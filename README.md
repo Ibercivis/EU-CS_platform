@@ -1,36 +1,38 @@
 
 
-# eucs_platform
+# EU-CS_platform
 
-eucs_platform is a _short description_. It is built with [Python][0] using the [Django Web Framework][1].
+EU-CS_platform is a web platform for Citizen Science. It is built with [Python][0] using the [Django Web Framework][1].
 
-This project has the following basic apps:
-
-* App1 (short desc)
-* App2 (short desc)
-* App3 (short desc)
 
 ## Installation
+First of all, install Python v3 <br/>
 
-### Quick start
-
-To set up a development environment quickly, first install Python 3. It
-comes with virtualenv built-in. So create a virtual env by:
-
-    1. `$ python3 -m venv eucs_platform`
-    2. `$ . eucs_platform/bin/activate`
-
-Install all dependencies:
-
+Once you have python in your SO, download or clone this repository and launch next commands.<br/>
+```
+python -m pip install --upgrade pip
+```
+```
+pip install -U django
+```
+In source directory: <br/>
+    ```
     pip install -r requirements.txt
+    ```
+```
+cd src
+cp eucs_platform/settings/local.sample.env eucs_platform/settings/local.env
+```
+```
+python manage.py migrate
+```
 
-Run migrations:
+## Launch
+```
+python manage.py runserver
+```
 
-    python manage.py migrate
 
-### Detailed instructions
-
-Take a look at the docs for more information.
 
 [0]: https://www.python.org/
 [1]: https://www.djangoproject.com/
