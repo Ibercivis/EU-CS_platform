@@ -95,10 +95,15 @@ WSGI_APPLICATION = "eucs_platform.wsgi.application"
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
 DATABASES = {
-    # Raises ImproperlyConfigured exception if DATABASE_URL not in
-    # os.environ
-    "default": env.db()
-}
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'eu_citizen_science',
+            'USER': 'postgres',
+            'PASSWORD': 'science2020',
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
+    }
 
 # Internationalization
 # https://docs.djangoproject.com/en/dev/topics/i18n/
