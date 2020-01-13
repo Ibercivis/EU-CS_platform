@@ -5,63 +5,207 @@
 
 {% block title %}{{ block.super }}Home{% endblock %}
 
+
 {% block navbar-left %}
   {% include "_navbar.html" with active_link="home" %}
 {% endblock %}
 
-{% block navbar-right %}
-  {% if not user.is_authenticated %}
-<a class="btn btn-default" href="{% url 'accounts:login' %}" role="button">Log in</a>
-<a class="btn btn-primary" href="{% url 'accounts:signup' %}" role="button">Sign up</a>
-  {% else %}
-    {{ block.super }}
-  {% endif %}
-{% endblock %}
 
 {% block splash %}
-  <div class="jumbotron jumbotron-carousel corporate-jumbo">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8 col-sm-8">
-          <h1>{% include "_brandname.html" %}</h1>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
-	  <a class="btn btn-primary" href="{% url 'accounts:signup' %}" role="button">Sign up for Free!</a>
-        </div>
-        <div class="col-md-4 col-sm-4">
+<div class="jumbotron jumbotron-carousel corporate-jumbo">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-sm-8">
+        <h1>{% include "_brandname.html" %}</h1>
+        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
+  <a class="btn btn-primary" href="{% url 'accounts:signup' %}" role="button">Sign up for Free!</a>
+      </div>
+      <div class="col-md-4 col-sm-4">
 
-        </div>
       </div>
     </div>
   </div>
+</div>
 {% endblock splash %}
 
 {% block container %}
+
+
 <!-- Benefits of the Django application -->
 <a id="about"></a>
 
 <div class="container">
   <div class="row">
-    <div class="col-lg-4">
+    <div class="col-lg-3">
       <h2>Heading</h2>
-      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
+        condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec
+        sed odio dui. </p>
       <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
     </div>
-    <div class="col-lg-4">
+    <div class="col-lg-3">
       <h2>Heading</h2>
-      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
+        condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec
+        sed odio dui. </p>
       <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
     </div>
-    <div class="col-lg-4">
+    <div class="col-lg-3">
       <h2>Heading</h2>
-      <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
+      <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta
+        felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum
+        massa.</p>
+      <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+    </div>
+    <div class="col-lg-3">
+      <h2>Heading</h2>
+      <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta
+        felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum
+        massa.</p>
       <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
     </div>
   </div>
 </div>
+</div>
+
+
+</br></br></br></br>
+<div class="container">
+  <div class="row align-items-center">
+    <div class="col-1"></div>
+    <div class="col-2">
+      <img src="http://eu-citizen.science/wp-content/uploads/2019/05/mfn.png" class="d-block img-fluid">
+    </div>
+    <div class="col-2 align-items-center">
+      <img src="http://eu-citizen.science/wp-content/uploads/2019/10/ecsa_main_id.png" class="d-block img-fluid">
+    </div>
+    <div class="col-2">
+      <img src="http://eu-citizen.science/wp-content/uploads/2019/06/iiasalogo.png" class="d-block img-fluid">
+    </div>
+    <div class="col-2">
+      <img src="http://eu-citizen.science/wp-content/uploads/2019/05/Earthwatch_logo_Green.jpg" class="d-block img-fluid">
+    </div>
+    <div class="col-2">
+      <img src="http://eu-citizen.science/wp-content/uploads/2019/05/logo.gif" class="d-block img-fluid">
+    </div>
+  </div>
+
+</br></br></br></br>
+
+  <div class="row align-items-center">
+    <div class="col-2">
+      <img src="http://eu-citizen.science/wp-content/uploads/2019/05/University_College_London_logo.png" class="d-block img-fluid">
+    </div>
+    <div class="col-2">
+      <img src="http://eu-citizen.science/wp-content/uploads/2019/05/Ecsite_logo.jpg" class="d-block img-fluid">
+    </div>
+    <div class="col-2 align-items-center">
+      <img src="http://eu-citizen.science/wp-content/uploads/2019/05/Trinity_Main_Logo.jpg" class="d-block img-fluid">
+    </div>
+    <div class="col-2">
+      <img src="http://eu-citizen.science/wp-content/uploads/2019/05/va-logo.png" class="d-block img-fluid">
+    </div>
+    <div class="col-2">
+      <img src="http://eu-citizen.science/wp-content/uploads/2019/05/Natural-History-Museum-Logo.gif" class="d-block img-fluid">
+    </div>
+    <div class="col-2">
+      <img src="http://eu-citizen.science/wp-content/uploads/2019/05/zegel.png" class="d-block img-fluid">
+    </div>
+  </div>
+
+</br></br></br></br>
+
+  <div class="row align-items-center">
+    <div class="col-3"></div>
+    <div class="col-2">
+      <img src="http://eu-citizen.science/wp-content/uploads/2019/05/mru.png" class="d-block img-fluid">
+    </div>
+    <div class="col-2">
+      <img src="http://eu-citizen.science/wp-content/uploads/2019/06/Figueira.png" class="d-block img-fluid">
+    </div>
+    <div class="col-2">
+      <img src="http://eu-citizen.science/wp-content/uploads/2019/05/cropped-mneco-1.png" class="d-block img-fluid">
+    </div>
+    <div class="col-3"></div>
+  </div>
+
+</br></br></br></br>
+<p align="center">Third parties</p>
+
+<div class="row align-items-center">
+  <div class="col-2">
+    <img src="http://eu-citizen.science/wp-content/uploads/2019/09/Boku-wien.svg.png" class="d-block img-fluid">
+  </div>
+  <div class="col-2">
+    <img src="http://eu-citizen.science/wp-content/uploads/2019/09/museumbelgique.png" class="d-block img-fluid">
+  </div>
+  <div class="col-2 align-items-center">
+    <img src="http://eu-citizen.science/wp-content/uploads/2019/09/tartuulikool.png" class="d-block img-fluid">
+  </div>
+  <div class="col-2">
+    <img src="http://eu-citizen.science/wp-content/uploads/2019/09/MNHN-logo.jpg" class="d-block img-fluid">
+  </div>
+  <div class="col-2">
+    <img src="http://eu-citizen.science/wp-content/uploads/2019/09/thessaloniki_logo.png" class="d-block img-fluid">
+  </div>
+  <div class="col-2">
+    <img src="http://eu-citizen.science/wp-content/uploads/2019/09/essrg-logo.png" class="d-block img-fluid">
+  </div>
+</div>
+
+
+</br></br></br></br>
+
+<div class="row align-items-center">
+  <div class="col-3"></div>
+  <div class="col-2">
+    <img src="http://eu-citizen.science/wp-content/uploads/2019/09/fgrc-logo.png" class="d-block img-fluid">
+  </div>
+  <div class="col-2">
+    <img src="http://eu-citizen.science/wp-content/uploads/2019/09/Logo_Ibercivis_CMYK.png" class="d-block img-fluid">
+  </div>
+  <div class="col-2">
+    <img src="http://eu-citizen.science/wp-content/uploads/2019/09/fecyt.png" class="d-block img-fluid">
+  </div>
+  <div class="col-3"></div>
+</div>
+
+
+
+
+</div>
+
+</br></br></br></br>
+
+
+<div id="cta-1" class="col-sm-10 offset-sm-1 cta-blue-section content-section content-section-spacing-medium
+ bg-color1 white-text" style="background-image: none; background-color: #a4b494;"
+ data-id="cta--1" data-label="Cta" data-export-id="cta-blue-section" data-category="cta">
+  </br>
+  <div class="container">
+    <div class="col-sm-8 space-bottom-xs" data-type="column">
+      <p class="">EU-Citizen.Science has received funding from the European Union�s Horizon 2020 Framework Programme for Research and Innovation under grant agreement No. 824580</p>
+    </div>
+  
+    <div class="col-sm-4 end-sm" data-type="column">
+      <img class="custom-image" title="cropped-europe-1.png" 
+      src="http://eu-citizen.science/wp-content/uploads/2019/04/cropped-europe-1.png" alt="">
+    </div>
+  </div>
+  </br>
+</div>
+
 
 {% endblock container %}
 
 {% block scripts %}
 <script src="{% static 'site/js/site.js' %}"></script>
+
+<script src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
+    <script>
+        $('.basicAutoComplete').autoComplete(
+            {minLength: 1}
+        );
+    </script>
 {% endblock scripts %}
 
