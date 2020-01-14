@@ -1,0 +1,100 @@
+
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}{{ block.super }}Projects{% endblock %}
+<!--
+{% block navbar-left %}
+  {% include "_navbar.html" with active_link="projects" %}
+{% endblock %}
+-->
+
+
+{% block container %}
+{{ form.media.css }}
+
+
+    <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+
+    </br></br></br>
+      <!-- / .main-navbar -->
+      <div class="main-content-container container-fluid px-4">
+          <!-- Page Header -->
+          <div class="page-header row no-gutters py-4">
+            <div class="col-12 col-sm-4 text-center text-sm-left mb-0">              
+              <h2 class="page-title">Add new project</h2>
+            </div>
+          </div>
+
+          <div class="card card-small mb-4">
+          <div class="card-body p-0 pb-3 text-center">
+                <table class="table mb-0">
+        
+          <form action="/new_project" method="post" class="add-new-post">
+            {% csrf_token %}
+            
+            <br/>
+            <h4>Project info</h4>
+            <div class="row">
+                <div class="col-5 p-3 ml-5">
+                    {{ form.project_name|as_crispy_field }}
+                </div>
+                <div class="col-5 p-3 ml-5">
+                    {{ form.url|as_crispy_field }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-5 p-3 ml-5" >
+                    {{ form.start_date|as_crispy_field }}
+                </div>
+                <div class="col-5 p-3 ml-5">
+                    {{ form.end_date|as_crispy_field }}
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-5 p-3 ml-5" >
+                  {{ form.category|as_crispy_field }}
+              </div>  
+            </div>
+            <hr/>
+            <h4>Contact person info</h4>
+            <div class="row">
+              <div class="col-5 p-3 ml-5" >
+                  <label for="name">Contact person name</label><br/>
+                  <input type="text" disabled name="name" value={{user.name}} maxlength="100" class="textinput textInput form-control">                  
+              </div>
+              <div class="col-5 p-3 ml-5">
+                  <label for="email">Contact person email</label><br/>
+                  <input type="text" disabled name="email" value={{user.email}} maxlength="100" class="textinput textInput form-control">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-5 p-3 ml-5" >
+                  {{ form.contact_person_phone|as_crispy_field }}
+              </div>
+
+            </div>
+
+            <br/><br/>
+
+            <div class="row justify-content-md-center">
+                <button type="submit" class="btn btn-success">Save</button>                
+                <!-- <button type="submit" name="cancel" value="cancel" class="btn btn-danger" style="margin-left:20px">Back</button>                 -->
+            </div>
+        </form>  
+    </div>
+          
+</table>
+</div>
+
+        </div>
+    </main>
+
+{% endblock container %}
+
+{% block scripts %}
+  {{ form.media.js }}
+{% endblock scripts %}
