@@ -5,10 +5,12 @@ from django.views import generic
 from django.contrib.auth import get_user_model
 from django.contrib import auth
 from django.contrib import messages
+from django.shortcuts import redirect
 from authtools import views as authviews
 from braces import views as bracesviews
 from django.conf import settings
 from . import forms
+
 
 User = get_user_model()
 
@@ -82,3 +84,16 @@ class PasswordResetDoneView(authviews.PasswordResetDoneView):
 class PasswordResetConfirmView(authviews.PasswordResetConfirmAndLoginView):
     template_name = "accounts/password-reset-confirm.html"
     form_class = forms.SetPasswordForm
+
+
+def delete_user(request):
+    try:
+        u = User.objects.get(id = request.user.id)
+        u.delete()
+        messages.success(request, "The user has been deleted.")
+    except User.DoesNotExist: 
+        messages.error = 'User does not exist.'
+    except Exception as e: 
+        messages.error = 'There was a problem trying delete an user'
+    return redirect('home')
+    

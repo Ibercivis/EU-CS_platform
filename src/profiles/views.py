@@ -58,3 +58,4 @@ class EditProfile(LoginRequiredMixin, generic.TemplateView):
         profile.save()
         messages.success(request, "Profile details saved!")
         return redirect("profiles:show_self")
+
