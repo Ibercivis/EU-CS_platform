@@ -95,5 +95,6 @@ def delete_user(request):
         messages.error = 'User does not exist.'
     except Exception as e: 
         messages.error = 'There was a problem trying delete an user'
+            
     return redirect('home')
     
