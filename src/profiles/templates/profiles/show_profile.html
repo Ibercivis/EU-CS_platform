@@ -13,6 +13,7 @@
       <h1>{{ show_user.get_full_name }}</h1>
       {% if editable %}
       <a href="{% url 'profiles:edit_self' %}" class="btn btn-info">Edit Profile</a>
+      <a href="{% url 'accounts:delete' %}" class="btn btn-danger">Delete Profile</a>
       {% endif %}
     </div>
     <div class="col-sm-2"><img title="profile picture" class="img-circle img-responsive" src="{% thumbnail show_user.profile.picture|default:'default_profile.png' 140x140 crop %}">

@@ -27,8 +27,15 @@ INSTALLED_APPS += ("debug_toolbar",)
 # Additional middleware introduced by debug toolbar
 MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
 
+#Email settings
 # Show emails to console in DEBUG mode
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST_USER = '5d2fd444450a07'
+EMAIL_HOST_PASSWORD = '02a46bb1305126'
+EMAIL_PORT = '2525' 
+EMAIL_USE_TLS = True
 
 # Show thumbnail generation errors
 THUMBNAIL_DEBUG = True
