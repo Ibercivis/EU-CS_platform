@@ -75,7 +75,8 @@ INSTALLED_APPS = (
     "easy_thumbnails",
     "profiles",
     "accounts",
-    "projects"
+    "projects",
+    "django_select2"
 )
 
 MIDDLEWARE = [

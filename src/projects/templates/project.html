@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}{{ block.super }}Projects{% endblock %}
+
+{% block navbar-left %}
+  {% include "_navbar.html" with active_link="project" %}
+{% endblock %}
+
+
+
+{% block container %}
+
+
+
+
+<main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+  </br></br></br></br>
+
+  <div class="main-content-container container-fluid px-4">
+
+
+    <div class="card card-small mb-4">
+      <div class="card-header">
+        <h2 align="center">Project {{project.name}}</h2>
+        <br /><br />
+        <div class="row">
+          <div class="container">
+            <div class="p-0 offset-lg-1 offset-md-2">
+              <p> ID: {{project.id}}</p>
+              <p> Name: {{project.name}}</p>
+
+              <p> Start date: {{ project.start_date | date:"d/m/Y"}}</p>
+              <p> End date: {{ project.end_date | date:"d/m/Y"}}</p>
+              <p> Website: <a href="{{project.url}}">{{project.url}}</a></p>
+              <p> Categories:   {% for c in categories %} {{c.category|capfirst}} | {% endfor %}  </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+
+
+
+
+    <br /><br /><br />
+
+  </div>
+
+
+</main>
+
+{% endblock container %}
+
+{% block scripts %}
+
+{% endblock scripts %}

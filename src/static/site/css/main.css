@@ -177,3 +177,7 @@ body>.navbar-transparent {
 .form-box form .form-control:focus {
   z-index: 2;
 }
+
+.form_error input, .form_error select {
+    border: 2px red solid;
+}
