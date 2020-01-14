@@ -32,4 +32,11 @@ def projects(request):
     return render(request, 'projects.html', {'projects':projects})
 
 
-    
+def project(request, pk):
+    project = get_object_or_404(Project, id=pk)
+    proj_categories = project.category.split('#')
+    categories = ''
+    if proj_categories[0] != '':
+        categories = Category.objects.filter(id__in=proj_categories)
+
+    return render(request, 'project.html', {'project':project, 'categories': categories})
