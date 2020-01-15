@@ -50,7 +50,6 @@
           </span>
           <br/><br/>
           
-          
         
               
           <div class="row">
@@ -89,4 +88,15 @@
             {minLength: 1}
         );
     </script>
+    <script>
+      $(function () {
+          $('.custom-select').on('change', function () {
+              var category = $(this).val();
+              $('#searchProjects').submit();
+          });
+      });
+      $("#keywords").blur(function(){
+        $('#searchProjects').submit();
+      });
+  </script>
 {% endblock scripts %}
