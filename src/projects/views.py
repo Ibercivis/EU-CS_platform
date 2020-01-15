@@ -28,8 +28,15 @@ def new_project(request):
 
 def projects(request):
     projects = Project.objects.all()
+    categories = Category.objects.all()
+    
+    if request.GET.get('keywords'):
+        projects = projects.filter(name__icontains = request.GET['keywords'])
+    
+    if request.GET.get('category'):
+        projects = projects.filter(category__icontains = request.GET['category'])
 
-    return render(request, 'projects.html', {'projects':projects})
+    return render(request, 'projects.html', {'projects':projects, 'categories': categories})
 
 
 def project(request, pk):
@@ -40,3 +47,12 @@ def project(request, pk):
         categories = Category.objects.filter(id__in=proj_categories)
 
     return render(request, 'project.html', {'project':project, 'categories': categories})
+
+def text_autocomplete(request):  
+    if request.GET.get('q'):
+        text = request.GET['q']
+        data = Project.objects.filter(name__icontains=text).values_list('name',flat=True)
+        json = list(data)
+        return JsonResponse(json, safe=False)
+    else:
+        return HttpResponse("No cookies")

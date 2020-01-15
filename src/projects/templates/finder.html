@@ -1,0 +1,29 @@
+{% load staticfiles %}
+
+
+{% if user.is_authenticated %}
+<!-- Main Sidebar -->
+<aside class="main-sidebar col-12 col-md-3 col-lg-2 px-0">
+    <br />
+    <div class="container">
+        <form  action="{% url 'projects' %}" >            
+            <label for="keywords" style="color:black">Keywords</label>
+            <input type="text" id="keywords" name="keywords" autocomplete="off"
+                class="basicAutoComplete form-control mb-4" placeholder="Keywords" data-url="text_autocomplete/">
+            <label for="category" style="color:black">Category:</label>
+            <select id="category" name="category" class="custom-select">
+                <option selected value="">Category</option>
+                {% for c in categories %}
+                <option value="{{c.id}}">
+                    {{c.category|capfirst}}
+                </option>
+                {% endfor %}
+            </select>
+            <br /><br />
+            <button class="btn btn-info btn-block" type="submit">Find projects</button>
+        </form>
+    </div>
+
+</aside>
+<!-- End Main Sidebar -->
+{% endif %}

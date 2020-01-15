@@ -28,9 +28,10 @@
 
 {% block container %}
 
+{% include "finder.html" %}
 
     <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
-    </br></br>
+    </br></br></br></br>
 
       <!-- / .main-navbar -->
       <div class="main-content-container container-fluid px-4">
@@ -56,7 +57,7 @@
               {% for project in projects %}
               <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                 <div class="card card-small card-post h-100">
-                  <div class="card-post__image" style="background-image: url('static/site/img/banner.JPG');"></div>
+                  <div class="card-post__image" style="background-image: url('static/site/img/project.png');"></div>
                   <div class="card-body">
                     <h4 class="card-title">
                       <a class="text-fiord-blue" href="{% url 'project' project.id %}">{{ project.name }}</a>
@@ -79,3 +80,13 @@
 
 {% endblock container %}
 
+{% block scripts %}
+<script src="{% static 'site/js/site.js' %}"></script>
+
+<script src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
+    <script>
+        $('.basicAutoComplete').autoComplete(
+            {minLength: 1}
+        );
+    </script>
+{% endblock scripts %}
