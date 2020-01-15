@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+<link rel="stylesheet" href="https://anijs.github.io/lib/anicollection/anicollection.css" />
+
+
+
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}{{ block.super }}Projects{% endblock %}
+
+{% block navbar-left %}
+{% include "_navbar.html" with active_link="projects" %}
+{% endblock %}
+
+
+
+{% block container %}
+
+
+
+
+
+<main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+    </br></br></br></br></br>
+    <div class="main-content-container container-fluid px-4">
+
+
+        <div class="container">
+            Upload a Citizen Science's document </br></br>
+
+            <div class="card card-small mb-4">
+                <div class="card-body p-0 pb-3 text-center">
+                    <table class="table mb-0">
+                        <form action="/new_document" method="post" class="add-new-post" enctype="multipart/form-data">
+                            {% csrf_token %}
+
+                            <br />
+                            <h4>Document</h4>
+                            <div class="row">
+                                <div class="col-5 p-3 ml-5">
+                                    {{ form.name|as_crispy_field }}
+                                </div>
+                                <div class="col-5 p-3 ml-5">
+                                    {{ form.author|as_crispy_field }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5 p-3 ml-5">
+                                    {{ form.description|as_crispy_field }}
+                                </div>
+                                <div class="col-5 p-3 ml-5">
+                                    {{ form.url|as_crispy_field }}
+                                </div>
+                            </div>
+                 
+
+
+                            <div class="row justify-content-md-center">
+                                <button type="submit" class="btn btn-success">Upload document</button>
+                            </div>
+                        </form>
+                    </table>
+                </div>
+            </div>
+
+
+
+
+
+
+            <br /><br />
+            
+
+        </div>
+    </div>
+</main>
+
+{% endblock container %}
+
+
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+<script src="https://unpkg.com/shards-ui@latest/dist/js/shards.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js"></script>
+{% endblock scripts %}

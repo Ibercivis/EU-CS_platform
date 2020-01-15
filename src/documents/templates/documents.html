@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}{{ block.super }}Projects{% endblock %}
+
+{% block navbar-left %}
+  {% include "_navbar.html" with active_link="projects" %}
+{% endblock %}
+
+
+{% block messages %}
+{% if messages %}
+{% for message in messages %}
+<div class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+  <div class="alert alert-{{ message.tags }}">
+    <a class="close" data-dismiss="alert">×</a>
+    {{ message|safe }}
+  </div>
+</div>
+{% endfor %}
+{% endif %}
+{% endblock %}
+
+
+{% block container %}
+
+
+
+
+
+<main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+    </br></br></br></br>
+    <div class="main-content-container container-fluid px-4">
+        <h1>Documents</h1>
+        <br/>
+        <span>
+          <a href="{% url 'new_document' %}">
+            <i class="material-icons">add_circle</i> 
+            Add new document
+            </a>
+        </span>
+        <br/><br/>
+        <div class="row">
+            {% for doc in documents %}
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+              <div class="card card-small card-post h-100">
+                <!--<div class="card-post__image" style="background-image: url('static/site/img/banner.JPG');"></div>-->
+                <div class="card-body">
+                  <h4 class="card-title">
+                    <a class="text-fiord-blue" href="#">{{ doc.name }}</a>
+                  </h4>
+                  <p class="card-text"><i>Description:</i><br/>{{doc.description}}</p>
+                  <img class="card-img" src="static/site/img/document.png">
+                  <br/><br/>
+                  <p class="card-text"><a href="{{doc.url}}" target="_blank"> View resource </a></p>
+                </div>
+                <div class="card-footer text-muted border-top py-3">
+                    <span>Author: {{doc.author}}</span><br/>
+                    <span class="d-inline-block">Date
+                    <span class="text-fiord-blue">{{doc.datePublished | date:"d/m/Y"}}</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</main>
+
+{% endblock container %}
+
+{% block scripts %}
+
+{% endblock scripts %}
