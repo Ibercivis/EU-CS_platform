@@ -1,0 +1,13 @@
+{% if projects.has_other_pages %}
+<ul class="pagination" style="margin-left:3em">
+  {% for i in projects.paginator.page_range %}
+  {% if projects.number == i %}
+  <li class="active btn btn-info mb-4"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+  {% else %}
+  <a href="?page={{ i }}">
+    <li class="btn mb-4 btn-light">{{ i }}</li>
+  </a>
+  {% endif %}
+  {% endfor %}
+</ul>
+{% endif %}

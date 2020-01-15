@@ -7,7 +7,7 @@
 {% block title %}{{ block.super }}Projects{% endblock %}
 
 {% block navbar-left %}
-  {% include "_navbar.html" with active_link="projects" %}
+{% include "_navbar.html" with active_link="projects" %}
 {% endblock %}
 
 
@@ -30,73 +30,82 @@
 
 {% include "finder.html" %}
 
-    <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
-    </br></br></br></br>
 
-      <!-- / .main-navbar -->
-      <div class="main-content-container container-fluid px-4">
-          <!-- Page Header -->
-          <div class="page-header row no-gutters py-4">
-            <div class="col-12 col-sm-4 text-center text-sm-left mb-0">              
-              <h2 class="page-title">Projects</h2>
-            </div>
+<main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+  </br></br></br></br>
+
+  <!-- / .main-navbar -->
+  <div class="main-content-container container-fluid px-4">
+    <!-- Page Header -->
+    <div class="page-header row no-gutters py-4">
+      <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+        <h2 class="page-title">Projects</h2>       
+      </div>
+    </div>
+    <span >
+      <a href="{% url 'new_project' %}">
+        <i class="material-icons">add_circle</i>
+        Add new project
+      </a>
+    </span>
+    <br/><br/>
+ 
+
+    <div class="row">
+      {% for project in projects %}
+      <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+        <div class="card card-small card-post h-100">
+          <div class="card-post__image" style="background-image: url('static/site/img/project.png');"></div>
+          <div class="card-body">
+            <h4 class="card-title">
+              <a class="text-fiord-blue" href="{% url 'project' project.id %}">{{ project.name }}</a>
+            </h4>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse metus tortor.</p>
           </div>
-
-          <span>
-            <a href="{% url 'new_project' %}">
-              <i class="material-icons">add_circle</i> 
-              Add new project
-              </a>
-          </span>
-          <br/><br/>
-          
-        
-              
-          <div class="row">
-              {% for project in projects %}
-              <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                <div class="card card-small card-post h-100">
-                  <div class="card-post__image" style="background-image: url('static/site/img/project.png');"></div>
-                  <div class="card-body">
-                    <h4 class="card-title">
-                      <a class="text-fiord-blue" href="{% url 'project' project.id %}">{{ project.name }}</a>
-                    </h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse metus tortor.</p>
-                  </div>
-                  <div class="card-footer text-muted border-top py-3">
-                    <span class="d-inline-block">By
-                      <a class="text-fiord-blue" href="#">{{project.creator.name}}</a>
-                    </span>
-                  </div>
-                </div>
-              </div>
-              {% endfor %}
+          <div class="card-footer text-muted border-top py-3">
+            <span class="d-inline-block">By
+              <a class="text-fiord-blue" href="#">{{project.creator.name}}</a>
+            </span>
           </div>
-
-
         </div>
-    </main>
+      </div>
+      {% endfor %}
+    </div>
+
+
+    <br /><br />
+    {% include "paginator.html" %}
+    <span>
+      Page {{ projects.number }} of {{ projects.paginator.num_pages }}.
+    </span>
+
+  </div>
+</main>
 
 {% endblock container %}
+
+
+
 
 {% block scripts %}
 <script src="{% static 'site/js/site.js' %}"></script>
 
-<script src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
-    <script>
-        $('.basicAutoComplete').autoComplete(
-            {minLength: 1}
-        );
-    </script>
-    <script>
-      $(function () {
-          $('.custom-select').on('change', function () {
-              var category = $(this).val();
-              $('#searchProjects').submit();
-          });
-      });
-      $("#keywords").blur(function(){
-        $('#searchProjects').submit();
-      });
-  </script>
+<script
+  src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
+<script>
+  $('.basicAutoComplete').autoComplete(
+    { minLength: 1 }
+  );
+</script>
+<script>
+  $(function () {
+    $('.custom-select').on('change', function () {
+      var category = $(this).val();
+      $('#searchProjects').submit();
+    });
+  });
+  $("#keywords").blur(function () {
+    $('#searchProjects').submit();
+  });
+</script>
 {% endblock scripts %}

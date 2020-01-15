@@ -31,6 +31,7 @@ def projects(request):
     categories = Category.objects.all()
     filters = {'keywords': '', 'category': 0}
     
+
     if request.GET.get('keywords'):
         projects = projects.filter(name__icontains = request.GET['keywords'])
         filters['keywords'] = request.GET['keywords']
@@ -38,6 +39,10 @@ def projects(request):
     if request.GET.get('category'):
         projects = projects.filter(category__icontains = request.GET['category'])
         filters['category'] = int(request.GET['category'])
+
+    paginator = Paginator(projects, 8) 
+    page = request.GET.get('page')
+    projects = paginator.get_page(page)
 
     return render(request, 'projects.html', {'projects':projects, 'categories': categories, 'filters': filters})
 
