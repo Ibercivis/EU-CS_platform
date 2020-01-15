@@ -6,24 +6,30 @@
 <aside class="main-sidebar col-12 col-md-3 col-lg-2 px-0">
     <br />
     <div class="container">
-        <form  action="{% url 'projects' %}" >            
+        <a class="btn btn-primary" href="{% url 'clearfilters'%}">Clear filters</a>
+
+        <form  id="searchProjects" action="{% url 'projects' %}" >            
             <label for="keywords" style="color:black">Keywords</label>
-            <input type="text" id="keywords" name="keywords" autocomplete="off"
+            <input type="text" id="keywords" name="keywords" autocomplete="off" value="{{filters.keywords}}"
                 class="basicAutoComplete form-control mb-4" placeholder="Keywords" data-url="text_autocomplete/">
             <label for="category" style="color:black">Category:</label>
+            
             <select id="category" name="category" class="custom-select">
-                <option selected value="">Category</option>
+                <option value="">Category</option>
                 {% for c in categories %}
-                <option value="{{c.id}}">
+                
+                <option {% if c.id ==  filters.category %} selected {% endif %} value="{{c.id}}" >
                     {{c.category|capfirst}}
                 </option>
                 {% endfor %}
             </select>
             <br /><br />
-            <button class="btn btn-info btn-block" type="submit">Find projects</button>
+            <button class="btn btn-info btn-block" id="search" type="submit">Find projects</button>
         </form>
     </div>
 
 </aside>
 <!-- End Main Sidebar -->
 {% endif %}
+
+

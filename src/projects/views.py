@@ -29,14 +29,17 @@ def new_project(request):
 def projects(request):
     projects = Project.objects.all()
     categories = Category.objects.all()
+    filters = {'keywords': '', 'category': 0}
     
     if request.GET.get('keywords'):
         projects = projects.filter(name__icontains = request.GET['keywords'])
+        filters['keywords'] = request.GET['keywords']
     
     if request.GET.get('category'):
         projects = projects.filter(category__icontains = request.GET['category'])
+        filters['category'] = int(request.GET['category'])
 
-    return render(request, 'projects.html', {'projects':projects, 'categories': categories})
+    return render(request, 'projects.html', {'projects':projects, 'categories': categories, 'filters': filters})
 
 
 def project(request, pk):
@@ -56,3 +59,7 @@ def text_autocomplete(request):
         return JsonResponse(json, safe=False)
     else:
         return HttpResponse("No cookies")
+
+def clearFilters(request):
+    print("clearFilter")
+    return redirect ('projects')
