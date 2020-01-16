@@ -42,12 +42,14 @@
         <h2 class="page-title">Projects</h2>       
       </div>
     </div>
+    {% if user.is_authenticated %}
     <span >
       <a href="{% url 'new_project' %}">
         <i class="material-icons">add_circle</i>
         Add new project
       </a>
     </span>
+    {% endif %}
     <br/><br/>
  
 
