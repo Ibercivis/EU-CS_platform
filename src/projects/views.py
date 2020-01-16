@@ -27,7 +27,8 @@ def new_project(request):
     return render(request, 'new_project.html', {'form': form, 'user':user})
 
 def projects(request):
-    projects = Project.objects.all()
+    projects = Project.objects.get_queryset().order_by('id')
+
     categories = Category.objects.all()
     filters = {'keywords': '', 'category': 0}
     
@@ -66,5 +67,4 @@ def text_autocomplete(request):
         return HttpResponse("No cookies")
 
 def clearFilters(request):
-    print("clearFilter")
     return redirect ('projects')

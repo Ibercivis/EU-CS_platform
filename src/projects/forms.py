@@ -6,13 +6,34 @@ from django_select2.forms import Select2MultipleWidget
 
 class ProjectForm(forms.Form):
     error_css_class = 'form_error'
+    #Basic Project Information
     project_name = forms.CharField(max_length=100)
-    url = forms.CharField(max_length=200)
+    aim = forms.CharField(max_length=100)
+    description = forms.CharField(max_length=300)
+    keywords = forms.CharField(max_length=100, required=False)
+    status = forms.CharField(max_length=100)
     start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}))
-    end_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}))    
-    contact_person_phone = forms.CharField(max_length=100, required=False)
+    end_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=False)  
+    topic = forms.CharField(max_length=100, required=False)
     
     category = forms.ModelMultipleChoiceField(queryset=Category.objects.all(), widget=Select2MultipleWidget, required=False)
+    
+    #Images and communications
+    url = forms.CharField(max_length=200, required=False)
+    image = forms.CharField(max_length=200, required=False)
+    image_credit = forms.CharField(max_length=200, required=False)
+    #Geography
+    latitude = forms.FloatField()
+    longitude = forms.FloatField()
+    #Personal and Organizational Affiliates
+    host = forms.CharField(max_length=100)
+    #Supplementary information for Citizen Science
+    how_to_participate = forms.CharField(max_length=300, required=False)
+    equipment = forms.CharField(max_length=200, required=False)
+
+    
+    contact_person_phone = forms.CharField(max_length=100, required=False)
+    
 
     def clean(self):
         start_date = self.data['start_date']
@@ -39,7 +60,11 @@ class ProjectForm(forms.Form):
             project.category = categories
         else:           
             project = Project(name = self.data['project_name'], url = self.data['url'], category = categories,
-                         start_date = start_dateData, end_date = end_dateData, creator=args.user)
+                         start_date = start_dateData, end_date = end_dateData, creator=args.user,
+                         latitude = self.data['latitude'], longitude = self.data['longitude'],
+                         aim = self.data['aim'], description = self.data['description'], 
+                         topic = self.data['topic'], keywords = self.data['keywords'],
+                         host = self.data['host'])
         
         project.save()
         return 'success'
