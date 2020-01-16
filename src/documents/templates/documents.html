@@ -36,12 +36,14 @@
     <div class="main-content-container container-fluid px-4">
         <h1>Documents</h1>
         <br/>
+        {% if user.is_authenticated %}
         <span>
           <a href="{% url 'new_document' %}">
             <i class="material-icons">add_circle</i> 
             Add new document
             </a>
         </span>
+        {% endif %}
         <br/><br/>
         <div class="row">
             {% for doc in documents %}
