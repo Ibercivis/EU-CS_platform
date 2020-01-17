@@ -87,6 +87,11 @@ def selectCategories(projCategories):
         categories = Category.objects.filter(id__in=proj_categories)
     return categories
 
+def deleteProject(request, pk):
+    obj = get_object_or_404(Project, id=pk)
+    obj.delete()        
+    return redirect('projects')
+
 def text_autocomplete(request):  
     if request.GET.get('q'):
         text = request.GET['q']

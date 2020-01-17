@@ -38,7 +38,7 @@ class ProjectForm(forms.Form):
     def clean(self):
         start_date = self.data['start_date']
         end_date = self.data['end_date'] 
-        if end_date < start_date:
+        if end_date is not '' and end_date < start_date:
             msg = u"End date should be greater than start date."            
             self._errors["end_date"] = self.error_class([msg])
 
