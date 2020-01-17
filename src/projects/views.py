@@ -50,12 +50,42 @@ def projects(request):
 
 def project(request, pk):
     project = get_object_or_404(Project, id=pk)
-    proj_categories = project.category.split('#')
+    categories = selectCategories(project.category)
+
+    return render(request, 'project.html', {'project':project, 'categories': categories})
+
+def editProject(request, pk):
+    project = get_object_or_404(Project, id=pk)
+    user = request.user
+    if user != project.creator:
+        return redirect('../projects', {})
+    
+    start_datetime = formats.date_format(project.start_date, 'Y-m-d')
+    end_datetime = formats.date_format(project.end_date, 'Y-m-d')    
+    categories = selectCategories(project.category)
+
+    form = ProjectForm(initial={
+        'project_name':project.name,'url': project.url,'start_date': start_datetime,
+        'end_date':end_datetime, 'aim': project.aim, 'description': project.description, 
+        'keywords': project.keywords, 'status': project.status, 'topic': project.topic,
+        'category':categories, 'latitude': project.latitude, 'longitude': project.longitude, 
+        'image': project.image, 'image_credit': project.imageCredit, 'host': project.host,
+        'how_to_participate': project.howToParticipate, 'equipment': project.equipment,
+    })
+    
+    if request.method == 'POST':
+        form = ProjectForm(request.POST)
+        if form.is_valid():
+            form.save(request)
+            return redirect('/project/'+ str(pk))
+    return render(request, 'editProject.html', {'form': form, 'project':project, 'user':user})
+
+def selectCategories(projCategories):
+    proj_categories = projCategories.split('#')
     categories = ''
     if proj_categories[0] != '':
         categories = Category.objects.filter(id__in=proj_categories)
-
-    return render(request, 'project.html', {'project':project, 'categories': categories})
+    return categories
 
 def text_autocomplete(request):  
     if request.GET.get('q'):
