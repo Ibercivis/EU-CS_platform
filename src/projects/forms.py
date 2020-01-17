@@ -57,6 +57,7 @@ class ProjectForm(forms.Form):
             project.url = self.data['url']
             project.start_date = start_dateData
             project.end_date = end_dateData
+            project.status = self.data['status']
             project.category = categories
         else:           
             project = Project(name = self.data['project_name'], url = self.data['url'], category = categories,
@@ -64,7 +65,7 @@ class ProjectForm(forms.Form):
                          latitude = self.data['latitude'], longitude = self.data['longitude'],
                          aim = self.data['aim'], description = self.data['description'], 
                          topic = self.data['topic'], keywords = self.data['keywords'],
-                         host = self.data['host'])
+                         status = self.data['status'], host = self.data['host'])
         
         project.save()
         return 'success'
