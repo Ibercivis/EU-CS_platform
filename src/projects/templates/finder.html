@@ -6,7 +6,9 @@
 <aside class="main-sidebar col-12 col-md-3 col-lg-2 px-0">
     <br />
     <div class="container">
-        <a class="btn btn-primary" href="{% url 'clearfilters'%}">Clear filters</a>
+        <div style="float:right;"><a href="{% url 'clearfilters'%}">Clear  <i class="fas fa-eraser"></i></a></div>
+        <br/>
+       
 
         <form  id="searchProjects" action="{% url 'projects' %}" >            
             <label for="keywords" style="color:black">Keywords</label>

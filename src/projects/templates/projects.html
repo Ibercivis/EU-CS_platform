@@ -62,7 +62,7 @@
             <h4 class="card-title">
               <a class="text-fiord-blue" href="{% url 'project' project.id %}">{{ project.name }}</a>
             </h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse metus tortor.</p>
+            <p class="card-text">{{project.description}}</p>
           </div>
           <div class="card-footer text-muted border-top py-3">
             <span class="d-inline-block">By
