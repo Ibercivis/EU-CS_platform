@@ -24,8 +24,15 @@
   <div class="main-content-container container-fluid px-4">
     <!-- Page Header -->
     <div class="page-header row no-gutters py-4">
-      <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-        <h2 class="page-title">Edit project</h2>
+      <div class="col-12  ">
+        <h2 class="page-title">Edit project
+          <span style="float:right;margin-right: 2%;">
+            <button type="submit" class="btn btn-danger"
+              onclick="location.href='{% url 'deleteProject' project.id %}'" name='deleteProject'>Delete <span
+                class="fas fa-trash-alt"></span>
+            </button>
+          </span>
+        </h2>
       </div>
     </div>
 
@@ -33,7 +40,7 @@
       <div class="card-body p-0 pb-3 text-center">
         <table class="table mb-0">
 
-          <form action="/editProject/{{project.id}}" method="post" class="add-new-post">
+          <form action="/editProject/{{project.id}}" method="post">
             {% csrf_token %}
 
             <br />
@@ -168,7 +175,7 @@
   <br /><br />
 
   <div class="row justify-content-md-center">
-    <button type="submit" class="btn btn-success">Save</button>    
+    <button type="submit" class="btn btn-success">Save</button>
   </div>
   </form>
   </div>

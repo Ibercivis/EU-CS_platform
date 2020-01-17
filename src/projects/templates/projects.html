@@ -77,9 +77,11 @@
 
     <br /><br />
     {% include "paginator.html" %}
+    {% if projects %}
     <span>
       Page {{ projects.number }} of {{ projects.paginator.num_pages }}.
     </span>
+    {% endif %}
 
   </div>
 </main>
