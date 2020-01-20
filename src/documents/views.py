@@ -16,13 +16,6 @@ def new_document(request):
     form = DocumentForm()
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
-        '''
-        myfile = request.FILES['document']
-        fs = FileSystemStorage()
-        filename = fs.save(myfile.name, myfile)
-        uploaded_file_url = fs.url(filename)
-        print(uploaded_file_url)
-        '''
         if form.is_valid():
             form.save(request)
             messages.success(request, "Document uploaded with success!")

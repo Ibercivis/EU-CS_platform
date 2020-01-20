@@ -10,7 +10,7 @@ class DocumentForm(forms.ModelForm):
 
     class Meta:
         model = Document
-        fields = ["name", "author", "about", "abstract", "url", "audience",
+        fields = ["name", "about", "abstract", "url", "audience",
          "inLanguage", "keywords", "license", "publisher"]
         
 
@@ -18,5 +18,6 @@ class DocumentForm(forms.ModelForm):
         publication_date = datetime.now()        
         doc = super(DocumentForm, self).save(commit=False)
         doc.datePublished = publication_date
+        doc.author = args.user
         doc.save()
         return 'success'
