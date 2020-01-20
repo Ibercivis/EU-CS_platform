@@ -43,7 +43,7 @@
                                     {{ form.name|as_crispy_field }}
                                 </div>
                                 <div class="col-5 p-3 ml-5">
-                                    {{ form.author|as_crispy_field }}
+                                    {{ form.about|as_crispy_field }}
                                 </div>
                             </div>
                             <div class="row">
@@ -54,9 +54,30 @@
                                     {{ form.url|as_crispy_field }}
                                 </div>
                             </div>
-                 
-
-
+                            <div class="row">
+                                <div class="col-5 p-3 ml-5">
+                                    {{ form.author|as_crispy_field }}
+                                </div>
+                                <div class="col-5 p-3 ml-5">
+                                    {{ form.inLanguage|as_crispy_field }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5 p-3 ml-5">
+                                    {{ form.keywords|as_crispy_field }}
+                                </div>
+                                <div class="col-5 p-3 ml-5">
+                                    {{ form.license|as_crispy_field }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5 p-3 ml-5">
+                                    {{ form.audience|as_crispy_field }}
+                                </div>
+                                <div class="col-5 p-3 ml-5">
+                                    {{ form.publisher|as_crispy_field }}
+                                </div>
+                            </div>
                             <div class="row justify-content-md-center">
                                 <button type="submit" class="btn btn-success">Upload document</button>
                             </div>
@@ -71,7 +92,7 @@
 
 
             <br /><br />
-            
+
 
         </div>
     </div>
