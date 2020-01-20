@@ -6,7 +6,8 @@
 
 {% load staticfiles %}
 {% load crispy_forms_tags %}
-
+{% load i18n %} 
+{% load l10n %} 
 
 {% block title %}{{ block.super }}Projects{% endblock %}
 
@@ -71,7 +72,20 @@
                                     {{ form.license|as_crispy_field }}
                                 </div>
                                 <div class="col-5 p-3 ml-5">
-                                    {{ form.inLanguage|as_crispy_field }}
+                                    {% get_language_info_list for LANGUAGES as languages %}            
+                                    {% if settings.USE_I18N and languages|length > 1 %}
+                                    <label for="language" class="control-label  requiredField">
+                                        Language<span class="asteriskField">*</span>
+                                    </label>
+                                    <select name="language" class="form-control" >
+                                        {% for language in languages %}
+                                        <option value="{{ language.code }}"
+                                            {% if language.code == LANGUAGE_CODE %}selected="selected"{% endif %}>
+                                            {{ language.name_local }}
+                                        </option>
+                                        {% endfor %}
+                                        </select>
+                                    {% endif %}
                                 </div>
                             </div>
                             <div class="row">

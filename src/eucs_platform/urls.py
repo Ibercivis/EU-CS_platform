@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import include, path
+from django.conf.urls import url
 import profiles.urls
 import accounts.urls
 import projects.urls
@@ -20,6 +21,8 @@ urlpatterns = [
     path("", include(accounts.urls)),
     path("", include(projects.urls)),
     path("", include(documents.urls)),
+    url(r'^i18n/', include('django.conf.urls.i18n')),
+
 ]
 
 # User-uploaded files like profile pics need to be served in development

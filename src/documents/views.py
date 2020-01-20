@@ -6,6 +6,7 @@ from .forms import DocumentForm
 from django.utils import timezone
 from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
+from django.conf import settings
 
 
 def documents(request):
@@ -16,9 +17,10 @@ def new_document(request):
     form = DocumentForm()
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
+
         if form.is_valid():
             form.save(request)
             messages.success(request, "Document uploaded with success!")
             return redirect('/documents')
 
-    return render(request, 'new_document.html', {'form': form})
+    return render(request, 'new_document.html', {'form': form, 'settings': settings})

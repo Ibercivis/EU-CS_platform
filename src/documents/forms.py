@@ -5,13 +5,12 @@ from .models import Document
 from datetime import datetime, date
 from django.forms import ModelForm
 
-
 class DocumentForm(forms.ModelForm):
 
     class Meta:
         model = Document
         fields = ["name", "about", "abstract", "url", "audience",
-         "inLanguage", "keywords", "license", "publisher"]
+         "keywords", "license", "publisher"]
         
 
     def save(self, args):
@@ -19,5 +18,6 @@ class DocumentForm(forms.ModelForm):
         doc = super(DocumentForm, self).save(commit=False)
         doc.datePublished = publication_date
         doc.author = args.user
+        doc.inLanguage = self.data['language']
         doc.save()
         return 'success'
