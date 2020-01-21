@@ -11,7 +11,16 @@ from django.conf import settings
 
 def documents(request):
     documents = Document.objects.all()
-    return render(request, 'documents.html', {'documents':documents})
+    filters = {'keywords': ''}
+    
+    if request.GET.get('keywords'):
+        documents = documents.filter(name__icontains = request.GET['keywords'])
+        filters['keywords'] = request.GET['keywords']
+
+    return render(request, 'documents.html', {'documents':documents, 'filters': filters})
+
+def clearFilters(request):
+    return redirect ('documents')
 
 def new_document(request):
     form = DocumentForm()
