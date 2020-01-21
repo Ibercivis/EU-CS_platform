@@ -77,7 +77,9 @@ INSTALLED_APPS = (
     "accounts",
     "projects",
     "documents",
-    "django_select2"
+    "django_select2",
+    "blog",
+    "django_summernote",
 )
 
 MIDDLEWARE = [
