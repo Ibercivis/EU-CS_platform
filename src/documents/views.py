@@ -49,7 +49,7 @@ def editDocument(request, pk):
 
     form = DocumentForm(initial={
         'name':document.name,'about': document.about, 'abstract': document.abstract, 
-        'url': document.url,'license': document.license, 
+        'url': document.url,'license': document.license,
         'audience' : document.audience, 'publisher': document.publisher, 'keywords': document.keywords
       
     })

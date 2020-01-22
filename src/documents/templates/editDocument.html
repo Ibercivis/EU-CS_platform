@@ -83,7 +83,7 @@
                 </label>
                 <select name="language" class="form-control">
                   {% for language in languages %}
-                  <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}selected="selected"
+                  <option value="{{ language.code }}" {% if language.code == document.inLanguage %}selected
                     {% endif %}>
                     {{ language.name_local }}
                   </option>
