@@ -27,7 +27,10 @@
       <div class="col-12  ">
         <h2 class="page-title">Edit document
           <span style="float:right;margin-right: 2%;">
-
+            <button type="submit" class="btn btn-danger"
+              onclick="location.href='{% url 'deleteDocument' document.id %}'" name='deleteDocument'>Delete <span
+                class="fas fa-trash-alt"></span>
+            </button>
           </span>
         </h2>
       </div>

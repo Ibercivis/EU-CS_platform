@@ -62,3 +62,8 @@ def editDocument(request, pk):
 
     return render(request, 'editDocument.html', {'form': form, 'document': document,
      'user': user, 'settings': settings })
+
+def deleteDocument(request, pk):
+    obj = get_object_or_404(Document, id=pk)
+    obj.delete()        
+    return redirect('documents')
