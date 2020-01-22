@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}{{ block.super }}Document{% endblock %}
+
+{% block navbar-left %}
+{% include "_navbar.html" with active_link="document" %}
+{% endblock %}
+
+
+
+{% block container %}
+
+
+
+
+<main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+  </br></br></br></br>
+
+  <div class="main-content-container container-fluid px-4">
+
+
+    <div class="card card-small mb-4">
+      <div class="card-header">
+        <h2 align="center">Document {{document.name}}
+          {% if user.is_authenticated %}
+          {% if document.author == user %}
+          <a href="{% url 'editDocument' document.id %}">
+            <i class="material-icons" style="font-size: 24px;">edit</i>
+          </a>
+          {% endif %}
+          {% endif %}
+        </h2>
+
+        <br /><br />
+        <div class="row">
+
+          <div class="col-sm-6">
+            <div class="container">
+              <div class="p-0 offset-lg-1 offset-md-2">
+                <h4>Document info</h4>
+                <p> ID: {{document.id}}</p>
+                <p> Name: {{document.name}}</p>
+                <p> About: {{document.about}}</p>
+                <p> Abstract: {{ document.abstract }}</p>
+                <p> URL: <a href="{{document.url}}">{{document.url}}</a></p>
+                <p> License: {{ document.license }}</p>
+                <p> Language: {{ document.inLanguage }}</p>
+                <p> Audience: {{ document.audience }} </p>
+                <p> Publisher: {{ document.publisher }}</p>
+                <p> Keywords: {{ document.keywords }} </p>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <br /><br /><br />
+            <img src="/static/site/img/document.png" style="max-width: 50%;    
+            margin-left: auto;
+            margin-right: auto;
+            display: block;">
+          </div>
+
+        </div>
+      </div>
+
+
+
+    </div>
+    <br />
+
+
+
+
+    <br /><br /><br />
+
+  </div>
+
+
+</main>
+
+{% endblock container %}
+
+{% block scripts %}
+
+{% endblock scripts %}

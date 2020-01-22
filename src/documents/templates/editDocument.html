@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% load l10n %}
+
+{% block title %}{{ block.super }}documents{% endblock %}
+<!--
+{% block navbar-left %}
+  {% include "_navbar.html" with active_link="documents" %}
+{% endblock %}
+-->
+
+{% block container %}
+{{ form.media.css }}
+
+
+
+<main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+
+  </br></br></br>
+  <!-- / .main-navbar -->
+  <div class="main-content-container container-fluid px-4">
+    <!-- Page Header -->
+    <div class="page-header row no-gutters py-4">
+      <div class="col-12  ">
+        <h2 class="page-title">Edit document
+          <span style="float:right;margin-right: 2%;">
+
+          </span>
+        </h2>
+      </div>
+    </div>
+
+    <div class="card card-small mb-4">
+      <div class="card-body p-0 pb-3 text-center">
+        <table class="table mb-0">
+
+          <form action="/editDocument/{{document.id}}" method="post">
+            {% csrf_token %}
+
+            <br />
+
+            <div class="row">
+              <div class="col-5 p-3 ml-5">
+                <input type="hidden" id="documentID" name="documentID" value={{document.id}}>
+                {{ form.name|as_crispy_field }}
+              </div>
+              <div class="col-5 p-3 ml-5">
+                {{ form.about|as_crispy_field }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-5 p-3 ml-5">
+                {{ form.abstract|as_crispy_field }}
+              </div>
+              <div class="col-5 p-3 ml-5">
+                {{ form.url|as_crispy_field }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-5 p-3 ml-5">
+                <label for="name">Contact person name</label><br />
+                <input type="text" disabled name="name" value={{user.name}} maxlength="100"
+                  class="textinput textInput form-control">
+              </div>
+              <div class="col-5 p-3 ml-5">
+                <label for="email">Contact person email</label><br />
+                <input type="text" disabled name="email" value={{user.email}} maxlength="100"
+                  class="textinput textInput form-control">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-5 p-3 ml-5">
+                {{ form.license|as_crispy_field }}
+              </div>
+              <div class="col-5 p-3 ml-5">
+                {% get_language_info_list for LANGUAGES as languages %}
+                {% if settings.USE_I18N and languages|length > 1 %}
+                <label for="language" class="control-label  requiredField">
+                  Language<span class="asteriskField">*</span>
+                </label>
+                <select name="language" class="form-control">
+                  {% for language in languages %}
+                  <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}selected="selected"
+                    {% endif %}>
+                    {{ language.name_local }}
+                  </option>
+                  {% endfor %}
+                </select>
+                {% endif %}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-5 p-3 ml-5">
+                {{ form.audience|as_crispy_field }}
+              </div>
+              <div class="col-5 p-3 ml-5">
+                {{ form.publisher|as_crispy_field }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-5 p-3 ml-5">
+                {{ form.keywords|as_crispy_field }}
+              </div>
+              <div class="col-5 p-3 ml-5">
+
+              </div>
+            </div>
+
+            <br /><br />
+
+            <div class="row justify-content-md-center">
+              <button type="submit" class="btn btn-success">Save</button>
+            </div>
+          </form>
+      </div>
+
+      </table>
+    </div>
+
+  </div>
+</main>
+
+{% endblock container %}
+
+{% block scripts %}
+<script>
+  $(document).ready(function () {
+    $('#contactinfo').on('click', function () {
+      $('#contactinfoform').toggle();
+      $('html,body').animate({ scrollTop: $("#contactinfo").offset().top - 160 }, { duration: "slow" });
+    });
+  });
+</script>
+{{ form.media.js }}
+{% endblock scripts %}
