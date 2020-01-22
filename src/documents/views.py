@@ -33,3 +33,32 @@ def new_document(request):
             return redirect('/documents')
 
     return render(request, 'new_document.html', {'form': form, 'settings': settings})
+
+
+def document(request, pk):
+    document = get_object_or_404(Document, id=pk)
+
+    return render(request, 'document.html', {'document':document})
+
+def editDocument(request, pk):
+    document = get_object_or_404(Document, id=pk)
+    user = request.user
+
+    if user != document.author:
+        return redirect('../documents', {})
+
+    form = DocumentForm(initial={
+        'name':document.name,'about': document.about, 'abstract': document.abstract, 
+        'url': document.url,'license': document.license, 
+        'audience' : document.audience, 'publisher': document.publisher, 'keywords': document.keywords
+      
+    })
+    
+    if request.method == 'POST':
+        form = DocumentForm(request.POST)
+        if form.is_valid():
+            form.save(request)
+            return redirect('/document/'+ str(pk))
+
+    return render(request, 'editDocument.html', {'form': form, 'document': document,
+     'user': user, 'settings': settings })

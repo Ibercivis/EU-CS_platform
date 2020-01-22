@@ -52,7 +52,7 @@
                 <!--<div class="card-post__image" style="background-image: url('static/site/img/banner.JPG');"></div>-->
                 <div class="card-body">
                   <h4 class="card-title">
-                    <a class="text-fiord-blue" href="#">{{ doc.name }}</a>
+                    <a class="text-fiord-blue" href="{% url 'document' doc.id %}">{{ doc.name }}</a>
                   </h4>
                   <p class="card-text"><i>Abstract:</i><br/>{{doc.abstract}}</p>
                   <img class="card-img" src="static/site/img/document.png">
