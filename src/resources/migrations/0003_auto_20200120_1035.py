@@ -8,12 +8,12 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('documents', '0002_auto_20200120_1020'),
+        ('resources', '0002_auto_20200120_1020'),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='document',
+            model_name='resource',
             name='author',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
         ),

@@ -6,7 +6,7 @@ from django.conf.urls import url
 import profiles.urls
 import accounts.urls
 import projects.urls
-import documents.urls
+import resources.urls
 from . import views
 
 # Personalized admin site settings like title and header
@@ -20,7 +20,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include(accounts.urls)),
     path("", include(projects.urls)),
-    path("", include(documents.urls)),
+    path("", include(resources.urls)),
     path('', include('blog.urls')),
     path('summernote/', include('django_summernote.urls')),
     url(r'^i18n/', include('django.conf.urls.i18n')),

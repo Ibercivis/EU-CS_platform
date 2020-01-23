@@ -5,10 +5,10 @@
 {% load i18n %}
 {% load l10n %}
 
-{% block title %}{{ block.super }}Documents{% endblock %}
+{% block title %}{{ block.super }}Resources{% endblock %}
 
 {% block navbar-left %}
-{% include "_navbar.html" with active_link="documents" %}
+{% include "_navbar.html" with active_link="resources" %}
 {% endblock %}
 
 {% block container %}
@@ -21,10 +21,10 @@
   <div class="main-content-container container-fluid px-4">
     <div class="page-header row no-gutters py-4">
       <div class="col-12  ">
-        <h2 class="page-title">Edit document
+        <h2 class="page-title">Edit resource
           <span style="float:right;margin-right: 2%;">
             <button type="submit" class="btn btn-danger"
-              onclick="location.href='{% url 'deleteDocument' document.id %}'" name='deleteDocument'>Delete <span
+              onclick="location.href='{% url 'deleteResource' resource.id %}'" name='deleteResource'>Delete <span
                 class="fas fa-trash-alt"></span>
             </button>
           </span>
@@ -36,14 +36,14 @@
       <div class="card-body p-0 pb-3 text-center">
         <table class="table mb-0">
 
-          <form action="/editDocument/{{document.id}}" method="post">
+          <form action="/editResource/{{resource.id}}" method="post">
             {% csrf_token %}
 
             <br />
 
             <div class="row">
               <div class="col-5 p-3 ml-5">
-                <input type="hidden" id="documentID" name="documentID" value={{document.id}}>
+                <input type="hidden" id="resourceID" name="resourceID" value={{resource.id}}>
                 {{ form.name|as_crispy_field }}
               </div>
               <div class="col-5 p-3 ml-5">
@@ -82,7 +82,7 @@
                 </label>
                 <select name="language" class="form-control">
                   {% for language in languages %}
-                  <option value="{{ language.code }}" {% if language.code == document.inLanguage %}selected {% endif %}>
+                  <option value="{{ language.code }}" {% if language.code == resource.inLanguage %}selected {% endif %}>
                     {{ language.name_local }}
                   </option>
                   {% endfor %}
