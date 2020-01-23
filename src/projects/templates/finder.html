@@ -1,26 +1,21 @@
 {% load staticfiles %}
 
-
-
-<!-- Main Sidebar -->
 <aside class="main-sidebar col-12 col-md-3 col-lg-2 px-0">
     <br />
     <div class="container">
-        <div style="float:right;"><a href="{% url 'clearfilters'%}">Clear  <i class="fas fa-eraser"></i></a></div>
-        <br/>
-       
+        <div style="float:right;"><a href="{% url 'clearfilters'%}">Clear <i class="fas fa-eraser"></i></a></div>
+        <br />
 
-        <form  id="searchProjects" action="{% url 'projects' %}" >            
+        <form id="searchProjects" action="{% url 'projects' %}">
             <label for="keywords" style="color:black">Keywords</label>
             <input type="text" id="keywords" name="keywords" autocomplete="off" value="{{filters.keywords}}"
                 class="basicAutoComplete form-control mb-4" placeholder="Keywords" data-url="text_autocomplete/">
             <label for="category" style="color:black">Category:</label>
-            
+
             <select id="category" name="category" class="custom-select">
                 <option value="">Category</option>
                 {% for c in categories %}
-                
-                <option {% if c.id ==  filters.category %} selected {% endif %} value="{{c.id}}" >
+                <option {% if c.id ==  filters.category %} selected {% endif %} value="{{c.id}}">
                     {{c.category|capfirst}}
                 </option>
                 {% endfor %}
@@ -29,9 +24,4 @@
             <button class="btn btn-info btn-block" id="search" type="submit">Find projects</button>
         </form>
     </div>
-
 </aside>
-<!-- End Main Sidebar -->
-
-
-

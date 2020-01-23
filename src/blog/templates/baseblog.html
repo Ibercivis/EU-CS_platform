@@ -3,18 +3,15 @@
 {% load crispy_forms_tags %}
 
 
-{% block title %}{{ block.super }}Projects{% endblock %}
+{% block title %}{{ block.super }}Blog{% endblock %}
 
 {% block navbar-left %}
-{% include "_navbar.html" with active_link="projects" %}
+{% include "_navbar.html" with active_link="blog" %}
 {% endblock %}
-
-
 
 
 <style>
     body {
-        font-family: "Roboto", sans-serif;
         font-size: 17px;
         background-color: #fdfdfd;
     }

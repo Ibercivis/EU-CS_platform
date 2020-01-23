@@ -40,14 +40,6 @@
     
     <nav class="navbar navbar-light fixed-top navbar-expand-lg "
       style="background-color: #f3f3f3;border-color: #e7e7e7;">
-
-<!-- 
-      {% block navbar-brand %}
-      <a class="navbar-brand" href="{% url 'home' %}">
-        <img src="{% static 'site/img/logo.png' %}" alt="logo">
-        {% include "_brandname.html" %}        
-      </a>
-      {% endblock %} -->
       
       <button class="navbar-toggler" type="button" data-toggle="collapse"
         data-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false"
@@ -66,11 +58,8 @@
         </ul>
       </div>
 
-
-
       <ul class="navbar-nav ">
         {% block navbar-right %}
-
         {% if not user.is_authenticated %}
         <li>
           <div class="row">
@@ -122,7 +111,6 @@
 
   {% block container %}
   <div class="container">
-
     <div class="starter-template">
       <h1>New Project</h1>
       <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a

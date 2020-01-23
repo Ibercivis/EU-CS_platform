@@ -25,33 +25,27 @@
 {% endblock %}
 
 
-
 {% block container %}
 
 {% include "finder.html" %}
 
-
 <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
   </br></br></br></br>
-
-  <!-- / .main-navbar -->
   <div class="main-content-container container-fluid px-4">
-    <!-- Page Header -->
     <div class="page-header row no-gutters py-4">
       <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-        <h2 class="page-title">Projects</h2>       
+        <h2 class="page-title">Projects</h2>
       </div>
     </div>
     {% if user.is_authenticated %}
-    <span >
+    <span>
       <a href="{% url 'new_project' %}">
         <i class="material-icons">add_circle</i>
         Add new project
       </a>
     </span>
     {% endif %}
-    <br/><br/>
- 
+    <br /><br />
 
     <div class="row">
       {% for project in projects %}
@@ -74,7 +68,6 @@
       {% endfor %}
     </div>
 
-
     <br /><br />
     {% include "paginator.html" %}
     {% if projects %}
@@ -87,8 +80,6 @@
 </main>
 
 {% endblock container %}
-
-
 
 
 {% block scripts %}
