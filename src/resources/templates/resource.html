@@ -4,10 +4,10 @@
 {% load crispy_forms_tags %}
 
 
-{% block title %}{{ block.super }}Document{% endblock %}
+{% block title %}{{ block.super }}Resource{% endblock %}
 
 {% block navbar-left %}
-{% include "_navbar.html" with active_link="document" %}
+{% include "_navbar.html" with active_link="resource" %}
 {% endblock %}
 
 
@@ -22,10 +22,10 @@
 
     <div class="card card-small mb-4">
       <div class="card-header">
-        <h2 align="center">Document {{document.name}}
+        <h2 align="center">Resource {{resource.name}}
           {% if user.is_authenticated %}
-          {% if document.author == user %}
-          <a href="{% url 'editDocument' document.id %}">
+          {% if resource.author == user %}
+          <a href="{% url 'editResource' resource.id %}">
             <i class="material-icons" style="font-size: 24px;">edit</i>
           </a>
           {% endif %}
@@ -38,17 +38,17 @@
           <div class="col-sm-6">
             <div class="container">
               <div class="p-0 offset-lg-1 offset-md-2">
-                <h4>Document info</h4>
-                <p> ID: {{document.id}}</p>
-                <p> Name: {{document.name}}</p>
-                <p> About: {{document.about}}</p>
-                <p> Abstract: {{ document.abstract }}</p>
-                <p> URL: <a href="{{document.url}}">{{document.url}}</a></p>
-                <p> License: {{ document.license }}</p>
-                <p> Language: {{ document.inLanguage }}</p>
-                <p> Audience: {{ document.audience }} </p>
-                <p> Publisher: {{ document.publisher }}</p>
-                <p> Keywords: {{ document.keywords }} </p>
+                <h4>Resource info</h4>
+                <p> ID: {{resource.id}}</p>
+                <p> Name: {{resource.name}}</p>
+                <p> About: {{resource.about}}</p>
+                <p> Abstract: {{ resource.abstract }}</p>
+                <p> URL: <a href="{{resource.url}}">{{resource.url}}</a></p>
+                <p> License: {{ resource.license }}</p>
+                <p> Language: {{ resource.inLanguage }}</p>
+                <p> Audience: {{ resource.audience }} </p>
+                <p> Publisher: {{ resource.publisher }}</p>
+                <p> Keywords: {{ resource.keywords }} </p>
 
               </div>
             </div>
@@ -56,7 +56,7 @@
 
           <div class="col-sm-6">
             <br /><br /><br />
-            <img src="/static/site/img/document.png" style="max-width: 50%;    
+            <img src="/static/site/img/resource.png" style="max-width: 50%;    
             margin-left: auto;
             margin-right: auto;
             display: block;">

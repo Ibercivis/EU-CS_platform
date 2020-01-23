@@ -76,7 +76,7 @@ INSTALLED_APPS = (
     "profiles",
     "accounts",
     "projects",
-    "documents",
+    "resources",
     "django_select2",
     "blog",
     "django_summernote",
