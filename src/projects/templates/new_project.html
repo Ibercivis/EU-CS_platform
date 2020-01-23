@@ -5,11 +5,10 @@
 
 
 {% block title %}{{ block.super }}Projects{% endblock %}
-<!--
+
 {% block navbar-left %}
-  {% include "_navbar.html" with active_link="projects" %}
+{% include "_navbar.html" with active_link="projects" %}
 {% endblock %}
--->
 
 
 {% block container %}
@@ -19,163 +18,153 @@
 <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
 
   </br></br></br>
-  <!-- / .main-navbar -->
   <div class="main-content-container container-fluid px-4">
-    <!-- Page Header -->
     <div class="page-header row no-gutters py-4">
       <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-            <h2 class="page-title">Add new project</h2>
-          </div>
-        </div>
-
-        <div class="card card-small mb-4">
-          <div class="card-body p-0 pb-3 text-center">
-            <table class="table mb-0">
-
-              <form action="/new_project" method="post" class="add-new-post" autocomplete="off">
-                {% csrf_token %}
-
-                <br />
-
-              <div>
-                <h4>Project info</h4>
-              </div>
-                <div class="row">
-                  <div class="col-5 p-3 ml-5">
-                    {{ form.project_name|as_crispy_field }}
-                  </div>
-                  <div class="col-5 p-3 ml-5">
-                    {{ form.aim|as_crispy_field }}
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-5 p-3 ml-5">
-                    {{ form.description|as_crispy_field }}
-                  </div>
-                  <div class="col-5 p-3 ml-5">
-                    {{ form.keywords|as_crispy_field }}
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-5 p-3 ml-5">
-                    {{ form.category|as_crispy_field }}
-                  </div>
-                  <div class="col-5 p-3 ml-5">
-                    {{ form.status|as_crispy_field }}
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-5 p-3 ml-5">
-                    {{ form.start_date|as_crispy_field }}
-                  </div>
-                  <div class="col-5 p-3 ml-5">
-                    {{ form.end_date|as_crispy_field }}
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-5 p-3 ml-5">
-                    {{ form.topic|as_crispy_field }}
-                  </div>
-              </div>  
-                  </div>
-              </div>  
-            </div>
-              </div>  
-                  </div>
-                  <div class="col-5 p-3 ml-5">
-                  </div>
-                </div>
-
-                <hr />
-                <h4>Contact person info</h4>
-                <a id="contactinfo" href="#">Show</a>
-                <div id="contactinfoform" style="display:none">
-                  <div class="row">
-                    <div class="col-5 p-3 ml-5">
-                      <label for="name">Contact person name</label><br />
-                      <input type="text" disabled name="name" value={{user.name}} maxlength="100"
-                        class="textinput textInput form-control">
-                    </div>
-                    <div class="col-5 p-3 ml-5">
-                      <label for="email">Contact person email</label><br />
-                      <input type="text" disabled name="email" value={{user.email}} maxlength="100"
-                        class="textinput textInput form-control">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-5 p-3 ml-5">
-                      {{ form.contact_person_phone|as_crispy_field }}
-                    </div>
-
-                  </div>
-                </div>
-                <hr />
-
-
-                <h4>Images and communications</h4>
-                <div class="row">
-                  <div class="col-5 p-3 ml-5">
-                    {{ form.url|as_crispy_field }}
-                  </div>
-                  <div class="col-5 p-3 ml-5">
-                    {{ form.image|as_crispy_field }}
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-5 p-3 ml-5">
-                    {{ form.image_credit|as_crispy_field }}
-                  </div>
-                  <div class="col-5 p-3 ml-5">
-                  </div>
-                </div>
-                <hr />
-
-                <h4>Geography</h4>
-                <div class="row">
-                  <div class="col-5 p-3 ml-5">
-                    {{ form.latitude|as_crispy_field }}
-                  </div>
-                  <div class="col-5 p-3 ml-5">
-                    {{ form.longitude|as_crispy_field }}
-                  </div>
-                </div>
-                <hr />
-
-                <h4>Personal and Organizational Affiliates</h4>
-                <div class="row">
-                  <div class="col-5 p-3 ml-5">
-                    {{ form.host|as_crispy_field }}
-                  </div>
-                  <div class="col-5 p-3 ml-5">              
-                  </div>
-                </div>
-                <hr />
-
-
-                <h4>Supplementary information for Citizen Science</h4>
-                <div class="row">
-                  <div class="col-5 p-3 ml-5">
-                    {{ form.how_to_participate|as_crispy_field }}
-                  </div>
-                  <div class="col-5 p-3 ml-5">              
-                    {{ form.equipment|as_crispy_field }}
-                  </div>
-                </div>
-                <hr />
-
-                <br /><br />
-
-                <div class="row justify-content-md-center">
-                  <button type="submit" class="btn btn-success">Save</button>
-                  <!-- <button type="submit" name="cancel" value="cancel" class="btn btn-danger" style="margin-left:20px">Back</button>                 -->
-                </div>
-              </form>
-          </div>
-
-          </table>
-        </div>
-
+        <h2 class="page-title">Add new project</h2>
       </div>
+    </div>
+
+    <div class="card card-small mb-4">
+      <div class="card-body p-0 pb-3 text-center">
+        <table class="table mb-0">
+
+          <form action="/new_project" method="post" class="add-new-post" autocomplete="off">
+            {% csrf_token %}
+            <br />
+
+            <div>
+              <h4>Project info</h4>
+            </div>
+            <div class="row">
+              <div class="col-5 p-3 ml-5">
+                {{ form.project_name|as_crispy_field }}
+              </div>
+              <div class="col-5 p-3 ml-5">
+                {{ form.aim|as_crispy_field }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-5 p-3 ml-5">
+                {{ form.description|as_crispy_field }}
+              </div>
+              <div class="col-5 p-3 ml-5">
+                {{ form.keywords|as_crispy_field }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-5 p-3 ml-5">
+                {{ form.category|as_crispy_field }}
+              </div>
+              <div class="col-5 p-3 ml-5">
+                {{ form.status|as_crispy_field }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-5 p-3 ml-5">
+                {{ form.start_date|as_crispy_field }}
+              </div>
+              <div class="col-5 p-3 ml-5">
+                {{ form.end_date|as_crispy_field }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-5 p-3 ml-5">
+                {{ form.topic|as_crispy_field }}
+              </div>
+
+              <div class="col-5 p-3 ml-5">
+              </div>
+            </div>
+
+            <hr />
+            <h4>Contact person info</h4>
+            <a id="contactinfo" href="#">Show</a>
+            <div id="contactinfoform" style="display:none">
+              <div class="row">
+                <div class="col-5 p-3 ml-5">
+                  <label for="name">Contact person name</label><br />
+                  <input type="text" disabled name="name" value={{user.name}} maxlength="100"
+                    class="textinput textInput form-control">
+                </div>
+                <div class="col-5 p-3 ml-5">
+                  <label for="email">Contact person email</label><br />
+                  <input type="text" disabled name="email" value={{user.email}} maxlength="100"
+                    class="textinput textInput form-control">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-5 p-3 ml-5">
+                  {{ form.contact_person_phone|as_crispy_field }}
+                </div>
+
+              </div>
+            </div>
+            <hr />
+
+
+            <h4>Images and communications</h4>
+            <div class="row">
+              <div class="col-5 p-3 ml-5">
+                {{ form.url|as_crispy_field }}
+              </div>
+              <div class="col-5 p-3 ml-5">
+                {{ form.image|as_crispy_field }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-5 p-3 ml-5">
+                {{ form.image_credit|as_crispy_field }}
+              </div>
+              <div class="col-5 p-3 ml-5">
+              </div>
+            </div>
+            <hr />
+
+            <h4>Geography</h4>
+            <div class="row">
+              <div class="col-5 p-3 ml-5">
+                {{ form.latitude|as_crispy_field }}
+              </div>
+              <div class="col-5 p-3 ml-5">
+                {{ form.longitude|as_crispy_field }}
+              </div>
+            </div>
+            <hr />
+
+            <h4>Personal and Organizational Affiliates</h4>
+            <div class="row">
+              <div class="col-5 p-3 ml-5">
+                {{ form.host|as_crispy_field }}
+              </div>
+              <div class="col-5 p-3 ml-5">
+              </div>
+            </div>
+            <hr />
+
+            <h4>Supplementary information for Citizen Science</h4>
+            <div class="row">
+              <div class="col-5 p-3 ml-5">
+                {{ form.how_to_participate|as_crispy_field }}
+              </div>
+              <div class="col-5 p-3 ml-5">
+                {{ form.equipment|as_crispy_field }}
+              </div>
+            </div>
+            <hr />
+
+            <br /><br />
+
+            <div class="row justify-content-md-center">
+              <button type="submit" class="btn btn-success">Save</button>              
+            </div>
+          </form>
+      </div>
+
+      </table>
+    </div>
+
+  </div>
 </main>
 
 {% endblock container %}
@@ -186,7 +175,7 @@
   $(document).ready(function () {
     $('#contactinfo').on('click', function () {
       $('#contactinfoform').toggle();
-      $('html,body').animate({scrollTop:$("#contactinfo").offset().top-160},{duration:"slow"});
+      $('html,body').animate({ scrollTop: $("#contactinfo").offset().top - 160 }, { duration: "slow" });
     });
   });
 </script>

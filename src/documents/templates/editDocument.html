@@ -5,24 +5,20 @@
 {% load i18n %}
 {% load l10n %}
 
-{% block title %}{{ block.super }}documents{% endblock %}
-<!--
+{% block title %}{{ block.super }}Documents{% endblock %}
+
 {% block navbar-left %}
-  {% include "_navbar.html" with active_link="documents" %}
+{% include "_navbar.html" with active_link="documents" %}
 {% endblock %}
--->
 
 {% block container %}
 {{ form.media.css }}
 
 
-
 <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
 
   </br></br></br>
-  <!-- / .main-navbar -->
   <div class="main-content-container container-fluid px-4">
-    <!-- Page Header -->
     <div class="page-header row no-gutters py-4">
       <div class="col-12  ">
         <h2 class="page-title">Edit document
@@ -86,8 +82,7 @@
                 </label>
                 <select name="language" class="form-control">
                   {% for language in languages %}
-                  <option value="{{ language.code }}" {% if language.code == document.inLanguage %}selected
-                    {% endif %}>
+                  <option value="{{ language.code }}" {% if language.code == document.inLanguage %}selected {% endif %}>
                     {{ language.name_local }}
                   </option>
                   {% endfor %}

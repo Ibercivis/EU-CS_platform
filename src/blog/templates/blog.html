@@ -1,32 +1,30 @@
-{% extends "baseblog.html" %} 
+{% extends "baseblog.html" %}
 {% block content %}
 <style>
-    body {
-        font-family: "Roboto", sans-serif;
-        font-size: 18px;
+    body {        
         background-color: #fdfdfd;
     }
-    
+
     .head_text {
         color: white;
     }
-    
+
     .card {
         box-shadow: 0 16px 48px #E3E7EB;
     }
 </style>
-<br/><br/><br/><br/>
+<br /><br /><br /><br />
 
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class=" col-md-8 col-md-10 mx-auto">
-                <div style="text-align: center;">
-                    <h3><u>Posts </u> </h3>
-                </div>
+<div class="overlay"></div>
+<div class="container">
+    <div class="row">
+        <div class=" col-md-8 col-md-10 mx-auto">
+            <div style="text-align: center;">
+                <h3><u>Posts </u> </h3>
             </div>
         </div>
     </div>
+</div>
 
 <div class="container">
     <div class="row">
@@ -37,7 +35,7 @@
                 <div class="card-body">
                     <h2 class="card-title">{{ post.title }}</h2>
                     <p class="card-text text-muted h6">{{ post.author }} | {{ post.created_on}} </p>
-                    <p class="card-text">{{post.content|slice:":200" | safe }}</p>
+                    <p class="card-text">{{post.content | slice:":200" | safe }}</p>
                     <a href="{% url 'post_detail' post.slug  %}" class="btn btn-primary">Read More &rarr;</a>
                 </div>
             </div>

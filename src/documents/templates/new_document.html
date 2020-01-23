@@ -3,11 +3,10 @@
 <link rel="stylesheet" href="https://anijs.github.io/lib/anicollection/anicollection.css" />
 
 
-
 {% load staticfiles %}
 {% load crispy_forms_tags %}
-{% load i18n %} 
-{% load l10n %} 
+{% load i18n %}
+{% load l10n %}
 
 {% block title %}{{ block.super }}Projects{% endblock %}
 
@@ -16,17 +15,11 @@
 {% endblock %}
 
 
-
 {% block container %}
-
-
-
-
 
 <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
     </br></br></br></br></br>
     <div class="main-content-container container-fluid px-4">
-
 
         <div class="container">
             Upload a Citizen Science's document </br></br>
@@ -36,7 +29,6 @@
                     <table class="table mb-0">
                         <form action="/new_document" method="post" class="add-new-post" enctype="multipart/form-data">
                             {% csrf_token %}
-
                             <br />
                             <h4>Document</h4>
                             <div class="row">
@@ -72,19 +64,19 @@
                                     {{ form.license|as_crispy_field }}
                                 </div>
                                 <div class="col-5 p-3 ml-5">
-                                    {% get_language_info_list for LANGUAGES as languages %}            
+                                    {% get_language_info_list for LANGUAGES as languages %}
                                     {% if settings.USE_I18N and languages|length > 1 %}
                                     <label for="language" class="control-label  requiredField">
                                         Language<span class="asteriskField">*</span>
                                     </label>
-                                    <select name="language" class="form-control" >
+                                    <select name="language" class="form-control">
                                         {% for language in languages %}
                                         <option value="{{ language.code }}"
-                                            {% if language.code == LANGUAGE_CODE %}selected="selected"{% endif %}>
+                                            {% if language.code == LANGUAGE_CODE %}selected="selected" {% endif %}>
                                             {{ language.name_local }}
                                         </option>
                                         {% endfor %}
-                                        </select>
+                                    </select>
                                     {% endif %}
                                 </div>
                             </div>
@@ -112,14 +104,7 @@
                 </div>
             </div>
 
-
-
-
-
-
             <br /><br />
-
-
         </div>
     </div>
 </main>
@@ -128,15 +113,5 @@
 
 
 {% block scripts %}
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-    crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-    crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-<script src="https://unpkg.com/shards-ui@latest/dist/js/shards.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js"></script>
+
 {% endblock scripts %}
