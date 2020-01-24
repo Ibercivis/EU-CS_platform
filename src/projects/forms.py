@@ -14,9 +14,8 @@ class ProjectForm(forms.Form):
     status = forms.CharField(max_length=100)
     start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}))
     end_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=False)  
-    topic = forms.CharField(max_length=100, required=False)
     
-    category = forms.ModelMultipleChoiceField(queryset=Category.objects.all(), widget=Select2MultipleWidget, required=False)
+    topic = forms.ModelMultipleChoiceField(queryset=Category.objects.all(), widget=Select2MultipleWidget, required=False)
     
     #Images and communications
     url = forms.CharField(max_length=200, required=False)
@@ -47,7 +46,7 @@ class ProjectForm(forms.Form):
         end_dateData = self.data['end_date']        
         pk = self.data.get('projectID', '')        
         categories = ''
-        for c in self.data.getlist('category'):
+        for c in self.data.getlist('topic'):
             categories += c + "#"
         categories = categories[:len(categories) - 1]
         
@@ -58,13 +57,13 @@ class ProjectForm(forms.Form):
             project.start_date = start_dateData
             project.end_date = end_dateData
             project.status = self.data['status']
-            project.category = categories
+            project.topic = categories
         else:           
-            project = Project(name = self.data['project_name'], url = self.data['url'], category = categories,
+            project = Project(name = self.data['project_name'], url = self.data['url'],
                          start_date = start_dateData, end_date = end_dateData, creator=args.user,
                          latitude = self.data['latitude'], longitude = self.data['longitude'],
                          aim = self.data['aim'], description = self.data['description'], 
-                         topic = self.data['topic'], keywords = self.data['keywords'],
+                         topic = categories, keywords = self.data['keywords'],
                          status = self.data['status'], host = self.data['host'])
         
         project.save()

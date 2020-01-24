@@ -38,7 +38,7 @@ def projects(request):
         filters['keywords'] = request.GET['keywords']
     
     if request.GET.get('category'):
-        projects = projects.filter(category__icontains = request.GET['category'])
+        projects = projects.filter(topic__icontains = request.GET['category'])
         filters['category'] = int(request.GET['category'])
 
     paginator = Paginator(projects, 8) 
@@ -50,7 +50,7 @@ def projects(request):
 
 def project(request, pk):
     project = get_object_or_404(Project, id=pk)
-    categories = selectCategories(project.category)
+    categories = selectCategories(project.topic)
 
     return render(request, 'project.html', {'project':project, 'categories': categories})
 
@@ -62,13 +62,13 @@ def editProject(request, pk):
     
     start_datetime = formats.date_format(project.start_date, 'Y-m-d')
     end_datetime = formats.date_format(project.end_date, 'Y-m-d')    
-    categories = selectCategories(project.category)
+    categories = selectCategories(project.topic)
 
     form = ProjectForm(initial={
         'project_name':project.name,'url': project.url,'start_date': start_datetime,
         'end_date':end_datetime, 'aim': project.aim, 'description': project.description, 
-        'keywords': project.keywords, 'status': project.status, 'topic': project.topic,
-        'category':categories, 'latitude': project.latitude, 'longitude': project.longitude, 
+        'keywords': project.keywords, 'status': project.status, 
+        'topic':categories, 'latitude': project.latitude, 'longitude': project.longitude, 
         'image': project.image, 'image_credit': project.imageCredit, 'host': project.host,
         'how_to_participate': project.howToParticipate, 'equipment': project.equipment,
     })

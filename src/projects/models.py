@@ -2,7 +2,6 @@ from django.db import models
 from django.conf import settings
 
 class Project(models.Model):    
-    category =  models.CharField(max_length=200)
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     #Database information
     dateCreated = models.DateTimeField('Created date', auto_now=True)
@@ -16,7 +15,7 @@ class Project(models.Model):
     status = models.CharField(max_length=100)
     start_date = models.DateTimeField('Start date')
     end_date = models.DateTimeField('End date')
-    topic = models.CharField(max_length=100)
+    topic = models.CharField(max_length=300)
     #Images and communications
     url = models.CharField(max_length=200)
     image = models.CharField(max_length=200)
