@@ -1,6 +1,11 @@
 from django.db import models
 from django.conf import settings
 
+class Status(models.Model):
+    status = models.TextField()
+    def __str__(self):        
+        return f'{self.status}'
+
 class Project(models.Model):    
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     #Database information
@@ -12,7 +17,7 @@ class Project(models.Model):
     aim = models.CharField(max_length=100)
     description = models.CharField(max_length=300)
     keywords = models.CharField(max_length=100)
-    status = models.CharField(max_length=100)
+    status = models.ForeignKey(Status, on_delete=models.CASCADE)
     start_date = models.DateTimeField('Start date')
     end_date = models.DateTimeField('End date')
     topic = models.CharField(max_length=300)

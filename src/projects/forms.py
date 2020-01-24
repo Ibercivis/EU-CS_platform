@@ -1,6 +1,6 @@
 from django import forms
 from django.db import models
-from .models import Project, Category
+from .models import Project, Category, Status
 from django.shortcuts import get_object_or_404
 from django_select2.forms import Select2MultipleWidget
 
@@ -11,7 +11,7 @@ class ProjectForm(forms.Form):
     aim = forms.CharField(max_length=100)
     description = forms.CharField(max_length=300)
     keywords = forms.CharField(max_length=100, required=False)
-    status = forms.CharField(max_length=100)
+    status = forms.ModelChoiceField(queryset=Status.objects.all())
     start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}))
     end_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=False)  
     
@@ -49,6 +49,7 @@ class ProjectForm(forms.Form):
         for c in self.data.getlist('topic'):
             categories += c + "#"
         categories = categories[:len(categories) - 1]
+        status = get_object_or_404(Status, id=self.data['status'])
         
         if(pk):
             project = get_object_or_404(Project, id=pk)
@@ -56,7 +57,7 @@ class ProjectForm(forms.Form):
             project.url = self.data['url']
             project.start_date = start_dateData
             project.end_date = end_dateData
-            project.status = self.data['status']
+            project.status = status
             project.topic = categories
         else:           
             project = Project(name = self.data['project_name'], url = self.data['url'],
@@ -64,7 +65,7 @@ class ProjectForm(forms.Form):
                          latitude = self.data['latitude'], longitude = self.data['longitude'],
                          aim = self.data['aim'], description = self.data['description'], 
                          topic = categories, keywords = self.data['keywords'],
-                         status = self.data['status'], host = self.data['host'])
+                         status = status, host = self.data['host'])
         
         project.save()
         return 'success'
