@@ -41,9 +41,8 @@
                 <p> Description: {{project.description}}</p>
                 <p> Start date: {{ project.start_date | date:"d/m/Y"}}</p>
                 <p> End date: {{ project.end_date | date:"d/m/Y"}}</p>
-                <p> Topic: {{ project.topic}}</p>
                 <p> Status: {{ project.status}}</p>
-                <p> Categories: {% for c in categories %} {{c.category|capfirst}} | {% endfor %} </p>
+                <p> Topic: {% for c in categories %} {{c.category|capfirst}} | {% endfor %} </p>
                 <br />
                 <p>Date created: {{project.dateCreated  | date:"d/m/Y"}} </p>
                 <p>Date updated: {{project.dateUpdated  | date:"d/m/Y"}} </p>
