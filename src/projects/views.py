@@ -50,7 +50,7 @@ def projects(request):
     page = request.GET.get('page')
     projects = paginator.get_page(page)
 
-    return render(request, 'projects.html', {'projects':projects, 'categories': categories,
+    return render(request, 'projects.html', {'projects': projects, 'categories': categories,
     'status': status, 'filters': filters})
 
 

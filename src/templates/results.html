@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}{{ block.super }}Projects{% endblock %}
+
+{% block navbar-left %}
+{% include "_navbar.html" with active_link="projects" %}
+{% endblock %}
+
+
+{% block messages %}
+{% if messages %}
+{% for message in messages %}
+<div class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+    <div class="alert alert-{{ message.tags }}">
+        <a class="close" data-dismiss="alert">×</a>
+        {{ message|safe }}
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+{% endblock %}
+
+
+{% block container %}
+<br /><br /><br /><br />
+
+<main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+
+    <div class="container">
+        <h3><u>Results</u></h3>
+
+        {% if showProjects %}
+        <h4>Projects</h4>
+        <div class="row">
+            {% for project in projects %}
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                <div class="card card-small card-post h-100">
+                    <div class="card-post__image" style="background-image: url('../static/site/img/project.png');"></div>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a class="text-fiord-blue" href="{% url 'project' project.id %}">{{ project.name }}</a>
+                        </h4>
+                        <p class="card-text">{{project.description}}</p>
+                    </div>
+                    <div class="card-footer text-muted border-top py-3">
+                        <span class="d-inline-block">By
+                            <a class="text-fiord-blue" href="#">{{project.creator.name}}</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if showResources %}
+        <h4>Resources</h4>
+        <div class="row">
+            {% for rsc in resources %}
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+              <div class="card card-small card-post h-100">
+                <div class="card-body">
+                  <h4 class="card-title">
+                    <a class="text-fiord-blue" href="{% url 'resource' rsc.id %}">{{ rsc.name }}</a>
+                  </h4>
+                  <p class="card-text"><i>Abstract:</i><br />{{rsc.abstract}}</p>
+                  <img class="card-img" src="../static/site/img/resource.png">
+                  <br /><br />
+                  <p class="card-text"><a href="{{rsc.url}}" target="_blank"> View resource </a></p>
+                </div>
+                <div class="card-footer text-muted border-top py-3">
+                  <span>Author: {{rsc.author.name}}</span><br />
+                  <span class="d-inline-block">Date
+                    <span class="text-fiord-blue">{{rsc.datePublished | date:"d/m/Y"}}</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+          
+    </div>
+</main>
+{% endblock container %}
