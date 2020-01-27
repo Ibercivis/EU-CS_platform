@@ -5,7 +5,7 @@ from django.views import generic
 from django.core.paginator import Paginator
 from .forms import ProjectForm
 from django.utils import timezone
-from .models import Project, Category
+from .models import Project, Category, Status
 from django.contrib.auth import get_user_model
 import json
 from django.utils.dateparse import parse_datetime
@@ -30,7 +30,8 @@ def projects(request):
     projects = Project.objects.get_queryset().order_by('id')
 
     categories = Category.objects.all()
-    filters = {'keywords': '', 'category': 0}
+    status = Status.objects.all()
+    filters = {'keywords': '', 'category': 0, 'status': 0}
     
 
     if request.GET.get('keywords'):
@@ -41,11 +42,16 @@ def projects(request):
         projects = projects.filter(topic__icontains = request.GET['category'])
         filters['category'] = int(request.GET['category'])
 
+    if request.GET.get('status'):
+        projects = projects.filter(status = request.GET['status'])
+        filters['status'] = int(request.GET['status'])
+
     paginator = Paginator(projects, 8) 
     page = request.GET.get('page')
     projects = paginator.get_page(page)
 
-    return render(request, 'projects.html', {'projects':projects, 'categories': categories, 'filters': filters})
+    return render(request, 'projects.html', {'projects':projects, 'categories': categories,
+    'status': status, 'filters': filters})
 
 
 def project(request, pk):

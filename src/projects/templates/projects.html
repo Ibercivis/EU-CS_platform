@@ -94,8 +94,14 @@
 </script>
 <script>
   $(function () {
-    $('.custom-select').on('change', function () {
+    $('.category-select').on('change', function () {
       var category = $(this).val();
+      $('#searchProjects').submit();
+    });
+  });
+  $(function () {
+    $('.status-select').on('change', function () {
+      var status = $(this).val();
       $('#searchProjects').submit();
     });
   });
