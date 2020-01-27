@@ -12,7 +12,7 @@
                 class="basicAutoComplete form-control mb-4" placeholder="Keywords" data-url="text_autocomplete/">
             <label for="category" style="color:black">Category:</label>
 
-            <select id="category" name="category" class="custom-select">
+            <select id="category" name="category" class="custom-select category-select">
                 <option value="">Category</option>
                 {% for c in categories %}
                 <option {% if c.id ==  filters.category %} selected {% endif %} value="{{c.id}}">
@@ -20,6 +20,19 @@
                 </option>
                 {% endfor %}
             </select>
+
+            <br /><br />
+            <label for="status" style="color:black">Status:</label>
+
+            <select id="status" name="status" class="custom-select status-select">
+                <option value="">-----</option>
+                {% for s in status %}
+                <option {% if s.id ==  filters.status %} selected {% endif %} value="{{s.id}}">
+                    {{s.status|capfirst}}
+                </option>
+                {% endfor %}
+            </select>
+
             <br /><br />
             <button class="btn btn-info btn-block" id="search" type="submit">Find projects</button>
         </form>
