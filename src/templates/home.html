@@ -7,7 +7,7 @@
 
 
 {% block navbar-left %}
-  {% include "_navbar.html" with active_link="home" %}
+{% include "_navbar.html" with active_link="home" %}
 {% endblock %}
 
 
@@ -16,15 +16,27 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8 col-sm-8">
+        <br /><br /><br />
         <h1>{% include "_brandname.html" %}</h1>
-        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
-  <a class="btn btn-primary" href="{% url 'accounts:signup' %}" role="button">Sign up for Free!</a>
+        <br /><br /><br />
+      </div>
+    </div>
+    <div class="row">
+      <p>Find a Citizen Science project/resource</p>
+      {% include "finder.html" %}
+    </div>
+
+    <div class="row">
+      <div class="col-md-8 col-sm-8">
+        <br /><br /><br />
+        <a class="btn btn-primary" href="{% url 'accounts:signup' %}" role="button">Sign up for Free!</a>
       </div>
       <div class="col-md-4 col-sm-4">
 
       </div>
     </div>
   </div>
+
 </div>
 {% endblock splash %}
 
@@ -82,18 +94,20 @@
       <img src="http://eu-citizen.science/wp-content/uploads/2019/06/iiasalogo.png" class="d-block img-fluid">
     </div>
     <div class="col-2">
-      <img src="http://eu-citizen.science/wp-content/uploads/2019/05/Earthwatch_logo_Green.jpg" class="d-block img-fluid">
+      <img src="http://eu-citizen.science/wp-content/uploads/2019/05/Earthwatch_logo_Green.jpg"
+        class="d-block img-fluid">
     </div>
     <div class="col-2">
       <img src="http://eu-citizen.science/wp-content/uploads/2019/05/logo.gif" class="d-block img-fluid">
     </div>
   </div>
 
-</br></br></br></br>
+  </br></br></br></br>
 
   <div class="row align-items-center">
     <div class="col-2">
-      <img src="http://eu-citizen.science/wp-content/uploads/2019/05/University_College_London_logo.png" class="d-block img-fluid">
+      <img src="http://eu-citizen.science/wp-content/uploads/2019/05/University_College_London_logo.png"
+        class="d-block img-fluid">
     </div>
     <div class="col-2">
       <img src="http://eu-citizen.science/wp-content/uploads/2019/05/Ecsite_logo.jpg" class="d-block img-fluid">
@@ -105,14 +119,15 @@
       <img src="http://eu-citizen.science/wp-content/uploads/2019/05/va-logo.png" class="d-block img-fluid">
     </div>
     <div class="col-2">
-      <img src="http://eu-citizen.science/wp-content/uploads/2019/05/Natural-History-Museum-Logo.gif" class="d-block img-fluid">
+      <img src="http://eu-citizen.science/wp-content/uploads/2019/05/Natural-History-Museum-Logo.gif"
+        class="d-block img-fluid">
     </div>
     <div class="col-2">
       <img src="http://eu-citizen.science/wp-content/uploads/2019/05/zegel.png" class="d-block img-fluid">
     </div>
   </div>
 
-</br></br></br></br>
+  </br></br></br></br>
 
   <div class="row align-items-center">
     <div class="col-3"></div>
@@ -128,46 +143,46 @@
     <div class="col-3"></div>
   </div>
 
-</br></br></br></br>
-<p align="center">Third parties</p>
+  </br></br></br></br>
+  <p align="center">Third parties</p>
 
-<div class="row align-items-center">
-  <div class="col-2">
-    <img src="http://eu-citizen.science/wp-content/uploads/2019/09/Boku-wien.svg.png" class="d-block img-fluid">
+  <div class="row align-items-center">
+    <div class="col-2">
+      <img src="http://eu-citizen.science/wp-content/uploads/2019/09/Boku-wien.svg.png" class="d-block img-fluid">
+    </div>
+    <div class="col-2">
+      <img src="http://eu-citizen.science/wp-content/uploads/2019/09/museumbelgique.png" class="d-block img-fluid">
+    </div>
+    <div class="col-2 align-items-center">
+      <img src="http://eu-citizen.science/wp-content/uploads/2019/09/tartuulikool.png" class="d-block img-fluid">
+    </div>
+    <div class="col-2">
+      <img src="http://eu-citizen.science/wp-content/uploads/2019/09/MNHN-logo.jpg" class="d-block img-fluid">
+    </div>
+    <div class="col-2">
+      <img src="http://eu-citizen.science/wp-content/uploads/2019/09/thessaloniki_logo.png" class="d-block img-fluid">
+    </div>
+    <div class="col-2">
+      <img src="http://eu-citizen.science/wp-content/uploads/2019/09/essrg-logo.png" class="d-block img-fluid">
+    </div>
   </div>
-  <div class="col-2">
-    <img src="http://eu-citizen.science/wp-content/uploads/2019/09/museumbelgique.png" class="d-block img-fluid">
-  </div>
-  <div class="col-2 align-items-center">
-    <img src="http://eu-citizen.science/wp-content/uploads/2019/09/tartuulikool.png" class="d-block img-fluid">
-  </div>
-  <div class="col-2">
-    <img src="http://eu-citizen.science/wp-content/uploads/2019/09/MNHN-logo.jpg" class="d-block img-fluid">
-  </div>
-  <div class="col-2">
-    <img src="http://eu-citizen.science/wp-content/uploads/2019/09/thessaloniki_logo.png" class="d-block img-fluid">
-  </div>
-  <div class="col-2">
-    <img src="http://eu-citizen.science/wp-content/uploads/2019/09/essrg-logo.png" class="d-block img-fluid">
-  </div>
-</div>
 
 
-</br></br></br></br>
+  </br></br></br></br>
 
-<div class="row align-items-center">
-  <div class="col-3"></div>
-  <div class="col-2">
-    <img src="http://eu-citizen.science/wp-content/uploads/2019/09/fgrc-logo.png" class="d-block img-fluid">
+  <div class="row align-items-center">
+    <div class="col-3"></div>
+    <div class="col-2">
+      <img src="http://eu-citizen.science/wp-content/uploads/2019/09/fgrc-logo.png" class="d-block img-fluid">
+    </div>
+    <div class="col-2">
+      <img src="http://eu-citizen.science/wp-content/uploads/2019/09/Logo_Ibercivis_CMYK.png" class="d-block img-fluid">
+    </div>
+    <div class="col-2">
+      <img src="http://eu-citizen.science/wp-content/uploads/2019/09/fecyt.png" class="d-block img-fluid">
+    </div>
+    <div class="col-3"></div>
   </div>
-  <div class="col-2">
-    <img src="http://eu-citizen.science/wp-content/uploads/2019/09/Logo_Ibercivis_CMYK.png" class="d-block img-fluid">
-  </div>
-  <div class="col-2">
-    <img src="http://eu-citizen.science/wp-content/uploads/2019/09/fecyt.png" class="d-block img-fluid">
-  </div>
-  <div class="col-3"></div>
-</div>
 
 
 
@@ -178,17 +193,18 @@
 
 
 <div id="cta-1" class="col-sm-10 offset-sm-1 cta-blue-section content-section content-section-spacing-medium
- bg-color1 white-text" style="background-image: none; background-color: #a4b494;"
- data-id="cta--1" data-label="Cta" data-export-id="cta-blue-section" data-category="cta">
+ bg-color1 white-text" style="background-image: none; background-color: #a4b494;" data-id="cta--1" data-label="Cta"
+  data-export-id="cta-blue-section" data-category="cta">
   </br>
   <div class="container">
     <div class="col-sm-8 space-bottom-xs" data-type="column">
-      <p class="">EU-Citizen.Science has received funding from the European Union�s Horizon 2020 Framework Programme for Research and Innovation under grant agreement No. 824580</p>
+      <p class="">EU-Citizen.Science has received funding from the European Union�s Horizon 2020 Framework Programme for
+        Research and Innovation under grant agreement No. 824580</p>
     </div>
-  
+
     <div class="col-sm-4 end-sm" data-type="column">
-      <img class="custom-image" title="cropped-europe-1.png" 
-      src="http://eu-citizen.science/wp-content/uploads/2019/04/cropped-europe-1.png" alt="">
+      <img class="custom-image" title="cropped-europe-1.png"
+        src="http://eu-citizen.science/wp-content/uploads/2019/04/cropped-europe-1.png" alt="">
     </div>
   </div>
   </br>
@@ -196,6 +212,3 @@
 
 
 {% endblock container %}
-
-
-
