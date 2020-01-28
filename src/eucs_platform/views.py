@@ -1,12 +1,14 @@
 from django.views import generic
 from django.shortcuts import render
 from projects.models import Project
-from resources.models import Resource
+from resources.models import Resource, ResourceGroup, ResourcesGrouped
 
 
-class HomePage(generic.TemplateView):
-    template_name = "home.html"
+def home(request):
+    groups = ResourceGroup.objects.get_queryset().order_by('id')
+    resourcesgrouped = ResourcesGrouped.objects.get_queryset().order_by('group')
 
+    return render(request, 'home.html', {'groups': groups, 'resourcesgrouped': resourcesgrouped})
 
 class AboutPage(generic.TemplateView):
     template_name = "about.html"

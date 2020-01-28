@@ -22,7 +22,7 @@
       </div>
     </div>
     <div class="row">
-      <p>Find a Citizen Science projects  and resources</p>
+      <p>Find a Citizen Science projects and resources</p>
       {% include "finder.html" %}
     </div>
 
@@ -48,38 +48,39 @@
 <a id="about"></a>
 
 <div class="container">
+  {% for group in groups %}
+  <br /><br /><br />
+  <h1 style="text-align: center;">{{group.name}}</h1>
+  <br />
+
   <div class="row">
-    <div class="col-lg-3">
-      <h2>Heading</h2>
-      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-        condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec
-        sed odio dui. </p>
-      <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+    {% for rg in resourcesgrouped %}
+    {% if rg.group == group %}
+    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+      <div class="card card-small card-post h-100">
+        <div class="card-body">
+          <h4 class="card-title">
+            <a class="text-fiord-blue" href="{% url 'resource' rg.resource.id %}">{{ rg.resource.name }}</a>
+          </h4>
+          <p class="card-text"><i>Abstract:</i><br />{{rg.resource.abstract}}</p>
+          <img class="card-img" src="static/site/img/resource.png">
+          <br /><br />
+          <p class="card-text"><a href="{{rg.resource.url}}" target="_blank"> View resource </a></p>
+        </div>
+        <div class="card-footer text-muted border-top py-3">
+          <span>Author: {{rg.resource.author.name}}</span><br />
+          <span class="d-inline-block">Date
+            <span class="text-fiord-blue">{{rg.resource.datePublished | date:"d/m/Y"}}</span>
+          </span>
+        </div>
+      </div>
     </div>
-    <div class="col-lg-3">
-      <h2>Heading</h2>
-      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-        condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec
-        sed odio dui. </p>
-      <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
-    </div>
-    <div class="col-lg-3">
-      <h2>Heading</h2>
-      <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta
-        felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum
-        massa.</p>
-      <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
-    </div>
-    <div class="col-lg-3">
-      <h2>Heading</h2>
-      <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta
-        felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum
-        massa.</p>
-      <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
-    </div>
+    {% endif %}  
+    {% endfor %}  
   </div>
+  {% endfor %}
 </div>
-</div>
+
 
 
 </br></br></br></br>
