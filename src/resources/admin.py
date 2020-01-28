@@ -4,6 +4,7 @@ from .models import Resource, ResourceGroup, ResourcesGrouped
 
 class ResourcesGroupedAdmin(admin.ModelAdmin):
     list_filter = ('group','resource',)
+    ordering = ('-group',)
 
 admin.site.register(Resource)
 admin.site.register(ResourceGroup)
