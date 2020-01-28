@@ -3,7 +3,7 @@ from .models import Project, Category, Status
 
 # Register your models here.
 class ProjectA(admin.ModelAdmin):
-    list_filter = ('creator',)
+    list_filter = ('creator', 'status', )
 
 admin.site.register(Project, ProjectA)
 admin.site.register(Category)
