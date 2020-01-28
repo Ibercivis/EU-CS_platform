@@ -14,7 +14,7 @@ admin.site.site_title = "Eucs_Platform Site Admin"
 admin.site.site_header = "Eucs_Platform Administration"
 
 urlpatterns = [
-    path("", views.HomePage.as_view(), name="home"),
+    path("", views.home, name="home"),
     path("results/", views.results, name="results"),
     path("about/", views.AboutPage.as_view(), name="about"),
     path("users/", include(profiles.urls)),
