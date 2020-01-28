@@ -26,8 +26,8 @@ class Project(models.Model):
     image = models.CharField(max_length=200)
     imageCredit = models.CharField(max_length=200)
     #Geography
-    latitude = models.DecimalField(max_digits=8,decimal_places=6)
-    longitude = models.DecimalField(max_digits=8,decimal_places=6)
+    latitude = models.DecimalField(max_digits=9,decimal_places=6)
+    longitude = models.DecimalField(max_digits=9,decimal_places=6)
     #Personal and Organizational Affiliates
     host = models.CharField(max_length=100)
     #Supplementary information for Citizen Science

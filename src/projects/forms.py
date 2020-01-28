@@ -22,8 +22,8 @@ class ProjectForm(forms.Form):
     image = forms.CharField(max_length=200, required=False)
     image_credit = forms.CharField(max_length=200, required=False)
     #Geography
-    latitude = forms.DecimalField(max_digits=8,decimal_places=6)
-    longitude = forms.DecimalField(max_digits=8,decimal_places=6)
+    latitude = forms.DecimalField(max_digits=9,decimal_places=6)
+    longitude = forms.DecimalField(max_digits=9,decimal_places=6)
     #Personal and Organizational Affiliates
     host = forms.CharField(max_length=100)
     #Supplementary information for Citizen Science
