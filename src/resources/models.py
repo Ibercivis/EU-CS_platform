@@ -29,5 +29,7 @@ class ResourceGroup(models.Model):
 class ResourcesGrouped(models.Model):
     group = models.ForeignKey(ResourceGroup, on_delete=models.CASCADE)
     resource = models.ForeignKey(Resource, on_delete=models.CASCADE)
+    class Meta:
+        unique_together = (("group", "resource"),)
     def __str__(self):
         return str(self.group) + ' - ' + str(self.resource)
