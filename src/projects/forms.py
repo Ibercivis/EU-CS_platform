@@ -9,7 +9,7 @@ class ProjectForm(forms.Form):
     #Basic Project Information
     project_name = forms.CharField(max_length=100)
     aim = forms.CharField(max_length=100)
-    description = forms.CharField(max_length=300)
+    description = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}), max_length=300)
     keywords = forms.CharField(max_length=100, required=False)
     status = forms.ModelChoiceField(queryset=Status.objects.all())
     start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}))
@@ -27,8 +27,8 @@ class ProjectForm(forms.Form):
     #Personal and Organizational Affiliates
     host = forms.CharField(max_length=100)
     #Supplementary information for Citizen Science
-    how_to_participate = forms.CharField(max_length=300, required=False)
-    equipment = forms.CharField(max_length=200, required=False)
+    how_to_participate = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}), max_length=300, required=False)
+    equipment = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}), max_length=200, required=False)
 
     
     contact_person_phone = forms.CharField(max_length=100, required=False)
