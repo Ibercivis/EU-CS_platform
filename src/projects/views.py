@@ -5,7 +5,7 @@ from django.views import generic
 from django.core.paginator import Paginator
 from .forms import ProjectForm
 from django.utils import timezone
-from .models import Project, Category, Status
+from .models import Project, Topic, Status
 from django.contrib.auth import get_user_model
 import json
 from django.utils.dateparse import parse_datetime
@@ -29,18 +29,18 @@ def new_project(request):
 def projects(request):
     projects = Project.objects.get_queryset().order_by('id')
 
-    categories = Category.objects.all()
+    topics = Topic.objects.all()
     status = Status.objects.all()
-    filters = {'keywords': '', 'category': 0, 'status': 0}
+    filters = {'keywords': '', 'topic': '', 'status': 0}
     
 
     if request.GET.get('keywords'):
         projects = projects.filter(name__icontains = request.GET['keywords'])
-        filters['keywords'] = request.GET['keywords']
+        filters['keywords'] = request.GET['keywords']    
     
-    if request.GET.get('category'):
-        projects = projects.filter(topic__icontains = request.GET['category'])
-        filters['category'] = int(request.GET['category'])
+    if request.GET.get('topic'):
+        projects = projects.filter(topic__topic = request.GET['topic'])
+        filters['topic'] = request.GET['topic']
 
     if request.GET.get('status'):
         projects = projects.filter(status = request.GET['status'])
@@ -50,15 +50,14 @@ def projects(request):
     page = request.GET.get('page')
     projects = paginator.get_page(page)
 
-    return render(request, 'projects.html', {'projects': projects, 'categories': categories,
+    return render(request, 'projects.html', {'projects': projects, 'topics': topics,
     'status': status, 'filters': filters})
 
 
 def project(request, pk):
     project = get_object_or_404(Project, id=pk)
-    categories = selectCategories(project.topic)
 
-    return render(request, 'project.html', {'project':project, 'categories': categories})
+    return render(request, 'project.html', {'project':project})
 
 def editProject(request, pk):
     project = get_object_or_404(Project, id=pk)
@@ -68,13 +67,12 @@ def editProject(request, pk):
     
     start_datetime = formats.date_format(project.start_date, 'Y-m-d')
     end_datetime = formats.date_format(project.end_date, 'Y-m-d')    
-    categories = selectCategories(project.topic)
 
     form = ProjectForm(initial={
         'project_name':project.name,'url': project.url,'start_date': start_datetime,
         'end_date':end_datetime, 'aim': project.aim, 'description': project.description, 
         'keywords': project.keywords, 'status': project.status, 
-        'topic':categories, 'latitude': project.latitude, 'longitude': project.longitude, 
+        'topic':project.topic.all, 'latitude': project.latitude, 'longitude': project.longitude, 
         'image': project.image, 'image_credit': project.imageCredit, 'host': project.host,
         'how_to_participate': project.howToParticipate, 'equipment': project.equipment,
     })
@@ -86,12 +84,6 @@ def editProject(request, pk):
             return redirect('/project/'+ str(pk))
     return render(request, 'editProject.html', {'form': form, 'project':project, 'user':user})
 
-def selectCategories(projCategories):
-    proj_categories = projCategories.split('#')
-    categories = ''
-    if proj_categories[0] != '':
-        categories = Category.objects.filter(id__in=proj_categories)
-    return categories
 
 def deleteProject(request, pk):
     obj = get_object_or_404(Project, id=pk)

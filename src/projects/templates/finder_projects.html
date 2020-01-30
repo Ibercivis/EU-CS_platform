@@ -10,13 +10,13 @@
             <label for="keywords" style="color:black">Keywords</label>
             <input type="text" id="keywords" name="keywords" autocomplete="off" value="{{filters.keywords}}"
                 class="basicAutoComplete form-control mb-4" placeholder="Keywords" data-url="text_autocomplete/">
-            <label for="category" style="color:black">Category:</label>
+            <label for="topic" style="color:black">Topic:</label>
 
-            <select id="category" name="category" class="custom-select category-select">
-                <option value="">Category</option>
-                {% for c in categories %}
-                <option {% if c.id ==  filters.category %} selected {% endif %} value="{{c.id}}">
-                    {{c.category|capfirst}}
+            <select id="topic" name="topic" class="custom-select topic-select">
+                <option value="">Topic</option>
+                {% for topic in topics %}                
+                <option {% if topic.topic ==  filters.topic %} selected {% endif %} value="{{topic}}">
+                    {{topic|capfirst}}
                 </option>
                 {% endfor %}
             </select>
