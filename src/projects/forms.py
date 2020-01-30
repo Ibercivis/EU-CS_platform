@@ -1,6 +1,6 @@
 from django import forms
 from django.db import models
-from .models import Project, Category, Status
+from .models import Project, Topic, Status
 from django.shortcuts import get_object_or_404
 from django_select2.forms import Select2MultipleWidget
 
@@ -15,7 +15,7 @@ class ProjectForm(forms.Form):
     start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}))
     end_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=False)  
     
-    topic = forms.ModelMultipleChoiceField(queryset=Category.objects.all(), widget=Select2MultipleWidget, required=False)
+    topic = forms.ModelMultipleChoiceField(queryset=Topic.objects.all(), widget=Select2MultipleWidget, required=False)
     
     #Images and communications
     url = forms.CharField(max_length=200, required=False)
@@ -45,10 +45,7 @@ class ProjectForm(forms.Form):
         start_dateData = self.data['start_date']
         end_dateData = self.data['end_date']        
         pk = self.data.get('projectID', '')        
-        categories = ''
-        for c in self.data.getlist('topic'):
-            categories += c + "#"
-        categories = categories[:len(categories) - 1]
+      
         status = get_object_or_404(Status, id=self.data['status'])
         
         if(pk):
@@ -58,14 +55,15 @@ class ProjectForm(forms.Form):
             project.start_date = start_dateData
             project.end_date = end_dateData
             project.status = status
-            project.topic = categories
+        
         else:           
             project = Project(name = self.data['project_name'], url = self.data['url'],
                          start_date = start_dateData, end_date = end_dateData, creator=args.user,
                          latitude = self.data['latitude'], longitude = self.data['longitude'],
                          aim = self.data['aim'], description = self.data['description'], 
-                         topic = categories, keywords = self.data['keywords'],
+                         keywords = self.data['keywords'],
                          status = status, host = self.data['host'])
-        
+                     
         project.save()
+        project.topic.set(self.data.getlist('topic'))
         return 'success'

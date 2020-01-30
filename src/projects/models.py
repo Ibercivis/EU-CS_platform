@@ -6,6 +6,11 @@ class Status(models.Model):
     def __str__(self):        
         return f'{self.status}'
 
+class Topic(models.Model):
+    topic = models.TextField()
+    def __str__(self):        
+        return f'{self.topic}'
+
 class Project(models.Model):    
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     #Database information
@@ -20,7 +25,7 @@ class Project(models.Model):
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
     start_date = models.DateTimeField('Start date')
     end_date = models.DateTimeField('End date')
-    topic = models.CharField(max_length=300)
+    topic = models.ManyToManyField(Topic)
     #Images and communications
     url = models.CharField(max_length=200)
     image = models.CharField(max_length=200)
@@ -36,7 +41,3 @@ class Project(models.Model):
     def __str__(self):        
         return f'{self.name}'
 
-class Category(models.Model):
-    category = models.TextField()
-    def __str__(self):        
-        return f'{self.category}'
