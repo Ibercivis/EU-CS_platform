@@ -3,6 +3,8 @@
 html, body{
     height:100%;		/* For full height images */
     font-family: 'Open Sans', sans-serif;
+		background-color: #fff;
+		color: #333;
 }
 
 .starter-template {
@@ -20,16 +22,6 @@ html, body{
 .alert {
     margin-top: 55px;
     margin-bottom: 0;
-}
-
-body>.navbar-transparent {
-    background-color: transparent;
-    border-color: transparent;
-    box-shadow: none;
-}
-
-.navbar-transparent .navbar-nav > .active > a {
-    background-color: transparent;
 }
 
 .navbar-form {
