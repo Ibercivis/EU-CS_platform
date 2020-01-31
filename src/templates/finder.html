@@ -1,43 +1,20 @@
 {% load staticfiles %}
-
-<br />
 <div class="container" style="color:black">
-    <div class="card">
-        <div class="card-body">
-            <form action="{% url 'results' %}">
-                <div class="row">
-                    <div class="col-md-1 col-sm-1"></div>
-                    <div class="col-md-9 col-sm-9 input-group">
-                        <input type="text" id="keywords" name="keywords" autocomplete="off"
-                            class="basicAutoComplete form-control mb-4" placeholder="Keywords"
-                            data-url="text_autocomplete/">
+	<div class="card">
+		<div class="card-body">
+			<form action="{% url 'results' %}">
+				<div class="row">
+					<div class="col-md-11 col-sm-9 input-group">
+						<input type="text" id="keywords" name="keywords" autocomplete="off"
+																														 class="basicAutoComplete form-control mb-4" placeholder="What are you looking for today?"
+																																																				 data-url="text_autocomplete/">
 
-                    </div>
-                    <div class="col-md-2 col-sm-2 input-group">
-                        <span class="input-group-btn">
-                            <button class="btn btn-info btn-block" type="submit">Find</button>
-                        </span>
-                    </div>
-
-                </div>
-                <div class="row">
-                    <div class="col-md-5 col-sm-5"></div>
-                    <div>
-                        <div class="form-check">
-                            <span>
-                                <input type="checkbox" class="form-check-input" id="projects_check"
-                                    name="projects_check" checked>
-                                <label class="form-check-label" for="projects_check">Projects</label>
-                            </span>
-                            <span style="margin-left:3em">
-                                <input type="checkbox" class="form-check-input" id="resources_check"
-                                    name="resources_check" checked>
-                                <label class="form-check-label" for="resources_check">Resources</label>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
+					</div>
+					<div class="col-md-1 col-sm-1">
+						<button class="btn btn-outline-dark" type="submit">Find</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
