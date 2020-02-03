@@ -11,6 +11,16 @@ class Topic(models.Model):
     def __str__(self):        
         return f'{self.topic}'
 
+class Photo(models.Model):
+    file = models.ImageField()
+    description = models.CharField(max_length=255, blank=True)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'photo'
+        verbose_name_plural = 'photos'
+
+
 class Project(models.Model):    
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     #Database information
@@ -28,7 +38,7 @@ class Project(models.Model):
     topic = models.ManyToManyField(Topic)
     #Images and communications
     url = models.CharField(max_length=200)
-    image = models.CharField(max_length=200)
+    image = models.ImageField() #models.CharField(max_length=200)
     imageCredit = models.CharField(max_length=200)
     #Geography
     latitude = models.DecimalField(max_digits=9,decimal_places=6)
