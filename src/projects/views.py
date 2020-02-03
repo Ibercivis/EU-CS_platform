@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.views import generic
 from django.core.paginator import Paginator
-from .forms import ProjectForm
+from .forms import ProjectForm, PhotoForm
 from django.utils import timezone
 from .models import Project, Topic, Status
 from django.contrib.auth import get_user_model
@@ -18,11 +18,14 @@ def new_project(request):
     form = ProjectForm()
     user = request.user
     if request.method == 'POST':
-        form = ProjectForm(request.POST) 
+        print("entra")
+        form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
             form.save(request)
             messages.success(request, "Project added with success!")
             return redirect('/projects')
+        else:
+            print(form.errors)
 
     return render(request, 'new_project.html', {'form': form, 'user':user})
 
