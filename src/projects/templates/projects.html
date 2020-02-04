@@ -51,7 +51,12 @@
       {% for project in projects %}
       <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
         <div class="card card-small card-post h-100">
-          <div class="card-post__image" style="background-image: url('static/site/img/project.png');"></div>
+          {% if project.image %} 
+            <div class="card-post__image" style="background-image: url('{{ project.image }}');"></div>
+          {% else %}
+            <div class="card-post__image" style="background-image: url('static/site/img/project.png');"></div>
+          {% endif %}
+
           <div class="card-body">
             <h4 class="card-title">
               <a class="text-fiord-blue" href="{% url 'project' project.id %}">{{ project.name }}</a>

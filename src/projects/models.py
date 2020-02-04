@@ -38,7 +38,7 @@ class Project(models.Model):
     topic = models.ManyToManyField(Topic)
     #Images and communications
     url = models.CharField(max_length=200)
-    image = models.ImageField() #models.CharField(max_length=200)
+    image = models.ImageField(upload_to='images/')
     imageCredit = models.CharField(max_length=200)
     #Geography
     latitude = models.DecimalField(max_digits=9,decimal_places=6)

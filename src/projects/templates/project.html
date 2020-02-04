@@ -65,10 +65,19 @@
 
           <div class="col-sm-6">
             <br /><br /><br />
-            <img src="/static/site/img/project.png" style="max-width: 50%;    
-            margin-left: auto;
-            margin-right: auto;
-            display: block;">
+            {% if project.image %}            
+              <img src="{{ project.image }}" 
+              style="max-width: 50%;    
+              margin-left: auto;
+              margin-right: auto;
+              display: block;">
+            {% else %}
+              <img src='/static/site/img/project.png'
+              style="max-width: 50%;    
+              margin-left: auto;
+              margin-right: auto;
+              display: block;">            
+            {% endif %}
           </div>
 
         </div>
