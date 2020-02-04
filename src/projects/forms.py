@@ -21,7 +21,7 @@ class ProjectForm(forms.Form):
     
     #Images and communications
     url = forms.CharField(max_length=200, required=False)
-    image = forms.ImageField() #forms.CharField(max_length=200, required=False)
+    image = forms.ImageField()
     x = forms.FloatField(widget=forms.HiddenInput())
     y = forms.FloatField(widget=forms.HiddenInput())
     width = forms.FloatField(widget=forms.HiddenInput())
@@ -49,7 +49,7 @@ class ProjectForm(forms.Form):
             msg = u"End date should be greater than start date."            
             self._errors["end_date"] = self.error_class([msg])
 
-    def save(self, args):
+    def save(self, args, photo):
         start_dateData = self.data['start_date']
         end_dateData = self.data['end_date']        
         pk = self.data.get('projectID', '')        
@@ -72,46 +72,8 @@ class ProjectForm(forms.Form):
                          keywords = self.data['keywords'],
                          status = status, host = self.data['host'])
 
-
-        x = self.cleaned_data.get('x')
-        y = self.cleaned_data.get('y')
-        w = self.cleaned_data.get('width')
-        h = self.cleaned_data.get('height')
-
-        photo = self.data['image']
-        image = Image.open(photo)
-        cropped_image = image.crop((x, y, w+x, h+y))
-        resized_image = cropped_image.resize((200, 200), Image.ANTIALIAS)
-        resized_image.save(photo.path)
-        project.image = image
-
+        
+        project.image = photo
         project.save()
         project.topic.set(self.data.getlist('topic'))
         return 'success'
-
-
-
-class PhotoForm(forms.ModelForm):
-    x = forms.FloatField(widget=forms.HiddenInput())
-    y = forms.FloatField(widget=forms.HiddenInput())
-    width = forms.FloatField(widget=forms.HiddenInput())
-    height = forms.FloatField(widget=forms.HiddenInput())
-
-    class Meta:
-        model = Photo
-        fields = ('file', 'x', 'y', 'width', 'height', )
-
-    def save(self):
-        photo = super(PhotoForm, self).save()
-
-        x = self.cleaned_data.get('x')
-        y = self.cleaned_data.get('y')
-        w = self.cleaned_data.get('width')
-        h = self.cleaned_data.get('height')
-
-        image = Image.open(photo.file)
-        cropped_image = image.crop((x, y, w+x, h+y))
-        resized_image = cropped_image.resize((200, 200), Image.ANTIALIAS)
-        resized_image.save(photo.file.path)
-
-        return photo

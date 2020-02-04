@@ -105,6 +105,10 @@
                 </div>
                 <div class="col-5 p-3 ml-5">
                   {{ form.image|as_crispy_field }}
+                  {{ form.x|as_crispy_field }}
+                  {{ form.y|as_crispy_field }}
+                  {{ form.height|as_crispy_field }}
+                  {{ form.width|as_crispy_field }}
                 </div>
               </div>
               <div class="row">
@@ -199,14 +203,7 @@
 </div>
 
 
-<!-- CONTAINER TO DISPLAY THE CROPPED IMAGES -->
-<div class="row" style="margin-top: 20px">
-  {% for photo in photos %}
-    <div class="col-sm-4 col-md-3">
-      <img src="{{ photo.file.url }}" class="thumbnail">
-    </div>
-  {% endfor %}
-</div>
+
 
   </div>
 
@@ -306,13 +303,12 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
     });
 
     /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
-    $(".js-crop-and-upload").click(function () {
-      var cropData = $image.cropper("getData");
+    $(".js-crop-and-upload").click(function () {     
+      var cropData = $image.cropper("getData");      
       $("#id_x").val(cropData["x"]);
       $("#id_y").val(cropData["y"]);
       $("#id_height").val(cropData["height"]);
-      $("#id_width").val(cropData["width"]);
-      //$("#formUpload").submit();
+      $("#id_width").val(cropData["width"]);    
       $("#modalCrop").modal("hide");
     });
 
