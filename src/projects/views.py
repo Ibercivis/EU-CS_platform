@@ -12,17 +12,33 @@ from django.utils.dateparse import parse_datetime
 from datetime import datetime
 from django.utils import formats
 from django.contrib import messages
-
+from PIL import Image
 
 def new_project(request):
     form = ProjectForm()
     user = request.user
     if request.method == 'POST':
-        form = ProjectForm(request.POST) 
-        if form.is_valid():
-            form.save(request)
+        form = ProjectForm(request.POST, request.FILES)
+
+        if form.is_valid():            
+            x = form.cleaned_data.get('x')
+            y = form.cleaned_data.get('y')
+            w = form.cleaned_data.get('width')
+            h = form.cleaned_data.get('height')
+            photo = request.FILES['image']
+            image = Image.open(photo)
+            cropped_image = image.crop((x, y, w+x, h+y))
+            resized_image = cropped_image.resize((200, 200), Image.ANTIALIAS)
+            _datetime = formats.date_format(datetime.now(), 'Y-m-d')
+            image_path = "media/images/" + _datetime + '_' + photo.name 
+            resized_image.save(image_path)   
+
+            form.save(request, '/' + image_path)
+
             messages.success(request, "Project added with success!")
             return redirect('/projects')
+        else:
+            print(form.errors)
 
     return render(request, 'new_project.html', {'form': form, 'user':user})
 
@@ -78,9 +94,21 @@ def editProject(request, pk):
     })
     
     if request.method == 'POST':
-        form = ProjectForm(request.POST)
+        form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save(request)
+            x = form.cleaned_data.get('x')
+            y = form.cleaned_data.get('y')
+            w = form.cleaned_data.get('width')
+            h = form.cleaned_data.get('height')
+            photo = request.FILES['image']
+            image = Image.open(photo)
+            cropped_image = image.crop((x, y, w+x, h+y))
+            resized_image = cropped_image.resize((200, 200), Image.ANTIALIAS)
+            _datetime = formats.date_format(datetime.now(), 'Y-m-d')
+            image_path = "media/images/" + _datetime + '_' + photo.name 
+            resized_image.save(image_path)   
+
+            form.save(request, '/' + image_path)
             return redirect('/project/'+ str(pk))
     return render(request, 'editProject.html', {'form': form, 'project':project, 'user':user})
 

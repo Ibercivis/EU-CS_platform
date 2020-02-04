@@ -1,8 +1,10 @@
 from django import forms
 from django.db import models
-from .models import Project, Topic, Status
+from .models import Project, Topic, Status, Photo
 from django.shortcuts import get_object_or_404
 from django_select2.forms import Select2MultipleWidget
+from django.core.files import File
+from PIL import Image
 
 class ProjectForm(forms.Form):
     error_css_class = 'form_error'
@@ -19,7 +21,13 @@ class ProjectForm(forms.Form):
     
     #Images and communications
     url = forms.CharField(max_length=200, required=False)
-    image = forms.CharField(max_length=200, required=False)
+    image = forms.ImageField()
+    x = forms.FloatField(widget=forms.HiddenInput())
+    y = forms.FloatField(widget=forms.HiddenInput())
+    width = forms.FloatField(widget=forms.HiddenInput())
+    height = forms.FloatField(widget=forms.HiddenInput())
+
+
     image_credit = forms.CharField(max_length=200, required=False)
     #Geography
     latitude = forms.DecimalField(max_digits=9,decimal_places=6)
@@ -41,7 +49,7 @@ class ProjectForm(forms.Form):
             msg = u"End date should be greater than start date."            
             self._errors["end_date"] = self.error_class([msg])
 
-    def save(self, args):
+    def save(self, args, photo):
         start_dateData = self.data['start_date']
         end_dateData = self.data['end_date']        
         pk = self.data.get('projectID', '')        
@@ -63,7 +71,9 @@ class ProjectForm(forms.Form):
                          aim = self.data['aim'], description = self.data['description'], 
                          keywords = self.data['keywords'],
                          status = status, host = self.data['host'])
-                     
+
+        
+        project.image = photo
         project.save()
         project.topic.set(self.data.getlist('topic'))
         return 'success'

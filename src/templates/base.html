@@ -31,6 +31,7 @@
   <link rel="stylesheet" id="main-stylesheet" data-version="1.1.0" href="{% static 'styles/shards-dashboards.1.1.0.css'%}">
   <link rel="stylesheet" href="{% static 'styles/extras.1.1.0.min.css' %}">
   <link rel="stylesheet" href="{% static 'site/css/main.css' %}">
+  <link rel="stylesheet" href="{% static 'styles/cropper.min.css' %}">
 
 </head>
 
@@ -147,6 +148,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js"
     integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="anonymous"></script>
   <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'scripts/cropper.min.js' %}"></script>
+  <script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
   {% block scripts %}
   {% endblock scripts %}
 </body>

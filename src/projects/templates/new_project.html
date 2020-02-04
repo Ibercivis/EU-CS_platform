@@ -29,7 +29,7 @@
       <div class="card-body p-0 pb-3 text-center">
         <table class="table mb-0">
 
-          <form action="/new_project" method="post" class="add-new-post" autocomplete="off">
+          <form action="/new_project" method="post" enctype="multipart/form-data" class="add-new-post" autocomplete="off">
             {% csrf_token %}
             <br />
 
@@ -105,6 +105,10 @@
                 </div>
                 <div class="col-5 p-3 ml-5">
                   {{ form.image|as_crispy_field }}
+                  {{ form.x|as_crispy_field }}
+                  {{ form.y|as_crispy_field }}
+                  {{ form.height|as_crispy_field }}
+                  {{ form.width|as_crispy_field }}
                 </div>
               </div>
               <div class="row">
@@ -169,17 +173,59 @@
       </table>
     </div>
 
+    <!-- MODAL TO CROP THE IMAGE -->
+<div class="modal fade" id="modalCrop">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Crop the photo</h4>
+      </div>
+      <div class="modal-body">
+        <img src="" id="image" style="max-width: 100%;">
+      </div>
+      <div class="modal-footer">
+        <div class="btn-group pull-left" role="group">
+          <button type="button" class="btn btn-default js-zoom-in">
+            <span><i class="material-icons" style="font-size: 24px;">zoom_in</i> </span>
+          </button>
+          <button type="button" class="btn btn-default js-zoom-out">
+            <span><i class="material-icons" style="font-size: 24px;">zoom_out</i></span>
+          </button>
+        </div>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Nevermind</button>
+        <button type="button" class="btn btn-primary js-crop-and-upload">Crop and upload</button>
+      </div>
+    </div>
   </div>
+</div>
+
+
+
+
+  </div>
+
+
+
+
 </main>
 
 {% endblock container %}
 
 {% block scripts %}
-
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js"
+integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="anonymous"></script>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'scripts/cropper.min.js' %}"></script>
+<script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
 <script>
   $(document).ready(function () {
     $('#contactinfo').on('click', function () {
-      $('#contactinfoform').toggle();
+      $('#contactinfoform').toggle() ;
       $('html,body').animate({ scrollTop: $("#contactinfo").offset().top - 160 }, { duration: "slow" });
     });
 
@@ -204,6 +250,71 @@
     });
 
   });
+
+
+  $(function () {
+
+    /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
+    $("#id_image").change(function () {
+      if (this.files && this.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $("#image").attr("src", e.target.result);
+          $("#modalCrop").modal("show");
+        }
+        reader.readAsDataURL(this.files[0]);
+      }
+    });
+
+    /* SCRIPTS TO HANDLE THE CROPPER BOX */
+    var $image = $("#image");
+    var cropBoxData;
+    var canvasData;
+    $("#modalCrop").on("shown.bs.modal", function () {
+      $image.cropper({
+        viewMode: 1,
+        aspectRatio: 1/1,
+        minCropBoxWidth: 200,
+        minCropBoxHeight: 200,
+        dragMode: 'move',
+        guides: false,
+        center: false,
+        highlight: false,
+        cropBoxMovable: false,
+        cropBoxResizable: false,
+        toggleDragModeOnDblclick: false,        
+        ready: function () {
+          $image.cropper("setCanvasData", canvasData);
+          $image.cropper("setCropBoxData", cropBoxData);
+        }
+      });
+    }).on("hidden.bs.modal", function () {
+      cropBoxData = $image.cropper("getCropBoxData");
+      canvasData = $image.cropper("getCanvasData");
+      $image.cropper("destroy");
+    });
+
+    $(".js-zoom-in").click(function () {
+      $image.cropper("zoom", 0.1);
+    });
+
+    $(".js-zoom-out").click(function () {
+      $image.cropper("zoom", -0.1);
+    });
+
+    /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
+    $(".js-crop-and-upload").click(function () {     
+      var cropData = $image.cropper("getData");      
+      $("#id_x").val(cropData["x"]);
+      $("#id_y").val(cropData["y"]);
+      $("#id_height").val(cropData["height"]);
+      $("#id_width").val(cropData["width"]);    
+      $("#modalCrop").modal("hide");
+    });
+
+  });
+
+  
 </script>
 {{ form.media.js }}
 {% endblock scripts %}
