@@ -171,13 +171,13 @@
 
     <!-- MODAL TO CROP THE IMAGE -->
     <div class="modal fade" id="modalCrop">
-      <div class="modal-dialog">
+      <div class="modal-dialog mdialog">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
             <h4 class="modal-title">Crop the photo</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+            </button>
           </div>
           <div class="modal-body">
             <img src="" id="image" style="max-width: 100%;">
@@ -185,13 +185,13 @@
           <div class="modal-footer">
             <div class="btn-group pull-left" role="group">
               <button type="button" class="btn btn-default js-zoom-in">
-                <span><i class="material-icons" style="font-size: 24px;">zoom_in</i> </span>
+                <span><i class="material-icons" style="font-size: 18px;">zoom_in</i> </span>
               </button>
               <button type="button" class="btn btn-default js-zoom-out">
-                <span><i class="material-icons" style="font-size: 24px;">zoom_out</i></span>
+                <span><i class="material-icons" style="font-size: 18px;">zoom_out</i></span>
               </button>
             </div>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Nevermind</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
             <button type="button" class="btn btn-primary js-crop-and-upload">Crop and upload</button>
           </div>
         </div>
@@ -261,15 +261,14 @@
     var canvasData;
     $("#modalCrop").on("shown.bs.modal", function () {
       $image.cropper({
-        viewMode: 1,
+        viewMode: 0,
         aspectRatio: 1/1,
         minCropBoxWidth: 200,
         minCropBoxHeight: 200,
         dragMode: 'move',
         guides: false,
         center: false,
-        highlight: false,
-        cropBoxMovable: false,
+        highlight: false,        
         cropBoxResizable: false,
         toggleDragModeOnDblclick: false,        
         ready: function () {

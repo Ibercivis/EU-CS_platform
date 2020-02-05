@@ -174,3 +174,11 @@ html, body{
 .form_error input, .form_error select {
     border: 2px red solid;
 }
+
+.mdialog {
+    position: relative;
+    display: table; 
+    overflow-y: auto;    
+    overflow-x: auto;
+    width: auto;
+}
