@@ -109,11 +109,12 @@
                 {{ form.url|as_crispy_field }}
               </div>
               <div class="col-5 p-3 ml-5">
-                {{ form.image|as_crispy_field }}
+                {{ form.image|as_crispy_field }}        
                 {{ form.x|as_crispy_field }}
                 {{ form.y|as_crispy_field }}
                 {{ form.height|as_crispy_field }}
                 {{ form.width|as_crispy_field }}
+                <img id="imageResult" src="{{ project.image }}" alt="Image not upload">
               </div>
             </div>
             <div class="row">
@@ -245,6 +246,7 @@
 
     /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
     $("#id_image").change(function () {
+      $('#imageResult').attr('src', '');
       if (this.files && this.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
@@ -298,6 +300,7 @@
       $("#id_height").val(cropData["height"]);
       $("#id_width").val(cropData["width"]);    
       $("#modalCrop").modal("hide");
+      $('#imageResult').attr('src', $image.cropper('getCroppedCanvas', {width: 200, height: 200}).toDataURL());
     });
 
   });
