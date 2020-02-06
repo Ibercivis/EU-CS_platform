@@ -109,6 +109,7 @@
                   {{ form.y|as_crispy_field }}
                   {{ form.height|as_crispy_field }}
                   {{ form.width|as_crispy_field }}
+                  <img id="imageResult" src="" alt="Image not upload">
                 </div>
               </div>
               <div class="row">
@@ -253,6 +254,7 @@
 
     /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
     $("#id_image").change(function () {
+      $('#imageResult').attr('src', '');
       if (this.files && this.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
@@ -299,13 +301,14 @@
     });
 
     /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
-    $(".js-crop-and-upload").click(function () {     
+    $(".js-crop-and-upload").click(function () {      
       var cropData = $image.cropper("getData");      
       $("#id_x").val(cropData["x"]);
       $("#id_y").val(cropData["y"]);
       $("#id_height").val(cropData["height"]);
-      $("#id_width").val(cropData["width"]);    
+      $("#id_width").val(cropData["width"]);
       $("#modalCrop").modal("hide");
+      $('#imageResult').attr('src', $image.cropper('getCroppedCanvas', {width: 200, height: 200}).toDataURL());
     });
 
   });
