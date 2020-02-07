@@ -114,7 +114,7 @@
                 {{ form.y|as_crispy_field }}
                 {{ form.height|as_crispy_field }}
                 {{ form.width|as_crispy_field }}
-                <img id="imageResult" src="{{ project.image }}" alt="Image not upload">
+                <a id="imgResult" href="#"> <img id="imageResult" src="{{ project.image }}" alt="Image not upload"></a>
               </div>
             </div>
             <div class="row">
@@ -239,22 +239,33 @@
       $('html,body').animate({ scrollTop: $("#information").offset().top - 160 }, { duration: "slow" });
     });
 
+    $('#imgResult').on('click', function () {
+      $('html,body').animate({ scrollTop: $("#imgResult").offset().top - 220 }, { duration: "slow" });
+    });
+
   });
 
 
   $(function () {
-
+    changed = false;
     /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
     $("#id_image").change(function () {
       $('#imageResult').attr('src', '');
       if (this.files && this.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
+          changed = true;
           $("#image").attr("src", e.target.result);
           $("#modalCrop").modal("show");
         }
         reader.readAsDataURL(this.files[0]);
       }
+    });
+
+    $("#imageResult").click(function () {
+      if(!changed)
+        $("#image").attr("src", $("#imageResult").attr("src"));
+      $("#modalCrop").modal("show");
     });
 
     /* SCRIPTS TO HANDLE THE CROPPER BOX */
