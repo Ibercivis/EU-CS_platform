@@ -276,8 +276,12 @@
 
     $("#imageResult").click(function () {
       if(!changed)
-        $("#image").attr("src", $("#imageResult").attr("src"));
-      $("#modalCrop").modal("show");
+        $("#id_image").click();
+      else{
+        //$("#image").attr("src", $("#imageResult").attr("src"));
+        $("#modalCrop").modal("show");
+      }
+
     });
 
     /* SCRIPTS TO HANDLE THE CROPPER BOX */
@@ -323,7 +327,7 @@
       $("#id_height").val(cropData["height"]);
       $("#id_width").val(cropData["width"]);    
       $("#modalCrop").modal("hide");
-      $('#imageResult').attr('src', $image.cropper('getCroppedCanvas', {width: 200, height: 200}).toDataURL());
+      $('#imageResult').attr('src', $image.cropper('getCroppedCanvas', {width: 200, height: 200}).toDataURL());      
     });
 
   });
