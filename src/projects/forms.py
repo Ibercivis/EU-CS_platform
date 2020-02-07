@@ -21,11 +21,11 @@ class ProjectForm(forms.Form):
     
     #Images and communications
     url = forms.CharField(max_length=200, required=False)
-    image = forms.ImageField()
-    x = forms.FloatField(widget=forms.HiddenInput())
-    y = forms.FloatField(widget=forms.HiddenInput())
-    width = forms.FloatField(widget=forms.HiddenInput())
-    height = forms.FloatField(widget=forms.HiddenInput())
+    image = forms.ImageField(required=False)
+    x = forms.FloatField(widget=forms.HiddenInput(),required=False)
+    y = forms.FloatField(widget=forms.HiddenInput(), required=False)
+    width = forms.FloatField(widget=forms.HiddenInput(),required=False)
+    height = forms.FloatField(widget=forms.HiddenInput(), required=False)
 
 
     image_credit = forms.CharField(max_length=200, required=False)
@@ -72,8 +72,8 @@ class ProjectForm(forms.Form):
                          keywords = self.data['keywords'],
                          status = status, host = self.data['host'])
 
-        
-        project.image = photo
+        if(photo != '/'):
+            project.image = photo
         project.save()
         project.topic.set(self.data.getlist('topic'))
         return 'success'

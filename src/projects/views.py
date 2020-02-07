@@ -21,17 +21,20 @@ def new_project(request):
         form = ProjectForm(request.POST, request.FILES)
 
         if form.is_valid():            
-            x = form.cleaned_data.get('x')
-            y = form.cleaned_data.get('y')
-            w = form.cleaned_data.get('width')
-            h = form.cleaned_data.get('height')
-            photo = request.FILES['image']
-            image = Image.open(photo)
-            cropped_image = image.crop((x, y, w+x, h+y))
-            resized_image = cropped_image.resize((200, 200), Image.ANTIALIAS)
-            _datetime = formats.date_format(datetime.now(), 'Y-m-d')
-            image_path = "media/images/" + _datetime + '_' + photo.name 
-            resized_image.save(image_path)   
+            filepath = request.FILES.get('image', False)
+            image_path = ''
+            if (filepath):
+                x = form.cleaned_data.get('x')
+                y = form.cleaned_data.get('y')
+                w = form.cleaned_data.get('width')
+                h = form.cleaned_data.get('height')
+                photo = request.FILES['image']
+                image = Image.open(photo)
+                cropped_image = image.crop((x, y, w+x, h+y))
+                resized_image = cropped_image.resize((200, 200), Image.ANTIALIAS)
+                _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
+                image_path = "media/images/" + _datetime + '_' + photo.name 
+                resized_image.save(image_path)   
 
             form.save(request, '/' + image_path)
 
@@ -96,20 +99,25 @@ def editProject(request, pk):
     if request.method == 'POST':
         form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
-            x = form.cleaned_data.get('x')
-            y = form.cleaned_data.get('y')
-            w = form.cleaned_data.get('width')
-            h = form.cleaned_data.get('height')
-            photo = request.FILES['image']
-            image = Image.open(photo)
-            cropped_image = image.crop((x, y, w+x, h+y))
-            resized_image = cropped_image.resize((200, 200), Image.ANTIALIAS)
-            _datetime = formats.date_format(datetime.now(), 'Y-m-d')
-            image_path = "media/images/" + _datetime + '_' + photo.name 
-            resized_image.save(image_path)   
+            filepath = request.FILES.get('image', False)
+            image_path = ''
+            if (filepath):
+                x = form.cleaned_data.get('x')
+                y = form.cleaned_data.get('y')
+                w = form.cleaned_data.get('width')
+                h = form.cleaned_data.get('height')
+                photo = request.FILES['image']
+                image = Image.open(photo)
+                cropped_image = image.crop((x, y, w+x, h+y))
+                resized_image = cropped_image.resize((200, 200), Image.ANTIALIAS)
+                _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
+                image_path = "media/images/" + _datetime + '_' + photo.name 
+                resized_image.save(image_path)   
 
             form.save(request, '/' + image_path)
             return redirect('/project/'+ str(pk))
+        else:
+            print(form.errors)
     return render(request, 'editProject.html', {'form': form, 'project':project, 'user':user})
 
 
