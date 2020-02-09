@@ -102,9 +102,9 @@ WSGI_APPLICATION = "eucs_platform.wsgi.application"
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'eu_citizen_science',
-            'USER': 'postgres',
-            'PASSWORD': 'postgres',
+            'NAME': 'eucitizenscience',
+            'USER': 'eucitizenscience',
+            'PASSWORD': 'eucitizenscience',
             'HOST': 'localhost',
             'PORT': '5432',
         }

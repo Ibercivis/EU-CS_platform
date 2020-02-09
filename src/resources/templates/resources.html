@@ -47,15 +47,14 @@
     <br /><br />
     <div class="row">
       {% for rsc in resources %}
-      <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-        <div class="card card-small card-post h-100">
+      <div class="col-lg-6 col-md-12 mb-4">
+        <div class="card">
           <div class="card-body">
             <h4 class="card-title">
-              <a class="text-fiord-blue" href="{% url 'resource' rsc.id %}">{{ rsc.name }}</a>
-            </h4>
+		    <a class="text-fiord-blue" href="{% url 'resource' rsc.id %}">{{ rsc.name }}</a></h4>
+            <img class="card-img" style=" float: left; background-color: #fff; border-radius: 50%; border: 0px; width: 75px" src="static/site/img/gdoc.png">
+
             <p class="card-text"><i>Abstract:</i><br />{{rsc.abstract}}</p>
-            <img class="card-img" src="static/site/img/resource.png">
-            <br /><br />
             <p class="card-text"><a href="{{rsc.url}}" target="_blank"> View resource </a></p>
           </div>
           <div class="card-footer text-muted border-top py-3">
