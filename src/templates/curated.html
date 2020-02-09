@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ block.super }}Home{% endblock %}
+
+
+{% block navbar-left %}
+{% include "_navbar.html" with active_link="home" %}
+{% endblock %}
+
+
+{% block container %}
+
+<br /><br /><br /><br />
+<a id="about"></a>
+
+<div class="container">
+  {% for group in groups %}
+  <br /><br /><br />
+  <h3>{{group.name}}</h3>
+  <p>{{group.description}}</p>
+  <br />
+
+  <div class="row">
+    {% for rg in resourcesgrouped %}
+    {% if rg.group == group %}
+    <div class="col-lg-6 col-md-12 mb-4">
+      <div class="card card-small card-post h-100">
+        <div class="card-body">
+          <h5 class="card-title">
+            <a class="text-fiord-blue" href="{% url 'resource' rg.resource.id %}">{{ rg.resource.name }}</a>
+          </h5>
+	  <img class="card-img" style=" float: left; background-color: #fff; border-radius: 50%; border: 0px; width: 75px" src="../static/site/img/gdoc.png">
+          <p class="card-text"><i>Abstract: </i>{{rg.resource.abstract}}</p>
+          <p class="card-text"><a href="{{rg.resource.url}}" target="_blank">Download resource </a></p>
+        </div>
+        <!--div class="card-footer text-muted border-top py-3">
+          <span>Author: {{rg.resource.author.name}}</span><br />
+          <span class="d-inline-block">Date
+            <span class="text-fiord-blue">{{rg.resource.datePublished | date:"d/m/Y"}}</span>
+          </span>
+        </div-->
+      </div>
+    </div>
+    {% endif %}  
+    {% endfor %}  
+  </div>
+  {% endfor %}
+</div>
+{% endblock container %}
