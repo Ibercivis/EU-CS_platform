@@ -32,3 +32,11 @@ def results(request):
 
     return render(request, 'results.html', {'projects': projects, 'resources': resources,
     'showProjects': showProjects, 'showResources': showResources})
+
+def curated(request):
+    groups = ResourceGroup.objects.get_queryset().order_by('id')
+    resourcesgrouped = ResourcesGrouped.objects.get_queryset().order_by('group')
+
+    return render(request, 'curated.html', {'groups': groups, 'resourcesgrouped': resourcesgrouped})
+
+
