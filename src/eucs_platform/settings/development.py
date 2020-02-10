@@ -1,6 +1,7 @@
 from .base import *  # NOQA
 import sys
 import logging.config
+from django.utils.translation import gettext_lazy as _
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -36,6 +37,13 @@ EMAIL_HOST_USER = '5d2fd444450a07'
 EMAIL_HOST_PASSWORD = '02a46bb1305126'
 EMAIL_PORT = '2525' 
 EMAIL_USE_TLS = True
+
+
+
+LANGUAGES = [ 
+    ('en', 'English'), ('es', 'Spanish'), 
+]
+
 
 # Show thumbnail generation errors
 THUMBNAIL_DEBUG = True

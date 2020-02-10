@@ -2,6 +2,7 @@
 
 {% load staticfiles %}
 {% load crispy_forms_tags %}
+{% load i18n %}
 
 {% block title %}{{ block.super }}Home{% endblock %}
 
@@ -14,6 +15,8 @@
 {% block splash %}
 <div class="jumbotron jumbotron-carousel corporate-jumbo">
   <div class="col-sm-12">
+    <h1>{% blocktrans %} Hola {% endblocktrans  %}</h1>
+    <p>{% trans "Bienvenido al sitio" %}</p>    
     {% include "finder.html" %}
   </div>
 </div>
