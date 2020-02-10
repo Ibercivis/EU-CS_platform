@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base2.html" %}
 
 {% load staticfiles %}
 {% load crispy_forms_tags %}
@@ -28,9 +28,7 @@
 {% block container %}
 
 {% include "finder_projects.html" %}
-
 <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
-  </br></br></br></br>
   <div class="main-content-container container-fluid px-4">
     <div class="page-header row no-gutters py-4">
       <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
@@ -45,8 +43,6 @@
       </a>
     </span>
     {% endif %}
-    <br /><br />
-
     <div class="row">
       {% for project in projects %}
       <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
@@ -63,11 +59,11 @@
             </h4>
             <p class="card-text">{{project.description}}</p>
           </div>
-          <div class="card-footer text-muted border-top py-3">
+          <!--div class="card-footer text-muted border-top py-3">
             <span class="d-inline-block">By
               <a class="text-fiord-blue" href="#">{{project.creator.name}}</a>
             </span>
-          </div>
+          </div-->
         </div>
       </div>
       {% endfor %}
