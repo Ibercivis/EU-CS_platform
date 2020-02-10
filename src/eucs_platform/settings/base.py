@@ -9,12 +9,19 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 """
 from django.urls import reverse_lazy
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / "directory"
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 STATICFILES_DIRS = [str(BASE_DIR / "static")]
 MEDIA_ROOT = str(BASE_DIR / "media")
 MEDIA_URL = "/media/"
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
+
+
 
 # Use Django templates using the new Django 1.8 TEMPLATES settings
 TEMPLATES = [
