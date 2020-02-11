@@ -13,6 +13,8 @@ from datetime import datetime
 from django.utils import formats
 from django.contrib import messages
 from PIL import Image
+from django.db.models import Q
+from itertools import chain
 
 def new_project(request):
     form = ProjectForm()
@@ -54,7 +56,8 @@ def projects(request):
     
 
     if request.GET.get('keywords'):
-        projects = projects.filter(name__icontains = request.GET['keywords'])
+        projects = projects.filter( Q(name__icontains = request.GET['keywords']) | 
+                                    Q(keywords__icontains = request.GET['keywords']) )
         filters['keywords'] = request.GET['keywords']    
     
     if request.GET.get('topic'):
@@ -130,7 +133,9 @@ def text_autocomplete(request):
     if request.GET.get('q'):
         text = request.GET['q']
         data = Project.objects.filter(name__icontains=text).values_list('name',flat=True)
-        json = list(data)
+        keywords = Project.objects.filter(keywords__icontains=text).values_list('keywords',flat=True)
+        report = chain(data, keywords)
+        json = list(report)
         return JsonResponse(json, safe=False)
     else:
         return HttpResponse("No cookies")
