@@ -52,7 +52,7 @@ def projects(request):
 
     topics = Topic.objects.all()
     status = Status.objects.all()
-    filters = {'keywords': '', 'topic': '', 'status': 0}
+    filters = {'keywords': '', 'topic': '', 'status': 0, 'host': ''}
     
 
     if request.GET.get('keywords'):
@@ -67,6 +67,10 @@ def projects(request):
     if request.GET.get('status'):
         projects = projects.filter(status = request.GET['status'])
         filters['status'] = int(request.GET['status'])
+    
+    if request.GET.get('host'):
+        projects = projects.filter( host__icontains = request.GET['host'])
+        filters['host'] = request.GET['host']  
 
     paginator = Paginator(projects, 8) 
     page = request.GET.get('page')
@@ -132,10 +136,20 @@ def deleteProject(request, pk):
 def text_autocomplete(request):  
     if request.GET.get('q'):
         text = request.GET['q']
-        data = Project.objects.filter(name__icontains=text).values_list('name',flat=True)
+        project_names = Project.objects.filter(name__icontains=text).values_list('name',flat=True)
         keywords = Project.objects.filter(keywords__icontains=text).values_list('keywords',flat=True)
-        report = chain(data, keywords)
+        report = chain(project_names, keywords)
         json = list(report)
+        return JsonResponse(json, safe=False)
+    else:
+        return HttpResponse("No cookies")
+
+
+def host_autocomplete(request):  
+    if request.GET.get('q'):
+        text = request.GET['q']
+        data = Project.objects.filter(host__icontains=text).values_list('host',flat=True)               
+        json = list(data)
         return JsonResponse(json, safe=False)
     else:
         return HttpResponse("No cookies")
