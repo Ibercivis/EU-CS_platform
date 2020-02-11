@@ -62,7 +62,14 @@ class ProjectForm(forms.Form):
             project.url = self.data['url']
             project.start_date = start_dateData
             project.end_date = end_dateData
+            project.latitude = self.data['latitude']
+            project.longitude = self.data['longitude']
+            project.aim = self.data['aim']
+            project.description = self.data['description']
+            project.keywords = self.data['keywords']            
             project.status = status
+            project.host = self.data['host']
+            
         
         else:           
             project = Project(name = self.data['project_name'], url = self.data['url'],
