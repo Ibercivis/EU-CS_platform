@@ -87,6 +87,7 @@ INSTALLED_APPS = (
     "django_select2",
     "blog",
     "django_summernote",
+    "leaflet"
 )
 
 MIDDLEWARE = [
@@ -152,3 +153,11 @@ LOGIN_URL = reverse_lazy("accounts:login")
 
 
 THUMBNAIL_EXTENSION = "png"  # Or any extn for your thumbnails
+
+LEAFLET_CONFIG = {
+    'DEFAULT_CENTER': (40.0, -3.0),
+    'DEFAULT_ZOOM': 2,
+    'RESET_VIEW': False
+
+
+}

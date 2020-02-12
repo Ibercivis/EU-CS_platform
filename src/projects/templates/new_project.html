@@ -2,6 +2,7 @@
 
 {% load staticfiles %}
 {% load crispy_forms_tags %}
+{% load leaflet_tags %}
 
 
 {% block title %}{{ block.super }}Projects{% endblock %}
@@ -14,6 +15,23 @@
 {% block container %}
 {{ form.media.css }}
 
+<style>
+
+  .leaflet-container {  /* all maps */
+      width:  600px;
+      height: 300px;
+  }
+
+  #specialbigmap {
+      height: 800px;
+  }
+
+  /* Resize the "display_raw" textbox */
+  .django-leaflet-raw-textarea {
+      width: 100%;
+  }
+
+</style>
 
 <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
 
@@ -32,7 +50,6 @@
           <form action="/new_project" method="post" enctype="multipart/form-data" class="add-new-post" autocomplete="off">
             {% csrf_token %}
             <br />
-
             <div>
               <h4>Project info</h4>
             </div>
@@ -130,9 +147,10 @@
                 </div>
                 <div class="col-5 p-3 ml-5">
                   {{ form.longitude|as_crispy_field }}
-                </div>
-              </div>
-            </div>            
+                </div>                
+              </div>                        
+            </div> 
+            {% leaflet_map "map" callback="window.map_init_basic" %}     
             <hr />
 
             <h4>Personal and Organizational Affiliates</h4>
@@ -220,7 +238,7 @@
 <script src="{% static 'scripts/cropper.min.js' %}"></script>
 <script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
 <script>
-  $(document).ready(function () {
+  $(document).ready(function () {    
     $('#contactinfo').on('click', function () {
       $('#contactinfoform').toggle() ;
       $('html,body').animate({ scrollTop: $("#contactinfo").offset().top - 160 }, { duration: "slow" });
@@ -321,6 +339,30 @@
   });
 
   
+</script>
+
+
+<script type="text/javascript">
+  var map;
+  var marker_layer = new L.marker([50.5, 30.5]);
+  
+  function addMarker(e){
+    map.removeLayer(marker_layer);
+    marker_layer = new L.marker(e.latlng, {draggable:true});
+    marker_layer.on('drag', function (e) {
+      $("#id_latitude").val((e.latlng.lat).toFixed(6));
+      $("#id_longitude").val((e.latlng.lng).toFixed(6));
+    });
+    map.addLayer(marker_layer);
+    $("#id_latitude").val((e.latlng.lat).toFixed(6));
+    $("#id_longitude").val((e.latlng.lng).toFixed(6));
+}
+
+  function map_init_basic (leafmap, options) {      
+      map = leafmap;
+      map.on('click', addMarker); 
+  }
+
 </script>
 {{ form.media.js }}
 {% endblock scripts %}

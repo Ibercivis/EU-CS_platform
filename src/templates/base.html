@@ -3,7 +3,7 @@
 {% load staticfiles %}
 {% load thumbnail %}
 {% load i18n %}
-
+{% load leaflet_tags %}
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,7 +34,8 @@
   <link rel="stylesheet" href="{% static 'styles/extras.1.1.0.min.css' %}">
   <link rel="stylesheet" href="{% static 'site/css/main.css' %}">
   <link rel="stylesheet" href="{% static 'styles/cropper.min.css' %}">
-
+  {% leaflet_js %}
+  {% leaflet_css %}
 </head>
 
 <body>
@@ -129,7 +130,6 @@
   <div class="container">
   </div><!-- /.container -->
   {% endblock container %}
-
   <!-- Site footer -->
   {% block footer %}
   <!-- Some social button for contact will do -->
