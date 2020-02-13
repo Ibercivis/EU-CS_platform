@@ -2,7 +2,7 @@
 
 {% load staticfiles %}
 {% load crispy_forms_tags %}
-
+{% load leaflet_tags %}
 
 {% block title %}{{ block.super }}Projects{% endblock %}
 
@@ -51,7 +51,7 @@
                 <h4>Geography</h4>
                 <p>Latitude: {{project.latitude}}</p>
                 <p>Longitude: {{project.longitude}}</p>
-
+                {% leaflet_map "map" callback="window.map_init_basic" %}
                 <br />
                 <p> Website: <a href="{{project.url}}">{{project.url}}</a></p>
                 <p> Host: {{project.host}}</p>
@@ -94,5 +94,14 @@
 {% endblock container %}
 
 {% block scripts %}
+<script type="text/javascript">
+  var map;
+  var marker_layer = new L.marker([50.5, 30.5]);
+  
+  function map_init_basic (leafmap, options) {      
+      map = leafmap;
+      new L.marker([{{project.latitude}},{{project.longitude}}]).addTo(map);  
+  }
 
+</script>
 {% endblock scripts %}

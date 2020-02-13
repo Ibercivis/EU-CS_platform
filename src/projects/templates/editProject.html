@@ -2,7 +2,7 @@
 
 {% load staticfiles %}
 {% load crispy_forms_tags %}
-
+{% load leaflet_tags %}
 
 {% block title %}{{ block.super }}Projects{% endblock %}
 
@@ -141,6 +141,7 @@
                 </div>
               </div>
             </div>
+            {% leaflet_map "map" callback="window.map_init_basic" %}  
             <hr />
 
             <h4>Personal and Organizational Affiliates</h4>
@@ -331,6 +332,34 @@
     });
 
   });
+</script>
+
+<script type="text/javascript">
+  var map;
+  var marker_layer = new L.marker([50.5, 30.5]);
+  
+  function editMarker(e){
+    map.removeLayer(marker_layer);
+    marker_layer = new L.marker(e.latlng, {draggable:true});
+    marker_layer.on('drag', function (e) {
+      $("#id_latitude").val((e.latlng.lat).toFixed(6));
+      $("#id_longitude").val((e.latlng.lng).toFixed(6));
+    });
+    map.addLayer(marker_layer);
+    $("#id_latitude").val((e.latlng.lat).toFixed(6));
+    $("#id_longitude").val((e.latlng.lng).toFixed(6));
+  }
+
+  function map_init_basic (leafmap, options) {      
+      map = leafmap;
+      var obj = { latlng: { 
+        lat: parseFloat($("#id_latitude").val()), 
+        lng: parseFloat($("#id_longitude").val()) } 
+      }
+      editMarker(obj); 
+      map.on('click', editMarker);        
+  }
+
 </script>
 {{ form.media.js }}
 {% endblock scripts %}
