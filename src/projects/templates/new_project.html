@@ -15,23 +15,6 @@
 {% block container %}
 {{ form.media.css }}
 
-<style>
-
-  .leaflet-container {  /* all maps */
-      width:  600px;
-      height: 300px;
-  }
-
-  #specialbigmap {
-      height: 800px;
-  }
-
-  /* Resize the "display_raw" textbox */
-  .django-leaflet-raw-textarea {
-      width: 100%;
-  }
-
-</style>
 
 <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
 
@@ -356,7 +339,7 @@
     map.addLayer(marker_layer);
     $("#id_latitude").val((e.latlng.lat).toFixed(6));
     $("#id_longitude").val((e.latlng.lng).toFixed(6));
-}
+  }
 
   function map_init_basic (leafmap, options) {      
       map = leafmap;
