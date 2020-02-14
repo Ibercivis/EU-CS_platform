@@ -7,11 +7,12 @@ from datetime import datetime, date
 from django.forms import ModelForm
 
 class ResourceForm(forms.ModelForm):
-
+    abstract = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}), max_length=300)
     class Meta:
         model = Resource
         fields = ["name", "about", "abstract", "url", "audience",
          "keywords", "license", "publisher"]
+        
         
 
     def save(self, args):
