@@ -1,20 +1,21 @@
 {% load staticfiles %}
+    <br />
+    <br/>
+    <br />
+    <br />
+    <br />
     <div class="col-lg-12">
     <div class="container">
 	    <div class="row">
-<h2 class="page-title">Projects</h2>
-	    </div>
-	    <div class="row">
-		    <div class="col-lg-12">
-        <form id="searchProjects" action="{% url 'projects' %}">
+        <div class="col-lg-1"><a href="{% url 'clearfilters'%}">Clear <i class="fas fa-eraser"></i></a></div>
+        <form id="searchProjects" class="col-lg-11" action="{% url 'projects' %}">
 		<div class="row">
             <!--label for="keywords" style="color:black">Keywords</label-->
-	    <div class="input-group">
             <input type="text" id="keywords" name="keywords" autocomplete="off" value="{{filters.keywords}}"
-                class="basicAutoComplete form-control" placeholder="Keywords, project name" data-url="text_autocomplete/">
+                class="basicAutoComplete form-control col-lg-2 mb-4" placeholder="Keywords, project name" data-url="text_autocomplete/">
+            
             <!--label for="topic" style="color:black">Topic:</label-->
-	    <div class="input-group-append">
-            <select id="topic" name="topic" class="custom-select topic-select ">
+            <select id="topic" name="topic" class="custom-select topic-select col-lg-2">
                 <option value="">Topic</option>
                 {% for topic in topics %}                
                 <option {% if topic.topic ==  filters.topic %} selected {% endif %} value="{{topic}}">
@@ -22,11 +23,9 @@
                 </option>
                 {% endfor %}
             </select>
-	    </div>
             <!--label for="status" style="color:black">Status:</label-->
 
-	    <div class="input-group-append">
-            <select id="status" name="status" class="custom-select status-select">
+            <select id="status" name="status" class="custom-select status-select col-lg-2">
                 <option value="">Status<option>
                 {% for s in status %}
                 <option {% if s.id ==  filters.status %} selected {% endif %} value="{{s.id}}">
@@ -34,30 +33,12 @@
                 </option>
                 {% endfor %}
             </select>
-	    </div>
-
-	    </div>
             <!-- label for="host" style="color:black">Host</label-->
             <input type="text" id="host" name="host" autocomplete="off" value="{{filters.host}}"
-                class="basicAutoComplete form-control col-lg-2 mb-4 ml-1" placeholder="Host" data-url="host_autocomplete" />
-	    <div class="col-lg-1">
-            <button class="btn btn-info" id="search" type="submit">Find</button>
-	    </div>
-	    <div class="col-lg-1">
-<a class="btn btn-secondary" href="{% url 'clearfilters'%}">Clear</a>
-	    </div>
+                class="basicAutoComplete form-control col-lg-3" placeholder="Host" data-url="host_autocomplete" />
+            <button class="btn btn-info btn-block" id="search" type="submit">Find projects</button>
 		</div>
         </form>
-    {% if user.is_authenticated %}
-    <div class="col-lg-2 mb-4">
-      <a class="btn btn-danger" href="{% url 'new_project' %}">
-        <i class="material-icons">add_circle</i>
-        Add new project
-      </a>
-    </div>
-    {% endif %}
-
-		    </div>
 	    </div>
     </div>
     </div>
