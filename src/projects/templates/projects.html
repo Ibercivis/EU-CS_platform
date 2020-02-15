@@ -26,26 +26,21 @@
 
 
 {% block container %}
-
+<br />
+<br />
+<br />
+<br />
+<br />
 {% include "finder_projects.html" %}
-<main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
-  <div class="main-content-container container-fluid px-4">
-    <div class="page-header row no-gutters py-4">
+<main class="main-content col-lg-12">
+  <div class="main-content-container container">
+    <div class="page-header row no-gutters">
       <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-        <h2 class="page-title">Projects</h2>
       </div>
     </div>
-    {% if user.is_authenticated %}
-    <span>
-      <a href="{% url 'new_project' %}">
-        <i class="material-icons">add_circle</i>
-        Add new project
-      </a>
-    </span>
-    {% endif %}
     <div class="row">
       {% for project in projects %}
-      <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
         <div class="card card-small card-post h-100">
           {% if project.image %} 
             <div class="card-post__image" style="background-image: url('{{ project.image }}');"></div>
@@ -55,9 +50,10 @@
 
           <div class="card-body">
             <h4 class="card-title">
-              <a class="text-fiord-blue" href="{% url 'project' project.id %}">{{ project.name }}</a>
+              {{ project.name }}
             </h4>
             <p class="card-text">{{project.description}}</p>
+	    <a class="btn btn-outline-dark" href="{% url 'project' project.id %}">Read more</a>
           </div>
           <!--div class="card-footer text-muted border-top py-3">
             <span class="d-inline-block">By
