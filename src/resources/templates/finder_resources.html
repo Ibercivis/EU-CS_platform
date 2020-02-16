@@ -1,16 +1,23 @@
 {% load staticfiles %}
 <div class="row">
 	<div class="col-lg-2">
-		<h2>Resources</h2>
+		<h3>Resources</h3>
 	</div>
 	<div class="col-lg-10">
-        <form class="form-inline" id="searchResources" action="{% url 'resources' %}">
-		<div class="md-form my-0 mr-2">
+        <form class="form-inline float-lg-right" id="searchResources" action="{% url 'resources' %}">
+
+		<div class="my-0 mr-2">
             <input type="text" id="keywords" name="keywords" autocomplete="on" value="{{filters.keywords}}"
                 class="basicAutoComplete form-control" placeholder="Keywords" data-url="text_autocomplete/">
-		</div>
-		<button class="btn btn-info" id="search" type="submit"><i class="fas fa-search"></i></button>
 
+		<button class="btn btn-info" id="search" type="submit"><i class="fas fa-search"></i></button>
+		{% if user.is_authenticated %}
+		<a class="btn btn-danger" href="{% url 'new_resource' %}">
+						<i class="fas fa-plus-circle"></i>
+		</a>
+		{% endif %}
+
+		</div>
         <!--a href="{% url 'clearfilters_resources'%}">Clear <i class="fas fa-eraser"></i></a-->
         </form>
     </div>
