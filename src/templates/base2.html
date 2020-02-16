@@ -3,151 +3,250 @@
 {% load staticfiles %}
 {% load thumbnail %}
 
+
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="{% block description %}{% endblock description %}">
-  <meta name="author" content="Arun Ravindran">
-  <link rel="shortcut icon" href="{% static 'site/ico/favicon.ico' %}">
-
-  <title>{% block title %}{% include "_brandname.html" %} :: {% endblock %}</title>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Material Design for Bootstrap</title>
+  <!-- MDB icon -->
+  <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
   <!-- Bootstrap core CSS -->
-  <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-
-  <!-- Custom styles for this site -->
-  {% block styles %}
-  <link href="{% static 'site/css/main.css' %}" rel="stylesheet">
-  {% endblock styles %}
-
-  <!-- Template Shards -->
-  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-  <!--link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"-->
-  <link rel="stylesheet" href="{% static 'bootstrap/css/grayscale.min.css' %}">
-  <link rel="stylesheet" id="main-stylesheet" data-version="1.1.0"
-    href="{% static 'styles/shards-dashboards.1.1.0.css'%}">
-  <link rel="stylesheet" href="{% static 'styles/extras.1.1.0.min.css' %}">
-  <link rel="stylesheet" href="{% static 'site/css/main.css' %}">
-  <link rel="stylesheet" href="{% static 'styles/cropper.min.css' %}">
-
+  <link rel="stylesheet" href="{% static 'site/css/bootstrap.min.css' %}">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="{% static 'site/css/mdb.min.css' %}">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="{% static 'site/css/style.css' %}">
 </head>
-
 <body>
+<header>
 
-  {% block navbar %}
-
-  <div id="navbar" class="navbar-collapse justify-content-between" role="navigation">
-
-    <nav class="navbar navbar-light bg-light fixed-top navbar-expand-lg ">
-
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbar"
-        aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="dark-blue-text"><i class="fas fa-bars fa-1x"></i></span>
+  <!--Navbar-->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white">
+    <div class="container">
+	    <a class="navbar-brand" href="#">{% include "_brandname.html" %}</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
       </button>
-
-      <div class="collapse navbar-collapse" id="mainNavbar">
-        <a class="navbar-brand" href="{% url 'home' %}">
-          <img src="{% static 'site/img/logo.png' %}" alt="logo">
-          {% include "_brandname.html" %}
-        </a>
-        <ul class="navbar-nav ml-auto">
-          {% block navbar-left %}
-          {% endblock %}
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+	  {% block navbar-left %}
+	  {% endblock navbar-left %}
+          <li class="nav-item btn-group">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">Dropdown
+            </a>
+            <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
         </ul>
+        <form class="form-inline">
+          <div class="md-form my-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          </div>
+        </form>
       </div>
+    </div>
+  </nav>
+  <!--/.Navbar-->
+</header>
+<main>
+  <!--Main layout-->
+  <div class="container">
+    <!--First row-->
+    <div class="row wow fadeIn" data-wow-delay="0.2s">
+      <div class="col-md-12">
+          <h2 class="h2-responsive">
+	  {% block page_header %}
+	  {% endblock page_header %}
+                </div>
+    </div>
+    <!--/.First row-->
 
-      <div class="dropdown-divider"></div>
-      <ul class="navbar-nav">
-        {% block navbar-right %}
-        {% if not user.is_authenticated %}
-        <li> <a class="navbar-brand" href="{% url 'accounts:login' %}" role="button">Log in</a> </li>
-        <li><a class="navbar-brand" href="{% url 'accounts:signup' %}" role="button">Sign up</a></li>
-        {% else %}
+    <hr class="extra-margins">
 
-        {% if user.is_staff %}
-        <li><a href="{% url 'admin:index' %}">Admin</a></li>
-        {% endif %}
+    <!--Second row-->
+    <div class="row">
+	    {% block list_of_items %}
+	    {% endblock list_of_items %}
+    </div>
+    <!--/.Second row-->
+  </div>
+  <!--/.Main layout-->
 
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle profile-menu" data-toggle="dropdown">
-            <img src="{% thumbnail user.profile.picture|default:'default_profile.png' 30x30 crop %}" alt="" />
-            {{ user.get_full_name|truncatechars:20 }}
+</main>
+
+<!--Footer-->
+<!-- Footer -->
+<footer class="page-footer font-small unique-color-dark">
+
+  <div style="background-color: #6351ce;">
+    <div class="container">
+
+      <!-- Grid row-->
+      <div class="row py-4 d-flex align-items-center">
+
+        <!-- Grid column -->
+        <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+          <h6 class="mb-0">Get connected with us on social networks!</h6>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-6 col-lg-7 text-center text-md-right">
+
+          <!-- Facebook -->
+          <a class="fb-ic">
+            <i class="fab fa-facebook-f white-text mr-4"> </i>
+          </a>
+          <!-- Twitter -->
+          <a class="tw-ic">
+            <i class="fab fa-twitter white-text mr-4"> </i>
+          </a>
+          <!-- Google +-->
+          <a class="gplus-ic">
+            <i class="fab fa-google-plus-g white-text mr-4"> </i>
+          </a>
+          <!--Linkedin -->
+          <a class="li-ic">
+            <i class="fab fa-linkedin-in white-text mr-4"> </i>
+          </a>
+          <!--Instagram-->
+          <a class="ins-ic">
+            <i class="fab fa-instagram white-text"> </i>
           </a>
 
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="{% url 'profiles:show_self' %}">Profile</a></li>
-            <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
-          </ul>
-        </li>
-        {% endif %}
-      </ul>
+        </div>
+        <!-- Grid column -->
 
-    </nav>
+      </div>
+      <!-- Grid row-->
+
+    </div>
   </div>
 
-  {% endblock %}
+  <!-- Footer Links -->
+  <div class="container text-center text-md-left mt-5">
+
+    <!-- Grid row -->
+    <div class="row mt-3">
+
+      <!-- Grid column -->
+      <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+
+        <!-- Content -->
+        <h6 class="text-uppercase font-weight-bold">Company name</h6>
+        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+        <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
+          consectetur
+          adipisicing elit.</p>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+
+        <!-- Links -->
+        <h6 class="text-uppercase font-weight-bold">Products</h6>
+        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+        <p>
+          <a href="#!">MDBootstrap</a>
+        </p>
+        <p>
+          <a href="#!">MDWordPress</a>
+        </p>
+        <p>
+          <a href="#!">BrandFlow</a>
+        </p>
+        <p>
+          <a href="#!">Bootstrap Angular</a>
+        </p>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+
+        <!-- Links -->
+        <h6 class="text-uppercase font-weight-bold">Useful links</h6>
+        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+        <p>
+          <a href="#!">Your Account</a>
+        </p>
+        <p>
+          <a href="#!">Become an Affiliate</a>
+        </p>
+        <p>
+          <a href="#!">Shipping Rates</a>
+        </p>
+        <p>
+          <a href="#!">Help</a>
+        </p>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+
+        <!-- Links -->
+        <h6 class="text-uppercase font-weight-bold">Contact</h6>
+        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+        <p>
+          <i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
+        <p>
+          <i class="fas fa-envelope mr-3"></i> info@example.com</p>
+        <p>
+          <i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
+        <p>
+          <i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
 
   </div>
-  {% endblock navbar %}
+  <!-- Footer Links -->
 
-  {% block messages %}
-  {% if messages %}
-  {% for message in messages %}
-  <div class="alert alert-{{ message.tags }}">
-    <a class="close" data-dismiss="alert">×</a>
-    {{ message|safe }}
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2020 Copyright:
+    <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
   </div>
-  {% endfor %}
-  {% endif %}
-  {% endblock %}
+  <!-- Copyright -->
 
-  {% block splash %}
-  {% endblock splash %}
+</footer>
+<!-- Footer -->
+<!--/.Footer-->
 
-  {% block container %}
-  <div class="container">
-  </div><!-- /.container -->
-  {% endblock container %}
 
-  <!-- Site footer -->
-  {% block footer %}
-  <!-- Some social button for contact will do -->
-  <div class="container">
-	  <div class="footer">
-		  <div class="row">
-			  <div class="col-lg-1"></div>
-			  <div class="col-lg-5">
-				  <p>&#127279; Company {% now 'Y' %}</p>
-			  </div>
-			  <div class="col-lg-5 text-right">
-				  Connect with us on
-				  <a href="https://www.facebook.com/EUCitSciProject/" target="_blank"><i class="fab fa-facebook"></i>
-					  Facebook</a> or
-				  <a href="https://twitter.com/eucitsci?lang=es" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
-			  </div>
-			  <div class="col-lg-1"></div>
 
-		  </div>
-	  </div>
-  </div>
-  {% endblock %}
 
-  <!-- Bootstrap core JavaScript
-    ================================================== -->
-  <!-- Placed at the end of the document so the pages load faster -->
-  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js"
-    integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="anonymous"></script>
-  <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-  <script src="{% static 'scripts/cropper.min.js' %}"></script>
-  <script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
-  {% block scripts %}
-  {% endblock scripts %}
+
+
+  <!-- End your project here-->
+  <!-- jQuery -->
+	<script type="text/javascript" src="{% static 'site/js/jquery.min.js' %}"></script>
+  <!-- Bootstrap tooltips -->
+	<script type="text/javascript" src="{% static 'site/js/popper.min.js' %}"></script>
+  <!-- Bootstrap core JavaScript -->
+	<script type="text/javascript" src="{% static 'site/js/bootstrap.min.js' %}"></script>
+  <!-- MDB core JavaScript -->
+	<script type="text/javascript" src="{% static 'site/js/mdb.min.js' %}"></script>
+  <!-- Your custom scripts (optional) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+  <script type="text/javascript"  src="{% static 'site/js/own.js' %}"></script>
+
 </body>
-
 </html>
