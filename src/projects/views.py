@@ -72,7 +72,7 @@ def projects(request):
         projects = projects.filter( host__icontains = request.GET['host'])
         filters['host'] = request.GET['host']  
 
-    paginator = Paginator(projects, 8) 
+    paginator = Paginator(projects, 9) 
     page = request.GET.get('page')
     projects = paginator.get_page(page)
 
