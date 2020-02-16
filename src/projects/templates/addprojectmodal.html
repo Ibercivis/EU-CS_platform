@@ -1,0 +1,168 @@
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% load leaflet_tags %}
+{{ form.media.css }}
+
+<div class="modal bd-example-modal-xl" id="addProjectModal" tabindex="-1" role="dialog" aria-labelledby="addProjectModal" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="AddProjectModalLabel">AddProject</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">x
+        </button>
+      </div>
+      <div class="modal-body">
+     <table class="table mb-0">
+
+          <form action="/new_project" method="post" enctype="multipart/form-data" class="add-new-post" autocomplete="off">
+            {% csrf_token %}
+            <br />
+            <div>
+              <h4>Project info</h4>
+            </div>
+            <div class="row">
+              <div class="col-5 p-3 ml-5">
+                {{ form.project_name|as_crispy_field }}
+              </div>
+              <div class="col-5 p-3 ml-5">
+                {{ form.aim|as_crispy_field }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-5 p-3 ml-5">
+                {{ form.description|as_crispy_field }}
+              </div>
+              <div class="col-5 p-3 ml-5">
+                {{ form.keywords|as_crispy_field }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-5 p-3 ml-5">
+                {{ form.topic|as_crispy_field }}
+              </div>
+              <div class="col-5 p-3 ml-5">
+                {{ form.status|as_crispy_field }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-5 p-3 ml-5">
+                {{ form.start_date|as_crispy_field }}
+              </div>
+              <div class="col-5 p-3 ml-5">
+                {{ form.end_date|as_crispy_field }}
+              </div>
+            </div>
+
+
+            <hr />
+            <h4>Contact person info</h4>
+            <a id="contactinfo" href="#">Show</a>
+            <div id="contactinfoform" style="display:none">
+              <div class="row">
+                <div class="col-5 p-3 ml-5">
+                  <label for="name">Contact person name</label><br />
+                  <input type="text" disabled name="name" value={{user.name}} maxlength="100"
+                    class="textinput textInput form-control">
+                </div>
+                <div class="col-5 p-3 ml-5">
+                  <label for="email">Contact person email</label><br />
+                  <input type="text" disabled name="email" value={{user.email}} maxlength="100"
+                    class="textinput textInput form-control">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-5 p-3 ml-5">
+                  {{ form.contact_person_phone|as_crispy_field }}
+                </div>
+
+              </div>
+            </div>
+            <hr />
+
+
+            <h4>Images and communications</h4>
+            <a id="images" href="#">Show</a>
+            <div id="imagesform" style="display:none">
+              <div class="row">
+                <div class="col-5 p-3 ml-5">
+                  {{ form.url|as_crispy_field }}
+                </div>
+                <div class="col-5 p-3 ml-5">
+                  {{ form.image|as_crispy_field }}
+                  {{ form.x|as_crispy_field }}
+                  {{ form.y|as_crispy_field }}
+                  {{ form.height|as_crispy_field }}
+                  {{ form.width|as_crispy_field }}
+                  <a id="imgResult" href="#"> <img id="imageResult" src="" alt="Image not upload"></a>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-5 p-3 ml-5">
+                  {{ form.image_credit|as_crispy_field }}
+                </div>
+                <div class="col-5 p-3 ml-5">
+                </div>
+              </div>
+            </div>
+            <hr />
+            <h4>Geography</h4>
+            <a id="geography" href="#">Show</a>
+            <div id="geographyform" style="display:none">
+              <div class="row">
+                <div class="col-5 p-3 ml-5">
+                  {{ form.latitude|as_crispy_field }}
+                </div>
+                <div class="col-5 p-3 ml-5">
+                  {{ form.longitude|as_crispy_field }}
+                </div>                
+              </div>                        
+            </div> 
+            {% leaflet_map "map" callback="window.map_init_basic" %}     
+            <hr />
+
+            <h4>Personal and Organizational Affiliates</h4>
+            <a id="organization" href="#">Show</a>
+            <div id="organizationform" style="display:none">
+              <div class="row">
+                <div class="col-5 p-3 ml-5">
+                  {{ form.host|as_crispy_field }}
+                </div>
+                <div class="col-5 p-3 ml-5">
+                </div>
+              </div>
+            </div>
+            <hr />
+
+            <h4>Supplementary information for Citizen Science</h4>
+            <a id="information" href="#">Show</a>
+            <div id="informationform" style="display:none">
+              <div class="row">
+                <div class="col-5 p-3 ml-5">
+                  {{ form.how_to_participate|as_crispy_field }}
+                </div>
+                <div class="col-5 p-3 ml-5">
+                  {{ form.equipment|as_crispy_field }}
+                </div>
+              </div>
+            </div>
+            <hr />
+
+            <br /><br />
+
+            <div class="row justify-content-md-center">
+              <button type="submit" class="btn btn-success">Save</button>              
+            </div>
+          </form>
+      </div>
+
+      </table>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
