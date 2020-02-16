@@ -7,23 +7,18 @@
 
 
 {% block navbar-left %}
-{% include "_navbar.html" with active_link="home" %}
+{% include "_navbar.html" with active_link="curated" %}
 {% endblock %}
 
+{% block page_title %}
+Curated Resources
+{% endblock page_title %}
 
-{% block container %}
-
-<br /><br /><br /><br />
-<a id="about"></a>
-
-<div class="container">
+{% block list_of_items %}
   {% for group in groups %}
-  <br /><br /><br />
-  <h3>{{group.name}}</h3>
+  <h3 class="h3-responsive">{{group.name}}</h3>
+  <br>
   <p>{{group.description}}</p>
-  <br />
-
-  <div class="row">
     {% for rg in resourcesgrouped %}
     {% if rg.group == group %}
     <div class="col-lg-6 col-md-12 mb-4">
@@ -46,7 +41,5 @@
     </div>
     {% endif %}  
     {% endfor %}  
-  </div>
   {% endfor %}
-</div>
-{% endblock container %}
+  {% endblock list_of_items %}

@@ -10,6 +10,10 @@
 {% include "_navbar.html" with active_link="projects" %}
 {% endblock %}
 
+{% block page_header %}
+{% include "finder_projects.html" %}
+{% endblock page_header %}
+
 
 {% block messages %}
 {% if messages %}
@@ -23,37 +27,22 @@
 {% endfor %}
 {% endif %}
 {% endblock %}
-
-
-{% block container %}
-<br />
-<br />
-<br />
-<br />
-<br />
-{% include "finder_projects.html" %}
-<main class="main-content col-lg-12">
-  <div class="main-content-container container">
-    <div class="page-header row no-gutters">
-      <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-      </div>
-    </div>
-    <div class="row">
+	    {% block list_of_items %}
       {% for project in projects %}
       <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-        <div class="card card-small card-post h-100">
+        <div class="card wow fadeIn" data-wow-delay="0.2s">
           {% if project.image %} 
-            <div class="card-post__image" style="background-image: url('{{ project.image }}');"></div>
+	  <img class="img-fluid" src="{{ project.image }}" />
           {% else %}
-            <div class="card-post__image" style="background-image: url('static/site/img/project.png');"></div>
+	  <img class="img-fluid" src="static/site/img/project.png" />
           {% endif %}
 
           <div class="card-body">
             <h4 class="card-title">
               {{ project.name }}
             </h4>
-            <p class="card-text">{{project.description}}</p>
-	    <a class="btn btn-outline-dark" href="{% url 'project' project.id %}">Read more</a>
+            <p class="card-text">{{project.description | truncatewords:12 }}</p>
+	    <a class="btn btn-info" href="{% url 'project' project.id %}">Read more</a>
           </div>
           <!--div class="card-footer text-muted border-top py-3">
             <span class="d-inline-block">By
@@ -63,8 +52,7 @@
         </div>
       </div>
       {% endfor %}
-    </div>
-
+      {% endblock list_of_items %}
     <br /><br />
     {% include "paginator.html" %}
     {% if projects %}
@@ -72,21 +60,14 @@
       Page {{ projects.number }} of {{ projects.paginator.num_pages }}.
     </span>
     {% endif %}
-
   </div>
 </main>
-
-{% endblock container %}
-
-
 {% block scripts %}
-<script src="{% static 'site/js/site.js' %}"></script>
-
 <script
   src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
 <script>
   $('.basicAutoComplete').autoComplete(
-    { minLength: 1 }
+    { minLength: 3 }
   );
 </script>
 <script>

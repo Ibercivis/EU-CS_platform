@@ -10,7 +10,9 @@
 {% include "_navbar.html" with active_link="resources" %}
 {% endblock %}
 
-
+{% block page_title %}
+Resources
+{% endblock page_title %}
 {% block messages %}
 {% if messages %}
 {% for message in messages %}
@@ -23,18 +25,12 @@
 {% endfor %}
 {% endif %}
 {% endblock %}
-
-
-{% block container %}
-
-
+{% block page_header %}
 {% include "finder_resources.html" %}
+{% endblock page_header %}
 
 
-<main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
-  <div class="main-content-container container-fluid px-4">
-    <h2>Resources</h2>
-    <br />
+{%block list_of_items %}
     {% if user.is_authenticated %}
     <span>
       <a href="{% url 'new_resource' %}">
@@ -44,10 +40,9 @@
     </span>
     {% endif %}
     <br /><br />
-    <div class="row">
       {% for rsc in resources %}
       <div class="col-lg-6 col-md-12 mb-4">
-        <div class="card">
+        <div class="card wow fadeId" data-wow-delay="0.2s">
           <div class="card-body">
             <h5 class="card-title">
 		    <a class="text-fiord-blue" href="{% url 'resource' rsc.id %}">{{ rsc.name | truncatewords:6 }}</a></h5>
@@ -65,12 +60,7 @@
         </div>
       </div>
       {% endfor %}
-    </div>
-
-  </div>
-</main>
-
-{% endblock container %}
+{% endblock list_of_items %}
 
 {% block scripts %}
 
