@@ -1,8 +1,6 @@
-{% extends "base.html" %}
+{% extends "base2.html" %}
 
 {% load staticfiles %}
-{% load crispy_forms_tags %}
-
 {% block title %}{{ block.super }}About{% endblock %}
 
 {% block navbar-left %}
@@ -10,18 +8,7 @@
 {% endblock %}
 
 
-{% block container %}
-
-<div id="sec1" class="text-page">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 text-center">
-        <h1>{% include "_brandname.html" %}</h1>
-        <p class="lead">An Awesome Tagline Goes Here</p>
-      </div>
-    </div>
-  </div>
-</div>
+{% block list_of_items %}
 
 <div id="sec2" class="text-page">
   <div class="container">
@@ -157,27 +144,7 @@
     </div>
   </div>
 </div>
-
-<div id="cta-1" class="col-sm-10 offset-sm-1 cta-blue-section content-section content-section-spacing-medium
- bg-color1 white-text" style="background-image: none; background-color: #a4b494;" data-id="cta--1" data-label="Cta"
-  data-export-id="cta-blue-section" data-category="cta">
-  </br>
-  <div class="container">
-    <div class="col-sm-8 space-bottom-xs" data-type="column">
-      <p class="">EU-Citizen.Science has received funding from the European Union�s Horizon 2020 Framework Programme for
-        Research and Innovation under grant agreement No. 824580</p>
-    </div>
-
-    <div class="col-sm-4 end-sm" data-type="column">
-      <img class="custom-image" title="cropped-europe-1.png"
-        src="http://eu-citizen.science/wp-content/uploads/2019/04/cropped-europe-1.png" alt="">
-    </div>
-  </div>
-  </br>
-</div>
-
-
-{% endblock container %}
+{% endblock list_of_items %}
 
 {% block scripts %}
   
