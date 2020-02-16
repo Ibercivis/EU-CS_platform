@@ -2,6 +2,7 @@
 
 {% load staticfiles %}
 {% load crispy_forms_tags %}
+{% load leaflet_tags %}
 
 
 {% block title %}{{ block.super }}Projects{% endblock %}
@@ -13,8 +14,6 @@
 {% block page_header %}
 {% include "finder_projects.html" %}
 {% endblock page_header %}
-
-
 {% block messages %}
 {% if messages %}
 {% for message in messages %}
@@ -27,10 +26,10 @@
 {% endfor %}
 {% endif %}
 {% endblock %}
-	    {% block list_of_items %}
+    {% block list_of_items %}
       {% for project in projects %}
       <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-        <div class="card wow fadeIn" data-wow-delay="0.2s">
+        <div class="card">
           {% if project.image %} 
 	  <img class="img-fluid" src="{{ project.image }}" />
           {% else %}
@@ -42,13 +41,41 @@
               {{ project.name }}
             </h4>
             <p class="card-text">{{project.description | truncatewords:12 }}</p>
-	    <a class="btn btn-info" href="{% url 'project' project.id %}">Read more</a>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{project.id}}">
+Read more 
+</button>	
+<!-- Modal -->
+<div class="modal bd-example-modal-xl" id="exampleModal{{project.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{project.name}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        </button>
+      </div>
+      <div class="modal-body">
+	<h5>Project info</h5>
+	<b>Description: </b>{{project.description}}<br>
+	<b>Keywords: </b>{{project.keywords}}<br>
+	<b>Status: </b>{{project.status}}<br>
+	<b>Host: </b>{{project.host}}<br>
+        <b>Website: </b><a href="{{project.url}}" target="_blank">{{project.url}}</a><br>
+	<h5>Geography</h5>
+	<h5>Other info</h5>
+	<b>How to participate: </b>{{project.howToParticipate}}<br>
+	<b>Needed Equipment: </b>{{project.equipment}}
+</script>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End modal -->
           </div>
-          <!--div class="card-footer text-muted border-top py-3">
-            <span class="d-inline-block">By
-              <a class="text-fiord-blue" href="#">{{project.creator.name}}</a>
-            </span>
-          </div-->
         </div>
       </div>
       {% endfor %}

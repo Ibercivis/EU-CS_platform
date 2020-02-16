@@ -1,18 +1,17 @@
 {% load staticfiles %}
 <div class="row">
 				<div class="col-lg-2">
-<h2>Projects</h2>
+<h3>Projects</h3>
 				</div>
 				<div class="col-lg-10">
-<form class="form-inline" id="searchProjects" action="{% url 'projects' %}">
-	<div class="md-form my-0 mr-2">
+<form class="form-inline float-lg-right" id="searchProjects" action="{% url 'projects' %}">
+	<div class="my-0 mr-2">
 		<!--label for="keywords" style="color:black">Keywords</label-->
-		<input type="text" id="keywords" name="keywords" autocomplete="on" value="{{filters.keywords}}"
-								     class="basicAutoComplete form-control" placeholder="Keywords, project name" data-url="text_autocomplete/">
+		<input type="text" id="keywords" name="keywords" autocomplete="on" value="{{filters.keywords}}" class="basicAutoComplete form-control" placeholder="Keywords, project name" data-url="text_autocomplete/">
 	</div>
 	<div class="md-form my-0 mr-2">
 		<!--label for="topic" style="color:black">Topic:</label-->
-		<select id="topic" name="topic" class="custom-select">
+		<select id="topic" name="topic" class="custom-select form-control">
 			<option value="">Topic</option>
 			{% for topic in topics %}                
 			<option {% if topic.topic ==  filters.topic %} selected {% endif %} value="{{topic}}">
@@ -21,7 +20,7 @@
 			{% endfor %}
 		</select>
 		<!--label for="status" style="color:black">Status:</label-->
-		<select id="status" name="status" class="custom-select status-select">
+		<select id="status" name="status" class="custom-select status-select form-control">
 			<option value="">Status<option>
 			{% for s in status %}
 			<option {% if s.id ==  filters.status %} selected {% endif %} value="{{s.id}}">

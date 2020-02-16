@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block page_title %}
-Resources
+Resources 
 {% endblock page_title %}
 {% block messages %}
 {% if messages %}
@@ -29,20 +29,10 @@ Resources
 {% include "finder_resources.html" %}
 {% endblock page_header %}
 
-
 {%block list_of_items %}
-    {% if user.is_authenticated %}
-    <span>
-      <a href="{% url 'new_resource' %}">
-        <i class="material-icons">add_circle</i>
-        Add new resource
-      </a>
-    </span>
-    {% endif %}
-    <br /><br />
       {% for rsc in resources %}
       <div class="col-lg-6 col-md-12 mb-4">
-        <div class="card wow fadeId" data-wow-delay="0.2s">
+        <div class="card">
           <div class="card-body">
             <h5 class="card-title">
 		    <a class="text-fiord-blue" href="{% url 'resource' rsc.id %}">{{ rsc.name | truncatewords:6 }}</a></h5>
