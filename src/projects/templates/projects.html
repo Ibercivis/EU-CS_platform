@@ -26,68 +26,63 @@
 {% endfor %}
 {% endif %}
 {% endblock %}
-    {% block list_of_items %}
-      {% for project in projects %}
-      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-        <div class="card">
-          {% if project.image %} 
-	  <img class="img-fluid" src="{{ project.image }}" />
-          {% else %}
-	  <img class="img-fluid" src="static/site/img/project.png" />
-          {% endif %}
+{% block list_of_items %}
+{% for project in projects %}
+<div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+	<div class="card">
+		{% if project.image %} 
+		<img class="img-fluid" src="{{ project.image }}" />
+		{% else %}
+		<img class="img-fluid" src="static/site/img/project.png" />
+		{% endif %}
 
-          <div class="card-body">
-            <h4 class="card-title">
-              {{ project.name }}
-            </h4>
-            <p class="card-text">{{project.description | truncatewords:12 }}</p>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{project.id}}">
-Read more 
-</button>	
-<!-- Modal -->
-<div class="modal bd-example-modal-xl" id="exampleModal{{project.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">{{project.name}}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        </button>
-      </div>
-      <div class="modal-body">
-	<h5>Project info</h5>
-	<b>Description: </b>{{project.description}}<br>
-	<b>Keywords: </b>{{project.keywords}}<br>
-	<b>Status: </b>{{project.status}}<br>
-	<b>Host: </b>{{project.host}}<br>
-        <b>Website: </b><a href="{{project.url}}" target="_blank">{{project.url}}</a><br>
-	<h5>Geography</h5>
-	<h5>Other info</h5>
-	<b>How to participate: </b>{{project.howToParticipate}}<br>
-	<b>Needed Equipment: </b>{{project.equipment}}
-</script>
+		<div class="card-body">
+			<h4 class="card-title">
+				{{ project.name }}
+			</h4>
+			<p class="card-text">{{project.description | truncatewords:12 }}</p>
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{project.id}}">
+				Read more 
+			</button>	
+			<!-- Modal -->
+			<div class="modal bd-example-modal-xl" id="exampleModal{{project.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-xl" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">{{project.name}}</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							</button>
+						</div>
+						<div class="modal-body">
+							<h5>Project info</h5>
+							<b>Description: </b>{{project.description}}<br>
+							<b>Keywords: </b>{{project.keywords}}<br>
+							<b>Status: </b>{{project.status}}<br>
+							<b>Host: </b>{{project.host}}<br>
+							<b>Website: </b><a href="{{project.url}}" target="_blank">{{project.url}}</a><br>
+							<h5>Geography</h5>
+							<h5>Other info</h5>
+							<b>How to participate: </b>{{project.howToParticipate}}<br>
+							<b>Needed Equipment: </b>{{project.equipment}}
+							</script>
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary">Save changes</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End modal -->
+		</div>
+	</div>
 </div>
-<!-- End modal -->
-          </div>
-        </div>
-      </div>
-      {% endfor %}
-      {% endblock list_of_items %}
-    <br /><br />
-    {% include "paginator.html" %}
-    {% if projects %}
-    <span>
-      Page {{ projects.number }} of {{ projects.paginator.num_pages }}.
-    </span>
-    {% endif %}
-  </div>
+{% endfor %}
+	<div class="col-lg-12">
+		{% include "paginator.html" %}
+</div>
+{% endblock list_of_items %}
 </main>
 {% block scripts %}
 <script
