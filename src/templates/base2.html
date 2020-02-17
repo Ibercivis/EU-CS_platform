@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 {% load staticfiles %}
@@ -229,5 +230,111 @@
 	<script type="text/javascript" src="{% static 'site/js/bootstrap.min.js' %}"></script>
 
   <script type="text/javascript"  src="{% static 'site/js/own.js' %}"></script>
+
+<script>
+  function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+      var cookies = document.cookie.split(';');
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = jQuery.trim(cookies[i]);
+        // Does this cookie string begin with the name we want?
+        if (cookie.substring(0, name.length + 1) == (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+
+  function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+  }
+
+  function abrir_modal(url) {
+    $('#loginModal').load(url, function () {
+      $("#submit-id-sign_in").click(function(){
+        var user = $("#id_username").val();
+        var pass = $("#id_password").val();
+     
+        var csrftoken = getCookie('csrftoken');
+//        var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+              var csrfmiddlewaretoken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+              if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                xhr.setRequestHeader("X-CSRFToken", csrfmiddlewaretoken);
+              }              
+            }
+        });
+        $.ajax(
+          {
+            type: "POST",
+            url: "/login/",
+           
+            data: {
+              username: user,
+              password: pass,
+              csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            context: this,
+            success: function (data) {
+              self.parent.location.reload();
+            }           
+          })
+          return false;
+      });
+
+
+      $("#submit-id-sign_up").click(function(){
+        var email = $("#id_email").val();
+        var user = $("#id_name").val();
+        var pass = $("#id_password1").val();
+        var pass2 = $("#id_password1").val();
+        
+        var csrftoken = getCookie('csrftoken');
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+              var csrfmiddlewaretoken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+              if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                xhr.setRequestHeader("X-CSRFToken", csrfmiddlewaretoken);
+              }              
+            }
+        });
+        $.ajax(
+          {
+            type: "POST",
+            url: "/signup/",
+           
+            data: {
+              email: email,
+              name: user,
+              password1: pass,
+              password2: pass2,
+              csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            context: this,
+            success: function (data) {              
+              document.getElementById("loginModal").innerHTML  = data;
+            }         
+          })
+          return false;
+      });
+
+      $(this).modal('show');
+    });
+    return false;
+  }
+
+
+  function cerrar_modal() {
+    $('#loginModal').modal('hide');
+    return false;
+  }
+</script>
+
 </body>
 </html>
