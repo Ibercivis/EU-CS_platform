@@ -36,8 +36,8 @@
         </ul>
         <form class="form-inline">
 				{% if not user.is_authenticated %}
-					<a href="{% url 'accounts:login' %}" class="btn btn-outline-info rounded ml-2">login</a>
-					<a  href="{% url 'accounts:signup' %}" class="btn btn-outline-danger rounded ml-2">sign-up</a>
+        <li><a  class="navbar-brand" onclick="return abrir_modal('{% url 'accounts:login' %}')">Login</a></li>
+        <li><a class="navbar-brand"  onclick="return abrir_modal('{% url 'accounts:signup' %}')" role="button">Sign up</a></li>
 				{% else %}
 					<a class="btn btn-outline-info rounded ml-2" href="{% url 'profiles:show_self' %}">profile</a>
      			<a class="btn btn-outline-info rounded ml-2" href="{% url 'accounts:logout' %}">logout</a>
@@ -79,6 +79,8 @@
   <!--/.Main layout-->
 
 </main>
+
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true"></div>
 
 <!--Footer-->
 <!-- Footer -->
@@ -229,7 +231,7 @@
   <!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="{% static 'site/js/bootstrap.min.js' %}"></script>
 
-  <script type="text/javascript"  src="{% static 'site/js/own.js' %}"></script>
+  
 
 <script>
   function getCookie(name) {
