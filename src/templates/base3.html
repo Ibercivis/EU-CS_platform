@@ -19,9 +19,8 @@
 </head>
 <body>
 <header>
-
   <!--Navbar-->
-  <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top fg-white">
     <div class="container">
 	    <a class="navbar-brand" href="http://193.146.117.217:8000">{% include "_brandname.html" %}</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -53,9 +52,15 @@
   </nav>
   <!--/.Navbar-->
 </header>
-<body>
 <main>
 {% block splash %}
 {% endblock splash %}
+</main>
+	<script type="text/javascript" src="{% static 'site/js/jquery.min.js' %}"></script>
+  <!-- Bootstrap core JavaScript -->
+	<script type="text/javascript" src="{% static 'site/js/bootstrap.min.js' %}"></script>
+
+  <script type="text/javascript"  src="{% static 'site/js/own.js' %}"></script>
+
 </body>
 </html>

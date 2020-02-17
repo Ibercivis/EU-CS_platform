@@ -34,19 +34,12 @@ Resources
       <div class="col-lg-6 col-md-12 mb-4">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">
-		    <a class="text-fiord-blue" href="{% url 'resource' rsc.id %}">{{ rsc.name | truncatewords:6 }}</a></h5>
+            <h4 class="card-title">{{ rsc.name | truncatewords:4 }}</h4>
             <img class="card-img" style=" float: left; background-color: #fff; border-radius: 50%; border: 0px; width: 75px" src="static/site/img/gdoc.png">
 
-            <p class="card-text"><i>Abstract:</i><br />{{rsc.abstract |truncatewords:8 }}</p>
+            <p class="card-text">{{rsc.abstract |truncatewords:20 }}</p>
             <p class="card-text"><a href="{{rsc.url}}" target="_blank"> View resource </a></p>
           </div>
-          <!--div class="card-footer text-muted border-top py-3">
-            <span>Author: {{rsc.author.name}}</span><br />
-            <span class="d-inline-block">Date
-              <span class="text-fiord-blue">{{rsc.datePublished | date:"d/m/Y"}}</span>
-            </span>
-          </div-->
         </div>
       </div>
       {% endfor %}
