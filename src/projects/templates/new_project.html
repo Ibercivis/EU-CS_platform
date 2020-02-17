@@ -279,10 +279,9 @@
     var canvasData;
     $("#modalCrop").on("shown.bs.modal", function () {
       $image.cropper({
-        viewMode: 0,
-        aspectRatio: 1/1,
-        minCropBoxWidth: 200,
-        minCropBoxHeight: 200,
+        viewMode: 0,        
+        minCropBoxWidth: 400,
+        minCropBoxHeight: 300,
         dragMode: 'move',
         guides: false,
         center: false,
@@ -316,7 +315,7 @@
       $("#id_height").val(cropData["height"]);
       $("#id_width").val(cropData["width"]);
       $("#modalCrop").modal("hide");
-      $('#imageResult').attr('src', $image.cropper('getCroppedCanvas', {width: 200, height: 200}).toDataURL());
+      $('#imageResult').attr('src', $image.cropper('getCroppedCanvas', {width: 400, height: 300}).toDataURL());
     });
 
   });
