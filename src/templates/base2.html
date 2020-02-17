@@ -35,8 +35,8 @@
         </ul>
         <form class="form-inline">
 				{% if not user.is_authenticated %}
-        <li><a  class="navbar-brand" onclick="return abrir_modal('{% url 'accounts:login' %}')">Login</a></li>
-        <li><a class="navbar-brand"  onclick="return abrir_modal('{% url 'accounts:signup' %}')" role="button">Sign up</a></li>
+        <a  class="btn btn-outline-info rounded ml-2" onclick="return abrir_modal('{% url 'accounts:login' %}')">Login</a>
+        <a class="btn btn-outline-info rounded ml-2"  onclick="return abrir_modal('{% url 'accounts:signup' %}')" role="button">Sign up</a>
 				{% else %}
 					<a class="btn btn-outline-info rounded ml-2" href="{% url 'profiles:show_self' %}">profile</a>
      			<a class="btn btn-outline-info rounded ml-2" href="{% url 'accounts:logout' %}">logout</a>
@@ -45,8 +45,6 @@
         {% if user.is_staff %}
         <a class="btn btn-outline-danger rounded ml-2" href="{% url 'admin:index' %}">Admin</a>
         {% endif %}
-
-
         </form>
       </div>
     </div>
@@ -65,7 +63,6 @@
                 </div>
     </div>
     <!--/.First row-->
-
     <hr class="extra-margins">
 
     <!--Second row-->
@@ -76,10 +73,9 @@
     <!--/.Second row-->
   </div>
   <!--/.Main layout-->
-
 </main>
 
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true"></div>
+<div class="modal" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true"></div>
 
 <!--Footer-->
 <!-- Footer -->
@@ -126,29 +122,22 @@
 
       </div>
       <!-- Grid row-->
-
     </div>
   </div>
-
   <!-- Footer Links -->
   <div class="container text-center text-md-left mt-5">
-
     <!-- Grid row -->
     <div class="row mt-3">
-
       <!-- Grid column -->
       <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-
         <!-- Content -->
         <h6 class="text-uppercase font-weight-bold">Company name</h6>
         <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
         <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
           consectetur
           adipisicing elit.</p>
-
       </div>
       <!-- Grid column -->
-
       <!-- Grid column -->
       <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
 
@@ -339,4 +328,3 @@
 
 </body>
 </html>
->>>>>>> e0443484b72eb63a2a7fe3f5fbcc85b1e8e55fc9
