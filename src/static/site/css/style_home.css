@@ -1,5 +1,4 @@
 main {
-	margin-top: 80px;
 	font-weight: 200;
 }
 
@@ -22,4 +21,15 @@ input[type="text"]:focus,
 select.form-control:focus {
   -webkit-box-shadow: none;
   box-shadow: none;
+}
+
+.jumbotron{
+    height: 100vh;
+		background-image: url('../img/citizenscience_16x9.jpg');
+		 background-size: cover;
+  background-position: center;
+}
+
+.main_info{
+				margin-top: 5%;
 }
