@@ -19,13 +19,13 @@ Curated Resources
   <div class="col-lg-12">
 	<div class="row">
 		<div class="col-lg-12">
-  <h3 class="h5">{{group.name}}</h3>
+  <h3>{{group.name}}</h3>
 		</div>
   	</div>
 	<div class="row">
 		<div class="col-lg-12">
 
-  <p>{{group.description}}</p>
+  <h5>{{group.description}}</h5>
 		</div>
 	</div>
 	<div class="row">
@@ -34,11 +34,9 @@ Curated Resources
     <div class="col-lg-6 col-md-12 mb-4">
       <div class="card card-small card-post h-100">
         <div class="card-body">
-          <h5 class="card-title">
-            <a class="text-fiord-blue" href="{% url 'resource' rg.resource.id %}">{{ rg.resource.name }}</a>
-          </h5>
+          <h4 class="card-title"> {{ rg.resource.name  | truncatewords:4}} </h4>
 	  <img class="card-img" style=" float: left; background-color: #fff; border-radius: 50%; border: 0px; width: 75px" src="../static/site/img/gdoc.png">
-          <p class="card-text"><i>Abstract: </i>{{rg.resource.abstract}}</p>
+          <p class="card-text">{{rg.resource.abstract | truncatewords:20}}</p>
           <p class="card-text"><a href="{{rg.resource.url}}" target="_blank">Download resource </a></p>
         </div>
         <!--div class="card-footer text-muted border-top py-3">

@@ -3,10 +3,9 @@ main {
 	font-weight: 200;
 }
 
-h2, h3, h4 {
+h2, h3, h4,h5 {
 	font-weight: 200;
 }	
-
 
 input[type="text"],
 select.form-control {
@@ -22,4 +21,7 @@ input[type="text"]:focus,
 select.form-control:focus {
   -webkit-box-shadow: none;
   box-shadow: none;
+}
+.rounded {
+	border-radius: 40px !important;
 }
