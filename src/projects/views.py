@@ -33,7 +33,7 @@ def new_project(request):
                 photo = request.FILES['image']
                 image = Image.open(photo)
                 cropped_image = image.crop((x, y, w+x, h+y))
-                resized_image = cropped_image.resize((200, 200), Image.ANTIALIAS)
+                resized_image = cropped_image.resize((400, 300), Image.ANTIALIAS)
                 _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
                 image_path = "media/images/" + _datetime + '_' + photo.name 
                 resized_image.save(image_path)   
@@ -116,7 +116,7 @@ def editProject(request, pk):
                 photo = request.FILES['image']
                 image = Image.open(photo)
                 cropped_image = image.crop((x, y, w+x, h+y))
-                resized_image = cropped_image.resize((200, 200), Image.ANTIALIAS)
+                resized_image = cropped_image.resize((400, 300), Image.ANTIALIAS)
                 _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
                 image_path = "media/images/" + _datetime + '_' + photo.name 
                 resized_image.save(image_path)   
