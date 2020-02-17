@@ -35,8 +35,8 @@
         </ul>
         <form class="form-inline">
 				{% if not user.is_authenticated %}
-					<a href="{% url 'accounts:login' %}" class="btn btn-outline-info rounded ml-2">login</a>
-					<a  href="{% url 'accounts:signup' %}" class="btn btn-outline-danger rounded ml-2">sign-up</a>
+        <li><a  class="navbar-brand" onclick="return abrir_modal('{% url 'accounts:login' %}')">Login</a></li>
+        <li><a class="navbar-brand"  onclick="return abrir_modal('{% url 'accounts:signup' %}')" role="button">Sign up</a></li>
 				{% else %}
 					<a class="btn btn-outline-info rounded ml-2" href="{% url 'profiles:show_self' %}">profile</a>
      			<a class="btn btn-outline-info rounded ml-2" href="{% url 'accounts:logout' %}">logout</a>
@@ -78,6 +78,8 @@
   <!--/.Main layout-->
 
 </main>
+
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true"></div>
 
 <!--Footer-->
 <!-- Footer -->
@@ -129,7 +131,7 @@
   </div>
 
   <!-- Footer Links -->
-  <div class="container text-center text-md-left mt-5 text-light">
+  <div class="container text-center text-md-left mt-5">
 
     <!-- Grid row -->
     <div class="row mt-3">
@@ -138,9 +140,11 @@
       <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
 
         <!-- Content -->
-        <h6 class="text-uppercase font-weight-bold">EU-CITIZEN.SCIENCE</h6>
+        <h6 class="text-uppercase font-weight-bold">Company name</h6>
         <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-        <p>EU-Citizen.Science has received funding from the European Union´s Horizon 2020 Framework Programme for Research and Innovation under grant agreement No. 824580</p>
+        <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
+          consectetur
+          adipisicing elit.</p>
 
       </div>
       <!-- Grid column -->
@@ -226,6 +230,113 @@
   <!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="{% static 'site/js/bootstrap.min.js' %}"></script>
 
-  <script type="text/javascript"  src="{% static 'site/js/own.js' %}"></script>
+  
+
+<script>
+  function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+      var cookies = document.cookie.split(';');
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = jQuery.trim(cookies[i]);
+        // Does this cookie string begin with the name we want?
+        if (cookie.substring(0, name.length + 1) == (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+
+  function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+  }
+
+  function abrir_modal(url) {
+    $('#loginModal').load(url, function () {
+      $("#submit-id-sign_in").click(function(){
+        var user = $("#id_username").val();
+        var pass = $("#id_password").val();
+     
+        var csrftoken = getCookie('csrftoken');
+//        var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+              var csrfmiddlewaretoken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+              if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                xhr.setRequestHeader("X-CSRFToken", csrfmiddlewaretoken);
+              }              
+            }
+        });
+        $.ajax(
+          {
+            type: "POST",
+            url: "/login/",
+           
+            data: {
+              username: user,
+              password: pass,
+              csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            context: this,
+            success: function (data) {
+              self.parent.location.reload();
+            }           
+          })
+          return false;
+      });
+
+
+      $("#submit-id-sign_up").click(function(){
+        var email = $("#id_email").val();
+        var user = $("#id_name").val();
+        var pass = $("#id_password1").val();
+        var pass2 = $("#id_password1").val();
+        
+        var csrftoken = getCookie('csrftoken');
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+              var csrfmiddlewaretoken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+              if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                xhr.setRequestHeader("X-CSRFToken", csrfmiddlewaretoken);
+              }              
+            }
+        });
+        $.ajax(
+          {
+            type: "POST",
+            url: "/signup/",
+           
+            data: {
+              email: email,
+              name: user,
+              password1: pass,
+              password2: pass2,
+              csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            context: this,
+            success: function (data) {              
+              document.getElementById("loginModal").innerHTML  = data;
+            }         
+          })
+          return false;
+      });
+
+      $(this).modal('show');
+    });
+    return false;
+  }
+
+
+  function cerrar_modal() {
+    $('#loginModal').modal('hide');
+    return false;
+  }
+</script>
+
 </body>
 </html>
+>>>>>>> e0443484b72eb63a2a7fe3f5fbcc85b1e8e55fc9
