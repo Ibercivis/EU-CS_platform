@@ -11,14 +11,10 @@ class Topic(models.Model):
     def __str__(self):        
         return f'{self.topic}'
 
-class Photo(models.Model):
-    file = models.ImageField()
-    description = models.CharField(max_length=255, blank=True)
-    uploaded_at = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        verbose_name = 'photo'
-        verbose_name_plural = 'photos'
+class Keyword(models.Model):
+    keyword = models.TextField()
+    def __str__(self):        
+        return f'{self.keyword}'
 
 
 class Project(models.Model):    
@@ -31,7 +27,7 @@ class Project(models.Model):
     name = models.CharField(max_length=100)
     aim = models.CharField(max_length=100)
     description = models.CharField(max_length=300)
-    keywords = models.CharField(max_length=100)
+    keywords = models.ManyToManyField(Keyword)
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
     start_date = models.DateTimeField('Start date')
     end_date = models.DateTimeField('End date')
