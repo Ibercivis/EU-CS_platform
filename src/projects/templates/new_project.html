@@ -50,6 +50,7 @@
               </div>
               <div class="col-5 p-3 ml-5">
                 {{ form.keywords|as_crispy_field }}
+                {{form.choices |as_crispy_field}}
               </div>
             </div>
             <div class="row">
@@ -166,15 +167,14 @@
             <br /><br />
 
             <div class="row justify-content-md-center">
-              <button type="submit" class="btn btn-success">Save</button>              
+              <button onclick="completeSubmit()" type="submit" class="btn btn-success">Save</button>              
             </div>
           </form>
       </div>
 
       </table>
     </div>
-
-    <!-- MODAL TO CROP THE IMAGE -->
+<!-- MODAL TO CROP THE IMAGE -->
 <div class="modal fade" id="modalCrop">
   <div class="modal-dialog mdialog">
     <div class="modal-content">
@@ -203,13 +203,7 @@
   </div>
 </div>
 
-
-
-
-  </div>
-
-
-
+</div>
 
 </main>
 
@@ -221,7 +215,18 @@
 <script src="{% static 'scripts/cropper.min.js' %}"></script>
 <script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
 <script>
-  $(document).ready(function () {    
+  $(document).ready(function () {
+
+    $("#div_id_keywords div").on('keyup', function(){
+      var key = $(".selection input").val();
+      if (key.indexOf(',') > -1) {
+         var word =key.slice(0, -1);
+         $(".selection input").val("");
+         $("#id_keywords").append("<option value='" + word +"' selected> " + word + " </option>");
+      }      
+    });
+
+
     $('#contactinfo').on('click', function () {
       $('#contactinfoform').toggle() ;
       $('html,body').animate({ scrollTop: $("#contactinfo").offset().top - 160 }, { duration: "slow" });
@@ -345,6 +350,16 @@
       map.on('click', addMarker); 
   }
 
+  function completeSubmit(){
+    var option_all = $("#id_keywords option:selected").map(function () {
+        return $.trim($(this).text());
+      }).get().join(',');
+      
+      $("#id_choices").val(option_all);
+      $("#id_keywords").empty();
+  }
+
+  
 </script>
 {{ form.media.js }}
 {% endblock scripts %}
