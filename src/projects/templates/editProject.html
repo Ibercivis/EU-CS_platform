@@ -57,6 +57,7 @@
               </div>
               <div class="col-5 p-3 ml-5">
                 {{ form.keywords|as_crispy_field }}
+                {{form.choices |as_crispy_field}}
               </div>
             </div>
             <div class="row">
@@ -175,7 +176,7 @@
             <br /><br />
 
             <div class="row justify-content-md-center">
-              <button type="submit" class="btn btn-success">Save</button>
+              <button onclick="completeSubmit()" type="submit" class="btn btn-success">Save</button>
             </div>
           </form>
       </div>
@@ -227,6 +228,23 @@
 <script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
 <script>
   $(document).ready(function () {
+    var choices = $("#id_choices").val();
+    var choices = choices.split(",");
+
+    for (choice of choices){
+      $("#id_keywords").append("<option value='" + choice +"' selected> " + choice + " </option>");
+    }
+
+    $("#div_id_keywords div").on('keyup', function(){
+      var key = $(".selection input").val();
+      if (key.indexOf(',') > -1) {
+         var word =key.slice(0, -1);
+         $(".selection input").val("");
+         $("#id_keywords").append("<option value='" + word +"' selected> " + word + " </option>");
+      }      
+    });
+
+
     $('#contactinfo').on('click', function () {
       $('#contactinfoform').toggle() ;
       $('html,body').animate({ scrollTop: $("#contactinfo").offset().top - 160 }, { duration: "slow" });
@@ -357,6 +375,15 @@
       }
       editMarker(obj); 
       map.on('click', editMarker);        
+  }
+
+  function completeSubmit(){
+    var option_all = $("#id_keywords option:selected").map(function () {
+        return $.trim($(this).text());
+      }).get().join(',');
+      
+      $("#id_choices").val(option_all);
+      $("#id_keywords").empty();
   }
 
 </script>
