@@ -19,9 +19,9 @@ from itertools import chain
 def new_project(request):
     form = ProjectForm()
     user = request.user
-    if request.method == 'POST':
+    if request.method == 'POST':    
         form = ProjectForm(request.POST, request.FILES)
-
+       
         if form.is_valid():            
             filepath = request.FILES.get('image', False)
             image_path = ''

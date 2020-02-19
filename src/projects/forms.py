@@ -1,6 +1,6 @@
 from django import forms
 from django.db import models
-from .models import Project, Topic, Status, Photo
+from .models import Project, Topic, Status, Keyword
 from django.shortcuts import get_object_or_404
 from django_select2.forms import Select2MultipleWidget
 from django.core.files import File
@@ -12,7 +12,15 @@ class ProjectForm(forms.Form):
     project_name = forms.CharField(max_length=100)
     aim = forms.CharField(max_length=100)
     description = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}), max_length=300)
-    keywords = forms.CharField(max_length=100, required=False)
+    ### keywords = forms.CharField(max_length=100, required=False)
+   
+    CHOICES = ()
+
+    choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=CHOICES)
+    
+    keywords = forms.MultipleChoiceField(choices=CHOICES, widget=Select2MultipleWidget, required=False)
+    
+
     status = forms.ModelChoiceField(queryset=Status.objects.all())
     start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}))
     end_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=False)  
@@ -55,7 +63,6 @@ class ProjectForm(forms.Form):
         pk = self.data.get('projectID', '')        
       
         status = get_object_or_404(Status, id=self.data['status'])
-        
         if(pk):
             project = get_object_or_404(Project, id=pk)
             project.name = self.data['project_name']
@@ -65,8 +72,7 @@ class ProjectForm(forms.Form):
             project.latitude = self.data['latitude']
             project.longitude = self.data['longitude']
             project.aim = self.data['aim']
-            project.description = self.data['description']
-            project.keywords = self.data['keywords']            
+            project.description = self.data['description']         
             project.status = status
             project.host = self.data['host']
             
@@ -76,11 +82,20 @@ class ProjectForm(forms.Form):
                          start_date = start_dateData, end_date = end_dateData, creator=args.user,
                          latitude = self.data['latitude'], longitude = self.data['longitude'],
                          aim = self.data['aim'], description = self.data['description'], 
-                         keywords = self.data['keywords'],
                          status = status, host = self.data['host'])
 
         if(photo != '/'):
             project.image = photo
         project.save()
         project.topic.set(self.data.getlist('topic'))
+
+        choices = self.data['choices']
+        choices = choices.split(',')
+        for choice in choices:
+            if(choice != ''):
+                keyword = Keyword.objects.get_or_create(keyword=choice)                   
+        keywords = Keyword.objects.all()
+        keywords = keywords.filter(keyword__in = choices)
+        project.keywords.set(keywords)
+
         return 'success'
