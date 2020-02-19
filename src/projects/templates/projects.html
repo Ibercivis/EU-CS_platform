@@ -56,7 +56,7 @@
 						<div class="modal-body">
 							<h5>Project info</h5>
 							<b>Description: </b>{{project.description}}<br>
-							<b>Keywords: </b>{{project.keywords}}<br>
+							<b>Keywords: </b>{% for keyword in project.keywords.all %} {{keyword|capfirst}} | {% endfor %}<br>
 							<b>Status: </b>{{project.status}}<br>
 							<b>Host: </b>{{project.host}}<br>
 							<b>Website: </b><a href="{{project.url}}" target="_blank">{{project.url}}</a><br>
