@@ -103,14 +103,12 @@
             </div>
             <hr />
 
-
+            {{ form.url|as_crispy_field }}
+            
             <h4>Images and communications</h4>
             <a id="images" href="#">Show</a>
             <div id="imagesform" style="display:none">
               <div class="row">
-                <div class="col-5 p-3 ml-5">
-                  {{ form.url|as_crispy_field }}
-                </div>
                 <div class="col-5 p-3 ml-5">
                   {{ form.image|as_crispy_field }}
                   {{ form.x|as_crispy_field }}
@@ -119,14 +117,10 @@
                   {{ form.width|as_crispy_field }}
                   <a id="imgResult" href="#"> <img id="imageResult" src="{{ project.image }}" alt="Image not upload"></a>
                 </div>
-              </div>
-              <div class="row">
                 <div class="col-5 p-3 ml-5">
                   {{ form.image_credit|as_crispy_field }}
                 </div>
-                <div class="col-5 p-3 ml-5">
-                </div>
-              </div>
+              </div>                              
             </div>
             <hr />
 
