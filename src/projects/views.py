@@ -5,7 +5,7 @@ from django.views import generic
 from django.core.paginator import Paginator
 from .forms import ProjectForm
 from django.utils import timezone
-from .models import Project, Topic, Status
+from .models import Project, Topic, Status, Keyword
 from django.contrib.auth import get_user_model
 import json
 from django.utils.dateparse import parse_datetime
@@ -53,11 +53,10 @@ def projects(request):
     topics = Topic.objects.all()
     status = Status.objects.all()
     filters = {'keywords': '', 'topic': '', 'status': 0, 'host': ''}
-    
 
     if request.GET.get('keywords'):
         projects = projects.filter( Q(name__icontains = request.GET['keywords']) | 
-                                    Q(keywords__icontains = request.GET['keywords']) )
+                                    Q(keywords__keyword__icontains = request.GET['keywords']) )
         filters['keywords'] = request.GET['keywords']    
     
     if request.GET.get('topic'):
@@ -139,8 +138,8 @@ def deleteProject(request, pk):
 def text_autocomplete(request):  
     if request.GET.get('q'):
         text = request.GET['q']
-        project_names = Project.objects.filter(name__icontains=text).values_list('name',flat=True)
-        keywords = Project.objects.filter(keywords__icontains=text).values_list('keywords',flat=True)
+        project_names = Project.objects.filter(name__icontains=text).values_list('name',flat=True).distinct()
+        keywords = Keyword.objects.filter(keyword__icontains=text).values_list('keyword',flat=True).distinct()
         report = chain(project_names, keywords)
         json = list(report)
         return JsonResponse(json, safe=False)
