@@ -13,10 +13,9 @@ class ProjectForm(forms.Form):
     aim = forms.CharField(max_length=100)
     description = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}), max_length=300)
    
-    CHOICES = ()     
-
-    choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=CHOICES)    
-    keywords = forms.MultipleChoiceField(choices=CHOICES, widget=Select2MultipleWidget, required=False)   
+    CHOICES = ()
+    choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=CHOICES)
+    keywords = forms.MultipleChoiceField(choices=CHOICES, widget=Select2MultipleWidget, required=False)
 
     status = forms.ModelChoiceField(queryset=Status.objects.all())
     start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}))

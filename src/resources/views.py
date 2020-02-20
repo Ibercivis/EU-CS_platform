@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Resource
+from .models import Resource, Keyword
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from .forms import ResourceForm
@@ -7,14 +7,17 @@ from django.utils import timezone
 from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
 from django.conf import settings
-
+from django.db.models import Q
+from itertools import chain
 
 def resources(request):
     resources = Resource.objects.all()
     filters = {'keywords': ''}
     
     if request.GET.get('keywords'):
-        resources = resources.filter(name__icontains = request.GET['keywords'])
+        resources = resources.filter( Q(name__icontains = request.GET['keywords'])  | 
+                                    Q(keywords__keyword__icontains = request.GET['keywords']) )
+                                    
         filters['keywords'] = request.GET['keywords']
 
     return render(request, 'resources.html', {'resources':resources, 'filters': filters})
@@ -47,11 +50,15 @@ def editResource(request, pk):
     if user != resource.author:
         return redirect('../resources', {})
 
+    keywordsList = list(resource.keywords.all().values_list('keyword', flat=True))
+    keywordsList = ", ".join(keywordsList)
+    choices = keywordsList
+
     form = ResourceForm(initial={
         'name':resource.name,'about': resource.about, 'abstract': resource.abstract, 
         'url': resource.url,'license': resource.license,
-        'audience' : resource.audience, 'publisher': resource.publisher, 'keywords': resource.keywords
-      
+        'audience' : resource.audience, 'publisher': resource.publisher,
+        'choices': choices  
     })
     
     if request.method == 'POST':
@@ -67,3 +74,14 @@ def deleteResource(request, pk):
     obj = get_object_or_404(Resource, id=pk)
     obj.delete()        
     return redirect('resources')
+
+def resources_autocomplete(request):  
+    if request.GET.get('q'):
+        text = request.GET['q']
+        rsc_names = Resource.objects.filter(name__icontains=text).values_list('name',flat=True).distinct()
+        keywords = Keyword.objects.filter(keyword__icontains=text).values_list('keyword',flat=True).distinct()
+        report = chain(rsc_names, keywords)
+        json = list(report)
+        return JsonResponse(json, safe=False)
+    else:
+        return HttpResponse("No cookies")    

@@ -8,7 +8,7 @@
 
 		<div class="my-0 mr-2">
             <input type="text" id="keywords" name="keywords" autocomplete="on" value="{{filters.keywords}}"
-                class="basicAutoComplete form-control" placeholder="Keywords" data-url="text_autocomplete/">
+                class="basicAutoComplete form-control" placeholder="Keywords" data-url="resources_autocomplete/">
 
 		<button class="btn btn-info" id="search" type="submit"><i class="fas fa-search"></i></button>
 		{% if user.is_authenticated %}
@@ -21,4 +21,21 @@
         <!--a href="{% url 'clearfilters_resources'%}">Clear <i class="fas fa-eraser"></i></a-->
         </form>
     </div>
-    </div>
+</div>
+
+<script type="text/javascript" src="{% static 'site/js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'site/js/bootstrap.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js"
+integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="anonymous"></script>
+<script
+  src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
+<script>
+  $('.basicAutoComplete').autoComplete(
+    { minLength: 3 }
+  );
+
+  $("#keywords").blur(function () {
+    $('#searchProjects').submit();
+  });
+
+</script>

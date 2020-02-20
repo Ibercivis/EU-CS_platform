@@ -1,6 +1,12 @@
 from django.db import models
 from django.conf import settings
 
+
+class Keyword(models.Model):
+    keyword = models.TextField()
+    def __str__(self):        
+        return f'{self.keyword}'
+
 class Resource(models.Model):
     name = models.CharField(max_length=100)
     url = models.CharField(max_length=200)
@@ -12,7 +18,7 @@ class Resource(models.Model):
     audience = models.CharField(max_length=100)
     datePublished = models.DateTimeField('Date Published')
     inLanguage = models.CharField(max_length=100)
-    keywords = models.CharField(max_length=100)
+    keywords = models.ManyToManyField(Keyword)
     license =  models.CharField(max_length=100)
     publisher = models.CharField(max_length=100)
 
