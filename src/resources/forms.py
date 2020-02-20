@@ -1,13 +1,18 @@
 from django import forms
 from django.db import models
 from django.utils import timezone
-from .models import Resource
+from .models import Resource, Keyword
 from django.shortcuts import get_object_or_404
 from datetime import datetime, date
 from django.forms import ModelForm
+from django_select2.forms import Select2MultipleWidget
 
 class ResourceForm(forms.ModelForm):
     abstract = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}), max_length=300)
+    CHOICES = ()
+    choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=CHOICES)
+    keywords = forms.MultipleChoiceField(choices=CHOICES, widget=Select2MultipleWidget, required=False)
+    
     class Meta:
         model = Resource
         fields = ["name", "about", "abstract", "url", "audience",
@@ -29,7 +34,6 @@ class ResourceForm(forms.ModelForm):
             rsc.license = self.data['license']
             rsc.audience = self.data['audience']
             rsc.publisher = self.data['publisher']
-            rsc.keywords = self.data['keywords']
         else:
             rsc.datePublished = publication_date
             rsc.author = args.user
@@ -37,4 +41,14 @@ class ResourceForm(forms.ModelForm):
         rsc.inLanguage = self.data['language']     
 
         rsc.save()
+
+        choices = self.data['choices']
+        choices = choices.split(',')
+        for choice in choices:
+            if(choice != ''):
+                keyword = Keyword.objects.get_or_create(keyword=choice)                   
+        keywords = Keyword.objects.all()
+        keywords = keywords.filter(keyword__in = choices)
+        rsc.keywords.set(keywords)
+
         return 'success'
