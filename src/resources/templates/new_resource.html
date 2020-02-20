@@ -16,7 +16,7 @@
 
 
 {% block container %}
-
+{{ form.media.css }}
 <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
     </br></br></br></br></br>
     <div class="main-content-container container-fluid px-4">
@@ -91,13 +91,15 @@
                             <div class="row">
                                 <div class="col-5 p-3 ml-5">
                                     {{ form.keywords|as_crispy_field }}
+                                    {{form.choices |as_crispy_field}}
                                 </div>
                                 <div class="col-5 p-3 ml-5">
 
                                 </div>
                             </div>
+                            <br />
                             <div class="row justify-content-md-center">
-                                <button type="submit" class="btn btn-success">Upload resource</button>
+                                <button type="submit" onclick="completeSubmit()" class="btn btn-success">Upload resource</button>
                             </div>
                         </form>
                     </table>
@@ -114,4 +116,28 @@
 
 {% block scripts %}
 
+<script>
+    $(document).ready(function () {
+  
+      $("#div_id_keywords div").on('keyup', function(){
+        var key = $(".selection input").val();
+        if (key.indexOf(',') > -1) {
+           var word =key.slice(0, -1);
+           $(".selection input").val("");
+           $("#id_keywords").append("<option value='" + word +"' selected> " + word + " </option>");
+        }      
+      });
+    });
+
+    function completeSubmit(){
+        var option_all = $("#id_keywords option:selected").map(function () {
+            return $.trim($(this).text());
+        }).get().join(',');
+        
+        $("#id_choices").val(option_all);
+        $("#id_keywords").empty();
+    }
+
+</script>
+{{ form.media.js }}
 {% endblock scripts %}
