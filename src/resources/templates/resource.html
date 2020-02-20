@@ -48,7 +48,7 @@
                 <p> Language: {{ resource.inLanguage }}</p>
                 <p> Audience: {{ resource.audience }} </p>
                 <p> Publisher: {{ resource.publisher }}</p>
-                <p> Keywords: {{ resource.keywords }} </p>
+                <p> Keywords: {% for keyword in resource.keywords.all %} {{keyword|capfirst}} | {% endfor %} </p>
 
               </div>
             </div>
