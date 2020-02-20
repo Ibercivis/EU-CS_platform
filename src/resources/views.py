@@ -8,7 +8,7 @@ from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
 from django.conf import settings
 from django.db.models import Q
-
+from itertools import chain
 
 def resources(request):
     resources = Resource.objects.all()
@@ -74,3 +74,14 @@ def deleteResource(request, pk):
     obj = get_object_or_404(Resource, id=pk)
     obj.delete()        
     return redirect('resources')
+
+def resources_autocomplete(request):  
+    if request.GET.get('q'):
+        text = request.GET['q']
+        rsc_names = Resource.objects.filter(name__icontains=text).values_list('name',flat=True).distinct()
+        keywords = Keyword.objects.filter(keyword__icontains=text).values_list('keyword',flat=True).distinct()
+        report = chain(rsc_names, keywords)
+        json = list(report)
+        return JsonResponse(json, safe=False)
+    else:
+        return HttpResponse("No cookies")    
