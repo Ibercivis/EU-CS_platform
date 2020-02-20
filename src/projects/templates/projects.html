@@ -41,10 +41,10 @@
 				{{ project.name }}
 			</h4>
 			<p class="card-text">{{project.description | truncatewords:12 }}</p>
-	{% for topic in project.topic.all %} <button class="btn btn-outline-info btn-sm rounded mb-2">{{topic}}</button>  {% endfor %}
+	{% for topic in project.topic.all %} <a class="btn btn-outline-info btn-sm rounded mb-2" href="projects?keywords=&topic={{topic}}">{{topic}}</a>  {% endfor %}
 		  <br>
 
-			{% for keyword in project.keywords.all %} <button class="btn btn-outline-secondary btn-sm rounded mb-2">{{keyword}}</button>  {% endfor %}
+			{% for keyword in project.keywords.all %} <a class="btn btn-outline-secondary btn-sm rounded mb-2" href="projects?keywords={{keyword}}">{{keyword}}</a>  {% endfor %}
 			<br>
 
 			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{project.id}}">
