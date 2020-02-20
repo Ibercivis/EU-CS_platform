@@ -8,5 +8,6 @@ urlpatterns = [
     path('new_resource', views.new_resource, name='new_resource'),
     path('editResource/<int:pk>', views.editResource, name='editResource'),
     path('deleteResource/<int:pk>', views.deleteResource, name='deleteResource'),
+    path('resources_autocomplete/', views.resources_autocomplete, name='resources_autocomplete'),
 ]
 
