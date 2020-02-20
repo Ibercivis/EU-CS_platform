@@ -36,7 +36,7 @@ class Project(models.Model):
     url = models.CharField(max_length=200)
 
     #Images and communications
-    image = models.ImageField(upload_to='images/')
+    image = models.ImageField(upload_to='images/', max_length=300)
     imageCredit = models.CharField(max_length=200)
     #Geography
     latitude = models.DecimalField(max_digits=9,decimal_places=6)
