@@ -13,6 +13,9 @@ def home(request):
 class AboutPage(generic.TemplateView):
     template_name = "about.html"
 
+class EventsPage(generic.TemplateView):
+    template_name = "events.html"
+
 
 def results(request):
     projects = Project.objects.get_queryset().order_by('id')

@@ -1,0 +1,71 @@
+{% extends "base2.html" %}
+
+{% load staticfiles %}
+{% block title %}{{ block.super }}Events{% endblock %}
+
+{% block navbar-left %}
+{% include "_navbar.html" with active_link="events" %}
+{% endblock %}
+
+
+{% block list_of_items %}
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center align-items-center">
+      <h2>Events</h2>
+      <p class="lead">Share, initiate and learn - citizen science in Europe</p>
+    </div>
+  </div>
+
+  <br /><br /><br />
+
+  <div class="row ">
+    <div>
+      <p>Do you want to find out more about EU-Citizen.Science? We will be presenting the platform at several events in
+        the coming months, both project-run events and external events. </p>
+    </div>
+  </div>
+  
+  <br />
+
+  <div class="row">
+    <div>
+      <p><b>2020</b></p>
+
+      <p><a href="https://www.ecsa-conference.eu/" target="_blank"> ECSA 2020 conference</a></p>
+
+      <p><i>May 24-26, Trieste; external event</i></p>
+
+      <p>
+        EU-Citizen.Science will be presenting during several sessions at the third international ECSA conference.
+      </p>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="row">
+    <div>
+      <p><b>2021</b></p>
+
+      <p><a href="https://www.ecsite.eu/conference" target="_blank"> Ecsite annual conference</a></p>
+
+      <p><i>Dates and location to be confirmed; EU-Citizen.Science event</i></p>
+
+      <p>
+        The platform will hold a pre-conference workshop at Ecsite’s annual conference in 2021, which will be focused on science centres that haven’t yet worked with citizen science.
+      </p>
+    </div>
+  </div>
+  
+  <br />
+
+</div>
+
+{% endblock list_of_items %}
+
+{% block scripts %}
+
+{% endblock scripts %}

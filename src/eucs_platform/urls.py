@@ -18,6 +18,7 @@ urlpatterns = [
     path("results/", views.results, name="results"),
     path("curated/", views.curated,name="curated"),
     path("about/", views.AboutPage.as_view(), name="about"),
+    path("events/", views.EventsPage.as_view(), name="events"),
     path("users/", include(profiles.urls)),
     path("admin/", admin.site.urls),
     path("", include(accounts.urls)),
