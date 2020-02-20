@@ -84,32 +84,4 @@
 </div>
 {% endblock list_of_items %}
 </main>
-{% block scripts %}
-<script
-  src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
-<script>
-  $('.basicAutoComplete').autoComplete(
-    { minLength: 3 }
-  );
-</script>
-<script>
-  $(function () {
-    $('.topic-select').on('change', function () {
-      var topic = $(this).val();
-      $('#searchProjects').submit();
-    });
-  });
-  $(function () {
-    $('.status-select').on('change', function () {
-      var status = $(this).val();
-      $('#searchProjects').submit();
-    });
-  });
-  $("#keywords").blur(function () {
-    $('#searchProjects').submit();
-  });
-  $("#host").blur(function () {
-    $('#searchProjects').submit();
-  });
-</script>
-{% endblock scripts %}
+
