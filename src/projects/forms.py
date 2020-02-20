@@ -24,8 +24,9 @@ class ProjectForm(forms.Form):
     
     topic = forms.ModelMultipleChoiceField(queryset=Topic.objects.all(), widget=Select2MultipleWidget, required=False)
     
-    #Images and communications
+
     url = forms.CharField(max_length=200, required=False)
+    #Images and communications    
     image = forms.ImageField(required=False)
     x = forms.FloatField(widget=forms.HiddenInput(),required=False)
     y = forms.FloatField(widget=forms.HiddenInput(), required=False)
