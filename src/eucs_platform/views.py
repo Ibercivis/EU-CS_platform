@@ -39,7 +39,35 @@ def results(request):
 def curated(request):
     groups = ResourceGroup.objects.get_queryset().order_by('id')
     resourcesgrouped = ResourcesGrouped.objects.get_queryset().order_by('group')
-
     return render(request, 'curated.html', {'groups': groups, 'resourcesgrouped': resourcesgrouped})
+
+def imprint(request):
+    return render(request, 'imprint.html')
+
+def contact(request):
+    return render(request, 'contact.html')
+
+def terms(request):
+    return render(request, 'terms.html')
+
+def privacy(request):
+    return render(request, 'privacy.html')
+
+def help(request):
+    return render(request, 'help.html')
+
+def status(request):
+    return render(request, 'status.html')
+
+
+
+
+
+
+
+
+
+
+
 
 

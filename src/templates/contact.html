@@ -1,0 +1,26 @@
+{% extends "base2.html" %}
+
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ block.super }}Contact{% endblock %}
+
+
+{% block navbar-left %}
+{% include "_navbar.html" %}
+{% endblock %}
+
+{% block page_title %}
+Contact
+{% endblock page_title %}
+
+{% block list_of_items %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h2>Terms</h2>
+			<br>
+		</div>
+	</div>
+</div>
+{% endblock list_of_items %}
