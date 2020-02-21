@@ -1,0 +1,86 @@
+[
+    {
+        "pk": 1,
+        "model": "resources.category",
+        "fields": {
+            "text":"Tools"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "resources.category",
+        "fields": {
+            "text":"Guidelines"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "resources.category",
+        "fields": {
+            "text":"Training resources"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "resources.category",
+        "fields": {
+            "text":"Other Materials"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "resources.category",
+        "fields": {
+            "text":"Libraries",
+            "parent": 4
+        }
+    },
+    {
+        "pk": 6,
+        "model": "resources.category",
+        "fields": {
+            "text":"Scientific Publications",
+            "parent": 4
+        }
+    },
+    {
+        "pk": 7,
+        "model": "resources.category",
+        "fields": {
+            "text":"Websites",
+            "parent": 4
+        }
+    },
+    {
+        "pk": 8,
+        "model": "resources.category",
+        "fields": {
+            "text":"Reports",
+            "parent": 4
+        }
+    },
+    {
+        "pk": 9,
+        "model": "resources.category",
+        "fields": {
+            "text":"Audio",
+            "parent": 4
+        }
+    },
+    {
+        "pk": 10,
+        "model": "resources.category",
+        "fields": {
+            "text":"Visuals",
+            "parent": 4
+        }
+    },
+    {
+        "pk": 11,
+        "model": "resources.category",
+        "fields": {
+            "text":"Miscellaneous",
+            "parent": 4
+        }
+    }
+]

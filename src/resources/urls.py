@@ -9,5 +9,6 @@ urlpatterns = [
     path('editResource/<int:pk>', views.editResource, name='editResource'),
     path('deleteResource/<int:pk>', views.deleteResource, name='deleteResource'),
     path('resources_autocomplete/', views.resources_autocomplete, name='resources_autocomplete'),
+    path('get_sub_category/', views.get_sub_category, name='get_sub_category'),
 ]
 
