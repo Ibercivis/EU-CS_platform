@@ -29,7 +29,6 @@ def new_resource(request):
     form = ResourceForm()
     if request.method == 'POST':
         form = ResourceForm(request.POST, request.FILES)
-        print(form)
         if form.is_valid():
             form.save(request)
             messages.success(request, "Resource uploaded with success!")
@@ -58,7 +57,7 @@ def editResource(request, pk):
         'name':resource.name,'about': resource.about, 'abstract': resource.abstract, 
         'url': resource.url,'license': resource.license,
         'audience' : resource.audience, 'publisher': resource.publisher,
-        'choices': choices, 'category': resource.category
+        'choices': choices, 'category': getCategory(resource.category), 'categorySelected': resource.category.id
     })
     
     if request.method == 'POST':
@@ -88,7 +87,7 @@ def resources_autocomplete(request):
 
 def get_sub_category(request):
     category = request.GET.get("category")
-    options = '<select class="select form-control">'
+    options = '<select id="id_subcategory" class="select form-control">'
     response = {}
 
     if category:
@@ -105,7 +104,15 @@ def get_sub_category(request):
             options += '</select>'
             response['sub_categories'] = options        
         else:
-            response['sub_categories'] = '<select class="select form-control" disabled></select>'
+            response['sub_categories'] = '<select id="id_subcategory" class="select form-control" disabled></select>'
     else:
-        response['sub_categories'] = '<select class="select form-control" disabled></select>'
+        response['sub_categories'] = '<select id="id_subcategory" class="select form-control" disabled></select>'
     return JsonResponse(response)
+
+
+def getCategory(category):    
+    if category.parent:
+            return category.parent
+    else:
+        return category
+    
