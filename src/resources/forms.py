@@ -1,7 +1,7 @@
 from django import forms
 from django.db import models
 from django.utils import timezone
-from .models import Resource, Keyword
+from .models import Resource, Keyword, Category
 from django.shortcuts import get_object_or_404
 from datetime import datetime, date
 from django.forms import ModelForm
@@ -12,11 +12,13 @@ class ResourceForm(forms.ModelForm):
     CHOICES = ()
     choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=CHOICES)
     keywords = forms.MultipleChoiceField(choices=CHOICES, widget=Select2MultipleWidget, required=False)
+    category = forms.ModelChoiceField(queryset=Category.objects.filter(parent__isnull=True))
+    #subcategory = forms.ModelChoiceField(queryset=Category.objects.filter(parent__isnull=True))
     
     class Meta:
         model = Resource
         fields = ["name", "about", "abstract", "url", "audience",
-         "keywords", "license", "publisher"]
+         "keywords", "license", "publisher", "category"]
         
         
 
@@ -24,6 +26,9 @@ class ResourceForm(forms.ModelForm):
         publication_date = datetime.now()        
         rsc = super(ResourceForm, self).save(commit=False)
         
+        category = get_object_or_404(Category, id=self.data['category'])
+        print(category)
+
         pk = self.data.get('resourceID', '')
         if pk:
             rsc = get_object_or_404(Resource, id=pk)
@@ -33,13 +38,13 @@ class ResourceForm(forms.ModelForm):
             rsc.url = self.data['url']
             rsc.license = self.data['license']
             rsc.audience = self.data['audience']
-            rsc.publisher = self.data['publisher']
+            rsc.publisher = self.data['publisher']            
         else:
             rsc.datePublished = publication_date
             rsc.author = args.user
 
         rsc.inLanguage = self.data['language']     
-
+        rsc.category = category
         rsc.save()
 
         choices = self.data['choices']

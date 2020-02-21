@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Resource, Keyword
+from .models import Resource, Keyword, Category
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from .forms import ResourceForm
@@ -29,7 +29,7 @@ def new_resource(request):
     form = ResourceForm()
     if request.method == 'POST':
         form = ResourceForm(request.POST, request.FILES)
-
+        print(form)
         if form.is_valid():
             form.save(request)
             messages.success(request, "Resource uploaded with success!")
@@ -84,4 +84,28 @@ def resources_autocomplete(request):
         json = list(report)
         return JsonResponse(json, safe=False)
     else:
-        return HttpResponse("No cookies")    
+        return HttpResponse("No cookies")
+
+def get_sub_category(request):
+    category = request.GET.get("category")
+    options = '<select class="select form-control">'
+    response = {}
+
+    if category:
+        sub_categories = Category.objects.filter(parent=category)
+        sub_categories = sub_categories.values_list("id","text")
+        tupla_sub_categories = tuple(sub_categories)
+
+        if tupla_sub_categories:
+            for sub_category in tupla_sub_categories:
+                options += '<option value = "%s">%s</option>' % (
+                    sub_category[0],
+                    sub_category[1]     
+                )
+            options += '</select>'
+            response['sub_categories'] = options        
+        else:
+            response['sub_categories'] = '<select class="select form-control" disabled></select>'
+    else:
+        response['sub_categories'] = '<select class="select form-control" disabled></select>'
+    return JsonResponse(response)

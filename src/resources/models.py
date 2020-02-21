@@ -7,6 +7,15 @@ class Keyword(models.Model):
     def __str__(self):        
         return f'{self.keyword}'
 
+class Category(models.Model):
+    text = models.TextField()
+    parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
+    def __str__(self):
+        res = str(self.text) 
+        if(self.parent):
+            res  +=  ' - ' + str(self.parent)
+        return res
+
 class Resource(models.Model):
     name = models.CharField(max_length=100)
     url = models.CharField(max_length=200)
@@ -19,6 +28,7 @@ class Resource(models.Model):
     datePublished = models.DateTimeField('Date Published')
     inLanguage = models.CharField(max_length=100)
     keywords = models.ManyToManyField(Keyword)
+    category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.CASCADE)
     license =  models.CharField(max_length=100)
     publisher = models.CharField(max_length=100)
 
