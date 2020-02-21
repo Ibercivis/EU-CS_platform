@@ -58,7 +58,7 @@ def editResource(request, pk):
         'name':resource.name,'about': resource.about, 'abstract': resource.abstract, 
         'url': resource.url,'license': resource.license,
         'audience' : resource.audience, 'publisher': resource.publisher,
-        'choices': choices  
+        'choices': choices, 'category': resource.category
     })
     
     if request.method == 'POST':

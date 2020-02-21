@@ -104,7 +104,7 @@
                 {{form.choices |as_crispy_field}}
               </div>
               <div class="col-5 p-3 ml-5">
-
+                {{ form.category|as_crispy_field }}
               </div>
             </div>
 
@@ -147,7 +147,33 @@
       $('#contactinfoform').toggle();
       $('html,body').animate({ scrollTop: $("#contactinfo").offset().top - 160 }, { duration: "slow" });
     });
+
+    $("#id_category").on('change', getSubCategories);
+    getSubCategories();
+
   });
+
+  function getSubCategories(){
+    var category = $("#id_category").val();        
+    var request = $.ajax(
+        {
+            type: "GET",
+            url: "{% url 'get_sub_category' %}",
+            data: {
+                "category": category
+            },
+            success: function (response) {
+                $("#id_sub_categories").html(response.sub_categories);
+                
+            }
+        }
+    );
+
+    request.done(function (response) {            
+        $("#id_sub_categories").trigger("change");
+    });
+
+  }
 
   function completeSubmit(){
     var option_all = $("#id_keywords option:selected").map(function () {
