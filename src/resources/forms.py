@@ -13,8 +13,8 @@ class ResourceForm(forms.ModelForm):
     choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=CHOICES)
     keywords = forms.MultipleChoiceField(choices=CHOICES, widget=Select2MultipleWidget, required=False)
     category = forms.ModelChoiceField(queryset=Category.objects.filter(parent__isnull=True))
-    #subcategory = forms.ModelChoiceField(queryset=Category.objects.filter(parent__isnull=True))
-    
+    categorySelected = forms.CharField(widget=forms.HiddenInput(),required=False)
+
     class Meta:
         model = Resource
         fields = ["name", "about", "abstract", "url", "audience",
@@ -25,9 +25,7 @@ class ResourceForm(forms.ModelForm):
     def save(self, args):
         publication_date = datetime.now()        
         rsc = super(ResourceForm, self).save(commit=False)
-        
-        category = get_object_or_404(Category, id=self.data['category'])
-        print(category)
+        category = get_object_or_404(Category, id=self.data['categorySelected'])
 
         pk = self.data.get('resourceID', '')
         if pk:

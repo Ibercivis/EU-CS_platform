@@ -91,10 +91,11 @@
                             <div class="row">
                                 <div class="col-5 p-3 ml-5">
                                     {{ form.keywords|as_crispy_field }}
-                                    {{form.choices |as_crispy_field}}
+                                    {{form.choices|as_crispy_field}}
                                 </div>
                                 <div class="col-5 p-3 ml-5">
                                     {{ form.category|as_crispy_field }}
+                                    {{ form.categorySelected|as_crispy_field }}
                                     <div id="id_sub_categories"></div>
                                 </div>
                             </div>
@@ -129,6 +130,7 @@
         }      
       });
 
+
       $("#id_category").on('change', getSubCategories);
       getSubCategories();
     });
@@ -148,21 +150,22 @@
                 }
             }
         );
-
-        request.done(function (response) {            
-            $("#id_sub_categories").trigger("change");
-        });
-
     }
    
 
-    function completeSubmit(){
+    function completeSubmit(){       
         var option_all = $("#id_keywords option:selected").map(function () {
             return $.trim($(this).text());
-        }).get().join(',');
-        
+        }).get().join(',');        
         $("#id_choices").val(option_all);
         $("#id_keywords").empty();
+
+        var category = $("#id_category").val();
+        $("#id_categorySelected").val(category);            
+        var subcategory = $("#id_subcategory").val();
+        if(subcategory){
+            $("#id_categorySelected").val(subcategory);
+        }     
     }
 
 </script>

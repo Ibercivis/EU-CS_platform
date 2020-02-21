@@ -63,7 +63,7 @@ class ProjectForm(forms.Form):
         if(pk):
             project = get_object_or_404(Project, id=pk)
             project.name = self.data['project_name']
-            project.url = self.data['url']
+            #project.url = self.data['url']
             project.start_date = start_dateData
             project.end_date = end_dateData
             project.latitude = self.data['latitude']
@@ -75,7 +75,8 @@ class ProjectForm(forms.Form):
             
         
         else:           
-            project = Project(name = self.data['project_name'], url = self.data['url'],
+            project = Project(name = self.data['project_name'],
+                        # url = self.data['url'],
                          start_date = start_dateData, end_date = end_dateData, creator=args.user,
                          latitude = self.data['latitude'], longitude = self.data['longitude'],
                          aim = self.data['aim'], description = self.data['description'], 
