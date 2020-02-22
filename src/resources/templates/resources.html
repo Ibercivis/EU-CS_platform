@@ -2,7 +2,8 @@
 
 {% load staticfiles %}
 {% load crispy_forms_tags %}
-
+{% load i18n %}
+{% load l10n %}
 
 {% block title %}{{ block.super }}Resources{% endblock %}
 
@@ -28,7 +29,6 @@ Resources
 {% block page_header %}
 {% include "finder_resources.html" %}
 {% endblock page_header %}
-
 {%block list_of_items %}
       {% for rsc in resources %}
       <div class="col-lg-6 col-md-12 mb-4">
@@ -37,8 +37,19 @@ Resources
             <h4 class="card-title">{{ rsc.name | truncatewords:4 }}</h4>
             <img class="card-img" style=" float: left; background-color: #fff; border-radius: 50%; border: 0px; width: 75px" src="static/site/img/gdoc.png">
 
-            <p class="card-text">{{rsc.abstract |truncatewords:20 }}</p>
-            <p class="card-text"><a href="{{rsc.url}}" target="_blank"> View resource </a></p>
+            <p class="card-text">{{rsc.abstract |truncatewords:20 }}<br>
+						<p class="card-test">
+        {% get_language_info_list for LANGUAGES as languages %}
+        {% for language in languages %}
+					{% if language.code == rsc.inLanguage %}
+	 					<a class="badge badge-pill badge-success" href="resources?language={{rsc.inLanguage}}">{{language.name_local}}</a><br />
+					{% endif %}
+				{% endfor %}
+            <a class="badge badge-pill badge-dark" href="">{{rsc.license}}</a><br>
+			{% for keyword in rsc.keywords.all %} <a class="badge badge-pill badge-secondary" href="projects?keywords={{keyword}}">{{keyword}}</a>  {% endfor %}
+</p>
+ 							<a class="btn btn-primary" href="/resource/{{rsc.id}}" target="_blank">Read More</a>
+            	<a class="btn btn-secondary" href="{{rsc.url}}" target="_blank">Download</a></p>
           </div>
         </div>
       </div>
