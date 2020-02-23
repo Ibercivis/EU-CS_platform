@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base2.html" %}
 
 {% load staticfiles %}
 {% load crispy_forms_tags %}
@@ -6,39 +6,31 @@
 
 {% block title %}{{ block.super }}Profile{% endblock %}
 
-<!-- Benefits of the Django application -->
-{% block container %}
-
-<div class="container">
-  <div class="container profile-head">
-  <h1 class="text-primary">Edit Profile</h1>
-  </div>
-  <br>
-  <div class="row">
-    <!-- left column -->
-    <div class="col-md-3">
-      <div class="text-center">
-        <img title="profile picture" class="img-circle img-responsive" src="{% thumbnail user.profile.picture|default:'default_profile.png' 140x140 crop %}">
-      </div>
-    </div>
-      
-    <!-- edit form column -->
-    <div class="col-md-9">
-      <h3>Personal info</h3>
-      <form enctype="multipart/form-data" method="post">
-	{% crispy user_form %}
-	{% crispy profile_form %}
-      </form>
-    </div>
-  </div>
-</div>
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <a class="btn btn-default pull-right" href="{% url 'accounts:password-change' %}">Change Password</a>
-    </div>
-  </div>
-</div>
+{% block navbar-left %}
+{% include "_navbar.html" with active_link="" %}
 {% endblock %}
+{% block list_of_items %}
+<div class="container-fluid">
+	<div class="card card-mb-4">
+		<div class="card-body">
+			<div class=card-title">
+				<h2>
+					 <img title="profile picture" class="img-fluid rounded-circle" 
+						src="{% thumbnail user.profile.picture|default:'default_profile.png' 140x140 crop %}">
+      			Edit profile: {{ user.get_full_name }}
+				</h2>
+			</div>
+			<div class="card-text">
+   			<form enctype="multipart/form-data" method="post">
+					{% crispy user_form %}
+					{% crispy profile_form %}
+   			<a class="btn btn-danger float-right" href="{% url 'accounts:password-change' %}">Change Password</a>
+      	</form>
+			</div>
+		</div>
+	</div>
+<br>
+<br>
+{% endblock list_of_items%}
 
 

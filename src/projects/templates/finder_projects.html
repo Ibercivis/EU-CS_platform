@@ -30,17 +30,12 @@
 				</select>
 				<!-- label for="host" style="color:black">Host</label-->
 				<button class="btn btn-info" id="search" type="submit" alt="Find">
-					<i class="fas fa-search"></i>
+					<i class="fas fa-search"></i> Find
 				</button>
 				{% if user.is_authenticated %}
-				<a class="btn btn-danger" href="{% url 'new_project' %}">
-					<i class="fas fa-plus-circle"></i>
+				<a class="btn btn-warning" href="{% url 'new_project' %}">
+					<i class="fas fa-plus-circle"></i> Add
 				</a>
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProjectModal">
-					<i class="fas fa-plus-circle"></i>
-
-				</button>	
-
 				{% endif %}
 			</div>
 		</form>
