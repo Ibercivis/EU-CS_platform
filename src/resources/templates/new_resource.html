@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base2.html" %}
 
 <link rel="stylesheet" href="https://anijs.github.io/lib/anicollection/anicollection.css" />
 
@@ -15,7 +15,7 @@
 {% endblock %}
 
 
-{% block container %}
+{% block list_of_items %}
 {{ form.media.css }}
 <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
     </br></br></br></br></br>
@@ -113,7 +113,7 @@
     </div>
 </main>
 
-{% endblock container %}
+{% endblock list_of_items %}
 
 
 {% block scripts %}
