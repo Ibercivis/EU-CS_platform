@@ -1,12 +1,12 @@
 {% extends "base2.html" %}
-
-<link rel="stylesheet" href="https://anijs.github.io/lib/anicollection/anicollection.css" />
-
-
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% load i18n %}
 {% load l10n %}
+{% block head %}
+{{ block.super }}
+{{ form.media.css }}
+{% endblock head %}
 
 {% block title %}{{ block.super }}Projects{% endblock %}
 
@@ -16,21 +16,15 @@
 
 
 {% block list_of_items %}
-{{ form.media.css }}
-<main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
-    </br></br></br></br></br>
-    <div class="main-content-container container-fluid px-4">
-
-        <div class="container">
-            Upload a Citizen Science's resource </br></br>
-
-            <div class="card card-small mb-4">
-                <div class="card-body p-0 pb-3 text-center">
-                    <table class="table mb-0">
+<div class="container-fluid">
+	<div class="card mb-4">
+		<div class="card-title p-3">
+			<h2>Add new resource</h2>
+		</div>
+		<div class="card-text p-3">
+             <table class="table mb-0">
                         <form action="/new_resource" method="post" class="add-new-post" enctype="multipart/form-data">
                             {% csrf_token %}
-                            <br />
-                            <h4>Resource</h4>
                             <div class="row">
                                 <div class="col-5 p-3 ml-5">
                                     {{ form.name|as_crispy_field }}
@@ -99,20 +93,12 @@
                                     <div id="id_sub_categories"></div>
                                 </div>
                             </div>
-                            <br />
-                            <div class="row justify-content-md-center">
-                                <button type="submit" onclick="completeSubmit()" class="btn btn-success">Upload resource</button>
-                            </div>
+                                <button type="submit" onclick="completeSubmit()" class="btn btn-success">Save</button>
                         </form>
                     </table>
-                </div>
-            </div>
-
-            <br /><br />
-        </div>
-    </div>
-</main>
-
+		</div>
+	</div>
+</div>
 {% endblock list_of_items %}
 
 

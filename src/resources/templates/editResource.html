@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base2.html" %}
 
 {% load staticfiles %}
 {% load crispy_forms_tags %}
@@ -11,7 +11,7 @@
 {% include "_navbar.html" with active_link="resources" %}
 {% endblock %}
 
-{% block container %}
+{% block list_of_items %}
 {{ form.media.css }}
 
 
@@ -124,7 +124,7 @@
   </div>
 </main>
 
-{% endblock container %}
+{% endblock list_of_items %}
 
 {% block scripts %}
 <script>
