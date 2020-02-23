@@ -1,97 +1,85 @@
-{% extends "base.html" %}
-
+{% extends "base2.html" %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% load leaflet_tags %}
+{% block head %}
+{{block.super }}
+{% leaflet_js %}
+{% leaflet_css %}
+{% endblock head %}
 
 {% block title %}{{ block.super }}Projects{% endblock %}
 
 {% block navbar-left %}
 {% include "_navbar.html" with active_link="project" %}
 {% endblock %}
+{% block list_of_items %}
+  <div class="main-content-container container-fluid" >
+    <div class="card mb-4">
+  {% if project.image %}            
+              <img class="img-fluid img-responsive img-zoom" src="{{ project.image }}" >
+            {% else %}
+              <img class="img-fluid img-responsive img-zoom" src='/static/site/img/project.png'>
+            {% endif %}
 
-
-{% block container %}
-
-<main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
-  </br></br></br></br>
-  <div class="main-content-container container-fluid px-4">
-
-    <div class="card card-small mb-4">
-      <div class="card-header">
-        <h2 align="center">Project {{project.name}}
-          {% if user.is_authenticated %}
+      <div class="card-text p-3">
+        <h2>{{project.name}}
+         {% if user.is_authenticated %}
           {% if project.creator == user %}
-          <a href="{% url 'editProject' project.id %}">
-            <i class="material-icons" style="font-size: 24px;">edit</i>
+          <a class="btn btn-warning float-right" href="{% url 'editProject' project.id %}">
+            Edit
           </a>
           {% endif %}
           {% endif %}
+   <p>{% for topic in project.topic.all %} <a class="btn btn-outline-info btn-sm rounded mb-2" href="projects?keywords=&topic={{topic}}">{{topic}}</a>  {% endfor %}
+							{% for keyword in project.keywords.all %} <a class="btn btn-outline-secondary btn-sm rounded mb-2" href="projects?keywords={{keyword}}">{{keyword}}</a>  {% endfor %}</p>
         </h2>
-
-        <br /><br />
-        <div class="row">
-
-          <div class="col-sm-6">
-            <div class="container">
-              <div class="p-0 offset-lg-1 offset-md-2">
-                <h4>Project info</h4>
-                <p> ID: {{project.id}}</p>
-                <p> Name: {{project.name}}</p>
-                <p> Description: {{project.description}}</p>
-                <p> Keywords: {% for keyword in project.keywords.all %} {{keyword|capfirst}} | {% endfor %}</p>
-                <p> Start date: {{ project.start_date | date:"d/m/Y"}}</p>
-                <p> End date: {{ project.end_date | date:"d/m/Y"}}</p>
-                <p> Status: {{ project.status}}</p>
-                <p> Topic: {% for topic in project.topic.all %} {{topic|capfirst}} | {% endfor %} </p>
-                <br />
-                <p>Date created: {{project.dateCreated  | date:"d/m/Y"}} </p>
-                <p>Date updated: {{project.dateUpdated  | date:"d/m/Y"}} </p>
-                <br />
-                <h4>Geography</h4>
+<div class="row">
+				<div class="col-xl-6">
+                             <p><b> Host: </b>{{project.host}}</p>
+                <p><b>Start date: </b>{{ project.start_date | date:"d/m/Y"}}</p>
+                <p><b>End date: </b>{{ project.end_date | date:"d/m/Y"}}</p>
+                <p><b>Status: </b>{{ project.status}}</p>
+                <p><b>Date created:</b> {{project.dateCreated  | date:"d/m/Y"}} </p>
+                <p><b>Date updated:</b>{{project.dateUpdated  | date:"d/m/Y"}} </p>
+                <p><b>Website: </b><a href="{{project.url}}">{{project.url}}</a></p>
+</div>
+<div class="col-xl-6">
+                <p><b>Description: </b>{{project.description}}</p>
+</div>
+</div>
+<div class="row">
+<div class="col-12">
+             <h4>Geography</h4>
                 <p>Latitude: {{project.latitude}}</p>
                 <p>Longitude: {{project.longitude}}</p>
                 {% leaflet_map "map" callback="window.map_init_basic" %}
-                <br />
-                <p> Website: <a href="{{project.url}}">{{project.url}}</a></p>
-                <p> Host: {{project.host}}</p>
-                <br />
+</div>
+</div>
+<div class="row">
+<div class="col-xl-6 col-12 mt-2">
+                <p><b>How to participate: </b>{{project.howToParticipate}}</p>
 
-                <p>How to participate: {{project.howToParticipate}}</p>
-                <p>Equipment: {{project.equipment}}</p>
+</div>
+<div class="col-xl-6 col-12 mt-2">
+                <p><b>Needed equipment:</b>{{project.equipment}}</p>
+
+</div>
+
+</div>
 
               </div>
             </div>
           </div>
 
-          <div class="col-sm-6">
-            <br /><br /><br />
-            {% if project.image %}            
-              <img src="{{ project.image }}" 
-              style="max-width: 50%;    
-              margin-left: auto;
-              margin-right: auto;
-              display: block;">
-            {% else %}
-              <img src='/static/site/img/project.png'
-              style="max-width: 50%;    
-              margin-left: auto;
-              margin-right: auto;
-              display: block;">            
-            {% endif %}
-          </div>
+          <div class="col-12">
+                    </div>
 
         </div>
       </div>
 
-    </div>
-    <br />
-    <br /><br /><br />
 
-  </div>
-</main>
-
-{% endblock container %}
+{% endblock list_of_items %}
 
 {% block scripts %}
 <script type="text/javascript">
