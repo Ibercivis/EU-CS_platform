@@ -1,9 +1,12 @@
-{% extends "base_forms.html" %}
-
+{% extends "base2.html" %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% load leaflet_tags %}
-
+{% block head %}
+{{block.super }}
+{% leaflet_js %}
+{% leaflet_css %}
+{% endblock head %}
 
 {% block title %}{{ block.super }}Projects{% endblock %}
 
@@ -12,22 +15,45 @@
 {% endblock %}
 
 
-{% block container %}
+{% block list_of_items %}
 {{ form.media.css }}
 
-
-<main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
-
-  </br></br></br>
-  <div class="main-content-container container-fluid px-4">
-    <div class="page-header row no-gutters py-4">
-      <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-        <h2 class="page-title">Add new project</h2>
+<!-- MODAL TO CROP THE IMAGE -->
+<div class="modal fade" id="modalCrop">
+  <div class="modal-dialog mdialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Crop the photo</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img src="" id="image" style="max-width: 100%;">
+      </div>
+      <div class="modal-footer">
+        <div class="btn-group pull-left" role="group">
+          <button type="button" class="btn btn-default js-zoom-in">
+            <span><i class="material-icons" style="font-size: 18px;">zoom_in</i> </span>
+          </button>
+          <button type="button" class="btn btn-default js-zoom-out">
+            <span><i class="material-icons" style="font-size: 18px;">zoom_out</i></span>
+          </button>
+        </div>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary js-crop-and-upload">Crop and upload</button>
       </div>
     </div>
+  </div>
+</div>
 
-    <div class="card card-small mb-4">
-      <div class="card-body p-0 pb-3 text-center">
+
+<div class="container-fluid">
+	<div class="card mb-4">
+		<div class="card-title p-3">
+			<h2>Add new project</h2>
+		</div>
+		<div class="card-text p-3">
         <table class="table mb-0">
 
           <form action="/new_project" method="post" enctype="multipart/form-data" class="add-new-post" autocomplete="off">
@@ -165,47 +191,14 @@
             </div>
           </form>
       </div>
-
       </table>
-    </div>
-<!-- MODAL TO CROP THE IMAGE -->
-<div class="modal fade" id="modalCrop">
-  <div class="modal-dialog mdialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Crop the photo</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <img src="" id="image" style="max-width: 100%;">
-      </div>
-      <div class="modal-footer">
-        <div class="btn-group pull-left" role="group">
-          <button type="button" class="btn btn-default js-zoom-in">
-            <span><i class="material-icons" style="font-size: 18px;">zoom_in</i> </span>
-          </button>
-          <button type="button" class="btn btn-default js-zoom-out">
-            <span><i class="material-icons" style="font-size: 18px;">zoom_out</i></span>
-          </button>
-        </div>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary js-crop-and-upload">Crop and upload</button>
-      </div>
-    </div>
-  </div>
+	</div>
 </div>
+{% endblock list_of_items %}
 
-</div>
-
-</main>
-
-{% endblock container %}
 
 {% block scripts %}
 <script src="{% static 'site/js/site.js' %}"></script>
-
 <script src="{% static 'scripts/cropper.min.js' %}"></script>
 <script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
 <script>

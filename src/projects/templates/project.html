@@ -4,6 +4,7 @@
 {% load leaflet_tags %}
 {% block head %}
 {{block.super }}
+<link rel="stylesheet" href="{% static 'styles/cropper.min.css' %}">
 {% leaflet_js %}
 {% leaflet_css %}
 {% endblock head %}
@@ -26,7 +27,7 @@
         <h2>{{project.name}}
          {% if user.is_authenticated %}
           {% if project.creator == user %}
-          <a class="btn btn-warning float-right" href="{% url 'editProject' project.id %}">
+          <a class="btn btn-danger float-right" href="{% url 'editProject' project.id %}">
             Edit
           </a>
           {% endif %}

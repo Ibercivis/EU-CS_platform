@@ -2,6 +2,9 @@
 <html lang="en">
 {% load staticfiles %}
 {% load thumbnail %}
+{% load i18n %}
+{% load leaflet_tags %}
+
 <!-- 
 Coolors:
 0d0a0b
@@ -25,6 +28,9 @@ ffffff
   <link rel="stylesheet" href="{% static 'site/css/bootstrap.min.css' %}">
   <!-- Your custom styles (optional) -->
   <link rel="stylesheet" href="{% static 'site/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'styles/extras.1.1.0.min.css' %}">
+  <link rel="stylesheet" href="{% static 'site/css/main.css' %}">
+  <link rel="stylesheet" href="{% static 'styles/cropper.min.css' %}">
 {% endblock head %}
 </head>
 <body>
@@ -94,6 +100,9 @@ ffffff
 	<script type="text/javascript" src="{% static 'site/js/jquery.min.js' %}"></script>
   <!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="{% static 'site/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'scripts/cropper.min.js' %}"></script>
+  <script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
+
 	{% block scripts %}
 	{% endblock scripts %}
 
