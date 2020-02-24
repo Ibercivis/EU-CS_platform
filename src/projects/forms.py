@@ -5,6 +5,9 @@ from django.shortcuts import get_object_or_404
 from django_select2.forms import Select2MultipleWidget
 from django.core.files import File
 from PIL import Image
+from geopy.geocoders import Nominatim
+
+geolocator = Nominatim(timeout=None)
 
 class ProjectForm(forms.Form):
     error_css_class = 'form_error'
@@ -59,6 +62,10 @@ class ProjectForm(forms.Form):
         end_dateData = self.data['end_date']        
         pk = self.data.get('projectID', '')        
       
+        latitude = self.data['latitude']
+        longitude = self.data['longitude']
+        country = getCountryCode(latitude,longitude).upper()
+
         status = get_object_or_404(Status, id=self.data['status'])
         if(pk):
             project = get_object_or_404(Project, id=pk)
@@ -66,8 +73,9 @@ class ProjectForm(forms.Form):
             #project.url = self.data['url']
             project.start_date = start_dateData
             project.end_date = end_dateData
-            project.latitude = self.data['latitude']
-            project.longitude = self.data['longitude']
+            project.latitude = latitude
+            project.longitude = longitude
+            project.country = country
             project.aim = self.data['aim']
             project.description = self.data['description']         
             project.status = status
@@ -80,7 +88,7 @@ class ProjectForm(forms.Form):
             project = Project(name = self.data['project_name'],
                         # url = self.data['url'],
                          start_date = start_dateData, end_date = end_dateData, creator=args.user,
-                         latitude = self.data['latitude'], longitude = self.data['longitude'],
+                         latitude = latitude, longitude = longitude, country = country,
                          aim = self.data['aim'], description = self.data['description'], 
                          status = status, host = self.data['host'], imageCredit = self.data['image_credit'],
                          howToParticipate = self.data['how_to_participate'],
@@ -101,3 +109,12 @@ class ProjectForm(forms.Form):
         project.keywords.set(keywords)
 
         return 'success'
+
+
+def getCountryCode(latitude, longitude):       
+    location = geolocator.reverse([latitude, longitude], exactly_one=True)
+    
+    if len(location.raw) > 1:
+        return location.raw['address']['country_code']
+    else:
+        return ''

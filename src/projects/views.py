@@ -16,6 +16,7 @@ from PIL import Image
 from django.db.models import Q
 from itertools import chain
 
+
 def new_project(request):
     form = ProjectForm()
     user = request.user
@@ -52,7 +53,7 @@ def projects(request):
 
     topics = Topic.objects.all()
     status = Status.objects.all()
-    filters = {'keywords': '', 'topic': '', 'status': 0, 'host': ''}
+    filters = {'keywords': '', 'topic': '', 'status': 0, 'country': '', 'host': ''}
 
     if request.GET.get('keywords'):
         projects = projects.filter( Q(name__icontains = request.GET['keywords']) | 
@@ -66,6 +67,10 @@ def projects(request):
     if request.GET.get('status'):
         projects = projects.filter(status = request.GET['status'])
         filters['status'] = int(request.GET['status'])
+
+    if request.GET.get('country'):
+        projects = projects.filter(country = request.GET['country'])
+        filters['country'] = request.GET['country']
     
     if request.GET.get('host'):
         projects = projects.filter( host__icontains = request.GET['host'])
@@ -81,7 +86,7 @@ def projects(request):
 
 def project(request, pk):
     project = get_object_or_404(Project, id=pk)
-
+       
     return render(request, 'project.html', {'project':project})
 
 def editProject(request, pk):

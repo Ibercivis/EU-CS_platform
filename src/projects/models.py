@@ -1,5 +1,7 @@
 from django.db import models
 from django.conf import settings
+from django_countries.fields import CountryField
+
 
 class Status(models.Model):
     status = models.TextField()
@@ -41,6 +43,7 @@ class Project(models.Model):
     #Geography
     latitude = models.DecimalField(max_digits=9,decimal_places=6)
     longitude = models.DecimalField(max_digits=9,decimal_places=6)
+    country = CountryField()
     #Personal and Organizational Affiliates
     host = models.CharField(max_length=100)
     #Supplementary information for Citizen Science
