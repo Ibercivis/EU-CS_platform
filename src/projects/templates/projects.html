@@ -41,19 +41,20 @@
 
 								<div class="card-body">
 												<h4 class="card-title">
-																{{ project.name }}
-												</h4>
-											<p class="card-text">{{project.description | truncatewords:12 }}</p>
-											{% for country in countries %}
+																{{ project.name }}</h4>
+												{% for country in countries %}
 													{% if country.code == project.country %}
 														<a class="badge badge-pill badge-success" href="projects?country={{country.code}}">{{ country.name }}</a>
 													{% endif %}
 												{% endfor %}
 												{% for topic in project.topic.all %} <a class="badge badge-pill badge-dark" href="projects?keywords=&topic={{topic|urlencode}}">{{topic}}</a>  {% endfor %}
 												{% for keyword in project.keywords.all %} <a class="badge badge-pill badge-info" href="projects?keywords={{keyword|urlencode}}">{{keyword}}</a>  {% endfor %}
-												<br>
-												<a class="btn btn-outline-primary float-right" target="_black" href="/project/{{project.id }}"> Read more </a>	
-								</div>
+											<div class="card-text">{{project.description | truncatechars:100 }}</div>
+																		</div>
+	<div class="card-footer bg-white">
+											<a class="btn btn-outline-primary float-right" target="_black" href="/project/{{project.id }}"> Read more </a>	
+											</div>
+
 				</div>
 </div>
 {% endfor %}
