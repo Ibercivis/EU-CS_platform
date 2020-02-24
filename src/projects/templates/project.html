@@ -32,8 +32,8 @@
           </a>
           {% endif %}
           {% endif %}
-   <p>{% for topic in project.topic.all %} <a class="btn btn-outline-info btn-sm rounded mb-2" href="projects?keywords=&topic={{topic}}">{{topic}}</a>  {% endfor %}
-							{% for keyword in project.keywords.all %} <a class="btn btn-outline-secondary btn-sm rounded mb-2" href="projects?keywords={{keyword}}">{{keyword}}</a>  {% endfor %}</p>
+   <p>{% for topic in project.topic.all %} <a class="btn btn-outline-info btn-sm rounded mb-2" href="/projects?keywords=&topic={{topic|urlencode}}">{{topic}}</a>  {% endfor %}
+							{% for keyword in project.keywords.all %} <a class="btn btn-outline-secondary btn-sm rounded mb-2" href="/projects?keywords={{keyword|urlencode}}">{{keyword}}</a>  {% endfor %}</p>
         </h2>
 <div class="row">
 				<div class="col-xl-6">
