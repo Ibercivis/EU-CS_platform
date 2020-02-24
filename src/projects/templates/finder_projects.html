@@ -1,4 +1,6 @@
 {% load staticfiles %}
+{% load countries %}
+{% get_countries as countries %}
 <div class="row">
 	<div class="col-lg-2">
 		<h3>Projects</h3>
@@ -38,6 +40,14 @@
 				</a>
 				{% endif %}
 			</div>
+			<div class="md-form my-0 ml-2">
+				<select id="country" name="country" class="custom-select form-control">
+					<option value="">Country<option>
+					{% for country in countries %}
+					<option {% if country.code ==  filters.country %} selected {% endif %} value="{{ country.code }}">{{ country.name }}</option>
+					{% endfor %}
+				</select>
+			</div>
 		</form>
 	</div>
 </div>
@@ -52,21 +62,32 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
   $('.basicAutoComplete').autoComplete(
     { minLength: 3 }
   );
+
+  $("#keywords").blur(function () {
+    $('#searchProjects').submit();
+  });
+
   $(function () {
     $('#topic').on('change', function () {
       var topic = $(this).val();
       $('#searchProjects').submit();
     });
   });
+
   $(function () {
     $('.status-select').on('change', function () {
       var status = $(this).val();
       $('#searchProjects').submit();
     });
   });
-  $("#keywords").blur(function () {
-    $('#searchProjects').submit();
+
+  $(function () {
+    $('#country').on('change', function () {
+      var country = $(this).val();
+      $('#searchProjects').submit();
+    });
   });
+ 
   $("#host").blur(function () {
     $('#searchProjects').submit();
   });
