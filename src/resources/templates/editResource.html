@@ -1,10 +1,12 @@
 {% extends "base2.html" %}
-
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% load i18n %}
 {% load l10n %}
-
+{% block head %}
+{{ block.super }}
+{{ form.media.css }}
+{% endblock head %}
 {% block title %}{{ block.super }}Resources{% endblock %}
 
 {% block navbar-left %}
@@ -12,29 +14,15 @@
 {% endblock %}
 
 {% block list_of_items %}
-{{ form.media.css }}
-
-
-<main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
-
-  </br></br></br>
-  <div class="main-content-container container-fluid px-4">
-    <div class="page-header row no-gutters py-4">
-      <div class="col-12  ">
-        <h2 class="page-title">Edit resource
-          <span style="float:right;margin-right: 2%;">
-            <button type="submit" class="btn btn-danger"
-              onclick="location.href='{% url 'deleteResource' resource.id %}'" name='deleteResource'>Delete <span
-                class="fas fa-trash-alt"></span>
-            </button>
-          </span>
-        </h2>
-      </div>
-    </div>
-
-    <div class="card card-small mb-4">
-      <div class="card-body p-0 pb-3 text-center">
-        <table class="table mb-0">
+<div class="container-fluid">
+	<div class="card mb-4">
+		<div class="card-title p-3">
+			<h3>Edit resource
+   <button type="submit" class="btn btn-danger float-right" onclick="location.href='{% url 'deleteResource' resource.id %}'" name='deleteResource'> <span class="fas fa-trash-alt"></span> Delete            </button>
+</h3>
+		</div>
+		<div class="card-text p-3">
+      <table class="table mb-0">
 
           <form action="/editResource/{{resource.id}}" method="post">
             {% csrf_token %}
@@ -109,21 +97,15 @@
                 <div id="id_sub_categories"></div>
               </div>
             </div>
-
-            <br /><br />
-
-            <div class="row justify-content-md-center">
               <button type="submit" onclick="completeSubmit()" class="btn btn-success">Save</button>
-            </div>
           </form>
       </div>
 
       </table>
-    </div>
 
-  </div>
-</main>
-
+		</div>
+	</div>
+</div>
 {% endblock list_of_items %}
 
 {% block scripts %}
