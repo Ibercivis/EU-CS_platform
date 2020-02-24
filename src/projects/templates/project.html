@@ -8,9 +8,7 @@
 {% leaflet_js %}
 {% leaflet_css %}
 {% endblock head %}
-
 {% block title %}{{ block.super }}Projects{% endblock %}
-
 {% block navbar-left %}
 {% include "_navbar.html" with active_link="project" %}
 {% endblock %}
@@ -32,20 +30,19 @@
           </a>
           {% endif %}
           {% endif %}
-
         </h2>
 <p>									{% for country in countries %}
 													{% if country.code == project.country %}
-														<a class="badge badge-pill badge-success" href="projects?country={{country.code}}">{{ country.name }}</a>
+														<a class="badge badge-pill badge-success" href="/projects?country={{country.code}}">{{ country.name }}</a>
 													{% endif %}
 												{% endfor %}
-												{% for topic in project.topic.all %} <a class="badge badge-pill badge-dark" href="projects?keywords=&topic={{topic|urlencode}}">{{topic}}</a>  {% endfor %}
-												{% for keyword in project.keywords.all %} <a class="badge badge-pill badge-info" href="projects?keywords={{keyword|urlencode}}">{{keyword}}</a>  {% endfor %}</p>
+												{% for topic in project.topic.all %} <a class="badge badge-pill badge-dark" href="/projects?keywords=&topic={{topic|urlencode}}">{{topic}}</a>  {% endfor %}
+												{% for keyword in project.keywords.all %} <a class="badge badge-pill badge-info" href="/projects?keywords={{keyword|urlencode}}">{{keyword}}</a>  {% endfor %}</p>
 			
 
 <div class="row">
 				<div class="col-xl-6">
-                             <p><b> Host: </b>{{project.host}}</p>
+                <p><b> Host: </b>{{project.host}}</p>
                 <p><b>Start date: </b>{{ project.start_date | date:"d/m/Y"}}</p>
                 <p><b>End date: </b>{{ project.end_date | date:"d/m/Y"}}</p>
                 <p><b>Status: </b>{{ project.status}}</p>
