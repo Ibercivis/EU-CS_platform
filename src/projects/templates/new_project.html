@@ -210,7 +210,7 @@
 
 
     $('#contactinfo').on('click', function () {
-      $('#contactinfoform').toggle() ;
+      $('#contactinfoform').toggle();
       $('html,body').animate({ scrollTop: $("#contactinfo").offset().top - 160 }, { duration: "slow" });
     });
 
@@ -333,6 +333,12 @@
   }
 
   function completeSubmit(){
+    $('#contactinfoform').show();
+    $('#informationform').show();
+    $('#imagesform').show();
+    $('#organizationform').show();
+    $('#geographyform').show();   
+
     var option_all = $("#id_keywords option:selected").map(function () {
         return $.trim($(this).text());
       }).get().join(',');
