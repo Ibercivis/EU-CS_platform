@@ -72,7 +72,9 @@ class ProjectForm(forms.Form):
             project.description = self.data['description']         
             project.status = status
             project.host = self.data['host']
-            
+            project.imageCredit = self.data['image_credit']
+            project.howToParticipate = self.data['how_to_participate']
+            project.equipment = self.data['equipment']                    
         
         else:           
             project = Project(name = self.data['project_name'],
@@ -80,7 +82,9 @@ class ProjectForm(forms.Form):
                          start_date = start_dateData, end_date = end_dateData, creator=args.user,
                          latitude = self.data['latitude'], longitude = self.data['longitude'],
                          aim = self.data['aim'], description = self.data['description'], 
-                         status = status, host = self.data['host'])
+                         status = status, host = self.data['host'], imageCredit = self.data['image_credit'],
+                         howToParticipate = self.data['how_to_participate'],
+                         equipment = self.data['equipment'] )
 
         if(photo != '/'):
             project.image = photo
