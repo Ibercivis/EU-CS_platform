@@ -37,8 +37,7 @@ Resources
             <h4 class="card-title">{{ rsc.name | truncatewords:4 }}</h4>
             <img class="card-img" style=" float: left; background-color: #fff; border-radius: 50%; border: 0px; width: 75px" src="static/site/img/gdoc.png">
 
-            <p class="card-text">{{rsc.abstract |truncatewords:20 }}<br>
-						<p class="card-test">
+						<p class="card-text">
         {% get_language_info_list for LANGUAGES as languages %}
         {% for language in languages %}
 					{% if language.code == rsc.inLanguage %}
@@ -49,9 +48,14 @@ Resources
 			{% for keyword in rsc.keywords.all %} <a class="badge badge-pill badge-secondary" href="/resources?keywords={{keyword}}">{{keyword}}</a>  {% endfor %}
 </p>
 
+            <p class="card-text">{{rsc.abstract |truncatewords:20 }}<br>
+
+          </div>
+					<div class="card-footer bg-white">
+
             	<a class="btn btn-outline-secondary float-right ml-2" href="{{rsc.url}}" target="_blank">Download</a>
  							<a class="btn btn-outline-primary float-right ml-2" href="/resource/{{rsc.id}}" target="_blank">Read More</a>
-          </div>
+</div>
         </div>
       </div>
       {% endfor %}
