@@ -46,7 +46,7 @@ def editResource(request, pk):
     resource = get_object_or_404(Resource, id=pk)
     user = request.user
 
-    if user != resource.author:
+    if user != resource.author and not user.is_staff:
         return redirect('../resources', {})
 
     keywordsList = list(resource.keywords.all().values_list('keyword', flat=True))
