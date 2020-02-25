@@ -354,7 +354,8 @@
         lat: parseFloat($("#id_latitude").val()), 
         lng: parseFloat($("#id_longitude").val()) } 
       }
-      editMarker(obj); 
+      if($("#id_latitude").val())
+        editMarker(obj); 
       map.on('click', editMarker);        
   }
 
