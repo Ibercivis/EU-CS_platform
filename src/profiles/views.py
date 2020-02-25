@@ -34,7 +34,10 @@ class EditProfile(LoginRequiredMixin, generic.TemplateView):
         if "user_form" not in kwargs:
             kwargs["user_form"] = forms.UserForm(instance=user)
         if "profile_form" not in kwargs:
-            kwargs["profile_form"] = forms.ProfileForm(instance=user.profile)
+            interestAreasList = list(user.profile.interestAreas.all().values_list('interestArea', flat=True))
+            interestAreasList = ", ".join(interestAreasList)
+            choices = interestAreasList
+            kwargs["profile_form"] = forms.ProfileForm(instance=user.profile, initial={'choices': choices})
         return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
@@ -53,9 +56,8 @@ class EditProfile(LoginRequiredMixin, generic.TemplateView):
             return super().get(request, user_form=user_form, profile_form=profile_form)
         # Both forms are fine. Time to save!
         user_form.save()
-        profile = profile_form.save(commit=False)
-        profile.user = user
-        profile.save()
+        profile_form.save(request)
+
         messages.success(request, "Profile details saved!")
         return redirect("profiles:show_self")
 
