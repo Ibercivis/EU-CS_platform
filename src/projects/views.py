@@ -57,7 +57,7 @@ def projects(request):
 
     if request.GET.get('keywords'):
         projects = projects.filter( Q(name__icontains = request.GET['keywords']) | 
-                                    Q(keywords__keyword__icontains = request.GET['keywords']) )
+                                    Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
         filters['keywords'] = request.GET['keywords']    
     
     if request.GET.get('topic'):

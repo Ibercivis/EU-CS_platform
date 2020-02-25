@@ -16,7 +16,7 @@ def resources(request):
     
     if request.GET.get('keywords'):
         resources = resources.filter( Q(name__icontains = request.GET['keywords'])  | 
-                                    Q(keywords__keyword__icontains = request.GET['keywords']) )
+                                    Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
                                     
         filters['keywords'] = request.GET['keywords']
 
