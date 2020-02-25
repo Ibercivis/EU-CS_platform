@@ -24,9 +24,11 @@
       <div class="card-text p-3">
         <h2>{{project.name}}
          {% if user.is_authenticated %}
-          {% if project.creator == user %}
-          <a class="btn btn-danger float-right" href="{% url 'editProject' project.id %}"><i class="fas fa-edit"></i> Edit </a>
-          {% endif %}
+            {% if project.creator == user or user.is_staff %}
+            <a class="btn btn-danger float-right" href="{% url 'editProject' project.id %}"><i class="fas fa-edit"></i> Edit </a>
+              Edit
+            </a>
+            {% endif %}
           {% endif %}
         </h2>
 <p>									{% for country in countries %}
