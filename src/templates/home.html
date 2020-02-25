@@ -5,12 +5,9 @@
 {% load i18n %}
 
 {% block title %}{{ block.super }}Home{% endblock %}
-
-
 {% block navbar-left %}
-{% include "_navbar.html" with active_link="home" %}
+{% include "_navbar.html" with active_link="about" %}
 {% endblock %}
-
 
 {% block splash %}
 <div class="jumbotron">
@@ -56,8 +53,3 @@
 	</div>
 </div>
 {% endblock splash %}
-
-{% block container %}
-
-
-{% endblock container %}

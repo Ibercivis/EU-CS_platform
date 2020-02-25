@@ -34,7 +34,6 @@ class Project(models.Model):
     start_date = models.DateTimeField('Start date')
     end_date = models.DateTimeField('End date')
     topic = models.ManyToManyField(Topic)
-    
     url = models.CharField(max_length=200)
 
     #Images and communications

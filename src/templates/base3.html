@@ -2,7 +2,6 @@
 <html lang="en">
 {% load staticfiles %}
 {% load thumbnail %}
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -20,9 +19,9 @@
 <body>
 <header>
   <!--Navbar-->
-  <nav class="navbar navbar-expand-lg navbar-light fixed-top fg-white">
-    <div class="container">
-	    <a class="navbar-brand" href="http://193.146.117.217:8000">{% include "_brandname.html" %}</a>
+  <nav class="navbar navbar-expand-lg navbar-dark text-white text-weight-bold fixed-top">
+    <div class="container text-weight-bold">
+	    <a class="navbar-brand" href="/">{% include "_brandname.html" %}</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -31,25 +30,24 @@
         <ul class="navbar-nav mr-auto">
 	  {% block navbar-left %}
 	  {% endblock navbar-left %}
-          <li class="nav-item btn-group">
-            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">Dropdown
-            </a>
-            <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
         </ul>
-        <form class="form-inline">
-          <div class="md-form my-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-          </div>
-        </form>
+
+				<ul class="navbar-nav">
+				{% if not user.is_authenticated %}
+        <li class="nav-item"><a class="nav-link" onclick="return abrir_modal('{% url 'accounts:login' %}')">Login</a></li>
+				<li class="nav-item"><a class="nav-link" onclick="return abrir_modal('{% url 'accounts:signup' %}')" role="button">Sign up</a>
+				{% else %}
+				<li class="nav-item"><a class="nav-link" href="{% url 'profiles:show_self' %}">Profile</a></li>
+     		<li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a></li>
+				{% endif %}
+        {% if user.is_staff %}
+        <li class="nav-item"><a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
+        {% endif %}
+				</ul>
       </div>
     </div>
   </nav>
+
   <!--/.Navbar-->
 </header>
 <main>
