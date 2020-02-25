@@ -25,9 +25,7 @@
         <h2>{{project.name}}
          {% if user.is_authenticated %}
           {% if project.creator == user %}
-          <a class="btn btn-danger float-right" href="{% url 'editProject' project.id %}">
-            Edit
-          </a>
+          <a class="btn btn-danger float-right" href="{% url 'editProject' project.id %}"><i class="fas fa-edit"></i> Edit </a>
           {% endif %}
           {% endif %}
         </h2>
