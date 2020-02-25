@@ -3,6 +3,13 @@
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% load thumbnail %}
+{% load leaflet_tags %}
+{% block head %}
+{{ block.super }}
+{{ profile_form.media.css }}
+{% leaflet_js %}
+{% leaflet_css %}
+{% endblock head %}
 
 {% block title %}{{ block.super }}Profile{% endblock %}
 
@@ -10,6 +17,7 @@
 {% include "_navbar.html" with active_link="" %}
 {% endblock %}
 {% block list_of_items %}
+
 <div class="container-fluid">
 	<div class="card card-mb-4">
 		<div class="card-body">
@@ -23,7 +31,20 @@
 			<div class="card-text">
    			<form enctype="multipart/form-data" method="post">
 					{% crispy user_form %}
-					{% crispy profile_form %}
+
+					{{ profile_form.picture|as_crispy_field }}
+					{{ profile_form.title|as_crispy_field }}
+					{{ profile_form.bio|as_crispy_field }}
+					{{ profile_form.institution|as_crispy_field }}
+					{{ profile_form.interestAreas|as_crispy_field }}
+					{{ profile_form.choices|as_crispy_field }}
+					{{ profile_form.latitude|as_crispy_field }}
+					{{ profile_form.longitude|as_crispy_field }}
+					<label>Geographical location</label>
+					{% leaflet_map "map" callback="window.map_init_basic" %}
+					<br/><br/>
+					<button id="upload" type="submit" class="btn btn-success">Upload</button>
+								
    			<a class="btn btn-danger float-right" href="{% url 'accounts:password-change' %}">Change Password</a>
       	</form>
 			</div>
@@ -33,4 +54,68 @@
 <br>
 {% endblock list_of_items%}
 
+{% block scripts %}
+<script type="text/javascript" src="{% static 'site/js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'site/js/bootstrap.min.js' %}"></script>
 
+<script>
+	
+    $(document).ready(function () {
+		var choices = $("#id_choices").val();
+		var choices = choices.split(",");
+
+		for (choice of choices){
+		$("#id_interestAreas").append("<option value='" + choice +"' selected> " + choice + " </option>");
+		}
+
+		$("#div_id_interestAreas div").on('keyup', function(){
+			var key = $(".selection input").val();
+			if (key.indexOf(',') > -1) {
+				var word =key.slice(0, -1);
+				$(".selection input").val("");
+				$("#id_interestAreas").append("<option value='" + word +"' selected> " + word + " </option>");
+			}
+		});
+	  
+		$("#upload").on('click', function(){
+			var option_all = $("#id_interestAreas option:selected").map(function () {
+				return $.trim($(this).text());
+			}).get().join(',');        
+			$("#id_choices").val(option_all);
+			$("#id_interestAreas").empty();
+		});	  
+      
+    });
+</script>
+
+<script type="text/javascript">
+	var map;
+	var marker_layer = new L.marker([50.5, 30.5]);	
+
+	function editMarker(e){
+		map.removeLayer(marker_layer);
+		marker_layer = new L.marker(e.latlng, {draggable:true});
+		marker_layer.on('drag', function (e) {
+		$("#id_latitude").val((e.latlng.lat).toFixed(6));
+		$("#id_longitude").val((e.latlng.lng).toFixed(6));
+		});
+		map.addLayer(marker_layer);
+		$("#id_latitude").val((e.latlng.lat).toFixed(6));
+		$("#id_longitude").val((e.latlng.lng).toFixed(6));
+	}
+
+	function map_init_basic (leafmap) {
+		map = leafmap;
+		var obj = { latlng: { 
+			lat: parseFloat($("#id_latitude").val()), 
+			lng: parseFloat($("#id_longitude").val()) } 
+		}
+		if($("#id_latitude").val())
+      		editMarker(obj); 
+		map.on('click', editMarker); 
+	}
+
+</script>
+  
+{{ profile_form.media.js }}
+{% endblock scripts %}
