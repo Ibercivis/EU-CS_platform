@@ -25,10 +25,10 @@
       <div class="card-header">
         <h2>  {{resource.name}}
           {% if user.is_authenticated %}
-          {% if resource.author == user or user.is_staff %}
-          <a class="btn btn-danger float-right" href="{% url 'editResource' resource.id %}">Edit
-          </a>
-          {% endif %}
+            {% if resource.author == user or user.is_staff %}
+            <a class="btn btn-danger float-right" href="{% url 'editResource' resource.id %}">Edit
+            </a>
+            {% endif %}
           {% endif %}
         </h2>
  
