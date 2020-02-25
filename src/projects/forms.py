@@ -15,18 +15,13 @@ class ProjectForm(forms.Form):
     project_name = forms.CharField(max_length=100)
     aim = forms.CharField(max_length=100)
     description = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}), max_length=300)
-   
     CHOICES = ()
     choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=CHOICES)
     keywords = forms.MultipleChoiceField(choices=CHOICES, widget=Select2MultipleWidget, required=False)
-
     status = forms.ModelChoiceField(queryset=Status.objects.all())
     start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}))
     end_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=False)  
-    
     topic = forms.ModelMultipleChoiceField(queryset=Topic.objects.all(), widget=Select2MultipleWidget, required=False)
-    
-
     url = forms.CharField(max_length=200, required=False)
     #Images and communications    
     image = forms.ImageField(required=False)
@@ -34,8 +29,6 @@ class ProjectForm(forms.Form):
     y = forms.FloatField(widget=forms.HiddenInput(), required=False)
     width = forms.FloatField(widget=forms.HiddenInput(),required=False)
     height = forms.FloatField(widget=forms.HiddenInput(), required=False)
-
-
     image_credit = forms.CharField(max_length=200, required=False)
     #Geography
     latitude = forms.DecimalField(max_digits=9,decimal_places=6)
@@ -45,8 +38,6 @@ class ProjectForm(forms.Form):
     #Supplementary information for Citizen Science
     how_to_participate = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}), max_length=300, required=False)
     equipment = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}), max_length=200, required=False)
-
-    
     contact_person_phone = forms.CharField(max_length=100, required=False)
     
 
@@ -65,7 +56,6 @@ class ProjectForm(forms.Form):
         latitude = self.data['latitude']
         longitude = self.data['longitude']
         country = getCountryCode(latitude,longitude).upper()
-
         status = get_object_or_404(Status, id=self.data['status'])
         if(pk):
             project = get_object_or_404(Project, id=pk)
@@ -98,7 +88,6 @@ class ProjectForm(forms.Form):
             project.image = photo
         project.save()
         project.topic.set(self.data.getlist('topic'))
-
         choices = self.data['choices']
         choices = choices.split(',')
         for choice in choices:
@@ -107,13 +96,11 @@ class ProjectForm(forms.Form):
         keywords = Keyword.objects.all()
         keywords = keywords.filter(keyword__in = choices)
         project.keywords.set(keywords)
-
         return 'success'
 
 
 def getCountryCode(latitude, longitude):       
     location = geolocator.reverse([latitude, longitude], exactly_one=True)
-    
     if len(location.raw) > 1:
         return location.raw['address']['country_code']
     else:

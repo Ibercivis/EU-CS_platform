@@ -5,7 +5,7 @@ from django.views import generic
 from django.core.paginator import Paginator
 from .forms import ProjectForm
 from django.utils import timezone
-from .models import Project, Topic, Status, Keyword
+from .models import Project, Topic, Status, Keyword, Votes
 from django.contrib.auth import get_user_model
 import json
 from django.utils.dateparse import parse_datetime
@@ -15,6 +15,7 @@ from django.contrib import messages
 from PIL import Image
 from django.db.models import Q
 from itertools import chain
+from django.db.models import Avg, Max, Min, Sum
 
 
 def new_project(request):
@@ -86,8 +87,9 @@ def projects(request):
 
 def project(request, pk):
     project = get_object_or_404(Project, id=pk)
-       
-    return render(request, 'project.html', {'project':project})
+    votes = Votes.objects.all().filter(project_id=pk).aggregate(Avg('vote'))['vote__avg']
+    print(votes)
+    return render(request, 'project.html', {'project':project,'votes':votes})
 
 def editProject(request, pk):
     project = get_object_or_404(Project, id=pk)
