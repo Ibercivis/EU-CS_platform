@@ -91,8 +91,8 @@ def project(request, pk):
 
 def editProject(request, pk):
     project = get_object_or_404(Project, id=pk)
-    user = request.user
-    if user != project.creator:
+    user = request.user    
+    if user != project.creator and not user.is_staff:
         return redirect('../projects', {})
     
     start_datetime = formats.date_format(project.start_date, 'Y-m-d')

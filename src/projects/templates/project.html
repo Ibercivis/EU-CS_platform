@@ -24,7 +24,7 @@
       <div class="card-text p-3">
         <h2>{{project.name}}
          {% if user.is_authenticated %}
-          {% if project.creator == user %}
+          {% if project.creator == user or user.is_staff %}
           <a class="btn btn-danger float-right" href="{% url 'editProject' project.id %}">
             Edit
           </a>
