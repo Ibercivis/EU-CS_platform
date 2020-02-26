@@ -11,4 +11,5 @@ urlpatterns = [
     path('text_autocomplete/', views.text_autocomplete, name='text_autocomplete'),
     path('host_autocomplete/', views.host_autocomplete, name='host_autocomplete'),
     path('clearfilters/', views.clearFilters, name='clearfilters'),
+    path('setFeatured/', views.setFeatured, name='setFeatured'),
 ]

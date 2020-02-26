@@ -5,7 +5,7 @@ from django.views import generic
 from django.core.paginator import Paginator
 from .forms import ProjectForm
 from django.utils import timezone
-from .models import Project, Topic, Status, Keyword, Votes
+from .models import Project, Topic, Status, Keyword, Votes, FeaturedProjects
 from django.contrib.auth import get_user_model
 import json
 from django.utils.dateparse import parse_datetime
@@ -51,6 +51,7 @@ def new_project(request):
 
 def projects(request):
     projects = Project.objects.get_queryset().order_by('id')
+    featuredProjects = FeaturedProjects.objects.all().values_list('project_id',flat=True)
 
     topics = Topic.objects.all()
     status = Status.objects.all()
@@ -82,11 +83,11 @@ def projects(request):
     projects = paginator.get_page(page)
 
     return render(request, 'projects.html', {'projects': projects, 'topics': topics,
-    'status': status, 'filters': filters})
+    'status': status, 'filters': filters, 'featuredProjects': featuredProjects})
 
 
 def project(request, pk):
-    project = get_object_or_404(Project, id=pk)
+    
     votes = Votes.objects.all().filter(project_id=pk).aggregate(Avg('vote'))['vote__avg']
     print(votes)
     return render(request, 'project.html', {'project':project,'votes':votes})
@@ -139,10 +140,10 @@ def editProject(request, pk):
 
 def deleteProject(request, pk):
     obj = get_object_or_404(Project, id=pk)
-    obj.delete()        
+    obj.delete()
     return redirect('projects')
 
-def text_autocomplete(request):  
+def text_autocomplete(request):
     if request.GET.get('q'):
         text = request.GET['q']
         project_names = Project.objects.filter(name__icontains=text).values_list('name',flat=True).distinct()
@@ -165,3 +166,19 @@ def host_autocomplete(request):
 
 def clearFilters(request):
     return redirect ('projects')
+
+def setFeatured(request):
+    response = {}
+    id = request.POST.get("project_id")    
+    
+    #Delete
+    try:
+        obj = FeaturedProjects.objects.get(project_id=id)    
+        obj.delete()
+    except FeaturedProjects.DoesNotExist:
+        #Insert
+        fProject = get_object_or_404(Project, id=id)
+        featureProject = FeaturedProjects(project=fProject)
+        featureProject.save()
+
+    return JsonResponse(response, safe=False) 
