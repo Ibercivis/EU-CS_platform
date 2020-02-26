@@ -1,7 +1,7 @@
 from django.views import generic
 from django.shortcuts import render
 from projects.models import Project
-from resources.models import Resource, ResourceGroup, ResourcesGrouped
+from resources.models import Resource, ResourceGroup, ResourcesGrouped, FeaturedResources
 from blog.models import Post
 from projects.models import FeaturedProjects, Project
 import random
@@ -18,8 +18,13 @@ def home(request):
     if featuredProjects:
         featuredProject = random.choice(featuredProjects)
         featuredProject = get_object_or_404(Project, id=featuredProject.project_id)
-      
-    return render(request, 'home.html', {'featuredProject':featuredProject, 'lastBlogEntry': lastBlogEntry})
+    featuredResources = FeaturedResources.objects.all()
+    featuredResource = None
+    if featuredResources:
+        featuredResource = random.choice(featuredResources)
+        featuredResource = get_object_or_404(Resource, id=featuredResource.resource_id)
+    
+    return render(request, 'home.html', {'featuredProject':featuredProject, 'featuredResource':featuredResource, 'lastBlogEntry': lastBlogEntry})
 
 class AboutPage(generic.TemplateView):
     template_name = "about.html"

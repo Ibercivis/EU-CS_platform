@@ -50,3 +50,9 @@ class ResourcesGrouped(models.Model):
         unique_together = (("group", "resource"),)
     def __str__(self):
         return str(self.group) + ' - ' + str(self.resource)
+
+
+class FeaturedResources(models.Model):
+    resource = models.ForeignKey(Resource, on_delete=models.CASCADE)
+    def __str__(self):        
+        return f'{self.resource}'
