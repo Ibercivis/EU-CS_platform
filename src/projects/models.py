@@ -18,7 +18,7 @@ class Keyword(models.Model):
     def __str__(self):        
         return f'{self.keyword}'
 
-class Project(models.Model):    
+class Project(models.Model):
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     #Database information
     dateCreated = models.DateTimeField('Created date', auto_now=True)
@@ -62,4 +62,7 @@ class Votes(models.Model):
     def __str__(self):        
         return f'{self.vote}'
 
-
+class FeaturedProjects(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    def __str__(self):        
+        return f'{self.project}'

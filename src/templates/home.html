@@ -12,47 +12,105 @@
 {% block splash %}
 <div class="jumbotron">
 	<div class="row main_info">
-	<div class="col-sm-12"> 
-		{% include "finder.html" %}
-	</div>
-	<div class="col-sm-12"> 
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8 col-sm-12 mt-2">
-					<div class="card card-small card-post h-100">
-						<div class="card-body">
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-6 col-lg-4 mt-2 ">				
-					<div class="card card-small card-post h-100">
-						<div class="card-body">	
-							<h3><u>Last Blog Entry</u></h3> <br/>
-							<h5 class="card-title">{{ lastBlogEntry.title }}</h5>
-								<p class="card-text text-muted h6">{{ lastBlogEntry.author.name }} | {{ lastBlogEntry.created_on}} </p>
-								<p class="card-text">{{lastBlogEntry.content | slice:":200" | safe }}</p>
-							<a href="{% url 'post_detail' lastBlogEntry.slug  %}" class="btn btn-primary">Read More</a>						
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12 mt-2">
-					<div class="card card-small card-post h-100">
-								<div class="card-body">
-				<h5 class="card-title">
-							Share, initiate and learn about citizen science in Europe
-						</h5>
-<b>EU-Citizen.Science</b> is a platform for sharing knowledge, tools, training and resources for Citizen Science. Resources by the community, for the community. 
-<b>Search</b> for handy guidelines, <b>share</b> your latest projects, <b>find</b> your needed tool, <b>upload</b> your protocols, or simply <b>join</b> the conversation in the community forums.
-
-						</div>
-					</div>
-				</div>
-
-			</div>
+		<div class="col-sm-12">
+			{% include "finder.html" %}
 		</div>
+		<div class="col-sm-12">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8 col-sm-12 mt-2">
+						<div class="card card-small card-post h-100">
+							<div class="card-body">
+								
+								<div class="row">
+									
+									<div class="col-lg-6 col-sm-6 mt-2">
+										<h3>Featured project</h3>
+										{% if featuredProject %}
+										<div class="card h-100">
+											{% if featuredProject.image %}
+											<img class="img-fluid" src="{{ featuredProject.image }}" />
+											{% else %}
+											<img class="img-fluid" src="static/site/img/project.png" />
+											{% endif %}
 
+											<div class="card-body">
+												<h4 class="card-title">
+													{{ featuredProject.name }}</h4>
+												{% for country in countries %}
+												{% if country.code == featuredProject.country %}
+												<a class="badge badge-pill badge-success"
+													href="projects?country={{country.code}}">{{ country.name }}</a>
+												{% endif %}
+												{% endfor %}
+												{% for topic in featuredProject.topic.all %} <a
+													class="badge badge-pill badge-dark"
+													href="projects?keywords=&topic={{topic|urlencode}}">{{topic}}</a>
+												{% endfor %}
+												{% for keyword in featuredProject.keywords.all %} <a
+													class="badge badge-pill badge-info"
+													href="projects?keywords={{keyword|urlencode}}">{{keyword}}</a>
+												{% endfor %}
+												<div class="card-text">
+													{{featuredProject.description | truncatechars:100 }}
+												</div>
+											</div>
+											<div class="card-footer bg-white">
+												<a class="btn btn-outline-primary float-right" target="_black"
+													href="/project/{{featuredProject.id }}"> Read more </a>
+											</div>
+										</div>
+										{% endif %}
+									</div>
+
+
+									<div class="col-lg-6 col-sm-6 mt-2">
+
+									</div>
+
+								</div>
+								<br/><br/>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6 col-lg-4 mt-2 ">
+
+						<div class="card card-small card-post h-100">
+							<div class="card-body">
+								<h3><u>Last Blog Entry</u></h3> <br />
+								{% if lastBlogEntry %}
+								<h5 class="card-title">{{ lastBlogEntry.title }}</h5>
+								<p class="card-text text-muted h6">{{ lastBlogEntry.author.name }} |
+									{{ lastBlogEntry.created_on}} </p>
+								<p class="card-text">{{lastBlogEntry.content | slice:":200" | safe }}</p>
+								<a href="{% url 'post_detail' lastBlogEntry.slug  %}" class="btn btn-primary">Read
+									More</a>
+								{% endif %}
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12 mt-2">
+						<div class="card card-small card-post h-100">
+							<div class="card-body">
+								<h5 class="card-title">
+									Share, initiate and learn about citizen science in Europe
+								</h5>
+								<b>EU-Citizen.Science</b> is a platform for sharing knowledge, tools, training and
+								resources for Citizen Science. Resources by the community, for the community.
+								<b>Search</b> for handy guidelines, <b>share</b> your latest projects, <b>find</b> your
+								needed tool, <b>upload</b> your protocols, or simply <b>join</b> the conversation in the
+								community forums.
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
 	</div>
-</div>
-{% endblock splash %}
+	{% endblock splash %}

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Project, Topic, Status
+from .models import Project, Topic, Status, FeaturedProjects
 from django import forms
 from django_select2.forms import Select2MultipleWidget
 
@@ -19,3 +19,4 @@ class ProjectA(admin.ModelAdmin):
 admin.site.register(Project, ProjectA)
 admin.site.register(Topic)
 admin.site.register(Status)
+admin.site.register(FeaturedProjects)
