@@ -2,13 +2,15 @@ from django.views import generic
 from django.shortcuts import render
 from projects.models import Project
 from resources.models import Resource, ResourceGroup, ResourcesGrouped
+from blog.models import Post
 
 
 def home(request):
-    groups = ResourceGroup.objects.get_queryset().order_by('id')
-    resourcesgrouped = ResourcesGrouped.objects.get_queryset().order_by('group')
+    #groups = ResourceGroup.objects.get_queryset().order_by('id')
+    #resourcesgrouped = ResourcesGrouped.objects.get_queryset().order_by('group')
+    lastBlogEntry = Post.objects.all().filter(status=1).latest('created_on')
 
-    return render(request, 'home.html', {'groups': groups, 'resourcesgrouped': resourcesgrouped})
+    return render(request, 'home.html', {'lastBlogEntry': lastBlogEntry})
 
 class AboutPage(generic.TemplateView):
     template_name = "about.html"
