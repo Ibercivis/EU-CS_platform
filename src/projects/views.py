@@ -87,7 +87,7 @@ def projects(request):
 
 
 def project(request, pk):
-    
+    project = get_object_or_404(Project, id=pk)
     votes = Votes.objects.all().filter(project_id=pk).aggregate(Avg('vote'))['vote__avg']
     print(votes)
     return render(request, 'project.html', {'project':project,'votes':votes})
