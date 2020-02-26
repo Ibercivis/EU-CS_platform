@@ -50,6 +50,26 @@ Resources
 
             <p class="card-text">{{rsc.abstract |truncatewords:20 }}<br>
 
+              <div id="featured{{rsc.id}}">
+                {% if user.is_staff %}
+                  {% if rsc.id in featuredResources %}
+                  <img onclick="setFeaturedRsc({{rsc.id}})" class="img-fluid"
+                    src="static/site/img/gdoc.png" height="10%" width="10%"/>
+                  {% else %}
+                  <img onclick="setFeaturedRsc({{rsc.id}})" class="img-fluid"
+                  src="static/site/img/gdoc.png" height="10%" width="10%" style="background-color: rgba(0,0,0,0.2);filter:brightness(0.4);"/>
+                  {% endif %}
+                {% else %}
+                  {% if rsc.id in featuredResources %}
+                  <img class="img-fluid" src="static/site/img/gdoc.png" height="10%" width="10%"/>
+                  {% else %}
+                  <img class="img-fluid" src="static/site/img/gdoc.png" height="10%" width="10%" style="background-color: rgba(0,0,0,0.2);filter:brightness(0.4);"/>
+                  {% endif %}
+                {% endif %}
+
+              </div>
+
+
           </div>
 					<div class="card-footer bg-white">
 
@@ -60,3 +80,25 @@ Resources
       </div>
       {% endfor %}
 {% endblock list_of_items %}
+
+{% block scripts %}
+<script>
+
+	function setFeaturedRsc(idResource){
+		var htmlId = "featured" + idResource;
+        var request = $.ajax(
+            {
+                type: "POST",
+                url: "{% url 'setFeaturedRsc' %}",
+                data: {
+                    "resource_id": idResource,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function (response) {
+                    $("#"+htmlId).load(" #"+htmlId);
+                }
+            }
+        );
+    }
+</script>
+{% endblock scripts %} 
