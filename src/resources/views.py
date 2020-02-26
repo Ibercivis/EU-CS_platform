@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Resource, Keyword, Category
+from .models import Resource, Keyword, Category, FeaturedResources
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from .forms import ResourceForm
@@ -12,6 +12,8 @@ from itertools import chain
 
 def resources(request):
     resources = Resource.objects.all()
+    featuredResources = FeaturedResources.objects.all().values_list('resource_id',flat=True)
+
     filters = {'keywords': ''}
     
     if request.GET.get('keywords'):
@@ -20,7 +22,7 @@ def resources(request):
                                     
         filters['keywords'] = request.GET['keywords']
 
-    return render(request, 'resources.html', {'resources':resources, 'filters': filters})
+    return render(request, 'resources.html', {'resources':resources, 'featuredResources': featuredResources, 'filters': filters})
 
 def clearFilters(request):
     return redirect ('resources')
@@ -115,4 +117,19 @@ def getCategory(category):
             return category.parent
     else:
         return category
-    
+
+def setFeaturedRsc(request):
+    response = {}
+    id = request.POST.get("resource_id")    
+
+    #Delete
+    try:
+        obj = FeaturedResources.objects.get(resource_id=id)    
+        obj.delete()
+    except FeaturedResources.DoesNotExist:
+        #Insert
+        fResource = get_object_or_404(Resource, id=id)
+        featureResource = FeaturedResources(resource=fResource)
+        featureResource.save()
+
+    return JsonResponse(response, safe=False) 
