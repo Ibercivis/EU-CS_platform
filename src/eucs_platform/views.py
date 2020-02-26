@@ -3,14 +3,23 @@ from django.shortcuts import render
 from projects.models import Project
 from resources.models import Resource, ResourceGroup, ResourcesGrouped
 from blog.models import Post
-
+from projects.models import FeaturedProjects, Project
+import random
+from django.shortcuts import get_object_or_404
 
 def home(request):
     #groups = ResourceGroup.objects.get_queryset().order_by('id')
     #resourcesgrouped = ResourcesGrouped.objects.get_queryset().order_by('group')
-    lastBlogEntry = Post.objects.all().filter(status=1).latest('created_on')
-
-    return render(request, 'home.html', {'lastBlogEntry': lastBlogEntry})
+    lastBlogEntry = Post.objects.all().filter(status=1)
+    if lastBlogEntry:
+        lastBlogEntry = lastBlogEntry.latest('created_on')
+    featuredProjects = FeaturedProjects.objects.all()
+    featuredProject = None
+    if featuredProjects:
+        featuredProject = random.choice(featuredProjects)
+        featuredProject = get_object_or_404(Project, id=featuredProject.project_id)
+      
+    return render(request, 'home.html', {'featuredProject':featuredProject, 'lastBlogEntry': lastBlogEntry})
 
 class AboutPage(generic.TemplateView):
     template_name = "about.html"
