@@ -17,6 +17,7 @@ from django.db.models import Q
 from itertools import chain
 from django.db.models import Avg, Max, Min, Sum
 
+User = get_user_model()
 
 def new_project(request):
     form = ProjectForm()
@@ -187,5 +188,23 @@ def setFeatured(request):
         fProject = get_object_or_404(Project, id=id)
         featureProject = FeaturedProjects(project=fProject)
         featureProject.save()
+
+    return JsonResponse(response, safe=False) 
+
+
+def setFollowedProject(request):
+    response = {}
+    projectId = request.POST.get("project_id")
+    userId = request.POST.get("user_id")
+    #Delete
+    try:
+        obj = FollowedProjects.objects.get(project_id=projectId,user_id=userId)    
+        obj.delete()
+    except FollowedProjects.DoesNotExist:
+        #Insert
+        fProject = get_object_or_404(Project, id=projectId)
+        fUser = get_object_or_404(User, id=userId)
+        followedProject = FollowedProjects(project=fProject, user=fUser)
+        followedProject.save()
 
     return JsonResponse(response, safe=False) 

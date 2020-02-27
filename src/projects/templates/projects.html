@@ -67,11 +67,13 @@
 													{% endif %}
 
 													{% if user.is_authenticated %}
+													<div id="followed{{project.id}}">
 														{% if project.id in followedProjects %}
-															<button type="button" class="btn btn-primary">Unfollow</button>
+															<button type="button" class="btn btn-primary" onclick="setFollowedProject({{project.id}},{{user.id}})">Unfollow</button>
 														{% elif project.creator != user %}
-															<button type="button" class="btn btn-primary">Follow</button>
+															<button type="button" class="btn btn-primary" onclick="setFollowedProject({{project.id}},{{user.id}})">Follow</button>
 														{% endif %}
+													</div>
 													{% endif %}
 
 												{% endif %}
@@ -97,7 +99,6 @@
 
 {% block scripts %}
 <script>
-
 	function setFeatured(idProject){
 		var htmlId = "featured" + idProject;
         var request = $.ajax(
@@ -106,6 +107,24 @@
                 url: "{% url 'setFeatured' %}",
                 data: {
                     "project_id": idProject,
+              		csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function (response) {
+                    $("#"+htmlId).load(" #"+htmlId);
+                }
+            }
+        );
+    }
+
+	function setFollowedProject(idProject, idUser){
+		var htmlId = "followed" + idProject;
+        var request = $.ajax(
+            {
+                type: "POST",
+                url: "{% url 'setFollowedProject' %}",
+                data: {
+                    "project_id": idProject,
+					"user_id": idUser,
               		csrfmiddlewaretoken: '{{ csrf_token }}'
                 },
                 success: function (response) {
