@@ -35,7 +35,7 @@ Resources
         <div class="card h-100">
           <div class="card-body">
             <h4 class="card-title">{{ rsc.name | truncatewords:4 }}</h4>
-            <img class="card-img" style=" float: left; background-color: #fff; border-radius: 50%; border: 0px; width: 75px" src="static/site/img/gdoc.png">
+            <img class="card-img" style=" float: left; background-color: #fff; border-radius: 50%; border: 0px; width: 75px" src="{% static 'site/img/gdoc.png' %}">
 
 						<p class="card-text">
         {% get_language_info_list for LANGUAGES as languages %}
@@ -54,16 +54,16 @@ Resources
                 {% if user.is_staff %}
                   {% if rsc.id in featuredResources %}
                   <img onclick="setFeaturedRsc({{rsc.id}})" class="img-fluid"
-                    src="static/site/img/gdoc.png" height="10%" width="10%"/>
+                    src="{% static 'site/img/gdoc.png' %}" height="10%" width="10%"/>
                   {% else %}
                   <img onclick="setFeaturedRsc({{rsc.id}})" class="img-fluid"
-                  src="static/site/img/gdoc.png" height="10%" width="10%" style="background-color: rgba(0,0,0,0.2);filter:brightness(0.4);"/>
+                  src="{% static 'site/img/gdoc.png' %}" height="10%" width="10%" style="background-color: rgba(0,0,0,0.2);filter:brightness(0.4);"/>
                   {% endif %}
                 {% else %}
                   {% if rsc.id in featuredResources %}
-                  <img class="img-fluid" src="static/site/img/gdoc.png" height="10%" width="10%"/>
+                  <img class="img-fluid" src="{% static 'site/img/gdoc.png' %}" height="10%" width="10%"/>
                   {% else %}
-                  <img class="img-fluid" src="static/site/img/gdoc.png" height="10%" width="10%" style="background-color: rgba(0,0,0,0.2);filter:brightness(0.4);"/>
+                  <img class="img-fluid" src="{% static 'site/img/gdoc.png' %}" height="10%" width="10%" style="background-color: rgba(0,0,0,0.2);filter:brightness(0.4);"/>
                   {% endif %}
 
                   {% if user.is_authenticated %}
