@@ -7,6 +7,8 @@
 {{ block.super }}
 {% leaflet_js %}
 {% leaflet_css %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js"
+integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="anonymous"></script>
 {% endblock head %}
 
 
@@ -24,11 +26,24 @@
 	<div class="card-title">
 <h1>
  <img title="profile picture" class="img-fluid rounded-circle" src="{% thumbnail show_user.profile.picture|default:'default_profile.png' 140x140 crop %}">
-      {{ show_user.get_full_name }}
+	  {{ show_user.get_full_name }}	  
       {% if editable %}
       <a href="{% url 'accounts:delete' %}" class="btn btn-outline btn-danger float-right ml-2">Delete Profile</a>
       <a href="{% url 'profiles:edit_self' %}" class="btn btn-outline btn-info float-right ml-2">Edit Profile</a>
-      {% endif %}
+	  {% endif %}
+	  
+	  <span class="dropdown float-right">
+		<a class="btn btn-outline btn-secondary float-right dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			Projects & Resources
+		  </a>
+		<span class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+			<a class="dropdown-item" href="#">Uploaded projects</a>
+			<a class="dropdown-item" href="#">Uploaded resources</a>
+			<a class="dropdown-item" href="#">Followed projects</a>
+			<a class="dropdown-item" href="#">Saved resources</a>
+		</span>	  
+	  </span>
+
     </div>
      </div>
 	<div class="card-text">
@@ -63,8 +78,8 @@
 {% endblock list_of_items%}
 
 {% block scripts %}
-<script type="text/javascript" src="{% static 'site/js/jquery.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'site/js/bootstrap.min.js' %}"></script>
+
+
 <script type="text/javascript">
 	var map;
 	var marker_layer = new L.marker([50.5, 30.5]);
