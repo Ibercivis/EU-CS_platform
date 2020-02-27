@@ -52,15 +52,15 @@ ffffff
         </ul>
         <form class="form-inline">
 				{% if not user.is_authenticated %}
-        <a  class="btn btn-outline-info rounded ml-2" onclick="return abrir_modal('{% url 'accounts:login' %}')">Login</a>
-        <a class="btn btn-outline-info rounded ml-2"  onclick="return abrir_modal('{% url 'accounts:signup' %}')" role="button">Sign up</a>
+        <a class="ml-4" href="#"  onclick="return abrir_modal('{% url 'accounts:login' %}')">Login</a>
+        <a class="ml-4" href="#"  onclick="return abrir_modal('{% url 'accounts:signup' %}')" role="button">Sign up</a>
 				{% else %}
-					<a class="btn btn-outline-info rounded ml-2" href="{% url 'profiles:show_self' %}">profile</a>
-     			<a class="btn btn-outline-info rounded ml-2" href="{% url 'accounts:logout' %}">logout</a>
+					<a class="ml-4" href="{% url 'profiles:show_self' %}">Profile</a>
+     			<a class="ml-4" href="{% url 'accounts:logout' %}">Logout</a>
 				{% endif %}
 
         {% if user.is_staff %}
-        <a class="btn btn-outline-danger rounded ml-2" href="{% url 'admin:index' %}">Admin</a>
+        <a class="ml-4" href="{% url 'admin:index' %}">Admin</a>
         {% endif %}
         </form>
       </div>

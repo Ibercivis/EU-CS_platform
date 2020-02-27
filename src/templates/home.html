@@ -89,13 +89,12 @@
 										{% endif %}
 					<div class="card  mt-4">
 							<div class="card-body">
-								<h3><u>Last Blog Entry</u></h3> <br />
 								{% if lastBlogEntry %}
-								<h5 class="card-title">{{ lastBlogEntry.title }}</h5>
-								<p class="card-text text-muted h6">{{ lastBlogEntry.author.name }} |
+								<h4 class="card-title">{{ lastBlogEntry.title }}</h4>
+								<p class="card-text text-muted">{{ lastBlogEntry.author.name }} |
 									{{ lastBlogEntry.created_on}} </p>
 								<p class="card-text">{{lastBlogEntry.content | slice:":200" | safe }}</p>
-								<a href="{% url 'post_detail' lastBlogEntry.slug  %}" class="btn btn-primary">Read
+								<a href="{% url 'post_detail' lastBlogEntry.slug  %}" class="btn btn-outline-primary float-right">Read
 									More</a>
 								{% endif %}
 							</div>
