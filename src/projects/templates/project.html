@@ -22,7 +22,7 @@
             {% endif %}
 
       <div class="card-text p-3">
-        <h2>{{project.name}}<i class="fas fa-star-half-alt"></i>{{votes}}
+        <h2>{{project.name}}<i class="fas fa-star-half-alt"></i>{{votes}}{{votes| stringformat:'d'}}
          {% if user.is_authenticated %}
             {% if project.creator == user or user.is_staff %}
             <a class="btn btn-danger float-right" href="{% url 'editProject' project.id %}"><i class="fas fa-edit"></i> Edit </a>
