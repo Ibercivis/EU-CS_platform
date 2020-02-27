@@ -66,26 +66,27 @@ Resources
                   <img class="img-fluid" src="{% static 'site/img/gdoc.png' %}" height="10%" width="10%" style="background-color: rgba(0,0,0,0.2);filter:brightness(0.4);"/>
                   {% endif %}
 
-                  {% if user.is_authenticated %}
-                  <div id="saved{{rsc.id}}">
-                    {% if rsc.id in savedResources %}
-                      <button type="button" class="btn btn-primary" onclick="setSavedResource({{rsc.id}},{{user.id}})">Remove from my library</button>
-                    {% elif rsc.author != user %}
-                      <button type="button" class="btn btn-primary" onclick="setSavedResource({{rsc.id}},{{user.id}})">Save to my library</button>
-                    {% endif %}
-                  </div>
                   {% endif %}
 
-                {% endif %}
-
-              </div>
+                        </div>
 
 
           </div>
 					<div class="card-footer bg-white">
+            	<a class="btn btn-outline-secondary float-right ml-2 mt-2" href="{{rsc.url}}" target="_blank">Download</a>
+ 							<a class="btn btn-outline-primary float-right ml-2 mt-2" href="/resource/{{rsc.id}}" target="_blank">Read More</a>
+        {% if user.is_authenticated %}
+                  <div id="saved{{rsc.id}}">
+                    {% if rsc.id in savedResources %}
+                      <button type="button" class="btn btn-outline-primary float-right mt-2" onclick="setSavedResource({{rsc.id}},{{user.id}})">In my library</button>
+                    {% else %}
+                      <button type="button" class="btn btn-outline-secondary float-right mt-2" onclick="setSavedResource({{rsc.id}},{{user.id}})">Add to my library</button>
+                    {% endif %}
+                  </div>
 
-            	<a class="btn btn-outline-secondary float-right ml-2" href="{{rsc.url}}" target="_blank">Download</a>
- 							<a class="btn btn-outline-primary float-right ml-2" href="/resource/{{rsc.id}}" target="_blank">Read More</a>
+                {% endif %}
+
+
 </div>
         </div>
       </div>

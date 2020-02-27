@@ -18,14 +18,7 @@
 		<div class="col-sm-12">
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-8 col-sm-12 mt-2">
-						<div class="card card-small card-post h-100">
-							<div class="card-body">
-								
-								<div class="row">
-									
-									<div class="col-lg-6 col-sm-6 mt-2">
-										<h3>Featured project</h3>
+					<div class="col-lg-4 col-sm-12 mt-4">
 										{% if featuredProject %}
 										<div class="card h-100">
 											{% if featuredProject.image %}
@@ -61,13 +54,11 @@
 											</div>
 										</div>
 										{% endif %}
-									</div>
 
-
-									<div class="col-lg-6 col-sm-6 mt-2">
-										<h3>Featured resource</h3>
+					</div>
+					<div class="col-lg-8 col-sm-12">
 										{% if featuredResource %}
-										<div class="card h-100">
+										<div class="card mt-4">
 											<div class="card-body">
 												<h4 class="card-title">{{ featuredResource.name | truncatewords:4 }}</h4>
 												<img class="card-img" style=" float: left; background-color: #fff; border-radius: 50%; border: 0px; width: 75px"
@@ -96,16 +87,7 @@
 											</div>
 										</div>
 										{% endif %}
-									</div>
-
-								</div>
-								<br/><br/>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-6 col-lg-4 mt-2 ">
-
-						<div class="card card-small card-post h-100">
+					<div class="card  mt-4">
 							<div class="card-body">
 								<h3><u>Last Blog Entry</u></h3> <br />
 								{% if lastBlogEntry %}
@@ -118,11 +100,8 @@
 								{% endif %}
 							</div>
 						</div>
-
-					</div>
-				</div>
 				<div class="row">
-					<div class="col-lg-12 mt-2">
+					<div class="col-lg-12 mt-4">
 						<div class="card card-small card-post h-100">
 							<div class="card-body">
 								<h5 class="card-title">
@@ -142,5 +121,4 @@
 			</div>
 
 		</div>
-	</div>
 	{% endblock splash %}
