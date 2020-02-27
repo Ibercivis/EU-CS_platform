@@ -1,10 +1,12 @@
 from __future__ import unicode_literals
 from django.views import generic
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from . import forms
 from . import models
+from projects.models import Project, FollowedProjects
+from resources.models import Resource, SavedResources
 
 
 class ShowProfile(LoginRequiredMixin, generic.TemplateView):
@@ -61,3 +63,26 @@ class EditProfile(LoginRequiredMixin, generic.TemplateView):
         messages.success(request, "Profile details saved!")
         return redirect("profiles:show_self")
 
+def projects(request):
+    user = request.user
+    projects = Project.objects.all().filter(creator=user)
+
+    return render(request, 'profiles/my_projects.html', {'show_user': user, 'projects': projects})
+
+def resources(request):
+    user = request.user
+    resources = Resource.objects.all().filter(author=user)
+
+    return render(request, 'profiles/my_resources.html', {'show_user': user, 'resources': resources})
+
+def followedProjects(request):
+    user = request.user
+    followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id', flat=True)    
+    followedProjects = Project.objects.filter(id__in=followedProjects)
+    return render(request, 'profiles/followed_projects.html', {'show_user': user, 'followedProjects': followedProjects})
+
+def savedResources(request):
+    user = request.user
+    savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id', flat=True)
+    savedResources = Resource.objects.filter(id__in=savedResources)
+    return render(request, 'profiles/saved_resources.html', {'show_user': user, 'savedResources': savedResources})

@@ -37,10 +37,10 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 			Projects & Resources
 		  </a>
 		<span class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-			<a class="dropdown-item" href="#">Uploaded projects</a>
-			<a class="dropdown-item" href="#">Uploaded resources</a>
-			<a class="dropdown-item" href="#">Followed projects</a>
-			<a class="dropdown-item" href="#">Saved resources</a>
+			<a class="dropdown-item" href="{% url 'profiles:self_projects' %}">Uploaded projects</a>
+			<a class="dropdown-item" href="{% url 'profiles:self_resources' %}">Uploaded resources</a>
+			<a class="dropdown-item" href="{% url 'profiles:followed_projects' %}">Followed projects</a>
+			<a class="dropdown-item" href="{% url 'profiles:saved_resources' %}">Saved resources</a>
 		</span>	  
 	  </span>
 
