@@ -56,3 +56,11 @@ class FeaturedResources(models.Model):
     resource = models.ForeignKey(Resource, on_delete=models.CASCADE)
     def __str__(self):        
         return f'{self.resource}'
+
+class SavedResources(models.Model):
+    class Meta:
+        unique_together = (('user', 'resource'),)
+    resource = models.ForeignKey(Resource, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    def __str__(self):        
+        return f'{self.resource} - {self.user.name}' 
