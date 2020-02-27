@@ -11,5 +11,6 @@ urlpatterns = [
     path('resources_autocomplete/', views.resources_autocomplete, name='resources_autocomplete'),
     path('get_sub_category/', views.get_sub_category, name='get_sub_category'),
     path('setFeaturedRsc/', views.setFeaturedRsc, name='setFeaturedRsc'),
+    path('setSavedResource/', views.setSavedResource, name='setSavedResource'),
 ]
 

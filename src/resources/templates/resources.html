@@ -65,6 +65,17 @@ Resources
                   {% else %}
                   <img class="img-fluid" src="static/site/img/gdoc.png" height="10%" width="10%" style="background-color: rgba(0,0,0,0.2);filter:brightness(0.4);"/>
                   {% endif %}
+
+                  {% if user.is_authenticated %}
+                  <div id="saved{{rsc.id}}">
+                    {% if rsc.id in savedResources %}
+                      <button type="button" class="btn btn-primary" onclick="setSavedResource({{rsc.id}},{{user.id}})">Remove from my library</button>
+                    {% elif rsc.author != user %}
+                      <button type="button" class="btn btn-primary" onclick="setSavedResource({{rsc.id}},{{user.id}})">Save to my library</button>
+                    {% endif %}
+                  </div>
+                  {% endif %}
+
                 {% endif %}
 
               </div>
@@ -83,7 +94,6 @@ Resources
 
 {% block scripts %}
 <script>
-
 	function setFeaturedRsc(idResource){
 		var htmlId = "featured" + idResource;
         var request = $.ajax(
@@ -93,6 +103,24 @@ Resources
                 data: {
                     "resource_id": idResource,
                     csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function (response) {
+                    $("#"+htmlId).load(" #"+htmlId);
+                }
+            }
+        );
+    }
+
+  function setSavedResource(idResource, idUser){
+		var htmlId = "saved" + idResource;
+        var request = $.ajax(
+            {
+                type: "POST",
+                url: "{% url 'setSavedResource' %}",
+                data: {
+                    "resource_id": idResource,
+					          "user_id": idUser,
+              		  csrfmiddlewaretoken: '{{ csrf_token }}'
                 },
                 success: function (response) {
                     $("#"+htmlId).load(" #"+htmlId);

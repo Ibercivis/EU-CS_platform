@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Resource, Keyword, Category, FeaturedResources
+from .models import Resource, Keyword, Category, FeaturedResources, SavedResources
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from .forms import ResourceForm
@@ -9,10 +9,18 @@ from django.contrib import messages
 from django.conf import settings
 from django.db.models import Q
 from itertools import chain
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 def resources(request):
     resources = Resource.objects.all()
     featuredResources = FeaturedResources.objects.all().values_list('resource_id',flat=True)
+
+    savedResources = None
+    user = request.user
+    if not user.is_staff:
+        savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True)
 
     filters = {'keywords': ''}
     
@@ -22,7 +30,8 @@ def resources(request):
                                     
         filters['keywords'] = request.GET['keywords']
 
-    return render(request, 'resources.html', {'resources':resources, 'featuredResources': featuredResources, 'filters': filters})
+    return render(request, 'resources.html', {'resources':resources, 'featuredResources': featuredResources,
+    'savedResources': savedResources, 'filters': filters})
 
 def clearFilters(request):
     return redirect ('resources')
@@ -131,5 +140,23 @@ def setFeaturedRsc(request):
         fResource = get_object_or_404(Resource, id=id)
         featureResource = FeaturedResources(resource=fResource)
         featureResource.save()
+
+    return JsonResponse(response, safe=False) 
+
+def setSavedResource(request):
+    response = {}
+    resourceId = request.POST.get("resource_id")
+    userId = request.POST.get("user_id")
+
+    #Delete
+    try:
+        obj = SavedResources.objects.get(resource_id=resourceId,user_id=userId)    
+        obj.delete()
+    except SavedResources.DoesNotExist:
+        #Insert
+        fResource = get_object_or_404(Resource, id=resourceId)
+        fUser = get_object_or_404(User, id=userId)
+        savedResource = SavedResources(resource=fResource, user=fUser)
+        savedResource.save()
 
     return JsonResponse(response, safe=False) 
