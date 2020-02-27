@@ -5,7 +5,7 @@ from django.views import generic
 from django.core.paginator import Paginator
 from .forms import ProjectForm
 from django.utils import timezone
-from .models import Project, Topic, Status, Keyword, Votes, FeaturedProjects
+from .models import Project, Topic, Status, Keyword, Votes, FeaturedProjects, FollowedProjects
 from django.contrib.auth import get_user_model
 import json
 from django.utils.dateparse import parse_datetime
@@ -49,9 +49,15 @@ def new_project(request):
 
     return render(request, 'new_project.html', {'form': form, 'user':user})
 
+
 def projects(request):
     projects = Project.objects.get_queryset().order_by('id')
     featuredProjects = FeaturedProjects.objects.all().values_list('project_id',flat=True)
+
+    followedProjects = None
+    user = request.user
+    if not user.is_staff:
+        followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id',flat=True)
 
     topics = Topic.objects.all()
     status = Status.objects.all()
@@ -83,7 +89,7 @@ def projects(request):
     projects = paginator.get_page(page)
 
     return render(request, 'projects.html', {'projects': projects, 'topics': topics,
-    'status': status, 'filters': filters, 'featuredProjects': featuredProjects})
+    'status': status, 'filters': filters, 'featuredProjects': featuredProjects, 'followedProjects': followedProjects})
 
 
 def project(request, pk):
@@ -91,6 +97,7 @@ def project(request, pk):
     votes = Votes.objects.all().filter(project_id=pk).aggregate(Avg('vote'))['vote__avg']
     print(votes)
     return render(request, 'project.html', {'project':project,'votes':votes})
+
 
 def editProject(request, pk):
     project = get_object_or_404(Project, id=pk)
