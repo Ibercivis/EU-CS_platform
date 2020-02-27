@@ -12,4 +12,5 @@ urlpatterns = [
     path('host_autocomplete/', views.host_autocomplete, name='host_autocomplete'),
     path('clearfilters/', views.clearFilters, name='clearfilters'),
     path('setFeatured/', views.setFeatured, name='setFeatured'),
+    path('setFollowedProject/', views.setFollowedProject, name='setFollowedProject'),
 ]
