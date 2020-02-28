@@ -62,7 +62,7 @@ def projects(request):
 
     topics = Topic.objects.all()
     status = Status.objects.all()
-    filters = {'keywords': '', 'topic': '', 'status': 0, 'country': '', 'host': ''}
+    filters = {'keywords': '', 'topic': '', 'status': 0, 'country': '', 'host': '', 'featured': ''}
 
     if request.GET.get('keywords'):
         projects = projects.filter( Q(name__icontains = request.GET['keywords']) | 
@@ -83,7 +83,11 @@ def projects(request):
     
     if request.GET.get('host'):
         projects = projects.filter( host__icontains = request.GET['host'])
-        filters['host'] = request.GET['host']  
+        filters['host'] = request.GET['host']
+    
+    if request.GET.get('featuredCheck'):        
+        projects = projects.filter(id__in=featuredProjects)
+        filters['featured'] = request.GET['featuredCheck']
 
     paginator = Paginator(projects, 9) 
     page = request.GET.get('page')
