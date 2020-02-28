@@ -82,6 +82,7 @@
               <div class="col-5 p-3 ml-5">
                 {{ form.keywords|as_crispy_field }}
                 {{form.choices |as_crispy_field}}
+                {{form.choicesSelected|as_crispy_field}}
               </div>
             </div>
             <div class="row">
@@ -211,9 +212,18 @@
   $(document).ready(function () {
     var choices = $("#id_choices").val();
     var choices = choices.split(",");
-
+    var choicesSelected = $("#id_choicesSelected").val().split(",");
     for (choice of choices){
-      $("#id_keywords").append("<option value='" + choice +"' selected> " + choice + " </option>");
+      var encontrado = false;
+      for(sel of choicesSelected){
+        if(sel == choice){
+          encontrado = true;
+          $("#id_keywords").append("<option value='" + choice +"' selected> " + choice + " </option>");
+        }
+      }  
+      if(!encontrado){
+        $("#id_keywords").append("<option value='" + choice +"'> " + choice + " </option>");
+      }    
     }
 
     $("#div_id_keywords div").on('keyup', function(){

@@ -112,14 +112,14 @@ def editProject(request, pk):
     
     start_datetime = formats.date_format(project.start_date, 'Y-m-d')
     end_datetime = formats.date_format(project.end_date, 'Y-m-d')    
-  
+       
     keywordsList = list(project.keywords.all().values_list('keyword', flat=True))
-    keywordsList = ", ".join(keywordsList)
-    choices = keywordsList
+    keywordsList = ", ".join(keywordsList)     
+    
     form = ProjectForm(initial={
         'project_name':project.name,'url': project.url,'start_date': start_datetime,
         'end_date':end_datetime, 'aim': project.aim, 'description': project.description, 
-        'choices': choices, 'status': project.status, 
+        'status': project.status, 'choicesSelected':keywordsList,
         'topic':project.topic.all, 'latitude': project.latitude, 'longitude': project.longitude, 
         'image': project.image, 'image_credit': project.imageCredit, 'host': project.host,
         'how_to_participate': project.howToParticipate, 'equipment': project.equipment,
