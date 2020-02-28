@@ -22,7 +22,7 @@ def resources(request):
     if not user.is_staff:
         savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True)
 
-    filters = {'keywords': ''}
+    filters = {'keywords': '', 'language': ''}
     
     if request.GET.get('keywords'):
         resources = resources.filter( Q(name__icontains = request.GET['keywords'])  | 
@@ -30,8 +30,16 @@ def resources(request):
                                     
         filters['keywords'] = request.GET['keywords']
 
+    if request.GET.get('language'):
+        resources = resources.filter(inLanguage = request.GET['language'])
+        filters['language'] = request.GET['language']
+
+    if request.GET.get('license'):
+        resources = resources.filter(license__icontains = request.GET['license'])
+        filters['license'] = request.GET['license']
+
     return render(request, 'resources.html', {'resources':resources, 'featuredResources': featuredResources,
-    'savedResources': savedResources, 'filters': filters})
+    'savedResources': savedResources, 'filters': filters, 'settings': settings})
 
 def clearFilters(request):
     return redirect ('resources')
@@ -92,6 +100,15 @@ def resources_autocomplete(request):
         keywords = Keyword.objects.filter(keyword__icontains=text).values_list('keyword',flat=True).distinct()
         report = chain(rsc_names, keywords)
         json = list(report)
+        return JsonResponse(json, safe=False)
+    else:
+        return HttpResponse("No cookies")
+
+def license_autocomplete(request):  
+    if request.GET.get('q'):
+        text = request.GET['q']
+        licenses = Resource.objects.filter(license__icontains=text).values_list('license',flat=True).distinct()
+        json = list(licenses)
         return JsonResponse(json, safe=False)
     else:
         return HttpResponse("No cookies")
