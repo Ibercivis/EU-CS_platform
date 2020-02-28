@@ -199,6 +199,13 @@
 <script>
   $(document).ready(function () {
 
+    var choices = $("#id_choices").val();
+    var choices = choices.split(",");
+
+    for (choice of choices){
+      $("#id_keywords").append("<option value='" + choice +"'> " + choice + " </option>");
+    }
+
     $("#div_id_keywords div").on('keyup', function(){
       var key = $(".selection input").val();
       if (key.indexOf(',') > -1) {
