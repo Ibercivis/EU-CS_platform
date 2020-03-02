@@ -14,10 +14,8 @@ class ProjectForm(forms.Form):
     #Basic Project Information
     project_name = forms.CharField(max_length=100)
     aim = forms.CharField(max_length=100)
-    description = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}), max_length=300)
-    CHOICES = list(Keyword.objects.all().values_list('keyword',flat=True))
-    CHOICES = ", ".join(CHOICES)
-    choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=CHOICES)
+    description = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}), max_length=300)    
+    choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     choicesSelected = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     keywords = forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False)
     status = forms.ModelChoiceField(queryset=Status.objects.all())

@@ -20,7 +20,9 @@ from django.db.models import Avg, Max, Min, Sum
 User = get_user_model()
 
 def new_project(request):
-    form = ProjectForm()
+    choices = list(Keyword.objects.all().values_list('keyword',flat=True))
+    choices = ", ".join(choices)
+    form = ProjectForm(initial={'choices': choices})
     user = request.user
     if request.method == 'POST':    
         form = ProjectForm(request.POST, request.FILES)
@@ -116,10 +118,13 @@ def editProject(request, pk):
     keywordsList = list(project.keywords.all().values_list('keyword', flat=True))
     keywordsList = ", ".join(keywordsList)     
     
+    choices = list(Keyword.objects.all().values_list('keyword',flat=True))
+    choices = ", ".join(choices)
+
     form = ProjectForm(initial={
         'project_name':project.name,'url': project.url,'start_date': start_datetime,
         'end_date':end_datetime, 'aim': project.aim, 'description': project.description, 
-        'status': project.status, 'choicesSelected':keywordsList,
+        'status': project.status, 'choices': choices, 'choicesSelected':keywordsList,
         'topic':project.topic.all, 'latitude': project.latitude, 'longitude': project.longitude, 
         'image': project.image, 'image_credit': project.imageCredit, 'host': project.host,
         'how_to_participate': project.howToParticipate, 'equipment': project.equipment,
