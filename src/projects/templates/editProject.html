@@ -216,7 +216,7 @@
     for (choice of choices){
       var encontrado = false;
       for(sel of choicesSelected){
-        if(sel == choice){
+        if(sel.trim() == choice.trim()){
           encontrado = true;
           $("#id_keywords").append("<option value='" + choice +"' selected> " + choice + " </option>");
         }
