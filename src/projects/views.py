@@ -59,8 +59,8 @@ def projects(request):
 
     followedProjects = None
     user = request.user
-    if not user.is_staff:
-        followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id',flat=True)
+   
+    followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id',flat=True)
 
     topics = Topic.objects.all()
     status = Status.objects.all()
