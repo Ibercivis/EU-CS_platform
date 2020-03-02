@@ -26,6 +26,7 @@ cp eucs_platform/settings/local.sample.env eucs_platform/settings/local.env
 ```
 python manage.py loaddata projects/fixtures/topics.json
 python manage.py loaddata projects/fixtures/status.json
+python manage.py loaddata resources/fixtures/categories.json
 ```
 
 ```
