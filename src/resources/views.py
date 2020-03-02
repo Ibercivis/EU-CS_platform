@@ -70,13 +70,12 @@ def editResource(request, pk):
 
     keywordsList = list(resource.keywords.all().values_list('keyword', flat=True))
     keywordsList = ", ".join(keywordsList)
-    choices = keywordsList
 
     form = ResourceForm(initial={
         'name':resource.name,'about': resource.about, 'abstract': resource.abstract, 
         'url': resource.url,'license': resource.license,
         'audience' : resource.audience, 'publisher': resource.publisher,
-        'choices': choices, 'category': getCategory(resource.category), 'categorySelected': resource.category.id
+        'choicesSelected':keywordsList, 'category': getCategory(resource.category), 'categorySelected': resource.category.id
     })
     
     if request.method == 'POST':
