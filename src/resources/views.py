@@ -45,7 +45,9 @@ def clearFilters(request):
     return redirect ('resources')
 
 def new_resource(request):
-    form = ResourceForm()
+    choices = list(Keyword.objects.all().values_list('keyword',flat=True))
+    choices = ", ".join(choices)
+    form = ResourceForm(initial={'choices': choices})
     if request.method == 'POST':
         form = ResourceForm(request.POST, request.FILES)
         if form.is_valid():
@@ -71,9 +73,12 @@ def editResource(request, pk):
     keywordsList = list(resource.keywords.all().values_list('keyword', flat=True))
     keywordsList = ", ".join(keywordsList)
 
+    choices = list(Keyword.objects.all().values_list('keyword',flat=True))
+    choices = ", ".join(choices)
+
     form = ResourceForm(initial={
         'name':resource.name,'about': resource.about, 'abstract': resource.abstract, 
-        'url': resource.url,'license': resource.license,
+        'url': resource.url,'license': resource.license, 'choices': choices,
         'audience' : resource.audience, 'publisher': resource.publisher,
         'choicesSelected':keywordsList, 'category': getCategory(resource.category), 'categorySelected': resource.category.id
     })
