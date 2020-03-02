@@ -43,14 +43,10 @@
                             </div>
                             <div class="row">
                                 <div class="col-5 p-3 ml-5">
-                                    <label for="name">Contact person name</label><br />
-                                    <input type="text" disabled name="name" value={{user.name}} maxlength="100"
-                                        class="textinput textInput form-control">
+                                    {{ form.author|as_crispy_field }}
                                 </div>
                                 <div class="col-5 p-3 ml-5">
-                                    <label for="email">Contact person email</label><br />
-                                    <input type="text" disabled name="email" value={{user.email}} maxlength="100"
-                                        class="textinput textInput form-control">
+                                    {{ form.author_email|as_crispy_field }}
                                 </div>
                             </div>
                             <div class="row">

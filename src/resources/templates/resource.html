@@ -25,7 +25,7 @@
       <div class="card-header">
         <h2>  {{resource.name}}
           {% if user.is_authenticated %}
-            {% if resource.author == user or user.is_staff %}
+            {% if resource.creator == user or user.is_staff %}
             <a class="btn btn-danger float-right" href="{% url 'editResource' resource.id %}"><i class="fas fa-edit"></i> Edit
             </a>
             {% endif %}
@@ -45,6 +45,8 @@
                 <p><b>About: </b> {{resource.about}}</p>
                 <p><b>Abstract: </b> {{ resource.abstract }}</p>
                 <p><b> URL: </b><a href="{{resource.url}}" target="_blank">{{resource.url}}</a></p>
+                <p><b>Author: </b>{{ resource.author_rsc }}</p>
+                <p><b>Author's email: </b>{{ resource.author_email }}</p>
                 <p><b>License: </b>{{ resource.license }}</p>
                 <p><b>Language: </b> {{ resource.inLanguage }}</p>
                 <p><b>Audience: </b>{{ resource.audience }} </p>

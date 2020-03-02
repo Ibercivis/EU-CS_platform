@@ -34,7 +34,9 @@ class Project(models.Model):
     end_date = models.DateTimeField('End date')
     topic = models.ManyToManyField(Topic)
     url = models.CharField(max_length=200)
-
+    #Contact person info
+    author = models.CharField(max_length=100)
+    author_email =  models.CharField(max_length=100)
     #Images and communications
     image = models.ImageField(upload_to='images/', max_length=300)
     imageCredit = models.CharField(max_length=200)

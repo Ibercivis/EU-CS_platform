@@ -14,11 +14,12 @@ class ResourceForm(forms.ModelForm):
     keywords = forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False)
     category = forms.ModelChoiceField(queryset=Category.objects.filter(parent__isnull=True))
     categorySelected = forms.CharField(widget=forms.HiddenInput(),required=False)
+    author = forms.CharField(max_length=100)
 
     class Meta:
         model = Resource
         fields = ["name", "about", "abstract", "url", "audience",
-         "keywords", "license", "publisher", "category"]
+         "keywords", "license", "publisher", "category", "author","author_email"]
         
         
 
@@ -39,9 +40,11 @@ class ResourceForm(forms.ModelForm):
             rsc.publisher = self.data['publisher']            
         else:
             rsc.datePublished = publication_date
-            rsc.author = args.user
+            rsc.creator = args.user
 
         rsc.inLanguage = self.data['language']     
+        rsc.author_rsc = self.data['author']
+        rsc.author_email = self.data['author_email']
         rsc.category = category
         rsc.save()
 
