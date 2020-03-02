@@ -76,7 +76,7 @@
 													<div id="followed{{project.id}}">
 														{% if project.id in followedProjects %}
 															<button type="button" class="btn btn-outline-primary float-right" onclick="setFollowedProject({{project.id}},{{user.id}})">Following</button>
-														{% elif project.creator != user %}
+														{% else %}
 															<button type="button" class="btn btn-outline-secondary float-right" onclick="setFollowedProject({{project.id}},{{user.id}})">Follow</button>
 														{% endif %}
 													</div>

@@ -19,8 +19,8 @@ def resources(request):
 
     savedResources = None
     user = request.user
-    if not user.is_staff:
-        savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True)
+
+    savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True)
 
     filters = {'keywords': '', 'language': ''}
     
