@@ -67,7 +67,7 @@ def editResource(request, pk):
     resource = get_object_or_404(Resource, id=pk)
     user = request.user
 
-    if user != resource.author and not user.is_staff:
+    if user != resource.creator and not user.is_staff:
         return redirect('../resources', {})
 
     keywordsList = list(resource.keywords.all().values_list('keyword', flat=True))
@@ -80,6 +80,7 @@ def editResource(request, pk):
         'name':resource.name,'about': resource.about, 'abstract': resource.abstract, 
         'url': resource.url,'license': resource.license, 'choices': choices,
         'audience' : resource.audience, 'publisher': resource.publisher,
+        'author': resource.author_rsc, 'author_email': resource.author_email,
         'choicesSelected':keywordsList, 'category': getCategory(resource.category), 'categorySelected': resource.category.id
     })
     

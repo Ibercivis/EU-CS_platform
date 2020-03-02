@@ -47,6 +47,8 @@
                 <p><b>Status: </b>{{ project.status}}</p>
                 <p><b>Date created:</b> {{project.dateCreated  | date:"d/m/Y"}} </p>
                 <p><b>Date updated:</b>{{project.dateUpdated  | date:"d/m/Y"}} </p>
+                <p><b>Contact person: </b>{{ project.author}}</p>
+                <p><b>Contact person email: </b>{{ project.author_email}}</p>
                 <p><b>Website: </b><a href="{{project.url}}">{{project.url}}</a></p>
 </div>
 <div class="col-xl-6">

@@ -128,6 +128,7 @@ def editProject(request, pk):
         'topic':project.topic.all, 'latitude': project.latitude, 'longitude': project.longitude, 
         'image': project.image, 'image_credit': project.imageCredit, 'host': project.host,
         'how_to_participate': project.howToParticipate, 'equipment': project.equipment,
+        'contact_person': project.author, 'contact_person_email': project.author_email,
     })
     
     if request.method == 'POST':

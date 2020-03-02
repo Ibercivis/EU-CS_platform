@@ -23,6 +23,9 @@ class ProjectForm(forms.Form):
     end_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=False)  
     topic = forms.ModelMultipleChoiceField(queryset=Topic.objects.all(), widget=Select2MultipleWidget, required=False)
     url = forms.CharField(max_length=200, required=False)
+    #Contact person info
+    contact_person = forms.CharField(max_length=100)
+    contact_person_email = forms.CharField(max_length=100)
     #Images and communications    
     image = forms.ImageField(required=False)
     x = forms.FloatField(widget=forms.HiddenInput(),required=False)
@@ -59,10 +62,12 @@ class ProjectForm(forms.Form):
         status = get_object_or_404(Status, id=self.data['status'])
         if(pk):
             project = get_object_or_404(Project, id=pk)
-            project.name = self.data['project_name']
-            #project.url = self.data['url']
+            project.name = self.data['project_name']           
             project.start_date = start_dateData
             project.end_date = end_dateData
+            #project.url = self.data['url']
+            project.author = self.data['contact_person']
+            project.author_email = self.data['contact_person_email']
             project.latitude = latitude
             project.longitude = longitude
             project.country = country
@@ -78,6 +83,7 @@ class ProjectForm(forms.Form):
             project = Project(name = self.data['project_name'],
                         # url = self.data['url'],
                          start_date = start_dateData, end_date = end_dateData, creator=args.user,
+                         author = self.data['contact_person'], author_email = self.data['contact_person_email'],
                          latitude = latitude, longitude = longitude, country = country,
                          aim = self.data['aim'], description = self.data['description'], 
                          status = status, host = self.data['host'], imageCredit = self.data['image_credit'],
