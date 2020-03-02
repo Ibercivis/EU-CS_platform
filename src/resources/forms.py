@@ -9,9 +9,7 @@ from django_select2.forms import Select2MultipleWidget
 
 class ResourceForm(forms.ModelForm):
     abstract = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}), max_length=300)   
-    CHOICES = list(Keyword.objects.all().values_list('keyword',flat=True))
-    CHOICES = ", ".join(CHOICES)
-    choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=CHOICES)
+    choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     choicesSelected = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     keywords = forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False)
     category = forms.ModelChoiceField(queryset=Category.objects.filter(parent__isnull=True))
