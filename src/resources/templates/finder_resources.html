@@ -20,10 +20,14 @@
               <select id="language" name="language" class="form-control">
                 <option value="">Language<option>
                   {% for language in languages %}
-                  <option value="{{ language.code }}"                  
-                  {% if language.code ==  filters.language %} selected {% endif %}>
-                      {{ language.name_local }}
-                  </option>
+                    {% for lwc in languagesWithContent %}
+                      {% if language.code == lwc %}
+                        <option value="{{ language.code }}"                  
+                        {% if language.code ==  filters.language %} selected {% endif %}>
+                            {{ language.name_local }}
+                        </option>
+                      {% endif %}
+                    {% endfor %}
                   {% endfor %}
               </select>
               {% endif %}

@@ -22,6 +22,8 @@ def resources(request):
 
     savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True)
 
+    languagesWithContent = Resource.objects.all().values_list('inLanguage',flat=True).distinct()
+
     filters = {'keywords': '', 'language': ''}
     
     if request.GET.get('keywords'):
@@ -39,7 +41,7 @@ def resources(request):
         filters['license'] = request.GET['license']
 
     return render(request, 'resources.html', {'resources':resources, 'featuredResources': featuredResources,
-    'savedResources': savedResources, 'filters': filters, 'settings': settings})
+    'savedResources': savedResources, 'filters': filters, 'settings': settings, 'languagesWithContent': languagesWithContent})
 
 def clearFilters(request):
     return redirect ('resources')
