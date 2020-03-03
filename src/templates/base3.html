@@ -36,8 +36,8 @@
 
 				<ul class="navbar-nav">
 				{% if not user.is_authenticated %}
-        <li class="nav-item"><a class="nav-link" onclick="return abrir_modal('{% url 'accounts:login' %}')">Login</a></li>
-				<li class="nav-item"><a class="nav-link" onclick="return abrir_modal('{% url 'accounts:signup' %}')" role="button">Sign up</a>
+        <li class="nav-item"><a class="ml-4" href="{% url 'accounts:login' %}">Login</a></li>
+				<li class="nav-item"><a class="ml-4" href="{% url 'accounts:signup' %}" role="button">Sign up</a></li>
 				{% else %}
 				<li class="nav-item"><a class="nav-link" href="{% url 'profiles:show_self' %}">Profile</a></li>
      		<li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a></li>
