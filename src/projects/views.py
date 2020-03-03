@@ -62,6 +62,8 @@ def projects(request):
    
     followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id',flat=True)
 
+    countriesWithContent = Project.objects.all().values_list('country',flat=True).distinct()
+
     topics = Topic.objects.all()
     status = Status.objects.all()
     filters = {'keywords': '', 'topic': '', 'status': 0, 'country': '', 'host': '', 'featured': ''}
@@ -95,7 +97,7 @@ def projects(request):
     page = request.GET.get('page')
     projects = paginator.get_page(page)
 
-    return render(request, 'projects.html', {'projects': projects, 'topics': topics,
+    return render(request, 'projects.html', {'projects': projects, 'topics': topics, 'countriesWithContent': countriesWithContent,
     'status': status, 'filters': filters, 'featuredProjects': featuredProjects, 'followedProjects': followedProjects})
 
 
