@@ -6,6 +6,7 @@ from blog.models import Post
 from projects.models import FeaturedProjects, Project
 import random
 from django.shortcuts import get_object_or_404
+from django.db.models import Q
 
 def home(request):
     #groups = ResourceGroup.objects.get_queryset().order_by('id')
@@ -36,11 +37,13 @@ class EventsPage(generic.TemplateView):
 def results(request):
     projects = Project.objects.get_queryset().order_by('id')
     resources = Resource.objects.get_queryset().order_by('id')
-    showProjects = showResources = False
+    showProjects = showResources = True
 
     if request.GET.get('keywords'):
-        projects = projects.filter(name__icontains = request.GET['keywords'])
-        resources = resources.filter(name__icontains = request.GET['keywords'])
+        projects = projects.filter( Q(name__icontains = request.GET['keywords']) | 
+                                    Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
+        resources = resources.filter( Q(name__icontains = request.GET['keywords'])  | 
+                                    Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
     
 
     if request.GET.get('projects_check'):
