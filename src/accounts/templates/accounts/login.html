@@ -1,4 +1,4 @@
-{% extends "accounts/auth_base.html" %}
+{% extends "base2.html" %}
 
 {% load crispy_forms_tags %}
 
@@ -6,14 +6,19 @@
 
 {% block form_heading %}Please Log In{% endblock %}
 
-{% block form %}
-  {% crispy form %}
+{% block list_of_items %}
+<div class="container form-box col-lg-4 col-md-6 col-sm-12 mb-4">
+  <div class="text-center">
+    {% block form %}
+    {% crispy form %}
 
-  <div class="form-message">
-    <p>
-      Don't have an account? <a href="{% url 'accounts:signup' %}">Sign up</a>.
-      
-    </p>
+    <div class="form-message">
+      <p>
+        Don't have an account? <a href="{% url 'accounts:signup' %}">Sign up</a>.
+
+      </p>
+    </div>
+    {% endblock form %}
   </div>
-{% endblock form %}
-
+</div>
+{% endblock list_of_items %}
