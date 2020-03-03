@@ -7,6 +7,17 @@ class Keyword(models.Model):
     def __str__(self):        
         return f'{self.keyword}'
 
+class Theme(models.Model):
+    theme = models.TextField()
+    def __str__(self):        
+        return f'{self.theme}'
+
+
+class Audience(models.Model):
+    audience = models.TextField()
+    def __str__(self):        
+        return f'{self.audience}'
+
 class Category(models.Model):
     text = models.TextField()
     parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
@@ -26,13 +37,17 @@ class Resource(models.Model):
     about  = models.CharField(max_length=200)
     abstract = models.CharField(max_length=300)
     aggregateRating = models.CharField(max_length=100)
-    audience = models.CharField(max_length=100)
-    datePublished = models.DateTimeField('Date Published')
+    audience = models.ForeignKey(Audience, null=True, blank=True, on_delete=models.CASCADE)
+    dateUploaded = models.DateTimeField('Date Uploaded')
     inLanguage = models.CharField(max_length=100)
     keywords = models.ManyToManyField(Keyword)
     category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.CASCADE)
     license =  models.CharField(max_length=100)
     publisher = models.CharField(max_length=100)
+    datePublished = models.IntegerField()
+    theme = models.ForeignKey(Theme, on_delete=models.CASCADE)
+    imageURL = models.CharField(max_length=200)
+    resourceDOI = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
