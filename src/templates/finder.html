@@ -2,22 +2,38 @@
 <div class="container" style="color:black">
 	<div class="card">
 		<div class="card-body">
-			<form action="{% url 'results' %}">
+			<form id="finder" action="#" onsubmit="return actionForm();">
 				<div class="row">
-					<div class="col-md-11 col-sm-9 input-group">
-						<input type="text" id="keywords" name="keywords" autocomplete="off"
-						       class="basicAutoComplete form-control mb-4" placeholder="What are you looking for today?"
-							 data-url="text_autocomplete/">
+					<div class="col-md-9 col-sm-7 input-group">
+						<input type="text" id="keywords" name="keywords" autocomplete="off" class="form-control mb-4"
+							placeholder="What are you looking for today?">
 
+					</div>
+					<div class="col-md-2 col-sm-2">
+						<select id="type" class="form-control">
+							<option value="projects">Projects</option>
+							<option value="resources">Resources</option>
+						</select>
 					</div>
 					<div class="col-md-1 col-sm-1">
 						<button class="btn btn-info" id="search" type="submit" alt="Find">
 							<i class="fas fa-search"></i>
 						</button>
-
 					</div>
+
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
+
+<script>
+	function actionForm(){
+		var type = $('#type').val();
+		if (type == "projects"){
+			$("#finder").attr("action", "projects");
+		}else{
+			$("#finder").attr("action", "resources");
+		}
+	}
+</script>
