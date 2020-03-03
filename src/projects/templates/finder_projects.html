@@ -20,7 +20,12 @@
 			<select id="country" name="country" class="custom-select form-control col-lg-2 ml-2 float-right">
 					<option value="">Country<option>
 					{% for country in countries %}
-					<option {% if country.code ==  filters.country %} selected {% endif %} value="{{ country.code }}">{{ country.name }}</option>
+						{% for cwc in countriesWithContent %}
+							{% if country.code == cwc %}
+								<option {% if country.code ==  filters.country %} 
+								selected {% endif %} value="{{ country.code }}">{{ country.name }}</option>
+							{% endif %}
+						{% endfor %}
 					{% endfor %}
 				</select>
 				<select id="status" name="status" class="custom-select status-select form-control col-lg-2 ml-2 float-right">
