@@ -40,11 +40,6 @@ EMAIL_USE_TLS = True
 
 
 
-LANGUAGES = [ 
-    ('en', 'English'), ('es', 'Spanish'), 
-]
-
-
 # Show thumbnail generation errors
 THUMBNAIL_DEBUG = True
 
