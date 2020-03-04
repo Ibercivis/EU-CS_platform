@@ -186,6 +186,29 @@
               </div>
             </div>
             <hr />
+
+            <h4>Funding</h4>
+            <a id="funding" href="#">Show</a>
+            <div id="fundingform" style="display:none">
+              <div class="row">
+                <div class="col-5 p-3 ml-5">
+                  {{ form.funding_body|as_crispy_field }}
+                  {{ form.fundingBodySelected|as_crispy_field }}
+                </div>
+                <div class="col-5 p-3 ml-5">
+                  {{ form.funding_program|as_crispy_field }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-5 p-3 ml-5">
+                  {{ form.funding_agency|as_crispy_field }}
+                </div>
+                <div class="col-5 p-3 ml-5">
+                </div>
+              </div>
+            </div>
+            <hr />
+
               <button onclick="completeSubmit()" type="submit" class="btn btn-success"><i class="fas fa-share-square"></i> Save</button>              
           </form>
       </div>
@@ -210,11 +233,20 @@
     }
 
     $("#div_id_keywords div").on('keyup', function(){
-      var key = $(".selection input").val();
+      var key = $("#div_id_keywords .selection input").val();
       if (key.indexOf(',') > -1) {
          var word =key.slice(0, -1);
-         $(".selection input").val("");
+         $("#div_id_keywords .selection input").val("");
          $("#id_keywords").append("<option value='" + word +"' selected> " + word + " </option>");
+      }      
+    });
+
+    $("#div_id_funding_body div").on('keyup', function(){
+      var key = $("#div_id_funding_body .selection input").val();
+      if (key.indexOf(',') > -1) {
+         var word =key.slice(0, -1);
+         $("#div_id_funding_body .selection input").val("");
+         $("#id_funding_body").append("<option value='" + word +"' selected> " + word + " </option>");
       }      
     });
 
@@ -242,6 +274,12 @@
     $('#information').on('click', function () {
       $('#informationform').toggle();
       $('html,body').animate({ scrollTop: $("#information").offset().top - 160 }, { duration: "slow" });
+    });
+
+    $('#funding').on('click', function () {
+      $('#fundingform').toggle();
+      $('html,body').animate({ scrollTop: $("#funding").offset().top - 160 }, { duration: "slow" });
+      $('.select2-container').attr("style", "width:100%");
     });
 
     $('#imgResult').on('click', function () {
@@ -355,6 +393,13 @@
       
       $("#id_choices").val(option_all);
       $("#id_keywords").empty();
+
+      var fundingBody = $("#id_funding_body option:selected").map(function () {
+        return $.trim($(this).text());
+      }).get().join(',');
+
+      $("#id_fundingBodySelected").val(fundingBody);
+      $("#id_funding_body").empty();
   }
 
   

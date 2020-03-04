@@ -18,6 +18,16 @@ class Keyword(models.Model):
     def __str__(self):        
         return f'{self.keyword}'
 
+class FundingBody(models.Model):
+    body = models.TextField()
+    def __str__(self):        
+        return f'{self.body}'
+
+class FundingAgency(models.Model):
+    agency = models.TextField()
+    def __str__(self):        
+        return f'{self.agency}'
+
 class Project(models.Model):
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     #Database information
@@ -30,8 +40,8 @@ class Project(models.Model):
     description = models.CharField(max_length=1000)
     keywords = models.ManyToManyField(Keyword)
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
-    start_date = models.DateTimeField('Start date')
-    end_date = models.DateTimeField('End date')
+    start_date = models.DateTimeField('Start date',null=True, blank=True)
+    end_date = models.DateTimeField('End date',null=True, blank=True)
     topic = models.ManyToManyField(Topic)
     url = models.CharField(max_length=200)
     #Contact person info
@@ -49,6 +59,10 @@ class Project(models.Model):
     #Supplementary information for Citizen Science
     howToParticipate = models.CharField(max_length=1000)
     equipment = models.CharField(max_length=200)
+    #Funding
+    fundingBody = models.ForeignKey(FundingBody, on_delete=models.CASCADE,null=True, blank=True) 
+    fundingProgram = models.CharField(max_length=500)
+    fundingAgency =  models.ForeignKey(FundingAgency, on_delete=models.CASCADE,null=True, blank=True) 
 		#Rate
 		#TODO: Do we want to use it?
     #rate = models.DecimalField(max_digits=2,decimal_places=1)

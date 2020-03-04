@@ -1,8 +1,8 @@
 from django import forms
 from django.db import models
-from .models import Project, Topic, Status, Keyword
+from .models import Project, Topic, Status, Keyword, FundingBody, FundingAgency
 from django.shortcuts import get_object_or_404
-from django_select2.forms import Select2MultipleWidget
+from django_select2.forms import Select2MultipleWidget, Select2Widget
 from django.core.files import File
 from PIL import Image
 from geopy.geocoders import Nominatim
@@ -26,6 +26,7 @@ class ProjectForm(forms.Form):
     #Contact person info
     contact_person = forms.CharField(max_length=100)
     contact_person_email = forms.CharField(max_length=100)
+    contact_person_phone = forms.CharField(max_length=100, required=False)
     #Images and communications    
     image = forms.ImageField(required=False)
     x = forms.FloatField(widget=forms.HiddenInput(),required=False)
@@ -41,8 +42,11 @@ class ProjectForm(forms.Form):
     #Supplementary information for Citizen Science
     how_to_participate = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}), max_length=1000, required=False)
     equipment = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}), max_length=200, required=False)
-    contact_person_phone = forms.CharField(max_length=100, required=False)
-    
+    #Funding
+    funding_body =  forms.ModelMultipleChoiceField(queryset=FundingBody.objects.all(), widget=Select2MultipleWidget, required=False)
+    fundingBodySelected = forms.CharField(widget=forms.HiddenInput(), max_length=100, required=False)
+    funding_program = forms.CharField(max_length=500, required=False)
+    funding_agency =   forms.ModelChoiceField(queryset=FundingAgency.objects.all(), required=False)
 
     def clean(self):
         start_date = self.data['start_date']
@@ -60,11 +64,10 @@ class ProjectForm(forms.Form):
         longitude = self.data['longitude']
         country = getCountryCode(latitude,longitude).upper()
         status = get_object_or_404(Status, id=self.data['status'])
+
         if(pk):
             project = get_object_or_404(Project, id=pk)
             project.name = self.data['project_name']           
-            project.start_date = start_dateData
-            project.end_date = end_dateData
             project.url = self.data['url']
             project.author = self.data['contact_person']
             project.author_email = self.data['contact_person_email']
@@ -77,18 +80,29 @@ class ProjectForm(forms.Form):
             project.host = self.data['host']
             project.imageCredit = self.data['image_credit']
             project.howToParticipate = self.data['how_to_participate']
-            project.equipment = self.data['equipment']                    
+            project.equipment = self.data['equipment']
+            project.fundingProgram = self.data['funding_program']
         
         else:           
             project = Project(name = self.data['project_name'],
-                         url = self.data['url'],
-                         start_date = start_dateData, end_date = end_dateData, creator=args.user,
+                         url = self.data['url'], creator=args.user,
                          author = self.data['contact_person'], author_email = self.data['contact_person_email'],
                          latitude = latitude, longitude = longitude, country = country,
                          aim = self.data['aim'], description = self.data['description'], 
                          status = status, host = self.data['host'], imageCredit = self.data['image_credit'],
                          howToParticipate = self.data['how_to_participate'],
-                         equipment = self.data['equipment'] )
+                         equipment = self.data['equipment'],fundingProgram = self.data['funding_program'] )
+
+
+        if start_dateData:
+            project.start_date = start_dateData
+        if end_dateData:
+            project.end_date = end_dateData
+
+        fundingBodySelected = self.data['fundingBodySelected']
+        if(fundingBodySelected != ''):
+            body, exist = FundingBody.objects.get_or_create(body=fundingBodySelected)
+            project.fundingBody = body
 
         if(photo != '/'):
             project.image = photo
