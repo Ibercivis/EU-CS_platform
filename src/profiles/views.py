@@ -71,7 +71,7 @@ def projects(request):
 
 def resources(request):
     user = request.user
-    resources = Resource.objects.all().filter(author=user)
+    resources = Resource.objects.all().filter(creator=user)
 
     return render(request, 'profiles/my_resources.html', {'show_user': user, 'resources': resources})
 
