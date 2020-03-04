@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404
 from datetime import datetime, date
 from django.forms import ModelForm
 from django_select2.forms import Select2MultipleWidget
+from authors.models import Author
 
 class ResourceForm(forms.ModelForm):
     abstract = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}), max_length=1000)   
@@ -14,7 +15,9 @@ class ResourceForm(forms.ModelForm):
     keywords = forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False)
     category = forms.ModelChoiceField(queryset=Category.objects.filter(parent__isnull=True))
     categorySelected = forms.CharField(widget=forms.HiddenInput(),required=False)
-    author = forms.CharField(max_length=100)
+    authorsCollection = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
+    selectedAuthors = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
+    authors = forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False)
     audience = forms.ModelChoiceField(queryset=Audience.objects.all())
     theme = forms.ModelMultipleChoiceField(queryset=Theme.objects.all(), widget=Select2MultipleWidget, required=False)
     imageURL = forms.CharField(max_length=300)
@@ -24,7 +27,7 @@ class ResourceForm(forms.ModelForm):
     class Meta:
         model = Resource
         fields = ["name", "abstract", "url", "audience", "theme",
-         "keywords", "license", "publisher", "category", "author","author_email",
+         "keywords", "license", "publisher", "category", "authors","author_email",
          "imageURL", "resource_DOI", "year_of_publication"]
         
         
@@ -47,8 +50,7 @@ class ResourceForm(forms.ModelForm):
             rsc.dateUploaded = publication_date
             rsc.creator = args.user
 
-        rsc.inLanguage = self.data['language']
-        rsc.author_rsc = self.data['author']
+        rsc.inLanguage = self.data['language']        
         rsc.author_email = self.data['author_email']
         rsc.imageURL = self.data['imageURL']
         rsc.resourceDOI = self.data['resource_DOI']
@@ -56,9 +58,9 @@ class ResourceForm(forms.ModelForm):
         rsc.category = category
         rsc.save()
 
-
         rsc.theme.set(self.data.getlist('theme'))
 
+        # Keywords
         choices = self.data['choices']
         choices = choices.split(',')
         for choice in choices:
@@ -67,5 +69,15 @@ class ResourceForm(forms.ModelForm):
         keywords = Keyword.objects.all()
         keywords = keywords.filter(keyword__in = choices)
         rsc.keywords.set(keywords)
+
+        # Authors
+        authors = self.data['authorsCollection']
+        authors = authors.split(',')
+        for author in authors:
+            if(author != ''):
+                Author.objects.get_or_create(author=author)
+        authorsCollection = Author.objects.all()
+        authors = authorsCollection.filter(author__in = authors)
+        rsc.authors.set(authors)
 
         return 'success'

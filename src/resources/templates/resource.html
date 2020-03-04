@@ -44,7 +44,7 @@
 			{% for keyword in resource.keywords.all %} <a class="badge badge-pill badge-secondary" href="/resources?keywords={{keyword}}">{{keyword}}</a>  {% endfor %}
                 <p><b>Abstract: </b> {{ resource.abstract }}</p>
                 <p><b> URL: </b><a href="{{resource.url}}" target="_blank">{{resource.url}}</a></p>
-                <p><b>Author: </b>{{ resource.author_rsc }}</p>
+                <p><b>Author: </b>{% for author in resource.authors.all %}{{ author }} {% endfor %}</p>
                 <p><b>Author's email: </b>{{ resource.author_email }}</p>
                 <p><b>License: </b>{{ resource.license }}</p>
                 <p><b>Language: </b> {{ resource.inLanguage }}</p>

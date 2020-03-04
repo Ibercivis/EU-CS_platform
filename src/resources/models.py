@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-
+from authors.models import Author
 
 class Keyword(models.Model):
     keyword = models.TextField()
@@ -32,7 +32,7 @@ class Resource(models.Model):
     url = models.CharField(max_length=200)
     image = models.CharField(max_length=200)
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    author_rsc =  models.CharField(max_length=100)
+    authors =  models.ManyToManyField(Author)
     author_email =  models.CharField(max_length=100)
     abstract = models.CharField(max_length=1000)
     aggregateRating = models.CharField(max_length=100)

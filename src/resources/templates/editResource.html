@@ -48,7 +48,9 @@
             </div>
             <div class="row">
               <div class="col-5 p-3 ml-5">
-                {{ form.author|as_crispy_field }}
+                {{ form.authors|as_crispy_field }}
+                {{form.authorsCollection |as_crispy_field}}
+                {{form.selectedAuthors|as_crispy_field}}
               </div>
               <div class="col-5 p-3 ml-5">
                 {{ form.author_email|as_crispy_field }}
@@ -129,27 +131,53 @@
     
     var choicesSelected = $("#id_choicesSelected").val().split(",");
     for (choice of choices){
-      //alert()
-      var encontrado = false;
+      var found = false;
       for(sel of choicesSelected){ 
         if(sel.trim() == choice.trim()){
-          encontrado = true;
+          found = true;
           $("#id_keywords").append("<option value='" + choice +"' selected> " + choice + " </option>");
         }
       }  
-      if(!encontrado){
+      if(!found){
         $("#id_keywords").append("<option value='" + choice +"'> " + choice + " </option>");
       }    
     }
 
     $("#div_id_keywords div").on('keyup', function(){
-      var key = $(".selection input").val();
+      var key = $("#div_id_keywords .selection input").val();
       if (key.indexOf(',') > -1) {
          var word =key.slice(0, -1);
-         $(".selection input").val("");
+         $("#div_id_keywords .selection input").val("");
          $("#id_keywords").append("<option value='" + word +"' selected> " + word + " </option>");
       }      
     });
+
+    var authorsCollection = $("#id_authorsCollection").val();
+    var authorsCollection = authorsCollection.split(",");
+    
+    var selectedAuthors = $("#id_selectedAuthors").val().split(",");
+    for (author of authorsCollection){
+      var found = false;
+      for(sel of selectedAuthors){ 
+        if(sel.trim() == author.trim()){
+          found = true;
+          $("#id_authors").append("<option value='" + author +"' selected> " + author + " </option>");
+        }
+      }  
+      if(!found){
+        $("#id_authors").append("<option value='" + author +"'> " + author + " </option>");
+      }    
+    }
+
+    $("#div_id_authors div").on('keyup', function(){
+        var key = $("#div_id_authors .selection input").val();
+        if (key.indexOf(',') > -1) {
+        var word =key.slice(0, -1);
+        $("#div_id_authors .selection input").val("");
+        $("#id_authors").append("<option value='" + word +"' selected> " + word + " </option>");
+        }      
+    });
+
 
     $('#contactinfo').on('click', function () {
       $('#contactinfoform').toggle();
@@ -183,11 +211,17 @@
   function completeSubmit(){
     var option_all = $("#id_keywords option:selected").map(function () {
         return $.trim($(this).text());
-      }).get().join(',');
-      
+      }).get().join(',');      
       $("#id_choices").val(option_all);
       $("#id_keywords").empty();
       
+
+      option_all = $("#id_authors option:selected").map(function () {
+          return $.trim($(this).text());
+      }).get().join(',');        
+      $("#id_authorsCollection").val(option_all);
+      $("#id_authors").empty();
+
       var category = $("#id_category").val();
       $("#id_categorySelected").val(category);            
       var subcategory = $("#id_subcategory").val();
