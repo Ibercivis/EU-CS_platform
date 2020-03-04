@@ -10,6 +10,7 @@ from django.conf import settings
 from django.db.models import Q
 from itertools import chain
 from django.contrib.auth import get_user_model
+from authors.models import Author
 
 User = get_user_model()
 
@@ -49,7 +50,9 @@ def clearFilters(request):
 def new_resource(request):
     choices = list(Keyword.objects.all().values_list('keyword',flat=True))
     choices = ", ".join(choices)
-    form = ResourceForm(initial={'choices': choices})
+    authorsCollection = list(Author.objects.all().values_list('author',flat=True))
+    authorsCollection = ", ".join(authorsCollection)
+    form = ResourceForm(initial={'choices': choices, 'authorsCollection': authorsCollection})
     if request.method == 'POST':
         form = ResourceForm(request.POST, request.FILES)
         if form.is_valid():
@@ -78,12 +81,19 @@ def editResource(request, pk):
     choices = list(Keyword.objects.all().values_list('keyword',flat=True))
     choices = ", ".join(choices)
 
+    selectedAuthors = list(resource.authors.all().values_list('author',flat=True))
+    selectedAuthors = ", ".join(selectedAuthors)
+
+    authorsCollection = list(Author.objects.all().values_list('author',flat=True))
+    authorsCollection = ", ".join(authorsCollection)
+
     form = ResourceForm(initial={
-        'name':resource.name, 'abstract': resource.abstract, 'imageURL': resource.imageURL,
+        'name':resource.name, 'abstract': resource.abstract, 'imageURL': resource.imageURL,'resource_DOI': resource.resourceDOI,
         'url': resource.url,'license': resource.license, 'choices': choices, 'theme': resource.theme.all,
         'audience' : resource.audience, 'publisher': resource.publisher, 'year_of_publication': resource.datePublished,
-        'author': resource.author_rsc, 'author_email': resource.author_email, 'resource_DOI': resource.resourceDOI,
-        'choicesSelected':keywordsList, 'category': getCategory(resource.category), 'categorySelected': resource.category.id
+        'authors': resource.authors.all, 'selectedAuthors': selectedAuthors, 'authorsCollection': authorsCollection,
+        'author_email': resource.author_email, 'choicesSelected':keywordsList, 
+        'category': getCategory(resource.category), 'categorySelected': resource.category.id
     })
     
     if request.method == 'POST':
