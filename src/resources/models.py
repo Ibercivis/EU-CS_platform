@@ -44,7 +44,7 @@ class Resource(models.Model):
     license =  models.CharField(max_length=100)
     publisher = models.CharField(max_length=100)
     datePublished = models.IntegerField()
-    theme = models.ForeignKey(Theme, on_delete=models.CASCADE)
+    theme = models.ManyToManyField(Theme)
     imageURL = models.CharField(max_length=200)
     resourceDOI = models.CharField(max_length=100)
 
