@@ -8,7 +8,7 @@ from django.forms import ModelForm
 from django_select2.forms import Select2MultipleWidget
 
 class ResourceForm(forms.ModelForm):
-    abstract = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}), max_length=300)   
+    abstract = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}), max_length=1000)   
     choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     choicesSelected = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     keywords = forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False)
@@ -23,7 +23,7 @@ class ResourceForm(forms.ModelForm):
 
     class Meta:
         model = Resource
-        fields = ["name", "about", "abstract", "url", "audience", "theme",
+        fields = ["name", "abstract", "url", "audience", "theme",
          "keywords", "license", "publisher", "category", "author","author_email",
          "imageURL", "resource_DOI", "year_of_publication"]
         
@@ -38,7 +38,6 @@ class ResourceForm(forms.ModelForm):
         if pk:
             rsc = get_object_or_404(Resource, id=pk)
             rsc.name = self.data['name']
-            rsc.about = self.data['about']
             rsc.abstract = self.data['abstract']
             rsc.url = self.data['url']
             rsc.license = self.data['license']

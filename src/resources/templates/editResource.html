@@ -35,7 +35,7 @@
                 {{ form.name|as_crispy_field }}
               </div>
               <div class="col-5 p-3 ml-5">
-                {{ form.about|as_crispy_field }}
+                {{ form.url|as_crispy_field }}
               </div>
             </div>
             <div class="row">
@@ -43,7 +43,7 @@
                 {{ form.abstract|as_crispy_field }}
               </div>
               <div class="col-5 p-3 ml-5">
-                {{ form.url|as_crispy_field }}
+                {{ form.resource_DOI|as_crispy_field }}
               </div>
             </div>
             <div class="row">
@@ -106,9 +106,8 @@
               <div class="col-5 p-3 ml-5">
                   {{ form.theme|as_crispy_field }}
               </div>
-              <div class="col-5 p-3 ml-5">
-                  {{ form.resource_DOI|as_crispy_field }}
-                  <div id="id_sub_categories"></div>
+              <div class="col-5 p-3 ml-5">                
+                  
               </div>
             </div>
               <button type="submit" onclick="completeSubmit()" class="btn btn-success"><i class="fas fa-share-square"></i> Save</button>

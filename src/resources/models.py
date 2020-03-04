@@ -28,14 +28,13 @@ class Category(models.Model):
         return res
 
 class Resource(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=200)
     url = models.CharField(max_length=200)
     image = models.CharField(max_length=200)
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     author_rsc =  models.CharField(max_length=100)
     author_email =  models.CharField(max_length=100)
-    about  = models.CharField(max_length=200)
-    abstract = models.CharField(max_length=300)
+    abstract = models.CharField(max_length=1000)
     aggregateRating = models.CharField(max_length=100)
     audience = models.ForeignKey(Audience, null=True, blank=True, on_delete=models.CASCADE)
     dateUploaded = models.DateTimeField('Date Uploaded')
