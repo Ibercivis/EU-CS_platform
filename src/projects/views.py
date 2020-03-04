@@ -5,7 +5,7 @@ from django.views import generic
 from django.core.paginator import Paginator
 from .forms import ProjectForm
 from django.utils import timezone
-from .models import Project, Topic, Status, Keyword, Votes, FeaturedProjects, FollowedProjects
+from .models import Project, Topic, Status, Keyword, Votes, FeaturedProjects, FollowedProjects, FundingBody, FundingAgency
 from django.contrib.auth import get_user_model
 import json
 from django.utils.dateparse import parse_datetime
@@ -114,14 +114,22 @@ def editProject(request, pk):
     if user != project.creator and not user.is_staff:
         return redirect('../projects', {})
     
-    start_datetime = formats.date_format(project.start_date, 'Y-m-d')
-    end_datetime = formats.date_format(project.end_date, 'Y-m-d')    
+    start_datetime = None
+    end_datetime = None
+
+    if project.start_date:
+        start_datetime = formats.date_format(project.start_date, 'Y-m-d')
+    if project.end_date:
+        end_datetime = formats.date_format(project.end_date, 'Y-m-d')    
        
     keywordsList = list(project.keywords.all().values_list('keyword', flat=True))
     keywordsList = ", ".join(keywordsList)     
     
     choices = list(Keyword.objects.all().values_list('keyword',flat=True))
     choices = ", ".join(choices)
+
+    fundingBody = list(FundingBody.objects.all().values_list('body',flat=True))
+    fundingBody = ", ".join(fundingBody)
 
     form = ProjectForm(initial={
         'project_name':project.name,'url': project.url,'start_date': start_datetime,
@@ -131,6 +139,8 @@ def editProject(request, pk):
         'image': project.image, 'image_credit': project.imageCredit, 'host': project.host,
         'how_to_participate': project.howToParticipate, 'equipment': project.equipment,
         'contact_person': project.author, 'contact_person_email': project.author_email,
+        'funding_body': fundingBody, 'fundingBodySelected': project.fundingBody, 'fundingProgram': project.fundingProgram,
+        'fundingAgency': project.fundingAgency,
     })
     
     if request.method == 'POST':

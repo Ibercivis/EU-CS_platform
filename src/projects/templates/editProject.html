@@ -195,6 +195,29 @@
               </div>
             </div>
             <hr />
+
+            <h4>Funding</h4>
+            <a id="funding" href="#">Show</a>
+            <div id="fundingform" style="display:none">
+              <div class="row">
+                <div class="col-5 p-3 ml-5">
+                  {{ form.funding_body|as_crispy_field }}
+                  {{ form.fundingBodySelected|as_crispy_field }}
+                </div>
+                <div class="col-5 p-3 ml-5">
+                  {{ form.funding_program|as_crispy_field }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-5 p-3 ml-5">
+                  {{ form.funding_agency|as_crispy_field }}
+                </div>
+                <div class="col-5 p-3 ml-5">
+                </div>
+              </div>
+            </div>
+            <hr />
+
               <button onclick="completeSubmit()" type="submit" class="btn btn-success"><i class="fas fa-share-square"></i> Save</button>
           </form>
       </div>
@@ -217,27 +240,50 @@
     var choices = choices.split(",");
     var choicesSelected = $("#id_choicesSelected").val().split(",");
     for (choice of choices){
-      var encontrado = false;
+      var found = false;
       for(sel of choicesSelected){
         if(sel.trim() == choice.trim()){
-          encontrado = true;
+          found = true;
           $("#id_keywords").append("<option value='" + choice +"' selected> " + choice + " </option>");
         }
       }  
-      if(!encontrado){
+      if(!found){
         $("#id_keywords").append("<option value='" + choice +"'> " + choice + " </option>");
       }    
     }
+    var funding_body = $("#id_funding_body option").map(function () {
+        return $.trim($(this).text());
+      }).get();
+    $("#id_funding_body").empty();
+    var sel = $("#id_fundingBodySelected").val()
+    for(fb of funding_body){
+      if(sel.trim() == fb.trim()){
+          found = true;
+          $("#id_funding_body").append("<option value='" + fb +"' selected> " + fb + " </option>");
+        }
+        else{
+          $("#id_funding_body").append("<option value='" + fb +"'> " + fb + " </option>");
+        }
+    }
+
 
     $("#div_id_keywords div").on('keyup', function(){
-      var key = $(".selection input").val();
+      var key = $("#div_id_keywords .selection input").val();
       if (key.indexOf(',') > -1) {
          var word =key.slice(0, -1);
-         $(".selection input").val("");
+         $("#div_id_keywords .selection input").val("");
          $("#id_keywords").append("<option value='" + word +"' selected> " + word + " </option>");
       }      
     });
 
+    $("#div_id_funding_body div").on('keyup', function(){
+      var key = $("#div_id_funding_body .selection input").val();
+      if (key.indexOf(',') > -1) {
+         var word =key.slice(0, -1);
+         $("#div_id_funding_body .selection input").val("");
+         $("#id_funding_body").append("<option value='" + word +"' selected> " + word + " </option>");
+      }      
+    });
 
     $('#contactinfo').on('click', function () {
       $('#contactinfoform').toggle() ;
@@ -262,6 +308,12 @@
     $('#information').on('click', function () {
       $('#informationform').toggle();
       $('html,body').animate({ scrollTop: $("#information").offset().top - 160 }, { duration: "slow" });
+    });
+
+    $('#funding').on('click', function () {
+      $('#fundingform').toggle();
+      $('html,body').animate({ scrollTop: $("#funding").offset().top - 160 }, { duration: "slow" });
+      $('.select2-container').attr("style", "width:100%");
     });
 
     $('#imgResult').on('click', function () {
@@ -361,7 +413,7 @@
     $("#id_longitude").val((e.latlng.lng).toFixed(6));
   }
 
-  function map_init_basic (leafmap, options) {      
+  function map_init_basic (leafmap, options) {
       map = leafmap;
       var obj = { latlng: { 
         lat: parseFloat($("#id_latitude").val()), 
@@ -379,6 +431,12 @@
       
       $("#id_choices").val(option_all);
       $("#id_keywords").empty();
+
+      var fundingBody = $("#id_funding_body option:selected").map(function () {
+        return $.trim($(this).text());
+      }).get();
+      $("#id_fundingBodySelected").val(fundingBody);
+      $("#id_funding_body").empty();
   }
 
 </script>
