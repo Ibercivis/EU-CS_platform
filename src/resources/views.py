@@ -80,7 +80,7 @@ def editResource(request, pk):
 
     form = ResourceForm(initial={
         'name':resource.name, 'abstract': resource.abstract, 'imageURL': resource.imageURL,
-        'url': resource.url,'license': resource.license, 'choices': choices, 'theme': resource.theme,
+        'url': resource.url,'license': resource.license, 'choices': choices, 'theme': resource.theme.all,
         'audience' : resource.audience, 'publisher': resource.publisher, 'year_of_publication': resource.datePublished,
         'author': resource.author_rsc, 'author_email': resource.author_email, 'resource_DOI': resource.resourceDOI,
         'choicesSelected':keywordsList, 'category': getCategory(resource.category), 'categorySelected': resource.category.id

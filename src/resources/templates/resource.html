@@ -42,7 +42,6 @@
 				{% endfor %}
             <a class="badge badge-pill badge-dark" href="">{{resource.license}}</a>
 			{% for keyword in resource.keywords.all %} <a class="badge badge-pill badge-secondary" href="/resources?keywords={{keyword}}">{{keyword}}</a>  {% endfor %}
-                <p><b>About: </b> {{resource.about}}</p>
                 <p><b>Abstract: </b> {{ resource.abstract }}</p>
                 <p><b> URL: </b><a href="{{resource.url}}" target="_blank">{{resource.url}}</a></p>
                 <p><b>Author: </b>{{ resource.author_rsc }}</p>
@@ -53,7 +52,7 @@
                 <p><b>Publisher: </b> {{ resource.publisher }}</p>
                 <p><b>Year of publication: </b> {{ resource.datePublished }}</p>
                 <p><b>Resource DOI: </b> {{ resource.resourceDOI }}</p>
-                <p><b>Theme: </b> {{ resource.theme }}</p>
+                <p><b>Theme: </b> 	{% for theme in resource.theme.all %}{{ theme }} {% endfor %}</p>
 
     </div>
   </div>

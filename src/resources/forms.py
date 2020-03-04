@@ -16,7 +16,7 @@ class ResourceForm(forms.ModelForm):
     categorySelected = forms.CharField(widget=forms.HiddenInput(),required=False)
     author = forms.CharField(max_length=100)
     audience = forms.ModelChoiceField(queryset=Audience.objects.all())
-    theme = forms.ModelChoiceField(queryset=Theme.objects.all())
+    theme = forms.ModelMultipleChoiceField(queryset=Theme.objects.all(), widget=Select2MultipleWidget, required=False)
     imageURL = forms.CharField(max_length=300)
     resource_DOI = forms.CharField(max_length=100)
     year_of_publication = forms.IntegerField()
@@ -41,7 +41,7 @@ class ResourceForm(forms.ModelForm):
             rsc.abstract = self.data['abstract']
             rsc.url = self.data['url']
             rsc.license = self.data['license']
-            rsc.audience = self.data['audience']
+            rsc.audience = get_object_or_404(Audience, id=self.data['audience'])
             rsc.publisher = self.data['publisher']
         else:
             rsc.dateUploaded = publication_date
@@ -55,6 +55,9 @@ class ResourceForm(forms.ModelForm):
         rsc.datePublished = self.data['year_of_publication']
         rsc.category = category
         rsc.save()
+
+
+        rsc.theme.set(self.data.getlist('theme'))
 
         choices = self.data['choices']
         choices = choices.split(',')
