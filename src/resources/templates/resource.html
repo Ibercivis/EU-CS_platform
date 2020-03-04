@@ -22,6 +22,11 @@
 
 
     <div class="card mb-4">
+      {% if resource.image %}            
+      <img class="img-fluid img-responsive img-zoom" src="{{ resource.image }}" >
+      {% else %}
+        <img class="img-fluid img-responsive img-zoom" src='/static/site/img/resource.png'>
+      {% endif %}
       <div class="card-header">
         <h2>  {{resource.name}}
           {% if user.is_authenticated %}
