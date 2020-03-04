@@ -39,7 +39,7 @@ class ProjectForm(forms.Form):
     #Personal and Organizational Affiliates
     host = forms.CharField(max_length=100)
     #Supplementary information for Citizen Science
-    how_to_participate = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}), max_length=300, required=False)
+    how_to_participate = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}), max_length=1000, required=False)
     equipment = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}), max_length=200, required=False)
     contact_person_phone = forms.CharField(max_length=100, required=False)
     
@@ -65,7 +65,7 @@ class ProjectForm(forms.Form):
             project.name = self.data['project_name']           
             project.start_date = start_dateData
             project.end_date = end_dateData
-            #project.url = self.data['url']
+            project.url = self.data['url']
             project.author = self.data['contact_person']
             project.author_email = self.data['contact_person_email']
             project.latitude = latitude
@@ -81,7 +81,7 @@ class ProjectForm(forms.Form):
         
         else:           
             project = Project(name = self.data['project_name'],
-                        # url = self.data['url'],
+                         url = self.data['url'],
                          start_date = start_dateData, end_date = end_dateData, creator=args.user,
                          author = self.data['contact_person'], author_email = self.data['contact_person_email'],
                          latitude = latitude, longitude = longitude, country = country,

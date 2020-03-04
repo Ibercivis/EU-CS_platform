@@ -47,7 +47,7 @@ class Project(models.Model):
     #Personal and Organizational Affiliates
     host = models.CharField(max_length=100)
     #Supplementary information for Citizen Science
-    howToParticipate = models.CharField(max_length=300)
+    howToParticipate = models.CharField(max_length=1000)
     equipment = models.CharField(max_length=200)
 		#Rate
 		#TODO: Do we want to use it?
