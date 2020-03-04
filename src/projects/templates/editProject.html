@@ -17,7 +17,7 @@
 
 
 {% block list_of_items %}
-{{ form.media.css }}
+
     <!-- MODAL TO CROP THE IMAGE -->
     <div class="modal fade" id="modalCrop">
       <div class="modal-dialog mdialog">
@@ -46,7 +46,8 @@
         </div>
       </div>
     </div>
-	  <!-- END MODAL TO CROP -->
+    <!-- END MODAL TO CROP -->
+    
 <div class="container fluid">
 	<div class="card mb-4">
 		<div class="card-title p-3">
@@ -201,7 +202,6 @@
 
 {% block scripts %}
 <script src="{% static 'site/js/site.js' %}"></script>
-
 <script src="{% static 'scripts/cropper.min.js' %}"></script>
 <script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
 <script>

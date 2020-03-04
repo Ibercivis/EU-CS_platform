@@ -45,7 +45,7 @@ class Resource(models.Model):
     publisher = models.CharField(max_length=100)
     datePublished = models.IntegerField()
     theme = models.ManyToManyField(Theme)
-    imageURL = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='images/', max_length=300)
     resourceDOI = models.CharField(max_length=100)
 
     def __str__(self):

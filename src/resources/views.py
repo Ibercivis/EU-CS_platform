@@ -11,6 +11,9 @@ from django.db.models import Q
 from itertools import chain
 from django.contrib.auth import get_user_model
 from authors.models import Author
+from PIL import Image
+from django.utils import formats
+from datetime import datetime
 
 User = get_user_model()
 
@@ -56,7 +59,22 @@ def new_resource(request):
     if request.method == 'POST':
         form = ResourceForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save(request)
+            filepath = request.FILES.get('image', False)
+            image_path = ''
+            if (filepath):
+                x = form.cleaned_data.get('x')
+                y = form.cleaned_data.get('y')
+                w = form.cleaned_data.get('width')
+                h = form.cleaned_data.get('height')
+                photo = request.FILES['image']
+                image = Image.open(photo)
+                cropped_image = image.crop((x, y, w+x, h+y))
+                resized_image = cropped_image.resize((400, 300), Image.ANTIALIAS)
+                _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
+                image_path = "media/images/" + _datetime + '_' + photo.name 
+                resized_image.save(image_path)   
+
+            form.save(request, '/' + image_path)
             messages.success(request, "Resource uploaded with success!")
             return redirect('/resources')
 
@@ -88,7 +106,7 @@ def editResource(request, pk):
     authorsCollection = ", ".join(authorsCollection)
 
     form = ResourceForm(initial={
-        'name':resource.name, 'abstract': resource.abstract, 'imageURL': resource.imageURL,'resource_DOI': resource.resourceDOI,
+        'name':resource.name, 'abstract': resource.abstract, 'image': resource.image,'resource_DOI': resource.resourceDOI,
         'url': resource.url,'license': resource.license, 'choices': choices, 'theme': resource.theme.all,
         'audience' : resource.audience, 'publisher': resource.publisher, 'year_of_publication': resource.datePublished,
         'authors': resource.authors.all, 'selectedAuthors': selectedAuthors, 'authorsCollection': authorsCollection,
@@ -97,9 +115,24 @@ def editResource(request, pk):
     })
     
     if request.method == 'POST':
-        form = ResourceForm(request.POST)
+        form = ResourceForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save(request)
+            filepath = request.FILES.get('image', False)
+            image_path = ''
+            if (filepath):
+                x = form.cleaned_data.get('x')
+                y = form.cleaned_data.get('y')
+                w = form.cleaned_data.get('width')
+                h = form.cleaned_data.get('height')
+                photo = request.FILES['image']
+                image = Image.open(photo)
+                cropped_image = image.crop((x, y, w+x, h+y))
+                resized_image = cropped_image.resize((400, 300), Image.ANTIALIAS)
+                _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
+                image_path = "media/images/" + _datetime + '_' + photo.name 
+                resized_image.save(image_path)   
+
+            form.save(request, '/' + image_path)
             return redirect('/resource/'+ str(pk))
 
     return render(request, 'editResource.html', {'form': form, 'resource': resource,
