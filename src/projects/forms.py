@@ -13,13 +13,13 @@ class ProjectForm(forms.Form):
     error_css_class = 'form_error'
     #Basic Project Information
     project_name = forms.CharField(max_length=100)
-    aim = forms.CharField(max_length=100)
-    description = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}), max_length=300)    
+    aim = forms.CharField(max_length=500)
+    description = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}), max_length=1000)    
     choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     choicesSelected = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     keywords = forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False)
     status = forms.ModelChoiceField(queryset=Status.objects.all())
-    start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}))
+    start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=False)
     end_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=False)  
     topic = forms.ModelMultipleChoiceField(queryset=Topic.objects.all(), widget=Select2MultipleWidget, required=False)
     url = forms.CharField(max_length=200, required=False)
@@ -47,7 +47,7 @@ class ProjectForm(forms.Form):
     def clean(self):
         start_date = self.data['start_date']
         end_date = self.data['end_date'] 
-        if end_date is not '' and end_date < start_date:
+        if start_date is not '' and end_date is not '' and end_date < start_date:
             msg = u"End date should be greater than start date."            
             self._errors["end_date"] = self.error_class([msg])
 

@@ -26,8 +26,8 @@ class Project(models.Model):
     origin = models.CharField(max_length=100)
     #Basic Project Information
     name = models.CharField(max_length=100)
-    aim = models.CharField(max_length=100)
-    description = models.CharField(max_length=300)
+    aim = models.CharField(max_length=500)
+    description = models.CharField(max_length=1000)
     keywords = models.ManyToManyField(Keyword)
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
     start_date = models.DateTimeField('Start date')
