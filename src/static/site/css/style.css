@@ -32,3 +32,16 @@ select.form-control:focus {
 .img-zoom {
 	object-fit: cover;
 }
+input[type=checkbox] {
+display:none;
+}
+.mylabel {
+  background-image: url(../img/icon_bw.png);
+  background-size: auto 100%;
+  width: 30px;
+  height: 30px;
+  background-repeat: no-repeat;
+}
+#featuredCheck:checked + .mylabel {
+  background-image: url(../img/icon_color.png);
+}
