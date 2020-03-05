@@ -2,22 +2,25 @@
 {% load i18n %}
 {% load l10n %}
 <div class="row">
-	<div class="col-lg-2">
-		<h3>Resources</h3>
+	<div class="col-lg-3">
+		<h3>Resources
+              {% if user.is_authenticated %}
+              <a class="btn btn-warning" href="{% url 'new_resource' %}">
+                      <i class="fas fa-plus-circle"></i> Add
+              </a>
+              {% endif %}
+	</h3>
+
+
 	</div>
-	<div class="col-lg-10">
+	<div class="col-lg-9 float-right">
         <form class="form-inline float-lg-right" id="searchResources" action="{% url 'resources' %}">
+					<div class="float-right">
 
-          <div class="my-0 ml-2">
-
-            
-              <input type="text" id="keywords" name="keywords" autocomplete="on" value="{{filters.keywords}}"
-                  class="basicAutoComplete form-control" placeholder="Keywords" data-url="resources_autocomplete/">
-
-                
+          <button class="btn btn-info float-right" id="search" type="submit"><i class="fas fa-search"></i> Find</button>
               {% get_language_info_list for LANGUAGES as languages %}
               {% if settings.USE_I18N and languages|length > 1 %}
-              <select id="language" name="language" class="form-control">
+              <select id="language" name="language" class="custom-select form-control col-lg-2 ml-2 float-right">
                 <option value="">Language<option>
                   {% for language in languages %}
                     {% for lwc in languagesWithContent %}
@@ -34,17 +37,12 @@
               
 
               <input type="text" id="license" name="license" autocomplete="on" value="{{filters.license}}"
-              class="basicAutoComplete form-control" placeholder="License" data-url="license_autocomplete/">
+              class="basicAutoComplete form-control col-lg-2 ml-2 float-right" placeholder="License" data-url="license_autocomplete/">
+
+              <input type="text" id="keywords" name="keywords" autocomplete="on" value="{{filters.keywords}}" class="basicAutoComplete form-control col-lg-2 ml-2 float-right" placeholder="Keywords" data-url="resources_autocomplete/">
+				</div>
 
 
-              <button class="btn btn-info" id="search" type="submit"><i class="fas fa-search"></i> Find</button>
-              {% if user.is_authenticated %}
-              <a class="btn btn-warning" href="{% url 'new_resource' %}">
-                      <i class="fas fa-plus-circle"></i> Add
-              </a>
-              {% endif %}
-
-            </div>
         </form>
   </div>
 
