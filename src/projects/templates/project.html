@@ -81,26 +81,26 @@ Funding here
 
 </div>
 	<div class="card-footer bg-white">
-											<div id="featured{{project.id}}">
+			<div id="featured{{project.id}}" class="float-left">
 												{% if user.is_staff %}
 													{% if project.id in featuredProjects %}
-													<img onclick="setFeatured({{project.id}})" class="img-fluid"
-														src="{% static 'site/img/project.png' %}" height="10%" width="10%"/>
+													<img onclick="setFeatured({{project.id}})" class="img-fluid mt-2" src="{% static 'site/img/icon_color.png' %}" />
 													{% else %}
-													<img onclick="setFeatured({{project.id}})" class="img-fluid"
-													src="{% static 'site/img/project.png' %}" height="10%" width="10%" style="background-color: rgba(0,0,0,0.2);filter:brightness(0.4);"/>
+													<img onclick="setFeatured({{project.id}})" class="img-fluid mt-2" src="{% static 'site/img/icon_bw.png' %}" />
 													{% endif %}
 												{% else %}
 													{% if project.id in featuredProjects %}
-													<img class="img-fluid" src="{% static 'site/img/project.png' %}" height="10%" width="10%"/>
+													<img class="img-fluid" src="{% static 'site/img/project.png' %}" />
 													{% else %}
-													<img class="img-fluid" src="{% static 'site/img/project.png' %}" height="10%" width="10%" style="background-color: rgba(0,0,0,0.2);filter:brightness(0.4);"/>
+													<img class="img-fluid" src="{% static 'site/img/project.png' %}" style="background-color: rgba(0,0,0,0.2);filter:brightness(0.4);"/>
 													{% endif %}
 
 													{% endif %}
 
 										
 											</div>
+			</div>
+
 	
 
 											<a class="btn btn-outline-primary float-right ml-2" target="_black" href="/project/{{project.id }}"> Read more </a>	
@@ -124,11 +124,8 @@ Funding here
               </div>
             </div>
           </div>
-
-
         </div>
       </div>
-
 
 {% endblock list_of_items %}
 
