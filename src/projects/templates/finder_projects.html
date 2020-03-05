@@ -2,18 +2,20 @@
 {% load countries %}
 {% get_countries as countries %}
 <div class="row">
-	<div class="col-lg-2">
-		<h3>Projects</h3>
-	</div>
-	<div class="col-lg-10 float-right">
-		<form class="form-inline float-lg-right" id="searchProjects" action="{% url 'projects' %}">
-				<!--label for="keywords" style="color:black">Keywords</label-->
-				<div class="float-right">
+	<div class="col-lg-3">
+		<h3>Projects
 				{% if user.is_authenticated %}
-				<a class="btn btn-warning ml-2 float-right" href="{% url 'new_project' %}">
+				<a class="btn btn-warning ml-2" href="{% url 'new_project' %}">
 					<i class="fas fa-plus-circle"></i> Add
 				</a>
 				{% endif %}
+	</h3>
+
+	</div>
+	<div class="col-lg-9 float-right">
+		<form class="form-inline float-lg-right" id="searchProjects" action="{% url 'projects' %}">
+				<!--label for="keywords" style="color:black">Keywords</label-->
+				<div class="float-right">
 			<button class="btn btn-info ml-2 float-right" id="search" type="submit" alt="Find">
 					<i class="fas fa-search"></i> Find
 				</button>
@@ -44,7 +46,7 @@
 					</option>
 					{% endfor %}
 				</select>
-				<input type="text" id="keywords" name="keywords" autocomplete="on" value="{{filters.keywords}}" class="basicAutoComplete form-control col-lg-2 float-right" placeholder="Keywords, project name" data-url="text_autocomplete/">
+				<input type="text" id="keywords" name="keywords" autocomplete="on" value="{{filters.keywords}}" class="basicAutoComplete form-control col-lg-2 float-right" placeholder="Title or keywords" data-url="text_autocomplete/">
 				<div class="form-check float-right">
 					<input type="checkbox" class="form-check-input" id="featuredCheck" name="featuredCheck" {% if filters.featured %} checked {% endif %}>
 					<label class="form-check-label" for="featuredCheck">Featured projects</label>
