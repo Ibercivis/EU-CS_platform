@@ -21,7 +21,7 @@
 <body>
 <header>
   <!--Navbar-->
-  <nav class="navbar navbar-expand-lg navbar-dark text-white text-weight-bold fixed-top">
+  <nav class="navbar navbar-expand-lg navbar-light bg-white text-dark text-weight-bold fixed-top">
     <div class="container text-weight-bold">
 	    <a class="navbar-brand" href="/">{% include "_brandname.html" %}</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -33,7 +33,6 @@
 	  {% block navbar-left %}
 	  {% endblock navbar-left %}
         </ul>
-
 				<ul class="navbar-nav">
 				{% if not user.is_authenticated %}
         <li class="nav-item"><a class="ml-4" href="{% url 'accounts:login' %}">Login</a></li>
@@ -56,11 +55,15 @@
 {% block splash %}
 {% endblock splash %}
 </main>
+{% block footer %}
+{% include "_footer.html" %}
+{% endblock footer %}
+
+
+{% block script %}
 	<script type="text/javascript" src="{% static 'site/js/jquery.min.js' %}"></script>
   <!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="{% static 'site/js/bootstrap.min.js' %}"></script>
-
-  <script type="text/javascript"  src="{% static 'site/js/own.js' %}"></script>
-
+{% endblock script %}
 </body>
 </html>

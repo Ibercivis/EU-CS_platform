@@ -12,112 +12,33 @@
 {% block splash %}
 <div class="jumbotron">
 	<div class="row main_info">
-		<div class="col-sm-12">
-			{% include "finder.html" %}
-		</div>
-		<div class="col-sm-12">
-			<div class="container">
+<div class="container" style="color:black">
+			<form id="finder" action="/resources" >
 				<div class="row">
-					<div class="col-lg-4 col-sm-12 mt-4">
-										{% if featuredProject %}
-										<div class="card h-100">
-											{% if featuredProject.image %}
-											<img class="img-fluid" src="{{ featuredProject.image }}" />
-											{% else %}
-											<img class="img-fluid" src="static/site/img/project.png" />
-											{% endif %}
-
-											<div class="card-body">
-												<h4 class="card-title">
-													{{ featuredProject.name }}</h4>
-												{% for country in countries %}
-												{% if country.code == featuredProject.country %}
-												<a class="badge badge-pill badge-success"
-													href="projects?country={{country.code}}">{{ country.name }}</a>
-												{% endif %}
-												{% endfor %}
-												{% for topic in featuredProject.topic.all %} <a
-													class="badge badge-pill badge-dark"
-													href="projects?keywords=&topic={{topic|urlencode}}">{{topic}}</a>
-												{% endfor %}
-												{% for keyword in featuredProject.keywords.all %} <a
-													class="badge badge-pill badge-info"
-													href="projects?keywords={{keyword|urlencode}}">{{keyword}}</a>
-												{% endfor %}
-												<div class="card-text">
-													{{featuredProject.description | truncatechars:100 }}
-												</div>
-											</div>
-											<div class="card-footer bg-white">
-												<a class="btn btn-outline-primary float-right" target="_black"
-													href="/project/{{featuredProject.id }}"> Read more </a>
-											</div>
-										</div>
-										{% endif %}
+					<div class="col-lg-10 col-12">
+						<input type="text" id="keywords" name="keywords" autocomplete="off" class="form-control"
+							placeholder="What are you looking for today?">
 
 					</div>
-					<div class="col-lg-8 col-sm-12">
-										{% if featuredResource %}
-										<div class="card mt-4">
-											<div class="card-body">
-												<h4 class="card-title">{{ featuredResource.name | truncatewords:4 }}</h4>
-												<img class="card-img" style=" float: left; background-color: #fff; border-radius: 50%; border: 0px; width: 75px"
-													src="static/site/img/gdoc.png">
-										
-												<p class="card-text">
-													{% get_language_info_list for LANGUAGES as languages %}
-													{% for language in languages %}
-													{% if language.code == featuredResource.inLanguage %}
-													<a class="badge badge-pill badge-success"
-														href="/resources?language={{featuredResource.inLanguage}}">{{language.name_local}}</a>
-													{% endif %}
-													{% endfor %}
-													<a class="badge badge-pill badge-dark" href="">{{featuredResource.license}}</a>
-													{% for keyword in featuredResource.keywords.all %} <a class="badge badge-pill badge-secondary"
-														href="/resources?keywords={{keyword}}">{{keyword}}</a> {% endfor %}
-												</p>
-										
-												<p class="card-text">{{featuredResource.abstract |truncatewords:20 }}<br>
-										
-											</div>
-											<div class="card-footer bg-white">
-										
-												<a class="btn btn-outline-secondary float-right ml-2" href="{{featuredResource.url}}" target="_blank">Download</a>
-												<a class="btn btn-outline-primary float-right ml-2" href="/resource/{{featuredResource.id}}" target="_blank">Read More</a>
-											</div>
-										</div>
-										{% endif %}
-					<div class="card  mt-4">
-							<div class="card-body">
-								{% if lastBlogEntry %}
-								<h4 class="card-title">{{ lastBlogEntry.title }}</h4>
-								<p class="card-text text-muted">{{ lastBlogEntry.author.name }} |
-									{{ lastBlogEntry.created_on}} </p>
-								<p class="card-text">{{lastBlogEntry.content | slice:":200" | safe }}</p>
-								<a href="{% url 'post_detail' lastBlogEntry.slug  %}" class="btn btn-outline-primary float-right">Read
-									More</a>
-								{% endif %}
-							</div>
-						</div>
-				<div class="row">
-					<div class="col-lg-12 mt-4">
-						<div class="card card-small card-post h-100">
-							<div class="card-body">
-								<h5 class="card-title">
-									Share, initiate and learn about citizen science in Europe
-								</h5>
-								<b>EU-Citizen.Science</b> is a platform for sharing knowledge, tools, training and
-								resources for Citizen Science. Resources by the community, for the community.
-								<b>Search</b> for handy guidelines, <b>share</b> your latest projects, <b>find</b> your
-								needed tool, <b>upload</b> your protocols, or simply <b>join</b> the conversation in the
-								community forums.
+					<div class="col-lg-2 col-12">
+<div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
+  <label class="btn btn-light active">
+    <input type="radio" name="options" id="resources" checked onClick='$("#finder").attr("action", "resources").submit()'> Resources
+  </label>
 
-							</div>
-						</div>
+  <label class="btn btn-light">
+    <input type="radio" name="options" id="projects" onClick='$("#finder").attr("action", "projects").submit()'> Projects
+  </label>
+</div>
+
 					</div>
-
 				</div>
-			</div>
+			</form>
+</div>
 
-		</div>
+	</div>
+</div>
 	{% endblock splash %}
+{% block script %}
+{{ block.super }}
+{% endblock script %}
