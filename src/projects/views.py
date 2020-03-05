@@ -102,10 +102,12 @@ def projects(request):
 
 
 def project(request, pk):
+    user = request.user
     project = get_object_or_404(Project, id=pk)
     votes = Votes.objects.all().filter(project_id=pk).aggregate(Avg('vote'))['vote__avg']
-    print(votes)
-    return render(request, 'project.html', {'project':project,'votes':votes})
+    followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id',flat=True)
+    featuredProjects = FeaturedProjects.objects.all().values_list('project_id',flat=True)
+    return render(request, 'project.html', {'project':project,'votes':votes, 'followedProjects':followedProjects, 'featuredProjects':featuredProjects})
 
 
 def editProject(request, pk):

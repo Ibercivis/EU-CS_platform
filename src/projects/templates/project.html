@@ -74,13 +74,57 @@
 </div>
 
 </div>
+<div class="row">
+          <div class="col-12">
+Funding here
+                    </div>
+
+</div>
+	<div class="card-footer bg-white">
+											<div id="featured{{project.id}}">
+												{% if user.is_staff %}
+													{% if project.id in featuredProjects %}
+													<img onclick="setFeatured({{project.id}})" class="img-fluid"
+														src="{% static 'site/img/project.png' %}" height="10%" width="10%"/>
+													{% else %}
+													<img onclick="setFeatured({{project.id}})" class="img-fluid"
+													src="{% static 'site/img/project.png' %}" height="10%" width="10%" style="background-color: rgba(0,0,0,0.2);filter:brightness(0.4);"/>
+													{% endif %}
+												{% else %}
+													{% if project.id in featuredProjects %}
+													<img class="img-fluid" src="{% static 'site/img/project.png' %}" height="10%" width="10%"/>
+													{% else %}
+													<img class="img-fluid" src="{% static 'site/img/project.png' %}" height="10%" width="10%" style="background-color: rgba(0,0,0,0.2);filter:brightness(0.4);"/>
+													{% endif %}
+
+													{% endif %}
+
+										
+											</div>
+	
+
+											<a class="btn btn-outline-primary float-right ml-2" target="_black" href="/project/{{project.id }}"> Read more </a>	
+			{% if user.is_authenticated %}
+													<div id="followed{{project.id}}">
+														{% if project.id in followedProjects %}
+															<button type="button" class="btn btn-outline-primary float-right" onclick="setFollowedProject({{project.id}},{{user.id}})">Following</button>
+														{% else %}
+															<button type="button" class="btn btn-outline-secondary float-right" onclick="setFollowedProject({{project.id}},{{user.id}})">Follow</button>
+														{% endif %}
+													</div>
+
+												{% endif %}
+											
+											</div>
+
+				</div>
+
+
 
               </div>
             </div>
           </div>
 
-          <div class="col-12">
-                    </div>
 
         </div>
       </div>
@@ -98,5 +142,39 @@
       new L.marker([{{project.latitude}},{{project.longitude}}]).addTo(map);  
   }
 
+	function setFeatured(idProject){
+		var htmlId = "featured" + idProject;
+        var request = $.ajax(
+            {
+                type: "POST",
+                url: "{% url 'setFeatured' %}",
+                data: {
+                    "project_id": idProject,
+              		csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function (response) {
+                    $("#"+htmlId).load(" #"+htmlId);
+                }
+            }
+        );
+    }
+
+	function setFollowedProject(idProject, idUser){
+		var htmlId = "followed" + idProject;
+        var request = $.ajax(
+            {
+                type: "POST",
+                url: "{% url 'setFollowedProject' %}",
+                data: {
+                    "project_id": idProject,
+					"user_id": idUser,
+              		csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function (response) {
+                    $("#"+htmlId).load(" #"+htmlId);
+                }
+            }
+        );
+    }
 </script>
 {% endblock scripts %}

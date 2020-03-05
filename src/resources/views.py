@@ -83,8 +83,10 @@ def new_resource(request):
 
 def resource(request, pk):
     resource = get_object_or_404(Resource, id=pk)
-
-    return render(request, 'resource.html', {'resource':resource})
+    user = request.user
+    savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True) #TODO: Only ask for the resource
+    featuredResources = FeaturedResources.objects.all().values_list('resource_id',flat=True)
+    return render(request, 'resource.html', {'resource':resource, 'savedResources':savedResources, 'featuredResources':featuredResources})
 
 def editResource(request, pk):
     resource = get_object_or_404(Resource, id=pk)
