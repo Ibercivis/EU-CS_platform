@@ -50,19 +50,30 @@ ffffff
 	  {% block navbar-left %}
 	  {% endblock navbar-left %}
         </ul>
-        <form class="form-inline">
+				<ul class="navbar-nav">
 				{% if not user.is_authenticated %}
-        <a class="ml-4" href="{% url 'accounts:login' %}">Login</a>
-        <a class="ml-4" href="{% url 'accounts:signup' %}" role="button">Sign up</a>
+        <li class="nav-item"><a class="nav-link ml-4" href="{% url 'accounts:login' %}">Login</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'accounts:signup' %}" role="button">Sign up</a></li>
 				{% else %}
-					<a class="ml-4" href="{% url 'profiles:show_self' %}">Profile</a>
-     			<a class="ml-4" href="{% url 'accounts:logout' %}">Logout</a>
+					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle ml-4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Personal area</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'profiles:show_self' %}">Profile</a>
+			<a class="dropdown-item" href="{% url 'profiles:self_projects' %}">Uploaded projects</a>
+			<a class="dropdown-item" href="{% url 'profiles:self_resources' %}">Uploaded resources</a>
+			<a class="dropdown-item" href="{% url 'profiles:followed_projects' %}">Followed projects</a>
+			<a class="dropdown-item" href="{% url 'profiles:saved_resources' %}">My library</a>
+
+        </div>
+
+					</li>
+					
+     			<li class="nav-item"><a class="nav-link ml-4" href="{% url 'accounts:logout' %}">Logout</a></li></li>
 				{% endif %}
 
         {% if user.is_staff %}
-        <a class="ml-4" href="{% url 'admin:index' %}">Admin</a>
+        <li class="nav-item"><a  class="nav-link ml-4" href="{% url 'admin:index' %}">Admin</a></li>
         {% endif %}
-        </form>
+        </ul>
       </div>
     </div>
   </nav>
@@ -93,17 +104,13 @@ ffffff
 {% block footer %}
 {% include "_footer.html" %}
 {% endblock footer %}
-
-
   <!-- jQuery -->
 	<script type="text/javascript" src="{% static 'site/js/jquery.min.js' %}"></script>
   <!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="{% static 'site/js/bootstrap.min.js' %}"></script>
   <script src="{% static 'scripts/cropper.min.js' %}"></script>
   <script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
-
 	{% block scripts %}
 	{% endblock scripts %}
-
 </body>
 </html>

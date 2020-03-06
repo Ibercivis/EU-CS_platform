@@ -24,29 +24,13 @@
 				<h1>
 					<img title="profile picture" class="img-fluid rounded-circle"
 						src="{% thumbnail show_user.profile.picture|default:'default_profile.png' 140x140 crop %}">
-					{{ show_user.get_full_name }}
-
-					<a href="{% url 'profiles:show_self' %}" class="btn btn-outline btn-info float-right ml-2">Show
-						Profile</a>
-
-					<span class="dropdown float-right">
-						<a class="btn btn-outline btn-secondary float-right dropdown-toggle" href="#" role="button"
-							id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Projects & Resources
-						</a>
-						<span class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							<a class="dropdown-item" href="{% url 'profiles:self_projects' %}">Uploaded projects</a>
-							<a class="dropdown-item" href="{% url 'profiles:self_resources' %}">Uploaded resources</a>
-							<a class="dropdown-item" href="{% url 'profiles:followed_projects' %}">Followed projects</a>
-							<a class="dropdown-item" href="{% url 'profiles:saved_resources' %}">Saved resources</a>
-						</span>
-					</span>
+					{{ show_user.get_full_name }}</h1>
 
 			</div>
 		</div>
 		<div class="card-text">
 
-			<div class="col-md-12 text-center align-items-center">
+			<div class="col-md-12">
 				<h2>Followed projects</h2><br />
 			</div>
 			<div class="row">
