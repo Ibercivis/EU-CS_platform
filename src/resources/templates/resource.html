@@ -54,32 +54,33 @@
 
     </div> <!-- End of card text -->
 		<div class="card-footer bg-white">
+		<div class="row">
+			<div class="col-2">
 
               <div id="featured{{rsc.id}}">
                 {% if user.is_staff %}
                   {% if resource.id in featuredResources %}
-                  <img onclick="setFeaturedRsc({{resource.id}})" class="img-fluid"
-                    src="{% static 'site/img/gdoc.png' %}" height="10%" width="10%"/>
+                  <img onclick="setFeaturedRsc({{resource.id}})" class="img-fluid" src="{% static 'site/img/icon_color.png' %}" />
                   {% else %}
-                  <img onclick="setFeaturedRsc({{resource.id}})" class="img-fluid"
-                  src="{% static 'site/img/gdoc.png' %}" height="10%" width="10%" style="background-color: rgba(0,0,0,0.2);filter:brightness(0.4);"/>
+                  <img onclick="setFeaturedRsc({{resource.id}})" class="img-fluid" src="{% static 'site/img/icon_bw.png' %}" />
                   {% endif %}
                 {% else %}
                   {% if rresource.id in featuredResources %}
-                  <img class="img-fluid" src="{% static 'site/img/gdoc.png' %}" height="10%" width="10%"/>
+                  <img class="img-fluid" src="{% static 'site/img/icon_color.png' %}" />
                   {% else %}
-                  <img class="img-fluid" src="{% static 'site/img/gdoc.png' %}" height="10%" width="10%" style="background-color: rgba(0,0,0,0.2);filter:brightness(0.4);"/>
+                  <img class="img-fluid" src="{% static 'site/img/icon_bw.png' %}" />
                   {% endif %}
 
                   {% endif %}
 
                         </div>
+				</div>
+				<div class="col-10">
 
 
 
 
             	<a class="btn btn-outline-secondary float-right ml-2 mt-2" href="{{resource.url}}" target="_blank">Download</a>
- 							<a class="btn btn-outline-primary float-right ml-2 mt-2" href="/resource/{{resource.id}}" target="_blank">Read More</a>
         {% if user.is_authenticated %}
                   <div id="saved{{resource.id}}">
                     {% if resource.id in savedResources %}
@@ -90,6 +91,8 @@
                   </div>
 
                 {% endif %}
+	</div>
+</div>
 
 
 		</div>
