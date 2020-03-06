@@ -33,8 +33,15 @@ Resources
       {% for rsc in resources %}
       <div class="col-lg-6 col-md-12 mb-4">
         <div class="card h-100">
+								{% if rsc.image %} 
+								<img class="img-fluid img-zoom" src="{{ rsc.image }}" />
+								{% else %}
+								<img class="img-fluid img-zoom" src="{% static 'site/img/proct.png' %}" />
+								{% endif %}
+
+
           <div class="card-body">
-            <h4 class="card-title">{{ rsc.name | truncatewords:4 }}</h4>
+            <h4 class="card-title">{{ rsc.name | truncatewords:10 }}</h4>
             <img class="card-img" style=" float: left; background-color: #fff; border-radius: 50%; border: 0px; width: 75px" src="{% static 'site/img/gdoc.png' %}">
 
 						<p class="card-text">
@@ -44,11 +51,10 @@ Resources
 	 					<a class="badge badge-pill badge-success" href="/resources?language={{rsc.inLanguage}}">{{language.name_local}}</a>
 					{% endif %}
 				{% endfor %}
-            <a class="badge badge-pill badge-dark" href="">{{rsc.license}}</a>
 			{% for keyword in rsc.keywords.all %} <a class="badge badge-pill badge-secondary" href="/resources?keywords={{keyword}}">{{keyword}}</a>  {% endfor %}
 </p>
 
-            <p class="card-text">{{rsc.abstract |truncatewords:20 }}<br>
+            <p class="card-text">{{rsc.abstract |truncatewords:40 }}<br>
 
           </div>
 					<div class="card-footer bg-white">
