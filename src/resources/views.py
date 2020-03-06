@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Resource, Keyword, Category, FeaturedResources, SavedResources
+from .models import Resource, Keyword, Category, FeaturedResources, SavedResources, Theme, Category
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from .forms import ResourceForm
@@ -27,13 +27,15 @@ def resources(request):
     savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True)
 
     languagesWithContent = Resource.objects.all().values_list('inLanguage',flat=True).distinct()
+    themes = Theme.objects.all()
+    categories = Category.objects.all()
+
 
     filters = {'keywords': '', 'language': ''}
     
     if request.GET.get('keywords'):
         resources = resources.filter( Q(name__icontains = request.GET['keywords'])  | 
                                     Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
-                                    
         filters['keywords'] = request.GET['keywords']
 
     if request.GET.get('language'):
@@ -43,9 +45,16 @@ def resources(request):
     if request.GET.get('license'):
         resources = resources.filter(license__icontains = request.GET['license'])
         filters['license'] = request.GET['license']
+    if request.GET.get('theme'):
+        resources = resources.filter(theme = request.GET['theme'])
+        filters['theme'] = int(request.GET['theme'])
+
+    if request.GET.get('category'):
+        resources = resources.filter(theme = request.GET['category'])
+        filters['category'] = int(request.GET['category'])
 
     return render(request, 'resources.html', {'resources':resources, 'featuredResources': featuredResources,
-    'savedResources': savedResources, 'filters': filters, 'settings': settings, 'languagesWithContent': languagesWithContent})
+    'savedResources': savedResources, 'filters': filters, 'settings': settings, 'languagesWithContent': languagesWithContent, 'themes':themes, 'categories': categories})
 
 def clearFilters(request):
     return redirect ('resources')

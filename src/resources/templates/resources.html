@@ -52,6 +52,7 @@ Resources
 					{% endif %}
 				{% endfor %}
 			{% for keyword in rsc.keywords.all %} <a class="badge badge-pill badge-secondary" href="/resources?keywords={{keyword}}">{{keyword}}</a>  {% endfor %}
+			{% for theme in rsc.theme.all %} {{ theme }} {% endfor %}
 </p>
 
             <p class="card-text">{{rsc.abstract |truncatewords:40 }}<br>
@@ -162,6 +163,23 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
       $('#searchResources').submit();
     });
   });
+  $(function () {
+    $('#theme').on('change', function () {
+      var topic = $(this).val();
+      $('#searchResources').submit();
+    });
+  });
+  $(function () {
+    $('#category').on('change', function () {
+      var topic = $(this).val();
+      $('#searchResources').submit();
+    });
+  });
+
+
+
+
+
 
   $("#license").blur(function () {
     $('#searchResources').submit();
