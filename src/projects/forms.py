@@ -17,7 +17,7 @@ class ProjectForm(forms.Form):
     description = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}), max_length=2000)    
     choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     choicesSelected = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
-    keywords = forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False)
+    keywords = forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False,label="Keywords (comma separated)")
     status = forms.ModelChoiceField(queryset=Status.objects.all())
     start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=False)
     end_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=False)  
@@ -43,7 +43,7 @@ class ProjectForm(forms.Form):
     how_to_participate = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}), max_length=1000, required=False)
     equipment = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}), max_length=200, required=False)
     #Funding
-    funding_body =  forms.ModelMultipleChoiceField(queryset=FundingBody.objects.all(), widget=Select2MultipleWidget, required=False)
+    funding_body =  forms.ModelMultipleChoiceField(queryset=FundingBody.objects.all(), widget=Select2MultipleWidget, required=False, label="Funding bodies (comma separated)")
     fundingBodySelected = forms.CharField(widget=forms.HiddenInput(), max_length=100, required=False)
     funding_program = forms.CharField(max_length=500, required=False)
     funding_agency =   forms.ModelChoiceField(queryset=FundingAgency.objects.all(), required=False)
