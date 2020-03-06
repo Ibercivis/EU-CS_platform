@@ -99,6 +99,11 @@ Resources
 {% endblock list_of_items %}
 
 {% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js"
+integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="anonymous"></script>
+<script
+  src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
+
 <script>
 	function setFeaturedRsc(idResource){
 		var htmlId = "featured" + idResource;
@@ -134,5 +139,26 @@ Resources
             }
         );
     }
+</script>
+
+<script>
+  $('.basicAutoComplete').autoComplete(
+    { minLength: 3 }
+  );
+
+  $("#keywords").blur(function () {
+    $('#searchResources').submit();
+  });
+
+  $(function () {
+    $('#language').on('change', function () {
+      var language = $(this).val();
+      $('#searchResources').submit();
+    });
+  });
+
+  $("#license").blur(function () {
+    $('#searchResources').submit();
+  });
 </script>
 {% endblock scripts %} 
