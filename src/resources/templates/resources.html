@@ -50,31 +50,34 @@ Resources
 
             <p class="card-text">{{rsc.abstract |truncatewords:20 }}<br>
 
-              <div id="featured{{rsc.id}}">
+          </div>
+					<div class="card-footer bg-white">
+				 <div class="row">
+					<div class="col-2">
+
+              <div id="featured{{rsc.id}}" class="float-left">
                 {% if user.is_staff %}
                   {% if rsc.id in featuredResources %}
-                  <img onclick="setFeaturedRsc({{rsc.id}})" class="img-fluid"
-                    src="{% static 'site/img/gdoc.png' %}" height="10%" width="10%"/>
+                  <img onclick="setFeaturedRsc({{rsc.id}})" class="img-fluid mt-2" src="{% static 'site/img/icon_color.png' %}" />
                   {% else %}
-                  <img onclick="setFeaturedRsc({{rsc.id}})" class="img-fluid"
-                  src="{% static 'site/img/gdoc.png' %}" height="10%" width="10%" style="background-color: rgba(0,0,0,0.2);filter:brightness(0.4);"/>
+                  <img onclick="setFeaturedRsc({{rsc.id}})" class="img-fluid mt-2" src="{% static 'site/img/icon_bw.png' %}" />
                   {% endif %}
                 {% else %}
                   {% if rsc.id in featuredResources %}
-                  <img class="img-fluid" src="{% static 'site/img/gdoc.png' %}" height="10%" width="10%"/>
+                  <img class="img-fluid" src="{% static 'site/img/icon_color.png' %}" />
                   {% else %}
-                  <img class="img-fluid" src="{% static 'site/img/gdoc.png' %}" height="10%" width="10%" style="background-color: rgba(0,0,0,0.2);filter:brightness(0.4);"/>
+                  <img class="img-fluid" src="{% static 'site/img/icon_bw.png' %}" />
                   {% endif %}
 
                   {% endif %}
 
                         </div>
+						</div>
+						<div class="col-10">
 
 
-          </div>
-					<div class="card-footer bg-white">
-            	<a class="btn btn-outline-secondary float-right ml-2 mt-2" href="{{rsc.url}}" target="_blank">Download</a>
  							<a class="btn btn-outline-primary float-right ml-2 mt-2" href="/resource/{{rsc.id}}" target="_blank">Read More</a>
+            	<a class="btn btn-outline-secondary float-right ml-2 mt-2" href="{{rsc.url}}" target="_blank">Download</a>
         {% if user.is_authenticated %}
                   <div id="saved{{rsc.id}}">
                     {% if rsc.id in savedResources %}
@@ -85,6 +88,8 @@ Resources
                   </div>
 
                 {% endif %}
+	</div>
+</div>
 
 
 </div>
