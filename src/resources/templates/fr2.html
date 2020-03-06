@@ -1,0 +1,14 @@
+{% load my_tags %}
+{% if resources.has_other_pages %}
+<ul class="pagination">
+  {% for i in resources.paginator.page_range %}
+  {% if resources.number == i %}
+  <li class="active btn btn-info mb-4"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+  {% else %}
+  <a href="?{% param_replace page=i %}">
+    <li class="btn mb-4 btn-light">{{ i }}</li>
+  </a>
+  {% endif %}
+  {% endfor %}
+</ul>
+{% endif %}

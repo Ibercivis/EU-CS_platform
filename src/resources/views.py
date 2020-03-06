@@ -3,6 +3,7 @@ from .models import Resource, Keyword, Category, FeaturedResources, SavedResourc
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from .forms import ResourceForm
+from django.core.paginator import Paginator
 from django.utils import timezone
 from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
@@ -18,7 +19,7 @@ from datetime import datetime
 User = get_user_model()
 
 def resources(request):
-    resources = Resource.objects.all()
+    resources = Resource.objects.all().order_by('id')
     featuredResources = FeaturedResources.objects.all().values_list('resource_id',flat=True)
 
     savedResources = None
@@ -52,6 +53,11 @@ def resources(request):
     if request.GET.get('category'):
         resources = resources.filter(theme = request.GET['category'])
         filters['category'] = int(request.GET['category'])
+
+    paginator = Paginator(resources, 8)
+    page = request.GET.get('page')
+    resources = paginator.get_page(page)
+    print(resources)
 
     return render(request, 'resources.html', {'resources':resources, 'featuredResources': featuredResources,
     'savedResources': savedResources, 'filters': filters, 'settings': settings, 'languagesWithContent': languagesWithContent, 'themes':themes, 'categories': categories})
