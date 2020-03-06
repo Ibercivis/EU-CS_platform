@@ -32,9 +32,9 @@
 				<div class="card h-100">
 								<a href="/project/{{project.id }}">
 								{% if project.image %} 
-								<img class="img-fluid img-zoom" src="{{ project.image }}" />
+								<img class="img-fluid img-zoom lazyload" src="{{ project.image }}" />
 								{% else %}
-								<img class="img-fluid img-zoom" src="{% static 'site/img/project.png' %}" />
+								<img class="img-fluid img-zoom lazyload" src="{% static 'site/img/project.png' %}" />
 								{% endif %}
 								</a>
 
