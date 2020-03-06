@@ -35,9 +35,9 @@ class Project(models.Model):
     dateUpdated = models.DateTimeField('Updated date', auto_now=True)
     origin = models.CharField(max_length=100)
     #Basic Project Information
-    name = models.CharField(max_length=100)
-    aim = models.CharField(max_length=500)
-    description = models.CharField(max_length=1000)
+    name = models.CharField(max_length=200)
+    aim = models.CharField(max_length=1000)
+    description = models.CharField(max_length=2000)
     keywords = models.ManyToManyField(Keyword)
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
     start_date = models.DateTimeField('Start date',null=True, blank=True)
@@ -55,9 +55,9 @@ class Project(models.Model):
     longitude = models.DecimalField(max_digits=9,decimal_places=6)
     country = CountryField()
     #Personal and Organizational Affiliates
-    host = models.CharField(max_length=100)
+    host = models.CharField(max_length=200)
     #Supplementary information for Citizen Science
-    howToParticipate = models.CharField(max_length=1000)
+    howToParticipate = models.CharField(max_length=2000)
     equipment = models.CharField(max_length=200)
     #Funding
     fundingBody = models.ForeignKey(FundingBody, on_delete=models.CASCADE,null=True, blank=True) 
