@@ -12,9 +12,9 @@ geolocator = Nominatim(timeout=None)
 class ProjectForm(forms.Form):
     error_css_class = 'form_error'
     #Basic Project Information
-    project_name = forms.CharField(max_length=100)
-    aim = forms.CharField(max_length=500)
-    description = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}), max_length=1000)    
+    project_name = forms.CharField(max_length=200)
+    aim = forms.CharField(max_length=1000)
+    description = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}), max_length=2000)    
     choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     choicesSelected = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     keywords = forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False)

@@ -32,9 +32,9 @@
 				<div class="card h-100">
 								<a href="/project/{{project.id }}">
 								{% if project.image %} 
-								<img class="img-fluid" src="{{ project.image }}" />
+								<img class="img-fluid img-zoom" src="{{ project.image }}" />
 								{% else %}
-								<img class="img-fluid" src="{% static 'site/img/project.png' %}" />
+								<img class="img-fluid img-zoom" src="{% static 'site/img/project.png' %}" />
 								{% endif %}
 								</a>
 
@@ -62,9 +62,9 @@
 													{% endif %}
 												{% else %}
 													{% if project.id in featuredProjects %}
-													<img class="img-fluid" src="{% static 'site/img/project.png' %}" />
+													<img class="img-fluid mt-2" src="{% static 'site/img/icon_color.png' %}" />
 													{% else %}
-													<img class="img-fluid" src="{% static 'site/img/project.png' %}" style="background-color: rgba(0,0,0,0.2);filter:brightness(0.4);"/>
+													<img class="img-fluid mt-2" src="{% static 'site/img/icon_bw.png' %}"/>
 													{% endif %}
 
 													{% endif %}
