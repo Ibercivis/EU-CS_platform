@@ -3,10 +3,14 @@ python:
   - "3.6.9"
 install:
   - pip3 install -r requirements.txt
-  - cd ..
-  - django-admin.py startproject --template=./edge --extension=py,md,html,env my_proj
+  - cd src
   - cd my_proj/src
-  - cp my_proj/settings/local.sample.env my_proj/settings/local.env
+  - cp cp eucs_platform/settings/local.sample.env eucs_platform/settings/local.env
   - python manage.py migrate
+  - python manage.py loaddata projects/fixtures/topics.json
+  - python manage.py loaddata projects/fixtures/status.json
+  - python manage.py loaddata resources/fixtures/categories.json
+  - python manage.py loaddata resources/fixtures/themes.json
+  - python manage.py loaddata resources/fixtures/audiences.json
 script:
   - python manage.py test profiles
