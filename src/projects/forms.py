@@ -45,8 +45,9 @@ class ProjectForm(forms.Form):
     #Funding
     funding_body =  forms.ModelMultipleChoiceField(queryset=FundingBody.objects.all(), widget=Select2MultipleWidget, required=False, label="Funding bodies (comma separated)")
     fundingBodySelected = forms.CharField(widget=forms.HiddenInput(), max_length=100, required=False)
-    funding_program = forms.CharField(max_length=500, required=False)
-    funding_agency =   forms.ModelChoiceField(queryset=FundingAgency.objects.all(), required=False)
+    funding_program = forms.CharField(max_length=500, required=False)    
+    funding_agency =   forms.ModelMultipleChoiceField(queryset=FundingAgency.objects.all(), widget=Select2MultipleWidget, required=False)
+    fundingAgencySelected = forms.CharField(widget=forms.HiddenInput(), max_length=100, required=False)
 
     def clean(self):
         start_date = self.data['start_date']
@@ -103,6 +104,11 @@ class ProjectForm(forms.Form):
         if(fundingBodySelected != ''):
             body, exist = FundingBody.objects.get_or_create(body=fundingBodySelected)
             project.fundingBody = body
+
+        fundingAgencySelected = self.data['fundingAgencySelected']
+        if(fundingAgencySelected != ''):
+            agency, exist = FundingAgency.objects.get_or_create(agency=fundingAgencySelected)
+            project.fundingAgency = agency
 
         if(photo != '/'):
             project.image = photo

@@ -133,6 +133,9 @@ def editProject(request, pk):
     fundingBody = list(FundingBody.objects.all().values_list('body',flat=True))
     fundingBody = ", ".join(fundingBody)
 
+    fundingAgency = list(FundingAgency.objects.all().values_list('agency',flat=True))
+    fundingAgency = ", ".join(fundingAgency)
+    
     form = ProjectForm(initial={
         'project_name':project.name,'url': project.url,'start_date': start_datetime,
         'end_date':end_datetime, 'aim': project.aim, 'description': project.description, 
@@ -142,7 +145,7 @@ def editProject(request, pk):
         'how_to_participate': project.howToParticipate, 'equipment': project.equipment,
         'contact_person': project.author, 'contact_person_email': project.author_email,
         'funding_body': fundingBody, 'fundingBodySelected': project.fundingBody, 'fundingProgram': project.fundingProgram,
-        'fundingAgency': project.fundingAgency,
+        'funding_agency': fundingAgency,'fundingAgencySelected': project.fundingAgency,
     })
     
     if request.method == 'POST':
