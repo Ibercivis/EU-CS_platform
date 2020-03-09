@@ -181,13 +181,15 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
     });
   });
 
-
-
-
-
-
   $("#license").blur(function () {
     $('#searchResources').submit();
+  });
+
+  $(function () {
+    $('#featuredCheck').on('click', function () {
+      var featuredCheck = $(this).val();
+      $('#searchResources').submit();
+    });
   });
 </script>
 {% endblock scripts %} 
