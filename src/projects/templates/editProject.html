@@ -149,7 +149,31 @@
                 <div class="col-5 p-3 ml-5">
                   {{ form.image_credit|as_crispy_field }}
                 </div>
-              </div>                              
+              </div>
+              <div class="row">
+                <div class="col-5 p-3 ml-5">
+                  {{ form.image2|as_crispy_field }}
+                  {{ form.x2|as_crispy_field }}
+                  {{ form.y2|as_crispy_field }}
+                  {{ form.height2|as_crispy_field }}
+                  {{ form.width2|as_crispy_field }}
+                  <a id="imgResult2" href="#"> <img id="imageResult2" src="{{ project.image2 }}" alt="Image not upload"></a>
+                </div>
+                <div class="col-5 p-3 ml-5">                 
+                </div>                
+              </div>              
+              <div class="row">
+                <div class="col-5 p-3 ml-5">
+                  {{ form.image3|as_crispy_field }}
+                  {{ form.x3|as_crispy_field }}
+                  {{ form.y3|as_crispy_field }}
+                  {{ form.height3|as_crispy_field }}
+                  {{ form.width3|as_crispy_field }}
+                  <a id="imgResult3" href="#"> <img id="imageResult3" src="{{ project.image3 }}" alt="Image not upload"></a>
+                </div>
+                <div class="col-5 p-3 ml-5">                 
+                </div>                
+              </div>                               
             </div>
             <hr />
 
@@ -361,8 +385,10 @@
 
   $(function () {
     changed = false;
+    var imgSelected;
     /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
     $("#id_image").change(function () {
+      imgSelected = 1;
       $('#imageResult').attr('src', '');
       if (this.files && this.files[0]) {
         var reader = new FileReader();
@@ -375,14 +401,47 @@
       }
     });
 
+    $("#id_image2").change(function () {
+      imgSelected = 2;
+      $('#imageResult2').attr('src', '');
+      if (this.files && this.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $("#image").attr("src", e.target.result);
+          $("#modalCrop").modal("show");
+        }
+        reader.readAsDataURL(this.files[0]);
+      }
+    });
+
+    $("#id_image3").change(function () {
+      imgSelected = 3;
+      $('#imageResult3').attr('src', '');
+      if (this.files && this.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $("#image").attr("src", e.target.result);
+          $("#modalCrop").modal("show");
+        }
+        reader.readAsDataURL(this.files[0]);
+      }
+    });
+
     $("#imageResult").click(function () {
       if(!changed)
         $("#id_image").click();
       else{
-        //$("#image").attr("src", $("#imageResult").attr("src"));
         $("#modalCrop").modal("show");
       }
 
+    });
+
+    $("#imageResult2").click(function () {
+      $("#modalCrop").modal("show");
+    });
+
+    $("#imageResult3").click(function () {
+      $("#modalCrop").modal("show");
     });
 
     /* SCRIPTS TO HANDLE THE CROPPER BOX */
@@ -391,10 +450,9 @@
     var canvasData;
     $("#modalCrop").on("shown.bs.modal", function () {
       $image.cropper({
-				aspectRatio:4/3,
         viewMode: 0,
-        CropBoxWidth: 400,
-        CropBoxHeight: 300,
+        minCropBoxWidth: imgSelected > 1 ? 1100 : 400,
+        minCropBoxHeight: 300,
         dragMode: 'move',
         guides: false,
         center: false,
@@ -421,14 +479,16 @@
     });
 
     /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
-    $(".js-crop-and-upload").click(function () {     
-      var cropData = $image.cropper("getData");      
-      $("#id_x").val(cropData["x"]);
-      $("#id_y").val(cropData["y"]);
-      $("#id_height").val(cropData["height"]);
-      $("#id_width").val(cropData["width"]);    
+    $(".js-crop-and-upload").click(function () {
+      var cropData = $image.cropper("getData");
+      var imgSel = imgSelected > 1 ? imgSelected : '';
+      $("#id_x" + imgSel).val(cropData["x"]);
+      $("#id_y" + imgSel).val(cropData["y"]);
+      $("#id_height" + imgSel).val(cropData["height"]);
+      $("#id_width" + imgSel).val(cropData["width"]);
       $("#modalCrop").modal("hide");
-      $('#imageResult').attr('src', $image.cropper('getCroppedCanvas', {width: 400, height: 300}).toDataURL());      
+      $('#imageResult' + imgSel).attr('src', $image.cropper('getCroppedCanvas',
+       {width: imgSelected > 1 ? 1100 : 400, height: 300}).toDataURL());
     });
 
   });

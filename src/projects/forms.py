@@ -34,6 +34,16 @@ class ProjectForm(forms.Form):
     width = forms.FloatField(widget=forms.HiddenInput(),required=False)
     height = forms.FloatField(widget=forms.HiddenInput(), required=False)
     image_credit = forms.CharField(max_length=200, required=False)
+    image2 = forms.ImageField(required=False)
+    x2 = forms.FloatField(widget=forms.HiddenInput(),required=False)
+    y2 = forms.FloatField(widget=forms.HiddenInput(), required=False)
+    width2 = forms.FloatField(widget=forms.HiddenInput(),required=False)
+    height2 = forms.FloatField(widget=forms.HiddenInput(), required=False)
+    image3 = forms.ImageField(required=False)
+    x3 = forms.FloatField(widget=forms.HiddenInput(),required=False)
+    y3 = forms.FloatField(widget=forms.HiddenInput(), required=False)
+    width3 = forms.FloatField(widget=forms.HiddenInput(),required=False)
+    height3 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     #Geography
     latitude = forms.DecimalField(max_digits=9,decimal_places=6)
     longitude = forms.DecimalField(max_digits=9,decimal_places=6)
@@ -56,7 +66,7 @@ class ProjectForm(forms.Form):
             msg = u"End date should be greater than start date."            
             self._errors["end_date"] = self.error_class([msg])
 
-    def save(self, args, photo):
+    def save(self, args, images):
         start_dateData = self.data['start_date']
         end_dateData = self.data['end_date']        
         pk = self.data.get('projectID', '')        
@@ -110,8 +120,16 @@ class ProjectForm(forms.Form):
             agency, exist = FundingAgency.objects.get_or_create(agency=fundingAgencySelected)
             project.fundingAgency = agency
 
-        if(photo != '/'):
-            project.image = photo
+                 
+        if(images[0] != '/'):
+            project.image = images[0]
+        
+        if(images[1] != '/'):
+            project.image2 = images[1]
+        
+        if(images[2] != '/'):
+            project.image3 = images[2]
+        
         project.save()
         project.topic.set(self.data.getlist('topic'))
         choices = self.data['choices']
