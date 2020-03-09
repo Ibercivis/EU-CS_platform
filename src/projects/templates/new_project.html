@@ -202,6 +202,7 @@
               <div class="row">
                 <div class="col-5 p-3 ml-5">
                   {{ form.funding_agency|as_crispy_field }}
+                  {{ form.fundingAgencySelected|as_crispy_field }}
                 </div>
                 <div class="col-5 p-3 ml-5">
                 </div>
@@ -251,6 +252,21 @@
          var word =key.slice(0, -1);
          $("#div_id_funding_body .selection input").val("");
          $("#id_funding_body").append("<option value='" + word +"' selected> " + word + " </option>");
+         $("#id_funding_body").removeAttr('multiple');
+      }      
+    });
+
+    $("#div_id_funding_agency div").on('change', function(){
+      $("#id_funding_agency").removeAttr('multiple');
+    });
+
+    $("#div_id_funding_agency div").on('keyup', function(){
+      var key = $("#div_id_funding_agency .selection input").val();
+      if (key.indexOf(',') > -1) {
+         var word =key.slice(0, -1);
+         $("#div_id_funding_agency .selection input").val("");
+         $("#id_funding_agency").append("<option value='" + word +"' selected> " + word + " </option>");
+         $("#id_funding_agency").removeAttr('multiple');
       }      
     });
 
@@ -394,17 +410,21 @@
 
     var option_all = $("#id_keywords option:selected").map(function () {
         return $.trim($(this).text());
-      }).get().join(',');
-      
-      $("#id_choices").val(option_all);
-      $("#id_keywords").empty();
+    }).get().join(',');      
+    $("#id_choices").val(option_all);
+    $("#id_keywords").empty();
 
-      var fundingBody = $("#id_funding_body option:selected").map(function () {
-        return $.trim($(this).text());
-      }).get().join(',');
+    var fundingBody = $("#id_funding_body option:selected").map(function () {
+      return $.trim($(this).text());
+    }).get().join(',');
+    $("#id_fundingBodySelected").val(fundingBody);
+    $("#id_funding_body").empty();
 
-      $("#id_fundingBodySelected").val(fundingBody);
-      $("#id_funding_body").empty();
+    var fundingAgency = $("#id_funding_agency option:selected").map(function () {
+      return $.trim($(this).text());
+    }).get().join(',');
+    $("#id_fundingAgencySelected").val(fundingAgency);
+    $("#id_funding_agency").empty();
   }
 
   
