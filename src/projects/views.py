@@ -16,6 +16,7 @@ from PIL import Image
 from django.db.models import Q
 from itertools import chain
 from django.db.models import Avg, Max, Min, Sum
+import random
 
 User = get_user_model()
 
@@ -27,23 +28,15 @@ def new_project(request):
     if request.method == 'POST':    
         form = ProjectForm(request.POST, request.FILES)
        
-        if form.is_valid():            
-            filepath = request.FILES.get('image', False)
-            image_path = ''
-            if (filepath):
-                x = form.cleaned_data.get('x')
-                y = form.cleaned_data.get('y')
-                w = form.cleaned_data.get('width')
-                h = form.cleaned_data.get('height')
-                photo = request.FILES['image']
-                image = Image.open(photo)
-                cropped_image = image.crop((x, y, w+x, h+y))
-                resized_image = cropped_image.resize((400, 300), Image.ANTIALIAS)
-                _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
-                image_path = "media/images/" + _datetime + '_' + photo.name 
-                resized_image.save(image_path)   
-
-            form.save(request, '/' + image_path)
+        if form.is_valid():
+            images = []
+            image_path = saveImage(request, form, 'image', '')
+            image2_path = saveImage(request, form, 'image2', '2')
+            image3_path = saveImage(request, form, 'image3', '3')
+            images.append(image_path)
+            images.append(image2_path)
+            images.append(image3_path)
+            form.save(request, images)
 
             messages.success(request, "Project added with success!")
             return redirect('/projects')
@@ -52,6 +45,27 @@ def new_project(request):
 
     return render(request, 'new_project.html', {'form': form, 'user':user})
 
+def saveImage(request, form, element, ref):
+    image_path = ''
+    filepath = request.FILES.get(element, False)            
+    if (filepath):
+        x = form.cleaned_data.get('x' + ref)
+        y = form.cleaned_data.get('y' + ref)
+        w = form.cleaned_data.get('width' + ref)
+        h = form.cleaned_data.get('height' + ref)
+        photo = request.FILES[element]
+        image = Image.open(photo)
+        cropped_image = image.crop((x, y, w+x, h+y))
+        if(ref != ''):
+            resized_image = cropped_image.resize((1100, 300), Image.ANTIALIAS)
+        else:
+            resized_image = cropped_image.resize((400, 300), Image.ANTIALIAS)
+        _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
+        random_num = random.randint(0, 1000)
+        image_path = "media/images/" + _datetime + '_' + str(random_num) + '_' + photo.name 
+        resized_image.save(image_path)
+        
+    return '/' + image_path 
 
 def projects(request):
     projects = Project.objects.get_queryset().order_by('id')
@@ -142,6 +156,7 @@ def editProject(request, pk):
         'status': project.status, 'choices': choices, 'choicesSelected':keywordsList,
         'topic':project.topic.all, 'latitude': project.latitude, 'longitude': project.longitude, 
         'image': project.image, 'image_credit': project.imageCredit, 'host': project.host,
+        'image2': project.image2, 'image3': project.image3,
         'how_to_participate': project.howToParticipate, 'equipment': project.equipment,
         'contact_person': project.author, 'contact_person_email': project.author_email,
         'funding_body': fundingBody, 'fundingBodySelected': project.fundingBody, 'fundingProgram': project.fundingProgram,
@@ -151,22 +166,14 @@ def editProject(request, pk):
     if request.method == 'POST':
         form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
-            filepath = request.FILES.get('image', False)
-            image_path = ''
-            if (filepath):
-                x = form.cleaned_data.get('x')
-                y = form.cleaned_data.get('y')
-                w = form.cleaned_data.get('width')
-                h = form.cleaned_data.get('height')
-                photo = request.FILES['image']
-                image = Image.open(photo)
-                cropped_image = image.crop((x, y, w+x, h+y))
-                resized_image = cropped_image.resize((400, 300), Image.ANTIALIAS)
-                _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
-                image_path = "media/images/" + _datetime + '_' + photo.name 
-                resized_image.save(image_path)   
-
-            form.save(request, '/' + image_path)
+            images = []
+            image_path = saveImage(request, form, 'image', '')
+            image2_path = saveImage(request, form, 'image2', '2')
+            image3_path = saveImage(request, form, 'image3', '3')
+            images.append(image_path)
+            images.append(image2_path)
+            images.append(image3_path)
+            form.save(request, images)
             return redirect('/project/'+ str(pk))
         else:
             print(form.errors)

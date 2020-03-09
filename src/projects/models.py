@@ -50,6 +50,8 @@ class Project(models.Model):
     #Images and communications
     image = models.ImageField(upload_to='images/', max_length=300)
     imageCredit = models.CharField(max_length=200)
+    image2 = models.ImageField(upload_to='images/', max_length=300,null=True, blank=True)
+    image3 = models.ImageField(upload_to='images/', max_length=300,null=True, blank=True)
     #Geography
     latitude = models.DecimalField(max_digits=9,decimal_places=6)
     longitude = models.DecimalField(max_digits=9,decimal_places=6)
