@@ -48,7 +48,7 @@
 					</option>
 					{% endfor %}
 				</select>
-			  <input type="text" id="keywords" name="keywords" autocomplete="on" value="{{filters.keywords}}" class="basicAutoComplete form-control col-lg-2 float-right" placeholder="Title or keywords" data-url="text_autocomplete/">
+			  	<input type="text" id="keywords" name="keywords" autocomplete="on" value="{{filters.keywords}}" class="basicAutoComplete form-control col-lg-2 float-right" placeholder="Title or keywords" data-url="text_autocomplete/">
 				<div class="form-check float-right mt-2 mr-4">
 					<input type="checkbox" class="form-check-input myicon" id="featuredCheck" name="featuredCheck" {% if filters.featured %} checked {% endif %}>
 					<label class="form-check-label mylabel" for="featuredCheck" data-toggle="tooltip" data-placement="top" title="Toggle between curated/all projects"></label>

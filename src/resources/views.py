@@ -54,10 +54,14 @@ def resources(request):
         resources = resources.filter(theme = request.GET['category'])
         filters['category'] = int(request.GET['category'])
 
+
+    if request.GET.get('featuredCheck'):        
+        resources = resources.filter(id__in=featuredResources)
+        filters['featured'] = request.GET['featuredCheck']
+
     paginator = Paginator(resources, 8)
     page = request.GET.get('page')
     resources = paginator.get_page(page)
-    print(resources)
 
     return render(request, 'resources.html', {'resources':resources, 'featuredResources': featuredResources,
     'savedResources': savedResources, 'filters': filters, 'settings': settings, 'languagesWithContent': languagesWithContent, 'themes':themes, 'categories': categories})
