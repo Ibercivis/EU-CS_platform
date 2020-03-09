@@ -56,7 +56,7 @@
 		<div class="card-text p-3">
       <table class="table mb-0">
 
-          <form action="/editResource/{{resource.id}}" method="post">
+          <form action="/editResource/{{resource.id}}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
 
             <br />
