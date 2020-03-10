@@ -48,11 +48,7 @@
 								{% for category in categories %}
 									<option {% if category.id == filters.category %} selected {% endif %} value="{{category.id}}">{{category}}</option>
 								{% endfor %}
-							<select>
-    
-              
-
-              <!--input type="text" id="license" name="license" autocomplete="on" value="{{filters.license}}" class="basicAutoComplete form-control col-lg-2 ml-2 float-right" placeholder="License" data-url="license_autocomplete/"-->
+							<select>              
 
               <input type="text" id="keywords" name="keywords" autocomplete="on" value="{{filters.keywords}}" class="basicAutoComplete form-control col-lg-2 ml-2 float-right" placeholder="Keywords" data-url="resources_autocomplete/">
               <div class="form-check float-right mt-2 mr-4">

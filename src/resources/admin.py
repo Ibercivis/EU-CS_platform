@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Resource, ResourceGroup, ResourcesGrouped, Category, FeaturedResources, SavedResources
-# Register your models here.
+
 
 class ResourcesGroupedAdmin(admin.ModelAdmin):
     list_filter = ('group','resource',)
