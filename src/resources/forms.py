@@ -33,15 +33,14 @@ class ResourceForm(forms.ModelForm):
         model = Resource
         fields = ["name", "abstract", "url", "audience", "theme","keywords", "license", "publisher",
          "category", "authors","author_email", "image", "x", "y", "width", "height", "resource_DOI", "year_of_publication"]
-        
-        
+                
 
     def save(self, args, photo):
+        pk = self.data.get('resourceID', '')
         publication_date = datetime.now()
         rsc = super(ResourceForm, self).save(commit=False)
         category = get_object_or_404(Category, id=self.data['categorySelected'])
-
-        pk = self.data.get('resourceID', '')
+        
         if pk:
             rsc = get_object_or_404(Resource, id=pk)
             rsc.name = self.data['name']

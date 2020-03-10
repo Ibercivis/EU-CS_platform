@@ -1,37 +1,33 @@
 from django.shortcuts import render
-from .models import Resource, Keyword, Category, FeaturedResources, SavedResources, Theme, Category
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
-from .forms import ResourceForm
 from django.core.paginator import Paginator
 from django.utils import timezone
 from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
 from django.conf import settings
 from django.db.models import Q
-from itertools import chain
 from django.contrib.auth import get_user_model
+from django.utils import formats
+from itertools import chain
 from authors.models import Author
 from PIL import Image
-from django.utils import formats
 from datetime import datetime
+from .models import Resource, Keyword, Category, FeaturedResources, SavedResources, Theme, Category
+from .forms import ResourceForm
+
 
 User = get_user_model()
 
 def resources(request):
     resources = Resource.objects.all().order_by('id')
     featuredResources = FeaturedResources.objects.all().values_list('resource_id',flat=True)
-
-    savedResources = None
     user = request.user
-
+    savedResources = None
     savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True)
-
     languagesWithContent = Resource.objects.all().values_list('inLanguage',flat=True).distinct()
     themes = Theme.objects.all()
     categories = Category.objects.all()
-
-
     filters = {'keywords': '', 'language': ''}
     
     if request.GET.get('keywords'):
@@ -116,13 +112,10 @@ def editResource(request, pk):
 
     keywordsList = list(resource.keywords.all().values_list('keyword', flat=True))
     keywordsList = ", ".join(keywordsList)
-
     choices = list(Keyword.objects.all().values_list('keyword',flat=True))
     choices = ", ".join(choices)
-
     selectedAuthors = list(resource.authors.all().values_list('author',flat=True))
     selectedAuthors = ", ".join(selectedAuthors)
-
     authorsCollection = list(Author.objects.all().values_list('author',flat=True))
     authorsCollection = ", ".join(authorsCollection)
 
@@ -193,7 +186,6 @@ def get_sub_category(request):
         sub_categories = Category.objects.filter(parent=category)
         sub_categories = sub_categories.values_list("id","text")
         tupla_sub_categories = tuple(sub_categories)
-
         if tupla_sub_categories:
             for sub_category in tupla_sub_categories:
                 options += '<option value = "%s">%s</option>' % (
