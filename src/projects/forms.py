@@ -28,22 +28,24 @@ class ProjectForm(forms.Form):
     contact_person_email = forms.CharField(max_length=100)
     contact_person_phone = forms.CharField(max_length=100, required=False)
     #Images and communications    
-    image = forms.ImageField(required=False)
-    x = forms.FloatField(widget=forms.HiddenInput(),required=False)
-    y = forms.FloatField(widget=forms.HiddenInput(), required=False)
-    width = forms.FloatField(widget=forms.HiddenInput(),required=False)
-    height = forms.FloatField(widget=forms.HiddenInput(), required=False)
-    image_credit = forms.CharField(max_length=200, required=False)
+    image1 = forms.ImageField(required=False)
+    x1 = forms.FloatField(widget=forms.HiddenInput(),required=False)
+    y1 = forms.FloatField(widget=forms.HiddenInput(), required=False)
+    width1 = forms.FloatField(widget=forms.HiddenInput(),required=False)
+    height1 = forms.FloatField(widget=forms.HiddenInput(), required=False)
+    image_credit1 = forms.CharField(max_length=200, required=False)
     image2 = forms.ImageField(required=False)
     x2 = forms.FloatField(widget=forms.HiddenInput(),required=False)
     y2 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     width2 = forms.FloatField(widget=forms.HiddenInput(),required=False)
     height2 = forms.FloatField(widget=forms.HiddenInput(), required=False)
+    image_credit2 = forms.CharField(max_length=200, required=False)
     image3 = forms.ImageField(required=False)
     x3 = forms.FloatField(widget=forms.HiddenInput(),required=False)
     y3 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     width3 = forms.FloatField(widget=forms.HiddenInput(),required=False)
     height3 = forms.FloatField(widget=forms.HiddenInput(), required=False)
+    image_credit3 = forms.CharField(max_length=200, required=False)
     #Geography
     latitude = forms.DecimalField(max_digits=9,decimal_places=6)
     longitude = forms.DecimalField(max_digits=9,decimal_places=6)
@@ -88,7 +90,9 @@ class ProjectForm(forms.Form):
             project.description = self.data['description']         
             project.status = status
             project.host = self.data['host']
-            project.imageCredit = self.data['image_credit']
+            project.imageCredit1 = self.data['image_credit1']
+            project.imageCredit2 = self.data['image_credit2']
+            project.imageCredit3 = self.data['image_credit3']
             project.howToParticipate = self.data['how_to_participate']
             project.equipment = self.data['equipment']
             project.fundingProgram = self.data['funding_program']        
@@ -98,11 +102,10 @@ class ProjectForm(forms.Form):
                          author = self.data['contact_person'], author_email = self.data['contact_person_email'],
                          latitude = latitude, longitude = longitude, country = country,
                          aim = self.data['aim'], description = self.data['description'], 
-                         status = status, host = self.data['host'], imageCredit = self.data['image_credit'],
+                         status = status, host = self.data['host'], imageCredit1 = self.data['image_credit1'],
+                         imageCredit2 = self.data['image_credit2'], imageCredit3 = self.data['image_credit3'],
                          howToParticipate = self.data['how_to_participate'],
                          equipment = self.data['equipment'],fundingProgram = self.data['funding_program'] )
-
-
         if start_dateData:
             project.start_date = start_dateData
         if end_dateData:
@@ -120,7 +123,7 @@ class ProjectForm(forms.Form):
 
                  
         if(images[0] != '/'):
-            project.image = images[0]
+            project.image1 = images[0]
         
         if(images[1] != '/'):
             project.image2 = images[1]

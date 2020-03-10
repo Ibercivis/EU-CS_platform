@@ -139,15 +139,15 @@
             <div id="imagesform" style="display:none">
               <div class="row">
                 <div class="col-5 p-3 ml-5">
-                  {{ form.image|as_crispy_field }}
-                  {{ form.x|as_crispy_field }}
-                  {{ form.y|as_crispy_field }}
-                  {{ form.height|as_crispy_field }}
-                  {{ form.width|as_crispy_field }}
-                  <a id="imgResult" href="#"> <img id="imageResult" src="{{ project.image }}" alt="Image not upload"></a>
+                  {{ form.image1|as_crispy_field }}
+                  {{ form.x1|as_crispy_field }}
+                  {{ form.y1|as_crispy_field }}
+                  {{ form.height1|as_crispy_field }}
+                  {{ form.width1|as_crispy_field }}
+                  <a id="imgResult1" href="#"> <img id="imageResult" src="{{ project.image1 }}" alt="Image not upload"></a>
                 </div>
                 <div class="col-5 p-3 ml-5">
-                  {{ form.image_credit|as_crispy_field }}
+                  {{ form.image_credit1|as_crispy_field }}
                 </div>
               </div>
               <div class="row">
@@ -160,6 +160,7 @@
                   <a id="imgResult2" href="#"> <img id="imageResult2" src="{{ project.image2 }}" alt="Image not upload"></a>
                 </div>
                 <div class="col-5 p-3 ml-5">                 
+									{{ form.image_credit2|as_crispy_field }}
                 </div>                
               </div>              
               <div class="row">
@@ -172,6 +173,7 @@
                   <a id="imgResult3" href="#"> <img id="imageResult3" src="{{ project.image3 }}" alt="Image not upload"></a>
                 </div>
                 <div class="col-5 p-3 ml-5">                 
+									{{ form.image_credit3|as_crispy_field }}
                 </div>                
               </div>                               
             </div>
@@ -387,7 +389,7 @@
     changed = false;
     var imgSelected;
     /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
-    $("#id_image").change(function () {
+    $("#id_image1").change(function () {
       imgSelected = 1;
       $('#imageResult').attr('src', '');
       if (this.files && this.files[0]) {
@@ -427,9 +429,9 @@
       }
     });
 
-    $("#imageResult").click(function () {
+    $("#imageResult1").click(function () {
       if(!changed)
-        $("#id_image").click();
+        $("#id_image1").click();
       else{
         $("#modalCrop").modal("show");
       }
@@ -451,7 +453,8 @@
     $("#modalCrop").on("shown.bs.modal", function () {
       $image.cropper({
         viewMode: 0,
-        minCropBoxWidth: imgSelected > 1 ? 1100 : 400,
+	      aspectRatio: imgSelected == 3 ? 11/3 : 4/3,
+        minCropBoxWidth: imgSelected == 3 ? 1100 : 400,
         minCropBoxHeight: 300,
         dragMode: 'move',
         guides: false,
@@ -481,14 +484,14 @@
     /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
     $(".js-crop-and-upload").click(function () {
       var cropData = $image.cropper("getData");
-      var imgSel = imgSelected > 1 ? imgSelected : '';
-      $("#id_x" + imgSel).val(cropData["x"]);
-      $("#id_y" + imgSel).val(cropData["y"]);
-      $("#id_height" + imgSel).val(cropData["height"]);
-      $("#id_width" + imgSel).val(cropData["width"]);
+      $("#id_x" + imgSelected).val(cropData["x"]);
+      $("#id_y" + imgSelected).val(cropData["y"]);
+      $("#id_height" + imgSelected).val(cropData["height"]);
+      $("#id_width" + imgSelected).val(cropData["width"]);
       $("#modalCrop").modal("hide");
-      $('#imageResult' + imgSel).attr('src', $image.cropper('getCroppedCanvas',
-       {width: imgSelected > 1 ? 1100 : 400, height: 300}).toDataURL());
+      $('#imageResult' + imgSelected).attr('src', $image.cropper('getCroppedCanvas',
+      	{width: imgSelected == 3 ? 1100 : 400, height: 300}).toDataURL());
+
     });
 
   });

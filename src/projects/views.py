@@ -31,10 +31,10 @@ def new_project(request):
        
         if form.is_valid():
             images = []
-            image_path = saveImage(request, form, 'image', '')
+            image1_path = saveImage(request, form, 'image1', '1')
             image2_path = saveImage(request, form, 'image2', '2')
             image3_path = saveImage(request, form, 'image3', '3')
-            images.append(image_path)
+            images.append(image1_path)
             images.append(image2_path)
             images.append(image3_path)
             form.save(request, images)
@@ -57,7 +57,7 @@ def saveImage(request, form, element, ref):
         photo = request.FILES[element]
         image = Image.open(photo)
         cropped_image = image.crop((x, y, w+x, h+y))
-        if(ref != ''):
+        if(ref == '3'):
             resized_image = cropped_image.resize((1100, 300), Image.ANTIALIAS)
         else:
             resized_image = cropped_image.resize((400, 300), Image.ANTIALIAS)
@@ -154,8 +154,9 @@ def editProject(request, pk):
         'end_date':end_datetime, 'aim': project.aim, 'description': project.description, 
         'status': project.status, 'choices': choices, 'choicesSelected':keywordsList,
         'topic':project.topic.all, 'latitude': project.latitude, 'longitude': project.longitude, 
-        'image': project.image, 'image_credit': project.imageCredit, 'host': project.host,
-        'image2': project.image2, 'image3': project.image3,
+        'image1': project.image1, 'image_credit1': project.imageCredit1, 'host': project.host,
+        'image2': project.image2, 'image_credit2': project.imageCredit2,
+        'image3': project.image3, 'image_credit3': project.imageCredit3,
         'how_to_participate': project.howToParticipate, 'equipment': project.equipment,
         'contact_person': project.author, 'contact_person_email': project.author_email,
         'funding_body': fundingBody, 'fundingBodySelected': project.fundingBody, 'fundingProgram': project.fundingProgram,
@@ -166,10 +167,10 @@ def editProject(request, pk):
         form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
             images = []
-            image_path = saveImage(request, form, 'image', '')
+            image1_path = saveImage(request, form, 'image1', '1')
             image2_path = saveImage(request, form, 'image2', '2')
             image3_path = saveImage(request, form, 'image3', '3')
-            images.append(image_path)
+            images.append(image1_path)
             images.append(image2_path)
             images.append(image3_path)
             form.save(request, images)
