@@ -67,10 +67,9 @@ class ProjectForm(forms.Form):
             self._errors["end_date"] = self.error_class([msg])
 
     def save(self, args, images):
+        pk = self.data.get('projectID', '') 
         start_dateData = self.data['start_date']
-        end_dateData = self.data['end_date']        
-        pk = self.data.get('projectID', '')        
-      
+        end_dateData = self.data['end_date']                             
         latitude = self.data['latitude']
         longitude = self.data['longitude']
         country = getCountryCode(latitude,longitude).upper()
@@ -92,8 +91,7 @@ class ProjectForm(forms.Form):
             project.imageCredit = self.data['image_credit']
             project.howToParticipate = self.data['how_to_participate']
             project.equipment = self.data['equipment']
-            project.fundingProgram = self.data['funding_program']
-        
+            project.fundingProgram = self.data['funding_program']        
         else:           
             project = Project(name = self.data['project_name'],
                          url = self.data['url'], creator=args.user,
