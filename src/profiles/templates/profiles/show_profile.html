@@ -75,6 +75,7 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 	
 	function map_init_basic (leafmap, options) {
 		map = leafmap;
+		map.setView([{{show_user.profile.latitude}}, {{show_user.profile.longitude}}], 12)
 		new L.marker([{{show_user.profile.latitude}},{{show_user.profile.longitude}}]).addTo(map);		
 	}
   

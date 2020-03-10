@@ -138,6 +138,7 @@
   
   function map_init_basic (leafmap, options) {      
       map = leafmap;
+			map.setView([{{project.latitude}}, {{project.longitude}}], 12)
       new L.marker([{{project.latitude}},{{project.longitude}}]).addTo(map);  
   }
 

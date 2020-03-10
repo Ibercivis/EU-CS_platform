@@ -106,6 +106,7 @@
 
 	function map_init_basic (leafmap) {
 		map = leafmap;
+	  map.setView([parseFloat($("#id_latitude").val()),parseFloat($("#id_longitude").val())], 12)
 		var obj = { latlng: { 
 			lat: parseFloat($("#id_latitude").val()), 
 			lng: parseFloat($("#id_longitude").val()) } 
