@@ -3,20 +3,21 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.views import generic
 from django.core.paginator import Paginator
-from .forms import ProjectForm
-from django.utils import timezone
-from .models import Project, Topic, Status, Keyword, Votes, FeaturedProjects, FollowedProjects, FundingBody, FundingAgency
 from django.contrib.auth import get_user_model
-import json
+from django.utils import timezone
 from django.utils.dateparse import parse_datetime
-from datetime import datetime
 from django.utils import formats
 from django.contrib import messages
-from PIL import Image
 from django.db.models import Q
-from itertools import chain
 from django.db.models import Avg, Max, Min, Sum
+from datetime import datetime
+from PIL import Image
+from itertools import chain
+from .forms import ProjectForm
+from .models import Project, Topic, Status, Keyword, Votes, FeaturedProjects, FollowedProjects, FundingBody, FundingAgency
+import json
 import random
+
 
 User = get_user_model()
 
@@ -70,12 +71,9 @@ def saveImage(request, form, element, ref):
 def projects(request):
     projects = Project.objects.get_queryset().order_by('id')
     featuredProjects = FeaturedProjects.objects.all().values_list('project_id',flat=True)
-
-    followedProjects = None
-    user = request.user
-   
+    user = request.user  
+    followedProjects = None     
     followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id',flat=True)
-
     countriesWithContent = Project.objects.all().values_list('country',flat=True).distinct()
 
     topics = Topic.objects.all()
@@ -121,7 +119,8 @@ def project(request, pk):
     votes = Votes.objects.all().filter(project_id=pk).aggregate(Avg('vote'))['vote__avg']
     followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id',flat=True)
     featuredProjects = FeaturedProjects.objects.all().values_list('project_id',flat=True)
-    return render(request, 'project.html', {'project':project,'votes':votes, 'followedProjects':followedProjects, 'featuredProjects':featuredProjects})
+    return render(request, 'project.html', {'project':project,'votes':votes, 'followedProjects':followedProjects, 
+    'featuredProjects':featuredProjects})
 
 
 def editProject(request, pk):
