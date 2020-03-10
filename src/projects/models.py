@@ -48,10 +48,12 @@ class Project(models.Model):
     author = models.CharField(max_length=100)
     author_email =  models.CharField(max_length=100)
     #Images and communications
-    image = models.ImageField(upload_to='images/', max_length=300)
-    imageCredit = models.CharField(max_length=200)
+    image1 = models.ImageField(upload_to='images/', max_length=300)
+    imageCredit1 = models.CharField(max_length=200, null=True, blank=True)
     image2 = models.ImageField(upload_to='images/', max_length=300,null=True, blank=True)
+    imageCredit2 = models.CharField(max_length=200)
     image3 = models.ImageField(upload_to='images/', max_length=300,null=True, blank=True)
+    imageCredit3 = models.CharField(max_length=200, null=True, blank=True)
     #Geography
     latitude = models.DecimalField(max_digits=9,decimal_places=6)
     longitude = models.DecimalField(max_digits=9,decimal_places=6)
