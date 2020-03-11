@@ -159,7 +159,12 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
   );
 
   $("#keywords").blur(function () {
+    var keywords = $(this).val();
     $('#searchResources').submit();
+  });
+
+  $('.basicAutoComplete').on('autocomplete.select', function (evt, item) {	
+	  $('#searchResources').submit();
   });
 
   $(function () {
