@@ -56,7 +56,7 @@
 		<div class="card-text p-3">
       <table class="table mb-0">
 
-          <form action="/editResource/{{resource.id}}" method="post" enctype="multipart/form-data">
+          <form action="/editResource/{{resource.id}}" class="edit-resource" method="post" enctype="multipart/form-data">
             {% csrf_token %}
 
             <br />
@@ -149,7 +149,7 @@
                   
               </div>
             </div>
-              <button type="submit" onclick="completeSubmit()" class="btn btn-success"><i class="fas fa-share-square"></i> Save</button>
+              <button type="submit" class="btn btn-success"><i class="fas fa-share-square"></i> Save</button>
           </form>
       </div>
 
@@ -164,6 +164,8 @@
 <script src="{% static 'site/js/site.js' %}"></script>
 <script src="{% static 'scripts/cropper.min.js' %}"></script>
 <script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"></script>
 <script>
   $(document).ready(function () {
     var choices = $("#id_choices").val();
@@ -229,6 +231,44 @@
 
     $('#imgResult').on('click', function () {
       $('html,body').animate({ scrollTop: $("#imgResult").offset().top - 220 }, { duration: "slow" });
+    });
+
+    $("form").submit(function (e) {
+      var validationFailed = false;
+
+      $.each($("[required]"), function (index, value) {
+              var id = $(value).parent().parent().attr('id');
+              $("#" + id + " .errorMsg").remove();
+              if(!$(value).val()){
+              validationFailed = true;          
+              $(value).parent().append("<span class='errorMsg'> <b>Required field (*)</b></span>");
+              }
+          });
+
+      if (validationFailed) {
+          e.preventDefault();
+          $('html,body').animate({ scrollTop: $(".edit-resource").offset().top - 160 }, { duration: "slow" });
+          return false;
+      }else{
+        var option_all = $("#id_keywords option:selected").map(function () {
+          return $.trim($(this).text());
+        }).get().join(',');      
+        $("#id_choices").val(option_all);
+        $("#id_keywords").empty();
+        
+        option_all = $("#id_authors option:selected").map(function () {
+            return $.trim($(this).text());
+        }).get().join(',');        
+        $("#id_authorsCollection").val(option_all);
+        $("#id_authors").empty();
+
+        var category = $("#id_category").val();
+        $("#id_categorySelected").val(category);            
+        var subcategory = $("#id_subcategory").val();
+        if(subcategory){
+            $("#id_categorySelected").val(subcategory);
+        }
+      }
     });
   });
 
@@ -326,27 +366,6 @@
 
   });
 
-  function completeSubmit(){
-    var option_all = $("#id_keywords option:selected").map(function () {
-        return $.trim($(this).text());
-      }).get().join(',');      
-      $("#id_choices").val(option_all);
-      $("#id_keywords").empty();
-      
-
-      option_all = $("#id_authors option:selected").map(function () {
-          return $.trim($(this).text());
-      }).get().join(',');        
-      $("#id_authorsCollection").val(option_all);
-      $("#id_authors").empty();
-
-      var category = $("#id_category").val();
-      $("#id_categorySelected").val(category);            
-      var subcategory = $("#id_subcategory").val();
-      if(subcategory){
-          $("#id_categorySelected").val(subcategory);
-      }        
-  }
 </script>
 {{ form.media.js }}
 {% endblock scripts %}
