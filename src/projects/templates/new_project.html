@@ -56,7 +56,7 @@
 		<div class="card-text p-3">
         <table class="table mb-0">
 
-          <form action="/new_project" method="post" enctype="multipart/form-data" class="add-new-post" autocomplete="off">
+          <form action="/new_project" method="post" enctype="multipart/form-data" class="add-new-project" autocomplete="off">
             {% csrf_token %}
             <br />
             <div>
@@ -347,15 +347,14 @@
             var id = $(value).parent().parent().attr('id');
             $("#" + id + " .errorMsg").remove();
             if(!$(value).val()){
-              validationFailed = true;
-              //$(value).addClass('error');              
+              validationFailed = true;           
               $(value).parent().append("<span class='errorMsg'> <b>Required field (*)</b></span>");
             }
         });
         
       if (validationFailed) {
           e.preventDefault();
-          $('html,body').animate({ scrollTop: $(".add-new-post").offset().top - 160 }, { duration: "slow" });
+          $('html,body').animate({ scrollTop: $(".add-new-project").offset().top - 160 }, { duration: "slow" });
           return false;
       }else{
         var option_all = $("#id_keywords option:selected").map(function () {
