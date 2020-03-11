@@ -236,7 +236,7 @@
             </div>
             <hr />
 
-              <button onclick="completeSubmit()" type="submit" class="btn btn-success"><i class="fas fa-share-square"></i> Save</button>              
+              <button type="submit" class="btn btn-success"><i class="fas fa-share-square"></i> Save</button>              
           </form>
       </div>
       </table>
@@ -249,9 +249,11 @@
 <script src="{% static 'site/js/site.js' %}"></script>
 <script src="{% static 'scripts/cropper.min.js' %}"></script>
 <script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"></script>
 <script>
   $(document).ready(function () {
-
+    
     var choices = $("#id_choices").val();
     var choices = choices.split(",");
 
@@ -330,6 +332,50 @@
 
     $('#imgResult').on('click', function () {
       $('html,body').animate({ scrollTop: $("#imgResult").offset().top - 220 }, { duration: "slow" });
+    });
+
+    $("form").submit(function (e) {      
+      $('#contactinfoform').show();
+      $('#informationform').show();
+      $('#imagesform').show();
+      $('#organizationform').show();
+      $('#geographyform').show();
+      $('#fundingform').show(); $('.select2-container').attr("style", "width:100%");
+      var validationFailed = false;
+            
+      $.each($("[required]"), function (index, value) {
+            var id = $(value).parent().parent().attr('id');
+            $("#" + id + " .errorMsg").remove();
+            if(!$(value).val()){
+              validationFailed = true;
+              //$(value).addClass('error');              
+              $(value).parent().append("<span class='errorMsg'> <b>Required field (*)</b></span>");
+            }
+        });
+        
+      if (validationFailed) {
+          e.preventDefault();
+          $('html,body').animate({ scrollTop: $(".add-new-post").offset().top - 160 }, { duration: "slow" });
+          return false;
+      }else{
+        var option_all = $("#id_keywords option:selected").map(function () {
+        return $.trim($(this).text());
+        }).get().join(',');      
+        $("#id_choices").val(option_all);
+        $("#id_keywords").empty();
+
+        var fundingBody = $("#id_funding_body option:selected").map(function () {
+          return $.trim($(this).text());
+        }).get().join(',');
+        $("#id_fundingBodySelected").val(fundingBody);
+        $("#id_funding_body").empty();
+
+        var fundingAgency = $("#id_funding_agency option:selected").map(function () {
+          return $.trim($(this).text());
+        }).get().join(',');
+        $("#id_fundingAgencySelected").val(fundingAgency);
+        $("#id_funding_agency").empty();
+      }
     });
 
   });
@@ -464,33 +510,6 @@
       map = leafmap;
       map.on('click', addMarker); 
   }
-
-  function completeSubmit(){
-    $('#contactinfoform').show();
-    $('#informationform').show();
-    $('#imagesform').show();
-    $('#organizationform').show();
-    $('#geographyform').show();   
-
-    var option_all = $("#id_keywords option:selected").map(function () {
-        return $.trim($(this).text());
-    }).get().join(',');      
-    $("#id_choices").val(option_all);
-    $("#id_keywords").empty();
-
-    var fundingBody = $("#id_funding_body option:selected").map(function () {
-      return $.trim($(this).text());
-    }).get().join(',');
-    $("#id_fundingBodySelected").val(fundingBody);
-    $("#id_funding_body").empty();
-
-    var fundingAgency = $("#id_funding_agency option:selected").map(function () {
-      return $.trim($(this).text());
-    }).get().join(',');
-    $("#id_fundingAgencySelected").val(fundingAgency);
-    $("#id_funding_agency").empty();
-  }
-
   
 </script>
 {{ form.media.js }}
