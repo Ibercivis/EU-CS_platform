@@ -3,6 +3,7 @@
 {% load crispy_forms_tags %}
 {% load leaflet_tags %}
 {% block head %}
+
 {{block.super }}
 {% leaflet_js %}
 {% leaflet_css %}
@@ -245,6 +246,27 @@
             </div>
             <hr />
 
+            <div id="customFields"></div>
+            <button onclick="getCustomField()" type="button" class="btn btn-warning">
+              <i class="fas fa-plus-circle"></i> Add custom field
+            </button>
+            <br />
+<!--             <div>
+              <div class="row">
+                <div class="col-5 p-3 ml-5">
+                  {{ form.title|as_crispy_field }}
+                </div>
+              </div>
+              <div class="col-12 p-3 ml-12">
+                {{ form.paragraph|as_crispy_field }}
+              </div>
+            </div> -->
+            <div class="row">
+              <div class="col-5 p-3 ml-5">
+            <textarea id="summernote" name="editordata"></textarea><br/>
+            <div class="summernote">summernote 1</div>
+              </div>
+            </div>
               <button type="submit" class="btn btn-success"><i class="fas fa-share-square"></i> Save</button>
           </form>
       </div>
@@ -263,8 +285,14 @@
 <script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"></script>
+
+
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote-bs4.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote-bs4.min.js"></script>
 <script>
   $(document).ready(function () {
+    $('#summernote').summernote();
+    $('.summernote').summernote();
     var choices = $("#id_choices").val();
     var choices = choices.split(",");
     var choicesSelected = $("#id_choicesSelected").val().split(",");
@@ -568,6 +596,24 @@
       if($("#id_latitude").val())
         editMarker(obj); 
       map.on('click', editMarker);        
+  }
+
+
+  			
+  function getCustomField(){
+    var projectId = $("#projectId").val();        
+    var request = $.ajax(
+        {
+            type: "GET",
+            url: "{% url 'getCustomField' %}",
+            data: {
+                "project_id": projectId
+            },
+            success: function (response) {                
+                $("#customFields").append(response.text);
+            }
+        }
+    );
   }
 
 </script>

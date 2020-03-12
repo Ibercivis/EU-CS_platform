@@ -1,11 +1,12 @@
 from django import forms
 from django.db import models
-from .models import Project, Topic, Status, Keyword, FundingBody, FundingAgency
+from .models import Project, Topic, Status, Keyword, FundingBody, FundingAgency, CustomField
 from django.shortcuts import get_object_or_404
 from django_select2.forms import Select2MultipleWidget, Select2Widget
 from django.core.files import File
 from PIL import Image
 from geopy.geocoders import Nominatim
+from django_summernote.widgets import SummernoteWidget
 
 geolocator = Nominatim(timeout=None)
 
@@ -60,6 +61,9 @@ class ProjectForm(forms.Form):
     funding_program = forms.CharField(max_length=500, required=False)    
     funding_agency =   forms.ModelMultipleChoiceField(queryset=FundingAgency.objects.all(), widget=Select2MultipleWidget, required=False)
     fundingAgencySelected = forms.CharField(widget=forms.HiddenInput(), max_length=100, required=False)
+    #Custom fields
+    title = forms.CharField(max_length=100, required=False)
+    paragraph = forms.CharField(widget=SummernoteWidget(), required=False)
 
     def clean(self):
         start_date = self.data['start_date']
@@ -141,6 +145,12 @@ class ProjectForm(forms.Form):
         keywords = Keyword.objects.all()
         keywords = keywords.filter(keyword__in = choices)
         project.keywords.set(keywords)
+
+        CustomField.objects.get_or_create(title=self.data['title'], paragraph=self.data['paragraph']) 
+        cfields = CustomField.objects.all()
+        project.customField.set(cfields)
+
+
         return 'success'
 
 
