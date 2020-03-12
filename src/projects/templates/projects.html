@@ -26,7 +26,7 @@
 {% endblock %}
 {% block list_of_items %}
 {% for project in projects %}
-<div class="col-lg-4  col-sm-12 mb-4">
+<div class="col-lg-4  col-sm-12 mb-4">				 
 				<div class="card h-100">
 								<a href="/project/{{project.id }}">
 								{% if project.image1 %} 
@@ -66,8 +66,17 @@
 													{% endif %}
 
 													{% endif %}
+													
+													<div id="hidden{{project.id}}">
+													{% if user.is_staff %}
+														{% if project.hidden %}
+															<a onclick="setHidden({{project.id}}, false)"><i class="fas fa-eye-slash"></i></a>
+														{% else %}
+															<a onclick="setHidden({{project.id}}, true)"><i class="fas fa-eye"></i></a>													
+														{% endif %}
+													{% endif %}
+													</div>
 
-										
 											</div>
 			</div>
 			<div class="col-10">
@@ -113,6 +122,24 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
                 url: "{% url 'setFeatured' %}",
                 data: {
                     "project_id": idProject,
+              		csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function (response) {
+                    $("#"+htmlId).load(" #"+htmlId);
+                }
+            }
+        );
+    }
+
+	function setHidden(idProject, hidden){
+		var htmlId = "hidden" + idProject;
+        var request = $.ajax(
+            {
+                type: "POST",
+                url: "{% url 'setHidden' %}",
+                data: {
+                    "project_id": idProject,
+					"hidden": hidden,
               		csrfmiddlewaretoken: '{{ csrf_token }}'
                 },
                 success: function (response) {

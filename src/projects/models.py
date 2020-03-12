@@ -67,6 +67,9 @@ class Project(models.Model):
     fundingBody = models.ForeignKey(FundingBody, on_delete=models.CASCADE,null=True, blank=True) 
     fundingProgram = models.CharField(max_length=500)
     fundingAgency =  models.ForeignKey(FundingAgency, on_delete=models.CASCADE,null=True, blank=True) 
+
+    hidden = models.BooleanField(null=True, blank=True)
+
 		#Rate
 		#TODO: Do we want to use it?
     #rate = models.DecimalField(max_digits=2,decimal_places=1)
