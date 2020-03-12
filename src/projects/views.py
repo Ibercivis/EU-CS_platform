@@ -14,7 +14,7 @@ from datetime import datetime
 from PIL import Image
 from itertools import chain
 from .forms import ProjectForm
-from .models import Project, Topic, Status, Keyword, Votes, FeaturedProjects, FollowedProjects, FundingBody, FundingAgency
+from .models import Project, Topic, Status, Keyword, Votes, FeaturedProjects, FollowedProjects, FundingBody, FundingAgency, CustomField
 import json
 import random
 
@@ -148,6 +148,10 @@ def editProject(request, pk):
 
     fundingAgency = list(FundingAgency.objects.all().values_list('agency',flat=True))
     fundingAgency = ", ".join(fundingAgency)
+
+    cfields = CustomField.objects.all()
+    title = cfields[:1].get().title
+    paragraph = cfields[:1].get().paragraph
     
     form = ProjectForm(initial={
         'project_name':project.name,'url': project.url,'start_date': start_datetime,
@@ -161,6 +165,7 @@ def editProject(request, pk):
         'contact_person': project.author, 'contact_person_email': project.author_email,
         'funding_body': fundingBody, 'fundingBodySelected': project.fundingBody, 'fundingProgram': project.fundingProgram,
         'funding_agency': fundingAgency,'fundingAgencySelected': project.fundingAgency,
+        'title': title, 'paragraph': paragraph,
     })
     
     if request.method == 'POST':
@@ -242,3 +247,13 @@ def setFollowedProject(request):
         followedProject.save()
 
     return JsonResponse(response, safe=False) 
+
+def getCustomField(request):
+    #projectId = request.GET.get("projectId")
+    response = {}
+    title = '<div class="row"><div class="col-5 p-3 ml-5"><label class="control-label">Title</label>'
+    title += '<input type="text" name="title" maxlength="100" class="textinput textInput form-control" ></div></div>'
+    paragraph = '<div class="col-12 p-3 ml-12"><label class="control-label">Paragraph</label>'
+    paragraph += '</div>'
+    response['text']  = title + paragraph
+    return JsonResponse(response)

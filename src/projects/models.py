@@ -28,6 +28,10 @@ class FundingAgency(models.Model):
     def __str__(self):        
         return f'{self.agency}'
 
+class CustomField(models.Model):
+    title = models.TextField()
+    paragraph = models.TextField()
+
 class Project(models.Model):
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     #Database information
@@ -71,6 +75,7 @@ class Project(models.Model):
 		#TODO: Do we want to use it?
     #rate = models.DecimalField(max_digits=2,decimal_places=1)
     #nvoters = models.IntegerField()
+    customField = models.ManyToManyField(CustomField)
     def __str__(self):        
         return f'{self.name}'
 
