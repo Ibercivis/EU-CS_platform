@@ -104,6 +104,9 @@ def projects(request):
     if request.GET.get('featuredCheck'):        
         projects = projects.filter(id__in=featuredProjects)
         filters['featured'] = request.GET['featuredCheck']
+    
+    if not user.is_staff:
+        projects = projects.filter(~Q(hidden=True))
 
     paginator = Paginator(projects, 9) 
     page = request.GET.get('page')
@@ -225,6 +228,14 @@ def setFeatured(request):
 
     return JsonResponse(response, safe=False) 
 
+def setHidden(request):
+    response = {}
+    id = request.POST.get("project_id")
+    hidden = request.POST.get("hidden")
+    project = get_object_or_404(Project, id=id)
+    project.hidden = False if hidden == 'false' else True
+    project.save()
+    return JsonResponse(response, safe=False) 
 
 def setFollowedProject(request):
     response = {}

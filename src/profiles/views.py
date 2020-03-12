@@ -3,6 +3,7 @@ from django.views import generic
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 from . import forms
 from . import models
 from projects.models import Project, FollowedProjects
@@ -79,6 +80,7 @@ def followedProjects(request):
     user = request.user
     followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id', flat=True)    
     followedProjects = Project.objects.filter(id__in=followedProjects)
+    followedProjects = followedProjects.filter(~Q(hidden=True))
     return render(request, 'profiles/followed_projects.html', {'show_user': user, 'followedProjects': followedProjects})
 
 def savedResources(request):

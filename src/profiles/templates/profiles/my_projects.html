@@ -64,6 +64,11 @@
 
 						</div>
 						<div class="card-footer bg-white">
+
+							{% if project.hidden %}
+								<a><i class="fas fa-eye-slash"></i></a>
+							{% endif %}
+
 							<a class="btn btn-outline-primary float-right" target="_black"
 								href="/project/{{project.id }}">
 								Read more
