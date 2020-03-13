@@ -191,14 +191,17 @@ def deleteProject(request, pk):
 def text_autocomplete(request):
     if request.GET.get('q'):
         text = request.GET['q']
-        project_names = Project.objects.filter(name__icontains=text).values_list('name',flat=True).distinct()
-        keywords = Keyword.objects.filter(keyword__icontains=text).values_list('keyword',flat=True).distinct()
-        report = chain(project_names, keywords)
+        report = getNamesKeywords(text)
         json = list(report)
         return JsonResponse(json, safe=False)
     else:
         return HttpResponse("No cookies")
 
+def getNamesKeywords(text):
+    project_names = Project.objects.filter(name__icontains=text).values_list('name',flat=True).distinct()
+    keywords = Keyword.objects.filter(keyword__icontains=text).values_list('keyword',flat=True).distinct()
+    report = chain(project_names, keywords)
+    return report
 
 def host_autocomplete(request):  
     if request.GET.get('q'):

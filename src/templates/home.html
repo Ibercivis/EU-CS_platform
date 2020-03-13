@@ -16,8 +16,8 @@
 			<form id="finder" action="/resources" >
 				<div class="row">
 					<div class="col-lg-9 col-12">
-						<input type="text" id="keywords" name="keywords" autocomplete="off" class="form-control"
-							placeholder="What are you looking for today?">
+						<input type="text" id="keywords" name="keywords" autocomplete="off" class="basicAutoComplete form-control"
+							placeholder="What are you looking for today?" data-url="home_autocomplete/">
 
 					</div>
 					<div class="col-lg-3 col-12">
@@ -40,5 +40,17 @@
 </div>
 	{% endblock splash %}
 {% block script %}
+<script type="text/javascript" src="{% static 'site/js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'site/js/bootstrap.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js"
+integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="anonymous"></script>
+<script
+  src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
+  
+<script>
+	$('.basicAutoComplete').autoComplete(
+    	{ minLength: 3 }
+  	);
+</script>
 {{ block.super }}
 {% endblock script %}
