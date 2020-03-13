@@ -7,6 +7,7 @@ from django.core.files import File
 from PIL import Image
 from geopy.geocoders import Nominatim
 from django_summernote.widgets import SummernoteWidget
+from itertools import chain
 
 geolocator = Nominatim(timeout=None)
 
@@ -146,11 +147,6 @@ class ProjectForm(forms.Form):
         keywords = keywords.filter(keyword__in = choices)
         project.keywords.set(keywords)
 
-        CustomField.objects.get_or_create(title=self.data['title'], paragraph=self.data['paragraph']) 
-        cfields = CustomField.objects.all()
-        project.customField.set(cfields)
-
-
         return 'success'
 
 
@@ -160,3 +156,20 @@ def getCountryCode(latitude, longitude):
         return location.raw['address']['country_code']
     else:
         return ''
+
+
+class CustomFieldForm(forms.Form):
+    title = forms.CharField(max_length=100)
+    paragraph = forms.CharField(widget=SummernoteWidget())
+    def save(self, args):
+        cfield = CustomField(title=self.data['title'], paragraph=self.data['paragraph'])
+        pk = self.data.get('projectID', '')
+        print(pk)
+        cfield.save()
+        cfields = CustomField.objects.all().filter(project = pk)
+        print(cfields)
+
+        project = get_object_or_404(Project, id=pk)
+        project.customField.set(cfields)
+        project.save()
+        return 'success'

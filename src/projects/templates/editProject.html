@@ -247,10 +247,31 @@
             <hr />
 
             <div id="customFields"></div>
-            <button onclick="getCustomField()" type="button" class="btn btn-warning">
+
+            <br />
+            
+            (Custom fields added here)
+            <br/>
+            <div id="customField" style="display:none">                  
+                <form action="#">
+                  {% csrf_token %}
+                  <div class="row">
+                    <div class="col-5 p-3 ml-5">
+                      {{ cFieldForm.title |as_crispy_field }}
+                    </div>
+                  </div>
+                  <div class="col-12 p-3 ml-12">
+                    {{ cFieldForm.paragraph|as_crispy_field }}  
+                  </div>
+                  <button type="submit" class="btn btn-success"><i class="fas fa-share-square"></i> Add</button>        
+                </form>
+             </div>
+
+             <button id="customFieldButton" type="button" class="btn btn-warning">
               <i class="fas fa-plus-circle"></i> Add custom field
             </button>
-            <br />
+            <br/><br/>
+
 <!--             <div>
               <div class="row">
                 <div class="col-5 p-3 ml-5">
@@ -261,11 +282,7 @@
                 {{ form.paragraph|as_crispy_field }}
               </div>
             </div> -->
-            <div class="row">
-              <div class="col-5 p-3 ml-5">
-            <textarea id="summernote" name="editordata"></textarea><br/>
-            <div class="summernote">summernote 1</div>
-              </div>
+
             </div>
               <button type="submit" class="btn btn-success"><i class="fas fa-share-square"></i> Save</button>
           </form>
@@ -291,8 +308,6 @@
   <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote-bs4.min.js"></script>
 <script>
   $(document).ready(function () {
-    $('#summernote').summernote();
-    $('.summernote').summernote();
     var choices = $("#id_choices").val();
     var choices = choices.split(",");
     var choicesSelected = $("#id_choicesSelected").val().split(",");
@@ -412,8 +427,13 @@
       $('html,body').animate({ scrollTop: $("#imgResult").offset().top - 220 }, { duration: "slow" });
     });
 
+    $('#customFieldButton').on('click', function () {
+      $('#customField').toggle();
+      $('#customFieldButton').prop('disabled', true);
+    });
 
-    $("form").submit(function (e) {      
+
+    $("form").submit(function (e) {
       $('#contactinfoform').show();
       $('#informationform').show();
       $('#imagesform').show();

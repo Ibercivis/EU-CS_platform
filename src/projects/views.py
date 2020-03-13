@@ -13,7 +13,7 @@ from django.db.models import Avg, Max, Min, Sum
 from datetime import datetime
 from PIL import Image
 from itertools import chain
-from .forms import ProjectForm
+from .forms import ProjectForm, CustomFieldForm
 from .models import Project, Topic, Status, Keyword, Votes, FeaturedProjects, FollowedProjects, FundingBody, FundingAgency, CustomField
 import json
 import random
@@ -167,22 +167,28 @@ def editProject(request, pk):
         'funding_agency': fundingAgency,'fundingAgencySelected': project.fundingAgency,
         'title': title, 'paragraph': paragraph,
     })
+
+    cFieldForm = CustomFieldForm()
     
     if request.method == 'POST':
-        form = ProjectForm(request.POST, request.FILES)
-        if form.is_valid():
-            images = []
-            image1_path = saveImage(request, form, 'image1', '1')
-            image2_path = saveImage(request, form, 'image2', '2')
-            image3_path = saveImage(request, form, 'image3', '3')
-            images.append(image1_path)
-            images.append(image2_path)
-            images.append(image3_path)
-            form.save(request, images)
-            return redirect('/project/'+ str(pk))
+        if request.POST.get('title', None):
+            cFieldForm = CustomFieldForm(request.POST)
+            cFieldForm.save(request)
         else:
-            print(form.errors)
-    return render(request, 'editProject.html', {'form': form, 'project':project, 'user':user})
+            form = ProjectForm(request.POST, request.FILES)
+            if form.is_valid():
+                images = []
+                image1_path = saveImage(request, form, 'image1', '1')
+                image2_path = saveImage(request, form, 'image2', '2')
+                image3_path = saveImage(request, form, 'image3', '3')
+                images.append(image1_path)
+                images.append(image2_path)
+                images.append(image3_path)
+                form.save(request, images)
+                return redirect('/project/'+ str(pk))
+            else:
+                print(form.errors)
+    return render(request, 'editProject.html', {'form': form, 'cFieldForm': cFieldForm, 'project':project, 'user':user})
 
 
 def deleteProject(request, pk):
