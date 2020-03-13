@@ -47,6 +47,8 @@ class Resource(models.Model):
     theme = models.ManyToManyField(Theme)
     image = models.ImageField(upload_to='images/', max_length=300)
     resourceDOI = models.CharField(max_length=100)
+    
+    hidden = models.BooleanField(null=True, blank=True)
 
     def __str__(self):
         return self.name

@@ -87,4 +87,5 @@ def savedResources(request):
     user = request.user
     savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id', flat=True)
     savedResources = Resource.objects.filter(id__in=savedResources)
+    savedResources = savedResources.filter(~Q(hidden=True))
     return render(request, 'profiles/saved_resources.html', {'show_user': user, 'savedResources': savedResources})

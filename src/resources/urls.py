@@ -13,5 +13,6 @@ urlpatterns = [
     path('get_sub_category/', views.get_sub_category, name='get_sub_category'),
     path('setFeaturedRsc/', views.setFeaturedRsc, name='setFeaturedRsc'),
     path('setSavedResource/', views.setSavedResource, name='setSavedResource'),
+    path('setHiddenResource/', views.setHiddenResource, name='setHiddenResource'),
 ]
 

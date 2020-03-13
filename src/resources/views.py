@@ -55,6 +55,11 @@ def resources(request):
         resources = resources.filter(id__in=featuredResources)
         filters['featured'] = request.GET['featuredCheck']
 
+     
+    if not user.is_staff:
+        resources = resources.filter(~Q(hidden=True)) 
+
+
     paginator = Paginator(resources, 8)
     page = request.GET.get('page')
     resources = paginator.get_page(page)
@@ -239,4 +244,14 @@ def setSavedResource(request):
         savedResource = SavedResources(resource=fResource, user=fUser)
         savedResource.save()
 
+    return JsonResponse(response, safe=False) 
+
+
+def setHiddenResource(request):
+    response = {}
+    id = request.POST.get("resource_id")
+    hidden = request.POST.get("hidden")
+    resource = get_object_or_404(Resource, id=id)
+    resource.hidden = False if hidden == 'false' else True
+    resource.save()
     return JsonResponse(response, safe=False) 
