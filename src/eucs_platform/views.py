@@ -1,12 +1,17 @@
 from django.views import generic
 from django.shortcuts import render
+from django.http import HttpResponse, JsonResponse
 from projects.models import Project
 from resources.models import Resource, ResourceGroup, ResourcesGrouped, FeaturedResources
 from blog.models import Post
 from projects.models import FeaturedProjects, Project
 import random
+import json
+from itertools import chain
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
+from projects.views import getNamesKeywords
+from resources.views import getRscNamesKeywords
 
 def home(request):
     #groups = ResourceGroup.objects.get_queryset().order_by('id')
@@ -79,7 +84,16 @@ def status(request):
     return render(request, 'status.html')
 
 
-
+def home_autocomplete(request):
+    if request.GET.get('q'):
+        text = request.GET['q']
+        resources = getRscNamesKeywords(text)
+        projects = getNamesKeywords(text)
+        report = chain(resources, projects)
+        json = list(report)
+        return JsonResponse(json, safe=False)
+    else:
+        return HttpResponse("No cookies")
 
 
 

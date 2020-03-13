@@ -165,13 +165,17 @@ def deleteResource(request, pk):
 def resources_autocomplete(request):  
     if request.GET.get('q'):
         text = request.GET['q']
-        rsc_names = Resource.objects.filter(name__icontains=text).values_list('name',flat=True).distinct()
-        keywords = Keyword.objects.filter(keyword__icontains=text).values_list('keyword',flat=True).distinct()
-        report = chain(rsc_names, keywords)
+        report = getRscNamesKeywords(text)
         json = list(report)
         return JsonResponse(json, safe=False)
     else:
         return HttpResponse("No cookies")
+
+def getRscNamesKeywords(text):
+    rsc_names = Resource.objects.filter(name__icontains=text).values_list('name',flat=True).distinct()
+    keywords = Keyword.objects.filter(keyword__icontains=text).values_list('keyword',flat=True).distinct()
+    report = chain(rsc_names, keywords)
+    return report
 
 def license_autocomplete(request):  
     if request.GET.get('q'):
