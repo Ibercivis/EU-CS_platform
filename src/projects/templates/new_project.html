@@ -29,7 +29,11 @@
         </button>
       </div>
       <div class="modal-body">
-        <img src="" id="image" style="max-width: 100%;">
+				<div class="row">
+					<div class="col-11">
+        <img src="" id="image" class="img-fluid img-zoom" >
+					</div>
+				</div>
       </div>
       <div class="modal-footer">
         <div class="btn-group pull-left" role="group">
@@ -55,10 +59,8 @@
 		</div>
 		<div class="card-text p-3">
         <table class="table mb-0">
-
           <form action="/new_project" method="post" enctype="multipart/form-data" class="add-new-project" autocomplete="off">
             {% csrf_token %}
-            <br />
             <div>
               <h4>Project info</h4>
             </div>
@@ -103,12 +105,9 @@
                 
               </div>
             </div>
-
-
             <hr />
             <h4>Contact person info</h4>
-            <a id="contactinfo" href="#">Show</a>
-            <div id="contactinfoform" style="display:none">
+            <div id="contactinfoform">
               <div class="row">
                 <div class="col-5 p-3 ml-5">
                   {{ form.contact_person|as_crispy_field }}
@@ -121,15 +120,11 @@
                 <div class="col-5 p-3 ml-5">
                   {{ form.contact_person_phone|as_crispy_field }}
                 </div>
-
               </div>
             </div>
             <hr />
-
-
             <h4>Images and communications</h4>
-            <a id="images" href="#">Show</a>
-            <div id="imagesform" style="display:none">
+            <div id="imagesform">
               <div class="row">
                 <div class="col-5 p-3 ml-5">
                   {{ form.image1|as_crispy_field }}
@@ -137,7 +132,7 @@
                   {{ form.y1|as_crispy_field }}
                   {{ form.height1|as_crispy_field }}
                   {{ form.width1|as_crispy_field }}
-                  <a id="imgResult1" href="#"> <img id="imageResult1" src="" alt="Image not upload"></a>
+                  <a id="imgResult1" href="#"> <img iclass="img-fluid img-zoom" id="imageResult1" src="" alt=""></a>
                 </div>
                 <div class="col-5 p-3 ml-5">
                   {{ form.image_credit1|as_crispy_field }}
@@ -150,7 +145,7 @@
                   {{ form.y2|as_crispy_field }}
                   {{ form.height2|as_crispy_field }}
                   {{ form.width2|as_crispy_field }}
-                  <a id="imgResult2" href="#"> <img id="imageResult2" src="" alt="Image not upload"></a>
+                  <a id="imgResult2" href="#"><img class="img-fluid img-zoom" id="imageResult2" src="" alt=""></a>
                 </div>
                 <div class="col-5 p-3 ml-5">                 
         					{{ form.image_credit2|as_crispy_field }}
@@ -163,7 +158,7 @@
                   {{ form.y3|as_crispy_field }}
                   {{ form.height3|as_crispy_field }}
                   {{ form.width3|as_crispy_field }}
-                  <a id="imgResult3" href="#"> <img id="imageResult3" src="" alt="Image not upload"></a>
+                  <a id="imgResult3" href="#"><img class="img-fluid img-zoom" id="imageResult3" src="" alt=""></a>
                 </div>
                 <div class="col-5 p-3 ml-5">                 
 									{{ form.image_credit3|as_crispy_field }}
@@ -172,8 +167,8 @@
             </div>
             <hr />
             <h4>Geography</h4>
-            <a id="geography" href="#">Show</a>
-            <div id="geographyform" style="display:none">
+						<p>Main location where the project takes place (click on the map)</p>
+            <div id="geographyform">
               <div class="row">
                 <div class="col-5 p-3 ml-5">
                   {{ form.latitude|as_crispy_field }}
@@ -187,8 +182,7 @@
             <hr />
 
             <h4>Personal and Organizational Affiliates</h4>
-            <a id="organization" href="#">Show</a>
-            <div id="organizationform" style="display:none">
+            <div id="organizationform">
               <div class="row">
                 <div class="col-5 p-3 ml-5">
                   {{ form.host|as_crispy_field }}
@@ -200,8 +194,7 @@
             <hr />
 
             <h4>Supplementary information for Citizen Science</h4>
-            <a id="information" href="#">Show</a>
-            <div id="informationform" style="display:none">
+            <div id="informationform">
               <div class="row">
                 <div class="col-5 p-3 ml-5">
                   {{ form.how_to_participate|as_crispy_field }}
@@ -214,8 +207,7 @@
             <hr />
 
             <h4>Funding</h4>
-            <a id="funding" href="#">Show</a>
-            <div id="fundingform" style="display:none">
+            <div id="fundingform">
               <div class="row">
                 <div class="col-5 p-3 ml-5">
                   {{ form.funding_body|as_crispy_field }}
@@ -299,10 +291,6 @@
     });
 
 
-    $('#contactinfo').on('click', function () {
-      $('#contactinfoform').toggle();
-      $('html,body').animate({ scrollTop: $("#contactinfo").offset().top - 160 }, { duration: "slow" });
-    });
 
     $('#images').on('click', function () {
       $('#imagesform').toggle();
