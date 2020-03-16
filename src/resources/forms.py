@@ -1,7 +1,7 @@
 from django import forms
 from django.db import models
 from django.utils import timezone
-from .models import Resource, Keyword, Category, Audience, Theme
+from .models import Resource, Keyword, Category, Audience, Theme, ResourceGroup, ResourcesGrouped
 from django.shortcuts import get_object_or_404
 from datetime import datetime, date
 from django.forms import ModelForm
@@ -30,10 +30,11 @@ class ResourceForm(forms.ModelForm):
     year_of_publication = forms.IntegerField()
     name = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'autocomplete':'nope'}))
     license = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'autocomplete':'nope'}))
+    curatedList = forms.ModelMultipleChoiceField(queryset=ResourceGroup.objects.all(), widget=Select2MultipleWidget, required=False,label="Curated lists")
 
     class Meta:
         model = Resource
-        fields = ["name", "abstract", "url", "audience", "theme","keywords", "license", "publisher",
+        fields = ["name", "abstract", "url", "audience", "theme","keywords", "license", "publisher", "curatedList",
          "category", "authors","author_email", "image", "x", "y", "width", "height", "resource_DOI", "year_of_publication"]
                 
 
@@ -67,6 +68,17 @@ class ResourceForm(forms.ModelForm):
         rsc.save()
 
         rsc.theme.set(self.data.getlist('theme'))
+
+        curatedList = self.data.getlist('curatedList')
+        
+        if args.user.is_staff:
+            objs = ResourcesGrouped.objects.filter(resource=rsc)
+            if objs:
+                for obj in objs:
+                    obj.delete()        
+            for clist in curatedList:
+                rscGroup = get_object_or_404(ResourceGroup, id=clist)
+                ResourcesGrouped.objects.get_or_create(group=rscGroup,resource=rsc)
 
         # Keywords
         choices = self.data['choices']

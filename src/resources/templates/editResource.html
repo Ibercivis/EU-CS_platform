@@ -146,7 +146,9 @@
                   {{ form.theme|as_crispy_field }}
               </div>
               <div class="col-5 p-3 ml-5">                
-                  
+                {% if user.is_staff %}
+                    {{ form.curatedList|as_crispy_field }}
+                {% endif %}  
               </div>
             </div>
               <button type="submit" class="btn btn-success"><i class="fas fa-share-square"></i> Save</button>
@@ -167,7 +169,7 @@
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"></script>
 <script>
-  $(document).ready(function () {
+  $(document).ready(function () {  
     var choices = $("#id_choices").val();
     var choices = choices.split(",");
     
@@ -232,6 +234,8 @@
     $('#imgResult').on('click', function () {
       $('html,body').animate({ scrollTop: $("#imgResult").offset().top - 220 }, { duration: "slow" });
     });
+
+    $("#div_id_curatedList select").val({{curatedGroups}});
 
     $("form").submit(function (e) {
       var validationFailed = false;

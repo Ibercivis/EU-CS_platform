@@ -13,7 +13,7 @@ from itertools import chain
 from authors.models import Author
 from PIL import Image
 from datetime import datetime
-from .models import Resource, Keyword, Category, FeaturedResources, SavedResources, Theme, Category
+from .models import Resource, Keyword, Category, FeaturedResources, SavedResources, Theme, Category, ResourcesGrouped
 from .forms import ResourceForm
 
 
@@ -124,6 +124,8 @@ def editResource(request, pk):
     authorsCollection = list(Author.objects.all().values_list('author',flat=True))
     authorsCollection = ", ".join(authorsCollection)
 
+    curatedGroups = list(ResourcesGrouped.objects.all().filter(resource_id=pk).values_list('group_id', flat=True))
+
     form = ResourceForm(initial={
         'name':resource.name, 'abstract': resource.abstract, 'image': resource.image,'resource_DOI': resource.resourceDOI,
         'url': resource.url,'license': resource.license, 'choices': choices, 'theme': resource.theme.all,
@@ -154,7 +156,7 @@ def editResource(request, pk):
             form.save(request, '/' + image_path)
             return redirect('/resource/'+ str(pk))
 
-    return render(request, 'editResource.html', {'form': form, 'resource': resource,
+    return render(request, 'editResource.html', {'form': form, 'resource': resource, 'curatedGroups': curatedGroups,
      'user': user, 'settings': settings })
 
 def deleteResource(request, pk):
