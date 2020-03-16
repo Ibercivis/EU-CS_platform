@@ -45,7 +45,7 @@
 
 								<div class="card-body">
 												<h5 class="card-title mt-3 mb-3"> <a class="card-link" href="/project/{{project.id }}">{{ project.name }}</a></h5>
-														<div class="card-text mt-3">{{project.description | truncatechars:100 }}</div>
+														<div class="card-text mt-3">{{project.description | safe | truncatechars:100 }}</div>
 									{% for country in countries %}
 													{% if country.code == project.country %}
 														<a class="badge  badge-dark mt-3" href="projects?country={{country.code}}">{{ country.name }}</a>
