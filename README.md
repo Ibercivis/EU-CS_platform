@@ -15,6 +15,9 @@ python -m pip install --upgrade pip
 ```
 pip install -U django
 ```
+
+Configure a Database. IE a PostgreSQL DB and configure database section in \src\eucs_platform\settings\base.py with the correct data.
+
 In source directory: <br/>
     ```
     pip install -r requirements.txt
