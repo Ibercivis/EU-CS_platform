@@ -45,7 +45,7 @@
 												{% endfor %}
 												{% for topic in project.topic.all %} <a class="badge badge-dark" href="projects?keywords=&topic={{topic|urlencode}}">{{topic}}</a>  {% endfor %}
 												{% for keyword in project.keywords.all %} <a class="badge badge-info" href="projects?keywords={{keyword|urlencode}}">{{keyword}}</a>  {% endfor %}
-											<div class="card-text mt-2">{{project.description | truncatechars:100 }}</div>
+											<div class="card-text mt-2">{{project.description | safe | truncatechars:100 }}</div>
 									
 																		</div>
 	<div class="card-footer bg-white">

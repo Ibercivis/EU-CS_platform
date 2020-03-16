@@ -1,9 +1,10 @@
 from django import forms
 from django.db import models
-from .models import Project, Topic, Status, Keyword, FundingBody, FundingAgency
+from django_summernote.widgets import SummernoteWidget
 from django.shortcuts import get_object_or_404
 from django_select2.forms import Select2MultipleWidget, Select2Widget
 from django.core.files import File
+from .models import Project, Topic, Status, Keyword, FundingBody, FundingAgency
 from PIL import Image
 from geopy.geocoders import Nominatim
 
@@ -14,7 +15,7 @@ class ProjectForm(forms.Form):
     #Basic Project Information
     project_name = forms.CharField(max_length=200)
     aim = forms.CharField(max_length=1000, widget=forms.TextInput(attrs={'autocomplete':'nope'}),label="Aim of the project")
-    description = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}), max_length=2000, label="Project description (max 2000 characters")    
+    description = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 2000}}), label="Project description (max 2000 characters)")
     choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     choicesSelected = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     keywords = forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False,label="Keywords (Select or write a new ones, comma separated)")
@@ -52,8 +53,8 @@ class ProjectForm(forms.Form):
     #Personal and Organizational Affiliates
     host = forms.CharField(max_length=100, label="Name of the institution hosting the project")
     #Supplementary information for Citizen Science
-    how_to_participate = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}), max_length=1000, required=False, label="How to participate in the project (max 1000 characters)")
-    equipment = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}), max_length=200, required=False, label="Equipment needeed to participate (max 200 characters)")
+    how_to_participate = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 1000}}), required=False, label="How to participate in the project (max 1000 characters)")
+    equipment = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 200}}), required=False, label="Equipment needeed to participate (max 200 characters)")
     #Funding
     funding_body =  forms.ModelMultipleChoiceField(queryset=FundingBody.objects.all(), widget=Select2MultipleWidget, required=False, label="Funding bodies (Select or write new one)")
     fundingBodySelected = forms.CharField(widget=forms.HiddenInput(), max_length=100, required=False)
