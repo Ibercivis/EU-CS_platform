@@ -28,61 +28,65 @@
 {% for project in projects %}
 <div class="col-lg-4  col-sm-12 mb-4">				 
 				<div class="card h-100 shadow-sm ">
-								<a href="/project/{{project.id }}">
+								<a class="card-img-wrap "href="/project/{{project.id }}">
+
 								{% if project.image1 %} 
-								<img class="img-fluid img-zoom lazyload" src="{{ project.image1 }}" />
+								<img class="card-img-top img-fluid img-zoom lazyload" src="{{ project.image1 }}" />
 								{% else %}
-								<img class="img-fluid img-zoom lazyload" src="{% static 'site/img/project.png' %}" />
+								<img class="card-img-top img-fluid img-zoom lazyload" src="{% static 'site/img/project.png' %}" />
 								{% endif %}
+
+								<div class="upper">
+							{% for topic in project.topic.all %}<a class="badge badge-dark" href="projects?keywords=&topic={{topic|urlencode}}">{{topic | upper}}</a><br> {% endfor %}
+								</div>
+
 								</a>
 
+
 								<div class="card-body">
-												<h5 class="card-title"> <a class="card-link" href="/project/{{project.id }}">{{ project.name }}</a></h5>
-												{% for country in countries %}
+												<h5 class="card-title mt-3 mb-3"> <a class="card-link" href="/project/{{project.id }}">{{ project.name }}</a></h5>
+														<div class="card-text mt-3">{{project.description | truncatechars:100 }}</div>
+									{% for country in countries %}
 													{% if country.code == project.country %}
-														<a class="badge  badge-success" href="projects?country={{country.code}}">{{ country.name }}</a>
+														<a class="badge  badge-dark mt-3" href="projects?country={{country.code}}">{{ country.name }}</a>
 													{% endif %}
 												{% endfor %}
-												{% for topic in project.topic.all %} <a class="badge badge-dark" href="projects?keywords=&topic={{topic|urlencode}}">{{topic}}</a>  {% endfor %}
-												{% for keyword in project.keywords.all %} <a class="badge badge-info" href="projects?keywords={{keyword|urlencode}}">{{keyword}}</a>  {% endfor %}
-											<div class="card-text mt-2">{{project.description | truncatechars:100 }}</div>
+												<br>
+												{% for keyword in project.keywords.all %} <a class="badge badge-secondary" href="projects?keywords={{keyword|urlencode}}">{{keyword}}</a>  {% endfor %}
+
 									
 																		</div>
-	<div class="card-footer bg-white">
+	<div class="card-footer bg-white border-top-0">
 		<div class="row">
 			<div class="col-2">
 			<div id="featured{{project.id}}" class="float-left">
 												{% if user.is_staff %}
 													{% if project.id in featuredProjects %}
-													<i onclick="setFeatured({{project.id}})" class="fas fa-check mt-2" /></i>
+													<a href="" style="color: Green" ><i style="color: Green" onclick="setFeatured({{project.id}})" class="fas fa-check mt-2" /></i></a>
 													{% else %}
-													<i onclick="setFeatured({{project.id}})" class="fas fa-hourglass-half mt-2" src="{% static 'site/img/icon_bw.png' %}" /></i>
+													<a href="" style="color: Tomato"><i onclick="setFeatured({{project.id}})" class="fas fa-hourglass-half mt-2"></i></a>
 													{% endif %}
 												{% else %}
 													{% if project.id in featuredProjects %}
-													<i class="fas fa-check mt2"></i>
+													<span style="color: Green" data-toggle="tooltip" data-placement="top" title="Approved under EU-CITIZEN.SCIENCE criteria"><i class="fas fa-check mt2"></i></span>
 													{% else %}
-													<img class="img-fluid mt-2" src="{% static 'site/img/icon_bw.png' %}"/>
+													<span style="color: Tomato" data-toggle="tooltip" data-placement="top" title="Waiting for moderation"><i class="fas fa-hourglass-half mt-2"></i></span>
 													{% endif %}
 
 													{% endif %}
 											</div>
-		</div>
-		<div class="col-2">
 		<div id="hidden{{project.id}}" class="float-left">
 													{% if user.is_staff %}
 														{% if project.hidden %}
-															<a onclick="setHidden({{project.id}}, false)"><i class="fas fa-eye-slash mt-2"></i></a>
+															<a style="color: Tomato;" onclick="setHidden({{project.id}}, false)"><i class="fas fa-eye-slash mt-2"></i></a>
 														{% else %}
-															<a onclick="setHidden({{project.id}}, true)"><i class="fas fa-eye mt-2"></i></a>													
+															<a style="color:Green" onclick="setHidden({{project.id}}, true)"><i class="fas fa-eye mt-2"></i></a>													
 														{% endif %}
 													{% endif %}
 													</div>
 
 			</div>
-			<div class="col-8">
-										
-
+			<div class="col-10">
 			{% if user.is_authenticated %}
 													<div id="followed{{project.id}}">
 														{% if project.id in followedProjects %}
@@ -97,7 +101,6 @@
 											</div>
 				</div>
 			</div>
-
 				</div><!-- end of card footer -->
 </div><!-- end of card -->
 {% endfor %}

@@ -5,6 +5,7 @@ main {
 	margin-top: 80px;
 	font-weight: 200;
 	min-height: 100%;
+	background-color: #f8f8f8;
 }
 
 h2, h3, h4,h5 {
@@ -50,4 +51,45 @@ display:none;
 }
 .nav-link.active{
 	border-bottom: 2px solid #007bff;
+}
+.card-link{
+	color: #fc5b62;
+	font-weight: 500;
+	font-family: "Poppins", Helvetica, sans-serif;
+	font-size: 1.2em;
+  transition: color .25s;
+
+}
+.card-link:hover{
+	color: #333;
+}
+
+.card-img-wrap {
+  overflow: hidden;
+  position: relative;
+}
+.card-img-wrap:after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+
+}
+.card-img-wrap img {
+  transition: transform .25s;
+  width: 100%;
+  transform: scale(1.1);
+}
+.card-img-wrap:hover img {
+  transform: scale(1.0);
+}
+.upper {
+	position: absolute;
+	top: 15px;
+	left: 15px;
+}
+.upper a{
+	background-color: rgba(0,0,0,0.6);
+	font-family: "Poppins", Helvetica, sans-serif;
+	color: rgb(204, 204, 204);
+	font-weight: 500;
 }
