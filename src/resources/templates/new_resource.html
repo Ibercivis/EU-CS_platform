@@ -8,10 +8,10 @@
 {{ form.media.css }}
 {% endblock head %}
 
-{% block title %}{{ block.super }}Projects{% endblock %}
+{% block title %}{{ block.super }}New resource{% endblock %}
 
 {% block navbar-left %}
-{% include "_navbar.html" with active_link="projects" %}
+{% include "_navbar.html" with active_link="resources" %}
 {% endblock %}
 
 
@@ -143,7 +143,9 @@
                                     {{ form.theme|as_crispy_field }}
                                 </div>
                                 <div class="col-5 p-3 ml-5">
-                                                                    
+                                    {% if user.is_staff %}
+                                        {{ form.curatedList|as_crispy_field }}
+                                    {% endif %}
                                 </div>
                             </div>
                                 <button type="submit" class="btn btn-success"> <i class="fas fa-share-square"></i> Save</button>

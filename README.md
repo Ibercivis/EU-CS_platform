@@ -15,6 +15,9 @@ python -m pip install --upgrade pip
 ```
 pip install -U django
 ```
+
+Configure a Database. IE a PostgreSQL DB and configure database section in \src\eucs_platform\settings\base.py with the correct data.
+
 In source directory: <br/>
     ```
     pip install -r requirements.txt
@@ -23,6 +26,11 @@ In source directory: <br/>
 cd src
 cp eucs_platform/settings/local.sample.env eucs_platform/settings/local.env
 ```
+
+```
+python manage.py migrate
+```
+
 ```
 python manage.py loaddata projects/fixtures/topics.json
 python manage.py loaddata projects/fixtures/status.json
@@ -31,9 +39,6 @@ python manage.py loaddata resources/fixtures/themes.json
 python manage.py loaddata resources/fixtures/audiences.json
 ```
 
-```
-python manage.py migrate
-```
 
 ## Launch
 ```
