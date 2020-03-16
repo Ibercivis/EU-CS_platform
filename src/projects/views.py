@@ -150,8 +150,11 @@ def editProject(request, pk):
     fundingAgency = ", ".join(fundingAgency)
 
     cfields = CustomField.objects.all()
-    title = cfields[:1].get().title
-    paragraph = cfields[:1].get().paragraph
+    title = ''
+    paragraph = ''
+    if cfields:
+        title = cfields[:1].get().title
+        paragraph = cfields[:1].get().paragraph
     
     form = ProjectForm(initial={
         'project_name':project.name,'url': project.url,'start_date': start_datetime,
