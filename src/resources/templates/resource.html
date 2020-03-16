@@ -42,7 +42,7 @@
 			{% for theme in resource.theme.all %}<a class="badge badge-pill badge-info" href="/resources?theme={{theme.id}}">{{ theme }}</a> {% endfor %}
 			{% for keyword in resource.keywords.all %} <a class="badge badge-pill badge-secondary" href="/resources?keywords={{keyword}}">{{keyword}}</a>  {% endfor %}
 			<br /><br>
-                <p><b>Abstract: </b> {{ resource.abstract }}</p>
+                <p><b>Abstract: </b> {{ resource.abstract | safe }}</p>
                 <p><b> URL: </b><a href="{{resource.url}}" target="_blank">{{resource.url}}</a></p>
                 <p><b>Author(s): </b>{% for author in resource.authors.all %}{{ author }} {% endfor %}</p>
                 <p><b>Author's email: </b>{{ resource.author_email }}</p>
