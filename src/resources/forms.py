@@ -1,16 +1,18 @@
 from django import forms
 from django.db import models
 from django.utils import timezone
-from .models import Resource, Keyword, Category, Audience, Theme, ResourceGroup, ResourcesGrouped
 from django.shortcuts import get_object_or_404
-from datetime import datetime, date
+from django_summernote.widgets import SummernoteWidget
 from django.forms import ModelForm
 from django_select2.forms import Select2MultipleWidget
+from .models import Resource, Keyword, Category, Audience, Theme, ResourceGroup, ResourcesGrouped
 from authors.models import Author
 from PIL import Image
+from datetime import datetime, date
+
 
 class ResourceForm(forms.ModelForm):
-    abstract = forms.CharField(widget=forms.Textarea(attrs={"rows":5, "cols":20}), max_length=1000)   
+    abstract = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 1000}}), max_length=1000)
     choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     choicesSelected = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     keywords = forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False, label="Keywords (comma separated)")

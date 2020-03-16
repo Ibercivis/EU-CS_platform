@@ -52,7 +52,7 @@
                 <p><b>Website: </b><a href="{{project.url}}">{{project.url}}</a></p>
 </div>
 <div class="col-xl-6">
-                <p><b>Description: </b>{{project.description}}</p>
+                <p><b>Description: </b>{{project.description | safe}}</p>
 </div>
 </div>
 <div class="row">
@@ -65,11 +65,11 @@
 </div>
 <div class="row">
 <div class="col-xl-6 col-12 mt-2">
-                <p><b>How to participate: </b>{{project.howToParticipate}}</p>
+                <p><b>How to participate: </b>{{project.howToParticipate | safe}}</p>
 
 </div>
 <div class="col-xl-6 col-12 mt-2">
-                <p><b>Needed equipment:</b>{{project.equipment}}</p>
+                <p><b>Needed equipment:</b>{{project.equipment |safe}}</p>
 
 </div>
 
