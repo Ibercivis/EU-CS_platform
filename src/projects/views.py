@@ -58,9 +58,9 @@ def saveImage(request, form, element, ref):
         image = Image.open(photo)
         cropped_image = image.crop((x, y, w+x, h+y))
         if(ref == '3'):
-            resized_image = cropped_image.resize((1100, 300), Image.ANTIALIAS)
+            resized_image = cropped_image.resize((1100, 400), Image.ANTIALIAS)
         else:
-            resized_image = cropped_image.resize((400, 300), Image.ANTIALIAS)
+            resized_image = cropped_image.resize((600, 400), Image.ANTIALIAS)
         _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
         random_num = random.randint(0, 1000)
         image_path = "media/images/" + _datetime + '_' + str(random_num) + '_' + photo.name 
