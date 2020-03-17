@@ -114,7 +114,7 @@ WSGI_APPLICATION = "eucs_platform.wsgi.application"
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'eucitizenscience_dev',
+            'NAME': 'eucitizenscience',
             'USER': 'eucitizenscience',
             'PASSWORD': 'eucitizenscience',
             'HOST': 'localhost',
@@ -163,6 +163,18 @@ LEAFLET_CONFIG = {
     'DEFAULT_ZOOM': 2,
     'MIN_ZOOM': 2,
     'RESET_VIEW': False
+}
 
+SUMMERNOTE_THEME = 'bs4' 
 
+SUMMERNOTE_CONFIG = {
+    'iframe': True,
+    'summernote': {
+        # As an example, using Summernote Air-mode
+        'airMode': False,
+        'width': '100%',
+        'height': '300',
+        'toolbar': ['bold', 'italic', 'underline'],
+    },
+    'disable_attachment': True,
 }

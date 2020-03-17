@@ -29,7 +29,11 @@
             </button>
           </div>
           <div class="modal-body">
-            <img src="" id="image" style="max-width: 100%;">
+            <div class="row">
+              <div class="col-11">
+                <img src="" id="image" class="img-fluid img-zoom">
+              </div>
+            </div>
           </div>
           <div class="modal-footer">
             <div class="btn-group pull-left" role="group">
@@ -47,7 +51,7 @@
       </div>
     </div>
     <!-- END MODAL TO CROP -->
-    
+
 <div class="container fluid">
 	<div class="card mb-4">
 		<div class="card-title p-3">
@@ -104,7 +108,7 @@
                 {{ form.url|as_crispy_field }}
               </div>
               <div class="col-5 p-3 ml-5">
-                
+
               </div>
             </div>
 
@@ -152,10 +156,10 @@
                   {{ form.width2|as_crispy_field }}
                   <a id="imgResult2" href="#"> <img class="img-fluid img-zoom" id="imageResult2" src="{{ project.image2 }}" alt="Image not upload"></a>
                 </div>
-                <div class="col-5 p-3 ml-5">                 
+                <div class="col-5 p-3 ml-5">
 									{{ form.image_credit2|as_crispy_field }}
-                </div>                
-              </div>              
+                </div>
+              </div>
               <div class="row">
                 <div class="col-5 p-3 ml-5">
                   {{ form.image3|as_crispy_field }}
@@ -165,10 +169,10 @@
                   {{ form.width3|as_crispy_field }}
                   <a id="imgResult3" href="#"> <img class="img-fluid img-zoom" id="imageResult3" src="{{ project.image3 }}" alt="Image not upload"></a>
                 </div>
-                <div class="col-5 p-3 ml-5">                 
+                <div class="col-5 p-3 ml-5">
 									{{ form.image_credit3|as_crispy_field }}
-                </div>                
-              </div>                               
+                </div>
+              </div>
             </div>
             <hr />
 
@@ -184,7 +188,7 @@
                 </div>
               </div>
             </div>
-            {% leaflet_map "map" callback="window.map_init_basic" %}  
+            {% leaflet_map "map" callback="window.map_init_basic" %}
             <hr />
 
             <h4>Personal and Organizational Affiliates</h4>
@@ -265,10 +269,10 @@
           found = true;
           $("#id_keywords").append("<option value='" + choice +"' selected> " + choice + " </option>");
         }
-      }  
+      }
       if(!found){
         $("#id_keywords").append("<option value='" + choice +"'> " + choice + " </option>");
-      }    
+      }
     }
 
     var funding_body = $("#id_funding_body option").map(function () {
@@ -305,14 +309,14 @@
          var word =key.slice(0, -1);
          $("#div_id_keywords .selection input").val("");
          $("#id_keywords").append("<option value='" + word +"' selected> " + word + " </option>");
-      }      
+      }
     });
 
     $("#div_id_funding_body div").on('select2:open', function(){
       if($("#id_fundingBodySelected").val()){
         $("#id_funding_body").removeAttr('multiple');
       }
-      
+
     });
     $("#div_id_funding_body div").on('keyup', function(){
       var key = $("#div_id_funding_body .selection input").val();
@@ -321,13 +325,13 @@
          var word =key.slice(0, -1);
          $("#div_id_funding_body .selection input").val("");
          $("#id_funding_body").append("<option value='" + word +"' selected> " + word + " </option>");
-      }      
+      }
     });
 
     $("#div_id_funding_agency div").on('select2:open', function(){
       if($("#id_fundingAgencySelected").val()){
         $("#id_funding_agency").removeAttr('multiple');
-      }      
+      }
     });
     $("#div_id_funding_agency div").on('keyup', function(){
       var key = $("#div_id_funding_agency .selection input").val();
@@ -335,8 +339,8 @@
       if (key.indexOf(',') > -1) {
          var word =key.slice(0, -1);
          $("#div_id_funding_agency .selection input").val("");
-         $("#id_funding_agency").append("<option value='" + word +"' selected> " + word + " </option>");         
-      }      
+         $("#id_funding_agency").append("<option value='" + word +"' selected> " + word + " </option>");
+      }
     });
 
     $('#contactinfo').on('click', function () {
@@ -375,7 +379,7 @@
     });
 
 
-    $("form").submit(function (e) {      
+    $("form").submit(function (e) {
       $('#contactinfoform').show();
       $('#informationform').show();
       $('#imagesform').show();
@@ -388,7 +392,7 @@
             var id = $(value).parent().parent().attr('id');
             $("#" + id + " .errorMsg").remove();
             if(!$(value).val()){
-              validationFailed = true;               
+              validationFailed = true;
               $(value).parent().append("<span class='errorMsg'> <b>Required field (*)</b></span>");
             }
         });
@@ -400,7 +404,7 @@
       }else{
         var option_all = $("#id_keywords option:selected").map(function () {
         return $.trim($(this).text());
-        }).get().join(',');      
+        }).get().join(',');
         $("#id_choices").val(option_all);
         $("#id_keywords").empty();
 
@@ -495,9 +499,9 @@
         dragMode: 'move',
         guides: false,
         center: false,
-        highlight: false,        
+        highlight: false,
         cropBoxResizable: false,
-        toggleDragModeOnDblclick: false,        
+        toggleDragModeOnDblclick: false,
         ready: function () {
           $image.cropper("setCanvasData", canvasData);
           $image.cropper("setCropBoxData", cropBoxData);
@@ -536,7 +540,7 @@
 <script type="text/javascript">
   var map;
   var marker_layer = new L.marker([50.5, 30.5]);
-  
+
   function editMarker(e){
     map.removeLayer(marker_layer);
     marker_layer = new L.marker(e.latlng, {draggable:true});
@@ -551,13 +555,13 @@
 
   function map_init_basic (leafmap, options) {
       map = leafmap;
-      var obj = { latlng: { 
-        lat: parseFloat($("#id_latitude").val()), 
-        lng: parseFloat($("#id_longitude").val()) } 
+      var obj = { latlng: {
+        lat: parseFloat($("#id_latitude").val()),
+        lng: parseFloat($("#id_longitude").val()) }
       }
       if($("#id_latitude").val())
-        editMarker(obj); 
-      map.on('click', editMarker);        
+        editMarker(obj);
+      map.on('click', editMarker);
   }
 
 </script>

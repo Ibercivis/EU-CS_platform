@@ -8,7 +8,7 @@
 {% get_countries as countries %}
 
 
-<!-- 
+<!--
 Coolors:
 0d0a0b
 631d76
@@ -52,10 +52,10 @@ ffffff
         </ul>
 				<ul class="navbar-nav">
 				{% if not user.is_authenticated %}
-        <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">Login</a></li>
-        <li class="nav-item"><a class="nav-link" href="{% url 'accounts:signup' %}" role="button">Sign up</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">LOGIN</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'accounts:signup' %}" role="button">SIGN UP</a></li>
 				{% else %}
-					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Personal area</a>
+					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">PERSONAL AREA</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="{% url 'profiles:show_self' %}">Profile</a>
 			<a class="dropdown-item" href="{% url 'profiles:self_projects' %}">Uploaded projects</a>
@@ -66,12 +66,12 @@ ffffff
         </div>
 
 					</li>
-					
-     			<li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a></li></li>
+
+     			<li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}">LOGOUT</a></li></li>
 				{% endif %}
 
         {% if user.is_staff %}
-        <li class="nav-item"><a  class="nav-link" href="{% url 'admin:index' %}">Admin</a></li>
+        <li class="nav-item"><a  class="nav-link" href="{% url 'admin:index' %}">ADMIN</a></li>
         {% endif %}
         </ul>
       </div>
