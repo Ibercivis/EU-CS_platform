@@ -22,27 +22,29 @@
             {% endif %}
 
       <div class="card-text p-3">
-        <br><br><br>
+        <div class="row">
         {% if user.is_authenticated %}
-          {% if project.creator == user or user.is_staff %}
+          {% if prooject.creator == user or user.is_staff %}
           <a class="btn btn-info float-right" href="{% url 'editProject' project.id %}"><i class="fas fa-edit"></i> Edit </a>
           {% endif %}
           {% endif %}
+          <br><br><br>
+          </div>
         <div class="row">
           <div class="col-12 col-xl-4">
-            <h2 style="color: #FC5B62">{{project.name}}<!-- i class="fas fa-star-half-alt"></i>{{votes}}{{votes| stringformat:'d'}}--></h2>
+            <h2>{{project.name}}<!-- i class="fas fa-star-half-alt"></i>{{votes}}{{votes| stringformat:'d'}}--></h2>
             </div>
-            <div class="col-12 col-xl-8"
+            <div class="col-12 col-xl-8 pt-2">
             <p><b>{{project.aim | safe}}</b></p>
             <p>{{project.description | safe}}</p>
             </div>
           </div>
           <div class="row">
-            <div class="col-4 mt-5 mb-5">
+            <div class="col-4 mt-5">
               <div class="card h-100 shadow-sm">
                 <div class="card-body">
-                  <h1><i class="fas fa-globe-europe" style="color: #FC5B62"></i></h1>
-                  <h3>Location</h3>
+                  <h1><i class="fas fa-globe-europe"></i></h1>
+                  <h4 class="text-dark">Location</h4>
                   {% for country in countries %}
                     {% if country.code == project.country %}
                       {{ country.name }}
@@ -51,20 +53,20 @@
                 </div>
               </div>
             </div>
-            <div class="col-4 mt-5 mb-5">
+            <div class="col-4 mt-5">
               <div class="card h-100 shadow-sm">
                 <div class="card-body">
-                  <h1><i class="fas fa-globe-europe" style="color: #FC5B62" ></i></h1>
-                  <h3>Topic</h3>
+                  <h1><i class="fas fa-globe-europe" ></i></h1>
+                  <h4 class="text-dark">Topic</h4>
               	   {% for topic in project.topic.all %} <a class="badge badge-pill badge-dark" href="/projects?keywords=&topic={{topic|urlencode}}">{{topic}}</a>  {% endfor %}
                 </div>
               </div>
             </div>
-            <div class="col-4 mt-5 mb-5">
+            <div class="col-4 mt-5">
               <div class="card h-100 shadow-sm">
                 <div class="card-body">
-                  <h1><i class="far fa-lightbulb" style="color: #FC5B62"></i></h1>
-                  <h3>Keywords</h3>
+                  <h1><i class="far fa-lightbulb"></i></h1>
+                  <h4 class="text-dark">Keywords</h4>
                   {% for keyword in project.keywords.all %} <a class="badge badge-pill badge-info" href="/projects?keywords={{keyword|urlencode}}">{{keyword}}</a>  {% endfor %}
                 </div>
               </div>
@@ -72,60 +74,65 @@
           </div><!-- End of icon rows -->
           <div class="row">
             <div class="col-12 col-xl-4 mt-5">
-              <h2 style="color: #FC5B62">Main info</h2>
+              <h2>Main info</h2>
             </div>
-				    <div class="col-xl-6 mt-5">
-                <p><b> Host: </b>{{project.host}}</p>
-                <p><b>Start date: </b>{{ project.start_date | date:"d/m/Y"}}</p>
-                <p><b>End date: </b>{{ project.end_date | date:"d/m/Y"}}</p>
-                <p><b>Status: </b>{{ project.status}}</p>
-                <p><b>Date created:</b> {{project.dateCreated  | date:"d/m/Y"}} </p>
-                <p><b>Date updated:</b>{{project.dateUpdated  | date:"d/m/Y"}} </p>
-                <p><b>Contact person: </b>{{ project.author}}</p>
-                <p><b>Contact person email: </b>{{ project.author_email}}</p>
-                <p><b>Website: </b><a href="{{project.url}}">{{project.url}}</a></p>
+				    <div class="col-xl-6 mt-5 pt-2">
+                <b> Host: </b>{{project.host}}<br>
+                <b>Start date: </b>{{ project.start_date | date:"d/m/Y"}}<br>
+                <b>End date: </b>{{ project.end_date | date:"d/m/Y"}}<br>
+                <b>Status: </b>{{ project.status}}<br>
+                <b>Date created:</b> {{project.dateCreated  | date:"d/m/Y"}}<br>
+                <b>Date updated:</b>{{project.dateUpdated  | date:"d/m/Y"}}<br>
+                <b>Contact person: </b>{{ project.author}}<br>
+                <b>Contact person email: </b>{{ project.author_email}}<br>
+                <b>Website: </b><a href="{{project.url}}">{{project.url}}</a><br>
             </div>
           </div>
-<div class="col-xl-6">
-</div>
-</div>
-<div class="row">
-<div class="col-12">
-             <h4>Geography</h4>
-                <p>Latitude: {{project.latitude}}</p>
-                <p>Longitude: {{project.longitude}}</p>
-                {% leaflet_map "map" callback="window.map_init_basic" %}
-</div>
-</div>
-<div class="row">
-<div class="col-xl-6 col-12 mt-2">
-                <p><b>How to participate: </b>{{project.howToParticipate | safe}}</p>
-</div>
-<div class="col-xl-6 col-12 mt-2">
-                <p><b>Needed equipment:</b>{{project.equipment |safe}}</p>
-</div>
-</div>
-<div class="row">
-          <div class="col-12">
-            <p><b>Funding body: </b>{% if project.fundingBody %} {{ project.fundingBody }} {% endif %}</p>
-            <p><b>Funding program: </b>{{ project.fundingProgram }}</p>
-            <p><b>Funding agency: </b>{% if project.fundingAgency %} {{ project.fundingAgency }} {% endif %}</p>
+          <div class="row">
+            <div class="col-12">
+                       <h2>Geography</h2>
+                          <p>Latitude: {{project.latitude}}</p>
+                          <p>Longitude: {{project.longitude}}</p>
+                          {% leaflet_map "map" callback="window.map_init_basic" %}
+              </div>
           </div>
-          <div class="col-12">
-            {% for customField in project.customField.all %} 
-              Title: {{customField.title}} <br/>
-              Paragraph: {{customField.paragraph | safe }} 
+          <div class="row">
+            <div class="col-12 col-xl-4 mt-5">
+              <h2>Participation</h2>
+            </div>
+            <div class="col-12 col-xl-8 mt-5 pt-2">
+              <p><b>How to participate: </b>{{project.howToParticipate | safe}}</p>
+              <p><b>Needed equipment:</b>{{project.equipment |safe}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-xl-4 mt-5">
+              <h2>Funding</h2>
+            </div>
+            <div class="col-12 col-xl-4 mt-5 pt-2">
+              <b>Funding body: </b>{% if project.fundingBody %} {{ project.fundingBody }} {% endif %}<br>
+              <b>Funding program:</b>{{ project.fundingProgram }}<br>
+              <b>Funding agency: </b>{% if project.fundingAgency %} {{ project.fundingAgency }} {% endif %}<br>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-xl-4 mt-5">
+              <h2>Further info</h2>
+            </div>
+            <div class="col-12 col-xl-8 mt-5 pt-2">
+            {% for customField in project.customField.all %}
+              <p><b>{{customField.title}}</b></p>
+              <p>{{customField.paragraph | safe }}</p>
             {% endfor %}
-            </div>
-
-</div>
-	<div class="card-footer bg-white">
-			<div id="featured{{project.id}}" class="float-left">
+          </div>
+        </div><!-- End of card-text -->
+	       <div class="card-footer bg-white">
+			       <div id="featured{{project.id}}" class="float-left">
 												{% if user.is_staff %}
 													{% if project.id in featuredProjects %}
-													<img onclick="setFeatured({{project.id}})" class="img-fluid mt-2" src="{% static 'site/img/icon_color.png' %}" />
+													<a onclick="setFeatured({{project.id}})" href="">Approved</a>
 													{% else %}
-													<img onclick="setFeatured({{project.id}})" class="img-fluid mt-2" src="{% static 'site/img/icon_bw.png' %}" />
+													<a onclick="setFeatured({{project.id}})" href="">Pending</a>
 													{% endif %}
 												{% else %}
 													{% if project.id in featuredProjects %}
@@ -136,9 +143,8 @@
 
 													{% endif %}
 
-
 											</div>
-			</div>
+			</div><!-- End of card footer -->
 											<a class="btn btn-outline-primary float-right ml-2" target="_black" href="{{project.url }}"> Website</a>
 			{% if user.is_authenticated %}
 													<div id="followed{{project.id}}">
