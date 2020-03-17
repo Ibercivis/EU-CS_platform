@@ -13,5 +13,4 @@ urlpatterns = [
     path('clearfilters/', views.clearFilters, name='clearfilters'),
     path('setFeatured/', views.setFeatured, name='setFeatured'),
     path('setFollowedProject/', views.setFollowedProject, name='setFollowedProject'),
-    path('getCustomField/', views.getCustomField, name='getCustomField'),
 ]
