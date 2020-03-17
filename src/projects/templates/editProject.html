@@ -286,18 +286,11 @@
 <script src="{% static 'site/js/site.js' %}"></script>
 <script src="{% static 'scripts/cropper.min.js' %}"></script>
 <script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
-<script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.formset/1.2.2/jquery.formset.js"></script>
 
 <script>
-      $('.customField-formset').formset({
-        addText: '  <button id="customFieldButton" type="button" class="btn btn-warning"><i class="fas fa-plus-circle"></i> Add custom field          </button>'
-    });
   $(document).ready(function () {
     var choices = $("#id_choices").val();
     var choices = choices.split(",");
@@ -464,6 +457,9 @@
 
   });
 
+  $('.customField-formset').formset({
+      addText: '  <button id="customFieldButton" type="button" class="btn btn-warning"><i class="fas fa-plus-circle"></i> Add custom field          </button>'
+  });
 
   $(function () {
     changed = false;

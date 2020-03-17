@@ -172,4 +172,4 @@ class CustomFieldForm(forms.Form):
     title = forms.CharField(max_length=100, required=False)
     paragraph = forms.CharField(widget=SummernoteWidget(), required=False)
 
-CustomFieldFormset = formset_factory(CustomFieldForm,extra=2)
+CustomFieldFormset = formset_factory(CustomFieldForm,extra=1)
