@@ -36,7 +36,7 @@ class Resource(models.Model):
     author_email =  models.CharField(max_length=100)
     abstract = models.CharField(max_length=1000)
     aggregateRating = models.CharField(max_length=100)
-    audience = models.ForeignKey(Audience, null=True, blank=True, on_delete=models.CASCADE)
+    audience = models.ManyToManyField(Audience)
     dateUploaded = models.DateTimeField('Date Uploaded')
     inLanguage = models.CharField(max_length=100)
     keywords = models.ManyToManyField(Keyword)

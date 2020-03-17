@@ -21,7 +21,7 @@ class ResourceForm(forms.ModelForm):
     authorsCollection = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     selectedAuthors = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     authors = forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False,label="Authors (comma separated)")
-    audience = forms.ModelChoiceField(queryset=Audience.objects.all())
+    audience = forms.ModelMultipleChoiceField(queryset=Audience.objects.all(), widget=Select2MultipleWidget)
     theme = forms.ModelMultipleChoiceField(queryset=Theme.objects.all(), widget=Select2MultipleWidget, required=False)
     image = forms.ImageField(required=False)
     x = forms.FloatField(widget=forms.HiddenInput(),required=False)
@@ -52,7 +52,6 @@ class ResourceForm(forms.ModelForm):
             rsc.abstract = self.data['abstract']
             rsc.url = self.data['url']
             rsc.license = self.data['license']
-            rsc.audience = get_object_or_404(Audience, id=self.data['audience'])
             rsc.publisher = self.data['publisher']
         else:
             rsc.dateUploaded = publication_date
@@ -69,6 +68,7 @@ class ResourceForm(forms.ModelForm):
 
         rsc.save()
 
+        rsc.audience.set(self.data.getlist('audience'))
         rsc.theme.set(self.data.getlist('theme'))
 
         curatedList = self.data.getlist('curatedList')

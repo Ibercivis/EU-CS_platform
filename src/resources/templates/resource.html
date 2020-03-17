@@ -47,7 +47,7 @@
                 <p><b>Author(s): </b>{% for author in resource.authors.all %}{{ author }} {% endfor %}</p>
                 <p><b>Author's email: </b>{{ resource.author_email }}</p>
                 <p><b>License: </b>{{ resource.license }}</p>
-                <p><b>Audience: </b>{{ resource.audience }} </p>
+                <p><b>Audience: </b>{% for audience in resource.audience.all %}{{ audience }} {% endfor %}</p>
                 <p><b>Publisher: </b> {{ resource.publisher }}</p>
                 <p><b>Year of publication: </b> {{ resource.datePublished }}</p>
                 <p><b>Resource DOI: </b> {{ resource.resourceDOI }}</p>
