@@ -13,7 +13,7 @@ from django.db.models import Avg, Max, Min, Sum
 from datetime import datetime
 from PIL import Image
 from itertools import chain
-from .forms import ProjectForm, CustomFieldForm
+from .forms import ProjectForm, CustomFieldForm, CustomFieldFormset
 from .models import Project, Topic, Status, Keyword, Votes, FeaturedProjects, FollowedProjects, FundingBody, FundingAgency, CustomField
 import json
 import random
@@ -148,13 +148,6 @@ def editProject(request, pk):
 
     fundingAgency = list(FundingAgency.objects.all().values_list('agency',flat=True))
     fundingAgency = ", ".join(fundingAgency)
-
-    cfields = CustomField.objects.all()
-    title = ''
-    paragraph = ''
-    if cfields:
-        title = cfields[:1].get().title
-        paragraph = cfields[:1].get().paragraph
     
     form = ProjectForm(initial={
         'project_name':project.name,'url': project.url,'start_date': start_datetime,
@@ -168,30 +161,39 @@ def editProject(request, pk):
         'contact_person': project.author, 'contact_person_email': project.author_email,
         'funding_body': fundingBody, 'fundingBodySelected': project.fundingBody, 'fundingProgram': project.fundingProgram,
         'funding_agency': fundingAgency,'fundingAgencySelected': project.fundingAgency,
-        'title': title, 'paragraph': paragraph,
     })
-
-    cFieldForm = CustomFieldForm()
     
+
+    fields = list(project.customField.all().values())
+    data = [{'title': l['title'], 'paragraph': l['paragraph']}
+                    for l in fields]
+    cField_formset = CustomFieldFormset(initial=data)
+
     if request.method == 'POST':
-        if request.POST.get('title', None):
-            cFieldForm = CustomFieldForm(request.POST)
-            cFieldForm.save(request)
+        form = ProjectForm(request.POST, request.FILES)
+        cField_formset = CustomFieldFormset(request.POST)
+
+        if form.is_valid() and cField_formset.is_valid():
+
+            new_cFields = []
+            for cField_form in cField_formset:
+                title = cField_form.cleaned_data.get('title')
+                paragraph = cField_form.cleaned_data.get('paragraph')
+                if title and paragraph:
+                    new_cFields.append(CustomField(title=title, paragraph=paragraph))
+
+            images = []
+            image1_path = saveImage(request, form, 'image1', '1')
+            image2_path = saveImage(request, form, 'image2', '2')
+            image3_path = saveImage(request, form, 'image3', '3')
+            images.append(image1_path)
+            images.append(image2_path)
+            images.append(image3_path)
+            form.save(request, images, new_cFields)
+            return redirect('/project/'+ str(pk))
         else:
-            form = ProjectForm(request.POST, request.FILES)
-            if form.is_valid():
-                images = []
-                image1_path = saveImage(request, form, 'image1', '1')
-                image2_path = saveImage(request, form, 'image2', '2')
-                image3_path = saveImage(request, form, 'image3', '3')
-                images.append(image1_path)
-                images.append(image2_path)
-                images.append(image3_path)
-                form.save(request, images)
-                return redirect('/project/'+ str(pk))
-            else:
-                print(form.errors)
-    return render(request, 'editProject.html', {'form': form, 'cFieldForm': cFieldForm, 'project':project, 'user':user})
+            print(form.errors)
+    return render(request, 'editProject.html', {'form': form, 'project':project, 'user':user, 'cField_formset':cField_formset})
 
 
 def deleteProject(request, pk):
@@ -256,13 +258,3 @@ def setFollowedProject(request):
         followedProject.save()
 
     return JsonResponse(response, safe=False) 
-
-def getCustomField(request):
-    #projectId = request.GET.get("projectId")
-    response = {}
-    title = '<div class="row"><div class="col-5 p-3 ml-5"><label class="control-label">Title</label>'
-    title += '<input type="text" name="title" maxlength="100" class="textinput textInput form-control" ></div></div>'
-    paragraph = '<div class="col-12 p-3 ml-12"><label class="control-label">Paragraph</label>'
-    paragraph += '</div>'
-    response['text']  = title + paragraph
-    return JsonResponse(response)

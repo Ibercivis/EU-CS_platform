@@ -249,39 +249,25 @@
             <div id="customFields"></div>
 
             <br />
-            
-            (Custom fields added here)
+                       
             <br/>
-            <div id="customField" style="display:none">                  
-                <form action="#">
-                  {% csrf_token %}
-                  <div class="row">
-                    <div class="col-5 p-3 ml-5">
-                      {{ cFieldForm.title |as_crispy_field }}
-                    </div>
-                  </div>
-                  <div class="col-12 p-3 ml-12">
-                    {{ cFieldForm.paragraph|as_crispy_field }}  
-                  </div>
-                  <button type="submit" class="btn btn-success"><i class="fas fa-share-square"></i> Add</button>        
-                </form>
-             </div>
 
-             <button id="customFieldButton" type="button" class="btn btn-warning">
-              <i class="fas fa-plus-circle"></i> Add custom field
-            </button>
-            <br/><br/>
 
-<!--             <div>
-              <div class="row">
-                <div class="col-5 p-3 ml-5">
-                  {{ form.title|as_crispy_field }}
+            {{ cField_formset.management_form }}
+            {% for cField_form in cField_formset.forms %}
+            <div  class="customField-formset">                          
+                <div class="row">
+                  <div class="col-5 p-3 ml-5">
+                    {{ cField_form.title |as_crispy_field }}
+                  </div>
                 </div>
-              </div>
-              <div class="col-12 p-3 ml-12">
-                {{ form.paragraph|as_crispy_field }}
-              </div>
-            </div> -->
+                <div class="col-12 p-3 ml-12">
+                  {{ cField_form.paragraph|as_crispy_field }}  
+                </div>
+           </div>
+           {% endfor %}
+
+          <br/><br/>
 
             </div>
               <button type="submit" class="btn btn-success"><i class="fas fa-share-square"></i> Save</button>
@@ -300,13 +286,18 @@
 <script src="{% static 'site/js/site.js' %}"></script>
 <script src="{% static 'scripts/cropper.min.js' %}"></script>
 <script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.formset/1.2.2/jquery.formset.js"></script>
 
-
-  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote-bs4.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote-bs4.min.js"></script>
 <script>
+      $('.customField-formset').formset({
+        addText: '  <button id="customFieldButton" type="button" class="btn btn-warning"><i class="fas fa-plus-circle"></i> Add custom field          </button>'
+    });
   $(document).ready(function () {
     var choices = $("#id_choices").val();
     var choices = choices.split(",");
@@ -425,11 +416,6 @@
 
     $('#imgResult').on('click', function () {
       $('html,body').animate({ scrollTop: $("#imgResult").offset().top - 220 }, { duration: "slow" });
-    });
-
-    $('#customFieldButton').on('click', function () {
-      $('#customField').toggle();
-      $('#customFieldButton').prop('disabled', true);
     });
 
 
@@ -616,24 +602,6 @@
       if($("#id_latitude").val())
         editMarker(obj); 
       map.on('click', editMarker);        
-  }
-
-
-  			
-  function getCustomField(){
-    var projectId = $("#projectId").val();        
-    var request = $.ajax(
-        {
-            type: "GET",
-            url: "{% url 'getCustomField' %}",
-            data: {
-                "project_id": projectId
-            },
-            success: function (response) {                
-                $("#customFields").append(response.text);
-            }
-        }
-    );
   }
 
 </script>

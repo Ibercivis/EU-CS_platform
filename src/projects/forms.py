@@ -4,6 +4,7 @@ from .models import Project, Topic, Status, Keyword, FundingBody, FundingAgency,
 from django.shortcuts import get_object_or_404
 from django_select2.forms import Select2MultipleWidget, Select2Widget
 from django.core.files import File
+from django.forms import formset_factory
 from PIL import Image
 from geopy.geocoders import Nominatim
 from django_summernote.widgets import SummernoteWidget
@@ -73,7 +74,7 @@ class ProjectForm(forms.Form):
             msg = u"End date should be greater than start date."            
             self._errors["end_date"] = self.error_class([msg])
 
-    def save(self, args, images):
+    def save(self, args, images, cFields):
         pk = self.data.get('projectID', '') 
         start_dateData = self.data['start_date']
         end_dateData = self.data['end_date']                             
@@ -135,6 +136,15 @@ class ProjectForm(forms.Form):
         
         if(images[2] != '/'):
             project.image3 = images[2]
+
+        if(cFields):
+            paragraphs = []
+            for cField in cFields:
+                paragraphs.append(cField.paragraph)
+                CustomField.objects.get_or_create(title=cField.title, paragraph=cField.paragraph)
+            cfields = CustomField.objects.all().filter(paragraph__in = paragraphs)
+            project = get_object_or_404(Project, id=pk)
+            project.customField.set(cfields)
         
         project.save()
         project.topic.set(self.data.getlist('topic'))
@@ -159,17 +169,7 @@ def getCountryCode(latitude, longitude):
 
 
 class CustomFieldForm(forms.Form):
-    title = forms.CharField(max_length=100)
-    paragraph = forms.CharField(widget=SummernoteWidget())
-    def save(self, args):
-        cfield = CustomField(title=self.data['title'], paragraph=self.data['paragraph'])
-        pk = self.data.get('projectID', '')
-        print(pk)
-        cfield.save()
-        cfields = CustomField.objects.all().filter(project = pk)
-        print(cfields)
+    title = forms.CharField(max_length=100, required=False)
+    paragraph = forms.CharField(widget=SummernoteWidget(), required=False)
 
-        project = get_object_or_404(Project, id=pk)
-        project.customField.set(cfields)
-        project.save()
-        return 'success'
+CustomFieldFormset = formset_factory(CustomFieldForm,extra=2)
