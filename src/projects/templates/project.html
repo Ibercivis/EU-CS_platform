@@ -111,6 +111,13 @@
             <p><b>Funding program: </b>{{ project.fundingProgram }}</p>
             <p><b>Funding agency: </b>{% if project.fundingAgency %} {{ project.fundingAgency }} {% endif %}</p>
           </div>
+          <div class="col-12">
+            {% for customField in project.customField.all %} 
+              Title: {{customField.title}} <br/>
+              Paragraph: {{customField.paragraph | safe }} 
+            {% endfor %}
+            </div>
+
 </div>
 	<div class="card-footer bg-white">
 			<div id="featured{{project.id}}" class="float-left">
@@ -143,7 +150,6 @@
 													</div>
 
 												{% endif %}
-
 											</div>
 
 				</div>

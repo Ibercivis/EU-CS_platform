@@ -1,12 +1,14 @@
 from django import forms
 from django.db import models
-from django_summernote.widgets import SummernoteWidget
+from .models import Project, Topic, Status, Keyword, FundingBody, FundingAgency, CustomField
 from django.shortcuts import get_object_or_404
 from django_select2.forms import Select2MultipleWidget, Select2Widget
 from django.core.files import File
-from .models import Project, Topic, Status, Keyword, FundingBody, FundingAgency
+from django.forms import formset_factory
 from PIL import Image
 from geopy.geocoders import Nominatim
+from django_summernote.widgets import SummernoteWidget
+from itertools import chain
 
 geolocator = Nominatim(timeout=None)
 
@@ -61,6 +63,9 @@ class ProjectForm(forms.Form):
     funding_program = forms.CharField(max_length=500, required=False)
     funding_agency =   forms.ModelMultipleChoiceField(queryset=FundingAgency.objects.all(), widget=Select2MultipleWidget, required=False, label="Funding agency (Select or write new one)")
     fundingAgencySelected = forms.CharField(widget=forms.HiddenInput(), max_length=100, required=False)
+    #Custom fields
+    title = forms.CharField(max_length=100, required=False)
+    paragraph = forms.CharField(widget=SummernoteWidget(), required=False)
 
     def clean(self):
         start_date = self.data['start_date']
@@ -69,8 +74,8 @@ class ProjectForm(forms.Form):
             msg = u"End date should be greater than start date."
             self._errors["end_date"] = self.error_class([msg])
 
-    def save(self, args, images):
-        pk = self.data.get('projectID', '')
+    def save(self, args, images, cFields):
+        pk = self.data.get('projectID', '') 
         start_dateData = self.data['start_date']
         end_dateData = self.data['end_date']
         latitude = self.data['latitude']
@@ -132,6 +137,14 @@ class ProjectForm(forms.Form):
         if(images[2] != '/'):
             project.image3 = images[2]
 
+        if(cFields):
+            paragraphs = []
+            for cField in cFields:
+                paragraphs.append(cField.paragraph)
+                CustomField.objects.get_or_create(title=cField.title, paragraph=cField.paragraph)
+            cfields = CustomField.objects.all().filter(paragraph__in = paragraphs)
+            project = get_object_or_404(Project, id=pk)
+            project.customField.set(cfields)
         project.save()
         project.topic.set(self.data.getlist('topic'))
         choices = self.data['choices']
@@ -142,6 +155,7 @@ class ProjectForm(forms.Form):
         keywords = Keyword.objects.all()
         keywords = keywords.filter(keyword__in = choices)
         project.keywords.set(keywords)
+
         return 'success'
 
 
@@ -151,3 +165,10 @@ def getCountryCode(latitude, longitude):
         return location.raw['address']['country_code']
     else:
         return ''
+
+
+class CustomFieldForm(forms.Form):
+    title = forms.CharField(max_length=100, required=False)
+    paragraph = forms.CharField(widget=SummernoteWidget(), required=False)
+
+CustomFieldFormset = formset_factory(CustomFieldForm,extra=1)

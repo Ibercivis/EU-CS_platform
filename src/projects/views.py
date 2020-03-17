@@ -13,8 +13,8 @@ from django.db.models import Avg, Max, Min, Sum
 from datetime import datetime
 from PIL import Image
 from itertools import chain
-from .forms import ProjectForm
-from .models import Project, Topic, Status, Keyword, Votes, FeaturedProjects, FollowedProjects, FundingBody, FundingAgency
+from .forms import ProjectForm, CustomFieldForm, CustomFieldFormset
+from .models import Project, Topic, Status, Keyword, Votes, FeaturedProjects, FollowedProjects, FundingBody, FundingAgency, CustomField
 import json
 import random
 
@@ -37,7 +37,7 @@ def new_project(request):
             images.append(image1_path)
             images.append(image2_path)
             images.append(image3_path)
-            form.save(request, images)
+            form.save(request, images, [])
 
             messages.success(request, "Project added with success!")
             return redirect('/projects')
@@ -166,9 +166,25 @@ def editProject(request, pk):
         'funding_agency': fundingAgency,'fundingAgencySelected': project.fundingAgency,
     })
     
+
+    fields = list(project.customField.all().values())
+    data = [{'title': l['title'], 'paragraph': l['paragraph']}
+                    for l in fields]
+    cField_formset = CustomFieldFormset(initial=data)
+
     if request.method == 'POST':
         form = ProjectForm(request.POST, request.FILES)
-        if form.is_valid():
+        cField_formset = CustomFieldFormset(request.POST)
+
+        if form.is_valid() and cField_formset.is_valid():
+
+            new_cFields = []
+            for cField_form in cField_formset:
+                title = cField_form.cleaned_data.get('title')
+                paragraph = cField_form.cleaned_data.get('paragraph')
+                if title and paragraph:
+                    new_cFields.append(CustomField(title=title, paragraph=paragraph))
+
             images = []
             image1_path = saveImage(request, form, 'image1', '1')
             image2_path = saveImage(request, form, 'image2', '2')
@@ -176,11 +192,11 @@ def editProject(request, pk):
             images.append(image1_path)
             images.append(image2_path)
             images.append(image3_path)
-            form.save(request, images)
+            form.save(request, images, new_cFields)
             return redirect('/project/'+ str(pk))
         else:
             print(form.errors)
-    return render(request, 'editProject.html', {'form': form, 'project':project, 'user':user})
+    return render(request, 'editProject.html', {'form': form, 'project':project, 'user':user, 'cField_formset':cField_formset})
 
 
 def deleteProject(request, pk):
