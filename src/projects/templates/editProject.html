@@ -3,6 +3,7 @@
 {% load crispy_forms_tags %}
 {% load leaflet_tags %}
 {% block head %}
+
 {{block.super }}
 {% leaflet_js %}
 {% leaflet_css %}
@@ -235,6 +236,30 @@
             </div>
             <hr />
 
+            <div id="customFields"></div>
+
+            <br />
+                       
+            <br/>
+
+
+            {{ cField_formset.management_form }}
+            {% for cField_form in cField_formset.forms %}
+            <div  class="customField-formset">                          
+                <div class="row">
+                  <div class="col-5 p-3 ml-5">
+                    {{ cField_form.title |as_crispy_field }}
+                  </div>
+                </div>
+                <div class="col-12 p-3 ml-12">
+                  {{ cField_form.paragraph|as_crispy_field }}  
+                </div>
+           </div>
+           {% endfor %}
+
+          <br/><br/>
+
+            </div>
               <button type="submit" class="btn btn-success"><i class="fas fa-share-square"></i> Save</button>
           </form>
       </div>
@@ -253,6 +278,8 @@
 <script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.formset/1.2.2/jquery.formset.js"></script>
+
 <script>
   $(document).ready(function () {
     var choices = $("#id_choices").val();
@@ -375,7 +402,7 @@
     });
 
 
-    $("form").submit(function (e) {      
+    $("form").submit(function (e) {
       $('#contactinfoform').show();
       $('#informationform').show();
       $('#imagesform').show();
@@ -420,6 +447,9 @@
 
   });
 
+  $('.customField-formset').formset({
+      addText: '  <button id="customFieldButton" type="button" class="btn btn-warning"><i class="fas fa-plus-circle"></i> Add custom field          </button>'
+  });
 
   $(function () {
     changed = false;
