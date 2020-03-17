@@ -60,7 +60,7 @@ Resources
 			{% for keyword in rsc.keywords.all %} <a class="badge badge-pill badge-secondary" href="/resources?keywords={{keyword}}">{{keyword}}</a>  {% endfor %}
 </p>
 
-            <p class="card-text">{{rsc.abstract |truncatewords:40 }}<br>
+            <p class="card-text">{{rsc.abstract | safe | truncatewords:40 }}<br>
 
           </div>
 					<div class="card-footer bg-white">
