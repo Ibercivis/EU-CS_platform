@@ -37,7 +37,7 @@ def new_project(request):
             images.append(image1_path)
             images.append(image2_path)
             images.append(image3_path)
-            form.save(request, images)
+            form.save(request, images, [])
 
             messages.success(request, "Project added with success!")
             return redirect('/projects')
