@@ -22,14 +22,32 @@
             {% endif %}
 
       <div class="card-text p-3">
-        <div class="row">
+       
         {% if user.is_authenticated %}
-          {% if project.creator == user or user.is_staff %}
+          {% if project.creator == user or user.is_staff or user.id == cooperator %}
+          <div class="row">
           <a class="btn btn-info float-right" href="{% url 'editProject' project.id %}"><i class="fas fa-edit"></i> Edit </a>
-          {% endif %}
-          {% endif %}
-          <br><br><br>
+          
           </div>
+          {% endif %}
+          {% if project.creator == user or user.is_staff %}
+          <br>
+          <div class="row">
+            <label for="allowUser" class="control-label">
+              Allow an user to edit
+            </label>
+            <select id="allowUser" name="allowUser" class="custom-select form-control col-lg-2 ml-2 float-right">
+              <option value="">User<option>
+              {% for user in users %}
+                  <option {% if user.id ==  cooperator %} selected {% endif %} value="{{ user.id }}">{{ user.name }}</option>
+              {% endfor %}
+            </select>
+            <span id="messageAllowUser"></span>
+          </div>
+          <br><br>
+          {% endif %}
+          {% endif %}
+
         <div class="row">
           <div class="col-12 col-xl-4">
             <h2>{{project.name}}<!-- i class="fas fa-star-half-alt"></i>{{votes}}{{votes| stringformat:'d'}}--></h2>
@@ -181,6 +199,27 @@
       new L.marker([{{project.latitude}},{{project.longitude}}]).addTo(map);
   }
 
+  $(function () {
+    $('#allowUser').on('change', function () {
+      var user_id = $(this).val();
+      var idProject = {{project.id}};
+      var request = $.ajax(
+            {
+                type: "POST",
+                url: "{% url 'allowUser' %}",
+                data: {
+                    "project_id": idProject,
+                    "user_id": user_id,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function (response) {
+                  $("#messageAllowUser").html("Done!");
+                }
+            }
+        );
+    });
+  });
+
 	function setFeatured(idProject){
 		var htmlId = "featured" + idProject;
         var request = $.ajax(
@@ -189,7 +228,7 @@
                 url: "{% url 'setFeatured' %}",
                 data: {
                     "project_id": idProject,
-              		csrfmiddlewaretoken: '{{ csrf_token }}'
+              		  csrfmiddlewaretoken: '{{ csrf_token }}'
                 },
                 success: function (response) {
                     $("#"+htmlId).load(" #"+htmlId);
@@ -206,8 +245,8 @@
                 url: "{% url 'setFollowedProject' %}",
                 data: {
                     "project_id": idProject,
-					"user_id": idUser,
-              		csrfmiddlewaretoken: '{{ csrf_token }}'
+                    "user_id": idUser,
+              		  csrfmiddlewaretoken: '{{ csrf_token }}'
                 },
                 success: function (response) {
                     $("#"+htmlId).load(" #"+htmlId);
