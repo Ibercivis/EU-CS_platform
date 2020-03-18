@@ -24,7 +24,7 @@
       <div class="card-text p-3">
         <div class="row">
         {% if user.is_authenticated %}
-          {% if prooject.creator == user or user.is_staff %}
+          {% if project.creator == user or user.is_staff %}
           <a class="btn btn-info float-right" href="{% url 'editProject' project.id %}"><i class="fas fa-edit"></i> Edit </a>
           {% endif %}
           {% endif %}

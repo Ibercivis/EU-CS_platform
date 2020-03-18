@@ -91,7 +91,8 @@ INSTALLED_APPS = (
     "django_summernote",
     "leaflet",
     "django_countries",
-    "authors"
+    "authors",
+    "contact"
 )
 
 MIDDLEWARE = [
