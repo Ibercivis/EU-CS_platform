@@ -23,14 +23,34 @@
       <div class="card-header">
         <h2>  {{resource.name}}
           {% if user.is_authenticated %}
-            {% if resource.creator == user or user.is_staff %}
+            {% if resource.creator == user or user.is_staff or user.id == cooperator %}
             <a class="btn btn-danger float-right" href="{% url 'editResource' resource.id %}"><i class="fas fa-edit"></i> Edit
             </a>
             {% endif %}
           {% endif %}
         </h2>
- 
-		</div>
+        {% if user.is_authenticated %}
+        {% if resource.creator == user or user.is_staff %}
+        <br>
+        <div class="row">
+          <label for="allowUser" class="control-label">
+            Allow an user to edit
+          </label>
+          <select id="allowUser" name="allowUser" class="custom-select form-control col-lg-2 ml-2 float-right">
+            <option value="">User<option>
+            {% for user in users %}
+                <option {% if user.id ==  cooperator %} selected {% endif %} value="{{ user.id }}">{{ user.name }}</option>
+            {% endfor %}
+          </select>
+          <span id="messageAllowUser"></span>
+        </div>
+        <br><br>
+        {% endif %}
+      {% endif %}
+    </div>
+    
+
+
         <div class="card-text m-2 mt-4">
         <a class="badge badge-pill badge-dark" href="/category?theme={{resource.category.id}}">{{resource.category }}</a>
         {% get_language_info_list for LANGUAGES as languages %}
@@ -139,5 +159,25 @@
             }
         );
     }
+  $(function () {
+    $('#allowUser').on('change', function () {
+      var user_id = $(this).val();
+      var idResource = {{resource.id}};
+      var request = $.ajax(
+            {
+                type: "POST",
+                url: "{% url 'allowUserResource' %}",
+                data: {
+                    "resource_id": idResource,
+                    "user_id": user_id,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function (response) {
+                  $("#messageAllowUser").html("Done!");
+                }
+            }
+        );
+    });
+  });
 </script>
 {% endblock scripts %} 

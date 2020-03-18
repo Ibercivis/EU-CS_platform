@@ -14,4 +14,5 @@ urlpatterns = [
     path('setFeatured/', views.setFeatured, name='setFeatured'),
     path('setHidden/', views.setHidden, name='setHidden'),
     path('setFollowedProject/', views.setFollowedProject, name='setFollowedProject'),
+    path('allowUser/', views.allowUser, name='allowUser'),
 ]

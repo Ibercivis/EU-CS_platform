@@ -14,5 +14,6 @@ urlpatterns = [
     path('setFeaturedRsc/', views.setFeaturedRsc, name='setFeaturedRsc'),
     path('setSavedResource/', views.setSavedResource, name='setSavedResource'),
     path('setHiddenResource/', views.setHiddenResource, name='setHiddenResource'),
+    path('allowUserResource/', views.allowUserResource, name='allowUserResource'),
 ]
 

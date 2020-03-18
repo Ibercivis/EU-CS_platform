@@ -13,7 +13,7 @@ from itertools import chain
 from authors.models import Author
 from PIL import Image
 from datetime import datetime
-from .models import Resource, Keyword, Category, FeaturedResources, SavedResources, Theme, Category, ResourcesGrouped
+from .models import Resource, Keyword, Category, FeaturedResources, SavedResources, Theme, Category, ResourcesGrouped, ResourcePermission
 from .forms import ResourceForm
 
 
@@ -104,15 +104,30 @@ def new_resource(request):
 def resource(request, pk):
     resource = get_object_or_404(Resource, id=pk)
     user = request.user
+    users = getOtherUsers(resource.creator)
+    cooperator = getCooperator(pk)
     savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True) #TODO: Only ask for the resource
     featuredResources = FeaturedResources.objects.all().values_list('resource_id',flat=True)
-    return render(request, 'resource.html', {'resource':resource, 'savedResources':savedResources, 'featuredResources':featuredResources})
+    return render(request, 'resource.html', {'resource':resource, 'savedResources':savedResources, 'featuredResources':featuredResources,
+        'users': users, 'cooperator': cooperator})
+
+def getOtherUsers(creator):
+    users = User.objects.all().exclude(is_superuser=True).exclude(id=creator.id)
+    return users
+
+def getCooperator(resourceID):
+    cooperator = list(ResourcePermission.objects.all().filter(resource_id=resourceID).values_list('user_id',flat=True))
+    if(cooperator):
+        cooperator = cooperator[0]
+    else:
+        cooperator = None
+    return cooperator
 
 def editResource(request, pk):
     resource = get_object_or_404(Resource, id=pk)
     user = request.user
-
-    if user != resource.creator and not user.is_staff:
+    cooperator = getCooperator(pk)
+    if user != resource.creator and not user.is_staff and not user.id == cooperator:
         return redirect('../resources', {})
 
     keywordsList = list(resource.keywords.all().values_list('keyword', flat=True))
@@ -260,4 +275,21 @@ def setHiddenResource(request):
     resource = get_object_or_404(Resource, id=id)
     resource.hidden = False if hidden == 'false' else True
     resource.save()
-    return JsonResponse(response, safe=False) 
+    return JsonResponse(response, safe=False)
+
+def allowUserResource(request):
+    response = {}
+    resourceId = request.POST.get("resource_id")
+    userId = request.POST.get("user_id")
+    #Delete
+    objs = ResourcePermission.objects.all().filter(resource_id=resourceId) 
+    if(objs):
+        for obj in objs:
+            obj.delete()
+
+    #Insert
+    fResource = get_object_or_404(Resource, id=resourceId)
+    fUser = get_object_or_404(User, id=userId)
+    resourcePermission = ResourcePermission(resource=fResource, user=fUser)
+    resourcePermission.save()
+    return JsonResponse(response, safe=False)
