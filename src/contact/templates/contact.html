@@ -1,0 +1,47 @@
+{% extends "base2.html" %}
+
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ block.super }}Contact{% endblock %}
+
+{% block navbar-left %}
+{% include "_navbar.html" %}
+{% endblock %}
+
+{% block page_title %}
+Contact
+{% endblock page_title %}
+
+{% block list_of_items %}
+<div class="container">
+
+  <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto form p-4">
+    <h1>Contact Us</h1>
+    <br/>
+    <form method="post" autocomplete="off">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-5">
+          {{ form.name | as_crispy_field}}
+        </div>
+        <div class="col-5">
+          {{ form.surname | as_crispy_field}}
+        </div>
+      </div>
+      <div class="row">
+        {{ form.from_email | as_crispy_field}}
+      </div>
+      <div class="row">
+        {{ form.message | as_crispy_field}}
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-success">Send</button>
+      </div>
+    </form>
+    <br>
+
+  </div>
+</div>
+{% endblock list_of_items %}

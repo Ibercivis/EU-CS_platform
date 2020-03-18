@@ -1,0 +1,24 @@
+{% extends "base2.html" %}
+{% load staticfiles %}
+
+{% block title %}{{ block.super }}Contact email sended{% endblock %}
+
+{% block navbar-left %}
+{% include "_navbar.html" %}
+{% endblock %}
+
+{% block list_of_items %}
+<div class="container form-box">
+  <div class="text-center">
+    {% block form_heading %}Success! {% endblock %}
+
+    {% block form %}
+    <div class="form-message">
+      <p>
+        Thank you for your message.
+      </p>
+    </div>
+    {% endblock form %}
+  </div>
+</div>
+{% endblock list_of_items %}

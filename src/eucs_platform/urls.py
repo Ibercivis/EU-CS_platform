@@ -7,6 +7,7 @@ import profiles.urls
 import accounts.urls
 import projects.urls
 import resources.urls
+import contact.urls
 from . import views
 
 # Personalized admin site settings like title and header
@@ -18,7 +19,6 @@ urlpatterns = [
     path("results/", views.results, name="results"),
     path("curated/", views.curated,name="curated"),
     path("imprint/", views.imprint,name="imprint"),
-    path("contact/", views.contact,name="contact"),
     path("terms/", views.terms,name="terms"),
     path("privacy/", views.privacy,name="privacy"),
     path("help/", views.help,name="help"),
@@ -28,6 +28,7 @@ urlpatterns = [
     path("events/", views.EventsPage.as_view(), name="events"),
     path("users/", include(profiles.urls)),
     path("admin/", admin.site.urls),
+    path("", include(contact.urls)),
     path("", include(accounts.urls)),
     path("", include(projects.urls)),
     path("", include(resources.urls)),
