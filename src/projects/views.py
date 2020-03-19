@@ -13,7 +13,7 @@ from django.db.models import Avg, Max, Min, Sum
 from datetime import datetime
 from PIL import Image
 from itertools import chain
-from .forms import ProjectForm, CustomFieldForm, CustomFieldFormset
+from .forms import ProjectForm, CustomFieldForm, CustomFieldFormset, ProjectPermissionForm
 from .models import Project, Topic, Status, Keyword, Votes, FeaturedProjects, FollowedProjects, FundingBody, FundingAgency, CustomField, ProjectPermission
 import json
 import random
@@ -120,30 +120,36 @@ def project(request, pk):
     user = request.user
     project = get_object_or_404(Project, id=pk)
     users = getOtherUsers(project.creator)
-    cooperator = getCooperator(pk)
+    cooperators = getCooperatorsNames(pk)
+    permissionForm = ProjectPermissionForm(initial={'usersCollection':users, 'selectedUsers': cooperators})
     votes = Votes.objects.all().filter(project_id=pk).aggregate(Avg('vote'))['vote__avg']
     followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id',flat=True)
     featuredProjects = FeaturedProjects.objects.all().values_list('project_id',flat=True)
     return render(request, 'project.html', {'project':project,'votes':votes, 'followedProjects':followedProjects, 
-    'featuredProjects':featuredProjects, 'users': users, 'cooperator': cooperator})
+    'featuredProjects':featuredProjects, 'permissionForm': permissionForm, 'cooperators': getCooperators(pk)})
 
 def getOtherUsers(creator):
-    users = User.objects.all().exclude(is_superuser=True).exclude(id=creator.id)
+    users = list(User.objects.all().exclude(is_superuser=True).exclude(id=creator.id).values_list('name',flat=True))
+    users = ", ".join(users)
     return users
 
-def getCooperator(projectID):
-    cooperator = list(ProjectPermission.objects.all().filter(project_id=projectID).values_list('user_id',flat=True))
-    if(cooperator):
-        cooperator = cooperator[0]
-    else:
-        cooperator = None
-    return cooperator
+def getCooperators(projectID):
+    users = list(ProjectPermission.objects.all().filter(project_id=projectID).values_list('user',flat=True))
+    return users
+
+def getCooperatorsNames(projectID):
+    users = getCooperators(projectID)
+    cooperators = ""
+    for user in users:
+        userObj = get_object_or_404(User, id=user)
+        cooperators += userObj.name + ", "
+    return cooperators
 
 def editProject(request, pk):
     project = get_object_or_404(Project, id=pk)
     user = request.user
-    cooperator = getCooperator(pk)
-    if user != project.creator and not user.is_staff and not user.id == cooperator:
+    cooperators = getCooperators(pk)
+    if user != project.creator and not user.is_staff and not user.id in cooperators:
         return redirect('../projects', {})
     
     start_datetime = None
@@ -290,16 +296,20 @@ def setFollowedProject(request):
 def allowUser(request):
     response = {}
     projectId = request.POST.get("project_id")
-    userId = request.POST.get("user_id")
-    #Delete
+    users = request.POST.get("users")
+    
+    #Delete all
     objs = ProjectPermission.objects.all().filter(project_id=projectId) 
     if(objs):
         for obj in objs:
             obj.delete()
-
-    #Insert
+   
+    #Insert all
     fProject = get_object_or_404(Project, id=projectId)
-    fUser = get_object_or_404(User, id=userId)
-    projectPermission = ProjectPermission(project=fProject, user=fUser)
-    projectPermission.save()
+    users = users.split(',')
+    for user in users:
+        fUser = User.objects.filter(name=user)[:1].get()
+        projectPermission = ProjectPermission(project=fProject, user=fUser)
+        projectPermission.save()  
+
     return JsonResponse(response, safe=False)

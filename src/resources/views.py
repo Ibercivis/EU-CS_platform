@@ -14,7 +14,7 @@ from authors.models import Author
 from PIL import Image
 from datetime import datetime
 from .models import Resource, Keyword, Category, FeaturedResources, SavedResources, Theme, Category, ResourcesGrouped, ResourcePermission
-from .forms import ResourceForm
+from .forms import ResourceForm, ResourcePermissionForm
 
 
 User = get_user_model()
@@ -105,29 +105,36 @@ def resource(request, pk):
     resource = get_object_or_404(Resource, id=pk)
     user = request.user
     users = getOtherUsers(resource.creator)
-    cooperator = getCooperator(pk)
+    cooperators = getCooperatorsNames(pk)
+    permissionForm = ResourcePermissionForm(initial={'usersCollection':users, 'selectedUsers': cooperators})
     savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True) #TODO: Only ask for the resource
     featuredResources = FeaturedResources.objects.all().values_list('resource_id',flat=True)
     return render(request, 'resource.html', {'resource':resource, 'savedResources':savedResources, 'featuredResources':featuredResources,
-        'users': users, 'cooperator': cooperator})
+        'cooperators': getCooperators(pk), 'permissionForm': permissionForm})
 
 def getOtherUsers(creator):
-    users = User.objects.all().exclude(is_superuser=True).exclude(id=creator.id)
+    users = list(User.objects.all().exclude(is_superuser=True).exclude(id=creator.id).values_list('name',flat=True))
+    users = ", ".join(users)
     return users
 
-def getCooperator(resourceID):
-    cooperator = list(ResourcePermission.objects.all().filter(resource_id=resourceID).values_list('user_id',flat=True))
-    if(cooperator):
-        cooperator = cooperator[0]
-    else:
-        cooperator = None
-    return cooperator
+def getCooperators(resourceID):
+    users = list(ResourcePermission.objects.all().filter(resource_id=resourceID).values_list('user',flat=True))
+    return users
+
+def getCooperatorsNames(resourceID):
+    users = getCooperators(resourceID)
+    cooperators = ""
+    for user in users:
+        userObj = get_object_or_404(User, id=user)
+        cooperators += userObj.name + ", "
+    return cooperators
 
 def editResource(request, pk):
     resource = get_object_or_404(Resource, id=pk)
     user = request.user
-    cooperator = getCooperator(pk)
-    if user != resource.creator and not user.is_staff and not user.id == cooperator:
+    cooperators = getCooperators(pk)
+    print(cooperators)
+    if user != resource.creator and not user.is_staff and not user.id in cooperators:
         return redirect('../resources', {})
 
     keywordsList = list(resource.keywords.all().values_list('keyword', flat=True))
@@ -280,16 +287,20 @@ def setHiddenResource(request):
 def allowUserResource(request):
     response = {}
     resourceId = request.POST.get("resource_id")
-    userId = request.POST.get("user_id")
-    #Delete
+    users = request.POST.get("users")
+    
+    #Delete all
     objs = ResourcePermission.objects.all().filter(resource_id=resourceId) 
     if(objs):
         for obj in objs:
             obj.delete()
-
-    #Insert
+   
+    #Insert all
     fResource = get_object_or_404(Resource, id=resourceId)
-    fUser = get_object_or_404(User, id=userId)
-    resourcePermission = ResourcePermission(resource=fResource, user=fUser)
-    resourcePermission.save()
+    users = users.split(',')
+    for user in users:
+        fUser = User.objects.filter(name=user)[:1].get()
+        resourcePermission = ResourcePermission(resource=fResource, user=fUser)
+        resourcePermission.save()  
+
     return JsonResponse(response, safe=False)

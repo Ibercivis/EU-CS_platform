@@ -172,3 +172,9 @@ class CustomFieldForm(forms.Form):
     paragraph = forms.CharField(widget=SummernoteWidget(), required=False)
 
 CustomFieldFormset = formset_factory(CustomFieldForm,extra=1)
+
+
+class ProjectPermissionForm(forms.Form):
+    selectedUsers = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
+    usersCollection = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
+    usersAllowed =   forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False, label="Allow users to edit")

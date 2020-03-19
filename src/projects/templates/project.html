@@ -7,12 +7,14 @@
 <link rel="stylesheet" href="{% static 'styles/cropper.min.css' %}">
 {% leaflet_js %}
 {% leaflet_css %}
+
 {% endblock head %}
 {% block title %}{{ block.super }}Projects{% endblock %}
 {% block navbar-left %}
 {% include "_navbar.html" with active_link="project" %}
 {% endblock %}
 {% block list_of_items %}
+{{ permissionForm.media.css }}
   <div class="main-content-container container-fluid" >
     <div class="card mb-4">
   {% if project.image3 %}
@@ -24,7 +26,7 @@
       <div class="card-text p-3">
        
         {% if user.is_authenticated %}
-          {% if project.creator == user or user.is_staff or user.id == cooperator %}
+          {% if project.creator == user or user.is_staff or user.id in cooperators %}
           <div class="row">
           <a class="btn btn-info float-right" href="{% url 'editProject' project.id %}"><i class="fas fa-edit"></i> Edit </a>
           
@@ -32,18 +34,16 @@
           {% endif %}
           {% if project.creator == user or user.is_staff %}
           <br>
-          <div class="row">
-            <label for="allowUser" class="control-label">
-              Allow an user to edit
-            </label>
-            <select id="allowUser" name="allowUser" class="custom-select form-control col-lg-2 ml-2 float-right">
-              <option value="">User<option>
-              {% for user in users %}
-                  <option {% if user.id ==  cooperator %} selected {% endif %} value="{{ user.id }}">{{ user.name }}</option>
-              {% endfor %}
-            </select>
-            <span id="messageAllowUser"></span>
-          </div>
+          <permissionForm>
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-5 p-3 ml-5">
+              {{ permissionForm.usersAllowed | as_crispy_field }}
+              {{ permissionForm.selectedUsers | as_crispy_field }}
+              {{ permissionForm.usersCollection | as_crispy_field }}
+              </div>
+            </div>
+          </permissionForm>
           <br><br>
           {% endif %}
           {% endif %}
@@ -190,6 +190,27 @@
 
 {% block scripts %}
 <script type="text/javascript">
+
+  $(document).ready(function () {  
+    var users = $("#id_usersCollection").val();
+    var users = users.split(",");
+    
+    var selectedUsers = $("#id_selectedUsers").val().split(",");
+    for (user of users){
+      var found = false;
+      for(sel of selectedUsers){ 
+        if(sel.trim() == user.trim()){
+          found = true;
+          $("#id_usersAllowed").append("<option value='" + user +"' selected> " + user + " </option>");
+        }
+      }  
+      if(!found){
+        $("#id_usersAllowed").append("<option value='" + user +"'> " + user + " </option>");
+      }    
+    }
+  });
+
+
   var map;
   var marker_layer = new L.marker([50.5, 30.5]);
 
@@ -200,8 +221,11 @@
   }
 
   $(function () {
-    $('#allowUser').on('change', function () {
-      var user_id = $(this).val();
+    $('#id_usersAllowed').on('change', function () {
+        users = $("#id_usersAllowed option:selected").map(function () {
+            return $.trim($(this).text());
+        }).get().join(',');
+
       var idProject = {{project.id}};
       var request = $.ajax(
             {
@@ -209,11 +233,11 @@
                 url: "{% url 'allowUser' %}",
                 data: {
                     "project_id": idProject,
-                    "user_id": user_id,
+                    "users": users,
                     csrfmiddlewaretoken: '{{ csrf_token }}'
                 },
                 success: function (response) {
-                  $("#messageAllowUser").html("Done!");
+                  
                 }
             }
         );
@@ -255,4 +279,5 @@
         );
     }
 </script>
+{{ permissionForm.media.js }}
 {% endblock scripts %}
