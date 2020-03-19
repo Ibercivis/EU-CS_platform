@@ -103,3 +103,9 @@ class ResourceForm(forms.ModelForm):
         rsc.authors.set(authors)
 
         return 'success'
+
+
+class ResourcePermissionForm(forms.Form):
+    selectedUsers = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
+    usersCollection = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
+    usersAllowed =   forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False, label="Allow users to edit")

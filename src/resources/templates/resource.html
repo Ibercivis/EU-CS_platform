@@ -13,6 +13,7 @@
 
 
 {% block list_of_items %}
+{{ permissionForm.media.css }}
   <div class="container-fluid">
     <div class="card mb-4">
       {% if resource.image %}            
@@ -23,7 +24,7 @@
       <div class="card-header">
         <h2>  {{resource.name}}
           {% if user.is_authenticated %}
-            {% if resource.creator == user or user.is_staff or user.id == cooperator %}
+            {% if resource.creator == user or user.is_staff or user.id in cooperators %}
             <a class="btn btn-danger float-right" href="{% url 'editResource' resource.id %}"><i class="fas fa-edit"></i> Edit
             </a>
             {% endif %}
@@ -32,18 +33,16 @@
         {% if user.is_authenticated %}
         {% if resource.creator == user or user.is_staff %}
         <br>
-        <div class="row">
-          <label for="allowUser" class="control-label">
-            Allow an user to edit
-          </label>
-          <select id="allowUser" name="allowUser" class="custom-select form-control col-lg-2 ml-2 float-right">
-            <option value="">User<option>
-            {% for user in users %}
-                <option {% if user.id ==  cooperator %} selected {% endif %} value="{{ user.id }}">{{ user.name }}</option>
-            {% endfor %}
-          </select>
-          <span id="messageAllowUser"></span>
-        </div>
+        <permissionForm>
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-5 p-3 ml-5">
+            {{ permissionForm.usersAllowed | as_crispy_field }}
+            {{ permissionForm.selectedUsers | as_crispy_field }}
+            {{ permissionForm.usersCollection | as_crispy_field }}
+            </div>
+          </div>
+        </permissionForm>
         <br><br>
         {% endif %}
       {% endif %}
@@ -125,6 +124,23 @@
 
 {% block scripts %}
 <script>
+  $(document).ready(function () {  
+    var users = $("#id_usersCollection").val();
+    var users = users.split(",");
+    var selectedUsers = $("#id_selectedUsers").val().split(",");
+    for (user of users){
+      var found = false;
+      for(sel of selectedUsers){ 
+        if(sel.trim() == user.trim()){
+          found = true;
+          $("#id_usersAllowed").append("<option value='" + user +"' selected> " + user + " </option>");
+        }
+      }  
+      if(!found){
+        $("#id_usersAllowed").append("<option value='" + user +"'> " + user + " </option>");
+      }    
+    }
+  });
 	function setFeaturedRsc(idResource){
 		var htmlId = "featured" + idResource;
         var request = $.ajax(
@@ -160,24 +176,27 @@
         );
     }
   $(function () {
-    $('#allowUser').on('change', function () {
-      var user_id = $(this).val();
-      var idResource = {{resource.id}};
+    $('#id_usersAllowed').on('change', function () {
+        users = $("#id_usersAllowed option:selected").map(function () {
+          return $.trim($(this).text());
+        }).get().join(',');
+        var idResource = {{ resource.id }};
       var request = $.ajax(
-            {
-                type: "POST",
-                url: "{% url 'allowUserResource' %}",
-                data: {
-                    "resource_id": idResource,
-                    "user_id": user_id,
-                    csrfmiddlewaretoken: '{{ csrf_token }}'
-                },
-                success: function (response) {
-                  $("#messageAllowUser").html("Done!");
-                }
-            }
-        );
+        {
+          type: "POST",
+          url: "{% url 'allowUserResource' %}",
+          data: {
+            "resource_id": idResource,
+            "users": users,
+            csrfmiddlewaretoken: '{{ csrf_token }}'
+          },
+          success: function (response) {
+
+          }
+        }
+      );
     });
   });
 </script>
+{{ permissionForm.media.js }}
 {% endblock scripts %} 
