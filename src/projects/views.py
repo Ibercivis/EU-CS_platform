@@ -120,7 +120,7 @@ def project(request, pk):
     user = request.user
     project = get_object_or_404(Project, id=pk)
     users = getOtherUsers(project.creator)
-    cooperators = getCooperatorsNames(pk)
+    cooperators = getCooperatorsEmail(pk)
     permissionForm = ProjectPermissionForm(initial={'usersCollection':users, 'selectedUsers': cooperators})
     votes = Votes.objects.all().filter(project_id=pk).aggregate(Avg('vote'))['vote__avg']
     followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id',flat=True)
@@ -129,7 +129,7 @@ def project(request, pk):
     'featuredProjects':featuredProjects, 'permissionForm': permissionForm, 'cooperators': getCooperators(pk)})
 
 def getOtherUsers(creator):
-    users = list(User.objects.all().exclude(is_superuser=True).exclude(id=creator.id).values_list('name',flat=True))
+    users = list(User.objects.all().exclude(is_superuser=True).exclude(id=creator.id).values_list('email',flat=True))
     users = ", ".join(users)
     return users
 
@@ -137,12 +137,12 @@ def getCooperators(projectID):
     users = list(ProjectPermission.objects.all().filter(project_id=projectID).values_list('user',flat=True))
     return users
 
-def getCooperatorsNames(projectID):
+def getCooperatorsEmail(projectID):
     users = getCooperators(projectID)
     cooperators = ""
     for user in users:
         userObj = get_object_or_404(User, id=user)
-        cooperators += userObj.name + ", "
+        cooperators += userObj.email + ", "
     return cooperators
 
 def editProject(request, pk):
@@ -308,7 +308,7 @@ def allowUser(request):
     fProject = get_object_or_404(Project, id=projectId)
     users = users.split(',')
     for user in users:
-        fUser = User.objects.filter(name=user)[:1].get()
+        fUser = User.objects.filter(email=user)[:1].get()
         projectPermission = ProjectPermission(project=fProject, user=fUser)
         projectPermission.save()  
 
