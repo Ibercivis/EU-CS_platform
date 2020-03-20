@@ -4,10 +4,11 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
+from itertools import chain
 from . import forms
 from . import models
-from projects.models import Project, FollowedProjects
-from resources.models import Resource, SavedResources
+from projects.models import Project, FollowedProjects, ProjectPermission
+from resources.models import Resource, SavedResources, ResourcePermission
 
 
 class ShowProfile(LoginRequiredMixin, generic.TemplateView):
@@ -66,12 +67,18 @@ class EditProfile(LoginRequiredMixin, generic.TemplateView):
 
 def projects(request):
     user = request.user
-    projects = Project.objects.all().filter(creator=user)
+    projectsCreated = Project.objects.all().filter(creator=user)
+    projectsWithPermission = getProjectsWithPermission(user)
+    projectsWithPermission = Project.objects.all().filter(id__in=projectsWithPermission)
+    projects = chain(projectsCreated, projectsWithPermission)    
     return render(request, 'profiles/my_projects.html', {'show_user': user, 'projects': projects})
 
 def resources(request):
     user = request.user
-    resources = Resource.objects.all().filter(creator=user)
+    resourcesCreated = Resource.objects.all().filter(creator=user)
+    resourcesWithPermission = getResourcesWithPermission(user)
+    resourcesWithPermission = Resource.objects.all().filter(id__in=resourcesWithPermission)
+    resources = chain(resourcesCreated, resourcesWithPermission)
     return render(request, 'profiles/my_resources.html', {'show_user': user, 'resources': resources})
 
 def followedProjects(request):
@@ -87,3 +94,11 @@ def savedResources(request):
     savedResources = Resource.objects.filter(id__in=savedResources)
     savedResources = savedResources.filter(~Q(hidden=True))
     return render(request, 'profiles/saved_resources.html', {'show_user': user, 'resources': savedResources})
+
+def getProjectsWithPermission(user):
+    projects = list(ProjectPermission.objects.all().filter(user_id=user).values_list('project',flat=True))
+    return projects
+
+def getResourcesWithPermission(user):
+    resources = list(ResourcePermission.objects.all().filter(user_id=user).values_list('resource',flat=True))
+    return resources
