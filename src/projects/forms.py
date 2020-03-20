@@ -16,7 +16,7 @@ class ProjectForm(forms.Form):
     error_css_class = 'form_error'
     #Basic Project Information
     project_name = forms.CharField(max_length=200)
-    aim = forms.CharField(max_length=1000, widget=forms.TextInput(attrs={'autocomplete':'nope'}),label="Aim of the project")
+    aim = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 1000}}), label="Aim of the project (max 1000 characters)")
     description = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 2000}}), label="Project description (max 2000 characters)")
     choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     choicesSelected = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
