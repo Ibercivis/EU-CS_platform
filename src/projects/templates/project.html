@@ -4,7 +4,6 @@
 {% load leaflet_tags %}
 {% block head %}
 {{block.super }}
-<link rel="stylesheet" href="{% static 'styles/cropper.min.css' %}">
 {% leaflet_js %}
 {% leaflet_css %}
 
@@ -24,12 +23,12 @@
             {% endif %}
 
       <div class="card-text p-3">
-       
+
         {% if user.is_authenticated %}
           {% if project.creator == user or user.is_staff or user.id in cooperators %}
           <div class="row">
           <a class="btn btn-info float-right" href="{% url 'editProject' project.id %}"><i class="fas fa-edit"></i> Edit </a>
-          
+
           </div>
           {% endif %}
           {% if project.creator == user or user.is_staff %}
@@ -74,7 +73,7 @@
             <div class="col-4 mt-5">
               <div class="card h-100 shadow-sm">
                 <div class="card-body">
-                  <h1><i class="fas fa-globe-europe" ></i></h1>
+                  
                   <h4 class="text-dark">Topic</h4>
               	   {% for topic in project.topic.all %} <a class="badge badge-pill badge-dark" href="/projects?keywords=&topic={{topic|urlencode}}">{{topic}}</a>  {% endfor %}
                 </div>
@@ -181,32 +180,28 @@
 
 
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
 {% endblock list_of_items %}
 
 {% block scripts %}
 <script type="text/javascript">
 
-  $(document).ready(function () {  
+  $(document).ready(function () {
     var users = $("#id_usersCollection").val();
     var users = users.split(",");
-    
+
     var selectedUsers = $("#id_selectedUsers").val().split(",");
     for (user of users){
       var found = false;
-      for(sel of selectedUsers){ 
+      for(sel of selectedUsers){
         if(sel.trim() == user.trim()){
           found = true;
           $("#id_usersAllowed").append("<option value='" + user +"' selected> " + user + " </option>");
         }
-      }  
+      }
       if(!found){
         $("#id_usersAllowed").append("<option value='" + user +"'> " + user + " </option>");
-      }    
+      }
     }
   });
 
@@ -237,7 +232,7 @@
                     csrfmiddlewaretoken: '{{ csrf_token }}'
                 },
                 success: function (response) {
-                  
+
                 }
             }
         );

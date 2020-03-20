@@ -468,7 +468,7 @@
       $("#id_width" + imgSelected).val(cropData["width"]);
       $("#modalCrop").modal("hide");
       $('#imageResult' + imgSelected).attr('src', $image.cropper('getCroppedCanvas',
-       {width: imgSelected == 3 ? 1100 : 600, height: 3400}).toDataURL());
+       {width: imgSelected == 3 ? 1100 : 600, height: 400}).toDataURL());
     });
 
   });

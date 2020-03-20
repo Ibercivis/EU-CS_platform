@@ -7,8 +7,21 @@ main {
 	min-height: 100%;
 	background-color: #f8f8f8;
 }
+main.nomargintop {
+	margin-top: 0px;
+	font-weight: 200;
+	min-height: 100%;
+	background-color: #f8f8f8;
+}
 
+.jumbotron{
+    min-height: 30vh;
+		background: url('../img/cancitizensc.jpg') #fff;
+		 background-size: cover;
+  background-position: center;
+}
 h1,h2, h3, h4,h5 {
+	font-family: "Poppins", Helvetica, sans-serif;
 	font-weight: 200;
 	color: #fc5b62;
 }
@@ -56,18 +69,24 @@ display:none;
   background-image: url(../img/icon_color.png);
 }
 .nav-link.active{
-	border-bottom: 2px solid #007bff;
+	border-bottom: 2px solid #17A398;
 }
 .card-link{
 	color: #fc5b62;
-	font-weight: 500;
+	font-weight: 400;
 	font-family: "Poppins", Helvetica, sans-serif;
 	font-size: 1.2em;
   transition: color .25s;
-
 }
 .card-link:hover{
 	color: #333;
+}
+.card-link-resource{
+	color: #4e598c;
+	font-weight: 400;
+	font-family: "Poppins", Helvetica, sans-serif;
+	font-size: 1.2em;
+	transition: color .25s;
 }
 
 .card-img-wrap {
@@ -98,4 +117,34 @@ display:none;
 	font-family: "Poppins", Helvetica, sans-serif;
 	color: rgb(204, 204, 204);
 	font-weight: 500;
+}
+.upper a.frontpage{
+	background-color: rgba(255,255,255,0.7);
+	font-family: "Poppins", Helvetica, sans-serif;
+	color: rgb(30, 30, 30);
+	font-weight: 500;
+	font-size: 1.0em;
+}
+.badge{
+	font-family: "Poppins", Helvetica, sans-serif;
+	font-weight: 500;
+}
+.btn-approved{
+	color: #17a398;
+}
+.btn-pending{
+	color: #fc4b62;
+}
+.overlay-orange{
+	background: linear-gradient(to right, rgba(0, 0, 0, 1.0), rgba(195, 55, 100, 0.8));
+}
+.overlay-blue{
+	background: linear-gradient(to right, rgba(0, 0, 0, 1.0), rgba(89, 55, 195, 0.8));
+}
+.img-filter{
+	object-fit: cover;
+	opacity: 0.4;
+}
+.navbar-front{
+	background: rgba(0,0,0,0.7);
 }

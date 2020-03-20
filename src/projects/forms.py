@@ -43,7 +43,7 @@ class ProjectForm(forms.Form):
     width2 = forms.FloatField(widget=forms.HiddenInput(),required=False)
     height2 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     image_credit2 = forms.CharField(max_length=200, required=False, label="Logo credit")
-    image3 = forms.ImageField(required=False, label="Image 3: Header (Will be resized to 1100x400 pixels" )
+    image3 = forms.ImageField(required=False, label="Image 3: Header (Will be resized to 1100x300 pixels" )
     x3 = forms.FloatField(widget=forms.HiddenInput(),required=False)
     y3 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     width3 = forms.FloatField(widget=forms.HiddenInput(),required=False)
@@ -75,7 +75,7 @@ class ProjectForm(forms.Form):
             self._errors["end_date"] = self.error_class([msg])
 
     def save(self, args, images, cFields):
-        pk = self.data.get('projectID', '') 
+        pk = self.data.get('projectID', '')
         start_dateData = self.data['start_date']
         end_dateData = self.data['end_date']
         latitude = self.data['latitude']

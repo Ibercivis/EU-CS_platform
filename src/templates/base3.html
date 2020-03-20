@@ -16,12 +16,12 @@
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="{% static 'site/css/bootstrap.min.css' %}">
   <!-- Your custom styles (optional) -->
-  <link rel="stylesheet" href="{% static 'site/css/style_home.css' %}">
+  <link rel="stylesheet" href="{% static 'site/css/style.css' %}">
 </head>
 <body>
 <header>
   <!--Navbar-->
-  <nav class="navbar navbar-expand-lg navbar-light bg-white text-dark text-weight-bold fixed-top">
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-front text-white text-weight-bold fixed-top">
     <div class="container text-weight-bold">
 	    <a class="navbar-brand" href="/">{% include "_brandname.html" %}</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -51,7 +51,7 @@
 
   <!--/.Navbar-->
 </header>
-<main>
+<main class="nomargintop">
 {% block splash %}
 {% endblock splash %}
 </main>

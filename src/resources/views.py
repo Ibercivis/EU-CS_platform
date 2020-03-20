@@ -29,9 +29,9 @@ def resources(request):
     themes = Theme.objects.all()
     categories = Category.objects.all()
     filters = {'keywords': '', 'language': ''}
-    
+
     if request.GET.get('keywords'):
-        resources = resources.filter( Q(name__icontains = request.GET['keywords'])  | 
+        resources = resources.filter( Q(name__icontains = request.GET['keywords'])  |
                                     Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
         filters['keywords'] = request.GET['keywords']
 
@@ -51,13 +51,13 @@ def resources(request):
         filters['category'] = int(request.GET['category'])
 
 
-    if request.GET.get('featuredCheck'):        
+    if request.GET.get('featuredCheck'):
         resources = resources.filter(id__in=featuredResources)
         filters['featured'] = request.GET['featuredCheck']
 
-     
+
     if not user.is_staff:
-        resources = resources.filter(~Q(hidden=True)) 
+        resources = resources.filter(~Q(hidden=True))
 
 
     paginator = Paginator(resources, 8)
@@ -89,10 +89,10 @@ def new_resource(request):
                 photo = request.FILES['image']
                 image = Image.open(photo)
                 cropped_image = image.crop((x, y, w+x, h+y))
-                resized_image = cropped_image.resize((400, 300), Image.ANTIALIAS)
+                resized_image = cropped_image.resize((600, 400), Image.ANTIALIAS)
                 _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
-                image_path = "media/images/" + _datetime + '_' + photo.name 
-                resized_image.save(image_path)   
+                image_path = "media/images/" + _datetime + '_' + photo.name
+                resized_image.save(image_path)
 
             form.save(request, '/' + image_path)
             messages.success(request, "Resource uploaded with success!")
@@ -153,10 +153,10 @@ def editResource(request, pk):
         'url': resource.url,'license': resource.license, 'choices': choices, 'theme': resource.theme.all,
         'audience' : resource.audience.all, 'publisher': resource.publisher, 'year_of_publication': resource.datePublished,
         'authors': resource.authors.all, 'selectedAuthors': selectedAuthors, 'authorsCollection': authorsCollection,
-        'author_email': resource.author_email, 'choicesSelected':keywordsList, 
+        'author_email': resource.author_email, 'choicesSelected':keywordsList,
         'category': getCategory(resource.category), 'categorySelected': resource.category.id
     })
-    
+
     if request.method == 'POST':
         form = ResourceForm(request.POST, request.FILES)
         if form.is_valid():
@@ -172,8 +172,8 @@ def editResource(request, pk):
                 cropped_image = image.crop((x, y, w+x, h+y))
                 resized_image = cropped_image.resize((400, 300), Image.ANTIALIAS)
                 _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
-                image_path = "media/images/" + _datetime + '_' + photo.name 
-                resized_image.save(image_path)   
+                image_path = "media/images/" + _datetime + '_' + photo.name
+                resized_image.save(image_path)
 
             form.save(request, '/' + image_path)
             return redirect('/resource/'+ str(pk))
@@ -183,10 +183,10 @@ def editResource(request, pk):
 
 def deleteResource(request, pk):
     obj = get_object_or_404(Resource, id=pk)
-    obj.delete()        
+    obj.delete()
     return redirect('resources')
 
-def resources_autocomplete(request):  
+def resources_autocomplete(request):
     if request.GET.get('q'):
         text = request.GET['q']
         report = getRscNamesKeywords(text)
@@ -201,7 +201,7 @@ def getRscNamesKeywords(text):
     report = chain(rsc_names, keywords)
     return report
 
-def license_autocomplete(request):  
+def license_autocomplete(request):
     if request.GET.get('q'):
         text = request.GET['q']
         licenses = Resource.objects.filter(license__icontains=text).values_list('license',flat=True).distinct()
@@ -223,10 +223,10 @@ def get_sub_category(request):
             for sub_category in tupla_sub_categories:
                 options += '<option value = "%s">%s</option>' % (
                     sub_category[0],
-                    sub_category[1]     
+                    sub_category[1]
                 )
             options += '</select>'
-            response['sub_categories'] = options        
+            response['sub_categories'] = options
         else:
             response['sub_categories'] = '<select id="id_subcategory" class="select form-control" disabled></select>'
     else:
@@ -234,7 +234,7 @@ def get_sub_category(request):
     return JsonResponse(response)
 
 
-def getCategory(category):    
+def getCategory(category):
     if category.parent:
             return category.parent
     else:
@@ -242,11 +242,11 @@ def getCategory(category):
 
 def setFeaturedRsc(request):
     response = {}
-    id = request.POST.get("resource_id")    
+    id = request.POST.get("resource_id")
 
     #Delete
     try:
-        obj = FeaturedResources.objects.get(resource_id=id)    
+        obj = FeaturedResources.objects.get(resource_id=id)
         obj.delete()
     except FeaturedResources.DoesNotExist:
         #Insert
@@ -254,7 +254,7 @@ def setFeaturedRsc(request):
         featureResource = FeaturedResources(resource=fResource)
         featureResource.save()
 
-    return JsonResponse(response, safe=False) 
+    return JsonResponse(response, safe=False)
 
 def setSavedResource(request):
     response = {}
@@ -263,7 +263,7 @@ def setSavedResource(request):
 
     #Delete
     try:
-        obj = SavedResources.objects.get(resource_id=resourceId,user_id=userId)    
+        obj = SavedResources.objects.get(resource_id=resourceId,user_id=userId)
         obj.delete()
     except SavedResources.DoesNotExist:
         #Insert
@@ -272,7 +272,7 @@ def setSavedResource(request):
         savedResource = SavedResources(resource=fResource, user=fUser)
         savedResource.save()
 
-    return JsonResponse(response, safe=False) 
+    return JsonResponse(response, safe=False)
 
 
 def setHiddenResource(request):
@@ -288,19 +288,19 @@ def allowUserResource(request):
     response = {}
     resourceId = request.POST.get("resource_id")
     users = request.POST.get("users")
-    
+
     #Delete all
-    objs = ResourcePermission.objects.all().filter(resource_id=resourceId) 
+    objs = ResourcePermission.objects.all().filter(resource_id=resourceId)
     if(objs):
         for obj in objs:
             obj.delete()
-   
+
     #Insert all
     fResource = get_object_or_404(Resource, id=resourceId)
     users = users.split(',')
     for user in users:
         fUser = User.objects.filter(email=user)[:1].get()
         resourcePermission = ResourcePermission(resource=fResource, user=fUser)
-        resourcePermission.save()  
+        resourcePermission.save()
 
     return JsonResponse(response, safe=False)

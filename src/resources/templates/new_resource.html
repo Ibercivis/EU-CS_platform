@@ -179,14 +179,14 @@
         for (author of authorsCollection){
             $("#id_authors").append("<option value='" + author +"'> " + author + " </option>");
         }
-  
+
         $("#div_id_keywords div").on('keyup', function(){
             var key = $("#div_id_keywords .selection input").val();
             if (key.indexOf(',') > -1) {
                 var word =key.slice(0, -1);
                 $("#div_id_keywords .selection input").val("");
                 $("#id_keywords").append("<option value='" + word +"' selected> " + word + " </option>");
-            }      
+            }
         });
 
         $("#div_id_authors div").on('keyup', function(){
@@ -195,7 +195,7 @@
             var word =key.slice(0, -1);
             $("#div_id_authors .selection input").val("");
             $("#id_authors").append("<option value='" + word +"' selected> " + word + " </option>");
-            }      
+            }
         });
 
         $("#id_category").on('change', getSubCategories);
@@ -208,7 +208,7 @@
                     var id = $(value).parent().parent().attr('id');
                     $("#" + id + " .errorMsg").remove();
                     if(!$(value).val()){
-                    validationFailed = true;          
+                    validationFailed = true;
                     $(value).parent().append("<span class='errorMsg'> <b>Required field (*)</b></span>");
                     }
                 });
@@ -220,28 +220,28 @@
             }else{
                 var option_all = $("#id_keywords option:selected").map(function () {
                     return $.trim($(this).text());
-                }).get().join(',');        
+                }).get().join(',');
                 $("#id_choices").val(option_all);
                 $("#id_keywords").empty();
 
                 option_all = $("#id_authors option:selected").map(function () {
                     return $.trim($(this).text());
-                }).get().join(',');        
+                }).get().join(',');
                 $("#id_authorsCollection").val(option_all);
                 $("#id_authors").empty();
 
                 var category = $("#id_category").val();
-                $("#id_categorySelected").val(category);            
+                $("#id_categorySelected").val(category);
                 var subcategory = $("#id_subcategory").val();
                 if(subcategory){
                     $("#id_categorySelected").val(subcategory);
-                }     
+                }
             }
         });
     });
 
     function getSubCategories(){
-        var category = $("#id_category").val();        
+        var category = $("#id_category").val();
         var request = $.ajax(
             {
                 type: "GET",
@@ -251,7 +251,7 @@
                 },
                 success: function (response) {
                     $("#id_sub_categories").html(response.sub_categories);
-                    
+
                 }
             }
         );
@@ -281,16 +281,16 @@
         var canvasData;
         $("#modalCrop").on("shown.bs.modal", function () {
         $image.cropper({
-						aspectRatio: 4/3,
-            viewMode: 0,        
-            minCropBoxWidth: 400,
-            minCropBoxHeight: 300,
+						aspectRatio: 3/2,
+            viewMode: 0,
+            minCropBoxWidth: 600,
+            minCropBoxHeight: 400,
             dragMode: 'move',
             guides: false,
             center: false,
-            highlight: false,        
+            highlight: false,
             cropBoxResizable: false,
-            toggleDragModeOnDblclick: false,        
+            toggleDragModeOnDblclick: false,
             ready: function () {
             $image.cropper("setCanvasData", canvasData);
             $image.cropper("setCropBoxData", cropBoxData);
@@ -311,14 +311,14 @@
     });
 
     /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
-    $(".js-crop-and-upload").click(function () {      
-    var cropData = $image.cropper("getData");      
+    $(".js-crop-and-upload").click(function () {
+    var cropData = $image.cropper("getData");
     $("#id_x").val(cropData["x"]);
     $("#id_y").val(cropData["y"]);
     $("#id_height").val(cropData["height"]);
     $("#id_width").val(cropData["width"]);
     $("#modalCrop").modal("hide");
-    $('#imageResult').attr('src', $image.cropper('getCroppedCanvas', {width: 400, height: 300}).toDataURL());
+    $('#imageResult').attr('src', $image.cropper('getCroppedCanvas', {width: 600, height: 400}).toDataURL());
     });
 
     });
