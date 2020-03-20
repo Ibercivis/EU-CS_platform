@@ -7,7 +7,19 @@ main {
 	min-height: 100%;
 	background-color: #f8f8f8;
 }
+main.nomargintop {
+	margin-top: 0px;
+	font-weight: 200;
+	min-height: 100%;
+	background-color: #f8f8f8;
+}
 
+.jumbotron{
+    min-height: 30vh;
+		background: url('../img/cancitizensc.jpg') #fff;
+		 background-size: cover;
+  background-position: center;
+}
 h1,h2, h3, h4,h5 {
 	font-family: "Poppins", Helvetica, sans-serif;
 	font-weight: 200;
@@ -106,6 +118,13 @@ display:none;
 	color: rgb(204, 204, 204);
 	font-weight: 500;
 }
+.upper a.frontpage{
+	background-color: rgba(255,255,255,0.7);
+	font-family: "Poppins", Helvetica, sans-serif;
+	color: rgb(30, 30, 30);
+	font-weight: 500;
+	font-size: 1.0em;
+}
 .badge{
 	font-family: "Poppins", Helvetica, sans-serif;
 	font-weight: 500;
@@ -115,4 +134,17 @@ display:none;
 }
 .btn-pending{
 	color: #fc4b62;
+}
+.overlay-orange{
+	background: linear-gradient(to right, rgba(0, 0, 0, 1.0), rgba(195, 55, 100, 0.8));
+}
+.overlay-blue{
+	background: linear-gradient(to right, rgba(0, 0, 0, 1.0), rgba(89, 55, 195, 0.8));
+}
+.img-filter{
+	object-fit: cover;
+	opacity: 0.4;
+}
+.navbar-front{
+	background: rgba(0,0,0,0.7);
 }

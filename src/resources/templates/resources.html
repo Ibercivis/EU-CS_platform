@@ -50,9 +50,9 @@
 
 
     <div class="card-body">
-      <h5 class="card-title mt-3 mb-3"><a class="card-link card-link-resource" href="/resource/{{rsc.id}}" class="card-link">{{ rsc.name | truncatewords:15 }}</a></h5>
-      <div class="card-text mt-3">{{rsc.abstract | safe | truncatewords:40 }}
-        <a class="" href="{{rsc.url}}" target="_blank">Download</a>
+      <h6 class="card-title mt-3 mb-3"><a class="card-link card-link-resource" href="/resource/{{rsc.id}}" class="card-link">{{ rsc.name | truncatewords:12 }}</a></h6>
+      <div class="card-text mt-3">{{rsc.abstract | safe | truncatewords:30 }}
+        <a class="" href="/resource/{{rsc.id}}" target="_blank">Read more</a>
       </div>
       <a class="badge badge-light" href="/resources?category={{rsc.category.id}}">{{ rsc.category | upper }}</a><br>
       {% for theme in rsc.theme.all %}<a class="badge badge-light" href="/resources?theme={{theme.id}}">{{ theme | upper}}</a> {% endfor %}<br>
