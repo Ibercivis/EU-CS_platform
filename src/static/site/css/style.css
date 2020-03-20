@@ -9,6 +9,7 @@ main {
 }
 
 h1,h2, h3, h4,h5 {
+	font-family: "Poppins", Helvetica, sans-serif;
 	font-weight: 200;
 	color: #fc5b62;
 }
@@ -56,18 +57,24 @@ display:none;
   background-image: url(../img/icon_color.png);
 }
 .nav-link.active{
-	border-bottom: 2px solid #007bff;
+	border-bottom: 2px solid #17A398;
 }
 .card-link{
 	color: #fc5b62;
-	font-weight: 500;
+	font-weight: 400;
 	font-family: "Poppins", Helvetica, sans-serif;
 	font-size: 1.2em;
   transition: color .25s;
-
 }
 .card-link:hover{
 	color: #333;
+}
+.card-link-resource{
+	color: #4e598c;
+	font-weight: 400;
+	font-family: "Poppins", Helvetica, sans-serif;
+	font-size: 1.2em;
+	transition: color .25s;
 }
 
 .card-img-wrap {
@@ -98,4 +105,14 @@ display:none;
 	font-family: "Poppins", Helvetica, sans-serif;
 	color: rgb(204, 204, 204);
 	font-weight: 500;
+}
+.badge{
+	font-family: "Poppins", Helvetica, sans-serif;
+	font-weight: 500;
+}
+.btn-approved{
+	color: #17a398;
+}
+.btn-pending{
+	color: #fc4b62;
 }

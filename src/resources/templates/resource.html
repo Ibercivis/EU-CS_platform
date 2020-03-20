@@ -14,189 +14,217 @@
 
 {% block list_of_items %}
 {{ permissionForm.media.css }}
-  <div class="container-fluid">
-    <div class="card mb-4">
-      {% if resource.image %}            
-      <img class="img-fluid img-responsive img-zoom" src="{{ resource.image }}" >
-      {% else %}
-        <img class="img-fluid img-responsive img-zoom" src='/static/site/img/resource.png'>
-      {% endif %}
-      <div class="card-header">
-        <h2>  {{resource.name}}
+<div class="container-fluid main-content-containe">
+  <div class="card mb-4">
+    {% if resource.image %}
+    <img class="img-fluid img-responsive img-zoom" src="{{ resource.image }}" >
+    {% else %}
+    <img class="img-fluid img-responsive img-zoom" src='/static/site/img/resource.png'>
+    {% endif %}
+    <div class="card-header">
+      <div class="row">
+        <div class="col-6">
           {% if user.is_authenticated %}
-            {% if resource.creator == user or user.is_staff or user.id in cooperators %}
-            <a class="btn btn-danger float-right" href="{% url 'editResource' resource.id %}"><i class="fas fa-edit"></i> Edit
-            </a>
-            {% endif %}
+          {% if resource.creator == user or user.is_staff or user.id in cooperators %}
+          <a class="btn btn-danger" href="{% url 'editResource' resource.id %}"><i class="fas fa-edit"></i> Edit
+          </a>
           {% endif %}
-        </h2>
-        {% if user.is_authenticated %}
-        {% if resource.creator == user or user.is_staff %}
-        <br>
-        <permissionForm>
-          {% csrf_token %}
-          <div class="row">
-            <div class="col-5 p-3 ml-5">
+          {% endif %}
+          {% if user.is_authenticated %}
+          {% if resource.creator == user or user.is_staff %}
+        </div>
+        <div class="col-6">
+          <permissionForm>
+            {% csrf_token %}
             {{ permissionForm.usersAllowed | as_crispy_field }}
             {{ permissionForm.selectedUsers | as_crispy_field }}
             {{ permissionForm.usersCollection | as_crispy_field }}
+          </permissionForm>
+          <br><br>
+        </div>
+        {% endif %}
+        {% endif %}
+      </div>
+    </div><!-- End of card-header -->
+    <div class="card-text p-3">
+      <div class="row">
+        <div class="col-12 col-xl-4">
+          <h2>{{resource.name}}</h2>
+        </div>
+        <div class="col-12 col-xl-8 pt-2">
+          {{ resource.abstract | safe }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-3 mt-5">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <h1><i class="fas fa-globe-europe" ></i></h1>
+              <h5 class="text-dark">Language</h5>
+              {% get_language_info_list for LANGUAGES as languages %}
+              {% for language in languages %}
+              {% if language.code == resource.inLanguage %}
+              <a class="badge badge-light" href="/resources?language={{resource.inLanguage}}">{{language.name_local | upper}}</a>
+              {% endif %}
+              {% endfor %}
             </div>
           </div>
-        </permissionForm>
-        <br><br>
-        {% endif %}
-      {% endif %}
-    </div>
-    
-
-
-        <div class="card-text m-2 mt-4">
-        <a class="badge badge-pill badge-dark" href="/category?theme={{resource.category.id}}">{{resource.category }}</a>
-        {% get_language_info_list for LANGUAGES as languages %}
-        {% for language in languages %}
-					{% if language.code == resource.inLanguage %}
-	 					<a class="badge badge-pill badge-success" href="/resources?language={{resource.inLanguage}}">{{language.name_local}}</a>
-					{% endif %}
-				{% endfor %}
-			{% for theme in resource.theme.all %}<a class="badge badge-pill badge-info" href="/resources?theme={{theme.id}}">{{ theme }}</a> {% endfor %}
-			{% for keyword in resource.keywords.all %} <a class="badge badge-pill badge-secondary" href="/resources?keywords={{keyword}}">{{keyword}}</a>  {% endfor %}
-			<br /><br>
-                <p><b>Abstract: </b> {{ resource.abstract | safe }}</p>
-                <p><b> URL: </b><a href="{{resource.url}}" target="_blank">{{resource.url}}</a></p>
-                <p><b>Author(s): </b>{% for author in resource.authors.all %}{{ author }} {% endfor %}</p>
-                <p><b>Author's email: </b>{{ resource.author_email }}</p>
-                <p><b>License: </b>{{ resource.license }}</p>
-                <p><b>Audience: </b>{% for audience in resource.audience.all %}{{ audience }} {% endfor %}</p>
-                <p><b>Publisher: </b> {{ resource.publisher }}</p>
-                <p><b>Year of publication: </b> {{ resource.datePublished }}</p>
-                <p><b>Resource DOI: </b> {{ resource.resourceDOI }}</p>
-
+        </div>
+        <div class="col-12 col-sm-3 mt-5">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <h1><i class="fas fa-globe-europe" ></i></h1>
+              <h5 class="text-dark">Category</h5>
+              <a class="badge badge-light" href="/category?theme={{resource.category.id}}">{{resource.category | upper }}</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-3 mt-5">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <h1><i class="fas fa-globe-europe" ></i></h1>
+              <h5 class="text-dark">Theme</h5>
+              {% for theme in resource.theme.all %}<a class="badge badge-light" href="/resources?theme={{theme.id}}">{{ theme | upper }}</a> {% endfor %}
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-3 mt-5">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <h1><i class="far fa-lightbulb"></i></h1>
+              <h5 class="text-dark">Keywords</h5>
+              {% for keyword in resource.keywords.all %} <a class="badge badge-light" href="/resources?keywords={{keyword}}">{{keyword  | upper}}</a>  {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div><!-- End of row of cards -->
+      <div class="row">
+        <div class="col-12 col-xl-4 mt-5">
+          <h2>Main info</h2>
+        </div>
+        <div class="col-12 col-xl-8 mt-5">
+          <b> URL: </b><a href="{{resource.url}}" target="_blank">{{resource.url}}</a><br>
+          <b>Author(s): </b>{% for author in resource.authors.all %}{{ author }} {% endfor %}<br>
+          <b>Author's email: </b>{{ resource.author_email }}<br>
+          <b>License: </b>{{ resource.license }}<br>
+          <b>Audience: </b>{% for audience in resource.audience.all %}{{ audience }} {% endfor %}<br>
+          <b>Publisher: </b> {{ resource.publisher }}<br>
+          <b>Year of publication: </b> {{ resource.datePublished }}<br>
+          <b>Resource DOI: </b> {{ resource.resourceDOI }}<br>
+        </div>
+      </div>
     </div> <!-- End of card text -->
-		<div class="card-footer bg-white">
-		<div class="row">
-			<div class="col-2">
-
-              <div id="featured{{rsc.id}}">
-                {% if user.is_staff %}
-                  {% if resource.id in featuredResources %}
-                  <img onclick="setFeaturedRsc({{resource.id}})" class="img-fluid" src="{% static 'site/img/icon_color.png' %}" />
-                  {% else %}
-                  <img onclick="setFeaturedRsc({{resource.id}})" class="img-fluid" src="{% static 'site/img/icon_bw.png' %}" />
-                  {% endif %}
-                {% else %}
-                  {% if rresource.id in featuredResources %}
-                  <img class="img-fluid" src="{% static 'site/img/icon_color.png' %}" />
-                  {% else %}
-                  <img class="img-fluid" src="{% static 'site/img/icon_bw.png' %}" />
-                  {% endif %}
-
-                  {% endif %}
-
-                        </div>
-				</div>
-				<div class="col-10">
-
-
-
-
-            	<a class="btn btn-outline-secondary float-right ml-2 mt-2" href="{{resource.url}}" target="_blank">Download</a>
-        {% if user.is_authenticated %}
-                  <div id="saved{{resource.id}}">
-                    {% if resource.id in savedResources %}
-                      <button type="button" class="btn btn-outline-primary float-right mt-2" onclick="setSavedResource({{resource.id}},{{user.id}})">In my library</button>
-                    {% else %}
-                      <button type="button" class="btn btn-outline-secondary float-right mt-2" onclick="setSavedResource({{resource.id}},{{user.id}})">Add to my library</button>
-                    {% endif %}
-                  </div>
-
-                {% endif %}
-	</div>
-</div>
-
-
-		</div>
+    <div class="card-footer bg-white">
+      <div class="row">
+        <div class="col-2">
+          <div id="featured{{rsc.id}}">
+            {% if user.is_staff %}
+            {% if resource.id in featuredResources %}
+            <img onclick="setFeaturedRsc({{resource.id}})" class="img-fluid" src="{% static 'site/img/icon_color.png' %}" />
+            {% else %}
+            <img onclick="setFeaturedRsc({{resource.id}})" class="img-fluid" src="{% static 'site/img/icon_bw.png' %}" />
+            {% endif %}
+            {% else %}
+            {% if rresource.id in featuredResources %}
+            <img class="img-fluid" src="{% static 'site/img/icon_color.png' %}" />
+            {% else %}
+            <img class="img-fluid" src="{% static 'site/img/icon_bw.png' %}" />
+            {% endif %}
+            {% endif %}
+          </div>
+        </div>
+        <div class="col-10">
+          <a class="btn btn-outline-secondary float-right ml-2 mt-2" href="{{resource.url}}" target="_blank">Download</a>
+          {% if user.is_authenticated %}
+          <div id="saved{{resource.id}}">
+            {% if resource.id in savedResources %}
+            <button type="button" class="btn btn-outline-primary float-right mt-2" onclick="setSavedResource({{resource.id}},{{user.id}})">In my library</button>
+            {% else %}
+            <button type="button" class="btn btn-outline-secondary float-right mt-2" onclick="setSavedResource({{resource.id}},{{user.id}})">To my library</button>
+            {% endif %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-
-
-
 {% endblock list_of_items %}
-
 {% block scripts %}
 <script>
-  $(document).ready(function () {  
+  $(document).ready(function () {
     var users = $("#id_usersCollection").val();
     var users = users.split(",");
     var selectedUsers = $("#id_selectedUsers").val().split(",");
     for (user of users){
       var found = false;
-      for(sel of selectedUsers){ 
+      for(sel of selectedUsers){
         if(sel.trim() == user.trim()){
           found = true;
           $("#id_usersAllowed").append("<option value='" + user +"' selected> " + user + " </option>");
         }
-      }  
+      }
       if(!found){
         $("#id_usersAllowed").append("<option value='" + user +"'> " + user + " </option>");
-      }    
+      }
     }
   });
-	function setFeaturedRsc(idResource){
-		var htmlId = "featured" + idResource;
-        var request = $.ajax(
-            {
-                type: "POST",
-                url: "{% url 'setFeaturedRsc' %}",
-                data: {
-                    "resource_id": idResource,
-                    csrfmiddlewaretoken: '{{ csrf_token }}'
-                },
-                success: function (response) {
-                    $("#"+htmlId).load(" #"+htmlId);
-                }
-            }
-        );
+  function setFeaturedRsc(idResource){
+    var htmlId = "featured" + idResource;
+    var request = $.ajax(
+    {
+      type: "POST",
+      url: "{% url 'setFeaturedRsc' %}",
+      data: {
+        "resource_id": idResource,
+        csrfmiddlewaretoken: '{{ csrf_token }}'
+      },
+      success: function (response) {
+        $("#"+htmlId).load(" #"+htmlId);
+      }
     }
+    );
+  }
 
   function setSavedResource(idResource, idUser){
-		var htmlId = "saved" + idResource;
-        var request = $.ajax(
-            {
-                type: "POST",
-                url: "{% url 'setSavedResource' %}",
-                data: {
-                    "resource_id": idResource,
-					          "user_id": idUser,
-              		  csrfmiddlewaretoken: '{{ csrf_token }}'
-                },
-                success: function (response) {
-                    $("#"+htmlId).load(" #"+htmlId);
-                }
-            }
-        );
+    var htmlId = "saved" + idResource;
+    var request = $.ajax(
+    {
+      type: "POST",
+      url: "{% url 'setSavedResource' %}",
+      data: {
+        "resource_id": idResource,
+        "user_id": idUser,
+        csrfmiddlewaretoken: '{{ csrf_token }}'
+      },
+      success: function (response) {
+        $("#"+htmlId).load(" #"+htmlId);
+      }
     }
+    );
+  }
   $(function () {
     $('#id_usersAllowed').on('change', function () {
-        users = $("#id_usersAllowed option:selected").map(function () {
-          return $.trim($(this).text());
-        }).get().join(',');
-        var idResource = {{ resource.id }};
+      users = $("#id_usersAllowed option:selected").map(function () {
+        return $.trim($(this).text());
+      }).get().join(',');
+      var idResource = {{ resource.id }};
       var request = $.ajax(
-        {
-          type: "POST",
-          url: "{% url 'allowUserResource' %}",
-          data: {
-            "resource_id": idResource,
-            "users": users,
-            csrfmiddlewaretoken: '{{ csrf_token }}'
-          },
-          success: function (response) {
+      {
+        type: "POST",
+        url: "{% url 'allowUserResource' %}",
+        data: {
+          "resource_id": idResource,
+          "users": users,
+          csrfmiddlewaretoken: '{{ csrf_token }}'
+        },
+        success: function (response) {
 
-          }
         }
+      }
       );
     });
   });
 </script>
 {{ permissionForm.media.js }}
-{% endblock scripts %} 
+{% endblock scripts %}
