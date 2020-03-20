@@ -1,17 +1,12 @@
 {% extends "base2.html" %}
-
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% load i18n %}
 {% load l10n %}
-
 {% block title %}{{ block.super }}Resource{% endblock %}
-
 {% block navbar-left %}
 {% include "_navbar.html" with active_link="resource" %}
 {% endblock %}
-
-
 {% block list_of_items %}
 {{ permissionForm.media.css }}
 <div class="container-fluid main-content-containe">
@@ -185,7 +180,6 @@
     }
     );
   }
-
   function setSavedResource(idResource, idUser){
     var htmlId = "saved" + idResource;
     var request = $.ajax(
@@ -219,7 +213,6 @@
           csrfmiddlewaretoken: '{{ csrf_token }}'
         },
         success: function (response) {
-
         }
       }
       );
