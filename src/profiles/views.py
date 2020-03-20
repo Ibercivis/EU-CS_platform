@@ -67,25 +67,23 @@ class EditProfile(LoginRequiredMixin, generic.TemplateView):
 def projects(request):
     user = request.user
     projects = Project.objects.all().filter(creator=user)
-
     return render(request, 'profiles/my_projects.html', {'show_user': user, 'projects': projects})
 
 def resources(request):
     user = request.user
     resources = Resource.objects.all().filter(creator=user)
-
     return render(request, 'profiles/my_resources.html', {'show_user': user, 'resources': resources})
 
 def followedProjects(request):
     user = request.user
-    followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id', flat=True)    
+    followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id', flat=True)
     followedProjects = Project.objects.filter(id__in=followedProjects)
     followedProjects = followedProjects.filter(~Q(hidden=True))
-    return render(request, 'profiles/followed_projects.html', {'show_user': user, 'followedProjects': followedProjects})
+    return render(request, 'profiles/followed_projects.html', {'show_user': user, 'projects': followedProjects})
 
 def savedResources(request):
     user = request.user
     savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id', flat=True)
     savedResources = Resource.objects.filter(id__in=savedResources)
     savedResources = savedResources.filter(~Q(hidden=True))
-    return render(request, 'profiles/saved_resources.html', {'show_user': user, 'savedResources': savedResources})
+    return render(request, 'profiles/saved_resources.html', {'show_user': user, 'resources': savedResources})
