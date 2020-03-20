@@ -26,9 +26,9 @@ def new_project(request):
     choices = ", ".join(choices)
     form = ProjectForm(initial={'choices': choices})
     user = request.user
-    if request.method == 'POST':    
+    if request.method == 'POST':
         form = ProjectForm(request.POST, request.FILES)
-       
+
         if form.is_valid():
             images = []
             image1_path = saveImage(request, form, 'image1', '1')
@@ -48,7 +48,7 @@ def new_project(request):
 
 def saveImage(request, form, element, ref):
     image_path = ''
-    filepath = request.FILES.get(element, False)            
+    filepath = request.FILES.get(element, False)
     if (filepath):
         x = form.cleaned_data.get('x' + ref)
         y = form.cleaned_data.get('y' + ref)
@@ -63,16 +63,16 @@ def saveImage(request, form, element, ref):
             resized_image = cropped_image.resize((600, 400), Image.ANTIALIAS)
         _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
         random_num = random.randint(0, 1000)
-        image_path = "media/images/" + _datetime + '_' + str(random_num) + '_' + photo.name 
+        image_path = "media/images/" + _datetime + '_' + str(random_num) + '_' + photo.name
         resized_image.save(image_path)
-        
-    return '/' + image_path 
+
+    return '/' + image_path
 
 def projects(request):
     projects = Project.objects.get_queryset().order_by('id')
     featuredProjects = FeaturedProjects.objects.all().values_list('project_id',flat=True)
-    user = request.user  
-    followedProjects = None     
+    user = request.user
+    followedProjects = None
     followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id',flat=True)
     countriesWithContent = Project.objects.all().values_list('country',flat=True).distinct()
 
@@ -81,10 +81,10 @@ def projects(request):
     filters = {'keywords': '', 'topic': '', 'status': 0, 'country': '', 'host': '', 'featured': ''}
 
     if request.GET.get('keywords'):
-        projects = projects.filter( Q(name__icontains = request.GET['keywords']) | 
+        projects = projects.filter( Q(name__icontains = request.GET['keywords']) |
                                     Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
-        filters['keywords'] = request.GET['keywords']    
-    
+        filters['keywords'] = request.GET['keywords']
+
     if request.GET.get('topic'):
         projects = projects.filter(topic__topic = request.GET['topic'])
         filters['topic'] = request.GET['topic']
@@ -96,19 +96,19 @@ def projects(request):
     if request.GET.get('country'):
         projects = projects.filter(country = request.GET['country'])
         filters['country'] = request.GET['country']
-    
+
     if request.GET.get('host'):
         projects = projects.filter( host__icontains = request.GET['host'])
         filters['host'] = request.GET['host']
-    
-    if request.GET.get('featuredCheck'):        
+
+    if request.GET.get('featuredCheck'):
         projects = projects.filter(id__in=featuredProjects)
         filters['featured'] = request.GET['featuredCheck']
-    
+
     if not user.is_staff:
         projects = projects.filter(~Q(hidden=True))
 
-    paginator = Paginator(projects, 9) 
+    paginator = Paginator(projects, 9)
     page = request.GET.get('page')
     projects = paginator.get_page(page)
 
@@ -125,7 +125,7 @@ def project(request, pk):
     votes = Votes.objects.all().filter(project_id=pk).aggregate(Avg('vote'))['vote__avg']
     followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id',flat=True)
     featuredProjects = FeaturedProjects.objects.all().values_list('project_id',flat=True)
-    return render(request, 'project.html', {'project':project,'votes':votes, 'followedProjects':followedProjects, 
+    return render(request, 'project.html', {'project':project,'votes':votes, 'followedProjects':followedProjects,
     'featuredProjects':featuredProjects, 'permissionForm': permissionForm, 'cooperators': getCooperators(pk)})
 
 def getOtherUsers(creator):
@@ -151,18 +151,18 @@ def editProject(request, pk):
     cooperators = getCooperators(pk)
     if user != project.creator and not user.is_staff and not user.id in cooperators:
         return redirect('../projects', {})
-    
+
     start_datetime = None
     end_datetime = None
 
     if project.start_date:
         start_datetime = formats.date_format(project.start_date, 'Y-m-d')
     if project.end_date:
-        end_datetime = formats.date_format(project.end_date, 'Y-m-d')    
-       
+        end_datetime = formats.date_format(project.end_date, 'Y-m-d')
+
     keywordsList = list(project.keywords.all().values_list('keyword', flat=True))
-    keywordsList = ", ".join(keywordsList)     
-    
+    keywordsList = ", ".join(keywordsList)
+
     choices = list(Keyword.objects.all().values_list('keyword',flat=True))
     choices = ", ".join(choices)
 
@@ -171,12 +171,12 @@ def editProject(request, pk):
 
     fundingAgency = list(FundingAgency.objects.all().values_list('agency',flat=True))
     fundingAgency = ", ".join(fundingAgency)
-    
+
     form = ProjectForm(initial={
         'project_name':project.name,'url': project.url,'start_date': start_datetime,
-        'end_date':end_datetime, 'aim': project.aim, 'description': project.description, 
+        'end_date':end_datetime, 'aim': project.aim, 'description': project.description,
         'status': project.status, 'choices': choices, 'choicesSelected':keywordsList,
-        'topic':project.topic.all, 'latitude': project.latitude, 'longitude': project.longitude, 
+        'topic':project.topic.all, 'latitude': project.latitude, 'longitude': project.longitude,
         'image1': project.image1, 'image_credit1': project.imageCredit1, 'host': project.host,
         'image2': project.image2, 'image_credit2': project.imageCredit2,
         'image3': project.image3, 'image_credit3': project.imageCredit3,
@@ -185,7 +185,7 @@ def editProject(request, pk):
         'funding_body': fundingBody, 'fundingBodySelected': project.fundingBody, 'fundingProgram': project.fundingProgram,
         'funding_agency': fundingAgency,'fundingAgencySelected': project.fundingAgency,
     })
-    
+
 
     fields = list(project.customField.all().values())
     data = [{'title': l['title'], 'paragraph': l['paragraph']}
@@ -239,10 +239,10 @@ def getNamesKeywords(text):
     report = chain(project_names, keywords)
     return report
 
-def host_autocomplete(request):  
+def host_autocomplete(request):
     if request.GET.get('q'):
         text = request.GET['q']
-        data = Project.objects.filter(host__icontains=text).values_list('host',flat=True)               
+        data = Project.objects.filter(host__icontains=text).values_list('host',flat=True)
         json = list(data)
         return JsonResponse(json, safe=False)
     else:
@@ -253,11 +253,11 @@ def clearFilters(request):
 
 def setFeatured(request):
     response = {}
-    id = request.POST.get("project_id")    
-    
+    id = request.POST.get("project_id")
+
     #Delete
     try:
-        obj = FeaturedProjects.objects.get(project_id=id)    
+        obj = FeaturedProjects.objects.get(project_id=id)
         obj.delete()
     except FeaturedProjects.DoesNotExist:
         #Insert
@@ -265,7 +265,7 @@ def setFeatured(request):
         featureProject = FeaturedProjects(project=fProject)
         featureProject.save()
 
-    return JsonResponse(response, safe=False) 
+    return JsonResponse(response, safe=False)
 
 def setHidden(request):
     response = {}
@@ -274,7 +274,7 @@ def setHidden(request):
     project = get_object_or_404(Project, id=id)
     project.hidden = False if hidden == 'false' else True
     project.save()
-    return JsonResponse(response, safe=False) 
+    return JsonResponse(response, safe=False)
 
 def setFollowedProject(request):
     response = {}
@@ -282,7 +282,7 @@ def setFollowedProject(request):
     userId = request.POST.get("user_id")
     #Delete
     try:
-        obj = FollowedProjects.objects.get(project_id=projectId,user_id=userId)    
+        obj = FollowedProjects.objects.get(project_id=projectId,user_id=userId)
         obj.delete()
     except FollowedProjects.DoesNotExist:
         #Insert
@@ -297,19 +297,19 @@ def allowUser(request):
     response = {}
     projectId = request.POST.get("project_id")
     users = request.POST.get("users")
-    
+
     #Delete all
-    objs = ProjectPermission.objects.all().filter(project_id=projectId) 
+    objs = ProjectPermission.objects.all().filter(project_id=projectId)
     if(objs):
         for obj in objs:
             obj.delete()
-   
+
     #Insert all
     fProject = get_object_or_404(Project, id=projectId)
     users = users.split(',')
     for user in users:
         fUser = User.objects.filter(email=user)[:1].get()
         projectPermission = ProjectPermission(project=fProject, user=fUser)
-        projectPermission.save()  
+        projectPermission.save()
 
     return JsonResponse(response, safe=False)

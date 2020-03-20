@@ -243,25 +243,23 @@
             <div id="customFields"></div>
 
             <br />
-                       
+
             <br/>
 
 
             {{ cField_formset.management_form }}
             {% for cField_form in cField_formset.forms %}
-            <div  class="customField-formset">                          
+            <div  class="customField-formset">
                 <div class="row">
                   <div class="col-5 p-3 ml-5">
                     {{ cField_form.title |as_crispy_field }}
                   </div>
                 </div>
                 <div class="col-12 p-3 ml-12">
-                  {{ cField_form.paragraph|as_crispy_field }}  
+                  {{ cField_form.paragraph|as_crispy_field }}
                 </div>
            </div>
            {% endfor %}
-
-          <br/><br/>
 
             </div>
               <button type="submit" class="btn btn-success"><i class="fas fa-share-square"></i> Save</button>
@@ -271,8 +269,6 @@
       </table>
 
 		</div>
-	</div>
-</div>
 
 {% endblock list_of_items %}
 

@@ -19,18 +19,14 @@ def home(request):
     lastBlogEntry = Post.objects.all().filter(status=1)
     if lastBlogEntry:
         lastBlogEntry = lastBlogEntry.latest('created_on')
-    featuredProjects = FeaturedProjects.objects.all()
-    featuredProject = None
-    if featuredProjects:
-        featuredProject = random.choice(featuredProjects)
-        featuredProject = get_object_or_404(Project, id=featuredProject.project_id)
-    featuredResources = FeaturedResources.objects.all()
-    featuredResource = None
-    if featuredResources:
-        featuredResource = random.choice(featuredResources)
-        featuredResource = get_object_or_404(Resource, id=featuredResource.resource_id)
-    
-    return render(request, 'home.html', {'featuredProject':featuredProject, 'featuredResource':featuredResource, 'lastBlogEntry': lastBlogEntry})
+    featuredProjects = FeaturedProjects.objects.all()[:4].values_list('project_id',flat=True)
+    projects = Project.objects.all().order_by('id')
+    projects = projects.filter(id__in=featuredProjects)
+    featuredResources = FeaturedResources.objects.all()[:3].values_list('resource_id',flat=True)
+    resources = Resource.objects.all().order_by('id')
+    resources = resources.filter(id__in=featuredProjects)
+
+    return render(request, 'home.html', {'projects':projects, 'resources':resources, 'lastBlogEntry': lastBlogEntry})
 
 class AboutPage(generic.TemplateView):
     template_name = "about.html"
@@ -45,11 +41,11 @@ def results(request):
     showProjects = showResources = True
 
     if request.GET.get('keywords'):
-        projects = projects.filter( Q(name__icontains = request.GET['keywords']) | 
+        projects = projects.filter( Q(name__icontains = request.GET['keywords']) |
                                     Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
-        resources = resources.filter( Q(name__icontains = request.GET['keywords'])  | 
+        resources = resources.filter( Q(name__icontains = request.GET['keywords'])  |
                                     Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
-    
+
 
     if request.GET.get('projects_check'):
         showProjects = True
@@ -94,13 +90,3 @@ def home_autocomplete(request):
         return JsonResponse(json, safe=False)
     else:
         return HttpResponse("No cookies")
-
-
-
-
-
-
-
-
-
-
