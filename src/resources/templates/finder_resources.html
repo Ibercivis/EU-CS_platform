@@ -3,11 +3,6 @@
 {% load i18n %}
 {% load l10n %}
 <div class="row">
-	<div class="col-lg-12">
-		<h3>Resources</h3>
-	</div>
-</div>
-<div class="row">
 	<div class="col-lg-2">
               {% if user.is_authenticated %}
               <a class="btn btn-warning rounded-pill" href="{% url 'new_resource' %}">
@@ -27,7 +22,7 @@
                   {% for language in languages %}
                     {% for lwc in languagesWithContent %}
                       {% if language.code == lwc %}
-                        <option value="{{ language.code }}"                  
+                        <option value="{{ language.code }}"
                         {% if language.code ==  filters.language %} selected {% endif %}>
                             {{ language.name_local }}
                         </option>
@@ -48,7 +43,7 @@
 								{% for category in categories %}
 									<option {% if category.id == filters.category %} selected {% endif %} value="{{category.id}}">{{category}}</option>
 								{% endfor %}
-							<select>              
+							<select>
 
               <input type="text" id="keywords" name="keywords" autocomplete="off" value="{{filters.keywords}}" class="basicAutoComplete form-control col-lg-2 ml-2 float-right" placeholder="Keywords" data-url="resources_autocomplete/">
               <div class="form-check float-right mt-2 mr-4">
@@ -68,4 +63,3 @@
 </div>
 
 </div>
-

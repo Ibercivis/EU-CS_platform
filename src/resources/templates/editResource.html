@@ -145,10 +145,10 @@
               <div class="col-5 p-3 ml-5">
                   {{ form.theme|as_crispy_field }}
               </div>
-              <div class="col-5 p-3 ml-5">                
+              <div class="col-5 p-3 ml-5">
                 {% if user.is_staff %}
                     {{ form.curatedList|as_crispy_field }}
-                {% endif %}  
+                {% endif %}
               </div>
             </div>
               <button type="submit" class="btn btn-success"><i class="fas fa-share-square"></i> Save</button>
@@ -169,22 +169,22 @@
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"></script>
 <script>
-  $(document).ready(function () {  
+  $(document).ready(function () {
     var choices = $("#id_choices").val();
     var choices = choices.split(",");
-    
+
     var choicesSelected = $("#id_choicesSelected").val().split(",");
     for (choice of choices){
       var found = false;
-      for(sel of choicesSelected){ 
+      for(sel of choicesSelected){
         if(sel.trim() == choice.trim()){
           found = true;
           $("#id_keywords").append("<option value='" + choice +"' selected> " + choice + " </option>");
         }
-      }  
+      }
       if(!found){
         $("#id_keywords").append("<option value='" + choice +"'> " + choice + " </option>");
-      }    
+      }
     }
 
     $("#div_id_keywords div").on('keyup', function(){
@@ -193,24 +193,24 @@
          var word =key.slice(0, -1);
          $("#div_id_keywords .selection input").val("");
          $("#id_keywords").append("<option value='" + word +"' selected> " + word + " </option>");
-      }      
+      }
     });
 
     var authorsCollection = $("#id_authorsCollection").val();
     var authorsCollection = authorsCollection.split(",");
-    
+
     var selectedAuthors = $("#id_selectedAuthors").val().split(",");
     for (author of authorsCollection){
       var found = false;
-      for(sel of selectedAuthors){ 
+      for(sel of selectedAuthors){
         if(sel.trim() == author.trim()){
           found = true;
           $("#id_authors").append("<option value='" + author +"' selected> " + author + " </option>");
         }
-      }  
+      }
       if(!found){
         $("#id_authors").append("<option value='" + author +"'> " + author + " </option>");
-      }    
+      }
     }
 
     $("#div_id_authors div").on('keyup', function(){
@@ -219,7 +219,7 @@
         var word =key.slice(0, -1);
         $("#div_id_authors .selection input").val("");
         $("#id_authors").append("<option value='" + word +"' selected> " + word + " </option>");
-        }      
+        }
     });
 
 
@@ -227,8 +227,8 @@
       $('#contactinfoform').toggle();
       $('html,body').animate({ scrollTop: $("#contactinfo").offset().top - 160 }, { duration: "slow" });
     });
-    
-    getSubCategories();            
+
+    getSubCategories();
     $("#id_category").on('change', getSubCategories);
 
     $('#imgResult').on('click', function () {
@@ -244,7 +244,7 @@
               var id = $(value).parent().parent().attr('id');
               $("#" + id + " .errorMsg").remove();
               if(!$(value).val()){
-              validationFailed = true;          
+              validationFailed = true;
               $(value).parent().append("<span class='errorMsg'> <b>Required field (*)</b></span>");
               }
           });
@@ -256,18 +256,18 @@
       }else{
         var option_all = $("#id_keywords option:selected").map(function () {
           return $.trim($(this).text());
-        }).get().join(',');      
+        }).get().join(',');
         $("#id_choices").val(option_all);
         $("#id_keywords").empty();
-        
+
         option_all = $("#id_authors option:selected").map(function () {
             return $.trim($(this).text());
-        }).get().join(',');        
+        }).get().join(',');
         $("#id_authorsCollection").val(option_all);
         $("#id_authors").empty();
 
         var category = $("#id_category").val();
-        $("#id_categorySelected").val(category);            
+        $("#id_categorySelected").val(category);
         var subcategory = $("#id_subcategory").val();
         if(subcategory){
             $("#id_categorySelected").val(subcategory);
@@ -277,7 +277,7 @@
   });
 
   function getSubCategories(){
-    var category = $("#id_category").val();        
+    var category = $("#id_category").val();
     var request = $.ajax(
         {
             type: "GET",
@@ -288,9 +288,9 @@
             success: function (response) {
                 $("#id_sub_categories").html(response.sub_categories);
                 if($("#id_category").val() != $("#id_categorySelected").val()){
-                  $("#id_subcategory").val($("#id_categorySelected").val());                
+                  $("#id_subcategory").val($("#id_categorySelected").val());
                 }
-                
+
             }
         }
     );
@@ -328,16 +328,16 @@
     var canvasData;
     $("#modalCrop").on("shown.bs.modal", function () {
       $image.cropper({
-				spectRatio: 4/3,
+				spectRatio: 3/2,
         viewMode: 0,
-        minCropBoxWidth: 400,
-        minCropBoxHeight: 300,
+        minCropBoxWidth: 600,
+        minCropBoxHeight: 400,
         dragMode: 'move',
         guides: false,
         center: false,
-        highlight: false,        
+        highlight: false,
         cropBoxResizable: false,
-        toggleDragModeOnDblclick: false,        
+        toggleDragModeOnDblclick: false,
         ready: function () {
           $image.cropper("setCanvasData", canvasData);
           $image.cropper("setCropBoxData", cropBoxData);
@@ -358,14 +358,14 @@
     });
 
     /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
-    $(".js-crop-and-upload").click(function () {     
-      var cropData = $image.cropper("getData");      
+    $(".js-crop-and-upload").click(function () {
+      var cropData = $image.cropper("getData");
       $("#id_x").val(cropData["x"]);
       $("#id_y").val(cropData["y"]);
       $("#id_height").val(cropData["height"]);
-      $("#id_width").val(cropData["width"]);    
+      $("#id_width").val(cropData["width"]);
       $("#modalCrop").modal("hide");
-      $('#imageResult').attr('src', $image.cropper('getCroppedCanvas', {width: 400, height: 300}).toDataURL());      
+      $('#imageResult').attr('src', $image.cropper('getCroppedCanvas', {width: 600, height: 400}).toDataURL());      
     });
 
   });
