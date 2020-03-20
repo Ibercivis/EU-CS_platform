@@ -105,7 +105,7 @@ def resource(request, pk):
     resource = get_object_or_404(Resource, id=pk)
     user = request.user
     users = getOtherUsers(resource.creator)
-    cooperators = getCooperatorsNames(pk)
+    cooperators = getCooperatorsEmail(pk)
     permissionForm = ResourcePermissionForm(initial={'usersCollection':users, 'selectedUsers': cooperators})
     savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True) #TODO: Only ask for the resource
     featuredResources = FeaturedResources.objects.all().values_list('resource_id',flat=True)
@@ -113,7 +113,7 @@ def resource(request, pk):
         'cooperators': getCooperators(pk), 'permissionForm': permissionForm})
 
 def getOtherUsers(creator):
-    users = list(User.objects.all().exclude(is_superuser=True).exclude(id=creator.id).values_list('name',flat=True))
+    users = list(User.objects.all().exclude(is_superuser=True).exclude(id=creator.id).values_list('email',flat=True))
     users = ", ".join(users)
     return users
 
@@ -121,12 +121,12 @@ def getCooperators(resourceID):
     users = list(ResourcePermission.objects.all().filter(resource_id=resourceID).values_list('user',flat=True))
     return users
 
-def getCooperatorsNames(resourceID):
+def getCooperatorsEmail(resourceID):
     users = getCooperators(resourceID)
     cooperators = ""
     for user in users:
         userObj = get_object_or_404(User, id=user)
-        cooperators += userObj.name + ", "
+        cooperators += userObj.email + ", "
     return cooperators
 
 def editResource(request, pk):
@@ -299,7 +299,7 @@ def allowUserResource(request):
     fResource = get_object_or_404(Resource, id=resourceId)
     users = users.split(',')
     for user in users:
-        fUser = User.objects.filter(name=user)[:1].get()
+        fUser = User.objects.filter(email=user)[:1].get()
         resourcePermission = ResourcePermission(resource=fResource, user=fUser)
         resourcePermission.save()  
 
