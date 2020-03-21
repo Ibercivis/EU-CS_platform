@@ -52,10 +52,10 @@
         </div>
       </div>
     </div>
-    <div class="container-fluid">
+    <div class="container-fluid mt-4">
       <div class="card mb-4 mt-4">
-        <div class="card-title p-3">
-          <h2>Add new project</h2>
+        <div class="card-title mt-4">
+          <h2>New project</h2>
         </div>
         <div class="card-text p-3">
           <table class="table mb-0">
@@ -64,28 +64,29 @@
               <div>
                 <h4>Project info</h4>
               </div>
-              <div class="row">
-                <div class="col-5 p-3 ml-5">
+              <div class="form-row">
+                <div class="col-sm-6 col-12">
                   {{ form.project_name|as_crispy_field }}
                 </div>
-                <div class="col-5 p-3 ml-5">
-                  {{ form.aim|as_crispy_field }}
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-5 p-3 ml-5">
-                  {{ form.description|as_crispy_field }}
-                </div>
-                <div class="col-5 p-3 ml-5">
+                <div class="col-sm-6 col-12">
                   {{ form.keywords|as_crispy_field }}
                   {{form.choices |as_crispy_field}}
                 </div>
               </div>
+
+              <div class="form-row">
+                <div class="col-sm-6 col-12">
+                  {{ form.aim|as_crispy_field }}
+                </div>
+                <div class="col-sm-6 col-12">
+                  {{ form.description|as_crispy_field }}
+                </div>
+              </div>
               <div class="row">
-                <div class="col-5 p-3 ml-5">
+                <div class="col-sm-6 col-12">
                   {{ form.topic|as_crispy_field }}
                 </div>
-                <div class="col-5 p-3 ml-5">
+                <div class="col-sm-6 col-12">
                   {{ form.status|as_crispy_field }}
                 </div>
               </div>
