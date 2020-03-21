@@ -35,10 +35,10 @@ ffffff
   <link rel="stylesheet" href="{% static 'styles/cropper.min.css' %}">
   {% endblock head %}
 </head>
-<body class="d-flex flex-column">
+<body>
   <header>
     <!--Navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white">
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-front text-white text-weight-bold fixed-top">
       <div class="container">
         <a class="navbar-brand" href="/">{% include "_brandname.html" %}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -62,14 +62,10 @@ ffffff
               <a class="dropdown-item" href="{% url 'profiles:self_resources' %}">Uploaded resources</a>
               <a class="dropdown-item" href="{% url 'profiles:followed_projects' %}">Followed projects</a>
               <a class="dropdown-item" href="{% url 'profiles:saved_resources' %}">My library</a>
-
             </div>
-
           </li>
-
           <li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}">LOGOUT</a></li></li>
           {% endif %}
-
           {% if user.is_staff %}
           <li class="nav-item"><a  class="nav-link" href="{% url 'admin:index' %}">ADMIN</a></li>
           {% endif %}
@@ -80,6 +76,8 @@ ffffff
   <!--/.Navbar-->
 </header>
 <main class="flex-fill">
+  {% block splash %}
+  {% endblock splash %}
   <!--Main layout-->
   <div class="container">
     <!--First row-->

@@ -5,20 +5,20 @@
 {% load l10n %}
 {% block title %}{{ block.super }}Resource{% endblock %}
 {% block navbar-left %}
-{% include "_navbar.html" with active_link="resource" %}
+{% include "_navbar.html" with active_link="resources" %}
 {% endblock %}
 {% block list_of_items %}
 {{ permissionForm.media.css }}
-<div class="container">
+<div class="container mt-5">
   <div class="row">
     <div class="container-fluid main-content-container">
-      <div class="card mb-4">
+      <div class="card mb-4 mt-5">
         {% if resource.image2 %}
         <img class="img-fluid img-responsive img-zoom" src="{{ resource.image2 }}" >
         {% else %}
         <img class="img-fluid img-responsive img-zoom" src='/static/site/img/resource.png'>
         {% endif %}
-        <div class="card-header">
+        <div class="card-text">
           <div class="row">
             <div class="col-6">
               {% if user.is_authenticated %}

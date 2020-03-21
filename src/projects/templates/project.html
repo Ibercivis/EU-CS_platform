@@ -10,14 +10,14 @@
 {% endblock head %}
 {% block title %}{{ block.super }}Projects{% endblock %}
 {% block navbar-left %}
-{% include "_navbar.html" with active_link="project" %}
+{% include "_navbar.html" with active_link="projects" %}
 {% endblock %}
 {% block list_of_items %}
-<div class="container">
+<div class="container mt-5">
   <div class="row">
     {{ permissionForm.media.css }}
     <div class="main-content-container container-fluid" >
-      <div class="card mb-4">
+      <div class="card mb-4 mt-5">
         {% if project.image3 %}
         <img class="img-fluid img-responsive img-zoom" src="{{ project.image3 }}" >
         {% else %}
@@ -71,9 +71,9 @@
             <div class="col-4 mt-5">
               <div class="card h-100 shadow-sm">
                 <div class="card-body">
-
+                  <h1><i class="far fa-lightbulb"></i></h1>
                   <h4 class="text-dark">Topic</h4>
-                  {% for topic in project.topic.all %} <a class="badge badge-pill badge-dark" href="/projects?keywords=&topic={{topic|urlencode}}">{{topic}}</a>  {% endfor %}
+                  {% for topic in project.topic.all %} <a class="badge badge-light" href="/projects?keywords=&topic={{topic|urlencode}}">{{topic}}</a>  {% endfor %}
                 </div>
               </div>
             </div>
@@ -82,7 +82,7 @@
                 <div class="card-body">
                   <h1><i class="far fa-lightbulb"></i></h1>
                   <h4 class="text-dark">Keywords</h4>
-                  {% for keyword in project.keywords.all %} <a class="badge badge-pill badge-info" href="/projects?keywords={{keyword|urlencode}}">{{keyword}}</a>  {% endfor %}
+                  {% for keyword in project.keywords.all %} <a class="badge badge-light" href="/projects?keywords={{keyword|urlencode}}">{{keyword}}</a>  {% endfor %}
                 </div>
               </div>
             </div>
@@ -140,26 +140,24 @@
               <p>{{customField.paragraph | safe }}</p>
               {% endfor %}
             </div>
-          </div><!-- End of card-text -->
-          <div class="card-footer bg-white">
-            <div id="featured{{project.id}}" class="float-left">
-              {% if user.is_staff %}
-              {% if project.id in featuredProjects %}
-              <a onclick="setFeatured({{project.id}})" href="">Approved</a>
-              {% else %}
-              <a onclick="setFeatured({{project.id}})" href="">Pending</a>
-              {% endif %}
-              {% else %}
-              {% if project.id in featuredProjects %}
-              <img class="img-fluid" src="{% static 'site/img/project.png' %}" />
-              {% else %}
-              <img class="img-fluid" src="{% static 'site/img/project.png' %}" style="background-color: rgba(0,0,0,0.2);filter:brightness(0.4);"/>
-              {% endif %}
-
-              {% endif %}
-
-            </div>
-          </div><!-- End of card footer -->
+          </div>
+        </div><!-- End of card-text -->
+        <div class="card-footer bg-white">
+          <div id="featured{{project.id}}" class="float-left">
+            {% if user.is_staff %}
+            {% if project.id in featuredProjects %}
+            <a onclick="setFeatured({{project.id}})" href="">Approved</a>
+            {% else %}
+            <a onclick="setFeatured({{project.id}})" href="">Pending</a>
+            {% endif %}
+            {% else %}
+            {% if project.id in featuredProjects %}
+            <button class="btn float-left"><i class="fas fa-check"></i>&nbsp;Approved</button>
+            {% else %}
+            <button class="btn btn-pending float-left"><i class="fas fa-hourglass-half mt-2"></i>&nbsp;Pending...</button>
+            {% endif %}
+          </div>
+          {% endif %}
           <a class="btn btn-outline-primary float-right ml-2" target="_black" href="{{project.url }}"> Website</a>
           {% if user.is_authenticated %}
           <div id="followed{{project.id}}">
@@ -169,14 +167,9 @@
             <button type="button" class="btn btn-outline-secondary float-right" onclick="setFollowedProject({{project.id}},{{user.id}})">Follow</button>
             {% endif %}
           </div>
-
           {% endif %}
-        </div>
-
-      </div>
-
-
-
+        </div><!-- End of card footer -->
+      </div><!-- End of card -->
     </div>
   </div>
 </div>

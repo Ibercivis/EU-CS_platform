@@ -24,6 +24,14 @@
 {% endfor %}
 {% endif %}
 {% endblock %}
+{% block splash %}
+<div class="jumbotron jumbotron-fluid jumbotron-projects">
+	<div class="container">
+		<h1 class="display-5 pb-0"><br>Projects</h1>
+		<p class="lead text-light">	Find or add Citizen Science projecs</p>
+	</div>
+</div>
+{% endblock splash %}
 {% block list_of_items %}
 <div class="container">
 	<div class="row">
@@ -31,9 +39,6 @@
 	{% endblock list_of_items %}
 	</div>
 </div>
-
-
-
 {% block scripts %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js"
 integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="anonymous"></script>
