@@ -1,214 +1,253 @@
 {% extends "base2.html" %}
-
 {% load staticfiles %}
 {% block title %}{{ block.super }}About{% endblock %}
-
 {% block navbar-left %}
 {% include "_navbar.html" with active_link="about" %}
 {% endblock %}
-
-
 {% block list_of_items %}
-
 <div class="container">
-				<div class="row">
-								<div class="col-12">
-												<h2>About</h2>
-												<h3>The Platform</h3>
-												<p>EU-Citizen.Science is an online platform for sharing knowledge, tools, training and resources for citizen science – by the community, for the community.<br><br>
-
-												The vision for the platform is to aid in the mainstreaming of citizen science, and build on the growing impact of citizens participating in research across the full range of scientific enquiry, by supporting the sharing of knowledge, know-how, and experience between anyone doing or wanting to do citizen science.<br>
-												</p>
-												<p>
-												On this platform you will find:
-												<ul>
-																<li>a knowledge hub for sharing resources</li>
-																<li>a projects &amp; networks hub to help practitioners to find each other outside the platform</li>
-																<li>training modules for capacity building</li>
-																<li>an events calendar</li>
-																<li>community forums for conversations and collaboration to take place amongst the community of practitioners – both new and experienced alike.</li>
-												</ul>
-												</p>
-												<p>
-												Spotted something missing? You can add your own Resources here, or add your own Project here. Have a suggestion for us? Please share your thoughts in our community feedback forum or in the <a href="/contact">contact</a> section.
-												</p>
-												<h3>The Project</h3>
-												<p>The EU-Citizen.Science project has been funded by the European Commission Horizon 2020 programme, in the Science with and for Society programme of work (also known as SwafS).  Our mission is ambitious –to become the reference point for citizen science through cross-network knowledge sharing for citizen science participants, practitioners, researchers, policy makers and society across Europe</p>
-												<div class="card">
-																<div class="card-body">
-																				<h4 class="card-title">Our Vision</h4>	
-																				<div class="card-text">is that Citizen Science becomes an appreciated and widely established means for the democratization of science in Europe</div>
-																</div>
-												</div>
-												<div class="card mt-2">
-																<div class="card-body">
-																				<h4 class="card-title">Our Core Mission</h4>	
-																				<div class="card-text">is to become the Europeanreference point for CS through cross-network knowledge sharing for citizen science participants, practitioners, researchers, policy makers and society across Europe</div>
-																</div>
-												</div>
-												<div class="row mt-2">
-																<div class="col-lg-6 col-12">
-																				<div class="card">
-																								<div class="card-body">
-																												<h4 class="card-title">Objective 1: Establish</h4>	
-																												<div class="card-text">EU-Citizen.Science as the community hub for high-quality CS exchange and learning Europe</div>
-																								</div>
-																				</div>
-																</div>
-																<div class="col-lg-6 col-12">
-																				<div class="card">
-																								<div class="card-body">
-																												<h4 class="card-title">Objective 3: Empower</h4>	
-																												<div class="card-text">diverse stakeholders to become citizen scientists, start CS initiatives, &amp; CS approaches professionally</div>
-																								</div>
-																				</div>
-																</div>
-																<div class="col-lg-6 col-12 mt-2">
-																				<div class="card">
-																								<div class="card-body">
-																												<h4 class="card-title">Objective 2: Consolidate</h4>	
-																												<div class="card-text">the CS knowledge base and celebrate outstanding practices and start of the art in CS in Europe</div>
-																								</div>
-																				</div>
-																</div>
-																<div class="col-lg-6 col-12 mt-2">
-																				<div class="card">
-																								<div class="card-body">
-																												<h4 class="card-title">Objective 4: Explore</h4>	
-																												<div class="card-text">new pathways for participatory governance, by strengthening links between CS and policy making</div>
-																								</div>
-																				</div>
-																</div>
-																<div class="col-lg-12 col-12 mt-2">
-																				<div class="card">
-																								<div class="card-body">
-																												<h4 class="card-title">Objective 5: Advance</h4>	
-																												<div class="card-text">CS into the mainstream of public engagement, science communication and education</div>
-																								</div>
-																				</div>
-																</div>
-												</div>
-												<br>
-
-
-												<p>
-												In keeping with our mission, we aim to engage equally with CS participants, practitioners, researchers, policy makers and society as a whole throughout the course of the project. In order to do so effectively, it is necessary to have a clear understanding of who our target audience is, their needs and requirements, and how we can build a community of engaged users of the Platform.
-												</p>
-												<h3>The Team</h3>
-												<p>The EU-Citizen.Science consortium consists of 14 partners and 9 third parties from across 14 European member states, as well as other project supporters. We represent a variety of stakeholders that are active in citizen science, including universities, non-governmental organisations, local authorities, community service organisations and museums.</p>
-												<img class="img-fluid" src="{% static 'site/img/team.png' %}">
-
-
-												<h4 class="mt-4">Consortium partners</h4>
-												<div class="container">
-																<div class="row align-items-center">
-																				<div class="col-6 col-xl-2">
-																								<a href="https://www.museumfuernaturkunde.berlin/" target="_blank"><img src="{% static 'site/img/mfn.png' %}" class="d-block img-fluid"></a>
-																				</div>
-																				<div class="col-6 col-xl-2">
-																								<a href="https://ecsa.citizen-science.net/" target="_blank"><img src="{% static 'site/img/ecsa_main_id.png' %}" class="d-block img-fluid"></a>
-																				</div>
-																				<div class="col-6 col-xl-2">
-																								<a href="https://www.iiasa.ac.at/" target="_blank"><img src="{% static 'site/img/iiasalogo.png' %}" class="d-block img-fluid"></a>
-																				</div>
-																				<div class="col-6 col-xl-2">
-																								<a href="https://earthwatch.org.uk/"><img src="{% static 'site/img/Earthwatch_logo_Green.jpg' %}" class="d-block img-fluid"></a>
-																				</div>
-																				<div class="col-6 col-xl-2">
-																								<a href="https://www.zsi.at/"><img src="{% static 'site/img/logo.gif' %}" class="d-block img-fluid"></a>
-																				</div>
-																				<div class="col-6 col-xl-2">
-																								<a href="https://www.mruni.eu/lt/"><img src="{% static 'site/img/mru.png' %}" class="d-block img-fluid"></a>
-																				</div>
-																				<div class="col-6 col-xl-2">
-																								<a href="https://www.geog.ucl.ac.uk/research/research-centres/excites">
-																								<img src="{% static 'site/img/University_College_London_logo.png' %}" class="d-block img-fluid"></a>
-																				</div>
-																				<div class="col-6 col-xl-2">
-																								<a href="https://www.ecsite.eu/" target="_blank">
-																								<img src="{% static 'site/img/Ecsite_logo.jpg' %}" class="d-block img-fluid"></a>
-																				</div>
-																				<div class="col-6 col-xl-2 align-items-center">
-																								<a href="https://www.tcd.ie/">
-																								<img src="{% static 'site/img/Trinity_Main_Logo.jpg' %}" class="d-block img-fluid"></a>
-																				</div>
-																				<div class="col-6 col-xl-2">
-																								<a href="https://v-a.se/">
-																								<img src="{% static 'site/img/va-logo.png' %}" class="d-block img-fluid"></a>
-																				</div>
-																				<div class="col-6 col-xl-2">
-																								<a href="https://www.nhm.ac.uk/">
-																								<img src="{% static 'site/img/Natural-History-Museum-Logo.gif' %}" class="d-block img-fluid"></a>
-																				</div>
-																				<div class="col-6 col-xl-2">
-																								<a href="https://www.universiteitleiden.nl/en">
-																								<img src="{% static 'site/img/zegel.png' %}" class="d-block img-fluid"></a>
-																				</div>
-																				<div class="col-6 col-xl-2">
-																								<a href="https://cm-fcr.pt/en/pontos-de-interesse-english/">
-																								<img src="{% static 'site/img/Figueira.png' %}" class="d-block img-fluid"></a>
-																				</div>
-																				<div class="col-6 col-xl-2">
-																								<a href="http://www.ciencia.gob.es/portal/site/MICINN/">
-																								<img src="{% static 'site/img/cropped-mneco-1.png' %}" class="d-block img-fluid"></a>
-																				</div>
-																</div>
-												</div>
-
-												<br>
-												<br>
-												<h4 class="mt-2 ">Third party partners</h4>
-												<div class="container">
-																<div class="row align-items-center">
-																				<div class="col-3 col-xl-1">
-																								<a href="https://boku.ac.at/" target="_blank"><img src="{% static 'site/img/Boku-wien.svg.png' %}" class="img-fluid"></a>
-																				</div>
-																				<div class="col-6 col-xl-2">
-																								<a href="" target="_blank"><img src="{% static 'site/img/museumbelgique.png' %}" class="d-block img-fluid"></a>
-																				</div>
-																				<div class="col-xl-1 col-3 align-items-center">
-																								<a href="" target="_blank"><img src="{% static 'site/img/tartuulikool.png' %}" class="d-block img-fluid"></a>
-																				</div>
-																				<div class="col-3 col-xl-1">
-																								<a href="" target="_blank"><img src="{% static 'site/img/MNHN-logo.jpg' %}" class="d-block img-fluid"></a>
-																				</div>
-																				<div class="col-6 col-xl-1">
-																								<a href="" target="_blank"><img src="{% static 'site/img/thessaloniki_logo.png' %}" class="d-block img-fluid"></a>
-																				</div>
-																				<div class="col-6 col-xl-1">
-																								<a href="" target="_blank"><img src="{% static 'site/img/essrg-logo.png' %}" class="d-block img-fluid"></a>
-																				</div>
-																				<div class="col-3 col-xl-1"
-																								<a href="" target="_blank"><img src="{% static 'site/img/fgrc-logo.png' %}" class="d-block img-fluid"></a>
-																				</div>
-																				<div class="col-2">
-																								<a href="" target="_blank"><img src="{% static 'site/img/Logo_Ibercivis_CMYK.png' %}" class="d-block img-fluid"></a>
-																				</div>
-																				<div class="col-2">
-																								<a href="" target="_blank"><img src="{% static 'site/img/fecyt.png' %}" class="d-block img-fluid"></a>
-																				</div>
-																				<div class="col-3"></div>
-																</div>
-												</div>
-												<br><br>
-												<h2>Citizen Science</h2>
-												<p>Citizen science actively involves the public in scientific research that generates new knowledge or understanding, and thus has the potential to bring together science, policy makers, and society as a whole in an impactful way. As a core dimension of Open Science, it opens up the opportunity for all members of society to take an active role in research, innovation and the development of evidence-based policy, at local, national and EU levels.</p>
-												<p>Citizen science is a flexible concept which can be adapted and applied within diverse situations and disciplines. In order to set out some of the key principles which we as a community believe underlie good practice in citizen science, the following <b>10 Principles of Citizen Science</b> were developed by the ‘Sharing best practice and building capacity’ working group of the <b>European Citizen Science Association</b>, led by the Natural History Museum London with input from many members of the Association.</p>
-												<h3>Ten principles of citizen science</h3>
-												<ol>
-																<li><b> Citizen science projects actively involve citizens in scientific endeavour that generates new knowledge or understanding. Citizens may act as contributors, collaborators, or as project leader and have a meaningful role in the project.</b></li>
-																<li><b>Citizen science projects have a genuine science outcome.</b> For example, answering a research question or informing conservation action, management decisions or environmental policy.</li>
-																<li><b> Both the professional scientists and the citizen scientists benefit from taking part.</b> Benefits may include the publication of research outputs, learning opportunities, personal enjoyment, social benefits, satisfaction through contributing to scientific evidence e.g. to address local, national and international issues, and through that, the potential to influence policy.</li>
-																<li><b>Citizen scientists may, if they wish, participate in multiple stages of the scientific process.</b> This may include developing the research question, designing the method, gathering and analysing data, and communicating the results.</li>
-																<li><b>Citizen scientists receive feedback from the project.</b> For example, how their data are being used and what the research, policy or societal outcomes are.</b></li>
-																<li><b> Citizen science is considered a research approach like any other, with limitations and biases that should be considered and controlled for.</b> However unlike traditional research approaches, citizen science provides opportunity for greater public engagement and democratisation of science.</li>
-																<li><b> Citizen science project data and meta-data are made publicly available and where possible, results are published in an open access format.</b> Data sharing may occur during or after the project, unless there are security or privacy concerns that prevent this.</li>
-																<li><b>  Citizen scientists are acknowledged in project results and publications.</b></li>
-																<li><b> Citizen science programmes are evaluated for their scientific output, data quality, participant experience and wider societal or policy impact.</b></li>
-																<li><b>The leaders of citizen science projects take into consideration legal and ethical issues surrounding copyright, intellectual property, data sharing agreements, confidentiality, attribution, and the environmental impact of any activities.</b></li>
-												</ol>
+	<div class="row">
+		<div class="col-sm-4 col-12 mt-4 mb-4">
+			<h3>The Platform</h3>
+		</div>
+		<div class="col-sm-8 col-12 mt-4 mb-4">
+			<p>EU-Citizen.Science is an online platform for sharing knowledge, tools, training and resources for citizen science – by the community, for the community.<br><br>
+				The vision for the platform is to aid in the mainstreaming of citizen science, and build on the growing impact of citizens participating in research across the full range of scientific enquiry, by supporting the sharing of knowledge, know-how, and experience between anyone doing or wanting to do citizen science.<br>
+			</p>
+			<p>
+				On this platform you will find:
+				<ul>
+					<li>a knowledge hub for sharing resources</li>
+					<li>a projects &amp; networks hub to help practitioners to find each other outside the platform</li>
+					<li>training modules for capacity building</li>
+					<li>an events calendar</li>
+					<li>community forums for conversations and collaboration to take place amongst the community of practitioners – both new and experienced alike.</li>
+				</ul>
+			</p>
+			<p>
+				Spotted something missing? You can add your own Resources here, or add your own Project here. Have a suggestion for us? Please share your thoughts in our community feedback forum or in the <a href="/contact">contact</a> section.
+			</p>
+		</div>
+	</div>
+</div>
+<div class="container-fluid bg-white">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mt-4 mb-4">
+				<h3>The Project</h3>
+			</div>
+			<div class="col-sm-8 col-12 mt-4 mb-4">
+				<p>The EU-Citizen.Science project has been funded by the European Commission Horizon 2020 programme,
+					in the Science with and for Society programme of work (also known as SwafS).  Our mission is ambitious –to
+					become the reference point for citizen science through cross-network knowledge sharing for citizen science participants,
+					practitioners, researchers, policy makers and society across Europe</p>
+					<div class="row">
+						<div class="col-sm-6 col-12 mt-4 mb-4">
+							<div class="card h-100 shadow-sm">
+								<div class="card-body">
+									<h4 class="card-title">Our Vision</h4>
+									<div class="card-text">is that Citizen Science becomes an appreciated and widely established means for the democratization of science in Europe</div>
 								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-12 mt-2">
+							<div class="card h-100 shadow-sm">
+								<div class="card-body">
+									<h4 class="card-title">Our Core Mission</h4>
+									<div class="card-text">is to become the Europeanreference point for CS through cross-network knowledge sharing for citizen science participants, practitioners, researchers, policy makers and society across Europe</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-12 mt-4">
+							<div class="card h-100 shadow-sm">
+								<div class="card-body">
+									<h4 class="card-title">Objective 1: Establish</h4>
+									<div class="card-text">EU-Citizen.Science as the community hub for high-quality CS exchange and learning Europe</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-12 mt-4">
+							<div class="card h-100 shadow-sm">
+								<div class="card-body">
+									<h4 class="card-title">Objective 2: Consolidate</h4>
+									<div class="card-text">the CS knowledge base and celebrate outstanding practices and start of the art in CS in Europe</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-12 mt-4">
+							<div class="card h-100 shadow-sm">
+								<div class="card-body">
+									<h4 class="card-title">Objective 3: Empower</h4>
+									<div class="card-text">diverse stakeholders to become citizen scientists, start CS initiatives, &amp; CS approaches professionally</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-12 mt-4">
+							<div class="card h-100 shadow-sm">
+								<div class="card-body">
+									<h4 class="card-title">Objective 4: Explore</h4>
+									<div class="card-text">new pathways for participatory governance, by strengthening links between CS and policy making</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-12 mt-4 mb-4">
+							<div class="card h-100 shadow-sm">
+								<div class="card-body">
+									<h4 class="card-title">Objective 5: Advance</h4>
+									<div class="card-text">CS into the mainstream of public engagement, science communication and education</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12 mb-4">
+							In keeping with our mission, we aim to engage equally with CS participants, practitioners, researchers, policy makers and society as
+							a whole throughout the course of the project. In order to do so effectively, it is necessary to have a clear understanding of who our target
+							audience is, their needs and requirements, and how we can build a community of engaged users of the Platform.
+						</div>
+					</div>
 				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mt-4 mb-4">
+				<h3>The Team</h3>
+			</div>
+			<div class="col-sm-8 col-12 mt-4 mb-4">
+				The EU-Citizen.Science consortium consists of 14 partners and 9 third parties from across 14 European member states, as well as other project supporters.
+				We represent a variety of stakeholders that are active in citizen science, including universities, non-governmental organisations, local authorities, community
+				service organisations and museums.
+				<img class="img-fluid mb-4 mt-4" src="{% static 'site/img/team.png' %}">
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid bg-white">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 mt-4 mb-1">
+					<h3>Consortium partners</h3>
+				</div>
+				<div class="col-12 mt-1 mb-4">
+					<div class="row align-items-center">
+						<div class="col-6 col-xl-2">
+							<a href="https://www.museumfuernaturkunde.berlin/" target="_blank"><img src="{% static 'site/img/mfn.png' %}" class="d-block img-fluid"/></a>
+						</div>
+						<div class="col-6 col-xl-2">
+							<a href="https://ecsa.citizen-science.net/" target="_blank"><img src="{% static 'site/img/ecsa_main_id.png' %}" class="d-block img-fluid"/></a>
+						</div>
+						<div class="col-6 col-xl-2">
+							<a href="https://www.iiasa.ac.at/" target="_blank"><img src="{% static 'site/img/iiasalogo.png' %}" class="d-block img-fluid"/></a>
+						</div>
+						<div class="col-6 col-xl-2">
+							<a href="https://earthwatch.org.uk/"><img src="{% static 'site/img/Earthwatch_logo_Green.jpg' %}" class="d-block img-fluid"/></a>
+						</div>
+						<div class="col-6 col-xl-2">
+							<a href="https://www.zsi.at/"><img src="{% static 'site/img/logo.gif' %}" class="d-block img-fluid"/></a>
+						</div>
+						<div class="col-6 col-xl-2">
+							<a href="https://www.mruni.eu/lt/"><img src="{% static 'site/img/mru.png' %}" class="d-block img-fluid"/></a>
+						</div>
+						<div class="col-6 col-xl-2">
+							<a href="https://www.geog.ucl.ac.uk/research/research-centres/excites"><img src="{% static 'site/img/University_College_London_logo.png' %}" class="d-block img-fluid"/></a>
+						</div>
+						<div class="col-6 col-xl-2">
+							<a href="https://www.ecsite.eu/" target="_blank"><img src="{% static 'site/img/Ecsite_logo.jpg' %}" class="d-block img-fluid"/></a>
+						</div>
+						<div class="col-6 col-xl-2 align-items-center">
+							<a href="https://www.tcd.ie/"><img src="{% static 'site/img/Trinity_Main_Logo.jpg' %}" class="d-block img-fluid"/></a>
+						</div>
+						<div class="col-6 col-xl-2">
+							<a href="https://v-a.se/"><img src="{% static 'site/img/va-logo.png' %}" class="d-block img-fluid"/></a>
+						</div>
+						<div class="col-6 col-xl-2">
+							<a href="https://www.nhm.ac.uk/"><img src="{% static 'site/img/Natural-History-Museum-Logo.gif' %}" class="d-block img-fluid"/></a>
+						</div>
+						<div class="col-6 col-xl-2">
+							<a href="https://www.universiteitleiden.nl/en"><img src="{% static 'site/img/zegel.png' %}" class="d-block img-fluid"/></a>
+						</div>
+						<div class="col-6 col-xl-2">
+							<a href="https://cm-fcr.pt/en/pontos-de-interesse-english/"><img src="{% static 'site/img/Figueira.png' %}" class="d-block img-fluid"/></a>
+						</div>
+						<div class="col-6 col-xl-2">
+							<a href="http://www.ciencia.gob.es/portal/site/MICINN/"><img src="{% static 'site/img/cropped-mneco-1.png' %}" class="d-block img-fluid"/></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12 mt-4 mb-1">
+					<h3>Third party partners</h3>
+				</div>
+				<div class="col-12 mt-1 mb-4">
+					<div class="row align-items-center">
+						<div class="col-3 col-xl-1">
+							<a href="https://boku.ac.at/" target="_blank"><img src="{% static 'site/img/Boku-wien.svg.png' %}" class="img-fluid"></a>
+						</div>
+						<div class="col-6 col-xl-2">
+							<a href="" target="_blank"><img src="{% static 'site/img/museumbelgique.png' %}" class="d-block img-fluid"></a>
+						</div>
+						<div class="col-xl-1 col-3 align-items-center">
+							<a href="" target="_blank"><img src="{% static 'site/img/tartuulikool.png' %}" class="d-block img-fluid"></a>
+						</div>
+						<div class="col-3 col-xl-1">
+							<a href="" target="_blank"><img src="{% static 'site/img/MNHN-logo.jpg' %}" class="d-block img-fluid"></a>
+						</div>
+						<div class="col-6 col-xl-1">
+							<a href="" target="_blank"><img src="{% static 'site/img/thessaloniki_logo.png' %}" class="d-block img-fluid"></a>
+						</div>
+						<div class="col-6 col-xl-1">
+							<a href="" target="_blank"><img src="{% static 'site/img/essrg-logo.png' %}" class="d-block img-fluid"></a>
+						</div>
+						<div class="col-3 col-xl-1"
+						<a href="" target="_blank"><img src="{% static 'site/img/fgrc-logo.png' %}" class="d-block img-fluid"></a>
+					</div>
+					<div class="col-2">
+						<a href="" target="_blank"><img src="{% static 'site/img/Logo_Ibercivis_CMYK.png' %}" class="d-block img-fluid"></a>
+					</div>
+					<div class="col-2">
+						<a href="" target="_blank"><img src="{% static 'site/img/fecyt.png' %}" class="d-block img-fluid"></a>
+					</div>
+					<div class="col-3"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4 col-12 mt-4 mb-4">
+			<h3>Citizen Science</h3>
+		</div>
+		<div class="col-sm-8 col-12 mt-4 mb-4">
+			<p>Citizen science actively involves the public in scientific research that generates new knowledge or understanding, and thus has the potential to bring together science, policy makers, and society as a whole in an impactful way. As a core dimension of Open Science, it opens up the opportunity for all members of society to take an active role in research, innovation and the development of evidence-based policy, at local, national and EU levels.</p>
+			<p>Citizen science is a flexible concept which can be adapted and applied within diverse situations and disciplines. In order to set out some of the key principles which we as a community believe underlie good practice in citizen science, the following <b>10 Principles of Citizen Science</b> were developed by the ‘Sharing best practice and building capacity’ working group of the <b>European Citizen Science Association</b>, led by the Natural History Museum London with input from many members of the Association.</p>
+		</div>
+	</div>
+</div>
+<div class="container-fluid bg-white">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mt-4 mb-4">
+				<h3>Ten principles of citizen science</h3>
+			</div>
+			<div class="col-sm-8 col-12 mt-4 mb-4">
+				<ol>
+					<li><b> Citizen science projects actively involve citizens in scientific endeavour that generates new knowledge or understanding. Citizens may act as contributors, collaborators, or as project leader and have a meaningful role in the project.</b></li>
+					<li><b>Citizen science projects have a genuine science outcome.</b> For example, answering a research question or informing conservation action, management decisions or environmental policy.</li>
+					<li><b> Both the professional scientists and the citizen scientists benefit from taking part.</b> Benefits may include the publication of research outputs, learning opportunities, personal enjoyment, social benefits, satisfaction through contributing to scientific evidence e.g. to address local, national and international issues, and through that, the potential to influence policy.</li>
+					<li><b>Citizen scientists may, if they wish, participate in multiple stages of the scientific process.</b> This may include developing the research question, designing the method, gathering and analysing data, and communicating the results.</li>
+					<li><b>Citizen scientists receive feedback from the project.</b> For example, how their data are being used and what the research, policy or societal outcomes are.</b></li>
+					<li><b> Citizen science is considered a research approach like any other, with limitations and biases that should be considered and controlled for.</b> However unlike traditional research approaches, citizen science provides opportunity for greater public engagement and democratisation of science.</li>
+					<li><b> Citizen science project data and meta-data are made publicly available and where possible, results are published in an open access format.</b> Data sharing may occur during or after the project, unless there are security or privacy concerns that prevent this.</li>
+					<li><b>  Citizen scientists are acknowledged in project results and publications.</b></li>
+					<li><b> Citizen science programmes are evaluated for their scientific output, data quality, participant experience and wider societal or policy impact.</b></li>
+					<li><b>The leaders of citizen science projects take into consideration legal and ethical issues surrounding copyright, intellectual property, data sharing agreements, confidentiality, attribution, and the environmental impact of any activities.</b></li>
+				</ol>
+			</div>
+		</div>
+	</div>
 </div>
 {% endblock list_of_items %}
 

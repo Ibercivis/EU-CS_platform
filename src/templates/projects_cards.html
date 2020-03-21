@@ -13,7 +13,7 @@
 			<div class="upper">
 				{% for country in countries %}
 				{% if country.code == project.country %}
-				<a class="badge badge-dark country" href="projects?country={{country.code}}">{{ country.name | upper }}</a>
+				<a class="badge frontpage" href="projects?country={{country.code}}">{{ country.name | upper }}</a>
 				{% endif %}
 				{% endfor %}
 			</div>

@@ -15,6 +15,8 @@ from PIL import Image
 from datetime import datetime
 from .models import Resource, Keyword, Category, FeaturedResources, SavedResources, Theme, Category, ResourcesGrouped, ResourcePermission
 from .forms import ResourceForm, ResourcePermissionForm
+import random
+
 
 
 User = get_user_model()
@@ -70,6 +72,27 @@ def resources(request):
 def clearFilters(request):
     return redirect ('resources')
 
+def saveImage(request, form, element, ref):
+    image_path = ''
+    filepath = request.FILES.get(element, False)
+    if (filepath):
+        x = form.cleaned_data.get('x' + ref)
+        y = form.cleaned_data.get('y' + ref)
+        w = form.cleaned_data.get('width' + ref)
+        h = form.cleaned_data.get('height' + ref)
+        photo = request.FILES[element]
+        image = Image.open(photo)
+        cropped_image = image.crop((x, y, w+x, h+y))
+        if(ref == '2'):
+            resized_image = cropped_image.resize((1100, 400), Image.ANTIALIAS)
+        else:
+            resized_image = cropped_image.resize((600, 400), Image.ANTIALIAS)
+        _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
+        random_num = random.randint(0, 1000)
+        image_path = "media/images/" + _datetime + '_' + str(random_num) + '_' + photo.name
+        resized_image.save(image_path)
+
+    return '/' + image_path
 def new_resource(request):
     choices = list(Keyword.objects.all().values_list('keyword',flat=True))
     choices = ", ".join(choices)
@@ -79,22 +102,13 @@ def new_resource(request):
     if request.method == 'POST':
         form = ResourceForm(request.POST, request.FILES)
         if form.is_valid():
-            filepath = request.FILES.get('image', False)
-            image_path = ''
-            if (filepath):
-                x = form.cleaned_data.get('x')
-                y = form.cleaned_data.get('y')
-                w = form.cleaned_data.get('width')
-                h = form.cleaned_data.get('height')
-                photo = request.FILES['image']
-                image = Image.open(photo)
-                cropped_image = image.crop((x, y, w+x, h+y))
-                resized_image = cropped_image.resize((600, 400), Image.ANTIALIAS)
-                _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
-                image_path = "media/images/" + _datetime + '_' + photo.name
-                resized_image.save(image_path)
 
-            form.save(request, '/' + image_path)
+            images = []
+            image1_path = saveImage(request, form, 'image1','1')
+            image2_path = saveImage(request, form, 'image2','2')
+            images.append(image1_path)
+            images.append(image2_path)
+            form.save(request, images)
             messages.success(request, "Resource uploaded with success!")
             return redirect('/resources')
 
@@ -149,7 +163,7 @@ def editResource(request, pk):
     curatedGroups = list(ResourcesGrouped.objects.all().filter(resource_id=pk).values_list('group_id', flat=True))
 
     form = ResourceForm(initial={
-        'name':resource.name, 'abstract': resource.abstract, 'image': resource.image,'resource_DOI': resource.resourceDOI,
+        'name':resource.name, 'abstract': resource.abstract, 'image1': resource.image1, 'image2': resource.image2,'resource_DOI': resource.resourceDOI,
         'url': resource.url,'license': resource.license, 'choices': choices, 'theme': resource.theme.all,
         'audience' : resource.audience.all, 'publisher': resource.publisher, 'year_of_publication': resource.datePublished,
         'authors': resource.authors.all, 'selectedAuthors': selectedAuthors, 'authorsCollection': authorsCollection,
@@ -160,22 +174,14 @@ def editResource(request, pk):
     if request.method == 'POST':
         form = ResourceForm(request.POST, request.FILES)
         if form.is_valid():
-            filepath = request.FILES.get('image', False)
-            image_path = ''
-            if (filepath):
-                x = form.cleaned_data.get('x')
-                y = form.cleaned_data.get('y')
-                w = form.cleaned_data.get('width')
-                h = form.cleaned_data.get('height')
-                photo = request.FILES['image']
-                image = Image.open(photo)
-                cropped_image = image.crop((x, y, w+x, h+y))
-                resized_image = cropped_image.resize((400, 300), Image.ANTIALIAS)
-                _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
-                image_path = "media/images/" + _datetime + '_' + photo.name
-                resized_image.save(image_path)
+            images = []
+            image1_path = saveImage(request, form, 'image1','1')
+            image2_path = saveImage(request, form, 'image2','2')
+            images.append(image1_path)
+            images.append(image2_path)
+            form.save(request, images)
+            messages.success(request, "Resource uploaded with success!")
 
-            form.save(request, '/' + image_path)
             return redirect('/resource/'+ str(pk))
 
     return render(request, 'editResource.html', {'form': form, 'resource': resource, 'curatedGroups': curatedGroups,

@@ -15,36 +15,42 @@ main.nomargintop {
 }
 
 .jumbotron{
-    min-height: 30vh;
-		background: url('../img/cancitizensc.jpg') #fff;
-		 background-size: cover;
-  background-position: center;
+	font-weight: bold;
+	background-image: url('../img/cancitizensc.jpg');
+	min-height: 30vh;
+	background-position: center center;
+}
+.jumbotron .container-fluid{
+	background: rgba(255,255,255,0.7);
+	position: relative;
+	bottom: 0;
+	z-index: 2;
+	top:0;
+	text-align: center;
 }
 h1,h2, h3, h4,h5 {
 	font-family: "Poppins", Helvetica, sans-serif;
 	font-weight: 200;
 	color: #fc5b62;
 }
-
 #search{
 	background-color: #fc5b62;
 	border: 0px;
 }
-
 input[type="text"],
 select.form-control {
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid #aaaaaa;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  border-radius: 0;
+	background: transparent;
+	border: none;
+	border-bottom: 1px solid #aaaaaa;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	border-radius: 0;
 }
 
 input[type="text"]:focus,
 select.form-control:focus {
-  -webkit-box-shadow: none;
-  box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
 }
 .rounded {
 	border-radius: 40px !important;
@@ -53,20 +59,20 @@ select.form-control:focus {
 	object-fit: cover;
 }
 input[type=checkbox] {
-display:none;
+	display:none;
 }
 .errorMsg {
 	color: #F00;
 }
 .mylabel {
-  background-image: url(../img/icon_bw.png);
-  background-size: auto 100%;
-  width: 30px;
-  height: 30px;
-  background-repeat: no-repeat;
+	background-image: url(../img/icon_bw.png);
+	background-size: auto 100%;
+	width: 30px;
+	height: 30px;
+	background-repeat: no-repeat;
 }
 #featuredCheck:checked + .mylabel {
-  background-image: url(../img/icon_color.png);
+	background-image: url(../img/icon_color.png);
 }
 .nav-link.active{
 	border-bottom: 2px solid #17A398;
@@ -76,7 +82,7 @@ display:none;
 	font-weight: 400;
 	font-family: "Poppins", Helvetica, sans-serif;
 	font-size: 1.2em;
-  transition: color .25s;
+	transition: color .25s;
 }
 .card-link:hover{
 	color: #333;
@@ -90,22 +96,22 @@ display:none;
 }
 
 .card-img-wrap {
-  overflow: hidden;
-  position: relative;
+	overflow: hidden;
+	position: relative;
 }
 .card-img-wrap:after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+	content: '';
+	position: absolute;
+	top: 0; left: 0; right: 0; bottom: 0;
 
 }
 .card-img-wrap img {
-  transition: transform .25s;
-  width: 100%;
-  transform: scale(1.1);
+	transition: transform .25s;
+	width: 100%;
+	transform: scale(1.1);
 }
 .card-img-wrap:hover img {
-  transform: scale(1.0);
+	transform: scale(1.0);
 }
 .upper {
 	position: absolute;
@@ -147,4 +153,14 @@ display:none;
 }
 .navbar-front{
 	background: rgba(0,0,0,0.7);
+}
+a{
+	color: #17a398;
+}
+a:hover{
+	color: #079288;
+	text-decoration: none;
+}
+.lead{
+	font-size: 1.8em;
 }

@@ -23,11 +23,16 @@ class ResourceForm(forms.ModelForm):
     authors = forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False,label="Authors (comma separated)")
     audience = forms.ModelMultipleChoiceField(queryset=Audience.objects.all(), widget=Select2MultipleWidget)
     theme = forms.ModelMultipleChoiceField(queryset=Theme.objects.all(), widget=Select2MultipleWidget, required=False)
-    image = forms.ImageField(required=False)
-    x = forms.FloatField(widget=forms.HiddenInput(),required=False)
-    y = forms.FloatField(widget=forms.HiddenInput(), required=False)
-    width = forms.FloatField(widget=forms.HiddenInput(),required=False)
-    height = forms.FloatField(widget=forms.HiddenInput(), required=False)
+    image1 = forms.ImageField(required=False)
+    x1 = forms.FloatField(widget=forms.HiddenInput(),required=False)
+    y1 = forms.FloatField(widget=forms.HiddenInput(), required=False)
+    width1 = forms.FloatField(widget=forms.HiddenInput(),required=False)
+    height1 = forms.FloatField(widget=forms.HiddenInput(), required=False)
+    image2 = forms.ImageField(required=False)
+    x2 = forms.FloatField(widget=forms.HiddenInput(),required=False)
+    y2 = forms.FloatField(widget=forms.HiddenInput(), required=False)
+    width2 = forms.FloatField(widget=forms.HiddenInput(),required=False)
+    height2 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     resource_DOI = forms.CharField(max_length=100)
     year_of_publication = forms.IntegerField()
     name = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'autocomplete':'nope'}))
@@ -37,15 +42,15 @@ class ResourceForm(forms.ModelForm):
     class Meta:
         model = Resource
         fields = ["name", "abstract", "url", "audience", "theme","keywords", "license", "publisher", "curatedList",
-         "category", "authors","author_email", "image", "x", "y", "width", "height", "resource_DOI", "year_of_publication"]
-                
+         "category", "authors","author_email", "image1", "x1", "y1", "width1", "height1", "resource_DOI", "year_of_publication"]
 
-    def save(self, args, photo):
+
+    def save(self, args, images):
         pk = self.data.get('resourceID', '')
         publication_date = datetime.now()
         rsc = super(ResourceForm, self).save(commit=False)
         category = get_object_or_404(Category, id=self.data['categorySelected'])
-        
+
         if pk:
             rsc = get_object_or_404(Resource, id=pk)
             rsc.name = self.data['name']
@@ -57,14 +62,18 @@ class ResourceForm(forms.ModelForm):
             rsc.dateUploaded = publication_date
             rsc.creator = args.user
 
-        rsc.inLanguage = self.data['language']        
+        rsc.inLanguage = self.data['language']
         rsc.author_email = self.data['author_email']
         rsc.resourceDOI = self.data['resource_DOI']
         rsc.datePublished = self.data['year_of_publication']
         rsc.category = category
 
-        if(photo != '/'):
-            rsc.image = photo
+        if(images[0] != '/'):
+            rsc.image1 = images[0]
+        if(images[1] != '/'):
+            rsc.image2 = images[1]
+
+
 
         rsc.save()
 
@@ -72,12 +81,12 @@ class ResourceForm(forms.ModelForm):
         rsc.theme.set(self.data.getlist('theme'))
 
         curatedList = self.data.getlist('curatedList')
-        
+
         if args.user.is_staff:
             objs = ResourcesGrouped.objects.filter(resource=rsc)
             if objs:
                 for obj in objs:
-                    obj.delete()        
+                    obj.delete()
             for clist in curatedList:
                 rscGroup = get_object_or_404(ResourceGroup, id=clist)
                 ResourcesGrouped.objects.get_or_create(group=rscGroup,resource=rsc)
@@ -87,7 +96,7 @@ class ResourceForm(forms.ModelForm):
         choices = choices.split(',')
         for choice in choices:
             if(choice != ''):
-                keyword = Keyword.objects.get_or_create(keyword=choice)                   
+                keyword = Keyword.objects.get_or_create(keyword=choice)
         keywords = Keyword.objects.all()
         keywords = keywords.filter(keyword__in = choices)
         rsc.keywords.set(keywords)

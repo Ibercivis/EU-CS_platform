@@ -17,13 +17,15 @@
 {% include "_navbar.html" with active_link="" %}
 {% endblock %}
 {% block list_of_items %}
+<div class="container">
+	<div class="row">
 
 <div class="container-fluid">
 	<div class="card card-mb-4">
 		<div class="card-body">
 			<div class="card-title">
 				<h2>
-					 <img title="profile picture" class="img-fluid rounded-circle" 
+					 <img title="profile picture" class="img-fluid rounded-circle"
 						src="{% thumbnail user.profile.picture|default:'default_profile.png' 140x140 crop %}">
       			Edit profile: {{ user.get_full_name }}
 				</h2>
@@ -44,14 +46,14 @@
 					{% leaflet_map "map" callback="window.map_init_basic" %}
 					<br/><br/>
 					<button id="upload" type="submit" class="btn btn-success">Upload</button>
-								
+
    			<a class="btn btn-danger float-right" href="{% url 'accounts:password-change' %}">Change Password</a>
       	</form>
 			</div>
 		</div>
 	</div>
-<br>
-<br>
+</div>
+</div>
 {% endblock list_of_items%}
 
 {% block scripts %}
@@ -59,7 +61,7 @@
 <script type="text/javascript" src="{% static 'site/js/bootstrap.min.js' %}"></script>
 
 <script>
-	
+
     $(document).ready(function () {
 		var choices = $("#id_choices").val();
 		var choices = choices.split(",");
@@ -76,21 +78,21 @@
 				$("#id_interestAreas").append("<option value='" + word +"' selected> " + word + " </option>");
 			}
 		});
-	  
+
 		$("#upload").on('click', function(){
 			var option_all = $("#id_interestAreas option:selected").map(function () {
 				return $.trim($(this).text());
-			}).get().join(',');        
+			}).get().join(',');
 			$("#id_choices").val(option_all);
 			$("#id_interestAreas").empty();
-		});	  
-      
+		});
+
     });
 </script>
 
 <script type="text/javascript">
 	var map;
-	var marker_layer = new L.marker([50.5, 30.5]);	
+	var marker_layer = new L.marker([50.5, 30.5]);
 
 	function editMarker(e){
 		map.removeLayer(marker_layer);
@@ -107,16 +109,16 @@
 	function map_init_basic (leafmap) {
 		map = leafmap;
 	  map.setView([parseFloat($("#id_latitude").val()),parseFloat($("#id_longitude").val())], 12)
-		var obj = { latlng: { 
-			lat: parseFloat($("#id_latitude").val()), 
-			lng: parseFloat($("#id_longitude").val()) } 
+		var obj = { latlng: {
+			lat: parseFloat($("#id_latitude").val()),
+			lng: parseFloat($("#id_longitude").val()) }
 		}
 		if($("#id_latitude").val())
-      		editMarker(obj); 
-		map.on('click', editMarker); 
+      		editMarker(obj);
+		map.on('click', editMarker);
 	}
 
 </script>
-  
+
 {{ profile_form.media.js }}
 {% endblock scripts %}

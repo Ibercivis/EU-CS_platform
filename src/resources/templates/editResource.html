@@ -44,10 +44,8 @@
   </div>
 </div>
 <!-- END MODAL TO CROP -->
-
-
-<div class="container-fluid">
-	<div class="card mb-4">
+<div class="container">
+	<div class="card mb-4 mt-4">
 		<div class="card-title p-3">
 			<h3>Edit resource
    <button type="submit" class="btn btn-danger float-right" onclick="location.href='{% url 'deleteResource' resource.id %}'" name='deleteResource'> <span class="fas fa-trash-alt"></span> Delete            </button>
@@ -113,12 +111,20 @@
                   {{ form.audience|as_crispy_field }}
               </div>
               <div class="col-5 p-3 ml-5">
-                  {{ form.image|as_crispy_field }}
-                  {{ form.x|as_crispy_field }}
-                  {{ form.y|as_crispy_field }}
-                  {{ form.height|as_crispy_field }}
-                  {{ form.width|as_crispy_field }}
-                  <a id="imgResult" href="#"> <img id="imageResult" class="img-fluid img-zoom" src="{{ resource.image }}" alt=""></a>
+                  {{ form.image1|as_crispy_field }}
+                  {{ form.x1|as_crispy_field }}
+                  {{ form.y1|as_crispy_field }}
+                  {{ form.height1|as_crispy_field }}
+                  {{ form.width1|as_crispy_field }}
+                  <a id="imgResult1" href="#"> <img id="imageResult1" class="img-fluid img-zoom" src="{{ resource.image1 }}" alt=""></a>
+              </div>
+              <div class="col-5 p-3 ml-5">
+                  {{ form.image2|as_crispy_field }}
+                  {{ form.x2|as_crispy_field }}
+                  {{ form.y2|as_crispy_field }}
+                  {{ form.height2|as_crispy_field }}
+                  {{ form.width2|as_crispy_field }}
+                  <a id="imgResult2" href="#"> <img id="imageResult2" class="img-fluid img-zoom" src="{{ resource.image2 }}" alt=""></a>
               </div>
             </div>
             <div class="row">
@@ -295,42 +301,48 @@
         }
     );
   }
-
   $(function () {
-    changed = false;
+    var imgSelected;
     /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
-    $("#id_image").change(function () {
-      $('#imageResult').attr('src', '');
+    $("#id_image1").change(function () {
+      imgSelected = 1;
+      $('#imageResult1').attr('src', '');
       if (this.files && this.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-          changed = true;
           $("#image").attr("src", e.target.result);
           $("#modalCrop").modal("show");
         }
         reader.readAsDataURL(this.files[0]);
       }
     });
-
-    $("#imageResult").click(function () {
-      if(!changed)
-        $("#id_image").click();
-      else{
-        //$("#image").attr("src", $("#imageResult").attr("src"));
-        $("#modalCrop").modal("show");
+    $("#id_image2").change(function () {
+      imgSelected = 2;
+      $('#imageResult2').attr('src', '');
+      if (this.files && this.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $("#image").attr("src", e.target.result);
+          $("#modalCrop").modal("show");
+        }
+        reader.readAsDataURL(this.files[0]);
       }
-
     });
-
+    $("#imageResult1").click(function () {
+      $("#modalCrop").modal("show");
+    });
+    $("#imageResult2").click(function () {
+      $("#modalCrop").modal("show");
+    });
     /* SCRIPTS TO HANDLE THE CROPPER BOX */
     var $image = $("#image");
     var cropBoxData;
     var canvasData;
     $("#modalCrop").on("shown.bs.modal", function () {
       $image.cropper({
-				spectRatio: 3/2,
         viewMode: 0,
-        minCropBoxWidth: 600,
+        aspectRatio: imgSelected == 2 ? 11/3 : 3/2,
+        minCropBoxWidth: imgSelected == 2 ? 1100 : 600,
         minCropBoxHeight: 400,
         dragMode: 'move',
         guides: false,
@@ -360,15 +372,17 @@
     /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
     $(".js-crop-and-upload").click(function () {
       var cropData = $image.cropper("getData");
-      $("#id_x").val(cropData["x"]);
-      $("#id_y").val(cropData["y"]);
-      $("#id_height").val(cropData["height"]);
-      $("#id_width").val(cropData["width"]);
+      $("#id_x" + imgSelected).val(cropData["x"]);
+      $("#id_y" + imgSelected).val(cropData["y"]);
+      $("#id_height" + imgSelected).val(cropData["height"]);
+      $("#id_width" + imgSelected).val(cropData["width"]);
       $("#modalCrop").modal("hide");
-      $('#imageResult').attr('src', $image.cropper('getCroppedCanvas', {width: 600, height: 400}).toDataURL());      
+      $('#imageResult' + imgSelected).attr('src', $image.cropper('getCroppedCanvas',
+      {width: imgSelected == 2 ? 1100 : 600, height: 400}).toDataURL());
     });
 
   });
+
 
 </script>
 {{ form.media.js }}

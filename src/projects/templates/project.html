@@ -13,22 +13,21 @@
 {% include "_navbar.html" with active_link="project" %}
 {% endblock %}
 {% block list_of_items %}
-{{ permissionForm.media.css }}
-  <div class="main-content-container container-fluid" >
-    <div class="card mb-4">
-  {% if project.image3 %}
-              <img class="img-fluid img-responsive img-zoom" src="{{ project.image3 }}" >
-            {% else %}
-              <img class="img-fluid img-responsive img-zoom" src='/static/site/img/project.png'>
-            {% endif %}
-
-      <div class="card-text p-3">
-
-        {% if user.is_authenticated %}
+<div class="container">
+  <div class="row">
+    {{ permissionForm.media.css }}
+    <div class="main-content-container container-fluid" >
+      <div class="card mb-4">
+        {% if project.image3 %}
+        <img class="img-fluid img-responsive img-zoom" src="{{ project.image3 }}" >
+        {% else %}
+        <img class="img-fluid img-responsive img-zoom" src='/static/site/img/project.png'>
+        {% endif %}
+        <div class="card-text p-3">
+          {% if user.is_authenticated %}
           {% if project.creator == user or user.is_staff or user.id in cooperators %}
           <div class="row">
-          <a class="btn btn-info float-right" href="{% url 'editProject' project.id %}"><i class="fas fa-edit"></i> Edit </a>
-
+            <a class="btn btn-info float-right" href="{% url 'editProject' project.id %}"><i class="fas fa-edit"></i> Edit </a>
           </div>
           {% endif %}
           {% if project.creator == user or user.is_staff %}
@@ -37,23 +36,22 @@
             {% csrf_token %}
             <div class="row">
               <div class="col-5 p-3 ml-5">
-              {{ permissionForm.usersAllowed | as_crispy_field }}
-              {{ permissionForm.selectedUsers | as_crispy_field }}
-              {{ permissionForm.usersCollection | as_crispy_field }}
+                {{ permissionForm.usersAllowed | as_crispy_field }}
+                {{ permissionForm.selectedUsers | as_crispy_field }}
+                {{ permissionForm.usersCollection | as_crispy_field }}
               </div>
             </div>
           </permissionForm>
           <br><br>
           {% endif %}
           {% endif %}
-
-        <div class="row">
-          <div class="col-12 col-xl-4">
-            <h2>{{project.name}}<!-- i class="fas fa-star-half-alt"></i>{{votes}}{{votes| stringformat:'d'}}--></h2>
+          <div class="row">
+            <div class="col-12 col-xl-4">
+              <h2>{{project.name}}<!-- i class="fas fa-star-half-alt"></i>{{votes}}{{votes| stringformat:'d'}}--></h2>
             </div>
             <div class="col-12 col-xl-8 pt-2">
-            <p><b>{{project.aim | safe}}</b></p>
-            <p>{{project.description | safe}}</p>
+              <p><b>{{project.aim | safe}}</b></p>
+              <p>{{project.description | safe}}</p>
             </div>
           </div>
           <div class="row">
@@ -63,9 +61,9 @@
                   <h1><i class="fas fa-globe-europe"></i></h1>
                   <h4 class="text-dark">Location</h4>
                   {% for country in countries %}
-                    {% if country.code == project.country %}
-                      {{ country.name }}
-                    {% endif %}
+                  {% if country.code == project.country %}
+                  {{ country.name }}
+                  {% endif %}
                   {% endfor %}
                 </div>
               </div>
@@ -73,9 +71,9 @@
             <div class="col-4 mt-5">
               <div class="card h-100 shadow-sm">
                 <div class="card-body">
-                  
+
                   <h4 class="text-dark">Topic</h4>
-              	   {% for topic in project.topic.all %} <a class="badge badge-pill badge-dark" href="/projects?keywords=&topic={{topic|urlencode}}">{{topic}}</a>  {% endfor %}
+                  {% for topic in project.topic.all %} <a class="badge badge-pill badge-dark" href="/projects?keywords=&topic={{topic|urlencode}}">{{topic}}</a>  {% endfor %}
                 </div>
               </div>
             </div>
@@ -93,25 +91,25 @@
             <div class="col-12 col-xl-4 mt-5">
               <h2>Main info</h2>
             </div>
-				    <div class="col-xl-6 mt-5 pt-2">
-                <b> Host: </b>{{project.host}}<br>
-                <b>Start date: </b>{{ project.start_date | date:"d/m/Y"}}<br>
-                <b>End date: </b>{{ project.end_date | date:"d/m/Y"}}<br>
-                <b>Status: </b>{{ project.status}}<br>
-                <b>Date created:</b> {{project.dateCreated  | date:"d/m/Y"}}<br>
-                <b>Date updated:</b>{{project.dateUpdated  | date:"d/m/Y"}}<br>
-                <b>Contact person: </b>{{ project.author}}<br>
-                <b>Contact person email: </b>{{ project.author_email}}<br>
-                <b>Website: </b><a href="{{project.url}}">{{project.url}}</a><br>
+            <div class="col-xl-6 mt-5 pt-2">
+              <b> Host: </b>{{project.host}}<br>
+              <b>Start date: </b>{{ project.start_date | date:"d/m/Y"}}<br>
+              <b>End date: </b>{{ project.end_date | date:"d/m/Y"}}<br>
+              <b>Status: </b>{{ project.status}}<br>
+              <b>Date created:</b> {{project.dateCreated  | date:"d/m/Y"}}<br>
+              <b>Date updated:</b>{{project.dateUpdated  | date:"d/m/Y"}}<br>
+              <b>Contact person: </b>{{ project.author}}<br>
+              <b>Contact person email: </b>{{ project.author_email}}<br>
+              <b>Website: </b><a href="{{project.url}}">{{project.url}}</a><br>
             </div>
           </div>
           <div class="row">
             <div class="col-12">
-                       <h2>Geography</h2>
-                          <p>Latitude: {{project.latitude}}</p>
-                          <p>Longitude: {{project.longitude}}</p>
-                          {% leaflet_map "map" callback="window.map_init_basic" %}
-              </div>
+              <h2>Geography</h2>
+              <p>Latitude: {{project.latitude}}</p>
+              <p>Longitude: {{project.longitude}}</p>
+              {% leaflet_map "map" callback="window.map_init_basic" %}
+            </div>
           </div>
           <div class="row">
             <div class="col-12 col-xl-4 mt-5">
@@ -137,50 +135,51 @@
               <h2>Further info</h2>
             </div>
             <div class="col-12 col-xl-8 mt-5 pt-2">
-            {% for customField in project.customField.all %}
+              {% for customField in project.customField.all %}
               <p><b>{{customField.title}}</b></p>
               <p>{{customField.paragraph | safe }}</p>
-            {% endfor %}
+              {% endfor %}
+            </div>
+          </div><!-- End of card-text -->
+          <div class="card-footer bg-white">
+            <div id="featured{{project.id}}" class="float-left">
+              {% if user.is_staff %}
+              {% if project.id in featuredProjects %}
+              <a onclick="setFeatured({{project.id}})" href="">Approved</a>
+              {% else %}
+              <a onclick="setFeatured({{project.id}})" href="">Pending</a>
+              {% endif %}
+              {% else %}
+              {% if project.id in featuredProjects %}
+              <img class="img-fluid" src="{% static 'site/img/project.png' %}" />
+              {% else %}
+              <img class="img-fluid" src="{% static 'site/img/project.png' %}" style="background-color: rgba(0,0,0,0.2);filter:brightness(0.4);"/>
+              {% endif %}
+
+              {% endif %}
+
+            </div>
+          </div><!-- End of card footer -->
+          <a class="btn btn-outline-primary float-right ml-2" target="_black" href="{{project.url }}"> Website</a>
+          {% if user.is_authenticated %}
+          <div id="followed{{project.id}}">
+            {% if project.id in followedProjects %}
+            <button type="button" class="btn btn-outline-primary float-right" onclick="setFollowedProject({{project.id}},{{user.id}})">Following</button>
+            {% else %}
+            <button type="button" class="btn btn-outline-secondary float-right" onclick="setFollowedProject({{project.id}},{{user.id}})">Follow</button>
+            {% endif %}
           </div>
-        </div><!-- End of card-text -->
-	       <div class="card-footer bg-white">
-			       <div id="featured{{project.id}}" class="float-left">
-												{% if user.is_staff %}
-													{% if project.id in featuredProjects %}
-													<a onclick="setFeatured({{project.id}})" href="">Approved</a>
-													{% else %}
-													<a onclick="setFeatured({{project.id}})" href="">Pending</a>
-													{% endif %}
-												{% else %}
-													{% if project.id in featuredProjects %}
-													<img class="img-fluid" src="{% static 'site/img/project.png' %}" />
-													{% else %}
-													<img class="img-fluid" src="{% static 'site/img/project.png' %}" style="background-color: rgba(0,0,0,0.2);filter:brightness(0.4);"/>
-													{% endif %}
 
-													{% endif %}
+          {% endif %}
+        </div>
 
-											</div>
-			</div><!-- End of card footer -->
-											<a class="btn btn-outline-primary float-right ml-2" target="_black" href="{{project.url }}"> Website</a>
-			{% if user.is_authenticated %}
-													<div id="followed{{project.id}}">
-														{% if project.id in followedProjects %}
-															<button type="button" class="btn btn-outline-primary float-right" onclick="setFollowedProject({{project.id}},{{user.id}})">Following</button>
-														{% else %}
-															<button type="button" class="btn btn-outline-secondary float-right" onclick="setFollowedProject({{project.id}},{{user.id}})">Follow</button>
-														{% endif %}
-													</div>
-
-												{% endif %}
-											</div>
-
-				</div>
+      </div>
 
 
 
-              </div>
-
+    </div>
+  </div>
+</div>
 {% endblock list_of_items %}
 
 {% block scripts %}
@@ -210,69 +209,69 @@
   var marker_layer = new L.marker([50.5, 30.5]);
 
   function map_init_basic (leafmap, options) {
-      map = leafmap;
-			map.setView([{{project.latitude}}, {{project.longitude}}], 12)
-      new L.marker([{{project.latitude}},{{project.longitude}}]).addTo(map);
+    map = leafmap;
+    map.setView([{{project.latitude}}, {{project.longitude}}], 12)
+    new L.marker([{{project.latitude}},{{project.longitude}}]).addTo(map);
   }
 
   $(function () {
     $('#id_usersAllowed').on('change', function () {
-        users = $("#id_usersAllowed option:selected").map(function () {
-            return $.trim($(this).text());
-        }).get().join(',');
+      users = $("#id_usersAllowed option:selected").map(function () {
+        return $.trim($(this).text());
+      }).get().join(',');
 
       var idProject = {{project.id}};
       var request = $.ajax(
-            {
-                type: "POST",
-                url: "{% url 'allowUser' %}",
-                data: {
-                    "project_id": idProject,
-                    "users": users,
-                    csrfmiddlewaretoken: '{{ csrf_token }}'
-                },
-                success: function (response) {
+      {
+        type: "POST",
+        url: "{% url 'allowUser' %}",
+        data: {
+          "project_id": idProject,
+          "users": users,
+          csrfmiddlewaretoken: '{{ csrf_token }}'
+        },
+        success: function (response) {
 
-                }
-            }
-        );
+        }
+      }
+      );
     });
   });
 
-	function setFeatured(idProject){
-		var htmlId = "featured" + idProject;
-        var request = $.ajax(
-            {
-                type: "POST",
-                url: "{% url 'setFeatured' %}",
-                data: {
-                    "project_id": idProject,
-              		  csrfmiddlewaretoken: '{{ csrf_token }}'
-                },
-                success: function (response) {
-                    $("#"+htmlId).load(" #"+htmlId);
-                }
-            }
-        );
+  function setFeatured(idProject){
+    var htmlId = "featured" + idProject;
+    var request = $.ajax(
+    {
+      type: "POST",
+      url: "{% url 'setFeatured' %}",
+      data: {
+        "project_id": idProject,
+        csrfmiddlewaretoken: '{{ csrf_token }}'
+      },
+      success: function (response) {
+        $("#"+htmlId).load(" #"+htmlId);
+      }
     }
+    );
+  }
 
-	function setFollowedProject(idProject, idUser){
-		var htmlId = "followed" + idProject;
-        var request = $.ajax(
-            {
-                type: "POST",
-                url: "{% url 'setFollowedProject' %}",
-                data: {
-                    "project_id": idProject,
-                    "user_id": idUser,
-              		  csrfmiddlewaretoken: '{{ csrf_token }}'
-                },
-                success: function (response) {
-                    $("#"+htmlId).load(" #"+htmlId);
-                }
-            }
-        );
+  function setFollowedProject(idProject, idUser){
+    var htmlId = "followed" + idProject;
+    var request = $.ajax(
+    {
+      type: "POST",
+      url: "{% url 'setFollowedProject' %}",
+      data: {
+        "project_id": idProject,
+        "user_id": idUser,
+        csrfmiddlewaretoken: '{{ csrf_token }}'
+      },
+      success: function (response) {
+        $("#"+htmlId).load(" #"+htmlId);
+      }
     }
+    );
+  }
 </script>
 {{ permissionForm.media.js }}
 {% endblock scripts %}

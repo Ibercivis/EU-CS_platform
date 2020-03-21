@@ -25,132 +25,134 @@
 {% endif %}
 {% endblock %}
 {% block list_of_items %}
-{% include "projects_cards.html" %}
+<div class="container">
+	<div class="row">
+	{% include "projects_cards.html" %}
+	{% endblock list_of_items %}
+	</div>
+</div>
 
 
-		{% endblock list_of_items %}
-	</main>
 
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js"
+integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="anonymous"></script>
+<script
+src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
 
-	{% block scripts %}
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js"
-	integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="anonymous"></script>
-	<script
-	src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
-
-	<script>
-		function setFeatured(idProject){
-			var htmlId = "featured" + idProject;
-			var request = $.ajax(
-			{
-				type: "POST",
-				url: "{% url 'setFeatured' %}",
-				data: {
-					"project_id": idProject,
-					csrfmiddlewaretoken: '{{ csrf_token }}'
-				},
-				success: function (response) {
-					$("#"+htmlId).load(" #"+htmlId);
-				}
+<script>
+	function setFeatured(idProject){
+		var htmlId = "featured" + idProject;
+		var request = $.ajax(
+		{
+			type: "POST",
+			url: "{% url 'setFeatured' %}",
+			data: {
+				"project_id": idProject,
+				csrfmiddlewaretoken: '{{ csrf_token }}'
+			},
+			success: function (response) {
+				$("#"+htmlId).load(" #"+htmlId);
 			}
-			);
 		}
+		);
+	}
 
-		function setHidden(idProject, hidden){
-			var htmlId = "hidden" + idProject;
-			var request = $.ajax(
-			{
-				type: "POST",
-				url: "{% url 'setHidden' %}",
-				data: {
-					"project_id": idProject,
-					"hidden": hidden,
-					csrfmiddlewaretoken: '{{ csrf_token }}'
-				},
-				success: function (response) {
-					$("#"+htmlId).load(" #"+htmlId);
-				}
+	function setHidden(idProject, hidden){
+		var htmlId = "hidden" + idProject;
+		var request = $.ajax(
+		{
+			type: "POST",
+			url: "{% url 'setHidden' %}",
+			data: {
+				"project_id": idProject,
+				"hidden": hidden,
+				csrfmiddlewaretoken: '{{ csrf_token }}'
+			},
+			success: function (response) {
+				$("#"+htmlId).load(" #"+htmlId);
 			}
-			);
 		}
+		);
+	}
 
-		function setFollowedProject(idProject, idUser){
-			var htmlId = "followed" + idProject;
-			var request = $.ajax(
-			{
-				type: "POST",
-				url: "{% url 'setFollowedProject' %}",
-				data: {
-					"project_id": idProject,
-					"user_id": idUser,
-					csrfmiddlewaretoken: '{{ csrf_token }}'
-				},
-				success: function (response) {
-					$("#"+htmlId).load(" #"+htmlId);
-				}
+	function setFollowedProject(idProject, idUser){
+		var htmlId = "followed" + idProject;
+		var request = $.ajax(
+		{
+			type: "POST",
+			url: "{% url 'setFollowedProject' %}",
+			data: {
+				"project_id": idProject,
+				"user_id": idUser,
+				csrfmiddlewaretoken: '{{ csrf_token }}'
+			},
+			success: function (response) {
+				$("#"+htmlId).load(" #"+htmlId);
 			}
-			);
 		}
-	</script>
-	<script>
-		$('.basicAutoComplete').autoComplete(
-		{ minLength: 3 }
+		);
+	}
+</script>
+<script>
+	$('.basicAutoComplete').autoComplete(
+	{ minLength: 3 }
+	);
+
+	$("#keywords").blur(function () {
+		var keywords = $(this).val();
+		$('#searchProjects').submit();
+	});
+
+	$('.basicAutoComplete').on('autocomplete.select', function (evt, item) {
+		$('#searchProjects').submit();
+	});
+
+	$(function () {
+		$('#topic').on('change', function () {
+			var topic = $(this).val();
+			$('#searchProjects').submit();
+		});
+	});
+
+	$(function () {
+		$('.status-select').on('change', function () {
+			var status = $(this).val();
+			$('#searchProjects').submit();
+		});
+	});
+
+	$(function () {
+		$('#country').on('change', function () {
+			var country = $(this).val();
+			$('#searchProjects').submit();
+		});
+	});
+
+	$("#host").blur(function () {
+		$('#searchProjects').submit();
+	});
+
+	$(function () {
+		$('#featuredCheck').on('click', function () {
+			var featuredCheck = $(this).val();
+			$('#searchProjects').submit();
+		});
+	});
+</script>
+<script>
+	$(document).ready(function() {
+		// executes when HTML-Document is loaded and DOM is ready
+		console.log("document is ready");
+		$( ".card" ).hover(
+		function() {
+			$(this).addClass('shadow-none').css('cursor', 'pointer');
+		}, function() {
+			$(this).removeClass('shadow-none');
+		}
 		);
 
-		$("#keywords").blur(function () {
-			var keywords = $(this).val();
-			$('#searchProjects').submit();
-		});
-
-		$('.basicAutoComplete').on('autocomplete.select', function (evt, item) {
-			$('#searchProjects').submit();
-		});
-
-		$(function () {
-			$('#topic').on('change', function () {
-				var topic = $(this).val();
-				$('#searchProjects').submit();
-			});
-		});
-
-		$(function () {
-			$('.status-select').on('change', function () {
-				var status = $(this).val();
-				$('#searchProjects').submit();
-			});
-		});
-
-		$(function () {
-			$('#country').on('change', function () {
-				var country = $(this).val();
-				$('#searchProjects').submit();
-			});
-		});
-
-		$("#host").blur(function () {
-			$('#searchProjects').submit();
-		});
-
-		$(function () {
-			$('#featuredCheck').on('click', function () {
-				var featuredCheck = $(this).val();
-				$('#searchProjects').submit();
-			});
-		});
-	</script>
-	<script>
-		$(document).ready(function() {
-			// executes when HTML-Document is loaded and DOM is ready
-			console.log("document is ready");
-			$( ".card" ).hover(
-			function() {
-				$(this).addClass('shadow-none').css('cursor', 'pointer');
-			}, function() {
-				$(this).removeClass('shadow-none');
-			}
-			);
-
-			// document ready
-		});
-	</script>
-	{% endblock scripts %}
+		// document ready
+	});
+</script>
+{% endblock scripts %}

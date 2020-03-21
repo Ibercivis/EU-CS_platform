@@ -1,5 +1,4 @@
 {% extends "base2.html" %}
-
 {% load staticfiles %}
 {% load thumbnail %}
 {% block head %}
@@ -7,16 +6,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js"
 	integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="anonymous"></script>
 {% endblock head %}
-
-
 {% block title %}{{ block.super }}Profile{% endblock %}
-
 {% block navbar-left %}
 {% include "_navbar.html" with active_link="project" %}
 {% endblock %}
-
-
 {% block list_of_items %}
+<div class="container">
+	<div class="row">
 <div class="container-fluid">
 	<div class="card card-mb-4">
 		<div class="card-body">
@@ -25,7 +21,6 @@
 					<img title="profile picture" class="img-fluid rounded-circle"
 						src="{% thumbnail show_user.profile.picture|default:'default_profile.png' 140x140 crop %}">
 					{{ show_user.get_full_name }}</h1>
-
 			</div>
 		</div>
 		<div class="card-text">
@@ -38,6 +33,6 @@
 		</div>
 	</div>
 </div>
-<br>
-<br>
+</div>
+</div>
 {% endblock list_of_items%}
