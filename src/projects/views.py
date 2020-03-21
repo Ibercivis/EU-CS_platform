@@ -17,10 +17,7 @@ from .forms import ProjectForm, CustomFieldForm, CustomFieldFormset, ProjectPerm
 from .models import Project, Topic, Status, Keyword, Votes, FeaturedProjects, FollowedProjects, FundingBody, FundingAgency, CustomField, ProjectPermission
 import json
 import random
-
-
 User = get_user_model()
-
 def new_project(request):
     choices = list(Keyword.objects.all().values_list('keyword',flat=True))
     choices = ", ".join(choices)
@@ -28,7 +25,6 @@ def new_project(request):
     user = request.user
     if request.method == 'POST':
         form = ProjectForm(request.POST, request.FILES)
-
         if form.is_valid():
             images = []
             image1_path = saveImage(request, form, 'image1', '1')

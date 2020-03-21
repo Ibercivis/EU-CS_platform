@@ -1,15 +1,13 @@
 {% load staticfiles %}
 {% for project in projects %}
 <div class="col-lg-4  col-sm-12 mb-4">
-	<div class="card h-100 shadow-sm">
+	<div class="card h-100 shadow">
 		<a class="card-img-wrap "href="/project/{{project.id }}">
-
 			{% if project.image1 %}
 			<img class="card-img-top img-fluid img-zoom lazyload" src="{{ project.image1 }}" />
 			{% else %}
 			<img class="card-img-top img-fluid img-zoom lazyload" src="{% static 'site/img/project.png' %}" />
 			{% endif %}
-
 			<div class="upper">
 				{% for country in countries %}
 				{% if country.code == project.country %}
@@ -42,7 +40,6 @@
 						<button class="btn btn-pending float-left " data-toggle="tooltip" data-placement="top" title="Waiting for moderation under EU-CITIZEN.SCIENCE criteria">
 							<i class="fas fa-hourglass-half"></i>&nbsp;Pending...</button>
 							{% endif %}
-
 							{% endif %}
 							<div id="hidden{{project.id}}" style="display:inline-block">
 								{% if user.is_staff %}
