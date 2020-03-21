@@ -15,33 +15,37 @@ Contact
 
 {% block list_of_items %}
 <div class="container">
-
-  <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto form p-4">
-    <h1>Contact Us</h1>
-    <br/>
-    <form method="post" autocomplete="off">
-      {% csrf_token %}
-      <div class="row">
-        <div class="col-5">
-          {{ form.name | as_crispy_field}}
+  <div class="row">
+    <div class="col-12 col-sm-4 mt-4 mb-4">
+      <h3>Contact Us</h3>
+    </div>
+    <div class="col-12 col-sm-8 mt-4 mb-4">
+      <form method="post" autocomplete="off">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-6">
+            {{ form.name | as_crispy_field}}
+          </div>
+          <div class="col-6">
+            {{ form.surname | as_crispy_field}}
+          </div>
         </div>
-        <div class="col-5">
-          {{ form.surname | as_crispy_field}}
+        <div class="row">
+          <div class="col-12 col-sm-6">
+            {{ form.from_email | as_crispy_field}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-6">
+          {{ form.message | as_crispy_field}}
         </div>
       </div>
       <div class="row">
-        {{ form.from_email | as_crispy_field}}
-      </div>
-      <div class="row">
-        {{ form.message | as_crispy_field}}
-      </div>
+        <div class="col-12 col-sm-6">
+            <button type="submit" class="btn btn-success">Send</button>
+        </div>
 
-      <div class="form-actions">
-        <button type="submit" class="btn btn-success">Send</button>
-      </div>
     </form>
-    <br>
-
   </div>
 </div>
 {% endblock list_of_items %}

@@ -20,64 +20,67 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 
 
 {% block list_of_items %}
-<div class="container-fluid">
-	<div class="card card-mb-4">
-		<div class="card-body">
-	<div class="card-title">
-<h1>
- <img title="profile picture" class="img-fluid rounded-circle" src="{% thumbnail show_user.profile.picture|default:'default_profile.png' 140x140 crop %}">
-	  {{ show_user.get_full_name }}	  
-      {% if editable %}
-      <a href="{% url 'accounts:delete' %}" class="btn btn-outline btn-danger float-right ml-2">Delete Profile</a>
-      <a href="{% url 'profiles:edit_self' %}" class="btn btn-outline btn-info float-right ml-2">Edit Profile</a>
-	  {% endif %}
-	  
+<div class="container">
+	<div class="row">
+		<div class="container-fluid">
+			<div class="card card-mb-4">
+				<div class="card-body">
+					<div class="card-title">
+						<h1>
+							<img title="profile picture" class="img-fluid rounded-circle" src="{% thumbnail show_user.profile.picture|default:'default_profile.png' 140x140 crop %}">
+							{{ show_user.get_full_name }}
+							{% if editable %}
+							<a href="{% url 'accounts:delete' %}" class="btn btn-outline btn-danger float-right ml-2">Delete Profile</a>
+							<a href="{% url 'profiles:edit_self' %}" class="btn btn-outline btn-info float-right ml-2">Edit Profile</a>
+							{% endif %}
 
-    </div>
-     </div>
-	<div class="card-text">
-	<div class="row m-2">
-		<div class="col-12 col-xl-6">
-			<p><b>Email: </b>{{ show_user.email|default:"missing"}}</p>
-			<p><b>Joined: </b>{{ show_user.date_joined }}</p>
-			<p><b>Last seen: </b>{{ show_user.last_login }}</p>
+
+						</div>
+					</div>
+					<div class="card-text">
+						<div class="row m-2">
+							<div class="col-12 col-xl-6">
+								<p><b>Email: </b>{{ show_user.email|default:"missing"}}</p>
+								<p><b>Joined: </b>{{ show_user.date_joined }}</p>
+								<p><b>Last seen: </b>{{ show_user.last_login }}</p>
+							</div>
+							<div class="col-12 col-xl-6">
+								<p><strong>Title</strong>: {{ show_user.profile.title }} </p>
+								<p><strong>Bio and disciplinary background</strong>: {{ show_user.profile.bio }}</p>
+								<p><strong>Institution</strong>: {{ show_user.profile.institution }}</p>
+							</div>
+							<div class="col-12 col-xl-6">
+								<p><strong>Interest Areas</strong>:
+									{% for area in show_user.profile.interestAreas.all %}
+									{{ area }}
+									{% endfor %}
+								</p>
+							</div>
+
+						</div>
+						<div >
+							<label><strong>Geographical location</strong></label>
+							{% leaflet_map "map" callback="window.map_init_basic" %}
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div class="col-12 col-xl-6">
-			<p><strong>Title</strong>: {{ show_user.profile.title }} </p>
-			<p><strong>Bio and disciplinary background</strong>: {{ show_user.profile.bio }}</p>
-			<p><strong>Institution</strong>: {{ show_user.profile.institution }}</p>
-		</div>
-		<div class="col-12 col-xl-6">
-			<p><strong>Interest Areas</strong>: 
-				{% for area in show_user.profile.interestAreas.all %} 
-					{{ area }}
-				{% endfor %}
-			</p>			
-		</div>	
-		
 	</div>
-	<div >
-		<label><strong>Geographical location</strong></label>
-		{% leaflet_map "map" callback="window.map_init_basic" %}
-	</div>
-</div>
-</div>
-<br>
-<br>
-{% endblock list_of_items%}
+	{% endblock list_of_items%}
 
-{% block scripts %}
+	{% block scripts %}
 
 
-<script type="text/javascript">
-	var map;
-	var marker_layer = new L.marker([50.5, 30.5]);
-	
-	function map_init_basic (leafmap, options) {
-		map = leafmap;
-		map.setView([{{show_user.profile.latitude}}, {{show_user.profile.longitude}}], 12)
-		new L.marker([{{show_user.profile.latitude}},{{show_user.profile.longitude}}]).addTo(map);		
-	}
-  
-</script>
-{% endblock scripts %}
+	<script type="text/javascript">
+		var map;
+		var marker_layer = new L.marker([50.5, 30.5]);
+
+		function map_init_basic (leafmap, options) {
+			map = leafmap;
+			map.setView([{{show_user.profile.latitude}}, {{show_user.profile.longitude}}], 12)
+			new L.marker([{{show_user.profile.latitude}},{{show_user.profile.longitude}}]).addTo(map);
+		}
+
+	</script>
+	{% endblock scripts %}

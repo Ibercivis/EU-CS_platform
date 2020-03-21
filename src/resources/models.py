@@ -4,25 +4,25 @@ from authors.models import Author
 
 class Keyword(models.Model):
     keyword = models.TextField()
-    def __str__(self):        
+    def __str__(self):
         return f'{self.keyword}'
 
 class Theme(models.Model):
     theme = models.TextField()
-    def __str__(self):        
+    def __str__(self):
         return f'{self.theme}'
 
 
 class Audience(models.Model):
     audience = models.TextField()
-    def __str__(self):        
+    def __str__(self):
         return f'{self.audience}'
 
 class Category(models.Model):
     text = models.TextField()
     parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
     def __str__(self):
-        res = str(self.text) 
+        res = str(self.text)
         if(self.parent):
             res  +=  ' - ' + str(self.parent)
         return res
@@ -30,7 +30,7 @@ class Category(models.Model):
 class Resource(models.Model):
     name = models.CharField(max_length=200)
     url = models.CharField(max_length=200)
-    image = models.CharField(max_length=200)
+    image1 = models.CharField(max_length=300,null=True, blank=True)
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     authors =  models.ManyToManyField(Author)
     author_email =  models.CharField(max_length=100)
@@ -47,7 +47,7 @@ class Resource(models.Model):
     theme = models.ManyToManyField(Theme)
     image = models.ImageField(upload_to='images/', max_length=300)
     resourceDOI = models.CharField(max_length=100)
-    
+    image2 = models.ImageField(upload_to='images/', max_length=300,null=True, blank=True)
     hidden = models.BooleanField(null=True, blank=True)
 
     def __str__(self):
@@ -72,7 +72,7 @@ class ResourcesGrouped(models.Model):
 
 class FeaturedResources(models.Model):
     resource = models.ForeignKey(Resource, on_delete=models.CASCADE)
-    def __str__(self):        
+    def __str__(self):
         return f'{self.resource}'
 
 class SavedResources(models.Model):
@@ -80,8 +80,8 @@ class SavedResources(models.Model):
         unique_together = (('user', 'resource'),)
     resource = models.ForeignKey(Resource, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    def __str__(self):        
-        return f'{self.resource} - {self.user.name}' 
+    def __str__(self):
+        return f'{self.resource} - {self.user.name}'
 
 class ResourcePermission(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

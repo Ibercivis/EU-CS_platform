@@ -23,7 +23,7 @@
   <!--Navbar-->
   <nav class="navbar navbar-expand-lg navbar-dark navbar-front text-white text-weight-bold fixed-top">
     <div class="container text-weight-bold">
-	    <a class="navbar-brand" href="/">{% include "_brandname.html" %}</a>
+	    <a class="navbar-brand nav-link active"  href="/">{% include "_brandname.html" %}</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -35,14 +35,14 @@
         </ul>
 				<ul class="navbar-nav">
 				{% if not user.is_authenticated %}
-        <li class="nav-item"><a class="nav-link ml-4" href="{% url 'accounts:login' %}">Login</a></li>
-				<li class="nav-item"><a class="nav-link" href="{% url 'accounts:signup' %}">Sign up</a></li>
+        <li class="nav-item"><a class="nav-link ml-4" href="{% url 'accounts:login' %}">LOGIN</a></li>
+				<li class="nav-item"><a class="nav-link" href="{% url 'accounts:signup' %}">SIGN UP</a></li>
 				{% else %}
-				<li class="nav-item"><a class="nav-link" href="{% url 'profiles:show_self' %}">Profile</a></li>
-     		<li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a></li>
+				<li class="nav-item"><a class="nav-link" href="{% url 'profiles:show_self' %}">PROFILE</a></li>
+     		<li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}">LOGOUT</a></li>
 				{% endif %}
         {% if user.is_staff %}
-        <li class="nav-item"><a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
+        <li class="nav-item"><a class="nav-link" href="{% url 'admin:index' %}">ADMIN</a>
         {% endif %}
 				</ul>
       </div>
