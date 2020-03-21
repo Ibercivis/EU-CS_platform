@@ -1,54 +1,60 @@
 {% extends "base2.html" %}
-
 {% load staticfiles %}
 {% load crispy_forms_tags %}
+{% block title %}{{ block.super }}Events{% endblock %}
+{% block splash %}
 
-{% block title %}{{ block.super }}Home{% endblock %}
+<div class="jumbotron jumbotron-fluid jumbotron-lists">
+	<div class="container">
+		<h1 class="display-5 pb-0"><br>Curated lists</h1>
+		<p class="lead text-light">Don't know where to start? Have a look to our curated lists</p>
+	</div>
+</div>
 
-
+{% endblock splash %}
 {% block navbar-left %}
 {% include "_navbar.html" with active_link="curated" %}
 {% endblock %}
-
 {% block page_title %}
 Curated Resources
 {% endblock page_title %}
-
 {% block list_of_items %}
-	Here is going to be some lists with curated sets of resources: e.g. Best guidelines if you want to start a CS project. Working on it (it is ready on v0.2 (18th March 2020))
-  {% for group in groups %}
-  <div class="col-lg-12">
+{% for group in groups %}
+<div class="container">
 	<div class="row">
-		<div class="col-lg-12">
-  <h3>{{group.name}}</h3>
+		<div class="col-12">
+			Here is going to be some lists with curated sets of resources: e.g. Best guidelines if you want to start a CS project. Working on it (it is ready on v0.2 (18th March 2020))
 		</div>
-  	</div>
-	<div class="row">
 		<div class="col-lg-12">
-
-  <h5>{{group.description}}</h5>
+			<h3>{{group.name}}</h3>
 		</div>
 	</div>
 	<div class="row">
-    {% for rg in resourcesgrouped %}
-    {% if rg.group == group %}
-    <div class="col-lg-6 col-md-12 mb-4">
-      <div class="card card-small card-post h-100">
-        <div class="card-body">
-          <h4 class="card-title"> {{ rg.resource.name  | truncatewords:4}} </h4>
-	  <img class="card-img" style=" float: left; background-color: #fff; border-radius: 50%; border: 0px; width: 75px" src="../static/site/img/gdoc.png">
-          <p class="card-text">{{rg.resource.abstract | truncatewords:20}}</p>
-          <p class="card-text"><a href="{{rg.resource.url}}" target="_blank">Download resource </a></p>
-        </div>
-        <!--div class="card-footer text-muted border-top py-3">
-          <span>Author: {{rg.resource.author.name}}</span><br />
-          <span class="d-inline-block">Date
-            <span class="text-fiord-blue">{{rg.resource.datePublished | date:"d/m/Y"}}</span>
-          </span>
-        </div-->
+		<div class="col-lg-12">
+			<h5>{{group.description}}</h5>
+		</div>
 	</div>
-    </div>
-    {% endif %}  
-    {% endfor %}  
-  {% endfor %}
-  {% endblock list_of_items %}
+	<div class="row">
+		{% for rg in resourcesgrouped %}
+		{% if rg.group == group %}
+		<div class="col-lg-6 col-md-12 mb-4">
+			<div class="card card-small card-post h-100">
+				<div class="card-body">
+					<h4 class="card-title"> {{ rg.resource.name  | truncatewords:4}} </h4>
+					<img class="card-img" style=" float: left; background-color: #fff; border-radius: 50%; border: 0px; width: 75px" src="../static/site/img/gdoc.png">
+					<p class="card-text">{{rg.resource.abstract | truncatewords:20}}</p>
+					<p class="card-text"><a href="{{rg.resource.url}}" target="_blank">Download resource </a></p>
+				</div>
+				<!--div class="card-footer text-muted border-top py-3">
+				<span>Author: {{rg.resource.author.name}}</span><br />
+				<span class="d-inline-block">Date
+				<span class="text-fiord-blue">{{rg.resource.datePublished | date:"d/m/Y"}}</span>
+			</span>
+		</div-->
+	</div>
+</div>
+</div>
+{% endif %}
+{% endfor %}
+{% endfor %}
+{% endblock list_of_items %}

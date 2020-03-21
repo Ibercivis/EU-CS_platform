@@ -7,7 +7,7 @@ from django.db.models import Q
 from itertools import chain
 from . import forms
 from . import models
-from projects.models import Project, FollowedProjects, ProjectPermission
+from projects.models import Project, FollowedProjects, ProjectPermission, FeaturedProjects
 from resources.models import Resource, SavedResources, ResourcePermission
 
 
@@ -70,8 +70,10 @@ def projects(request):
     projectsCreated = Project.objects.all().filter(creator=user)
     projectsWithPermission = getProjectsWithPermission(user)
     projectsWithPermission = Project.objects.all().filter(id__in=projectsWithPermission)
-    projects = chain(projectsCreated, projectsWithPermission)    
-    return render(request, 'profiles/my_projects.html', {'show_user': user, 'projects': projects})
+    projects = chain(projectsCreated, projectsWithPermission)
+    featuredProjects = FeaturedProjects.objects.all().values_list('project_id',flat=True)
+
+    return render(request, 'profiles/my_projects.html', {'show_user': user, 'projects': projects, 'featuredProjects': featuredProjects})
 
 def resources(request):
     user = request.user

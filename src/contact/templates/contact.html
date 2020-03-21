@@ -4,9 +4,16 @@
 {% load crispy_forms_tags %}
 
 {% block title %}{{ block.super }}Contact{% endblock %}
-
+{% block splash %}
+<div class="jumbotron jumbotron-fluid jumbotron-contact">
+	<div class="container">
+		<h1 class="display-5 pb-0"><br>Contact</h1>
+		<p class="lead text-light">Get in touch with us</p>
+	</div>
+</div>
+{% endblock splash %}
 {% block navbar-left %}
-{% include "_navbar.html" %}
+{% include "_navbar.html" with active_link="contact" %}
 {% endblock %}
 
 {% block page_title %}
@@ -17,7 +24,7 @@ Contact
 <div class="container">
   <div class="row">
     <div class="col-12 col-sm-4 mt-4 mb-4">
-      <h3>Contact Us</h3>
+      <h3></h3>
     </div>
     <div class="col-12 col-sm-8 mt-4 mb-4">
       <form method="post" autocomplete="off">

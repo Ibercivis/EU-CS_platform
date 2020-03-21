@@ -2,9 +2,8 @@ body{
 	min-height: 100vh;
 }
 main {
-	margin-top: 80px;
 	font-weight: 200;
-	min-height: 100%;
+	min-height: 100vh;
 	background-color: #f8f8f8;
 }
 main.nomargintop {
@@ -13,20 +12,37 @@ main.nomargintop {
 	min-height: 100%;
 	background-color: #f8f8f8;
 }
-
-.jumbotron{
+.jumbotron {
 	font-weight: bold;
-	background-image: url('../img/cancitizensc.jpg');
-	min-height: 30vh;
 	background-position: center center;
 }
-.jumbotron .container-fluid{
-	background: rgba(255,255,255,0.7);
-	position: relative;
-	bottom: 0;
-	z-index: 2;
-	top:0;
-	text-align: center;
+.jumbotron-main{
+	background-image: url('../img/cancitizensc.jpg');
+	min-height: 30vh;
+}
+.jumbotron-projects{
+	background-image: url('../img/cancitizensc.jpg');
+	min-height: 15vh;
+}
+.jumbotron-resources{
+	background-image: url('../img/cancitizensc.jpg');
+	min-height: 15vh;
+}
+.jumbotron-lists{
+	background-image: url('../img/cancitizensc.jpg');
+	min-height: 15vh;
+}
+.jumbotron-contact{
+	background-image: url('../img/cancitizensc.jpg');
+	min-height: 15vh;
+}
+.jumbotron-about{
+	background-image: url('../img/cancitizensc.jpg');
+	min-height: 15vh;
+}
+.jumbotron-events{
+	background-image: url('../img/cancitizensc.jpg');
+	min-height: 15vh;
 }
 h1,h2, h3, h4,h5 {
 	font-family: "Poppins", Helvetica, sans-serif;
@@ -139,7 +155,7 @@ input[type=checkbox] {
 	color: #17a398;
 }
 .btn-pending{
-	color: #fc4b62;
+	color: #aaa;
 }
 .overlay-orange{
 	background: linear-gradient(to right, rgba(0, 0, 0, 1.0), rgba(195, 55, 100, 0.8));
