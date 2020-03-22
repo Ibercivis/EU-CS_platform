@@ -52,57 +52,66 @@
       </div>
     </div>
 
-    <div class="container-fluid">
-      <div class="card mb-4 shadow">
+    <div class="container mt-5">
+      <div class="card mb-5 mt-5 shadow">
         <div class="card-title p-3">
-          <h2>Add new resource</h2>
+          <div class="row">
+            <div class="col-12">
+              <h2>New resource</h2>
+            </div>
+          </div>
         </div>
         <div class="card-text p-3">
           <table class="table mb-0">
             <form action="/new_resource" method="post" class="add-new-resource" enctype="multipart/form-data" autocomplete="off">
               {% csrf_token %}
-              <div class="row">
-                <div class="col-5 p-3 ml-5">
+
+              <div class="form-row">
+                <div class="col-sm-6 col-12">
                   {{ form.name|as_crispy_field }}
                 </div>
-                <div class="col-5 p-3 ml-5">
+                <div class="col-sm-6 col-12">
                   {{ form.url|as_crispy_field }}
                 </div>
               </div>
-              <div class="row">
-                <div class="col-5 p-3 ml-5">
+
+              <div class="form-row">
+                <div class="col-sm-6 col-12">
                   {{ form.abstract|as_crispy_field }}
                 </div>
-                <div class="col-5 p-3 ml-5">
-                  {{ form.resource_DOI|as_crispy_field }}
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-5 p-3 ml-5">
-                  {{ form.keywords|as_crispy_field }}
-                  {{form.choices|as_crispy_field}}
-                </div>
-                <div class="col-5 p-3 ml-5">
+                <div class="col-sm-6 col-12">
                   {{ form.category|as_crispy_field }}
                   {{ form.categorySelected|as_crispy_field }}
-                  <div id="id_sub_categories"></div>
+                  <div id="id_sub_categories"></div><br/>
+                  {{ form.audience|as_crispy_field }}
                 </div>
               </div>
 
-              <div class="row">
-                <div class="col-5 p-3 ml-5">
+              <div class="form-row">
+                <div class="col-sm-6 col-12">
+                  {{ form.keywords|as_crispy_field }}
+                  {{form.choices|as_crispy_field}}
+                </div>
+                <div class="col-sm-6 col-12">
+                {{ form.resource_DOI|as_crispy_field }}
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col-sm-6 col-12">
                   {{ form.authors|as_crispy_field }}
                   {{ form.authorsCollection|as_crispy_field }}
                 </div>
-                <div class="col-5 p-3 ml-5">
+                <div class="col-sm-6 col-12">
                   {{ form.author_email|as_crispy_field }}
                 </div>
               </div>
-              <div class="row">
-                <div class="col-5 p-3 ml-5">
+
+              <div class="form-row">
+                <div class="col-sm-6 col-12">
                   {{ form.license|as_crispy_field }}
                 </div>
-                <div class="col-5 p-3 ml-5">
+                <div class="col-sm-6 col-12">
                   {% get_language_info_list for LANGUAGES as languages %}
                   {% if settings.USE_I18N and languages|length > 1 %}
                   <label for="language" class="control-label  requiredField">
@@ -110,20 +119,17 @@
                   </label>
                   <select name="language" class="form-control">
                     {% for language in languages %}
-                    <option value="{{ language.code }}"
+                    <option value="{{ language.code}}"
                     {% if language.code == LANGUAGE_CODE %}selected="selected" {% endif %}>
-                    {{ language.name_local }}
+                    {{ language.name_local | upper}}
                   </option>
                   {% endfor %}
                 </select>
                 {% endif %}
               </div>
             </div>
-            <div class="row">
-              <div class="col-5 p-3 ml-5">
-                {{ form.audience|as_crispy_field }}
-              </div>
-              <div class="col-5 p-3 ml-5">
+            <div class="form-row">
+              <div class="col-sm-6 col-12">
                 {{ form.image1|as_crispy_field }}
                 {{ form.x1|as_crispy_field }}
                 {{ form.y1|as_crispy_field }}
@@ -131,7 +137,7 @@
                 {{ form.width1|as_crispy_field }}
                 <a id="imgResult1" href="#"> <img id="imageResult1" src="" alt="" class="img-fluid img-zoom"></a>
               </div>
-              <div class="col-5 p-3 ml-5">
+              <div class="col-sm-6 col-12">
                 {{ form.image2|as_crispy_field }}
                 {{ form.x2|as_crispy_field }}
                 {{ form.y2|as_crispy_field }}
@@ -140,19 +146,20 @@
                 <a id="imgResult2" href="#"> <img id="imageResult2" src="" alt="" class="img-fluid img-zoom"></a>
               </div>
             </div>
-            <div class="row">
-              <div class="col-5 p-3 ml-5">
+
+            <div class="form-row">
+              <div class="col-sm-6 col-12">
                 {{ form.publisher|as_crispy_field }}
               </div>
-              <div class="col-5 p-3 ml-5">
+              <div class="col-sm-6 col-12">
                 {{ form.year_of_publication|as_crispy_field }}
               </div>
             </div>
             <div class="row">
-              <div class="col-5 p-3 ml-5">
+              <div class="col-sm-6 col-12">
                 {{ form.theme|as_crispy_field }}
               </div>
-              <div class="col-5 p-3 ml-5">
+              <div class="col-sm-6 col-12">
                 {% if user.is_staff %}
                 {{ form.curatedList|as_crispy_field }}
                 {% endif %}
@@ -269,87 +276,87 @@
     );
   }
 
-    $(function () {
-      var imgSelected;
-      /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
-      $("#id_image1").change(function () {
-        imgSelected = 1;
-        $('#imageResult1').attr('src', '');
-        if (this.files && this.files[0]) {
-          var reader = new FileReader();
-          reader.onload = function (e) {
-            $("#image").attr("src", e.target.result);
-            $("#modalCrop").modal("show");
-          }
-          reader.readAsDataURL(this.files[0]);
+  $(function () {
+    var imgSelected;
+    /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
+    $("#id_image1").change(function () {
+      imgSelected = 1;
+      $('#imageResult1').attr('src', '');
+      if (this.files && this.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $("#image").attr("src", e.target.result);
+          $("#modalCrop").modal("show");
         }
-      });
-      $("#id_image2").change(function () {
-        imgSelected = 2;
-        $('#imageResult2').attr('src', '');
-        if (this.files && this.files[0]) {
-          var reader = new FileReader();
-          reader.onload = function (e) {
-            $("#image").attr("src", e.target.result);
-            $("#modalCrop").modal("show");
-          }
-          reader.readAsDataURL(this.files[0]);
-        }
-      });
-      $("#imageResult1").click(function () {
-        $("#modalCrop").modal("show");
-      });
-      $("#imageResult2").click(function () {
-        $("#modalCrop").modal("show");
-      });
-      /* SCRIPTS TO HANDLE THE CROPPER BOX */
-      var $image = $("#image");
-      var cropBoxData;
-      var canvasData;
-      $("#modalCrop").on("shown.bs.modal", function () {
-        $image.cropper({
-          viewMode: 0,
-          aspectRatio: imgSelected == 2 ? 11/3 : 3/2,
-          minCropBoxWidth: imgSelected == 2 ? 1100 : 600,
-          minCropBoxHeight: 400,
-          dragMode: 'move',
-          guides: false,
-          center: false,
-          highlight: false,
-          cropBoxResizable: false,
-          toggleDragModeOnDblclick: false,
-          ready: function () {
-            $image.cropper("setCanvasData", canvasData);
-            $image.cropper("setCropBoxData", cropBoxData);
-          }
-        });
-      }).on("hidden.bs.modal", function () {
-        cropBoxData = $image.cropper("getCropBoxData");
-        canvasData = $image.cropper("getCanvasData");
-        $image.cropper("destroy");
-      });
-
-      $(".js-zoom-in").click(function () {
-        $image.cropper("zoom", 0.1);
-      });
-
-      $(".js-zoom-out").click(function () {
-        $image.cropper("zoom", -0.1);
-      });
-
-      /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
-      $(".js-crop-and-upload").click(function () {
-        var cropData = $image.cropper("getData");
-        $("#id_x" + imgSelected).val(cropData["x"]);
-        $("#id_y" + imgSelected).val(cropData["y"]);
-        $("#id_height" + imgSelected).val(cropData["height"]);
-        $("#id_width" + imgSelected).val(cropData["width"]);
-        $("#modalCrop").modal("hide");
-        $('#imageResult' + imgSelected).attr('src', $image.cropper('getCroppedCanvas',
-        {width: imgSelected == 2 ? 1100 : 600, height: 400}).toDataURL());
-      });
-
+        reader.readAsDataURL(this.files[0]);
+      }
     });
+    $("#id_image2").change(function () {
+      imgSelected = 2;
+      $('#imageResult2').attr('src', '');
+      if (this.files && this.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $("#image").attr("src", e.target.result);
+          $("#modalCrop").modal("show");
+        }
+        reader.readAsDataURL(this.files[0]);
+      }
+    });
+    $("#imageResult1").click(function () {
+      $("#modalCrop").modal("show");
+    });
+    $("#imageResult2").click(function () {
+      $("#modalCrop").modal("show");
+    });
+    /* SCRIPTS TO HANDLE THE CROPPER BOX */
+    var $image = $("#image");
+    var cropBoxData;
+    var canvasData;
+    $("#modalCrop").on("shown.bs.modal", function () {
+      $image.cropper({
+        viewMode: 0,
+        aspectRatio: imgSelected == 2 ? 11/3 : 3/2,
+        minCropBoxWidth: imgSelected == 2 ? 1100 : 600,
+        minCropBoxHeight: 400,
+        dragMode: 'move',
+        guides: false,
+        center: false,
+        highlight: false,
+        cropBoxResizable: false,
+        toggleDragModeOnDblclick: false,
+        ready: function () {
+          $image.cropper("setCanvasData", canvasData);
+          $image.cropper("setCropBoxData", cropBoxData);
+        }
+      });
+    }).on("hidden.bs.modal", function () {
+      cropBoxData = $image.cropper("getCropBoxData");
+      canvasData = $image.cropper("getCanvasData");
+      $image.cropper("destroy");
+    });
+
+    $(".js-zoom-in").click(function () {
+      $image.cropper("zoom", 0.1);
+    });
+
+    $(".js-zoom-out").click(function () {
+      $image.cropper("zoom", -0.1);
+    });
+
+    /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
+    $(".js-crop-and-upload").click(function () {
+      var cropData = $image.cropper("getData");
+      $("#id_x" + imgSelected).val(cropData["x"]);
+      $("#id_y" + imgSelected).val(cropData["y"]);
+      $("#id_height" + imgSelected).val(cropData["height"]);
+      $("#id_width" + imgSelected).val(cropData["width"]);
+      $("#modalCrop").modal("hide");
+      $('#imageResult' + imgSelected).attr('src', $image.cropper('getCroppedCanvas',
+      {width: imgSelected == 2 ? 1100 : 600, height: 400}).toDataURL());
+    });
+
+  });
 
 
 </script>

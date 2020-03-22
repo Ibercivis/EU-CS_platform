@@ -191,7 +191,6 @@ def editProject(request, pk):
     if request.method == 'POST':
         form = ProjectForm(request.POST, request.FILES)
         cField_formset = CustomFieldFormset(request.POST)
-
         if form.is_valid() and cField_formset.is_valid():
 
             new_cFields = []
@@ -200,7 +199,6 @@ def editProject(request, pk):
                 paragraph = cField_form.cleaned_data.get('paragraph')
                 if title and paragraph:
                     new_cFields.append(CustomField(title=title, paragraph=paragraph))
-
             images = []
             image1_path = saveImage(request, form, 'image1', '1')
             image2_path = saveImage(request, form, 'image2', '2')
