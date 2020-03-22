@@ -21,14 +21,14 @@ class ProjectForm(forms.Form):
     choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     choicesSelected = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     keywords = forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False,label="Keywords (Select or write a new ones, comma separated)")
-    status = forms.ModelChoiceField(queryset=Status.objects.all())
+    status = forms.ModelChoiceField(queryset=Status.objects.all(), label="Status (Select one)")
     start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=False)
     end_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=False)
     topic = forms.ModelMultipleChoiceField(queryset=Topic.objects.all(), widget=Select2MultipleWidget, required=False,label="Topic (Multiple selection)")
     url = forms.CharField(max_length=200, required=False)
     #Contact person info
     contact_person = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'autocomplete':'nope'}))
-    contact_person_email = forms.CharField(max_length=100)
+    contact_person_email = forms.EmailField()
     contact_person_phone = forms.CharField(max_length=100, required=False)
     #Images and communications
     image1 = forms.ImageField(required=False,label="Image 1 (Will be resized to 600x400 pixels)")

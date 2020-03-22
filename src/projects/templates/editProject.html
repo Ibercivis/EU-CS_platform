@@ -13,13 +13,15 @@
 {% block title %}{{ block.super }}Projects{% endblock %}
 
 {% block navbar-left %}
-  {% include "_navbar.html" with active_link="" %}
+{% include "_navbar.html" with active_link="" %}
 {% endblock %}
 
 
 {% block list_of_items %}
 
-    <!-- MODAL TO CROP THE IMAGE -->
+<!-- MODAL TO CROP THE IMAGE -->
+<div class="container">
+  <div class="row">
     <div class="modal fade" id="modalCrop">
       <div class="modal-dialog mdialog">
         <div class="modal-content">
@@ -51,223 +53,226 @@
         </div>
       </div>
     </div>
-    <!-- END MODAL TO CROP -->
-<div class="container fluid">
-	<div class="card mb-4">
-		<div class="card-title p-3">
-			<h3>Edit project
-            <button type="submit" class="btn btn-danger float-right" onclick="location.href='{% url 'deleteProject' project.id %}'"
-              name='deleteProject'><i class="fas fa-trash-alt"></i> Delete
-            </button>
-				</h3>
-		</div>
-		<div class="card-text p-3">
-  <table class="table mb-0">
-          <form action="/editProject/{{project.id}}" class="edit-project" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div>
-              <h4>Project info</h4>
-            </div>
-            <div class="row">
-              <div class="col-5 p-3 ml-5">
-                <input type="hidden" id="projectID" name="projectID" value={{project.id}}>
-                {{ form.project_name|as_crispy_field }}
-              </div>
-              <div class="col-5 p-3 ml-5">
-                {{ form.aim|as_crispy_field }}
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-5 p-3 ml-5">
-                {{ form.description|as_crispy_field }}
-              </div>
-              <div class="col-5 p-3 ml-5">
-                {{ form.keywords|as_crispy_field }}
-                {{form.choices |as_crispy_field}}
-                {{form.choicesSelected|as_crispy_field}}
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-5 p-3 ml-5">
-                {{ form.topic|as_crispy_field }}
-              </div>
-              <div class="col-5 p-3 ml-5">
-                {{ form.status|as_crispy_field }}
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-5 p-3 ml-5">
-                {{ form.start_date|as_crispy_field }}
-              </div>
-              <div class="col-5 p-3 ml-5">
-                {{ form.end_date|as_crispy_field }}
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-5 p-3 ml-5">
-                {{ form.url|as_crispy_field }}
-              </div>
-              <div class="col-5 p-3 ml-5">
-
-              </div>
-            </div>
-
-
-            <hr />
-            <h4>Contact person info</h4>
-            <div id="contactinfoform">
-              <div class="row">
-                <div class="col-5 p-3 ml-5">
-                  {{ form.contact_person|as_crispy_field }}
-                </div>
-                <div class="col-5 p-3 ml-5">
-                  {{ form.contact_person_email|as_crispy_field }}
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-5 p-3 ml-5">
-                  {{ form.contact_person_phone|as_crispy_field }}
-                </div>
-
-              </div>
-            </div>
-            <hr />
-            <h4>Images and communications</h4>
-            <div id="imagesform">
-              <div class="row">
-                <div class="col-5 p-3 ml-5">
-                  {{ form.image1|as_crispy_field }}
-                  {{ form.x1|as_crispy_field }}
-                  {{ form.y1|as_crispy_field }}
-                  {{ form.height1|as_crispy_field }}
-                  {{ form.width1|as_crispy_field }}
-                  <a id="imgResult1" href="#"> <img class="img-fluid img-zoom" id="imageResult1" src="{{ project.image1 }}" alt="Image not upload"></a>
-                </div>
-                <div class="col-5 p-3 ml-5">
-                  {{ form.image_credit1|as_crispy_field }}
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-5 p-3 ml-5">
-                  {{ form.image2|as_crispy_field }}
-                  {{ form.x2|as_crispy_field }}
-                  {{ form.y2|as_crispy_field }}
-                  {{ form.height2|as_crispy_field }}
-                  {{ form.width2|as_crispy_field }}
-                  <a id="imgResult2" href="#"> <img class="img-fluid img-zoom" id="imageResult2" src="{{ project.image2 }}" alt="Image not upload"></a>
-                </div>
-                <div class="col-5 p-3 ml-5">
-									{{ form.image_credit2|as_crispy_field }}
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-5 p-3 ml-5">
-                  {{ form.image3|as_crispy_field }}
-                  {{ form.x3|as_crispy_field }}
-                  {{ form.y3|as_crispy_field }}
-                  {{ form.height3|as_crispy_field }}
-                  {{ form.width3|as_crispy_field }}
-                  <a id="imgResult3" href="#"> <img class="img-fluid img-zoom" id="imageResult3" src="{{ project.image3 }}" alt="Image not upload"></a>
-                </div>
-                <div class="col-5 p-3 ml-5">
-									{{ form.image_credit3|as_crispy_field }}
-                </div>
-              </div>
-            </div>
-            <hr />
-
-            <h4>Geography</h4>
-						<p>Main location where the project takes place (click on the map)</p>
-            <div id="geographyform">
-              <div class="row">
-                <div class="col-5 p-3 ml-5">
-                  {{ form.latitude|as_crispy_field }}
-                </div>
-                <div class="col-5 p-3 ml-5">
-                  {{ form.longitude|as_crispy_field }}
-                </div>
-              </div>
-            </div>
-            {% leaflet_map "map" callback="window.map_init_basic" %}
-            <hr />
-
-            <h4>Personal and Organizational Affiliates</h4>
-            <div id="organizationform">
-              <div class="row">
-                <div class="col-5 p-3 ml-5">
-                  {{ form.host|as_crispy_field }}
-                </div>
-                <div class="col-5 p-3 ml-5">
-                </div>
-              </div>
-            </div>
-            <hr />
-
-
-            <h4>Supplementary information for Citizen Science</h4>
-            <div id="informationform">
-              <div class="row">
-                <div class="col-5 p-3 ml-5">
-                  {{ form.how_to_participate|as_crispy_field }}
-                </div>
-                <div class="col-5 p-3 ml-5">
-                  {{ form.equipment|as_crispy_field }}
-                </div>
-              </div>
-            </div>
-            <hr />
-
-            <h4>Funding</h4>
-            <div id="fundingform">
-              <div class="row">
-                <div class="col-5 p-3 ml-5">
-                  {{ form.funding_body|as_crispy_field }}
-                  {{ form.fundingBodySelected|as_crispy_field }}
-                </div>
-                <div class="col-5 p-3 ml-5">
-                  {{ form.funding_program|as_crispy_field }}
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-5 p-3 ml-5">
-                  {{ form.funding_agency|as_crispy_field }}
-                  {{ form.fundingAgencySelected|as_crispy_field }}
-                </div>
-                <div class="col-5 p-3 ml-5">
-                </div>
-              </div>
-            </div>
-            <hr />
-
-            <div id="customFields"></div>
-
-            <br />
-
-            <br/>
-
-
-            {{ cField_formset.management_form }}
-            {% for cField_form in cField_formset.forms %}
-            <div  class="customField-formset">
-                <div class="row">
-                  <div class="col-5 p-3 ml-5">
-                    {{ cField_form.title |as_crispy_field }}
-                  </div>
-                </div>
-                <div class="col-12 p-3 ml-12">
-                  {{ cField_form.paragraph|as_crispy_field }}
-                </div>
-           </div>
-           {% endfor %}
-
-            </div>
-              <button type="submit" class="btn btn-success"><i class="fas fa-share-square"></i> Save</button>
-          </form>
+  </div>
+</div>
+<!-- END MODAL TO CROP -->
+<div class="container mt-5">
+  <div class="card mt-5 mb-5 shadow">
+    <div class="card-title p-3">
+      <div class="row">
+        <div clas="col-12">
+          <h2>Edit project</h2>
+          <button type="submit" class="btn btn-danger float-right" onclick="location.href='{% url 'deleteProject' project.id %}'"
+          name='deleteProject'><i class="fas fa-trash-alt"></i> Delete
+        </button>
       </div>
+    </div>
+  </div>
+  <div class="card-text p-3">
+    <table class="table mb-0">
+      <form action="/editProject/{{project.id}}" class="edit-project" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+          <h4>Project info</h4>
+        </div>
 
-      </table>
+        <div class="form-row">
+          <div class="col-sm-6 col-12 ">
+            <input type="hidden" id="projectID" name="projectID" value={{project.id}}>
+            {{ form.project_name|as_crispy_field }}
+          </div>
+          <div class="col-sm-6 col-12">
+            {{ form.keywords|as_crispy_field }}
+            {{form.choices |as_crispy_field}}
+            {{form.choicesSelected|as_crispy_field}}
+          </div>
+        </div>
 
-		</div>
+        <div class="form-row">
+          <div class="col-sm-6 col-12">
+            {{ form.description|as_crispy_field }}
+          </div>
+          <div class="col-sm-6 col-12">
+            {{ form.aim|as_crispy_field }}
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col-sm-6 col-12">
+            {{ form.topic|as_crispy_field }}
+          </div>
+          <div class="col-sm-6 col-12">
+            {{ form.status|as_crispy_field }}
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col-sm-6 col-12">
+            {{ form.start_date|as_crispy_field }}
+          </div>
+          <div class="col-sm-6 col-12">
+            {{ form.end_date|as_crispy_field }}
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col-sm-6 col-12">
+            {{ form.url|as_crispy_field }}
+          </div>
+          <div class="col-sm-6 col-12">
+          </div>
+        </div>
+
+
+        <hr />
+        <h4>Contact person info</h4>
+        <div id="contactinfoform">
+          <div class="form-row">
+            <div class="col-sm-6 col-12">
+              {{ form.contact_person|as_crispy_field }}
+            </div>
+            <div class="col-sm-6 col-12">
+              {{ form.contact_person_email|as_crispy_field }}
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-sm-6 col-12">
+              {{ form.contact_person_phone|as_crispy_field }}
+            </div>
+
+          </div>
+        </div>
+        <hr />
+        <h4>Images and communications</h4>
+        <div id="imagesform">
+          <div class="form-row">
+            <div class="col-sm-6 col-12">
+              {{ form.image1|as_crispy_field }}
+              {{ form.x1|as_crispy_field }}
+              {{ form.y1|as_crispy_field }}
+              {{ form.height1|as_crispy_field }}
+              {{ form.width1|as_crispy_field }}
+              <a id="imgResult1" href="#"> <img class="img-fluid img-zoom" id="imageResult1" src="{{ project.image1 }}" alt="Image not upload"></a>
+            </div>
+            <div class="col-sm-6 col-12">
+              {{ form.image_credit1|as_crispy_field }}
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-sm-6 col-12">
+              {{ form.image2|as_crispy_field }}
+              {{ form.x2|as_crispy_field }}
+              {{ form.y2|as_crispy_field }}
+              {{ form.height2|as_crispy_field }}
+              {{ form.width2|as_crispy_field }}
+              <a id="imgResult2" href="#"> <img class="img-fluid img-zoom" id="imageResult2" src="{{ project.image2 }}" alt="Image not upload"></a>
+            </div>
+            <div class="col-sm-6 col-12">
+              {{ form.image_credit2|as_crispy_field }}
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-sm-6 col-12">
+              {{ form.image3|as_crispy_field }}
+              {{ form.x3|as_crispy_field }}
+              {{ form.y3|as_crispy_field }}
+              {{ form.height3|as_crispy_field }}
+              {{ form.width3|as_crispy_field }}
+              <a id="imgResult3" href="#"> <img class="img-fluid img-zoom" id="imageResult3" src="{{ project.image3 }}" alt="Image not upload"></a>
+            </div>
+            <div class="col-sm-6 col-12">
+              {{ form.image_credit3|as_crispy_field }}
+            </div>
+          </div>
+        </div>
+        <hr />
+
+        <h4>Geography</h4>
+        <p>Main location where the project takes place (click on the map)</p>
+        <div id="geographyform">
+          {% leaflet_map "map" callback="window.map_init_basic" %}
+          <div class="form-row">
+            <div class="col-sm-6 col-12">
+              {{ form.latitude|as_crispy_field }}
+            </div>
+            <div class="col-sm-6 col-12">
+              {{ form.longitude|as_crispy_field }}
+            </div>
+          </div>
+        </div>
+        <hr />
+
+        <h4>Personal and Organizational Affiliates</h4>
+        <div id="organizationform">
+          <div class="form-row">
+            <div class="col-sm-6 col-12">
+              {{ form.host|as_crispy_field }}
+            </div>
+            <div class="col-sm-6 col-12">
+            </div>
+          </div>
+        </div>
+        <hr />
+
+
+        <h4>Supplementary information for Citizen Science</h4>
+        <div id="informationform">
+          <div class="form-row">
+            <div class="col-sm-6 col-12">
+              {{ form.how_to_participate|as_crispy_field }}
+            </div>
+            <div class="col-sm-6 col-12">
+              {{ form.equipment|as_crispy_field }}
+            </div>
+          </div>
+        </div>
+        <hr />
+
+        <h4>Funding</h4>
+        <div id="fundingform">
+          <div class="form-row">
+            <div class="col-sm-6 col-12">
+              {{ form.funding_body|as_crispy_field }}
+              {{ form.fundingBodySelected|as_crispy_field }}
+            </div>
+            <div class="col-sm-6 col-12">
+              {{ form.funding_program|as_crispy_field }}
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-sm-6 col-12">
+              {{ form.funding_agency|as_crispy_field }}
+              {{ form.fundingAgencySelected|as_crispy_field }}
+            </div>
+            <div class="col-sm-6 col-12">
+            </div>
+          </div>
+        </div>
+        <hr />
+        <h4> Custom fields</h4>
+        <div id="customFields"></div>
+
+        {{ cField_formset.management_form }}
+        {% for cField_form in cField_formset.forms %}
+        <div  class="customField-formset">
+          <div class="form-row">
+            <div class="col-12 col-sm-6">
+              {{ cField_form.title |as_crispy_field }}
+            </div>
+            <div class="col-12 col-sm-6">
+              {{ cField_form.paragraph|as_crispy_field }}
+            </div>
+          </div>
+        </div>
+        <hr/>
+        {% endfor %}
+        <button type="submit" class="btn btn-success"><i class="fas fa-share-square"></i> Save</button>
+      </form>
+    </div>
+
+  </table>
+
+</div>
 
 {% endblock list_of_items %}
 
@@ -304,11 +309,11 @@
     var sel = $("#id_fundingBodySelected").val()
     for(fb of funding_body){
       if(sel.trim() == fb.trim()){
-          $("#id_funding_body").append("<option value='" + fb +"' selected> " + fb + " </option>");
-        }
-        else{
-          $("#id_funding_body").append("<option value='" + fb +"'> " + fb + " </option>");
-        }
+        $("#id_funding_body").append("<option value='" + fb +"' selected> " + fb + " </option>");
+      }
+      else{
+        $("#id_funding_body").append("<option value='" + fb +"'> " + fb + " </option>");
+      }
     }
 
     var funding_agency = $("#id_funding_agency option").map(function () {
@@ -318,19 +323,19 @@
     var sel = $("#id_fundingAgencySelected").val()
     for(fb of funding_agency){
       if(sel.trim() == fb.trim()){
-          $("#id_funding_agency").append("<option value='" + fb +"' selected> " + fb + " </option>");
-        }
-        else{
-          $("#id_funding_agency").append("<option value='" + fb +"'> " + fb + " </option>");
-        }
+        $("#id_funding_agency").append("<option value='" + fb +"' selected> " + fb + " </option>");
+      }
+      else{
+        $("#id_funding_agency").append("<option value='" + fb +"'> " + fb + " </option>");
+      }
     }
 
     $("#div_id_keywords div").on('keyup', function(){
       var key = $("#div_id_keywords .selection input").val();
       if (key.indexOf(',') > -1) {
-         var word =key.slice(0, -1);
-         $("#div_id_keywords .selection input").val("");
-         $("#id_keywords").append("<option value='" + word +"' selected> " + word + " </option>");
+        var word =key.slice(0, -1);
+        $("#div_id_keywords .selection input").val("");
+        $("#id_keywords").append("<option value='" + word +"' selected> " + word + " </option>");
       }
     });
 
@@ -344,9 +349,9 @@
       var key = $("#div_id_funding_body .selection input").val();
       $("#id_funding_body").removeAttr('multiple');
       if (key.indexOf(',') > -1) {
-         var word =key.slice(0, -1);
-         $("#div_id_funding_body .selection input").val("");
-         $("#id_funding_body").append("<option value='" + word +"' selected> " + word + " </option>");
+        var word =key.slice(0, -1);
+        $("#div_id_funding_body .selection input").val("");
+        $("#id_funding_body").append("<option value='" + word +"' selected> " + word + " </option>");
       }
     });
 
@@ -359,9 +364,9 @@
       var key = $("#div_id_funding_agency .selection input").val();
       $("#id_funding_agency").removeAttr('multiple');
       if (key.indexOf(',') > -1) {
-         var word =key.slice(0, -1);
-         $("#div_id_funding_agency .selection input").val("");
-         $("#id_funding_agency").append("<option value='" + word +"' selected> " + word + " </option>");
+        var word =key.slice(0, -1);
+        $("#div_id_funding_agency .selection input").val("");
+        $("#id_funding_agency").append("<option value='" + word +"' selected> " + word + " </option>");
       }
     });
 
@@ -411,21 +416,21 @@
       var validationFailed = false;
 
       $.each($("[required]"), function (index, value) {
-            var id = $(value).parent().parent().attr('id');
-            $("#" + id + " .errorMsg").remove();
-            if(!$(value).val()){
-              validationFailed = true;
-              $(value).parent().append("<span class='errorMsg'> <b>Required field (*)</b></span>");
-            }
-        });
+        var id = $(value).parent().parent().attr('id');
+        $("#" + id + " .errorMsg").remove();
+        if(!$(value).val()){
+          validationFailed = true;
+          $(value).parent().append("<span class='errorMsg'> <b>Required field (*)</b></span>");
+        }
+      });
 
       if (validationFailed) {
-          e.preventDefault();
-          $('html,body').animate({ scrollTop: $(".edit-project").offset().top - 160 }, { duration: "slow" });
-          return false;
+        e.preventDefault();
+        $('html,body').animate({ scrollTop: $(".edit-project").offset().top - 160 }, { duration: "slow" });
+        return false;
       }else{
         var option_all = $("#id_keywords option:selected").map(function () {
-        return $.trim($(this).text());
+          return $.trim($(this).text());
         }).get().join(',');
         $("#id_choices").val(option_all);
         $("#id_keywords").empty();
@@ -447,7 +452,7 @@
   });
 
   $('.customField-formset').formset({
-      addText: '  <button id="customFieldButton" type="button" class="btn btn-warning"><i class="fas fa-plus-circle"></i> Add custom field          </button>'
+    addText: '  <button id="customFieldButton" type="button" class="btn btn-warning"><i class="fas fa-plus-circle"></i> Add custom field          </button>'
   });
 
   $(function () {
@@ -496,7 +501,7 @@
 
     $("#imageResult1").click(function () {
       if(!changed)
-        $("#id_image1").click();
+      $("#id_image1").click();
       else{
         $("#modalCrop").modal("show");
       }
@@ -518,7 +523,7 @@
     $("#modalCrop").on("shown.bs.modal", function () {
       $image.cropper({
         viewMode: 0,
-	      aspectRatio: imgSelected == 3 ? 11/3 : 3/2,
+        aspectRatio: imgSelected == 3 ? 11/3 : 3/2,
         minCropBoxWidth: imgSelected == 3 ? 1100 : 600,
         minCropBoxHeight: 400,
         dragMode: 'move',
@@ -555,7 +560,7 @@
       $("#id_width" + imgSelected).val(cropData["width"]);
       $("#modalCrop").modal("hide");
       $('#imageResult' + imgSelected).attr('src', $image.cropper('getCroppedCanvas',
-      	{width: imgSelected == 3 ? 1100 : 600, height: 400}).toDataURL());
+      {width: imgSelected == 3 ? 1100 : 600, height: 400}).toDataURL());
 
     });
 
@@ -579,14 +584,14 @@
   }
 
   function map_init_basic (leafmap, options) {
-      map = leafmap;
-      var obj = { latlng: {
-        lat: parseFloat($("#id_latitude").val()),
-        lng: parseFloat($("#id_longitude").val()) }
-      }
-      if($("#id_latitude").val())
-        editMarker(obj);
-      map.on('click', editMarker);
+    map = leafmap;
+    var obj = { latlng: {
+      lat: parseFloat($("#id_latitude").val()),
+      lng: parseFloat($("#id_longitude").val()) }
+    }
+    if($("#id_latitude").val())
+    editMarker(obj);
+    map.on('click', editMarker);
   }
 
 </script>
