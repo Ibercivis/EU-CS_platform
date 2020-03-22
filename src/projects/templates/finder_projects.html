@@ -2,63 +2,66 @@
 {% load countries %}
 {% get_countries as countries %}
 <!--div class="row">
-	<div class="col-12">
-		<h3> Projects</h3>
-	</div>
+<div class="col-12">
+<h3> Projects</h3>
+</div>
 </div-->
 <div class="row">
 	<div class="col-lg-2">
-				{% if user.is_authenticated %}
-				<a class="btn btn-warning" href="{% url 'new_project' %}" data-toggle="tooltip" data-placement="top" title="Click here to add a new project">
-					<i class="fas fa-plus-circle"></i> Add
-				</a>
-				{% endif %}
+		{% if user.is_authenticated %}
+		<a class="btn btn-warning" href="{% url 'new_project' %}" data-toggle="tooltip" data-placement="top" title="Click here to add a new project">
+			<i class="fas fa-plus-circle"></i>Add
+		</a>
+		{% endif %}
+	</div
 	</div>
-	<div class="col-lg-10 float-right">
+	<div class="col-lg-12 float-right">
 		<form class="form-inline float-lg-right" id="searchProjects" action="{% url 'projects' %}">
-				<div class="float-right">
-			<button class="btn btn-info ml-2 float-right" id="search" type="submit" alt="Find">
-					<i class="fas fa-search"></i> Find
-				</button>
-			<select id="country" name="country" class="custom-select form-control col-lg-2 ml-2 float-right">
-					<option value="">Country<option>
-					{% for country in countries %}
-						{% for cwc in countriesWithContent %}
-							{% if country.code == cwc %}
-								<option {% if country.code ==  filters.country %} 
+			<div class="float-right">
+				<div class="input-group mb-3">
+					<input type="text" id="keywords" name="keywords" autocomplete="off" value="{{filters.keywords}}" class="basicAutoComplete form-control" placeholder="Title or keywords" data-url="text_autocomplete/">
+					<select id="status" name="status" class="custom-select status-select form-control">
+						<option value="">Status<option>
+							{% for s in status %}
+							<option {% if s.id ==  filters.status %} selected {% endif %} value="{{s.id}}">
+								{{s.status|capfirst}}
+							</option>
+							{% endfor %}
+						</select>
+						<select id="country" name="country" class="custom-select form-control">
+							<option value="">Country<option>
+								{% for country in countries %}
+								{% for cwc in countriesWithContent %}
+								{% if country.code == cwc %}
+								<option {% if country.code ==  filters.country %}
 								selected {% endif %} value="{{ country.code }}">{{ country.name }}</option>
-							{% endif %}
-						{% endfor %}
-					{% endfor %}
-				</select>
-				<select id="status" name="status" class="custom-select status-select form-control col-lg-2 ml-2 float-right">
-					<option value="">Status<option>
-					{% for s in status %}
-					<option {% if s.id ==  filters.status %} selected {% endif %} value="{{s.id}}">
-					{{s.status|capfirst}}
-					</option>
-					{% endfor %}
-				</select>
-				<select id="topic" name="topic" class="custom-select form-control col-lg-2 ml-2 float-right">
-					<option value="">Topic</option>
-					{% for topic in topics %}                
-					<option {% if topic.topic ==  filters.topic %} selected {% endif %} value="{{topic}}">
-					{{topic|capfirst}}
-					</option>
-					{% endfor %}
-				</select>
-			  	<input type="text" id="keywords" name="keywords" autocomplete="off" value="{{filters.keywords}}" class="basicAutoComplete form-control col-lg-2 float-right" placeholder="Title or keywords" data-url="text_autocomplete/">
-				<div class="form-check float-right mt-2 mr-4">
-					<input type="checkbox" class="form-check-input myicon" id="featuredCheck" name="featuredCheck" {% if filters.featured %} checked {% endif %}>
-					<label class="form-check-label mylabel" for="featuredCheck" data-toggle="tooltip" data-placement="top" title="Toggle between curated/all projects"></label>
-				</div>
+								{% endif %}
+								{% endfor %}
+								{% endfor %}
+							</select>
+							<select id="topic" name="topic" class="custom-select form-control">
+								<option value="">Topic</option>
+								{% for topic in topics %}
+								<option {% if topic.topic ==  filters.topic %} selected {% endif %} value="{{topic}}">
+									{{topic|capfirst}}
+								</option>
+								{% endfor %}
+							</select>
+							<select id="featuredCheck" name="featuredCheck" class="custom-select form-control">
+								<option value="On" {% if filters.featuredCheck == "On" %} selected {% endif %}>Curated</option>
+								<option value="Off" {% if filters.featuredCheck == "Off" %} selected {% endif %}>Not curated</option>
+								<option value="All" {% if filters.featuredCheck == "All" %} selected {% endif %}">All</option>
+							</select>
+							<button class="btn btn-info round-0" id="search" type="submit" alt="Find">
+								<i class="fas fa-search"></i> Find
+							</button>
+						</div>
+					</div>
+				</form>
 			</div>
-		</form>
-	</div>
-<div class="col-lg-12 text-right">
-{% if request.get_full_path != "/projects" %}
-<a class="text-decoration-none text-muted" href="/projects"><i class="fas fa-times"></i> Clear current search query, filters, and sorts</a>
-{% endif %}
-</div>
-</div>
-
+		</div>
+		<div class="col-lg-12 text-right">
+			{% if request.get_full_path != "/projects" %}
+			<a class="text-decoration-none text-muted" href="/projects"><i class="fas fa-times"></i> Clear current search query, filters, and sorts</a>
+			{% endif %}
+		</div>
