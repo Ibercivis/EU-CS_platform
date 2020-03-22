@@ -74,7 +74,7 @@ def projects(request):
 
     topics = Topic.objects.all()
     status = Status.objects.all()
-    filters = {'keywords': '', 'topic': '', 'status': 0, 'country': '', 'host': '', 'featured': ''}
+    filters = {'keywords': '', 'topic': '', 'status': 0, 'country': '', 'host': '', 'featuredCheck': ''}
 
     if request.GET.get('keywords'):
         projects = projects.filter( Q(name__icontains = request.GET['keywords']) |
@@ -97,10 +97,17 @@ def projects(request):
         projects = projects.filter( host__icontains = request.GET['host'])
         filters['host'] = request.GET['host']
 
-    if request.GET.get('featuredCheck'):
-        projects = projects.filter(id__in=featuredProjects)
-        filters['featured'] = request.GET['featuredCheck']
 
+    if request.GET.get('featuredCheck'):
+        if request.GET['featuredCheck'] == 'On':
+            projects = projects.filter(id__in=featuredProjects)
+        if request.GET['featuredCheck'] == 'Off':
+            projects = projects.exclude(id__in=featuredProjects)
+        if request.GET['featuredCheck'] == 'All':
+            projects = projects
+        filters['featuredCheck'] = request.GET['featuredCheck']
+    else:
+        projects = projects.filter(id__in=featuredProjects)
     if not user.is_staff:
         projects = projects.filter(~Q(hidden=True))
 
@@ -206,7 +213,7 @@ def editProject(request, pk):
             images.append(image1_path)
             images.append(image2_path)
             images.append(image3_path)
-            form.save(request, images, new_cFields)
+            form.save(request, images,[])
             return redirect('/project/'+ str(pk))
         else:
             print(form.errors)

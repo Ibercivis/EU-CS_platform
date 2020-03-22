@@ -4,62 +4,59 @@
 {% load l10n %}
 <div class="row">
 	<div class="col-lg-2">
-              {% if user.is_authenticated %}
-              <a class="btn btn-warning rounded-pill" href="{% url 'new_resource' %}">
-                      <i class="fas fa-plus-circle"></i> Add
-              </a>
-              {% endif %}
+		{% if user.is_authenticated %}
+		<a class="btn btn-warning rounded-pill" href="{% url 'new_resource' %}">
+			<i class="fas fa-plus-circle"></i> Add
+		</a>
+		{% endif %}
 	</div>
 	<div class="col-lg-10 float-right">
-        <form class="form-inline float-lg-right" id="searchResources" action="{% url 'resources' %}">
-					<div class="float-right">
+		<form class="form-inline float-lg-right" id="searchResources" action="{% url 'resources' %}">
+			<div class="float-right">
+				<div class="input-group mb-3">
+					<input type="text" id="keywords" name="keywords" autocomplete="off" value="{{filters.keywords}}" class="basicAutoComplete form-control" placeholder="Title or Keywords" data-url="resources_autocomplete/">
+					{% get_language_info_list for LANGUAGES as languages %}
+					{% if settings.USE_I18N and languages|length > 1 %}
+					<select id="language" name="language" class="custom-select form-control">
+						<option value="">Language<option>
+							{% for language in languages %}
+							{% for lwc in languagesWithContent %}
+							{% if language.code == lwc %}
+							<option value="{{ language.code }}"
+							{% if language.code ==  filters.language %} selected {% endif %}>
+							{{ language.name_local }}
+						</option>
+						{% endif %}
+						{% endfor %}
+						{% endfor %}
+					</select>
+					{% endif %}
+					<select id="theme" name="theme" class="custom-select form-control">
+						<option value="">Theme</option>
+						{% for theme in themes %}
+						<option {% if theme.id == filters.theme %} selected {% endif %} value="{{theme.id}}">{{theme}}</option>
+						{% endfor %}
+					</select>
+					<select id="category" name="category" class="custom-select form-control">
+						<option value="">Category</option>
+						{% for category in categories %}
+						<option {% if category.id == filters.category %} selected {% endif %} value="{{category.id}}">{{category}}</option>
+						{% endfor %}
+						<select>
+						<button class="btn btn-info" id="search" type="submit"><i class="fas fa-search"></i> Find</button>
 
-          <button class="btn btn-info rounded-pill ml-2 float-right" id="search" type="submit"><i class="fas fa-search"></i> Find</button>
-              {% get_language_info_list for LANGUAGES as languages %}
-              {% if settings.USE_I18N and languages|length > 1 %}
-              <select id="language" name="language" class="custom-select form-control col-lg-2 ml-2 float-right">
-                <option value="">Language<option>
-                  {% for language in languages %}
-                    {% for lwc in languagesWithContent %}
-                      {% if language.code == lwc %}
-                        <option value="{{ language.code }}"
-                        {% if language.code ==  filters.language %} selected {% endif %}>
-                            {{ language.name_local }}
-                        </option>
-                      {% endif %}
-                    {% endfor %}
-                  {% endfor %}
-              </select>
-              {% endif %}
-							<select id="theme" name="theme" class="custom-select form-control col-lg-2 ml-2 float-right">
-								<option value="">Theme</option>
-								{% for theme in themes %}
-									<option {% if theme.id == filters.theme %} selected {% endif %} value="{{theme.id}}">{{theme}}</option>
-								{% endfor %}
-							<select>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
 
-						 <select id="category" name="category" class="custom-select form-control col-lg-2 ml-2 float-right">
-								<option value="">Category</option>
-								{% for category in categories %}
-									<option {% if category.id == filters.category %} selected {% endif %} value="{{category.id}}">{{category}}</option>
-								{% endfor %}
-							<select>
-
-              <input type="text" id="keywords" name="keywords" autocomplete="off" value="{{filters.keywords}}" class="basicAutoComplete form-control col-lg-2 ml-2 float-right" placeholder="Keywords" data-url="resources_autocomplete/">
-              <div class="form-check float-right mt-2 mr-4">
-                <input type="checkbox" class="form-check-input myicon" id="featuredCheck" name="featuredCheck" {% if filters.featured %} checked {% endif %}>
-                <label class="form-check-label mylabel" for="featuredCheck" data-toggle="tooltip" data-placement="top" title="Toggle between curated/all resources"></label>
-              </div>
-				</div>
-
-
-        </form>
-  </div>
-
+		<div class="form-check float-right mt-2 mr-4">
+			<input type="checkbox" class="form-check-input myicon" id="featuredCheck" name="featuredCheck" {% if filters.featured %} checked {% endif %}>
+			<label class="form-check-label mylabel" for="featuredCheck" data-toggle="tooltip" data-placement="top" title="Toggle between curated/all resources"></label>
+		</div>
 <div class="col-lg-12 text-right">
-{% if request.get_full_path != "/resources" %}
-<a class="text-decoration-none text-muted" href="/resources"><i class="fas fa-times"></i> Clear current search query, filters, and sorts</a>
-{% endif %}
-</div>
-
+	{% if request.get_full_path != "/resources" %}
+	<a class="text-decoration-none text-muted" href="/resources"><i class="fas fa-times"></i> Clear current search query, filters, and sorts</a>
+	{% endif %}
 </div>

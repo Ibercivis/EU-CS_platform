@@ -19,122 +19,115 @@
 		<div class="container">
 			<form id="finder" action="/resources" >
 				<div class="form-row">
-					<div class="col-9 mb-4">
+					<div class="input-group mb-3">
 						<input type="text" id="keywords" name="keywords" autocomplete="off" class="basicAutoComplete form-control"
-						placeholder="What are you looking for today?" data-url="home_autocomplete/">
+						placeholder="What are you looking for today?" data-url="home_autocomplete/"/>
+
+							<button  id="resources" class="btn btn-info"  onClick='$("#finder").attr("action", "resources").submit()'> Resources</button>
+							<button  id="resources" class="btn btn-info"  onClick='$("#finder").attr("action", "projects").submit()'> Projects</button>
 					</div>
-					<div class="col-3 mb-4">
-						<div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
-							<label class="btn btn-light active" class="form-control">
-								<input type="radio" name="options" id="resources" checked onClick='$("#finder").attr("action", "resources").submit()'> Resources
-							</label>
-							<label class="btn btn-light">
-								<input type="radio" name="options" class="form-control" id="projects" onClick='$("#finder").attr("action", "projects").submit()'> Projects
-							</label>
+					</div
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid border-top border-bottom" style="background: #e8e8e8;">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 mt-4">
+					<h2 style="color: #5937c3">Lastest resources</h2>
+				</div>
+			</div>
+			<div class="row">
+				{% for resource in resources %}
+				<div class="col-12 col-xl-4 mt-2 mb-4">
+					<div class="card h-100 shadow">
+						<a class="card-img-wrap overlay-blue" href="/resource/{{resource.id }}">
+							{% if resource.image2 %}
+							<img class="card-img-top img-fluid img-zoom lazyload img-filter" src="{{ resource.image2 }}" />
+							{% else %}
+							<img class="card-img-top img-fluid img-zoom lazyload" src="{% static 'site/img/project.png' %}" />
+							{% endif %}
+						</a>
+						<div class="upper">
+							<a class="badge frontpage" href="projects?country={{country.code}}">{{ resource.name |  truncatechars:32 | upper }}</a>
 						</div>
 					</div>
 				</div>
-			</form>
+				{% endfor %}
+				<div class="col-12 text-center">
+					<button type="button" class="btn  btn-outline-primary btn-lg shadow-sm">See All</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-12">&nbsp;
+
 		</div>
 	</div>
-</div>
-<div class="container-fluid border-top border-bottom" style="background: #e8e8e8;">
 	<div class="container">
 		<div class="row">
 			<div class="col-12 mt-4">
-				<h2 style="color: #5937c3">Lastest resources</h2>
+				<h2>Lastest projects</h2>
 			</div>
 		</div>
 		<div class="row">
-			{% for resource in resources %}
+			{% for project in projects %}
 			<div class="col-12 col-xl-4 mt-2 mb-4">
 				<div class="card h-100 shadow">
-					<a class="card-img-wrap overlay-blue" href="/resource/{{resource.id }}">
-						{% if resource.image2 %}
-						<img class="card-img-top img-fluid img-zoom lazyload img-filter" src="{{ resource.image2 }}" />
+					<a class="card-img-wrap overlay-orange " href="/project/{{project.id }}">
+						{% if project.image3 %}
+						<img class="card-img-top img-fluid img-zoom lazyload img-filter" src="{{ project.image3 }}" />
 						{% else %}
 						<img class="card-img-top img-fluid img-zoom lazyload" src="{% static 'site/img/project.png' %}" />
 						{% endif %}
 					</a>
 					<div class="upper">
-						<a class="badge frontpage" href="projects?country={{country.code}}">{{ resource.name |  truncatechars:32 | upper }}</a>
+						<a class=" badge frontpage round-0" href="projects?country={{country.code}}">{{ project.name | upper }}</a>
 					</div>
 				</div>
 			</div>
 			{% endfor %}
 			<div class="col-12 text-center">
-			<button type="button" class="btn  btn-outline-primary btn-lg shadow-sm">See All</button>
+				<button type="button" class="btn  btn-outline-primary btn-lg shadow-sm">See All</button>
+			</div>
+		</div>
+		<div class="col-12">&nbsp;</div>
+	</div>
+	<div class="container-fluid border-top border-bottom" style="background: #e8e8e8;">
+		<div class="row">
+			<div class="container">
+				<div class="row">
+					<div class="col-12 mt-4">
+						<h2>Last blog entries</h2>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12 col-xl-4 mt-5">
+						asd
+					</div>
+					<div class="col-12 col-xl-4 mt-5">
+						asd2
+					</div>
+					<div class="col-12 col-xl-4 mt-5">
+						asd3
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-	<div class="col-12">&nbsp;
+	{% endblock splash %}
+	{% block script %}
+	<script type="text/javascript" src="{% static 'site/js/jquery.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'site/js/bootstrap.min.js' %}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js"
+	integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="anonymous"></script>
+	<script
+	src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
 
-	</div>
-</div>
-<div class="container">
-	<div class="row">
-		<div class="col-12 mt-4">
-			<h2>Lastest projects</h2>
-		</div>
-	</div>
-	<div class="row">
-		{% for project in projects %}
-		<div class="col-12 col-xl-4 mt-2 mb-4">
-			<div class="card h-100 shadow">
-				<a class="card-img-wrap overlay-orange " href="/project/{{project.id }}">
-					{% if project.image3 %}
-					<img class="card-img-top img-fluid img-zoom lazyload img-filter" src="{{ project.image3 }}" />
-					{% else %}
-					<img class="card-img-top img-fluid img-zoom lazyload" src="{% static 'site/img/project.png' %}" />
-					{% endif %}
-				</a>
-				<div class="upper">
-					<a class=" badge frontpage round-0" href="projects?country={{country.code}}">{{ project.name | upper }}</a>
-				</div>
-			</div>
-		</div>
-		{% endfor %}
-		<div class="col-12 text-center">
-		<button type="button" class="btn  btn-outline-primary btn-lg shadow-sm">See All</button>
-		</div>
-	</div>
-	<div class="col-12">&nbsp;</div>
-</div>
-<div class="container-fluid border-top border-bottom" style="background: #e8e8e8;">
-	<div class="row">
-		<div class="container">
-			<div class="row">
-				<div class="col-12 mt-4">
-					<h2>Last blog entries</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-12 col-xl-4 mt-5">
-					asd
-				</div>
-				<div class="col-12 col-xl-4 mt-5">
-					asd2
-				</div>
-				<div class="col-12 col-xl-4 mt-5">
-					asd3
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-{% endblock splash %}
-{% block script %}
-<script type="text/javascript" src="{% static 'site/js/jquery.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'site/js/bootstrap.min.js' %}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js"
-integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="anonymous"></script>
-<script
-src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
-
-<script>
-	$('.basicAutoComplete').autoComplete(
-	{ minLength: 3 }
-	);
-</script>
-{{ block.super }}
-{% endblock script %}
+	<script>
+		$('.basicAutoComplete').autoComplete(
+		{ minLength: 3 }
+		);
+	</script>
+	{{ block.super }}
+	{% endblock script %}

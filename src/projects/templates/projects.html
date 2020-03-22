@@ -1,14 +1,11 @@
 {% extends "base2.html" %}
-
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% load leaflet_tags %}
-
 {% block title %}{{ block.super }}Projects{% endblock %}
 {% block navbar-left %}
 {% include "_navbar.html" with active_link="projects" %}
 {% endblock %}
-
 {% block page_header %}
 {% include "finder_projects.html" %}
 {% endblock page_header %}
@@ -44,7 +41,6 @@
 integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="anonymous"></script>
 <script
 src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
-
 <script>
 	function setFeatured(idProject){
 		var htmlId = "featured" + idProject;
@@ -62,7 +58,6 @@ src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bo
 		}
 		);
 	}
-
 	function setHidden(idProject, hidden){
 		var htmlId = "hidden" + idProject;
 		var request = $.ajax(
@@ -80,7 +75,6 @@ src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bo
 		}
 		);
 	}
-
 	function setFollowedProject(idProject, idUser){
 		var htmlId = "followed" + idProject;
 		var request = $.ajax(
@@ -139,7 +133,7 @@ src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bo
 	});
 
 	$(function () {
-		$('#featuredCheck').on('click', function () {
+		$('#featuredCheck').on('change', function () {
 			var featuredCheck = $(this).val();
 			$('#searchProjects').submit();
 		});
@@ -156,7 +150,6 @@ src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bo
 			$(this).removeClass('shadow-none');
 		}
 		);
-
 		// document ready
 	});
 </script>
