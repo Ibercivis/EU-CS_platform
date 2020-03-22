@@ -15,82 +15,103 @@
 
 {% block list_of_items %}
 
- <!-- MODAL TO CROP THE IMAGE -->
- <div class="modal fade" id="modalCrop">
-  <div class="modal-dialog mdialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Crop the photo</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <img src="" id="image" style="max-width: 100%;">
-      </div>
-      <div class="modal-footer">
-        <div class="btn-group pull-left" role="group">
-          <button type="button" class="btn btn-default js-zoom-in">
-            <span><i class="material-icons" style="font-size: 18px;">zoom_in</i> </span>
-          </button>
-          <button type="button" class="btn btn-default js-zoom-out">
-            <span><i class="material-icons" style="font-size: 18px;">zoom_out</i></span>
-          </button>
+<!-- MODAL TO CROP THE IMAGE -->
+<div class="container">
+  <div class="row">
+    <div class="modal fade" id="modalCrop">
+      <div class="modal-dialog mdialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Crop the photo</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <img src="" id="image" style="max-width: 100%;">
+          </div>
+          <div class="modal-footer">
+            <div class="btn-group pull-left" role="group">
+              <button type="button" class="btn btn-default js-zoom-in">
+                <span><i class="material-icons" style="font-size: 18px;">zoom_in</i> </span>
+              </button>
+              <button type="button" class="btn btn-default js-zoom-out">
+                <span><i class="material-icons" style="font-size: 18px;">zoom_out</i></span>
+              </button>
+            </div>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary js-crop-and-upload">Crop and upload</button>
+          </div>
         </div>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary js-crop-and-upload">Crop and upload</button>
       </div>
     </div>
-  </div>
-</div>
-<!-- END MODAL TO CROP -->
-<div class="container">
-	<div class="card mb-4 mt-4">
-		<div class="card-title p-3">
-			<h3>Edit resource
-   <button type="submit" class="btn btn-danger float-right" onclick="location.href='{% url 'deleteResource' resource.id %}'" name='deleteResource'> <span class="fas fa-trash-alt"></span> Delete            </button>
-</h3>
-		</div>
-		<div class="card-text p-3">
-      <table class="table mb-0">
+
+    <!-- END MODAL TO CROP -->
+    <div class="container mt-5">
+      <div class="card mb-5 mt-5 shadow">
+        <div class="card-title p-3">
+          <div class="row">
+            <div class="col-12">
+              <h2>Edit resource</h2>
+              <button type="submit" class="btn btn-danger float-right" onclick="location.href='{% url 'deleteResource' resource.id %}'" name='deleteResource'>
+                <span class="fas fa-trash-alt"></span> Delete
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card-text p-3">
 
           <form action="/editResource/{{resource.id}}" class="edit-resource" method="post" enctype="multipart/form-data">
             {% csrf_token %}
 
-            <br />
-
-            <div class="row">
-              <div class="col-5 p-3 ml-5">
+            <div class="form-row">
+              <div class="col-sm-6 col-12">
                 <input type="hidden" id="resourceID" name="resourceID" value={{resource.id}}>
                 {{ form.name|as_crispy_field }}
               </div>
-              <div class="col-5 p-3 ml-5">
+              <div class="col-sm-6 col-12">
                 {{ form.url|as_crispy_field }}
               </div>
             </div>
-            <div class="row">
-              <div class="col-5 p-3 ml-5">
+
+            <div class="form-row">
+              <div class="col-sm-6 col-12">
                 {{ form.abstract|as_crispy_field }}
               </div>
-              <div class="col-5 p-3 ml-5">
+              <div class="col-sm-6 col-12">
+                {{ form.category|as_crispy_field }}
+                {{ form.categorySelected|as_crispy_field }}
+                <div id="id_sub_categories"></div><br/>
+                {{ form.audience|as_crispy_field }}
+
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-sm-6 col-12">
+                {{form.keywords|as_crispy_field }}
+                {{form.choices |as_crispy_field}}
+                {{form.choicesSelected|as_crispy_field}}
+              </div>
+              <div class="col-sm-6 col-12">
                 {{ form.resource_DOI|as_crispy_field }}
               </div>
             </div>
-            <div class="row">
-              <div class="col-5 p-3 ml-5">
+            <div class="form-row">
+              <div class="col-sm-6 col-12">
                 {{ form.authors|as_crispy_field }}
                 {{form.authorsCollection |as_crispy_field}}
                 {{form.selectedAuthors|as_crispy_field}}
               </div>
-              <div class="col-5 p-3 ml-5">
+              <div class="col-sm-6 col-12">
                 {{ form.author_email|as_crispy_field }}
               </div>
             </div>
-            <div class="row">
-              <div class="col-5 p-3 ml-5">
+
+            <div class="form-row">
+              <div class="col-sm-6 col-12">
                 {{ form.license|as_crispy_field }}
               </div>
-              <div class="col-5 p-3 ml-5">
+              <div class="col-sm-6 col-12">
                 {% get_language_info_list for LANGUAGES as languages %}
                 {% if settings.USE_I18N and languages|length > 1 %}
                 <label for="language" class="control-label  requiredField">
@@ -106,66 +127,51 @@
                 {% endif %}
               </div>
             </div>
-            <div class="row">
-              <div class="col-5 p-3 ml-5">
-                  {{ form.audience|as_crispy_field }}
+
+            <div class="form-row">
+              <div class="col-sm-6 col-12">
+                {{ form.image1|as_crispy_field }}
+                {{ form.x1|as_crispy_field }}
+                {{ form.y1|as_crispy_field }}
+                {{ form.height1|as_crispy_field }}
+                {{ form.width1|as_crispy_field }}
+                <a id="imgResult1" href="#"> <img id="imageResult1" class="img-fluid img-zoom" src="{{ resource.image1 }}" alt=""></a>
               </div>
-              <div class="col-5 p-3 ml-5">
-                  {{ form.image1|as_crispy_field }}
-                  {{ form.x1|as_crispy_field }}
-                  {{ form.y1|as_crispy_field }}
-                  {{ form.height1|as_crispy_field }}
-                  {{ form.width1|as_crispy_field }}
-                  <a id="imgResult1" href="#"> <img id="imageResult1" class="img-fluid img-zoom" src="{{ resource.image1 }}" alt=""></a>
-              </div>
-              <div class="col-5 p-3 ml-5">
-                  {{ form.image2|as_crispy_field }}
-                  {{ form.x2|as_crispy_field }}
-                  {{ form.y2|as_crispy_field }}
-                  {{ form.height2|as_crispy_field }}
-                  {{ form.width2|as_crispy_field }}
-                  <a id="imgResult2" href="#"> <img id="imageResult2" class="img-fluid img-zoom" src="{{ resource.image2 }}" alt=""></a>
+              <div class="col-sm-6 col-12">
+                {{ form.image2|as_crispy_field }}
+                {{ form.x2|as_crispy_field }}
+                {{ form.y2|as_crispy_field }}
+                {{ form.height2|as_crispy_field }}
+                {{ form.width2|as_crispy_field }}
+                <a id="imgResult2" href="#"> <img id="imageResult2" class="img-fluid img-zoom" src="{{ resource.image2 }}" alt=""></a>
               </div>
             </div>
-            <div class="row">
-                <div class="col-5 p-3 ml-5">
-                    {{ form.publisher|as_crispy_field }}
-                </div>
-                <div class="col-5 p-3 ml-5">
-                    {{ form.year_of_publication|as_crispy_field }}
-                </div>
-            </div>
-            <div class="row">
-              <div class="col-5 p-3 ml-5">
-                {{ form.keywords|as_crispy_field }}
-                {{form.choices |as_crispy_field}}
-                {{form.choicesSelected|as_crispy_field}}
+
+            <div class="form-row">
+              <div class="col-sm-6 col-12">
+                {{ form.publisher|as_crispy_field }}
               </div>
-              <div class="col-5 p-3 ml-5">
-                {{ form.category|as_crispy_field }}
-                {{ form.categorySelected|as_crispy_field }}
-                <div id="id_sub_categories"></div>
+              <div class="col-sm-6 col-12">
+                {{ form.year_of_publication|as_crispy_field }}
               </div>
             </div>
-            <div class="row">
-              <div class="col-5 p-3 ml-5">
-                  {{ form.theme|as_crispy_field }}
+            <div class="form-row">
+              <div class="col-sm-6 col-12">
+                {{ form.theme|as_crispy_field }}
               </div>
-              <div class="col-5 p-3 ml-5">
+              <div class="col-sm-6 col-12">
                 {% if user.is_staff %}
-                    {{ form.curatedList|as_crispy_field }}
+                {{ form.curatedList|as_crispy_field }}
                 {% endif %}
               </div>
             </div>
-              <button type="submit" class="btn btn-success"><i class="fas fa-share-square"></i> Save</button>
+            <button type="submit" class="btn btn-success"><i class="fas fa-share-square"></i> Save</button>
           </form>
+        </div>
       </div>
+    </div>
 
-      </table>
 
-		</div>
-	</div>
-</div>
 {% endblock list_of_items %}
 
 {% block scripts %}
@@ -196,9 +202,9 @@
     $("#div_id_keywords div").on('keyup', function(){
       var key = $("#div_id_keywords .selection input").val();
       if (key.indexOf(',') > -1) {
-         var word =key.slice(0, -1);
-         $("#div_id_keywords .selection input").val("");
-         $("#id_keywords").append("<option value='" + word +"' selected> " + word + " </option>");
+        var word =key.slice(0, -1);
+        $("#div_id_keywords .selection input").val("");
+        $("#id_keywords").append("<option value='" + word +"' selected> " + word + " </option>");
       }
     });
 
@@ -220,12 +226,12 @@
     }
 
     $("#div_id_authors div").on('keyup', function(){
-        var key = $("#div_id_authors .selection input").val();
-        if (key.indexOf(',') > -1) {
+      var key = $("#div_id_authors .selection input").val();
+      if (key.indexOf(',') > -1) {
         var word =key.slice(0, -1);
         $("#div_id_authors .selection input").val("");
         $("#id_authors").append("<option value='" + word +"' selected> " + word + " </option>");
-        }
+      }
     });
 
 
@@ -247,18 +253,18 @@
       var validationFailed = false;
 
       $.each($("[required]"), function (index, value) {
-              var id = $(value).parent().parent().attr('id');
-              $("#" + id + " .errorMsg").remove();
-              if(!$(value).val()){
-              validationFailed = true;
-              $(value).parent().append("<span class='errorMsg'> <b>Required field (*)</b></span>");
-              }
-          });
+        var id = $(value).parent().parent().attr('id');
+        $("#" + id + " .errorMsg").remove();
+        if(!$(value).val()){
+          validationFailed = true;
+          $(value).parent().append("<span class='errorMsg'> <b>Required field (*)</b></span>");
+        }
+      });
 
       if (validationFailed) {
-          e.preventDefault();
-          $('html,body').animate({ scrollTop: $(".edit-resource").offset().top - 160 }, { duration: "slow" });
-          return false;
+        e.preventDefault();
+        $('html,body').animate({ scrollTop: $(".edit-resource").offset().top - 160 }, { duration: "slow" });
+        return false;
       }else{
         var option_all = $("#id_keywords option:selected").map(function () {
           return $.trim($(this).text());
@@ -267,7 +273,7 @@
         $("#id_keywords").empty();
 
         option_all = $("#id_authors option:selected").map(function () {
-            return $.trim($(this).text());
+          return $.trim($(this).text());
         }).get().join(',');
         $("#id_authorsCollection").val(option_all);
         $("#id_authors").empty();
@@ -276,7 +282,7 @@
         $("#id_categorySelected").val(category);
         var subcategory = $("#id_subcategory").val();
         if(subcategory){
-            $("#id_categorySelected").val(subcategory);
+          $("#id_categorySelected").val(subcategory);
         }
       }
     });
@@ -285,20 +291,20 @@
   function getSubCategories(){
     var category = $("#id_category").val();
     var request = $.ajax(
-        {
-            type: "GET",
-            url: "{% url 'get_sub_category' %}",
-            data: {
-                "category": category
-            },
-            success: function (response) {
-                $("#id_sub_categories").html(response.sub_categories);
-                if($("#id_category").val() != $("#id_categorySelected").val()){
-                  $("#id_subcategory").val($("#id_categorySelected").val());
-                }
-
-            }
+    {
+      type: "GET",
+      url: "{% url 'get_sub_category' %}",
+      data: {
+        "category": category
+      },
+      success: function (response) {
+        $("#id_sub_categories").html(response.sub_categories);
+        if($("#id_category").val() != $("#id_categorySelected").val()){
+          $("#id_subcategory").val($("#id_categorySelected").val());
         }
+
+      }
+    }
     );
   }
   $(function () {

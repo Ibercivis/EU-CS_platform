@@ -1,5 +1,4 @@
 {% extends "base2.html" %}
-
 {% load staticfiles %}
 {% load thumbnail %}
 {% load i18n %}
@@ -10,38 +9,33 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js"
 integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="anonymous"></script>
 {% endblock head %}
-
-
 {% block title %}{{ block.super }}Profile{% endblock %}
-
 {% block navbar-left %}
 {% include "_navbar.html" with active_link="project" %}
 {% endblock %}
 
 
 {% block list_of_items %}
-<div class="container-fluid">
-	<div class="card card-mb-4">
-		<div class="card-body">
-			<div class="card-title">
-				<h1>
-					<img title="profile picture" class="img-fluid rounded-circle"
-					src="{% thumbnail show_user.profile.picture|default:'default_profile.png' 140x140 crop %}">
-					{{ show_user.get_full_name }}
-
+<div class="container">
+	<div class="row mt-5">
+		<div class="container">
+			<div class="row mt-5">
+				<div class="col-12">
+					<h1>
+						<img title="profile picture" class="img-fluid rounded-circle"
+						src="{% thumbnail show_user.profile.picture|default:'default_profile.png' 140x140 crop %}">
+						{{ show_user.get_full_name }}
+					</div>
+					<div class="col-12">
+						<h2>Uploaded resources</h2><br />
+					</div>
 				</div>
-			</div>
-			<div class="card-text">
-
-				<div class="col-md-12">
-					<h2>Uploaded resources</h2><br />
-				</div>
-				<div class="row">
-					{% include "resources_cards.html" %}
+				<div class="container">
+					<div class="row">
+						{% include "resources_cards.html" %}
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<br>
-	<br>
 	{% endblock list_of_items%}

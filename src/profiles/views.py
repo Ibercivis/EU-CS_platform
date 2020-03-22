@@ -72,7 +72,6 @@ def projects(request):
     projectsWithPermission = Project.objects.all().filter(id__in=projectsWithPermission)
     projects = chain(projectsCreated, projectsWithPermission)
     featuredProjects = FeaturedProjects.objects.all().values_list('project_id',flat=True)
-
     return render(request, 'profiles/my_projects.html', {'show_user': user, 'projects': projects, 'featuredProjects': featuredProjects})
 
 def resources(request):
@@ -86,16 +85,16 @@ def resources(request):
 def followedProjects(request):
     user = request.user
     followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id', flat=True)
-    followedProjects = Project.objects.filter(id__in=followedProjects)
-    followedProjects = followedProjects.filter(~Q(hidden=True))
-    return render(request, 'profiles/followed_projects.html', {'show_user': user, 'projects': followedProjects})
+    projects = Project.objects.filter(id__in=followedProjects)
+    projects = projects.filter(~Q(hidden=True))
+    return render(request, 'profiles/followed_projects.html', {'show_user': user, 'projects': projects,'followedProjects': followedProjects })
 
 def savedResources(request):
     user = request.user
     savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id', flat=True)
-    savedResources = Resource.objects.filter(id__in=savedResources)
-    savedResources = savedResources.filter(~Q(hidden=True))
-    return render(request, 'profiles/saved_resources.html', {'show_user': user, 'resources': savedResources})
+    resources= Resource.objects.filter(id__in=savedResources)
+    resources = resources.filter(~Q(hidden=True))
+    return render(request, 'profiles/saved_resources.html', {'show_user': user, 'resources': resources, 'savedResources': savedResources })
 
 def getProjectsWithPermission(user):
     projects = list(ProjectPermission.objects.all().filter(user_id=user).values_list('project',flat=True))
