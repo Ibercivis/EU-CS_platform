@@ -17,8 +17,6 @@ from .models import Resource, Keyword, Category, FeaturedResources, SavedResourc
 from .forms import ResourceForm, ResourcePermissionForm
 import random
 
-
-
 User = get_user_model()
 
 def resources(request):
@@ -52,15 +50,12 @@ def resources(request):
         resources = resources.filter(theme = request.GET['category'])
         filters['category'] = int(request.GET['category'])
 
-
     if request.GET.get('featuredCheck'):
         resources = resources.filter(id__in=featuredResources)
         filters['featured'] = request.GET['featuredCheck']
 
-
     if not user.is_staff:
         resources = resources.filter(~Q(hidden=True))
-
 
     paginator = Paginator(resources, 8)
     page = request.GET.get('page')

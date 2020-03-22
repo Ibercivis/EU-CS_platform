@@ -51,200 +51,200 @@
         </div>
       </div>
     </div>
-  </div>
-</div>
-<div class="container mt-5">
-  <div class="card mt-5 mb-5 shadow">
-    <div class="card-title  p-3">
-      <div class="row">
-        <div class="col-12">
-          <h2>New project</h2>
+
+    <div class="container mt-5">
+      <div class="card mt-5 mb-5 shadow">
+        <div class="card-title  p-3">
+          <div class="row">
+            <div class="col-12">
+              <h2>New project</h2>
+            </div>
+          </div>
         </div>
+        <div class="card-text p-3">
+          <form action="/new_project" method="post" enctype="multipart/form-data" class="add-new-project" autocomplete="off">
+            {% csrf_token %}
+            <div>
+              <h4>Project info</h4>
+            </div>
+
+            <div class="form-row">
+              <div class="col-sm-6 col-12">
+                {{ form.project_name|as_crispy_field }}
+              </div>
+              <div class="col-sm-6 col-12">
+                {{ form.keywords|as_crispy_field }}
+                {{form.choices |as_crispy_field}}
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col-sm-6 col-12">
+                {{ form.aim|as_crispy_field }}
+              </div>
+              <div class="col-sm-6 col-12">
+                {{ form.description|as_crispy_field }}
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col-sm-6 col-12">
+                {{ form.topic|as_crispy_field }}
+              </div>
+              <div class="col-sm-6 col-12">
+                {{ form.status|as_crispy_field }}
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col-sm-6 col-12">
+                {{ form.start_date|as_crispy_field }}
+              </div>
+              <div class="col-sm-6 col-12">
+                {{ form.end_date|as_crispy_field }}
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col-sm-6 col-12">
+                {{ form.url|as_crispy_field }}
+              </div>
+              <div class="col-sm-6 col-12">
+              </div>
+            </div>
+
+            <hr />
+            <h4>Contact person info</h4>
+            <div id="contactinfoform">
+              <div class="form-row">
+                <div class="col-sm-6 col-12">
+                  {{ form.contact_person|as_crispy_field }}
+                </div>
+                <div class="col-sm-6 col-12">
+                  {{ form.contact_person_email|as_crispy_field }}
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col-sm-6 col-12">
+                  {{ form.contact_person_phone|as_crispy_field }}
+                </div>
+              </div>
+            </div>
+
+            <hr />
+            <h4>Images and communications</h4>
+            <div id="imagesform">
+              <div class="form-row">
+                <div class="col-sm-6 col-12">
+                  {{ form.image1|as_crispy_field }}
+                  {{ form.x1|as_crispy_field }}
+                  {{ form.y1|as_crispy_field }}
+                  {{ form.height1|as_crispy_field }}
+                  {{ form.width1|as_crispy_field }}
+                  <a id="imgResult1" href="#"> <img class="img-fluid img-zoom" id="imageResult1" src="" alt=""></a>
+                </div>
+                <div class="col-sm-6 col-12">
+                  {{ form.image_credit1|as_crispy_field }}
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col-sm-6 col-12">
+                  {{ form.image2|as_crispy_field }}
+                  {{ form.x2|as_crispy_field }}
+                  {{ form.y2|as_crispy_field }}
+                  {{ form.height2|as_crispy_field }}
+                  {{ form.width2|as_crispy_field }}
+                  <a id="imgResult2" href="#"><img class="img-fluid img-zoom" id="imageResult2" src="" alt=""></a>
+                </div>
+                <div class="col-sm-6 col-12">
+                  {{ form.image_credit2|as_crispy_field }}
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col-sm-6 col-12">
+                  {{ form.image3|as_crispy_field }}
+                  {{ form.x3|as_crispy_field }}
+                  {{ form.y3|as_crispy_field }}
+                  {{ form.height3|as_crispy_field }}
+                  {{ form.width3|as_crispy_field }}
+                  <a id="imgResult3" href="#"><img class="img-fluid img-zoom" id="imageResult3" src="" alt=""></a>
+                </div>
+                <div class="col-sm-6 col-12">
+                  {{ form.image_credit3|as_crispy_field }}
+                </div>
+              </div>
+            </div>
+            <hr />
+            <h4>Geography</h4>
+            <p>Main location where the project takes place (click on the map)</p>
+            <div id="geographyform">
+              {% leaflet_map "map" callback="window.map_init_basic" %}
+              <div class="form-row">
+                <div class="col-sm-6 col-12">
+                  {{ form.latitude|as_crispy_field }}
+                </div>
+                <div class="col-sm-6 col-12">
+                  {{ form.longitude|as_crispy_field }}
+                </div>
+              </div>
+            </div>
+            <hr />
+
+            <h4>Personal and Organizational Affiliates</h4>
+            <div id="organizationform">
+              <div class="row">
+                <div class="col-sm-6 col-12">
+                  {{ form.host|as_crispy_field }}
+                </div>
+                <div class="col-sm-6 col-12">
+                </div>
+              </div>
+            </div>
+            <hr />
+
+            <h4>Supplementary information for Citizen Science</h4>
+            <div id="informationform">
+              <div class="form-row">
+                <div class="col-sm-6 col-12">
+                  {{ form.how_to_participate|as_crispy_field }}
+                </div>
+                <div class="col-sm-6 col-12">
+                  {{ form.equipment|as_crispy_field }}
+                </div>
+              </div>
+            </div>
+            <hr />
+
+            <h4>Funding</h4>
+            <div id="fundingform">
+              <div class="form-row">
+                <div class="col-sm-6 col-12">
+                  {{ form.funding_body|as_crispy_field }}
+                  {{ form.fundingBodySelected|as_crispy_field }}
+                </div>
+                <div class="col-sm-6 col-12">
+                  {{ form.funding_program|as_crispy_field }}
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-sm-6 col-12">
+                  {{ form.funding_agency|as_crispy_field }}
+                  {{ form.fundingAgencySelected|as_crispy_field }}
+                </div>
+                <div class="col-5 p-3 ml-5">
+                </div>
+              </div>
+            </div>
+            <hr />
+            <button type="submit" class="btn btn-success"><i class="fas fa-share-square"></i> Save</button>
+          </form>
+        </div>
+
       </div>
     </div>
-    <div class="card-text p-3">
-      <table class="table mb-0">
-        <form action="/new_project" method="post" enctype="multipart/form-data" class="add-new-project" autocomplete="off">
-          {% csrf_token %}
-          <div>
-            <h4>Project info</h4>
-          </div>
-
-          <div class="form-row">
-            <div class="col-sm-6 col-12">
-              {{ form.project_name|as_crispy_field }}
-            </div>
-            <div class="col-sm-6 col-12">
-              {{ form.keywords|as_crispy_field }}
-              {{form.choices |as_crispy_field}}
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="col-sm-6 col-12">
-              {{ form.aim|as_crispy_field }}
-            </div>
-            <div class="col-sm-6 col-12">
-              {{ form.description|as_crispy_field }}
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="col-sm-6 col-12">
-              {{ form.topic|as_crispy_field }}
-            </div>
-            <div class="col-sm-6 col-12">
-              {{ form.status|as_crispy_field }}
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="col-sm-6 col-12">
-              {{ form.start_date|as_crispy_field }}
-            </div>
-            <div class="col-sm-6 col-12">
-              {{ form.end_date|as_crispy_field }}
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="col-sm-6 col-12">
-              {{ form.url|as_crispy_field }}
-            </div>
-            <div class="col-sm-6 col-12">
-            </div>
-          </div>
-
-          <hr />
-          <h4>Contact person info</h4>
-          <div id="contactinfoform">
-            <div class="form-row">
-              <div class="col-sm-6 col-12">
-                {{ form.contact_person|as_crispy_field }}
-              </div>
-              <div class="col-sm-6 col-12">
-                {{ form.contact_person_email|as_crispy_field }}
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="col-sm-6 col-12">
-                {{ form.contact_person_phone|as_crispy_field }}
-              </div>
-            </div>
-          </div>
-
-          <hr />
-          <h4>Images and communications</h4>
-          <div id="imagesform">
-            <div class="form-row">
-              <div class="col-sm-6 col-12">
-                {{ form.image1|as_crispy_field }}
-                {{ form.x1|as_crispy_field }}
-                {{ form.y1|as_crispy_field }}
-                {{ form.height1|as_crispy_field }}
-                {{ form.width1|as_crispy_field }}
-                <a id="imgResult1" href="#"> <img class="img-fluid img-zoom" id="imageResult1" src="" alt=""></a>
-              </div>
-              <div class="col-sm-6 col-12">
-                {{ form.image_credit1|as_crispy_field }}
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="col-sm-6 col-12">
-                {{ form.image2|as_crispy_field }}
-                {{ form.x2|as_crispy_field }}
-                {{ form.y2|as_crispy_field }}
-                {{ form.height2|as_crispy_field }}
-                {{ form.width2|as_crispy_field }}
-                <a id="imgResult2" href="#"><img class="img-fluid img-zoom" id="imageResult2" src="" alt=""></a>
-              </div>
-              <div class="col-sm-6 col-12">
-                {{ form.image_credit2|as_crispy_field }}
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="col-sm-6 col-12">
-                {{ form.image3|as_crispy_field }}
-                {{ form.x3|as_crispy_field }}
-                {{ form.y3|as_crispy_field }}
-                {{ form.height3|as_crispy_field }}
-                {{ form.width3|as_crispy_field }}
-                <a id="imgResult3" href="#"><img class="img-fluid img-zoom" id="imageResult3" src="" alt=""></a>
-              </div>
-              <div class="col-sm-6 col-12">
-                {{ form.image_credit3|as_crispy_field }}
-              </div>
-            </div>
-          </div>
-          <hr />
-          <h4>Geography</h4>
-          <p>Main location where the project takes place (click on the map)</p>
-          <div id="geographyform">
-            {% leaflet_map "map" callback="window.map_init_basic" %}
-            <div class="form-row">
-              <div class="col-sm-6 col-12">
-                {{ form.latitude|as_crispy_field }}
-              </div>
-              <div class="col-sm-6 col-12">
-                {{ form.longitude|as_crispy_field }}
-              </div>
-            </div>
-          </div>
-          <hr />
-
-          <h4>Personal and Organizational Affiliates</h4>
-          <div id="organizationform">
-            <div class="row">
-              <div class="col-sm-6 col-12">
-                {{ form.host|as_crispy_field }}
-              </div>
-              <div class="col-sm-6 col-12">
-              </div>
-            </div>
-          </div>
-          <hr />
-
-          <h4>Supplementary information for Citizen Science</h4>
-          <div id="informationform">
-            <div class="form-row">
-              <div class="col-sm-6 col-12">
-                {{ form.how_to_participate|as_crispy_field }}
-              </div>
-              <div class="col-sm-6 col-12">
-                {{ form.equipment|as_crispy_field }}
-              </div>
-            </div>
-          </div>
-          <hr />
-
-          <h4>Funding</h4>
-          <div id="fundingform">
-            <div class="form-row">
-              <div class="col-sm-6 col-12">
-                {{ form.funding_body|as_crispy_field }}
-                {{ form.fundingBodySelected|as_crispy_field }}
-              </div>
-              <div class="col-sm-6 col-12">
-                {{ form.funding_program|as_crispy_field }}
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="col-sm-6 col-12">
-                {{ form.funding_agency|as_crispy_field }}
-                {{ form.fundingAgencySelected|as_crispy_field }}
-              </div>
-              <div class="col-5 p-3 ml-5">
-              </div>
-            </div>
-          </div>
-          <hr />
-          <button type="submit" class="btn btn-success"><i class="fas fa-share-square"></i> Save</button>
-        </form>
-      </div>
-    </table>
   </div>
 </div>
 {% endblock list_of_items %}
