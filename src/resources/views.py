@@ -51,8 +51,14 @@ def resources(request):
         filters['category'] = int(request.GET['category'])
 
     if request.GET.get('featuredCheck'):
-        resources = resources.filter(id__in=featuredResources)
-        filters['featured'] = request.GET['featuredCheck']
+        if request.GET['featuredCheck'] == 'On':
+            resources = resources.filter(id__in=featuredResources)
+        if request.GET['featuredCheck'] == 'Off':
+            resources = resources.exclude(id__in=featuredResources)
+        if request.GET['featuredCheck'] == 'All':
+            resources = resources
+        filters['featuredCheck'] = request.GET['featuredCheck']
+        
 
     if not user.is_staff:
         resources = resources.filter(~Q(hidden=True))

@@ -10,7 +10,7 @@
 		</a>
 		{% endif %}
 	</div>
-	<div class="col-lg-10 float-right">
+	<div class="col-lg-12 float-right">
 		<form class="form-inline float-lg-right" id="searchResources" action="{% url 'resources' %}">
 			<div class="float-right">
 				<div class="input-group mb-3">
@@ -42,21 +42,21 @@
 						{% for category in categories %}
 						<option {% if category.id == filters.category %} selected {% endif %} value="{{category.id}}">{{category}}</option>
 						{% endfor %}
-						<select>
+						<select/>
+						<select id="featuredCheck" name="featuredCheck" class="custom-select form-control">
+							<option value="On" {% if filters.featuredCheck == "On" %} selected {% endif %}>Curated</option>
+							<option value="Off" {% if filters.featuredCheck == "Off" %} selected {% endif %}>Not curated</option>
+							<option value="All" {% if filters.featuredCheck == "All" %} selected {% endif %}">All</option>
+						</select>
 						<button class="btn btn-info" id="search" type="submit"><i class="fas fa-search"></i> Find</button>
 
-						</div>
 					</div>
-				</form>
-			</div>
+				</div>
+			</form>
 		</div>
-
-		<div class="form-check float-right mt-2 mr-4">
-			<input type="checkbox" class="form-check-input myicon" id="featuredCheck" name="featuredCheck" {% if filters.featured %} checked {% endif %}>
-			<label class="form-check-label mylabel" for="featuredCheck" data-toggle="tooltip" data-placement="top" title="Toggle between curated/all resources"></label>
-		</div>
-<div class="col-lg-12 text-right">
-	{% if request.get_full_path != "/resources" %}
-	<a class="text-decoration-none text-muted" href="/resources"><i class="fas fa-times"></i> Clear current search query, filters, and sorts</a>
-	{% endif %}
-</div>
+	</div>
+	<div class="col-lg-12 text-right">
+		{% if request.get_full_path != "/resources" %}
+		<a class="text-decoration-none text-muted" href="/resources"><i class="fas fa-times"></i> Clear current search query, filters, and sorts</a>
+		{% endif %}
+	</div>
