@@ -19,14 +19,12 @@
       {% endif %}
       {% endfor %}
     </div>
-
-
     <div class="card-body">
       <h6 class="card-title mt-3 mb-3"><a class="card-link card-link-resource" href="/resource/{{rsc.id}}" class="card-link">{{ rsc.name | truncatewords:12 }}</a></h6>
       <div class="card-text mt-3">{{rsc.abstract | safe | truncatewords:30 }}
         <a class="" href="/resource/{{rsc.id}}" target="_blank">Read more</a>
       </div>
-      <a class="badge badge-light" href="/resources?category={{rsc.category.id}}">{{ rsc.category | upper }}</a><br>
+      <a class="badge badge-dark" href="/resources?category={{rsc.category.id}}">{{ rsc.category | upper }}</a><br>
       {% for theme in rsc.theme.all %}<a class="badge badge-light" href="/resources?theme={{theme.id}}">{{ theme | upper}}</a> {% endfor %}<br>
       {% for keyword in rsc.keywords.all %} <a class="badge  badge-light" href="/resources?keywords={{keyword}}">{{keyword | upper}}</a>  {% endfor %}
     </div><!-- end of card-body -->
@@ -51,9 +49,7 @@
             {% endif %}
 
             {% endif %}
-
           </div>
-
           <div id="hidden{{rsc.id}}">
             {% if user.is_staff %}
             {% if rsc.hidden %}
@@ -65,7 +61,6 @@
           </div>
         </div>
         <div class="col-6">
-
           {% if user.is_authenticated %}
           <div id="saved{{rsc.id}}">
             {% if rsc.id in savedResources %}
