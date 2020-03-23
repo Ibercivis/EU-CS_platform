@@ -304,44 +304,7 @@
     });
 
 
-
-    $('#images').on('click', function () {
-      $('#imagesform').toggle();
-      $('html,body').animate({ scrollTop: $("#images").offset().top - 160 }, { duration: "slow" });
-    });
-
-    $('#geography').on('click', function () {
-      $('#geographyform').toggle();
-      $('html,body').animate({ scrollTop: $("#geography").offset().top - 160 }, { duration: "slow" });
-    });
-
-    $('#organization').on('click', function () {
-      $('#organizationform').toggle();
-      $('html,body').animate({ scrollTop: $("#organization").offset().top - 160 }, { duration: "slow" });
-    });
-
-    $('#information').on('click', function () {
-      $('#informationform').toggle();
-      $('html,body').animate({ scrollTop: $("#information").offset().top - 160 }, { duration: "slow" });
-    });
-
-    $('#funding').on('click', function () {
-      $('#fundingform').toggle();
-      $('html,body').animate({ scrollTop: $("#funding").offset().top - 160 }, { duration: "slow" });
-      $('.select2-container').attr("style", "width:100%");
-    });
-
-    $('#imgResult').on('click', function () {
-      $('html,body').animate({ scrollTop: $("#imgResult").offset().top - 220 }, { duration: "slow" });
-    });
-
     $("form").submit(function (e) {
-      $('#contactinfoform').show();
-      $('#informationform').show();
-      $('#imagesform').show();
-      $('#organizationform').show();
-      $('#geographyform').show();
-      $('#fundingform').show(); $('.select2-container').attr("style", "width:100%");
       var validationFailed = false;
 
       $.each($("[required]"), function (index, value) {
