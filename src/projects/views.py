@@ -105,11 +105,12 @@ def projects(request):
             projects = projects.exclude(id__in=featuredProjects)
         if request.GET['featuredCheck'] == 'All':
             projects = projects
-        filters['featuredCheck'] = request.GET['featuredCheck']
+        filters['featuredCheck'] = request.GET['featuredCheck']        
     else:
         projects = projects.filter(id__in=featuredProjects)
     if not user.is_staff:
         projects = projects.filter(~Q(hidden=True))
+
 
     paginator = Paginator(projects, 9)
     page = request.GET.get('page')
