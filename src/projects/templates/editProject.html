@@ -55,15 +55,37 @@
     </div>
 
     <!-- END MODAL TO CROP -->
+
+    <!-- Delete modal -->
+    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Confirm delete</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                
+              </div>
+              <div class="modal-body">
+                <p>You are going to delete this project, this procedure is irreversible.</p>
+                <p>Do you want to proceed?</p>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <a class="btn btn-danger btn-ok">Delete</a>
+              </div>
+          </div>
+      </div>
+    </div>
+
     <div class="container mt-5">
       <div class="card mt-5 mb-5 shadow">
         <div class="card-title p-3">
           <div class="row">
             <div clas="col-12 p-3">
               <h2>Edit project</h2>
-              <button type="submit" class="btn btn-danger float-right" onclick="location.href='{% url 'deleteProject' project.id %}'"
-              name='deleteProject'><i class="fas fa-trash-alt"></i> Delete
-            </button>
+              <button type="submit" class="btn btn-danger float-right" data-href="{% url 'deleteProject' project.id %}"
+                data-toggle="modal" data-target="#confirm-delete" name='deleteProject'><i class="fas fa-trash-alt"></i> Delete
+              </button>
           </div>
         </div>
       </div>
@@ -371,49 +393,12 @@
       }
     });
 
-    $('#contactinfo').on('click', function () {
-      $('#contactinfoform').toggle() ;
-      $('html,body').animate({ scrollTop: $("#contactinfo").offset().top - 160 }, { duration: "slow" });
-    });
-
-    $('#images').on('click', function () {
-      $('#imagesform').toggle();
-      $('html,body').animate({ scrollTop: $("#images").offset().top - 160 }, { duration: "slow" });
-    });
-
-    $('#geography').on('click', function () {
-      $('#geographyform').toggle();
-      $('html,body').animate({ scrollTop: $("#geography").offset().top - 160 }, { duration: "slow" });
-    });
-
-    $('#organization').on('click', function () {
-      $('#organizationform').toggle();
-      $('html,body').animate({ scrollTop: $("#organization").offset().top - 160 }, { duration: "slow" });
-    });
-
-    $('#information').on('click', function () {
-      $('#informationform').toggle();
-      $('html,body').animate({ scrollTop: $("#information").offset().top - 160 }, { duration: "slow" });
-    });
-
-    $('#funding').on('click', function () {
-      $('#fundingform').toggle();
-      $('html,body').animate({ scrollTop: $("#funding").offset().top - 160 }, { duration: "slow" });
-      $('.select2-container').attr("style", "width:100%");
-    });
-
-    $('#imgResult').on('click', function () {
-      $('html,body').animate({ scrollTop: $("#imgResult").offset().top - 220 }, { duration: "slow" });
-    });
-
+    function validateEmail(email) {
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    }
 
     $("form").submit(function (e) {
-      $('#contactinfoform').show();
-      $('#informationform').show();
-      $('#imagesform').show();
-      $('#organizationform').show();
-      $('#geographyform').show();
-      $('#fundingform').show(); $('.select2-container').attr("style", "width:100%");
       var validationFailed = false;
 
       $.each($("[required]"), function (index, value) {
@@ -424,6 +409,11 @@
           $(value).parent().append("<span class='errorMsg'> <b>Required field (*)</b></span>");
         }
       });
+      var email = $("#id_contact_person_email").val();
+      if(!validateEmail(email)){
+        validationFailed = true;
+        $("#div_id_contact_person_email").append("<span class='errorMsg'> <b>Enter a valid email address.</b></span>");
+      }
 
       if (validationFailed) {
         e.preventDefault();
@@ -450,6 +440,10 @@
       }
     });
 
+  });
+
+  $('#confirm-delete').on('show.bs.modal', function(e) {
+    $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
   });
 
   $('.customField-formset').formset({

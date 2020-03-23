@@ -47,13 +47,37 @@
     </div>
 
     <!-- END MODAL TO CROP -->
+
+
+     <!-- Delete modal -->
+     <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Confirm delete</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                
+              </div>
+              <div class="modal-body">
+                <p>You are going to delete this resource, this procedure is irreversible.</p>
+                <p>Do you want to proceed?</p>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <a class="btn btn-danger btn-ok">Delete</a>
+              </div>
+          </div>
+      </div>
+    </div>
+
     <div class="container mt-5">
       <div class="card mb-5 mt-5 shadow">
         <div class="card-title p-3">
           <div class="row">
             <div class="col-12">
               <h2>Edit resource</h2>
-              <button type="submit" class="btn btn-danger float-right" onclick="location.href='{% url 'deleteResource' resource.id %}'" name='deleteResource'>
+              <button type="submit" class="btn btn-danger float-right" data-href="{% url 'deleteResource' resource.id %}"
+                data-toggle="modal" data-target="#confirm-delete" name='deleteResource'>
                 <span class="fas fa-trash-alt"></span> Delete
               </button>
             </div>
@@ -250,6 +274,11 @@
 
         $("#div_id_curatedList select").val({{curatedGroups}});
 
+        function validateEmail(email) {
+          var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return re.test(String(email).toLowerCase());
+        }
+
         $("form").submit(function (e) {
           var validationFailed = false;
 
@@ -261,6 +290,11 @@
               $(value).parent().append("<span class='errorMsg'> <b>Required field (*)</b></span>");
             }
           });
+          var email = $("#id_author_email").val();
+          if(!validateEmail(email)){
+            validationFailed = true;
+            $("#div_id_author_email").append("<span class='errorMsg'> <b>Enter a valid email address.</b></span>");
+          }
 
           if (validationFailed) {
             e.preventDefault();
@@ -287,6 +321,10 @@
             }
           }
         });
+      });
+
+      $('#confirm-delete').on('show.bs.modal', function(e) {
+        $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
       });
 
       function getSubCategories(){
