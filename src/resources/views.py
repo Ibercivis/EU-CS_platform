@@ -58,7 +58,8 @@ def resources(request):
         if request.GET['featuredCheck'] == 'All':
             resources = resources
         filters['featuredCheck'] = request.GET['featuredCheck']
-        
+    else:
+        resources = resources.filter(id__in=featuredResources)    
 
     if not user.is_staff:
         resources = resources.filter(~Q(hidden=True))
