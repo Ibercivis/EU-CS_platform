@@ -319,10 +319,10 @@
         }
       });
       var email = $("#id_contact_person_email").val();
-      if(!validateEmail(email)){
-        validationFailed = true;
-        $("#div_id_contact_person_email").append("<span class='errorMsg'> <b>Enter a valid email address.</b></span>");
-      }
+      //if(!validateEmail(email)){
+      //  validationFailed = true;
+      //  $("#div_id_contact_person_email").append("<span class='errorMsg'> <b>Enter a valid email address.</b></span>");
+      //}
 
       if (validationFailed) {
         e.preventDefault();

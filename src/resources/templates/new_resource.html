@@ -220,8 +220,8 @@
     getSubCategories();
 
     function validateEmail(email) {
-      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(String(email).toLowerCase());
+    //  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    //  return re.test(String(email).toLowerCase());
     }
 
     $("form").submit(function (e) {
@@ -236,10 +236,10 @@
         }
       });
       var email = $("#id_author_email").val();
-      if(!validateEmail(email)){
-        validationFailed = true;
-        $("#div_id_author_email").append("<span class='errorMsg'> <b>Enter a valid email address.</b></span>");
-      }
+      //if(!validateEmail(email)){
+      //  validationFailed = true;
+      //  $("#div_id_author_email").append("<span class='errorMsg'> <b>Enter a valid email address.</b></span>");
+      //}
 
       if (validationFailed) {
         e.preventDefault();

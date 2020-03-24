@@ -47,7 +47,7 @@ def resources(request):
         filters['theme'] = int(request.GET['theme'])
 
     if request.GET.get('category'):
-        resources = resources.filter(theme = request.GET['category'])
+        resources = resources.filter(category = request.GET['category'])
         filters['category'] = int(request.GET['category'])
 
     if request.GET.get('featuredCheck'):
@@ -59,12 +59,12 @@ def resources(request):
             resources = resources
         filters['featuredCheck'] = request.GET['featuredCheck']
     else:
-        resources = resources.filter(id__in=featuredResources)    
+        resources = resources.filter(id__in=featuredResources)
 
     if not user.is_staff:
         resources = resources.filter(~Q(hidden=True))
 
-    paginator = Paginator(resources, 8)
+    paginator = Paginator(resources, 9)
     page = request.GET.get('page')
     resources = paginator.get_page(page)
 

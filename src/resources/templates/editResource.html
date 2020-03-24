@@ -56,7 +56,7 @@
               <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel">Confirm delete</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                
+
               </div>
               <div class="modal-body">
                 <p>You are going to delete this resource, this procedure is irreversible.</p>
@@ -291,10 +291,10 @@
             }
           });
           var email = $("#id_author_email").val();
-          if(!validateEmail(email)){
-            validationFailed = true;
-            $("#div_id_author_email").append("<span class='errorMsg'> <b>Enter a valid email address.</b></span>");
-          }
+          //if(!validateEmail(email)){
+          //  validationFailed = true;
+          //  $("#div_id_author_email").append("<span class='errorMsg'> <b>Enter a valid email address.</b></span>");
+          //}
 
           if (validationFailed) {
             e.preventDefault();

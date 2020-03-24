@@ -18,12 +18,12 @@
         {% else %}
         <img class="img-fluid img-responsive img-zoom" src='/static/site/img/resource.png'>
         {% endif %}
-        <div class="card-text">
+        <div class="card-header bg-white">
           <div class="row">
             <div class="col-6">
               {% if user.is_authenticated %}
               {% if resource.creator == user or user.is_staff or user.id in cooperators %}
-              <a class="btn btn-danger" href="{% url 'editResource' resource.id %}"><i class="fas fa-edit"></i> Edit
+              <a class="btn btn-danger mt-4" href="{% url 'editResource' resource.id %}"><i class="fas fa-edit"></i> Edit
               </a>
               {% endif %}
               {% endif %}
