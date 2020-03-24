@@ -16,8 +16,8 @@ class ProjectForm(forms.Form):
     error_css_class = 'form_error'
     #Basic Project Information
     project_name = forms.CharField(max_length=200)
-    aim = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 1000}}), label="Aim of the project (max 1000 characters)")
-    description = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 2000}}), label="Project description (max 2000 characters)")
+    aim = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 2000}}), label="Aim of the project (max 2000 characters)")
+    description = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 3000}}), label="Project description (max 3           000 characters)")
     choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     choicesSelected = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     keywords = forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False,label="Keywords (Select or write a new ones, comma separated)")
@@ -36,19 +36,19 @@ class ProjectForm(forms.Form):
     y1 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     width1 = forms.FloatField(widget=forms.HiddenInput(),required=False)
     height1 = forms.FloatField(widget=forms.HiddenInput(), required=False)
-    image_credit1 = forms.CharField(max_length=200, required=False, label="Image 1 credit")
+    image_credit1 = forms.CharField(max_length=300, required=False, label="Image 1 credit")
     image2 = forms.ImageField(required=False, label="Image 2: Logo (Will be resized to 600x400 pixels)")
     x2 = forms.FloatField(widget=forms.HiddenInput(),required=False)
     y2 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     width2 = forms.FloatField(widget=forms.HiddenInput(),required=False)
     height2 = forms.FloatField(widget=forms.HiddenInput(), required=False)
-    image_credit2 = forms.CharField(max_length=200, required=False, label="Logo credit")
+    image_credit2 = forms.CharField(max_length=300, required=False, label="Logo credit")
     image3 = forms.ImageField(required=False, label="Image 3: Header (Will be resized to 1100x300 pixels" )
     x3 = forms.FloatField(widget=forms.HiddenInput(),required=False)
     y3 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     width3 = forms.FloatField(widget=forms.HiddenInput(),required=False)
     height3 = forms.FloatField(widget=forms.HiddenInput(), required=False, label="Image 3 credit")
-    image_credit3 = forms.CharField(max_length=200, required=False)
+    image_credit3 = forms.CharField(max_length=300, required=False)
     #Geography
     latitude = forms.DecimalField(max_digits=9,decimal_places=6)
     longitude = forms.DecimalField(max_digits=9,decimal_places=6)
@@ -56,7 +56,7 @@ class ProjectForm(forms.Form):
     host = forms.CharField(max_length=100, label="Name of the institution hosting the project")
     #Supplementary information for Citizen Science
     how_to_participate = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 1000}}), required=False, label="How to participate in the project (max 1000 characters)")
-    equipment = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 200}}), required=False, label="Equipment needeed to participate (max 200 characters)")
+    equipment = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 1000}}), required=False, label="Equipment needeed to participate (max 1000 characters)")
     #Funding
     funding_body =  forms.ModelMultipleChoiceField(queryset=FundingBody.objects.all(), widget=Select2MultipleWidget, required=False, label="Funding bodies (Select or write new one)")
     fundingBodySelected = forms.CharField(widget=forms.HiddenInput(), max_length=100, required=False)
