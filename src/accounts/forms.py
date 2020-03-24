@@ -20,12 +20,12 @@ class LoginForm(AuthenticationForm):
             Field("username", placeholder="Enter Email", autofocus=""),
             Field("password", placeholder="Enter Password"),
             HTML(
-                '<a href="{}">Forgot Password?</a>'.format(
+                'Forgot Password? <a href="{}">Remember me</a><br><br>'.format(
                     reverse("accounts:password-reset")
                 )
             ),
-            Field("remember_me"),
-            Submit("sign_in", "Log in", css_class="btn btn-lg btn-primary btn-block"),
+            Submit("sign_in", "Log in", css_class="btn btn-primary"),
+
         )
 
 
