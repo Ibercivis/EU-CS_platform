@@ -6,17 +6,6 @@
 {% load leaflet_tags %}
 {% load countries %}
 {% get_countries as countries %}
-
-
-<!--
-Coolors:
-0d0a0b
-631d76
-ffffff
-9e4770
-007bff
--->
-
 <head>
   {% block head %}
   <meta charset="UTF-8">
@@ -38,73 +27,73 @@ ffffff
 <body>
   <header>
     <!--Navbar-->
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-front text-white text-weight-bold fixed-top">
-      <div class="container">
-        <a class="navbar-brand" href="/">{% include "_brandname.html" %}</a>
+    <nav class="navbar navbar-expand-xl navbar-dark navbar-front text-white text-weight-bold fixed-top">
+      <div class="container text-weight-bold">
+        <a class="navbar-brand" href="/">
+          <img src="{% static 'site/img/icon.png' %}" width="30" height="30" alt=""/>
+        </a>
+        <a class="navbar-brand 	nav-link {% if request.get_full_path == "/" %} active {% endif %}" href="/">{% include "_brandname.html" %}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          {% block navbar-left %}
-          {% endblock navbar-left %}
-        </ul>
-        <ul class="navbar-nav">
-          {% if not user.is_authenticated %}
-          <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">LOGIN</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'accounts:signup' %}" role="button">SIGN UP</a></li>
-          {% else %}
-          <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">PERSONAL AREA</a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="{% url 'profiles:show_self' %}">Profile</a>
-              <a class="dropdown-item" href="{% url 'profiles:self_projects' %}">Uploaded projects</a>
-              <a class="dropdown-item" href="{% url 'profiles:self_resources' %}">Uploaded resources</a>
-              <a class="dropdown-item" href="{% url 'profiles:followed_projects' %}">Followed projects</a>
-              <a class="dropdown-item" href="{% url 'profiles:saved_resources' %}">My library</a>
-            </div>
-          </li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}">LOGOUT</a></li></li>
-          {% endif %}
-          {% if user.is_staff %}
-          <li class="nav-item"><a  class="nav-link" href="{% url 'admin:index' %}">ADMIN</a></li>
-          {% endif %}
-        </ul>
+        <span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            {% block navbar-left %}
+            {% endblock navbar-left %}
+          </ul>
+          <ul class="navbar-nav">
+            {% if not user.is_authenticated %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">LOGIN</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'accounts:signup' %}" role="button">SIGN UP</a></li>
+            {% else %}
+            <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">PERSONAL AREA</a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'profiles:show_self' %}">Profile</a>
+                <a class="dropdown-item" href="{% url 'profiles:self_projects' %}">Uploaded projects</a>
+                <a class="dropdown-item" href="{% url 'profiles:self_resources' %}">Uploaded resources</a>
+                <a class="dropdown-item" href="{% url 'profiles:followed_projects' %}">Followed projects</a>
+                <a class="dropdown-item" href="{% url 'profiles:saved_resources' %}">My library</a>
+              </div>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}">LOGOUT</a></li></li>
+            {% endif %}
+            {% if user.is_staff %}
+            <li class="nav-item"><a  class="nav-link" href="{% url 'admin:index' %}">ADMIN</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!--/.Navbar-->
+  </header>
+  <main class="flex-fill">
+    {% block splash %}
+    {% endblock splash %}
+    <!--Main layout-->
+    <div class="container">
+      <!--First row-->
+      <div class="row">
+        <div class="col-md-12">
+          {% block page_header %}
+          {% endblock page_header %}
+        </div>
       </div>
     </div>
-  </nav>
-  <!--/.Navbar-->
-</header>
-<main class="flex-fill">
-  {% block splash %}
-  {% endblock splash %}
-  <!--Main layout-->
-  <div class="container">
-    <!--First row-->
-    <div class="row">
-      <div class="col-md-12">
-        {% block page_header %}
-        {% endblock page_header %}
-      </div>
-    </div>
-  </div>
-  {% block list_of_items %}
-  {% endblock list_of_items %}
-  <!--/.Main layout-->
-</main>
-{% block footer %}
-{% include "_footer.html" %}
-{% endblock footer %}
-<!-- jQuery -->
-<script type="text/javascript" src="{% static 'site/js/jquery.min.js' %}"></script>
-<!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="{% static 'site/js/bootstrap.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'scripts/lazysizes.min.js' %}"></script>
-
-
-<script src="{% static 'scripts/cropper.min.js' %}"></script>
-<script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
-{% block scripts %}
-{% endblock scripts %}
+    {% block list_of_items %}
+    {% endblock list_of_items %}
+    <!--/.Main layout-->
+  </main>
+  {% block footer %}
+  {% include "_footer.html" %}
+  {% endblock footer %}
+  <!-- jQuery -->
+  <script type="text/javascript" src="{% static 'site/js/jquery.min.js' %}"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="{% static 'site/js/bootstrap.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'scripts/lazysizes.min.js' %}"></script>
+  <script src="{% static 'scripts/cropper.min.js' %}"></script>
+  <script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
+  {% block scripts %}
+  {% endblock scripts %}
 </body>
 </html>

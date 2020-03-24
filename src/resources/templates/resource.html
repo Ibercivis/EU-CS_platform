@@ -56,7 +56,7 @@
             <div class="col-12 col-sm-3 mt-5">
               <div class="card h-100 shadow-sm">
                 <div class="card-body">
-                  <h1><i class="fas fa-globe-europe" ></i></h1>
+                  <h1><i class="fas fa-language" ></i></h1>
                   <h5 class="text-dark">Language</h5>
                   {% get_language_info_list for LANGUAGES as languages %}
                   {% for language in languages %}
@@ -70,7 +70,7 @@
             <div class="col-12 col-sm-3 mt-5">
               <div class="card h-100 shadow-sm">
                 <div class="card-body">
-                  <h1><i class="fas fa-globe-europe" ></i></h1>
+                  <h1><i class="fas fa-grip-horizontal" ></i></h1>
                   <h5 class="text-dark">Category</h5>
                   <a class="badge badge-light" href="/category?theme={{resource.category.id}}">{{resource.category | upper }}</a>
                 </div>
@@ -79,7 +79,7 @@
             <div class="col-12 col-sm-3 mt-5">
               <div class="card h-100 shadow-sm">
                 <div class="card-body">
-                  <h1><i class="fas fa-globe-europe" ></i></h1>
+                  <h1><i class="fas fa-book" ></i></h1>
                   <h5 class="text-dark">Theme</h5>
                   {% for theme in resource.theme.all %}<a class="badge badge-light" href="/resources?theme={{theme.id}}">{{ theme | upper }}</a> {% endfor %}
                 </div>

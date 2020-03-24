@@ -23,16 +23,17 @@
 {% endblock %}
 {% block splash %}
 <div class="jumbotron jumbotron-fluid jumbotron-projects">
-	<div class="container">
-		<h1 class="display-5 pb-0"><br>Resources</h1>
-		<p class="lead text-light">	Find or add Citizen Science resources</p>
-	</div>
+  <div class="container">
+    <h1 class="display-5 pb-0"><br>Resources</h1>
+    <p class="lead text-light">Browse and search for citizen science resources, or add your own
+  </div>
 </div>
 {% endblock splash %}
 {% block page_header %}
 {% include "finder_resources.html" %}
 {% endblock page_header %}
 {%block list_of_items %}
+
 <div class="container">
   <div class="row">
     {% include "resources_cards.html" %}
@@ -147,18 +148,18 @@ src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bo
   });
 </script>
 <script>
-	$(document).ready(function() {
-		// executes when HTML-Document is loaded and DOM is ready
-		console.log("document is ready");
-		$( ".card" ).hover(
-		function() {
-			$(this).addClass('shadow-none').css('cursor', 'pointer');
-		}, function() {
-			$(this).removeClass('shadow-none');
-		}
-		);
+  $(document).ready(function() {
+    // executes when HTML-Document is loaded and DOM is ready
+    console.log("document is ready");
+    $( ".card" ).hover(
+    function() {
+      $(this).addClass('shadow-none').css('cursor', 'pointer');
+    }, function() {
+      $(this).removeClass('shadow-none');
+    }
+    );
 
-		// document ready
-	});
+    // document ready
+  });
 </script>
 {% endblock scripts %}

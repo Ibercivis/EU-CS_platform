@@ -18,11 +18,22 @@
   <!-- Your custom styles (optional) -->
   <link rel="stylesheet" href="{% static 'site/css/style.css' %}">
 </head>
+
+
+
+
+
+
+
+
 <body>
 <header>
   <!--Navbar-->
   <nav class="navbar navbar-expand-lg navbar-dark navbar-front text-white text-weight-bold fixed-top">
     <div class="container text-weight-bold">
+      <a class="navbar-brand" href="/">
+      <img src="{% static 'site/img/icon.png' %}" width="30" height="30" alt="">
+    </a>
 	    <a class="navbar-brand nav-link active"  href="/">{% include "_brandname.html" %}</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

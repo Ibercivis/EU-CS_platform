@@ -1,15 +1,15 @@
-
 {% load staticfiles %}
 {% load i18n %}
 {% load l10n %}
+
 <div class="row">
-	<div class="col-lg-2">
-		{% if user.is_authenticated %}
-		<a class="btn btn-warning rounded-pill" href="{% url 'new_resource' %}">
-			<i class="fas fa-plus-circle"></i> Add
-		</a>
-		{% endif %}
+	<div class="col-lg-12 mb-3">
+		Search for citizen science resources by title or keywords, and filter further across a range of fields.
+		<b>Submitted projects that have been checked by our Moderator, have been marked as 'Moderated'</b>. Read more about our <a href="/faq">moderation process</a>
 	</div>
+</div>
+
+<div class="row">
 	<div class="col-lg-12 float-right">
 		<form class="form-inline float-lg-right" id="searchResources" action="{% url 'resources' %}">
 			<div class="float-right">
@@ -44,17 +44,24 @@
 						{% endfor %}
 						<select/>
 						<select id="featuredCheck" name="featuredCheck" class="custom-select form-control">
-							<option value="On" {% if filters.featuredCheck == "On" %} selected {% endif %}>Curated</option>
-							<option value="Off" {% if filters.featuredCheck == "Off" %} selected {% endif %}>Not curated</option>
+							<option value="On" {% if filters.featuredCheck == "On" %} selected {% endif %}>Moderated</option>
+							<option value="Off" {% if filters.featuredCheck == "Off" %} selected {% endif %}>Not moderated</option>
 							<option value="All" {% if filters.featuredCheck == "All" %} selected {% endif %}">All</option>
 						</select>
-						<button class="btn btn-info" id="search" type="submit"><i class="fas fa-search"></i> Find</button>
+						<div class="input-group-append">
 
+						<button class="btn btn-info" id="search" type="submit"><i class="fas fa-search"></i> Find</button>
+						</div>
 					</div>
 				</div>
 			</form>
 		</div>
 	</div>
+	{% if user.is_authenticated %}
+	<a class="btn btn-warning float-left mb-3" href="{% url 'new_resource' %}">
+		<i class="fas fa-plus-circle"></i> Add
+	</a>
+	{% endif %}
 	<div class="col-lg-12 text-right">
 		{% if request.get_full_path != "/resources" %}
 		<a class="text-decoration-none text-muted" href="/resources"><i class="fas fa-times"></i> Clear current search query, filters, and sorts</a>

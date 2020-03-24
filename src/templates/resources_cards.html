@@ -41,13 +41,10 @@
             {% endif %}
             {% else %}
             {% if rsc.id in featuredResources %}
-            <button class="btn float-left"><i class="fas fa-check"></i>&nbsp;Approved</button>
+            <img  class="img-fluid mt-2" src="{% static 'site/img/icon_color.png' %}" />
             {% else %}
-            <button class="btn float-left" data-toggle="tooltip" data-placement="top" title="Waiting for moderation under EU-CITIZEN.SCIENCE criteria">
-              <i class="fas fa-hourglass-half"></i>&nbsp;Pending...
-            </button>
+            <img  class="img-fluid mt-2" src="{% static 'site/img/icon_bw.png' %}" />
             {% endif %}
-
             {% endif %}
           </div>
           <div id="hidden{{rsc.id}}">
