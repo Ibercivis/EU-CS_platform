@@ -12,7 +12,8 @@ from datetime import datetime, date
 
 
 class ResourceForm(forms.ModelForm):
-    abstract = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 3000}}), max_length=3000)
+    #abstract = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 3000}}), max_length=3000)
+    abstract = forms.CharField(widget=forms.Textarea, max_length = 3000)
     choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     choicesSelected = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     keywords = forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False, label="Keywords (comma separated)")
