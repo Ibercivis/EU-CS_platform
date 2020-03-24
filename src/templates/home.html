@@ -34,7 +34,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-12 mt-4">
-					<h2 style="color: #5937c3">Lastest resources</h2>
+					<h2 style="color: #5937c3">Latest resources</h2>
 				</div>
 			</div>
 			<div class="row">
@@ -66,7 +66,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12 mt-4">
-				<h2>Lastest projects</h2>
+				<h2>Latest projects</h2>
 			</div>
 		</div>
 		<div class="row">
@@ -81,7 +81,7 @@
 						{% endif %}
 					</a>
 					<div class="upper">
-						<a class=" badge frontpage round-0" href="projects?country={{country.code}}">{{ project.name | upper }}</a>
+						<a class=" badge frontpage round-0" href="projects?country={{country.code}}">{{ project.name | truncatechars:32 | upper }}</a>
 					</div>
 				</div>
 			</div>
@@ -97,7 +97,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-12 mt-4">
-						<h2>Lastest blog entries</h2>
+						<h2>Latest blog entries</h2>
 					</div>
 				</div>
 				<div class="row">
