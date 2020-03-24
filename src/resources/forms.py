@@ -12,7 +12,7 @@ from datetime import datetime, date
 
 
 class ResourceForm(forms.ModelForm):
-    abstract = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 1000}}), max_length=1000)
+    abstract = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 3000}}), max_length=3000)
     choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     choicesSelected = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     keywords = forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False, label="Keywords (comma separated)")
@@ -33,10 +33,11 @@ class ResourceForm(forms.ModelForm):
     y2 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     width2 = forms.FloatField(widget=forms.HiddenInput(),required=False)
     height2 = forms.FloatField(widget=forms.HiddenInput(), required=False)
-    resource_DOI = forms.CharField(max_length=100)
-    year_of_publication = forms.IntegerField()
+    resource_DOI = forms.CharField(max_length=100, required=False)
+    author_email  = forms.CharField(max_length=100, required=False)
+    year_of_publication = forms.IntegerField(required=True)
     name = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'autocomplete':'nope'}))
-    license = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'autocomplete':'nope'}))
+    license = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'autocomplete':'nope'}), required=False)
     curatedList = forms.ModelMultipleChoiceField(queryset=ResourceGroup.objects.all(), widget=Select2MultipleWidget, required=False,label="Curated lists")
 
     class Meta:
@@ -117,4 +118,4 @@ class ResourceForm(forms.ModelForm):
 class ResourcePermissionForm(forms.Form):
     selectedUsers = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     usersCollection = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
-    usersAllowed =   forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False, label="Allow users to edit")
+    usersAllowed =   forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False, label="Following users can edit the resource")

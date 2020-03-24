@@ -10,19 +10,16 @@
 <div class="row">
 	<div class="col-lg-12 mb-3">
 		Search for citizen science projects by keyword or title, and filter further across a range of fields.<b> Submitted projects that have been checked by our Moderator,
-			have been marked as 'Moderated'</b>. Read more about our <a href="/faq">moderation process</a>
+			have been marked as 'Moderated'</b>. Read more about our <a href="/faq">moderation process.</a>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-lg-2">
 
-			</div
-		</div>
+	<div class="row">
 		<div class="col-lg-12 float-right">
 			<form class="form-inline float-lg-right" id="searchProjects" action="{% url 'projects' %}">
 				<div class="float-right">
 					<div class="input-group mb-3">
-						<input type="text" id="keywords" name="keywords" style="width: 100%" autocomplete="off"
+						<input type="text" id="keywords" name="keywords"  autocomplete="off"
 						value="{{filters.keywords}}" class="basicAutoComplete form-control" placeholder="Title or keywords" data-url="text_autocomplete/">
 						<select id="status" name="status" class="custom-select status-select form-control">
 							<option value="">Status<option>
@@ -52,8 +49,8 @@
 									{% endfor %}
 								</select>
 								<select id="featuredCheck" name="featuredCheck" class="custom-select form-control">
-									<option value="On" {% if filters.featuredCheck == "On" %} selected {% endif %}>Moderated</option>
-									<option value="Off" {% if filters.featuredCheck == "Off" %} selected {% endif %}>Not moderated</option>
+									<option value="On" {% if filters.featuredCheck == "On" %} selected {% endif %}>Only Moderated</option>
+									<option value="Off" {% if filters.featuredCheck == "Off" %} selected {% endif %}>Only not moderated</option>
 									<option value="All" {% if filters.featuredCheck == "All" %} selected {% endif %}">All</option>
 								</select>
 								<div class="input-group-append">
@@ -62,18 +59,18 @@
 									</button>
 								</div>
 							</div>
-							</div>
-						</form>
-					</div>
+						</div>
+					</form>
 				</div>
-				{% if user.is_authenticated %}
-				<a class="btn btn-warning mb-3 float-left" href="{% url 'new_project' %}" data-toggle="tooltip" data-placement="top" title="Click here to add a new project">
-					<i class="fas fa-plus-circle"></i>Add
-				</a>
-				{% endif %}
+			</div>
+			{% if user.is_authenticated %}
+			<a class="btn btn-warning mb-3 float-left" href="{% url 'new_project' %}" data-toggle="tooltip" data-placement="top" title="Click here to add a new project">
+				<i class="fas fa-plus-circle"></i>Add
+			</a>
+			{% endif %}
 
-				<div class="col-lg-12 text-right">
-					{% if request.get_full_path != "/projects" %}
-					<a class="text-decoration-none text-muted" href="/projects"><i class="fas fa-times"></i> Clear current search query, filters, and sorts</a>
-					{% endif %}
-				</div>
+			<div class="col-lg-12 text-right">
+				{% if request.get_full_path != "/projects" %}
+				<a class="text-decoration-none text-muted" href="/projects"><i class="fas fa-times"></i> Clear current search query, filters, and sorts</a>
+				{% endif %}
+			</div>

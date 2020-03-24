@@ -24,27 +24,31 @@
         <img class="img-fluid img-responsive img-zoom" src='/static/site/img/project.png'>
         {% endif %}
         <div class="card-text p-3">
-          {% if user.is_authenticated %}
-          {% if project.creator == user or user.is_staff or user.id in cooperators %}
           <div class="row">
-            <a class="btn btn-info float-right" href="{% url 'editProject' project.id %}"><i class="fas fa-edit"></i> Edit </a>
-          </div>
-          {% endif %}
-          {% if project.creator == user or user.is_staff %}
-          <br>
-          <permissionForm>
-            {% csrf_token %}
-            <div class="row">
-              <div class="col-5 p-3 ml-5">
-                {{ permissionForm.usersAllowed | as_crispy_field }}
-                {{ permissionForm.selectedUsers | as_crispy_field }}
-                {{ permissionForm.usersCollection | as_crispy_field }}
-              </div>
+            <div class="col-6">
+              {% if user.is_authenticated %}
+              {% if project.creator == user or user.is_staff or user.id in cooperators %}
+
+              <a class="btn btn-info float-left mt-4" href="{% url 'editProject' project.id %}"><i class="fas fa-edit"></i> Edit </a>
+
+              {% endif %}
+              {% if project.creator == user or user.is_staff %}
             </div>
-          </permissionForm>
-          <br><br>
-          {% endif %}
-          {% endif %}
+            <div class="col-6">
+              <permissionForm>
+                {% csrf_token %}
+                <div class="row">
+                  <div class="col-5">
+                    {{ permissionForm.usersAllowed | as_crispy_field }}
+                    {{ permissionForm.selectedUsers | as_crispy_field }}
+                    {{ permissionForm.usersCollection | as_crispy_field }}
+                  </div>
+                </div>
+              </permissionForm>
+            </div>
+            {% endif %}
+            {% endif %}
+          </div>
           <div class="row">
             <div class="col-12 col-xl-4">
               <h2>{{project.name}}<!-- i class="fas fa-star-half-alt"></i>{{votes}}{{votes| stringformat:'d'}}--></h2>
@@ -98,8 +102,6 @@
               <b>Status: </b>{{ project.status}}<br>
               <b>Date created:</b> {{project.dateCreated  | date:"d/m/Y"}}<br>
               <b>Date updated:</b>{{project.dateUpdated  | date:"d/m/Y"}}<br>
-              <b>Contact person: </b>{{ project.author}}<br>
-              <b>Contact person email: </b>{{ project.author_email}}<br>
               <b>Website: </b><a href="{{project.url}}">{{project.url}}</a><br>
             </div>
           </div>
@@ -124,7 +126,7 @@
             <div class="col-12 col-xl-4 mt-5">
               <h2>Funding</h2>
             </div>
-            <div class="col-12 col-xl-4 mt-5 pt-2">
+            <div class="col-12 col-xl-8 mt-5 pt-2">
               <b>Funding body: </b>{% if project.fundingBody %} {{ project.fundingBody }} {% endif %}<br>
               <b>Funding program:</b>{{ project.fundingProgram }}<br>
               <b>Funding agency: </b>{% if project.fundingAgency %} {{ project.fundingAgency }} {% endif %}<br>
@@ -143,128 +145,132 @@
           </div>
         </div><!-- End of card-text -->
         <div class="card-footer bg-white">
-          <div id="featured{{project.id}}" class="float-left">
-            {% if user.is_staff %}
-            {% if project.id in featuredProjects %}
-            <a onclick="setFeatured({{project.id}})" href="">Approved</a>
-            {% else %}
-            <a onclick="setFeatured({{project.id}})" href="">Pending</a>
-            {% endif %}
-            {% else %}
-            {% if project.id in featuredProjects %}
-            <button class="btn float-left"><i class="fas fa-check"></i>&nbsp;Approved</button>
-            {% else %}
-            <button class="btn btn-pending float-left"><i class="fas fa-hourglass-half mt-2"></i>&nbsp;Pending...</button>
-            {% endif %}
-          </div>
-          {% endif %}
-          <a class="btn btn-outline-primary float-right ml-2" target="_black" href="{{project.url }}"> Website</a>
-          {% if user.is_authenticated %}
-          <div id="followed{{project.id}}">
-            {% if project.id in followedProjects %}
-            <button type="button" class="btn btn-outline-primary float-right" onclick="setFollowedProject({{project.id}},{{user.id}})">Following</button>
-            {% else %}
-            <button type="button" class="btn btn-outline-secondary float-right" onclick="setFollowedProject({{project.id}},{{user.id}})">Follow</button>
-            {% endif %}
-          </div>
-          {% endif %}
-        </div><!-- End of card footer -->
-      </div><!-- End of card -->
+          <div class="row">
+            <div class="col-6">
+              <div id="featured{{project.id}}" class="float-left">
+                {% if user.is_staff %}
+                {% if project.id in featuredProjects %}
+                <img  class="img-fluid mt-2"  onclick="setFeatured({{project.id}})" src="{% static 'site/img/icon_color.png' %}" />
+                {% else %}
+                <img  class="img-fluid mt-2" onclick="setFeatured({{project.id}})" src="{% static 'site/img/icon_bw.png' %}" />
+                {% endif %}
+                {% else %}
+                {% if project.id in featuredProjects %}
+                <img  class="img-fluid mt-2" src="{% static 'site/img/icon_color.png' %}" />
+                {% else %}
+                <img  class="img-fluid mt-2" src="{% static 'site/img/icon_bw.png' %}" />
+                {% endif %}
+                {% endif %}
+              </div>
+            </div>
+            <div class="col-6">
+              {% if user.is_authenticated %}
+              <div id="followed{{project.id}}" class="float-right">
+                {% if project.id in followedProjects %}
+                <button type="button" class="btn btn-outline-primary float-right" onclick="setFollowedProject({{project.id}},{{user.id}})">Following</button>
+                {% else %}
+                <button type="button" class="btn btn-outline-secondary float-right" onclick="setFollowedProject({{project.id}},{{user.id}})">Follow</button>
+                {% endif %}
+              </div>
+              {% endif %}
+            </div>
+          </div><!-- End of card footer -->
+        </div><!-- End of card -->
+      </div>
     </div>
   </div>
-</div>
-{% endblock list_of_items %}
+  {% endblock list_of_items %}
 
-{% block scripts %}
-<script type="text/javascript">
+  {% block scripts %}
+  <script type="text/javascript">
 
-  $(document).ready(function () {
-    var users = $("#id_usersCollection").val();
-    var users = users.split(",");
+    $(document).ready(function () {
+      var users = $("#id_usersCollection").val();
+      var users = users.split(",");
 
-    var selectedUsers = $("#id_selectedUsers").val().split(",");
-    for (user of users){
-      var found = false;
-      for(sel of selectedUsers){
-        if(sel.trim() == user.trim()){
-          found = true;
-          $("#id_usersAllowed").append("<option value='" + user +"' selected> " + user + " </option>");
+      var selectedUsers = $("#id_selectedUsers").val().split(",");
+      for (user of users){
+        var found = false;
+        for(sel of selectedUsers){
+          if(sel.trim() == user.trim()){
+            found = true;
+            $("#id_usersAllowed").append("<option value='" + user +"' selected> " + user + " </option>");
+          }
+        }
+        if(!found){
+          $("#id_usersAllowed").append("<option value='" + user +"'> " + user + " </option>");
         }
       }
-      if(!found){
-        $("#id_usersAllowed").append("<option value='" + user +"'> " + user + " </option>");
-      }
+    });
+
+
+    var map;
+    var marker_layer = new L.marker([50.5, 30.5]);
+
+    function map_init_basic (leafmap, options) {
+      map = leafmap;
+      map.setView([{{project.latitude}}, {{project.longitude}}], 12)
+      new L.marker([{{project.latitude}},{{project.longitude}}]).addTo(map);
     }
-  });
 
+    $(function () {
+      $('#id_usersAllowed').on('change', function () {
+        users = $("#id_usersAllowed option:selected").map(function () {
+          return $.trim($(this).text());
+        }).get().join(',');
 
-  var map;
-  var marker_layer = new L.marker([50.5, 30.5]);
+        var idProject = {{project.id}};
+        var request = $.ajax(
+        {
+          type: "POST",
+          url: "{% url 'allowUser' %}",
+          data: {
+            "project_id": idProject,
+            "users": users,
+            csrfmiddlewaretoken: '{{ csrf_token }}'
+          },
+          success: function (response) {
 
-  function map_init_basic (leafmap, options) {
-    map = leafmap;
-    map.setView([{{project.latitude}}, {{project.longitude}}], 12)
-    new L.marker([{{project.latitude}},{{project.longitude}}]).addTo(map);
-  }
+          }
+        }
+        );
+      });
+    });
 
-  $(function () {
-    $('#id_usersAllowed').on('change', function () {
-      users = $("#id_usersAllowed option:selected").map(function () {
-        return $.trim($(this).text());
-      }).get().join(',');
-
-      var idProject = {{project.id}};
+    function setFeatured(idProject){
+      var htmlId = "featured" + idProject;
       var request = $.ajax(
       {
         type: "POST",
-        url: "{% url 'allowUser' %}",
+        url: "{% url 'setFeatured' %}",
         data: {
           "project_id": idProject,
-          "users": users,
           csrfmiddlewaretoken: '{{ csrf_token }}'
         },
         success: function (response) {
-
+          $("#"+htmlId).load(" #"+htmlId);
         }
       }
       );
-    });
-  });
-
-  function setFeatured(idProject){
-    var htmlId = "featured" + idProject;
-    var request = $.ajax(
-    {
-      type: "POST",
-      url: "{% url 'setFeatured' %}",
-      data: {
-        "project_id": idProject,
-        csrfmiddlewaretoken: '{{ csrf_token }}'
-      },
-      success: function (response) {
-        $("#"+htmlId).load(" #"+htmlId);
-      }
     }
-    );
-  }
 
-  function setFollowedProject(idProject, idUser){
-    var htmlId = "followed" + idProject;
-    var request = $.ajax(
-    {
-      type: "POST",
-      url: "{% url 'setFollowedProject' %}",
-      data: {
-        "project_id": idProject,
-        "user_id": idUser,
-        csrfmiddlewaretoken: '{{ csrf_token }}'
-      },
-      success: function (response) {
-        $("#"+htmlId).load(" #"+htmlId);
+    function setFollowedProject(idProject, idUser){
+      var htmlId = "followed" + idProject;
+      var request = $.ajax(
+      {
+        type: "POST",
+        url: "{% url 'setFollowedProject' %}",
+        data: {
+          "project_id": idProject,
+          "user_id": idUser,
+          csrfmiddlewaretoken: '{{ csrf_token }}'
+        },
+        success: function (response) {
+          $("#"+htmlId).load(" #"+htmlId);
+        }
       }
+      );
     }
-    );
-  }
-</script>
-{{ permissionForm.media.js }}
-{% endblock scripts %}
+  </script>
+  {{ permissionForm.media.js }}
+  {% endblock scripts %}
