@@ -101,8 +101,6 @@
             </div>
             <div class="col-12 col-xl-8 mt-5">
               <b> URL: </b><a href="{{resource.url}}" target="_blank">{{resource.url}}</a><br>
-              <b>Author(s): </b>{% for author in resource.authors.all %}{{ author }} {% endfor %}<br>
-              <b>Author's email: </b>{{ resource.author_email }}<br>
               <b>License: </b>{{ resource.license }}<br>
               <b>Audience: </b>{% for audience in resource.audience.all %}{{ audience }} {% endfor %}<br>
               <b>Publisher: </b> {{ resource.publisher }}<br>
