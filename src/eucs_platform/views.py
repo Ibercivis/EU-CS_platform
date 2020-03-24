@@ -79,8 +79,8 @@ def terms(request):
 def privacy(request):
     return render(request, 'privacy.html')
 
-def help(request):
-    return render(request, 'help.html')
+def faq(request):
+    return render(request, 'faq.html')
 
 def status(request):
     return render(request, 'status.html')

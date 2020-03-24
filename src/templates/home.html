@@ -1,4 +1,4 @@
-{% extends "base3.html" %}
+{% extends "base2.html" %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% load i18n %}
@@ -11,7 +11,7 @@
 <div class="jumbotron jumbotron-fluid jumbotron-main">
 	<div class="container">
 		<h1 class="display-4 mt-5 pt-5 pb-0"><br>Join the Citizen Science Community</h1>
-		<p class="lead text-light">	Here goes a great short phrase with links to actions like <a href="#"> login</a> , or also <a href="#">sign-up</a>, or things like <a href="#">browse</a></p>
+		<p class="lead text-light">Welcome to the platform for sharing knowledge, tools, training and resources for Citizen Science</p>
 	</div>
 </div>
 <div class="container-fluid"  style="background: #f8f8f8;">
@@ -21,8 +21,7 @@
 				<div class="form-row">
 					<div class="input-group mb-3">
 						<input type="text" id="keywords" name="keywords" autocomplete="off" class="basicAutoComplete form-control"
-						placeholder="What are you looking for today?" data-url="home_autocomplete/"/>
-
+						placeholder="Search for citizen science resources, projects, tools, training, and more...." data-url="home_autocomplete/"/>
 							<button  id="resources" class="btn btn-info" style="margin-left: 5px;" onClick='$("#finder").attr("action", "resources").submit()'> Resources</button>
 							<button  id="resources" class="btn btn-info" style="margin-left: 5px;" onClick='$("#finder").attr("action", "projects").submit()'> Projects</button>
 					</div>

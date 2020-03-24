@@ -2,7 +2,9 @@ body{
 	min-height: 100vh;
 }
 main {
+	font-family: arial, sans-serif;
 	font-weight: 200;
+	color: #444;
 	min-height: 100vh;
 	background-color: #f8f8f8;
 }
@@ -90,6 +92,8 @@ input[type=checkbox] {
 #featuredCheck:checked + .mylabel {
 	background-image: url(../img/icon_color.png);
 }
+
+
 .nav-link.active{
 	border-bottom: 2px solid #17A398;
 }

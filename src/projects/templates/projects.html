@@ -6,9 +6,7 @@
 {% block navbar-left %}
 {% include "_navbar.html" with active_link="projects" %}
 {% endblock %}
-{% block page_header %}
-{% include "finder_projects.html" %}
-{% endblock page_header %}
+
 {% block messages %}
 {% if messages %}
 {% for message in messages %}
@@ -29,13 +27,19 @@
 	</div>
 </div>
 {% endblock splash %}
+{% block page_header %}
+{% include "finder_projects.html" %}
+
+{% endblock page_header %}
 {% block list_of_items %}
 <div class="container">
 	<div class="row">
 	{% include "projects_cards.html" %}
 	{% endblock list_of_items %}
+
 	</div>
 </div>
+
 {% block scripts %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js"
 integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="anonymous"></script>

@@ -1,4 +1,6 @@
 {% extends "base2.html" %}
+{% load i18n %}
+{% load l10n %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% block title %}{{ block.super }}Events{% endblock %}
@@ -7,7 +9,7 @@
 <div class="jumbotron jumbotron-fluid jumbotron-lists">
 	<div class="container">
 		<h1 class="display-5 pb-0"><br>Curated lists</h1>
-		<p class="lead text-light">Don't know where to start? Have a look to our curated lists</p>
+		<p class="lead text-light">A selection of Gold Star citizen science resources made by the EU-Citizen.Science consortium</p>
 	</div>
 </div>
 
@@ -22,10 +24,13 @@ Curated Resources
 {% for group in groups %}
 <div class="container">
 	<div class="row">
-		<div class="col-12">
-			Here is going to be some lists with curated sets of resources: e.g. Best guidelines if you want to start a CS project. Working on it (it is ready on v0.2 (18th March 2020))
-		</div>
 		<div class="col-lg-12">
+			<b>The EU-Citizen.Science consortium has made a selection of Gold Star citizen science resources</b>
+			to help you get started with designing and launching your own citizen science project, categorised across the project lifecycle.
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12 mt-3">
 			<h3>{{group.name}}</h3>
 		</div>
 	</div>
@@ -37,24 +42,72 @@ Curated Resources
 	<div class="row">
 		{% for rg in resourcesgrouped %}
 		{% if rg.group == group %}
-		<div class="col-lg-6 col-md-12 mb-4">
-			<div class="card card-small card-post h-100">
-				<div class="card-body">
-					<h4 class="card-title"> {{ rg.resource.name  | truncatewords:4}} </h4>
-					<img class="card-img" style=" float: left; background-color: #fff; border-radius: 50%; border: 0px; width: 75px" src="../static/site/img/gdoc.png">
-					<p class="card-text">{{rg.resource.abstract | truncatewords:20}}</p>
-					<p class="card-text"><a href="{{rg.resource.url}}" target="_blank">Download resource </a></p>
+		<div class="col-lg-4 col-md-12 mb-4">
+			<div class="card h-100 shadow">
+				<a class="card-img-wrap" href="/resource/{{rsc.id}}">
+					{% if rg.resource.image1 %}
+					<img class="img-fluid img-zoom" src="{{ rg.resource.image1 }}" />
+					{% else %}
+					<img class="img-fluid img-zoom" src="{% static 'site/img/proct.png' %}" />
+					{% endif %}
+				</a>
+				<div class="upper">
+					{% get_language_info_list for LANGUAGES as languages %}
+					{% for language in languages %}
+					{% if language.code == rg.resource.inLanguage %}
+					<a class="badge frontpage" href="/resources?language={{rsc.inLanguage}}">{{language.name_local | upper}}</a>
+					{% endif %}
+					{% endfor %}
 				</div>
-				<!--div class="card-footer text-muted border-top py-3">
-				<span>Author: {{rg.resource.author.name}}</span><br />
-				<span class="d-inline-block">Date
-				<span class="text-fiord-blue">{{rg.resource.datePublished | date:"d/m/Y"}}</span>
-			</span>
-		</div-->
+				<div class="card-body">
+					<h6 class="card-title mt-3 mb-3"><a class="card-link card-link-resource" href="/resource/{{rsc.id}}" class="card-link">{{ rg.resource.name | truncatewords:12 }}</a></h6>
+					<div class="card-text mt-3">{{rg.resource.abstract | safe | truncatewords:30 }}
+						<a class="" href="/resource/{{rg.resource.id}}" target="_blank">Read more</a>
+					</div>
+					<a class="badge badge-dark" href="/resources?category={{rsc.category.id}}">{{ rg.resource.category | upper }}</a><br>
+					{% for theme in rg.resource.theme.all %}<a class="badge badge-light" href="/resources?theme={{theme.id}}">{{ theme | upper}}</a> {% endfor %}<br>
+					{% for keyword in rg.resource.keywords.all %} <a class="badge  badge-light" href="/resources?keywords={{keyword}}">{{keyword | upper}}</a>  {% endfor %}
+				</div><!-- end of card-body -->
+				<div class="card-footer bg-white">
+					<div class="row">
+						<div class="col-6">
+						</div>
+						<div class="col-6">
+							{% if user.is_authenticated %}
+							<div id="saved{{rsc.id}}">
+								{% if rg.resource.id in savedResources %}
+								<button type="button" class="btn btn-outline-primary float-right mt-2" onclick="setSavedResource({{rg.resource.id}},{{user.id}})">In my library</button>
+								{% else %}
+								<button type="button" class="btn btn-outline-secondary float-right mt-2" onclick="setSavedResource({{rg.resource.id}},{{user.id}})">To my library</button>
+								{% endif %}
+							</div>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{% endif %}
+		{% endfor %}
 	</div>
 </div>
-</div>
-{% endif %}
-{% endfor %}
+
 {% endfor %}
 {% endblock list_of_items %}
+{% block scripts %}
+<script>
+	$(document).ready(function() {
+		// executes when HTML-Document is loaded and DOM is ready
+		console.log("document is ready");
+		$( ".card" ).hover(
+		function() {
+			$(this).addClass('shadow-none').css('cursor', 'pointer');
+		}, function() {
+			$(this).removeClass('shadow-none');
+		}
+		);
+
+		// document ready
+	});
+</script>
+{% endblock scripts %}
