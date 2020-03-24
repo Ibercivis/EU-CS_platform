@@ -7,20 +7,32 @@
 {% block form_heading %}Signing Up is Free{% endblock %}
 
 {% block list_of_items %}
-<div class="container form-box col-lg-4 col-md-6 col-sm-12 mb-4">
-  <div class="text-center">
-    {% block form %}
-    {% crispy form %}
+<div class="container mt-5">
+  <div class="row">
+    <div class="container d-flex justify-content-center">
+      <div class="col-lg-6 col-12">
+        <div class="card mb-4 mt-5 shadow">
+          <div class="card-header">
+            <h3>Sign in</h3>
+          </div>
+          <div class="card-text p-3">
+            {% block form %}
+            {% crispy form %}
 
-    <div class="form-message">
-      <p>
-				<br/>
-        Already signed up? <a href="{% url 'accounts:login' %}">Log in</a>.
-      </p>
-			<br>
-			</b>By clicking on Register, you accept our <a href="/terms"> Terms of Use</a>. Learn more about how we collect, use and share your information in the <a href="/privacy"> Privacy section</a>, as well as our use of cookies and similar technologies in our <a href="/privacy#coockies">Cookie Policy</a></p>
+            <div class="form-message">
+              <p>
+                <br/>
+                Already signed up? <a href="{% url 'accounts:login' %}">Log in</a>.
+              </p>
+              <br>
+              By clicking on Register, you accept our <a href="/terms"> Terms of Use</a>. Learn more about how we collect, use and share your information in the <a href="/privacy"> Privacy section</a>, as well as our use of cookies and similar technologies in our <a href="/privacy#coockies">Cookie Policy</a></p>
+            </div>
+            {% endblock form %}
+          </div>
+        </div>
+      </div>
     </div>
-    {% endblock form %}
   </div>
 </div>
+
 {% endblock list_of_items %}
