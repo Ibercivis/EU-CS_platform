@@ -36,7 +36,7 @@ class ResourceForm(forms.ModelForm):
     height2 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     resource_DOI = forms.CharField(max_length=100, required=False)
     author_email  = forms.CharField(max_length=100, required=False)
-    year_of_publication = forms.IntegerField(required=True)
+    year_of_publication = forms.IntegerField(required=False)
     name = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'autocomplete':'nope'}))
     license = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'autocomplete':'nope'}), required=False)
     curatedList = forms.ModelMultipleChoiceField(queryset=ResourceGroup.objects.all(), widget=Select2MultipleWidget, required=False,label="Curated lists")
