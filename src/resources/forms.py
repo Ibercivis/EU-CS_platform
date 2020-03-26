@@ -22,7 +22,7 @@ class ResourceForm(forms.ModelForm):
     authorsCollection = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     selectedAuthors = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     authors = forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False,label="Authors (comma separated)")
-    audience = forms.ModelMultipleChoiceField(queryset=Audience.objects.all(), widget=Select2MultipleWidget)
+    audience = forms.ModelMultipleChoiceField(queryset=Audience.objects.all(), widget=Select2MultipleWidget(),)
     theme = forms.ModelMultipleChoiceField(queryset=Theme.objects.all(), widget=Select2MultipleWidget, required=False)
     image1 = forms.ImageField(required=False)
     x1 = forms.FloatField(widget=forms.HiddenInput(),required=False)
