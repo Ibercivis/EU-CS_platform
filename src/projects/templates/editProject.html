@@ -588,8 +588,8 @@
       $("#id_longitude").val((e.latlng.lng).toFixed(6));
     });
     map.addLayer(marker_layer);
-    $("#id_latitude").val(e.location.y);
-    $("#id_longitude").val(e.location.x);
+    $("#id_latitude").val(parseFloat(e.location.y).toFixed(6));
+    $("#id_longitude").val(parseFloat(e.location.x).toFixed(6));
   }
 
   function map_init_basic (leafmap, options) {
