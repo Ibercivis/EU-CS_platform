@@ -30,7 +30,7 @@ class ProjectForm(forms.Form):
     url = forms.CharField(max_length=200, required=False)
     #Contact person info
     contact_person = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'autocomplete':'nope'}))
-    contact_person_email = forms.EmailField()
+    contact_person_email = forms.EmailField(required=False)
     contact_person_phone = forms.CharField(max_length=100, required=False)
     #Images and communications
     image1 = forms.ImageField(required=False,label="Image 1 (Will be resized to 600x400 pixels)")
