@@ -4,6 +4,8 @@
 {% load leaflet_tags %}
 {% block head %}
 {{block.super }}
+<link rel="stylesheet" href="{% static 'site/css/leaflet-geosearch_style.css' %}">
+<link rel="stylesheet" href="{% static 'site/css/leaflet.css' %}">
 {% leaflet_js %}
 {% leaflet_css %}
 {% endblock head %}
@@ -255,6 +257,7 @@
 <script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"></script>
+<script src="{% static 'site/js/leaflet-geosearch_2_7.min.js' %}"></script>
 <script>
   $(document).ready(function () {
 
@@ -467,10 +470,41 @@
     $("#id_longitude").val((e.latlng.lng).toFixed(6));
   }
 
+
+  function searchedMarker(e){
+    map.removeLayer(marker_layer);
+    marker_layer = new L.marker([e.location.y,e.location.x], {draggable:true});
+    marker_layer.on('drag', function (e) {
+      $("#id_latitude").val((e.latlng.lat).toFixed(6));
+      $("#id_longitude").val((e.latlng.lng).toFixed(6));
+    });
+    map.addLayer(marker_layer);
+    $("#id_latitude").val(e.location.y);
+    $("#id_longitude").val(e.location.x);
+  }
+
   function map_init_basic (leafmap, options) {
     map = leafmap;
     map.on('click', addMarker);
+
+    var GeoSearchControl = window.GeoSearch.GeoSearchControl;
+    var OpenStreetMapProvider = window.GeoSearch.OpenStreetMapProvider;
+    var provider = new OpenStreetMapProvider({});
+
+    //  Define search controls
+    var searchControl = new GeoSearchControl({
+      provider: provider,
+      style: 'bar',
+      showMarker: false,
+      autoClose: true,
+      keepResult: true,
+      //retainZoomLevel: true,
+    });
+
+    map.addControl(searchControl);
+    map.on('geosearch/showlocation', searchedMarker);
   }
+
 
 </script>
 {{ form.media.js }}
