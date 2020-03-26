@@ -13,7 +13,7 @@ from datetime import datetime, date
 
 class ResourceForm(forms.ModelForm):
     #abstract = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 3000}}), max_length=3000)
-    abstract = forms.CharField(widget=forms.Textarea, max_length = 3000)
+    abstract = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Please briefly describe the resource (ideally in 500 words or less)'}), max_length = 3000)
     choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     choicesSelected = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     keywords = forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False, label="Keywords (comma separated)")
@@ -36,8 +36,9 @@ class ResourceForm(forms.ModelForm):
     height2 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     resource_DOI = forms.CharField(max_length=100, required=False)
     author_email  = forms.CharField(max_length=100, required=False)
+    url = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'URL to where the document is hosted by the publisher, or in a permanent repository such as Zenodo, OSF, the RIO Journal, or similar'}))
     year_of_publication = forms.IntegerField(required=False)
-    name = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'autocomplete':'nope'}))
+    name = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'autocomplete':'nope','placeholder':' The title or name of the resource'}))
     license = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'autocomplete':'nope'}), required=False)
     curatedList = forms.ModelMultipleChoiceField(queryset=ResourceGroup.objects.all(), widget=Select2MultipleWidget, required=False,label="Curated lists")
 
