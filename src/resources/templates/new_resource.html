@@ -53,143 +53,148 @@
     </div>
 
     <div class="container mt-5">
-      <div class="card mb-5 mt-5 shadow">
-        <div class="card-title p-3">
-          <div class="form-row">
-            <div class="col-12">
-              <h2>New resource</h2>
-              Thank you for proposing a new citizen science resource to be shared on the EU-Citizen.Science Platform.
-              Please fill in all of the mandatory information in the fields below (indicated with an asterisk*),
-               and as much of the non-mandatory information as possible.<br><br>
+      <div class="row d-flex justify-content-center">
+        <div class="col-sm-10 col-12">
+          <div class="card mb-5 mt-5 shadow">
+            <div class="card-title p-5">
+              <div class="form-row">
+                <div class="col-12">
+                  <h2>New resource</h2>
+                  Thank you for proposing a new citizen science resource to be shared on the EU-Citizen.Science Platform.
+                  Please fill in all of the mandatory information in the fields below (indicated with an asterisk*),
+                  and as much of the non-mandatory information as possible.<br><br>
 
-               Resources can include documents such as guidelines, reports, policy briefs, and protocols;
-               tools such as software or hardware, and other file formats such as videos or podcasts.
-               Read our blog post on Types of Resources.<br><br>
+                  Resources can include documents such as guidelines, reports, policy briefs, and protocols;
+                  tools such as software or hardware, and other file formats such as videos or podcasts.
+                  Read our blog post on Types of Resources.<br><br>
 
-               Upon saving this profile, your resource will be submitted for moderation by one of the members of the
-               EU-Citizen.Science consortium. The moderation process is meant to ensure that all of the resources shared
-               on the platform are indeed useful for citizen science projects and practitioners, and are of good quality.
-               Read more about <a href="/faq">Moderation Process</a> here.<br><br>
+                  Upon saving this profile, your resource will be submitted for moderation by one of the members of the
+                  EU-Citizen.Science consortium. The moderation process is meant to ensure that all of the resources shared
+                  on the platform are indeed useful for citizen science projects and practitioners, and are of good quality.
+                  Read more about <a href="/faq">The Moderation Process</a> here.<br><br>
 
-               Quality factors that we consider include whether your resource is easy to access, is structured clearly,
-               is easy to read (or hear or view) and understand. Read our <a href="/faq">Quality Guidelines</a>  here.
+                  Quality factors that we consider include whether your resource is easy to access, is structured clearly,
+                  is easy to read (or hear or view) and understand. Read our <a href="/faq">Quality Guidelines</a>  here.
 
-               Please note that we strongly recommend that you first ensure that your resource is hosted in a permanent
-               repository (such as on a website that will be maintained and can provide a permalink, or a repository such
-               as a publisher, <a href="https://zenodo.org/" target="_blank">Zenodo<a> , <a href="https://osf.io/">OSF</a>
-               or the <a href="https://riojournal.com/">RIO Journal</a>.
+                  Please note that we strongly recommend that you first ensure that your resource is hosted in a permanent
+                  repository (such as on a website that will be maintained and can provide a permalink, or a repository such
+                  as a publisher, <a href="https://zenodo.org/" target="_blank">Zenodo<a> , <a href="https://osf.io/">OSF</a>
+                  or the <a href="https://riojournal.com/">RIO Journal</a>.
+                </div>
+              </div>
             </div>
+            <div class="card-text pl-5 pr-5 pb-5">
+              <table class="table mb-0">
+                <form action="/new_resource" method="post" class="add-new-resource" enctype="multipart/form-data" autocomplete="off">
+                  {% csrf_token %}
+
+                  <div class="form-row">
+                    <div class="col-12">
+                      {{ form.name|as_crispy_field }}
+                    </div>
+                    <div class="col-12">
+                      {{ form.url|as_crispy_field }}
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="col-12">
+                      {{ form.abstract|as_crispy_field }}
+                    </div>
+                    <div class="col-12">
+                      {{ form.category|as_crispy_field }}
+                      {{ form.categorySelected|as_crispy_field }}
+                      <div id="id_sub_categories"></div><br/>
+                      {{ form.audience|as_crispy_field }}
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col-12">
+                      {{ form.keywords|as_crispy_field }}
+                      {{form.choices|as_crispy_field}}
+                    </div>
+                    <div class="col-12">
+                      {{ form.resource_DOI|as_crispy_field }}
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col-12">
+                      {{ form.authors|as_crispy_field }}
+                      {{ form.authorsCollection|as_crispy_field }}
+                    </div>
+                    <div class="col-12">
+                      {{ form.author_email|as_crispy_field }}
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col-12">
+                      {{ form.license|as_crispy_field }}
+                    </div>
+                    <div class="col-12">
+                      {% get_language_info_list for LANGUAGES as languages %}
+                      {% if settings.USE_I18N and languages|length > 1 %}
+                      <label for="language" class="control-label  requiredField">
+                        Language<span class="asteriskField">*</span>
+                      </label>
+                      <select name="language" class="form-control">
+                        {% for language in languages %}
+                        <option value="{{ language.code}}"
+                        {% if language.code == LANGUAGE_CODE %}selected="selected" {% endif %}>
+                        {{ language.name_local | upper}}
+                      </option>
+                      {% endfor %}
+                    </select>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-12">
+                    {{ form.image1|as_crispy_field }}
+                    {{ form.x1|as_crispy_field }}
+                    {{ form.y1|as_crispy_field }}
+                    {{ form.height1|as_crispy_field }}
+                    {{ form.width1|as_crispy_field }}
+                    <a id="imgResult1" href="#"> <img id="imageResult1" src="" alt="" class="img-fluid img-zoom"></a>
+                  </div>
+                  <div class="col-12">
+                    {{ form.image2|as_crispy_field }}
+                    {{ form.x2|as_crispy_field }}
+                    {{ form.y2|as_crispy_field }}
+                    {{ form.height2|as_crispy_field }}
+                    {{ form.width2|as_crispy_field }}
+                    <a id="imgResult2" href="#"> <img id="imageResult2" src="" alt="" class="img-fluid img-zoom"></a>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-12">
+                    {{ form.publisher|as_crispy_field }}
+                  </div>
+                  <div class="col-12">
+                    {{ form.year_of_publication|as_crispy_field }}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    {{ form.theme|as_crispy_field }}
+                  </div>
+                  <div class="col-12">
+                    {% if user.is_staff %}
+                    {{ form.curatedList|as_crispy_field }}
+                    {% endif %}
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-success"> <i class="fas fa-share-square"></i> Save</button>
+              </form>
+            </table>
           </div>
         </div>
-        <div class="card-text p-3">
-          <table class="table mb-0">
-            <form action="/new_resource" method="post" class="add-new-resource" enctype="multipart/form-data" autocomplete="off">
-              {% csrf_token %}
-
-              <div class="form-row">
-                <div class="col-12">
-                  {{ form.name|as_crispy_field }}
-                </div>
-                <div class="col-12">
-                  {{ form.url|as_crispy_field }}
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="col-12">
-                  {{ form.abstract|as_crispy_field }}
-                </div>
-                <div class="col-12">
-                  {{ form.category|as_crispy_field }}
-                  {{ form.categorySelected|as_crispy_field }}
-                  <div id="id_sub_categories"></div><br/>
-                  {{ form.audience|as_crispy_field }}
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="col-12">
-                  {{ form.keywords|as_crispy_field }}
-                  {{form.choices|as_crispy_field}}
-                </div>
-                <div class="col-12">
-                  {{ form.resource_DOI|as_crispy_field }}
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="col-12">
-                  {{ form.authors|as_crispy_field }}
-                  {{ form.authorsCollection|as_crispy_field }}
-                </div>
-                <div class="col-12">
-                  {{ form.author_email|as_crispy_field }}
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="col-12">
-                  {{ form.license|as_crispy_field }}
-                </div>
-                <div class="col-12">
-                  {% get_language_info_list for LANGUAGES as languages %}
-                  {% if settings.USE_I18N and languages|length > 1 %}
-                  <label for="language" class="control-label  requiredField">
-                    Language<span class="asteriskField">*</span>
-                  </label>
-                  <select name="language" class="form-control">
-                    {% for language in languages %}
-                    <option value="{{ language.code}}"
-                    {% if language.code == LANGUAGE_CODE %}selected="selected" {% endif %}>
-                    {{ language.name_local | upper}}
-                  </option>
-                  {% endfor %}
-                </select>
-                {% endif %}
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="col-12">
-                {{ form.image1|as_crispy_field }}
-                {{ form.x1|as_crispy_field }}
-                {{ form.y1|as_crispy_field }}
-                {{ form.height1|as_crispy_field }}
-                {{ form.width1|as_crispy_field }}
-                <a id="imgResult1" href="#"> <img id="imageResult1" src="" alt="" class="img-fluid img-zoom"></a>
-              </div>
-              <div class="col-12">
-                {{ form.image2|as_crispy_field }}
-                {{ form.x2|as_crispy_field }}
-                {{ form.y2|as_crispy_field }}
-                {{ form.height2|as_crispy_field }}
-                {{ form.width2|as_crispy_field }}
-                <a id="imgResult2" href="#"> <img id="imageResult2" src="" alt="" class="img-fluid img-zoom"></a>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="col-12">
-                {{ form.publisher|as_crispy_field }}
-              </div>
-              <div class="col-12">
-                {{ form.year_of_publication|as_crispy_field }}
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12">
-                {{ form.theme|as_crispy_field }}
-              </div>
-              <div class="col-12">
-                {% if user.is_staff %}
-                {{ form.curatedList|as_crispy_field }}
-                {% endif %}
-              </div>
-            </div>
-            <button type="submit" class="btn btn-success"> <i class="fas fa-share-square"></i> Save</button>
-          </form>
-        </table>
       </div>
     </div>
   </div>
+</div>
 </div>
 
 {% endblock list_of_items %}
@@ -240,8 +245,8 @@
     getSubCategories();
 
     function validateEmail(email) {
-    //  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    //  return re.test(String(email).toLowerCase());
+      //  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      //  return re.test(String(email).toLowerCase());
     }
 
     $("form").submit(function (e) {
