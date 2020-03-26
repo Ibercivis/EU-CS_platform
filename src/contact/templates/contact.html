@@ -22,37 +22,40 @@ Contact
 
 {% block list_of_items %}
 <div class="container">
-  <div class="row">
-    <div class="col-12 col-sm-4 mt-4 mb-4">
-      <h3></h3>
-    </div>
-    <div class="col-12 col-sm-8 mt-4 mb-4">
-      <form method="post" autocomplete="off">
-        {% csrf_token %}
-        <div class="row">
-          <div class="col-6">
-            {{ form.name | as_crispy_field}}
-          </div>
-          <div class="col-6">
-            {{ form.surname | as_crispy_field}}
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12 col-sm-6">
-            {{ form.from_email | as_crispy_field}}
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12 col-sm-6">
-          {{ form.message | as_crispy_field}}
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12 col-sm-6">
-            <button type="submit" class="btn btn-success">Send</button>
-        </div>
+	<div class="row">
+		<div class="col-12 col-sm-12 mt-4 mb-4">
+			<div class="card mb-4 mt-5 shadow">
+				<div class="card-text p-3">
+					<h3>Contact</h3>
+					<form method="post" autocomplete="off">
+						{% csrf_token %}
+						<div class="row">
+							<div class="col-6">
+								{{ form.name | as_crispy_field}}
+							</div>
+							<div class="col-6">
+								{{ form.surname | as_crispy_field}}
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12 col-sm-12">
+								{{ form.from_email | as_crispy_field}}
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12 col-sm-12">
+								{{ form.message | as_crispy_field}}
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12 col-sm-6">
+								<button type="submit" class="btn btn-success">Send</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    </form>
-  </div>
-</div>
-{% endblock list_of_items %}
+	{% endblock list_of_items %}

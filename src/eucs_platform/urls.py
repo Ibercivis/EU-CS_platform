@@ -22,6 +22,7 @@ urlpatterns = [
     path("terms/", views.terms,name="terms"),
     path("privacy/", views.privacy,name="privacy"),
     path("faq/", views.faq,name="faq"),
+    path("subscribe/", views.subscribe,name="subscribe"),
     path("home_autocomplete/", views.home_autocomplete,name="home_autocomplete"),
     path("status/", views.status,name="status"),
     path("about/", views.AboutPage.as_view(), name="about"),

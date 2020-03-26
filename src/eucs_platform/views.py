@@ -84,6 +84,9 @@ def faq(request):
 
 def status(request):
     return render(request, 'status.html')
+    
+def subscribe(request):
+    return render(request, 'subscribe.html')
 
 
 def home_autocomplete(request):
