@@ -1,16 +1,18 @@
 {% load staticfiles %}
 {% load i18n %}
 {% load l10n %}
-
-
-
-
-
-
 <div class="row">
 	<div class="col-lg-12 mb-3">
-		Search for citizen science resources by title or keywords, and filter further across a range of fields.
-		<b>Submitted projects that have been checked by our Moderator, have been marked as 'Moderated'</b>. Read more about our <a href="/faq">moderation process</a>
+		{% if user.is_authenticated %}
+		Search for citizen science resources by title or keywords, and filter further
+		 across a range of fields.<b>Submitted projects that have been checked by our
+	   Moderator, have been marked as 'Moderated'</b>. Read more about our <a href="/faq">moderation process</a>
+		{% else %}
+		Search for citizen science resources by keyword or title, and filter further across a
+		range of fields. Submitted resources that have been checked by our Moderator,
+		have been marked as 'Moderated'. Read more about our <a href="/faq">moderation process</a>.
+		To add your own resource, please first <a href="/signup">Sign Up</a> or <a href="/login">Log In</a>.
+    {% endif %}
 	</div>
 </div>
 

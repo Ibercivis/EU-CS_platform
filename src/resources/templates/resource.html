@@ -120,7 +120,7 @@
                 <img onclick="setFeaturedRsc({{resource.id}})" class="img-fluid" src="{% static 'site/img/icon_bw.png' %}" />
                 {% endif %}
                 {% else %}
-                {% if rresource.id in featuredResources %}
+                {% if resource.id in featuredResources %}
                 <img class="img-fluid" src="{% static 'site/img/icon_color.png' %}" />
                 {% else %}
                 <img class="img-fluid" src="{% static 'site/img/icon_bw.png' %}" />
@@ -135,7 +135,7 @@
                 {% if resource.id in savedResources %}
                 <button type="button" class="btn btn-outline-primary float-right mt-2" onclick="setSavedResource({{resource.id}},{{user.id}})">In my library</button>
                 {% else %}
-                <button type="button" class="btn btn-outline-secondary float-right mt-2" onclick="setSavedResource({{resource.id}},{{user.id}})">To my library</button>
+                <button type="button" class="btn btn-outline-secondary float-right mt-2" onclick="setSavedResource({{resource.id}},{{user.id}})">Add to library</button>
                 {% endif %}
               </div>
               {% endif %}

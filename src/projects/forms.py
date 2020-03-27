@@ -15,23 +15,23 @@ geolocator = Nominatim(timeout=None)
 class ProjectForm(forms.Form):
     error_css_class = 'form_error'
     #Basic Project Information
-    project_name = forms.CharField(max_length=200)
+    project_name = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder':'Short name or title of the prohect'}))
     #aim = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 2000}}), label="Aim of the project (max 2000 characters)")
-    aim = forms.CharField(widget=forms.Textarea, max_length = 2000, label="Aim of the project (max 2000 characters)")
-    #description = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 3000}}), label="Project description (max 3000 characters)")
-    description = forms.CharField(widget=forms.Textarea, max_length = 3000, label="Project description (max 3000 characters)")
+    aim = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Primary aim, goal or objective of the project. Max 2000 characters'}), max_length = 2000)
+    #description = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 3000}}), label="Project description (max 3000 haracters)")
+    description = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Abstract or description of the project. Max 3000 characters'}), max_length = 3000)
     choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     choicesSelected = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
-    keywords = forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False,label="Keywords (Select or write a new ones, comma separated)")
+    keywords = forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget(attrs={'data-placeholder':'Please enter 2-3 keywords (comma separated) to aid in searching for projects'}), required=False)
     status = forms.ModelChoiceField(queryset=Status.objects.all(), label="Status (Select one)")
     start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=False)
     end_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=False)
-    topic = forms.ModelMultipleChoiceField(queryset=Topic.objects.all(), widget=Select2MultipleWidget, required=False,label="Topic (Multiple selection)")
-    url = forms.CharField(max_length=200, required=False)
+    topic = forms.ModelMultipleChoiceField(queryset=Topic.objects.all(), widget=Select2MultipleWidget(attrs={'data-placeholder':'The project topic or field of science'}), required=False,label="Topic (Multiple selection)")
+    url = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'placeholder':'Please provide a URL to an external web site for the project'}),required=False)
     #Contact person info
-    contact_person = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'autocomplete':'nope'}))
-    contact_person_email = forms.EmailField(required=False)
-    contact_person_phone = forms.CharField(max_length=100, required=False)
+    contact_person = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'autocomplete':'nope','placeholder':'Please ensure that you have the permission of this person before entering their name, otherwise leave blank'}))
+    contact_person_email = forms.EmailField(required=False, widget=forms.TextInput(attrs={'autocomplete':'nope','placeholder':'Please ensure that you have the permission of this person before entering their email, otherwise leave blank'}))
+    contact_person_phone = forms.CharField(max_length=100, required=False, widget=forms.TextInput(attrs={'autocomplete':'nope','placeholder':'Please ensure that you have the permission of this person before entering their email, otherwise leave blank'}) )
     #Images and communications
     image1 = forms.ImageField(required=False,label="Image 1 (Will be resized to 600x400 pixels)")
     x1 = forms.FloatField(widget=forms.HiddenInput(),required=False)
@@ -45,7 +45,7 @@ class ProjectForm(forms.Form):
     width2 = forms.FloatField(widget=forms.HiddenInput(),required=False)
     height2 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     image_credit2 = forms.CharField(max_length=300, required=False, label="Logo credit")
-    image3 = forms.ImageField(required=False, label="Image 3: Header (Will be resized to 1100x300 pixels" )
+    image3 = forms.ImageField(required=False, label="Image 3: Header (Will be resized to 1100x400 pixels" )
     x3 = forms.FloatField(widget=forms.HiddenInput(),required=False)
     y3 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     width3 = forms.FloatField(widget=forms.HiddenInput(),required=False)
@@ -55,17 +55,17 @@ class ProjectForm(forms.Form):
     latitude = forms.DecimalField(max_digits=9,decimal_places=6)
     longitude = forms.DecimalField(max_digits=9,decimal_places=6)
     #Personal and Organizational Affiliates
-    host = forms.CharField(max_length=100, label="Name of the institution hosting the project")
+    host = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder':'Enter the name of the institution hosting or coordinating the project'}))
     #Supplementary information for Citizen Science
     #how_to_participate = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 1000}}), required=False, label="How to participate in the project (max 1000 characters)")
-    how_to_participate = forms.CharField(widget=forms.Textarea, max_length = 1000, label="How to participate in the project (max 1000 characters)", required=False)
+    how_to_participate = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Free text description of how people can get involved in the project. Textual instructions for joining the project. Max 200 characters'}), max_length = 2000, required=False)
     #equipment = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 1000}}), required=False, label="Equipment needeed to participate (max 1000 characters)")
-    equipment = forms.CharField(widget=forms.Textarea, max_length = 1000, label="Equipment needeed to participate (max 1000 characters)", required=False)
+    equipment = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'What equipment is needed for participation?. Max 2000 characters'}), max_length = 2000, required=False)
     #Funding
-    funding_body =  forms.ModelMultipleChoiceField(queryset=FundingBody.objects.all(), widget=Select2MultipleWidget, required=False, label="Funding bodies (Select or write new one)")
+    funding_body =  forms.ModelMultipleChoiceField(queryset=FundingBody.objects.all(), widget=Select2MultipleWidget(attrs={'data-placeholder':' Please enter the funding agency of the project (e.g. European Commission) '}), required=False)
     fundingBodySelected = forms.CharField(widget=forms.HiddenInput(), max_length=100, required=False)
-    funding_program = forms.CharField(max_length=500, required=False)
-    funding_agency =   forms.ModelMultipleChoiceField(queryset=FundingAgency.objects.all(), widget=Select2MultipleWidget, required=False, label="Funding agency (Select or write new one)")
+    funding_program = forms.CharField(max_length=500, widget=forms.TextInput(attrs={'placeholder':'Indication of the programme that funds or funded a project'}),required=False)
+    #funding_agency =   forms.ModelMultipleChoiceField(queryset=FundingAgency.objects.all(), widget=Select2MultipleWidget, required=False, label="Funding agency (Select or write new one)")
     fundingAgencySelected = forms.CharField(widget=forms.HiddenInput(), max_length=100, required=False)
     #Custom fields
     title = forms.CharField(max_length=100, required=False)
@@ -126,10 +126,11 @@ class ProjectForm(forms.Form):
             body, exist = FundingBody.objects.get_or_create(body=fundingBodySelected)
             project.fundingBody = body
 
-        fundingAgencySelected = self.data['fundingAgencySelected']
-        if(fundingAgencySelected != ''):
-            agency, exist = FundingAgency.objects.get_or_create(agency=fundingAgencySelected)
-            project.fundingAgency = agency
+        #fundingAgencySelected = self.data['fundingAgencySelected']
+        #if(fundingAgencySelected != ''):
+        #agency, exist = FundingAgency.objects.get_or_create(agency=fundingAgencySelected)
+        #project.fundingAgency = agency
+        project.FundingAgency=''
 
 
         if(images[0] != '/'):
