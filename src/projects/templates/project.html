@@ -132,6 +132,16 @@
           </div>
           <div class="row">
             <div class="col-12 col-xl-4 mt-5">
+              <h2>Origin information</h2>
+            </div>
+            <div class="col-12 col-xl-8 mt-5 pt-2">
+              <b>Origin database: </b>{% if project.originDatabase %} {{ project.originDatabase }} {% endif %}<br>
+              <b>Origin UID:</b>{{ project.originUID }}<br>
+              <b>Origin URL: </b>{{ project.originURL }}<br>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-xl-4 mt-5">
               <h2>Further info</h2>
             </div>
             <div class="col-12 col-xl-8 mt-5 pt-2">

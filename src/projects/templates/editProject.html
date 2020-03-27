@@ -261,6 +261,24 @@
                 </div>
               </div>
               <hr />
+              <h4>Origin information</h4>
+              <div id="originform">
+                <div class="form-row">
+                  <div class="col-12">
+                    {{ form.origin_database|as_crispy_field }}
+                    {{ form.originDatabaseSelected|as_crispy_field }}
+                  </div>
+                  <div class="col-12">
+                    {{ form.originUID|as_crispy_field }}
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-12">
+                    {{ form.originURL|as_crispy_field }}
+                  </div>       
+                </div>
+              </div>
+              <hr />
               <h4> Custom fields</h4>
               <div id="customFields"></div>
 
@@ -334,7 +352,7 @@
       }
     }
 
-    var funding_agency = $("#id_funding_agency option").map(function () {
+/*     var funding_agency = $("#id_funding_agency option").map(function () {
       return $.trim($(this).text());
     }).get();
     $("#id_funding_agency").empty();
@@ -345,6 +363,21 @@
       }
       else{
         $("#id_funding_agency").append("<option value='" + fb +"'> " + fb + " </option>");
+      }
+    } */
+
+
+    var origin_database = $("#id_origin_database option").map(function () {
+      return $.trim($(this).text());
+    }).get();
+    $("#id_origin_database").empty();
+    var sel = $("#id_originDatabaseSelected").val()
+    for(fb of origin_database){
+      if(sel.trim() == fb.trim()){
+        $("#id_origin_database").append("<option value='" + fb +"' selected> " + fb + " </option>");
+      }
+      else{
+        $("#id_origin_database").append("<option value='" + fb +"'> " + fb + " </option>");
       }
     }
 
@@ -373,7 +406,7 @@
       }
     });
 
-    $("#div_id_funding_agency div").on('select2:open', function(){
+/*     $("#div_id_funding_agency div").on('select2:open', function(){
       if($("#id_fundingAgencySelected").val()){
         $("#id_funding_agency").removeAttr('multiple');
       }
@@ -385,6 +418,22 @@
         var word =key.slice(0, -1);
         $("#div_id_funding_agency .selection input").val("");
         $("#id_funding_agency").append("<option value='" + word +"' selected> " + word + " </option>");
+      }
+    }); */
+
+    $("#div_id_origin_database div").on('select2:open', function(){
+      if($("#id_originDatabaseSelected").val()){
+        $("#id_origin_database").removeAttr('multiple');
+      }
+
+    });
+    $("#div_id_origin_database div").on('keyup', function(){
+      var key = $("#div_id_origin_database .selection input").val();
+      $("#id_origin_database").removeAttr('multiple');
+      if (key.indexOf(',') > -1) {
+        var word =key.slice(0, -1);
+        $("#div_id_origin_database .selection input").val("");
+        $("#id_origin_database").append("<option value='" + word +"' selected> " + word + " </option>");
       }
     });
 
@@ -428,11 +477,17 @@
       $("#id_fundingBodySelected").val(fundingBody);
       $("#id_funding_body").empty();
 
-      var fundingAgency = $("#id_funding_agency option:selected").map(function () {
+/*       var fundingAgency = $("#id_funding_agency option:selected").map(function () {
         return $.trim($(this).text());
       }).get().join(',');
       $("#id_fundingAgencySelected").val(fundingAgency);
-      $("#id_funding_agency").empty();
+      $("#id_funding_agency").empty(); */
+
+      var originDatabase = $("#id_origin_database option:selected").map(function () {
+          return $.trim($(this).text());
+        }).get().join(',');
+        $("#id_originDatabaseSelected").val(originDatabase);
+        $("#id_origin_database").empty();
     }
   });
 

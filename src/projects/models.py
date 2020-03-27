@@ -28,6 +28,11 @@ class FundingAgency(models.Model):
     def __str__(self):
         return f'{self.agency}'
 
+class OriginDatabase(models.Model):
+    originDatabase = models.TextField()
+    def __str__(self):
+        return f'{self.originDatabase}'
+
 class CustomField(models.Model):
     title = models.TextField()
     paragraph = models.TextField()
@@ -71,6 +76,10 @@ class Project(models.Model):
     fundingBody = models.ForeignKey(FundingBody, on_delete=models.CASCADE,null=True, blank=True)
     fundingProgram = models.CharField(max_length=500)
     fundingAgency =  models.ForeignKey(FundingAgency, on_delete=models.CASCADE,null=True, blank=True)
+    #Origin information
+    originDatabase = models.ForeignKey(OriginDatabase, on_delete=models.CASCADE,null=True, blank=True)
+    originURL = models.CharField(max_length=200)
+    originUID = models.CharField(max_length=200)
 
     hidden = models.BooleanField(null=True, blank=True)
 
