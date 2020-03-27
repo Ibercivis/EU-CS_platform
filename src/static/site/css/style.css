@@ -48,12 +48,18 @@ main.nomargintop {
 }
 h1,h2, h3, h4,h5 {
 	font-family: "Poppins", Helvetica, sans-serif;
-	font-weight: 200;
-	color: #fc5b62;
+	font-weight: 400;
+	color: #e28386;
 }
+
 #search{
-	background-color: #fc5b62;
+	background-color: #e28683;
 	border: 0px;
+}
+
+#add{
+	background-color: #a4b494;
+	border-color: #a4b494;
 }
 input[type="text"],
 select.form-control {
@@ -95,10 +101,10 @@ input[type=checkbox] {
 
 
 .nav-link.active{
-	border-bottom: 2px solid #17A398;
+	border-bottom: 2px solid #a4b494;
 }
 .card-link{
-	color: #fc5b62;
+	color: #e28683;
 	font-weight: 400;
 	font-family: "Poppins", Helvetica, sans-serif;
 	font-size: 1.2em;
@@ -108,7 +114,7 @@ input[type=checkbox] {
 	color: #333;
 }
 .card-link-resource{
-	color: #4e598c;
+	color: #203863;
 	font-weight: 400;
 	font-family: "Poppins", Helvetica, sans-serif;
 	font-size: 1.2em;
@@ -162,24 +168,33 @@ input[type=checkbox] {
 	color: #aaa;
 }
 .overlay-orange{
-	background: linear-gradient(to right, rgba(0, 0, 0, 1.0), rgba(195, 55, 100, 0.8));
+	background: linear-gradient(to right, rgba(0, 0, 0, 1.0), rgba(226, 134, 131, 0.8));
 }
 .overlay-blue{
-	background: linear-gradient(to right, rgba(0, 0, 0, 1.0), rgba(89, 55, 195, 0.8));
+	background: linear-gradient(to right, rgba(0, 0, 0, 1.0), rgba(32, 56, 99, 0.8));
 }
 .img-filter{
 	object-fit: cover;
 	opacity: 0.4;
 }
+img.nonmoderated{
+	filter: grayscale(100%);
+}
 .navbar-front{
 	background: rgba(0,0,0,0.7);
 }
 a{
-	color: #17a398;
+	color: #203863;
 }
 a:hover{
-	color: #079288;
+	color: #001843;
 	text-decoration: none;
+}
+a.project{
+	color: #e28683;
+}
+a.project:hover{
+	color: #c26663;
 }
 .lead{
 	font-size: 1.8em;

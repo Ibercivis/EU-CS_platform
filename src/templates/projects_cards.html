@@ -17,8 +17,10 @@
 			</div>
 		</a>
 		<div class="card-body">
-			<h5 class="card-title mt-3 mb-3"> <a class="card-link" href="/project/{{project.id }}">{{ project.name }}</a></h5>
-			<div class="card-text mt-3">{{project.description | safe | truncatechars:100 }}</div>
+			<h6 class="card-title mt-3 mb-3"> <a class="card-link" href="/project/{{project.id }}">{{ project.name }}</a></h6>
+			<div class="card-text mt-3">{{project.description | safe | truncatechars:180 }}
+				<a class="project" href="/project/{{project.id}}" target="_blank">Read more</a>
+			</div>
 			<br>
 			{% for topic in project.topic.all %}<a class="badge badge-light" href="projects?keywords=&topic={{topic|urlencode}}">{{topic | upper}}</a> {% endfor %}<br>
 			{% for keyword in project.keywords.all %} <a class="badge badge-light" href="projects?keywords={{keyword|urlencode}}">{{keyword | upper}}</a>  {% endfor %}
