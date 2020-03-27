@@ -14,10 +14,12 @@ from datetime import datetime
 from PIL import Image
 from itertools import chain
 from .forms import ProjectForm, CustomFieldForm, CustomFieldFormset, ProjectPermissionForm
-from .models import Project, Topic, Status, Keyword, Votes, FeaturedProjects, FollowedProjects, FundingBody, FundingAgency, CustomField, ProjectPermission
+from .models import Project, Topic, Status, Keyword, Votes, FeaturedProjects, FollowedProjects, FundingBody, FundingAgency, CustomField, ProjectPermission,OriginDatabase
 import json
 import random
+
 User = get_user_model()
+
 def new_project(request):
     choices = list(Keyword.objects.all().values_list('keyword',flat=True))
     choices = ", ".join(choices)
@@ -173,8 +175,12 @@ def editProject(request, pk):
     fundingBody = list(FundingBody.objects.all().values_list('body',flat=True))
     fundingBody = ", ".join(fundingBody)
 
+    #TODO Delete fundingAgency?
     fundingAgency = list(FundingAgency.objects.all().values_list('agency',flat=True))
     fundingAgency = ", ".join(fundingAgency)
+
+    originDatabase = list(OriginDatabase.objects.all().values_list('originDatabase',flat=True))
+    originDatabase = ", ".join(originDatabase)
 
     form = ProjectForm(initial={
         'project_name':project.name,'url': project.url,'start_date': start_datetime,
@@ -188,6 +194,8 @@ def editProject(request, pk):
         'contact_person': project.author, 'contact_person_email': project.author_email,
         'funding_body': fundingBody, 'fundingBodySelected': project.fundingBody, 'fundingProgram': project.fundingProgram,
         'funding_agency': fundingAgency,'fundingAgencySelected': project.fundingAgency,
+        'originDatabase': originDatabase,'originDatabaseSelected': project.originDatabase,
+        'originUID' : project.originUID, 'originURL': project.originURL,
     })
 
 

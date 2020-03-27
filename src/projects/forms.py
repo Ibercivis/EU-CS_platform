@@ -1,6 +1,6 @@
 from django import forms
 from django.db import models
-from .models import Project, Topic, Status, Keyword, FundingBody, FundingAgency, CustomField
+from .models import Project, Topic, Status, Keyword, FundingBody, FundingAgency, CustomField, OriginDatabase
 from django.shortcuts import get_object_or_404
 from django_select2.forms import Select2MultipleWidget, Select2Widget
 from django.core.files import File
@@ -67,6 +67,11 @@ class ProjectForm(forms.Form):
     funding_program = forms.CharField(max_length=500, widget=forms.TextInput(attrs={'placeholder':'Indication of the programme that funds or funded a project'}),required=False)
     #funding_agency =   forms.ModelMultipleChoiceField(queryset=FundingAgency.objects.all(), widget=Select2MultipleWidget, required=False, label="Funding agency (Select or write new one)")
     fundingAgencySelected = forms.CharField(widget=forms.HiddenInput(), max_length=100, required=False)
+    #Origin information
+    origin_database =  forms.ModelMultipleChoiceField(queryset=OriginDatabase.objects.all(), widget=Select2MultipleWidget(attrs={'data-placeholder':' Please enter the origin database '}), required=False)
+    originDatabaseSelected = forms.CharField(widget=forms.HiddenInput(), max_length=300, required=False)
+    originUID = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'placeholder':'Enter the origin UID'}),required=False, label="Origin UID")
+    originURL = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'placeholder':'Enter the origin URL'}),required=False, label="Origin URL")
     #Custom fields
     title = forms.CharField(max_length=100, required=False)
     paragraph = forms.CharField(widget=SummernoteWidget(), required=False)
@@ -106,6 +111,8 @@ class ProjectForm(forms.Form):
             project.howToParticipate = self.data['how_to_participate']
             project.equipment = self.data['equipment']
             project.fundingProgram = self.data['funding_program']
+            project.originUID = self.data['originUID']
+            project.originURL = self.data['originURL']
         else:
             project = Project(name = self.data['project_name'],
                          url = self.data['url'], creator=args.user,
@@ -114,8 +121,9 @@ class ProjectForm(forms.Form):
                          aim = self.data['aim'], description = self.data['description'],
                          status = status, host = self.data['host'], imageCredit1 = self.data['image_credit1'],
                          imageCredit2 = self.data['image_credit2'], imageCredit3 = self.data['image_credit3'],
-                         howToParticipate = self.data['how_to_participate'],
-                         equipment = self.data['equipment'],fundingProgram = self.data['funding_program'] )
+                         howToParticipate = self.data['how_to_participate'],equipment = self.data['equipment'],
+                         fundingProgram = self.data['funding_program'],originUID = self.data['originUID'],
+                         originURL = self.data['originURL'] )
         if start_dateData:
             project.start_date = start_dateData
         if end_dateData:
@@ -132,6 +140,10 @@ class ProjectForm(forms.Form):
         #project.fundingAgency = agency
         project.FundingAgency=''
 
+        originDatabaseSelected = self.data['originDatabaseSelected']
+        if(originDatabaseSelected != ''):
+            originDatabase, exist = OriginDatabase.objects.get_or_create(originDatabase=originDatabaseSelected)
+            project.originDatabase = originDatabase
 
         if(images[0] != '/'):
             project.image1 = images[0]
