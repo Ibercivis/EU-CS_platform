@@ -29,7 +29,7 @@ class ProjectForm(forms.Form):
     topic = forms.ModelMultipleChoiceField(queryset=Topic.objects.all(), widget=Select2MultipleWidget(attrs={'data-placeholder':'The project topic or field of science'}), required=False,label="Topic (Multiple selection)")
     url = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'placeholder':'Please provide a URL to an external web site for the project'}),required=False)
     #Contact person info
-    contact_person = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'autocomplete':'nope','placeholder':'Please ensure that you have the permission of this person before entering their name, otherwise leave blank'}))
+    contact_person = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'autocomplete':'nope','placeholder':'Please ensure that you have the permission of this person before entering their name, otherwise leave blank'}), required=False)
     contact_person_email = forms.EmailField(required=False, widget=forms.TextInput(attrs={'autocomplete':'nope','placeholder':'Please ensure that you have the permission of this person before entering their email, otherwise leave blank'}))
     contact_person_phone = forms.CharField(max_length=100, required=False, widget=forms.TextInput(attrs={'autocomplete':'nope','placeholder':'Please ensure that you have the permission of this person before entering their email, otherwise leave blank'}) )
     #Images and communications
