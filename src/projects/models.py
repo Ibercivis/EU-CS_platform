@@ -54,7 +54,7 @@ class Project(models.Model):
     topic = models.ManyToManyField(Topic)
     url = models.CharField(max_length=200)
     #Contact person info
-    author = models.CharField(max_length=100)
+    author = models.CharField(max_length=100, null=True, blank=True)
     author_email =  models.CharField(max_length=100)
     #Images and communications
     image1 = models.ImageField(upload_to='images/', max_length=300)
