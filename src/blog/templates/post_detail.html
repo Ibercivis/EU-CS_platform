@@ -1,16 +1,22 @@
-{% extends 'baseblog.html' %} {% block content %}
-<br /><br /><br />
+{% extends 'baseblog.html' %}
+{% block list_of_items %}
+
 <div class="container">
   <div class="row">
-    <div class="col-md-8 card mb-4  mt-3 left  top">
-      <div class="card-body">
-        <h1>{% block title %} {{ object.title }} {% endblock title %}</h1>
-        <p class=" text-muted">{{ post.author }} | {{ post.created_on }}</p>
-        <p class="card-text ">{{ object.content | safe }}</p>
+    <div class="container mt-5">
+      <div class="row d-flex justify-content-center">
+        <div class="col-sm-10 col-12">
+          <div class="card mt-5 mb-5 shadow">
+            <div class="card-body">
+              <h1>{% block title %} {{ object.title }} {% endblock title %}</h1>
+              <p class=" text-muted">{{ post.author }} <br/> {{ post.created_on }}</p>
+              <p class="card-text ">{{ object.content | safe }}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
   </div>
 </div>
 
-{% endblock content %}
+{% endblock list_of_items %}
