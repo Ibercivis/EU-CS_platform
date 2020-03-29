@@ -24,7 +24,7 @@ urlpatterns = [
     path("faq/", views.faq,name="faq"),
     path("subscribe/", views.subscribe,name="subscribe"),
     path("home_autocomplete/", views.home_autocomplete,name="home_autocomplete"),
-    path("status/", views.status,name="status"),
+    path("development/", views.development,name="development"),
     path("about/", views.AboutPage.as_view(), name="about"),
     path("events/", views.EventsPage.as_view(), name="events"),
     path("users/", include(profiles.urls)),
