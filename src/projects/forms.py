@@ -31,7 +31,6 @@ class ProjectForm(forms.Form):
     #Contact person info
     contact_person = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'autocomplete':'nope','placeholder':'Please ensure that you have the permission of this person before entering their name, otherwise leave blank'}), required=False)
     contact_person_email = forms.EmailField(required=False, widget=forms.TextInput(attrs={'autocomplete':'nope','placeholder':'Please ensure that you have the permission of this person before entering their email, otherwise leave blank'}))
-    contact_person_phone = forms.CharField(max_length=100, required=False, widget=forms.TextInput(attrs={'autocomplete':'nope','placeholder':'Please ensure that you have the permission of this person before entering their email, otherwise leave blank'}) )
     #Images and communications
     image1 = forms.ImageField(required=False,label="Image 1 (Will be resized to 600x400 pixels)")
     x1 = forms.FloatField(widget=forms.HiddenInput(),required=False)
