@@ -19,10 +19,13 @@
     <div class="main-content-container container-fluid" >
       <div class="card mb-4 mt-5 shadow">
         {% if project.image3 %}
-        <img class="img-fluid img-responsive img-zoom" src="{{ project.image3 }}" >
+        <img class="img-fluid img-responsive img-zoom  {% if project.id not in featuredProjects %} nonmoderated {% endif %}" src="{{ project.image3 }}" >
         {% else %}
-        <img class="img-fluid img-responsive img-zoom" src='/static/site/img/project.png'>
+        <img class="img-fluid img-responsive img-zoom  {% if project.id not in featuredProjects %} nonmoderated {% endif %}" src='/static/site/img/project_default_header.png'>
         {% endif %}
+        <div class="upper">
+          {% if project.id not in featuredProjects %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br> {% endif %}
+          </div>
         <div class="card-text p-3">
           <div class="row">
 

@@ -9,15 +9,15 @@
       {% if rsc.image1 %}
       <img class="img-fluid img-zoom {% if rsc.id not in featuredResources %} nonmoderated {% endif %} " src="{{ rsc.image1 }}" />
       {% else %}
-      <img class="img-fluid img-zoom" src="{% static 'site/img/proct.png' %}" />
+      <img class="img-fluid img-zoom {% if rsc.id not in featuredResources %} nonmoderated {% endif %}" src="{% static 'site/img/resource_default_card.png' %}" />
       {% endif %}
     </a>
     <div class="upper">
       {% get_language_info_list for LANGUAGES as languages %}
       {% for language in languages %}
       {% if language.code == rsc.inLanguage %}
+      {% if rsc.id not in featuredResources %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br/> {% endif %}
       <a class="badge frontpage" href="/resources?language={{rsc.inLanguage}}">{{language.name_local | upper}}</a>
-      {% if rsc.id not in featuredResources %} <a class="badge frontpage">Not yet moderated</a> {% endif %}
       {% endif %}
       {% endfor %}
     </div>

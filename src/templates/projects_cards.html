@@ -5,13 +5,14 @@
 	<div class="card h-100 shadow">
 		<a class="card-img-wrap "href="/project/{{project.id }}">
 			{% if project.image1 %}
-			<img class="card-img-top img-fluid img-zoom lazyload" src="{{ project.image1 }}" />
+			<img class="card-img-top img-fluid img-zoom lazyload {% if project.id not in featuredProjects %} nonmoderated {% endif %}" src="{{ project.image1 }}" />
 			{% else %}
-			<img class="card-img-top img-fluid img-zoom lazyload" src="{% static 'site/img/project.png' %}" />
+			<img class="card-img-top img-fluid img-zoom lazyload {% if project.id not in featuredProjects %} nonmoderated {% endif %}" src="{% static 'site/img/project_default_card.png' %}" />
 			{% endif %}
 			<div class="upper">
 				{% for country in countries %}
 				{% if country.code == project.country %}
+				{% if project.id not in featuredProjects %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br> {% endif %}
 				<a class="badge frontpage" href="projects?country={{country.code}}">{{ country.name | upper }}</a>
 				{% endif %}
 				{% endfor %}
