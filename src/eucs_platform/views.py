@@ -82,9 +82,9 @@ def privacy(request):
 def faq(request):
     return render(request, 'faq.html')
 
-def status(request):
-    return render(request, 'status.html')
-    
+def development(request):
+    return render(request, 'development.html')
+
 def subscribe(request):
     return render(request, 'subscribe.html')
 
