@@ -30,6 +30,12 @@ def resources(request):
     categories = Category.objects.all()
     filters = {'keywords': '', 'language': ''}
 
+    if request.GET.get('orderby'):
+        resources=resources.order_by(request.GET['orderby'])
+        filters['orderby']=request.GET['orderby']
+    else:
+        resources=resources.order_by('-id')
+
     if request.GET.get('keywords'):
         resources = resources.filter( Q(name__icontains = request.GET['keywords'])  |
                                     Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
