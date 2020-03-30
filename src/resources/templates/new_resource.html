@@ -287,7 +287,7 @@
         $.each($("[required]"), function (index, value) {
           var id = $(value).parent().parent().attr('id');
           $("#" + id + " .errorMsg").remove();
-          if(!$(value).val()){
+          if(!$(value).val() || $(value).val().length < 1){
             validationFailed = true;
             $(value).parent().append("<span class='errorMsg'> <b>Required field (*)</b></span>");
           }
