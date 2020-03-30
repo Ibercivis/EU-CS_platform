@@ -123,4 +123,4 @@ class ResourceForm(forms.ModelForm):
 class ResourcePermissionForm(forms.Form):
     selectedUsers = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     usersCollection = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
-    usersAllowed =   forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False, label="Following users can edit the resource")
+    usersAllowed =   forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False, label="Give additional users permission to edit")

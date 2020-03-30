@@ -25,33 +25,36 @@
         {% endif %}
         <div class="upper">
           {% if project.id not in featuredProjects %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br> {% endif %}
-          </div>
-        <div class="card-text p-3">
+        </div>
+        <div class="card-header">
           <div class="row">
+            <div class="col-lg-6 col-12">
+              {% if user.is_authenticated %}
+              {% if project.creator == user or user.is_staff or user.id in cooperators %}
 
-            {% if user.is_authenticated %}
-            {% if project.creator == user or user.is_staff or user.id in cooperators %}
-            <div class="col-6">
               <a class="btn btn-info float-left mt-4" href="{% url 'editProject' project.id %}"><i class="fas fa-edit"></i> Edit </a>
-            </div>
-            {% endif %}
-            {% if project.creator == user or user.is_staff %}
 
+              {% endif %}
+              {% if project.creator == user or user.is_staff %}
+            </div>
             <div class="col-6">
               <permissionForm>
                 {% csrf_token %}
 
-                    {{ permissionForm.usersAllowed | as_crispy_field }}
-                    {{ permissionForm.selectedUsers | as_crispy_field }}
-                    {{ permissionForm.usersCollection | as_crispy_field }}
+                {{ permissionForm.usersAllowed | as_crispy_field }}
+                {{ permissionForm.selectedUsers | as_crispy_field }}
+                {{ permissionForm.usersCollection | as_crispy_field }}
 
               </permissionForm>
             </div>
             {% endif %}
             {% endif %}
           </div>
+        </div>
+
+        <div class="card-text p-3">
           <div class="row">
-            <div class="col-12 col-xl-4 mt-2">
+            <div class="col-12 col-xl-4 mt-2 mt-4">
               <h2>{{project.name}}<!-- i class="fas fa-star-half-alt"></i>{{votes}}{{votes| stringformat:'d'}}--></h2>
             </div>
             <div class="col-12 col-xl-8 mt-2">
