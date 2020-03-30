@@ -55,6 +55,37 @@
       </div>
     </div>
 
+
+    <!-- SAVE MESSAGE MODAL -->
+    <div class="modal fade" id="savedModal">
+      <div class="modal-dialog mdialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Project has been saved</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-sm">
+                <p>Thank you</p>
+
+                <p>Thank you for submitting your project profile. This has been sent to the EU-Citizen.Science moderation team, who will check it to ensure that all of the projects shared on the platform can indeed be considered citizen science projects.</p>
+
+                <p>We will be in touch with you if we have any questions, and otherwise you will receive an alert that your project has been moderated and published to the platform. Your project profile will be visible to the public in the meantime, but will be marked as unmoderated.</p>
+
+                <p>You can make updates or changes to this project profile at any time, by going to the Submitted projects section in your Personal Area (see the top-right of the platform menu).</p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary read-before-save">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="container mt-5">
       <div class="row d-flex justify-content-center">
         <div class="col-sm-10 col-12">
@@ -276,6 +307,7 @@
 <script src="http://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"></script>
 <script src="{% static 'site/js/leaflet-geosearch_2_7.min.js' %}"></script>
 <script>
+  var readSavedConfirmation = false;
   $(document).ready(function () {
 
     var choices = $("#id_choices").val();
@@ -341,17 +373,20 @@
       return re.test(String(email).toLowerCase());
     }
 
+
     $("form").submit(function (e) {
       var validationFailed = false;
+      if(!readSavedConfirmation){
+        $.each($("[required]"), function (index, value) {
+          var id = $(value).parent().parent().attr('id');
+          $("#" + id + " .errorMsg").remove();
+          if(!$(value).val()){
+            validationFailed = true;
+            $(value).parent().append("<span class='errorMsg'> <b>Required field (*)</b></span>");
+          }
+        });
+      }
 
-      $.each($("[required]"), function (index, value) {
-        var id = $(value).parent().parent().attr('id');
-        $("#" + id + " .errorMsg").remove();
-        if(!$(value).val()){
-          validationFailed = true;
-          $(value).parent().append("<span class='errorMsg'> <b>Required field (*)</b></span>");
-        }
-      });
       //var email = $("#id_contact_person_email").val();
       //if(!validateEmail(email)){
       //  validationFailed = true;
@@ -363,6 +398,11 @@
         $('html,body').animate({ scrollTop: $(".add-new-project").offset().top - 160 }, { duration: "slow" });
         return false;
       }else{
+        if(!readSavedConfirmation){
+          e.preventDefault();
+          $("#savedModal").modal("show");
+        }
+
         var option_all = $("#id_keywords option:selected").map(function () {
           return $.trim($(this).text());
         }).get().join(',');
@@ -485,6 +525,12 @@
       $("#modalCrop").modal("hide");
       $('#imageResult' + imgSelected).attr('src', $image.cropper('getCroppedCanvas',
       {width: imgSelected == 3 ? 1100 : 600, height: 400}).toDataURL());
+    });
+
+    $(".read-before-save").click(function () {
+      readSavedConfirmation = true;
+      $("#savedModal").modal("hide");
+      $('form').submit();
     });
 
   });
