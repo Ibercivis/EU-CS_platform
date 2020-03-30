@@ -52,6 +52,37 @@
       </div>
     </div>
 
+
+    <!-- SAVE MESSAGE MODAL -->
+    <div class="modal fade" id="savedModal">
+      <div class="modal-dialog mdialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Resource is going to saved</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-sm">
+                <p>Thank you</p>
+
+                <p>Thank you for submitting your resource profile. This has been sent to the EU-Citizen.Science moderation team, who will check it to ensure that all of the resources shared on the platform are indeed useful for citizen science projects and practitioners, and are of good quality.</p>
+
+                <p>We will be in touch with you if we have any questions, and otherwise you will receive an alert that your resource has been moderated and published to the platform. Your resource profile will be visible to the public in the meantime, but will be marked as unmoderated.</p>
+
+                <p>You can make updates or changes to this resource profile at any time, by going to the Submitted resources section in your Personal Area (see the top-right of the platform menu).</p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary read-before-save">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="container mt-5">
       <div class="row d-flex justify-content-center">
         <div class="col-sm-10 col-12">
@@ -207,6 +238,7 @@
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"></script>
 <script>
+  var readSavedConfirmation = false;
   $(document).ready(function () {
 
     var choices = $("#id_choices").val();
@@ -251,26 +283,31 @@
 
     $("form").submit(function (e) {
       var validationFailed = false;
-
-      $.each($("[required]"), function (index, value) {
-        var id = $(value).parent().parent().attr('id');
-        $("#" + id + " .errorMsg").remove();
-        if(!$(value).val()){
-          validationFailed = true;
-          $(value).parent().append("<span class='errorMsg'> <b>Required field (*)</b></span>");
-        }
-      });
-      var email = $("#id_author_email").val();
-      //if(!validateEmail(email)){
-      //  validationFailed = true;
-      //  $("#div_id_author_email").append("<span class='errorMsg'> <b>Enter a valid email address.</b></span>");
-      //}
+      if(!readSavedConfirmation){
+        $.each($("[required]"), function (index, value) {
+          var id = $(value).parent().parent().attr('id');
+          $("#" + id + " .errorMsg").remove();
+          if(!$(value).val()){
+            validationFailed = true;
+            $(value).parent().append("<span class='errorMsg'> <b>Required field (*)</b></span>");
+          }
+        });
+        var email = $("#id_author_email").val();
+        //if(!validateEmail(email)){
+        //  validationFailed = true;
+        //  $("#div_id_author_email").append("<span class='errorMsg'> <b>Enter a valid email address.</b></span>");
+        //}
+      }
 
       if (validationFailed) {
         e.preventDefault();
         $('html,body').animate({ scrollTop: $(".add-new-resource").offset().top - 160 }, { duration: "slow" });
         return false;
       }else{
+        if(!readSavedConfirmation){
+          e.preventDefault();
+          $("#savedModal").modal("show");
+        }
         var option_all = $("#id_keywords option:selected").map(function () {
           return $.trim($(this).text());
         }).get().join(',');
@@ -291,6 +328,13 @@
         }
       }
     });
+
+    $(".read-before-save").click(function () {
+      readSavedConfirmation = true;
+      $("#savedModal").modal("hide");
+      $('form').submit();
+    });
+
   });
 
   function getSubCategories(){
