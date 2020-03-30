@@ -67,7 +67,8 @@ def saveImage(request, form, element, ref):
     return '/' + image_path
 
 def projects(request):
-    projects = Project.objects.get_queryset().order_by('id')
+    projects = Project.objects.get_queryset()
+
     featuredProjects = FeaturedProjects.objects.all().values_list('project_id',flat=True)
     user = request.user
     followedProjects = None
@@ -77,6 +78,11 @@ def projects(request):
     topics = Topic.objects.all()
     status = Status.objects.all()
     filters = {'keywords': '', 'topic': '', 'status': 0, 'country': '', 'host': '', 'featuredCheck': ''}
+    if request.GET.get('orderby'):
+        projects=projects.order_by(request.GET['orderby'])
+        filters['orderby']=request.GET['orderby']
+    else:
+        projects=projects.order_by('-id')
 
     if request.GET.get('keywords'):
         projects = projects.filter( Q(name__icontains = request.GET['keywords']) |
@@ -107,7 +113,7 @@ def projects(request):
             projects = projects.exclude(id__in=featuredProjects)
         if request.GET['featuredCheck'] == 'All':
             projects = projects
-        filters['featuredCheck'] = request.GET['featuredCheck']        
+        filters['featuredCheck'] = request.GET['featuredCheck']
     else:
         projects = projects.filter(id__in=featuredProjects)
     if not user.is_staff:
@@ -279,10 +285,10 @@ def preFilteredProjects(request):
         if request.GET['featuredCheck'] == 'Off':
             projects = projects.exclude(id__in=featuredProjects)
         if request.GET['featuredCheck'] == 'All':
-            projects = projects    
+            projects = projects
     else:
         projects = projects.filter(id__in=featuredProjects)
-    
+
     return projects
 
 def host_autocomplete(request):
