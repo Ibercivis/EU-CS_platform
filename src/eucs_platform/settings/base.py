@@ -129,6 +129,58 @@ DATABASES = {
 
 LANGUAGE_CODE = "en-us"
 
+LANGUAGE_CODES = [
+    'fr',
+    'en',
+    'ar',
+    'am',
+    'bg',
+    'bn',
+    'ca',
+    'cs',
+    'da',
+    'de',
+    'el',
+    'es',
+    'et',
+    'fa',
+    'fi',
+    'fil',
+    'gu',
+    'he',
+    'hi',
+    'hr',
+    'hu',
+    'id',
+    'it',
+    'ja',
+    'kn',
+    'ko',
+    'lt',
+    'lv',
+    'ml',
+    'mr',
+    'ms',
+    'nl',
+    'no',
+    'pl',
+    'pt_PT',
+    'ro',
+    'ru',
+    'sk',
+    'sl',
+    'sr',
+    'sv',
+    'sw',
+    'ta',
+    'te',
+    'th',
+    'tr',
+    'uk',
+    'vi',
+    'zh_CN'
+]
+
 TIME_ZONE = "UTC"
 
 USE_I18N = True

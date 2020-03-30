@@ -142,10 +142,12 @@
                     Language<span class="asteriskField">*</span>
                   </label>
                   <select name="language" class="form-control">
-                    {% for language in languages %}
-                    <option value="{{ language.code }}" {% if language.code == resource.inLanguage %}selected {% endif %}>
-                      {{ language.name_local }}
-                    </option>
+                    {% for language in languages|dictsort:"name" %}
+                      {% if language.code in settings.LANGUAGE_CODES %}
+                        <option value="{{ language.code }}" {% if language.code == resource.inLanguage %}selected {% endif %}>
+                          {{ language.name }}
+                        </option>
+                      {% endif %}
                     {% endfor %}
                   </select>
                   {% endif %}
