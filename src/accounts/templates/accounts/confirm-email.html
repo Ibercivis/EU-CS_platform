@@ -1,0 +1,24 @@
+{% extends "base2.html" %}
+{% block title %}{{ block.super }}SignUp{% endblock %}
+{% block navbar-left %}
+{% include "_navbar.html"  %}
+{% endblock %}
+
+{% block splash %}
+<div class="jumbotron jumbotron-fluid jumbotron-projects">
+    <div class="container">
+        <h1 class="display-5 pb-0"><br></h1>
+        <p class="lead text-light"></p>
+    </div>
+</div>
+{% endblock splash %}
+
+
+{% block list_of_items %}
+<div class="container">
+    <div class="row">
+        <h3>Please confirm your email address to complete the registration</h3>
+
+    </div>
+</div>
+{% endblock %}
