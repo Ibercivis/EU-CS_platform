@@ -235,9 +235,16 @@ def deleteProject(request, pk):
     return redirect('projects')
 
 def text_autocomplete(request):
+    projects = preFilteredProjects(request)
     if request.GET.get('q'):
         text = request.GET['q']
-        report = getNamesKeywords(text)
+        projectsName = projects.filter( Q(name__icontains = text) ).distinct()
+        projectsKey = projects.filter( Q(keywords__keyword__icontains = text) ).distinct()
+        project_names = projectsName.values_list('name',flat=True).distinct()
+        keywords = projectsKey.values_list('keywords__keyword',flat=False).distinct()
+        keywords = Keyword.objects.filter(keyword__in = keywords).values_list('keyword',flat=True).distinct()
+        report = chain(project_names, keywords)
+        #report = getNamesKeywords(text)
         json = list(report)
         return JsonResponse(json, safe=False)
     else:
@@ -248,6 +255,35 @@ def getNamesKeywords(text):
     keywords = Keyword.objects.filter(keyword__icontains=text).values_list('keyword',flat=True).distinct()
     report = chain(project_names, keywords)
     return report
+
+def preFilteredProjects(request):
+    projects = Project.objects.get_queryset().order_by('id')
+    featuredProjects = FeaturedProjects.objects.all().values_list('project_id',flat=True)
+
+    if request.GET.get('topic'):
+        projects = projects.filter(topic__topic = request.GET['topic'])
+
+    if request.GET.get('status') and int(request.GET.get('status')) > 0:
+        projects = projects.filter(status = request.GET['status'])
+
+    if request.GET.get('country'):
+        projects = projects.filter(country = request.GET['country'])
+
+    if request.GET.get('host'):
+        projects = projects.filter( host__icontains = request.GET['host'])
+
+
+    if request.GET.get('featuredCheck'):
+        if request.GET['featuredCheck'] == 'On':
+            projects = projects.filter(id__in=featuredProjects)
+        if request.GET['featuredCheck'] == 'Off':
+            projects = projects.exclude(id__in=featuredProjects)
+        if request.GET['featuredCheck'] == 'All':
+            projects = projects    
+    else:
+        projects = projects.filter(id__in=featuredProjects)
+    
+    return projects
 
 def host_autocomplete(request):
     if request.GET.get('q'):
