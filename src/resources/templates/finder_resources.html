@@ -17,20 +17,32 @@
 	</div>
 	<div class="row">
 		<form class="form-inline float-lg-right" id="searchResources" action="{% url 'resources' %}">
-			<div class="col-12 col-lg-6">
+			<div class="col-12 col-lg-9">
 				<div class="float-right">
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<div class="input-group-text"><i class="fas fa-search"></i></div>
 						</div>
-						<input size="50" type="text" id="keywords" name="keywords" autocomplete="off" value="{{filters.keywords}}" class="basicAutoComplete form-control"
+						<input size="80" type="text" id="keywords" name="keywords" autocomplete="off" value="{{filters.keywords}}" class="basicAutoComplete form-control"
 						placeholder="Title or Keywords" data-url="resources_autocomplete/?language={{filters.language}}&theme={{filters.theme}}&category={{filters.category}}&featuredCheck={{filters.featuredCheck}}">
 						{% get_language_info_list for LANGUAGES as languages %}
 						{% if settings.USE_I18N and languages|length > 1 %}
 					</div>
 				</div>
 			</div>
-			<div class="col-12 col-lg-6">
+			<div class="col-lg-3 col-12  text-right float-rigth">
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<div class="input-group-text"><i class="fas fa-sort-amount-down"></i></div>
+						</div>
+				<select id="orderby" name="orderby" class="custom-select form-control float-right">
+					<option value="-id" {% if filters.orderby == "-id" %} selected {% endif %}>Newest</option>
+					<option value="id" {% if filters.orderby == "id" %} selected {% endif %}>Oldest</option>
+					<option value="theme" {% if filters.orderby == "theme" %} selected {% endif %}">Theme</option>
+				</select>
+			</div>
+			</div>
+			<div class="col-12 col-lg-10">
 				<div class="float-right">
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
@@ -70,25 +82,12 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3 col-12 text-left">
+				<div class="col-lg-2 col-12 text-right">
 					{% if user.is_authenticated %}
-					<a class="btn btn-warning float-left mb-3" href="{% url 'new_resource' %}">
+					<a class="btn btn-warning float-right mb-3" href="{% url 'new_resource' %}">
 						<i class="fas fa-plus-circle"></i> Add
 					</a>
 					{% endif %}
-				</div>
-				<div class="col-lg-6"></div>
-				<div class="col-lg-3 col-12  text-right float-rigth">
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<div class="input-group-text"><i class="fas fa-sort-amount-down"></i></div>
-							</div>
-					<select id="orderby" name="orderby" class="custom-select form-control float-right">
-						<option value="-id" {% if filters.orderby == "-id" %} selected {% endif %}>Newest</option>
-						<option value="id" {% if filters.orderby == "id" %} selected {% endif %}>Oldest</option>
-						<option value="theme" {% if filters.orderby == "theme" %} selected {% endif %}">Theme</option>
-					</select>
-				</div>
 				</div>
 				{% if request.get_full_path != "/resources" %}
 				<div class="col-lg-12 text-right mb-3">
