@@ -195,9 +195,16 @@ def deleteResource(request, pk):
     return redirect('resources')
 
 def resources_autocomplete(request):
+    resources = preFilteredResources(request)
     if request.GET.get('q'):
         text = request.GET['q']
-        report = getRscNamesKeywords(text)
+        resourceNames = resources.filter( Q(name__icontains = text) ).distinct()
+        resourceKeywords = resources.filter( Q(keywords__keyword__icontains = text) ).distinct()
+        rsc_names = resourceNames.values_list('name',flat=True).distinct()
+        keywords = resourceKeywords.values_list('keywords__keyword',flat=False).distinct()
+        keywords = Keyword.objects.filter(keyword__in = keywords).values_list('keyword',flat=True).distinct()
+        report = chain(rsc_names, keywords)
+        #report = getRscNamesKeywords(text)
         json = list(report)
         return JsonResponse(json, safe=False)
     else:
@@ -208,6 +215,32 @@ def getRscNamesKeywords(text):
     keywords = Keyword.objects.filter(keyword__icontains=text).values_list('keyword',flat=True).distinct()
     report = chain(rsc_names, keywords)
     return report
+
+def preFilteredResources(request):
+    resources = Resource.objects.all().order_by('id')
+    featuredResources = FeaturedResources.objects.all().values_list('resource_id',flat=True)
+    if request.GET.get('language'):
+        resources = resources.filter(inLanguage = request.GET['language'])
+
+    if request.GET.get('license'):
+        resources = resources.filter(license__icontains = request.GET['license'])
+    if request.GET.get('theme'):
+        resources = resources.filter(theme = request.GET['theme'])
+
+    if request.GET.get('category'):
+        resources = resources.filter(category = request.GET['category'])
+
+    if request.GET.get('featuredCheck'):
+        if request.GET['featuredCheck'] == 'On':
+            resources = resources.filter(id__in=featuredResources)
+        if request.GET['featuredCheck'] == 'Off':
+            resources = resources.exclude(id__in=featuredResources)
+        if request.GET['featuredCheck'] == 'All':
+            resources = resources
+    else:
+        resources = resources.filter(id__in=featuredResources)
+
+    return resources
 
 def license_autocomplete(request):
     if request.GET.get('q'):

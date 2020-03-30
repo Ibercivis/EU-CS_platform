@@ -27,7 +27,8 @@
 				<div class="float-right">
 					<div class="input-group mb-3">
 						<input type="text" id="keywords" name="keywords"  autocomplete="off"
-						value="{{filters.keywords}}" class="basicAutoComplete form-control" placeholder="Title or keywords" data-url="text_autocomplete/">
+						value="{{filters.keywords}}" class="basicAutoComplete form-control" placeholder="Title or keywords" 
+							data-url="text_autocomplete/?status={{filters.status}}&country={{filters.country}}&topic={{filters.topic}}&featuredCheck={{filters.featuredCheck}}">
 						<select id="status" name="status" class="custom-select status-select form-control">
 							<option value="">Status<option>
 								{% for s in status %}

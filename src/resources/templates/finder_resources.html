@@ -21,7 +21,8 @@
 		<form class="form-inline float-lg-right" id="searchResources" action="{% url 'resources' %}">
 			<div class="float-right">
 				<div class="input-group mb-3">
-					<input type="text" id="keywords" name="keywords" autocomplete="off" value="{{filters.keywords}}" class="basicAutoComplete form-control" placeholder="Title or Keywords" data-url="resources_autocomplete/">
+					<input type="text" id="keywords" name="keywords" autocomplete="off" value="{{filters.keywords}}" class="basicAutoComplete form-control"
+					 placeholder="Title or Keywords" data-url="resources_autocomplete/?language={{filters.language}}&theme={{filters.theme}}&category={{filters.category}}&featuredCheck={{filters.featuredCheck}}">
 					{% get_language_info_list for LANGUAGES as languages %}
 					{% if settings.USE_I18N and languages|length > 1 %}
 					<select id="language" name="language" class="custom-select form-control">
