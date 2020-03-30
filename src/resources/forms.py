@@ -69,14 +69,16 @@ class ResourceForm(forms.ModelForm):
         rsc.inLanguage = self.data['language']
         rsc.author_email = self.data['author_email']
         rsc.resourceDOI = self.data['resource_DOI']
-        rsc.datePublished = self.data['year_of_publication']
+        if self.data['year_of_publication'] != '':
+            rsc.datePublished = self.data['year_of_publication']
+        else:
+            rsc.datePublished = None
         rsc.category = category
 
         if(images[0] != '/'):
             rsc.image1 = images[0]
         if(images[1] != '/'):
             rsc.image2 = images[1]
-
 
 
         rsc.save()
