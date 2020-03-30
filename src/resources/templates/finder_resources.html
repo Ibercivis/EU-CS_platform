@@ -17,13 +17,25 @@
 	</div>
 	<div class="row">
 		<form class="form-inline float-lg-right" id="searchResources" action="{% url 'resources' %}">
-			<div class="col-lg-12 float-right">
+			<div class="col-12 col-lg-6">
 				<div class="float-right">
 					<div class="input-group mb-3">
-						<input type="text" id="keywords" name="keywords" autocomplete="off" value="{{filters.keywords}}" class="basicAutoComplete form-control"
+						<div class="input-group-prepend">
+							<div class="input-group-text"><i class="fas fa-search"></i></div>
+						</div>
+						<input size="50" type="text" id="keywords" name="keywords" autocomplete="off" value="{{filters.keywords}}" class="basicAutoComplete form-control"
 						placeholder="Title or Keywords" data-url="resources_autocomplete/?language={{filters.language}}&theme={{filters.theme}}&category={{filters.category}}&featuredCheck={{filters.featuredCheck}}">
 						{% get_language_info_list for LANGUAGES as languages %}
 						{% if settings.USE_I18N and languages|length > 1 %}
+					</div>
+				</div>
+			</div>
+			<div class="col-12 col-lg-6">
+				<div class="float-right">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<div class="input-group-text"><i class="fas fa-filter"></i></div>
+						</div>
 						<select id="language" name="language" class="custom-select form-control">
 							<option value="">All languages<option>
 								{% for language in languages %}
@@ -51,13 +63,10 @@
 							{% endfor %}
 							<select/>
 							<select id="featuredCheck" name="featuredCheck" class="custom-select form-control">
-								<option value="On" {% if filters.featuredCheck == "On" %} selected {% endif %}>Only Moderated</option>
-								<option value="Off" {% if filters.featuredCheck == "Off" %} selected {% endif %}>Only not moderated</option>
+								<option value="On" {% if filters.featuredCheck == "On" %} selected {% endif %}>Moderated</option>
+								<option value="Off" {% if filters.featuredCheck == "Off" %} selected {% endif %}>Not moderated</option>
 								<option value="All" {% if filters.featuredCheck == "All" %} selected {% endif %}">All</option>
 							</select>
-							<div class="input-group-append">
-								<button class="btn btn-info" id="search" type="submit"><i class="fas fa-search"></i> Find</button>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -68,14 +77,18 @@
 					</a>
 					{% endif %}
 				</div>
-				<div class="col-lg-5"></div>
-				<div class="col-lg-4 col-12  text-right float-rigth">
-					<select id="orderby" name="orderby" class="custom-select form-control mb-3 float-right">
+				<div class="col-lg-6"></div>
+				<div class="col-lg-3 col-12  text-right float-rigth">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<div class="input-group-text"><i class="fas fa-sort-amount-down"></i></div>
+							</div>
+					<select id="orderby" name="orderby" class="custom-select form-control float-right">
 						<option value="-id" {% if filters.orderby == "-id" %} selected {% endif %}>Newest</option>
 						<option value="id" {% if filters.orderby == "id" %} selected {% endif %}>Oldest</option>
 						<option value="theme" {% if filters.orderby == "theme" %} selected {% endif %}">Theme</option>
 					</select>
-					<label for="orderby" class="float-right mt-2">Order by: &nbsp;</label>
+				</div>
 				</div>
 				{% if request.get_full_path != "/resources" %}
 				<div class="col-lg-12 text-right mb-3">
