@@ -21,9 +21,9 @@
         <div class="upper">
           {% if resource.id not in featuredResources %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br> {% endif %}
           </div>
-        <div class="card-header bg-white">
+        <div class="card-header">
           <div class="row">
-            <div class="col-6">
+            <div class="col-lg-6 col-12">
               {% if user.is_authenticated %}
               {% if resource.creator == user or user.is_staff or user.id in cooperators %}
               <a class="btn btn-danger mt-4" href="{% url 'editResource' resource.id %}"><i class="fas fa-edit"></i> Edit
@@ -33,14 +33,13 @@
               {% if user.is_authenticated %}
               {% if resource.creator == user or user.is_staff %}
             </div>
-            <div class="col-6">
+            <div class="col-lg-6 col-12">
               <permissionForm>
                 {% csrf_token %}
                 {{ permissionForm.usersAllowed | as_crispy_field }}
                 {{ permissionForm.selectedUsers | as_crispy_field }}
                 {{ permissionForm.usersCollection | as_crispy_field }}
               </permissionForm>
-              <br><br>
             </div>
             {% endif %}
             {% endif %}
