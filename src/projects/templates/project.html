@@ -2,11 +2,12 @@
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% load leaflet_tags %}
+{% load reviews %}
 {% block head %}
 {{block.super }}
 {% leaflet_js %}
 {% leaflet_css %}
-
+<link href="/static/reviews/css/star-rating.css" type="text/css" media="all" rel="stylesheet">
 {% endblock head %}
 {% block title %}{{ block.super }}Projects{% endblock %}
 {% block navbar-left %}
@@ -55,7 +56,19 @@
         <div class="card-text p-3">
           <div class="row">
             <div class="col-12 col-xl-4 mt-2 mt-4">
-              <h2>{{project.name}}<!-- i class="fas fa-star-half-alt"></i>{{votes}}{{votes| stringformat:'d'}}--></h2>
+              <h2>{{project.name}} 
+                <!-- i class="fas fa-star-half-alt"></i>{{votes}}{{votes| stringformat:'d'}}--></h2>
+                {% get_rating for project as avg_rating %}
+                {% get_review_count for project as review_count %}
+                <span class="gl-star-rating-stars s{{ avg_rating | stringformat:'d'}}0 readonly">
+                  <span data-value="1" data-text="Terrible"></span>
+                  <span data-value="2" data-text="Poor"></span>
+                  <span data-value="3" data-text="Average"></span>
+                  <span data-value="4" data-text="Very Good"></span>
+                  <span data-value="5" data-text="Excellent"></span>
+                </span>                        
+                {{ review_count }} votes.            
+              <br/><a class="btn btn-info" href="/project_review/{{project.id}}">Vote</a>
             </div>
             <div class="col-12 col-xl-8 mt-2">
               <p><b>{{project.aim | safe}}</b></p>
@@ -188,10 +201,11 @@
               </div>
               {% endif %}
             </div>
-          </div><!-- End of card footer -->
+          </div><!-- End of card footer -->          
         </div><!-- End of card -->
       </div>
     </div>
+    {% render_review_list for project %}
   </div>
   {% endblock list_of_items %}
 

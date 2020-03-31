@@ -93,7 +93,9 @@ INSTALLED_APPS = (
     "leaflet",
     "django_countries",
     "authors",
-    "contact"
+    "contact",
+    "reviews",
+    'django.contrib.sites'
 )
 
 MIDDLEWARE = [
@@ -232,3 +234,6 @@ SUMMERNOTE_CONFIG = {
     },
     'disable_attachment': True,
 }
+
+SITE_ID = 1
+REVIEW_PUBLISH_UNMODERATED = True

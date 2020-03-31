@@ -15,4 +15,5 @@ urlpatterns = [
     path('setHidden/', views.setHidden, name='setHidden'),
     path('setFollowedProject/', views.setFollowedProject, name='setFollowedProject'),
     path('allowUser/', views.allowUser, name='allowUser'),
+    path('project_review/<int:pk>', views.project_review, name='project_review'),
 ]
