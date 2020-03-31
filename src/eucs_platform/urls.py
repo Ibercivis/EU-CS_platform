@@ -36,6 +36,7 @@ urlpatterns = [
     path('', include('blog.urls')),
     path('summernote/', include('django_summernote.urls')),
     url(r'^i18n/', include('django.conf.urls.i18n')),
+    url(r'^reviews/', include('reviews.urls')),
 
 ]
 

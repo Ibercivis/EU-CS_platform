@@ -365,3 +365,6 @@ def allowUser(request):
         projectPermission.save()
 
     return JsonResponse(response, safe=False)
+
+def project_review(request, pk):
+    return render(request, 'project_review.html', {'projectID': pk})
