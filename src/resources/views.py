@@ -351,3 +351,6 @@ def allowUserResource(request):
         resourcePermission.save()
 
     return JsonResponse(response, safe=False)
+
+def resource_review(request, pk):
+    return render(request, 'resource_review.html', {'resourceID': pk})
