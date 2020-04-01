@@ -414,6 +414,12 @@
         }
       });
 
+      var email = $("#id_contact_person_email").val();
+      if(email && !validateEmail(email)){
+      validationFailed = true;
+      $("#div_id_contact_person_email").append("<span class='errorMsg'> <b>Enter a valid email address.</b></span>");
+      }
+
     if (validationFailed) {
       e.preventDefault();
       $('html,body').animate({ scrollTop: $(".edit-project").offset().top - 160 }, { duration: "slow" });
