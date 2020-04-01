@@ -175,18 +175,20 @@
 <script>
   $(document).ready(function () {
     var users = $("#id_usersCollection").val();
-    var users = users.split(",");
-    var selectedUsers = $("#id_selectedUsers").val().split(",");
-    for (user of users){
-      var found = false;
-      for(sel of selectedUsers){
-        if(sel.trim() == user.trim()){
-          found = true;
-          $("#id_usersAllowed").append("<option value='" + user +"' selected> " + user + " </option>");
+    if(users){
+      var users = users.split(",");
+      var selectedUsers = $("#id_selectedUsers").val().split(",");
+      for (user of users){
+        var found = false;
+        for(sel of selectedUsers){
+          if(sel.trim() == user.trim()){
+            found = true;
+            $("#id_usersAllowed").append("<option value='" + user +"' selected> " + user + " </option>");
+          }
         }
-      }
-      if(!found){
-        $("#id_usersAllowed").append("<option value='" + user +"'> " + user + " </option>");
+        if(!found){
+          $("#id_usersAllowed").append("<option value='" + user +"'> " + user + " </option>");
+        }
       }
     }
   });
