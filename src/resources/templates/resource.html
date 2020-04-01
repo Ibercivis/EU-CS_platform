@@ -126,7 +126,18 @@
               <h4>Reviews</h4>
             </div>
             <div class="col-12 col-xl-8 mt-5">
-              {% render_review_list for resource %}
+              {% get_review_list for resource as review_list %}
+              {% for review in review_list %}
+              <span class="gl-star-rating-stars s{{ review.rating | stringformat:'d'}}0 readonly">
+                <span data-value="1" data-text="Terrible"></span>
+                <span data-value="2" data-text="Poor"></span>
+                <span data-value="3" data-text="Average"></span>
+                <span data-value="4" data-text="Very Good"></span>
+                <span data-value="5" data-text="Excellent"></span>
+              </span>
+                {{review.submit_date}} - {{review.user.name}}
+                <p>{{review.comment}}</p>
+              {% endfor %}
               {% if user.is_authenticated %}
               <a  class="btn btn-outline-secondary float-left mt-2" href="/resource_review/{{resource.id}}">Review</a>
               {% endif %}
