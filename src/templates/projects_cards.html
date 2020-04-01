@@ -13,10 +13,13 @@
 			<div class="upper">
 				{% for country in countries %}
 				{% if country.code == project.country %}
-				{% if project.id not in featuredProjects %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br> {% endif %}
-				<a class="badge frontpage" href="projects?country={{country.code}}">{{ country.name | upper }}</a>
+
+				<a class="badge frontpage mb-2" href="projects?country={{country.code}}">{{ country.name | upper }}</a><br/>
 				{% endif %}
 				{% endfor %}
+				{% if project.id not in featuredProjects %} <a class="badge frontpage frontpage-red" href="/faq#moderation">NOT YET MODERATED</a><br/>
+				{% else %} {% if filters.featuredCheck == "All" %}  <a class="badge frontpage frontpage-green" href="/faq#moderation">MODERATED</a><br/> {% endif %}
+				{% endif %}
 			</div>
 		</a>
 		<div class="card-body">
