@@ -243,5 +243,10 @@ EMAIL_HOST_PASSWORD = 'asdasdnasjasd2213'
 EMAIL_PORT = '587'
 EMAIL_USE_TLS = True
 
+EMAIL_RECIPIENT_LIST = [
+    "eucitsci@mfn.berlin",
+    "frasanz@bifi.es",
+]
+
 SITE_ID = 1
 REVIEW_PUBLISH_UNMODERATED = True
