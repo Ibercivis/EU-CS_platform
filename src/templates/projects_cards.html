@@ -11,15 +11,16 @@
 			<img class="card-img-top img-fluid img-zoom lazyload {% if project.id not in featuredProjects %} nonmoderated {% endif %}" src="{% static 'site/img/project_default_card.png' %}" />
 			{% endif %}
 			<div class="upper">
+				{% if project.id not in featuredProjects %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br/>
+				{% else %} {% if filters.featuredCheck == "All" %}  <a class="badge frontpage frontpage-green mb-2" href="/faq#moderation">MODERATED</a><br/> {% endif %}
+				{% endif %}
 				{% for country in countries %}
 				{% if country.code == project.country %}
 
-				<a class="badge frontpage mb-2" href="projects?country={{country.code}}">{{ country.name | upper }}</a><br/>
+				<a class="badge frontpage" href="projects?country={{country.code}}">{{ country.name | upper }}</a>
 				{% endif %}
 				{% endfor %}
-				{% if project.id not in featuredProjects %} <a class="badge frontpage frontpage-red" href="/faq#moderation">NOT YET MODERATED</a><br/>
-				{% else %} {% if filters.featuredCheck == "All" %}  <a class="badge frontpage frontpage-green" href="/faq#moderation">MODERATED</a><br/> {% endif %}
-				{% endif %}
+
 			</div>
 		</a>
 		<div class="card-body">

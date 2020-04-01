@@ -147,9 +147,12 @@
                 </div>
               </div>
               <hr />
-              <h4>Contact person info</h4>
+              <h4>Contact details</h4>
               <div id="contactinfoform">
                 <div class="form-row">
+                  <div class="col-12">
+                    {{ form.host|as_crispy_field }}
+                  </div>
                   <div class="col-12">
                     {{ form.contact_person|as_crispy_field }}
                   </div>
@@ -219,15 +222,7 @@
               </div>
               <hr />
 
-              <h4>Personal and Organizational Affiliates</h4>
-              <div id="organizationform">
-                <div class="form-row">
-                  <div class="col-12">
-                    {{ form.host|as_crispy_field }}
-                  </div>
-                </div>
-              </div>
-              <hr />
+
 
 
               <h4>Supplementary information for Citizen Science</h4>

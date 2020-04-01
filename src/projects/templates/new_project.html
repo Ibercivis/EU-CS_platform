@@ -162,9 +162,12 @@
                   </div>
 
                   <hr />
-                  <h4>Contact person info</h4>
+                  <h4>Contact details</h4>
                   <div id="contactinfoform">
                     <div class="form-row">
+                      <div class="col-12">
+                        {{ form.host|as_crispy_field }}
+                      </div>
                       <div class="col-12">
                         {{ form.contact_person|as_crispy_field }}
                       </div>
@@ -229,16 +232,6 @@
                       </div>
                       <div class="col-sm-6 col-12">
                         {{ form.longitude|as_crispy_field }}
-                      </div>
-                    </div>
-                  </div>
-                  <hr />
-
-                  <h4>Personal and Organizational Affiliates</h4>
-                  <div id="organizationform">
-                    <div class="row">
-                      <div class="col-12">
-                        {{ form.host|as_crispy_field }}
                       </div>
                     </div>
                   </div>
@@ -309,6 +302,8 @@
 <script>
   var readSavedConfirmation = false;
   $(document).ready(function () {
+    $('.js-example-basic-single').select2();
+
 
     var choices = $("#id_choices").val();
     var choices = choices.split(",");

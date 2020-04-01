@@ -169,7 +169,7 @@
                       <label for="language" class="control-label  requiredField">
                         Language<span class="asteriskField">*</span>
                       </label>
-                      
+
                       <select name="language" class="form-control">
                         {% for language in languages|dictsort:"name" %}
                           {% if language.code in settings.LANGUAGE_CODES %}
@@ -438,6 +438,10 @@
     });
 
   });
+  // In your Javascript (external .js resource or <script> tag)
+$(document).ready(function() {
+
+});
 
 
 </script>
