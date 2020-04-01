@@ -14,7 +14,7 @@ from datetime import datetime
 from PIL import Image
 from itertools import chain
 from .forms import ProjectForm, CustomFieldForm, CustomFieldFormset, ProjectPermissionForm
-from .models import Project, Topic, Status, Keyword, Votes, FeaturedProjects, FollowedProjects, FundingBody, FundingAgency, CustomField, ProjectPermission,OriginDatabase
+from .models import Project, Topic, Status, Keyword, Votes, FeaturedProjects, FollowedProjects, FundingBody, CustomField, ProjectPermission,OriginDatabase
 import json
 import random
 
@@ -181,10 +181,6 @@ def editProject(request, pk):
     fundingBody = list(FundingBody.objects.all().values_list('body',flat=True))
     fundingBody = ", ".join(fundingBody)
 
-    #TODO Delete fundingAgency?
-    fundingAgency = list(FundingAgency.objects.all().values_list('agency',flat=True))
-    fundingAgency = ", ".join(fundingAgency)
-
     originDatabase = list(OriginDatabase.objects.all().values_list('originDatabase',flat=True))
     originDatabase = ", ".join(originDatabase)
 
@@ -199,7 +195,6 @@ def editProject(request, pk):
         'how_to_participate': project.howToParticipate, 'equipment': project.equipment,
         'contact_person': project.author, 'contact_person_email': project.author_email,
         'funding_body': fundingBody, 'fundingBodySelected': project.fundingBody, 'fundingProgram': project.fundingProgram,
-        'funding_agency': fundingAgency,'fundingAgencySelected': project.fundingAgency,
         'originDatabase': originDatabase,'originDatabaseSelected': project.originDatabase,
         'originUID' : project.originUID, 'originURL': project.originURL,
     })

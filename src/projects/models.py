@@ -23,11 +23,6 @@ class FundingBody(models.Model):
     def __str__(self):
         return f'{self.body}'
 
-class FundingAgency(models.Model):
-    agency = models.TextField()
-    def __str__(self):
-        return f'{self.agency}'
-
 class OriginDatabase(models.Model):
     originDatabase = models.TextField()
     def __str__(self):
@@ -75,7 +70,6 @@ class Project(models.Model):
     #Funding
     fundingBody = models.ForeignKey(FundingBody, on_delete=models.CASCADE,null=True, blank=True)
     fundingProgram = models.CharField(max_length=500)
-    fundingAgency =  models.ForeignKey(FundingAgency, on_delete=models.CASCADE,null=True, blank=True)
     #Origin information
     originDatabase = models.ForeignKey(OriginDatabase, on_delete=models.CASCADE,null=True, blank=True)
     originURL = models.CharField(max_length=200)

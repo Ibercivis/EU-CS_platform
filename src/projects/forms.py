@@ -1,12 +1,13 @@
 from django import forms
 from django.db import models
-from .models import Project, Topic, Status, Keyword, FundingBody, FundingAgency, CustomField, OriginDatabase
+from .models import Project, Topic, Status, Keyword, FundingBody, CustomField, OriginDatabase
 from django.shortcuts import get_object_or_404
 from django_select2.forms import Select2MultipleWidget, Select2Widget
 from django.core.files import File
 from django.forms import formset_factory
 from PIL import Image
 from geopy.geocoders import Nominatim
+from geopy.exc import GeocoderServiceError
 from django_summernote.widgets import SummernoteWidget
 from itertools import chain
 
@@ -64,8 +65,6 @@ class ProjectForm(forms.Form):
     funding_body =  forms.ModelMultipleChoiceField(queryset=FundingBody.objects.all(), widget=Select2MultipleWidget(attrs={'data-placeholder':' Please enter the funding agency of the project (e.g. European Commission) '}), required=False)
     fundingBodySelected = forms.CharField(widget=forms.HiddenInput(), max_length=100, required=False)
     funding_program = forms.CharField(max_length=500, widget=forms.TextInput(attrs={'placeholder':'Indication of the programme that funds or funded a project'}),required=False)
-    #funding_agency =   forms.ModelMultipleChoiceField(queryset=FundingAgency.objects.all(), widget=Select2MultipleWidget, required=False, label="Funding agency (Select or write new one)")
-    fundingAgencySelected = forms.CharField(widget=forms.HiddenInput(), max_length=100, required=False)
     #Origin information
     origin_database =  forms.ModelMultipleChoiceField(queryset=OriginDatabase.objects.all(), widget=Select2MultipleWidget(attrs={'data-placeholder':' Please enter the origin database '}), required=False)
     originDatabaseSelected = forms.CharField(widget=forms.HiddenInput(), max_length=300, required=False)
@@ -133,12 +132,6 @@ class ProjectForm(forms.Form):
             body, exist = FundingBody.objects.get_or_create(body=fundingBodySelected)
             project.fundingBody = body
 
-        #fundingAgencySelected = self.data['fundingAgencySelected']
-        #if(fundingAgencySelected != ''):
-        #agency, exist = FundingAgency.objects.get_or_create(agency=fundingAgencySelected)
-        #project.fundingAgency = agency
-        project.FundingAgency=''
-
         originDatabaseSelected = self.data['originDatabaseSelected']
         if(originDatabaseSelected != ''):
             originDatabase, exist = OriginDatabase.objects.get_or_create(originDatabase=originDatabaseSelected)
@@ -176,12 +169,14 @@ class ProjectForm(forms.Form):
 
 
 def getCountryCode(latitude, longitude):
-    location = geolocator.reverse([latitude, longitude], exactly_one=True)
-    if len(location.raw) > 1:
-        return location.raw['address']['country_code']
-    else:
+    try:
+        location = geolocator.reverse([latitude, longitude], exactly_one=True)
+        if len(location.raw) > 1:
+            return location.raw['address']['country_code']
+        else:
+            return ''
+    except GeocoderServiceError:
         return ''
-
 
 class CustomFieldForm(forms.Form):
     title = forms.CharField(max_length=100, required=False)
