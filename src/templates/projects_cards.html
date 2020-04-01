@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load reviews %}
 {% if projects %}
 {% for project in projects %}
 <div class="col-lg-4  col-sm-12 mb-4">
@@ -20,6 +21,16 @@
 		</a>
 		<div class="card-body">
 			<h6 class="card-title mt-3 mb-3"> <a class="card-link" href="/project/{{project.id }}">{{ project.name }}</a></h6>
+			{% get_rating for project as avg_rating %}
+			{% get_review_count for project as review_count %}
+			<span class="gl-star-rating-stars s{{ avg_rating | stringformat:'d'}}0 readonly">
+				<span data-value="1" data-text="Terrible"></span>
+				<span data-value="2" data-text="Poor"></span>
+				<span data-value="3" data-text="Average"></span>
+				<span data-value="4" data-text="Very Good"></span>
+				<span data-value="5" data-text="Excellent"></span>
+			</span>
+			{{ review_count }} {% if review_count == 1 %} review {% else %} reviews {% endif %}
 			<div class="card-text mt-3">{{project.description | safe | truncatechars:180 }}
 				<a class="project" href="/project/{{project.id}}" target="_blank">Read more</a>
 			</div>
