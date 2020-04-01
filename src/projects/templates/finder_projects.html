@@ -79,8 +79,8 @@
 									{% endfor %}
 								</select>
 								<select id="featuredCheck" name="featuredCheck" class="custom-select form-control">
-									<option value="On" {% if filters.featuredCheck == "On" %} selected {% endif %}>Only Moderated</option>
-									<option value="Off" {% if filters.featuredCheck == "Off" %} selected {% endif %}>Only not moderated</option>
+									<option value="On" {% if filters.featuredCheck == "On" %} selected {% endif %}>Moderated</option>
+									<option value="Off" {% if filters.featuredCheck == "Off" %} selected {% endif %}>Not yet moderated</option>
 									<option value="All" {% if filters.featuredCheck == "All" %} selected {% endif %}">All</option>
 								</select>
 							</div>
