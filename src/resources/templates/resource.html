@@ -5,17 +5,15 @@
 {% load l10n %}
 {% load reviews %}
 {% block title %}{{ block.super }}Resource{% endblock %}
-
 {% block navbar-left %}
 {% include "_navbar.html" with active_link="resources" %}
 {% endblock %}
 {% block list_of_items %}
 {{ permissionForm.media.css }}
-<link href="/static/reviews/css/star-rating.css" type="text/css" media="all" rel="stylesheet">
 <div class="container mt-5">
   <div class="row">
     <div class="container-fluid main-content-container">
-      <div class="card mb-4 mt-5">
+      <div class="card mb-4 mt-5 shadow">
         {% if resource.image2 %}
         <img class="img-fluid img-responsive img-zoom {% if resource.id not in featuredResources %} nonmoderated {% endif %}" src="{{ resource.image2 }}" >
         {% else %}
@@ -23,7 +21,7 @@
         {% endif %}
         <div class="upper">
           {% if resource.id not in featuredResources %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br> {% endif %}
-          </div>
+        </div>
         <div class="card-header">
           <div class="row">
             <div class="col-lg-6 col-12">
@@ -33,36 +31,35 @@
               </a>
               {% endif %}
               {% endif %}
-              {% if user.is_authenticated %}
-              {% if resource.creator == user or user.is_staff %}
             </div>
             <div class="col-lg-6 col-12">
+              {% if user.is_authenticated %}
+              {% if resource.creator == user or user.is_staff %}
               <permissionForm>
                 {% csrf_token %}
                 {{ permissionForm.usersAllowed | as_crispy_field }}
                 {{ permissionForm.selectedUsers | as_crispy_field }}
                 {{ permissionForm.usersCollection | as_crispy_field }}
               </permissionForm>
+              {% endif %}
+              {% endif %}
             </div>
-            {% endif %}
-            {% endif %}
           </div>
         </div><!-- End of card-header -->
         <div class="card-text p-3">
           <div class="row">
             <div class="col-12 col-xl-4">
-              <h2>{{resource.name}}</h2>             
-                {% get_rating for resource as avg_rating %}
-                {% get_review_count for resource as review_count %}
-                <span class="gl-star-rating-stars s{{ avg_rating | stringformat:'d'}}0 readonly">
-                  <span data-value="1" data-text="Terrible"></span>
-                  <span data-value="2" data-text="Poor"></span>
-                  <span data-value="3" data-text="Average"></span>
-                  <span data-value="4" data-text="Very Good"></span>
-                  <span data-value="5" data-text="Excellent"></span>
-                </span>                        
-                {{ review_count }} votes.            
-              <br/><a class="btn btn-info" href="/resource_review/{{resource.id}}">Vote</a>
+              <h4>{{resource.name}}</h4>
+              {% get_rating for resource as avg_rating %}
+              {% get_review_count for resource as review_count %}
+              <span class="gl-star-rating-stars s{{ avg_rating | stringformat:'d'}}0 readonly">
+                <span data-value="1" data-text="Terrible"></span>
+                <span data-value="2" data-text="Poor"></span>
+                <span data-value="3" data-text="Average"></span>
+                <span data-value="4" data-text="Very Good"></span>
+                <span data-value="5" data-text="Excellent"></span>
+              </span>
+              {{ review_count }} <a href="#review-list">{% if review_count == 1 %} review {% else %} reviews {% endif %}</a>
             </div>
             <div class="col-12 col-xl-8 pt-2">
               {{ resource.abstract | safe }}
@@ -113,7 +110,7 @@
           </div><!-- End of row of cards -->
           <div class="row">
             <div class="col-12 col-xl-4 mt-5">
-              <h2>Main info</h2>
+              <h4>Main info</h4>
             </div>
             <div class="col-12 col-xl-8 mt-5">
               <b> URL: </b><a href="{{resource.url}}" target="_blank">{{resource.url}}</a><br>
@@ -122,6 +119,17 @@
               <b>Publisher: </b> {{ resource.publisher }}<br>
               <b>Year of publication: </b> {{ resource.datePublished }}<br>
               <b>Resource DOI: </b> {{ resource.resourceDOI }}<br>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-xl-4 mt-5">
+              <h4>Reviews</h4>
+            </div>
+            <div class="col-12 col-xl-8 mt-5">
+              {% render_review_list for resource %}
+              {% if user.is_authenticated %}
+              <a  class="btn btn-outline-secondary float-left mt-2" href="/resource_review/{{resource.id}}">Review</a>
+              {% endif %}
             </div>
           </div>
         </div> <!-- End of card text -->
@@ -161,7 +169,6 @@
       </div>
     </div>
   </div>
-  {% render_review_list for resource %}
 </div>
 {% endblock list_of_items %}
 {% block scripts %}
