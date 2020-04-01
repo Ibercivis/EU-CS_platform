@@ -25,17 +25,15 @@
               <hr/>
               {% render_review_list for post %}
               {% if user.is_authenticated %}
-            <a class="btn btn-outline-secondary" href="/post_review/{{project.id}}">Review</a>
-            {% endif %}
+                <a class="btn btn-outline-secondary" href="/post_review/{{project.id}}">Review</a>
+              {% endif %}
 
             </div>
           </div>
         </div>
       </div>
     </div>
-
   </div>
-
 </div>
 
 {% endblock list_of_items %}

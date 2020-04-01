@@ -53,7 +53,6 @@
           <div class="row">
             <div class="col-12 col-xl-4 mt-2 mt-4">
               <h2>{{project.name}}</h2>
-              <!-- i class="fas fa-star-half-alt"></i>{{votes}}{{votes| stringformat:'d'}}--></h2>
               {% get_rating for project as avg_rating %}
               {% get_review_count for project as review_count %}
               <span class="gl-star-rating-stars s{{ avg_rating | stringformat:'d'}}0 readonly">
