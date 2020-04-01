@@ -70,11 +70,8 @@
             <div class="row">
               <div class="col-sm">
                 <p>Thank you</p>
-
                 <p>Thank you for submitting your project profile. This has been sent to the EU-Citizen.Science moderation team, who will check it to ensure that all of the projects shared on the platform can indeed be considered citizen science projects.</p>
-
                 <p>We will be in touch with you if we have any questions, and otherwise you will receive an alert that your project has been moderated and published to the platform. Your project profile will be visible to the public in the meantime, but will be marked as unmoderated.</p>
-
                 <p>You can make updates or changes to this project profile at any time, by going to the Submitted projects section in your Personal Area (see the top-right of the platform menu).</p>
               </div>
             </div>
@@ -335,20 +332,6 @@
       }
     });
 
-/*     $("#div_id_funding_agency div").on('change', function(){
-      $("#id_funding_agency").removeAttr('multiple');
-    });
-
-    $("#div_id_funding_agency div").on('keyup', function(){
-      var key = $("#div_id_funding_agency .selection input").val();
-      if (key.indexOf(',') > -1) {
-        var word =key.slice(0, -1);
-        $("#div_id_funding_agency .selection input").val("");
-        $("#id_funding_agency").append("<option value='" + word +"' selected> " + word + " </option>");
-        $("#id_funding_agency").removeAttr('multiple');
-      }
-    }); */
-
     $("#div_id_origin_database div").on('change', function(){
       $("#id_origin_database").removeAttr('multiple');
     });
@@ -368,7 +351,6 @@
       return re.test(String(email).toLowerCase());
     }
 
-
     $("form").submit(function (e) {
       var validationFailed = false;
       if(!readSavedConfirmation){
@@ -381,12 +363,6 @@
           }
         });
       }
-
-      //var email = $("#id_contact_person_email").val();
-      //if(!validateEmail(email)){
-      //  validationFailed = true;
-      //  $("#div_id_contact_person_email").append("<span class='errorMsg'> <b>Enter a valid email address.</b></span>");
-      //}
 
       if (validationFailed) {
         e.preventDefault();
@@ -409,12 +385,6 @@
         }).get().join(',');
         $("#id_fundingBodySelected").val(fundingBody);
         $("#id_funding_body").empty();
-
-/*         var fundingAgency = $("#id_funding_agency option:selected").map(function () {
-          return $.trim($(this).text());
-        }).get().join(',');
-        $("#id_fundingAgencySelected").val(fundingAgency);
-        $("#id_funding_agency").empty(); */
 
         var originDatabase = $("#id_origin_database option:selected").map(function () {
           return $.trim($(this).text());

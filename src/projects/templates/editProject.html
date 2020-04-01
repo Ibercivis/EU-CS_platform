@@ -342,21 +342,6 @@
       }
     }
 
-/*     var funding_agency = $("#id_funding_agency option").map(function () {
-      return $.trim($(this).text());
-    }).get();
-    $("#id_funding_agency").empty();
-    var sel = $("#id_fundingAgencySelected").val()
-    for(fb of funding_agency){
-      if(sel.trim() == fb.trim()){
-        $("#id_funding_agency").append("<option value='" + fb +"' selected> " + fb + " </option>");
-      }
-      else{
-        $("#id_funding_agency").append("<option value='" + fb +"'> " + fb + " </option>");
-      }
-    } */
-
-
     var origin_database = $("#id_origin_database option").map(function () {
       return $.trim($(this).text());
     }).get();
@@ -396,21 +381,6 @@
       }
     });
 
-/*     $("#div_id_funding_agency div").on('select2:open', function(){
-      if($("#id_fundingAgencySelected").val()){
-        $("#id_funding_agency").removeAttr('multiple');
-      }
-    });
-    $("#div_id_funding_agency div").on('keyup', function(){
-      var key = $("#div_id_funding_agency .selection input").val();
-      $("#id_funding_agency").removeAttr('multiple');
-      if (key.indexOf(',') > -1) {
-        var word =key.slice(0, -1);
-        $("#div_id_funding_agency .selection input").val("");
-        $("#id_funding_agency").append("<option value='" + word +"' selected> " + word + " </option>");
-      }
-    }); */
-
     $("#div_id_origin_database div").on('select2:open', function(){
       if($("#id_originDatabaseSelected").val()){
         $("#id_origin_database").removeAttr('multiple');
@@ -443,12 +413,6 @@
           $(value).parent().append("<span class='errorMsg'> <b>Required field (*)</b></span>");
         }
       });
-      /*
-      var email = $("#id_contact_person_email").val();
-      if(!validateEmail(email)){
-      validationFailed = true;
-      $("#div_id_contact_person_email").append("<span class='errorMsg'> <b>Enter a valid email address.</b></span>");
-    } */
 
     if (validationFailed) {
       e.preventDefault();
@@ -466,12 +430,6 @@
       }).get().join(',');
       $("#id_fundingBodySelected").val(fundingBody);
       $("#id_funding_body").empty();
-
-/*       var fundingAgency = $("#id_funding_agency option:selected").map(function () {
-        return $.trim($(this).text());
-      }).get().join(',');
-      $("#id_fundingAgencySelected").val(fundingAgency);
-      $("#id_funding_agency").empty(); */
 
       var originDatabase = $("#id_origin_database option:selected").map(function () {
           return $.trim($(this).text());

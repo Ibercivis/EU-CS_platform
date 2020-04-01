@@ -151,16 +151,12 @@ src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bo
 </script>
 <script>
 	$(document).ready(function() {
-		// executes when HTML-Document is loaded and DOM is ready
-		console.log("document is ready");
 		$( ".card" ).hover(
 		function() {
 			$(this).addClass('shadow-none').css('cursor', 'pointer');
 		}, function() {
 			$(this).removeClass('shadow-none');
-		}
-		);
-		// document ready
+		});
 	});
 </script>
 {% endblock scripts %}

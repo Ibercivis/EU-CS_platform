@@ -155,7 +155,6 @@ def editResource(request, pk):
     resource = get_object_or_404(Resource, id=pk)
     user = request.user
     cooperators = getCooperators(pk)
-    print(cooperators)
     if user != resource.creator and not user.is_staff and not user.id in cooperators:
         return redirect('../resources', {})
 

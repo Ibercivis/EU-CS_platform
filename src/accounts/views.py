@@ -6,8 +6,6 @@ from django.contrib.auth import get_user_model
 from django.contrib import auth
 from django.contrib import messages
 from django.shortcuts import redirect
-from authtools import views as authviews
-from braces import views as bracesviews
 from django.conf import settings
 from django.core.mail import EmailMessage
 from django.http import HttpResponse
@@ -16,10 +14,11 @@ from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.shortcuts import render
+from django.core.mail import send_mail
+from authtools import views as authviews
+from braces import views as bracesviews
 from .tokens import account_activation_token
 from . import forms
-from django.core.mail import send_mail
-
 
 
 User = get_user_model()

@@ -1,17 +1,17 @@
 from django.views import generic
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-from projects.models import Project
-from resources.models import Resource, ResourceGroup, ResourcesGrouped, FeaturedResources
-from blog.models import Post
-from projects.models import FeaturedProjects, Project
-import random
-import json
-from itertools import chain
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
+from itertools import chain
+from projects.models import Project,FeaturedProjects
 from projects.views import getNamesKeywords
 from resources.views import getRscNamesKeywords
+from resources.models import Resource, ResourceGroup, ResourcesGrouped, FeaturedResources
+from blog.models import Post
+import random
+import json
+
 
 def home(request):
     #groups = ResourceGroup.objects.get_queryset().order_by('id')
@@ -23,14 +23,8 @@ def home(request):
     projects = Project.objects.all().order_by('-id')
     projects = projects.filter(id__in=featuredProjects)
     featuredResources = FeaturedResources.objects.all().order_by('-id')[:6].values_list('resource_id',flat=True)
-    print(featuredResources)
     resources = Resource.objects.all().order_by('-id')
-    for resource in resources:
-        print(resource.id)
     resources = resources.filter(id__in=featuredResources)
-    print(resources)
-    for resource in resources:
-        print(resource.id)
 
     return render(request, 'home.html', {'projects':projects, 'resources':resources, 'lastBlogEntry': lastBlogEntry})
 

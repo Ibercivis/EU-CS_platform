@@ -38,16 +38,12 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 {% block scripts %}
 <script>
 	$(document).ready(function() {
-		// executes when HTML-Document is loaded and DOM is ready
-		console.log("document is ready");
 		$( ".card" ).hover(
 		function() {
 			$(this).addClass('shadow-none').css('cursor', 'pointer');
 		}, function() {
 			$(this).removeClass('shadow-none');
-		}
-		);
-		// document ready
+		});
 	});
 </script>
 {% endblock scripts %}
