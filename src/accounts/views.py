@@ -18,6 +18,7 @@ from django.utils.encoding import force_bytes, force_text
 from django.shortcuts import render
 from .tokens import account_activation_token
 from . import forms
+from django.core.mail import send_mail
 
 
 
@@ -71,6 +72,7 @@ class SignUpView(
                     mail_subject, message, to=[to_email]
         )
         email.send()
+        #send_mail(mail_subject,message,"recover@ibercivis.es",[to_email])
         return render(self.request, 'accounts/confirm-email.html',{})
 
 
@@ -112,13 +114,13 @@ def delete_user(request):
         u = User.objects.get(id = request.user.id)
         u.delete()
         messages.success(request, "The user has been deleted.")
-    except User.DoesNotExist: 
+    except User.DoesNotExist:
         messages.error = 'User does not exist.'
-    except Exception as e: 
+    except Exception as e:
         messages.error = 'There was a problem trying delete an user'
-            
+
     return redirect('home')
-    
+
 
 def activate(request, uidb64, token):
     try:

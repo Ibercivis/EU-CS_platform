@@ -221,7 +221,7 @@ LEAFLET_CONFIG = {
     'RESET_VIEW': False
 }
 
-SUMMERNOTE_THEME = 'bs4' 
+SUMMERNOTE_THEME = 'bs4'
 
 SUMMERNOTE_CONFIG = {
     'iframe': True,
@@ -234,6 +234,14 @@ SUMMERNOTE_CONFIG = {
     },
     'disable_attachment': True,
 }
+
+#EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'recover@ibercivis.es'
+EMAIL_HOST_PASSWORD = 'asdasdnasjasd2213'
+EMAIL_PORT = '587'
+EMAIL_USE_TLS = True
 
 SITE_ID = 1
 REVIEW_PUBLISH_UNMODERATED = True
