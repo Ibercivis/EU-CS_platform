@@ -234,9 +234,9 @@ SUMMERNOTE_CONFIG = {
 
 #EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-DEFAULT_FROM_EMAIL = 'info@eu-citizen.science'
+DEFAULT_FROM_EMAIL = env("FROM_EMAIL")
 EMAIL_HOST = 'smtp.office365.com'
-EMAIL_HOST_USER = 'info@eu-citizen.science'
+EMAIL_HOST_USER = env("FROM_EMAIL")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = '587'
 EMAIL_USE_TLS = True
