@@ -24,7 +24,8 @@ In source directory: <br/>
     ```
 ```
 cd src
-cp eucs_platform/settings/local.sample.env eucs_platform/settings/local.env
+cp eucs_platform/settings/local.sample.reference.env eucs_platform/settings/local.env
+And edit this last file with database and email configuration
 ```
 
 ```
