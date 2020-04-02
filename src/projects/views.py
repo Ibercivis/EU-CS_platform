@@ -15,7 +15,7 @@ from PIL import Image
 from itertools import chain
 from reviews.models import Review
 from .forms import ProjectForm, CustomFieldForm, CustomFieldFormset, ProjectPermissionForm
-from .models import Project, Topic, Status, Keyword, Votes, FeaturedProjects, FollowedProjects, FundingBody, CustomField, ProjectPermission,OriginDatabase
+from .models import Project, Topic, Status, Keyword, FeaturedProjects, FollowedProjects, FundingBody, CustomField, ProjectPermission,OriginDatabase
 import json
 import random
 
@@ -154,10 +154,9 @@ def project(request, pk):
     users = getOtherUsers(project.creator)
     cooperators = getCooperatorsEmail(pk)
     permissionForm = ProjectPermissionForm(initial={'usersCollection':users, 'selectedUsers': cooperators})
-    votes = Votes.objects.all().filter(project_id=pk).aggregate(Avg('vote'))['vote__avg']
     followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id',flat=True)
     featuredProjects = FeaturedProjects.objects.all().values_list('project_id',flat=True)
-    return render(request, 'project.html', {'project':project,'votes':votes, 'followedProjects':followedProjects,
+    return render(request, 'project.html', {'project':project, 'followedProjects':followedProjects,
     'featuredProjects':featuredProjects, 'permissionForm': permissionForm, 'cooperators': getCooperators(pk)})
 
 def getOtherUsers(creator):
