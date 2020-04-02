@@ -77,21 +77,10 @@ class Project(models.Model):
 
     hidden = models.BooleanField(null=True, blank=True)
 
-		#Rate
-		#TODO: Do we want to use it?
-    #rate = models.DecimalField(max_digits=2,decimal_places=1)
-    #nvoters = models.IntegerField()
     customField = models.ManyToManyField(CustomField)
     def __str__(self):
         return f'{self.name}'
 
-
-class Votes(models.Model):
-    vote = models.DecimalField(max_digits=2,decimal_places=1)
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    def __str__(self):
-        return f'{self.vote}'
 
 class FeaturedProjects(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
