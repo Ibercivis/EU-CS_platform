@@ -38,6 +38,8 @@
 					<select id="orderby" name="orderby" class="custom-select form-control float-right">
 						<option value="-id" {% if filters.orderby == "-id" %} selected {% endif %}>Newest</option>
 						<option value="id" {% if filters.orderby == "id" %} selected {% endif %}>Oldest</option>
+						<option value="-avg_rating" {% if filters.orderby == "-avg_rating" %} selected {% endif %}>Best average rating</option>
+						<option value="avg_rating" {% if filters.orderby == "avg_rating" %} selected {% endif %}>Worst average rating</option>
 					</select>
 				</div>
 			</div>

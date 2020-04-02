@@ -8,11 +8,12 @@ from django.utils import timezone
 from django.utils.dateparse import parse_datetime
 from django.utils import formats
 from django.contrib import messages
-from django.db.models import Q
-from django.db.models import Avg, Max, Min, Sum
+from django.contrib.contenttypes.models import ContentType
+from django.db.models import Q, Avg
 from datetime import datetime
 from PIL import Image
 from itertools import chain
+from reviews.models import Review
 from .forms import ProjectForm, CustomFieldForm, CustomFieldFormset, ProjectPermissionForm
 from .models import Project, Topic, Status, Keyword, Votes, FeaturedProjects, FollowedProjects, FundingBody, CustomField, ProjectPermission,OriginDatabase
 import json
@@ -78,11 +79,6 @@ def projects(request):
     topics = Topic.objects.all()
     status = Status.objects.all()
     filters = {'keywords': '', 'topic': '', 'status': 0, 'country': '', 'host': '', 'featuredCheck': ''}
-    if request.GET.get('orderby'):
-        projects=projects.order_by(request.GET['orderby'])
-        filters['orderby']=request.GET['orderby']
-    else:
-        projects=projects.order_by('-id')
 
     if request.GET.get('keywords'):
         projects = projects.filter( Q(name__icontains = request.GET['keywords']) |
@@ -118,6 +114,30 @@ def projects(request):
         projects = projects.filter(id__in=featuredProjects)
     if not user.is_staff:
         projects = projects.filter(~Q(hidden=True))
+
+    # Ordering
+    if request.GET.get('orderby'):
+        orderBy = request.GET.get('orderby')
+        if("id" in orderBy):
+            projects=projects.order_by(request.GET['orderby'])
+        else:
+            reviews = Review.objects.filter(content_type=ContentType.objects.get(model="project"))    
+            reviews = reviews.values("object_pk", "content_type").annotate(avg_rating=Avg('rating')).order_by(orderBy).values_list('object_pk',flat=True)
+            reviews = list(reviews)
+            projectsVoted = []
+            for r in reviews:
+                proj = get_object_or_404(Project, id=r)
+                projectsVoted.append(proj)
+
+            projects= projects.exclude(id__in=reviews)
+            if(orderBy == "avg_rating"):
+                projects = list(projects) + list(projectsVoted)
+            else:
+                projects = list(projectsVoted) + list(projects)
+
+        filters['orderby']=request.GET['orderby']
+    else:
+        projects=projects.order_by('-id')
 
 
     paginator = Paginator(projects, 9)

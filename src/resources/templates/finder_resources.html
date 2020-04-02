@@ -39,6 +39,8 @@
 					<option value="-id" {% if filters.orderby == "-id" %} selected {% endif %}>Newest</option>
 					<option value="id" {% if filters.orderby == "id" %} selected {% endif %}>Oldest</option>
 					<option value="theme" {% if filters.orderby == "theme" %} selected {% endif %}">Theme</option>
+					<option value="-avg_rating" {% if filters.orderby == "-avg_rating" %} selected {% endif %}>Best average rating</option>
+					<option value="avg_rating" {% if filters.orderby == "avg_rating" %} selected {% endif %}>Worst average rating</option>
 				</select>
 			</div>
 			</div>
