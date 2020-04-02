@@ -118,9 +118,9 @@ WSGI_APPLICATION = "eucs_platform.wsgi.application"
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'eucitizenscience_dev2',
-            'USER': 'eucitizenscience',
-            'PASSWORD': 'eucitizenscience',
+            'NAME': env("DATABASE_NAME"),
+            'USER': env("DATABASE_USER"),
+            'PASSWORD': env("DATABASE_PASSWORD"),
             'HOST': 'localhost',
             'PORT': '5432',
         }
@@ -184,11 +184,8 @@ LANGUAGE_CODES = [
 ]
 
 TIME_ZONE = "UTC"
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
@@ -237,9 +234,10 @@ SUMMERNOTE_CONFIG = {
 
 #EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'recover@ibercivis.es'
-EMAIL_HOST_PASSWORD = 'asdasdnasjasd2213'
+DEFAULT_FROM_EMAIL = 'info@eu-citizen.science'
+EMAIL_HOST = 'smtp.office365.com'
+EMAIL_HOST_USER = 'info@eu-citizen.science'
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = '587'
 EMAIL_USE_TLS = True
 
