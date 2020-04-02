@@ -5,14 +5,16 @@ from django.core.paginator import Paginator
 from django.utils import timezone
 from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
+from django.contrib.contenttypes.models import ContentType
 from django.conf import settings
-from django.db.models import Q
+from django.db.models import Q, Avg
 from django.contrib.auth import get_user_model
 from django.utils import formats
 from itertools import chain
 from authors.models import Author
 from PIL import Image
 from datetime import datetime
+from reviews.models import Review
 from .models import Resource, Keyword, Category, FeaturedResources, SavedResources, Theme, Category, ResourcesGrouped, ResourcePermission
 from .forms import ResourceForm, ResourcePermissionForm
 import random
@@ -29,12 +31,6 @@ def resources(request):
     themes = Theme.objects.all()
     categories = Category.objects.all()
     filters = {'keywords': '', 'language': ''}
-
-    if request.GET.get('orderby'):
-        resources=resources.order_by(request.GET['orderby'])
-        filters['orderby']=request.GET['orderby']
-    else:
-        resources=resources.order_by('-id')
 
     if request.GET.get('keywords'):
         resources = resources.filter( Q(name__icontains = request.GET['keywords'])  |
@@ -69,6 +65,30 @@ def resources(request):
 
     if not user.is_staff:
         resources = resources.filter(~Q(hidden=True))
+
+    # Ordering
+    if request.GET.get('orderby'):
+        orderBy = request.GET.get('orderby')
+        if("id" in orderBy or "theme" in orderBy):
+            resources=resources.order_by(request.GET['orderby'])
+        else:
+            reviews = Review.objects.filter(content_type=ContentType.objects.get(model="resource"))    
+            reviews = reviews.values("object_pk", "content_type").annotate(avg_rating=Avg('rating')).order_by(orderBy).values_list('object_pk',flat=True)
+            reviews = list(reviews)
+            resourcesVoted = []
+            for r in reviews:
+                proj = get_object_or_404(Resource, id=r)
+                resourcesVoted.append(proj)
+
+            resources= resources.exclude(id__in=reviews)
+            if(orderBy == "avg_rating"):
+                resources = list(resources) + list(resourcesVoted)
+            else:
+                resources = list(resourcesVoted) + list(resources)
+
+        filters['orderby']=request.GET['orderby']
+    else:
+        resources=resources.order_by('-id')
 
     paginator = Paginator(resources, 9)
     page = request.GET.get('page')
