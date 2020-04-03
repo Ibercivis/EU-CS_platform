@@ -1,0 +1,29 @@
+{% autoescape off %}
+Hi {{ user.name }},
+{% endautoescape %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head></head>
+
+<body>
+    <p>Welcome to the EU-Citizen.Science community! We are really pleased that you have joined us here.</p>
+
+    <p>In this alpha release of the platform you can browse and search for
+        <a href="http://193.146.117.217/{% url 'resources' %}">Resources</a> that are useful for planning
+        and running citizen science projects, and can explore a wide range of citizen science
+        <a href="http://193.146.117.217/{% url 'projects' %}">Projects</a> to learn from others experience
+        and know-how. </p>
+
+    <p>By signing up, you are now able to follow projects and add resources to your library, which you can find in your
+        <a href="http://193.146.117.217/{% url 'profiles:show_self' %}">Personal Area</a>.</p>
+
+    <p>The success of the platform relies on the contribution of all of our members, so please do share your own best
+        practice citizen science resources, and profile the citizen science projects that you have been involved with -
+        both
+        past and present. Just look for the Add+ button on the resources and projects pages.</p>
+
+    <p>Log in now to get started!</p>
+</body>
+
+</html>
