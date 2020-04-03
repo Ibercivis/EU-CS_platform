@@ -130,6 +130,17 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
+        #Send email
+        mail_subject = 'Welcome to EU-Citizen.Science.'
+        message = render_to_string('accounts/welcome_email.html', {
+            'user': user,
+        })
+        to_email = user.email        
+        email = EmailMessage(
+                    mail_subject, message, to=[to_email]
+        )
+        email.content_subtype = "html"
+        email.send()
         auth.login(request, user)
         return render(request, 'accounts/confirmation-account.html',{})
     else:
