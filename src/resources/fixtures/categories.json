@@ -3,35 +3,35 @@
         "pk": 1,
         "model": "resources.category",
         "fields": {
-            "text":"Tools"
+            "text":"Tool"
         }
     },
     {
         "pk": 2,
         "model": "resources.category",
         "fields": {
-            "text":"Guidelines"
+            "text":"Guideline"
         }
     },
     {
         "pk": 3,
         "model": "resources.category",
         "fields": {
-            "text":"Training resources"
+            "text":"Training resource"
         }
     },
     {
         "pk": 4,
         "model": "resources.category",
         "fields": {
-            "text":"Other Materials"
+            "text":"Other Material"
         }
     },
     {
         "pk": 5,
         "model": "resources.category",
         "fields": {
-            "text":"Libraries",
+            "text":"Library",
             "parent": 4
         }
     },
@@ -39,7 +39,7 @@
         "pk": 6,
         "model": "resources.category",
         "fields": {
-            "text":"Scientific Publications",
+            "text":"Scientific Publication",
             "parent": 4
         }
     },
@@ -47,7 +47,7 @@
         "pk": 7,
         "model": "resources.category",
         "fields": {
-            "text":"Websites",
+            "text":"Website",
             "parent": 4
         }
     },
@@ -55,7 +55,7 @@
         "pk": 8,
         "model": "resources.category",
         "fields": {
-            "text":"Reports",
+            "text":"Report",
             "parent": 4
         }
     },
@@ -71,7 +71,7 @@
         "pk": 10,
         "model": "resources.category",
         "fields": {
-            "text":"Visuals",
+            "text":"Visual",
             "parent": 4
         }
     },
