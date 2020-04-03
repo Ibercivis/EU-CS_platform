@@ -247,6 +247,8 @@
     var choices = $("#id_choices").val();
     var choices = choices.split(",");
 
+    $("#id_keywords").attr('required', true);
+    $("#div_id_keywords label").append('<span class="asteriskField">*</span>');
     for (choice of choices){
       $("#id_keywords").append("<option value='" + choice +"'> " + choice + " </option>");
     }
@@ -254,6 +256,8 @@
     var authorsCollection = $("#id_authorsCollection").val();
     var authorsCollection = authorsCollection.split(",");
 
+    $("#id_authors").attr('required', true);
+    $("#div_id_authors label").append('<span class="asteriskField">*</span>');
     for (author of authorsCollection){
       $("#id_authors").append("<option value='" + author +"'> " + author + " </option>");
     }
@@ -295,7 +299,7 @@
             $(value).parent().append("<span class='errorMsg'> <b>Required field (*)</b></span>");
           }
         });
-        var email = $("#id_author_email").val();
+        //var email = $("#id_author_email").val();
       }
 
       if (validationFailed) {
