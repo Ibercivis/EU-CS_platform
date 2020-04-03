@@ -23,7 +23,7 @@ class ResourceForm(forms.ModelForm):
     selectedAuthors = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     authors = forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget(attrs={'data-placeholder':' Author(s) of the resource. If not known, name the project within the resource was created. Separated by commas'}), required=False,label="Authors")
     audience = forms.ModelMultipleChoiceField(queryset=Audience.objects.all(), widget=Select2MultipleWidget(attrs={'data-placeholder': 'The audience(s) for which the resource is intended. Multiple selection.'}))
-    theme = forms.ModelMultipleChoiceField(queryset=Theme.objects.all(), widget=Select2MultipleWidget(attrs={'data-placeholder':'The thematic content of the resource (select as many as apply)'}), required=False)
+    theme = forms.ModelMultipleChoiceField(queryset=Theme.objects.all(), widget=Select2MultipleWidget(attrs={'data-placeholder':'The thematic content of the resource (select as many as apply)'}))
     image1 = forms.ImageField(required=False)
     x1 = forms.FloatField(widget=forms.HiddenInput(),required=False)
     y1 = forms.FloatField(widget=forms.HiddenInput(), required=False)
