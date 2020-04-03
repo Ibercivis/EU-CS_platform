@@ -20,7 +20,6 @@ from braces import views as bracesviews
 from .tokens import account_activation_token
 from . import forms
 
-
 User = get_user_model()
 
 
@@ -97,7 +96,7 @@ class PasswordResetView(authviews.PasswordResetView):
     success_url = reverse_lazy("accounts:password-reset-done")
     subject_template_name = "accounts/emails/password-reset-subject.txt"
     email_template_name = "accounts/emails/password-reset-email.html"
-
+    extra_email_context = { 'PASSWORD_RESET_TIMEOUT_HOURS': settings.PASSWORD_RESET_TIMEOUT_DAYS * 24}
 
 class PasswordResetDoneView(authviews.PasswordResetDoneView):
     template_name = "accounts/password-reset-done.html"
