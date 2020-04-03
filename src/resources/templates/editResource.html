@@ -225,7 +225,8 @@
               $("#id_keywords").append("<option value='" + choice +"'> " + choice + " </option>");
             }
           }
-
+          $("#id_keywords").attr('required', true);
+          $("#div_id_keywords label").append('<span class="asteriskField">*</span>');
           $("#div_id_keywords div").on('keyup', function(){
             var key = $("#div_id_keywords .selection input").val();
             if (key.indexOf(',') > -1) {
@@ -251,7 +252,8 @@
               $("#id_authors").append("<option value='" + author +"'> " + author + " </option>");
             }
           }
-
+          $("#id_authors").attr('required', true);
+          $("#div_id_authors label").append('<span class="asteriskField">*</span>');
           $("#div_id_authors div").on('keyup', function(){
             var key = $("#div_id_authors .selection input").val();
             if (key.indexOf(',') > -1) {
@@ -287,12 +289,12 @@
             $.each($("[required]"), function (index, value) {
               var id = $(value).parent().parent().attr('id');
               $("#" + id + " .errorMsg").remove();
-              if(!$(value).val()){
+              if(!$(value).val() || $(value).val().length < 1){
                 validationFailed = true;
                 $(value).parent().append("<span class='errorMsg'> <b>Required field (*)</b></span>");
               }
             });
-            var email = $("#id_author_email").val();
+            //var email = $("#id_author_email").val();
 
             if (validationFailed) {
               e.preventDefault();
