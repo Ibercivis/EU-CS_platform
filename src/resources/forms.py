@@ -39,7 +39,7 @@ class ResourceForm(forms.ModelForm):
     url = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'URL to where the document is hosted by the publisher, or in a permanent repository such as Zenodo, OSF, the RIO Journal, or similar'}))
     year_of_publication = forms.IntegerField(required=False, widget=forms.TextInput(attrs={'placeholder':' enter the year (YYYY) that that this version of the resource was published'}))
     name = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'autocomplete':'nope','placeholder':' The title or name of the resource'}))
-    publisher = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'autocomplete':'nope','placeholder':'The publisher of the resource, if applicable. Otherwise please name the project within which the resource was created'}) )
+    publisher = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'autocomplete':'nope','placeholder':'The publisher of the resource (or the project name, or the lead institution).'}), required=False )
     license = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'autocomplete':'nope','placeholder':' Indicate the resource license, such as Creative Commons CC-BY. Enter a URL link to the license if available.'}), required=False)
     curatedList = forms.ModelMultipleChoiceField(queryset=ResourceGroup.objects.all(), widget=Select2MultipleWidget, required=False,label="Curated lists")
 
