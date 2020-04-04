@@ -19,13 +19,13 @@ def home(request):
     lastBlogEntry = Post.objects.all().filter(status=1)
     if lastBlogEntry:
         lastBlogEntry = lastBlogEntry.latest('created_on')
-    featuredProjects = FeaturedProjects.objects.all().order_by('-id')[:6].values_list('project_id',flat=True)
+    featuredProjects = FeaturedProjects.objects.all().order_by('-id')[:3].values_list('project_id',flat=True)
     allfeaturedProjects = FeaturedProjects.objects.all().order_by('-id').values_list('project_id',flat=True)
     projects = Project.objects.all().order_by('-id')
     allprojects =  projects.filter(id__in=allfeaturedProjects)
     projects = projects.filter(id__in=featuredProjects)
 
-    featuredResources = FeaturedResources.objects.all().order_by('-id')[:6].values_list('resource_id',flat=True)
+    featuredResources = FeaturedResources.objects.all().order_by('-id')[:3].values_list('resource_id',flat=True)
     resources = Resource.objects.all().order_by('-id')
     resources = resources.filter(id__in=featuredResources)
     print(projects)
