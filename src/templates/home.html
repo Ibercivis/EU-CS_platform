@@ -2,12 +2,26 @@
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% load i18n %}
+{% load leaflet_tags %}
+{% block head %}
+{{block.super }}
+{% leaflet_js %}
+{% leaflet_css %}
+{% endblock %}
 {% block title %}{{ block.super }}Home{% endblock %}
 {% block navbar-left %}
 {% include "_navbar.html"  %}
 {% endblock %}
 {% block splash %}
-
+<script>
+	function map_init_basic (leafmap, options) {
+		map = leafmap;
+		map.setView([{{50}}, {{20}}], 3)
+		{% for project in projects %}
+		L.marker([{{project.latitude}},{{project.longitude}}]).addTo(map);
+		{% endfor %}
+	}
+</script>
 <div class="jumbotron jumbotron-fluid jumbotron-main">
 	<div class="container">
 		<h1 class="display-4 mt-5 pt-5 pb-0"><br>Join the Citizen Science Community</h1>
@@ -27,6 +41,13 @@
 					</div>
 					</div
 				</form>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12">
+				{% leaflet_map "map" callback="window.map_init_basic" %}
 			</div>
 		</div>
 	</div>
@@ -121,11 +142,13 @@
 	integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="anonymous"></script>
 	<script
 	src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
-
 	<script>
 		$('.basicAutoComplete').autoComplete(
 		{ minLength: 3 }
 		);
+
+
 	</script>
+
 	{{ block.super }}
 	{% endblock script %}
