@@ -20,10 +20,12 @@
 <script>
 	function map_init_basic (leafmap, options) {
 		map = leafmap;
-		map.setView([{{50}}, {{20}}], 3)
+		map.setView([{{45}}, {{20}}], 4)
 		var markers = L.markerClusterGroup();
 		{% for project in allprojects %}
-		var marker = L.marker([{{project.latitude}},{{project.longitude}}]);
+		var marker = L.marker(new L.LatLng({{project.latitude}},{{project.longitude}}),{title: '{{project.name}}'});
+		var title = '<div class="row"><img src="{{project.image3}}"><br><a href="/project/{{project.id}}"></div><div class="row mt-2">{{project.name}}</a></div>'
+		marker.bindPopup(title);
 		markers.addLayer(marker);
 		{% endfor %}
 		map.addLayer(markers);
