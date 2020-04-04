@@ -4,7 +4,7 @@ body{
 main {
 	font-family: arial, sans-serif !important;
 	font-weight: 200;
-	color: #444;
+	color: #333;
 	min-height: 100vh;
 	background-color: #f8f8f8;
 }
@@ -47,9 +47,9 @@ main.nomargintop {
 	min-height: 15vh;
 }
 h1,h2, h3, h4,h5 {
-	font-family: "Poppins", Helvetica, sans-serif;
-	font-weight: 400;
-	color: #e28386;
+	font-family: "Poppins", Helvetica, Arial, sans-serif;
+	font-weight: 300;
+	color: #333;
 }
 
 #search{
@@ -99,17 +99,17 @@ input[type=checkbox] {
 	border-bottom: 2px solid #a4b494;
 }
 .card-link{
-	color: #e28683;
+	color: #333;
 	font-weight: 400;
 	font-family: "Poppins", Helvetica, sans-serif;
 	font-size: 1.2em;
 	transition: color .25s;
 }
 .card-link:hover{
-	color: #333;
+	color: #000;
 }
 .card-link-resource{
-	color: #203863;
+	color: #333;
 	font-weight: 400;
 	font-family: "Poppins", Helvetica, sans-serif;
 	font-size: 1.2em;
@@ -202,7 +202,7 @@ a.project{
 	color: #e28683;
 }
 a.project:hover{
-	color: #c26663;
+	color: #111;
 }
 .lead{
 	font-size: 1.8em;
@@ -222,4 +222,40 @@ dt {
 }
 #specialbigmap {
 			 height: 500px;
+}
+.bluebackground{
+	background-color: #203863;
+	color: #333;
+}
+.redbackground{
+	background-color: #e28683 ;
+}
+.greenbackground{
+	background-color: #a6d49f;
+}
+.dark {
+		color: #333;
+}
+.white {
+	color: #fff;
+}
+.red{
+	color: #e28683 ;
+}
+.btn-red{
+	background-color: #e28683;
+	color: #fff;
+	transition: background-color 0.25s;
+}
+.btn-red:hover{
+	background-color: #f29693;
+	color:#fff;
+}
+.btn-red:active{
+		background-color: #eee;
+	color:#333;
+}
+.linkwhite{
+	color: #fff;
+	text-decoration: underline;
 }
