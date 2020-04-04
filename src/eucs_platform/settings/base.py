@@ -216,7 +216,7 @@ LEAFLET_CONFIG = {
     'DEFAULT_ZOOM': 2,
     'MIN_ZOOM': 2,
     'RESET_VIEW': False,
-    'TILES': [('', 'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {'attribution': '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors', 'maxZoom': 20})]
+    #'TILES': [('', 'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {'attribution': '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors', 'maxZoom': 20})]
 
 }
 

@@ -17,7 +17,7 @@
 	function map_init_basic (leafmap, options) {
 		map = leafmap;
 		map.setView([{{50}}, {{20}}], 3)
-		{% for project in projects %}
+		{% for project in allprojects %}
 		L.marker([{{project.latitude}},{{project.longitude}}]).addTo(map);
 		{% endfor %}
 	}
