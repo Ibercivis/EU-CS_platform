@@ -20,11 +20,11 @@
 <script>
 	function map_init_basic (leafmap, options) {
 		map = leafmap;
-		map.setView([{{45}}, {{20}}], 4)
+		map.setView([{{52}}, {{20}}], 3.5)
 		var markers = L.markerClusterGroup();
 		{% for project in allprojects %}
 		var marker = L.marker(new L.LatLng({{project.latitude}},{{project.longitude}}),{title: '{{project.name}}'});
-		var title = '<div class="row"><img src="{{project.image3}}"><br><a href="/project/{{project.id}}"></div><div class="row mt-2">{{project.name}}</a></div>'
+		var title = '<div class="row"><img class="img-fluid img-responsive" src="{{project.image3}}"><br><a href="/project/{{project.id}}"></div><div class="row mt-2">{{project.name}}</a></div>'
 		marker.bindPopup(title);
 		markers.addLayer(marker);
 		{% endfor %}
@@ -43,7 +43,7 @@
 			<form id="finder" action="/resources" >
 				<div class="form-row">
 					<div class="input-group mb-3">
-						<input type="text" id="keywords" name="keywords" autocomplete="off" class="basicAutoComplete form-control"
+						<input type="text" id="keywords" name="keywords": autocomplete="off" class="basicAutoComplete form-control"
 						placeholder="Search for citizen science resources, projects, tools, training, and more...." data-url="home_autocomplete/"/>
 						<button  id="resources" class="btn btn-info" style="margin-left: 5px;" onClick='$("#finder").attr("action", "resources").submit()'> Resources</button>
 						<button  id="resources" class="btn btn-info" style="margin-left: 5px;" onClick='$("#finder").attr("action", "projects").submit()'> Projects</button>
@@ -56,7 +56,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-12">
-				{% leaflet_map "map" callback="window.map_init_basic" %}
+				{% leaflet_map "specialbigmap" callback="window.map_init_basic" %}
 			</div>
 		</div>
 	</div>
@@ -155,8 +155,6 @@
 		$('.basicAutoComplete').autoComplete(
 		{ minLength: 3 }
 		);
-
-
 	</script>
 
 	{{ block.super }}
