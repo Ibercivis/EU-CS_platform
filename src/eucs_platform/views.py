@@ -16,20 +16,16 @@ import json
 def home(request):
     #groups = ResourceGroup.objects.get_queryset().order_by('id')
     #resourcesgrouped = ResourcesGrouped.objects.get_queryset().order_by('group')
-    lastBlogEntry = Post.objects.all().filter(status=1)
-    if lastBlogEntry:
-        lastBlogEntry = lastBlogEntry.latest('created_on')
     featuredProjects = FeaturedProjects.objects.all().order_by('-id')[:3].values_list('project_id',flat=True)
     allfeaturedProjects = FeaturedProjects.objects.all().order_by('-id').values_list('project_id',flat=True)
     projects = Project.objects.all().order_by('-id')
     allprojects =  projects.filter(id__in=allfeaturedProjects)
     projects = projects.filter(id__in=featuredProjects)
-
+    entries = Post.objects.filter(status=1).order_by('-created_on')[:3]
     featuredResources = FeaturedResources.objects.all().order_by('-id')[:3].values_list('resource_id',flat=True)
     resources = Resource.objects.all().order_by('-id')
     resources = resources.filter(id__in=featuredResources)
-    print(projects)
-    return render(request, 'home.html', {'projects':projects, 'allprojects': allprojects,'resources':resources, 'lastBlogEntry': lastBlogEntry})
+    return render(request, 'home.html', {'projects':projects, 'allprojects': allprojects,'resources':resources, 'entries': entries}, )
 
 class AboutPage(generic.TemplateView):
     template_name = "about.html"
