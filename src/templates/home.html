@@ -31,35 +31,28 @@
 		map.addLayer(markers);
 	}
 </script>
-<div class="jumbotron jumbotron-fluid jumbotron-main">
+<div class="jumbotron jumbotron-fluid jumbotron-main mb-0">
 	<div class="container">
-		<h1 class="display-4 mt-5 pt-5 pb-0"><br>Join the Citizen Science Community</h1>
+		<h1 class="display-4 mt-5 red"><br>Join the Citizen Science Community</h1>
 		<p class="lead text-light">Welcome to the platform for sharing knowledge, tools, training and resources for Citizen Science</p>
-	</div>
-</div>
-
-<div class="container"  style="background: #f8f8f8;">
-	<div class="row">
-		<div class="container">
-			<form id="finder" action="/resources" >
-				<div class="form-row">
-					<div class="input-group mb-4">
-						<input type="text" id="keywords" name="keywords": autocomplete="off" class="basicAutoComplete form-control form-control-lg"
-						placeholder="Search for citizen science resources, projects, tools, training, and more...." data-url="home_autocomplete/"/>
-						<button  id="resources" class="btn btn-info" style="margin-left: 5px;" onClick='$("#finder").attr("action", "resources").submit()'> Resources</button>
-						<button  id="resources" class="btn btn-info" style="margin-left: 5px;" onClick='$("#finder").attr("action", "projects").submit()'> Projects</button>
-					</div>
+		<form id="finder" action="/resources" >
+			<div class="form-row">
+				<div class="input-group">
+					<input type="text" id="keywords" name="keywords": autocomplete="off" class="basicAutoComplete form-control form-control-lg"
+					placeholder="Search for citizen science resources, projects, tools, training, and more...." data-url="home_autocomplete/"/>
+					<button  id="resources" class="btn btn-red" style="margin-left: 5px;" onClick='$("#finder").attr("action", "resources").submit()'>RESOURCES</button>
+					<button  id="resources" class="btn btn-red" style="margin-left: 5px;" onClick='$("#finder").attr("action", "projects").submit()'>PROJECTS</button>
 				</div>
-			</form>
-		</div>
+			</div>
+		</form>
 	</div>
 </div>
-<div class="container-fluid"  style="background: #ffffff;">
+<div class="container-fluid whitebackground">
 	<div class="row">
 		<div class="container">
 			<div class="row">
-				<div class="col-12 mt-4">
-					<h2>Resource categories</h2>
+				<div class="col-12 mb-3 mt-5">
+					<h2 class="dark">Resource categories</h2>
 				</div>
 				<div class="col-lg-6 col-12 mb-4">
 					<div class="card h-100 shadow">
@@ -102,57 +95,65 @@
 						</div>
 					</div>
 				</div>
+				<div class="col-12 text-center mt-5 mb-5">
+					<a type="button" class="btn btn-red shadow-sm btn-lg" href="/curated">GO TO OUR SELECTION OF RESOURCES</a>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
-<div class="container">
-	<div class="row">
-		<div class="col-12 mt-4">
-			<h2>Projects</h2>
-		</div>
-		<div class="col-12">
-			{% leaflet_map "specialbigmap" callback="window.map_init_basic" %}
-		</div>
-		<div class="col-12 mb-4">&nbsp;</div>
-	</div>
-</div>
-<div class="container-fluid border-top border-bottom" style="background: #e8e8e8;">
+<div class="container-fluid bluebackground">
 	<div class="container">
 		<div class="row">
-			<div class="col-12 mt-4">
-				<h2 style="color: #203863;">Latest resources</h2>
+			<div class="col-12 mt-5 mb-3">
+				<h2 class="white">Latest resources</h2>
 			</div>
 		</div>
 		<div class="row">
 			{% include "resources_cards.html" %}
-			<div class="col-12 text-center">
-				<a type="button" class="btn  btn-outline-primary btn-lg shadow-sm" href="/resources">See all resources</a>
+			<div class="col-12 text-center mt-4 mb-4">
+				<a type="button" class="btn btn-red shadow-sm btn-lg" href="/resources">SEE ALL RESOURCES</a>
 			</div>
 		</div>
 	</div>
 	<div class="col-12">&nbsp;
 	</div>
 </div>
-<div class="container">
-	<div class="row">
-		<div class="col-12 mt-4">
-			<h2>Latest projects</h2>
+<div class="container-fluid" >
+	<div class="container">
+		<div class="row">
+			<div class="col-12 mt-5 mb-3">
+				<h2>Projects</h2>
+			</div>
+			<div class="col-12">
+				{% leaflet_map "specialbigmap" callback="window.map_init_basic" %}
+			</div>
+			<div class="col-12 mb-4">&nbsp;</div>
 		</div>
 	</div>
-	<div class="row">
-		{% include "projects_cards.html" %}
-		<div class="col-12 text-center">
-			<a type="button" class="btn  btn-outline-primary btn-lg shadow-sm" href="/projects">See all projects</a>
-		</div>
-	</div>
-	<div class="col-12">&nbsp;</div>
 </div>
-<div class="container-fluid border-top border-bottom" style="background: #e8e8e8;">
+<
+<div class="container-fluid bluebackground">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 mt-5 mb-3">
+				<h2 class="white">Latest projects</h2>
+			</div>
+		</div>
+		<div class="row">
+			{% include "projects_cards.html" %}
+			<div class="col-12 text-center mt-4 mb-5">
+				<a type="button" class="btn  btn-red btn-lg shadow-sm" href="/projects">SEE ALL PROJECTS</a>
+			</div>
+		</div>
+		<div class="col-12">&nbsp;</div>
+	</div>
+</div>
+<div class="container-fluid">
 	<div class="row">
 		<div class="container">
 			<div class="row">
-				<div class="col-12 mt-4">
+				<div class="col-12 mt-5 mb-3">
 					<h2>Latest blog entries</h2>
 				</div>
 				<div class="col-12">
@@ -171,6 +172,11 @@
 							</div>
 							{% endfor %}
 						</div>
+					</div>
+					<div class="col-12 text-center mt-4 mb-5">
+						<a type="button" class="btn  btn-red btn-lg shadow-sm" href="/blog">READ MORE POSTS</a>
+					</div>
+					<div class="col-12 text-center mt-4 mb-5">
 					</div>
 				</div>
 			</div>

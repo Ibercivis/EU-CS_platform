@@ -5,7 +5,7 @@
 {% for rsc in resources  %}
 {% load reviews %}
 <div class="col-lg-4 col-md-12 mb-4">
-  <div class="card h-100 shadow">
+  <div class="card h-100 shadow border-0">
     <a class="card-img-wrap" href="/resource/{{rsc.id}}">
       {% if rsc.image1 %}
       <img class="img-fluid img-zoom {% if rsc.id not in featuredResources %} nonmoderated {% endif %} " src="{{ rsc.image1 }}" />
