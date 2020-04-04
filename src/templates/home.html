@@ -13,13 +13,20 @@
 {% include "_navbar.html"  %}
 {% endblock %}
 {% block splash %}
+<script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
+
 <script>
 	function map_init_basic (leafmap, options) {
 		map = leafmap;
 		map.setView([{{50}}, {{20}}], 3)
+		var markers = L.markerClusterGroup();
 		{% for project in allprojects %}
-		L.marker([{{project.latitude}},{{project.longitude}}]).addTo(map);
+		var marker = L.marker([{{project.latitude}},{{project.longitude}}]);
+		markers.addLayer(marker);
 		{% endfor %}
+		map.addLayer(markers);
 	}
 </script>
 <div class="jumbotron jumbotron-fluid jumbotron-main">
