@@ -21,7 +21,6 @@
 Curated Resources
 {% endblock page_title %}
 {% block list_of_items %}
-{% for group in groups %}
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
@@ -29,19 +28,22 @@ Curated Resources
 			to help you get started with designing and launching your own citizen science project, categorised across the project lifecycle.
 		</div>
 	</div>
+</div>
+{% for group in groups %}
+<div class="container">
 	<div class="row">
+		<div class="col-12">
+			<hr/>
+		</div>
 		<div class="col-lg-12 mt-3">
-			<h3>{{group.name}}</h3>
+			<h2>{{group.name}}</h2>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-lg-12">
-			<h5>{{group.description}}</h5>
-		</div>
-	</div>
+
 	<div class="row">
 		{% for rg in resourcesgrouped %}
 		{% if rg.group == group %}
+
 		<div class="col-lg-4 col-md-12 mb-4">
 			<div class="card h-100 shadow">
 				<a class="card-img-wrap" href="/resource/{{rsc.id}}">
