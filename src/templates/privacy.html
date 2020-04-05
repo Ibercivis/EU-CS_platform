@@ -3,24 +3,25 @@
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 
-{% block title %}{{ block.super }}Privacy{% endblock %}
-
+{% block title %}{{ block.super }} :: Privacy{% endblock %}
+{% block splash %}
+<div class="jumbotron jumbotron-fluid">
+	<div class="container">
+		<h1 class="display-5 pb-0"><br>Privacy</h1>
+	</div>
+</div>
+{% endblock splash %}
 
 {% block navbar-left %}
 {% include "_navbar.html" %}
 {% endblock %}
 
-{% block page_title %}
-Privacy
-{% endblock page_title %}
-{% block splash %}
 <div class="jumbotron jumbotron-fluid">
 	<div class="container">
-		<h1 class="display-5"><br>The moderation process</h1>
+		<h1 class="display-5"><br>Privacy</h1>
 		<p class="lead text-light"></p>
 	</div>
 </div>
-{% endblock splash %}
 {% block list_of_items %}
 <div class="container">
 	<div class="row">

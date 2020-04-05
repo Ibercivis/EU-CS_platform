@@ -3,84 +3,83 @@
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 
-{% block title %}{{ block.super }}Imprint{% endblock %}
-
+{% block title %}{{ block.super }} :: Imprint{% endblock %}
+{% block splash %}
+<div class="jumbotron jumbotron-fluid">
+	<div class="container">
+		<h1 class="display-5 pb-0"><br>&nbsp;</h1>
+	</div>
+</div>
+{% endblock splash %}
 {% block navbar-left %}
 {% include "_navbar.html" %}
 {% endblock %}
-
-{% block page_title %}
-Imprint
-{% endblock page_title %}
-
 {% block list_of_items %}
+
 <div class="container">
 	<div class="row mt-5">
-		<div class="container">
-			<div class="row mt-5">
-				<div class="col-sm-4 col-12 mt-4 mb-4">
-					<h2>Imprint</h2>
-				</div>
-				<div class="col-sm-8 col-12 mt-4 mb-4">
+		<div class="col-sm-4 col-12 mt-4 mb-4">
+			<h2>Imprint</h2>
+		</div>
+		<div class="col-sm-8 col-12 mt-4 mb-4">
 
-					<b>EU-Citizen.Science</b><br>
-					c/o Museum für Naturkunde Berlin<br>
-					Leibniz-Institut für Evolutions- und Biodiversitätsforschung<br>
-					Invalidenstraße 43<br>
-					10115 Berlin<br>
-					Germany<br><br>
+			<b>EU-Citizen.Science</b><br>
+			c/o Museum für Naturkunde Berlin<br>
+			Leibniz-Institut für Evolutions- und Biodiversitätsforschung<br>
+			Invalidenstraße 43<br>
+			10115 Berlin<br>
+			Germany<br><br>
 
-					<b>Museum für Naturkunde Berlin</b><br>
-					Telephone: +49 308 8914 08943<br>
-					Email: Katherin.Wagenknecht [at] mfn.berlin or eucitsci [at] mfn.berlin<br>
-					Website: http://eu-citizen.science<br><br>
-					<b>ECSA</b><br>
-					Telephone: +49 308 8914 8776<br>
-					Email: D.Riemenschneider [at] mfn.berlin<br>
-					Telephone: +49 308 8914 08943<br><br>
-					<b>Authorised representative person</b><br>
-					Silke Voigt-Heucke, Museum für Naturkunde Berlin (MfN)<br><br>
-					<b>Content responsibility (German law § 55 Abs. 2 RStV)</b><br>
-					Katherin Wagenknecht, MfN<br>
-					VAT-ID (German law § 27 a Umsatzsteuergesetz)<br>
-					DE262426477<br><br>
-					<b>Bank account</b><br>
-					Deutsche Bank<br>
-					Account number: 512 087 800<br>
-					Bank code (BLZ): 100 708 48<br>
-					IBAN: DE40 1007 0848 051 2087 800<br>
-					BIC/SWIFT: DEUTDEDB110<br><br>
-					<b>Responsible persons</b><br>
-					Editorial:<br>
-					<ul>
-						<li>Katherin Wagenknecht, MfN</li>
-						<li>Tim Woods, ECSA</li>
-						<li>Maria Zolotonosa, Ecsite</li>
-					</ul>
+			<b>Museum für Naturkunde Berlin</b><br>
+			Telephone: +49 308 8914 08943<br>
+			Email: Katherin.Wagenknecht [at] mfn.berlin or eucitsci [at] mfn.berlin<br>
+			Website: http://eu-citizen.science<br><br>
+			<b>ECSA</b><br>
+			Telephone: +49 308 8914 8776<br>
+			Email: D.Riemenschneider [at] mfn.berlin<br>
+			Telephone: +49 308 8914 08943<br><br>
+			<b>Authorised representative person</b><br>
+			Silke Voigt-Heucke, Museum für Naturkunde Berlin (MfN)<br><br>
+			<b>Content responsibility (German law § 55 Abs. 2 RStV)</b><br>
+			Katherin Wagenknecht, MfN<br>
+			VAT-ID (German law § 27 a Umsatzsteuergesetz)<br>
+			DE262426477<br><br>
+			<b>Bank account</b><br>
+			Deutsche Bank<br>
+			Account number: 512 087 800<br>
+			Bank code (BLZ): 100 708 48<br>
+			IBAN: DE40 1007 0848 051 2087 800<br>
+			BIC/SWIFT: DEUTDEDB110<br><br>
+			<b>Responsible persons</b><br>
+			Editorial:<br>
+			<ul>
+				<li>Katherin Wagenknecht, MfN</li>
+				<li>Tim Woods, ECSA</li>
+				<li>Maria Zolotonosa, Ecsite</li>
+			</ul>
 
-					Web concept:
-					<ul>
-						<li>Francisco Sanz García, Ibercivis</li>
-						<li>Margaret Gold, ECSA</li>
-						<li>Marzia Mazzoneto, ECSA</li>
-					</ul>
-					Design and layout:
-					<ul>
-						<li>Francisco Sanz García, Ibercivis</li>
-						<li>Daniel Lisbona, Ibercivis</li>
-						<li>Margaret Gold, ECSA</li>
-					</ul>
+			Web concept:
+			<ul>
+				<li>Francisco Sanz García, Ibercivis</li>
+				<li>Margaret Gold, ECSA</li>
+				<li>Marzia Mazzoneto, ECSA</li>
+			</ul>
+			Design and layout:
+			<ul>
+				<li>Francisco Sanz García, Ibercivis</li>
+				<li>Daniel Lisbona, Ibercivis</li>
+				<li>Margaret Gold, ECSA</li>
+			</ul>
 
-					Website programming:
-					<ul>
-						<li> Francisco Sanz García, Ibercivis</li>
-						<li> Victor Val, Ibercivis</li>
-					</ul>
-				</div>
-			</div>
+			Website programming:
+			<ul>
+				<li> Francisco Sanz García, Ibercivis</li>
+				<li> Victor Val, Ibercivis</li>
+			</ul>
 		</div>
 	</div>
 </div>
+
 <div class="container-fluid bg-white">
 	<div class="container">
 		<div class="row">
