@@ -24,6 +24,7 @@ urlpatterns = [
     path("faq/", views.faq,name="faq"),
     path("subscribe/", views.subscribe,name="subscribe"),
     path("moderation/", views.moderation,name="moderation"),
+    path("criteria/", views.criteria,name="criteria"),
     path("home_autocomplete/", views.home_autocomplete,name="home_autocomplete"),
     path("development/", views.development,name="development"),
     path("about/", views.AboutPage.as_view(), name="about"),
