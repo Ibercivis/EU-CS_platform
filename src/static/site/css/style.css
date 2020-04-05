@@ -23,7 +23,9 @@ main.nomargintop {
 	min-height: 30vh;
 }
 .jumbotron-projects{
-	background-image: url('../img/cancitizensc.jpg');
+	background-image: url('../img/projects.webp');
+	background-size: cover;
+	background-position: center;
 	min-height: 15vh;
 }
 .jumbotron-resources{
@@ -215,9 +217,9 @@ a.project:hover{
 	font-size: 1.8em;
 }
 .gl-star-rating-stars > span {
-  width: 15px !important;
-  height: 15px !important;
-  background-size: 15px !important;
+	width: 15px !important;
+	height: 15px !important;
+	background-size: 15px !important;
 	margin: 0! important;
 }
 dt {
@@ -228,7 +230,7 @@ dt {
 	width: 200px !important;
 }
 #specialbigmap {
-			 height: 500px;
+	height: 500px;
 }
 .bluebackground{
 	background-color: #203863;
@@ -245,7 +247,7 @@ dt {
 	background-color: #a6d49f;
 }
 .dark {
-		color: #333;
+	color: #333;
 }
 .white {
 	color: #fff;
@@ -263,7 +265,7 @@ dt {
 	color:#333;
 }
 .btn-red:active{
-		background-color: #eee;
+	background-color: #eee;
 	color:#333;
 }
 .linkwhite{
