@@ -15,16 +15,10 @@ FAQ
 {% endblock page_title %}
 
 {% block list_of_items %}
-<div class="container">
-	<div class="row mt-5">
-		<div class="container">
-			<div class="row mt-5">
-				<div class="col-md-12">
-					<h2>Frequently Asked Questions</h2>
-					<br>
-				</div>
-			</div>
-		</div>
+<div class="jumbotron jumbotron-fluid jumbotron-about">
+	<div class="container">
+		<h1 class="display-5 pb-0"><br>Frequently Asked Questions</h1>
+		<p class="lead text-light">&nbsp;</p>
 	</div>
 </div>
 <div class="container">
@@ -58,14 +52,21 @@ FAQ
 			<div class="col-sm-8 col-12 mb-4 mt-4">
 				This alpha release of the platform (launched in April 2020) has a
 				<a href="/resources">Resources section</a> where you can browse and search for resources that are useful for planning
-				and running citizen science projects, and
-				a <a href="/projects">projects section</a> where you can browse and search
-				for citizen science projects to learn from other’s experience and collaborate. If you sign up
-				as a member of the community, you will be able to follow projects, add resources to your library,
-				and add your own projects and resources to those sections.<br/><br/>
+				and running citizen science projects, anda <a href="/projects">projects section</a> where you can browse and search
+				for citizen science projects to learn from the experience of others and collaborate.<br/><br/>
+				If you <a href="/signup">sign up</a> and <a href="/login">login</a> as a member of the community, you will be able to follow projects,
+				add resources to your library, and submit your own projects to be added to the platform (See <a href="#add">how do I add a project or resource</a>).<br/><br/>
 
-				You can read about our platform development and release planning in the
-				project <a href="https://zenodo.org/record/3612808">Platform Functionality Requirements & Specification Report</a>
+
+				You can also help <a href="/development">contributing</a> to the development of the platform.<br/><br/>
+
+				When you sign-up to be a member of the EU-Citizen.Science community, there are a range of additional features
+				that become available to you. You will be able to share your own projects and resources with the community,
+				provide a star rating for other projects and resources, and leave feedback or information about your own
+				experience using those resources. When viewing a project profile, you can ‘Follow’ it, or when viewing a
+				resource profile you can ‘Add to library’ to find them quickly again from your Personal Area.<br/><br/>
+
+				In the next release of the platform, you will also be able to leave comments and join the community forum conversations.
 			</div>
 		</div>
 	</div>
@@ -73,155 +74,141 @@ FAQ
 <div class="container">
 	<div class="row">
 		<div class="col-sm-4 col-12 mb-4 mt-4">
-			<h4>Are the resources hosted on the EU-Citizen.Science platform?</h4>
+			<h4>Why should I sign-up to become a member of the community?</h4>
 		</div>
 		<div class="col-sm-8 col-12 mb-4 mt-4">
-			No, we don’t host any documents, files, or software on our own platform. When a profile is created for a
-			resource, it points to the location where that resource is stored or published, and project profiles
-			point to the external website of that project. We strongly recommend the use of permanent repositories
-			and permalinks, so that links do not become broken over time.
+			When you sign-up to be a member of the EU-Citizen.Science community, there are a range of additional features
+			that become available to you. You will be able to share your own projects and resources with the community,
+			provide a star rating for other projects and resources, and leave feedback or information about your own
+			experience using those resources. When viewing a project profile, you can ‘Follow’ it, or when viewing a
+			resource profile you can ‘Add to library’ to find them quickly again from your Personal Area.<br/><br/>
+
+			In the next release of the platform, you will also be able to leave comments and join the community forum conversations.
+
 		</div>
 	</div>
 </div>
-<div class="container-fluid bg-white">
+
+<div class="container-fluid whitebackground">
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-4 col-12 mb-4 mt-4">
-				<h4>I can’t find the type of resource that I’m looking for, can you help?</h4>
-			</div>
-			<div class="col-sm-8 col-12 mb-4 mt-4">While the alpha release of the Platform is in the content-gathering phase,
-				we will still be missing many of the rich citizen science resources that exist already. But it may be that what
-				you are looking for does not exist yet. Please send us a message at <a href="mailto:eucitsci@mfn.berlin"> eucitsci@mfn.berlin</a> and we
-				will do our best to help you find it, or initiate the creation of it!
-			</div>
-		</div>
-	</div>
-</div>
-<div class="container">
-	<div class="row">
-		<div class="col-sm-4 col-12 mb-4 mt-4">
-			<h4>Can I add a project or resource of my own?</h4>
-		</div>
-		<div class="col-sm-8 col-12 mb-4 mt-4">
-			Yes, we are currently in the content-gathering phase with this alpha release of the platform, and therefore actively invite
-			all members of the community to share their citizen science projects and resources.
-			To add your project to the <a href="/projects">Project section</a>, or your resource to the
-			<a href="/resources">Resource section</a>, you will first need to <a href="/signup">Sign Up</a> and <a href="/login">Log In</a> to the platform.
-		</div>
-	</div>
-</div>
-<div class="container-fluid bg-white">
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-4 col-12 mb-4 mt-4">
-				<h4>What types of resources can I submit?</h4>
+				<h4>Are the resources hosted on the EU-Citizen.Science platform?</h4>
 			</div>
 			<div class="col-sm-8 col-12 mb-4 mt-4">
-				Resources can include documents such as guidelines, reports, policy briefs, and protocols; technical tools such as software or hardware;
-				and other file formats such as videos or podcasts.<br/><br/>
-				The resource should be relevant to the initiation, planning, execution, or closure of citizen science projects,
-				either for experienced or new practitioners.<br/><br/>
-				The resource should also meet a range of quality factors such as whether it is easy to access, is structured clearly,
-				is easy to read (or hear or view), and easy to understand. Read our Quality Guidelines <a href="#quality"> here</a>.
+				No, we don’t host any documents, files, or software on our own platform. When a profile is created for a
+				resource, it points to the location where that resource is stored or published, and project profiles
+				point to the external website of that project. We strongly recommend the use of permanent repositories
+				(such as the publisher’s page,  <a href="https://zenodo.org/">Zenodo</a>, <a href="https://osf.io/">OSF</a> or the
+				<a href="https://riojournal.com/">RIO Journal</a>) to create permalinks and digital object identifiers (DOI) for all resources.
+
 			</div>
 		</div>
 	</div>
 </div>
+
+
 <div class="container">
 	<div class="row">
 		<div class="col-sm-4 col-12 mb-4 mt-4">
-			<h4>What types of projects can I submit?</h4>
+			<h4>I can’t find the type of resource that I’m looking for, can you help?</h4>
 		</div>
-		<div class="col-sm-8 col-12 mb-4 mt-4">
-			Projects can be short-term or long-term citizen science initiatives, projects with an end date, or even one-day ‘Blitz’ events.<br/><br/>
-			Citizen science is a flexible concept which can be adapted and applied within diverse situations and disciplines, and represents a range
-			of approaches and historical practices for public participation in scientific research. Citizen science projects can involve voluntary
-			participants (citizen scientists) in many stages of the scientific process, from data collection and volunteer mapping,
-			through data interpretation and analysis, to publication and dissemination of results.<br/><br/>
-			For guidance on whether your project can be considered to be a citizen science project, please refer to the <a href="/about#ten">ECSA 10 Principles of Citizen Science</a>.
+		<div class="col-sm-8 col-12 mb-4 mt-4">While the alpha release of the Platform is in the content-gathering phase,
+			we will still be missing many of the rich citizen science resources that exist already. But maybe  what
+			you are looking for does not exist yet. Please send us a message at <a href="mailto:eucitsci@mfn.berlin"> eucitsci@mfn.berlin</a> and we
+			will do our best to help you find it, or initiate the creation of it!
 		</div>
 	</div>
 </div>
+
 <div class="container-fluid bg-white">
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-4 col-12 mb-4 mt-4">
-				<h4>How do I add a project or resource?</h4>
+				<h4>Can I add a project or resource of my own?</h4>
 			</div>
 			<div class="col-sm-8 col-12 mb-4 mt-4">
-				Once you have <a href="/signup">signed up</a>  and are <a href="login">logged in </a>, go to the <a href="/resources">Resources page</a>
-				or the <a href="/projects">Project page</a>, and look for the Add+ button under the search bar at the top of that page.
-				You will be taken to a form that will ask you for a range of mandatory and option information.<br/><br/>
-				This information will be used for creating the public profile of the project or resource on our platform. Please note that at first this
-				profile will be marked as ‘Unmoderated’. Once a member of the EU-Citizen.Science project has reviewed your submission, it will be marked as
-				‘Moderated’, or we will contact you with questions about the resource or project.
+				Yes, we actively invite and encourage all members of the community to profile
+				their citizen science projects and resources on the platform.
+				To add your project to the <a href="/projects">Projects section</a>, or your resource to
+				the <a href="/resource">Resources section</a>, you will first need to
+				<a href="/signup"Sign Up</a> and <a href="/login">Log In</a> to the platform.<br/><br/>
+
+				Please note that we moderate all submissions (<a href="#moderation>"What is the moderation process?</a>)
+				to ensure that all resources are of good quality (<a href="#quality">What are the quality criteria?</a>),
+				and that all projects are indeed citizen science initiatives (<a href="#citsci">What is citizen science?</a>).<br/><br/>
+
+				Please note that resources are not uploaded to the platform, rather they are linked to from within the profile that you create.
+
 			</div>
 		</div>
 	</div>
 </div>
+
 <div class="container">
 	<div class="row">
 		<div class="col-sm-4 col-12 mb-4 mt-4">
-			<h4 id="moderation">What is the moderation process?</h4>
+			<h4>What types of resources can I submit?</h4>
 		</div>
 		<div class="col-sm-8 col-12 mb-4 mt-4">
-			Text....
-		</div>
-	</div>
-</div>
-<div class="container-fluid bg-white">
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-4 col-12 mb-4 mt-4">
-				<h4>What are the quality criteria for resources?</h4>
-			</div>
-			<div class="col-sm-8 col-12 mb-4 mt-4">
-				Text....<br/><br/>
-				You can read more about how we developed the quality criteria in the
-				project deliverable <a href="https://zenodo.org/record/3716236">Framework Report Describing Criteria and Rationale for Sharing and Selecting State of the art Citizen Science Resources</a>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="container">
-	<div class="row">
-		<div class="col-sm-4 col-12 mb-4 mt-4">
-			<h4>What means to follow a project?</h4>
-		</div>
-		<div class="col-sm-8 col-12 mb-4 mt-4">
-			Text...
-		</div>
-	</div>
-</div>
-<div class="container-fluid bg-white">
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-4 col-12 mb-4 mt-4">
-				<h4>What means to 'add to my library' a resource?</h4>
-			</div>
-			<div class="col-sm-8 col-12 mb-4 mt-4">
-				Text...
-			</div>
-		</div>
-	</div>
-</div>
-<div class="container">
-	<div class="row">
-		<div class="col-sm-4 col-12 mb-4 mt-4">
-			<h4>How do you prevent dead links?</h4>
-		</div>
-		<div class="col-sm-8 col-12 mb-4 mt-4">
-			Encouraging Permalinks: In the form for submitting resources, alongside the metadata field for the link to the resource, we will strongly encourage
-			the use of permalinks from hosting repositories such as <a href="https://zenodo.org">Zenodo</a>, <a href="https://osf.io/">OSF</a> or the
-			<a href="https://riojournal.com/">RIO Journal</a> that create a permanent DOI for the resource, and support version management.
+			Resources should be related to citizen science, and useful for understanding,
+			planning, implementing and evaluating citizen science and citizen science
+			practices, or otherwise of value to citizen science practitioners.<br/><br/>
+
+			Resources can include documents such as how-to guides, publications, reports,
+			policy briefs, and protocols; technical tools such as software or hardware;
+			other file formats such as videos, podcasts, and diagrams; and even websites or webpages.<br/><br/>
+
 			<ul>
-				<li>Users will be warned that resources with broken links will be delisted, but they can update the links from their resource dashboard at any time.</li>
-				<li>When a resource is delisted, the person who submitted it will receive an email informing them of this, the reason, and how they can address the issue and resubmit the resource.</li>
+				<li>
+					<b>Guidelines</b> are written texts such as reports, deliverables, or briefings that describe
+					best practices or provide instructions that can be helpful in designing,
+					implementing or evaluating citizen science or initiatives relevant to citizen science.
+				</li>
+
+				<li>
+					<b>Scientific publications</b> are peer-reviewed texts about citizen science, ideally
+					sharing practical experience, knowledge, and recommendations for initiating
+					or running citizen science projects.
+				</li>
+
+				<li>
+					<b>Reports</b> are documents that present information on citizen science or
+					on topics relevant  to citizen science.
+				</li>
+
+				<li>
+					<b>Websites</b> and webpages are online sites where citizen science related guidance,
+					experience, and knowledge is published and shared.
+				</li>
+
+				<li>
+					<b>Training resources</b>are instructional materials about how to complete
+					a citizen science task, or how to initiate and run a citizen science project,
+					and can include massive open online courses (MOOCs), workshops, webinars, gamified training, and quizzes.
+				</li>
+
+				<li>
+					<b>Tools</b> are software (including apps and web platforms) or hardware that support
+					a particular task in citizen science initiatives, such as water quality equipment,
+					air quality sensors, etc.
+				</li>
+				<li>
+					<b>Libraries</b> are organized sets of technical resources such as databases,
+					repositories,  toolkits and toolboxes that bring together relevant documents
+					for a particular purpose in citizen science initiatives.
+				</li>
+				<li>
+					<b>Audio</b> resources are sound files with citizen science related
+					content such as podcasts, audio books, radio broadcasts, etc.
+				</li>
+				<li>
+					<b>Visual</b> resources are visual content related to citizen science
+					such as videos, diagrams, figures, illustrations, etc.
+				</li>
 			</ul>
-			Flagging Resources: All resources can be flagged by the community as having an issue that needs addressing, which includes broken links. These will then be delisted and the submitter
-			of the resource will be informed about how to address the issue and encouraged to resubmit it.<br/><br/>
-			Deadlink Checker: we will integrate a script to run software that checks for broken links such as Broken Link Checker by W-Shadow on a regular basis - likely once a month for the first year,
-			and once a quarter thereafter. (Links go dead over a matter of years, not months, as server-support often gets pulled approximately 2-3 years after a project ends)
+			The resource should also meet a range of quality factors such as whether it is easy to access, is structured clearly,
+			is easy to read (or hear or view), and easy to understand. Read our Quality Guidelines <a href="#quality"> here</a>.
 		</div>
 	</div>
 </div>
@@ -229,14 +216,17 @@ FAQ
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-4 col-12 mb-4 mt-4">
-				<h4>How do we deal with outdated resources & content changes?</h4>
+				<h4>What types of projects can I submit?</h4>
 			</div>
 			<div class="col-sm-8 col-12 mb-4 mt-4">
-				Resource Dashboard: The registered user who has submitted a Resource has access to the Resource profiles that they have created via a dashboard.
-				Resources can be updated at any time by providing a link to a new document. If the Resource is hosted on a platform such as Zenodo or OSF,
-				then the version management can happen at that location and the link and DOI will remain constant. It is up to the community to keep their resources up to date.<br/><br/>
-				Flagging Resources: All resources can be flagged by the community as having an issue that needs addressing, which includes resources that appear to be outdated.
-				These will then be delisted and the submitter of the resource will be informed about how to address the issue and resubmit.<br/><br/>
+				Projects must be related to citizen science, and can be short-term or long-term initiatives,
+				projects with an end date, or even one-day ‘Bioblitz’ events. <br/><br/>
+
+				Citizen science projects can involve voluntary participants (citizen scientists) in many fields of
+				research, in many stages of the research process - from data collection and volunteer mapping,
+				through data interpretation and analysis, to publication and dissemination of results. <br/><br/>
+
+				For guidance on whether your project can be considered to be a citizen science project, please refer to the <a href="/about#ten">ECSA 10 Principles of Citizen Science</a>.
 			</div>
 		</div>
 	</div>
@@ -244,10 +234,152 @@ FAQ
 <div class="container">
 	<div class="row">
 		<div class="col-sm-4 col-12 mb-4 mt-4">
-			<h4>Which resources are chosen to be on the “Curated List”?</h4>
+			<h4>How do I add a project or resource?</h4>
 		</div>
 		<div class="col-sm-8 col-12 mb-4 mt-4">
-			Text...
+			Once you have <a href="/signup">signed up</a>  and are <a href="login">logged in </a>, go to the <a href="/resources">Resources page</a>
+			or the <a href="/projects">Project page</a>, and look for the Add+ button alongside the search bar at the top of that page to add a new profile.<br/><br/>
+
+			In the resource or project profile form you will be asked to provide descriptive information in a number of mandatory and optional data fields.
+			This information will be used for creating the public profile of the project or resource on our platform. Please note that resources
+			are not uploaded to the platform, rather they are linked to from within the profile that you create. <br/><br/>
+
+			When saved, the profile will be submitted to a member of the EU-Citizen.Science team for moderation.
+			(<a href="#moderation">What is the moderation process?</a>) Once that process is complete, the profile will be marked as ‘Moderated’,
+			and will be fully available on the platform.
+		</div>
+	</div>
+</div>
+<div class="container-fluid bg-white">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mb-4 mt-4">
+				<h4 id="moderation">How does moderation work?</h4>
+			</div>
+			<div class="col-sm-8 col-12 mb-4 mt-4">
+				When a profile is saved, it will be submitted for moderation to a member
+				of the EU-Citizen.Science consortium, and marked as ‘not yet moderated’ on the platform.<br/><br/>
+				The first criterion that the moderator will look for, is that your resource is relevant to citizen science,
+				or that your project is a citizen science initiative. Guidance for this can be found in
+				the Characteristics of Citizen Science developed by the citizen science community.
+				The moderator will also consider whether your resource or project is in alignment with the <a href="#ten">10 Principles of Citizen Science.</a><br/><br/>
+				Resources will be assessed further against a range of specific criteria
+				to ensure that they are easy to access, implement and adapt, are well structured, are clearly described
+				and written in clear language, and ideally improve or support the desired impact of the initiative (eg. on science,
+				policy or society, etc). Read the full list of criteria in <a href="/quality">Quality Criteria for Resources,</a> and find
+				out how we developed these in the blog post: ‘How we developed the quality criteria for resources’.
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4 col-12 mb-4 mt-4">
+			<h4>What are the quality criteria for resources?</h4>
+		</div>
+		<div class="col-sm-8 col-12 mb-4 mt-4">
+			After completing all mandatory metadata fields in the profile, and ensuring
+			that the resource is relevant to citizen science initiatives, the resource will be
+			assessed against a set of specific criteria that we developed
+			to ensure that all resources profiled on the platform are of good quality. <br/><br/>
+			We consider good quality citizen science resources to be those that are easy to access,
+			implement and adapt, are well structured, are clearly described and written in clear
+			language, and ideally improve or support the desired impact of the initiative (eg. on
+			science, policy or society, etc).  It also enhances the value and quality of your resource
+			when you can say something about how it has been used and developed further in practice,
+			and whether or not it has been evaluated for usefulness, applicability, and impact. <br/><br/>
+
+			You can read  the full list of criteria in <a href="/quality">Quality Criteria for Resources,</a>
+			and find out how we developed these in the blog post: ‘How we developed the quality criteria for resources.
+		</div>
+	</div>
+</div>
+<div class="container-fluid bg-white">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mb-4 mt-4">
+				<h4>What are the quality criteria for projects?</h4>
+			</div>
+			<div class="col-sm-8 col-12 mb-4 mt-4">
+				The same overarching criteria are applied to both projects and resources.
+				You are required to provide descriptive information in a number of data
+				fields in the project profile, some of which are mandatory before it can
+				be submitted for moderation. It is also a requirement that the project profile
+				describe a citizen science initiative. Guidance for this can be found in the
+				Characteristics of Citizen Science.  A further suggested overarching criteria for
+				projects is that they be in alignment with the <a href="/about#ten">10 Principles of Citizen Science</a>.
+				There are no further specific requirements for projects.
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4 col-12 mb-4 mt-4">
+			<h4>Can I edit a profile after I have saved it?</h4>
+		</div>
+		<div class="col-sm-8 col-12 mb-4 mt-4">
+			Yes, you can edit and update the profiles of
+			the projects and resources that you have shared, both before and after they
+			have been moderated. You can find these profile edit pages in your Personal Area.
+		</div>
+	</div>
+</div>
+<div class="container-fluid bg-white">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mb-4 mt-4">
+				<h4>What is the Our Selection page?</h4>
+			</div>
+			<div class="col-sm-8 col-12 mb-4 mt-4">
+				The members of the EU-Citizen.Science consortium have curated a list of ‘Gold Star’
+				resources from amongst those in the Resources section that are of particularly
+				high quality, or represent best practice, to make it easier for new and experienced practitioners
+				alike to zoom in on the most useful resources. Read more about Our Selection in the blog
+				post ‘How we selected the starter set of resources, and curated ‘Our Selection’
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4 col-12 mb-4 mt-4">
+			<h4>What is the Personal Area?</h4>
+		</div>
+		<div class="col-sm-8 col-12 mb-4 mt-4">
+			The Personal Area is where you can edit the profiles of projects or resources
+			that you have submitted (as a logged-in member of the platform), in order to keep those profiles up to date.
+			There you will also find the list of projects that you have ‘followed’,
+			and the resources that you have added to your ‘library’ so that you can find them quickly again from your Personal Area. <br/><br/>
+			Please also share more information about yourself in the Profile area, with other members of the community.
+
+		</div>
+	</div>
+</div>
+<div class="container-fluid bg-white">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mb-4 mt-4">
+				<h4>What does it mean to follow a project?</h4>
+			</div>
+			<div class="col-sm-8 col-12 mb-4 mt-4">
+				When you are logged in, you will see a ‘Follow’ button at the bottom of the
+				project profiles. This allows you to add projects that you are interested
+				in to a list that can be found in your Personal Area, allowing you to find this project again easily.
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4 col-12 mb-4 mt-4">
+			<h4>What does it mean to 'add to my library'?</h4>
+		</div>
+		<div class="col-sm-8 col-12 mb-4 mt-4">
+			When you are logged in, you will see an ‘Add to library’ button at the bottom of the resource profiles.
+			This allows you to add resources that you are interested in to a list that
+			can be found in your Personal Area, allowing you to find this resource again easily.
 		</div>
 	</div>
 </div>
@@ -278,32 +410,5 @@ FAQ
 		</div>
 	</div>
 </div>
-
-
-
-
-
-
-<div class="container">
-	<div class="row">
-		<div class="col-sm-4 col-12 mb-4 mt-4">
-			<h4></h4>
-		</div>
-		<div class="col-sm-8 col-12 mb-4 mt-4">
-		</div>
-	</div>
-</div>
-<div class="container-fluid bg-white">
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-4 col-12 mb-4 mt-4">
-				<h4></h4>
-			</div>
-			<div class="col-sm-8 col-12 mb-4 mt-4">
-			</div>
-		</div>
-	</div>
-</div>
-
 
 {% endblock list_of_items %}
