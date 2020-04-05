@@ -1,0 +1,37 @@
+{% load staticfiles %}
+{% load reviews %}
+{% if projects %}
+{% for project in projects %}
+<div class="col-lg-4 col-sm-12 mb-4">
+	<div class="card h-100 shadow border-0">
+		<a class="card-img-wrap "href="/project/{{project.id }}">
+			{% if project.image1 %}
+			<img class="card-img-top img-fluid img-zoom lazyload {% if project.id not in featuredProjects %} nonmoderated {% endif %}" src="{{ project.image1 }}" />
+			{% else %}
+			<img class="card-img-top img-fluid img-zoom lazyload {% if project.id not in featuredProjects %} nonmoderated {% endif %}" src="{% static 'site/img/project_default_card.png' %}" />
+			{% endif %}
+			<div class="upper">
+				{% if project.id not in featuredProjects %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br/>
+				{% else %} {% if filters.featuredCheck == "All" %}  <a class="badge frontpage frontpage-green mb-2" href="/faq#moderation">MODERATED</a><br/> {% endif %}
+				{% endif %}
+				{% for country in countries %}
+				{% if country.code == project.country %}
+				<a class="badge frontpage" href="projects?country={{country.code}}">{{ country.name | upper }}</a>
+				{% endif %}
+				{% endfor %}
+			</div>
+		</a>
+		<div class="card-body">
+			<h6 class="card-title mt-3 mb-3"> <a class="card-link" href="/project/{{project.id }}">{{ project.name }}</a></h6>
+
+			<div class="card-text mt-3">{{project.description | safe | truncatechars:180 }}
+				<a class="project" href="/project/{{project.id}}" target="_blank">Read more</a>
+			</div>
+			<br>
+
+		</div><!-- End of card-body -->
+
+	</div><!-- end of card -->
+</div>
+{% endfor %}
+{% endif %}
