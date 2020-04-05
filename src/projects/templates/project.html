@@ -9,7 +9,7 @@
 {% leaflet_css %}
 <link href="/static/reviews/css/star-rating.css" type="text/css" media="all" rel="stylesheet">
 {% endblock head %}
-{% block title %}{{ block.super }}Projects{% endblock %}
+{% block title %}{{ block.super }} :: {{project.name}}{% endblock %}
 {% block navbar-left %}
 {% include "_navbar.html" with active_link="projects" %}
 {% endblock %}
