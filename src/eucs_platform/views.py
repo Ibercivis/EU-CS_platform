@@ -81,6 +81,9 @@ def development(request):
 def subscribe(request):
     return render(request, 'subscribe.html')
 
+def moderation(request):
+    return render(request, 'moderation.html')
+
 
 def home_autocomplete(request):
     if request.GET.get('q'):

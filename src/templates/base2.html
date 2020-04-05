@@ -73,10 +73,10 @@
     {% block splash %}
     {% endblock splash %}
     <!--Main layout-->
-    <div class="container">
-      <!--First row-->
-      <div class="row">
-        <div class="col-md-12">
+
+    <div class="container-fluid pt-3">
+      <div class="container">
+        <div class="col-12">
           {% block page_header %}
           {% endblock page_header %}
         </div>
@@ -84,6 +84,7 @@
     </div>
     {% block list_of_items %}
     {% endblock list_of_items %}
+
     <!--/.Main layout-->
   </main>
   {% block footer %}
