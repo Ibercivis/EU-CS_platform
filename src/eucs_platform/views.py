@@ -83,6 +83,8 @@ def subscribe(request):
 
 def moderation(request):
     return render(request, 'moderation.html')
+def criteria(request):
+    return render(request, 'criteria.html')
 
 
 def home_autocomplete(request):
