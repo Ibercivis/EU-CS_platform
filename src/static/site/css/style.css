@@ -189,7 +189,7 @@ img.nonmoderated{
 	filter: grayscale(100%);
 }
 .navbar-front{
-	background: rgba(0,0,0,0.7);
+	background: rgba(0,0,0,0.9);
 }
 a{
 	color: #203863;
@@ -199,7 +199,8 @@ a:hover{
 	text-decoration: none;
 }
 a.project{
-	color: #e28683;
+	color: #203863;
+	text-decoration: underline;
 }
 a.project:hover{
 	color: #111;
@@ -227,6 +228,10 @@ dt {
 	background-color: #203863;
 	color: #333;
 }
+.whitebackground{
+	background-color: #fff;
+	color: #333;
+}
 .redbackground{
 	background-color: #e28683 ;
 }
@@ -244,12 +249,12 @@ dt {
 }
 .btn-red{
 	background-color: #e28683;
-	color: #fff;
+	color: #333;
 	transition: background-color 0.25s;
 }
 .btn-red:hover{
 	background-color: #f29693;
-	color:#fff;
+	color:#333;
 }
 .btn-red:active{
 		background-color: #eee;
