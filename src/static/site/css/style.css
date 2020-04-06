@@ -17,8 +17,6 @@ main.nomargintop {
 .jumbotron {
 	font-weight: bold;
 	background-position: center center;
-
-
 }
 .jumbotron-default{
 	background-color: #203863;
@@ -27,16 +25,16 @@ main.nomargintop {
 .jumbotron-main{
 	background-image: url('../img/cancitizensc.webp');
 	min-height: 30vh;
-	background-color: #203863;
-	background-blend-mode: multiply;
+	background-color: #405883;
+	background-blend-mode: overlay;
 	background-size: cover;
 	background-position: center;
 }
 .jumbotron-projects{
 	background-image: url('../img/projects.webp');
 	min-height: 15vh;
-	background-color: #203863;
-	background-blend-mode: multiply;
+	background-color: #405883;
+	background-blend-mode: overlay;
 	background-size: cover;
 	background-position: center;
 }
@@ -44,32 +42,32 @@ main.nomargintop {
 	background-image: url('../img/resources.jpg');
 	background-size: cover;
 	min-height: 15vh;
-	background-color: #203863;
-	background-blend-mode: multiply;
+	background-color: #405883;
+	background-blend-mode: overlay;
 	background-size: cover;
 	background-position: center;
 }
 .jumbotron-lists{
-	background-image: url('../img/cancitizensc.jpg');
+	background-image: url('../img/selection.webp');
 	min-height: 15vh;
-	background-color: #203863;
-	background-blend-mode: multiply;
+	background-color: #405883;
+	background-blend-mode: overlay;
 	background-size: cover;
 	background-position: center;
 }
 .jumbotron-contact{
 	background-image: url('../img/cancitizensc.webp');
 	min-height: 15vh;
-	background-color: #203863;
-	background-blend-mode: multiply;
+	background-color: #405883;
+	background-blend-mode: overlay;
 	background-size: cover;
 	background-position: center;
 }
 .jumbotron-about{
-	background-image: url('../img/cancitizensc.jpg');
+	background-image: url('../img/about.webp');
 	min-height: 15vh;
-	background-color: #203863;
-	background-blend-mode: multiply;
+	background-color: #405883;
+	background-blend-mode: overlay;
 	background-size: cover;
 	background-position: center;
 }
@@ -77,8 +75,8 @@ main.nomargintop {
 	background-image: url('../img/events.jpg');
 	background-size: cover;
 	min-height: 15vh;
-	background-color: #203863;
-	background-blend-mode: multiply;
+	background-color: #405883;
+	background-blend-mode: overlay;
 	background-size: cover;
 	background-position: center;
 }
@@ -86,8 +84,8 @@ main.nomargintop {
 	background-image: url('../img/team.jpeg');
 	background-size: cover;
 	min-height: 15vh;
-	background-color: #203863;
-	background-blend-mode: multiply;
+	background-color: #405883;
+	background-blend-mode: overlay;
 	background-size: cover;
 	background-position: center;
 }
@@ -123,9 +121,9 @@ select.form-control:focus {
 .img-zoom {
 	object-fit: cover;
 }
-input[type=checkbox] {
+/*input[type=checkbox] {
 	display:none;
-}
+}*/
 .errorMsg {
 	color: #F00;
 }
