@@ -95,6 +95,22 @@
           </div>
         </div>
 
+        {% if user.is_authenticated %}
+          {% if project.creator == user or user.is_staff %}
+          <div class="row">
+            <div class="col-6"></div>
+            <div class="col-6">
+              <permissionForm>
+                {% csrf_token %}
+                {{ permissionForm.usersAllowed | as_crispy_field }}
+                {{ permissionForm.selectedUsers | as_crispy_field }}
+                {{ permissionForm.usersCollection | as_crispy_field }}
+              </permissionForm>
+            </div>
+          </div>
+          {% endif %}
+        {% endif %}
+
       </div>
       <div class="card-text pl-5 pr-5">
         <table class="table mb-0">
@@ -444,7 +460,48 @@
       }
     });
 
+    var users = $("#id_usersCollection").val();
+    var users = users.split(",");
+
+    var selectedUsers = $("#id_selectedUsers").val().split(",");
+    for (user of users){
+      var found = false;
+      for(sel of selectedUsers){
+        if(sel.trim() == user.trim()){
+          found = true;
+          $("#id_usersAllowed").append("<option value='" + user +"' selected> " + user + " </option>");
+        }
+      }
+      if(!found){
+        $("#id_usersAllowed").append("<option value='" + user +"'> " + user + " </option>");
+      }
+    }
+
   });
+
+  $(function () {
+      $('#id_usersAllowed').on('change', function () {
+        users = $("#id_usersAllowed option:selected").map(function () {
+          return $.trim($(this).text());
+        }).get().join(',');
+
+        var idProject = {{project.id}};
+        var request = $.ajax(
+        {
+          type: "POST",
+          url: "{% url 'allowUser' %}",
+          data: {
+            "project_id": idProject,
+            "users": users,
+            csrfmiddlewaretoken: '{{ csrf_token }}'
+          },
+          success: function (response) {
+
+          }
+        }
+        );
+      });
+    });
 
   $('#confirm-delete').on('show.bs.modal', function(e) {
     $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
