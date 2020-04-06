@@ -2,31 +2,35 @@
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% block title %}{{ block.super }} :: Terms{% endblock %}
+{% block splash %}
+<div class="jumbotron jumbotron-fluid jumbotron-default">
+	<div class="container">
+		<h1 class="display-4 pb-0 text-white"><br>Terms of use</h1>
+	</div>
+</div>
+{% endblock splash %}
+
 {% block navbar-left %}
 {% include "_navbar.html" %}
 {% endblock %}
-{% block page_title %}
-Terms
-{% endblock page_title %}
+
 
 {% block list_of_items %}
+
 <div class="container">
-	<div class="row mt-5">
-		<div class="container">
-			<div class="row mt-5">
-				<div class="col-12">
-					<h2>EU-CITIZEN.SCIENCE Acceptable Use Policies</h2>
-				</div>
-				<div class="col-12 mt-4 mb-4">
-					Short version: <i>We host a wide variety of resources and collaborative citizen science projects from all over the world, and that
-						collaboration only works when our users are able to work together in good faith. While using the Service, you must comply with our
-						Acceptable Use Policies, which include some restrictions on content you can post, conduct on the service, and other limitations.
-						In short, be excellent to each other.</i>
-					</div>
-				</div>
+	<div class="row">
+		<div class="col-12">
+			<h2>EU-CITIZEN.SCIENCE Acceptable Use Policies</h2>
+		</div>
+		<div class="col-12 mt-4 mb-4">
+			Short version: <i>We host a wide variety of resources and collaborative citizen science projects from all over the world, and that
+				collaboration only works when our users are able to work together in good faith. While using the Service, you must comply with our
+				Acceptable Use Policies, which include some restrictions on content you can post, conduct on the service, and other limitations.
+				In short, be excellent to each other.</i>
 			</div>
 		</div>
 	</div>
+
 	<div class="container-fluid bg-white">
 		<div class="container">
 			<div class="row">
