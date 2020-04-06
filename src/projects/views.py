@@ -69,7 +69,6 @@ def saveImage(request, form, element, ref):
 
 def projects(request):
     projects = Project.objects.get_queryset()
-
     featuredProjects = FeaturedProjects.objects.all().values_list('project_id',flat=True)
     user = request.user
     followedProjects = None
@@ -78,7 +77,7 @@ def projects(request):
 
     topics = Topic.objects.all()
     status = Status.objects.all()
-    filters = {'keywords': '', 'topic': '', 'status': 0, 'country': '', 'host': '', 'featuredCheck': ''}
+    filters = {'keywords': '', 'topic': '', 'status': 0, 'country': '', 'host': '', 'featuredCheck': '', 'doingAtHome': ''}
 
     if request.GET.get('keywords'):
         projects = projects.filter( Q(name__icontains = request.GET['keywords']) |
@@ -92,6 +91,9 @@ def projects(request):
     if request.GET.get('status'):
         projects = projects.filter(status = request.GET['status'])
         filters['status'] = int(request.GET['status'])
+    if request.GET.get('doingAtHome'):
+        projects = projects.filter(doingAtHome = request.GET['doingAtHome'])
+        filters['doingAtHome'] = int(request.GET['doingAtHome'])
 
     if request.GET.get('country'):
         projects = projects.filter(country = request.GET['country'])
@@ -100,7 +102,6 @@ def projects(request):
     if request.GET.get('host'):
         projects = projects.filter( host__icontains = request.GET['host'])
         filters['host'] = request.GET['host']
-
 
     if request.GET.get('featuredCheck'):
         if request.GET['featuredCheck'] == 'On':
@@ -121,7 +122,7 @@ def projects(request):
         if("id" in orderBy):
             projects=projects.order_by(request.GET['orderby'])
         else:
-            reviews = Review.objects.filter(content_type=ContentType.objects.get(model="project"))    
+            reviews = Review.objects.filter(content_type=ContentType.objects.get(model="project"))
             reviews = reviews.values("object_pk", "content_type").annotate(avg_rating=Avg('rating')).order_by(orderBy).values_list('object_pk',flat=True)
             reviews = list(reviews)
             projectsVoted = []
@@ -213,7 +214,7 @@ def editProject(request, pk):
         'image3': project.image3, 'image_credit3': project.imageCredit3,
         'how_to_participate': project.howToParticipate, 'equipment': project.equipment,
         'contact_person': project.author, 'contact_person_email': project.author_email,
-        'funding_body': fundingBody, 'fundingBodySelected': project.fundingBody, 'fundingProgram': project.fundingProgram,
+        'funding_body': fundingBody, 'doingAtHome': project.doingAtHome, 'fundingBodySelected': project.fundingBody, 'fundingProgram': project.fundingProgram,
         'originDatabase': originDatabase,'originDatabaseSelected': project.originDatabase,
         'originUID' : project.originUID, 'originURL': project.originURL,
     })

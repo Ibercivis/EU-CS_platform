@@ -59,6 +59,7 @@ class ProjectForm(forms.Form):
     #Supplementary information for Citizen Science
     #how_to_participate = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 1000}}), required=False, label="How to participate in the project (max 1000 characters)")
     how_to_participate = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Free text description of how people can get involved in the project. Textual instructions for joining the project. Max 200 characters'}), max_length = 2000, required=False)
+    doingAtHome =  forms.BooleanField(required=False,label="Can participate at home")
     #equipment = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 1000}}), required=False, label="Equipment needeed to participate (max 1000 characters)")
     equipment = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'What equipment is needed for participation?. Max 2000 characters'}), max_length = 2000, required=False)
     #Funding
@@ -89,6 +90,11 @@ class ProjectForm(forms.Form):
         longitude = self.data['longitude']
         country = getCountryCode(latitude,longitude).upper()
         status = get_object_or_404(Status, id=self.data['status'])
+        doingAtHome=False
+        if 'doingAtHome' in self.data:
+            if(self.data['doingAtHome']=='on'):
+                doingAtHome=True
+
 
         if(pk):
             project = get_object_or_404(Project, id=pk)
@@ -107,6 +113,7 @@ class ProjectForm(forms.Form):
             project.imageCredit2 = self.data['image_credit2']
             project.imageCredit3 = self.data['image_credit3']
             project.howToParticipate = self.data['how_to_participate']
+            project.doingAtHome = doingAtHome
             project.equipment = self.data['equipment']
             project.fundingProgram = self.data['funding_program']
             project.originUID = self.data['originUID']
@@ -121,7 +128,7 @@ class ProjectForm(forms.Form):
                          imageCredit2 = self.data['image_credit2'], imageCredit3 = self.data['image_credit3'],
                          howToParticipate = self.data['how_to_participate'],equipment = self.data['equipment'],
                          fundingProgram = self.data['funding_program'],originUID = self.data['originUID'],
-                         originURL = self.data['originURL'] )
+                         originURL = self.data['originURL'], doingAtHome=doingAtHome )
         if start_dateData:
             project.start_date = start_dateData
         if end_dateData:
