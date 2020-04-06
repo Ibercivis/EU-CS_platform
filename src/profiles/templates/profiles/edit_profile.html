@@ -21,134 +21,133 @@
 {% block list_of_items %}
 <div class="container">
 	<div class="row mt-5">
-<div class="container-fluid">
-	<div class="card mt-5 mb-5 shadow">
-		<div class="card-body">
-			<div class="card-title">
-				<h2>
-					 <img title="profile picture" class="img-fluid rounded-circle"
-						src="{% thumbnail user.profile.picture|default:'default_profile.png' 140x140 crop %}">
-      			Edit profile: {{ user.get_full_name }}
-				</h2>
-			</div>
-			<div class="card-text">
-   			<form enctype="multipart/form-data" method="post">
-					{% crispy user_form %}
-					{{ profile_form.picture|as_crispy_field }}
-					{{ profile_form.title|as_crispy_field }}
-					{{ profile_form.bio|as_crispy_field }}
-					{{ profile_form.institution|as_crispy_field }}
-					{{ profile_form.interestAreas|as_crispy_field }}
-					{{ profile_form.choices|as_crispy_field }}
-					{{ profile_form.latitude|as_crispy_field }}
-					{{ profile_form.longitude|as_crispy_field }}
-					<label>Geographical location</label>
-					{% leaflet_map "map" callback="window.map_init_basic" %}
-					<br/><br/>
-					<button id="upload" type="submit" class="btn btn-success">Upload</button>
-
-   			<a class="btn btn-danger float-right" href="{% url 'accounts:password-change' %}">Change Password</a>
-      	</form>
+		<div class="container-fluid">
+			<div class="card mt-5 mb-5 shadow">
+				<div class="card-body">
+					<div class="card-title">
+						<h2>
+							<img title="profile picture" class="img-fluid rounded-circle"
+							src="{% thumbnail user.profile.picture|default:'default_profile.png' 140x140 crop %}">
+							Edit profile: {{ user.get_full_name }}
+						</h2>
+					</div>
+					<div class="card-text">
+						<form enctype="multipart/form-data" method="post">
+							{% crispy user_form %}
+							{{ profile_form.picture|as_crispy_field }}
+							{{ profile_form.title|as_crispy_field }}
+							{{ profile_form.bio|as_crispy_field }}
+							{{ profile_form.institution|as_crispy_field }}
+							{{ profile_form.interestAreas|as_crispy_field }}
+							{{ profile_form.choices|as_crispy_field }}
+							{{ profile_form.latitude|as_crispy_field }}
+							{{ profile_form.longitude|as_crispy_field }}
+							<label>Geographical location</label>
+							{% leaflet_map "map" callback="window.map_init_basic" %}
+							<br/><br/>
+							<button id="upload" type="submit" class="btn btn-green"><i class="fas fa-share-square"></i> Save</button>
+							<a class="btn btn-red float-right" href="{% url 'accounts:password-change' %}"><i class="fas fa-key"></i> Change Password</a>
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
-</div>
-{% endblock list_of_items%}
+	{% endblock list_of_items%}
 
-{% block scripts %}
-<script type="text/javascript" src="{% static 'site/js/jquery.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'site/js/bootstrap.min.js' %}"></script>
-<script src="{% static 'site/js/leaflet-geosearch_2_7.min.js' %}"></script>
-<script>
+	{% block scripts %}
+	<script type="text/javascript" src="{% static 'site/js/jquery.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'site/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'site/js/leaflet-geosearch_2_7.min.js' %}"></script>
+	<script>
 
-    $(document).ready(function () {
-		var choices = $("#id_choices").val();
-		var choices = choices.split(",");
+		$(document).ready(function () {
+			var choices = $("#id_choices").val();
+			var choices = choices.split(",");
 
-		for (choice of choices){
-		$("#id_interestAreas").append("<option value='" + choice +"' selected> " + choice + " </option>");
-		}
-
-		$("#div_id_interestAreas div").on('keyup', function(){
-			var key = $(".selection input").val();
-			if (key.indexOf(',') > -1) {
-				var word =key.slice(0, -1);
-				$(".selection input").val("");
-				$("#id_interestAreas").append("<option value='" + word +"' selected> " + word + " </option>");
+			for (choice of choices){
+				$("#id_interestAreas").append("<option value='" + choice +"' selected> " + choice + " </option>");
 			}
+
+			$("#div_id_interestAreas div").on('keyup', function(){
+				var key = $(".selection input").val();
+				if (key.indexOf(',') > -1) {
+					var word =key.slice(0, -1);
+					$(".selection input").val("");
+					$("#id_interestAreas").append("<option value='" + word +"' selected> " + word + " </option>");
+				}
+			});
+
+			$("#upload").on('click', function(){
+				var option_all = $("#id_interestAreas option:selected").map(function () {
+					return $.trim($(this).text());
+				}).get().join(',');
+				$("#id_choices").val(option_all);
+				$("#id_interestAreas").empty();
+			});
+
 		});
+	</script>
 
-		$("#upload").on('click', function(){
-			var option_all = $("#id_interestAreas option:selected").map(function () {
-				return $.trim($(this).text());
-			}).get().join(',');
-			$("#id_choices").val(option_all);
-			$("#id_interestAreas").empty();
-		});
+	<script type="text/javascript">
+		var map;
+		var marker_layer = new L.marker([50.5, 30.5]);
 
-    });
-</script>
-
-<script type="text/javascript">
-	var map;
-	var marker_layer = new L.marker([50.5, 30.5]);
-
-	function editMarker(e){
-		map.removeLayer(marker_layer);
-		marker_layer = new L.marker(e.latlng, {draggable:true});
-		marker_layer.on('drag', function (e) {
-		$("#id_latitude").val((e.latlng.lat).toFixed(6));
-		$("#id_longitude").val((e.latlng.lng).toFixed(6));
-		});
-		map.addLayer(marker_layer);
-		$("#id_latitude").val((e.latlng.lat).toFixed(6));
-		$("#id_longitude").val((e.latlng.lng).toFixed(6));
-	}
-
-	function searchedMarker(e){
-		map.removeLayer(marker_layer);
-		marker_layer = new L.marker([e.location.y,e.location.x], {draggable:true});
-		marker_layer.on('drag', function (e) {
+		function editMarker(e){
+			map.removeLayer(marker_layer);
+			marker_layer = new L.marker(e.latlng, {draggable:true});
+			marker_layer.on('drag', function (e) {
+				$("#id_latitude").val((e.latlng.lat).toFixed(6));
+				$("#id_longitude").val((e.latlng.lng).toFixed(6));
+			});
+			map.addLayer(marker_layer);
 			$("#id_latitude").val((e.latlng.lat).toFixed(6));
 			$("#id_longitude").val((e.latlng.lng).toFixed(6));
-		});
-		map.addLayer(marker_layer);
-		$("#id_latitude").val(parseFloat(e.location.y).toFixed(6));
-		$("#id_longitude").val(parseFloat(e.location.x).toFixed(6));
-	}
-
-	function map_init_basic (leafmap) {
-		map = leafmap;
-    	if($("#id_latitude").val() !== '')
-	  		map.setView([parseFloat($("#id_latitude").val()),parseFloat($("#id_longitude").val())], 12)
-		var obj = { latlng: {
-			lat: parseFloat($("#id_latitude").val()),
-			lng: parseFloat($("#id_longitude").val()) }
 		}
-		if($("#id_latitude").val())
-      		editMarker(obj);
-		map.on('click', editMarker);
 
-		var GeoSearchControl = window.GeoSearch.GeoSearchControl;
-		var OpenStreetMapProvider = window.GeoSearch.OpenStreetMapProvider;
-		var provider = new OpenStreetMapProvider({});
+		function searchedMarker(e){
+			map.removeLayer(marker_layer);
+			marker_layer = new L.marker([e.location.y,e.location.x], {draggable:true});
+			marker_layer.on('drag', function (e) {
+				$("#id_latitude").val((e.latlng.lat).toFixed(6));
+				$("#id_longitude").val((e.latlng.lng).toFixed(6));
+			});
+			map.addLayer(marker_layer);
+			$("#id_latitude").val(parseFloat(e.location.y).toFixed(6));
+			$("#id_longitude").val(parseFloat(e.location.x).toFixed(6));
+		}
 
-		//  Define search controls
-		var searchControl = new GeoSearchControl({
-		provider: provider,
-		style: 'bar',
-		showMarker: false,
-		autoClose: true,
-		keepResult: true,
-		//retainZoomLevel: true,
-		});
+		function map_init_basic (leafmap) {
+			map = leafmap;
+			if($("#id_latitude").val() !== '')
+			map.setView([parseFloat($("#id_latitude").val()),parseFloat($("#id_longitude").val())], 12)
+			var obj = { latlng: {
+				lat: parseFloat($("#id_latitude").val()),
+				lng: parseFloat($("#id_longitude").val()) }
+			}
+			if($("#id_latitude").val())
+			editMarker(obj);
+			map.on('click', editMarker);
 
-		map.addControl(searchControl);
-		map.on('geosearch/showlocation', searchedMarker);
-	}
+			var GeoSearchControl = window.GeoSearch.GeoSearchControl;
+			var OpenStreetMapProvider = window.GeoSearch.OpenStreetMapProvider;
+			var provider = new OpenStreetMapProvider({});
 
-</script>
+			//  Define search controls
+			var searchControl = new GeoSearchControl({
+				provider: provider,
+				style: 'bar',
+				showMarker: false,
+				autoClose: true,
+				keepResult: true,
+				//retainZoomLevel: true,
+			});
 
-{{ profile_form.media.js }}
-{% endblock scripts %}
+			map.addControl(searchControl);
+			map.on('geosearch/showlocation', searchedMarker);
+		}
+
+	</script>
+
+	{{ profile_form.media.js }}
+	{% endblock scripts %}

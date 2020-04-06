@@ -16,419 +16,423 @@
 {% block list_of_items %}
 
 <!-- MODAL TO CROP THE IMAGE -->
-<div class="container">
-  <div class="row">
-    <div class="modal fade" id="modalCrop">
-      <div class="modal-dialog mdialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">Crop the photo</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-            </button>
-          </div>
-          <div class="modal-body">
+
+<div class="modal fade" id="modalCrop">
+  <div class="modal-dialog mdialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Crop the photo</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-11">
             <img src="" id="image" style="max-width: 100%;">
           </div>
-          <div class="modal-footer">
-            <div class="btn-group pull-left" role="group">
-              <button type="button" class="btn btn-default js-zoom-in">
-                <span><i class="material-icons" style="font-size: 18px;">zoom_in</i> </span>
-              </button>
-              <button type="button" class="btn btn-default js-zoom-out">
-                <span><i class="material-icons" style="font-size: 18px;">zoom_out</i></span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="btn-group pull-left" role="group">
+          <button type="button" class="btn btn-default js-zoom-in">
+            <span><i class="material-icons" style="font-size: 18px;">zoom_in</i> </span>
+          </button>
+          <button type="button" class="btn btn-default js-zoom-out">
+            <span><i class="material-icons" style="font-size: 18px;">zoom_out</i></span>
+          </button>
+        </div>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary js-crop-and-upload">Crop and upload</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- END MODAL TO CROP -->
+
+
+<!-- Delete modal -->
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Confirm delete</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>You are going to delete this resource, this procedure is irreversible.</p>
+        <p>Do you want to proceed?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <a class="btn btn-red"><span class="fas fa-trash-alt"></span> Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <div class="row d-flex justify-content-center">
+    <div class="col-sm-10 col-12">
+      <div class="card mb-5 mt-5 shadow">
+        <div class="card-title p-5">
+          <div class="row">
+            <div class="col-6">
+              <h2 clas="float-left">Edit resource</h2>
+            </div>
+            <div class="col-6">
+              <button type="sub>mit" class="btn btn-red float-right" data-href="{% url 'deleteResource' resource.id %}"
+                data-toggle="modal" data-target="#confirm-delete" name='deleteResource'>
+                <span class="fas fa-trash-alt"></span> Delete
               </button>
             </div>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary js-crop-and-upload">Crop and upload</button>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- END MODAL TO CROP -->
+        <div class="card-text pl-5 pr-5">
+          <table class="table mb-0">
+            <form action="/editResource/{{resource.id}}" class="edit-resource" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
 
-
-    <!-- Delete modal -->
-    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title" id="myModalLabel">Confirm delete</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-
-          </div>
-          <div class="modal-body">
-            <p>You are going to delete this resource, this procedure is irreversible.</p>
-            <p>Do you want to proceed?</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-danger btn-ok">Delete</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="container mt-5">
-      <div class="row d-flex justify-content-center">
-        <div class="col-sm-10 col-12">
-
-          <div class="card mb-5 mt-5 shadow">
-            <div class="card-title p-5">
-              <div class="row">
+              <div class="form-row">
                 <div class="col-12">
-                  <h2>Edit resource</h2>
-                  <button type="submit" class="btn btn-danger float-right" data-href="{% url 'deleteResource' resource.id %}"
-                  data-toggle="modal" data-target="#confirm-delete" name='deleteResource'>
-                  <span class="fas fa-trash-alt"></span> Delete
-                </button>
+                  <input type="hidden" id="resourceID" name="resourceID" value={{resource.id}}>
+                  {{ form.name|as_crispy_field }}
+                </div>
+                <div class="col-12">
+                  {{ form.url|as_crispy_field }}
+                </div>
               </div>
-            </div>
-          </div>
-          <div class="card-text pl-5 pr-5">
-            <table class="table mb-0">
-              <form action="/editResource/{{resource.id}}" class="edit-resource" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
 
-                <div class="form-row">
-                  <div class="col-12">
-                    <input type="hidden" id="resourceID" name="resourceID" value={{resource.id}}>
-                    {{ form.name|as_crispy_field }}
-                  </div>
-                  <div class="col-12">
-                    {{ form.url|as_crispy_field }}
-                  </div>
+              <div class="form-row">
+                <div class="col-12">
+                  {{ form.abstract|as_crispy_field }}
                 </div>
+                <div class="col-12">
+                  {{ form.category|as_crispy_field }}
+                  {{ form.categorySelected|as_crispy_field }}
+                  <div id="id_sub_categories"></div><br/>
+                  {{ form.audience|as_crispy_field }}
 
-                <div class="form-row">
-                  <div class="col-12">
-                    {{ form.abstract|as_crispy_field }}
-                  </div>
-                  <div class="col-12">
-                    {{ form.category|as_crispy_field }}
-                    {{ form.categorySelected|as_crispy_field }}
-                    <div id="id_sub_categories"></div><br/>
-                    {{ form.audience|as_crispy_field }}
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-12">
+                  {{form.keywords|as_crispy_field }}
+                  {{form.choices |as_crispy_field}}
+                  {{form.choicesSelected|as_crispy_field}}
+                </div>
+                <div class="col-12">
+                  {{ form.resource_DOI|as_crispy_field }}
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-12">
+                  {{ form.authors|as_crispy_field }}
+                  {{form.authorsCollection |as_crispy_field}}
+                  {{form.selectedAuthors|as_crispy_field}}
+                </div>
+                <div class="col-12">
+                  {{ form.author_email|as_crispy_field }}
+                </div>
+              </div>
 
-                  </div>
+              <div class="form-row">
+                <div class="col-12">
+                  {{ form.license|as_crispy_field }}
                 </div>
-                <div class="form-row">
-                  <div class="col-12">
-                    {{form.keywords|as_crispy_field }}
-                    {{form.choices |as_crispy_field}}
-                    {{form.choicesSelected|as_crispy_field}}
-                  </div>
-                  <div class="col-12">
-                    {{ form.resource_DOI|as_crispy_field }}
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="col-12">
-                    {{ form.authors|as_crispy_field }}
-                    {{form.authorsCollection |as_crispy_field}}
-                    {{form.selectedAuthors|as_crispy_field}}
-                  </div>
-                  <div class="col-12">
-                    {{ form.author_email|as_crispy_field }}
-                  </div>
-                </div>
-
-                <div class="form-row">
-                  <div class="col-12">
-                    {{ form.license|as_crispy_field }}
-                  </div>
-                  <div class="col-12">
-                    {% get_language_info_list for LANGUAGES as languages %}
-                    {% if settings.USE_I18N and languages|length > 1 %}
-                    <label for="language" class="control-label  requiredField">
-                      Language<span class="asteriskField">*</span>
-                    </label>
-                    <select name="language" class="form-control">
-                      {% for language in languages|dictsort:"name" %}
-                      {% if language.code in settings.LANGUAGE_CODES %}
-                      <option value="{{ language.code }}" {% if language.code == resource.inLanguage %}selected {% endif %}>
-                        {{ language.name }}
-                      </option>
-                      {% endif %}
-                      {% endfor %}
-                    </select>
+                <div class="col-12">
+                  {% get_language_info_list for LANGUAGES as languages %}
+                  {% if settings.USE_I18N and languages|length > 1 %}
+                  <label for="language" class="control-label  requiredField">
+                    Language<span class="asteriskField">*</span>
+                  </label>
+                  <select name="language" class="form-control">
+                    {% for language in languages|dictsort:"name" %}
+                    {% if language.code in settings.LANGUAGE_CODES %}
+                    <option value="{{ language.code }}" {% if language.code == resource.inLanguage %}selected {% endif %}>
+                      {{ language.name }}
+                    </option>
                     {% endif %}
-                  </div>
+                    {% endfor %}
+                  </select>
+                  {% endif %}
                 </div>
+              </div>
 
-                <div class="form-row">
-                  <div class="col-12">
-                    {{ form.image1|as_crispy_field }}
-                    {{ form.x1|as_crispy_field }}
-                    {{ form.y1|as_crispy_field }}
-                    {{ form.height1|as_crispy_field }}
-                    {{ form.width1|as_crispy_field }}
-                    <a id="imgResult1" href="#"> <img id="imageResult1" class="img-fluid img-zoom" src="{{ resource.image1 }}" alt=""></a>
-                  </div>
-                  <div class="col-12">
-                    {{ form.image2|as_crispy_field }}
-                    {{ form.x2|as_crispy_field }}
-                    {{ form.y2|as_crispy_field }}
-                    {{ form.height2|as_crispy_field }}
-                    {{ form.width2|as_crispy_field }}
-                    <a id="imgResult2" href="#"> <img id="imageResult2" class="img-fluid img-zoom" src="{{ resource.image2 }}" alt=""></a>
-                  </div>
+              <div class="form-row">
+                <div class="col-12">
+                  {{ form.image1|as_crispy_field }}
+                  {{ form.x1|as_crispy_field }}
+                  {{ form.y1|as_crispy_field }}
+                  {{ form.height1|as_crispy_field }}
+                  {{ form.width1|as_crispy_field }}
+                  <a id="imgResult1" href="#"> <img id="imageResult1" class="img-fluid img-zoom" src="{{ resource.image1 }}" alt=""></a>
                 </div>
+                <div class="col-12">
+                  {{ form.image2|as_crispy_field }}
+                  {{ form.x2|as_crispy_field }}
+                  {{ form.y2|as_crispy_field }}
+                  {{ form.height2|as_crispy_field }}
+                  {{ form.width2|as_crispy_field }}
+                  <a id="imgResult2" href="#"> <img id="imageResult2" class="img-fluid img-zoom" src="{{ resource.image2 }}" alt=""></a>
+                </div>
+              </div>
 
-                <div class="form-row">
-                  <div class="col-12">
-                    {{ form.publisher|as_crispy_field }}
-                  </div>
-                  <div class="col-12">
-                    {{ form.year_of_publication|as_crispy_field }}
-                  </div>
+              <div class="form-row">
+                <div class="col-12">
+                  {{ form.publisher|as_crispy_field }}
                 </div>
-                <div class="form-row">
-                  <div class="col-12">
-                    {{ form.theme|as_crispy_field }}
-                  </div>
-                  <div class="col-12">
-                    {% if user.is_staff %}
-                    {{ form.curatedList|as_crispy_field }}
-                    {% endif %}
-                  </div>
+                <div class="col-12">
+                  {{ form.year_of_publication|as_crispy_field }}
                 </div>
-                <button type="submit" class="btn btn-success mb-5"><i class="fas fa-share-square"></i> Save</button>
-              </form>
-            </table>
-          </div>
+              </div>
+              <div class="form-row">
+                <div class="col-12">
+                  {{ form.theme|as_crispy_field }}
+                </div>
+                <div class="col-12">
+                  {% if user.is_staff %}
+                  {{ form.curatedList|as_crispy_field }}
+                  {% endif %}
+                </div>
+              </div>
+              <button type="submit" class="btn btn-green mb-5"><i class="fas fa-share-square"></i> Save</button>
+            </form>
+          </table>
         </div>
       </div>
-      {% endblock list_of_items %}
-      {% block scripts %}
-      <script src="{% static 'site/js/site.js' %}"></script>
-      <script src="{% static 'scripts/cropper.min.js' %}"></script>
-      <script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
-      <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
-      <script src="http://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"></script>
-      <script>
-        $(document).ready(function () {
-          var choices = $("#id_choices").val();
-          var choices = choices.split(",");
+    </div>
+    {% endblock list_of_items %}
+    {% block scripts %}
+    <script src="{% static 'site/js/site.js' %}"></script>
+    <script src="{% static 'scripts/cropper.min.js' %}"></script>
+    <script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        var choices = $("#id_choices").val();
+        var choices = choices.split(",");
 
-          var choicesSelected = $("#id_choicesSelected").val().split(",");
-          for (choice of choices){
-            var found = false;
-            for(sel of choicesSelected){
-              if(sel.trim() == choice.trim()){
-                found = true;
-                $("#id_keywords").append("<option value='" + choice +"' selected> " + choice + " </option>");
-              }
-            }
-            if(!found){
-              $("#id_keywords").append("<option value='" + choice +"'> " + choice + " </option>");
+        var choicesSelected = $("#id_choicesSelected").val().split(",");
+        for (choice of choices){
+          var found = false;
+          for(sel of choicesSelected){
+            if(sel.trim() == choice.trim()){
+              found = true;
+              $("#id_keywords").append("<option value='" + choice +"' selected> " + choice + " </option>");
             }
           }
-          $("#id_keywords").attr('required', true);
-          $("#div_id_keywords label").append('<span class="asteriskField">*</span>');
-          $("#div_id_keywords div").on('keyup', function(){
-            var key = $("#div_id_keywords .selection input").val();
-            if (key.indexOf(',') > -1) {
-              var word =key.slice(0, -1);
-              $("#div_id_keywords .selection input").val("");
-              $("#id_keywords").append("<option value='" + word +"' selected> " + word + " </option>");
-            }
-          });
-
-          var authorsCollection = $("#id_authorsCollection").val();
-          var authorsCollection = authorsCollection.split(",");
-
-          var selectedAuthors = $("#id_selectedAuthors").val().split(",");
-          for (author of authorsCollection){
-            var found = false;
-            for(sel of selectedAuthors){
-              if(sel.trim() == author.trim()){
-                found = true;
-                $("#id_authors").append("<option value='" + author +"' selected> " + author + " </option>");
-              }
-            }
-            if(!found){
-              $("#id_authors").append("<option value='" + author +"'> " + author + " </option>");
-            }
+          if(!found){
+            $("#id_keywords").append("<option value='" + choice +"'> " + choice + " </option>");
           }
-          $("#id_authors").attr('required', true);
-          $("#div_id_authors label").append('<span class="asteriskField">*</span>');
-          $("#div_id_authors div").on('keyup', function(){
-            var key = $("#div_id_authors .selection input").val();
-            if (key.indexOf(',') > -1) {
-              var word =key.slice(0, -1);
-              $("#div_id_authors .selection input").val("");
-              $("#id_authors").append("<option value='" + word +"' selected> " + word + " </option>");
-            }
-          });
-
-
-          $('#contactinfo').on('click', function () {
-            $('#contactinfoform').toggle();
-            $('html,body').animate({ scrollTop: $("#contactinfo").offset().top - 160 }, { duration: "slow" });
-          });
-
-          getSubCategories();
-          $("#id_category").on('change', getSubCategories);
-
-          $('#imgResult').on('click', function () {
-            $('html,body').animate({ scrollTop: $("#imgResult").offset().top - 220 }, { duration: "slow" });
-          });
-
-          $("#div_id_curatedList select").val({{curatedGroups}});
-
-          function validateEmail(email) {
-            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            return re.test(String(email).toLowerCase());
-          }
-
-          $("form").submit(function (e) {
-            var validationFailed = false;
-
-            $.each($("[required]"), function (index, value) {
-              var id = $(value).parent().parent().attr('id');
-              $("#" + id + " .errorMsg").remove();
-              if(!$(value).val() || $(value).val().length < 1){
-                validationFailed = true;
-                $(value).parent().append("<span class='errorMsg'> <b>Required field (*)</b></span>");
-              }
-            });
-            //var email = $("#id_author_email").val();
-
-            if (validationFailed) {
-              e.preventDefault();
-              $('html,body').animate({ scrollTop: $(".edit-resource").offset().top - 160 }, { duration: "slow" });
-              return false;
-            }else{
-              var option_all = $("#id_keywords option:selected").map(function () {
-                return $.trim($(this).text());
-              }).get().join(',');
-              $("#id_choices").val(option_all);
-              $("#id_keywords").empty();
-
-              option_all = $("#id_authors option:selected").map(function () {
-                return $.trim($(this).text());
-              }).get().join(',');
-              $("#id_authorsCollection").val(option_all);
-              $("#id_authors").empty();
-
-              var category = $("#id_category").val();
-              $("#id_categorySelected").val(category);
-              var subcategory = $("#id_subcategory").val();
-              if(subcategory){
-                $("#id_categorySelected").val(subcategory);
-              }
-            }
-          });
-        });
-
-        $('#confirm-delete').on('show.bs.modal', function(e) {
-          $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-        });
-
-        function getSubCategories(){
-          var category = $("#id_category").val();
-          var request = $.ajax(
-          {
-            type: "GET",
-            url: "{% url 'get_sub_category' %}",
-            data: {
-              "category": category
-            },
-            success: function (response) {
-              $("#id_sub_categories").html(response.sub_categories);
-              if($("#id_category").val() != $("#id_categorySelected").val()){
-                $("#id_subcategory").val($("#id_categorySelected").val());
-              }
-
-            }
-          }
-          );
         }
-        $(function () {
-          var imgSelected;
-          /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
-          $("#id_image1").change(function () {
-            imgSelected = 1;
-            $('#imageResult1').attr('src', '');
-            if (this.files && this.files[0]) {
-              var reader = new FileReader();
-              reader.onload = function (e) {
-                $("#image").attr("src", e.target.result);
-                $("#modalCrop").modal("show");
-              }
-              reader.readAsDataURL(this.files[0]);
+        $("#id_keywords").attr('required', true);
+        $("#div_id_keywords label").append('<span class="asteriskField">*</span>');
+        $("#div_id_keywords div").on('keyup', function(){
+          var key = $("#div_id_keywords .selection input").val();
+          if (key.indexOf(',') > -1) {
+            var word =key.slice(0, -1);
+            $("#div_id_keywords .selection input").val("");
+            $("#id_keywords").append("<option value='" + word +"' selected> " + word + " </option>");
+          }
+        });
+
+        var authorsCollection = $("#id_authorsCollection").val();
+        var authorsCollection = authorsCollection.split(",");
+
+        var selectedAuthors = $("#id_selectedAuthors").val().split(",");
+        for (author of authorsCollection){
+          var found = false;
+          for(sel of selectedAuthors){
+            if(sel.trim() == author.trim()){
+              found = true;
+              $("#id_authors").append("<option value='" + author +"' selected> " + author + " </option>");
             }
-          });
-          $("#id_image2").change(function () {
-            imgSelected = 2;
-            $('#imageResult2').attr('src', '');
-            if (this.files && this.files[0]) {
-              var reader = new FileReader();
-              reader.onload = function (e) {
-                $("#image").attr("src", e.target.result);
-                $("#modalCrop").modal("show");
-              }
-              reader.readAsDataURL(this.files[0]);
-            }
-          });
-          $("#imageResult1").click(function () {
-            $("#modalCrop").modal("show");
-          });
-          $("#imageResult2").click(function () {
-            $("#modalCrop").modal("show");
-          });
-          /* SCRIPTS TO HANDLE THE CROPPER BOX */
-          var $image = $("#image");
-          var cropBoxData;
-          var canvasData;
-          $("#modalCrop").on("shown.bs.modal", function () {
-            $image.cropper({
-              viewMode: 0,
-              aspectRatio: imgSelected == 2 ? 11/4 : 3/2,
-              minCropBoxWidth: imgSelected == 2 ? 1100 : 600,
-              minCropBoxHeight: 400,
-              dragMode: 'move',
-              guides: false,
-              center: false,
-              highlight: false,
-              cropBoxResizable: false,
-              toggleDragModeOnDblclick: false,
-              ready: function () {
-                $image.cropper("setCanvasData", canvasData);
-                $image.cropper("setCropBoxData", cropBoxData);
-              }
-            });
-          }).on("hidden.bs.modal", function () {
-            cropBoxData = $image.cropper("getCropBoxData");
-            canvasData = $image.cropper("getCanvasData");
-            $image.cropper("destroy");
-          });
-
-          $(".js-zoom-in").click(function () {
-            $image.cropper("zoom", 0.1);
-          });
-
-          $(".js-zoom-out").click(function () {
-            $image.cropper("zoom", -0.1);
-          });
-
-          /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
-          $(".js-crop-and-upload").click(function () {
-            var cropData = $image.cropper("getData");
-            $("#id_x" + imgSelected).val(cropData["x"]);
-            $("#id_y" + imgSelected).val(cropData["y"]);
-            $("#id_height" + imgSelected).val(cropData["height"]);
-            $("#id_width" + imgSelected).val(cropData["width"]);
-            $("#modalCrop").modal("hide");
-            $('#imageResult' + imgSelected).attr('src', $image.cropper('getCroppedCanvas',
-            {width: imgSelected == 2 ? 1100 : 600, height: 400}).toDataURL());
-          });
-
+          }
+          if(!found){
+            $("#id_authors").append("<option value='" + author +"'> " + author + " </option>");
+          }
+        }
+        $("#id_authors").attr('required', true);
+        $("#div_id_authors label").append('<span class="asteriskField">*</span>');
+        $("#div_id_authors div").on('keyup', function(){
+          var key = $("#div_id_authors .selection input").val();
+          if (key.indexOf(',') > -1) {
+            var word =key.slice(0, -1);
+            $("#div_id_authors .selection input").val("");
+            $("#id_authors").append("<option value='" + word +"' selected> " + word + " </option>");
+          }
         });
 
 
-      </script>
-      {{ form.media.js }}
-      {% endblock scripts %}
+        $('#contactinfo').on('click', function () {
+          $('#contactinfoform').toggle();
+          $('html,body').animate({ scrollTop: $("#contactinfo").offset().top - 160 }, { duration: "slow" });
+        });
+
+        getSubCategories();
+        $("#id_category").on('change', getSubCategories);
+
+        $('#imgResult').on('click', function () {
+          $('html,body').animate({ scrollTop: $("#imgResult").offset().top - 220 }, { duration: "slow" });
+        });
+
+        $("#div_id_curatedList select").val({{curatedGroups}});
+
+        function validateEmail(email) {
+          var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return re.test(String(email).toLowerCase());
+        }
+
+        $("form").submit(function (e) {
+          var validationFailed = false;
+
+          $.each($("[required]"), function (index, value) {
+            var id = $(value).parent().parent().attr('id');
+            $("#" + id + " .errorMsg").remove();
+            if(!$(value).val() || $(value).val().length < 1){
+              validationFailed = true;
+              $(value).parent().append("<span class='errorMsg'> <b>Required field (*)</b></span>");
+            }
+          });
+          //var email = $("#id_author_email").val();
+
+          if (validationFailed) {
+            e.preventDefault();
+            $('html,body').animate({ scrollTop: $(".edit-resource").offset().top - 160 }, { duration: "slow" });
+            return false;
+          }else{
+            var option_all = $("#id_keywords option:selected").map(function () {
+              return $.trim($(this).text());
+            }).get().join(',');
+            $("#id_choices").val(option_all);
+            $("#id_keywords").empty();
+
+            option_all = $("#id_authors option:selected").map(function () {
+              return $.trim($(this).text());
+            }).get().join(',');
+            $("#id_authorsCollection").val(option_all);
+            $("#id_authors").empty();
+
+            var category = $("#id_category").val();
+            $("#id_categorySelected").val(category);
+            var subcategory = $("#id_subcategory").val();
+            if(subcategory){
+              $("#id_categorySelected").val(subcategory);
+            }
+          }
+        });
+      });
+
+      $('#confirm-delete').on('show.bs.modal', function(e) {
+        $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+      });
+
+      function getSubCategories(){
+        var category = $("#id_category").val();
+        var request = $.ajax(
+        {
+          type: "GET",
+          url: "{% url 'get_sub_category' %}",
+          data: {
+            "category": category
+          },
+          success: function (response) {
+            $("#id_sub_categories").html(response.sub_categories);
+            if($("#id_category").val() != $("#id_categorySelected").val()){
+              $("#id_subcategory").val($("#id_categorySelected").val());
+            }
+
+          }
+        }
+        );
+      }
+      $(function () {
+        var imgSelected;
+        /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
+        $("#id_image1").change(function () {
+          imgSelected = 1;
+          $('#imageResult1').attr('src', '');
+          if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+              $("#image").attr("src", e.target.result);
+              $("#modalCrop").modal("show");
+            }
+            reader.readAsDataURL(this.files[0]);
+          }
+        });
+        $("#id_image2").change(function () {
+          imgSelected = 2;
+          $('#imageResult2').attr('src', '');
+          if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+              $("#image").attr("src", e.target.result);
+              $("#modalCrop").modal("show");
+            }
+            reader.readAsDataURL(this.files[0]);
+          }
+        });
+        $("#imageResult1").click(function () {
+          $("#modalCrop").modal("show");
+        });
+        $("#imageResult2").click(function () {
+          $("#modalCrop").modal("show");
+        });
+        /* SCRIPTS TO HANDLE THE CROPPER BOX */
+        var $image = $("#image");
+        var cropBoxData;
+        var canvasData;
+        $("#modalCrop").on("shown.bs.modal", function () {
+          $image.cropper({
+            viewMode: 0,
+            aspectRatio: imgSelected == 2 ? 11/4 : 3/2,
+            minCropBoxWidth: imgSelected == 2 ? 1100 : 600,
+            minCropBoxHeight: 400,
+            dragMode: 'move',
+            guides: false,
+            center: false,
+            highlight: false,
+            cropBoxResizable: false,
+            toggleDragModeOnDblclick: false,
+            ready: function () {
+              $image.cropper("setCanvasData", canvasData);
+              $image.cropper("setCropBoxData", cropBoxData);
+            }
+          });
+        }).on("hidden.bs.modal", function () {
+          cropBoxData = $image.cropper("getCropBoxData");
+          canvasData = $image.cropper("getCanvasData");
+          $image.cropper("destroy");
+        });
+
+        $(".js-zoom-in").click(function () {
+          $image.cropper("zoom", 0.1);
+        });
+
+        $(".js-zoom-out").click(function () {
+          $image.cropper("zoom", -0.1);
+        });
+
+        /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
+        $(".js-crop-and-upload").click(function () {
+          var cropData = $image.cropper("getData");
+          $("#id_x" + imgSelected).val(cropData["x"]);
+          $("#id_y" + imgSelected).val(cropData["y"]);
+          $("#id_height" + imgSelected).val(cropData["height"]);
+          $("#id_width" + imgSelected).val(cropData["width"]);
+          $("#modalCrop").modal("hide");
+          $('#imageResult' + imgSelected).attr('src', $image.cropper('getCroppedCanvas',
+          {width: imgSelected == 2 ? 1100 : 600, height: 400}).toDataURL());
+        });
+
+      });
+
+
+    </script>
+    {{ form.media.js }}
+    {% endblock scripts %}

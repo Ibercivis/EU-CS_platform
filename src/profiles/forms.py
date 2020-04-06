@@ -36,7 +36,7 @@ class ProfileForm(forms.ModelForm):
             Field("choices"),
             Field("latitude"),
             Field("longitude"),
-            Submit("update", "Update", css_class="btn-success"),
+            Submit("update", "Update", css_class="btn-green"),
         )
 
     CHOICES = ()
@@ -48,11 +48,11 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = models.Profile
-        fields = ["picture", "title", "bio", "institution", "interestAreas", "choices", 
+        fields = ["picture", "title", "bio", "institution", "interestAreas", "choices",
                 "latitude", "longitude"]
-        
 
-    def save(self, args):        
+
+    def save(self, args):
         pForm = super(ProfileForm, self).save(commit=False)
         pForm.user = args.user
         pForm.save()
@@ -61,7 +61,7 @@ class ProfileForm(forms.ModelForm):
         choices = choices.split(',')
         for choice in choices:
             if(choice != ''):
-                area = models.InterestArea.objects.get_or_create(interestArea=choice)                   
+                area = models.InterestArea.objects.get_or_create(interestArea=choice)
         areas = models.InterestArea.objects.all()
         areas = areas.filter(interestArea__in = choices)
         pForm.interestAreas.set(areas)

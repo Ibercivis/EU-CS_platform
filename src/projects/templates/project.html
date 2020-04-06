@@ -32,7 +32,7 @@
             <div class="col-lg-6 col-12">
               {% if user.is_authenticated %}
               {% if project.creator == user or user.is_staff or user.id in cooperators %}
-              <a class="btn btn-info float-left mt-4" href="{% url 'editProject' project.id %}"><i class="fas fa-edit"></i> Edit </a>
+              <a class="btn btn-red float-left mt-4" href="{% url 'editProject' project.id %}"><i class="fas fa-edit"></i> Edit </a>
               {% endif %}
               {% if project.creator == user or user.is_staff %}
             </div>
