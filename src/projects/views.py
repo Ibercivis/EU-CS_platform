@@ -184,6 +184,10 @@ def editProject(request, pk):
     if user != project.creator and not user.is_staff and not user.id in cooperators:
         return redirect('../projects', {})
 
+    users = getOtherUsers(project.creator)
+    cooperators = getCooperatorsEmail(pk)
+    permissionForm = ProjectPermissionForm(initial={'usersCollection':users, 'selectedUsers': cooperators})
+
     start_datetime = None
     end_datetime = None
 
@@ -247,7 +251,8 @@ def editProject(request, pk):
             return redirect('/project/'+ str(pk))
         else:
             print(form.errors)
-    return render(request, 'editProject.html', {'form': form, 'project':project, 'user':user, 'cField_formset':cField_formset})
+    return render(request, 'editProject.html', {'form': form, 'project':project, 'user':user, 'cField_formset':cField_formset, 
+                'permissionForm': permissionForm})
 
 
 def deleteProject(request, pk):

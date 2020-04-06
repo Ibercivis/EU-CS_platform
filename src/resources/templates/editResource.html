@@ -88,6 +88,23 @@
               </button>
             </div>
           </div>
+
+          <div class="row">
+            <div class="col-lg-6"></div>
+            <div class="col-lg-6">
+              {% if user.is_authenticated %}
+              {% if resource.creator == user or user.is_staff %}
+              <permissionForm>
+                {% csrf_token %}
+                {{ permissionForm.usersAllowed | as_crispy_field }}
+                {{ permissionForm.selectedUsers | as_crispy_field }}
+                {{ permissionForm.usersCollection | as_crispy_field }}
+              </permissionForm>
+              {% endif %}
+              {% endif %}
+            </div>
+          </div>
+
         </div>
 
         <div class="card-text pl-5 pr-5">
@@ -212,6 +229,26 @@
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"></script>
     <script>
+  $(document).ready(function () {
+    var users = $("#id_usersCollection").val();
+    if (users) {
+      var users = users.split(",");
+      var selectedUsers = $("#id_selectedUsers").val().split(",");
+      for (user of users) {
+        var found = false;
+        for (sel of selectedUsers) {
+          if (sel.trim() == user.trim()) {
+            found = true;
+            $("#id_usersAllowed").append("<option value='" + user + "' selected> " + user + " </option>");
+          }
+        }
+        if (!found) {
+          $("#id_usersAllowed").append("<option value='" + user + "'> " + user + " </option>");
+        }
+      }
+    }
+  });
+
       $(document).ready(function () {
         var choices = $("#id_choices").val();
         var choices = choices.split(",");
@@ -432,7 +469,27 @@
 
       });
 
-
+        $(function () {
+          $('#id_usersAllowed').on('change', function () {
+            users = $("#id_usersAllowed option:selected").map(function () {
+              return $.trim($(this).text());
+            }).get().join(',');
+            var idResource = {{ resource.id }};
+            var request = $.ajax(
+              {
+                type: "POST",
+                url: "{% url 'allowUserResource' %}",
+                data: {
+                  "resource_id": idResource,
+                  "users": users,
+                  csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function (response) {
+                }
+              }
+            );
+          });
+      });
     </script>
     {{ form.media.js }}
     {% endblock scripts %}
