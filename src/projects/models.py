@@ -66,6 +66,7 @@ class Project(models.Model):
     host = models.CharField(max_length=200)
     #Supplementary information for Citizen Science
     howToParticipate = models.CharField(max_length=2000)
+    doingAtHome      = models.BooleanField(null=True, default=False)
     equipment = models.CharField(max_length=2000)
     #Funding
     fundingBody = models.ForeignKey(FundingBody, on_delete=models.CASCADE,null=True, blank=True)

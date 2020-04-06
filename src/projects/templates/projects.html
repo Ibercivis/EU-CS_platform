@@ -123,6 +123,12 @@ src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bo
 		});
 	});
 	$(function () {
+		$('#doingAtHome').on('change', function () {
+			var topic = $(this).val();
+			$('#searchProjects').submit();
+		});
+	});
+	$(function () {
 		$('#orderby').on('change', function () {
 			var orderby = $(this).val();
 			$('#searchProjects').submit();

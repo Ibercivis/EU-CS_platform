@@ -128,6 +128,7 @@
               <h4>Participation</h4>
             </div>
             <div class="col-12 col-xl-8 mt-5 pt-2">
+              {% if project.doingAtHome %} <p><b>This project can be done at home</b></p> {% endif %}
               <p><b>How to participate: </b>{{project.howToParticipate | safe}}</p>
               <p><b>Needed equipment:</b>{{project.equipment |safe}}</p>
             </div>
@@ -176,10 +177,10 @@
                 <span data-value="4" data-text="Very Good"></span>
                 <span data-value="5" data-text="Excellent"></span>
               </span>
-                {{review.submit_date}} - {{review.user.name}}
-                <p>{{review.comment}}</p>
+              {{review.submit_date}} - {{review.user.name}}
+              <p>{{review.comment}}</p>
               {% endfor %}
-                {% if user.is_authenticated %}
+              {% if user.is_authenticated %}
               <a class="btn btn-outline-secondary" href="/project_review/{{project.id}}">Review</a>
               {% endif %}
             </div>
