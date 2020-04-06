@@ -55,7 +55,6 @@
       </div>
     </div>
 
-
     <!-- SAVE MESSAGE MODAL -->
     <div class="modal fade" id="savedModal">
       <div class="modal-dialog mdialog">
@@ -239,6 +238,9 @@
                     <div class="form-row">
                       <div class="col-12">
                         {{ form.how_to_participate|as_crispy_field }}
+                      </div>
+                      <div class="col-12">
+                        {{ form.doingAtHome|as_crispy_field }}
                       </div>
                       <div class="col-12">
                         {{ form.equipment|as_crispy_field }}

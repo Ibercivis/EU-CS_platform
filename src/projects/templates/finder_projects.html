@@ -68,6 +68,11 @@
 									</option>
 									{% endfor %}
 								</select>
+								<select id="doingAtHome" name="doingAtHome" class="custom-select form-control">
+									<option value="">Doable at home<option>
+									<option value=1 {% if filters.doingAtHome == 1 %} selected {% endif %}>Yes</option>
+									<option value=0 {% if filters.doingAtHome == 0 %} selected {% endif %}>No</option>
+								</select>
 								<select id="featuredCheck" name="featuredCheck" class="custom-select form-control">
 									<option value="On" {% if filters.featuredCheck == "On" %} selected {% endif %}>Moderated</option>
 									<option value="Off" {% if filters.featuredCheck == "Off" %} selected {% endif %}>Not yet moderated</option>
