@@ -178,6 +178,10 @@ def editResource(request, pk):
     if user != resource.creator and not user.is_staff and not user.id in cooperators:
         return redirect('../resources', {})
 
+    users = getOtherUsers(resource.creator)
+    cooperators = getCooperatorsEmail(pk)
+    permissionForm = ResourcePermissionForm(initial={'usersCollection':users, 'selectedUsers': cooperators})
+
     keywordsList = list(resource.keywords.all().values_list('keyword', flat=True))
     keywordsList = ", ".join(keywordsList)
     choices = list(Keyword.objects.all().values_list('keyword',flat=True))
@@ -212,7 +216,7 @@ def editResource(request, pk):
             return redirect('/resource/'+ str(pk))
 
     return render(request, 'editResource.html', {'form': form, 'resource': resource, 'curatedGroups': curatedGroups,
-     'user': user, 'settings': settings })
+     'user': user, 'settings': settings, 'permissionForm': permissionForm })
 
 def deleteResource(request, pk):
     obj = get_object_or_404(Resource, id=pk)
