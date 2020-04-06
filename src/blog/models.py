@@ -6,6 +6,11 @@ STATUS = (
     (0,"Draft"),
     (1,"Publish")
 )
+STICKY = (
+    (0,"No"),
+    (1,"Yes")
+)
+
 
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
@@ -16,6 +21,7 @@ class Post(models.Model):
     excerpt = models.TextField(max_length=1000,default="")
     image = models.ImageField(max_length=200,default='default_blog.png')
     created_on = models.DateTimeField(auto_now_add=True)
+    sticky = models.IntegerField(choices=STICKY, default=0)
     status = models.IntegerField(choices=STATUS, default=0)
 
     class Meta:
