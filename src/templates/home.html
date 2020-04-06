@@ -39,10 +39,10 @@
 		<form id="finder" action="/resources" >
 			<div class="form-row">
 				<div class="input-group">
-					<input type="text" id="keywords" name="keywords": autocomplete="off" class="basicAutoComplete form-control form-control-lg"
-					placeholder="Search for citizen science resources, projects, tools, training, and more...." data-url="home_autocomplete/"/>
+					<input type="text" id="keywords" name="keywords" autocomplete="off" class="basicAutoComplete form-control form-control-lg" 
+					placeholder="Search for citizen science resources, projects, tools, training, and more...." data-url="home_autocomplete/">
 					<button  id="resources" class="btn btn-red" style="margin-left: 5px;" onClick='$("#finder").attr("action", "resources").submit()'>RESOURCES</button>
-					<button  id="resources" class="btn btn-red" style="margin-left: 5px;" onClick='$("#finder").attr("action", "projects").submit()'>PROJECTS</button>
+					<button  id="projects" class="btn btn-red" style="margin-left: 5px;" onClick='$("#finder").attr("action", "projects").submit()'>PROJECTS</button>
 				</div>
 			</div>
 		</form>
@@ -161,40 +161,42 @@
 					<div class="card-columns">
 						{% for post in entries %}
 						<div class="card shadow">
-							<a  href="{% url 'post_detail' post.slug  %}">
+							<a href="{% url 'post_detail' post.slug  %}">
 								<img class="card-img-top" src="/media/{{post.image}}" alt="Card image">
 							</a>
 							<div class="card-body">
-								<a href=""><h5 class="card-title">{{ post.title }}</h5></a>
-								<p class="card-text text-muted h6">{{ post.author.name }} <br/> {{ post.created_on}} </p>
-								<p class="card-text">{{post.excerpt | safe }}<br/><br/>
-									<a href="{% url 'post_detail' post.slug  %}" >Read More >></a></p>
-								</div>
+								<a href="">
+									<h5 class="card-title">{{ post.title }}</h5>
+								</a>
+								<p class="card-text text-muted h6">{{ post.author.name }} <br /> {{ post.created_on}}
+								</p>
+								<p class="card-text">{{post.excerpt | safe }}<br /><br />
+									<a href="{% url 'post_detail' post.slug  %}">Read More >></a></p>
 							</div>
-							{% endfor %}
 						</div>
+						{% endfor %}
 					</div>
-					<div class="col-12 text-center mt-4 mb-5">
-						<a type="button" class="btn  btn-red btn-lg shadow-sm" href="/blog">READ MORE POSTS</a>
-					</div>
-					<div class="col-12 text-center mt-4 mb-5">
-					</div>
+				</div>
+				<div class="col-12 text-center mt-4 mb-5">
+					<a type="button" class="btn  btn-red btn-lg shadow-sm" href="/blog">READ MORE POSTS</a>
+				</div>
+				<div class="col-12 text-center mt-4 mb-5">
 				</div>
 			</div>
 		</div>
-		{% endblock splash %}
-		{% block script %}
-		<script type="text/javascript" src="{% static 'site/js/jquery.min.js' %}"></script>
-		<script type="text/javascript" src="{% static 'site/js/bootstrap.min.js' %}"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js"
-		integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="anonymous"></script>
-		<script
-		src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
-		<script>
-			$('.basicAutoComplete').autoComplete(
-			{ minLength: 3 }
-			);
-		</script>
-
-		{{ block.super }}
-		{% endblock script %}
+	</div>
+</div>
+{% endblock splash %}
+{% block scripts %}
+<script type="text/javascript" src="{% static 'site/js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'site/js/bootstrap.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js"
+integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="anonymous"></script>
+<script
+src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
+<script>
+	$('.basicAutoComplete').autoComplete(
+		{ minLength: 3 }
+	);
+</script>
+{% endblock scripts %}
