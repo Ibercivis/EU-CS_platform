@@ -8,7 +8,6 @@
 {% leaflet_js %}
 {% leaflet_css %}
 {% endblock %}
-{% block title %}{% endblock %}
 {% block navbar-left %}
 {% include "_navbar.html"  %}
 {% endblock %}
@@ -39,33 +38,15 @@
 		<form id="finder" action="/resources" >
 			<div class="form-row">
 				<div class="input-group">
-					<input type="text" id="keywords" name="keywords" autocomplete="off" class="basicAutoComplete form-control form-control-lg"
+					<input type="text" id="keywords" name="keywords" autocomplete="off" class="basicAutoComplete form-control form-control-lg" 
 					placeholder="Search for citizen science resources, projects, tools, training, and more...." data-url="home_autocomplete/">
 					<button  id="resources" class="btn btn-red" style="margin-left: 5px;" onClick='$("#finder").attr("action", "resources").submit()'>RESOURCES</button>
 					<button  id="projects" class="btn btn-red" style="margin-left: 5px;" onClick='$("#finder").attr("action", "projects").submit()'>PROJECTS</button>
 				</div>
 			</div>
 		</form>
-		<!--h4 class="mt-4 white">Join the community to share your favourite citizen science resources, profile your own citizen science projects, and more. </h4-->
+			<!--h4 class="mt-4 white">Join the community to share your favourite citizen science resources, profile your own citizen science projects, and more. </h4-->
 	</div>
-</div>
-<div class="container-fluid whitebackground">
-	<div class="row">
-		<div class="container">
-			<div class="row">
-				<div class="col-12 mb-3 mt-5">
-					<h5 class="text-dark">We hope that you and your loved ones are healthy and safe in these challenging times.
-						 While many of us are under coronavirus lockdown, there is more than ever a strong need for high quality
-						 online resources and activities that can be used or done from home. We have therefore tagged the citizen
-						 science projects that can be joined from home</h5>
-				</div>
-				<div class="col-12 text-center mt-5 mb-5">
-					<a type="button" class="btn btn-red shadow-sm btn-lg" href="/projects?doingAtHome=1">DOABLE FROM HOME</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<hr/>
 </div>
 <div class="container-fluid whitebackground">
 	<div class="row">
@@ -73,7 +54,6 @@
 			<div class="row">
 				<div class="col-12 mb-3 mt-5">
 					<h2 class="dark">Search for citizen science resources by category</h2>
-
 				</div>
 				<div class="col-lg-6 col-12 mb-4">
 					<div class="card h-100 shadow">
@@ -99,7 +79,7 @@
 				<div class="col-lg-6 col-12 mb-4">
 					<div class="card h-100 shadow">
 						<a class="card-img-wrap overlay-blue" href="/resources?category=3">
-							<img class="card-img-top img-fluid img-zoom lazyload img-filter" src="{% static 'site/img/trainingb.webp' %}" />
+							<img class="card-img-top img-fluid img-zoom lazyload img-filter" src="{% static 'site/img/training.webp' %}" />
 						</a>
 						<div class="upper">
 							<a class="badge frontpage" href="/resources?category=3">TRAINING RESOURCES</a>
@@ -109,7 +89,7 @@
 				<div class="col-lg-6 col-12 mb-4">
 					<div class="card h-100 shadow">
 						<a class="card-img-wrap overlay-blue" href="/resources?category=4">
-							<img class="card-img-top img-fluid img-zoom lazyload img-filter" src="{% static 'site/img/materials.webp' %}" />
+							<img class="card-img-top img-fluid img-zoom lazyload img-filter" src="{% static 'site/img/tools.webp' %}" />
 						</a>
 						<div class="upper">
 							<a class="badge frontpage" href="/resources?category=4">OTHER MATERIALS</a>
@@ -144,7 +124,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12 mt-5 mb-3">
-				<h2>Search for citizen science projects by location</h2>
+				<h2>SEARCH FOR CITIZEN SCIENCE PROJECTS BY LOCATION</h2>
 			</div>
 			<div class="col-12">
 				{% leaflet_map "specialbigmap" callback="window.map_init_basic" %}
@@ -191,31 +171,31 @@
 								</p>
 								<p class="card-text">{{post.excerpt | safe }}<br /><br />
 									<a href="{% url 'post_detail' post.slug  %}">Read More >></a></p>
-								</div>
 							</div>
-							{% endfor %}
 						</div>
+						{% endfor %}
 					</div>
-					<div class="col-12 text-center mt-4 mb-5">
-						<a type="button" class="btn  btn-red btn-lg shadow-sm" href="/blog">READ MORE POSTS</a>
-					</div>
-					<div class="col-12 text-center mt-4 mb-5">
-					</div>
+				</div>
+				<div class="col-12 text-center mt-4 mb-5">
+					<a type="button" class="btn  btn-red btn-lg shadow-sm" href="/blog">READ MORE POSTS</a>
+				</div>
+				<div class="col-12 text-center mt-4 mb-5">
 				</div>
 			</div>
 		</div>
 	</div>
-	{% endblock splash %}
-	{% block scripts %}
-	<script type="text/javascript" src="{% static 'site/js/jquery.min.js' %}"></script>
-	<script type="text/javascript" src="{% static 'site/js/bootstrap.min.js' %}"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js"
-	integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="anonymous"></script>
-	<script
-	src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
-	<script>
-		$('.basicAutoComplete').autoComplete(
+</div>
+{% endblock splash %}
+{% block scripts %}
+<script type="text/javascript" src="{% static 'site/js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'site/js/bootstrap.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js"
+integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="anonymous"></script>
+<script
+src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
+<script>
+	$('.basicAutoComplete').autoComplete(
 		{ minLength: 3 }
-		);
-	</script>
-	{% endblock scripts %}
+	);
+</script>
+{% endblock scripts %}
