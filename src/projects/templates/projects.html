@@ -21,9 +21,11 @@
 {% endblock %}
 {% block splash %}
 <div class="jumbotron jumbotron-fluid jumbotron-projects mb-0">
-	<div class="container">
-		<h1 class="display-5 pb-0"><br>Projects</h1>
-		<p class="lead text-light">Browse and search for citizen science projects, or add your own</p>
+	<div class="container-fluid">
+		<div class="container">
+			<h1 class="display-4 pb-0 pt-0 text-white"><br>Projects</h1>
+			<p class="lead text-light">Browse and search for citizen science projects, or add your own</p>
+		</div>
 	</div>
 </div>
 {% endblock splash %}
@@ -37,8 +39,8 @@
 {% include "modal_projects.html" %}
 <div class="container">
 	<div class="row">
-	{% include "projects_cards.html" %}
-	{% endblock list_of_items %}
+		{% include "projects_cards.html" %}
+		{% endblock list_of_items %}
 
 	</div>
 </div>
