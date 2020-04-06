@@ -27,7 +27,7 @@
             <div class="col-lg-6 col-12">
               {% if user.is_authenticated %}
               {% if resource.creator == user or user.is_staff or user.id in cooperators %}
-              <a class="btn btn-danger mt-4" href="{% url 'editResource' resource.id %}"><i class="fas fa-edit"></i> Edit
+              <a class="btn btn-red mt-4" href="{% url 'editResource' resource.id %}"><i class="fas fa-edit"></i> Edit
               </a>
               {% endif %}
               {% endif %}

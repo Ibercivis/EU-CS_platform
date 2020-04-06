@@ -14,288 +14,284 @@
 {% block title %}{{ block.super }} :: Edit project{% endblock %}
 
 {% block navbar-left %}
-{% include "_navbar.html" with active_link="" %}
+{% include "_navbar.html" with active_link="projects" %}
 {% endblock %}
 
 
 {% block list_of_items %}
 
 <!-- MODAL TO CROP THE IMAGE -->
-<div class="container">
-  <div class="row">
-    <div class="modal fade" id="modalCrop">
-      <div class="modal-dialog mdialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">Crop the photo</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+
+<div class="modal fade" id="modalCrop">
+  <div class="modal-dialog mdialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Crop the photo</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-11">
+            <img src="" id="image" class="img-fluid img-zoom">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="btn-group pull-left" role="group">
+          <button type="button" class="btn btn-default js-zoom-in">
+            <span><i class="material-icons" style="font-size: 18px;">zoom_in</i> </span>
+          </button>
+          <button type="button" class="btn btn-default js-zoom-out">
+            <span><i class="material-icons" style="font-size: 18px;">zoom_out</i></span>
+          </button>
+        </div>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary js-crop-and-upload">Crop and upload</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- END MODAL TO CROP -->
+
+<!-- Delete modal -->
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Confirm delete</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+      </div>
+      <div class="modal-body">
+        <p>You are going to delete this project, this procedure is irreversible.</p>
+        <p>Do you want to proceed?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <a class="btn btn-red"><i class="fas fa-trash-alt"></i> Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container mt-5">
+  <div class="row  d-flex justify-content-center">
+    <div class="col-sm-10 col-12">
+      <div class="card mt-5 mb-5 shadow">
+        <div class="card-title p-5">
+          <div class="row">
+            <div clas="col-6">
+              <h2 class="float-left">Edit project</h2>
+            </div>
+            <div class="col-6">
+              <button type="submit" class="btn btn-red float-right" data-href="{% url 'deleteProject' project.id %}"
+              data-toggle="modal" data-target="#confirm-delete" name='deleteProject'><i class="fas fa-trash-alt"></i> Delete
             </button>
           </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-11">
-                <img src="" id="image" class="img-fluid img-zoom">
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <div class="btn-group pull-left" role="group">
-              <button type="button" class="btn btn-default js-zoom-in">
-                <span><i class="material-icons" style="font-size: 18px;">zoom_in</i> </span>
-              </button>
-              <button type="button" class="btn btn-default js-zoom-out">
-                <span><i class="material-icons" style="font-size: 18px;">zoom_out</i></span>
-              </button>
-            </div>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary js-crop-and-upload">Crop and upload</button>
-          </div>
         </div>
+
       </div>
-    </div>
-
-    <!-- END MODAL TO CROP -->
-
-    <!-- Delete modal -->
-    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title" id="myModalLabel">Confirm delete</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-
-          </div>
-          <div class="modal-body">
-            <p>You are going to delete this project, this procedure is irreversible.</p>
-            <p>Do you want to proceed?</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-danger btn-ok">Delete</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="container mt-5">
-      <div class="row  justify-content-center">
-        <div class="col-sm-10 col-12">
-          <div class="card mt-5 mb-5 shadow">
-            <div class="card-title p-5">
-              <div class="row">
-                <div clas="col-6">
-                  <h2 class="float-left">Edit project</h2>
-                </div>
-                <div class="col-6">
-                  <button type="submit" class="btn btn-danger float-right" data-href="{% url 'deleteProject' project.id %}"
-                  data-toggle="modal" data-target="#confirm-delete" name='deleteProject'><i class="fas fa-trash-alt"></i> Delete
-                </button>
+      <div class="card-text pl-5 pr-5">
+        <table class="table mb-0">
+          <form action="/editProject/{{project.id}}" class="edit-project" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div>
+              <h4>Project info</h4>
+            </div>
+            <div class="form-row">
+              <div class="col-12 ">
+                <input type="hidden" id="projectID" name="projectID" value={{project.id}}>
+                {{ form.project_name|as_crispy_field }}
+              </div>
+              <div class="col-12">
+                {{form.keywords|as_crispy_field }}
+                {{form.choices |as_crispy_field}}
+                {{form.choicesSelected|as_crispy_field}}
               </div>
             </div>
-          </div>
-        <div class="card-text p-5">
-          <table class="table mb-0">
-            <form action="/editProject/{{project.id}}" class="edit-project" method="post" enctype="multipart/form-data">
-              {% csrf_token %}
-              <div>
-                <h4>Project info</h4>
+
+            <div class="form-row">
+              <div class="col-12">
+                {{ form.description|as_crispy_field }}
               </div>
+              <div class="col-12">
+                {{ form.aim|as_crispy_field }}
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col-12">
+                {{ form.topic|as_crispy_field }}
+              </div>
+              <div class="col-12">
+                {{ form.status|as_crispy_field }}
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col-sm-6 col-12">
+                {{ form.start_date|as_crispy_field }}
+              </div>
+              <div class="col-sm-6 col-12">
+                {{ form.end_date|as_crispy_field }}
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col-12">
+                {{ form.url|as_crispy_field }}
+              </div>
+            </div>
+            <hr />
+            <h4>Contact details</h4>
+            <div id="contactinfoform">
               <div class="form-row">
-                <div class="col-12 ">
-                  <input type="hidden" id="projectID" name="projectID" value={{project.id}}>
-                  {{ form.project_name|as_crispy_field }}
+                <div class="col-12">
+                  {{ form.host|as_crispy_field }}
                 </div>
                 <div class="col-12">
-                  {{form.keywords|as_crispy_field }}
-                  {{form.choices |as_crispy_field}}
-                  {{form.choicesSelected|as_crispy_field}}
+                  {{ form.contact_person|as_crispy_field }}
+                </div>
+                <div class="col-12">
+                  {{ form.contact_person_email|as_crispy_field }}
                 </div>
               </div>
 
-              <div class="form-row">
-                <div class="col-12">
-                  {{ form.description|as_crispy_field }}
-                </div>
-                <div class="col-12">
-                  {{ form.aim|as_crispy_field }}
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="col-12">
-                  {{ form.topic|as_crispy_field }}
-                </div>
-                <div class="col-12">
-                  {{ form.status|as_crispy_field }}
-                </div>
-              </div>
-
+            </div>
+            <hr />
+            <h4>Project profile images</h4>
+            <div id="imagesform">
               <div class="form-row">
                 <div class="col-sm-6 col-12">
-                  {{ form.start_date|as_crispy_field }}
+                  {{ form.image1|as_crispy_field }}
+                  {{ form.x1|as_crispy_field }}
+                  {{ form.y1|as_crispy_field }}
+                  {{ form.height1|as_crispy_field }}
+                  {{ form.width1|as_crispy_field }}
+                  <a id="imgResult1" href="#"> <img class="img-fluid img-zoom" id="imageResult1" src="{{ project.image1 }}" alt="Image not upload"></a>
                 </div>
                 <div class="col-sm-6 col-12">
-                  {{ form.end_date|as_crispy_field }}
+                  {{ form.image_credit1|as_crispy_field }}
                 </div>
               </div>
+              <div class="form-row">
+                <div class="col-sm-6 col-12 mt-3">
+                  {{ form.image2|as_crispy_field }}
+                  {{ form.x2|as_crispy_field }}
+                  {{ form.y2|as_crispy_field }}
+                  {{ form.height2|as_crispy_field }}
+                  {{ form.width2|as_crispy_field }}
+                  <a id="imgResult2" href="#"> <img class="img-fluid img-zoom" id="imageResult2" src="{{ project.image2 }}" alt="Image not upload"></a>
+                </div>
+                <div class="col-sm-6 col-12">
+                  {{ form.image_credit2|as_crispy_field }}
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-sm-6 col-12 mt-3">
+                  {{ form.image3|as_crispy_field }}
+                  {{ form.x3|as_crispy_field }}
+                  {{ form.y3|as_crispy_field }}
+                  {{ form.height3|as_crispy_field }}
+                  {{ form.width3|as_crispy_field }}
+                  <a id="imgResult3" href="#"> <img class="img-fluid img-zoom" id="imageResult3" src="{{ project.image3 }}" alt="Image not upload"></a>
+                </div>
+                <div class="col-sm-6 col-12">
+                  {{ form.image_credit3|as_crispy_field }}
+                </div>
+              </div>
+            </div>
+            <hr />
 
+            <h4>Geography</h4>
+            <p>Main location where the project takes place (Enter address or click on the map)</p>
+            <div id="geographyform">
+              {% leaflet_map "map" callback="window.map_init_basic" %}
+              <div class="form-row">
+                <div class="col-sm-6 col-12">
+                  {{ form.latitude|as_crispy_field }}
+                </div>
+                <div class="col-sm-6 col-12">
+                  {{ form.longitude|as_crispy_field }}
+                </div>
+              </div>
+            </div>
+            <hr />
+            <h4>Supplementary information for Citizen Science</h4>
+            <div id="informationform">
               <div class="form-row">
                 <div class="col-12">
-                  {{ form.url|as_crispy_field }}
+                  {{ form.how_to_participate|as_crispy_field }}
+                </div>
+                <div class="col-12">
+                  {{ form.equipment|as_crispy_field }}
                 </div>
               </div>
-              <hr />
-              <h4>Contact details</h4>
-              <div id="contactinfoform">
-                <div class="form-row">
-                  <div class="col-12">
-                    {{ form.host|as_crispy_field }}
-                  </div>
-                  <div class="col-12">
-                    {{ form.contact_person|as_crispy_field }}
-                  </div>
-                  <div class="col-12">
-                    {{ form.contact_person_email|as_crispy_field }}
-                  </div>
-                </div>
+            </div>
+            <hr />
 
-              </div>
-              <hr />
-              <h4>Project profile images</h4>
-              <div id="imagesform">
-                <div class="form-row">
-                  <div class="col-sm-6 col-12">
-                    {{ form.image1|as_crispy_field }}
-                    {{ form.x1|as_crispy_field }}
-                    {{ form.y1|as_crispy_field }}
-                    {{ form.height1|as_crispy_field }}
-                    {{ form.width1|as_crispy_field }}
-                    <a id="imgResult1" href="#"> <img class="img-fluid img-zoom" id="imageResult1" src="{{ project.image1 }}" alt="Image not upload"></a>
-                  </div>
-                  <div class="col-sm-6 col-12">
-                    {{ form.image_credit1|as_crispy_field }}
-                  </div>
+            <h4>Funding</h4>
+            <div id="fundingform">
+              <div class="form-row">
+                <div class="col-sm-6 col-12">
+                  {{ form.funding_body|as_crispy_field }}
+                  {{ form.fundingBodySelected|as_crispy_field }}
                 </div>
-                <div class="form-row">
-                  <div class="col-sm-6 col-12 mt-3">
-                    {{ form.image2|as_crispy_field }}
-                    {{ form.x2|as_crispy_field }}
-                    {{ form.y2|as_crispy_field }}
-                    {{ form.height2|as_crispy_field }}
-                    {{ form.width2|as_crispy_field }}
-                    <a id="imgResult2" href="#"> <img class="img-fluid img-zoom" id="imageResult2" src="{{ project.image2 }}" alt="Image not upload"></a>
-                  </div>
-                  <div class="col-sm-6 col-12">
-                    {{ form.image_credit2|as_crispy_field }}
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="col-sm-6 col-12 mt-3">
-                    {{ form.image3|as_crispy_field }}
-                    {{ form.x3|as_crispy_field }}
-                    {{ form.y3|as_crispy_field }}
-                    {{ form.height3|as_crispy_field }}
-                    {{ form.width3|as_crispy_field }}
-                    <a id="imgResult3" href="#"> <img class="img-fluid img-zoom" id="imageResult3" src="{{ project.image3 }}" alt="Image not upload"></a>
-                  </div>
-                  <div class="col-sm-6 col-12">
-                    {{ form.image_credit3|as_crispy_field }}
-                  </div>
+                <div class="col-sm-6 col-12">
+                  {{ form.funding_program|as_crispy_field }}
                 </div>
               </div>
-              <hr />
-
-              <h4>Geography</h4>
-              <p>Main location where the project takes place (Enter address or click on the map)</p>
-              <div id="geographyform">
-                {% leaflet_map "map" callback="window.map_init_basic" %}
-                <div class="form-row">
-                  <div class="col-sm-6 col-12">
-                    {{ form.latitude|as_crispy_field }}
-                  </div>
-                  <div class="col-sm-6 col-12">
-                    {{ form.longitude|as_crispy_field }}
-                  </div>
+            </div>
+            <hr />
+            <h4>Origin information</h4>
+            <div id="originform">
+              <div class="form-row">
+                <div class="col-12">
+                  {{ form.origin_database|as_crispy_field }}
+                  {{ form.originDatabaseSelected|as_crispy_field }}
+                </div>
+                <div class="col-12">
+                  {{ form.originUID|as_crispy_field }}
                 </div>
               </div>
-              <hr />
-
-
-
-
-              <h4>Supplementary information for Citizen Science</h4>
-              <div id="informationform">
-                <div class="form-row">
-                  <div class="col-12">
-                    {{ form.how_to_participate|as_crispy_field }}
-                  </div>
-                  <div class="col-12">
-                    {{ form.equipment|as_crispy_field }}
-                  </div>
+              <div class="form-row">
+                <div class="col-12">
+                  {{ form.originURL|as_crispy_field }}
                 </div>
               </div>
-              <hr />
+            </div>
+            <hr />
+            <h4> Custom fields</h4>
+            <div id="customFields"></div>
 
-              <h4>Funding</h4>
-              <div id="fundingform">
-                <div class="form-row">
-                  <div class="col-sm-6 col-12">
-                    {{ form.funding_body|as_crispy_field }}
-                    {{ form.fundingBodySelected|as_crispy_field }}
-                  </div>
-                  <div class="col-sm-6 col-12">
-                    {{ form.funding_program|as_crispy_field }}
-                  </div>
+            {{ cField_formset.management_form }}
+            {% for cField_form in cField_formset.forms %}
+            <div  class="customField-formset">
+              <div class="form-row">
+                <div class="col-12">
+                  {{ cField_form.title |as_crispy_field }}
+                </div>
+                <div class="col-12">
+                  {{ cField_form.paragraph|as_crispy_field }}
                 </div>
               </div>
-              <hr />
-              <h4>Origin information</h4>
-              <div id="originform">
-                <div class="form-row">
-                  <div class="col-12">
-                    {{ form.origin_database|as_crispy_field }}
-                    {{ form.originDatabaseSelected|as_crispy_field }}
-                  </div>
-                  <div class="col-12">
-                    {{ form.originUID|as_crispy_field }}
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="col-12">
-                    {{ form.originURL|as_crispy_field }}
-                  </div>
-                </div>
-              </div>
-              <hr />
-              <h4> Custom fields</h4>
-              <div id="customFields"></div>
-
-              {{ cField_formset.management_form }}
-              {% for cField_form in cField_formset.forms %}
-              <div  class="customField-formset">
-                <div class="form-row">
-                  <div class="col-12">
-                    {{ cField_form.title |as_crispy_field }}
-                  </div>
-                  <div class="col-12">
-                    {{ cField_form.paragraph|as_crispy_field }}
-                  </div>
-                </div>
-              </div>
-              <hr/>
-              {% endfor %}
-              <button type="submit" class="btn btn-success"><i class="fas fa-share-square"></i> Save</button>
-            </form>
-          </table>
-        </div>
+            </div>
+            <hr/>
+            {% endfor %}
+            <button type="submit" class="btn btn-red mb-5"><i class="fas fa-share-square"></i> Save</button>
+          </form>
+        </table>
       </div>
     </div>
   </div>
 </div>
 </div>
-</div>
+
 
 
 
@@ -416,155 +412,155 @@
 
       var email = $("#id_contact_person_email").val();
       if(email && !validateEmail(email)){
-      validationFailed = true;
-      $("#div_id_contact_person_email").append("<span class='errorMsg'> <b>Enter a valid email address.</b></span>");
+        validationFailed = true;
+        $("#div_id_contact_person_email").append("<span class='errorMsg'> <b>Enter a valid email address.</b></span>");
       }
 
-    if (validationFailed) {
-      e.preventDefault();
-      $('html,body').animate({ scrollTop: $(".edit-project").offset().top - 160 }, { duration: "slow" });
-      return false;
-    }else{
-      var option_all = $("#id_keywords option:selected").map(function () {
-        return $.trim($(this).text());
-      }).get().join(',');
-      $("#id_choices").val(option_all);
-      $("#id_keywords").empty();
+      if (validationFailed) {
+        e.preventDefault();
+        $('html,body').animate({ scrollTop: $(".edit-project").offset().top - 160 }, { duration: "slow" });
+        return false;
+      }else{
+        var option_all = $("#id_keywords option:selected").map(function () {
+          return $.trim($(this).text());
+        }).get().join(',');
+        $("#id_choices").val(option_all);
+        $("#id_keywords").empty();
 
-      var fundingBody = $("#id_funding_body option:selected").map(function () {
-        return $.trim($(this).text());
-      }).get().join(',');
-      $("#id_fundingBodySelected").val(fundingBody);
-      $("#id_funding_body").empty();
+        var fundingBody = $("#id_funding_body option:selected").map(function () {
+          return $.trim($(this).text());
+        }).get().join(',');
+        $("#id_fundingBodySelected").val(fundingBody);
+        $("#id_funding_body").empty();
 
-      var originDatabase = $("#id_origin_database option:selected").map(function () {
+        var originDatabase = $("#id_origin_database option:selected").map(function () {
           return $.trim($(this).text());
         }).get().join(',');
         $("#id_originDatabaseSelected").val(originDatabase);
         $("#id_origin_database").empty();
-    }
-  });
-
-});
-
-$('#confirm-delete').on('show.bs.modal', function(e) {
-  $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-});
-
-$('.customField-formset').formset({
-  addText: '  <button id="customFieldButton" type="button" class="btn btn-warning"><i class="fas fa-plus-circle"></i> Add custom field          </button>'
-});
-
-$(function () {
-  changed = false;
-  var imgSelected;
-  /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
-  $("#id_image1").change(function () {
-    imgSelected = 1;
-    $('#imageResult').attr('src', '');
-    if (this.files && this.files[0]) {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        changed = true;
-        $("#image").attr("src", e.target.result);
-        $("#modalCrop").modal("show");
-      }
-      reader.readAsDataURL(this.files[0]);
-    }
-  });
-
-  $("#id_image2").change(function () {
-    imgSelected = 2;
-    $('#imageResult2').attr('src', '');
-    if (this.files && this.files[0]) {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        $("#image").attr("src", e.target.result);
-        $("#modalCrop").modal("show");
-      }
-      reader.readAsDataURL(this.files[0]);
-    }
-  });
-
-  $("#id_image3").change(function () {
-    imgSelected = 3;
-    $('#imageResult3').attr('src', '');
-    if (this.files && this.files[0]) {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        $("#image").attr("src", e.target.result);
-        $("#modalCrop").modal("show");
-      }
-      reader.readAsDataURL(this.files[0]);
-    }
-  });
-
-  $("#imageResult1").click(function () {
-    if(!changed)
-    $("#id_image1").click();
-    else{
-      $("#modalCrop").modal("show");
-    }
-
-  });
-
-  $("#imageResult2").click(function () {
-    $("#modalCrop").modal("show");
-  });
-
-  $("#imageResult3").click(function () {
-    $("#modalCrop").modal("show");
-  });
-
-  /* SCRIPTS TO HANDLE THE CROPPER BOX */
-  var $image = $("#image");
-  var cropBoxData;
-  var canvasData;
-  $("#modalCrop").on("shown.bs.modal", function () {
-    $image.cropper({
-      viewMode: 0,
-      aspectRatio: imgSelected == 3 ? 11/4 : 3/2,
-      minCropBoxWidth: imgSelected == 3 ? 1100 : 600,
-      minCropBoxHeight: 400,
-      dragMode: 'move',
-      guides: false,
-      center: false,
-      highlight: false,
-      cropBoxResizable: false,
-      toggleDragModeOnDblclick: false,
-      ready: function () {
-        $image.cropper("setCanvasData", canvasData);
-        $image.cropper("setCropBoxData", cropBoxData);
       }
     });
-  }).on("hidden.bs.modal", function () {
-    cropBoxData = $image.cropper("getCropBoxData");
-    canvasData = $image.cropper("getCanvasData");
-    $image.cropper("destroy");
-  });
-
-  $(".js-zoom-in").click(function () {
-    $image.cropper("zoom", 0.1);
-  });
-
-  $(".js-zoom-out").click(function () {
-    $image.cropper("zoom", -0.1);
-  });
-
-  /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
-  $(".js-crop-and-upload").click(function () {
-    var cropData = $image.cropper("getData");
-    $("#id_x" + imgSelected).val(cropData["x"]);
-    $("#id_y" + imgSelected).val(cropData["y"]);
-    $("#id_height" + imgSelected).val(cropData["height"]);
-    $("#id_width" + imgSelected).val(cropData["width"]);
-    $("#modalCrop").modal("hide");
-    $('#imageResult' + imgSelected).attr('src', $image.cropper('getCroppedCanvas',
-    {width: imgSelected == 3 ? 1100 : 600, height: 400}).toDataURL());
 
   });
 
-});
+  $('#confirm-delete').on('show.bs.modal', function(e) {
+    $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+  });
+
+  $('.customField-formset').formset({
+    addText: '  <button id="customFieldButton" type="button" class="btn btn-warning"><i class="fas fa-plus-circle"></i> Add custom field          </button>'
+  });
+
+  $(function () {
+    changed = false;
+    var imgSelected;
+    /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
+    $("#id_image1").change(function () {
+      imgSelected = 1;
+      $('#imageResult').attr('src', '');
+      if (this.files && this.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          changed = true;
+          $("#image").attr("src", e.target.result);
+          $("#modalCrop").modal("show");
+        }
+        reader.readAsDataURL(this.files[0]);
+      }
+    });
+
+    $("#id_image2").change(function () {
+      imgSelected = 2;
+      $('#imageResult2').attr('src', '');
+      if (this.files && this.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $("#image").attr("src", e.target.result);
+          $("#modalCrop").modal("show");
+        }
+        reader.readAsDataURL(this.files[0]);
+      }
+    });
+
+    $("#id_image3").change(function () {
+      imgSelected = 3;
+      $('#imageResult3').attr('src', '');
+      if (this.files && this.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $("#image").attr("src", e.target.result);
+          $("#modalCrop").modal("show");
+        }
+        reader.readAsDataURL(this.files[0]);
+      }
+    });
+
+    $("#imageResult1").click(function () {
+      if(!changed)
+      $("#id_image1").click();
+      else{
+        $("#modalCrop").modal("show");
+      }
+
+    });
+
+    $("#imageResult2").click(function () {
+      $("#modalCrop").modal("show");
+    });
+
+    $("#imageResult3").click(function () {
+      $("#modalCrop").modal("show");
+    });
+
+    /* SCRIPTS TO HANDLE THE CROPPER BOX */
+    var $image = $("#image");
+    var cropBoxData;
+    var canvasData;
+    $("#modalCrop").on("shown.bs.modal", function () {
+      $image.cropper({
+        viewMode: 0,
+        aspectRatio: imgSelected == 3 ? 11/4 : 3/2,
+        minCropBoxWidth: imgSelected == 3 ? 1100 : 600,
+        minCropBoxHeight: 400,
+        dragMode: 'move',
+        guides: false,
+        center: false,
+        highlight: false,
+        cropBoxResizable: false,
+        toggleDragModeOnDblclick: false,
+        ready: function () {
+          $image.cropper("setCanvasData", canvasData);
+          $image.cropper("setCropBoxData", cropBoxData);
+        }
+      });
+    }).on("hidden.bs.modal", function () {
+      cropBoxData = $image.cropper("getCropBoxData");
+      canvasData = $image.cropper("getCanvasData");
+      $image.cropper("destroy");
+    });
+
+    $(".js-zoom-in").click(function () {
+      $image.cropper("zoom", 0.1);
+    });
+
+    $(".js-zoom-out").click(function () {
+      $image.cropper("zoom", -0.1);
+    });
+
+    /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
+    $(".js-crop-and-upload").click(function () {
+      var cropData = $image.cropper("getData");
+      $("#id_x" + imgSelected).val(cropData["x"]);
+      $("#id_y" + imgSelected).val(cropData["y"]);
+      $("#id_height" + imgSelected).val(cropData["height"]);
+      $("#id_width" + imgSelected).val(cropData["width"]);
+      $("#modalCrop").modal("hide");
+      $('#imageResult' + imgSelected).attr('src', $image.cropper('getCroppedCanvas',
+      {width: imgSelected == 3 ? 1100 : 600, height: 400}).toDataURL());
+
+    });
+
+  });
 </script>
 
 <script type="text/javascript">

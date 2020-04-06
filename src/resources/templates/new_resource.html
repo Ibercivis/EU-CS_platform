@@ -172,12 +172,12 @@
 
                       <select name="language" class="form-control">
                         {% for language in languages|dictsort:"name" %}
-                          {% if language.code in settings.LANGUAGE_CODES %}
-                            <option value="{{ language.code}}"
-                            {% if language.code == LANGUAGE_CODE %}selected="selected" {% endif %}>
-                            {{ language.name | upper}}
-                          </option>
-                          {% endif %}
+                        {% if language.code in settings.LANGUAGE_CODES %}
+                        <option value="{{ language.code}}"
+                        {% if language.code == LANGUAGE_CODE %}selected="selected" {% endif %}>
+                        {{ language.name | upper}}
+                      </option>
+                      {% endif %}
                       {% endfor %}
                     </select>
                     {% endif %}
@@ -220,7 +220,7 @@
                     {% endif %}
                   </div>
                 </div>
-                <button type="submit" class="btn btn-success"> <i class="fas fa-share-square"></i> Save</button>
+                <button type="submit" class="btn btn-green mt-2"> <i class="fas fa-share-square"></i> Save</button>
               </form>
             </table>
           </div>
