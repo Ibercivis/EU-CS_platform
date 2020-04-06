@@ -65,11 +65,16 @@ class SignUpView(
             'uid':urlsafe_base64_encode(force_bytes(user.pk)),
             'token':account_activation_token.make_token(user),
         })
+        html_message = render_to_string('accounts/acc_active_email.html', {
+            'user': user,
+            'domain': current_site.domain,
+            'uid':urlsafe_base64_encode(force_bytes(user.pk)),
+            'token':account_activation_token.make_token(user),
+        })
+
         to_email = form.cleaned_data.get('email')
-        email = EmailMessage(
-                    mail_subject, message, to=[to_email]
-        )
-        email.send()
+        send_mail(mail_subject, message, 'eu-citizen.sciece@ibercivis.es',[to_email], html_message=html_message)
+        #email.send()
         #send_mail(mail_subject,message,"recover@ibercivis.es",[to_email])
         return render(self.request, 'accounts/confirm-email.html',{})
 
@@ -134,7 +139,7 @@ def activate(request, uidb64, token):
         message = render_to_string('accounts/welcome_email.html', {
             'user': user,
         })
-        to_email = user.email        
+        to_email = user.email
         email = EmailMessage(
                     mail_subject, message, to=[to_email]
         )
