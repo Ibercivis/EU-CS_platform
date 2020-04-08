@@ -226,8 +226,8 @@
     <script src="{% static 'site/js/site.js' %}"></script>
     <script src="{% static 'scripts/cropper.min.js' %}"></script>
     <script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
-    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
-    <script src="http://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"></script>
     <script>
   $(document).ready(function () {
     var users = $("#id_usersCollection").val();
@@ -365,7 +365,7 @@
       });
 
       $('#confirm-delete').on('show.bs.modal', function(e) {
-        $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+        $(this).find('.btn-red').attr('href', $(e.relatedTarget).data('href'));
       });
 
       function getSubCategories(){
