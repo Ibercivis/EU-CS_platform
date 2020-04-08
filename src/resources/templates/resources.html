@@ -110,10 +110,10 @@ src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bo
   { minLength: 3 }
   );
 
-  $("#keywords").blur(function () {
+/*   $("#keywords").blur(function () {
     var keywords = $(this).val();
     $('#searchResources').submit();
-  });
+  }); */
 
   $('.basicAutoComplete').on('autocomplete.select', function (evt, item) {
     $('#searchResources').submit();
