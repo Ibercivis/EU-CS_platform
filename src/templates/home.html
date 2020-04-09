@@ -20,7 +20,7 @@
 <script>
 	function map_init_basic (leafmap, options) {
 		map = leafmap;
-		map.setView([{{52}}, {{20}}], 3.5)
+		map.setView([{{52}}, {{20}}], 3.5);
 		var markers = L.markerClusterGroup();
 		{% for project in allprojects %}
 		var marker = L.marker(new L.LatLng({{project.latitude}},{{project.longitude}}),{title: '{{project.name}}'});
