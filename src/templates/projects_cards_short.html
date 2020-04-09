@@ -8,7 +8,7 @@
 			{% if project.image1 %}
 			<img class="card-img-top img-fluid img-zoom lazyload {% if project.id not in featuredProjects %} nonmoderated {% endif %}" alt="{{ project.name }}" src="{{ project.image1 }}" />
 			{% else %}
-			<img class="card-img-top img-fluid img-zoom lazyload {% if project.id not in featuredProjects %} nonmoderated {% endif %}" alt="{{ project.name }}"src="{% static 'site/img/project_default_card.png' %}" />
+			<img class="card-img-top img-fluid img-zoom lazyload {% if project.id not in featuredProjects %} nonmoderated {% endif %}" alt="{{ project.name }}"src="{% static 'site/img/project_default_card.webp' %}" />
 			{% endif %}
 			<div class="upper">
 				{% if project.id not in featuredProjects %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br/>
