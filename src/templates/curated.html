@@ -46,7 +46,7 @@ Curated Resources
 
 		<div class="col-lg-4 col-md-12 mb-4">
 			<div class="card h-100 shadow">
-				<a class="card-img-wrap" href="/resource/{{rsc.id}}">
+				<a class="card-img-wrap" href="/resource/{{rg.resource.id}}">
 					{% if rg.resource.image1 %}
 					<img class="img-fluid img-zoom" src="{{ rg.resource.image1 }}" />
 					{% else %}
@@ -62,7 +62,7 @@ Curated Resources
 					{% endfor %}
 				</div>
 				<div class="card-body">
-					<h6 class="card-title mt-3 mb-3"><a class="card-link card-link-resource" href="/resource/{{rsc.id}}" class="card-link">{{ rg.resource.name | truncatewords:12 }}</a></h6>
+					<h6 class="card-title mt-3 mb-3"><a class="card-link card-link-resource" href="/resource/{{rg.resource.id}}" class="card-link">{{ rg.resource.name | truncatewords:12 }}</a></h6>
 					<div class="card-text mt-3">{{rg.resource.abstract | safe | truncatewords:30 }}
 						<a class="" href="/resource/{{rg.resource.id}}" target="_blank">Read more</a>
 					</div>
