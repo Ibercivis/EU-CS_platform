@@ -77,7 +77,7 @@
 				<div class="col-lg-6 col-12 mb-4">
 					<div class="card h-100 shadow">
 						<a class="card-img-wrap overlay-blue" href="/resources?category=1">
-							<img class="card-img-top img-fluid img-zoom lazyload img-filter" src="{% static 'site/img/tools.webp' %}" />
+							<img class="card-img-top img-fluid img-zoom lazyload img-filter" alt="Tools" src="{% static 'site/img/tools.webp' %}" />
 						</a>
 						<div class="upper">
 							<a class="badge frontpage" href="/resources?category=1">TOOLS</a>
@@ -87,7 +87,7 @@
 				<div class="col-lg-6 col-12 mb-4">
 					<div class="card h-100 shadow">
 						<a class="card-img-wrap overlay-blue" href="/resources?category=2">
-							<img class="card-img-top img-fluid img-zoom lazyload img-filter" src="{% static 'site/img/guidelines.webp' %}" />
+							<img class="card-img-top img-fluid img-zoom lazyload img-filter" alt="Guidelines" src="{% static 'site/img/guidelines.webp' %}" />
 						</a>
 						<div class="upper">
 							<a class="badge frontpage" href="/resources?category=2">GUIDELINES</a>
@@ -98,7 +98,7 @@
 				<div class="col-lg-6 col-12 mb-4">
 					<div class="card h-100 shadow">
 						<a class="card-img-wrap overlay-blue" href="/resources?category=3">
-							<img class="card-img-top img-fluid img-zoom lazyload img-filter" src="{% static 'site/img/trainingb.webp' %}" />
+							<img class="card-img-top img-fluid img-zoom lazyload img-filter" alt="Training" src="{% static 'site/img/trainingb.webp' %}" />
 						</a>
 						<div class="upper">
 							<a class="badge frontpage" href="/resources?category=3">TRAINING RESOURCES</a>
@@ -108,7 +108,7 @@
 				<div class="col-lg-6 col-12 mb-4">
 					<div class="card h-100 shadow">
 						<a class="card-img-wrap overlay-blue" href="/resources?category=4">
-							<img class="card-img-top img-fluid img-zoom lazyload img-filter" src="{% static 'site/img/tools.webp' %}" />
+							<img class="card-img-top img-fluid img-zoom lazyload img-filter" Alt="Other materials" src="{% static 'site/img/materials.webp' %}" />
 						</a>
 						<div class="upper">
 							<a class="badge frontpage" href="/resources?category=4">OTHER MATERIALS</a>
@@ -180,7 +180,7 @@
 						{% for post in entries %}
 						<div class="card shadow">
 							<a href="{% url 'post_detail' post.slug  %}">
-								<img class="card-img-top" src="/media/{{post.image}}" alt="Card image">
+								<img class="card-img-top" alt="{{ post.title }}" src="/media/{{post.image}}" alt="Card image">
 							</a>
 							<div class="card-body">
 								<a href="">
