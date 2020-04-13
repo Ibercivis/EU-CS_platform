@@ -23,8 +23,10 @@ def home(request):
         featuredProjects.append(featuredProjectFixed1)
         featuredProjectFixed2 = FeaturedProjects.objects.get(project_id=featuredProjectsFixed[1]).project_id
         featuredProjects.append(featuredProjectFixed2)
-        featuredProject3 = FeaturedProjects.objects.exclude(project_id__in=featuredProjectsFixed).last().project_id
-        featuredProjects.append(featuredProject3)
+        featuredProject3 = FeaturedProjects.objects.exclude(project_id__in=featuredProjectsFixed)
+        if(featuredProject3):
+            featuredProject3 = featuredProject3.last().project_id
+            featuredProjects.append(featuredProject3)
     except FeaturedProjects.DoesNotExist:
         featuredProjects = FeaturedProjects.objects.all().order_by('-id')[:3].values_list('project_id',flat=True)
 
