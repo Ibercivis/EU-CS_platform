@@ -3,6 +3,8 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.views import generic
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 from django.utils.dateparse import parse_datetime
@@ -21,11 +23,12 @@ import random
 
 User = get_user_model()
 
+@login_required(login_url='/login')
 def new_project(request):
+    user = request.user
     choices = list(Keyword.objects.all().values_list('keyword',flat=True))
     choices = ", ".join(choices)
     form = ProjectForm(initial={'choices': choices})
-    user = request.user
     if request.method == 'POST':
         form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
@@ -257,7 +260,8 @@ def editProject(request, pk):
 
 def deleteProject(request, pk):
     obj = get_object_or_404(Project, id=pk)
-    obj.delete()
+    if request.user == obj.creator or request.user.is_staff or request.user.id in getCooperators(pk):
+        obj.delete()
     return redirect('projects')
 
 def text_autocomplete(request):
@@ -323,6 +327,7 @@ def host_autocomplete(request):
 def clearFilters(request):
     return redirect ('projects')
 
+@staff_member_required()
 def setFeatured(request):
     response = {}
     id = request.POST.get("project_id")
@@ -339,6 +344,7 @@ def setFeatured(request):
 
     return JsonResponse(response, safe=False)
 
+@staff_member_required()
 def setHidden(request):
     response = {}
     id = request.POST.get("project_id")
@@ -365,10 +371,15 @@ def setFollowedProject(request):
 
     return JsonResponse(response, safe=False)
 
-def allowUser(request):
+def allowUser(request):   
     response = {}
     projectId = request.POST.get("project_id")
     users = request.POST.get("users")
+    fProject = get_object_or_404(Project, id=projectId)
+    
+    if request.user != fProject.creator and not request.user.is_staff:
+        #TODO return JsonResponse with error code
+        return redirect('../projects', {})
 
     #Delete all
     objs = ProjectPermission.objects.all().filter(project_id=projectId)
@@ -376,8 +387,7 @@ def allowUser(request):
         for obj in objs:
             obj.delete()
 
-    #Insert all
-    fProject = get_object_or_404(Project, id=projectId)
+    #Insert all    
     users = users.split(',')
     for user in users:
         fUser = User.objects.filter(email=user)[:1].get()
