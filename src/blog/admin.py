@@ -6,6 +6,13 @@ from django_summernote.widgets import SummernoteWidget
 from django import forms
 from .models import Post
 
+def make_published(modeladmin, request, queryset):
+    queryset.update(status=1)
+make_published.short_description = "Mark selected posts as published"
+
+def make_draft(modeladmin, request, queryset):
+    queryset.update(status=0)
+make_draft.short_description = "Mark selected posts as draft"
 
 class SummernoteModelAdminWithCustomToolbar(SummernoteWidget):
     def summernote_settings(self):
@@ -46,6 +53,6 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ['title', 'content']
     prepopulated_fields = {'slug': ('title',)}
     form = CustomPostForm
-
+    actions = [make_published, make_draft]
 
 admin.site.register(Post, PostAdmin)
