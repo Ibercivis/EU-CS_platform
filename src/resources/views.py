@@ -6,6 +6,8 @@ from django.utils import timezone
 from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 from django.conf import settings
 from django.db.models import Q, Avg
 from django.contrib.auth import get_user_model
@@ -121,6 +123,8 @@ def saveImage(request, form, element, ref):
         resized_image.save(image_path)
 
     return '/' + image_path
+
+@login_required(login_url='/login')
 def new_resource(request):
     choices = list(Keyword.objects.all().values_list('keyword',flat=True))
     choices = ", ".join(choices)
@@ -220,7 +224,8 @@ def editResource(request, pk):
 
 def deleteResource(request, pk):
     obj = get_object_or_404(Resource, id=pk)
-    obj.delete()
+    if request.user == obj.creator or request.user.is_staff or request.user.id in getCooperators(pk):
+        obj.delete()
     return redirect('resources')
 
 def resources_autocomplete(request):
@@ -310,6 +315,7 @@ def getCategory(category):
     else:
         return category
 
+@staff_member_required()
 def setFeaturedRsc(request):
     response = {}
     id = request.POST.get("resource_id")
@@ -344,7 +350,7 @@ def setSavedResource(request):
 
     return JsonResponse(response, safe=False)
 
-
+@staff_member_required()
 def setHiddenResource(request):
     response = {}
     id = request.POST.get("resource_id")
@@ -358,6 +364,11 @@ def allowUserResource(request):
     response = {}
     resourceId = request.POST.get("resource_id")
     users = request.POST.get("users")
+    fResource = get_object_or_404(Resource, id=resourceId)
+
+    if request.user != fResource.creator and not request.user.is_staff:
+        #TODO return JsonResponse with error code
+        return redirect('../projects', {})
 
     #Delete all
     objs = ResourcePermission.objects.all().filter(resource_id=resourceId)
@@ -365,8 +376,7 @@ def allowUserResource(request):
         for obj in objs:
             obj.delete()
 
-    #Insert all
-    fResource = get_object_or_404(Resource, id=resourceId)
+    #Insert all    
     users = users.split(',')
     for user in users:
         fUser = User.objects.filter(email=user)[:1].get()
