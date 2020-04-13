@@ -16,7 +16,18 @@ import json
 def home(request):
     #groups = ResourceGroup.objects.get_queryset().order_by('id')
     #resourcesgrouped = ResourcesGrouped.objects.get_queryset().order_by('group')
-    featuredProjects = FeaturedProjects.objects.all().order_by('-id')[:3].values_list('project_id',flat=True)
+    try:
+        featuredProjectsFixed = [59,54]
+        featuredProjects = []
+        featuredProjectFixed1 = FeaturedProjects.objects.get(project_id=featuredProjectsFixed[0]).project_id
+        featuredProjects.append(featuredProjectFixed1)
+        featuredProjectFixed2 = FeaturedProjects.objects.get(project_id=featuredProjectsFixed[1]).project_id
+        featuredProjects.append(featuredProjectFixed2)
+        featuredProject3 = FeaturedProjects.objects.exclude(project_id__in=featuredProjectsFixed).last().project_id
+        featuredProjects.append(featuredProject3)
+    except FeaturedProjects.DoesNotExist:
+        featuredProjects = FeaturedProjects.objects.all().order_by('-id')[:3].values_list('project_id',flat=True)
+
     allfeaturedProjects = FeaturedProjects.objects.all().order_by('-id').values_list('project_id',flat=True)
     projects = Project.objects.all().order_by('-id')
     allprojects =  projects.filter(id__in=allfeaturedProjects)
