@@ -66,7 +66,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <a class="btn btn-red"><span class="fas fa-trash-alt"></span> Delete</a>
+        <a class="btn btn-red btn-delete"><span class="fas fa-trash-alt"></span> Delete</a>
       </div>
     </div>
   </div>
@@ -185,15 +185,28 @@
                   {{ form.y1|as_crispy_field }}
                   {{ form.height1|as_crispy_field }}
                   {{ form.width1|as_crispy_field }}
-                  <a id="imgResult1" href="#"> <img id="imageResult1" class="img-fluid img-zoom" src="{{ resource.image1 }}" alt=""></a>
+                  {{ form.withImage1|as_crispy_field }}
+                  <a id="imgResult1" href="#"> <img class="img-fluid img-zoom" id="imageResult1" src="{{ resource.image1 }}" alt=""></a>
+                  <div id="deleteImage1">                   
+                  {% if resource.image1 %}
+                    <a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>                  
+                  {% endif %}
+                  </div>
                 </div>
+
                 <div class="col-12">
                   {{ form.image2|as_crispy_field }}
                   {{ form.x2|as_crispy_field }}
                   {{ form.y2|as_crispy_field }}
                   {{ form.height2|as_crispy_field }}
                   {{ form.width2|as_crispy_field }}
-                  <a id="imgResult2" href="#"> <img id="imageResult2" class="img-fluid img-zoom" src="{{ resource.image2 }}" alt=""></a>
+                  {{ form.withImage2|as_crispy_field }}
+                  <a id="imgResult2" href="#"> <img class="img-fluid img-zoom" id="imageResult2" src="{{ resource.image2 }}" alt=""></a>
+                  <div id="deleteImage2">                   
+                  {% if resource.image2 %}
+                    <a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>                  
+                  {% endif %}
+                  </div>
                 </div>
               </div>
 
@@ -365,7 +378,18 @@
       });
 
       $('#confirm-delete').on('show.bs.modal', function(e) {
-        $(this).find('.btn-red').attr('href', $(e.relatedTarget).data('href'));
+        $(this).find('.btn-delete').attr('href', $(e.relatedTarget).data('href'));
+      });
+
+      $('#deleteImage1 > a').click(function () {
+        $('#imageResult1').attr('src', '');
+        $("#deleteImage1").empty();
+        $("#id_withImage1").val(false);
+      });
+      $('#deleteImage2 > a').click(function () {
+        $('#imageResult2').attr('src', '');
+        $("#deleteImage2").empty();
+        $("#id_withImage2").val(false);
       });
 
       function getSubCategories(){
@@ -465,6 +489,13 @@
           $("#modalCrop").modal("hide");
           $('#imageResult' + imgSelected).attr('src', $image.cropper('getCroppedCanvas',
           {width: imgSelected == 2 ? 1100 : 600, height: 400}).toDataURL());
+
+          $("#deleteImage"+imgSelected).html('<a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>  ');
+          $("#deleteImage"+imgSelected).click(function () {
+            $('#imageResult'+imgSelected).attr('src', '');
+            $('#id_image'+imgSelected).val('');
+            $("#deleteImage"+imgSelected).empty();
+          });
         });
 
       });
