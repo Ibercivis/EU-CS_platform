@@ -51,11 +51,12 @@ def new_project(request):
 def saveImage(request, form, element, ref):
     image_path = ''
     filepath = request.FILES.get(element, False)
+    withImage = form.cleaned_data.get('withImage' + ref)
     if (filepath):
         x = form.cleaned_data.get('x' + ref)
         y = form.cleaned_data.get('y' + ref)
         w = form.cleaned_data.get('width' + ref)
-        h = form.cleaned_data.get('height' + ref)
+        h = form.cleaned_data.get('height' + ref)        
         photo = request.FILES[element]
         image = Image.open(photo)
         cropped_image = image.crop((x, y, w+x, h+y))
@@ -67,8 +68,13 @@ def saveImage(request, form, element, ref):
         random_num = random.randint(0, 1000)
         image_path = "media/images/" + _datetime + '_' + str(random_num) + '_' + photo.name
         resized_image.save(image_path)
+        image_path = '/' + image_path
+    elif withImage:
+            image_path = '/'
+    else:
+        image_path = ''
 
-    return '/' + image_path
+    return  image_path
 
 def projects(request):
     projects = Project.objects.get_queryset()
@@ -216,11 +222,11 @@ def editProject(request, pk):
         'end_date':end_datetime, 'aim': project.aim, 'description': project.description,
         'status': project.status, 'choices': choices, 'choicesSelected':keywordsList,
         'topic':project.topic.all, 'latitude': project.latitude, 'longitude': project.longitude,
-        'image1': project.image1, 'image_credit1': project.imageCredit1, 'host': project.host,
-        'image2': project.image2, 'image_credit2': project.imageCredit2,
-        'image3': project.image3, 'image_credit3': project.imageCredit3,
+        'image1': project.image1, 'image_credit1': project.imageCredit1, 'withImage1': (True, False)[project.image1 == ""],
+        'image2': project.image2, 'image_credit2': project.imageCredit2, 'withImage2': (True, False)[project.image2 == ""],
+        'image3': project.image3, 'image_credit3': project.imageCredit3, 'withImage3': (True, False)[project.image3 == ""],
         'how_to_participate': project.howToParticipate, 'equipment': project.equipment,
-        'contact_person': project.author, 'contact_person_email': project.author_email,
+        'contact_person': project.author, 'contact_person_email': project.author_email, 'host': project.host,
         'funding_body': fundingBody, 'doingAtHome': project.doingAtHome, 'fundingBodySelected': project.fundingBody, 'fundingProgram': project.fundingProgram,
         'originDatabase': originDatabase,'originDatabaseSelected': project.originDatabase,
         'originUID' : project.originUID, 'originURL': project.originURL,

@@ -105,6 +105,7 @@ def clearFilters(request):
 def saveImage(request, form, element, ref):
     image_path = ''
     filepath = request.FILES.get(element, False)
+    withImage = form.cleaned_data.get('withImage' + ref)
     if (filepath):
         x = form.cleaned_data.get('x' + ref)
         y = form.cleaned_data.get('y' + ref)
@@ -121,8 +122,12 @@ def saveImage(request, form, element, ref):
         random_num = random.randint(0, 1000)
         image_path = "media/images/" + _datetime + '_' + str(random_num) + '_' + photo.name
         resized_image.save(image_path)
-
-    return '/' + image_path
+        image_path = '/' + image_path
+    elif withImage:
+            image_path = '/'
+    else:
+        image_path = ''
+    return image_path
 
 @login_required(login_url='/login')
 def new_resource(request):
@@ -199,6 +204,7 @@ def editResource(request, pk):
 
     form = ResourceForm(initial={
         'name':resource.name, 'abstract': resource.abstract, 'image1': resource.image1, 'image2': resource.image2,'resource_DOI': resource.resourceDOI,
+        'withImage1': (True, False)[resource.image1 == ""],'withImage2': (True, False)[resource.image2 == ""],
         'url': resource.url,'license': resource.license, 'choices': choices, 'theme': resource.theme.all,
         'audience' : resource.audience.all, 'publisher': resource.publisher, 'year_of_publication': resource.datePublished,
         'authors': resource.authors.all, 'selectedAuthors': selectedAuthors, 'authorsCollection': authorsCollection,

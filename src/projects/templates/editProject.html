@@ -72,7 +72,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <a class="btn btn-red"><i class="fas fa-trash-alt"></i> Delete</a>
+        <a class="btn btn-red btn-delete"><i class="fas fa-trash-alt"></i> Delete</a>
       </div>
     </div>
   </div>
@@ -189,7 +189,13 @@
                   {{ form.y1|as_crispy_field }}
                   {{ form.height1|as_crispy_field }}
                   {{ form.width1|as_crispy_field }}
+                  {{ form.withImage1|as_crispy_field }}
                   <a id="imgResult1" href="#"> <img class="img-fluid img-zoom" id="imageResult1" src="{{ project.image1 }}" alt="Image not upload"></a>
+                  <div id="deleteImage1">                   
+                  {% if project.image1 %}
+                    <a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>                  
+                  {% endif %}
+                  </div>
                 </div>
                 <div class="col-sm-6 col-12">
                   {{ form.image_credit1|as_crispy_field }}
@@ -202,7 +208,13 @@
                   {{ form.y2|as_crispy_field }}
                   {{ form.height2|as_crispy_field }}
                   {{ form.width2|as_crispy_field }}
+                  {{ form.withImage2|as_crispy_field }}
                   <a id="imgResult2" href="#"> <img class="img-fluid img-zoom" id="imageResult2" src="{{ project.image2 }}" alt="Image not upload"></a>
+                  <div id="deleteImage2">
+                  {% if project.image2 %}
+                    <a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>
+                  {% endif %}
+                  </div>
                 </div>
                 <div class="col-sm-6 col-12">
                   {{ form.image_credit2|as_crispy_field }}
@@ -215,7 +227,13 @@
                   {{ form.y3|as_crispy_field }}
                   {{ form.height3|as_crispy_field }}
                   {{ form.width3|as_crispy_field }}
+                  {{ form.withImage3|as_crispy_field }}
                   <a id="imgResult3" href="#"> <img class="img-fluid img-zoom" id="imageResult3" src="{{ project.image3 }}" alt="Image not upload"></a>
+                  <div id="deleteImage3">
+                  {% if project.image3 %}
+                    <a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>
+                  {% endif %}
+                  </div>
                 </div>
                 <div class="col-sm-6 col-12">
                   {{ form.image_credit3|as_crispy_field }}
@@ -477,6 +495,23 @@
       }
     }
 
+
+    $('#deleteImage1 > a').click(function () {
+      $('#imageResult1').attr('src', '');
+      $("#deleteImage1").empty();
+      $("#id_withImage1").val(false);
+    });
+    $('#deleteImage2 > a').click(function () {
+      $('#imageResult2').attr('src', '');
+      $("#deleteImage2").empty();
+      $("#id_withImage2").val(false);
+    });
+    $('#deleteImage3 > a').click(function () {
+      $('#imageResult3').attr('src', '');
+      $("#deleteImage3").empty();
+      $("#id_withImage3").val(false);
+    });
+
   });
 
   $(function () {
@@ -504,7 +539,7 @@
     });
 
   $('#confirm-delete').on('show.bs.modal', function(e) {
-    $(this).find('.btn-red').attr('href', $(e.relatedTarget).data('href'));
+    $(this).find('.btn-delete').attr('href', $(e.relatedTarget).data('href'));
   });
 
   $('.customField-formset').formset({
@@ -618,6 +653,12 @@
       $('#imageResult' + imgSelected).attr('src', $image.cropper('getCroppedCanvas',
       {width: imgSelected == 3 ? 1100 : 600, height: 400}).toDataURL());
 
+      $("#deleteImage"+imgSelected).html('<a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>  ');
+      $("#deleteImage"+imgSelected).click(function () {
+        $('#imageResult'+imgSelected).attr('src', '');
+        $('#id_image'+imgSelected).val('');
+        $("#deleteImage"+imgSelected).empty();
+      });
     });
 
   });
