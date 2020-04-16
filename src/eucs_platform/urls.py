@@ -7,6 +7,7 @@ import profiles.urls
 import accounts.urls
 import projects.urls
 import resources.urls
+import events.urls
 import contact.urls
 from . import views
 
@@ -28,7 +29,6 @@ urlpatterns = [
     path("home_autocomplete/", views.home_autocomplete,name="home_autocomplete"),
     path("development/", views.development,name="development"),
     path("about/", views.AboutPage.as_view(), name="about"),
-    path("events/", views.EventsPage.as_view(), name="events"),
     path("users/", include(profiles.urls)),
     path("admin/", admin.site.urls),
     path("", include(contact.urls)),
@@ -39,7 +39,7 @@ urlpatterns = [
     path('summernote/', include('django_summernote.urls')),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^reviews/', include('reviews.urls')),
-
+    path("", include(events.urls)),
 ]
 
 # User-uploaded files like profile pics need to be served in development
