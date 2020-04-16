@@ -1,0 +1,77 @@
+{% extends "base2.html" %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% block head %}
+{{block.super }}
+{% endblock head %}
+
+{% block title %}{{ block.super }} :: Events{% endblock %}
+
+{% block navbar-left %}
+{% include "_navbar.html" with active_link="events" %}
+{% endblock %}
+
+{% block list_of_items %}
+<div class="container">
+    <div class="row">
+        <div class="container mt-5">
+            <div class="row d-flex justify-content-center">
+                <div class="col-sm-10 col-12">
+                    <div class="card mt-5 mb-5 shadow">
+                        <div class="card-title  p-5">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h2>Edit event</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-text pr-5 pl-5 pb-5">
+                            <table class="table mb-0">
+                                <form action="/editEvent/{{event.id}}" method="post" class="save-event" autocomplete="off">
+                                    {% csrf_token %}
+                                    <div>
+                                        <h4>Event info</h4>
+                                    </div>
+                                    <input type="hidden" id="eventID" name="eventID" value={{event.id}}>
+                                    <div class="form-row">
+                                        <div class="col-12">
+                                            {{ form.title|as_crispy_field }}
+                                        </div>
+                                        <div class="col-12">
+                                            {{ form.description|as_crispy_field }}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col-12">
+                                            {{ form.place|as_crispy_field }}
+                                        </div>
+                                        <div class="col-12">
+                                            {{ form.start_date|as_crispy_field }}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col-12">
+                                            {{ form.end_date|as_crispy_field }}
+                                        </div>
+                                        <div class="col-12">
+                                            {{ form.url|as_crispy_field }}
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <button type="submit" class="btn btn-green"><i class="fas fa-share-square"></i> Save</button>
+                                </form>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock list_of_items %}
+{% block scripts %}
+{% endblock scripts %}
