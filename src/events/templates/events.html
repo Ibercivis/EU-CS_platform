@@ -29,14 +29,21 @@
     </div>
     {% if events %}
     {% for event in events %}
+
     <div class="row">
         <div class="col-sm-4 col-12 mt-4 mb-4">
             <h3>{{event.title}} <br />{{event.place}}, {{event.start_date}}</h3>
         </div>
 
-        <div class="col-sm-8 col-12 mt-4 mb-4">
+        <div class="col-sm-7 col-12 mt-4 mb-4">
             {{event.description}}
             <p><a href="{{event.url}}" target="_blank">{{event.url}}</a></p>
+        </div>
+        <div class="col-sm-1 col-12 mt-4 mb-4">
+        {% if user.is_staff %}
+            <a class="btn btn-red float-left mt-4" href="{% url 'editEvent' event.id %}"><i class="fas fa-edit"></i></a>
+            <a class="btn btn-red float-left mt-4" href="{% url 'deleteEvent' event.id %}" style="margin-left: 5px;"><i class="fas fa-trash-alt"></i></a>
+        {% endif %}
         </div>
     </div>
     {% endfor %}
