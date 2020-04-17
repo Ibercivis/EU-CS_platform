@@ -15,7 +15,6 @@
 
 
 {% block list_of_items %}
-
 <div class="container">
 	<div class="row">
 		<div class="col-12">
@@ -23,49 +22,53 @@
 				{% for post in post_list %}
 				{% if post.sticky == 1%}
 				<div class="card shadow">
-					<a  href="{% url 'post_detail' post.slug  %}">
+					<a href="{% url 'post_detail' post.slug  %}">
 						<img class="card-img-top" src="/media/{{post.image}}" alt="Card image">
 					</a>
 					<div class="card-body">
-						<a href=""><h5 class="card-title">{{ post.title }}</h5></a>
-						<p class="card-text text-muted h6">{{ post.author.name }} <br/> {{ post.created_on}} </p>
-						<p class="card-text">{{post.excerpt | safe }}<br/><br/>
-							<a href="{% url 'post_detail' post.slug  %}" >Read More >></a></p>
-						</div>
-					</div>
-					{% endif %}
-					{% endfor %}
-					{% for post in post_list %}
-					{% if post.sticky == 0%}
-					<div class="card shadow">
-						<a  href="{% url 'post_detail' post.slug  %}">
-							<img class="card-img-top" src="/media/{{post.image}}" alt="Card image">
+						<a href="">
+							<h5 class="card-title">{{ post.title }}</h5>
 						</a>
-						<div class="card-body">
-							<a href=""><h5 class="card-title">{{ post.title }}</h5></a>
-							<p class="card-text text-muted h6">{{ post.author.name }} <br/> {{ post.created_on}} </p>
-							<p class="card-text">{{post.excerpt | safe }}<br/><br/>
-								<a href="{% url 'post_detail' post.slug  %}" >Read More >></a></p>
-							</div>
-						</div>
-						{% endif %}
-						{% endfor %}
+						<p class="card-text text-muted h6">{{ post.author.name }} <br /> {{ post.created_on}} </p>
+						<p class="card-text">{{post.excerpt | safe }}<br /><br />
+							<a href="{% url 'post_detail' post.slug  %}">Read More >></a></p>
 					</div>
 				</div>
+				{% endif %}
+				{% endfor %}
+				{% for post in post_list %}
+				{% if post.sticky == 0%}
+				<div class="card shadow">
+					<a href="{% url 'post_detail' post.slug  %}">
+						<img class="card-img-top" src="/media/{{post.image}}" alt="Card image">
+					</a>
+					<div class="card-body">
+						<a href="">
+							<h5 class="card-title">{{ post.title }}</h5>
+						</a>
+						<p class="card-text text-muted h6">{{ post.author.name }} <br /> {{ post.created_on}} </p>
+						<p class="card-text">{{post.excerpt | safe }}<br /><br />
+							<a href="{% url 'post_detail' post.slug  %}">Read More >></a></p>
+					</div>
+				</div>
+				{% endif %}
+				{% endfor %}
 			</div>
 		</div>
+	</div>
+</div>
+{%endblock%}
 
-		{%endblock%}
-		{% block scripts %}
-		<script>
-			$(document).ready(function() {
-				$( ".card" ).hover(
-				function() {
-					$(this).addClass('shadow-none').css('cursor', 'pointer');
-				}, function() {
-					$(this).removeClass('shadow-none');
-				}
-				);
-			});
-		</script>
-		{% endblock scripts %}
+{% block scripts %}
+<script>
+	$(document).ready(function () {
+		$(".card").hover(
+			function () {
+				$(this).addClass('shadow-none').css('cursor', 'pointer');
+			}, function () {
+				$(this).removeClass('shadow-none');
+			}
+		);
+	});
+</script>
+{% endblock scripts %}

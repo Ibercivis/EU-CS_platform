@@ -53,7 +53,7 @@ class SignUpView(
     form_valid_message = "You're signed up!"
 
     def form_valid(self, form):
-        r = super().form_valid(form)
+        super().form_valid(form)
         user = form.save(commit=False)
         user.is_active = False
         user.save()
@@ -74,8 +74,7 @@ class SignUpView(
 
         to_email = form.cleaned_data.get('email')
         send_mail(mail_subject, message, 'eu-citizen.sciece@ibercivis.es',[to_email], html_message=html_message)
-        #email.send()
-        #send_mail(mail_subject,message,"recover@ibercivis.es",[to_email])
+
         return render(self.request, 'accounts/confirm-email.html',{})
 
 

@@ -61,7 +61,7 @@ class ProfileForm(forms.ModelForm):
         choices = choices.split(',')
         for choice in choices:
             if(choice != ''):
-                area = models.InterestArea.objects.get_or_create(interestArea=choice)
+                models.InterestArea.objects.get_or_create(interestArea=choice)
         areas = models.InterestArea.objects.all()
         areas = areas.filter(interestArea__in = choices)
         pForm.interestAreas.set(areas)

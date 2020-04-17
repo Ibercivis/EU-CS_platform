@@ -17,7 +17,6 @@ admin.site.site_header = "Eucs_Platform Administration"
 
 urlpatterns = [
     path("", views.home, name="home"),
-    path("results/", views.results, name="results"),
     path("curated/", views.curated,name="curated"),
     path("imprint/", views.imprint,name="imprint"),
     path("terms/", views.terms,name="terms"),
@@ -36,10 +35,10 @@ urlpatterns = [
     path("", include(projects.urls)),
     path("", include(resources.urls)),
     path('', include('blog.urls')),
+    path("", include(events.urls)),
     path('summernote/', include('django_summernote.urls')),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^reviews/', include('reviews.urls')),
-    path("", include(events.urls)),
 ]
 
 # User-uploaded files like profile pics need to be served in development

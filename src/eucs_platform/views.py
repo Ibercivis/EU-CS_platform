@@ -14,8 +14,6 @@ import json
 
 
 def home(request):
-    #groups = ResourceGroup.objects.get_queryset().order_by('id')
-    #resourcesgrouped = ResourcesGrouped.objects.get_queryset().order_by('group')
     try:
         featuredProjectsFixed = [59,54]
         featuredProjects = []
@@ -42,28 +40,6 @@ def home(request):
 
 class AboutPage(generic.TemplateView):
     template_name = "about.html"
-
-
-def results(request):
-    projects = Project.objects.get_queryset().order_by('id')
-    resources = Resource.objects.get_queryset().order_by('id')
-    showProjects = showResources = True
-
-    if request.GET.get('keywords'):
-        projects = projects.filter( Q(name__icontains = request.GET['keywords']) |
-                                    Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
-        resources = resources.filter( Q(name__icontains = request.GET['keywords'])  |
-                                    Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
-
-
-    if request.GET.get('projects_check'):
-        showProjects = True
-
-    if request.GET.get('resources_check'):
-        showResources = True
-
-    return render(request, 'results.html', {'projects': projects, 'resources': resources,
-    'showProjects': showProjects, 'showResources': showResources})
 
 def curated(request):
     groups = ResourceGroup.objects.get_queryset().order_by('id')

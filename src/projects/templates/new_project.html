@@ -293,6 +293,7 @@
   </div>
 </div>
 {% endblock list_of_items %}
+
 {% block scripts %}
 <script src="{% static 'site/js/site.js' %}"></script>
 <script src="{% static 'scripts/cropper.min.js' %}"></script>
@@ -561,8 +562,6 @@
     map.addControl(searchControl);
     map.on('geosearch/showlocation', searchedMarker);
   }
-
-
 </script>
 {{ form.media.js }}
 {% endblock scripts %}
