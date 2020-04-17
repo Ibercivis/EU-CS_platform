@@ -38,7 +38,7 @@
 {% block list_of_items %}
 {% include "modal_projects.html" %}
 <div class="container">
-	<div class="row">
+	<div class="row .projects">
 		{% include "projects_cards.html" %}
 	</div>
 </div>
@@ -51,7 +51,6 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
 <script>
 	function setFeatured(idProject){
-		var htmlId = "featured" + idProject;
 		var request = $.ajax(
 		{
 			type: "POST",
@@ -61,7 +60,7 @@ src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bo
 				csrfmiddlewaretoken: '{{ csrf_token }}'
 			},
 			success: function (response) {
-				$("#"+htmlId).load(" #"+htmlId);
+				window.location.reload(false);
 			}
 		}
 		);

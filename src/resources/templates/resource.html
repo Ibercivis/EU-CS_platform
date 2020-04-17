@@ -204,7 +204,6 @@
     }
   });
   function setFeaturedRsc(idResource){
-    var htmlId = "featured" + idResource;
     var request = $.ajax(
     {
       type: "POST",
@@ -214,7 +213,7 @@
         csrfmiddlewaretoken: '{{ csrf_token }}'
       },
       success: function (response) {
-        $("#"+htmlId).load(" #"+htmlId);
+        $(".main-content-container").load(" .main-content-container");
       }
     }
     );
