@@ -16,7 +16,6 @@
 {% block list_of_items %}
 
 <!-- MODAL TO CROP THE IMAGE -->
-
 <div class="modal fade" id="modalCrop">
   <div class="modal-dialog mdialog">
     <div class="modal-content">
@@ -48,7 +47,6 @@
     </div>
   </div>
 </div>
-
 <!-- END MODAL TO CROP -->
 
 
@@ -235,6 +233,7 @@
       </div>
     </div>
     {% endblock list_of_items %}
+    
     {% block scripts %}
     <script src="{% static 'site/js/site.js' %}"></script>
     <script src="{% static 'scripts/cropper.min.js' %}"></script>

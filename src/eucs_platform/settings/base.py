@@ -23,7 +23,6 @@ LOCALE_PATHS = [
 ]
 
 
-
 # Use Django templates using the new Django 1.8 TEMPLATES settings
 TEMPLATES = [
     {
@@ -228,7 +227,6 @@ SUMMERNOTE_THEME = 'bs4'
 SUMMERNOTE_CONFIG = {
     'iframe': True,
     'summernote': {
-        # As an example, using Summernote Air-mode
         'airMode': False,
         'width': '100%',
         'height': '300',

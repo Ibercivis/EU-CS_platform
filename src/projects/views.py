@@ -280,7 +280,6 @@ def text_autocomplete(request):
         keywords = projectsKey.values_list('keywords__keyword',flat=False).distinct()
         keywords = Keyword.objects.filter(keyword__in = keywords).values_list('keyword',flat=True).distinct()
         report = chain(project_names, keywords)
-        #report = getNamesKeywords(text)
         json = list(report)
         return JsonResponse(json, safe=False)
     else:

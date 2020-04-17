@@ -8,6 +8,7 @@
 {% block navbar-left %}
 {% include "_navbar.html" with active_link="resources" %}
 {% endblock %}
+
 {% block list_of_items %}
 {{ permissionForm.media.css }}
 <div class="container mt-5">
@@ -182,6 +183,7 @@
   </div>
 </div>
 {% endblock list_of_items %}
+
 {% block scripts %}
 <script>
   $(document).ready(function () {
