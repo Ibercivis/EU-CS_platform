@@ -372,6 +372,13 @@
          validationFailed = true;
          $("#div_id_contact_person_email").append("<span class='errorMsg'> <b>Enter a valid email address.</b></span>");
         }
+        //Check dates
+        var start_date = $("#id_start_date").val();
+        var end_date = $("#id_end_date").val();
+        if (start_date != '' && end_date != '' && end_date < start_date){
+          validationFailed = true;
+          $("#div_id_end_date").append("<span class='errorMsg'> <b>End date should be greater than start date.</b></span>");
+        }
       }
 
       if (validationFailed) {
