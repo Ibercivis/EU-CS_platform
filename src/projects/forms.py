@@ -90,36 +90,10 @@ class ProjectForm(forms.Form):
 
         if(pk):
             project = get_object_or_404(Project, id=pk)
-            project.name = self.data['project_name']
-            project.url = self.data['url']
-            project.author = self.data['contact_person']
-            project.author_email = self.data['contact_person_email']
-            project.latitude = latitude
-            project.longitude = longitude
-            project.country = country
-            project.aim = self.data['aim']
-            project.description = self.data['description']
-            project.status = status
-            project.host = self.data['host']
-            project.imageCredit1 = self.data['image_credit1']
-            project.imageCredit2 = self.data['image_credit2']
-            project.imageCredit3 = self.data['image_credit3']
-            project.howToParticipate = self.data['how_to_participate']
-            project.doingAtHome = doingAtHome
-            project.equipment = self.data['equipment']
-            project.fundingProgram = self.data['funding_program']
-            project.originUID = self.data['originUID']
-            project.originURL = self.data['originURL']
+            self.updateFields(project, latitude, longitude, country, status, doingAtHome)
         else:
-            project = Project(name = self.data['project_name'], url = self.data['url'], creator=args.user,                         
-                         author = self.data['contact_person'], author_email = self.data['contact_person_email'],
-                         latitude = latitude, longitude = longitude, country = country,
-                         aim = self.data['aim'], description = self.data['description'],
-                         status = status, host = self.data['host'], imageCredit1 = self.data['image_credit1'],
-                         imageCredit2 = self.data['image_credit2'], imageCredit3 = self.data['image_credit3'],
-                         howToParticipate = self.data['how_to_participate'],equipment = self.data['equipment'],
-                         fundingProgram = self.data['funding_program'],originUID = self.data['originUID'],
-                         originURL = self.data['originURL'], doingAtHome=doingAtHome )
+            project = self.createProject(latitude, longitude, country, status, doingAtHome, args)
+           
         if start_dateData:
             project.start_date = start_dateData
         if end_dateData:
@@ -137,10 +111,8 @@ class ProjectForm(forms.Form):
 
         if(images[0] != '/'):
             project.image1 = images[0]
-
         if(images[1] != '/'):
             project.image2 = images[1]
-
         if(images[2] != '/'):
             project.image3 = images[2]
 
@@ -152,8 +124,10 @@ class ProjectForm(forms.Form):
             cfields = CustomField.objects.all().filter(paragraph__in = paragraphs)
             project = get_object_or_404(Project, id=pk)
             project.customField.set(cfields)
+        
         project.save()
         project.topic.set(self.data.getlist('topic'))
+        
         choices = self.data['choices']
         choices = choices.split(',')
         for choice in choices:
@@ -164,6 +138,40 @@ class ProjectForm(forms.Form):
         project.keywords.set(keywords)
 
         return 'success'
+
+
+    def createProject(self, latitude, longitude, country, status, doingAtHome, args):
+         return Project(name = self.data['project_name'], url = self.data['url'], creator=args.user,                         
+                         author = self.data['contact_person'], author_email = self.data['contact_person_email'],
+                         latitude = latitude, longitude = longitude, country = country,
+                         aim = self.data['aim'], description = self.data['description'],
+                         status = status, host = self.data['host'], imageCredit1 = self.data['image_credit1'],
+                         imageCredit2 = self.data['image_credit2'], imageCredit3 = self.data['image_credit3'],
+                         howToParticipate = self.data['how_to_participate'],equipment = self.data['equipment'],
+                         fundingProgram = self.data['funding_program'],originUID = self.data['originUID'],
+                         originURL = self.data['originURL'], doingAtHome=doingAtHome )
+
+    def updateFields(self, project, latitude, longitude, country, status, doingAtHome):
+        project.name = self.data['project_name']
+        project.url = self.data['url']
+        project.author = self.data['contact_person']
+        project.author_email = self.data['contact_person_email']
+        project.latitude = latitude
+        project.longitude = longitude
+        project.country = country
+        project.aim = self.data['aim']
+        project.description = self.data['description']
+        project.status = status
+        project.host = self.data['host']
+        project.imageCredit1 = self.data['image_credit1']
+        project.imageCredit2 = self.data['image_credit2']
+        project.imageCredit3 = self.data['image_credit3']
+        project.howToParticipate = self.data['how_to_participate']
+        project.doingAtHome = doingAtHome
+        project.equipment = self.data['equipment']
+        project.fundingProgram = self.data['funding_program']
+        project.originUID = self.data['originUID']
+        project.originURL = self.data['originURL']
 
 
 def getCountryCode(latitude, longitude):
