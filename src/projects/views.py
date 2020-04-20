@@ -1,23 +1,18 @@
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
-from django.urls import reverse
-from django.views import generic
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import get_user_model
-from django.utils import timezone
-from django.utils.dateparse import parse_datetime
 from django.utils import formats
-from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q, Avg
 from datetime import datetime
 from PIL import Image
 from itertools import chain
 from reviews.models import Review
-from .forms import ProjectForm, CustomFieldForm, CustomFieldFormset, ProjectPermissionForm
-from .models import Project, Topic, Status, Keyword, FeaturedProjects, FollowedProjects, FundingBody, CustomField, ProjectPermission,OriginDatabase
+from .forms import ProjectForm, CustomFieldFormset, ProjectPermissionForm
+from .models import Project, Topic, Status, Keyword, FeaturedProjects, FollowedProjects, FundingBody, CustomField, ProjectPermission, OriginDatabase
 import json
 import random
 
@@ -32,49 +27,14 @@ def new_project(request):
     if request.method == 'POST':
         form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
-            images = []
-            image1_path = saveImage(request, form, 'image1', '1')
-            image2_path = saveImage(request, form, 'image2', '2')
-            image3_path = saveImage(request, form, 'image3', '3')
-            images.append(image1_path)
-            images.append(image2_path)
-            images.append(image3_path)
+            images = setImages(request, form)
             form.save(request, images, [])
-
-            messages.success(request, "Project added with success!")
             return redirect('/projects')
         else:
             print(form.errors)
 
     return render(request, 'new_project.html', {'form': form, 'user':user})
 
-def saveImage(request, form, element, ref):
-    image_path = ''
-    filepath = request.FILES.get(element, False)
-    withImage = form.cleaned_data.get('withImage' + ref)
-    if (filepath):
-        x = form.cleaned_data.get('x' + ref)
-        y = form.cleaned_data.get('y' + ref)
-        w = form.cleaned_data.get('width' + ref)
-        h = form.cleaned_data.get('height' + ref)        
-        photo = request.FILES[element]
-        image = Image.open(photo)
-        cropped_image = image.crop((x, y, w+x, h+y))
-        if(ref == '3'):
-            resized_image = cropped_image.resize((1100, 400), Image.ANTIALIAS)
-        else:
-            resized_image = cropped_image.resize((600, 400), Image.ANTIALIAS)
-        _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
-        random_num = random.randint(0, 1000)
-        image_path = "media/images/" + _datetime + '_' + str(random_num) + '_' + photo.name
-        resized_image.save(image_path)
-        image_path = '/' + image_path
-    elif withImage:
-            image_path = '/'
-    else:
-        image_path = ''
-
-    return  image_path
 
 def projects(request):
     projects = Project.objects.get_queryset()
@@ -93,35 +53,9 @@ def projects(request):
                                     Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
         filters['keywords'] = request.GET['keywords']
 
-    if request.GET.get('topic'):
-        projects = projects.filter(topic__topic = request.GET['topic'])
-        filters['topic'] = request.GET['topic']
+    projects = applyFilters(request, projects)
+    filters = setFilters(request, filters)    
 
-    if request.GET.get('status'):
-        projects = projects.filter(status = request.GET['status'])
-        filters['status'] = int(request.GET['status'])
-    if request.GET.get('doingAtHome'):
-        projects = projects.filter(doingAtHome = request.GET['doingAtHome'])
-        filters['doingAtHome'] = int(request.GET['doingAtHome'])
-
-    if request.GET.get('country'):
-        projects = projects.filter(country = request.GET['country'])
-        filters['country'] = request.GET['country']
-
-    if request.GET.get('host'):
-        projects = projects.filter( host__icontains = request.GET['host'])
-        filters['host'] = request.GET['host']
-
-    if request.GET.get('featuredCheck'):
-        if request.GET['featuredCheck'] == 'On':
-            projects = projects.filter(id__in=featuredProjects)
-        if request.GET['featuredCheck'] == 'Off':
-            projects = projects.exclude(id__in=featuredProjects)
-        if request.GET['featuredCheck'] == 'All':
-            projects = projects
-        filters['featuredCheck'] = request.GET['featuredCheck']
-    else:
-        projects = projects.filter(id__in=featuredProjects)
     if not user.is_staff:
         projects = projects.filter(~Q(hidden=True))
 
@@ -169,22 +103,6 @@ def project(request, pk):
     return render(request, 'project.html', {'project':project, 'followedProjects':followedProjects,
     'featuredProjects':featuredProjects, 'permissionForm': permissionForm, 'cooperators': getCooperators(pk)})
 
-def getOtherUsers(creator):
-    users = list(User.objects.all().exclude(is_superuser=True).exclude(id=creator.id).values_list('email',flat=True))
-    users = ", ".join(users)
-    return users
-
-def getCooperators(projectID):
-    users = list(ProjectPermission.objects.all().filter(project_id=projectID).values_list('user',flat=True))
-    return users
-
-def getCooperatorsEmail(projectID):
-    users = getCooperators(projectID)
-    cooperators = ""
-    for user in users:
-        userObj = get_object_or_404(User, id=user)
-        cooperators += userObj.email + ", "
-    return cooperators
 
 def editProject(request, pk):
     project = get_object_or_404(Project, id=pk)
@@ -249,19 +167,14 @@ def editProject(request, pk):
                 paragraph = cField_form.cleaned_data.get('paragraph')
                 if title and paragraph:
                     new_cFields.append(CustomField(title=title, paragraph=paragraph))
-            images = []
-            image1_path = saveImage(request, form, 'image1', '1')
-            image2_path = saveImage(request, form, 'image2', '2')
-            image3_path = saveImage(request, form, 'image3', '3')
-            images.append(image1_path)
-            images.append(image2_path)
-            images.append(image3_path)
+            images = setImages(request, form)
             form.save(request, images,[])
             return redirect('/project/'+ str(pk))
         else:
             print(form.errors)
     return render(request, 'editProject.html', {'form': form, 'project':project, 'user':user, 'cField_formset':cField_formset, 
                 'permissionForm': permissionForm})
+
 
 
 def deleteProject(request, pk):
@@ -285,6 +198,62 @@ def text_autocomplete(request):
     else:
         return HttpResponse("No cookies")
 
+
+def setImages(request, form):
+    images = []
+    image1_path = saveImage(request, form, 'image1', '1')
+    image2_path = saveImage(request, form, 'image2', '2')
+    image3_path = saveImage(request, form, 'image3', '3')
+    images.append(image1_path)
+    images.append(image2_path)
+    images.append(image3_path)
+    return images
+
+def saveImage(request, form, element, ref):
+    image_path = ''
+    filepath = request.FILES.get(element, False)
+    withImage = form.cleaned_data.get('withImage' + ref)
+    if (filepath):
+        x = form.cleaned_data.get('x' + ref)
+        y = form.cleaned_data.get('y' + ref)
+        w = form.cleaned_data.get('width' + ref)
+        h = form.cleaned_data.get('height' + ref)        
+        photo = request.FILES[element]
+        image = Image.open(photo)
+        cropped_image = image.crop((x, y, w+x, h+y))
+        if(ref == '3'):
+            resized_image = cropped_image.resize((1100, 400), Image.ANTIALIAS)
+        else:
+            resized_image = cropped_image.resize((600, 400), Image.ANTIALIAS)
+        _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
+        random_num = random.randint(0, 1000)
+        image_path = "media/images/" + _datetime + '_' + str(random_num) + '_' + photo.name
+        resized_image.save(image_path)
+        image_path = '/' + image_path
+    elif withImage:
+            image_path = '/'
+    else:
+        image_path = ''
+
+    return  image_path
+
+def getOtherUsers(creator):
+    users = list(User.objects.all().exclude(is_superuser=True).exclude(id=creator.id).values_list('email',flat=True))
+    users = ", ".join(users)
+    return users
+
+def getCooperators(projectID):
+    users = list(ProjectPermission.objects.all().filter(project_id=projectID).values_list('user',flat=True))
+    return users
+
+def getCooperatorsEmail(projectID):
+    users = getCooperators(projectID)
+    cooperators = ""
+    for user in users:
+        userObj = get_object_or_404(User, id=user)
+        cooperators += userObj.email + ", "
+    return cooperators
+
 def getNamesKeywords(text):
     project_names = Project.objects.filter(name__icontains=text).values_list('name',flat=True).distinct()
     keywords = Keyword.objects.filter(keyword__icontains=text).values_list('keyword',flat=True).distinct()
@@ -292,7 +261,10 @@ def getNamesKeywords(text):
     return report
 
 def preFilteredProjects(request):
-    projects = Project.objects.get_queryset().order_by('id')
+    projects = Project.objects.get_queryset().order_by('id')   
+    return applyFilters(request, projects)
+
+def applyFilters(request, projects):
     featuredProjects = FeaturedProjects.objects.all().values_list('project_id',flat=True)
 
     if request.GET.get('topic'):
@@ -304,9 +276,8 @@ def preFilteredProjects(request):
     if request.GET.get('country'):
         projects = projects.filter(country = request.GET['country'])
 
-    if request.GET.get('host'):
-        projects = projects.filter( host__icontains = request.GET['host'])
-
+    if request.GET.get('doingAtHome'):
+        projects = projects.filter(doingAtHome = request.GET['doingAtHome'])
 
     if request.GET.get('featuredCheck'):
         if request.GET['featuredCheck'] == 'On':
@@ -317,17 +288,21 @@ def preFilteredProjects(request):
             projects = projects
     else:
         projects = projects.filter(id__in=featuredProjects)
-
+    
     return projects
 
-def host_autocomplete(request):
-    if request.GET.get('q'):
-        text = request.GET['q']
-        data = Project.objects.filter(host__icontains=text).values_list('host',flat=True)
-        json = list(data)
-        return JsonResponse(json, safe=False)
-    else:
-        return HttpResponse("No cookies")
+def setFilters(request, filters):
+    if request.GET.get('topic'):
+        filters['topic'] = request.GET['topic']
+    if request.GET.get('status'):
+        filters['status'] =  int(request.GET['status'])
+    if request.GET.get('doingAtHome'):
+        filters['doingAtHome'] = int(request.GET['doingAtHome'])
+    if request.GET.get('country'):
+        filters['country'] = request.GET['country']
+    if request.GET.get('featuredCheck'):
+        filters['featuredCheck'] = request.GET['featuredCheck']
+    return filters
 
 def clearFilters(request):
     return redirect ('projects')
@@ -336,7 +311,6 @@ def clearFilters(request):
 def setFeatured(request):
     response = {}
     id = request.POST.get("project_id")
-
     #Delete
     try:
         obj = FeaturedProjects.objects.get(project_id=id)

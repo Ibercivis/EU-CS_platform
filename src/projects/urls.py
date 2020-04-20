@@ -9,7 +9,6 @@ urlpatterns = [
     path('editProject/<int:pk>', views.editProject, name='editProject'),
     path('deleteProject/<int:pk>', views.deleteProject, name='deleteProject'),
     path('text_autocomplete/', views.text_autocomplete, name='text_autocomplete'),
-    path('host_autocomplete/', views.host_autocomplete, name='host_autocomplete'),
     path('clearfilters/', views.clearFilters, name='clearfilters'),
     path('setFeatured/', views.setFeatured, name='setFeatured'),
     path('setHidden/', views.setHidden, name='setHidden'),
