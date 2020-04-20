@@ -1,20 +1,17 @@
 from django import forms
 from django.db import models
-from .models import Project, Topic, Status, Keyword, FundingBody, CustomField, OriginDatabase
-from django.shortcuts import get_object_or_404
-from django_select2.forms import Select2MultipleWidget, Select2Widget
 from django.core.files import File
 from django.forms import formset_factory
-from PIL import Image
+from django.shortcuts import get_object_or_404
+from django_select2.forms import Select2MultipleWidget
+from django_summernote.widgets import SummernoteWidget
 from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderServiceError
-from django_summernote.widgets import SummernoteWidget
-from itertools import chain
+from .models import Project, Topic, Status, Keyword, FundingBody, CustomField, OriginDatabase
 
 geolocator = Nominatim(timeout=None)
 
 class ProjectForm(forms.Form):
-    error_css_class = 'form_error'
     #Basic Project Information
     project_name = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder':'Short name or title of the prohect'}))
     #aim = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 2000}}), label="Aim of the project (max 2000 characters)")
@@ -78,12 +75,6 @@ class ProjectForm(forms.Form):
     title = forms.CharField(max_length=100, required=False)
     paragraph = forms.CharField(widget=SummernoteWidget(), required=False)
 
-    def clean(self):
-        start_date = self.data['start_date']
-        end_date = self.data['end_date']
-        if start_date is not '' and end_date is not '' and end_date < start_date:
-            msg = u"End date should be greater than start date."
-            self._errors["end_date"] = self.error_class([msg])
 
     def save(self, args, images, cFields):
         pk = self.data.get('projectID', '')
@@ -94,10 +85,8 @@ class ProjectForm(forms.Form):
         country = getCountryCode(latitude,longitude).upper()
         status = get_object_or_404(Status, id=self.data['status'])
         doingAtHome=False
-        if 'doingAtHome' in self.data:
-            if(self.data['doingAtHome']=='on'):
-                doingAtHome=True
-
+        if('doingAtHome' in self.data and self.data['doingAtHome'] == 'on'):
+            doingAtHome=True
 
         if(pk):
             project = get_object_or_404(Project, id=pk)
@@ -122,8 +111,7 @@ class ProjectForm(forms.Form):
             project.originUID = self.data['originUID']
             project.originURL = self.data['originURL']
         else:
-            project = Project(name = self.data['project_name'],
-                         url = self.data['url'], creator=args.user,
+            project = Project(name = self.data['project_name'], url = self.data['url'], creator=args.user,                         
                          author = self.data['contact_person'], author_email = self.data['contact_person_email'],
                          latitude = latitude, longitude = longitude, country = country,
                          aim = self.data['aim'], description = self.data['description'],
@@ -187,6 +175,7 @@ def getCountryCode(latitude, longitude):
             return ''
     except GeocoderServiceError:
         return ''
+
 
 class CustomFieldForm(forms.Form):
     title = forms.CharField(max_length=100, required=False)
