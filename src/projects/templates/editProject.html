@@ -336,7 +336,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.formset/1.2.2/jquery.formset.js"></script>
 <script src="{% static 'site/js/leaflet-geosearch_2_7.min.js' %}"></script>
 <script>
-  $(document).ready(function () {
+  $(function () {
     var choices = $("#id_choices").val();
     var choices = choices.split(",");
     var choicesSelected = $("#id_choicesSelected").val().split(",");
@@ -422,10 +422,59 @@
       }
     });
 
-    function validateEmail(email) {
-      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(String(email).toLowerCase());
+    var users = $("#id_usersCollection").val();
+    var users = users.split(",");
+    var selectedUsers = $("#id_selectedUsers").val().split(",");
+    for (user of users){
+      var found = false;
+      for(sel of selectedUsers){
+        if(sel.trim() == user.trim()){
+          found = true;
+          $("#id_usersAllowed").append("<option value='" + user +"' selected> " + user + " </option>");
+        }
+      }
+      if(!found){
+        $("#id_usersAllowed").append("<option value='" + user +"'> " + user + " </option>");
+      }
     }
+
+    $('#id_usersAllowed').on('change', function () {
+        users = $("#id_usersAllowed option:selected").map(function () {
+          return $.trim($(this).text());
+        }).get().join(',');
+
+        var idProject = {{project.id}};
+        var request = $.ajax(
+        {
+          type: "POST",
+          url: "{% url 'allowUser' %}",
+          data: {
+            "project_id": idProject,
+            "users": users,
+            csrfmiddlewaretoken: '{{ csrf_token }}'
+          },
+          success: function (response) {
+
+          }
+        }
+      );
+    });
+
+    $('#deleteImage1 > a').click(function () {
+      $('#imageResult1').attr('src', '');
+      $("#deleteImage1").empty();
+      $("#id_withImage1").val(false);
+    });
+    $('#deleteImage2 > a').click(function () {
+      $('#imageResult2').attr('src', '');
+      $("#deleteImage2").empty();
+      $("#id_withImage2").val(false);
+    });
+    $('#deleteImage3 > a').click(function () {
+      $('#imageResult3').attr('src', '');
+      $("#deleteImage3").empty();
+      $("#id_withImage3").val(false);
+    });
 
     $("form").submit(function (e) {
       var validationFailed = false;
@@ -478,65 +527,8 @@
       }
     });
 
-    var users = $("#id_usersCollection").val();
-    var users = users.split(",");
-
-    var selectedUsers = $("#id_selectedUsers").val().split(",");
-    for (user of users){
-      var found = false;
-      for(sel of selectedUsers){
-        if(sel.trim() == user.trim()){
-          found = true;
-          $("#id_usersAllowed").append("<option value='" + user +"' selected> " + user + " </option>");
-        }
-      }
-      if(!found){
-        $("#id_usersAllowed").append("<option value='" + user +"'> " + user + " </option>");
-      }
-    }
-
-
-    $('#deleteImage1 > a').click(function () {
-      $('#imageResult1').attr('src', '');
-      $("#deleteImage1").empty();
-      $("#id_withImage1").val(false);
-    });
-    $('#deleteImage2 > a').click(function () {
-      $('#imageResult2').attr('src', '');
-      $("#deleteImage2").empty();
-      $("#id_withImage2").val(false);
-    });
-    $('#deleteImage3 > a').click(function () {
-      $('#imageResult3').attr('src', '');
-      $("#deleteImage3").empty();
-      $("#id_withImage3").val(false);
-    });
-
   });
 
-  $(function () {
-      $('#id_usersAllowed').on('change', function () {
-        users = $("#id_usersAllowed option:selected").map(function () {
-          return $.trim($(this).text());
-        }).get().join(',');
-
-        var idProject = {{project.id}};
-        var request = $.ajax(
-        {
-          type: "POST",
-          url: "{% url 'allowUser' %}",
-          data: {
-            "project_id": idProject,
-            "users": users,
-            csrfmiddlewaretoken: '{{ csrf_token }}'
-          },
-          success: function (response) {
-
-          }
-        }
-        );
-      });
-    });
 
   $('#confirm-delete').on('show.bs.modal', function(e) {
     $(this).find('.btn-delete').attr('href', $(e.relatedTarget).data('href'));
@@ -596,7 +588,6 @@
       else{
         $("#modalCrop").modal("show");
       }
-
     });
 
     $("#imageResult2").click(function () {
@@ -718,9 +709,7 @@
 
     map.addControl(searchControl);
     map.on('geosearch/showlocation', searchedMarker);
-
   }
-
 </script>
 {{ form.media.js }}
 {% endblock scripts %}

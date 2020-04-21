@@ -10,18 +10,7 @@
 {% endblock %}
 {% block page_title %}
 {% endblock page_title %}
-{% block messages %}
-{% if messages %}
-{% for message in messages %}
-<div class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
-  <div class="alert alert-{{ message.tags }}">
-    <a class="close" data-dismiss="alert">×</a>
-    {{ message|safe }}
-  </div>
-</div>
-{% endfor %}
-{% endif %}
-{% endblock %}
+
 {% block splash %}
 <div class="jumbotron jumbotron-fluid jumbotron-resources">
   <div class="container">
@@ -104,9 +93,7 @@
       }
     );
   }
-</script>
 
-<script>
   $('.basicAutoComplete').autoComplete(
     { minLength: 3 }
   );
@@ -150,8 +137,7 @@
       $('#searchResources').submit();
     });
   });
-</script>
-<script>
+
   $(document).ready(function () {
     $(".card").hover(
       function () {
