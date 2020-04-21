@@ -139,7 +139,6 @@ def new_resource(request):
     if request.method == 'POST':
         form = ResourceForm(request.POST, request.FILES)
         if form.is_valid():
-
             images = []
             image1_path = saveImage(request, form, 'image1','1')
             image2_path = saveImage(request, form, 'image2','2')

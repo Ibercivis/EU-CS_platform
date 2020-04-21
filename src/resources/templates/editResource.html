@@ -241,81 +241,97 @@
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"></script>
     <script>
-  $(document).ready(function () {
-    var users = $("#id_usersCollection").val();
-    if (users) {
-      var users = users.split(",");
-      var selectedUsers = $("#id_selectedUsers").val().split(",");
-      for (user of users) {
-        var found = false;
-        for (sel of selectedUsers) {
-          if (sel.trim() == user.trim()) {
-            found = true;
-            $("#id_usersAllowed").append("<option value='" + user + "' selected> " + user + " </option>");
+      $(function () {
+        var users = $("#id_usersCollection").val();
+        if (users) {
+          var users = users.split(",");
+          var selectedUsers = $("#id_selectedUsers").val().split(",");
+          for (user of users) {
+            var found = false;
+            for (sel of selectedUsers) {
+              if (sel.trim() == user.trim()) {
+                found = true;
+                $("#id_usersAllowed").append("<option value='" + user + "' selected> " + user + " </option>");
+              }
+            }
+            if (!found) {
+              $("#id_usersAllowed").append("<option value='" + user + "'> " + user + " </option>");
+            }
           }
         }
-        if (!found) {
-          $("#id_usersAllowed").append("<option value='" + user + "'> " + user + " </option>");
-        }
-      }
-    }
-  });
 
-      $(document).ready(function () {
+        $('#id_usersAllowed').on('change', function () {
+          users = $("#id_usersAllowed option:selected").map(function () {
+            return $.trim($(this).text());
+          }).get().join(',');
+            var idResource = {{ resource.id }};
+            var request = $.ajax(
+              {
+                type: "POST",
+                url: "{% url 'allowUserResource' %}",
+                data: {
+                  "resource_id": idResource,
+                  "users": users,
+                  csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function (response) {
+                }
+              }
+            );
+        });
+
         var choices = $("#id_choices").val();
         var choices = choices.split(",");
 
         var choicesSelected = $("#id_choicesSelected").val().split(",");
-        for (choice of choices){
+        for (choice of choices) {
           var found = false;
-          for(sel of choicesSelected){
-            if(sel.trim() == choice.trim()){
+          for (sel of choicesSelected) {
+            if (sel.trim() == choice.trim()) {
               found = true;
-              $("#id_keywords").append("<option value='" + choice +"' selected> " + choice + " </option>");
+              $("#id_keywords").append("<option value='" + choice + "' selected> " + choice + " </option>");
             }
           }
-          if(!found){
-            $("#id_keywords").append("<option value='" + choice +"'> " + choice + " </option>");
+          if (!found) {
+            $("#id_keywords").append("<option value='" + choice + "'> " + choice + " </option>");
           }
         }
         $("#id_keywords").attr('required', true);
         $("#div_id_keywords label").append('<span class="asteriskField">*</span>');
-        $("#div_id_keywords div").on('keyup', function(){
+        $("#div_id_keywords div").on('keyup', function () {
           var key = $("#div_id_keywords .selection input").val();
           if (key.indexOf(',') > -1) {
-            var word =key.slice(0, -1);
+            var word = key.slice(0, -1);
             $("#div_id_keywords .selection input").val("");
-            $("#id_keywords").append("<option value='" + word +"' selected> " + word + " </option>");
+            $("#id_keywords").append("<option value='" + word + "' selected> " + word + " </option>");
           }
         });
 
         var authorsCollection = $("#id_authorsCollection").val();
         var authorsCollection = authorsCollection.split(",");
-
         var selectedAuthors = $("#id_selectedAuthors").val().split(",");
-        for (author of authorsCollection){
+        for (author of authorsCollection) {
           var found = false;
-          for(sel of selectedAuthors){
-            if(sel.trim() == author.trim()){
+          for (sel of selectedAuthors) {
+            if (sel.trim() == author.trim()) {
               found = true;
-              $("#id_authors").append("<option value='" + author +"' selected> " + author + " </option>");
+              $("#id_authors").append("<option value='" + author + "' selected> " + author + " </option>");
             }
           }
-          if(!found){
-            $("#id_authors").append("<option value='" + author +"'> " + author + " </option>");
+          if (!found) {
+            $("#id_authors").append("<option value='" + author + "'> " + author + " </option>");
           }
         }
         $("#id_authors").attr('required', true);
         $("#div_id_authors label").append('<span class="asteriskField">*</span>');
-        $("#div_id_authors div").on('keyup', function(){
+        $("#div_id_authors div").on('keyup', function () {
           var key = $("#div_id_authors .selection input").val();
           if (key.indexOf(',') > -1) {
-            var word =key.slice(0, -1);
+            var word = key.slice(0, -1);
             $("#div_id_authors .selection input").val("");
-            $("#id_authors").append("<option value='" + word +"' selected> " + word + " </option>");
+            $("#id_authors").append("<option value='" + word + "' selected> " + word + " </option>");
           }
         });
-
 
         $('#contactinfo').on('click', function () {
           $('#contactinfoform').toggle();
@@ -329,12 +345,7 @@
           $('html,body').animate({ scrollTop: $("#imgResult").offset().top - 220 }, { duration: "slow" });
         });
 
-        $("#div_id_curatedList select").val({{curatedGroups}});
-
-        function validateEmail(email) {
-          var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-          return re.test(String(email).toLowerCase());
-        }
+        $("#div_id_curatedList select").val({{ curatedGroups }});
 
         $("form").submit(function (e) {
           var validationFailed = false;
@@ -342,7 +353,7 @@
           $.each($("[required]"), function (index, value) {
             var id = $(value).parent().parent().attr('id');
             $("#" + id + " .errorMsg").remove();
-            if(!$(value).val() || $(value).val().length < 1){
+            if (!$(value).val() || $(value).val().length < 1) {
               validationFailed = true;
               $(value).parent().append("<span class='errorMsg'> <b>Required field (*)</b></span>");
             }
@@ -353,7 +364,7 @@
             e.preventDefault();
             $('html,body').animate({ scrollTop: $(".edit-resource").offset().top - 160 }, { duration: "slow" });
             return false;
-          }else{
+          } else {
             var option_all = $("#id_keywords option:selected").map(function () {
               return $.trim($(this).text());
             }).get().join(',');
@@ -369,14 +380,14 @@
             var category = $("#id_category").val();
             $("#id_categorySelected").val(category);
             var subcategory = $("#id_subcategory").val();
-            if(subcategory){
+            if (subcategory) {
               $("#id_categorySelected").val(subcategory);
             }
           }
         });
       });
 
-      $('#confirm-delete').on('show.bs.modal', function(e) {
+      $('#confirm-delete').on('show.bs.modal', function (e) {
         $(this).find('.btn-delete').attr('href', $(e.relatedTarget).data('href'));
       });
 
@@ -391,23 +402,23 @@
         $("#id_withImage2").val(false);
       });
 
-      function getSubCategories(){
+      function getSubCategories() {
         var category = $("#id_category").val();
         var request = $.ajax(
-        {
-          type: "GET",
-          url: "{% url 'get_sub_category' %}",
-          data: {
-            "category": category
-          },
-          success: function (response) {
-            $("#id_sub_categories").html(response.sub_categories);
-            if($("#id_category").val() != $("#id_categorySelected").val()){
-              $("#id_subcategory").val($("#id_categorySelected").val());
-            }
+          {
+            type: "GET",
+            url: "{% url 'get_sub_category' %}",
+            data: {
+              "category": category
+            },
+            success: function (response) {
+              $("#id_sub_categories").html(response.sub_categories);
+              if ($("#id_category").val() != $("#id_categorySelected").val()) {
+                $("#id_subcategory").val($("#id_categorySelected").val());
+              }
 
+            }
           }
-        }
         );
       }
       $(function () {
@@ -450,7 +461,7 @@
         $("#modalCrop").on("shown.bs.modal", function () {
           $image.cropper({
             viewMode: 0,
-            aspectRatio: imgSelected == 2 ? 11/4 : 3/2,
+            aspectRatio: imgSelected == 2 ? 11 / 4 : 3 / 2,
             minCropBoxWidth: imgSelected == 2 ? 1100 : 600,
             minCropBoxHeight: 400,
             dragMode: 'move',
@@ -487,38 +498,16 @@
           $("#id_width" + imgSelected).val(cropData["width"]);
           $("#modalCrop").modal("hide");
           $('#imageResult' + imgSelected).attr('src', $image.cropper('getCroppedCanvas',
-          {width: imgSelected == 2 ? 1100 : 600, height: 400}).toDataURL());
+            { width: imgSelected == 2 ? 1100 : 600, height: 400 }).toDataURL());
 
-          $("#deleteImage"+imgSelected).html('<a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>  ');
-          $("#deleteImage"+imgSelected).click(function () {
-            $('#imageResult'+imgSelected).attr('src', '');
-            $('#id_image'+imgSelected).val('');
-            $("#deleteImage"+imgSelected).empty();
+          $("#deleteImage" + imgSelected).html('<a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>  ');
+          $("#deleteImage" + imgSelected).click(function () {
+            $('#imageResult' + imgSelected).attr('src', '');
+            $('#id_image' + imgSelected).val('');
+            $("#deleteImage" + imgSelected).empty();
           });
         });
 
-      });
-
-        $(function () {
-          $('#id_usersAllowed').on('change', function () {
-            users = $("#id_usersAllowed option:selected").map(function () {
-              return $.trim($(this).text());
-            }).get().join(',');
-            var idResource = {{ resource.id }};
-            var request = $.ajax(
-              {
-                type: "POST",
-                url: "{% url 'allowUserResource' %}",
-                data: {
-                  "resource_id": idResource,
-                  "users": users,
-                  csrfmiddlewaretoken: '{{ csrf_token }}'
-                },
-                success: function (response) {
-                }
-              }
-            );
-          });
       });
     </script>
     {{ form.media.js }}

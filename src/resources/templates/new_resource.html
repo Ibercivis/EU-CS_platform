@@ -243,7 +243,7 @@
 <script src="https://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"></script>
 <script>
   var readSavedConfirmation = false;
-  $(document).ready(function () {
+  $(function () {
 
     var choices = $("#id_choices").val();
     var choices = choices.split(",");
@@ -284,10 +284,6 @@
     $("#id_category").on('change', getSubCategories);
     getSubCategories();
 
-    function validateEmail(email) {
-      //  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      //  return re.test(String(email).toLowerCase());
-    }
 
     $("form").submit(function (e) {
       var validationFailed = false;
@@ -300,7 +296,6 @@
             $(value).parent().append("<span class='errorMsg'> <b>Required field (*)</b></span>");
           }
         });
-        //var email = $("#id_author_email").val();
       }
 
       if (validationFailed) {

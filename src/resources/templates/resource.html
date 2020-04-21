@@ -186,7 +186,7 @@
 
 {% block scripts %}
 <script>
-  $(document).ready(function () {
+  $(function () {
     var users = $("#id_usersCollection").val();
     if(users){
       var users = users.split(",");
@@ -204,40 +204,7 @@
         }
       }
     }
-  });
-  function setFeaturedRsc(idResource){
-    var request = $.ajax(
-    {
-      type: "POST",
-      url: "{% url 'setFeaturedRsc' %}",
-      data: {
-        "resource_id": idResource,
-        csrfmiddlewaretoken: '{{ csrf_token }}'
-      },
-      success: function (response) {
-        $(".main-content-container").load(" .main-content-container");
-      }
-    }
-    );
-  }
-  function setSavedResource(idResource, idUser){
-    var htmlId = "saved" + idResource;
-    var request = $.ajax(
-    {
-      type: "POST",
-      url: "{% url 'setSavedResource' %}",
-      data: {
-        "resource_id": idResource,
-        "user_id": idUser,
-        csrfmiddlewaretoken: '{{ csrf_token }}'
-      },
-      success: function (response) {
-        $("#"+htmlId).load(" #"+htmlId);
-      }
-    }
-    );
-  }
-  $(function () {
+
     $('#id_usersAllowed').on('change', function () {
       users = $("#id_usersAllowed option:selected").map(function () {
         return $.trim($(this).text());
@@ -258,6 +225,40 @@
       );
     });
   });
+
+  function setFeaturedRsc(idResource){
+    var request = $.ajax(
+    {
+      type: "POST",
+      url: "{% url 'setFeaturedRsc' %}",
+      data: {
+        "resource_id": idResource,
+        csrfmiddlewaretoken: '{{ csrf_token }}'
+      },
+      success: function (response) {
+        $(".main-content-container").load(" .main-content-container");
+      }
+    }
+    );
+  }
+  
+  function setSavedResource(idResource, idUser){
+    var htmlId = "saved" + idResource;
+    var request = $.ajax(
+    {
+      type: "POST",
+      url: "{% url 'setSavedResource' %}",
+      data: {
+        "resource_id": idResource,
+        "user_id": idUser,
+        csrfmiddlewaretoken: '{{ csrf_token }}'
+      },
+      success: function (response) {
+        $("#"+htmlId).load(" #"+htmlId);
+      }
+    }
+    );
+  }
 </script>
 {{ permissionForm.media.js }}
 {% endblock scripts %}
