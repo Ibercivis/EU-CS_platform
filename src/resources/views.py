@@ -39,31 +39,8 @@ def resources(request):
                                     Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
         filters['keywords'] = request.GET['keywords']
 
-    if request.GET.get('language'):
-        resources = resources.filter(inLanguage = request.GET['language'])
-        filters['language'] = request.GET['language']
-
-    if request.GET.get('license'):
-        resources = resources.filter(license__icontains = request.GET['license'])
-        filters['license'] = request.GET['license']
-    if request.GET.get('theme'):
-        resources = resources.filter(theme = request.GET['theme'])
-        filters['theme'] = int(request.GET['theme'])
-
-    if request.GET.get('category'):
-        resources = resources.filter(category = request.GET['category'])
-        filters['category'] = int(request.GET['category'])
-
-    if request.GET.get('featuredCheck'):
-        if request.GET['featuredCheck'] == 'On':
-            resources = resources.filter(id__in=featuredResources)
-        if request.GET['featuredCheck'] == 'Off':
-            resources = resources.exclude(id__in=featuredResources)
-        if request.GET['featuredCheck'] == 'All':
-            resources = resources
-        filters['featuredCheck'] = request.GET['featuredCheck']
-    else:
-        resources = resources.filter(id__in=featuredResources)
+    resources = applyFilters(request, resources)
+    filters = setFilters(request, filters)   
 
     if not user.is_staff:
         resources = resources.filter(~Q(hidden=True))
@@ -99,35 +76,6 @@ def resources(request):
     return render(request, 'resources.html', {'resources':resources, 'featuredResources': featuredResources,
     'savedResources': savedResources, 'filters': filters, 'settings': settings, 'languagesWithContent': languagesWithContent, 'themes':themes, 'categories': categories})
 
-def clearFilters(request):
-    return redirect ('resources')
-
-def saveImage(request, form, element, ref):
-    image_path = ''
-    filepath = request.FILES.get(element, False)
-    withImage = form.cleaned_data.get('withImage' + ref)
-    if (filepath):
-        x = form.cleaned_data.get('x' + ref)
-        y = form.cleaned_data.get('y' + ref)
-        w = form.cleaned_data.get('width' + ref)
-        h = form.cleaned_data.get('height' + ref)
-        photo = request.FILES[element]
-        image = Image.open(photo)
-        cropped_image = image.crop((x, y, w+x, h+y))
-        if(ref == '2'):
-            resized_image = cropped_image.resize((1100, 400), Image.ANTIALIAS)
-        else:
-            resized_image = cropped_image.resize((600, 400), Image.ANTIALIAS)
-        _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
-        random_num = random.randint(0, 1000)
-        image_path = "media/images/" + _datetime + '_' + str(random_num) + '_' + photo.name
-        resized_image.save(image_path)
-        image_path = '/' + image_path
-    elif withImage:
-            image_path = '/'
-    else:
-        image_path = ''
-    return image_path
 
 @login_required(login_url='/login')
 def new_resource(request):
@@ -162,22 +110,6 @@ def resource(request, pk):
     return render(request, 'resource.html', {'resource':resource, 'savedResources':savedResources, 'featuredResources':featuredResources,
         'cooperators': getCooperators(pk), 'permissionForm': permissionForm})
 
-def getOtherUsers(creator):
-    users = list(User.objects.all().exclude(is_superuser=True).exclude(id=creator.id).values_list('email',flat=True))
-    users = ", ".join(users)
-    return users
-
-def getCooperators(resourceID):
-    users = list(ResourcePermission.objects.all().filter(resource_id=resourceID).values_list('user',flat=True))
-    return users
-
-def getCooperatorsEmail(resourceID):
-    users = getCooperators(resourceID)
-    cooperators = ""
-    for user in users:
-        userObj = get_object_or_404(User, id=user)
-        cooperators += userObj.email + ", "
-    return cooperators
 
 def editResource(request, pk):
     resource = get_object_or_404(Resource, id=pk)
@@ -254,20 +186,68 @@ def getRscNamesKeywords(text):
     report = chain(rsc_names, keywords)
     return report
 
+def getOtherUsers(creator):
+    users = list(User.objects.all().exclude(is_superuser=True).exclude(id=creator.id).values_list('email',flat=True))
+    users = ", ".join(users)
+    return users
+
+def getCooperators(resourceID):
+    users = list(ResourcePermission.objects.all().filter(resource_id=resourceID).values_list('user',flat=True))
+    return users
+
+def getCooperatorsEmail(resourceID):
+    users = getCooperators(resourceID)
+    cooperators = ""
+    for user in users:
+        userObj = get_object_or_404(User, id=user)
+        cooperators += userObj.email + ", "
+    return cooperators
+
+def clearFilters(request):
+    return redirect ('resources')
+
+def saveImage(request, form, element, ref):
+    image_path = ''
+    filepath = request.FILES.get(element, False)
+    withImage = form.cleaned_data.get('withImage' + ref)
+    if (filepath):
+        x = form.cleaned_data.get('x' + ref)
+        y = form.cleaned_data.get('y' + ref)
+        w = form.cleaned_data.get('width' + ref)
+        h = form.cleaned_data.get('height' + ref)
+        photo = request.FILES[element]
+        image = Image.open(photo)
+        cropped_image = image.crop((x, y, w+x, h+y))
+        if(ref == '2'):
+            resized_image = cropped_image.resize((1100, 400), Image.ANTIALIAS)
+        else:
+            resized_image = cropped_image.resize((600, 400), Image.ANTIALIAS)
+        _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
+        random_num = random.randint(0, 1000)
+        image_path = "media/images/" + _datetime + '_' + str(random_num) + '_' + photo.name
+        resized_image.save(image_path)
+        image_path = '/' + image_path
+    elif withImage:
+            image_path = '/'
+    else:
+        image_path = ''
+    return image_path
+
 def preFilteredResources(request):
     resources = Resource.objects.all().order_by('id')
+    return applyFilters(request, resources)
+
+def applyFilters(request, resources):
     featuredResources = FeaturedResources.objects.all().values_list('resource_id',flat=True)
+
     if request.GET.get('language'):
         resources = resources.filter(inLanguage = request.GET['language'])
-
     if request.GET.get('license'):
         resources = resources.filter(license__icontains = request.GET['license'])
     if request.GET.get('theme'):
         resources = resources.filter(theme = request.GET['theme'])
-
     if request.GET.get('category'):
         resources = resources.filter(category = request.GET['category'])
-
     if request.GET.get('featuredCheck'):
         if request.GET['featuredCheck'] == 'On':
             resources = resources.filter(id__in=featuredResources)
@@ -280,14 +260,19 @@ def preFilteredResources(request):
 
     return resources
 
-def license_autocomplete(request):
-    if request.GET.get('q'):
-        text = request.GET['q']
-        licenses = Resource.objects.filter(license__icontains=text).values_list('license',flat=True).distinct()
-        json = list(licenses)
-        return JsonResponse(json, safe=False)
-    else:
-        return HttpResponse("No cookies")
+def setFilters(request, filters):
+    if request.GET.get('language'):
+        filters['language'] = request.GET['language']
+    if request.GET.get('license'):
+        filters['license'] = request.GET['license']
+    if request.GET.get('theme'):
+        filters['theme'] = int(request.GET['theme'])
+    if request.GET.get('category'):
+        filters['category'] = int(request.GET['category'])
+    if request.GET.get('featuredCheck'):
+        filters['featuredCheck'] = request.GET['featuredCheck']
+    return filters
+
 
 def get_sub_category(request):
     category = request.GET.get("category")
