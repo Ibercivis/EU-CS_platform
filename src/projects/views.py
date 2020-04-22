@@ -54,7 +54,7 @@ def projects(request):
         filters['keywords'] = request.GET['keywords']
 
     projects = applyFilters(request, projects)
-    filters = setFilters(request, filters)    
+    filters = setFilters(request, filters)
 
     if not user.is_staff:
         projects = projects.filter(~Q(hidden=True))
