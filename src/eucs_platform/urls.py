@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import RedirectView
 from django.urls import include, path
 from django.conf.urls import url
 import profiles.urls
@@ -39,6 +40,7 @@ urlpatterns = [
     path('summernote/', include('django_summernote.urls')),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^reviews/', include('reviews.urls')),
+    url(r'^citizen-science-resources-related-to-the-covid19-pandemic/', RedirectView.as_view(url='blog/2020/03/31/citizen-science-resources-related-covid19-pandemic/'))
 ]
 
 # User-uploaded files like profile pics need to be served in development
