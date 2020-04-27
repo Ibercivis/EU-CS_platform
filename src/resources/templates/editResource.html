@@ -80,7 +80,8 @@
               <h2 clas="float-left">Edit resource</h2>
             </div>
             <div class="col-6">
-              <button type="sub>mit" class="btn btn-red float-right" data-href="{% url 'deleteResource' resource.id %}"
+              <button type="submit" onclick="$('form').submit()" class="btn btn-green"><i class="fas fa-share-square"></i> Save</button>
+              <button type="submit" class="btn btn-red float-right" data-href="{% url 'deleteResource' resource.id %}"
                 data-toggle="modal" data-target="#confirm-delete" name='deleteResource'>
                 <span class="fas fa-trash-alt"></span> Delete
               </button>
