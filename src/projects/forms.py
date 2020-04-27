@@ -13,7 +13,7 @@ geolocator = Nominatim(timeout=None)
 
 class ProjectForm(forms.Form):
     #Basic Project Information
-    project_name = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder':'Short name or title of the prohect'}))
+    project_name = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder':'Short name or title of the project'}))
     #aim = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 2000}}), label="Aim of the project (max 2000 characters)")
     aim = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Primary aim, goal or objective of the project. Max 2000 characters'}), max_length = 2000)
     #description = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 3000}}), label="Project description (max 3000 haracters)")
