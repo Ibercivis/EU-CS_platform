@@ -118,7 +118,10 @@
               <table class="table mb-0">
                 <form action="/new_resource" method="post" class="add-new-resource" enctype="multipart/form-data" autocomplete="off">
                   {% csrf_token %}
-
+                  <div>
+                    <button type="submit" class="btn btn-green float-right"><i class="fas fa-share-square"></i> Save</button>
+                    <br/><br/>
+                  </div>
                   <div class="form-row">
                     <div class="col-12">
                       {{ form.name|as_crispy_field }}
