@@ -147,8 +147,8 @@
         </div> <!-- End of card text -->
         <div class="card-footer bg-white">
           <div class="row">
-            <div class="col-2">
-              <div id="featured{{resource.id}}">
+            <div class="col-6">
+              <div id="featured{{resource.id}}" class="float-left">
                 {% if user.is_staff %}
                 {% if resource.id in featuredResources %}
                 <img onclick="setFeaturedRsc({{resource.id}})" class="img-fluid" src="{% static 'site/img/icon_color.png' %}" />
@@ -163,8 +163,13 @@
                 {% endif %}
                 {% endif %}
               </div>
+              {% if user.is_staff and resource.id not in featuredResources %}
+              <a class="btn btn-outline-secondary mb-1" style="margin-left: 15px;" href="{% url 'submitter_contact' 'resource' resource.id %}">
+                Contact the Submitter
+              </a>
+              {% endif %}
             </div>
-            <div class="col-10">
+            <div class="col-6">
               <a class="btn btn-outline-secondary float-right ml-2 mt-2" href="{{resource.url}}" target="_blank">Download</a>
               {% if user.is_authenticated %}
               <div id="saved{{resource.id}}">
