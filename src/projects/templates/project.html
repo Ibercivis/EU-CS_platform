@@ -193,7 +193,7 @@
               <div id="featured{{project.id}}" class="float-left">
                 {% if user.is_staff %}
                   {% if project.id in featuredProjects %}
-                  <img  class="img-fluid mt-2"  onclick="setFeatured({{project.id}})" src="{% static 'site/img/icon_color.png' %}" />
+                  <img  class="img-fluid mt-2" onclick="setFeatured({{project.id}})" src="{% static 'site/img/icon_color.png' %}" />
                   {% else %}
                   <img  class="img-fluid mt-2" onclick="setFeatured({{project.id}})" src="{% static 'site/img/icon_bw.png' %}" />
                   {% endif %}
@@ -205,6 +205,11 @@
                   {% endif %}
                 {% endif %}
               </div>
+              {% if user.is_staff and project.id not in featuredProjects %}
+              <a class="btn btn-outline-secondary mb-1" style="margin-left: 15px;" href="{% url 'submitter_contact' 'project' project.id %}">
+                Contact the Submitter
+              </a>
+              {% endif %}
             </div>
             <div class="col-6">
               {% if user.is_authenticated %}
