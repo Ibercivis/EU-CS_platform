@@ -27,6 +27,7 @@ class BaseProfile(models.Model):
     latitude = models.DecimalField(max_digits=9,decimal_places=6, blank=True, null=True)
     longitude = models.DecimalField(max_digits=9,decimal_places=6, blank=True, null=True)
     email_verified = models.BooleanField("Email verified", default=False)
+    orcid = models.CharField("ORCID", max_length=50, blank=True, null=True)
 
     class Meta:
         abstract = True
