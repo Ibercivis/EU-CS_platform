@@ -37,7 +37,7 @@
 
         <div class="col-sm-7 col-12 mt-4 mb-4">
             {{event.description}}
-            <p><a href="{{event.url}}" target="_blank">{{event.url}}</a></p>
+            <p><a href="{% if 'http' not in event.url %}//{%endif%}{{event.url}}" target="_blank">{{event.url}}</a></p>
         </div>
         <div class="col-sm-1 col-12 mt-4 mb-4">
         {% if user.is_staff %}

@@ -113,7 +113,7 @@
               <b>Status: </b>{{ project.status}}<br>
               <b>Date created:</b> {{project.dateCreated  | date:"d/m/Y"}}<br>
               <b>Date updated:</b>{{project.dateUpdated  | date:"d/m/Y"}}<br>
-              <b>Website: </b><a target="_blank" href="{{project.url}}">{{project.url}}</a><br>
+              <b>Website: </b><a target="_blank" href="{% if 'http' not in project.url %}//{%endif%}{{project.url}}">{{project.url}}</a><br>
             </div>
           </div>
           <div class="row">
