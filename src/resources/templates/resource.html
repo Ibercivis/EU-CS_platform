@@ -114,7 +114,7 @@
               <h4>Main info</h4>
             </div>
             <div class="col-12 col-xl-8 mt-5">
-              <b> URL: </b><a href="{{resource.url}}" target="_blank">{{resource.url}}</a><br>
+              <b> URL: </b><a href="{% if 'http' not in resource.url %}//{%endif%}{{resource.url}}" target="_blank">{{resource.url}}</a><br>
               <b>License: </b>{{ resource.license }}<br>
               <b>Audience: </b>{% for audience in resource.audience.all %}{{ audience }} {% endfor %}<br>
               <b>Publisher: </b> {{ resource.publisher }}<br>
@@ -170,7 +170,7 @@
               {% endif %}
             </div>
             <div class="col-6">
-              <a class="btn btn-outline-secondary float-right ml-2 mt-2" href="{{resource.url}}" target="_blank">Download</a>
+              <a class="btn btn-outline-secondary float-right ml-2 mt-2" href="{% if 'http' not in resource.url %}//{%endif%}{{resource.url}}" target="_blank">Download</a>
               {% if user.is_authenticated %}
               <div id="saved{{resource.id}}">
                 {% if resource.id in savedResources %}
