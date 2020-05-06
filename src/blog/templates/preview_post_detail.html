@@ -1,0 +1,9 @@
+{% extends 'post_detail.html' %}
+
+{% block list_of_items %}
+    <div class="container">
+        <br/><br/>
+        <h3>This is a previsualization. <a href="/admin/blog/post/{{post.id}}/change/">Go back</a></h3>
+    </div>
+    {{ block.super }}
+{% endblock list_of_items %}
