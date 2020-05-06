@@ -20,7 +20,7 @@ class ProjectForm(forms.Form):
     description = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Abstract or description of the project. Max 3000 characters'}), max_length = 3000)
     choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     choicesSelected = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
-    keywords = forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget(attrs={'data-placeholder':'Please enter 2-3 keywords (comma separated) to aid in searching for projects'}), required=False)
+    keywords = forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget(attrs={'data-placeholder':'Please enter 2-3 keywords (comma separated) to aid in searching for projects'}), required=False, label='Keywords (Put a comma after each keyword to add new keywords)')
     status = forms.ModelChoiceField(queryset=Status.objects.all(), label="Status (Select one)",widget=forms.Select(attrs={'class':'js-example-basic-single'}))
     start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=False, label="Closest approximate start date of the project")
     end_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=False, label="Approximate end date of the project")
@@ -63,7 +63,7 @@ class ProjectForm(forms.Form):
     #equipment = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 1000}}), required=False, label="Equipment needeed to participate (max 1000 characters)")
     equipment = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'What equipment is needed for participation?. Max 2000 characters'}), max_length = 2000, required=False)
     #Funding
-    funding_body =  forms.ModelMultipleChoiceField(queryset=FundingBody.objects.all(), widget=Select2MultipleWidget(attrs={'data-placeholder':' Please enter the funding agency of the project (e.g. European Commission) '}), required=False)
+    funding_body =  forms.ModelMultipleChoiceField(queryset=FundingBody.objects.all(), widget=Select2MultipleWidget(attrs={'data-placeholder':' Please enter the funding agency of the project (e.g. European Commission) '}), required=False, label="Funding body (Put a comma after each name to add a new funding body)")
     fundingBodySelected = forms.CharField(widget=forms.HiddenInput(), max_length=100, required=False)
     funding_program = forms.CharField(max_length=500, widget=forms.TextInput(attrs={'placeholder':'Indication of the programme that funds or funded a project'}),required=False)
     #Origin information
