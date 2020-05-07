@@ -59,6 +59,8 @@ class ResourceForm(forms.ModelForm):
 
         if pk:
             rsc = get_object_or_404(Resource, id=pk)
+            if rsc.hidden:
+                rsc.hidden = False
             rsc.name = self.data['name']
             rsc.abstract = self.data['abstract']
             rsc.url = self.data['url']
