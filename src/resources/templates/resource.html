@@ -21,7 +21,8 @@
         <img class="img-fluid img-responsive img-zoom {% if resource.id not in featuredResources %} nonmoderated {% endif %}" src='/static/site/img/resource_default_header.png'>
         {% endif %}
         <div class="upper">
-          {% if resource.id not in featuredResources %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br> {% endif %}
+          {% if resource.hidden %}<a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT ACCEPTED</a><br/>
+          {% else %}{% if resource.id not in featuredResources %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br> {% endif %}{% endif %}
         </div>
         <div class="card-header">
           <div class="row">

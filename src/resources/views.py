@@ -41,9 +41,8 @@ def resources(request):
 
     resources = applyFilters(request, resources)
     filters = setFilters(request, filters)   
-
-    if not user.is_staff:
-        resources = resources.filter(~Q(hidden=True))
+    
+    resources = resources.filter(~Q(hidden=True))
 
     # Ordering
     if request.GET.get('orderby'):
@@ -104,6 +103,8 @@ def resource(request, pk):
     user = request.user
     users = getOtherUsers(resource.creator)
     cooperators = getCooperatorsEmail(pk)
+    if resource.hidden and ( user.is_anonymous or (user != resource.creator and not user.is_staff and not user.id in getCooperators(pk))):
+        return redirect('../resources', {})
     permissionForm = ResourcePermissionForm(initial={'usersCollection':users, 'selectedUsers': cooperators})
     savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True) #TODO: Only ask for the resource
     featuredResources = FeaturedResources.objects.all().values_list('resource_id',flat=True)

@@ -8,7 +8,7 @@ from itertools import chain
 from . import forms
 from . import models
 from projects.models import Project, FollowedProjects, ProjectPermission, FeaturedProjects
-from resources.models import Resource, SavedResources, ResourcePermission
+from resources.models import Resource, SavedResources, ResourcePermission, FeaturedResources
 
 
 class ShowProfile(LoginRequiredMixin, generic.TemplateView):
@@ -80,7 +80,8 @@ def resources(request):
     resourcesWithPermission = getResourcesWithPermission(user)
     resourcesWithPermission = Resource.objects.all().filter(id__in=resourcesWithPermission)
     resources = chain(resourcesCreated, resourcesWithPermission)
-    return render(request, 'profiles/my_resources.html', {'show_user': user, 'resources': resources})
+    featuredResources = FeaturedResources.objects.all().values_list('resource_id',flat=True)
+    return render(request, 'profiles/my_resources.html', {'show_user': user, 'resources': resources, 'featuredResources': featuredResources})
 
 def followedProjects(request):
     user = request.user

@@ -26,7 +26,8 @@
         <img class="img-fluid img-responsive img-zoom  {% if project.id not in featuredProjects %} nonmoderated {% endif %}" src='/static/site/img/project_default_header.png'>
         {% endif %}
         <div class="upper">
-          {% if project.id not in featuredProjects %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br> {% endif %}
+          {% if project.hidden %}<a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT ACCEPTED</a><br/>
+          {% else %}{% if project.id not in featuredProjects %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br> {% endif %}{% endif %}
         </div>
         <div class="card-header">
           <div class="row">

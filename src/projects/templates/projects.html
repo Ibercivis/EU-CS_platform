@@ -65,7 +65,7 @@ src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bo
 				csrfmiddlewaretoken: '{{ csrf_token }}'
 			},
 			success: function (response) {
-				$("#"+htmlId).load(" #"+htmlId);
+				window.location.reload(false);
 			}
 		}
 		);

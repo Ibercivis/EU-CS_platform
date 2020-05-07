@@ -56,8 +56,7 @@ def projects(request):
     projects = applyFilters(request, projects)
     filters = setFilters(request, filters)
 
-    if not user.is_staff:
-        projects = projects.filter(~Q(hidden=True))
+    projects = projects.filter(~Q(hidden=True))
 
     # Ordering
     if request.GET.get('orderby'):
@@ -97,6 +96,8 @@ def project(request, pk):
     project = get_object_or_404(Project, id=pk)
     users = getOtherUsers(project.creator)
     cooperators = getCooperatorsEmail(pk)
+    if project.hidden and ( user.is_anonymous or (user != project.creator and not user.is_staff and not user.id in getCooperators(pk))):
+        return redirect('../projects', {})
     permissionForm = ProjectPermissionForm(initial={'usersCollection':users, 'selectedUsers': cooperators})
     followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id',flat=True)
     featuredProjects = FeaturedProjects.objects.all().values_list('project_id',flat=True)
@@ -160,7 +161,6 @@ def editProject(request, pk):
         form = ProjectForm(request.POST, request.FILES)
         cField_formset = CustomFieldFormset(request.POST)
         if form.is_valid() and cField_formset.is_valid():
-
             new_cFields = []
             for cField_form in cField_formset:
                 title = cField_form.cleaned_data.get('title')
