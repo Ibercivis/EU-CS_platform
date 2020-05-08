@@ -94,6 +94,24 @@
     );
   }
 
+  function setTop(idResource, top){
+		var htmlId = "top" + idResource;
+		var request = $.ajax(
+		{
+			type: "POST",
+			url: "{% url 'setTopResource' %}",
+			data: {
+				"resource_id": idResource,
+				"top": top,
+				csrfmiddlewaretoken: '{{ csrf_token }}'
+			},
+			success: function (response) {
+				window.location.reload(false);
+			}
+		}
+		);
+	}
+
   $('.basicAutoComplete').autoComplete(
     { minLength: 3 }
   );

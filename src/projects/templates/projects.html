@@ -70,6 +70,23 @@ src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bo
 		}
 		);
 	}
+	function setTop(idProject, top){
+		var htmlId = "top" + idProject;
+		var request = $.ajax(
+		{
+			type: "POST",
+			url: "{% url 'setTop' %}",
+			data: {
+				"project_id": idProject,
+				"top": top,
+				csrfmiddlewaretoken: '{{ csrf_token }}'
+			},
+			success: function (response) {
+				window.location.reload(false);
+			}
+		}
+		);
+	}
 	function setFollowedProject(idProject, idUser){
 		var htmlId = "followed" + idProject;
 		var request = $.ajax(

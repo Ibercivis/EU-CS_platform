@@ -71,6 +71,15 @@
 								{% endif %}
 							{% endif %}
 						</div>
+						<div id="top{{project.id}}" style="display:inline-block">
+							{% if user.is_staff %}
+								{% if project.top %}
+								<a  onclick="setTop({{project.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
+								{% else %}
+								<a  onclick="setTop({{project.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
+								{% endif %}							
+							{% endif %}
+						</div>
 					</div>
 				</div>
 				<div class="col-4">

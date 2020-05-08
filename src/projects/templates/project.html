@@ -211,6 +211,15 @@
                 Contact the Submitter
               </a>
               {% endif %}
+              <div id="top{{project.id}}" style="display:inline-block">
+                {% if user.is_staff %}
+                  {% if project.top %}
+                  <a  onclick="setTop({{project.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
+                  {% else %}
+                  <a  onclick="setTop({{project.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
+                  {% endif %}							
+                {% endif %}
+              </div>
             </div>
             <div class="col-6">
               {% if user.is_authenticated %}
@@ -294,6 +303,24 @@
         },
         success: function (response) {
           $(".main-content-container").load(" .main-content-container");
+        }
+      }
+      );
+    }
+
+    function setTop(idProject, top){
+      var htmlId = "top" + idProject;
+      var request = $.ajax(
+      {
+        type: "POST",
+        url: "{% url 'setTop' %}",
+        data: {
+          "project_id": idProject,
+          "top": top,
+          csrfmiddlewaretoken: '{{ csrf_token }}'
+        },
+        success: function (response) {
+          window.location.reload(false);
         }
       }
       );
