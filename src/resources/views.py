@@ -55,10 +55,10 @@ def resources(request):
             reviews = list(reviews)
             resourcesVoted = []
             for r in reviews:
-                proj = get_object_or_404(Resource, id=r)
-                resourcesVoted.append(proj)
+                rsc = get_object_or_404(Resource, id=r)
+                resourcesVoted.append(rsc)
 
-            resources= resources.exclude(id__in=reviews)
+            resources = resources.exclude(id__in=reviews)
             if(orderBy == "avg_rating"):
                 resources = list(resources) + list(resourcesVoted)
             else:
@@ -67,6 +67,12 @@ def resources(request):
         filters['orderby']=request.GET['orderby']
     else:
         resources=resources.order_by('-id')
+
+    # Pin resources to top
+    resourcesTop = resources.filter(top=True)
+    resourcesTopIds = list(resourcesTop.values_list('id',flat=True))
+    resources = resources.exclude(id__in=resourcesTopIds)
+    resources = list(resourcesTop) + list(resources)
 
     paginator = Paginator(resources, 9)
     page = request.GET.get('page')
@@ -350,6 +356,16 @@ def setHiddenResource(request):
     resource.save()
     return JsonResponse(response, safe=False)
 
+@staff_member_required()
+def setTopResource(request):
+    response = {}
+    id = request.POST.get("resource_id")
+    top = request.POST.get("top")
+    resource = get_object_or_404(Resource, id=id)
+    resource.top = False if top == 'false' else True
+    resource.save()
+    return JsonResponse(response, safe=False)
+
 def allowUserResource(request):
     response = {}
     resourceId = request.POST.get("resource_id")
@@ -358,7 +374,7 @@ def allowUserResource(request):
 
     if request.user != fResource.creator and not request.user.is_staff:
         #TODO return JsonResponse with error code
-        return redirect('../projects', {})
+        return redirect('../resources', {})
 
     #Delete all
     objs = ResourcePermission.objects.all().filter(resource_id=resourceId)

@@ -13,6 +13,7 @@ urlpatterns = [
     path('setFeaturedRsc/', views.setFeaturedRsc, name='setFeaturedRsc'),
     path('setSavedResource/', views.setSavedResource, name='setSavedResource'),
     path('setHiddenResource/', views.setHiddenResource, name='setHiddenResource'),
+    path('setTopResource/', views.setTopResource, name='setTopResource'),
     path('allowUserResource/', views.allowUserResource, name='allowUserResource'),
     path('resource_review/<int:pk>', views.resource_review, name='resource_review'),
 ]

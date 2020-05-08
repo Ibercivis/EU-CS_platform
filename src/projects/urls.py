@@ -12,6 +12,7 @@ urlpatterns = [
     path('clearfilters/', views.clearFilters, name='clearfilters'),
     path('setFeatured/', views.setFeatured, name='setFeatured'),
     path('setHidden/', views.setHidden, name='setHidden'),
+    path('setTop/', views.setTop, name='setTop'),
     path('setFollowedProject/', views.setFollowedProject, name='setFollowedProject'),
     path('allowUser/', views.allowUser, name='allowUser'),
     path('project_review/<int:pk>', views.project_review, name='project_review'),

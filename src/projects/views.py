@@ -72,7 +72,7 @@ def projects(request):
                 proj = get_object_or_404(Project, id=r)
                 projectsVoted.append(proj)
 
-            projects= projects.exclude(id__in=reviews)
+            projects = projects.exclude(id__in=reviews)
             if(orderBy == "avg_rating"):
                 projects = list(projects) + list(projectsVoted)
             else:
@@ -82,6 +82,11 @@ def projects(request):
     else:
         projects=projects.order_by('-id')
 
+    # Pin projects to top
+    projectsTop = projects.filter(top=True)
+    projectsTopIds = list(projectsTop.values_list('id',flat=True))
+    projects = projects.exclude(id__in=projectsTopIds)
+    projects = list(projectsTop) + list(projects)
 
     paginator = Paginator(projects, 9)
     page = request.GET.get('page')
@@ -330,6 +335,16 @@ def setHidden(request):
     hidden = request.POST.get("hidden")
     project = get_object_or_404(Project, id=id)
     project.hidden = False if hidden == 'false' else True
+    project.save()
+    return JsonResponse(response, safe=False)
+
+@staff_member_required()
+def setTop(request):
+    response = {}
+    id = request.POST.get("project_id")
+    top = request.POST.get("top")
+    project = get_object_or_404(Project, id=id)
+    project.top = False if top == 'false' else True
     project.save()
     return JsonResponse(response, safe=False)
 

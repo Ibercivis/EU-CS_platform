@@ -169,6 +169,15 @@
                 Contact the Submitter
               </a>
               {% endif %}
+              <div id="top{{resource.id}}" style="display:inline-block">
+                {% if user.is_staff %}
+                  {% if resource.top %}
+                  <a  onclick="setTop({{resource.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
+                  {% else %}
+                  <a  onclick="setTop({{resource.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
+                  {% endif %}							
+                {% endif %}
+              </div>
             </div>
             <div class="col-6">
               <a class="btn btn-outline-secondary float-right ml-2 mt-2" href="{% if 'http' not in resource.url %}//{%endif%}{{resource.url}}" target="_blank">Download</a>
@@ -247,6 +256,24 @@
     }
     );
   }
+
+  function setTop(idResource, top){
+		var htmlId = "top" + idResource;
+		var request = $.ajax(
+		{
+			type: "POST",
+			url: "{% url 'setTopResource' %}",
+			data: {
+				"resource_id": idResource,
+				"top": top,
+				csrfmiddlewaretoken: '{{ csrf_token }}'
+			},
+			success: function (response) {
+				window.location.reload(false);
+			}
+		}
+		);
+	}
   
   function setSavedResource(idResource, idUser){
     var htmlId = "saved" + idResource;

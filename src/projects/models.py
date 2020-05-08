@@ -78,7 +78,10 @@ class Project(models.Model):
 
     hidden = models.BooleanField(null=True, blank=True)
 
+    top = models.BooleanField(null=True, blank=True)
+
     customField = models.ManyToManyField(CustomField)
+
     def __str__(self):
         return f'{self.name}'
 
