@@ -32,11 +32,13 @@ def home(request):
     projects = Project.objects.all().order_by('-id')
     allprojects =  projects.filter(id__in=allfeaturedProjects)
     projects = projects.filter(id__in=featuredProjects)
+    topProjects = Project.objects.all().filter(top=True)[:3]
+    topResources = Resource.objects.all().filter(top=True)[:3]
     entries = Post.objects.filter(status=1).order_by('-created_on')[:3]
     featuredResources = FeaturedResources.objects.all().order_by('-id')[:3].values_list('resource_id',flat=True)
     resources = Resource.objects.all().order_by('-id')
     resources = resources.filter(id__in=featuredResources)
-    return render(request, 'home.html', {'projects':projects, 'allprojects': allprojects,'resources':resources, 'entries': entries}, )
+    return render(request, 'home.html', {'projects':projects, 'allprojects': allprojects, 'topProjects': topProjects, 'resources':resources, 'topResources': topResources, 'entries': entries}, )
 
 class AboutPage(generic.TemplateView):
     template_name = "about.html"
