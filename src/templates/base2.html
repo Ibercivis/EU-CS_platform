@@ -40,6 +40,9 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span></button>
+        
+        <div class="ribbon ribbon-top-left"><span><a style="text-decoration:none;color:white" href="https://eu-citizen.science/blog/2020/04/03/welcome-alpha-release-eu-citizenscience-platform/">ALPHA</a></span></div>
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             {% block navbar-left %}
@@ -116,7 +119,15 @@ ga('create', 'UA-139349847-1' , 'auto');
 ga('send', 'pageview');
 </script>
 <!-- End Google Analytics -->
-
+<script>
+  $(".navbar-toggler-icon").click(function () {
+    if($(".ribbon-top-left").is(":visible")){
+      $(".ribbon-top-left").hide();
+    }else{
+      $(".ribbon-top-left").show();
+    }
+  });
+</script>
   {% block scripts %}
   {% endblock scripts %}
 </body>
