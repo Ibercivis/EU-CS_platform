@@ -8,6 +8,7 @@
 {% block navbar-left %}
 {% include "_navbar.html" with active_link="resources" %}
 {% endblock %}
+
 {% block list_of_items %}
 {{ permissionForm.media.css }}
 <div class="container mt-5">
@@ -20,7 +21,8 @@
         <img class="img-fluid img-responsive img-zoom {% if resource.id not in featuredResources %} nonmoderated {% endif %}" src='/static/site/img/resource_default_header.png'>
         {% endif %}
         <div class="upper">
-          {% if resource.id not in featuredResources %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br> {% endif %}
+          {% if resource.hidden %}<a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT ACCEPTED</a><br/>
+          {% else %}{% if resource.id not in featuredResources %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br> {% endif %}{% endif %}
         </div>
         <div class="card-header">
           <div class="row">
@@ -113,7 +115,7 @@
               <h4>Main info</h4>
             </div>
             <div class="col-12 col-xl-8 mt-5">
-              <b> URL: </b><a href="{{resource.url}}" target="_blank">{{resource.url}}</a><br>
+              <b> URL: </b><a href="{% if 'http' not in resource.url %}//{%endif%}{{resource.url}}" target="_blank">{{resource.url}}</a><br>
               <b>License: </b>{{ resource.license }}<br>
               <b>Audience: </b>{% for audience in resource.audience.all %}{{ audience }} {% endfor %}<br>
               <b>Publisher: </b> {{ resource.publisher }}<br>
@@ -146,8 +148,8 @@
         </div> <!-- End of card text -->
         <div class="card-footer bg-white">
           <div class="row">
-            <div class="col-2">
-              <div id="featured{{rsc.id}}">
+            <div class="col-6">
+              <div id="featured{{resource.id}}" class="float-left">
                 {% if user.is_staff %}
                 {% if resource.id in featuredResources %}
                 <img onclick="setFeaturedRsc({{resource.id}})" class="img-fluid" src="{% static 'site/img/icon_color.png' %}" />
@@ -162,9 +164,23 @@
                 {% endif %}
                 {% endif %}
               </div>
+              {% if user.is_staff and resource.id not in featuredResources %}
+              <a class="btn btn-outline-secondary mb-1" style="margin-left: 15px;" href="{% url 'submitter_contact' 'resource' resource.id %}">
+                Contact the Submitter
+              </a>
+              {% endif %}
+              <div id="top{{resource.id}}" style="display:inline-block">
+                {% if user.is_staff %}
+                  {% if resource.top %}
+                  <a  onclick="setTop({{resource.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
+                  {% else %}
+                  <a  onclick="setTop({{resource.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
+                  {% endif %}							
+                {% endif %}
+              </div>
             </div>
-            <div class="col-10">
-              <a class="btn btn-outline-secondary float-right ml-2 mt-2" href="{{resource.url}}" target="_blank">Download</a>
+            <div class="col-6">
+              <a class="btn btn-outline-secondary float-right ml-2 mt-2" href="{% if 'http' not in resource.url %}//{%endif%}{{resource.url}}" target="_blank">Download</a>
               {% if user.is_authenticated %}
               <div id="saved{{resource.id}}">
                 {% if resource.id in savedResources %}
@@ -182,9 +198,10 @@
   </div>
 </div>
 {% endblock list_of_items %}
+
 {% block scripts %}
 <script>
-  $(document).ready(function () {
+  $(function () {
     var users = $("#id_usersCollection").val();
     if(users){
       var users = users.split(",");
@@ -202,41 +219,7 @@
         }
       }
     }
-  });
-  function setFeaturedRsc(idResource){
-    var htmlId = "featured" + idResource;
-    var request = $.ajax(
-    {
-      type: "POST",
-      url: "{% url 'setFeaturedRsc' %}",
-      data: {
-        "resource_id": idResource,
-        csrfmiddlewaretoken: '{{ csrf_token }}'
-      },
-      success: function (response) {
-        $("#"+htmlId).load(" #"+htmlId);
-      }
-    }
-    );
-  }
-  function setSavedResource(idResource, idUser){
-    var htmlId = "saved" + idResource;
-    var request = $.ajax(
-    {
-      type: "POST",
-      url: "{% url 'setSavedResource' %}",
-      data: {
-        "resource_id": idResource,
-        "user_id": idUser,
-        csrfmiddlewaretoken: '{{ csrf_token }}'
-      },
-      success: function (response) {
-        $("#"+htmlId).load(" #"+htmlId);
-      }
-    }
-    );
-  }
-  $(function () {
+
     $('#id_usersAllowed').on('change', function () {
       users = $("#id_usersAllowed option:selected").map(function () {
         return $.trim($(this).text());
@@ -257,6 +240,58 @@
       );
     });
   });
+
+  function setFeaturedRsc(idResource){
+    var request = $.ajax(
+    {
+      type: "POST",
+      url: "{% url 'setFeaturedRsc' %}",
+      data: {
+        "resource_id": idResource,
+        csrfmiddlewaretoken: '{{ csrf_token }}'
+      },
+      success: function (response) {
+        $(".main-content-container").load(" .main-content-container");
+      }
+    }
+    );
+  }
+
+  function setTop(idResource, top){
+		var htmlId = "top" + idResource;
+		var request = $.ajax(
+		{
+			type: "POST",
+			url: "{% url 'setTopResource' %}",
+			data: {
+				"resource_id": idResource,
+				"top": top,
+				csrfmiddlewaretoken: '{{ csrf_token }}'
+			},
+			success: function (response) {
+				window.location.reload(false);
+			}
+		}
+		);
+	}
+  
+  function setSavedResource(idResource, idUser){
+    var htmlId = "saved" + idResource;
+    var request = $.ajax(
+    {
+      type: "POST",
+      url: "{% url 'setSavedResource' %}",
+      data: {
+        "resource_id": idResource,
+        "user_id": idUser,
+        csrfmiddlewaretoken: '{{ csrf_token }}'
+      },
+      success: function (response) {
+        $("#"+htmlId).load(" #"+htmlId);
+      }
+    }
+    );
+  }
 </script>
 {{ permissionForm.media.js }}
 {% endblock scripts %}

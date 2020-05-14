@@ -14,9 +14,10 @@
       {% endif %}
     </a>
     <div class="upper">
-      {% if rsc.id not in featuredResources %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br/>
+      {% if rsc.hidden %}<a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT ACCEPTED</a><br/>
+      {% else %} {% if rsc.id not in featuredResources %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br/>
       {% else %} {% if filters.featuredCheck == "All" %}  <a class="badge frontpage frontpage-green mb-2" href="/faq#moderation">MODERATED</a><br/>{% endif %}
-      {% endif %}
+      {% endif %}{% endif %}
       {% get_language_info_list for LANGUAGES as languages %}
       {% for language in languages %}
       {% if language.code == rsc.inLanguage %}
@@ -64,11 +65,24 @@
           </div>
           <div id="hidden{{rsc.id}}">
             {% if user.is_staff %}
-            {% if rsc.hidden %}
-            <a onclick="setHiddenResource({{rsc.id}}, false)"><i class="fas fa-eye-slash"></i></a>
+              {% if rsc.hidden %}
+              <a onclick="setHiddenResource({{rsc.id}}, false)"><i class="fas fa-eye-slash"></i></a>
+              {% else %}
+              <a onclick="setHiddenResource({{rsc.id}}, true)"><i class="fas fa-eye"></i></a>
+              {% endif %}
             {% else %}
-            <a onclick="setHiddenResource({{rsc.id}}, true)"><i class="fas fa-eye"></i></a>
+              {% if rsc.hidden %}
+                <i class="fas fa-eye-slash"></i>
+              {% endif %}
             {% endif %}
+          </div>
+          <div id="top{{rsc.id}}" style="display:inline-block">
+            {% if user.is_staff %}
+              {% if rsc.top %}
+              <a  onclick="setTop({{rsc.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
+              {% else %}
+              <a  onclick="setTop({{rsc.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
+              {% endif %}							
             {% endif %}
           </div>
         </div>
@@ -93,7 +107,7 @@
 </div>
 {% else %}
 <div class="col-12">
-  <img  class="img-fluid img-zoom col-12 mt-5" src="{% static 'site/img/undraw_empty_xct9.svg' %}"
+  <img  class="img-fluid img-zoom col-12 mt-5" src="{% static 'site/img/undraw_empty_xct9.svg' %}">
   <h5>Sorry, nothing found</h5>
 </div>
 {% endif %}

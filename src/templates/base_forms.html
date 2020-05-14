@@ -57,19 +57,6 @@
   <!--/.Navbar-->
 </header>
 
-
-
-  {% block messages %}
-  {% if messages %}
-  {% for message in messages %}
-  <div class="alert alert-{{ message.tags }}">
-    <a class="close" data-dismiss="alert">×</a>
-    {{ message|safe }}
-  </div>
-  {% endfor %}
-  {% endif %}
-  {% endblock %}
-
   {% block splash %}
   {% endblock splash %}
 

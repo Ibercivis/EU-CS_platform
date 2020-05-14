@@ -10,18 +10,7 @@
 {% endblock %}
 {% block page_title %}
 {% endblock page_title %}
-{% block messages %}
-{% if messages %}
-{% for message in messages %}
-<div class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
-  <div class="alert alert-{{ message.tags }}">
-    <a class="close" data-dismiss="alert">×</a>
-    {{ message|safe }}
-  </div>
-</div>
-{% endfor %}
-{% endif %}
-{% endblock %}
+
 {% block splash %}
 <div class="jumbotron jumbotron-fluid jumbotron-resources">
   <div class="container">
@@ -30,6 +19,7 @@
   </div>
 </div>
 {% endblock splash %}
+
 {% block page_header %}
 {% include "finder_resources.html" %}
 {% endblock page_header %}
@@ -46,74 +36,85 @@
 
 {% block scripts %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js"
-integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="anonymous"></script>
+  integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="anonymous"></script>
 <script
-src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
+  src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
 
 <script>
-  function setFeaturedRsc(idResource){
-    var htmlId = "featured" + idResource;
+  function setFeaturedRsc(idResource) {
+    var htmlId = "resource" + idResource;
     var request = $.ajax(
-    {
-      type: "POST",
-      url: "{% url 'setFeaturedRsc' %}",
-      data: {
-        "resource_id": idResource,
-        csrfmiddlewaretoken: '{{ csrf_token }}'
-      },
-      success: function (response) {
-        $("#"+htmlId).load(" #"+htmlId);
+      {
+        type: "POST",
+        url: "{% url 'setFeaturedRsc' %}",
+        data: {
+          "resource_id": idResource,
+          csrfmiddlewaretoken: '{{ csrf_token }}'
+        },
+        success: function (response) {
+          window.location.reload(false);
+        }
       }
-    }
     );
   }
 
-  function setSavedResource(idResource, idUser){
+  function setSavedResource(idResource, idUser) {
     var htmlId = "saved" + idResource;
     var request = $.ajax(
-    {
-      type: "POST",
-      url: "{% url 'setSavedResource' %}",
-      data: {
-        "resource_id": idResource,
-        "user_id": idUser,
-        csrfmiddlewaretoken: '{{ csrf_token }}'
-      },
-      success: function (response) {
-        $("#"+htmlId).load(" #"+htmlId);
+      {
+        type: "POST",
+        url: "{% url 'setSavedResource' %}",
+        data: {
+          "resource_id": idResource,
+          "user_id": idUser,
+          csrfmiddlewaretoken: '{{ csrf_token }}'
+        },
+        success: function (response) {
+          $("#" + htmlId).load(" #" + htmlId);
+        }
       }
-    }
     );
   }
 
-  function setHiddenResource(idResource, hidden){
+  function setHiddenResource(idResource, hidden) {
     var htmlId = "hidden" + idResource;
     var request = $.ajax(
-    {
-      type: "POST",
-      url: "{% url 'setHiddenResource' %}",
-      data: {
-        "resource_id": idResource,
-        "hidden": hidden,
-        csrfmiddlewaretoken: '{{ csrf_token }}'
-      },
-      success: function (response) {
-        $("#"+htmlId).load(" #"+htmlId);
+      {
+        type: "POST",
+        url: "{% url 'setHiddenResource' %}",
+        data: {
+          "resource_id": idResource,
+          "hidden": hidden,
+          csrfmiddlewaretoken: '{{ csrf_token }}'
+        },
+        success: function (response) {
+          window.location.reload(false);
+        }
       }
-    }
     );
   }
-</script>
 
-<script>
+  function setTop(idResource, top){
+		var htmlId = "top" + idResource;
+		var request = $.ajax(
+		{
+			type: "POST",
+			url: "{% url 'setTopResource' %}",
+			data: {
+				"resource_id": idResource,
+				"top": top,
+				csrfmiddlewaretoken: '{{ csrf_token }}'
+			},
+			success: function (response) {
+				window.location.reload(false);
+			}
+		}
+		);
+	}
+
   $('.basicAutoComplete').autoComplete(
-  { minLength: 3 }
+    { minLength: 3 }
   );
-
-/*   $("#keywords").blur(function () {
-    var keywords = $(this).val();
-    $('#searchResources').submit();
-  }); */
 
   $('.basicAutoComplete').on('autocomplete.select', function (evt, item) {
     $('#searchResources').submit();
@@ -154,15 +155,14 @@ src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bo
       $('#searchResources').submit();
     });
   });
-</script>
-<script>
-  $(document).ready(function() {
-    $( ".card" ).hover(
-    function() {
-      $(this).addClass('shadow-none').css('cursor', 'pointer');
-    }, function() {
-      $(this).removeClass('shadow-none');
-    });
+
+  $(document).ready(function () {
+    $(".card").hover(
+      function () {
+        $(this).addClass('shadow-none').css('cursor', 'pointer');
+      }, function () {
+        $(this).removeClass('shadow-none');
+      });
   });
 </script>
 {% endblock scripts %}

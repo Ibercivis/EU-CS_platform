@@ -5,3 +5,8 @@ class ContactForm(forms.Form):
     name = forms.CharField(required=True)
     surname = forms.CharField(required=False)
     message = forms.CharField(widget=forms.Textarea(attrs={'rows': 5,'cols': 40}), required=True)
+
+
+class SubmitterContactForm(forms.Form):
+    subject = forms.CharField(required=True)
+    message = forms.CharField(widget=forms.Textarea(attrs={'rows': 5,'cols': 40}), required=True)

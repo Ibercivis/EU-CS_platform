@@ -111,6 +111,10 @@
                 <form action="/new_project" method="post" enctype="multipart/form-data" class="add-new-project" autocomplete="off">
                   {% csrf_token %}
                   <div>
+                    <button type="submit" class="btn btn-green float-right"><i class="fas fa-share-square"></i> Save</button>
+                    <br/><br/>
+                  </div>
+                  <div>
                     <h4>Project info</h4>
                   </div>
 
@@ -182,6 +186,7 @@
                         {{ form.y1|as_crispy_field }}
                         {{ form.height1|as_crispy_field }}
                         {{ form.width1|as_crispy_field }}
+                        {{ form.withImage1|as_crispy_field }}
                         <a id="imgResult1" href="#"> <img class="img-fluid img-zoom" id="imageResult1" src="" alt=""></a>
                       </div>
                       <div class="col-sm-6 col-12">
@@ -196,6 +201,7 @@
                         {{ form.y2|as_crispy_field }}
                         {{ form.height2|as_crispy_field }}
                         {{ form.width2|as_crispy_field }}
+                        {{ form.withImage2|as_crispy_field }}
                         <a id="imgResult2" href="#"><img class="img-fluid img-zoom" id="imageResult2" src="" alt=""></a>
                       </div>
                       <div class="col-sm-6 col-12">
@@ -210,6 +216,7 @@
                         {{ form.y3|as_crispy_field }}
                         {{ form.height3|as_crispy_field }}
                         {{ form.width3|as_crispy_field }}
+                        {{ form.withImage3|as_crispy_field }}
                         <a id="imgResult3" href="#"><img class="img-fluid img-zoom" id="imageResult3" src="" alt=""></a>
                       </div>
                       <div class="col-sm-6 col-12">
@@ -290,6 +297,7 @@
   </div>
 </div>
 {% endblock list_of_items %}
+
 {% block scripts %}
 <script src="{% static 'site/js/site.js' %}"></script>
 <script src="{% static 'scripts/cropper.min.js' %}"></script>
@@ -347,11 +355,6 @@
       }
     });
 
-    function validateEmail(email) {
-      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(String(email).toLowerCase());
-    }
-
     $("form").submit(function (e) {
       var validationFailed = false;
       if(!readSavedConfirmation){
@@ -367,6 +370,13 @@
         if(email && !validateEmail(email)){
          validationFailed = true;
          $("#div_id_contact_person_email").append("<span class='errorMsg'> <b>Enter a valid email address.</b></span>");
+        }
+        //Check dates
+        var start_date = $("#id_start_date").val();
+        var end_date = $("#id_end_date").val();
+        if (start_date != '' && end_date != '' && end_date < start_date){
+          validationFailed = true;
+          $("#div_id_end_date").append("<span class='errorMsg'> <b>End date should be greater than start date.</b></span>");
         }
       }
 
@@ -507,7 +517,6 @@
   });
 </script>
 
-
 <script type="text/javascript">
   var map;
   var marker_layer = new L.marker([50.5, 30.5]);
@@ -558,8 +567,6 @@
     map.addControl(searchControl);
     map.on('geosearch/showlocation', searchedMarker);
   }
-
-
 </script>
 {{ form.media.js }}
 {% endblock scripts %}

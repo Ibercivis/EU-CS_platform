@@ -16,12 +16,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 STATICFILES_DIRS = [str(BASE_DIR / "static")]
 MEDIA_ROOT = str(BASE_DIR / "media")
 MEDIA_URL = "/media/"
-STATIC_ROOT= "/tmp/static/"
+STATIC_ROOT= "/home/ubuntu/v0.2/static"
 
 LOCALE_PATHS = [
     os.path.join(BASE_DIR, 'locale'),
 ]
-
 
 
 # Use Django templates using the new Django 1.8 TEMPLATES settings
@@ -95,7 +94,9 @@ INSTALLED_APPS = (
     "authors",
     "contact",
     "reviews",
-    'django.contrib.sites'
+    'django.contrib.sites',
+    'cookielaw',
+    'events'
 )
 
 MIDDLEWARE = [
@@ -226,7 +227,6 @@ SUMMERNOTE_THEME = 'bs4'
 SUMMERNOTE_CONFIG = {
     'iframe': True,
     'summernote': {
-        # As an example, using Summernote Air-mode
         'airMode': False,
         'width': '100%',
         'height': '300',
@@ -247,6 +247,7 @@ EMAIL_USE_TLS = True
 EMAIL_RECIPIENT_LIST = [
     "eucitsci@mfn.berlin",
     "frasanz@bifi.es",
+    "mg@margaretgold.co.uk"
 ]
 
 SITE_ID = 1

@@ -11,9 +11,10 @@
 			<img class="card-img-top img-fluid img-zoom lazyload {% if project.id not in featuredProjects %} nonmoderated {% endif %}" src="{% static 'site/img/project_default_card.webp' %}" />
 			{% endif %}
 			<div class="upper">
-				{% if project.id not in featuredProjects %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br/>
+				{% if project.hidden %}<a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT ACCEPTED</a><br/>
+				{% else %} {% if project.id not in featuredProjects %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br/>
 				{% else %} {% if filters.featuredCheck == "All" %}  <a class="badge frontpage frontpage-green mb-2" href="/faq#moderation">MODERATED</a><br/> {% endif %}
-				{% endif %}
+				{% endif %}{% endif %}
 				{% for country in countries %}
 				{% if country.code == project.country %}
 				<a class="badge frontpage" href="projects?country={{country.code}}">{{ country.name | upper }}</a>
@@ -59,11 +60,24 @@
 						{% endif %}
 						<div id="hidden{{project.id}}" style="display:inline-block">
 							{% if user.is_staff %}
-							{% if project.hidden %}
-							<a  onclick="setHidden({{project.id}}, false)"><i class="fas fa-eye-slash"></i></a>
+								{% if project.hidden %}
+								<a  onclick="setHidden({{project.id}}, false)"><i class="fas fa-eye-slash"></i></a>
+								{% else %}
+								<a  onclick="setHidden({{project.id}}, true)"><i class="fas fa-eye"></i></a>
+								{% endif %}
 							{% else %}
-							<a  onclick="setHidden({{project.id}}, true)"><i class="fas fa-eye"></i></a>
+								{% if project.hidden %}
+									<i class="fas fa-eye-slash"></i>
+								{% endif %}
 							{% endif %}
+						</div>
+						<div id="top{{project.id}}" style="display:inline-block">
+							{% if user.is_staff %}
+								{% if project.top %}
+								<a  onclick="setTop({{project.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
+								{% else %}
+								<a  onclick="setTop({{project.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
+								{% endif %}							
 							{% endif %}
 						</div>
 					</div>
@@ -89,7 +103,7 @@
 </div>
 {% else %}
 <div class="col-12">
-	<img  class="img-fluid img-zoom col-12 mt-5" src="{% static 'site/img/undraw_empty_xct9.svg' %}"
+	<img  class="img-fluid img-zoom col-12 mt-5" src="{% static 'site/img/undraw_empty_xct9.svg' %}">
 	<h5 class="mb-4">Sorry, nothing found</h5>
 </div>
 {% endif %}
