@@ -10,8 +10,16 @@
         <div class="col-sm-10 col-12">
           <div class="card mt-5 mb-5 shadow">
             <div class="card-body">
-              <h1>{% block title %} {{ post.title }} {% endblock title %}</h1>
+              {% if post.image.width > post.image.height %}
+              <div class="card mb-4 mt-5 shadow">
+                <img class="img-fluid img-responsive img-zoom" src="/media/{{post.image}}" alt="Card image">
+              </div>
+              {% endif %}
+              <h1>{% block title %} {{ post.title }} {% endblock title %}</h1>              
               <p class=" text-muted">{{ post.author.name }} <br /> {{ post.created_on }}</p>
+              {% if post.image.width < post.image.height %}
+                <img class="img-fluid img-responsive img-zoom" style="float: right; margin: 0px 0px 15px 15px;" width="300px" src="/media/{{post.image}}" alt="Card image">
+              {% endif %}
               <p class="card-text ">{{ post.content | safe }}</p>
               <hr />
             </div>
