@@ -104,10 +104,6 @@
   <script type="text/javascript" src="{% static 'scripts/lazysizes.min.js' %}"></script>
   <script src="{% static 'scripts/cropper.min.js' %}"></script>
   <script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
-  <script>
-  document.addEventListener('touchstart', onTouchStart, {passive: true});
-  document.addEventListener('mousewheel', onMouseWheel, {passive: true});
-  </script>
   {% block scripts %}
   {% endblock scripts %}
 </body>
