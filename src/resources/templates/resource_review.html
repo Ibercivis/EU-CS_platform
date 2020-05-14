@@ -26,8 +26,6 @@
 		<div class="col-12 col-sm-12 ">
 			<div class="card  shadow">
 				<div class="card-text p-3">
- <!-- {% render_review_form for resources.resource resourceID %} -->
-
                 {% get_review_form for resources.resource resourceID as form %}
 
                     <form action="{% review_form_target %}" method="post">

@@ -1,29 +1,26 @@
 from django import forms
 from django.db import models
-from .models import Project, Topic, Status, Keyword, FundingBody, CustomField, OriginDatabase
-from django.shortcuts import get_object_or_404
-from django_select2.forms import Select2MultipleWidget, Select2Widget
 from django.core.files import File
 from django.forms import formset_factory
-from PIL import Image
+from django.shortcuts import get_object_or_404
+from django_select2.forms import Select2MultipleWidget
+from django_summernote.widgets import SummernoteWidget
 from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderServiceError
-from django_summernote.widgets import SummernoteWidget
-from itertools import chain
+from .models import Project, Topic, Status, Keyword, FundingBody, CustomField, OriginDatabase
 
 geolocator = Nominatim(timeout=None)
 
 class ProjectForm(forms.Form):
-    error_css_class = 'form_error'
     #Basic Project Information
-    project_name = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder':'Short name or title of the prohect'}))
+    project_name = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder':'Short name or title of the project'}))
     #aim = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 2000}}), label="Aim of the project (max 2000 characters)")
     aim = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Primary aim, goal or objective of the project. Max 2000 characters'}), max_length = 2000)
     #description = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 3000}}), label="Project description (max 3000 haracters)")
     description = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Abstract or description of the project. Max 3000 characters'}), max_length = 3000)
     choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     choicesSelected = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
-    keywords = forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget(attrs={'data-placeholder':'Please enter 2-3 keywords (comma separated) to aid in searching for projects'}), required=False)
+    keywords = forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget(attrs={'data-placeholder':'Please enter 2-3 keywords (comma separated) to aid in searching for projects'}), required=False, label='Keywords (Put a comma after each keyword to add new keywords)')
     status = forms.ModelChoiceField(queryset=Status.objects.all(), label="Status (Select one)",widget=forms.Select(attrs={'class':'js-example-basic-single'}))
     start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=False, label="Closest approximate start date of the project")
     end_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=False, label="Approximate end date of the project")
@@ -33,23 +30,26 @@ class ProjectForm(forms.Form):
     contact_person = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'autocomplete':'nope','placeholder':'Please ensure that you have the permission of this person before entering their name, otherwise leave blank'}), required=False)
     contact_person_email = forms.EmailField(required=False, widget=forms.TextInput(attrs={'autocomplete':'nope','placeholder':'Please ensure that you have the permission before entering their email, otherwise leave blank'}),label="Public contact email")
     #Images and communications
-    image1 = forms.ImageField(required=False,label="Project overview Image (Will be resized to 600x400 pixels)")
+    image1 = forms.ImageField(required=False,label="Project overview Image (Will be resized to 600x400 pixels)",widget=forms.FileInput)
     x1 = forms.FloatField(widget=forms.HiddenInput(),required=False)
     y1 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     width1 = forms.FloatField(widget=forms.HiddenInput(),required=False)
     height1 = forms.FloatField(widget=forms.HiddenInput(), required=False)
+    withImage1 = forms.BooleanField(widget=forms.HiddenInput(), required=False, initial=False)
     image_credit1 = forms.CharField(max_length=300, required=False, label="Image 1 credit")
-    image2 = forms.ImageField(required=False, label="Project logo (Will be resized to 600x400 pixels)")
+    image2 = forms.ImageField(required=False, label="Project logo (Will be resized to 600x400 pixels)",widget=forms.FileInput)
     x2 = forms.FloatField(widget=forms.HiddenInput(),required=False)
     y2 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     width2 = forms.FloatField(widget=forms.HiddenInput(),required=False)
     height2 = forms.FloatField(widget=forms.HiddenInput(), required=False)
+    withImage2 = forms.BooleanField(widget=forms.HiddenInput(), required=False, initial=False)
     image_credit2 = forms.CharField(max_length=300, required=False, label="Logo credit")
-    image3 = forms.ImageField(required=False, label="Header profile image (Will be resized to 1100x400 pixels" )
+    image3 = forms.ImageField(required=False, label="Header profile image (Will be resized to 1100x400 pixels", widget=forms.FileInput)
     x3 = forms.FloatField(widget=forms.HiddenInput(),required=False)
     y3 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     width3 = forms.FloatField(widget=forms.HiddenInput(),required=False)
     height3 = forms.FloatField(widget=forms.HiddenInput(), required=False, label="Image 3 credit")
+    withImage3 = forms.BooleanField(widget=forms.HiddenInput(), required=False, initial=False)
     image_credit3 = forms.CharField(max_length=300, required=False)
     #Geography
     latitude = forms.DecimalField(max_digits=9,decimal_places=6)
@@ -63,7 +63,7 @@ class ProjectForm(forms.Form):
     #equipment = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 1000}}), required=False, label="Equipment needeed to participate (max 1000 characters)")
     equipment = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'What equipment is needed for participation?. Max 2000 characters'}), max_length = 2000, required=False)
     #Funding
-    funding_body =  forms.ModelMultipleChoiceField(queryset=FundingBody.objects.all(), widget=Select2MultipleWidget(attrs={'data-placeholder':' Please enter the funding agency of the project (e.g. European Commission) '}), required=False)
+    funding_body =  forms.ModelMultipleChoiceField(queryset=FundingBody.objects.all(), widget=Select2MultipleWidget(attrs={'data-placeholder':' Please enter the funding agency of the project (e.g. European Commission) '}), required=False, label="Funding body (Put a comma after each name to add a new funding body)")
     fundingBodySelected = forms.CharField(widget=forms.HiddenInput(), max_length=100, required=False)
     funding_program = forms.CharField(max_length=500, widget=forms.TextInput(attrs={'placeholder':'Indication of the programme that funds or funded a project'}),required=False)
     #Origin information
@@ -75,12 +75,6 @@ class ProjectForm(forms.Form):
     title = forms.CharField(max_length=100, required=False)
     paragraph = forms.CharField(widget=SummernoteWidget(), required=False)
 
-    def clean(self):
-        start_date = self.data['start_date']
-        end_date = self.data['end_date']
-        if start_date is not '' and end_date is not '' and end_date < start_date:
-            msg = u"End date should be greater than start date."
-            self._errors["end_date"] = self.error_class([msg])
 
     def save(self, args, images, cFields):
         pk = self.data.get('projectID', '')
@@ -91,44 +85,17 @@ class ProjectForm(forms.Form):
         country = getCountryCode(latitude,longitude).upper()
         status = get_object_or_404(Status, id=self.data['status'])
         doingAtHome=False
-        if 'doingAtHome' in self.data:
-            if(self.data['doingAtHome']=='on'):
-                doingAtHome=True
-
+        if('doingAtHome' in self.data and self.data['doingAtHome'] == 'on'):
+            doingAtHome=True
 
         if(pk):
             project = get_object_or_404(Project, id=pk)
-            project.name = self.data['project_name']
-            project.url = self.data['url']
-            project.author = self.data['contact_person']
-            project.author_email = self.data['contact_person_email']
-            project.latitude = latitude
-            project.longitude = longitude
-            project.country = country
-            project.aim = self.data['aim']
-            project.description = self.data['description']
-            project.status = status
-            project.host = self.data['host']
-            project.imageCredit1 = self.data['image_credit1']
-            project.imageCredit2 = self.data['image_credit2']
-            project.imageCredit3 = self.data['image_credit3']
-            project.howToParticipate = self.data['how_to_participate']
-            project.doingAtHome = doingAtHome
-            project.equipment = self.data['equipment']
-            project.fundingProgram = self.data['funding_program']
-            project.originUID = self.data['originUID']
-            project.originURL = self.data['originURL']
+            if project.hidden:
+                project.hidden = False
+            self.updateFields(project, latitude, longitude, country, status, doingAtHome)
         else:
-            project = Project(name = self.data['project_name'],
-                         url = self.data['url'], creator=args.user,
-                         author = self.data['contact_person'], author_email = self.data['contact_person_email'],
-                         latitude = latitude, longitude = longitude, country = country,
-                         aim = self.data['aim'], description = self.data['description'],
-                         status = status, host = self.data['host'], imageCredit1 = self.data['image_credit1'],
-                         imageCredit2 = self.data['image_credit2'], imageCredit3 = self.data['image_credit3'],
-                         howToParticipate = self.data['how_to_participate'],equipment = self.data['equipment'],
-                         fundingProgram = self.data['funding_program'],originUID = self.data['originUID'],
-                         originURL = self.data['originURL'], doingAtHome=doingAtHome )
+            project = self.createProject(latitude, longitude, country, status, doingAtHome, args)
+           
         if start_dateData:
             project.start_date = start_dateData
         if end_dateData:
@@ -146,10 +113,8 @@ class ProjectForm(forms.Form):
 
         if(images[0] != '/'):
             project.image1 = images[0]
-
         if(images[1] != '/'):
             project.image2 = images[1]
-
         if(images[2] != '/'):
             project.image3 = images[2]
 
@@ -161,8 +126,10 @@ class ProjectForm(forms.Form):
             cfields = CustomField.objects.all().filter(paragraph__in = paragraphs)
             project = get_object_or_404(Project, id=pk)
             project.customField.set(cfields)
+        
         project.save()
         project.topic.set(self.data.getlist('topic'))
+        
         choices = self.data['choices']
         choices = choices.split(',')
         for choice in choices:
@@ -175,6 +142,40 @@ class ProjectForm(forms.Form):
         return 'success'
 
 
+    def createProject(self, latitude, longitude, country, status, doingAtHome, args):
+         return Project(name = self.data['project_name'], url = self.data['url'], creator=args.user,                         
+                         author = self.data['contact_person'], author_email = self.data['contact_person_email'],
+                         latitude = latitude, longitude = longitude, country = country,
+                         aim = self.data['aim'], description = self.data['description'],
+                         status = status, host = self.data['host'], imageCredit1 = self.data['image_credit1'],
+                         imageCredit2 = self.data['image_credit2'], imageCredit3 = self.data['image_credit3'],
+                         howToParticipate = self.data['how_to_participate'],equipment = self.data['equipment'],
+                         fundingProgram = self.data['funding_program'],originUID = self.data['originUID'],
+                         originURL = self.data['originURL'], doingAtHome=doingAtHome )
+
+    def updateFields(self, project, latitude, longitude, country, status, doingAtHome):
+        project.name = self.data['project_name']
+        project.url = self.data['url']
+        project.author = self.data['contact_person']
+        project.author_email = self.data['contact_person_email']
+        project.latitude = latitude
+        project.longitude = longitude
+        project.country = country
+        project.aim = self.data['aim']
+        project.description = self.data['description']
+        project.status = status
+        project.host = self.data['host']
+        project.imageCredit1 = self.data['image_credit1']
+        project.imageCredit2 = self.data['image_credit2']
+        project.imageCredit3 = self.data['image_credit3']
+        project.howToParticipate = self.data['how_to_participate']
+        project.doingAtHome = doingAtHome
+        project.equipment = self.data['equipment']
+        project.fundingProgram = self.data['funding_program']
+        project.originUID = self.data['originUID']
+        project.originURL = self.data['originURL']
+
+
 def getCountryCode(latitude, longitude):
     try:
         location = geolocator.reverse([latitude, longitude], exactly_one=True)
@@ -184,6 +185,7 @@ def getCountryCode(latitude, longitude):
             return ''
     except GeocoderServiceError:
         return ''
+
 
 class CustomFieldForm(forms.Form):
     title = forms.CharField(max_length=100, required=False)

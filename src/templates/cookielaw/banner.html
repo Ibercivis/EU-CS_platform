@@ -1,0 +1,18 @@
+
+{% load staticfiles %}
+
+<div id="cookieConsent">
+    <div id="closeCookieConsent">x</div>
+    This website is using cookies. <a href="{% url 'privacy' %}" target="_blank">More info</a>. <a class="cookieConsentOK" href="javascript:Cookielaw.createCookielawCookie();">That's Fine</a>
+</div>
+<script type="text/javascript" src="{% static 'site/js/jquery.min.js' %}"></script>
+<script>
+$(document).ready(function(){   
+    setTimeout(function () {
+        $("#cookieConsent").fadeIn(200);
+     }, 1000);
+    $("#closeCookieConsent, .cookieConsentOK").click(function() {
+        $("#cookieConsent").fadeOut(200);
+    }); 
+});
+</script>

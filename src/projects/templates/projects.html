@@ -7,18 +7,6 @@
 {% include "_navbar.html" with active_link="projects" %}
 {% endblock %}
 
-{% block messages %}
-{% if messages %}
-{% for message in messages %}
-<div class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
-	<div class="alert alert-{{ message.tags }}">
-		<a class="close" data-dismiss="alert">×</a>
-		{{ message|safe }}
-	</div>
-</div>
-{% endfor %}
-{% endif %}
-{% endblock %}
 {% block splash %}
 <div class="jumbotron jumbotron-fluid jumbotron-projects mb-0">
 	<div class="container-fluid">
@@ -38,12 +26,11 @@
 {% block list_of_items %}
 {% include "modal_projects.html" %}
 <div class="container">
-	<div class="row">
+	<div class="row .projects">
 		{% include "projects_cards.html" %}
-		{% endblock list_of_items %}
-
 	</div>
 </div>
+{% endblock list_of_items %}
 
 {% block scripts %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js"
@@ -52,7 +39,6 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
 <script>
 	function setFeatured(idProject){
-		var htmlId = "featured" + idProject;
 		var request = $.ajax(
 		{
 			type: "POST",
@@ -62,7 +48,7 @@ src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bo
 				csrfmiddlewaretoken: '{{ csrf_token }}'
 			},
 			success: function (response) {
-				$("#"+htmlId).load(" #"+htmlId);
+				window.location.reload(false);
 			}
 		}
 		);
@@ -79,7 +65,24 @@ src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bo
 				csrfmiddlewaretoken: '{{ csrf_token }}'
 			},
 			success: function (response) {
-				$("#"+htmlId).load(" #"+htmlId);
+				window.location.reload(false);
+			}
+		}
+		);
+	}
+	function setTop(idProject, top){
+		var htmlId = "top" + idProject;
+		var request = $.ajax(
+		{
+			type: "POST",
+			url: "{% url 'setTop' %}",
+			data: {
+				"project_id": idProject,
+				"top": top,
+				csrfmiddlewaretoken: '{{ csrf_token }}'
+			},
+			success: function (response) {
+				window.location.reload(false);
 			}
 		}
 		);
@@ -101,19 +104,12 @@ src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bo
 		}
 		);
 	}
-</script>
-<script>
+
 	$('.basicAutoComplete').autoComplete(
 	{ minLength: 3 }
 	);
 
-	//$("#keywords").blur(function () {
-		//var keywords = $(this).val();
-		//$('#searchProjects').submit();
-	//});
-
 	$('.basicAutoComplete').on('autocomplete.select', function (evt, item) {
-		//$('#keywords').val(item);
 		$('#searchProjects').submit();
 	});
 
@@ -160,8 +156,7 @@ src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bo
 			$('#searchProjects').submit();
 		});
 	});
-</script>
-<script>
+
 	$(document).ready(function() {
 		$( ".card" ).hover(
 		function() {

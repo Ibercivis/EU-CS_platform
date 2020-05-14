@@ -5,7 +5,7 @@ from django.views import generic
 from django.contrib.auth import get_user_model
 from django.contrib import auth
 from django.contrib import messages
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.conf import settings
 from django.core.mail import EmailMessage
 from django.http import HttpResponse
@@ -15,6 +15,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.shortcuts import render
 from django.core.mail import send_mail
+from profiles.models import Profile
 from authtools import views as authviews
 from braces import views as bracesviews
 from .tokens import account_activation_token
@@ -53,10 +54,14 @@ class SignUpView(
     form_valid_message = "You're signed up!"
 
     def form_valid(self, form):
-        r = super().form_valid(form)
+        super().form_valid(form)
         user = form.save(commit=False)
         user.is_active = False
         user.save()
+        orcid = form.cleaned_data.get('orcid')
+        profile = get_object_or_404(Profile, user_id=user.id)
+        profile.orcid = orcid
+        profile.save()
         current_site = get_current_site(self.request)
         mail_subject = 'Activate your EU-Citizen.Science account.'
         message = render_to_string('accounts/acc_active_email.html', {
@@ -74,8 +79,7 @@ class SignUpView(
 
         to_email = form.cleaned_data.get('email')
         send_mail(mail_subject, message, 'eu-citizen.sciece@ibercivis.es',[to_email], html_message=html_message)
-        #email.send()
-        #send_mail(mail_subject,message,"recover@ibercivis.es",[to_email])
+
         return render(self.request, 'accounts/confirm-email.html',{})
 
 

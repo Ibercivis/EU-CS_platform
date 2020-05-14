@@ -31,18 +31,21 @@ class LoginForm(AuthenticationForm):
 
 
 class SignupForm(authtoolsforms.UserCreationForm):
+      
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields["orcid"] = forms.CharField(required=False)
         self.helper = FormHelper()
-        self.fields["email"].widget.input_type = "email"  # ugly hack
+        self.fields["email"].widget.input_type = "email"  # ugly hack        
 
         self.helper.layout = Layout(
             Field("email", placeholder="Enter Email", autofocus=""),
             Field("name", placeholder="Enter Full Name"),
             Field("password1", placeholder="Enter Password"),
             Field("password2", placeholder="Re-enter Password"),
+            Field("orcid", placeholder="Enter ORCID"),
             StrictButton("Sign up", css_class="btn-green", type="Submit"),
-        )
+        ) 
 
 
 class PasswordChangeForm(authforms.PasswordChangeForm):

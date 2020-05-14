@@ -26,10 +26,8 @@
 		<div class="col-12 col-sm-12 ">
 			<div class="card  shadow">
 				<div class="card-text p-3">
- <!-- {% render_review_form for projects.project projectID %} -->
-
                 {% get_review_form for projects.project projectID as form %}
-
+                    
                     <form action="{% review_form_target %}" method="post">
                         {% csrf_token %}
                         <div class="row">
@@ -50,10 +48,8 @@
                         {{form.timestamp}}
                         {{form.security_hash}}
                     
-                        <input type="hidden" name="next" value="{% url 'project' projectID %}" />
-                    
-                        <input type="submit" name="submit" value="Send">                        
-                        
+                        <input type="hidden" name="next" value="{% url 'project' projectID %}" />                    
+                        <input type="submit" name="submit" value="Send">                                                
                     </form>
                 </div>
             </div>

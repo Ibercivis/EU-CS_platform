@@ -1,5 +1,6 @@
 {% extends 'baseblog.html' %}
 {% load reviews %}
+
 {% block list_of_items %}
 <link href="/static/reviews/css/star-rating.css" type="text/css" media="all" rel="stylesheet">
 <div class="container">
@@ -9,36 +10,18 @@
         <div class="col-sm-10 col-12">
           <div class="card mt-5 mb-5 shadow">
             <div class="card-body">
-              <h1>{% block title %} {{ object.title }} {% endblock title %}</h1>
-              <!-- {% get_rating for post as avg_rating %}
-              {% get_review_count for post as review_count %}
-              <span class="gl-star-rating-stars s{{ avg_rating | stringformat:'d'}}0 readonly">
-                <span data-value="1" data-text="Terrible"></span>
-                <span data-value="2" data-text="Poor"></span>
-                <span data-value="3" data-text="Average"></span>
-                <span data-value="4" data-text="Very Good"></span>
-                <span data-value="5" data-text="Excellent"></span>
-              </span>
-              {{ review_count }} <a href="#review-list">{% if review_count == 1 %} review {% else %} reviews {% endif %}</a> -->
-              <p class=" text-muted">{{ post.author.name }} <br/> {{ post.created_on }}</p>
-              <p class="card-text ">{{ object.content | safe }}</p>
-              <hr/>
-<!--               {% get_review_list for post as review_list %}
-              {% for review in review_list %}
-              <span class="gl-star-rating-stars s{{ review.rating | stringformat:'d'}}0 readonly">
-                <span data-value="1" data-text="Terrible"></span>
-                <span data-value="2" data-text="Poor"></span>
-                <span data-value="3" data-text="Average"></span>
-                <span data-value="4" data-text="Very Good"></span>
-                <span data-value="5" data-text="Excellent"></span>
-              </span>
-                {{review.submit_date}} - {{review.user.name}}
-                <p>{{review.comment}}</p>
-              {% endfor %}
-              {% if user.is_authenticated %}
-                <a class="btn btn-outline-secondary" href="/post_review/{{post.id}}">Review</a>
-              {% endif %} -->
-
+              {% if post.image.width > post.image.height %}
+              <div class="card mb-4 mt-5 shadow">
+                <img class="img-fluid img-responsive img-zoom" src="/media/{{post.image}}" alt="Card image">
+              </div>
+              {% endif %}
+              <h1>{% block title %} {{ post.title }} {% endblock title %}</h1>              
+              <p class=" text-muted">{{ post.author.name }} <br /> {{ post.created_on }}</p>
+              {% if post.image.width < post.image.height %}
+                <img class="img-fluid img-responsive img-zoom" style="float: right; margin: 0px 0px 15px 15px;" width="300px" src="/media/{{post.image}}" alt="Card image">
+              {% endif %}
+              <p class="card-text ">{{ post.content | safe }}</p>
+              <hr />
             </div>
           </div>
         </div>
@@ -46,5 +29,4 @@
     </div>
   </div>
 </div>
-
 {% endblock list_of_items %}

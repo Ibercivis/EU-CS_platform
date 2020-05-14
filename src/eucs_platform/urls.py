@@ -1,12 +1,14 @@
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import RedirectView
 from django.urls import include, path
 from django.conf.urls import url
 import profiles.urls
 import accounts.urls
 import projects.urls
 import resources.urls
+import events.urls
 import contact.urls
 from . import views
 
@@ -16,7 +18,6 @@ admin.site.site_header = "Eucs_Platform Administration"
 
 urlpatterns = [
     path("", views.home, name="home"),
-    path("results/", views.results, name="results"),
     path("curated/", views.curated,name="curated"),
     path("imprint/", views.imprint,name="imprint"),
     path("terms/", views.terms,name="terms"),
@@ -28,7 +29,6 @@ urlpatterns = [
     path("home_autocomplete/", views.home_autocomplete,name="home_autocomplete"),
     path("development/", views.development,name="development"),
     path("about/", views.AboutPage.as_view(), name="about"),
-    path("events/", views.EventsPage.as_view(), name="events"),
     path("users/", include(profiles.urls)),
     path("admin/", admin.site.urls),
     path("", include(contact.urls)),
@@ -36,10 +36,11 @@ urlpatterns = [
     path("", include(projects.urls)),
     path("", include(resources.urls)),
     path('', include('blog.urls')),
+    path("", include(events.urls)),
     path('summernote/', include('django_summernote.urls')),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^reviews/', include('reviews.urls')),
-
+    url(r'^citizen-science-resources-related-to-the-covid19-pandemic/', RedirectView.as_view(url='blog/2020/03/31/citizen-science-resources-related-covid19-pandemic/'))
 ]
 
 # User-uploaded files like profile pics need to be served in development

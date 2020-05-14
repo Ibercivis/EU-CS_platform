@@ -38,6 +38,7 @@
 							{{ profile_form.title|as_crispy_field }}
 							{{ profile_form.bio|as_crispy_field }}
 							{{ profile_form.institution|as_crispy_field }}
+							{{ profile_form.orcid|as_crispy_field }}
 							{{ profile_form.interestAreas|as_crispy_field }}
 							{{ profile_form.choices|as_crispy_field }}
 							{{ profile_form.latitude|as_crispy_field }}
@@ -56,8 +57,6 @@
 	{% endblock list_of_items%}
 
 	{% block scripts %}
-	<script type="text/javascript" src="{% static 'site/js/jquery.min.js' %}"></script>
-	<script type="text/javascript" src="{% static 'site/js/bootstrap.min.js' %}"></script>
 	<script src="{% static 'site/js/leaflet-geosearch_2_7.min.js' %}"></script>
 	<script>
 

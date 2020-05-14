@@ -32,6 +32,7 @@ class ProfileForm(forms.ModelForm):
             Field("title"),
             Field("bio"),
             Field("institution"),
+            Field("orcid"),
             Field("interestAreas"),
             Field("choices"),
             Field("latitude"),
@@ -48,7 +49,7 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = models.Profile
-        fields = ["picture", "title", "bio", "institution", "interestAreas", "choices",
+        fields = ["picture", "title", "bio", "institution", "orcid", "interestAreas", "choices",
                 "latitude", "longitude"]
 
 
@@ -61,7 +62,7 @@ class ProfileForm(forms.ModelForm):
         choices = choices.split(',')
         for choice in choices:
             if(choice != ''):
-                area = models.InterestArea.objects.get_or_create(interestArea=choice)
+                models.InterestArea.objects.get_or_create(interestArea=choice)
         areas = models.InterestArea.objects.all()
         areas = areas.filter(interestArea__in = choices)
         pForm.interestAreas.set(areas)

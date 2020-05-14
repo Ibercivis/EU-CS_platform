@@ -21,7 +21,6 @@
 {% block list_of_items %}
 
 <!-- MODAL TO CROP THE IMAGE -->
-
 <div class="modal fade" id="modalCrop">
   <div class="modal-dialog mdialog">
     <div class="modal-content">
@@ -53,8 +52,6 @@
     </div>
   </div>
 </div>
-
-
 <!-- END MODAL TO CROP -->
 
 <!-- Delete modal -->
@@ -64,7 +61,6 @@
       <div class="modal-header">
         <h4 class="modal-title" id="myModalLabel">Confirm delete</h4>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-
       </div>
       <div class="modal-body">
         <p>You are going to delete this project, this procedure is irreversible.</p>
@@ -72,7 +68,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <a class="btn btn-red"><i class="fas fa-trash-alt"></i> Delete</a>
+        <a class="btn btn-red btn-delete"><i class="fas fa-trash-alt"></i> Delete</a>
       </div>
     </div>
   </div>
@@ -85,13 +81,14 @@
       <div class="card mt-5 mb-5 shadow">
         <div class="card-title p-5">
           <div class="row">
-            <div clas="col-6">
+            <div class="col-6">
               <h2 class="float-left">Edit project</h2>
             </div>
             <div class="col-6">
+              <button type="submit" onclick="$('form').submit()" class="btn btn-green"><i class="fas fa-share-square"></i> Save</button>
               <button type="submit" class="btn btn-red float-right" data-href="{% url 'deleteProject' project.id %}"
               data-toggle="modal" data-target="#confirm-delete" name='deleteProject'><i class="fas fa-trash-alt"></i> Delete
-            </button>
+              </button>
           </div>
         </div>
 
@@ -189,7 +186,13 @@
                   {{ form.y1|as_crispy_field }}
                   {{ form.height1|as_crispy_field }}
                   {{ form.width1|as_crispy_field }}
+                  {{ form.withImage1|as_crispy_field }}
                   <a id="imgResult1" href="#"> <img class="img-fluid img-zoom" id="imageResult1" src="{{ project.image1 }}" alt="Image not upload"></a>
+                  <div id="deleteImage1">                   
+                  {% if project.image1 %}
+                    <a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>                  
+                  {% endif %}
+                  </div>
                 </div>
                 <div class="col-sm-6 col-12">
                   {{ form.image_credit1|as_crispy_field }}
@@ -202,7 +205,13 @@
                   {{ form.y2|as_crispy_field }}
                   {{ form.height2|as_crispy_field }}
                   {{ form.width2|as_crispy_field }}
+                  {{ form.withImage2|as_crispy_field }}
                   <a id="imgResult2" href="#"> <img class="img-fluid img-zoom" id="imageResult2" src="{{ project.image2 }}" alt="Image not upload"></a>
+                  <div id="deleteImage2">
+                  {% if project.image2 %}
+                    <a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>
+                  {% endif %}
+                  </div>
                 </div>
                 <div class="col-sm-6 col-12">
                   {{ form.image_credit2|as_crispy_field }}
@@ -215,7 +224,13 @@
                   {{ form.y3|as_crispy_field }}
                   {{ form.height3|as_crispy_field }}
                   {{ form.width3|as_crispy_field }}
+                  {{ form.withImage3|as_crispy_field }}
                   <a id="imgResult3" href="#"> <img class="img-fluid img-zoom" id="imageResult3" src="{{ project.image3 }}" alt="Image not upload"></a>
+                  <div id="deleteImage3">
+                  {% if project.image3 %}
+                    <a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>
+                  {% endif %}
+                  </div>
                 </div>
                 <div class="col-sm-6 col-12">
                   {{ form.image_credit3|as_crispy_field }}
@@ -302,7 +317,7 @@
             </div>
             <hr/>
             {% endfor %}
-            <button type="submit" class="btn btn-red mb-5"><i class="fas fa-share-square"></i> Save</button>
+            <button type="submit" class="btn btn-green mb-5"><i class="fas fa-share-square"></i> Save</button>
           </form>
         </table>
       </div>
@@ -310,10 +325,6 @@
   </div>
 </div>
 </div>
-
-
-
-
 
 {% endblock list_of_items %}
 
@@ -326,7 +337,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.formset/1.2.2/jquery.formset.js"></script>
 <script src="{% static 'site/js/leaflet-geosearch_2_7.min.js' %}"></script>
 <script>
-  $(document).ready(function () {
+  $(function () {
     var choices = $("#id_choices").val();
     var choices = choices.split(",");
     var choicesSelected = $("#id_choicesSelected").val().split(",");
@@ -412,10 +423,59 @@
       }
     });
 
-    function validateEmail(email) {
-      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(String(email).toLowerCase());
+    var users = $("#id_usersCollection").val();
+    var users = users.split(",");
+    var selectedUsers = $("#id_selectedUsers").val().split(",");
+    for (user of users){
+      var found = false;
+      for(sel of selectedUsers){
+        if(sel.trim() == user.trim()){
+          found = true;
+          $("#id_usersAllowed").append("<option value='" + user +"' selected> " + user + " </option>");
+        }
+      }
+      if(!found){
+        $("#id_usersAllowed").append("<option value='" + user +"'> " + user + " </option>");
+      }
     }
+
+    $('#id_usersAllowed').on('change', function () {
+        users = $("#id_usersAllowed option:selected").map(function () {
+          return $.trim($(this).text());
+        }).get().join(',');
+
+        var idProject = {{project.id}};
+        var request = $.ajax(
+        {
+          type: "POST",
+          url: "{% url 'allowUser' %}",
+          data: {
+            "project_id": idProject,
+            "users": users,
+            csrfmiddlewaretoken: '{{ csrf_token }}'
+          },
+          success: function (response) {
+
+          }
+        }
+      );
+    });
+
+    $('#deleteImage1 > a').click(function () {
+      $('#imageResult1').attr('src', '');
+      $("#deleteImage1").empty();
+      $("#id_withImage1").val(false);
+    });
+    $('#deleteImage2 > a').click(function () {
+      $('#imageResult2').attr('src', '');
+      $("#deleteImage2").empty();
+      $("#id_withImage2").val(false);
+    });
+    $('#deleteImage3 > a').click(function () {
+      $('#imageResult3').attr('src', '');
+      $("#deleteImage3").empty();
+      $("#id_withImage3").val(false);
+    });
 
     $("form").submit(function (e) {
       var validationFailed = false;
@@ -433,6 +493,14 @@
       if(email && !validateEmail(email)){
         validationFailed = true;
         $("#div_id_contact_person_email").append("<span class='errorMsg'> <b>Enter a valid email address.</b></span>");
+      }
+
+      //Check dates
+      var start_date = $("#id_start_date").val();
+      var end_date = $("#id_end_date").val();
+      if (start_date != '' && end_date != '' && end_date < start_date){
+        validationFailed = true;
+        $("#div_id_end_date").append("<span class='errorMsg'> <b>End date should be greater than start date.</b></span>");
       }
 
       if (validationFailed) {
@@ -460,51 +528,11 @@
       }
     });
 
-    var users = $("#id_usersCollection").val();
-    var users = users.split(",");
-
-    var selectedUsers = $("#id_selectedUsers").val().split(",");
-    for (user of users){
-      var found = false;
-      for(sel of selectedUsers){
-        if(sel.trim() == user.trim()){
-          found = true;
-          $("#id_usersAllowed").append("<option value='" + user +"' selected> " + user + " </option>");
-        }
-      }
-      if(!found){
-        $("#id_usersAllowed").append("<option value='" + user +"'> " + user + " </option>");
-      }
-    }
-
   });
 
-  $(function () {
-      $('#id_usersAllowed').on('change', function () {
-        users = $("#id_usersAllowed option:selected").map(function () {
-          return $.trim($(this).text());
-        }).get().join(',');
-
-        var idProject = {{project.id}};
-        var request = $.ajax(
-        {
-          type: "POST",
-          url: "{% url 'allowUser' %}",
-          data: {
-            "project_id": idProject,
-            "users": users,
-            csrfmiddlewaretoken: '{{ csrf_token }}'
-          },
-          success: function (response) {
-
-          }
-        }
-        );
-      });
-    });
 
   $('#confirm-delete').on('show.bs.modal', function(e) {
-    $(this).find('.btn-red').attr('href', $(e.relatedTarget).data('href'));
+    $(this).find('.btn-delete').attr('href', $(e.relatedTarget).data('href'));
   });
 
   $('.customField-formset').formset({
@@ -561,7 +589,6 @@
       else{
         $("#modalCrop").modal("show");
       }
-
     });
 
     $("#imageResult2").click(function () {
@@ -618,6 +645,12 @@
       $('#imageResult' + imgSelected).attr('src', $image.cropper('getCroppedCanvas',
       {width: imgSelected == 3 ? 1100 : 600, height: 400}).toDataURL());
 
+      $("#deleteImage"+imgSelected).html('<a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>  ');
+      $("#deleteImage"+imgSelected).click(function () {
+        $('#imageResult'+imgSelected).attr('src', '');
+        $('#id_image'+imgSelected).val('');
+        $("#deleteImage"+imgSelected).empty();
+      });
     });
 
   });
@@ -677,9 +710,7 @@
 
     map.addControl(searchControl);
     map.on('geosearch/showlocation', searchedMarker);
-
   }
-
 </script>
 {{ form.media.js }}
 {% endblock scripts %}

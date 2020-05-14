@@ -31,6 +31,7 @@
 		map.addLayer(markers);
 	}
 </script>
+
 <div class="jumbotron jumbotron-fluid jumbotron-main mb-0">
 	<div class="container">
 		<h1 class=" mt-5 text-white display-4 mb-2">Welcome to EU-Citizen.Science<br></h1>
@@ -41,8 +42,8 @@
 				<div class="input-group">
 					<input type="text" id="keywords" name="keywords" autocomplete="off" class="basicAutoComplete form-control form-control-lg"
 					placeholder="Search for citizen science resources, projects, tools, training, and more...." data-url="home_autocomplete/">
-					<button  id="resources" class="btn btn-red" style="margin-left: 5px;" onClick='$("#finder").attr("action", "resources").submit()'>RESOURCES</button>
-					<button  id="projects" class="btn btn-red" style="margin-left: 5px;" onClick='$("#finder").attr("action", "projects").submit()'>PROJECTS</button>
+					<button  id="resources" class="btn btn-red" style="margin-left: 5px;" onClick='$("#finder").attr("action", "resources").submit()'>SEARCH RESOURCES</button>
+					<button  id="projects" class="btn btn-red" style="margin-left: 5px;" onClick='$("#finder").attr("action", "projects").submit()'>SEARCH PROJECTS</button>
 				</div>
 			</div>
 		</form>
@@ -179,7 +180,7 @@
 					<div class="card-columns">
 						{% for post in entries %}
 						<div class="card shadow">
-							<a href="{% url 'post_detail' post.slug  %}">
+							<a href="{{ post.get_absolute_url }}">
 								<img class="card-img-top" alt="{{ post.title }}" src="/media/{{post.image}}" alt="Card image">
 							</a>
 							<div class="card-body">
@@ -189,7 +190,7 @@
 								<p class="card-text text-muted h6">{{ post.author.name }} <br /> {{ post.created_on}}
 								</p>
 								<p class="card-text">{{post.excerpt | safe }}<br /><br />
-									<a href="{% url 'post_detail' post.slug  %}">Read More >></a></p>
+									<a href="{{ post.get_absolute_url }}">Read More >></a></p>
 							</div>
 						</div>
 						{% endfor %}
@@ -202,6 +203,38 @@
 				</div>
 			</div>
 		</div>
+	</div>
+</div>
+<div class="container-fluid bluebackground">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 mt-5 mb-3">
+				<h2 class="white">Featured projects</h2>
+			</div>
+		</div>
+		<div class="row">
+			{% include "projects_cards_top.html" %}
+			<div class="col-12 text-center mt-4 mb-5">
+				<a type="button" class="btn  btn-red btn-lg shadow-sm" href="/projects">SEE ALL PROJECTS</a>
+			</div>
+		</div>
+		<div class="col-12">&nbsp;</div>
+	</div>
+</div>
+<div class="container-fluid">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 mt-5 mb-3">
+				<h2>Featured resources</h2>
+			</div>
+		</div>
+		<div class="row">
+			{% include "resources_cards_top.html" %}
+			<div class="col-12 text-center mt-4 mb-5">
+				<a type="button" class="btn  btn-red btn-lg shadow-sm" href="/resources">SEE ALL RESOURCES</a>
+			</div>
+		</div>
+		<div class="col-12">&nbsp;</div>
 	</div>
 </div>
 {% endblock splash %}
