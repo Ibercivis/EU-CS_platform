@@ -32,7 +32,7 @@
 
     <div class="row">
         <div class="col-sm-4 col-12 mt-4 mb-4">
-            <h3>{{event.title}}</h3> <h5>{{event.place}}, {{event.start_date | date:" M d, Y"}}</h5>
+            <h3>{{event.title}}</h3> <h5>{% if event.place %}{{event.place}}, {%endif%}{{event.start_date | date:" M d, Y"}}</h5>
         </div>
 
         <div class="col-sm-7 col-12 mt-4 mb-4">
