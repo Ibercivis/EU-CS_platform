@@ -72,7 +72,7 @@ class ResourcesGrouped(models.Model):
 
 
 class FeaturedResources(models.Model):
-    resource = models.ForeignKey(Resource, on_delete=models.CASCADE)
+    resource = models.OneToOneField(Resource, on_delete=models.CASCADE)
     def __str__(self):
         return f'{self.resource}'
 
