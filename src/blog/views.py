@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Post
 
 class PostList(generic.ListView):
-    queryset = Post.objects.filter(status=1).order_by('-created_on')
+    queryset = Post.objects.filter(status=1).order_by('-sticky', '-created_on')
     template_name = 'blog.html'
 
 
