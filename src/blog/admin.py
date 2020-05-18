@@ -50,7 +50,7 @@ class CustomPostForm(forms.ModelForm):
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'slug', 'status', 'excerpt', 'created_on')
+    list_display = ('title', 'slug', 'status', 'sticky', 'excerpt', 'created_on')
     list_filter = ("status",)
     search_fields = ['title', 'content']
     prepopulated_fields = {'slug': ('title',)}
