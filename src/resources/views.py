@@ -17,7 +17,7 @@ from authors.models import Author
 from PIL import Image
 from datetime import datetime
 from reviews.models import Review
-from .models import Resource, Keyword, Category, FeaturedResources, SavedResources, Theme, Category, ResourcesGrouped, ResourcePermission
+from .models import Resource, Keyword, Category, ApprovedResources, SavedResources, Theme, Category, ResourcesGrouped, ResourcePermission
 from .forms import ResourceForm, ResourcePermissionForm
 import random
 
@@ -25,7 +25,7 @@ User = get_user_model()
 
 def resources(request):
     resources = Resource.objects.all().order_by('id')
-    featuredResources = FeaturedResources.objects.all().values_list('resource_id',flat=True)
+    approvedResources = ApprovedResources.objects.all().values_list('resource_id',flat=True)
     user = request.user
     savedResources = None
     savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True)
@@ -69,7 +69,7 @@ def resources(request):
         resources=resources.order_by('-id')
 
     # Pin resources to top
-    resourcesTop = resources.filter(top=True)
+    resourcesTop = resources.filter(featured=True)
     resourcesTopIds = list(resourcesTop.values_list('id',flat=True))
     resources = resources.exclude(id__in=resourcesTopIds)
     resources = list(resourcesTop) + list(resources)
@@ -78,7 +78,7 @@ def resources(request):
     page = request.GET.get('page')
     resources = paginator.get_page(page)
 
-    return render(request, 'resources.html', {'resources':resources, 'featuredResources': featuredResources,
+    return render(request, 'resources.html', {'resources':resources, 'approvedResources': approvedResources,
     'savedResources': savedResources, 'filters': filters, 'settings': settings, 'languagesWithContent': languagesWithContent, 'themes':themes, 'categories': categories})
 
 
@@ -113,8 +113,8 @@ def resource(request, pk):
         return redirect('../resources', {})
     permissionForm = ResourcePermissionForm(initial={'usersCollection':users, 'selectedUsers': cooperators})
     savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True) #TODO: Only ask for the resource
-    featuredResources = FeaturedResources.objects.all().values_list('resource_id',flat=True)
-    return render(request, 'resource.html', {'resource':resource, 'savedResources':savedResources, 'featuredResources':featuredResources,
+    approvedResources = ApprovedResources.objects.all().values_list('resource_id',flat=True)
+    return render(request, 'resource.html', {'resource':resource, 'savedResources':savedResources, 'approvedResources':approvedResources,
         'cooperators': getCooperators(pk), 'permissionForm': permissionForm})
 
 
@@ -245,7 +245,7 @@ def preFilteredResources(request):
     return applyFilters(request, resources)
 
 def applyFilters(request, resources):
-    featuredResources = FeaturedResources.objects.all().values_list('resource_id',flat=True)
+    approvedResources = ApprovedResources.objects.all().values_list('resource_id',flat=True)
 
     if request.GET.get('language'):
         resources = resources.filter(inLanguage = request.GET['language'])
@@ -255,15 +255,15 @@ def applyFilters(request, resources):
         resources = resources.filter(theme = request.GET['theme'])
     if request.GET.get('category'):
         resources = resources.filter(category = request.GET['category'])
-    if request.GET.get('featuredCheck'):
-        if request.GET['featuredCheck'] == 'On':
-            resources = resources.filter(id__in=featuredResources)
-        if request.GET['featuredCheck'] == 'Off':
-            resources = resources.exclude(id__in=featuredResources)
-        if request.GET['featuredCheck'] == 'All':
+    if request.GET.get('approvedCheck'):
+        if request.GET['approvedCheck'] == 'On':
+            resources = resources.filter(id__in=approvedResources)
+        if request.GET['approvedCheck'] == 'Off':
+            resources = resources.exclude(id__in=approvedResources)
+        if request.GET['approvedCheck'] == 'All':
             resources = resources
     else:
-        resources = resources.filter(id__in=featuredResources)
+        resources = resources.filter(id__in=approvedResources)
 
     return resources
 
@@ -276,8 +276,8 @@ def setFilters(request, filters):
         filters['theme'] = int(request.GET['theme'])
     if request.GET.get('category'):
         filters['category'] = int(request.GET['category'])
-    if request.GET.get('featuredCheck'):
-        filters['featuredCheck'] = request.GET['featuredCheck']
+    if request.GET.get('approvedCheck'):
+        filters['approvedCheck'] = request.GET['approvedCheck']
     return filters
 
 
@@ -312,19 +312,19 @@ def getCategory(category):
         return category
 
 @staff_member_required()
-def setFeaturedRsc(request):
+def setApprovedRsc(request):
     response = {}
     id = request.POST.get("resource_id")
 
     #Delete
     try:
-        obj = FeaturedResources.objects.get(resource_id=id)
+        obj = ApprovedResources.objects.get(resource_id=id)
         obj.delete()
-    except FeaturedResources.DoesNotExist:
+    except ApprovedResources.DoesNotExist:
         #Insert
-        fResource = get_object_or_404(Resource, id=id)
-        featureResource = FeaturedResources(resource=fResource)
-        featureResource.save()
+        aResource = get_object_or_404(Resource, id=id)
+        approvedResource = ApprovedResources(resource=aResource)
+        approvedResource.save()
 
     return JsonResponse(response, safe=False)
 
@@ -339,9 +339,9 @@ def setSavedResource(request):
         obj.delete()
     except SavedResources.DoesNotExist:
         #Insert
-        fResource = get_object_or_404(Resource, id=resourceId)
-        fUser = get_object_or_404(User, id=userId)
-        savedResource = SavedResources(resource=fResource, user=fUser)
+        resource = get_object_or_404(Resource, id=resourceId)
+        user = get_object_or_404(User, id=userId)
+        savedResource = SavedResources(resource=resource, user=user)
         savedResource.save()
 
     return JsonResponse(response, safe=False)
@@ -357,12 +357,15 @@ def setHiddenResource(request):
     return JsonResponse(response, safe=False)
 
 @staff_member_required()
-def setTopResource(request):
+def setFeaturedResource(request):
     response = {}
     id = request.POST.get("resource_id")
-    top = request.POST.get("top")
+    featured = request.POST.get("featured")
+    print(id)
+    print(featured)
     resource = get_object_or_404(Resource, id=id)
-    resource.top = False if top == 'false' else True
+    print(resource)
+    resource.featured = False if featured == 'false' else True
     resource.save()
     return JsonResponse(response, safe=False)
 
@@ -370,9 +373,9 @@ def allowUserResource(request):
     response = {}
     resourceId = request.POST.get("resource_id")
     users = request.POST.get("users")
-    fResource = get_object_or_404(Resource, id=resourceId)
+    resource = get_object_or_404(Resource, id=resourceId)
 
-    if request.user != fResource.creator and not request.user.is_staff:
+    if request.user != resource.creator and not request.user.is_staff:
         #TODO return JsonResponse with error code
         return redirect('../resources', {})
 
@@ -386,7 +389,7 @@ def allowUserResource(request):
     users = users.split(',')
     for user in users:
         fUser = User.objects.filter(email=user)[:1].get()
-        resourcePermission = ResourcePermission(resource=fResource, user=fUser)
+        resourcePermission = ResourcePermission(resource=resource, user=fUser)
         resourcePermission.save()
 
     return JsonResponse(response, safe=False)

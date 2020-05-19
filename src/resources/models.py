@@ -49,7 +49,7 @@ class Resource(models.Model):
     resourceDOI = models.CharField(max_length=100, null=True,blank=True)
     image2 = models.ImageField(upload_to='images/', max_length=300,null=True, blank=True)
     hidden = models.BooleanField(null=True, blank=True)
-    top = models.BooleanField(null=True, blank=True)
+    featured = models.BooleanField(null=True, blank=True)
     
     def __str__(self):
         return self.name
@@ -71,7 +71,7 @@ class ResourcesGrouped(models.Model):
         return str(self.group) + ' - ' + str(self.resource)
 
 
-class FeaturedResources(models.Model):
+class ApprovedResources(models.Model):
     resource = models.OneToOneField(Resource, on_delete=models.CASCADE)
     def __str__(self):
         return f'{self.resource}'

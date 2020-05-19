@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Resource, ResourceGroup, ResourcesGrouped, Category, FeaturedResources, SavedResources
+from .models import Resource, ResourceGroup, ResourcesGrouped, Category, ApprovedResources, SavedResources
 
 
 class ResourcesGroupedAdmin(admin.ModelAdmin):
@@ -15,5 +15,5 @@ admin.site.register(Resource)
 admin.site.register(Category, CategoryGroupedAdmin)
 admin.site.register(ResourceGroup)
 admin.site.register(ResourcesGrouped, ResourcesGroupedAdmin)
-admin.site.register(FeaturedResources)
+admin.site.register(ApprovedResources)
 admin.site.register(SavedResources)

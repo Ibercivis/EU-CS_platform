@@ -41,12 +41,12 @@
   src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
 
 <script>
-  function setFeaturedRsc(idResource) {
+  function setApprovedRsc(idResource) {
     var htmlId = "resource" + idResource;
     var request = $.ajax(
       {
         type: "POST",
-        url: "{% url 'setFeaturedRsc' %}",
+        url: "{% url 'setApprovedRsc' %}",
         data: {
           "resource_id": idResource,
           csrfmiddlewaretoken: '{{ csrf_token }}'
@@ -94,15 +94,15 @@
     );
   }
 
-  function setTop(idResource, top){
-		var htmlId = "top" + idResource;
+  function setFeatured(idResource, featured){
+		var htmlId = "featured" + idResource;
 		var request = $.ajax(
 		{
 			type: "POST",
-			url: "{% url 'setTopResource' %}",
+			url: "{% url 'setFeaturedResource' %}",
 			data: {
 				"resource_id": idResource,
-				"top": top,
+				"featured": featured,
 				csrfmiddlewaretoken: '{{ csrf_token }}'
 			},
 			success: function (response) {
@@ -144,8 +144,8 @@
   });
 
   $(function () {
-    $('#featuredCheck').on('change', function () {
-      var featuredCheck = $(this).val();
+    $('#approvedCheck').on('change', function () {
+      var approvedCheck = $(this).val();
       $('#searchResources').submit();
     });
   });

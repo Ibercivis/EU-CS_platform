@@ -21,13 +21,13 @@
     <div class="main-content-container container-fluid" >
       <div class="card mb-4 mt-5 shadow">
         {% if project.image3 %}
-        <img class="img-fluid img-responsive img-zoom  {% if project.id not in featuredProjects %} nonmoderated {% endif %}" src="{{ project.image3 }}" >
+        <img class="img-fluid img-responsive img-zoom  {% if project.id not in approvedProjects %} nonmoderated {% endif %}" src="{{ project.image3 }}" >
         {% else %}
-        <img class="img-fluid img-responsive img-zoom  {% if project.id not in featuredProjects %} nonmoderated {% endif %}" src='/static/site/img/project_default_header.png'>
+        <img class="img-fluid img-responsive img-zoom  {% if project.id not in approvedProjects %} nonmoderated {% endif %}" src='/static/site/img/project_default_header.png'>
         {% endif %}
         <div class="upper">
           {% if project.hidden %}<a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT ACCEPTED</a><br/>
-          {% else %}{% if project.id not in featuredProjects %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br> {% endif %}{% endif %}
+          {% else %}{% if project.id not in approvedProjects %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br> {% endif %}{% endif %}
         </div>
         <div class="card-header">
           <div class="row">
@@ -191,32 +191,32 @@
         <div class="card-footer bg-white">
           <div class="row">
             <div class="col-6">
-              <div id="featured{{project.id}}" class="float-left">
+              <div id="approved{{project.id}}" class="float-left">
                 {% if user.is_staff %}
-                  {% if project.id in featuredProjects %}
-                  <img  class="img-fluid mt-2" onclick="setFeatured({{project.id}})" src="{% static 'site/img/icon_color.png' %}" />
+                  {% if project.id in approvedProjects %}
+                  <img  class="img-fluid mt-2" onclick="setApproved({{project.id}})" src="{% static 'site/img/icon_color.png' %}" />
                   {% else %}
-                  <img  class="img-fluid mt-2" onclick="setFeatured({{project.id}})" src="{% static 'site/img/icon_bw.png' %}" />
+                  <img  class="img-fluid mt-2" onclick="setApproved({{project.id}})" src="{% static 'site/img/icon_bw.png' %}" />
                   {% endif %}
                 {% else %}
-                  {% if project.id in featuredProjects %}
+                  {% if project.id in approvedProjects %}
                   <img  class="img-fluid mt-2" src="{% static 'site/img/icon_color.png' %}" />
                   {% else %}
                   <img  class="img-fluid mt-2" src="{% static 'site/img/icon_bw.png' %}" />
                   {% endif %}
                 {% endif %}
               </div>
-              {% if user.is_staff and project.id not in featuredProjects %}
+              {% if user.is_staff and project.id not in approvedProjects %}
               <a class="btn btn-outline-secondary mb-1" style="margin-left: 15px;" href="{% url 'submitter_contact' 'project' project.id %}">
                 Contact the Submitter
               </a>
               {% endif %}
-              <div id="top{{project.id}}" style="display:inline-block">
+              <div id="featured{{project.id}}" style="display:inline-block">
                 {% if user.is_staff %}
-                  {% if project.top %}
-                  <a  onclick="setTop({{project.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
+                  {% if project.featured %}
+                  <a  onclick="setFeatured({{project.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
                   {% else %}
-                  <a  onclick="setTop({{project.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
+                  <a  onclick="setFeatured({{project.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
                   {% endif %}							
                 {% endif %}
               </div>
@@ -292,11 +292,11 @@
       new L.marker([{{project.latitude}},{{project.longitude}}]).addTo(map);
     }
 
-    function setFeatured(idProject){
+    function setApproved(idProject){
       var request = $.ajax(
       {
         type: "POST",
-        url: "{% url 'setFeatured' %}",
+        url: "{% url 'setApproved' %}",
         data: {
           "project_id": idProject,
           csrfmiddlewaretoken: '{{ csrf_token }}'
@@ -308,15 +308,15 @@
       );
     }
 
-    function setTop(idProject, top){
-      var htmlId = "top" + idProject;
+    function setFeatured(idProject, featured){
+      var htmlId = "featured" + idProject;
       var request = $.ajax(
       {
         type: "POST",
-        url: "{% url 'setTop' %}",
+        url: "{% url 'setFeatured' %}",
         data: {
           "project_id": idProject,
-          "top": top,
+          "featured": featured,
           csrfmiddlewaretoken: '{{ csrf_token }}'
         },
         success: function (response) {

@@ -16,13 +16,13 @@
     <div class="container-fluid main-content-container">
       <div class="card mb-4 mt-5 shadow">
         {% if resource.image2 %}
-        <img class="img-fluid img-responsive img-zoom {% if resource.id not in featuredResources %} nonmoderated {% endif %}" src="{{ resource.image2 }}" >
+        <img class="img-fluid img-responsive img-zoom {% if resource.id not in approvedResources %} nonmoderated {% endif %}" src="{{ resource.image2 }}" >
         {% else %}
-        <img class="img-fluid img-responsive img-zoom {% if resource.id not in featuredResources %} nonmoderated {% endif %}" src='/static/site/img/resource_default_header.png'>
+        <img class="img-fluid img-responsive img-zoom {% if resource.id not in approvedResources %} nonmoderated {% endif %}" src='/static/site/img/resource_default_header.png'>
         {% endif %}
         <div class="upper">
           {% if resource.hidden %}<a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT ACCEPTED</a><br/>
-          {% else %}{% if resource.id not in featuredResources %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br> {% endif %}{% endif %}
+          {% else %}{% if resource.id not in approvedResources %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br> {% endif %}{% endif %}
         </div>
         <div class="card-header">
           <div class="row">
@@ -149,32 +149,32 @@
         <div class="card-footer bg-white">
           <div class="row">
             <div class="col-6">
-              <div id="featured{{resource.id}}" class="float-left">
+              <div id="approved{{resource.id}}" class="float-left">
                 {% if user.is_staff %}
-                {% if resource.id in featuredResources %}
-                <img onclick="setFeaturedRsc({{resource.id}})" class="img-fluid" src="{% static 'site/img/icon_color.png' %}" />
+                {% if resource.id in approvedResources %}
+                <img onclick="setApprovedRsc({{resource.id}})" class="img-fluid" src="{% static 'site/img/icon_color.png' %}" />
                 {% else %}
-                <img onclick="setFeaturedRsc({{resource.id}})" class="img-fluid" src="{% static 'site/img/icon_bw.png' %}" />
+                <img onclick="setApprovedRsc({{resource.id}})" class="img-fluid" src="{% static 'site/img/icon_bw.png' %}" />
                 {% endif %}
                 {% else %}
-                {% if resource.id in featuredResources %}
+                {% if resource.id in approvedResources %}
                 <img class="img-fluid" src="{% static 'site/img/icon_color.png' %}" />
                 {% else %}
                 <img class="img-fluid" src="{% static 'site/img/icon_bw.png' %}" />
                 {% endif %}
                 {% endif %}
               </div>
-              {% if user.is_staff and resource.id not in featuredResources %}
+              {% if user.is_staff and resource.id not in approvedResources %}
               <a class="btn btn-outline-secondary mb-1" style="margin-left: 15px;" href="{% url 'submitter_contact' 'resource' resource.id %}">
                 Contact the Submitter
               </a>
               {% endif %}
-              <div id="top{{resource.id}}" style="display:inline-block">
+              <div id="featured{{resource.id}}" style="display:inline-block">
                 {% if user.is_staff %}
-                  {% if resource.top %}
-                  <a  onclick="setTop({{resource.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
+                  {% if resource.featured %}
+                  <a  onclick="setFeatured({{resource.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
                   {% else %}
-                  <a  onclick="setTop({{resource.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
+                  <a  onclick="setFeatured({{resource.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
                   {% endif %}							
                 {% endif %}
               </div>
@@ -241,11 +241,11 @@
     });
   });
 
-  function setFeaturedRsc(idResource){
+  function setApprovedRsc(idResource){
     var request = $.ajax(
     {
       type: "POST",
-      url: "{% url 'setFeaturedRsc' %}",
+      url: "{% url 'setApprovedRsc' %}",
       data: {
         "resource_id": idResource,
         csrfmiddlewaretoken: '{{ csrf_token }}'
@@ -257,15 +257,15 @@
     );
   }
 
-  function setTop(idResource, top){
-		var htmlId = "top" + idResource;
+  function setFeatured(idResource, featured){
+		var htmlId = "featured" + idResource;
 		var request = $.ajax(
 		{
 			type: "POST",
-			url: "{% url 'setTopResource' %}",
+			url: "{% url 'setFeaturedResource' %}",
 			data: {
 				"resource_id": idResource,
-				"top": top,
+				"featured": featured,
 				csrfmiddlewaretoken: '{{ csrf_token }}'
 			},
 			success: function (response) {

@@ -6,14 +6,14 @@
 	<div class="card h-100 shadow border-0">
 		<a class="card-img-wrap "href="/project/{{project.id }}">
 			{% if project.image1 %}
-			<img class="card-img-top img-fluid img-zoom lazyload {% if project.id not in featuredProjects %} nonmoderated {% endif %}" src="{{ project.image1 }}" />
+			<img class="card-img-top img-fluid img-zoom lazyload {% if project.id not in approvedProjects %} nonmoderated {% endif %}" src="{{ project.image1 }}" />
 			{% else %}
-			<img class="card-img-top img-fluid img-zoom lazyload {% if project.id not in featuredProjects %} nonmoderated {% endif %}" src="{% static 'site/img/project_default_card.webp' %}" />
+			<img class="card-img-top img-fluid img-zoom lazyload {% if project.id not in approvedProjects %} nonmoderated {% endif %}" src="{% static 'site/img/project_default_card.webp' %}" />
 			{% endif %}
 			<div class="upper">
 				{% if project.hidden %}<a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT ACCEPTED</a><br/>
-				{% else %} {% if project.id not in featuredProjects %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br/>
-				{% else %} {% if filters.featuredCheck == "All" %}  <a class="badge frontpage frontpage-green mb-2" href="/faq#moderation">MODERATED</a><br/> {% endif %}
+				{% else %} {% if project.id not in approvedProjects %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br/>
+				{% else %} {% if filters.approvedCheck == "All" %}  <a class="badge frontpage frontpage-green mb-2" href="/faq#moderation">MODERATED</a><br/> {% endif %}
 				{% endif %}{% endif %}
 				{% for country in countries %}
 				{% if country.code == project.country %}
@@ -44,15 +44,15 @@
 		<div class="card-footer bg-white">
 			<div class="row">
 				<div class="col-8">
-					<div id="featured{{project.id}}" class="float-left">
+					<div id="approved{{project.id}}" class="float-left">
 						{% if user.is_staff %}
-						{% if project.id in featuredProjects %}
-						<img  class="img-fluid mt-2"  onclick="setFeatured({{project.id}})" src="{% static 'site/img/icon_color.png' %}" />
+						{% if project.id in approvedProjects %}
+						<img  class="img-fluid mt-2"  onclick="setApproved({{project.id}})" src="{% static 'site/img/icon_color.png' %}" />
 						{% else %}
-						<img  class="img-fluid mt-2" onclick="setFeatured({{project.id}})" src="{% static 'site/img/icon_bw.png' %}" />
+						<img  class="img-fluid mt-2" onclick="setApproved({{project.id}})" src="{% static 'site/img/icon_bw.png' %}" />
 						{% endif %}
 						{% else %}
-						{% if project.id in featuredProjects %}
+						{% if project.id in approvedProjects %}
 						<img  class="img-fluid mt-2" src="{% static 'site/img/icon_color.png' %}" />
 						{% else %}
 						<img  class="img-fluid mt-2" src="{% static 'site/img/icon_bw.png' %}" />
@@ -71,12 +71,12 @@
 								{% endif %}
 							{% endif %}
 						</div>
-						<div id="top{{project.id}}" style="display:inline-block">
+						<div id="featured{{project.id}}" style="display:inline-block">
 							{% if user.is_staff %}
-								{% if project.top %}
-								<a  onclick="setTop({{project.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
+								{% if project.featured %}
+								<a  onclick="setFeatured({{project.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
 								{% else %}
-								<a  onclick="setTop({{project.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
+								<a  onclick="setFeatured({{project.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
 								{% endif %}							
 							{% endif %}
 						</div>

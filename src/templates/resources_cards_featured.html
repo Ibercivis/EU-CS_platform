@@ -2,20 +2,20 @@
 {% load i18n %}
 {% load l10n %}
 {% if resources %}
-{% for rsc in topResources  %}
+{% for rsc in featuredResources  %}
 {% load reviews %}
 <div class="col-lg-4 col-md-12 mb-4">
   <div class="card h-100 shadow border-0">
     <a class="card-img-wrap" href="/resource/{{rsc.id}}">
       {% if rsc.image1 %}
-      <img class="img-fluid img-zoom {% if rsc.id not in featuredResources %} nonmoderated {% endif %} " alt="{{ rsc.name }}" src="{{ rsc.image1 }}" />
+      <img class="img-fluid img-zoom {% if rsc.id not in approvedResources %} nonmoderated {% endif %} " alt="{{ rsc.name }}" src="{{ rsc.image1 }}" />
       {% else %}
-      <img class="img-fluid img-zoom {% if rsc.id not in featuredResources %} nonmoderated {% endif %}" alt="{{ rsc.name}}" src="{% static 'site/img/resource_default_card.png' %}" />
+      <img class="img-fluid img-zoom {% if rsc.id not in approvedResources %} nonmoderated {% endif %}" alt="{{ rsc.name}}" src="{% static 'site/img/resource_default_card.png' %}" />
       {% endif %}
     </a>
     <div class="upper">
-      {% if rsc.id not in featuredResources %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br/>
-      {% else %} {% if filters.featuredCheck == "All" %}  <a class="badge frontpage frontpage-green mb-2" href="/faq#moderation">MODERATED</a><br/>{% endif %}
+      {% if rsc.id not in approvedResources %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br/>
+      {% else %} {% if filters.approvedCheck == "All" %}  <a class="badge frontpage frontpage-green mb-2" href="/faq#moderation">MODERATED</a><br/>{% endif %}
       {% endif %}
       {% get_language_info_list for LANGUAGES as languages %}
       {% for language in languages %}
