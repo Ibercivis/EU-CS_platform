@@ -38,11 +38,11 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 <script
 src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
 <script>
-	function setFeatured(idProject){
+	function setApproved(idProject){
 		var request = $.ajax(
 		{
 			type: "POST",
-			url: "{% url 'setFeatured' %}",
+			url: "{% url 'setApproved' %}",
 			data: {
 				"project_id": idProject,
 				csrfmiddlewaretoken: '{{ csrf_token }}'
@@ -70,15 +70,15 @@ src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bo
 		}
 		);
 	}
-	function setTop(idProject, top){
-		var htmlId = "top" + idProject;
+	function setFeatured(idProject, featured){
+		var htmlId = "featured" + idProject;
 		var request = $.ajax(
 		{
 			type: "POST",
-			url: "{% url 'setTop' %}",
+			url: "{% url 'setFeatured' %}",
 			data: {
 				"project_id": idProject,
-				"top": top,
+				"featured": featured,
 				csrfmiddlewaretoken: '{{ csrf_token }}'
 			},
 			success: function (response) {
@@ -151,8 +151,8 @@ src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bo
 	});
 
 	$(function () {
-		$('#featuredCheck').on('change', function () {
-			var featuredCheck = $(this).val();
+		$('#approvedCheck').on('change', function () {
+			var approvedCheck = $(this).val();
 			$('#searchProjects').submit();
 		});
 	});

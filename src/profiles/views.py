@@ -7,8 +7,8 @@ from django.db.models import Q
 from itertools import chain
 from . import forms
 from . import models
-from projects.models import Project, FollowedProjects, ProjectPermission, FeaturedProjects
-from resources.models import Resource, SavedResources, ResourcePermission, FeaturedResources
+from projects.models import Project, FollowedProjects, ProjectPermission, ApprovedProjects
+from resources.models import Resource, SavedResources, ResourcePermission, ApprovedResources
 
 
 class ShowProfile(LoginRequiredMixin, generic.TemplateView):
@@ -71,8 +71,8 @@ def projects(request):
     projectsWithPermission = getProjectsWithPermission(user)
     projectsWithPermission = Project.objects.all().filter(id__in=projectsWithPermission)
     projects = chain(projectsCreated, projectsWithPermission)
-    featuredProjects = FeaturedProjects.objects.all().values_list('project_id',flat=True)
-    return render(request, 'profiles/my_projects.html', {'show_user': user, 'projects': projects, 'featuredProjects': featuredProjects})
+    approvedProjects = ApprovedProjects.objects.all().values_list('project_id',flat=True)
+    return render(request, 'profiles/my_projects.html', {'show_user': user, 'projects': projects, 'approvedProjects': approvedProjects})
 
 def resources(request):
     user = request.user
@@ -80,8 +80,8 @@ def resources(request):
     resourcesWithPermission = getResourcesWithPermission(user)
     resourcesWithPermission = Resource.objects.all().filter(id__in=resourcesWithPermission)
     resources = chain(resourcesCreated, resourcesWithPermission)
-    featuredResources = FeaturedResources.objects.all().values_list('resource_id',flat=True)
-    return render(request, 'profiles/my_resources.html', {'show_user': user, 'resources': resources, 'featuredResources': featuredResources})
+    approvedResources = ApprovedResources.objects.all().values_list('resource_id',flat=True)
+    return render(request, 'profiles/my_resources.html', {'show_user': user, 'resources': resources, 'approvedResources': approvedResources})
 
 def followedProjects(request):
     user = request.user

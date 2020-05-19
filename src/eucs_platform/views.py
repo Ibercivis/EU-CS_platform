@@ -4,10 +4,10 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from itertools import chain
-from projects.models import Project,FeaturedProjects
+from projects.models import Project,ApprovedProjects
 from projects.views import getNamesKeywords
 from resources.views import getRscNamesKeywords
-from resources.models import Resource, ResourceGroup, ResourcesGrouped, FeaturedResources
+from resources.models import Resource, ResourceGroup, ResourcesGrouped, ApprovedResources
 from blog.models import Post
 import random
 import json
@@ -15,30 +15,30 @@ import json
 
 def home(request):
     try:
-        featuredProjectsFixed = [59,54]
-        featuredProjects = []
-        featuredProjectFixed1 = FeaturedProjects.objects.get(project_id=featuredProjectsFixed[0]).project_id
-        featuredProjects.append(featuredProjectFixed1)
-        featuredProjectFixed2 = FeaturedProjects.objects.get(project_id=featuredProjectsFixed[1]).project_id
-        featuredProjects.append(featuredProjectFixed2)
-        featuredProject3 = FeaturedProjects.objects.exclude(project_id__in=featuredProjectsFixed)
-        if(featuredProject3):
-            featuredProject3 = featuredProject3.last().project_id
-            featuredProjects.append(featuredProject3)
-    except FeaturedProjects.DoesNotExist:
-        featuredProjects = FeaturedProjects.objects.all().order_by('-id')[:3].values_list('project_id',flat=True)
+        approvedProjectsFixed = [59,54]
+        approvedProjects = []
+        approvedProjectFixed1 = ApprovedProjects.objects.get(project_id=approvedProjectsFixed[0]).project_id
+        approvedProjects.append(approvedProjectFixed1)
+        approvedProjectFixed2 = ApprovedProjects.objects.get(project_id=approvedProjectsFixed[1]).project_id
+        approvedProjects.append(approvedProjectFixed2)
+        approvedProject3 = ApprovedProjects.objects.exclude(project_id__in=approvedProjectsFixed)
+        if(approvedProject3):
+            approvedProject3 = approvedProject3.last().project_id
+            approvedProjects.append(approvedProject3)
+    except ApprovedProjects.DoesNotExist:
+        approvedProjects = ApprovedProjects.objects.all().order_by('-id')[:3].values_list('project_id',flat=True)
 
-    allfeaturedProjects = FeaturedProjects.objects.all().order_by('-id').values_list('project_id',flat=True)
+    allapprovedProjects = ApprovedProjects.objects.all().order_by('-id').values_list('project_id',flat=True)
     projects = Project.objects.all().order_by('-id')
-    allprojects =  projects.filter(id__in=allfeaturedProjects)
-    projects = projects.filter(id__in=featuredProjects)
-    topProjects = Project.objects.all().filter(top=True)[:3]
-    topResources = Resource.objects.all().filter(top=True)[:3]
+    allprojects =  projects.filter(id__in=allapprovedProjects)
+    projects = projects.filter(id__in=approvedProjects)
+    featuredProjects = Project.objects.all().filter(featured=True)[:3]
+    featuredResources = Resource.objects.all().filter(featured=True)[:3]
     entries = Post.objects.filter(status=1).order_by('-created_on')[:3]
-    featuredResources = FeaturedResources.objects.all().order_by('-id')[:3].values_list('resource_id',flat=True)
+    approvedResources = ApprovedResources.objects.all().order_by('-id')[:3].values_list('resource_id',flat=True)
     resources = Resource.objects.all().order_by('-id')
-    resources = resources.filter(id__in=featuredResources)
-    return render(request, 'home.html', {'projects':projects, 'allprojects': allprojects, 'topProjects': topProjects, 'resources':resources, 'topResources': topResources, 'entries': entries}, )
+    resources = resources.filter(id__in=approvedResources)
+    return render(request, 'home.html', {'projects':projects, 'allprojects': allprojects, 'featuredProjects': featuredProjects, 'resources':resources, 'featuredResources': featuredResources, 'entries': entries}, )
 
 class AboutPage(generic.TemplateView):
     template_name = "about.html"

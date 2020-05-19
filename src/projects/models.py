@@ -78,7 +78,7 @@ class Project(models.Model):
 
     hidden = models.BooleanField(null=True, blank=True)
 
-    top = models.BooleanField(null=True, blank=True)
+    featured = models.BooleanField(null=True, blank=True)
 
     customField = models.ManyToManyField(CustomField)
 
@@ -86,7 +86,7 @@ class Project(models.Model):
         return f'{self.name}'
 
 
-class FeaturedProjects(models.Model):
+class ApprovedProjects(models.Model):
     project = models.OneToOneField(Project, on_delete=models.CASCADE)
     def __str__(self):
         return f'{self.project}'

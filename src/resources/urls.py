@@ -10,10 +10,10 @@ urlpatterns = [
     path('deleteResource/<int:pk>', views.deleteResource, name='deleteResource'),
     path('resources_autocomplete/', views.resources_autocomplete, name='resources_autocomplete'),
     path('get_sub_category/', views.get_sub_category, name='get_sub_category'),
-    path('setFeaturedRsc/', views.setFeaturedRsc, name='setFeaturedRsc'),
+    path('setApprovedRsc/', views.setApprovedRsc, name='setApprovedRsc'),
     path('setSavedResource/', views.setSavedResource, name='setSavedResource'),
     path('setHiddenResource/', views.setHiddenResource, name='setHiddenResource'),
-    path('setTopResource/', views.setTopResource, name='setTopResource'),
+    path('setFeaturedResource/', views.setFeaturedResource, name='setFeaturedResource'),
     path('allowUserResource/', views.allowUserResource, name='allowUserResource'),
     path('resource_review/<int:pk>', views.resource_review, name='resource_review'),
 ]

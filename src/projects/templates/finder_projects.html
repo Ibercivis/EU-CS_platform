@@ -16,7 +16,7 @@
 					</div>
 					<input  type="text" id="keywords" name="keywords"  autocomplete="off"
 					value="{{filters.keywords}}" class="basicAutoComplete form-control form-control-lg" placeholder="Search for citizen science projects by title or keyword"
-					data-url="text_autocomplete/?status={{filters.status}}&country={{filters.country}}&topic={{filters.topic}}&doingAtHome={{filters.doingAtHome}}&featuredCheck={{filters.featuredCheck}}">
+					data-url="text_autocomplete/?status={{filters.status}}&country={{filters.country}}&topic={{filters.topic}}&doingAtHome={{filters.doingAtHome}}&approvedCheck={{filters.approvedCheck}}">
 					<div class="input-group-append">
 						<div class="input-group-text"><a href="#" data-toggle="modal" data-target="#projectsinfo" ><i class="fas fa-info-circle"></i></a></div>
 					</div>
@@ -73,10 +73,10 @@
 									<option value=1 {% if filters.doingAtHome == 1 %} selected {% endif %}>Yes</option>
 									<option value=0 {% if filters.doingAtHome == 0 %} selected {% endif %}>No</option>
 								</select>
-								<select id="featuredCheck" name="featuredCheck" class="custom-select form-control">
-									<option value="On" {% if filters.featuredCheck == "On" %} selected {% endif %}>Moderated</option>
-									<option value="Off" {% if filters.featuredCheck == "Off" %} selected {% endif %}>Not yet moderated</option>
-									<option value="All" {% if filters.featuredCheck == "All" %} selected {% endif %}">All</option>
+								<select id="approvedCheck" name="approvedCheck" class="custom-select form-control">
+									<option value="On" {% if filters.approvedCheck == "On" %} selected {% endif %}>Moderated</option>
+									<option value="Off" {% if filters.approvedCheck == "Off" %} selected {% endif %}>Not yet moderated</option>
+									<option value="All" {% if filters.approvedCheck == "All" %} selected {% endif %}">All</option>
 								</select>
 							</div>
 						</div>

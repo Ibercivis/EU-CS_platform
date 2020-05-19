@@ -16,7 +16,7 @@ have been marked as 'Moderated'. Read more about our <a href="/faq">moderation p
 					<div class="input-group-text"><i class="fas fa-search"></i></div>
 				</div>
 				<input  type="text" id="keywords" name="keywords" autocomplete="off" value="{{filters.keywords}}" class="basicAutoComplete form-control form-control-lg"
-				placeholder="Search for citizen science resources by title or keyword" data-url="resources_autocomplete/?language={{filters.language}}&theme={{filters.theme}}&category={{filters.category}}&featuredCheck={{filters.featuredCheck}}">
+				placeholder="Search for citizen science resources by title or keyword" data-url="resources_autocomplete/?language={{filters.language}}&theme={{filters.theme}}&category={{filters.category}}&approvedCheck={{filters.approvedCheck}}">
 				{% get_language_info_list for LANGUAGES as languages %}
 				{% if settings.USE_I18N and languages|length > 1 %}
 				<div class="input-group-append">
@@ -72,10 +72,10 @@ have been marked as 'Moderated'. Read more about our <a href="/faq">moderation p
 						<option {% if category.id == filters.category %} selected {% endif %} value="{{category.id}}">{{category}}</option>
 						{% endfor %}
 						<select/>
-						<select id="featuredCheck" name="featuredCheck" class="custom-select form-control">
-							<option value="On" {% if filters.featuredCheck == "On" %} selected {% endif %}>Moderated</option>
-							<option value="Off" {% if filters.featuredCheck == "Off" %} selected {% endif %}>Not yet moderated</option>
-							<option value="All" {% if filters.featuredCheck == "All" %} selected {% endif %}">All</option>
+						<select id="approvedCheck" name="approvedCheck" class="custom-select form-control">
+							<option value="On" {% if filters.approvedCheck == "On" %} selected {% endif %}>Moderated</option>
+							<option value="Off" {% if filters.approvedCheck == "Off" %} selected {% endif %}>Not yet moderated</option>
+							<option value="All" {% if filters.approvedCheck == "All" %} selected {% endif %}">All</option>
 						</select>
 					</div>
 				</div>

@@ -12,7 +12,7 @@ from PIL import Image
 from itertools import chain
 from reviews.models import Review
 from .forms import ProjectForm, CustomFieldFormset, ProjectPermissionForm
-from .models import Project, Topic, Status, Keyword, FeaturedProjects, FollowedProjects, FundingBody, CustomField, ProjectPermission, OriginDatabase
+from .models import Project, Topic, Status, Keyword, ApprovedProjects, FollowedProjects, FundingBody, CustomField, ProjectPermission, OriginDatabase
 import json
 import random
 
@@ -38,7 +38,7 @@ def new_project(request):
 
 def projects(request):
     projects = Project.objects.get_queryset()
-    featuredProjects = FeaturedProjects.objects.all().values_list('project_id',flat=True)
+    approvedProjects = ApprovedProjects.objects.all().values_list('project_id',flat=True)
     user = request.user
     followedProjects = None
     followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id',flat=True)
@@ -46,7 +46,7 @@ def projects(request):
 
     topics = Topic.objects.all()
     status = Status.objects.all()
-    filters = {'keywords': '', 'topic': '', 'status': 0, 'country': '', 'host': '', 'featuredCheck': '', 'doingAtHome': ''}
+    filters = {'keywords': '', 'topic': '', 'status': 0, 'country': '', 'host': '', 'approvedCheck': '', 'doingAtHome': ''}
 
     if request.GET.get('keywords'):
         projects = projects.filter( Q(name__icontains = request.GET['keywords']) |
@@ -83,7 +83,7 @@ def projects(request):
         projects=projects.order_by('-id')
 
     # Pin projects to top
-    projectsTop = projects.filter(top=True)
+    projectsTop = projects.filter(featured=True)
     projectsTopIds = list(projectsTop.values_list('id',flat=True))
     projects = projects.exclude(id__in=projectsTopIds)
     projects = list(projectsTop) + list(projects)
@@ -93,7 +93,7 @@ def projects(request):
     projects = paginator.get_page(page)
 
     return render(request, 'projects.html', {'projects': projects, 'topics': topics, 'countriesWithContent': countriesWithContent,
-    'status': status, 'filters': filters, 'featuredProjects': featuredProjects, 'followedProjects': followedProjects})
+    'status': status, 'filters': filters, 'approvedProjects': approvedProjects, 'followedProjects': followedProjects})
 
 
 def project(request, pk):
@@ -105,9 +105,9 @@ def project(request, pk):
         return redirect('../projects', {})
     permissionForm = ProjectPermissionForm(initial={'usersCollection':users, 'selectedUsers': cooperators})
     followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id',flat=True)
-    featuredProjects = FeaturedProjects.objects.all().values_list('project_id',flat=True)
+    approvedProjects = ApprovedProjects.objects.all().values_list('project_id',flat=True)
     return render(request, 'project.html', {'project':project, 'followedProjects':followedProjects,
-    'featuredProjects':featuredProjects, 'permissionForm': permissionForm, 'cooperators': getCooperators(pk)})
+    'approvedProjects':approvedProjects, 'permissionForm': permissionForm, 'cooperators': getCooperators(pk)})
 
 
 def editProject(request, pk):
@@ -270,7 +270,7 @@ def preFilteredProjects(request):
     return applyFilters(request, projects)
 
 def applyFilters(request, projects):
-    featuredProjects = FeaturedProjects.objects.all().values_list('project_id',flat=True)
+    approvedProjects = ApprovedProjects.objects.all().values_list('project_id',flat=True)
 
     if request.GET.get('topic'):
         projects = projects.filter(topic__topic = request.GET['topic'])
@@ -284,15 +284,15 @@ def applyFilters(request, projects):
     if request.GET.get('doingAtHome'):
         projects = projects.filter(doingAtHome = request.GET['doingAtHome'])
 
-    if request.GET.get('featuredCheck'):
-        if request.GET['featuredCheck'] == 'On':
-            projects = projects.filter(id__in=featuredProjects)
-        if request.GET['featuredCheck'] == 'Off':
-            projects = projects.exclude(id__in=featuredProjects)
-        if request.GET['featuredCheck'] == 'All':
+    if request.GET.get('approvedCheck'):
+        if request.GET['approvedCheck'] == 'On':
+            projects = projects.filter(id__in=approvedProjects)
+        if request.GET['approvedCheck'] == 'Off':
+            projects = projects.exclude(id__in=approvedProjects)
+        if request.GET['approvedCheck'] == 'All':
             projects = projects
     else:
-        projects = projects.filter(id__in=featuredProjects)
+        projects = projects.filter(id__in=approvedProjects)
     
     return projects
 
@@ -305,26 +305,26 @@ def setFilters(request, filters):
         filters['doingAtHome'] = int(request.GET['doingAtHome'])
     if request.GET.get('country'):
         filters['country'] = request.GET['country']
-    if request.GET.get('featuredCheck'):
-        filters['featuredCheck'] = request.GET['featuredCheck']
+    if request.GET.get('approvedCheck'):
+        filters['approvedCheck'] = request.GET['approvedCheck']
     return filters
 
 def clearFilters(request):
     return redirect ('projects')
 
 @staff_member_required()
-def setFeatured(request):
+def setApproved(request):
     response = {}
     id = request.POST.get("project_id")
     #Delete
     try:
-        obj = FeaturedProjects.objects.get(project_id=id)
+        obj = ApprovedProjects.objects.get(project_id=id)
         obj.delete()
-    except FeaturedProjects.DoesNotExist:
+    except ApprovedProjects.DoesNotExist:
         #Insert
-        fProject = get_object_or_404(Project, id=id)
-        featureProject = FeaturedProjects(project=fProject)
-        featureProject.save()
+        aProject = get_object_or_404(Project, id=id)
+        approvedProject = ApprovedProjects(project=aProject)
+        approvedProject.save()
 
     return JsonResponse(response, safe=False)
 
@@ -339,12 +339,12 @@ def setHidden(request):
     return JsonResponse(response, safe=False)
 
 @staff_member_required()
-def setTop(request):
+def setFeatured(request):
     response = {}
     id = request.POST.get("project_id")
-    top = request.POST.get("top")
+    featured = request.POST.get("featured")
     project = get_object_or_404(Project, id=id)
-    project.top = False if top == 'false' else True
+    project.featured = False if featured == 'false' else True
     project.save()
     return JsonResponse(response, safe=False)
 
@@ -369,9 +369,9 @@ def allowUser(request):
     response = {}
     projectId = request.POST.get("project_id")
     users = request.POST.get("users")
-    fProject = get_object_or_404(Project, id=projectId)
+    project = get_object_or_404(Project, id=projectId)
     
-    if request.user != fProject.creator and not request.user.is_staff:
+    if request.user != project.creator and not request.user.is_staff:
         #TODO return JsonResponse with error code
         return redirect('../projects', {})
 
@@ -385,7 +385,7 @@ def allowUser(request):
     users = users.split(',')
     for user in users:
         fUser = User.objects.filter(email=user)[:1].get()
-        projectPermission = ProjectPermission(project=fProject, user=fUser)
+        projectPermission = ProjectPermission(project=project, user=fUser)
         projectPermission.save()
 
     return JsonResponse(response, safe=False)
