@@ -96,7 +96,8 @@ INSTALLED_APPS = (
     "reviews",
     'django.contrib.sites',
     'cookielaw',
-    'events'
+    'events',
+    'rest_framework'
 )
 
 MIDDLEWARE = [
