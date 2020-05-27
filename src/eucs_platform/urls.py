@@ -47,6 +47,7 @@ urlpatterns = [
     url(r'^reviews/', include('reviews.urls')),
     url(r'^citizen-science-resources-related-to-the-covid19-pandemic/', RedirectView.as_view(url='blog/2020/03/31/citizen-science-resources-related-covid19-pandemic/')),
     path('', include(router.urls)),
+    path('api-token-auth/', views.obtain_auth_token, name='api_token_auth'),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
 

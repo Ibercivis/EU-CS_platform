@@ -97,7 +97,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'cookielaw',
     'events',
-    'rest_framework'
+    'rest_framework',
+    'rest_framework.authtoken',
 )
 
 MIDDLEWARE = [
@@ -253,3 +254,12 @@ EMAIL_RECIPIENT_LIST = [
 
 SITE_ID = 1
 REVIEW_PUBLISH_UNMODERATED = True
+
+
+REST_FRAMEWORK = {
+   'DEFAULT_AUTHENTICATION_CLASSES': (
+       'rest_framework.authentication.TokenAuthentication',
+       'rest_framework.authentication.SessionAuthentication',
+
+   ),
+}
