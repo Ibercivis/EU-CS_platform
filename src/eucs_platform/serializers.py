@@ -7,3 +7,4 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = ['name', 'email']
+
