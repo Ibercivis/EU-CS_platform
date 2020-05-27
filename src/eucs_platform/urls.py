@@ -11,10 +11,15 @@ import resources.urls
 import events.urls
 import contact.urls
 from . import views
+from rest_framework import routers
 
 # Personalized admin site settings like title and header
 admin.site.site_title = "Eucs_Platform Site Admin"
 admin.site.site_header = "Eucs_Platform Administration"
+
+router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet)
+
 
 urlpatterns = [
     path("", views.home, name="home"),
@@ -40,7 +45,9 @@ urlpatterns = [
     path('summernote/', include('django_summernote.urls')),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^reviews/', include('reviews.urls')),
-    url(r'^citizen-science-resources-related-to-the-covid19-pandemic/', RedirectView.as_view(url='blog/2020/03/31/citizen-science-resources-related-covid19-pandemic/'))
+    url(r'^citizen-science-resources-related-to-the-covid19-pandemic/', RedirectView.as_view(url='blog/2020/03/31/citizen-science-resources-related-covid19-pandemic/')),
+    path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
 
 # User-uploaded files like profile pics need to be served in development
