@@ -99,10 +99,7 @@ INSTALLED_APPS = (
     'events',
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_auth',
-#    'allauth',
-#    'allauth.account',
-#    'rest_auth.registration'
+    'djoser'
 )
 
 MIDDLEWARE = [
@@ -241,8 +238,8 @@ SUMMERNOTE_CONFIG = {
     'disable_attachment': True,
 }
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 DEFAULT_FROM_EMAIL = env("FROM_EMAIL")
 EMAIL_HOST = env("HOST_EMAIL")
 EMAIL_HOST_USER = env("FROM_EMAIL")
@@ -265,14 +262,8 @@ REST_FRAMEWORK = {
        'rest_framework.authentication.TokenAuthentication',
    ),
 }
-USER_DETAILS_SERIALIZER = 'eucs_platform.serializers.UserSerializer'
 
-""" ACCOUNT_USER_MODEL_USERNAME_FIELD = None
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-ACCOUNT_CONFIRM_EMAIL_ON_GET = True
-ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = '/?verification=1'
-ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = '/?verification=1' """
+
+DJOSER = {
+    'PASSWORD_RESET_CONFIRM_URL': '/password-reset/',
+}

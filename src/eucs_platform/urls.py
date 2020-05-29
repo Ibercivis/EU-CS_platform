@@ -23,10 +23,6 @@ router.register(r'users', views.UserViewSet)
 
 
 urlpatterns = [
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('api-token-auth/', views.obtain_auth_token, name='api_token_auth'),
-    url(r'^rest-auth/', include('rest_auth.urls')),
-    #url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
     path("", views.home, name="home"),
     path("curated/", views.curated,name="curated"),
     path("imprint/", views.imprint,name="imprint"),
@@ -64,7 +60,10 @@ urlpatterns = [
         accounts.views.PasswordResetView.as_view(),
         name="password_reset_confirm",
     ),
-
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api-token-auth/', views.obtain_auth_token, name='api_token_auth'),
+    url(r'^auth/', include('djoser.urls')),
+    url(r'^auth/', include('djoser.urls.authtoken')),
 ]
 
 # User-uploaded files like profile pics need to be served in development
