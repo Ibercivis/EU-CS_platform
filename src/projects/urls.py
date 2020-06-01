@@ -1,6 +1,11 @@
 from django.urls import path, include
-
+from projects.api.views import ProjectViewSet
+from rest_framework import routers
 from . import views
+
+
+router = routers.DefaultRouter()
+router.register(r'api_projects', ProjectViewSet)
 
 urlpatterns = [
     path('new_project', views.new_project, name='new_project'),
@@ -16,4 +21,5 @@ urlpatterns = [
     path('setFollowedProject/', views.setFollowedProject, name='setFollowedProject'),
     path('allowUser/', views.allowUser, name='allowUser'),
     path('project_review/<int:pk>', views.project_review, name='project_review'),
+    path('', include(router.urls)),
 ]
