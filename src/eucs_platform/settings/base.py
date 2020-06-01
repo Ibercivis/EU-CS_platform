@@ -266,4 +266,6 @@ REST_FRAMEWORK = {
 
 DJOSER = {
     'PASSWORD_RESET_CONFIRM_URL': '/password-reset/',
+    'ACTIVATION_URL': '/activate/',
+    'SEND_ACTIVATION_EMAIL': True,
 }

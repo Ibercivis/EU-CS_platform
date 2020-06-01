@@ -18,9 +18,6 @@ from rest_framework import routers
 admin.site.site_title = "Eucs_Platform Site Admin"
 admin.site.site_header = "Eucs_Platform Administration"
 
-router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-
 
 urlpatterns = [
     path("", views.home, name="home"),
@@ -47,19 +44,8 @@ urlpatterns = [
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^reviews/', include('reviews.urls')),
     url(r'^citizen-science-resources-related-to-the-covid19-pandemic/', RedirectView.as_view(url='blog/2020/03/31/citizen-science-resources-related-covid19-pandemic/')),
-    path('', include(router.urls)),
 
-    path('rest-auth/password/reset/', accounts.views.PasswordResetView.as_view(), name='password_reset_confirm'),
-    path(
-        "rest-auth/password-reset-done/",
-        accounts.views.PasswordResetDoneView.as_view(),
-        name="password-reset-done",
-    ),
-    url(
-        r"^rest-auth/password/reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$",
-        accounts.views.PasswordResetView.as_view(),
-        name="password_reset_confirm",
-    ),
+
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api-token-auth/', views.obtain_auth_token, name='api_token_auth'),
     url(r'^auth/', include('djoser.urls')),
