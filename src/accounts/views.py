@@ -18,6 +18,9 @@ from django.core.mail import send_mail
 from profiles.models import Profile
 from authtools import views as authviews
 from braces import views as bracesviews
+from templated_mail.mail import BaseEmailMessage
+from djoser import utils
+from django.contrib.auth.tokens import default_token_generator
 from .tokens import account_activation_token
 from . import forms
 
@@ -110,6 +113,17 @@ class PasswordResetView(authviews.PasswordResetView):
 class PasswordResetDoneView(authviews.PasswordResetDoneView):
     template_name = "accounts/password-reset-done.html"
 
+class PasswordResetEmail(BaseEmailMessage):
+    template_name = "accounts/emails/password-reset-email.html"
+
+    def get_context_data(self):
+        context = super().get_context_data()
+
+        user = context.get("user")
+        context["uid"] = utils.encode_uid(user.pk)
+        context["token"] = default_token_generator.make_token(user)
+        context["url"] = settings.PASSWORD_RESET_CONFIRM_URL.format(**context)
+        return context
 
 class PasswordResetConfirmView(authviews.PasswordResetConfirmAndLoginView):
     template_name = "accounts/password-reset-confirm.html"
