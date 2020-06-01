@@ -238,8 +238,8 @@ SUMMERNOTE_CONFIG = {
     'disable_attachment': True,
 }
 
-#EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 DEFAULT_FROM_EMAIL = env("FROM_EMAIL")
 EMAIL_HOST = env("HOST_EMAIL")
 EMAIL_HOST_USER = env("FROM_EMAIL")
@@ -263,9 +263,12 @@ REST_FRAMEWORK = {
    ),
 }
 
-
+PASSWORD_RESET_CONFIRM_URL = '/password-reset/'
 DJOSER = {
     'PASSWORD_RESET_CONFIRM_URL': '/password-reset/',
+    'EMAIL': {
+        'password_reset': 'accounts.views.PasswordResetEmail',
+    },    
     'ACTIVATION_URL': '/activate/',
     'SEND_ACTIVATION_EMAIL': True,
 }
