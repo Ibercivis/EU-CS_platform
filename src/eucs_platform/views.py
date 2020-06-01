@@ -13,7 +13,6 @@ import random
 import json
 from rest_framework import viewsets
 from rest_framework import permissions
-from eucs_platform.serializers import UserSerializer
 from django.contrib.auth import get_user_model
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -26,14 +25,6 @@ from rest_framework.permissions import AllowAny
 from rest_framework.status import (HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND, HTTP_200_OK)
 
 User = get_user_model()
-
-class UserViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = (IsAuthenticated,)
 
 
 @csrf_exempt
