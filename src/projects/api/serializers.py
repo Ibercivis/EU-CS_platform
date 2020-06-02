@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from projects.models import Project, Topic, Status, Keyword, FundingBody, OriginDatabase, CustomField
 from django_countries.serializer_fields import CountryField
+from projects.models import Project, Topic, Status, Keyword, FundingBody, OriginDatabase, CustomField
 
 class TopicSerializer(serializers.ModelSerializer):
     class Meta:
