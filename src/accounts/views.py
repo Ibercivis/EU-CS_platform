@@ -113,18 +113,6 @@ class PasswordResetView(authviews.PasswordResetView):
 class PasswordResetDoneView(authviews.PasswordResetDoneView):
     template_name = "accounts/password-reset-done.html"
 
-class PasswordResetEmail(BaseEmailMessage):
-    template_name = "accounts/emails/password-reset-email.html"
-
-    def get_context_data(self):
-        context = super().get_context_data()
-
-        user = context.get("user")
-        context["uid"] = utils.encode_uid(user.pk)
-        context["token"] = default_token_generator.make_token(user)
-        context["url"] = settings.PASSWORD_RESET_CONFIRM_URL.format(**context)
-        return context
-
 class PasswordResetConfirmView(authviews.PasswordResetConfirmAndLoginView):
     template_name = "accounts/password-reset-confirm.html"
     form_class = forms.SetPasswordForm
@@ -167,3 +155,30 @@ def activate(request, uidb64, token):
         return render(request, 'accounts/confirmation-account.html',{})
     else:
         return HttpResponse('Activation link is invalid!')
+
+
+class PasswordResetEmail(BaseEmailMessage):
+    template_name = "accounts/emails/password-reset-email.html"
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        user = context.get("user")
+        context["uid"] = utils.encode_uid(user.pk)
+        context["token"] = default_token_generator.make_token(user)
+        context["url"] = settings.PASSWORD_RESET_CONFIRM_URL.format(**context)
+        return context
+
+class ActivationEmail(BaseEmailMessage):
+    template_name = "accounts/acc_active_email.html"
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        user = context.get("user")
+        context["uid"] = utils.encode_uid(user.pk)
+        context["token"] = account_activation_token.make_token(user)
+        context["url"] = settings.ACTIVATION_URL.format(**context)
+        return context
+
+
+class ConfirmationEmail(BaseEmailMessage):
+    template_name = "accounts/welcome_email.html"

@@ -264,11 +264,13 @@ REST_FRAMEWORK = {
 }
 
 PASSWORD_RESET_CONFIRM_URL = '/password-reset/'
+ACTIVATION_URL = '/activate/'
 DJOSER = {
     'PASSWORD_RESET_CONFIRM_URL': '/password-reset/',
     'EMAIL': {
+        'activation': 'accounts.views.ActivationEmail',
+        'confirmation': 'accounts.views.ConfirmationEmail',
         'password_reset': 'accounts.views.PasswordResetEmail',
     },    
-    'ACTIVATION_URL': '/activate/',
     'SEND_ACTIVATION_EMAIL': True,
 }
