@@ -1,3 +1,10 @@
+{% load i18n %}
+
+{% block subject %}
+{% blocktrans %}Welcome to EU-Citizen.Science.{% endblocktrans %}
+{% endblock %}
+
+{% block html_body %}
 {% autoescape off %}
 Hi {{ user.name }},
 {% endautoescape %}
@@ -27,3 +34,4 @@ Hi {{ user.name }},
 </body>
 
 </html>
+{% endblock html_body %}
