@@ -99,7 +99,8 @@ INSTALLED_APPS = (
     'events',
     'rest_framework',
     'rest_framework.authtoken',
-    'djoser'
+    'djoser',
+    'rest_framework_swagger'
 )
 
 MIDDLEWARE = [
@@ -258,9 +259,10 @@ REVIEW_PUBLISH_UNMODERATED = True
 
 
 REST_FRAMEWORK = {
-   'DEFAULT_AUTHENTICATION_CLASSES': (
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
        'rest_framework.authentication.TokenAuthentication',
-   ),
+    ),
 }
 
 PASSWORD_RESET_CONFIRM_URL = '/password-reset/'

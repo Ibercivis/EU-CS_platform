@@ -1,7 +1,7 @@
 from django.urls import path, include
-from projects.api.views import ProjectViewSet
 from rest_framework import routers
 from django.conf.urls import url
+from projects.api.views import ProjectViewSet
 from . import views
 
 

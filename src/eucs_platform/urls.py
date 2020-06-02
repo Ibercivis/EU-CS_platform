@@ -11,8 +11,9 @@ import resources.urls
 import events.urls
 import contact.urls
 from . import views
-from rest_framework import routers
 
+from rest_framework_swagger.views import get_swagger_view
+schema_view = get_swagger_view(title='Project Name')
 
 # Personalized admin site settings like title and header
 admin.site.site_title = "Eucs_Platform Site Admin"
@@ -48,6 +49,7 @@ urlpatterns = [
     path('api-token-auth/', views.obtain_auth_token, name='api_token_auth'),
     url(r'^auth/', include('djoser.urls')),
     url(r'^auth/', include('djoser.urls.authtoken')),
+    url(r'^api/docs/', schema_view, name='api-doc'),
 ]
 
 # User-uploaded files like profile pics need to be served in development
