@@ -1,13 +1,8 @@
-from django.urls import path, include
-from rest_framework import routers
+from django.urls import path
 from . import views
 
 
-router = routers.DefaultRouter()
-#router.register(r'projects', ProjectViewSet)
-
 urlpatterns = [
-    #path('', include(router.urls)),
-    path('projects/', views.api_projects, name="api_projects"),
-    path('project/<int:pk>', views.api_project_detail, name="api_project_detail"),
+    path('projects/', views.ProjectList.as_view(), name="api_projects"),
+    path('projects/<int:pk>', views.ProjectDetail.as_view(), name="api_project_detail"),
 ]
