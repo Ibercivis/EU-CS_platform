@@ -37,25 +37,25 @@ class Project(models.Model):
     #Database information
     dateCreated = models.DateTimeField('Created date', auto_now=True)
     dateUpdated = models.DateTimeField('Updated date', auto_now=True)
-    origin = models.CharField(max_length=100)
+    origin = models.CharField(max_length=100, null=True, blank=True)
     #Basic Project Information
     name = models.CharField(max_length=200)
     aim = models.CharField(max_length=2000)
     description = models.CharField(max_length=3000)
-    keywords = models.ManyToManyField(Keyword)
+    keywords = models.ManyToManyField(Keyword, blank=True)
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
-    start_date = models.DateTimeField('Start date',null=True, blank=True)
-    end_date = models.DateTimeField('End date',null=True, blank=True)
+    start_date = models.DateTimeField('Start date', null=True, blank=True)
+    end_date = models.DateTimeField('End date', null=True, blank=True)
     topic = models.ManyToManyField(Topic)
-    url = models.CharField(max_length=200)
+    url = models.CharField(max_length=200,null=True, blank=True)
     #Contact person info
     author = models.CharField(max_length=100, null=True, blank=True)
-    author_email =  models.CharField(max_length=100)
+    author_email =  models.CharField(max_length=100, null=True, blank=True)
     #Images and communications
-    image1 = models.ImageField(upload_to='images/', max_length=300)
+    image1 = models.ImageField(upload_to='images/', max_length=300, null=True, blank=True)
     imageCredit1 = models.CharField(max_length=300, null=True, blank=True)
     image2 = models.ImageField(upload_to='images/', max_length=300,null=True, blank=True)
-    imageCredit2 = models.CharField(max_length=300)
+    imageCredit2 = models.CharField(max_length=300, null=True, blank=True)
     image3 = models.ImageField(upload_to='images/', max_length=300,null=True, blank=True)
     imageCredit3 = models.CharField(max_length=300, null=True, blank=True)
     #Geography
@@ -65,22 +65,22 @@ class Project(models.Model):
     #Personal and Organizational Affiliates
     host = models.CharField(max_length=200)
     #Supplementary information for Citizen Science
-    howToParticipate = models.CharField(max_length=2000)
+    howToParticipate = models.CharField(max_length=2000, null=True, blank=True)
     doingAtHome      = models.BooleanField(null=True, default=False)
-    equipment = models.CharField(max_length=2000)
+    equipment = models.CharField(max_length=2000, null=True, blank=True)
     #Funding
     fundingBody = models.ForeignKey(FundingBody, on_delete=models.CASCADE,null=True, blank=True)
-    fundingProgram = models.CharField(max_length=500)
+    fundingProgram = models.CharField(max_length=500, null=True, blank=True)
     #Origin information
     originDatabase = models.ForeignKey(OriginDatabase, on_delete=models.CASCADE,null=True, blank=True)
-    originURL = models.CharField(max_length=200)
-    originUID = models.CharField(max_length=200)
+    originURL = models.CharField(max_length=200, null=True, blank=True)
+    originUID = models.CharField(max_length=200, null=True, blank=True)
 
     hidden = models.BooleanField(null=True, blank=True)
 
     featured = models.BooleanField(null=True, blank=True)
 
-    customField = models.ManyToManyField(CustomField)
+    customField = models.ManyToManyField(CustomField, blank=True)
 
     def __str__(self):
         return f'{self.name}'

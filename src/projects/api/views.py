@@ -5,9 +5,9 @@ from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.permissions import BasePermission, IsAuthenticated, IsAuthenticatedOrReadOnly, AllowAny
 from rest_framework.response import Response
-from rest_framework.status import (HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND, HTTP_200_OK, HTTP_204_NO_CONTENT)
+from rest_framework.status import (HTTP_200_OK, HTTP_201_CREATED, HTTP_204_NO_CONTENT, HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND)
 from rest_framework.views import APIView
-from projects.api.serializers import ProjectSerializer
+from projects.api.serializers import ProjectSerializer, ProjectSerializerCreate
 from projects.models import Project
 from projects.views import getCooperators
 
@@ -17,6 +17,13 @@ class ProjectList(APIView):
         projects = Project.objects.all()
         serializer = ProjectSerializer(projects, many=True, context={'request': request})
         return Response(serializer.data)
+    
+    def post(self, request, format=None):
+        serializer = ProjectSerializerCreate(data=request.data)
+        if serializer.is_valid():
+            serializer.save(request)
+            return Response(serializer.data, status=HTTP_201_CREATED)
+        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
 class PermissionClass(BasePermission):
     def has_permission(self, request, view):
