@@ -22,7 +22,8 @@ class ProjectList(APIView):
         serializer = ProjectSerializerCreate(data=request.data)
         if serializer.is_valid():
             serializer.save(request)
-            return Response(serializer.data, status=HTTP_201_CREATED)
+            serializerReturn = ProjectSerializer(Project.objects.get(pk=serializer.data.get('id')), context={'request': request})
+            return Response(serializerReturn.data, status=HTTP_201_CREATED)
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
 class PermissionClass(BasePermission):
