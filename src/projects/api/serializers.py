@@ -44,6 +44,7 @@ class ProjectSerializerCreate(serializers.ModelSerializer):
     fundingBody = serializers.CharField(required=False)
     originDatabase = serializers.CharField(required=False)
     keywords = serializers.CharField(required=False)
+    customField = serializers.JSONField(required=False)
 
     class Meta:
         model = Project
@@ -73,22 +74,24 @@ class ProjectSerializerCreate(serializers.ModelSerializer):
         else:
             keywords = []
 
-        '''
+        
         cFields = self.validated_data.get('customField')
         if(cFields):
             paragraphs = []
             for cField in cFields:
-                paragraphs.append(cField.paragraph)
-                CustomField.objects.get_or_create(title=cField.title, paragraph=cField.paragraph)
-            cfields = CustomField.objects.all().filter(paragraph__in = paragraphs)
-            project = get_object_or_404(Project, id=pk)
-            project.customField.set(cfields)
-        '''
+                title = cField.get('title')
+                paragraph = cField.get('paragraph')
+                paragraphs.append(paragraph)
+                CustomField.objects.get_or_create(title=title, paragraph=paragraph)
+            cFields = CustomField.objects.all().filter(paragraph__in = paragraphs)
+        else:
+            cFields = []
+        
         
         country = getCountryCode(self.validated_data['latitude'],self.validated_data['longitude']).upper()
 
         moreItems = [('creator', args.user),('country', country), ('fundingBody', fundingBody), ('originDatabase', originDatabase),
-         ('keywords', keywords),]
+         ('keywords', keywords), ('customField', cFields)]
 
         data =  dict(
             list(self.validated_data.items()) +
