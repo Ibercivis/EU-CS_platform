@@ -7,7 +7,7 @@ from rest_framework.permissions import BasePermission, IsAuthenticated, IsAuthen
 from rest_framework.response import Response
 from rest_framework.status import (HTTP_200_OK, HTTP_201_CREATED, HTTP_204_NO_CONTENT, HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND)
 from rest_framework.views import APIView
-from projects.api.serializers import ProjectSerializer, ProjectSerializerCreate
+from projects.api.serializers import ProjectSerializer, ProjectSerializerCreateUpdate
 from projects.models import Project
 from projects.views import getCooperators
 
@@ -19,7 +19,7 @@ class ProjectList(APIView):
         return Response(serializer.data)
     
     def post(self, request, format=None):
-        serializer = ProjectSerializerCreate(data=request.data)
+        serializer = ProjectSerializerCreateUpdate(data=request.data)
         if serializer.is_valid():
             serializer.save(request)
             serializerReturn = ProjectSerializer(Project.objects.get(pk=serializer.data.get('id')), context={'request': request})
@@ -44,6 +44,15 @@ class ProjectDetail(APIView):
         project = self.get_object(pk)
         serializer = ProjectSerializer(project, context={'request': request})
         return Response(serializer.data)
+    
+    def put(self, request, pk, format=None):
+        project = self.get_object(pk)
+        serializer = ProjectSerializerCreateUpdate(project, data=request.data)
+        if serializer.is_valid():
+            serializer.update(project, serializer.validated_data, request.data)
+            serializerReturn = ProjectSerializer(Project.objects.get(pk=serializer.data.get('id')), context={'request': request})
+            return Response(serializerReturn.data)
+        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk, format=None):
         project = self.get_object(pk)

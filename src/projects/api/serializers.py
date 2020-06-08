@@ -35,7 +35,7 @@ class CustomFieldSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ProjectSerializerCreate(serializers.ModelSerializer):
+class ProjectSerializerCreateUpdate(serializers.ModelSerializer):
     topic = serializers.PrimaryKeyRelatedField(queryset=Topic.objects.all(), many=True)
     status = serializers.PrimaryKeyRelatedField(queryset=Status.objects.all())
     country = CountryField(required=False)
@@ -101,6 +101,77 @@ class ProjectSerializerCreate(serializers.ModelSerializer):
         self.instance = self.create(data)
 
         return "success"
+
+    def update(self, instance, validated_data, requestData):
+        keywordsSent = False
+        fundingBodySent = False
+        originDatabaseSent = False
+        customFieldSent = False
+        if 'keywords' in requestData:
+            keywords = ""
+            if requestData.get('keywords'):
+                keywords = validated_data.pop('keywords')
+            keywordsSent = True
+
+        if 'fundingBody' in requestData:
+            if requestData.get('fundingBody'):
+                fundingBody = validated_data.pop('fundingBody')
+                fundingBodySent = True
+            else:
+                instance.fundingBody  = None
+            
+        if 'originDatabase' in requestData:
+            if requestData.get('originDatabase'):
+                originDatabase = validated_data.pop('originDatabase')
+                originDatabaseSent = True
+            else:
+                instance.originDatabase  = None
+
+        if 'customField' in requestData:
+            cFields = ""
+            if requestData.get('customField'):
+                cFields = validated_data.pop('customField')
+            customFieldSent = True
+               
+
+        super().update(instance, validated_data)
+
+        if(keywordsSent):
+            choices = keywords.split(',')
+            for choice in choices:
+                if(choice != ''):
+                    keyword = Keyword.objects.get_or_create(keyword=choice)
+            keywords = Keyword.objects.all()
+            keywords = keywords.filter(keyword__in = choices)
+            instance.keywords.set(keywords)
+
+        if(fundingBodySent):
+            fundingBody, exist = FundingBody.objects.get_or_create(body=fundingBody)
+            instance.fundingBody = fundingBody
+
+        if(originDatabaseSent):
+            originDatabase, exist = OriginDatabase.objects.get_or_create(originDatabase=originDatabase)
+            instance.originDatabase = originDatabase
+
+        #CustomField
+        if(customFieldSent):
+            if(cFields):
+                paragraphs = []
+                for cField in cFields:
+                    title = cField.get('title')
+                    paragraph = cField.get('paragraph')
+                    paragraphs.append(paragraph)
+                    CustomField.objects.get_or_create(title=title, paragraph=paragraph)
+                cFields = CustomField.objects.all().filter(paragraph__in = paragraphs)
+            else:
+                cFields = []
+            instance.customField.set(cFields)
+        
+        instance.country = getCountryCode(self.validated_data['latitude'],self.validated_data['longitude']).upper()
+
+        instance.save()
+        return instance
+   
 
 class ProjectSerializer(serializers.ModelSerializer):
     topic = TopicSerializer(many=True, required=False)
