@@ -26,9 +26,10 @@ class ProjectList(APIView):
             return Response(serializerReturn.data, status=HTTP_201_CREATED)
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
-class PermissionClass(BasePermission):
+class PermissionClass(BasePermission):   
     def has_permission(self, request, view):
-        if request.method == "DELETE":
+        METHODS_WITH_PERMISSION = ["DELETE", "PUT", "POST"]
+        if request.method in  METHODS_WITH_PERMISSION:
             return request.user and request.user.is_active
         return True
 
@@ -47,11 +48,14 @@ class ProjectDetail(APIView):
     
     def put(self, request, pk, format=None):
         project = self.get_object(pk)
-        serializer = ProjectSerializerCreateUpdate(project, data=request.data)
-        if serializer.is_valid():
-            serializer.update(project, serializer.validated_data, request.data)
-            serializerReturn = ProjectSerializer(Project.objects.get(pk=serializer.data.get('id')), context={'request': request})
-            return Response(serializerReturn.data)
+        if request.user == project.creator or request.user.is_staff or request.user.id in getCooperators(pk):
+            serializer = ProjectSerializerCreateUpdate(project, data=request.data)
+            if serializer.is_valid():
+                serializer.update(project, serializer.validated_data, request.data)
+                serializerReturn = ProjectSerializer(Project.objects.get(pk=serializer.data.get('id')), context={'request': request})
+                return Response(serializerReturn.data)
+        else:
+            return Response({"This user can't update this project"}, status=HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk, format=None):
