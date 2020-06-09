@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.http import Http404
 from rest_framework import viewsets
 from rest_framework import permissions
@@ -8,7 +9,7 @@ from rest_framework.response import Response
 from rest_framework.status import (HTTP_200_OK, HTTP_201_CREATED, HTTP_204_NO_CONTENT, HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND)
 from rest_framework.views import APIView
 from projects.api.serializers import ProjectSerializer, ProjectSerializerCreateUpdate, StatusSerializer, TopicSerializer
-from projects.models import Project, Status, Topic
+from projects.models import Project, Status, Topic, ApprovedProjects
 from projects.views import getCooperators
 
 
@@ -30,8 +31,49 @@ class TopicViewSet(viewsets.ModelViewSet):
     queryset = Topic.objects.all()
 
 class ProjectList(APIView):
+
+    def applyFilters(self, request, projects):
+        approvedProjects = ApprovedProjects.objects.all().values_list('project_id',flat=True)
+
+        keywords = request.query_params.get('keywords', None)
+        if keywords is not None:
+            projects = projects.filter( Q(name__icontains = keywords) |
+                                    Q(keywords__keyword__icontains = keywords) ).distinct()
+
+        topic = request.query_params.get('topic', None)
+        if topic is not None:
+            projects = projects.filter(topic=topic)
+
+        status = request.query_params.get('status', None)
+        if status is not None:
+            projects = projects.filter(status=status)
+
+        country = request.query_params.get('country', None)
+        if country is not None:
+            projects = projects.filter(country=country)
+
+        doingAtHome = request.query_params.get('doingAtHome', None)
+        if doingAtHome is not None:
+            doingAtHome = True if (doingAtHome == "true" or doingAtHome == '1') else False
+            projects = projects.filter(doingAtHome=doingAtHome)
+
+        if request.GET.get('approvedCheck'):
+            if request.GET['approvedCheck'] == 'On':
+                projects = projects.filter(id__in=approvedProjects)
+            if request.GET['approvedCheck'] == 'Off':
+                projects = projects.exclude(id__in=approvedProjects)
+            if request.GET['approvedCheck'] == 'All':
+                projects = projects
+        else:
+            projects = projects.filter(id__in=approvedProjects)
+
+        return projects
+
     def get(self, request, format=None):
         projects = Project.objects.all()
+
+        projects = self.applyFilters(request, projects)
+
         serializer = ProjectSerializer(projects, many=True, context={'request': request})
         return Response(serializer.data)
     
@@ -43,12 +85,14 @@ class ProjectList(APIView):
             return Response(serializerReturn.data, status=HTTP_201_CREATED)
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
+
 class PermissionClass(BasePermission):   
     def has_permission(self, request, view):
         METHODS_WITH_PERMISSION = ["DELETE", "PUT", "POST"]
         if request.method in  METHODS_WITH_PERMISSION:
             return request.user and request.user.is_active
         return True
+
 
 class ProjectDetail(APIView):
     permission_classes = (PermissionClass,)
