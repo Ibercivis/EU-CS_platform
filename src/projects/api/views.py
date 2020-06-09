@@ -7,10 +7,27 @@ from rest_framework.permissions import BasePermission, IsAuthenticated, IsAuthen
 from rest_framework.response import Response
 from rest_framework.status import (HTTP_200_OK, HTTP_201_CREATED, HTTP_204_NO_CONTENT, HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND)
 from rest_framework.views import APIView
-from projects.api.serializers import ProjectSerializer, ProjectSerializerCreateUpdate
-from projects.models import Project
+from projects.api.serializers import ProjectSerializer, ProjectSerializerCreateUpdate, StatusSerializer, TopicSerializer
+from projects.models import Project, Status, Topic
 from projects.views import getCooperators
 
+
+class AdminPermissionsClass(BasePermission):
+    def has_permission(self, request, view):
+        METHODS_WITH_PERMISSION = ["DELETE", "PUT", "POST"]
+        if request.method in  METHODS_WITH_PERMISSION:
+            return request.user.is_staff
+        return True
+
+class StatusViewSet(viewsets.ModelViewSet):
+    permission_classes = (AdminPermissionsClass,)
+    serializer_class = StatusSerializer
+    queryset = Status.objects.all()
+
+class TopicViewSet(viewsets.ModelViewSet):
+    permission_classes = (AdminPermissionsClass,)
+    serializer_class = TopicSerializer
+    queryset = Topic.objects.all()
 
 class ProjectList(APIView):
     def get(self, request, format=None):
