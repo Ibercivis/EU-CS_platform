@@ -3,14 +3,14 @@ from django.http import Http404
 from rest_framework import viewsets
 from rest_framework import permissions
 from rest_framework import generics
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import BasePermission, IsAuthenticated, IsAuthenticatedOrReadOnly, AllowAny
 from rest_framework.response import Response
 from rest_framework.status import (HTTP_200_OK, HTTP_201_CREATED, HTTP_204_NO_CONTENT, HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND)
 from rest_framework.views import APIView
 from projects.api.serializers import ProjectSerializer, ProjectSerializerCreateUpdate, StatusSerializer, TopicSerializer
 from projects.models import Project, Status, Topic, ApprovedProjects
-from projects.views import getCooperators
+from projects.views import getCooperators, setProjectApproved
 
 
 class AdminPermissionsClass(BasePermission):
@@ -126,3 +126,9 @@ class ProjectDetail(APIView):
             return Response(status=HTTP_204_NO_CONTENT)
         else:
             return Response({"This user can't delete this project"}, status=HTTP_400_BAD_REQUEST)
+
+@api_view(['PUT'])
+@permission_classes([AdminPermissionsClass])
+def approve_project(request, pk):
+    setProjectApproved(pk)
+    return Response(status=HTTP_204_NO_CONTENT)

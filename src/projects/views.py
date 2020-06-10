@@ -316,6 +316,10 @@ def clearFilters(request):
 def setApproved(request):
     response = {}
     id = request.POST.get("project_id")
+    setProjectApproved(id)
+    return JsonResponse(response, safe=False)
+
+def setProjectApproved(id):
     #Delete
     try:
         obj = ApprovedProjects.objects.get(project_id=id)
@@ -325,8 +329,6 @@ def setApproved(request):
         aProject = get_object_or_404(Project, id=id)
         approvedProject = ApprovedProjects(project=aProject)
         approvedProject.save()
-
-    return JsonResponse(response, safe=False)
 
 @staff_member_required()
 def setHidden(request):
