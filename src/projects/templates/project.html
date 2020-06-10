@@ -194,9 +194,9 @@
               <div id="approved{{project.id}}" class="float-left">
                 {% if user.is_staff %}
                   {% if project.id in approvedProjects %}
-                  <img  class="img-fluid mt-2" onclick="setApproved({{project.id}})" src="{% static 'site/img/icon_color.png' %}" />
+                  <img  class="img-fluid mt-2" onclick="setApproved({{project.id}}, false)" src="{% static 'site/img/icon_color.png' %}" />
                   {% else %}
-                  <img  class="img-fluid mt-2" onclick="setApproved({{project.id}})" src="{% static 'site/img/icon_bw.png' %}" />
+                  <img  class="img-fluid mt-2" onclick="setApproved({{project.id}}, true)" src="{% static 'site/img/icon_bw.png' %}" />
                   {% endif %}
                 {% else %}
                   {% if project.id in approvedProjects %}
@@ -292,13 +292,14 @@
       new L.marker([{{project.latitude}},{{project.longitude}}]).addTo(map);
     }
 
-    function setApproved(idProject){
+    function setApproved(idProject, approved){
       var request = $.ajax(
       {
         type: "POST",
         url: "{% url 'setApproved' %}",
         data: {
           "project_id": idProject,
+          "approved": approved,
           csrfmiddlewaretoken: '{{ csrf_token }}'
         },
         success: function (response) {

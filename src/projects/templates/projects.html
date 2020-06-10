@@ -38,13 +38,14 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 <script
 src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
 <script>
-	function setApproved(idProject){
+	function setApproved(idProject, approved){
 		var request = $.ajax(
 		{
 			type: "POST",
 			url: "{% url 'setApproved' %}",
 			data: {
 				"project_id": idProject,
+				"approved": approved,
 				csrfmiddlewaretoken: '{{ csrf_token }}'
 			},
 			success: function (response) {
