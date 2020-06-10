@@ -316,39 +316,48 @@ def clearFilters(request):
 def setApproved(request):
     response = {}
     id = request.POST.get("project_id")
-    setProjectApproved(id)
+    approved = request.POST.get("approved")
+    setProjectApproved(id, approved)
     return JsonResponse(response, safe=False)
 
-def setProjectApproved(id):
-    #Delete
-    try:
-        obj = ApprovedProjects.objects.get(project_id=id)
-        obj.delete()
-    except ApprovedProjects.DoesNotExist:
+def setProjectApproved(id, approved):
+    approved= False if approved in ['False','false','0'] else True
+    if approved == True:
         #Insert
         aProject = get_object_or_404(Project, id=id)
-        approvedProject = ApprovedProjects(project=aProject)
-        approvedProject.save()
+        ApprovedProjects.objects.get_or_create(project=aProject)
+    else:
+        #Delete
+        obj = ApprovedProjects.objects.get(project_id=id)
+        obj.delete()
+        
 
 @staff_member_required()
 def setHidden(request):
     response = {}
     id = request.POST.get("project_id")
     hidden = request.POST.get("hidden")
-    project = get_object_or_404(Project, id=id)
-    project.hidden = False if hidden == 'false' else True
-    project.save()
+    setProjectHidden(id, hidden)
     return JsonResponse(response, safe=False)
+
+def setProjectHidden(id, hidden):    
+    project = get_object_or_404(Project, id=id)
+    project.hidden = False if hidden in ['False','false','0'] else True
+    project.save()
 
 @staff_member_required()
 def setFeatured(request):
     response = {}
     id = request.POST.get("project_id")
     featured = request.POST.get("featured")
-    project = get_object_or_404(Project, id=id)
-    project.featured = False if featured == 'false' else True
-    project.save()
+    setProjectFeatured(id, featured)
     return JsonResponse(response, safe=False)
+
+def setProjectFeatured(id, featured):
+    project = get_object_or_404(Project, id=id)
+    project.featured = featured
+    project.featured = False if featured in ['False','false','0'] else True
+    project.save()
 
 def setFollowedProject(request):
     response = {}

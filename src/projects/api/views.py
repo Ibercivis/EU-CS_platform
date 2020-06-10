@@ -10,7 +10,7 @@ from rest_framework.status import (HTTP_200_OK, HTTP_201_CREATED, HTTP_204_NO_CO
 from rest_framework.views import APIView
 from projects.api.serializers import ProjectSerializer, ProjectSerializerCreateUpdate, StatusSerializer, TopicSerializer
 from projects.models import Project, Status, Topic, ApprovedProjects
-from projects.views import getCooperators, setProjectApproved
+from projects.views import getCooperators, setProjectApproved, setProjectHidden, setProjectFeatured
 
 
 class AdminPermissionsClass(BasePermission):
@@ -129,6 +129,21 @@ class ProjectDetail(APIView):
 
 @api_view(['PUT'])
 @permission_classes([AdminPermissionsClass])
-def approve_project(request, pk):
-    setProjectApproved(pk)
+def approved_project(request, pk):
+    approved = request.data.get('value')
+    setProjectApproved(pk, approved)
+    return Response(status=HTTP_204_NO_CONTENT)
+
+@api_view(['PUT'])
+@permission_classes([AdminPermissionsClass])
+def hidden_project(request, pk):
+    hidden = request.data.get('value')
+    setProjectHidden(pk, hidden)
+    return Response(status=HTTP_204_NO_CONTENT)
+
+@api_view(['PUT'])
+@permission_classes([AdminPermissionsClass])
+def set_featured_project(request, pk):
+    featured = request.data.get('value')
+    setProjectFeatured(pk, featured)
     return Response(status=HTTP_204_NO_CONTENT)
