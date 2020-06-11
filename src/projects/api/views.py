@@ -10,7 +10,7 @@ from rest_framework.status import (HTTP_200_OK, HTTP_201_CREATED, HTTP_204_NO_CO
 from rest_framework.views import APIView
 from projects.api.serializers import ProjectSerializer, ProjectSerializerCreateUpdate, StatusSerializer, TopicSerializer
 from projects.models import Project, Status, Topic, ApprovedProjects
-from projects.views import getCooperators, setProjectApproved, setProjectHidden, setProjectFeatured
+from projects.views import getCooperators, setProjectApproved, setProjectHidden, setProjectFeatured, followProject
 
 
 class AdminPermissionsClass(BasePermission):
@@ -146,4 +146,12 @@ def hidden_project(request, pk):
 def set_featured_project(request, pk):
     featured = request.data.get('value')
     setProjectFeatured(pk, featured)
+    return Response(status=HTTP_204_NO_CONTENT)
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def follow_project(request, pk):
+    userId = request.user.id
+    follow = request.data.get('value')
+    followProject(pk, userId, follow)
     return Response(status=HTTP_204_NO_CONTENT)

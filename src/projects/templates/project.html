@@ -225,9 +225,9 @@
               {% if user.is_authenticated %}
               <div id="followed{{project.id}}" class="float-right">
                 {% if project.id in followedProjects %}
-                <button type="button" class="btn btn-outline-primary float-right" onclick="setFollowedProject({{project.id}},{{user.id}})">Following</button>
+                <button type="button" class="btn btn-outline-primary float-right" onclick="setFollowedProject({{project.id}},{{user.id}}, false)">Following</button>
                 {% else %}
-                <button type="button" class="btn btn-outline-secondary float-right" onclick="setFollowedProject({{project.id}},{{user.id}})">Follow</button>
+                <button type="button" class="btn btn-outline-secondary float-right" onclick="setFollowedProject({{project.id}},{{user.id}}, true)">Follow</button>
                 {% endif %}
               </div>
               {% endif %}
@@ -327,7 +327,7 @@
       );
     }
 
-    function setFollowedProject(idProject, idUser){
+    function setFollowedProject(idProject, idUser, follow){
       var htmlId = "followed" + idProject;
       var request = $.ajax(
       {
@@ -336,6 +336,7 @@
         data: {
           "project_id": idProject,
           "user_id": idUser,
+          "follow": follow,
           csrfmiddlewaretoken: '{{ csrf_token }}'
         },
         success: function (response) {
