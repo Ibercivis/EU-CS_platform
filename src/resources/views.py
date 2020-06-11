@@ -44,6 +44,10 @@ def resources(request):
     
     resources = resources.filter(~Q(hidden=True))
 
+    resourcesTop = resources.filter(featured=True)
+    resourcesTopIds = list(resourcesTop.values_list('id',flat=True))
+    resources = resources.exclude(id__in=resourcesTopIds)
+
     # Ordering
     if request.GET.get('orderby'):
         orderBy = request.GET.get('orderby')
@@ -56,7 +60,8 @@ def resources(request):
             resourcesVoted = []
             for r in reviews:
                 rsc = get_object_or_404(Resource, id=r)
-                resourcesVoted.append(rsc)
+                if rsc in resources:
+                    resourcesVoted.append(rsc)
 
             resources = resources.exclude(id__in=reviews)
             if(orderBy == "avg_rating"):
@@ -69,9 +74,6 @@ def resources(request):
         resources=resources.order_by('-id')
 
     # Pin resources to top
-    resourcesTop = resources.filter(featured=True)
-    resourcesTopIds = list(resourcesTop.values_list('id',flat=True))
-    resources = resources.exclude(id__in=resourcesTopIds)
     resources = list(resourcesTop) + list(resources)
 
     paginator = Paginator(resources, 9)
@@ -170,6 +172,9 @@ def deleteResource(request, pk):
     obj = get_object_or_404(Resource, id=pk)
     if request.user == obj.creator or request.user.is_staff or request.user.id in getCooperators(pk):
         obj.delete()
+        reviews = Review.objects.filter(content_type=ContentType.objects.get(model="resource"), object_pk=pk)
+        for r in reviews:
+            r.delete()
     return redirect('resources')
 
 def resources_autocomplete(request):

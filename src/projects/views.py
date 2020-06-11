@@ -82,8 +82,6 @@ def projects(request):
                 projects = list(projects) + list(projectsVoted)
             else:
                 projects = list(projectsVoted) + list(projects)
-            #print(projects)
-            #projects = Project.objects.filter(pk__in=''.join(projects))
 
         filters['orderby']=request.GET['orderby']
     else:
