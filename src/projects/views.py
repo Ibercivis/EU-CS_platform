@@ -58,6 +58,10 @@ def projects(request):
 
     projects = projects.filter(~Q(hidden=True))
 
+    projectsTop = projects.filter(featured=True)
+    projectsTopIds = list(projectsTop.values_list('id',flat=True))
+    projects = projects.exclude(id__in=projectsTopIds)
+
     # Ordering
     if request.GET.get('orderby'):
         orderBy = request.GET.get('orderby')
@@ -70,7 +74,8 @@ def projects(request):
             projectsVoted = []
             for r in reviews:
                 proj = get_object_or_404(Project, id=r)
-                projectsVoted.append(proj)
+                if proj in projects:
+                    projectsVoted.append(proj)
 
             projects = projects.exclude(id__in=reviews)
             if(orderBy == "avg_rating"):
@@ -83,9 +88,6 @@ def projects(request):
         projects=projects.order_by('-id')
 
     # Pin projects to top
-    projectsTop = projects.filter(featured=True)
-    projectsTopIds = list(projectsTop.values_list('id',flat=True))
-    projects = projects.exclude(id__in=projectsTopIds)
     projects = list(projectsTop) + list(projects)
 
     paginator = Paginator(projects, 9)
@@ -186,6 +188,9 @@ def deleteProject(request, pk):
     obj = get_object_or_404(Project, id=pk)
     if request.user == obj.creator or request.user.is_staff or request.user.id in getCooperators(pk):
         obj.delete()
+        reviews = Review.objects.filter(content_type=ContentType.objects.get(model="project"), object_pk=pk)
+        for r in reviews:
+            r.delete()
     return redirect('projects')
 
 def text_autocomplete(request):
