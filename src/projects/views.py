@@ -322,14 +322,17 @@ def setApproved(request):
 
 def setProjectApproved(id, approved):
     approved= False if approved in ['False','false','0'] else True
+    aProject = get_object_or_404(Project, id=id)
     if approved == True:
-        #Insert
-        aProject = get_object_or_404(Project, id=id)
+        #Insert        
         ApprovedProjects.objects.get_or_create(project=aProject)
     else:
         #Delete
-        obj = ApprovedProjects.objects.get(project_id=id)
-        obj.delete()
+        try:
+            obj = ApprovedProjects.objects.get(project_id=id)
+            obj.delete()
+        except ApprovedProjects.DoesNotExist:
+            print("Does not exist this approved project")
         
 
 @staff_member_required()
@@ -363,18 +366,25 @@ def setFollowedProject(request):
     response = {}
     projectId = request.POST.get("project_id")
     userId = request.POST.get("user_id")
-    #Delete
-    try:
-        obj = FollowedProjects.objects.get(project_id=projectId,user_id=userId)
-        obj.delete()
-    except FollowedProjects.DoesNotExist:
-        #Insert
-        fProject = get_object_or_404(Project, id=projectId)
-        fUser = get_object_or_404(User, id=userId)
-        followedProject = FollowedProjects(project=fProject, user=fUser)
-        followedProject.save()
-
+    follow = request.POST.get("follow")
+    followProject(projectId, userId, follow)
     return JsonResponse(response, safe=False)
+
+def followProject(projectId, userId, follow):
+    follow= False if follow in ['False','false','0'] else True
+    fProject = get_object_or_404(Project, id=projectId)
+    fUser = get_object_or_404(User, id=userId)
+    if follow == True:
+        #Insert
+        followedProject = FollowedProjects.objects.get_or_create(project=fProject, user=fUser)
+    else:
+        #Delete
+        try:            
+            obj = FollowedProjects.objects.get(project_id=projectId,user_id=userId)
+            obj.delete()
+        except FollowedProjects.DoesNotExist:
+            print("Does not exist this followed project")
+        
 
 def allowUser(request):   
     response = {}

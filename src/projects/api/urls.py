@@ -12,6 +12,7 @@ urlpatterns = [
     path('projects/<int:pk>/approved', views.approved_project, name="approve_project"),
     path('projects/<int:pk>/hidden', views.hidden_project, name="hide_project"),
     path('projects/<int:pk>/featured', views.set_featured_project, name="set_featured_project"),
+    path('projects/<int:pk>/follow', views.follow_project, name="follow_project"),
 ]
 
 urlpatterns += router.urls
