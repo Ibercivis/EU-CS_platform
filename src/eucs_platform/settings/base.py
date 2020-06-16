@@ -96,7 +96,8 @@ INSTALLED_APPS = (
     "reviews",
     'django.contrib.sites',
     'cookielaw',
-    'events'
+    'events',
+    'oidc_provider',
 )
 
 MIDDLEWARE = [
@@ -252,3 +253,7 @@ EMAIL_RECIPIENT_LIST = [
 
 SITE_ID = 1
 REVIEW_PUBLISH_UNMODERATED = True
+
+#OPENID
+#LOGIN_URL = '/accounts/login/'
+OIDC_SESSION_MANAGEMENT_ENABLE = True
