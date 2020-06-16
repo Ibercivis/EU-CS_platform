@@ -100,7 +100,8 @@ INSTALLED_APPS = (
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
-    'rest_framework_swagger'
+    'rest_framework_swagger',
+    'oidc_provider',
 )
 
 MIDDLEWARE = [
@@ -276,3 +277,7 @@ DJOSER = {
     },    
     'SEND_ACTIVATION_EMAIL': True,
 }
+
+#OPENID
+#LOGIN_URL = '/accounts/login/'
+OIDC_SESSION_MANAGEMENT_ENABLE = True

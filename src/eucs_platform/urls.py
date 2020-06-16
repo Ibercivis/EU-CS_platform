@@ -49,6 +49,7 @@ urlpatterns = [
     url(r'^api/auth/', include('djoser.urls')),
     url(r'^api/auth/', include('djoser.urls.authtoken')),
     url(r'^api/docs/', schema_view, name='api-doc'),
+    url(r'^openid/', include('oidc_provider.urls', namespace='oidc_provider')),
 ]
 
 # User-uploaded files like profile pics need to be served in development
