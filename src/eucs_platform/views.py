@@ -14,20 +14,7 @@ import json
 
 
 def home(request):
-    try:
-        approvedProjectsFixed = [59,54]
-        approvedProjects = []
-        approvedProjectFixed1 = ApprovedProjects.objects.get(project_id=approvedProjectsFixed[0]).project_id
-        approvedProjects.append(approvedProjectFixed1)
-        approvedProjectFixed2 = ApprovedProjects.objects.get(project_id=approvedProjectsFixed[1]).project_id
-        approvedProjects.append(approvedProjectFixed2)
-        approvedProject3 = ApprovedProjects.objects.exclude(project_id__in=approvedProjectsFixed)
-        if(approvedProject3):
-            approvedProject3 = approvedProject3.last().project_id
-            approvedProjects.append(approvedProject3)
-    except ApprovedProjects.DoesNotExist:
-        approvedProjects = ApprovedProjects.objects.all().order_by('-id')[:3].values_list('project_id',flat=True)
-
+    approvedProjects = ApprovedProjects.objects.all().order_by('-id')[:3].values_list('project_id',flat=True)
     allapprovedProjects = ApprovedProjects.objects.all().order_by('-id').values_list('project_id',flat=True)
     projects = Project.objects.all().order_by('-id')
     allprojects =  projects.filter(id__in=allapprovedProjects)
