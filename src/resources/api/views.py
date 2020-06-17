@@ -8,8 +8,31 @@ from rest_framework.permissions import BasePermission, IsAuthenticated, IsAuthen
 from rest_framework.response import Response
 from rest_framework.status import (HTTP_200_OK, HTTP_201_CREATED, HTTP_204_NO_CONTENT, HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND)
 from rest_framework.views import APIView
-from resources.api.serializers import ResourceSerializer
-from resources.models import Resource, ApprovedResources
+from resources.api.serializers import ResourceSerializer, AudienceSerializer, ThemeSerializer, CategorySerializer
+from resources.models import Resource, ApprovedResources, Audience, Theme, Category
+
+
+class AdminPermissionsClass(BasePermission):
+    def has_permission(self, request, view):
+        METHODS_WITH_PERMISSION = ["DELETE", "PUT", "POST"]
+        if request.method in  METHODS_WITH_PERMISSION:
+            return request.user.is_staff
+        return True
+
+class AudienceViewSet(viewsets.ModelViewSet):
+    permission_classes = (AdminPermissionsClass,)
+    serializer_class = AudienceSerializer
+    queryset = Audience.objects.all()
+
+class ThemeViewSet(viewsets.ModelViewSet):
+    permission_classes = (AdminPermissionsClass,)
+    serializer_class = ThemeSerializer
+    queryset = Theme.objects.all()
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    permission_classes = (AdminPermissionsClass,)
+    serializer_class = CategorySerializer
+    queryset = Category.objects.all()
 
 class ResourceList(APIView):
 
