@@ -29,13 +29,11 @@ class Category(models.Model):
 
 class Resource(models.Model):
     name = models.CharField(max_length=200)
-    url = models.CharField(max_length=200)
-    image1 = models.CharField(max_length=300,null=True, blank=True)
+    url = models.CharField(max_length=200)   
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     authors =  models.ManyToManyField(Author)
     author_email =  models.CharField(max_length=100, null=True, blank=True)
     abstract = models.CharField(max_length=3000)
-    aggregateRating = models.CharField(max_length=100)
     audience = models.ManyToManyField(Audience)
     dateUploaded = models.DateTimeField('Date Uploaded')
     inLanguage = models.CharField(max_length=100)
@@ -46,8 +44,9 @@ class Resource(models.Model):
     datePublished = models.IntegerField(null=True, blank=True)
     theme = models.ManyToManyField(Theme)
     image = models.ImageField(upload_to='images/', max_length=300)
-    resourceDOI = models.CharField(max_length=100, null=True,blank=True)
+    image1 = models.CharField(max_length=300,null=True, blank=True)
     image2 = models.ImageField(upload_to='images/', max_length=300,null=True, blank=True)
+    resourceDOI = models.CharField(max_length=100, null=True,blank=True)   
     hidden = models.BooleanField(null=True, blank=True)
     featured = models.BooleanField(null=True, blank=True)
     
