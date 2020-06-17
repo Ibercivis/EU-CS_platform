@@ -262,7 +262,8 @@ REVIEW_PUBLISH_UNMODERATED = True
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
     'DEFAULT_AUTHENTICATION_CLASSES': (
-       'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication'
     ),
 }
 
@@ -281,3 +282,5 @@ DJOSER = {
 #OPENID
 #LOGIN_URL = '/accounts/login/'
 OIDC_SESSION_MANAGEMENT_ENABLE = True
+
+LOGOUT_URL = 'rest_framework:logout'
