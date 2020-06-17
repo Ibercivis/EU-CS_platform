@@ -283,4 +283,5 @@ DJOSER = {
 #LOGIN_URL = '/accounts/login/'
 OIDC_SESSION_MANAGEMENT_ENABLE = True
 
+#Swagger
 LOGOUT_URL = 'rest_framework:logout'

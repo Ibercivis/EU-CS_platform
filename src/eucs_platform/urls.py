@@ -13,7 +13,7 @@ import contact.urls
 from . import views
 
 from rest_framework_swagger.views import get_swagger_view
-schema_view = get_swagger_view(title='Project Name')
+schema_view = get_swagger_view(title='Eucs_Platform')
 
 # Personalized admin site settings like title and header
 admin.site.site_title = "Eucs_Platform Site Admin"
