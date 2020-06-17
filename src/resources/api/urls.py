@@ -5,7 +5,7 @@ from . import views
 router = DefaultRouter()
 
 urlpatterns = [
-
+    path('resources/', views.ResourceList.as_view(), name="api_resources"),
 ]
 
 urlpatterns += router.urls
