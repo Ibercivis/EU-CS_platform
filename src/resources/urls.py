@@ -1,4 +1,5 @@
-from django.urls import path
+from django.urls import path, include
+from django.conf.urls import url
 from . import views
 
 urlpatterns = [
@@ -16,5 +17,6 @@ urlpatterns = [
     path('setFeaturedResource/', views.setFeaturedResource, name='setFeaturedResource'),
     path('allowUserResource/', views.allowUserResource, name='allowUserResource'),
     path('resource_review/<int:pk>', views.resource_review, name='resource_review'),
+    url(r'^api/', include('resources.api.urls')),
 ]
 
