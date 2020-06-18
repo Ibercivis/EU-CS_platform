@@ -71,9 +71,7 @@ class ProjectList(APIView):
 
     def get(self, request, format=None):
         projects = Project.objects.all()
-
         projects = self.applyFilters(request, projects)
-
         serializer = ProjectSerializer(projects, many=True, context={'request': request})
         return Response(serializer.data)
     
