@@ -10,7 +10,7 @@ from rest_framework.status import (HTTP_200_OK, HTTP_201_CREATED, HTTP_204_NO_CO
 from rest_framework.views import APIView
 from resources.api.serializers import ResourceSerializer, AudienceSerializer, ThemeSerializer, CategorySerializer, ResourceSerializerCreateUpdate
 from resources.models import Resource, ApprovedResources, Audience, Theme, Category
-
+from resources.views import getCooperators
 
 class AdminPermissionsClass(BasePermission):
     def has_permission(self, request, view):
@@ -119,7 +119,7 @@ class ResourceDetail(APIView):
         else:
             return Response({"This user can't update this resource"}, status=HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
-
+    '''
     def delete(self, request, pk, format=None):
         resource = self.get_object(pk)
         if request.user == resource.creator or request.user.is_staff or request.user.id in getCooperators(pk):
@@ -127,4 +127,4 @@ class ResourceDetail(APIView):
             return Response(status=HTTP_204_NO_CONTENT)
         else:
             return Response({"This user can't delete this resource"}, status=HTTP_400_BAD_REQUEST)
-    '''
+    
