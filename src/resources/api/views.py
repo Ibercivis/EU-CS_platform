@@ -77,3 +77,46 @@ class ResourceList(APIView):
         resources = self.applyFilters(request, resources)
         serializer = ResourceSerializer(resources, many=True, context={'request': request})
         return Response(serializer.data)
+
+
+class PermissionClass(BasePermission):   
+    def has_permission(self, request, view):
+        METHODS_WITH_PERMISSION = ["DELETE", "PUT", "POST"]
+        if request.method in  METHODS_WITH_PERMISSION:
+            return request.user and request.user.is_active
+        return True
+
+
+class ResourceDetail(APIView):
+    permission_classes = (PermissionClass,)
+    def get_object(self, pk):
+        try:
+            return Resource.objects.get(pk=pk)
+        except Resource.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        resource = self.get_object(pk)
+        serializer = ResourceSerializer(resource, context={'request': request})
+        return Response(serializer.data)
+    '''
+    def put(self, request, pk, format=None):
+        resource = self.get_object(pk)
+        if request.user == resource.creator or request.user.is_staff or request.user.id in getCooperators(pk):
+            serializer = ResourceSerializerCreateUpdate(resource, data=request.data)
+            if serializer.is_valid():
+                serializer.update(resource, serializer.validated_data, request.data)
+                serializerReturn = ResourceSerializer(Resource.objects.get(pk=serializer.data.get('id')), context={'request': request})
+                return Response(serializerReturn.data)
+        else:
+            return Response({"This user can't update this resource"}, status=HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        resource = self.get_object(pk)
+        if request.user == resource.creator or request.user.is_staff or request.user.id in getCooperators(pk):
+            resource.delete()
+            return Response(status=HTTP_204_NO_CONTENT)
+        else:
+            return Response({"This user can't delete this resource"}, status=HTTP_400_BAD_REQUEST)
+    '''

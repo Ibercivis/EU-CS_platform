@@ -9,6 +9,7 @@ router.register(r'resources/category', views.CategoryViewSet, basename='category
 
 urlpatterns = [
     path('resources/', views.ResourceList.as_view(), name="api_resources"),
+    path('resources/<int:pk>', views.ResourceDetail.as_view(), name="api_resource_detail"),
 ]
 
 urlpatterns += router.urls
