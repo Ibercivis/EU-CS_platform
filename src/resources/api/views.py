@@ -8,7 +8,7 @@ from rest_framework.permissions import BasePermission, IsAuthenticated, IsAuthen
 from rest_framework.response import Response
 from rest_framework.status import (HTTP_200_OK, HTTP_201_CREATED, HTTP_204_NO_CONTENT, HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND)
 from rest_framework.views import APIView
-from resources.api.serializers import ResourceSerializer, AudienceSerializer, ThemeSerializer, CategorySerializer
+from resources.api.serializers import ResourceSerializer, AudienceSerializer, ThemeSerializer, CategorySerializer, ResourceSerializerCreateUpdate
 from resources.models import Resource, ApprovedResources, Audience, Theme, Category
 
 
@@ -77,6 +77,14 @@ class ResourceList(APIView):
         resources = self.applyFilters(request, resources)
         serializer = ResourceSerializer(resources, many=True, context={'request': request})
         return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = ResourceSerializerCreateUpdate(data=request.data)
+        if serializer.is_valid():
+            serializer.save(request)
+            serializerReturn = ResourceSerializer(Resource.objects.get(pk=serializer.data.get('id')), context={'request': request})
+            return Response(serializerReturn.data, status=HTTP_201_CREATED)
+        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
 
 class PermissionClass(BasePermission):   
