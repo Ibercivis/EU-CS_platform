@@ -107,7 +107,7 @@ class ResourceDetail(APIView):
         resource = self.get_object(pk)
         serializer = ResourceSerializer(resource, context={'request': request})
         return Response(serializer.data)
-    '''
+    
     def put(self, request, pk, format=None):
         resource = self.get_object(pk)
         if request.user == resource.creator or request.user.is_staff or request.user.id in getCooperators(pk):
@@ -119,7 +119,7 @@ class ResourceDetail(APIView):
         else:
             return Response({"This user can't update this resource"}, status=HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
-    '''
+    
     def delete(self, request, pk, format=None):
         resource = self.get_object(pk)
         if request.user == resource.creator or request.user.is_staff or request.user.id in getCooperators(pk):
