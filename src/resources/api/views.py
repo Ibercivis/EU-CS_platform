@@ -10,7 +10,7 @@ from rest_framework.status import (HTTP_200_OK, HTTP_201_CREATED, HTTP_204_NO_CO
 from rest_framework.views import APIView
 from resources.api.serializers import ResourceSerializer, AudienceSerializer, ThemeSerializer, CategorySerializer, ResourceSerializerCreateUpdate
 from resources.models import Resource, ApprovedResources, Audience, Theme, Category
-from resources.views import getCooperators
+from resources.views import getCooperators, setResourceApproved
 
 class AdminPermissionsClass(BasePermission):
     def has_permission(self, request, view):
@@ -127,4 +127,10 @@ class ResourceDetail(APIView):
             return Response(status=HTTP_204_NO_CONTENT)
         else:
             return Response({"This user can't delete this resource"}, status=HTTP_400_BAD_REQUEST)
-    
+
+@api_view(['PUT'])
+@permission_classes([AdminPermissionsClass])
+def approved_resource(request, pk):
+    approved = request.data.get('value')
+    setResourceApproved(pk, approved)
+    return Response(status=HTTP_204_NO_CONTENT)

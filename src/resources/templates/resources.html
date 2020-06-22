@@ -41,7 +41,7 @@
   src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
 
 <script>
-  function setApprovedRsc(idResource) {
+  function setApprovedRsc(idResource, approved) {
     var htmlId = "resource" + idResource;
     var request = $.ajax(
       {
@@ -49,6 +49,7 @@
         url: "{% url 'setApprovedRsc' %}",
         data: {
           "resource_id": idResource,
+          "approved": approved,
           csrfmiddlewaretoken: '{{ csrf_token }}'
         },
         success: function (response) {
