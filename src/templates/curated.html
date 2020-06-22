@@ -78,9 +78,9 @@ Curated Resources
 							{% if user.is_authenticated %}
 							<div id="saved{{rsc.id}}">
 								{% if rg.resource.id in savedResources %}
-								<button type="button" class="btn btn-outline-primary float-right mt-2" onclick="setSavedResource({{rg.resource.id}},{{user.id}})">In my library</button>
+								<button type="button" class="btn btn-outline-primary float-right mt-2" onclick="setSavedResource({{rg.resource.id}},{{user.id}}, false)">In my library</button>
 								{% else %}
-								<button type="button" class="btn btn-outline-secondary float-right mt-2" onclick="setSavedResource({{rg.resource.id}},{{user.id}})">To my library</button>
+								<button type="button" class="btn btn-outline-secondary float-right mt-2" onclick="setSavedResource({{rg.resource.id}},{{user.id}}, true)">To my library</button>
 								{% endif %}
 							</div>
 							{% endif %}

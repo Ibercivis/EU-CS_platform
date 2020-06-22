@@ -10,7 +10,7 @@ from rest_framework.status import (HTTP_200_OK, HTTP_201_CREATED, HTTP_204_NO_CO
 from rest_framework.views import APIView
 from resources.api.serializers import ResourceSerializer, AudienceSerializer, ThemeSerializer, CategorySerializer, ResourceSerializerCreateUpdate
 from resources.models import Resource, ApprovedResources, Audience, Theme, Category
-from resources.views import getCooperators, setResourceApproved
+from resources.views import getCooperators, setResourceApproved, setResourceHidden, setResourceFeatured, saveResource
 
 class AdminPermissionsClass(BasePermission):
     def has_permission(self, request, view):
@@ -133,4 +133,26 @@ class ResourceDetail(APIView):
 def approved_resource(request, pk):
     approved = request.data.get('value')
     setResourceApproved(pk, approved)
+    return Response(status=HTTP_204_NO_CONTENT)
+
+@api_view(['PUT'])
+@permission_classes([AdminPermissionsClass])
+def hidden_resource(request, pk):
+    hidden = request.data.get('value')
+    setResourceHidden(pk, hidden)
+    return Response(status=HTTP_204_NO_CONTENT)
+
+@api_view(['PUT'])
+@permission_classes([AdminPermissionsClass])
+def set_featured_resource(request, pk):
+    featured = request.data.get('value')
+    setResourceFeatured(pk, featured)
+    return Response(status=HTTP_204_NO_CONTENT)
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def save_resource(request, pk):
+    userId = request.user.id
+    save = request.data.get('value')
+    saveResource(pk, userId, save)
     return Response(status=HTTP_204_NO_CONTENT)

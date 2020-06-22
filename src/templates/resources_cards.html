@@ -90,9 +90,9 @@
           {% if user.is_authenticated %}
           <div id="saved{{rsc.id}}">
             {% if rsc.id in savedResources %}
-            <button type="button" class="btn btn-outline-primary float-right mt-2" onclick="setSavedResource({{rsc.id}},{{user.id}})">In my library</button>
+            <button type="button" class="btn btn-outline-primary float-right mt-2" onclick="setSavedResource({{rsc.id}},{{user.id}}, false)">In my library</button>
             {% else %}
-            <button type="button" class="btn btn-outline-secondary float-right mt-2" onclick="setSavedResource({{rsc.id}},{{user.id}})">Add to library</button>
+            <button type="button" class="btn btn-outline-secondary float-right mt-2" onclick="setSavedResource({{rsc.id}},{{user.id}}, true)">Add to library</button>
             {% endif %}
           </div>
           {% endif %}
