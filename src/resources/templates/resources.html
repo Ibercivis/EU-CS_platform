@@ -59,7 +59,7 @@
     );
   }
 
-  function setSavedResource(idResource, idUser) {
+  function setSavedResource(idResource, idUser, save) {
     var htmlId = "saved" + idResource;
     var request = $.ajax(
       {
@@ -68,6 +68,7 @@
         data: {
           "resource_id": idResource,
           "user_id": idUser,
+          "save": save,
           csrfmiddlewaretoken: '{{ csrf_token }}'
         },
         success: function (response) {

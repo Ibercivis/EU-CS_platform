@@ -184,9 +184,9 @@
               {% if user.is_authenticated %}
               <div id="saved{{resource.id}}">
                 {% if resource.id in savedResources %}
-                <button type="button" class="btn btn-outline-primary float-right mt-2" onclick="setSavedResource({{resource.id}},{{user.id}})">In my library</button>
+                <button type="button" class="btn btn-outline-primary float-right mt-2" onclick="setSavedResource({{resource.id}},{{user.id}}, false)">In my library</button>
                 {% else %}
-                <button type="button" class="btn btn-outline-secondary float-right mt-2" onclick="setSavedResource({{resource.id}},{{user.id}})">Add to library</button>
+                <button type="button" class="btn btn-outline-secondary float-right mt-2" onclick="setSavedResource({{resource.id}},{{user.id}}, true)">Add to library</button>
                 {% endif %}
               </div>
               {% endif %}
@@ -276,7 +276,7 @@
 		);
 	}
   
-  function setSavedResource(idResource, idUser){
+  function setSavedResource(idResource, idUser, save){
     var htmlId = "saved" + idResource;
     var request = $.ajax(
     {
@@ -285,6 +285,7 @@
       data: {
         "resource_id": idResource,
         "user_id": idUser,
+        "save": save,
         csrfmiddlewaretoken: '{{ csrf_token }}'
       },
       success: function (response) {

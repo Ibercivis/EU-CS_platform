@@ -342,42 +342,53 @@ def setSavedResource(request):
     response = {}
     resourceId = request.POST.get("resource_id")
     userId = request.POST.get("user_id")
-
-    #Delete
-    try:
-        obj = SavedResources.objects.get(resource_id=resourceId,user_id=userId)
-        obj.delete()
-    except SavedResources.DoesNotExist:
-        #Insert
-        resource = get_object_or_404(Resource, id=resourceId)
-        user = get_object_or_404(User, id=userId)
-        savedResource = SavedResources(resource=resource, user=user)
-        savedResource.save()
-
+    save = request.POST.get("save")
+    saveResource(resourceId, userId, save)
     return JsonResponse(response, safe=False)
+
+
+def saveResource(resourceId, userId, save):
+    save= False if save in ['False','false','0'] else True
+    fResource = get_object_or_404(Resource, id=resourceId)
+    fUser = get_object_or_404(User, id=userId)
+    if save == True:
+        #Insert
+        savedResource = SavedResources.objects.get_or_create(resource=fResource, user=fUser)
+    else:
+        #Delete
+        try:            
+            obj = SavedResources.objects.get(resource_id=resourceId,user_id=userId)
+            obj.delete()
+        except SavedResources.DoesNotExist:
+            print("Does not exist this resource saved")
+
 
 @staff_member_required()
 def setHiddenResource(request):
     response = {}
     id = request.POST.get("resource_id")
     hidden = request.POST.get("hidden")
-    resource = get_object_or_404(Resource, id=id)
-    resource.hidden = False if hidden == 'false' else True
-    resource.save()
+    setResourceHidden(id, hidden)
     return JsonResponse(response, safe=False)
+
+def setResourceHidden(id, hidden): 
+    resource = get_object_or_404(Resource, id=id)
+    resource.hidden = False if hidden in ['False','false','0'] else True
+    resource.save()
 
 @staff_member_required()
 def setFeaturedResource(request):
     response = {}
     id = request.POST.get("resource_id")
     featured = request.POST.get("featured")
-    print(id)
-    print(featured)
-    resource = get_object_or_404(Resource, id=id)
-    print(resource)
-    resource.featured = False if featured == 'false' else True
-    resource.save()
+    setResourceFeatured(id, featured)
     return JsonResponse(response, safe=False)
+
+def setResourceFeatured(id, featured):
+    resource = get_object_or_404(Resource, id=id)
+    resource.featured = featured
+    resource.featured = False if featured in ['False','false','0'] else True
+    resource.save()
 
 def allowUserResource(request):
     response = {}
