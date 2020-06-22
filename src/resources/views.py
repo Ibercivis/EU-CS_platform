@@ -320,18 +320,23 @@ def getCategory(category):
 def setApprovedRsc(request):
     response = {}
     id = request.POST.get("resource_id")
-
-    #Delete
-    try:
-        obj = ApprovedResources.objects.get(resource_id=id)
-        obj.delete()
-    except ApprovedResources.DoesNotExist:
-        #Insert
-        aResource = get_object_or_404(Resource, id=id)
-        approvedResource = ApprovedResources(resource=aResource)
-        approvedResource.save()
-
+    approved = request.POST.get("approved")
+    setResourceApproved(id, approved)
     return JsonResponse(response, safe=False)
+
+def setResourceApproved(id, approved):
+    approved= False if approved in ['False','false','0'] else True
+    aResource = get_object_or_404(Resource, id=id)
+    if approved == True:
+        #Insert        
+        ApprovedResources.objects.get_or_create(resource=aResource)
+    else:
+        #Delete
+        try:
+            obj = ApprovedResources.objects.get(resource_id=id)
+            obj.delete()
+        except ApprovedResources.DoesNotExist:
+            print("Does not exist this approved resource")
 
 def setSavedResource(request):
     response = {}

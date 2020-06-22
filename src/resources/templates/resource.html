@@ -152,9 +152,9 @@
               <div id="approved{{resource.id}}" class="float-left">
                 {% if user.is_staff %}
                 {% if resource.id in approvedResources %}
-                <img onclick="setApprovedRsc({{resource.id}})" class="img-fluid" src="{% static 'site/img/icon_color.png' %}" />
+                <img onclick="setApprovedRsc({{resource.id}}, false)" class="img-fluid" src="{% static 'site/img/icon_color.png' %}" />
                 {% else %}
-                <img onclick="setApprovedRsc({{resource.id}})" class="img-fluid" src="{% static 'site/img/icon_bw.png' %}" />
+                <img onclick="setApprovedRsc({{resource.id}}, true)" class="img-fluid" src="{% static 'site/img/icon_bw.png' %}" />
                 {% endif %}
                 {% else %}
                 {% if resource.id in approvedResources %}
@@ -241,13 +241,14 @@
     });
   });
 
-  function setApprovedRsc(idResource){
+  function setApprovedRsc(idResource, approved){
     var request = $.ajax(
     {
       type: "POST",
       url: "{% url 'setApprovedRsc' %}",
       data: {
         "resource_id": idResource,
+        "approved": approved,
         csrfmiddlewaretoken: '{{ csrf_token }}'
       },
       success: function (response) {

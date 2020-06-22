@@ -51,9 +51,9 @@
           <div id="approved{{rsc.id}}" class="float-left">
             {% if user.is_staff %}
             {% if rsc.id in approvedResources %}
-            <img onclick="setApprovedRsc({{rsc.id}})" class="img-fluid mt-2" src="{% static 'site/img/icon_color.png' %}" />
+            <img onclick="setApprovedRsc({{rsc.id}}, false)" class="img-fluid mt-2" src="{% static 'site/img/icon_color.png' %}" />
             {% else %}
-            <img onclick="setApprovedRsc({{rsc.id}})" class="img-fluid mt-2" src="{% static 'site/img/icon_bw.png' %}" />
+            <img onclick="setApprovedRsc({{rsc.id}}, true)" class="img-fluid mt-2" src="{% static 'site/img/icon_bw.png' %}" />
             {% endif %}
             {% else %}
             {% if rsc.id in approvedResources %}
