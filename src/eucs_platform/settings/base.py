@@ -102,6 +102,7 @@ INSTALLED_APPS = (
     'djoser',
     'rest_framework_swagger',
     'oidc_provider',
+    'drf_yasg',
 )
 
 MIDDLEWARE = [
