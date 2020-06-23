@@ -4,6 +4,9 @@ from django.conf.urls.static import static
 from django.views.generic import RedirectView
 from django.urls import include, path
 from django.conf.urls import url
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+from rest_framework import permissions
 import profiles.urls
 import accounts.urls
 import projects.urls
@@ -12,8 +15,16 @@ import events.urls
 import contact.urls
 from . import views
 
-from rest_framework_swagger.views import get_swagger_view
-schema_view = get_swagger_view(title='Eucs_Platform')
+
+schema_view = get_schema_view(
+   openapi.Info(
+      title="EUCS PLATFORM API",
+      default_version='v1',
+      description="This is the EUCS plaftorm API",
+   ),
+   public=True,
+   permission_classes=(permissions.AllowAny,),
+)
 
 # Personalized admin site settings like title and header
 admin.site.site_title = "Eucs_Platform Site Admin"
@@ -48,7 +59,9 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/auth/', include('djoser.urls')),
     url(r'^api/auth/', include('djoser.urls.authtoken')),
-    url(r'^api/docs/', schema_view, name='api-doc'),
+    url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
+    url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     url(r'^openid/', include('oidc_provider.urls', namespace='oidc_provider')),
 ]
 
