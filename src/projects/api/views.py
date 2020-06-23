@@ -69,13 +69,21 @@ class ProjectList(APIView):
 
         return projects
 
+
     def get(self, request, format=None):
+        """
+        Return a list of projects.
+        """
         projects = Project.objects.all()
         projects = self.applyFilters(request, projects)
         serializer = ProjectSerializer(projects, many=True, context={'request': request})
         return Response(serializer.data)
     
+
     def post(self, request, format=None):
+        '''
+        Create a project.
+        '''
         serializer = ProjectSerializerCreateUpdate(data=request.data)
         if serializer.is_valid():
             serializer.save(request)
@@ -101,11 +109,17 @@ class ProjectDetail(APIView):
             raise Http404
 
     def get(self, request, pk, format=None):
+        '''
+        Return a project by id.
+        '''
         project = self.get_object(pk)
         serializer = ProjectSerializer(project, context={'request': request})
         return Response(serializer.data)
     
     def put(self, request, pk, format=None):
+        '''
+        Update a project
+        '''
         project = self.get_object(pk)
         if request.user == project.creator or request.user.is_staff or request.user.id in getCooperators(pk):
             serializer = ProjectSerializerCreateUpdate(project, data=request.data)
@@ -118,6 +132,7 @@ class ProjectDetail(APIView):
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk, format=None):
+        '''Delete a project'''
         project = self.get_object(pk)
         if request.user == project.creator or request.user.is_staff or request.user.id in getCooperators(pk):
             project.delete()
