@@ -1,8 +1,10 @@
 from rest_framework import serializers
 from django_countries.serializer_fields import CountryField
 from django.shortcuts import get_object_or_404
+from PIL import Image
 from projects.models import Project, Topic, Status, Keyword, FundingBody, OriginDatabase, CustomField
 from projects.forms import getCountryCode
+from projects.views import saveImageWithPath
 
 class TopicSerializer(serializers.ModelSerializer):
     class Meta:
@@ -88,10 +90,31 @@ class ProjectSerializerCreateUpdate(serializers.ModelSerializer):
             cFields = []
         
         
+        image1 = self.validated_data.get('image1')
+        if(image1):
+            photo = image1
+            image = Image.open(photo)
+            image_path = saveImageWithPath(image, photo.name)
+            image1 = image_path
+
+        image2 = self.validated_data.get('image2')
+        if(image2):
+            photo = image2
+            image = Image.open(photo)
+            image_path = saveImageWithPath(image, photo.name)
+            image2 = image_path
+
+        image3 = self.validated_data.get('image3')
+        if(image3):
+            photo = image3
+            image = Image.open(photo)
+            image_path = saveImageWithPath(image, photo.name)
+            image3 = image_path
+
         country = getCountryCode(self.validated_data['latitude'],self.validated_data['longitude']).upper()
 
         moreItems = [('creator', args.user),('country', country), ('fundingBody', fundingBody), ('originDatabase', originDatabase),
-         ('keywords', keywords), ('customField', cFields)]
+         ('keywords', keywords), ('customField', cFields), ('image1', image1), ('image2', image2), ('image3', image3)]
 
         data =  dict(
             list(self.validated_data.items()) +
@@ -107,6 +130,9 @@ class ProjectSerializerCreateUpdate(serializers.ModelSerializer):
         fundingBodySent = False
         originDatabaseSent = False
         customFieldSent = False
+        image1Sent = False
+        image2Sent = False
+        image3Sent = False
         if 'keywords' in requestData:
             keywords = ""
             if requestData.get('keywords'):
@@ -132,7 +158,21 @@ class ProjectSerializerCreateUpdate(serializers.ModelSerializer):
             if requestData.get('customField'):
                 cFields = validated_data.pop('customField')
             customFieldSent = True
-               
+
+        if 'image1' in requestData:
+            if requestData.get('image1'):
+                image1 = validated_data.pop('image1')
+            image1Sent = True
+
+        if 'image2' in requestData:
+            if requestData.get('image2'):
+                image2 = validated_data.pop('image2')
+            image2Sent = True
+
+        if 'image3' in requestData:
+            if requestData.get('image3'):
+                image3 = validated_data.pop('image3')
+            image3Sent = True
 
         super().update(instance, validated_data)
 
@@ -167,6 +207,27 @@ class ProjectSerializerCreateUpdate(serializers.ModelSerializer):
                 cFields = []
             instance.customField.set(cFields)
         
+        if(image1Sent):
+            if(image1):
+                photo = image1
+                image = Image.open(photo)
+                image_path = saveImageWithPath(image, photo.name)
+                instance.image1 = image_path
+
+        if(image2Sent):
+            if(image2):
+                photo = image2
+                image = Image.open(photo)
+                image_path = saveImageWithPath(image, photo.name)
+                instance.image2 = image_path
+
+        if(image3Sent):
+            if(image3):
+                photo = image3
+                image = Image.open(photo)
+                image_path = saveImageWithPath(image, photo.name)
+                instance.image3 = image_path
+
         instance.country = getCountryCode(self.validated_data['latitude'],self.validated_data['longitude']).upper()
 
         instance.save()
