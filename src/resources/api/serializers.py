@@ -1,9 +1,10 @@
 from datetime import datetime
 from rest_framework import serializers
 from django.shortcuts import get_object_or_404
+from PIL import Image
 from authors.models import Author
 from resources.models import Resource, Keyword, Theme, Audience, Category
-
+from resources.views import saveImageWithPath
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -87,9 +88,25 @@ class ResourceSerializerCreateUpdate(serializers.ModelSerializer):
         else:
             authors = []
 
+        image1 = self.validated_data.get('image1')
+        if(image1):
+            photo = image1
+            image = Image.open(photo)
+            image_path = saveImageWithPath(image, photo.name)
+            image1 = image_path
+
+        image2 = self.validated_data.get('image2')
+        if(image2):
+            photo = image2
+            image = Image.open(photo)
+            image_path = saveImageWithPath(image, photo.name)
+            image2 = image_path
+
+
         publication_date = datetime.now()
 
-        moreItems = [('creator', args.user),('keywords', keywords), ('authors', authors), ('dateUploaded', publication_date)]
+        moreItems = [('creator', args.user),('keywords', keywords), ('authors', authors), ('dateUploaded', publication_date), 
+        ('image1', image1), ('image2', image2)]
 
         data =  dict(
             list(self.validated_data.items()) +
@@ -103,6 +120,8 @@ class ResourceSerializerCreateUpdate(serializers.ModelSerializer):
     def update(self, instance, validated_data, requestData):
         keywordsSent = False
         authorsSent = False
+        image1Sent = False
+        image2Sent = False
         if 'keywords' in requestData:
             keywords = ""
             if requestData.get('keywords'):
@@ -115,6 +134,16 @@ class ResourceSerializerCreateUpdate(serializers.ModelSerializer):
                 authorsSent = True
             else:
                 instance.authors  = None                           
+
+        if 'image1' in requestData:
+            if requestData.get('image1'):
+                image1 = validated_data.pop('image1')
+            image1Sent = True
+
+        if 'image2' in requestData:
+            if requestData.get('image2'):
+                image2 = validated_data.pop('image2')
+            image2Sent = True
 
         super().update(instance, validated_data)
 
@@ -134,6 +163,20 @@ class ResourceSerializerCreateUpdate(serializers.ModelSerializer):
             authors = Author.objects.all()
             authors = authors.filter(author__in = choices)
             instance.authors.set(authors)
+
+        if(image1Sent):
+            if(image1):
+                photo = image1
+                image = Image.open(photo)
+                image_path = saveImageWithPath(image, photo.name)
+                instance.image1 = image_path
+
+        if(image2Sent):
+            if(image2):
+                photo = image2
+                image = Image.open(photo)
+                image_path = saveImageWithPath(image, photo.name)
+                instance.image2 = image_path
 
         instance.save()
         return instance
