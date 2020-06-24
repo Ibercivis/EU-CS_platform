@@ -234,15 +234,19 @@ def saveImage(request, form, element, ref):
             resized_image = cropped_image.resize((1100, 400), Image.ANTIALIAS)
         else:
             resized_image = cropped_image.resize((600, 400), Image.ANTIALIAS)
-        _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
-        random_num = random.randint(0, 1000)
-        image_path = "media/images/" + _datetime + '_' + str(random_num) + '_' + photo.name
-        resized_image.save(image_path)
-        image_path = '/' + image_path
+        image_path = saveImageWithPath(resized_image, photo.name)
     elif withImage:
             image_path = '/'
     else:
         image_path = ''
+    return image_path
+
+def saveImageWithPath(image, photoName):
+    _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
+    random_num = random.randint(0, 1000)
+    image_path = "media/images/" + _datetime + '_' + str(random_num) + '_' + photoName
+    image.save(image_path)
+    image_path = '/' + image_path
     return image_path
 
 def preFilteredResources(request):
