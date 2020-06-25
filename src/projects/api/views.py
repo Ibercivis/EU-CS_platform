@@ -1,3 +1,4 @@
+from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
 from django.http import Http404
 from rest_framework import viewsets
@@ -11,7 +12,7 @@ from rest_framework.views import APIView
 from projects.api.serializers import ProjectSerializer, ProjectSerializerCreateUpdate, StatusSerializer, TopicSerializer
 from projects.models import Project, Status, Topic, ApprovedProjects
 from projects.views import getCooperators, setProjectApproved, setProjectHidden, setProjectFeatured, followProject
-
+from reviews.models import Review
 
 class AdminPermissionsClass(BasePermission):
     def has_permission(self, request, view):
@@ -136,6 +137,9 @@ class ProjectDetail(APIView):
         project = self.get_object(pk)
         if request.user == project.creator or request.user.is_staff or request.user.id in getCooperators(pk):
             project.delete()
+            reviews = Review.objects.filter(content_type=ContentType.objects.get(model="project"), object_pk=pk)
+            for r in reviews:
+                r.delete()
             return Response(status=HTTP_204_NO_CONTENT)
         else:
             return Response({"This user can't delete this project"}, status=HTTP_400_BAD_REQUEST)

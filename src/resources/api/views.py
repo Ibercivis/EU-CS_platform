@@ -1,3 +1,4 @@
+from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
 from django.http import Http404
 from rest_framework import viewsets
@@ -11,6 +12,7 @@ from rest_framework.views import APIView
 from resources.api.serializers import ResourceSerializer, AudienceSerializer, ThemeSerializer, CategorySerializer, ResourceSerializerCreateUpdate
 from resources.models import Resource, ApprovedResources, Audience, Theme, Category
 from resources.views import getCooperators, setResourceApproved, setResourceHidden, setResourceFeatured, saveResource
+from reviews.models import Review
 
 class AdminPermissionsClass(BasePermission):
     def has_permission(self, request, view):
@@ -124,6 +126,9 @@ class ResourceDetail(APIView):
         resource = self.get_object(pk)
         if request.user == resource.creator or request.user.is_staff or request.user.id in getCooperators(pk):
             resource.delete()
+            reviews = Review.objects.filter(content_type=ContentType.objects.get(model="resource"), object_pk=pk)
+            for r in reviews:
+                r.delete()
             return Response(status=HTTP_204_NO_CONTENT)
         else:
             return Response({"This user can't delete this resource"}, status=HTTP_400_BAD_REQUEST)
