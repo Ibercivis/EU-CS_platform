@@ -57,10 +57,11 @@ class ResourceSerializerCreateUpdate(serializers.ModelSerializer):
             'category', 'license', 'publisher', 'datePublished', 'theme', 'inLanguage', 'resourceDOI', 'featured']
 
     def validate(self, data):
-        if data['theme'] == []:
-            raise serializers.ValidationError({'theme': ["This field is required."]})
-        if data['audience'] == []:
-            raise serializers.ValidationError({'audience': ["This field is required."]})
+        if not self.partial:
+            if data['theme'] == []:
+                raise serializers.ValidationError({'theme': ["This field is required."]})
+            if data['audience'] == []:
+                raise serializers.ValidationError({'audience': ["This field is required."]})
 
         return data
 

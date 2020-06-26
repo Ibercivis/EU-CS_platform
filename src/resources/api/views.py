@@ -122,6 +122,18 @@ class ResourceDetail(APIView):
             return Response({"This user can't update this resource"}, status=HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
     
+    def patch(self, request, pk, format=None):
+        resource = self.get_object(pk)
+        if request.user == resource.creator or request.user.is_staff or request.user.id in getCooperators(pk):
+            serializer = ResourceSerializerCreateUpdate(resource, data=request.data, partial=True)
+            if serializer.is_valid():
+                serializer.update(resource, serializer.validated_data, request.data)
+                serializerReturn = ResourceSerializer(Resource.objects.get(pk=serializer.data.get('id')), context={'request': request})
+                return Response(serializerReturn.data)
+        else:
+            return Response({"This user can't update this resource"}, status=HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+    
     def delete(self, request, pk, format=None):
         resource = self.get_object(pk)
         if request.user == resource.creator or request.user.is_staff or request.user.id in getCooperators(pk):
