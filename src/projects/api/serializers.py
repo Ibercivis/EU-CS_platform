@@ -228,7 +228,8 @@ class ProjectSerializerCreateUpdate(serializers.ModelSerializer):
                 image_path = saveImageWithPath(image, photo.name)
                 instance.image3 = image_path
 
-        instance.country = getCountryCode(self.validated_data['latitude'],self.validated_data['longitude']).upper()
+        if 'latitude' in requestData and 'longitude' in requestData:
+            instance.country = getCountryCode(self.validated_data['latitude'],self.validated_data['longitude']).upper()
 
         instance.save()
         return instance
