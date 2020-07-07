@@ -18,4 +18,5 @@ urlpatterns = [
     path('allowUser/', views.allowUser, name='allowUser'),
     path('project_review/<int:pk>', views.project_review, name='project_review'),
     url(r'^api/', include('projects.api.urls')),
+    path('downloadProjects', views.downloadProjects, name='downloadProjects'),
 ]

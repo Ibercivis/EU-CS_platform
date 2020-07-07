@@ -18,5 +18,7 @@ urlpatterns = [
     path('allowUserResource/', views.allowUserResource, name='allowUserResource'),
     path('resource_review/<int:pk>', views.resource_review, name='resource_review'),
     url(r'^api/', include('resources.api.urls')),
+    path('downloadResources', views.downloadResources, name='downloadResources'),
+
 ]
 
