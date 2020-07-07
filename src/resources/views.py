@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, StreamingHttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.core.paginator import Paginator
 from django.utils import timezone
@@ -19,6 +19,7 @@ from datetime import datetime
 from reviews.models import Review
 from .models import Resource, Keyword, Category, ApprovedResources, SavedResources, Theme, Category, ResourcesGrouped, ResourcePermission
 from .forms import ResourceForm, ResourcePermissionForm
+import csv
 import random
 
 User = get_user_model()
@@ -421,3 +422,53 @@ def allowUserResource(request):
 
 def resource_review(request, pk):
     return render(request, 'resource_review.html', {'resourceID': pk})
+
+
+### Download all resources in a CSV file
+def downloadResources(request):
+    resources = Resource.objects.get_queryset()
+
+    response = StreamingHttpResponse(
+        streaming_content=(iter_items(resources, Buffer())),
+        content_type='text/csv',
+    )
+    response['Content-Disposition'] = 'attachment; filename="resources.csv"'
+    return response
+
+def get_headers():
+    return ['id', 'name', 'abstract', 'audience', 'keywords','inLanguage', 'category', 'url', 'license', 'authors',
+     'publisher', 'datePublished', 'theme', 'resourceDOI']
+
+def get_data(item):
+    keywordsList = list(item.keywords.all().values_list('keyword', flat=True))
+    authorsList = list(item.authors.all().values_list('author', flat=True))
+    audienceList = list(item.audience.all().values_list('audience', flat=True))
+    themeList = list(item.theme.all().values_list('theme', flat=True))
+
+    return {
+        'id': item.id,
+        'name': item.name,
+        'abstract': item.abstract,
+        'audience': audienceList,
+        'keywords': keywordsList,
+        'inLanguage': item.inLanguage,
+        'category': item.category,
+        'url': item.url,
+        'license': item.license,
+        'authors': authorsList,
+        'publisher': item.publisher,
+        'datePublished': item.datePublished,
+        'theme': themeList,
+        'resourceDOI': item.resourceDOI,
+    }
+
+class Buffer(object):
+    def write(self, value):
+        return value
+
+def iter_items(items, pseudo_buffer):
+    writer = csv.DictWriter(pseudo_buffer, fieldnames=get_headers())
+    yield writer.writeheader()
+
+    for item in items:
+        yield writer.writerow(get_data(item))

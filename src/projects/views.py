@@ -1,4 +1,4 @@
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, StreamingHttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
@@ -13,6 +13,7 @@ from itertools import chain
 from reviews.models import Review
 from .forms import ProjectForm, CustomFieldFormset, ProjectPermissionForm
 from .models import Project, Topic, Status, Keyword, ApprovedProjects, FollowedProjects, FundingBody, CustomField, ProjectPermission, OriginDatabase
+import csv
 import json
 import random
 
@@ -422,3 +423,56 @@ def allowUser(request):
 
 def project_review(request, pk):
     return render(request, 'project_review.html', {'projectID': pk})
+
+### Download all projects in a CSV file
+def downloadProjects(request):
+    projects = Project.objects.get_queryset()
+
+    response = StreamingHttpResponse(
+        streaming_content=(iter_items(projects, Buffer())),
+        content_type='text/csv',
+    )
+    response['Content-Disposition'] = 'attachment; filename="projects.csv"'
+    return response
+
+def get_headers():
+    return ['id', 'name', 'aim', 'description', 'keywords','status', 'start_date', 'end_date', 'topic', 'url', 'country',
+     'host', 'howToParticipate', 'doingAtHome', 'equipment', 'fundingBody', 'fundingProgram', 'originDatabase', 'originURL', 'originUID']
+
+def get_data(item):
+    keywordsList = list(item.keywords.all().values_list('keyword', flat=True))
+    topicList = list(item.topic.all().values_list('topic', flat=True))
+
+    return {
+        'id': item.id,
+        'name': item.name,
+        'aim': item.aim,
+        'description': item.description,
+        'keywords': keywordsList,
+        'status': item.status,
+        'start_date': item.start_date,
+        'end_date': item.end_date,
+        'topic': topicList,
+        'url': item.url,
+        'country': item.country,
+        'host': item.host,
+        'howToParticipate': item.howToParticipate,
+        'doingAtHome': item.doingAtHome,
+        'equipment': item.equipment,
+        'fundingBody': item.fundingBody,
+        'fundingProgram': item.fundingProgram,
+        'originDatabase': item.originDatabase,
+        'originURL': item.originURL,
+        'originUID': item.originUID,
+    }
+
+class Buffer(object):
+    def write(self, value):
+        return value
+
+def iter_items(items, pseudo_buffer):
+    writer = csv.DictWriter(pseudo_buffer, fieldnames=get_headers())
+    yield writer.writeheader()
+
+    for item in items:
+        yield writer.writerow(get_data(item))
