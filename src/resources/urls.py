@@ -16,5 +16,6 @@ urlpatterns = [
     path('setFeaturedResource/', views.setFeaturedResource, name='setFeaturedResource'),
     path('allowUserResource/', views.allowUserResource, name='allowUserResource'),
     path('resource_review/<int:pk>', views.resource_review, name='resource_review'),
+    path('downloadResources', views.downloadResources, name='downloadResources'),
 ]
 
