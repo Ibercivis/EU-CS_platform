@@ -35,7 +35,7 @@ class SummernoteModelAdminWithCustomToolbar(SummernoteWidget):
                 ['style', ['style', ]],
                 ['font', ['bold', 'italic', 'underline', 'color', ]],
                 ['paragraph', ['paragraph', 'ol', 'ul', ]],
-                ['misc', ['link', 'picture', 'undo', 'redo', 'help', ]],
+                ['misc', ['link', 'picture', 'video', 'undo', 'redo', 'help', ]],
             ],
 
         })
