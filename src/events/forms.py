@@ -9,6 +9,7 @@ class EventForm(forms.Form):
     place = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder':'Place where event happens'}),required=False)
     start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}))
     end_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}))
+    hour = forms.TimeField(widget=forms.TextInput(attrs={'type': 'time'}), required=False)
     url = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'placeholder':'Please provide a URL to an external web site for the event'}),required=False)
     
     def save(self, args):
@@ -20,9 +21,10 @@ class EventForm(forms.Form):
             event.place = self.data['place']
             event.start_date = self.data['start_date']
             event.end_date = self.data['end_date']
+            event.hour = self.data['hour']
             event.url = self.data['url']
         else:
             event = Event(title =  self.data['title'], description =  self.data['description'], place =  self.data['place'],
-                        start_date =  self.data['start_date'], end_date =  self.data['end_date'], url =  self.data['url']
+                        start_date =  self.data['start_date'], end_date =  self.data['end_date'], hour = self.data['hour'], url =  self.data['url']
                     )
         event.save()

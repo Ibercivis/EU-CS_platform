@@ -35,7 +35,7 @@ def editEvent(request, pk):
     if event.end_date:
         end_datetime = formats.date_format(event.end_date, 'Y-m-d')
     form = EventForm(initial={'title': event.title, 'description': event.description, 'place': event.place,
-                    'start_date': start_datetime, 'end_date': end_datetime, 'url': event.url})
+                    'start_date': start_datetime, 'end_date': end_datetime, 'hour': event.hour, 'url': event.url})
     if request.method == 'POST':
         form = EventForm(request.POST)
         if form.is_valid():
