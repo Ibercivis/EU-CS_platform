@@ -6,6 +6,7 @@ class Event(models.Model):
     place = models.CharField(max_length=200, blank=True)
     start_date = models.DateTimeField('Start date')
     end_date = models.DateTimeField('End date')
+    hour = models.TimeField(null=True, blank=True)
     url = models.CharField(max_length=200)
 
     class Meta:
