@@ -371,7 +371,7 @@ def setFollowedProject(request):
 
     return JsonResponse(response, safe=False)
 
-def allowUser(request):   
+def allowUser(request): 
     response = {}
     projectId = request.POST.get("project_id")
     users = request.POST.get("users")
@@ -447,7 +447,8 @@ class Buffer(object):
 
 def iter_items(items, pseudo_buffer):
     writer = csv.DictWriter(pseudo_buffer, fieldnames=get_headers())
-    yield writer.writeheader()
+    yield ','.join(get_headers()) + '\r\n'
+
 
     for item in items:
         yield writer.writerow(get_data(item))
