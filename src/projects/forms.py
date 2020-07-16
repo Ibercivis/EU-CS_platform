@@ -25,7 +25,7 @@ class ProjectForm(forms.Form):
     start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=False, label="Closest approximate start date of the project")
     end_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), required=False, label="Approximate end date of the project")
     topic = forms.ModelMultipleChoiceField(queryset=Topic.objects.all(), widget=Select2MultipleWidget(attrs={'data-placeholder':'The project topic or field of science'}), required=False,label="Topic (Multiple selection)")
-    url = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'placeholder':'Please provide a URL to an external web site for the project'}),required=False)
+    url = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'placeholder':'Please provide a URL to an external web site for the project'}))
     #Contact person info
     contact_person = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'autocomplete':'nope','placeholder':'Please ensure that you have the permission of this person before entering their name, otherwise leave blank'}), required=False)
     contact_person_email = forms.EmailField(required=False, widget=forms.TextInput(attrs={'autocomplete':'nope','placeholder':'Please ensure that you have the permission before entering their email, otherwise leave blank'}),label="Public contact email")
@@ -58,7 +58,7 @@ class ProjectForm(forms.Form):
     host = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder':'Enter the name of the institution hosting or coordinating the project'}))
     #Supplementary information for Citizen Science
     #how_to_participate = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 1000}}), required=False, label="How to participate in the project (max 1000 characters)")
-    how_to_participate = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Free text description of how people can get involved in the project. Textual instructions for joining the project. Max 200 characters'}), max_length = 2000, required=False)
+    how_to_participate = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Free text description of how people can get involved in the project. Textual instructions for joining the project. Max 200 characters'}), max_length = 2000)
     doingAtHome =  forms.BooleanField(required=False,label="Can participate at home")
     #equipment = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 1000}}), required=False, label="Equipment needeed to participate (max 1000 characters)")
     equipment = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'What equipment is needed for participation?. Max 2000 characters'}), max_length = 2000, required=False)
