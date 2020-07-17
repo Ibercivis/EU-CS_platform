@@ -90,13 +90,14 @@ def projects(request):
 
     # Pin projects to top
     projects = list(projectsTop) + list(projects)
+    counter = len(projects)
 
     paginator = Paginator(projects, 9)
     page = request.GET.get('page')
     projects = paginator.get_page(page)
 
     return render(request, 'projects.html', {'projects': projects, 'topics': topics, 'countriesWithContent': countriesWithContent,
-    'status': status, 'filters': filters, 'approvedProjects': approvedProjects, 'followedProjects': followedProjects})
+    'status': status, 'filters': filters, 'approvedProjects': approvedProjects, 'followedProjects': followedProjects, 'counter': counter })
 
 
 def project(request, pk):
