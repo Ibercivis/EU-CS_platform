@@ -21,7 +21,7 @@ class Post(models.Model):
     content = models.TextField()
     excerpt = models.TextField(max_length=1000,default="")
     image = models.ImageField(max_length=200,default='default_blog.png')
-    created_on = models.DateTimeField(auto_now_add=True)
+    created_on = models.DateTimeField()
     sticky = models.IntegerField(choices=STICKY, default=0)
     status = models.IntegerField(choices=STATUS, default=0)
 

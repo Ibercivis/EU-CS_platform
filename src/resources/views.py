@@ -76,12 +76,13 @@ def resources(request):
 
     # Pin resources to top
     resources = list(resourcesTop) + list(resources)
+    counter = len(resources)
 
     paginator = Paginator(resources, 9)
     page = request.GET.get('page')
     resources = paginator.get_page(page)
 
-    return render(request, 'resources.html', {'resources':resources, 'approvedResources': approvedResources,
+    return render(request, 'resources.html', {'resources':resources, 'approvedResources': approvedResources, 'counter': counter, 
     'savedResources': savedResources, 'filters': filters, 'settings': settings, 'languagesWithContent': languagesWithContent, 'themes':themes, 'categories': categories})
 
 
@@ -468,7 +469,7 @@ class Buffer(object):
 
 def iter_items(items, pseudo_buffer):
     writer = csv.DictWriter(pseudo_buffer, fieldnames=get_headers())
-    yield writer.writeheader()
+    yield ','.join(get_headers()) + '\r\n'
 
     for item in items:
         yield writer.writerow(get_data(item))
