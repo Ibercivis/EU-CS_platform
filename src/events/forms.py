@@ -14,6 +14,9 @@ class EventForm(forms.Form):
     
     def save(self, args):
         pk = self.data.get('eventID', '')
+        hour = self.data['hour']
+        if hour == '':
+            hour = None
         if pk:
             event = get_object_or_404(Event, id=pk)
             event.title = self.data['title']
@@ -21,10 +24,10 @@ class EventForm(forms.Form):
             event.place = self.data['place']
             event.start_date = self.data['start_date']
             event.end_date = self.data['end_date']
-            event.hour = self.data['hour']
+            event.hour = hour
             event.url = self.data['url']
         else:
             event = Event(title =  self.data['title'], description =  self.data['description'], place =  self.data['place'],
-                        start_date =  self.data['start_date'], end_date =  self.data['end_date'], hour = self.data['hour'], url =  self.data['url']
+                        start_date =  self.data['start_date'], end_date =  self.data['end_date'], hour = hour, url =  self.data['url']
                     )
         event.save()
