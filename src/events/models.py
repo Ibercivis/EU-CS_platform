@@ -8,6 +8,7 @@ class Event(models.Model):
     end_date = models.DateTimeField('End date')
     hour = models.TimeField(null=True, blank=True)
     url = models.CharField(max_length=200)
+    featured = models.BooleanField(null=True, default=False)
 
     class Meta:
         ordering = ['start_date']

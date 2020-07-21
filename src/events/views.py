@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.admin.views.decorators import staff_member_required
+from django.http import JsonResponse
 from django.utils import formats
 from .models import Event
 from .forms import EventForm
@@ -7,7 +8,7 @@ from .forms import EventForm
 
 def events(request):
     user = request.user
-    events = Event.objects.get_queryset()
+    events = Event.objects.get_queryset().order_by('-featured','start_date')
 
     return render(request, 'events.html', {'events': events, 'user':user})
 
@@ -51,3 +52,13 @@ def deleteEvent(request, pk):
     if request.user.is_staff:
         obj.delete()
     return redirect('events')
+
+@staff_member_required()
+def setFeaturedEvent(request):
+    response = {}
+    id = request.POST.get("event_id")
+    featured = request.POST.get("featured")
+    event = get_object_or_404(Event, id=id)
+    event.featured = False if featured == 'false' else True
+    event.save()
+    return JsonResponse(response, safe=False)

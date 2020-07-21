@@ -27,10 +27,11 @@
         </a>
         {% endif %}
     </div>
+    
     {% if events %}
     {% for event in events %}
 
-    <div class="row">
+    <div class="row {% if event.featured %}event-highlighted{%endif%}">
         <div class="col-sm-4 col-12 mt-4 mb-4">
             <h3>{{event.title}}</h3> <h5>{% if event.place %}{{event.place}}, {%endif%}{{event.start_date | date:" M d, Y"}}
                 {% if event.hour %}{{event.hour | time:'H:i'}} {%endif%}
@@ -44,11 +45,19 @@
         </div>
         <div class="col-sm-1 col-12 mt-4 mb-4">
         {% if user.is_staff %}
-            <a class="btn btn-red float-left mt-4" href="{% url 'editEvent' event.id %}"><i class="fas fa-edit"></i></a>
-            <a class="btn btn-red float-left mt-4" href="{% url 'deleteEvent' event.id %}" style="margin-left: 5px;"><i class="fas fa-trash-alt"></i></a>
+            <span id="featured{{event.id}}">
+                {% if event.featured %}
+                <a class="btn btn-red float-left mt-4" onclick="setFeaturedEvent({{event.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
+                {% else %}
+                <a class="btn btn-red float-left mt-4" onclick="setFeaturedEvent({{event.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
+                {% endif %}	
+            </span>
+            <a class="btn btn-red float-left mt-4" href="{% url 'editEvent' event.id %}" ><i class="fas fa-edit"></i></a>
+            <a class="btn btn-red float-left mt-4" href="{% url 'deleteEvent' event.id %}"><i class="fas fa-trash-alt"></i></a>
         {% endif %}
         </div>
     </div>
+    <br/>
     {% endfor %}
     {% else %}
     <div class="col-12">
@@ -60,4 +69,23 @@
 {% endblock list_of_items %}
 
 {% block scripts %}
+<script>
+    function setFeaturedEvent(idEvent, featured){
+      var htmlId = "featured" + idEvent;
+      var request = $.ajax(
+      {
+        type: "POST",
+        url: "{% url 'setFeaturedEvent' %}",
+        data: {
+          "event_id": idEvent,
+          "featured": featured,
+          csrfmiddlewaretoken: '{{ csrf_token }}'
+        },
+        success: function (response) {
+          window.location.reload(false);
+        }
+      }
+      );
+    }
+</script>
 {% endblock scripts %}
