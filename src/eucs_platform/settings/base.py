@@ -98,6 +98,7 @@ INSTALLED_APPS = (
     'cookielaw',
     'events',
     'oidc_provider',
+    'captcha',
 )
 
 MIDDLEWARE = [
@@ -259,3 +260,6 @@ REVIEW_PUBLISH_UNMODERATED = True
 #OPENID
 #LOGIN_URL = '/accounts/login/'
 OIDC_SESSION_MANAGEMENT_ENABLE = True
+
+RECAPTCHA_PUBLIC_KEY = env("RECAPTCHA_PUBLIC_KEY")
+RECAPTCHA_PRIVATE_KEY = env("RECAPTCHA_PRIVATE_KEY")
