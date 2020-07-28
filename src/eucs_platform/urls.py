@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 from django.views.generic import RedirectView
 from django.urls import include, path
 from django.conf.urls import url
+from machina import urls as machina_urls
 import profiles.urls
 import accounts.urls
 import projects.urls
@@ -38,6 +39,7 @@ urlpatterns = [
     path('', include('blog.urls')),
     path("", include(events.urls)),
     path('summernote/', include('django_summernote.urls')),
+    path('forum/', include(machina_urls)),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^reviews/', include('reviews.urls')),
     url(r'^citizen-science-resources-related-to-the-covid19-pandemic/', RedirectView.as_view(url='blog/2020/03/31/citizen-science-resources-related-covid19-pandemic/')),
