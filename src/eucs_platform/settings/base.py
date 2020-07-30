@@ -130,6 +130,8 @@ INSTALLED_APPS = (
     'machina.apps.forum_tracking',
     'machina.apps.forum_member',
     'machina.apps.forum_permission',
+
+    'organisations',
 )
 
 MIDDLEWARE = [
