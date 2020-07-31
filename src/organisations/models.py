@@ -20,7 +20,7 @@ class Organisation(models.Model):
     logo = models.ImageField(upload_to='images/', max_length=300)
     contactPoint = models.CharField(max_length=100, null=True, blank=True)
     contactPointEmail = models.CharField(max_length=100, null=True, blank=True)
-    address = models.CharField(max_length=150) 
+    address = models.CharField(max_length=150)
       
     associatedProjects = models.ManyToManyField(Project)
     associatedResources = models.ManyToManyField(Resource)
