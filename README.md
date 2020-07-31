@@ -38,6 +38,7 @@ python manage.py loaddata projects/fixtures/status.json
 python manage.py loaddata resources/fixtures/categories.json
 python manage.py loaddata resources/fixtures/themes.json
 python manage.py loaddata resources/fixtures/audiences.json
+python manage.py loaddata organisations/fixtures/organisation_types.json
 ```
 
 
