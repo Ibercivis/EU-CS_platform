@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from authors.models import Author
+from organisations.models import Organisation
 
 class Keyword(models.Model):
     keyword = models.TextField()
@@ -48,6 +49,8 @@ class Resource(models.Model):
     resourceDOI = models.CharField(max_length=100, null=True,blank=True)   
     hidden = models.BooleanField(null=True, blank=True)
     featured = models.BooleanField(null=True, blank=True)
+
+    organisation = models.ManyToManyField(Organisation)
     
     def __str__(self):
         return self.name

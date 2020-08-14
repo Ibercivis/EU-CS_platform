@@ -10,6 +10,7 @@ from machina import urls as machina_urls
 from rest_framework import permissions
 import profiles.urls
 import accounts.urls
+import organisations.urls
 import projects.urls
 import resources.urls
 import events.urls
@@ -49,6 +50,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include(contact.urls)),
     path("", include(accounts.urls)),
+    path("", include(organisations.urls)),
     path("", include(projects.urls)),
     path("", include(resources.urls)),
     path('', include('blog.urls')),

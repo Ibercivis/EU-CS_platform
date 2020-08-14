@@ -9,6 +9,7 @@ from .models import Resource, Keyword, Category, Audience, Theme, ResourceGroup,
 from authors.models import Author
 from PIL import Image
 from datetime import datetime, date
+from organisations.models import Organisation
 
 
 class ResourceForm(forms.ModelForm):
@@ -44,6 +45,7 @@ class ResourceForm(forms.ModelForm):
     publisher = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'autocomplete':'nope','placeholder':'The publisher of the resource (or the project name, or the lead institution).'}), required=False )
     license = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'autocomplete':'nope','placeholder':' Indicate the resource license, such as Creative Commons CC-BY. Enter a URL link to the license if available.'}), required=False)
     curatedList = forms.ModelMultipleChoiceField(queryset=ResourceGroup.objects.all(), widget=Select2MultipleWidget, required=False,label="Curated lists")
+    organisation = forms.ModelMultipleChoiceField(queryset=Organisation.objects.all(), widget=Select2MultipleWidget(attrs={'data-placeholder':'Related organisations'}), required=False,label="Organisation (Multiple selection)")
 
     class Meta:
         model = Resource
@@ -89,8 +91,9 @@ class ResourceForm(forms.ModelForm):
 
         rsc.audience.set(self.data.getlist('audience'))
         rsc.theme.set(self.data.getlist('theme'))
+        rsc.organisation.set(self.data.getlist('organisation'))
 
-        curatedList = self.data.getlist('curatedList')
+        curatedList = self.data.getlist('curatedList')        
 
         if args.user.is_staff:
             objs = ResourcesGrouped.objects.filter(resource=rsc)

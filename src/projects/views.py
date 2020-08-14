@@ -148,7 +148,7 @@ def editProject(request, pk):
     form = ProjectForm(initial={
         'project_name':project.name,'url': project.url,'start_date': start_datetime,
         'end_date':end_datetime, 'aim': project.aim, 'description': project.description,
-        'status': project.status, 'choices': choices, 'choicesSelected':keywordsList,
+        'status': project.status, 'choices': choices, 'choicesSelected':keywordsList, 'organisation': project.organisation.all,
         'topic':project.topic.all, 'latitude': project.latitude, 'longitude': project.longitude,
         'image1': project.image1, 'image_credit1': project.imageCredit1, 'withImage1': (True, False)[project.image1 == ""],
         'image2': project.image2, 'image_credit2': project.imageCredit2, 'withImage2': (True, False)[project.image2 == ""],
