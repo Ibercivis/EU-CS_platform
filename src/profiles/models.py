@@ -3,6 +3,7 @@ from django.utils.encoding import python_2_unicode_compatible
 import uuid
 from django.db import models
 from django.conf import settings
+from organisations.models import Organisation
 
 
 class InterestArea(models.Model):
@@ -28,6 +29,7 @@ class BaseProfile(models.Model):
     longitude = models.DecimalField(max_digits=9,decimal_places=6, blank=True, null=True)
     email_verified = models.BooleanField("Email verified", default=False)
     orcid = models.CharField("ORCID", max_length=50, blank=True, null=True)
+    organisation = models.ManyToManyField(Organisation)
 
     class Meta:
         abstract = True

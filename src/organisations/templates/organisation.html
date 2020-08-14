@@ -33,12 +33,20 @@
 							</div>
 							<div class="col-12 col-sm-6">
 								<p><strong>Contact Point</strong>: {{ organisation.contactPoint }} </p>
-								<p><strong>Contact Point EMail</strong>: {{ organisation.contactPointEmail }}</p>
+								<p><strong>Contact Point Email</strong>: {{ organisation.contactPointEmail }}</p>
 								<p><strong>Address</strong>: {{ organisation.address }}</p>								
                             </div>
                             <div class="col-12 col-sm-6">
                                 <h5>Projects</h5>
                                 {% for project in associatedProjects.all %} <a class="badge" href="/project/{{project.id}}">{{project}}</a> <br/> {% endfor %}
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <h5>Resources</h5>
+                                {% for resource in associatedResources.all %} <a class="badge" href="/resource/{{resource.id}}">{{resource}}</a> <br/> {% endfor %}
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <h5>Members</h5>
+                                {% for member in members.all %} <a class="badge" href="/{{member.slug}}">{{member.user.name}}</a> <br/> {% endfor %}
                             </div>
 						</div>
 
