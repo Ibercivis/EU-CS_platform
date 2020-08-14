@@ -35,7 +35,11 @@
 								<p><strong>Contact Point</strong>: {{ organisation.contactPoint }} </p>
 								<p><strong>Contact Point EMail</strong>: {{ organisation.contactPointEmail }}</p>
 								<p><strong>Address</strong>: {{ organisation.address }}</p>								
-							</div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <h5>Projects</h5>
+                                {% for project in associatedProjects.all %} <a class="badge" href="/project/{{project.id}}">{{project}}</a> <br/> {% endfor %}
+                            </div>
 						</div>
 
 					</div>

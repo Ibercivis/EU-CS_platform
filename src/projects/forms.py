@@ -8,6 +8,7 @@ from django_summernote.widgets import SummernoteWidget
 from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderServiceError
 from .models import Project, Topic, Status, Keyword, FundingBody, CustomField, OriginDatabase
+from organisations.models import Organisation
 
 geolocator = Nominatim(timeout=None)
 
@@ -75,6 +76,7 @@ class ProjectForm(forms.Form):
     title = forms.CharField(max_length=100, required=False)
     paragraph = forms.CharField(widget=SummernoteWidget(), required=False)
 
+    organisation = forms.ModelMultipleChoiceField(queryset=Organisation.objects.all(), widget=Select2MultipleWidget(attrs={'data-placeholder':'Related organisations'}), required=False,label="Organisation (Multiple selection)")
 
     def save(self, args, images, cFields):
         pk = self.data.get('projectID', '')
@@ -129,6 +131,8 @@ class ProjectForm(forms.Form):
         
         project.save()
         project.topic.set(self.data.getlist('topic'))
+
+        project.organisation.set(self.data.getlist('organisation'))
         
         choices = self.data['choices']
         choices = choices.split(',')
