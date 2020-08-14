@@ -16,15 +16,25 @@ def new_organisation(request):
     if request.method == 'POST':
         form = OrganisationForm(request.POST, request.FILES)
         if form.is_valid():
-            photo = request.FILES['logo']
-            image = Image.open(photo)
-            _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
-            random_num = random.randint(0, 1000)
-            image_path = "media/images/" + _datetime + '_' + str(random_num) + '_' + photo.name
-            image.save(image_path)
-            form.save(request, image_path)
-            return redirect('/projects')
+            image_path = ''
+            if(request.FILES.get('logo', False)):
+                photo = request.FILES['logo']
+                image = Image.open(photo)
+                _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
+                random_num = random.randint(0, 1000)
+                image_path = "media/images/" + _datetime + '_' + str(random_num) + '_' + photo.name
+                image.thumbnail((144,144))
+                image.save(image_path)        
+            form.save(request, '/' + image_path)
+            return redirect('/')
         else:
             print(form.errors)
 
     return render(request, 'new_organisation.html', {'form': form, 'user':user})
+
+
+
+def organisation(request, pk):
+    organisation = get_object_or_404(Organisation, id=pk)
+
+    return render(request, 'organisation.html', {'organisation':organisation})
