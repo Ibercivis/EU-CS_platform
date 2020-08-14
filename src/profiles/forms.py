@@ -6,6 +6,7 @@ from crispy_forms.bootstrap import AppendedText, PrependedText, FormActions
 from django.contrib.auth import get_user_model
 from . import models
 from django_select2.forms import Select2MultipleWidget
+from organisations.models import Organisation
 
 User = get_user_model()
 
@@ -46,10 +47,11 @@ class ProfileForm(forms.ModelForm):
                         required=False, label="Interest Areas")
     latitude = forms.DecimalField(widget=forms.HiddenInput(),max_digits=9,decimal_places=6,required=False)
     longitude = forms.DecimalField(widget=forms.HiddenInput(),max_digits=9,decimal_places=6,required=False)
+    organisation = forms.ModelMultipleChoiceField(queryset=Organisation.objects.all(), widget=Select2MultipleWidget(attrs={'data-placeholder':'Related organisations'}), required=False,label="Organisation (Multiple selection)")
 
     class Meta:
         model = models.Profile
-        fields = ["picture", "title", "bio", "institution", "orcid", "interestAreas", "choices",
+        fields = ["picture", "title", "bio", "institution", "orcid", "interestAreas", "choices", "organisation",
                 "latitude", "longitude"]
 
 
@@ -66,5 +68,5 @@ class ProfileForm(forms.ModelForm):
         areas = models.InterestArea.objects.all()
         areas = areas.filter(interestArea__in = choices)
         pForm.interestAreas.set(areas)
-
+        pForm.organisation.set(self.data.getlist('organisation'))
         return 'success'

@@ -119,6 +119,9 @@
               <b>License: </b>{{ resource.license }}<br>
               <b>Audience: </b>{% for audience in resource.audience.all %}{{ audience }} {% endfor %}<br>
               <b>Publisher: </b> {{ resource.publisher }}<br>
+              <b>Organisation:</b>
+              {% for organisation in resource.organisation.all %} <a class="badge" href="/organisation/{{organisation.id}}">{{organisation}}</a>  {% endfor %}
+              <br/>
               <b>Year of publication: </b> {{ resource.datePublished }}<br>
               <b>Resource DOI: </b> {{ resource.resourceDOI }}<br>
             </div>

@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from authors.models import Author
+from organisations.models import Organisation
 
 class Keyword(models.Model):
     keyword = models.TextField()
@@ -50,6 +51,8 @@ class Resource(models.Model):
     image2 = models.ImageField(upload_to='images/', max_length=300,null=True, blank=True)
     hidden = models.BooleanField(null=True, blank=True)
     featured = models.BooleanField(null=True, blank=True)
+
+    organisation = models.ManyToManyField(Organisation)
     
     def __str__(self):
         return self.name

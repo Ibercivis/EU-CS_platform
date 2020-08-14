@@ -1,11 +1,14 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from PIL import Image
+from django.contrib.auth import get_user_model
 from django.utils import formats
 from datetime import datetime
 from .forms import OrganisationForm
 from .models import Organisation, OrganisationType
 from projects.models import Project
+from resources.models import Resource
+from profiles.models import Profile
 import random
 
 
@@ -39,4 +42,8 @@ def organisation(request, pk):
     organisation = get_object_or_404(Organisation, id=pk)
         
     associatedProjects = Project.objects.all().filter(organisation__id=pk)
-    return render(request, 'organisation.html', {'organisation':organisation, 'associatedProjects': associatedProjects})
+    associatedResources = Resource.objects.all().filter(organisation__id=pk)
+    members = Profile.objects.all().filter(organisation__id=pk)
+
+    return render(request, 'organisation.html', {'organisation':organisation, 'associatedProjects': associatedProjects, 'associatedResources': associatedResources,
+    'members': members})

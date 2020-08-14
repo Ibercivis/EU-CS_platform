@@ -147,7 +147,7 @@ def editResource(request, pk):
     form = ResourceForm(initial={
         'name':resource.name, 'abstract': resource.abstract, 'image1': resource.image1, 'image2': resource.image2,'resource_DOI': resource.resourceDOI,
         'withImage1': (True, False)[resource.image1 == ""],'withImage2': (True, False)[resource.image2 == ""],
-        'url': resource.url,'license': resource.license, 'choices': choices, 'theme': resource.theme.all,
+        'url': resource.url,'license': resource.license, 'choices': choices, 'theme': resource.theme.all,'organisation': resource.organisation.all,
         'audience' : resource.audience.all, 'publisher': resource.publisher, 'year_of_publication': resource.datePublished,
         'authors': resource.authors.all, 'selectedAuthors': selectedAuthors, 'authorsCollection': authorsCollection,
         'author_email': resource.author_email, 'choicesSelected':keywordsList,
