@@ -5,6 +5,7 @@ from django.utils import formats
 from datetime import datetime
 from .forms import OrganisationForm
 from .models import Organisation, OrganisationType
+from projects.models import Project
 import random
 
 
@@ -36,5 +37,6 @@ def new_organisation(request):
 
 def organisation(request, pk):
     organisation = get_object_or_404(Organisation, id=pk)
-
-    return render(request, 'organisation.html', {'organisation':organisation})
+        
+    associatedProjects = Project.objects.all().filter(organisation__id=pk)
+    return render(request, 'organisation.html', {'organisation':organisation, 'associatedProjects': associatedProjects})

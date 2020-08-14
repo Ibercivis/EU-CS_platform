@@ -114,6 +114,9 @@
               <b>Status: </b>{{ project.status}}<br>
               <b>Date created:</b> {{project.dateCreated  | date:"d/m/Y"}}<br>
               <b>Date updated:</b>{{project.dateUpdated  | date:"d/m/Y"}}<br>
+              <b>Organisation:</b>
+                  {% for organisation in project.organisation.all %} <a class="badge" href="/organisation/{{organisation.id}}">{{organisation}}</a>  {% endfor %}
+              <br/>
               <b>Website: </b><a target="_blank" href="{% if 'http' not in project.url %}//{%endif%}{{project.url}}">{{project.url}}</a><br>
             </div>
           </div>

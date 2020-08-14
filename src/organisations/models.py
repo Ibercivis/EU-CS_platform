@@ -1,7 +1,5 @@
 from django.db import models
 from django.conf import settings
-from projects.models import Project
-from resources.models import Resource
 
 class OrganisationType(models.Model):
     type = models.TextField()
@@ -21,10 +19,6 @@ class Organisation(models.Model):
     contactPoint = models.CharField(max_length=100, null=True, blank=True)
     contactPointEmail = models.CharField(max_length=100, null=True, blank=True)
     address = models.CharField(max_length=150)
-      
-    associatedProjects = models.ManyToManyField(Project)
-    associatedResources = models.ManyToManyField(Resource)
-    communityMembers = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='members')
   
 
     def __str__(self):
