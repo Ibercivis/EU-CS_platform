@@ -1,0 +1,114 @@
+{% extends "base2.html" %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% block head %}
+{{block.super }}
+{{ form.media.css }}
+
+{% endblock head %}
+
+{% block title %}{{ block.super }} :: New organisation{% endblock %}
+
+{% block navbar-left %}
+{% include "_navbar.html" with active_link="organisations" %}
+{% endblock %}
+
+
+{% block list_of_items %}
+<div class="container">
+  <div class="row">
+
+    <div class="container mt-5">
+      <div class="row d-flex justify-content-center">
+        <div class="col-sm-10 col-12">
+          <div class="card mt-5 mb-5 shadow">
+            <div class="card-title  p-5">
+              <div class="row">
+                <div class="col-12">
+                  <h2>New Organisation Profile</h2>
+                  Thank you for creating a profile for your organisation on the EU-Citizen.Science Platform. <br/>
+                  This can be linked with the Personal Profiles of the people in your organisation, the Project Profiles 
+                  of the projects that your organisation is involved in, and the Resource Profiles of the resources that 
+                  were published by your organisation. <br/>
+
+                  Please fill in all of the mandatory information in the fields below (indicated with an asterisk*),
+                  and as much of the non-mandatory information as possible.<br/>
+                  
+                  Upon saving this profile, your organisational profile will be submitted for moderation by one of 
+                  the members of the EU-Citizen.Science consortium. This step is simply to check for ‘spam’ or 
+                  inappropriate uses of the profile form.                   
+                </div>
+              </div>
+            </div>
+            <div class="card-text pr-5 pl-5 pb-5">
+              <table class="table mb-0">
+                <form action="/new_organisation" method="post" enctype="multipart/form-data" class="add-new-organisation" autocomplete="off">
+                  {% csrf_token %}
+                  <div>
+                    <button type="submit" class="btn btn-green float-right"><i class="fas fa-share-square"></i> Save</button>
+                    <br/><br/>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col-12">
+                      {{ form.name|as_crispy_field }}
+                    </div>
+                    <div class="col-12">
+                      {{ form.url|as_crispy_field }}
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col-12">
+                      {{ form.description|as_crispy_field }}
+                    </div>
+                    <div class="col-12">
+                      {{ form.orgType|as_crispy_field }}
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col-12">
+                      {{ form.logo|as_crispy_field }}
+                    </div>
+                    <div class="col-12">
+                      {{ form.contact_point|as_crispy_field }}
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col-12">
+                      {{ form.contact_point_email|as_crispy_field }}
+                    </div>
+                    <div class="col-12">
+                      {{ form.address|as_crispy_field }}
+                    </div>
+                  </div>                                 
+                 
+               
+                  <hr />
+                  <button type="submit" class="btn btn-green"><i class="fas fa-share-square"></i> Save</button>
+                </form>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock list_of_items %}
+
+{% block scripts %}
+<script src="{% static 'site/js/site.js' %}"></script>
+<script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('.js-example-basic-single').select2();
+
+  });
+</script>
+{{ form.media.js }}
+{% endblock scripts %}

@@ -44,6 +44,9 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 								<p><strong>Bio and disciplinary background</strong>: {{ show_user.profile.bio }}</p>
 								<p><strong>Institution</strong>: {{ show_user.profile.institution }}</p>
 								<p><strong>ORCID profile</strong>: {% if show_user.profile.orcid %} <a href="https://orcid.org/{{ show_user.profile.orcid }}" target="_blank">{{ show_user.profile.orcid }}</a>{% endif %}</p>
+								<b>Organisation:</b>
+								{% for organisation in show_user.profile.organisation.all %} <a class="badge" href="/organisation/{{organisation.id}}">{{organisation}}</a>  {% endfor %}
+								<br/>
 							</div>
 							<div class="col-12 col-sm-6">
 								<p><strong>Interest Areas</strong>:

@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django_countries.fields import CountryField
+from organisations.models import Organisation
 
 
 class Status(models.Model):
@@ -81,6 +82,8 @@ class Project(models.Model):
     featured = models.BooleanField(null=True, blank=True)
 
     customField = models.ManyToManyField(CustomField, blank=True)
+
+    organisation = models.ManyToManyField(Organisation)
 
     def __str__(self):
         return f'{self.name}'
