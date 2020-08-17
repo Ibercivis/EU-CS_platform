@@ -1,0 +1,73 @@
+{% extends "base2.html" %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% block title %}{{ block.super }} :: Organisations{% endblock %}
+{% block navbar-left %}
+{% include "_navbar.html" with active_link="organisations" %}
+{% endblock %}
+
+{% block splash %}
+<div class="jumbotron jumbotron-fluid jumbotron-organisations mb-0">
+	<div class="container-fluid">
+		<div class="container">
+			<h1 class="display-4 pb-0 pt-0 text-white"><br>Organisations</h1>
+			
+		</div>
+	</div>
+</div>
+{% endblock splash %}
+
+{% block page_header %}
+
+{% endblock page_header %}
+{% block list_of_items %}
+
+<div class="container">
+	<div class="row .projects">
+    {% if organisations %}
+        {% for organisation in organisations %}
+    <div class="col-lg-4 col-sm-12 mb-4">
+        <div class="card h-100 shadow border-0">
+            <a class="card-img-wrap "href="/organisation/{{organisation.id }}">
+                {% if organisation.logo %}
+                <img class="card-img-top img-fluid img-zoom lazyload " src="{{ organisation.logo }}" />
+                {% else %}
+                <img class="card-img-top img-fluid img-zoom lazyload " src="{% static 'site/img/project_default_card.webp' %}" />
+                {% endif %}
+
+            </a>
+            <div class="card-body">
+                <h6 class="card-title mt-3 mb-3"> <a class="card-link" href="/organisation/{{organisation.id }}">{{ organisation.name }}</a></h6>
+               
+                <div class="card-text mt-3">{{organisation.description | safe | truncatechars:180 }}
+                    <a class="organisation" href="/organisation/{{organisation.id}}" target="_blank">Read more</a>
+                </div>
+                <br>                
+            </div><!-- End of card-body -->
+
+        </div><!-- end of card -->
+    </div>
+    {% endfor %}
+
+    {% else %}
+    <div class="col-12">
+        <img  class="img-fluid img-zoom col-12 mt-5" src="{% static 'site/img/undraw_empty_xct9.svg' %}">
+        <h5 class="mb-4">Sorry, nothing found</h5>
+    </div>
+    {% endif %}
+	</div>
+</div>
+{% endblock list_of_items %}
+
+{% block scripts %}
+<script>
+	$(document).ready(function() {
+		$( ".card" ).hover(
+		function() {
+			$(this).addClass('shadow-none').css('cursor', 'pointer');
+		}, function() {
+			$(this).removeClass('shadow-none');
+		});
+	});
+</script>
+{% endblock scripts %}
