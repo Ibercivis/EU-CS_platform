@@ -1,0 +1,112 @@
+{% extends "base2.html" %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% block head %}
+{{block.super }}
+{{ form.media.css }}
+
+{% endblock head %}
+
+{% block title %}{{ block.super }} :: Edit organisation{% endblock %}
+
+{% block navbar-left %}
+{% include "_navbar.html" with active_link="organisations" %}
+{% endblock %}
+
+
+{% block list_of_items %}
+<div class="container">
+  <div class="row">
+
+    <div class="container mt-5">
+      <div class="row d-flex justify-content-center">
+        <div class="col-sm-10 col-12">
+          <div class="card mt-5 mb-5 shadow">
+            <div class="card-title  p-5">
+              <div class="row">
+                <div class="col-12">
+                    <h2>Edit Organisation Profile</h2>
+                </div>
+              </div>
+            </div>
+            <div class="card-text pr-5 pl-5 pb-5">
+              <table class="table mb-0">
+                <form action="/edit_organisation/{{organisation.id}}" method="post" enctype="multipart/form-data" class="edit-organisation" autocomplete="off">
+                  {% csrf_token %}
+                  <div>
+                    <button type="submit" class="btn btn-green float-right"><i class="fas fa-share-square"></i> Save</button>
+                    <br/><br/>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col-12">
+                        <input type="hidden" id="organisationID" name="organisationID" value={{organisation.id}}>
+                      {{ form.name|as_crispy_field }}
+                    </div>
+                    <div class="col-12">
+                      {{ form.url|as_crispy_field }}
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col-12">
+                      {{ form.description|as_crispy_field }}
+                    </div>
+                    <div class="col-12">
+                      {{ form.orgType|as_crispy_field }}
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col-12">
+                      {{ form.logo|as_crispy_field }}
+                      <a href="#"> <img class="img-fluid img-zoom" id="logo" src="{{ organisation.logo }}" alt="Image not upload"></a>
+                      <div id="deleteLogo">                   
+                      {% if organisation.logo %}
+                        <a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>                  
+                      {% endif %}
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      {{ form.contact_point|as_crispy_field }}
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col-12">
+                      {{ form.contact_point_email|as_crispy_field }}
+                    </div>
+                    <div class="col-12">
+                      {{ form.address|as_crispy_field }}
+                    </div>
+                  </div>                                 
+                 
+               
+                  <hr />
+                  <button type="submit" class="btn btn-green"><i class="fas fa-share-square"></i> Save</button>
+                </form>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock list_of_items %}
+
+{% block scripts %}
+<script src="{% static 'site/js/site.js' %}"></script>
+<script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"></script>
+<script>
+  $(document).ready(function () {    
+    $('#deleteLogo > a').click(function () {
+      $('#logo').attr('src', '');
+      $("#deleteLogo").empty();
+    });
+  });
+</script>
+{{ form.media.js }}
+{% endblock scripts %}

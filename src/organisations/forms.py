@@ -15,15 +15,25 @@ class OrganisationForm(forms.Form):
     address = forms.CharField(max_length=150, widget=forms.TextInput(attrs={'placeholder':' Please provide the physical address of the organisation'})) 
 
 
-    def save(self, args, logo_path):        
+    def save(self, args, logo_path):
+        pk = self.data.get('organisationID', '')
         orgType = get_object_or_404(OrganisationType, id=self.data['orgType'])
-
-        organisation = Organisation(name = self.data['name'], url = self.data['url'], creator=args.user,                         
+        if(pk):
+            organisation = get_object_or_404(Organisation, id=pk)
+            organisation.name = self.data['name']
+            organisation.url = self.data['url']
+            organisation.description = self.data['description']
+            organisation.orgType = orgType
+            organisation.contactPoint = self.data['contact_point']
+            organisation.contactPointEmail = self.data['contact_point_email']
+            organisation.address = self.data['address']
+        else:   
+            organisation = Organisation(name = self.data['name'], url = self.data['url'], creator=args.user,                         
                           description = self.data['description'], orgType = orgType, contactPoint = self.data['contact_point'],
                           contactPointEmail = self.data['contact_point_email'], address = self.data['address'])
         
         if(logo_path != '/'):
-            organisation.logo_path = logo_path
+            organisation.logo = logo_path
             
         organisation.save()
 
