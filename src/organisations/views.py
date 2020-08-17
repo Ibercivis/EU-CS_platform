@@ -54,7 +54,7 @@ def edit_organisation(request, pk):
     user = request.user
     
     if user != organisation.creator and not user.is_staff:
-        return redirect('../projects', {})
+        return redirect('../organisations', {})
 
     form = OrganisationForm(initial={
         'name':organisation.name,'url': organisation.url, 'description': organisation.description, 
@@ -81,3 +81,7 @@ def edit_organisation(request, pk):
             print(form.errors)
 
     return render(request, 'edit_organisation.html', {'form': form, 'organisation':organisation, 'user':user,})
+
+def organisations(request):
+    organisations = Organisation.objects.get_queryset()
+    return render(request, 'organisations.html', {'organisations': organisations})
