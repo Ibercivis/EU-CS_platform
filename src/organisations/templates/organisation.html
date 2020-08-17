@@ -46,7 +46,7 @@
                             </div>
                             <div class="col-12 col-sm-6">
                                 <h5>Members</h5>
-                                {% for member in members.all %} <a class="badge" href="/{{member.slug}}">{{member.user.name}}</a> <br/> {% endfor %}
+                                {% for member in members.all %} <a class="badge" href="/users/{{member.slug}}">{{member.user.name}}</a> <br/> {% endfor %}
                             </div>
 						</div>
 
