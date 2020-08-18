@@ -67,7 +67,7 @@ have been marked as 'Moderated'. Read more about our <a href="/faq">moderation p
 						{% endfor %}
 					</select>
 					<select id="category" name="category" class="custom-select form-control">
-						<option value="">All categories</option>
+						<option value="">All Resource Types</option>
 						{% for category in categories %}
 						<option {% if category.id == filters.category %} selected {% endif %} value="{{category.id}}">{{category}}</option>
 						{% endfor %}
