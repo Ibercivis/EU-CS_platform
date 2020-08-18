@@ -30,7 +30,7 @@ def new_organisation(request):
                 image.thumbnail((144,144))
                 image.save(image_path)        
             form.save(request, '/' + image_path)
-            return redirect('/')
+            return redirect('../organisations', {})
         else:
             print(form.errors)
 
@@ -40,13 +40,17 @@ def new_organisation(request):
 
 def organisation(request, pk):
     organisation = get_object_or_404(Organisation, id=pk)
-        
+    user = request.user
+    if user != organisation.creator and not user.is_staff:
+        editable = False
+    else:
+        editable = True 
     associatedProjects = Project.objects.all().filter(organisation__id=pk)
     associatedResources = Resource.objects.all().filter(organisation__id=pk)
     members = Profile.objects.all().filter(organisation__id=pk)
 
     return render(request, 'organisation.html', {'organisation':organisation, 'associatedProjects': associatedProjects, 'associatedResources': associatedResources,
-    'members': members})
+    'members': members, 'editable': editable})
 
 
 def edit_organisation(request, pk):
@@ -76,12 +80,23 @@ def edit_organisation(request, pk):
                 image.save(image_path)
                 image_path = '/' + image_path
             form.save(request, image_path)
-            return redirect('/')
+            return redirect('../organisations', {})
         else:
             print(form.errors)
 
     return render(request, 'edit_organisation.html', {'form': form, 'organisation':organisation, 'user':user,})
 
 def organisations(request):
-    organisations = Organisation.objects.get_queryset()
+    organisations = Organisation.objects.get_queryset().order_by('id')
     return render(request, 'organisations.html', {'organisations': organisations})
+
+def delete_organisation(request, pk):
+    organisation = get_object_or_404(Organisation, id=pk)
+    user = request.user
+    
+    if user != organisation.creator and not user.is_staff:
+        return redirect('../organisations', {})
+
+    organisation.delete()
+
+    return redirect('../organisations', {})
