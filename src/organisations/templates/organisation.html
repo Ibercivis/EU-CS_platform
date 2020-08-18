@@ -21,6 +21,10 @@
 						<h1>
                             <img title="organisation logo" class="img-fluid rounded-circle" src="{{ organisation.logo|default:'/media/default_profile.png' }} " width="144" height="144">
 							{{ organisation.name }}
+							{% if editable %}
+							<a href="{% url 'delete_organisation' organisation.id %}" class="btn btn-outline btn-red float-right ml-2 mt-5"><span class="fas fa-trash-alt"></span>&nbsp;Delete Organisation</a>
+							<a href="{% url 'edit_organisation' organisation.id %}" class="btn btn-outline btn-green float-right ml-2 mt-5"><i class="fas fa-edit"></i> Edit Organisation</a>
+							{% endif %}
 						</h1>
 						</div>
 					</div>
