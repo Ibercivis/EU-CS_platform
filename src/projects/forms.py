@@ -76,6 +76,8 @@ class ProjectForm(forms.Form):
     title = forms.CharField(max_length=100, required=False)
     paragraph = forms.CharField(widget=SummernoteWidget(), required=False)
 
+    mainOrganisation = forms.ModelChoiceField(queryset=Organisation.objects.all(), label="Main organisation (Select one)",widget=forms.Select(attrs={'class':'js-example-basic-single'}), required=False)
+
     organisation = forms.ModelMultipleChoiceField(queryset=Organisation.objects.all(), widget=Select2MultipleWidget(attrs={'data-placeholder':'Related organisations'}), required=False,label="Organisation (Multiple selection)")
 
     def save(self, args, images, cFields):
@@ -86,6 +88,7 @@ class ProjectForm(forms.Form):
         longitude = self.data['longitude']
         country = getCountryCode(latitude,longitude).upper()
         status = get_object_or_404(Status, id=self.data['status'])
+        mainOrganisation = get_object_or_404(Organisation, id=self.data['mainOrganisation'])
         doingAtHome=False
         if('doingAtHome' in self.data and self.data['doingAtHome'] == 'on'):
             doingAtHome=True
@@ -94,9 +97,9 @@ class ProjectForm(forms.Form):
             project = get_object_or_404(Project, id=pk)
             if project.hidden:
                 project.hidden = False
-            self.updateFields(project, latitude, longitude, country, status, doingAtHome)
+            self.updateFields(project, latitude, longitude, country, status, doingAtHome, mainOrganisation)
         else:
-            project = self.createProject(latitude, longitude, country, status, doingAtHome, args)
+            project = self.createProject(latitude, longitude, country, status, doingAtHome, mainOrganisation, args)
            
         if start_dateData:
             project.start_date = start_dateData
@@ -146,7 +149,7 @@ class ProjectForm(forms.Form):
         return 'success'
 
 
-    def createProject(self, latitude, longitude, country, status, doingAtHome, args):
+    def createProject(self, latitude, longitude, country, status, doingAtHome, mainOrganisation, args):
          return Project(name = self.data['project_name'], url = self.data['url'], creator=args.user,                         
                          author = self.data['contact_person'], author_email = self.data['contact_person_email'],
                          latitude = latitude, longitude = longitude, country = country,
@@ -155,9 +158,9 @@ class ProjectForm(forms.Form):
                          imageCredit2 = self.data['image_credit2'], imageCredit3 = self.data['image_credit3'],
                          howToParticipate = self.data['how_to_participate'],equipment = self.data['equipment'],
                          fundingProgram = self.data['funding_program'],originUID = self.data['originUID'],
-                         originURL = self.data['originURL'], doingAtHome=doingAtHome )
+                         originURL = self.data['originURL'], doingAtHome=doingAtHome, mainOrganisation=mainOrganisation)
 
-    def updateFields(self, project, latitude, longitude, country, status, doingAtHome):
+    def updateFields(self, project, latitude, longitude, country, status, doingAtHome, mainOrganisation):
         project.name = self.data['project_name']
         project.url = self.data['url']
         project.author = self.data['contact_person']
@@ -178,6 +181,7 @@ class ProjectForm(forms.Form):
         project.fundingProgram = self.data['funding_program']
         project.originUID = self.data['originUID']
         project.originURL = self.data['originURL']
+        project.mainOrganisation = mainOrganisation
 
 
 def getCountryCode(latitude, longitude):

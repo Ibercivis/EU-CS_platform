@@ -160,6 +160,7 @@
                 {{ form.url|as_crispy_field }}
               </div>
               <div class="col-12">
+                {{ form.mainOrganisation|as_crispy_field }}
                 {{ form.organisation|as_crispy_field }}
               </div>
             </div>
@@ -479,10 +480,31 @@
       $("#deleteImage3").empty();
       $("#id_withImage3").val(false);
     });
+    getOrganisations();
+    $("#id_mainOrganisation").on('change', function(){
+      getOrganisations();
+      $("#id_organisation").empty();
+    });
+    
+
+    function getOrganisations() {
+        var mainOrganisation = $("#id_mainOrganisation").val();
+        var request = $.ajax(          
+          {
+            type: "GET",
+            url: "{% url 'getOrganisations' %}",
+            data: {
+              "mainOrganisation": mainOrganisation
+            },
+            success: function (response) {
+              $("#id_organisation").html(response.organisations);
+            }
+          }
+        );
+      }
 
     $("form").submit(function (e) {
-      var validationFailed = false;
-
+      var validationFailed = false;      
       $.each($("[required]"), function (index, value) {
         var id = $(value).parent().parent().attr('id');
         $("#" + id + " .errorMsg").remove();

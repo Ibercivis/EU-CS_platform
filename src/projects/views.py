@@ -13,6 +13,7 @@ from itertools import chain
 from reviews.models import Review
 from .forms import ProjectForm, CustomFieldFormset, ProjectPermissionForm
 from .models import Project, Topic, Status, Keyword, ApprovedProjects, FollowedProjects, FundingBody, CustomField, ProjectPermission, OriginDatabase
+from organisations.models import Organisation
 import csv
 import json
 import random
@@ -148,7 +149,8 @@ def editProject(request, pk):
     form = ProjectForm(initial={
         'project_name':project.name,'url': project.url,'start_date': start_datetime,
         'end_date':end_datetime, 'aim': project.aim, 'description': project.description,
-        'status': project.status, 'choices': choices, 'choicesSelected':keywordsList, 'organisation': project.organisation.all,
+        'status': project.status, 'choices': choices, 'choicesSelected':keywordsList, 'mainOrganisation': project.mainOrganisation,
+        'organisation': project.organisation.all,
         'topic':project.topic.all, 'latitude': project.latitude, 'longitude': project.longitude,
         'image1': project.image1, 'image_credit1': project.imageCredit1, 'withImage1': (True, False)[project.image1 == ""],
         'image2': project.image2, 'image_credit2': project.imageCredit2, 'withImage2': (True, False)[project.image2 == ""],
@@ -478,3 +480,24 @@ def iter_items(items, pseudo_buffer):
 
     for item in items:
         yield writer.writerow(get_data(item))
+
+def getOrganisations(request):
+    mainOrganisation = request.GET.get("mainOrganisation")
+    options = '<select id="id_organisation" class="select form-control">'
+    response = {}
+    organisations = Organisation.objects.get_queryset()
+    organisations = organisations.values_list("id","name")
+    organisations = tuple(organisations)
+    if organisations:
+        for organisation in organisations:
+            if(int(organisation[0]) != int(mainOrganisation)):
+                options += '<option value = "%s">%s</option>' % (
+                    organisation[0],
+                    organisation[1]
+                )
+        options += '</select>'
+        response['organisations'] = options
+    else:
+        response['organisations'] = '<select id="id_organisation" class="select form-control" disabled></select>'
+   
+    return JsonResponse(response)
