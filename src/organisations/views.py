@@ -45,10 +45,11 @@ def organisation(request, pk):
         editable = False
     else:
         editable = True 
+    mainProjects = Project.objects.all().filter(mainOrganisation__id=pk)
     associatedProjects = Project.objects.all().filter(organisation__id=pk)
+    associatedProjects |=  mainProjects
     associatedResources = Resource.objects.all().filter(organisation__id=pk)
     members = Profile.objects.all().filter(organisation__id=pk)
-
     return render(request, 'organisation.html', {'organisation':organisation, 'associatedProjects': associatedProjects, 'associatedResources': associatedResources,
     'members': members, 'editable': editable})
 
