@@ -336,3 +336,15 @@ HAYSTACK_CONNECTIONS = {
 }
 
 MACHINA_BASE_TEMPLATE_NAME = 'base_forum.html'
+
+MACHINA_DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = [
+    'can_see_forum',
+    'can_read_forum',
+    'can_start_new_topics',
+    'can_reply_to_topics',
+    'can_edit_own_posts',
+    'can_post_without_approval',
+    'can_create_polls',
+    'can_vote_in_polls',
+    'can_download_file',
+]
