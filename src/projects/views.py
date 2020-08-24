@@ -483,6 +483,9 @@ def iter_items(items, pseudo_buffer):
 
 def getOrganisations(request):
     mainOrganisation = request.GET.get("mainOrganisation")
+    organisationsSelected = request.GET.getlist("organisationsSelected[]")
+    organisationsSelected = list(organisationsSelected)
+    organisationsSelected = ", ".join(organisationsSelected)
     options = '<select id="id_organisation" class="select form-control">'
     response = {}
     organisations = Organisation.objects.get_queryset()
@@ -491,10 +494,16 @@ def getOrganisations(request):
     if organisations:
         for organisation in organisations:
             if(int(organisation[0]) != int(mainOrganisation)):
-                options += '<option value = "%s">%s</option>' % (
-                    organisation[0],
-                    organisation[1]
-                )
+                if(str(organisation[0]) in organisationsSelected):
+                    options += '<option value = "%s" selected>%s</option>' % (
+                        organisation[0],
+                        organisation[1]
+                    )
+                else:
+                    options += '<option value = "%s">%s</option>' % (
+                        organisation[0],
+                        organisation[1]
+                    )
         options += '</select>'
         response['organisations'] = options
     else:

@@ -489,12 +489,14 @@
 
     function getOrganisations() {
         var mainOrganisation = $("#id_mainOrganisation").val();
+        var organisationsSelected = $("#id_organisation").val()
         var request = $.ajax(          
           {
             type: "GET",
             url: "{% url 'getOrganisations' %}",
             data: {
-              "mainOrganisation": mainOrganisation
+              "mainOrganisation": mainOrganisation,
+              "organisationsSelected": organisationsSelected
             },
             success: function (response) {
               $("#id_organisation").html(response.organisations);
