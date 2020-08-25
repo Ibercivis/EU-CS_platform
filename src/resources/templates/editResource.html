@@ -162,7 +162,7 @@
                   {% get_language_info_list for LANGUAGES as languages %}
                   {% if settings.USE_I18N and languages|length > 1 %}
                   <label for="language" class="control-label  requiredField">
-                    Language<span class="asteriskField">*</span>
+                    Please indicate the (main) language that the resource is made available in<span class="asteriskField">*</span>
                   </label>
                   <select name="language" class="form-control">
                     {% for language in languages|dictsort:"name" %}
