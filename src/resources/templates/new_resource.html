@@ -157,8 +157,7 @@
                       {{ form.authors|as_crispy_field }}
                       {{ form.authorsCollection|as_crispy_field }}
                     </div>
-                    <div class="col-12">
-                      {{ form.author_email|as_crispy_field }}
+                    <div class="col-12">                      
                     </div>
                   </div>
 
@@ -187,7 +186,7 @@
                   </div>
                 </div>
                 <div class="form-row">
-                  <div class="col-12">
+                  <div class="col-sm-6 col-12">
                     {{ form.image1|as_crispy_field }}
                     {{ form.x1|as_crispy_field }}
                     {{ form.y1|as_crispy_field }}
@@ -196,7 +195,13 @@
                     {{ form.withImage1|as_crispy_field }}
                     <a id="imgResult1" href="#"> <img id="imageResult1" src="" alt="" class="img-fluid img-zoom"></a>
                   </div>
-                  <div class="col-12">
+                  <div class="col-sm-6 col-12">
+                    {{ form.image_credit1|as_crispy_field }}
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-sm-6 col-12">
                     {{ form.image2|as_crispy_field }}
                     {{ form.x2|as_crispy_field }}
                     {{ form.y2|as_crispy_field }}
@@ -204,6 +209,9 @@
                     {{ form.width2|as_crispy_field }}
                     {{ form.withImage2|as_crispy_field }}
                     <a id="imgResult2" href="#"> <img id="imageResult2" src="" alt="" class="img-fluid img-zoom"></a>
+                  </div>
+                  <div class="col-sm-6 col-12">
+                    {{ form.image_credit2|as_crispy_field }}
                   </div>
                 </div>
 

@@ -150,7 +150,7 @@ def editResource(request, pk):
         'url': resource.url,'license': resource.license, 'choices': choices, 'theme': resource.theme.all,'organisation': resource.organisation.all,
         'audience' : resource.audience.all, 'publisher': resource.publisher, 'year_of_publication': resource.datePublished,
         'authors': resource.authors.all, 'selectedAuthors': selectedAuthors, 'authorsCollection': authorsCollection,
-        'author_email': resource.author_email, 'choicesSelected':keywordsList,
+        'image_credit1': resource.imageCredit1,'image_credit2': resource.imageCredit2, 'choicesSelected':keywordsList,
         'category': getCategory(resource.category), 'categorySelected': resource.category.id
     })
 

@@ -150,7 +150,7 @@
                   {{form.selectedAuthors|as_crispy_field}}
                 </div>
                 <div class="col-12">
-                  {{ form.author_email|as_crispy_field }}
+                  
                 </div>
               </div>
 
@@ -178,7 +178,7 @@
               </div>
 
               <div class="form-row">
-                <div class="col-12">
+                <div class="col-sm-6 col-12">
                   {{ form.image1|as_crispy_field }}
                   {{ form.x1|as_crispy_field }}
                   {{ form.y1|as_crispy_field }}
@@ -192,8 +192,13 @@
                   {% endif %}
                   </div>
                 </div>
+                <div class="col-sm-6 col-12">
+                  {{ form.image_credit1|as_crispy_field }}
+                </div>
+              </div>
 
-                <div class="col-12">
+              <div class="form-row">
+                <div class="col-sm-6 col-12">
                   {{ form.image2|as_crispy_field }}
                   {{ form.x2|as_crispy_field }}
                   {{ form.y2|as_crispy_field }}
@@ -206,6 +211,9 @@
                     <a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>                  
                   {% endif %}
                   </div>
+                </div>
+                <div class="col-sm-6 col-12">
+                  {{ form.image_credit2|as_crispy_field }}
                 </div>
               </div>
               
@@ -368,7 +376,6 @@
               $(value).parent().append("<span class='errorMsg'> <b>Required field (*)</b></span>");
             }
           });
-          //var email = $("#id_author_email").val();
 
           if (validationFailed) {
             e.preventDefault();
