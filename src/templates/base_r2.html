@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+{% load thumbnail %}
+{% load i18n %}
+{% load leaflet_tags %}
+{% load cookielaw_tags %}
+{% load countries %}
+{% get_countries as countries %}
+<head>
+  {% block head %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <link rel="shortcut icon" href="{% static 'site/ico/favicon.png' %}">
+  <title>
+    {% block title %}
+    EU-Citizen.Science
+    {% endblock title%}
+
+  </title>
+
+  <!-- Google Fonts Roboto -->
+  <!--link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"-->
+  <link rel="stylesheet" href="{% static 'site/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'site/css/style_21_07_2020.css' %}">
+  <!--link rel="stylesheet" href="{% static 'styles/extras.1.1.0.min.css' %}"-->
+  <link rel="stylesheet" href="{% static 'cookielaw/css/cookielaw.css' %}">
+  {% endblock head %}
+</head>
+<body>
+  <header>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-xl navbar-dark navbar-front text-white text-weight-bold fixed-top">
+      <div class="container text-weight-bold">
+        <a class="navbar-brand" href="/">
+          <img src="{% static 'site/img/icon.png' %}" width="30" height="30" alt=""/>
+        </a>
+        <a class="navbar-brand 	nav-link {% if request.get_full_path == "/" %} active {% endif %}" href="/">{% include "_brandname.html" %}</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span></button>
+
+        <div class="ribbon ribbon-top-left"><span><a style="text-decoration:none;color:white" href="https://eu-citizen.science/blog/2020/04/03/welcome-alpha-release-eu-citizenscience-platform/">ALPHA</a></span></div>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            {% block navbar-left %}
+            {% endblock navbar-left %}
+          </ul>
+          <ul class="navbar-nav">
+            {% if not user.is_authenticated %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">LOGIN</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'accounts:signup' %}" role="button">SIGN UP</a></li>
+            {% else %}
+            <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">PERSONAL AREA</a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'profiles:show_self' %}">My Profile</a>
+                <a class="dropdown-item" href="{% url 'profiles:self_projects' %}">Submitted projects</a>
+                <a class="dropdown-item" href="{% url 'profiles:self_resources' %}">Submitted resources</a>
+                <a class="dropdown-item" href="{% url 'profiles:followed_projects' %}">Followed projects</a>
+                <a class="dropdown-item" href="{% url 'profiles:saved_resources' %}">Resources library</a>
+                {% if user.is_staff %}
+                <a  class="dropdown-item" href="{% url 'admin:index' %}">Admin</a>
+                {% endif %}
+              </div>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}">LOGOUT</a></li></li>
+            {% endif %}
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!--/.Navbar-->
+  </header>
+
+  <main class="flex-fill">
+    {% block splash %}
+    {% endblock splash %}
+
+    <div class="container">
+      <div class="row mt-4">
+        <div class="col-12">
+          {% block page_header %}
+          {% endblock page_header %}
+        </div>
+      </div>
+    </div>
+
+    {% block list_of_items %}
+    {% endblock list_of_items %}
+
+  </main>
+  {% cookielaw_banner %}
+  {% block footer %}
+  {% include "_footer.html" %}
+  {% endblock footer %}
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <link href="/static/reviews/css/star-rating.css" type="text/css" media="all" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'styles/cropper.min.css' %}">
+  <script type="text/javascript" src="{% static 'site/js/jquery.min.js' %}"></script>
+
+  <script type="text/javascript" src="{% static 'site/js/bootstrap.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'scripts/lazysizes.min.js' %}"></script>
+  <script src="{% static 'scripts/cropper.min.js' %}"></script>
+  <script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
+  <script src="{% static 'cookielaw/js/cookielaw.js' %}"></script>
+
+  <!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-139349847-1' , 'auto');
+ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+<script>
+  $(".navbar-toggler-icon").click(function () {
+    if($(".ribbon-top-left").is(":visible")){
+      $(".ribbon-top-left").hide();
+    }else{
+      $(".ribbon-top-left").show();
+    }
+  });
+</script>
+  {% block scripts %}
+  {% endblock scripts %}
+</body>
+</html>

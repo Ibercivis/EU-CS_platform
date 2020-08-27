@@ -27,6 +27,20 @@ def home(request):
     resources = resources.filter(id__in=approvedResources)
     return render(request, 'home.html', {'projects':projects, 'allprojects': allprojects, 'featuredProjects': featuredProjects, 'resources':resources, 'featuredResources': featuredResources, 'entries': entries}, )
 
+def home_r2(request):
+    approvedProjects = ApprovedProjects.objects.all().order_by('-id')[:3].values_list('project_id',flat=True)
+    allapprovedProjects = ApprovedProjects.objects.all().order_by('-id').values_list('project_id',flat=True)
+    projects = Project.objects.all().order_by('-id')
+    allprojects =  projects.filter(id__in=allapprovedProjects)
+    projects = projects.filter(id__in=approvedProjects)
+    featuredProjects = Project.objects.all().filter(featured=True)[:3]
+    featuredResources = Resource.objects.all().filter(featured=True)[:3]
+    entries = Post.objects.filter(status=1).order_by('-created_on')[:3]
+    approvedResources = ApprovedResources.objects.all().order_by('-id')[:3].values_list('resource_id',flat=True)
+    resources = Resource.objects.all().order_by('-id')
+    resources = resources.filter(id__in=approvedResources)
+    return render(request, 'home_r2.html', {'projects':projects, 'allprojects': allprojects, 'featuredProjects': featuredProjects, 'resources':resources, 'featuredResources': featuredResources, 'entries': entries}, )
+
 class AboutPage(generic.TemplateView):
     template_name = "about.html"
 
