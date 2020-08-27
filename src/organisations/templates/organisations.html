@@ -1,4 +1,4 @@
-{% extends "base2.html" %}
+{% extends "base_r2.html" %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% block title %}{{ block.super }} :: Organisations{% endblock %}
@@ -11,7 +11,7 @@
 	<div class="container-fluid">
 		<div class="container">
 			<h1 class="display-4 pb-0 pt-0 text-white"><br>Organisations</h1>
-			
+
 		</div>
 	</div>
 </div>
@@ -38,11 +38,11 @@
             </a>
             <div class="card-body">
                 <h6 class="card-title mt-3 mb-3"> <a class="card-link" href="/organisation/{{organisation.id }}">{{ organisation.name }}</a></h6>
-               
+
                 <div class="card-text mt-3">{{organisation.description | safe | truncatechars:180 }}
                     <a class="organisation" href="/organisation/{{organisation.id}}" target="_blank">Read more</a>
                 </div>
-                <br>                
+                <br>
             </div><!-- End of card-body -->
 
         </div><!-- end of card -->

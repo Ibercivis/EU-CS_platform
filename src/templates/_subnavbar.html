@@ -1,0 +1,20 @@
+
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link {% if 'home_r2' in request.get_full_path %}active{% endif %}"
+    href="{% url 'home_r2' %}{% if request.GET.keywords %}?keywords={{request.GET.keywords}}{%endif%}">All</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {% if 'projects' in request.get_full_path %}active{% endif %}"
+    href="{% url 'projects' %}{% if request.GET.keywords %}?keywords={{request.GET.keywords}}{%endif%}">Projects</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {% if 'resources' in request.get_full_path %}active{% endif %}"
+    href="{% url 'resources' %}{% if request.GET.keywords %}?keywords={{request.GET.keywords}}{%endif%}"">Resources</a>
+  </li>
+  <li class="nav-item"><a class="nav-link {% if active_link == "resources" %}active{% endif %} " href="{% url 'resources' %}">Training</a></li>
+  <li class="nav-item"><a class="nav-link {% if 'organisations' in request.get_full_path %}active{% endif %} " href="{% url 'organisations'%}">Organisations</a></li>
+  <li class="nav-item"><a class="nav-link {% if 'curated' in request.get_full_path %}active{% endif %}" href="{% url 'curated' %}">Our Selection</a></li>
+</ul>
+
+<!--li class="nav-item"><a class="nav-link {% if active_link == "contact" %}active{% endif %}" href="{% url 'contact' %}">CONTACT</a></li-->
