@@ -1,4 +1,4 @@
-{% extends "base2.html" %}
+{% extends "base_r2.html" %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% load i18n %}
@@ -50,6 +50,8 @@
 			<!--h4 class="mt-4 white">Join the community to share your favourite citizen science resources, profile your own citizen science projects, and more. </h4-->
 	</div>
 </div>
+{% endblock splash %}
+{% block list_of_items %}
 <div class="container-fluid whitebackground">
 	<div class="row">
 		<div class="container">
@@ -67,9 +69,6 @@
 		</div>
 	</div>
 	<hr/>
-</div>
-<div class="container">
-	{% include "_subnavbar.html"  %}
 </div>
 <div class="container-fluid bluebackground">
 	<div class="container">
@@ -185,7 +184,8 @@
 		<div class="col-12">&nbsp;</div>
 	</div>
 </div>
-{% endblock splash %}
+{% endblock list_of_items %}
+
 {% block scripts %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js"
 integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="anonymous"></script>
