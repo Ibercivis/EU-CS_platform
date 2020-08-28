@@ -242,6 +242,16 @@
                     {% endif %}
                   </div>
                 </div>
+                {% if isTrainingResource %}
+                  <h3>Training resource fields</h3>
+                  <input type="hidden" id="trainingResource" name="trainingResource" value={{isTrainingResource}}>
+                  {{ form.education_level|as_crispy_field }}
+                  {{ form.educationLevelSelected|as_crispy_field }}
+                  {{ form.learning_resource_type|as_crispy_field }}
+                  {{ form.learningResourceTypeSelected|as_crispy_field }}
+                  {{ form.time_required|as_crispy_field }}
+                  {{ form.conditions_of_access|as_crispy_field }}
+                {% endif %}
                 <button type="submit" class="btn btn-green mt-2"> <i class="fas fa-share-square"></i> Save</button>
               </form>
             </table>
@@ -304,6 +314,33 @@
     $("#id_category").on('change', getSubCategories);
     getSubCategories();
 
+    $("#div_id_education_level div").on('change', function(){
+      $("#id_education_level").removeAttr('multiple');
+    });
+
+    $("#div_id_education_level div").on('keyup', function(){
+      var key = $("#div_id_education_level .selection input").val();
+      if (key.indexOf(',') > -1) {
+        var word =key.slice(0, -1);
+        $("#div_id_education_level .selection input").val("");
+        $("#id_education_level").append("<option value='" + word +"' selected> " + word + " </option>");
+        $("#id_education_level").removeAttr('multiple');
+      }
+    });
+
+    $("#div_id_learning_resource_type div").on('change', function(){
+      $("#id_learning_resource_type").removeAttr('multiple');
+    });
+
+    $("#div_id_learning_resource_type div").on('keyup', function(){
+      var key = $("#div_id_learning_resource_type .selection input").val();
+      if (key.indexOf(',') > -1) {
+        var word =key.slice(0, -1);
+        $("#div_id_learning_resource_type .selection input").val("");
+        $("#id_learning_resource_type").append("<option value='" + word +"' selected> " + word + " </option>");
+        $("#id_learning_resource_type").removeAttr('multiple');
+      }
+    });
 
     $("form").submit(function (e) {
       var validationFailed = false;
@@ -345,6 +382,18 @@
         if(subcategory){
           $("#id_categorySelected").val(subcategory);
         }
+
+        var educationLevel = $("#id_education_level option:selected").map(function () {
+          return $.trim($(this).text());
+        }).get().join(',');
+        $("#id_educationLevelSelected").val(educationLevel);
+        $("#id_education_level").empty();
+
+        var learningResourceType = $("#id_learning_resource_type option:selected").map(function () {
+          return $.trim($(this).text());
+        }).get().join(',');
+        $("#id_learningResourceTypeSelected").val(learningResourceType);
+        $("#id_learning_resource_type").empty();
       }
     });
 
