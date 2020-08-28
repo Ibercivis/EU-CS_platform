@@ -83,12 +83,9 @@
 					</div>
 					<div class="col-lg-6 col-6 mb-3">
 						{% if user.is_authenticated %}
-						<a class="btn btn-green mb-1" href="{% url 'new_project' %}" data-toggle="tooltip" data-placement="top" title="Click here to add a new project">
-							<i class="fas fa-plus-circle"></i>&nbsp;ADD
-						</a>
-						<a class="btn btn-dark mb-1" href="{% url 'downloadProjects' %}" data-toggle="tooltip" data-placement="top" title="Click here to download all the projects">
+						<!--a class="btn btn-dark mb-1" href="{% url 'downloadProjects' %}" data-toggle="tooltip" data-placement="top" title="Click here to download all the projects">
 							<i class="fas fa-download"></i>&nbsp;DOWNLOAD
-						</a>
+						</a-->
 						{% else %}
 						<a href="/signup">Sign up</a>
 						{% endif %}
@@ -100,6 +97,6 @@
 					{% endif %}
 				</form>
 				<div class="col-lg-6 col-6 mb-3">
-					{{ counter }} results 
+					{{ counter }} results
 				</div>
 			</div>
