@@ -28,6 +28,16 @@ class Category(models.Model):
             res  +=  ' - ' + str(self.parent)
         return res
 
+class EducationLevel(models.Model):
+    educationLevel = models.TextField()
+    def __str__(self):
+        return f'{self.educationLevel}'
+
+class LearningResourceType(models.Model):
+    learningResourceType = models.TextField()
+    def __str__(self):
+        return f'{self.learningResourceType}'
+
 class Resource(models.Model):
     name = models.CharField(max_length=200)
     url = models.CharField(max_length=200)   
@@ -52,6 +62,13 @@ class Resource(models.Model):
     featured = models.BooleanField(null=True, blank=True)
 
     organisation = models.ManyToManyField(Organisation)
+
+    #Training resources fields
+    isTrainingResource = models.BooleanField(null=True, blank=True)
+    educationLevel = models.ForeignKey(EducationLevel, on_delete=models.CASCADE,null=True, blank=True)
+    learningResourceType = models.ForeignKey(LearningResourceType, on_delete=models.CASCADE,null=True, blank=True)
+    timeRequired =  models.FloatField(null=True, blank=True)
+    conditionsOfAccess = models.CharField(max_length=300, null=True, blank=True)
     
     def __str__(self):
         return self.name

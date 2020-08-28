@@ -29,7 +29,7 @@
             <div class="col-lg-6 col-12">
               {% if user.is_authenticated %}
               {% if resource.creator == user or user.is_staff or user.id in cooperators %}
-              <a class="btn btn-red mt-4" href="{% url 'editResource' resource.id %}"><i class="fas fa-edit"></i> Edit
+              <a class="btn btn-red mt-4" href="{% if isTrainingResource %}{% url 'editTrainingResource' resource.id %}{% else %}{% url 'editResource' resource.id %}{% endif %}"><i class="fas fa-edit"></i> Edit
               </a>
               {% endif %}
               {% endif %}
@@ -126,6 +126,19 @@
               <b>Resource DOI: </b> {{ resource.resourceDOI }}<br>
             </div>
           </div>
+          {% if isTrainingResource %}
+            <div class="row">
+              <div class="col-12 col-xl-4 mt-5">
+                <h4>Training resource</h4>
+              </div>
+              <div class="col-12 col-xl-8 mt-5">               
+                <b>Education level: </b>{{ resource.educationLevel }}<br>
+                <b>Learning Resource Type: </b>{{ resource.learningResourceType }}<br>
+                <b>Time required: </b> {{ resource.timeRequired }}<br>
+                <b>Conditions of access: </b> {{ resource.conditionsOfAccess }}<br>
+              </div>
+            </div>
+          {% endif %}
           <div class="row">
             <div class="col-12 col-xl-4 mt-5">
               <h4>Reviews</h4>

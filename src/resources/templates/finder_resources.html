@@ -8,7 +8,7 @@ have been marked as 'Moderated'. Read more about our <a href="/faq">moderation p
 </div>
 </div-->
 <div class="row">
-	<form class="form-inline float-lg-right" id="searchResources" action="{% url 'resources' %}">
+	<form class="form-inline float-lg-right" id="searchResources" action="{% if isTrainingResource %} {% url 'training_resources' %} {% else %}{% url 'resources' %} {% endif %}">
 		<div class="col-12 col-lg-12">
 
 			<div class="input-group mb-3">

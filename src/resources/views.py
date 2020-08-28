@@ -17,15 +17,21 @@ from authors.models import Author
 from PIL import Image
 from datetime import datetime
 from reviews.models import Review
-from .models import Resource, Keyword, Category, ApprovedResources, SavedResources, Theme, Category, ResourcesGrouped, ResourcePermission
+from .models import Resource, Keyword, Category, ApprovedResources, SavedResources, Theme, Category, ResourcesGrouped, ResourcePermission, EducationLevel, LearningResourceType
 from .forms import ResourceForm, ResourcePermissionForm
 import csv
 import random
 
 User = get_user_model()
 
-def resources(request):
-    resources = Resource.objects.all().order_by('id')
+def training_resources(request):
+    return resources(request, True)
+
+def resources(request, isTrainingResource=False):
+    if(isTrainingResource):
+        resources = Resource.objects.all().filter(isTrainingResource=True).order_by('id')
+    else:
+        resources = Resource.objects.all().filter(~Q(isTrainingResource=True)).order_by('id')
     approvedResources = ApprovedResources.objects.all().values_list('resource_id',flat=True)
     user = request.user
     savedResources = None
@@ -81,11 +87,15 @@ def resources(request):
     resources = paginator.get_page(page)
 
     return render(request, 'resources.html', {'resources':resources, 'approvedResources': approvedResources, 'counter': counter,
-    'savedResources': savedResources, 'filters': filters, 'settings': settings, 'languagesWithContent': languagesWithContent, 'themes':themes, 'categories': categories})
-
+    'savedResources': savedResources, 'filters': filters, 'settings': settings, 'languagesWithContent': languagesWithContent, 
+    'themes':themes, 'categories': categories, 'isTrainingResource': isTrainingResource})
 
 @login_required(login_url='/login')
-def new_resource(request):
+def new_training_resource(request):
+    return new_resource(request, True)
+
+@login_required(login_url='/login')
+def new_resource(request, isTrainingResource=False): 
     choices = list(Keyword.objects.all().values_list('keyword',flat=True))
     choices = ", ".join(choices)
     authorsCollection = list(Author.objects.all().values_list('author',flat=True))
@@ -101,12 +111,16 @@ def new_resource(request):
             images.append(image2_path)
             form.save(request, images)
             messages.success(request, "Resource uploaded with success!")
+            if(isTrainingResource):
+                return redirect('/training_resources')
             return redirect('/resources')
 
-    return render(request, 'new_resource.html', {'form': form, 'settings': settings})
+    return render(request, 'new_resource.html', {'form': form, 'settings': settings, 'isTrainingResource': isTrainingResource})
 
+def training_resource(request, pk):
+    return resource(request, pk, True)
 
-def resource(request, pk):
+def resource(request, pk, isTrainingResource=False):
     resource = get_object_or_404(Resource, id=pk)
     user = request.user
     users = getOtherUsers(resource.creator)
@@ -117,10 +131,12 @@ def resource(request, pk):
     savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True) #TODO: Only ask for the resource
     approvedResources = ApprovedResources.objects.all().values_list('resource_id',flat=True)
     return render(request, 'resource.html', {'resource':resource, 'savedResources':savedResources, 'approvedResources':approvedResources,
-        'cooperators': getCooperators(pk), 'permissionForm': permissionForm})
+        'cooperators': getCooperators(pk), 'permissionForm': permissionForm, 'isTrainingResource': isTrainingResource})
 
+def editTrainingResource(request, pk):
+    return editResource(request, pk, True)
 
-def editResource(request, pk):
+def editResource(request, pk, isTrainingResource=False):
     resource = get_object_or_404(Resource, id=pk)
     user = request.user
     cooperators = getCooperators(pk)
@@ -142,6 +158,12 @@ def editResource(request, pk):
 
     curatedGroups = list(ResourcesGrouped.objects.all().filter(resource_id=pk).values_list('group_id', flat=True))
 
+    educationLevel = list(EducationLevel.objects.all().values_list('educationLevel',flat=True))
+    educationLevel = ", ".join(educationLevel)
+
+    learningResourceType = list(LearningResourceType.objects.all().values_list('learningResourceType',flat=True))
+    learningResourceType = ", ".join(learningResourceType)
+
     form = ResourceForm(initial={
         'name':resource.name, 'abstract': resource.abstract, 'image1': resource.image1, 'image2': resource.image2,'resource_DOI': resource.resourceDOI,
         'withImage1': (True, False)[resource.image1 == ""],'withImage2': (True, False)[resource.image2 == ""],
@@ -149,7 +171,10 @@ def editResource(request, pk):
         'audience' : resource.audience.all, 'publisher': resource.publisher, 'year_of_publication': resource.datePublished,
         'authors': resource.authors.all, 'selectedAuthors': selectedAuthors, 'authorsCollection': authorsCollection,
         'image_credit1': resource.imageCredit1,'image_credit2': resource.imageCredit2, 'choicesSelected':keywordsList,
-        'category': getCategory(resource.category), 'categorySelected': resource.category.id
+        'category': getCategory(resource.category), 'categorySelected': resource.category.id,
+        'education_level': educationLevel, 'educationLevelSelected': resource.educationLevel,
+        'learning_resource_type': learningResourceType, 'learningResourceTypeSelected': resource.learningResourceType,
+        'time_required': resource.timeRequired, 'conditions_of_access': resource.conditionsOfAccess
     })
 
     if request.method == 'POST':
@@ -166,7 +191,7 @@ def editResource(request, pk):
             return redirect('/resource/'+ str(pk))
 
     return render(request, 'editResource.html', {'form': form, 'resource': resource, 'curatedGroups': curatedGroups,
-     'user': user, 'settings': settings, 'permissionForm': permissionForm })
+     'user': user, 'settings': settings, 'permissionForm': permissionForm, 'isTrainingResource': isTrainingResource })
 
 def deleteResource(request, pk):
     obj = get_object_or_404(Resource, id=pk)

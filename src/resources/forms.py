@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404
 from django_summernote.widgets import SummernoteWidget
 from django.forms import ModelForm
 from django_select2.forms import Select2MultipleWidget
-from .models import Resource, Keyword, Category, Audience, Theme, ResourceGroup, ResourcesGrouped
+from .models import Resource, Keyword, Category, Audience, Theme, ResourceGroup, ResourcesGrouped, EducationLevel, LearningResourceType
 from authors.models import Author
 from PIL import Image
 from datetime import datetime, date
@@ -47,10 +47,19 @@ class ResourceForm(forms.ModelForm):
     license = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'autocomplete':'nope','placeholder':' Indicate the resource license, such as Creative Commons CC-BY. Enter a URL link to the license if available.'}), required=False)
     curatedList = forms.ModelMultipleChoiceField(queryset=ResourceGroup.objects.all(), widget=Select2MultipleWidget, required=False,label="Curated lists")
     organisation = forms.ModelMultipleChoiceField(queryset=Organisation.objects.all(), widget=Select2MultipleWidget(attrs={'data-placeholder':'Related organisations'}), required=False,label="Organisation (Multiple selection)")
+    
+    
+    #Training resources fields
+    education_level = forms.ModelMultipleChoiceField(queryset=EducationLevel.objects.all(), widget=Select2MultipleWidget(attrs={'data-placeholder':' Please enter the education level'}), required=False, label="Education level (Put a comma after each name to add a new education level)")
+    educationLevelSelected = forms.CharField(widget=forms.HiddenInput(), max_length=100, required=False)
+    learning_resource_type =forms.ModelMultipleChoiceField(queryset=LearningResourceType.objects.all(), widget=Select2MultipleWidget(attrs={'data-placeholder':' Please enter the learning resource type'}), required=False, label="Learning resource type (Put a comma after each name to add a new learning resource type)")
+    learningResourceTypeSelected = forms.CharField(widget=forms.HiddenInput(), max_length=100, required=False)
+    time_required = forms.FloatField(required=False)
+    conditions_of_access = forms.CharField(required=False)
 
     class Meta:
         model = Resource
-        fields = ["name", "abstract", "url", "audience", "theme","keywords", "license", "publisher", "curatedList",
+        fields = ["name", "abstract", "url", "audience", "theme","keywords", "license", "publisher", "curatedList", 
          "category", "authors", "image1", "x1", "y1", "width1", "height1", "resource_DOI", "year_of_publication", 'image_credit1', 'image_credit2']
 
     def save(self, args, images):
@@ -87,6 +96,24 @@ class ResourceForm(forms.ModelForm):
 
         rsc.imageCredit1 = self.data['image_credit1']
         rsc.imageCredit2 = self.data['image_credit2']
+
+        #Training resource fields
+        isTrainingResource = self.data.get('trainingResource', False)
+        if(isTrainingResource):
+            rsc.isTrainingResource = True
+            educationLevelSelected = self.data['educationLevelSelected']
+            print(educationLevelSelected)
+            if(educationLevelSelected != ''):
+                educationLevel, exist = EducationLevel.objects.get_or_create(educationLevel=educationLevelSelected)
+                rsc.educationLevel = educationLevel
+            learningResourceTypeSelected = self.data['learningResourceTypeSelected']
+            print(learningResourceTypeSelected)
+            if(learningResourceTypeSelected != ''):
+                learning_resource_type, exist = LearningResourceType.objects.get_or_create(learningResourceType=learningResourceTypeSelected)
+                rsc.learningResourceType = learning_resource_type
+            rsc.timeRequired = self.data['time_required']
+            rsc.conditionsOfAccess = self.data['conditions_of_access']
+        #End training resource fields
 
         rsc.save()
 

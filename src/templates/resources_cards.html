@@ -6,7 +6,7 @@
 {% load reviews %}
 <div class="col-lg-3 col-md-12 mb-4">
   <div class="card h-100 shadow border-0">
-    <a class="card-img-wrap" href="/resource/{{rsc.id}}">
+    <a class="card-img-wrap" href="{% if isTrainingResource %}/training_resource/{{rsc.id}}{% else %}/resource/{{rsc.id}}{% endif %}">
       {% if rsc.image1 %}
       <img class="img-fluid img-zoom {% if rsc.id not in approvedResources %} nonmoderated {% endif %} " src="{{ rsc.image1 }}" />
       {% else %}
@@ -27,7 +27,7 @@
 
     </div>
     <div class="card-body">
-      <h6 class="card-title mt-3 mb-3"><a class="card-link card-link-resource" href="/resource/{{rsc.id}}" class="card-link">{{ rsc.name | truncatewords:12 }}</a></h6>
+      <h6 class="card-title mt-3 mb-3"><a class="card-link card-link-resource" href="{% if isTrainingResource %}/training_resource/{{rsc.id}}{% else %}/resource/{{rsc.id}}{% endif %}" class="card-link">{{ rsc.name | truncatewords:12 }}</a></h6>
       {% get_rating for rsc as avg_rating %}
       {% get_review_count for rsc as review_count %}
       <span class="gl-star-rating-stars s{{ avg_rating | stringformat:'d'}}0 readonly">
