@@ -4,7 +4,7 @@
 {% if resources %}
 {% for rsc in resources  %}
 {% load reviews %}
-<div class="col-lg-3 col-md-12 mb-4">
+<div class="col-12 mb-4">
   <div class="card h-100 shadow border-0">
     <a class="card-img-wrap" href="/resource/{{rsc.id}}">
       {% if rsc.image1 %}
@@ -38,7 +38,9 @@
         <span data-value="5" data-text="Excellent"></span>
       </span>
       {{ review_count }} {% if review_count == 1 %} review {% else %} reviews {% endif %}
-    
+      <div class="card-text mt-3">{{rsc.abstract | safe | truncatewords:30 }}
+        <a class="" href="/resource/{{rsc.id}}" target="_blank">Read more</a>
+      </div>
       <a class="badge badge-dark" href="/resources?category={{rsc.category.id}}">{{ rsc.category | upper }}</a><br>
       {% for theme in rsc.theme.all %}<a class="badge badge-light" href="/resources?theme={{theme.id}}">{{ theme | upper}}</a> {% endfor %}<br>
       {% for keyword in rsc.keywords.all %} <a class="badge  badge-light" href="/resources?keywords={{keyword}}">{{keyword | upper}}</a>  {% endfor %}

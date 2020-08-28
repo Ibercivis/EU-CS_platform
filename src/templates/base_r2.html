@@ -66,8 +66,8 @@
               </div>
             </li>
             <li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}">LOGOUT</a></li></li>
-            <button class="btn btn-outline-success my-2 my-sm-0 ml-2" type="submit">Add</button>
             {% endif %}
+            <a data-toggle="modal" data-target="#modalinfo" class="btn btn-outline-success my-2 my-sm-0 ml-2" type="submit">Submit</a>
 
           </ul>
         </div>
@@ -77,6 +77,7 @@
   </header>
 
   <main class="flex-fill">
+    {% include "modalinfo.html" %}
     {% block splash %}
 
     {% endblock splash %}

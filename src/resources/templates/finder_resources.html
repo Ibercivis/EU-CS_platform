@@ -82,12 +82,10 @@ have been marked as 'Moderated'. Read more about our <a href="/faq">moderation p
 			</div>
 			<div class="col-lg-6 col-6 mb-3 text">
 				{% if user.is_authenticated %}
-				<a class="btn btn-green mb-1" href="{% url 'new_resource' %}">
-					<i class="fas fa-plus-circle"></i> Add
-				</a>
-				<a class="btn btn-dark mb-1" href="{% url 'downloadResources' %}" data-toggle="tooltip" data-placement="top" title="Click here to download all the resources">
+
+				<!--a class="btn btn-dark mb-1" href="{% url 'downloadResources' %}" data-toggle="tooltip" data-placement="top" title="Click here to download all the resources">
 					<i class="fas fa-download"></i>&nbsp;DOWNLOAD
-				</a>
+				</a-->
 				{% else %}
 				<a href="/signup">Sign up</a>
 				{% endif %}
@@ -99,6 +97,6 @@ have been marked as 'Moderated'. Read more about our <a href="/faq">moderation p
 			{% endif %}
 		</form>
 		<div class="col-lg-6 col-6 mb-3">
-			{{ counter }} results 
+			{{ counter }} results
 		</div>
 	</div>

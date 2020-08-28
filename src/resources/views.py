@@ -42,9 +42,7 @@ def resources(request):
 
     resources = applyFilters(request, resources)
     filters = setFilters(request, filters)   
-    
     resources = resources.filter(~Q(hidden=True))
-
     resourcesTop = resources.filter(featured=True)
     resourcesTopIds = list(resourcesTop.values_list('id',flat=True))
     resources = resources.exclude(id__in=resourcesTopIds)
@@ -55,7 +53,7 @@ def resources(request):
         if("id" in orderBy or "theme" in orderBy):
             resources=resources.order_by(request.GET['orderby'])
         else:
-            reviews = Review.objects.filter(content_type=ContentType.objects.get(model="resource"))    
+            reviews = Review.objects.filter(content_type=ContentType.objects.get(model="resource"))
             reviews = reviews.values("object_pk", "content_type").annotate(avg_rating=Avg('rating')).order_by(orderBy).values_list('object_pk',flat=True)
             reviews = list(reviews)
             resourcesVoted = []
@@ -82,7 +80,7 @@ def resources(request):
     page = request.GET.get('page')
     resources = paginator.get_page(page)
 
-    return render(request, 'resources.html', {'resources':resources, 'approvedResources': approvedResources, 'counter': counter, 
+    return render(request, 'resources.html', {'resources':resources, 'approvedResources': approvedResources, 'counter': counter,
     'savedResources': savedResources, 'filters': filters, 'settings': settings, 'languagesWithContent': languagesWithContent, 'themes':themes, 'categories': categories})
 
 
@@ -334,7 +332,7 @@ def setResourceApproved(id, approved):
     approved= False if approved in ['False','false','0'] else True
     aResource = get_object_or_404(Resource, id=id)
     if approved == True:
-        #Insert        
+        #Insert
         ApprovedResources.objects.get_or_create(resource=aResource)
     else:
         #Delete
@@ -362,7 +360,7 @@ def saveResource(resourceId, userId, save):
         savedResource = SavedResources.objects.get_or_create(resource=fResource, user=fUser)
     else:
         #Delete
-        try:            
+        try:
             obj = SavedResources.objects.get(resource_id=resourceId,user_id=userId)
             obj.delete()
         except SavedResources.DoesNotExist:
@@ -377,7 +375,7 @@ def setHiddenResource(request):
     setResourceHidden(id, hidden)
     return JsonResponse(response, safe=False)
 
-def setResourceHidden(id, hidden): 
+def setResourceHidden(id, hidden):
     resource = get_object_or_404(Resource, id=id)
     resource.hidden = False if hidden in ['False','false','0'] else True
     resource.save()
@@ -412,7 +410,7 @@ def allowUserResource(request):
         for obj in objs:
             obj.delete()
 
-    #Insert all    
+    #Insert all
     users = users.split(',')
     for user in users:
         fUser = User.objects.filter(email=user)[:1].get()
