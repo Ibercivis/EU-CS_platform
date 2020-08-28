@@ -8,6 +8,7 @@ from projects.models import Project,ApprovedProjects
 from projects.views import getNamesKeywords
 from resources.views import getRscNamesKeywords
 from resources.models import Resource, ResourceGroup, ResourcesGrouped, ApprovedResources
+from organisations.models import Organisation
 from blog.models import Post
 import random
 import json
@@ -39,7 +40,21 @@ def home_r2(request):
     approvedResources = ApprovedResources.objects.all().order_by('-id')[:3].values_list('resource_id',flat=True)
     resources = Resource.objects.all().order_by('-id')
     resources = resources.filter(id__in=approvedResources)
+    all(request)
     return render(request, 'home_r2.html', {'projects':projects, 'allprojects': allprojects, 'featuredProjects': featuredProjects, 'resources':resources, 'featuredResources': featuredResources, 'entries': entries}, )
+
+def all(request):
+    approvedProjects = ApprovedProjects.objects.all().order_by('-id')[:6].values_list('project_id',flat=True)
+    projects = Project.objects.all().order_by('-id')
+    projects = projects.filter(id__in=approvedProjects)
+
+    approvedResources = ApprovedResources.objects.all().order_by('-id')[:6].values_list('resource_id',flat=True)
+    resources = Resource.objects.all().order_by('-id')
+    resources = resources.filter(id__in=approvedResources).filter(~Q(isTrainingResource=True))
+    
+    trainingResources = Resource.objects.all().filter(isTrainingResource=True).order_by('id')[:6]
+    organisations = Organisation.objects.all().order_by('-id')[:6]
+    return None
 
 class AboutPage(generic.TemplateView):
     template_name = "about.html"
