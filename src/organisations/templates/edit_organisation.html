@@ -1,8 +1,13 @@
 {% extends "base2.html" %}
 {% load staticfiles %}
+{% load leaflet_tags %}
 {% load crispy_forms_tags %}
 {% block head %}
 {{block.super }}
+<link rel="stylesheet" href="{% static 'site/css/leaflet-geosearch_style.css' %}">
+<link rel="stylesheet" href="{% static 'site/css/leaflet.css' %}">
+{% leaflet_js %}
+{% leaflet_css %}
 {{ form.media.css }}
 
 {% endblock head %}
@@ -77,7 +82,17 @@
                       {{ form.contact_point_email|as_crispy_field }}
                     </div>
                     <div class="col-12">
-                      {{ form.address|as_crispy_field }}
+                      <div id="geographyform">
+                        {% leaflet_map "map" callback="window.map_init_basic" %}
+                        <div class="form-row">
+                          <div class="col-sm-6 col-12">
+                            {{ form.latitude|as_crispy_field }}
+                          </div>
+                          <div class="col-sm-6 col-12">
+                            {{ form.longitude|as_crispy_field }}
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>                                 
                  
@@ -100,6 +115,7 @@
 <script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"></script>
+<script src="{% static 'site/js/leaflet-geosearch_2_7.min.js' %}"></script>
 <script>
   $(document).ready(function () {    
     $('#deleteLogo > a').click(function () {
@@ -107,6 +123,63 @@
       $("#deleteLogo").empty();
     });
   });
+</script>
+
+<script type="text/javascript">
+  var map;
+  var marker_layer = new L.marker([50.5, 30.5]);
+
+  function editMarker(e){
+    map.removeLayer(marker_layer);
+    marker_layer = new L.marker(e.latlng, {draggable:true});
+    marker_layer.on('drag', function (e) {
+      $("#id_latitude").val((e.latlng.lat).toFixed(6));
+      $("#id_longitude").val((e.latlng.lng).toFixed(6));
+    });
+    map.addLayer(marker_layer);
+    $("#id_latitude").val((e.latlng.lat).toFixed(6));
+    $("#id_longitude").val((e.latlng.lng).toFixed(6));
+  }
+
+  function searchedMarker(e){
+    map.removeLayer(marker_layer);
+    marker_layer = new L.marker([e.location.y,e.location.x], {draggable:true});
+    marker_layer.on('drag', function (e) {
+      $("#id_latitude").val((e.latlng.lat).toFixed(6));
+      $("#id_longitude").val((e.latlng.lng).toFixed(6));
+    });
+    map.addLayer(marker_layer);
+    $("#id_latitude").val(parseFloat(e.location.y).toFixed(6));
+    $("#id_longitude").val(parseFloat(e.location.x).toFixed(6));
+  }
+
+  function map_init_basic (leafmap, options) {
+    map = leafmap;
+    var obj = { latlng: {
+      lat: parseFloat($("#id_latitude").val()),
+      lng: parseFloat($("#id_longitude").val()) }
+    }
+    if($("#id_latitude").val())
+    editMarker(obj);
+    map.on('click', editMarker);
+
+    var GeoSearchControl = window.GeoSearch.GeoSearchControl;
+    var OpenStreetMapProvider = window.GeoSearch.OpenStreetMapProvider;
+    var provider = new OpenStreetMapProvider({});
+
+    //  Define search controls
+    var searchControl = new GeoSearchControl({
+      provider: provider,
+      style: 'bar',
+      showMarker: false,
+      autoClose: true,
+      keepResult: true,
+      //retainZoomLevel: true,
+    });
+
+    map.addControl(searchControl);
+    map.on('geosearch/showlocation', searchedMarker);
+  }
 </script>
 {{ form.media.js }}
 {% endblock scripts %}

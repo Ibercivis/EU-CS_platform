@@ -18,7 +18,8 @@ class Organisation(models.Model):
     logo = models.ImageField(upload_to='images/', max_length=300)
     contactPoint = models.CharField(max_length=100, null=True, blank=True)
     contactPointEmail = models.CharField(max_length=100, null=True, blank=True)
-    address = models.CharField(max_length=150)
+    latitude = models.DecimalField(max_digits=9,decimal_places=6, null=True, blank=True)
+    longitude = models.DecimalField(max_digits=9,decimal_places=6, null=True, blank=True)
   
 
     def __str__(self):

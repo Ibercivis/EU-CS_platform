@@ -1,9 +1,13 @@
 {% extends "base_r2.html" %}
 
 {% load staticfiles %}
+{% load leaflet_tags %}
 {% load thumbnail %}
 {% block head %}
 {{ block.super }}
+{% leaflet_js %}
+{% leaflet_css %}
+
 {% endblock head %}
 {% block title %}Organisation{% endblock %}
 {% block navbar-left %}
@@ -37,9 +41,13 @@
 						</div>
 						<div class="col-12 col-sm-6">
 							<p><strong>Contact Point</strong>: {{ organisation.contactPoint }} </p>
-							<p><strong>Contact Point Email</strong>: {{ organisation.contactPointEmail }}</p>
-							<p><strong>Address</strong>: {{ organisation.address }}</p>
+							<p><strong>Contact Point Email</strong>: {{ organisation.contactPointEmail }}</p>							
 						</div>
+						<div class="col-12 col-sm-6">
+							<p><strong>Address</strong>: </p>
+							{% leaflet_map "map" callback="window.map_init_basic" %}
+						</div>
+
 						<div class="col-12 col-sm-6">
 							<h5>Projects</h5>
 							{% for project in associatedProjects.all %} <a class="badge" href="/project/{{project.id}}">{{project}}</a> <br/> {% endfor %}
@@ -62,4 +70,13 @@
 {% endblock list_of_items%}
 
 {% block scripts %}
+<script>
+	var map;
+    var marker_layer = new L.marker([50.5, 30.5]);
+    function map_init_basic (leafmap, options) {
+      map = leafmap;
+      map.setView([{{organisation.latitude}}, {{organisation.longitude}}], 12)
+      new L.marker([{{organisation.latitude}},{{organisation.longitude}}]).addTo(map);
+    }
+</script>
 {% endblock scripts %}
