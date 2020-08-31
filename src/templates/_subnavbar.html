@@ -1,30 +1,28 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white p-0" >
-<div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-  <ul class="nav nav-tabs mr-auto">
-    <li class="nav-item">
-      <a class="nav-link {% if 'home_r2' in request.get_full_path %}active{% endif %}"
-      href="{% url 'home_r2' %}{% if request.GET.keywords %}?keywords={{request.GET.keywords}}{%endif%}">All</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link {% if 'projects' in request.get_full_path %}active{% endif %}"
+<nav class="navbar navbar-light bg-white mt-5 pb-0 pl-0" >
+<div class="navbar order-1 order-md-0 pb-0 pl-0">
+  <ul class="nav pl-0">
+    <li class="nav-item pl-1">
+      <a class="nav-link sub {% if 'projects' in request.get_full_path %}active{% endif %}"
       href="{% url 'projects' %}{% if request.GET.keywords %}?keywords={{request.GET.keywords}}{%endif%}">Projects</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link {% if 'resources' in request.get_full_path %}active{% endif %}"
+      <a class="nav-link sub {% if 'resources/' in request.get_full_path %}active{% endif %}"
       href="{% url 'resources' %}{% if request.GET.keywords %}?keywords={{request.GET.keywords}}{%endif%}"">Resources</a>
     </li>
-    <li class="nav-item"><a class="nav-link {% if active_link == "resources" %}active{% endif %} " href="{% url 'resources' %}">Training</a></li>
-    <li class="nav-item"><a class="nav-link {% if 'organisations' in request.get_full_path %}active{% endif %} " href="{% url 'organisations'%}">Organisations</a></li>
-    <li class="nav-item"><a class="nav-link {% if 'curated' in request.get_full_path %}active{% endif %}" href="{% url 'curated' %}">Our Selection</a></li>
-  </ul>
-  <ul class="navbar-nav ml-auto">
     <li class="nav-item">
-      <a class="nav-link" href="#" onclick="reloadview(0)">0</a>
+      <a class="nav-link {% if 'training_resources' in  request.get_full_path %}active{% endif %} "
+       href="{% url 'training_resources' %}">Training</a></li>
+    <li class="nav-item"><a class="nav-link sub {% if 'organisations' in request.get_full_path %}active{% endif %} " href="{% url 'organisations'%}">Organisations</a></li>
+    <li class="nav-item"><a class="nav-link sub {% if 'curated' in request.get_full_path %}active{% endif %}" href="{% url 'curated' %}">Our Selection</a></li>
+  </ul>
+  <!--ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="#" onclick="$('#content-2').hide(); $('#content-1').show()">0</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#" onclick="reloadview(1)">1</a>
+      <a class="nav-link" href="#" onclick="$('#content-1').hide(); $('#content-2').show()">1</a>
     </li>
-  </ul>
+  </ul-->
 </div>
 </nav>
 

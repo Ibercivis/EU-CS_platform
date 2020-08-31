@@ -8,39 +8,32 @@
 {% endblock %}
 
 {% block splash %}
-<div class="jumbotron jumbotron-fluid jumbotron-projects mb-0">
+<!--div class="jumbotron jumbotron-fluid jumbotron-projects mb-0">
 	<div class="container-fluid">
 		<div class="container">
 			<h1 class="display-4 pb-0 pt-0 text-white"><br>Projects</h1>
-
 			<p class="lead text-light">Browse and search for citizen science projects, or add your own</p>
+			<form  id="searchrojects" action="{% url 'projects' %}">
+				<div class="input-group input-group mb-3">
+					<div class="input-group-prepend">
+						<div class="input-group-text"><i class="fas fa-search"></i></div>
+					</div>
+					<input  type="text" id="keywords" name="keywords"  autocomplete="off"
+					value="{{filters.keywords}}" class="basicAutoComplete form-control form-control-lg" placeholder="Search for citizen science projects by title or keyword"
+					data-url="text_autocomplete/?status={{filters.status}}&country={{filters.country}}&topic={{filters.topic}}&doingAtHome={{filters.doingAtHome}}&approvedCheck={{filters.approvedCheck}}">
+					<div class="input-group-append">
+						<div class="input-group-text"><a href="#" data-toggle="modal" data-target="#projectsinfo" ><i class="fas fa-info-circle"></i></a></div>
+					</div>
+				</div>
+			</formS>
 		</div>
 	</div>
-</div>
+</div-->
 {% endblock splash %}
 {% block searchbar %}
-<form class="form-inline float-lg-right" id="searchProjects" action="{% url 'projects' %}">
-	<div class="col-12 col-lg-12">
-		<div class="input-group mb-3">
-			<div class="input-group-prepend">
-				<div class="input-group-text"><i class="fas fa-search"></i></div>
-			</div>
-			<input  type="text" id="keywords" name="keywords"  autocomplete="off"
-			value="{{filters.keywords}}" class="basicAutoComplete form-control form-control-lg" placeholder="Search for citizen science projects by title or keyword"
-			data-url="text_autocomplete/?status={{filters.status}}&country={{filters.country}}&topic={{filters.topic}}&doingAtHome={{filters.doingAtHome}}&approvedCheck={{filters.approvedCheck}}">
-			<div class="input-group-append">
-				<div class="input-group-text"><a href="#" data-toggle="modal" data-target="#projectsinfo" ><i class="fas fa-info-circle"></i></a></div>
-			</div>
-		</div>
-	</div>
-</form>
 {% endblock searchbar %}
-
 {% block page_header %}
-
-
 {% include "finder_projects.html" %}
-
 {% endblock page_header %}
 {% block list_of_items %}
 {% include "modal_projects.html" %}

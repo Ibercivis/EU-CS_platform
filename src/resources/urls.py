@@ -25,4 +25,3 @@ urlpatterns = [
     path('training_resource/<int:pk>', views.training_resource, name='training_resource'),
     path('editTrainingResource/<int:pk>', views.editTrainingResource, name='editTrainingResource'),
 ]
-

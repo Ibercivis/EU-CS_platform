@@ -31,12 +31,12 @@
 <body>
   <header>
     <!--Navbar-->
-    <nav class="navbar navbar-expand-xl navbar-dark navbar-front text-white text-weight-bold fixed-top">
+    <nav class="navbar navbar-expand-xl navbar-dark navbar-front text-white text-weight-bold fixed-top b-0 pt-0 pb-0">
       <div class="container text-weight-bold">
         <a class="navbar-brand" href="/">
           <img src="{% static 'site/img/icon.png' %}" width="30" height="30" alt=""/>
         </a>
-        <a class="navbar-brand 	nav-link {% if request.get_full_path == "/" %} active {% endif %}" href="/">{% include "_brandname.html" %}</a>
+        <a class="navbar-brand nav-link pt-2 pb-2 {% if request.get_full_path == "/" %} active {% endif %}" href="/">{% include "_brandname.html" %}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span></button>
@@ -50,8 +50,8 @@
           </ul>
           <ul class="navbar-nav">
             {% if not user.is_authenticated %}
-            <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">LOGIN</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'accounts:signup' %}" role="button">SIGN UP</a></li>
+            <li class="nav-item"><a class="nav-link pt-3" href="{% url 'accounts:login' %}">LOGIN</a></li>
+            <li class="nav-item"><a class="nav-link pt-3" href="{% url 'accounts:signup' %}" role="button">SIGN UP</a></li>
             {% else %}
             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">PERSONAL AREA</a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -66,10 +66,11 @@
               </div>
             </li>
             <li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}">LOGOUT</a></li></li>
-            {% endif %}
-            <a data-toggle="modal" data-target="#modalinfo" class="btn btn-outline-success my-2 my-sm-0 ml-2" type="submit">Submit</a>
-
           </ul>
+          {% endif %}
+          <a data-toggle="modal" data-target="#modalinfo" class="nav-link redbackground text-dark pt-3 pb-3 bg-default" type="submit">SUBMIT</a>
+
+
         </div>
       </div>
     </nav>

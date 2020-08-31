@@ -23,11 +23,9 @@ have been marked as 'Moderated'. Read more about our <a href="/faq">moderation p
 					<div class="input-group-text"><a href="#" data-toggle="modal" data-target="#resourcesinfo" ><i class="fas fa-info-circle"></i></a></div>
 				</div>
 			</div>
-
-
 		</div>
 		<div class="col-lg-3 col-12  text-right float-rigth">
-			<div class="input-group mb-3">
+			<div class="input-group input-group-sm mb-3">
 				<div class="input-group-prepend">
 					<div class="input-group-text"><i class="fas fa-sort-amount-down"></i></div>
 				</div>
@@ -42,7 +40,7 @@ have been marked as 'Moderated'. Read more about our <a href="/faq">moderation p
 		</div>
 		<div class="col-12 col-lg-9 d-none d-sm-block">
 			<div class="float-right">
-				<div class="input-group mb-3">
+				<div class="input-group input-group-sm mb-3">
 					<div class="input-group-prepend">
 						<div class="input-group-text"><i class="fas fa-filter"></i></div>
 					</div>
@@ -81,13 +79,14 @@ have been marked as 'Moderated'. Read more about our <a href="/faq">moderation p
 				</div>
 			</div>
 			<div class="col-lg-6 col-6 mb-3 text">
+				{{ counter }} results
 				{% if user.is_authenticated %}
 
 				<!--a class="btn btn-dark mb-1" href="{% url 'downloadResources' %}" data-toggle="tooltip" data-placement="top" title="Click here to download all the resources">
 					<i class="fas fa-download"></i>&nbsp;DOWNLOAD
 				</a-->
 				{% else %}
-				<a href="/signup">Sign up</a>
+				<!--a href="/signup">Sign up</a-->
 				{% endif %}
 			</div>
 			{% if request.get_full_path != "/resources" %}
@@ -96,7 +95,4 @@ have been marked as 'Moderated'. Read more about our <a href="/faq">moderation p
 			</div>
 			{% endif %}
 		</form>
-		<div class="col-lg-6 col-6 mb-3">
-			{{ counter }} results
-		</div>
 	</div>
