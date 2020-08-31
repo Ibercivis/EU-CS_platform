@@ -2,6 +2,7 @@ from django import forms
 from django_select2.forms import Select2MultipleWidget
 from django.shortcuts import get_object_or_404
 from .models import Organisation, OrganisationType
+from projects.forms import getCountryCode
 
 class OrganisationForm(forms.Form):
 
@@ -35,7 +36,11 @@ class OrganisationForm(forms.Form):
         
         if(logo_path != '/'):
             organisation.logo = logo_path
-            
+
+
+        country = getCountryCode(organisation.latitude,organisation.longitude).upper()
+        organisation.country = country
+
         organisation.save()
 
         return 'success'
