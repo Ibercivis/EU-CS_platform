@@ -12,8 +12,8 @@ class OrganisationForm(forms.Form):
     logo = forms.ImageField(required=False,label="Please provide the URL of the logo image for your organisation (.jpg or .png)", widget=forms.FileInput)
     contact_point = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder':'Contact point'}))
     contact_point_email = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder':'Please provide the email address of the contact point for the organisation'}))
-    address = forms.CharField(max_length=150, widget=forms.TextInput(attrs={'placeholder':' Please provide the physical address of the organisation'})) 
-
+    latitude = forms.DecimalField(max_digits=9,decimal_places=6, widget=forms.HiddenInput())
+    longitude = forms.DecimalField(max_digits=9,decimal_places=6, widget=forms.HiddenInput())
 
     def save(self, args, logo_path):
         pk = self.data.get('organisationID', '')
@@ -26,11 +26,12 @@ class OrganisationForm(forms.Form):
             organisation.orgType = orgType
             organisation.contactPoint = self.data['contact_point']
             organisation.contactPointEmail = self.data['contact_point_email']
-            organisation.address = self.data['address']
+            organisation.latitude = self.data['latitude']
+            organisation.longitude = self.data['longitude']
         else:   
-            organisation = Organisation(name = self.data['name'], url = self.data['url'], creator=args.user,                         
-                          description = self.data['description'], orgType = orgType, contactPoint = self.data['contact_point'],
-                          contactPointEmail = self.data['contact_point_email'], address = self.data['address'])
+            organisation = Organisation(name = self.data['name'], url = self.data['url'], creator=args.user, latitude=self.data['latitude'], 
+                    longitude = self.data['longitude'], description = self.data['description'], orgType = orgType, contactPoint = self.data['contact_point'],
+                    contactPointEmail = self.data['contact_point_email'])
         
         if(logo_path != '/'):
             organisation.logo = logo_path

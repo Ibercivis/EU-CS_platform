@@ -64,7 +64,7 @@ def edit_organisation(request, pk):
     form = OrganisationForm(initial={
         'name':organisation.name,'url': organisation.url, 'description': organisation.description, 
         'orgType': organisation.orgType, 'logo': organisation.logo, 'contact_point': organisation.contactPoint,
-        'contact_point_email': organisation.contactPointEmail, 'address': organisation.address
+        'contact_point_email': organisation.contactPointEmail, 'latitude': organisation.latitude, 'longitude': organisation.longitude
     })
 
     if request.method == 'POST':
