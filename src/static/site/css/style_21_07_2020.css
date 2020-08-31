@@ -6,17 +6,23 @@ main {
 	font-weight: 200;
 	color: #333;
 	min-height: 100vh;
-	background-color: #f8f8f8;
+	background-color: #f9f9f9;
 }
 main.nomargintop {
 	margin-top: 0px;
 	font-weight: 200;
 	min-height: 100%;
-	background-color: #f8f8f8;
+	background-color: #f9f9f9;
 }
+* {
+  -webkit-border-radius: 0 !important;
+     -moz-border-radius: 0 !important;
+          border-radius: 0 !important;
+}:w
 .jumbotron {
 	font-weight: bold;
 	background-position: center center;
+	padding-bottom: 0 !important;
 }
 .jumbotron-default{
 	background-color: #203863;
@@ -24,25 +30,25 @@ main.nomargintop {
 }
 .jumbotron-main{
 	background-image: url('../img/cancitizensc.webp');
-	min-height: 30vh;
+	min-height: 15vh;
 	background-color: #405883;
 	background-blend-mode: overlay;
 	background-size: cover;
 	background-position: center;
 }
 .jumbotron-projects{
-	background-image: url('../img/projects.webp');
-	min-height: 15vh;
+	/*background-image: url('../img/projects.webp');*/
+	min-height: 10vh;
 	background-color: #405883;
 	background-blend-mode: overlay;
 	background-size: cover;
 	background-position: center;
 }
 .jumbotron-resources{
-	background-image: url('../img/resources.jpg');
+	/* background-image: url('../img/resources.jpg'); */
 	background-size: cover;
-	min-height: 15vh;
-	background-color: #405883;
+	min-height: 13vh;
+	background-color: #567;
 	background-blend-mode: overlay;
 	background-size: cover;
 	background-position: center;
@@ -139,8 +145,17 @@ select.form-control:focus {
 }
 
 
-.nav-link.active{
+.nav-link.main.active{
 	border-bottom: 2px solid #a4b494;
+}
+.nav-link.main:hover{
+	border-bottom: 2px solid #a4b494;
+}
+.nav-link.sub.active{
+	color: #333;
+}
+.nav-link.sub:hover{
+	color: #333;
 }
 .card-link{
 	color: #333;
@@ -352,7 +367,7 @@ dt {
 	text-transform: uppercase;
 	text-align: center;
   }
-  
+
   /* top left*/
   .ribbon-top-left {
 	top: -10px;

@@ -47,7 +47,7 @@ def resources(request, isTrainingResource=False):
         filters['keywords'] = request.GET['keywords']
 
     resources = applyFilters(request, resources)
-    filters = setFilters(request, filters)   
+    filters = setFilters(request, filters)
     resources = resources.filter(~Q(hidden=True))
     resourcesTop = resources.filter(featured=True)
     resourcesTopIds = list(resourcesTop.values_list('id',flat=True))
@@ -87,7 +87,7 @@ def resources(request, isTrainingResource=False):
     resources = paginator.get_page(page)
 
     return render(request, 'resources.html', {'resources':resources, 'approvedResources': approvedResources, 'counter': counter,
-    'savedResources': savedResources, 'filters': filters, 'settings': settings, 'languagesWithContent': languagesWithContent, 
+    'savedResources': savedResources, 'filters': filters, 'settings': settings, 'languagesWithContent': languagesWithContent,
     'themes':themes, 'categories': categories, 'isTrainingResource': isTrainingResource})
 
 @login_required(login_url='/login')
@@ -95,7 +95,7 @@ def new_training_resource(request):
     return new_resource(request, True)
 
 @login_required(login_url='/login')
-def new_resource(request, isTrainingResource=False): 
+def new_resource(request, isTrainingResource=False):
     choices = list(Keyword.objects.all().values_list('keyword',flat=True))
     choices = ", ".join(choices)
     authorsCollection = list(Author.objects.all().values_list('author',flat=True))
