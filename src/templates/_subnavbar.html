@@ -3,8 +3,8 @@
 <div class="navbar order-1 order-md-0 pb-0 pl-0">
   <ul class="nav pl-0">
     <li class="nav-item pl-1">
-      <a class="nav-link sub {% active_link 'home_r2' %}"
-      href="{% url 'home_r2' %}{% if request.GET.keywords %}?keywords={{request.GET.keywords}}{%endif%}">All</a>
+      <a class="nav-link sub {% active_link 'all' %}"
+      href="{% url 'all' %}{% if request.GET.keywords %}?keywords={{request.GET.keywords}}{%endif%}">All</a>
     </li>
     <li class="nav-item">
       <a class="nav-link sub {% active_link 'projects' %}"
