@@ -11,7 +11,7 @@
 {% endblock splash %}
 
 {% block page_header %}
-
+{% include "finder_organisations.html" %}
 {% endblock page_header %}
 {% block list_of_items %}
 
@@ -53,6 +53,10 @@
 {% endblock list_of_items %}
 
 {% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js"
+integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="anonymous"></script>
+<script
+src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
 <script>
 	$(document).ready(function() {
 		$( ".card" ).hover(
@@ -60,6 +64,26 @@
 			$(this).addClass('shadow-none').css('cursor', 'pointer');
 		}, function() {
 			$(this).removeClass('shadow-none');
+		});
+	});
+    $('.basicAutoComplete').autoComplete(
+	{ minLength: 3 }
+	);
+
+	$('.basicAutoComplete').on('autocomplete.select', function (evt, item) {
+		$('#searchOrganisations').submit();
+	});
+
+	$(function () {
+		$('#orgType').on('change', function () {
+			var orgType = $(this).val();
+			$('#searchOrganisations').submit();
+		});
+	});
+    $(function () {
+		$('#country').on('change', function () {
+			var country = $(this).val();
+			$('#searchOrganisations').submit();
 		});
 	});
 </script>

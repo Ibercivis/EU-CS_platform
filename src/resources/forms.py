@@ -142,12 +142,10 @@ class ResourceForm(forms.ModelForm):
         if(isTrainingResource):
             rsc.isTrainingResource = True
             educationLevelSelected = self.data['educationLevelSelected']
-            print(educationLevelSelected)
             if(educationLevelSelected != ''):
                 educationLevel, exist = EducationLevel.objects.get_or_create(educationLevel=educationLevelSelected)
                 rsc.educationLevel = educationLevel
             learningResourceTypeSelected = self.data['learningResourceTypeSelected']
-            print(learningResourceTypeSelected)
             if(learningResourceTypeSelected != ''):
                 learning_resource_type, exist = LearningResourceType.objects.get_or_create(learningResourceType=learningResourceTypeSelected)
                 rsc.learningResourceType = learning_resource_type
