@@ -87,7 +87,9 @@ def home_r2(request):
     tresources = tresources.exclude(id__in=tresourcesTopIds)
     tresources = list(tresourcesTop) + list(tresources)
 
-    return render(request, 'home_r2.html', {'projects':projects, 'resources':resources, 'tresources':tresources})
+    organisations = Organisation.objects.all().order_by('-id')
+
+    return render(request, 'home_r2.html', {'projects':projects, 'resources':resources, 'tresources':tresources, 'organisations': organisations})
 
 def all(request):
     approvedProjects = ApprovedProjects.objects.all().order_by('-id')[:6].values_list('project_id',flat=True)
