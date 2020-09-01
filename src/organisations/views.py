@@ -1,8 +1,10 @@
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from PIL import Image
 from django.contrib.auth import get_user_model
 from django.utils import formats
+from django.db.models import Q
 from datetime import datetime
 from .forms import OrganisationForm
 from .models import Organisation, OrganisationType
@@ -89,7 +91,23 @@ def edit_organisation(request, pk):
 
 def organisations(request):
     organisations = Organisation.objects.get_queryset().order_by('id')
-    return render(request, 'organisations.html', {'organisations': organisations})
+    countriesWithContent = Organisation.objects.all().values_list('country',flat=True).distinct()
+    orgTypes = OrganisationType.objects.all()
+    filters = {'keywords': '', 'orgType': '', 'country': ''}
+    if request.GET.get('keywords'):
+        organisations = organisations.filter( Q(name__icontains = request.GET['keywords'])).distinct()
+        filters['keywords'] = request.GET['keywords']
+    if request.GET.get('country'):
+        organisations = organisations.filter(country = request.GET['country'])
+        filters['country'] = request.GET['country']
+    if request.GET.get('orgType'):
+        organisations = organisations.filter(orgType = request.GET['orgType'])
+        filters['orgType'] = request.GET['orgType']
+    
+    counter = len(organisations)
+
+    return render(request, 'organisations.html', {'organisations': organisations, 'counter': counter, 
+    'filters': filters, 'countriesWithContent': countriesWithContent, 'orgTypes': orgTypes})
 
 def delete_organisation(request, pk):
     organisation = get_object_or_404(Organisation, id=pk)
@@ -101,3 +119,26 @@ def delete_organisation(request, pk):
     organisation.delete()
 
     return redirect('../organisations', {})
+
+def organisations_autocomplete(request):
+    organisations = preFilteredOrganisations(request)
+
+    if request.GET.get('q'):
+        text = request.GET['q']
+        organisationsName = organisations.filter( Q(name__icontains = text) ).distinct()
+        project_names = organisationsName.values_list('name',flat=True).distinct()
+        json = list(project_names)
+        return JsonResponse(json, safe=False)
+    else:
+        return HttpResponse("No cookies")
+
+def preFilteredOrganisations(request):
+    organisations = Organisation.objects.get_queryset().order_by('id')
+    return applyFilters(request, organisations)
+
+def applyFilters(request, organisations):
+    if request.GET.get('country'):
+        organisations = organisations.filter(country = request.GET['country'])
+    if request.GET.get('orgType'):
+        organisations = organisations.filter(orgType = request.GET['orgType'])
+    return organisations
