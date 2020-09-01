@@ -53,6 +53,7 @@ def home_r2(request):
 
     #Resources
     resources = Resource.objects.all().filter(~Q(isTrainingResource=True)).order_by('id')
+
     approvedResources = ApprovedResources.objects.all().values_list('resource_id',flat=True)
     savedResources = None
     savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True)
@@ -63,6 +64,7 @@ def home_r2(request):
         resources = resources.filter( Q(name__icontains = request.GET['keywords'])  |
                                     Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
         filters['keywords'] = request.GET['keywords']
+
     resources = resources.filter(~Q(hidden=True))
     resourcesTop = resources.filter(featured=True)
     resourcesTopIds = list(resourcesTop.values_list('id',flat=True))
@@ -75,13 +77,14 @@ def home_r2(request):
     tsavedResources = None
     tsavedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True)
     if request.GET.get('keywords'):
-        resources = tresources.filter( Q(name__icontains = request.GET['keywords'])  |
+        tresources = tresources.filter( Q(name__icontains = request.GET['keywords'])  |
                                     Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
         filters['keywords'] = request.GET['keywords']
+
     tresources = tresources.filter(~Q(hidden=True))
     tresourcesTop = tresources.filter(featured=True)
     tresourcesTopIds = list(tresourcesTop.values_list('id',flat=True))
-    tresources = tresources.exclude(id__in=resourcesTopIds)
+    tresources = tresources.exclude(id__in=tresourcesTopIds)
     tresources = list(tresourcesTop) + list(tresources)
 
     return render(request, 'home_r2.html', {'projects':projects, 'resources':resources, 'tresources':tresources})

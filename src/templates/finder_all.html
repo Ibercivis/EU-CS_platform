@@ -9,23 +9,7 @@ Read more about our <a href="/faq">moderation process</a>.
 </div-->
 
 <form class="form-inline" id="searchProjects" action="{% url 'home_r2' %}">
-	<div class="col-12 col-lg-12">
-		<div class="input-group mb-3">
-			<div class="input-group-prepend">
-				<div class="input-group-text"><i class="fas fa-search"></i></div>
-			</div>
-			<input  type="text" id="keywords" name="keywords"  autocomplete="off"
-			value="{{filters.keywords}}" class="basicAutoComplete form-control form-control-lg"
-			placeholder="Search for citizen science projects by title or keyword"
-			data-url="text_autocomplete/?status={{filters.status}}&country={{filters.country}}&topic={{filters.topic}}&doingAtHome={{filters.doingAtHome}}&approvedCheck={{filters.approvedCheck}}">
-			<div class="input-group-append">
-				<div class="input-group-text"><a href="#" data-toggle="modal" data-target="#projectsinfo" ><i class="fas fa-info-circle"></i></a></div>
-			</div>
-		</div>
-	</div>
-	<div class="col-12">
-	</div>
-	<div class="col-lg-6 col-6 mb-3">
+	<div class="col-lg-6 col-6 mb-3 pl-0">
 		{{ counter }} results
 		{% if user.is_authenticated %}
 		<!--a class="btn btn-dark mb-1" href="{% url 'downloadProjects' %}" data-toggle="tooltip" data-placement="top" title="Click here to download all the projects">

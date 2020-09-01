@@ -37,13 +37,26 @@
         <a class="navbar-brand" href="/">
           <img src="{% static 'site/img/icon.png' %}" width="30" height="30" alt=""/>
         </a>
-        <a class="navbar-brand nav-link pt-2 pb-2 {% if request.get_full_path == "/" %} active {% endif %}" href="/">{% include "_brandname.html" %}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span></button>
 
         <div class="ribbon ribbon-top-left"><span><a style="text-decoration:none;color:white" href="https://eu-citizen.science/blog/2020/04/03/welcome-alpha-release-eu-citizenscience-platform/">ALPHA</a></span></div>
-
+        <form class="form-inline" id="searchProjectsTop" action="{% url 'projects' %}">
+          <div class="col-12 col-lg-12">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text"><i class="fas fa-search"></i></div>
+              </div>
+              <input  type="text" id="keywords" name="keywords"  autocomplete="off"
+              value="{{filters.keywords}}" class="basicAutoComplete form-control form-control-lg" placeholder="Search for citizen science projects by title or keyword"
+              data-url="text_autocomplete/?status={{filters.status}}&country={{filters.country}}&topic={{filters.topic}}&doingAtHome={{filters.doingAtHome}}&approvedCheck={{filters.approvedCheck}}">
+              <div class="input-group-append">
+                <div class="input-group-text"><a href="#" data-toggle="modal" data-target="#projectsinfo" ><i class="fas fa-info-circle"></i></a></div>
+              </div>
+            </div>
+          </div>
+        </form>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             {% block navbar-left %}
@@ -63,12 +76,12 @@
                 <a class="dropdown-item" href="{% url 'profiles:self_resources' %}">Submitted resources</a>
                 <a class="dropdown-item" href="{% url 'profiles:followed_projects' %}">Followed projects</a>
                 <a class="dropdown-item" href="{% url 'profiles:saved_resources' %}">Resources library</a>
+                <a class="dropdown-item" href="{% url 'accounts:logout' %}">Logout</a>
                 {% if user.is_staff %}
                 <a  class="dropdown-item" href="{% url 'admin:index' %}">Admin</a>
                 {% endif %}
               </div>
             </li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}">LOGOUT</a></li></li>
           </ul>
           {% endif %}
           <a data-toggle="modal" data-target="#modalinfo" class="nav-link redbackground text-dark pt-3 pb-3 bg-default"
