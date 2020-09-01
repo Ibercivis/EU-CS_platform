@@ -88,7 +88,7 @@
             <div class="card-title p-5">
               <div class="form-row">
                 <div class="col-12">
-                  <h2>New resource</h2>
+                  <h2>New {% if isTrainingResource %}training {% endif %} resource</h2>
                   Thank you for proposing a new citizen science resource to be shared on the EU-Citizen.Science Platform.
                   Please fill in all of the mandatory information in the fields below (indicated with an asterisk*),
                   and as much of the non-mandatory information as possible.<br><br>
@@ -167,7 +167,8 @@
                       {% get_language_info_list for LANGUAGES as languages %}
                       {% if settings.USE_I18N and languages|length > 1 %}
                       <label for="language" class="control-label  requiredField">
-                        Please indicate the (main) language that the resource is made available in<span class="asteriskField">*</span>
+                        Language
+                        <span class="asteriskField">*</span>
                       </label>
 
                       <select name="language" class="form-control">
@@ -175,12 +176,13 @@
                         {% if language.code in settings.LANGUAGE_CODES %}
                         <option value="{{ language.code}}"
                         {% if language.code == LANGUAGE_CODE %}selected="selected" {% endif %}>
-                        {{ language.name | upper}}
+                        {{ language.name | lower | capfirst}}
                       </option>
                       {% endif %}
                       {% endfor %}
                     </select>
                     {% endif %}
+                    <p class="help-block">Please indicate the (main) language that the resource is made available</p>
                   </div>
                 </div>
                 <div class="form-row">
@@ -241,14 +243,13 @@
                   </div>
                 </div>
                 {% if isTrainingResource %}
-                  <h3>Training resource fields</h3>
-                  <input type="hidden" id="trainingResource" name="trainingResource" value={{isTrainingResource}}>
-                  {{ form.education_level|as_crispy_field }}
-                  {{ form.educationLevelSelected|as_crispy_field }}
-                  {{ form.learning_resource_type|as_crispy_field }}
-                  {{ form.learningResourceTypeSelected|as_crispy_field }}
-                  {{ form.time_required|as_crispy_field }}
-                  {{ form.conditions_of_access|as_crispy_field }}
+                <input type="hidden" id="trainingResource" name="trainingResource" value={{isTrainingResource}}>
+                {{ form.education_level|as_crispy_field }}
+                {{ form.educationLevelSelected|as_crispy_field }}
+                {{ form.learning_resource_type|as_crispy_field }}
+                {{ form.learningResourceTypeSelected|as_crispy_field }}
+                {{ form.time_required|as_crispy_field }}
+                {{ form.conditions_of_access|as_crispy_field }}
                 {% endif %}
                 <button type="submit" class="btn btn-green mt-2"> <i class="fas fa-share-square"></i> Save</button>
               </form>
@@ -261,7 +262,6 @@
 </div>
 </div>
 {% endblock list_of_items %}
-
 
 {% block scripts %}
 <script src="{% static 'site/js/site.js' %}"></script>

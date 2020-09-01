@@ -35,10 +35,10 @@
               {% if user.is_authenticated %}
                 {% if project.creator == user or user.is_staff or user.id in cooperators %}
                 <a class="btn btn-red float-left mt-4" href="{% url 'editProject' project.id %}"><i class="fas fa-edit"></i> Edit </a>
-                {% endif %}              
+                {% endif %}
             </div>
               {% if project.creator == user or user.is_staff %}
-                <div class="col-6">              
+                <div class="col-6">
                   <permissionForm>
                     {% csrf_token %}
                     {{ permissionForm.usersAllowed | as_crispy_field }}
@@ -221,7 +221,7 @@
                   <a  onclick="setFeatured({{project.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
                   {% else %}
                   <a  onclick="setFeatured({{project.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
-                  {% endif %}							
+                  {% endif %}
                 {% endif %}
               </div>
             </div>

@@ -117,11 +117,11 @@
               <h4>Project info</h4>
             </div>
             <div class="form-row">
-              <div class="col-12 ">
+              <div class="col-12 mb-3">
                 <input type="hidden" id="projectID" name="projectID" value={{project.id}}>
                 {{ form.project_name|as_crispy_field }}
               </div>
-              <div class="col-12">
+              <div class="col-12 mb-3">
                 {{form.keywords|as_crispy_field }}
                 {{form.choices |as_crispy_field}}
                 {{form.choicesSelected|as_crispy_field}}
@@ -129,37 +129,37 @@
             </div>
 
             <div class="form-row">
-              <div class="col-12">
+              <div class="col-12 mb-3">
                 {{ form.description|as_crispy_field }}
               </div>
-              <div class="col-12">
+              <div class="col-12 mb-3">
                 {{ form.aim|as_crispy_field }}
               </div>
             </div>
 
             <div class="form-row">
-              <div class="col-12">
+              <div class="col-12 mb-3">
                 {{ form.topic|as_crispy_field }}
               </div>
-              <div class="col-12">
+              <div class="col-12 mb-3">
                 {{ form.status|as_crispy_field }}
               </div>
             </div>
 
             <div class="form-row">
-              <div class="col-sm-6 col-12">
+              <div class="col-sm-6 col-12 mb-3 pr-5">
                 {{ form.start_date|as_crispy_field }}
               </div>
-              <div class="col-sm-6 col-12">
+              <div class="col-sm-6 col-12 mb-3">
                 {{ form.end_date|as_crispy_field }}
               </div>
             </div>
 
             <div class="form-row">
-              <div class="col-12">
+              <div class="col-12 mb-3">
                 {{ form.url|as_crispy_field }}
               </div>
-              <div class="col-12">
+              <div class="col-12 mb-3">
                 {{ form.mainOrganisation|as_crispy_field }}
                 {{ form.organisation|as_crispy_field }}
               </div>
@@ -168,9 +168,9 @@
             <h4>Contact details</h4>
             <div id="contactinfoform">
               <div class="form-row">
-                <div class="col-12">
+                <!--div class="col-12">
                   {{ form.host|as_crispy_field }}
-                </div>
+                </div-->
                 <div class="col-12">
                   {{ form.contact_person|as_crispy_field }}
                 </div>
@@ -184,7 +184,7 @@
             <h4>Project profile images</h4>
             <div id="imagesform">
               <div class="form-row">
-                <div class="col-sm-6 col-12">
+                <div class="col-sm-8 col-12 mb-3">
                   {{ form.image1|as_crispy_field }}
                   {{ form.x1|as_crispy_field }}
                   {{ form.y1|as_crispy_field }}
@@ -192,18 +192,18 @@
                   {{ form.width1|as_crispy_field }}
                   {{ form.withImage1|as_crispy_field }}
                   <a id="imgResult1" href="#"> <img class="img-fluid img-zoom" id="imageResult1" src="{{ project.image1 }}" alt="Image not upload"></a>
-                  <div id="deleteImage1">                   
+                  <div id="deleteImage1">
                   {% if project.image1 %}
-                    <a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>                  
+                    <a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>
                   {% endif %}
                   </div>
                 </div>
-                <div class="col-sm-6 col-12">
+                <div class="col-sm-4 col-12 mb-3">
                   {{ form.image_credit1|as_crispy_field }}
                 </div>
               </div>
               <div class="form-row">
-                <div class="col-sm-6 col-12 mt-3">
+                <div class="col-sm-8 col-12 mt-3">
                   {{ form.image2|as_crispy_field }}
                   {{ form.x2|as_crispy_field }}
                   {{ form.y2|as_crispy_field }}
@@ -217,12 +217,12 @@
                   {% endif %}
                   </div>
                 </div>
-                <div class="col-sm-6 col-12">
+                <div class="col-sm-4 col-12">
                   {{ form.image_credit2|as_crispy_field }}
                 </div>
               </div>
               <div class="form-row">
-                <div class="col-sm-6 col-12 mt-3">
+                <div class="col-sm-8 col-12 mt-3">
                   {{ form.image3|as_crispy_field }}
                   {{ form.x3|as_crispy_field }}
                   {{ form.y3|as_crispy_field }}
@@ -236,7 +236,7 @@
                   {% endif %}
                   </div>
                 </div>
-                <div class="col-sm-6 col-12">
+                <div class="col-sm-4 col-12">
                   {{ form.image_credit3|as_crispy_field }}
                 </div>
               </div>
@@ -248,10 +248,10 @@
             <div id="geographyform">
               {% leaflet_map "map" callback="window.map_init_basic" %}
               <div class="form-row">
-                <div class="col-sm-6 col-12">
+                <div class="col-sm-6 col-12 mb-3">
                   {{ form.latitude|as_crispy_field }}
                 </div>
-                <div class="col-sm-6 col-12">
+                <div class="col-sm-6 col-12 mb-3">
                   {{ form.longitude|as_crispy_field }}
                 </div>
               </div>
@@ -260,13 +260,13 @@
             <h4>Supplementary information for Citizen Science</h4>
             <div id="informationform">
               <div class="form-row">
-                <div class="col-12">
+                <div class="col-12 mb-3">
                   {{ form.how_to_participate|as_crispy_field }}
                 </div>
-                <div class="col-12">
+                <div class="col-12 mb-3">
                   {{ form.doingAtHome|as_crispy_field }}
                 </div>
-                <div class="col-12">
+                <div class="col-12 mb-3">
                   {{ form.equipment|as_crispy_field }}
                 </div>
               </div>
@@ -276,11 +276,11 @@
             <h4>Funding</h4>
             <div id="fundingform">
               <div class="form-row">
-                <div class="col-sm-6 col-12">
+                <div class="col-sm-6 col-12 mb-3">
                   {{ form.funding_body|as_crispy_field }}
                   {{ form.fundingBodySelected|as_crispy_field }}
                 </div>
-                <div class="col-sm-6 col-12">
+                <div class="col-sm-6 col-12 mb-3">
                   {{ form.funding_program|as_crispy_field }}
                 </div>
               </div>
@@ -289,16 +289,16 @@
             <h4>Origin information</h4>
             <div id="originform">
               <div class="form-row">
-                <div class="col-12">
+                <div class="col-12 mb-3">
                   {{ form.origin_database|as_crispy_field }}
                   {{ form.originDatabaseSelected|as_crispy_field }}
                 </div>
-                <div class="col-12">
+                <div class="col-12 mb-3">
                   {{ form.originUID|as_crispy_field }}
                 </div>
               </div>
               <div class="form-row">
-                <div class="col-12">
+                <div class="col-12 mb-3">
                   {{ form.originURL|as_crispy_field }}
                 </div>
               </div>
@@ -485,12 +485,12 @@
       getOrganisations();
       $("#id_organisation").empty();
     });
-    
+
 
     function getOrganisations() {
         var mainOrganisation = $("#id_mainOrganisation").val();
         var organisationsSelected = $("#id_organisation").val()
-        var request = $.ajax(          
+        var request = $.ajax(
           {
             type: "GET",
             url: "{% url 'getOrganisations' %}",
@@ -506,7 +506,7 @@
       }
 
     $("form").submit(function (e) {
-      var validationFailed = false;      
+      var validationFailed = false;
       $.each($("[required]"), function (index, value) {
         var id = $(value).parent().parent().attr('id');
         $("#" + id + " .errorMsg").remove();

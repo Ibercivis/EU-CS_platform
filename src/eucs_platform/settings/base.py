@@ -117,6 +117,7 @@ INSTALLED_APPS = (
     'oidc_provider',
     'drf_yasg',
     'captcha',
+    'active_link',
 
     # Machina dependencies:
     'mptt',
