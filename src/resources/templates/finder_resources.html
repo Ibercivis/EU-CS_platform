@@ -70,7 +70,7 @@ have been marked as 'Moderated'. Read more about our <a href="/faq">moderation p
 						{% for category in categories %}
 						<option {% if category.id == filters.category %} selected {% endif %} value="{{category.id}}">{{category}}</option>
 						{% endfor %}
-						<select/>
+					</select>
 						<select id="approvedCheck" name="approvedCheck" class="custom-select form-control">
 							<option value="On" {% if filters.approvedCheck == "On" %} selected {% endif %}>Moderated</option>
 							<option value="Off" {% if filters.approvedCheck == "Off" %} selected {% endif %}>Not yet moderated</option>

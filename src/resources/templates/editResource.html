@@ -376,31 +376,65 @@
         $("#div_id_curatedList select").val({{ curatedGroups }});
 
 
-        $("#div_id_education_level div").on('change', function(){
-          $("#id_education_level").removeAttr('multiple');
-        });
+        var education_level = $("#id_education_level option").map(function () {
+          return $.trim($(this).text());
+        }).get();
+        $("#id_education_level").empty();
+        var sel = $("#id_educationLevelSelected").val()
+        for(edlevel of education_level){
+          if(sel.trim() == edlevel.trim()){
+            $("#id_education_level").append("<option value='" + edlevel +"' selected> " + edlevel + " </option>");
+          }
+          else{
+            $("#id_education_level").append("<option value='" + edlevel +"'> " + edlevel + " </option>");
+          }
+        }
 
-        $("#div_id_education_level div").on('keyup', function(){
-          var key = $("#div_id_education_level .selection input").val();
-          if (key.indexOf(',') > -1) {
-            var word =key.slice(0, -1);
-            $("#div_id_education_level .selection input").val("");
-            $("#id_education_level").append("<option value='" + word +"' selected> " + word + " </option>");
+        $("#div_id_education_level div").on('select2:open', function(){
+          if($("#id_educationLevelSelected").val()){
             $("#id_education_level").removeAttr('multiple');
           }
         });
 
-        $("#div_id_learning_resource_type div").on('change', function(){
-          $("#id_learning_resource_type").removeAttr('multiple');
+        $("#div_id_education_level div").on('keyup', function(){
+          var key = $("#div_id_education_level .selection input").val();
+          $("#id_education_level").removeAttr('multiple');
+          if (key.indexOf(',') > -1) {
+            var word =key.slice(0, -1);
+            $("#div_id_education_level .selection input").val("");
+            $("#id_education_level").append("<option value='" + word +"' selected> " + word + " </option>");
+            
+          }
+        });
+
+        var learning_resource_type = $("#id_learning_resource_type option").map(function () {
+          return $.trim($(this).text());
+        }).get();
+        $("#id_learning_resource_type").empty();
+        var sel = $("#id_learningResourceTypeSelected").val()
+        for(learningRT of learning_resource_type){
+          if(sel.trim() == learningRT.trim()){
+            $("#id_learning_resource_type").append("<option value='" + learningRT +"' selected> " + learningRT + " </option>");
+          }
+          else{
+            $("#id_learning_resource_type").append("<option value='" + learningRT +"'> " + learningRT + " </option>");
+          }
+        }
+
+
+        $("#div_id_learning_resource_type div").on('select2:open', function(){
+          if($("#id_learningResourceTypeSelected").val()){
+            $("#id_learning_resource_type").removeAttr('multiple');
+          }
         });
 
         $("#div_id_learning_resource_type div").on('keyup', function(){
           var key = $("#div_id_learning_resource_type .selection input").val();
+          $("#id_learning_resource_type").removeAttr('multiple');
           if (key.indexOf(',') > -1) {
             var word =key.slice(0, -1);
             $("#div_id_learning_resource_type .selection input").val("");
-            $("#id_learning_resource_type").append("<option value='" + word +"' selected> " + word + " </option>");
-            $("#id_learning_resource_type").removeAttr('multiple');
+            $("#id_learning_resource_type").append("<option value='" + word +"' selected> " + word + " </option>");            
           }
         });
 
