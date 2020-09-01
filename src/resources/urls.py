@@ -19,7 +19,6 @@ urlpatterns = [
     path('resource_review/<int:pk>', views.resource_review, name='resource_review'),
     url(r'^api/', include('resources.api.urls')),
     path('downloadResources', views.downloadResources, name='downloadResources'),
-
     path('new_training_resource', views.new_training_resource, name='new_training_resource'),
     path('training_resources', views.training_resources, name='training_resources'),
     path('training_resource/<int:pk>', views.training_resource, name='training_resource'),

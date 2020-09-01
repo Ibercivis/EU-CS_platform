@@ -23,7 +23,9 @@
 			</div>
 		</a>
 		<div class="card-body">
-			<h6 class="card-title mt-3 mb-3"> <a class="card-link" href="/project/{{project.id }}">{{ project.name }}</a></h6>
+			<h6 class="card-title mt-1 mb-2">
+
+				 <a class="card-link" href="/project/{{project.id }}">{{ project.name }}</a></h6>
 			{% get_rating for project as avg_rating %}
 			{% get_review_count for project as review_count %}
 			<span class="gl-star-rating-stars s{{ avg_rating | stringformat:'d'}}0 readonly">
@@ -38,7 +40,7 @@
 				<a class="project" href="/project/{{project.id}}" target="_blank">Read more</a>
 			</div-->
 			<br>
-			{% for topic in project.topic.all %}<a class="badge badge-light" href="projects?keywords=&topic={{topic|urlencode}}">{{topic | upper}}</a> {% endfor %}<br>
+			{% for topic in project.topic.all %}<a class="badge badge-dark" href="projects?keywords=&topic={{topic|urlencode}}">{{topic | upper}}</a> {% endfor %}<br>
 			{% for keyword in project.keywords.all %} <a class="badge badge-light" href="projects?keywords={{keyword|urlencode}}">{{keyword | upper}}</a>  {% endfor %}
 		</div><!-- End of card-body -->
 		<div class="card-footer bg-white">

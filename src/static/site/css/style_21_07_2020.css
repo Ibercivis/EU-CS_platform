@@ -14,11 +14,11 @@ main.nomargintop {
 	min-height: 100%;
 	background-color: #f9f9f9;
 }
-* {
-  -webkit-border-radius: 0 !important;
-     -moz-border-radius: 0 !important;
-          border-radius: 0 !important;
-}:w
+*{
+	-webkit-border-radius: 0 !important;
+	-moz-border-radius: 0 !important;
+	border-radius: 0 !important;
+}
 .jumbotron {
 	font-weight: bold;
 	background-position: center center;
@@ -30,7 +30,6 @@ main.nomargintop {
 }
 .jumbotron-main{
 	background-image: url('../img/cancitizensc.webp');
-	min-height: 15vh;
 	background-color: #405883;
 	background-blend-mode: overlay;
 	background-size: cover;
@@ -113,7 +112,9 @@ h1,h2, h3, h4,h5 {
 }
 input[type="text"],
 select.form-control {
-
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
 }
 
 input[type="text"]:focus,
@@ -128,7 +129,7 @@ select.form-control:focus {
 	object-fit: cover;
 }
 /*input[type=checkbox] {
-	display:none;
+display:none;
 }*/
 .errorMsg {
 	color: #F00;
@@ -346,16 +347,16 @@ dt {
 	height: 150px;
 	overflow: hidden;
 	position: absolute;
-  }
-  .ribbon::before,
-  .ribbon::after {
+}
+.ribbon::before,
+.ribbon::after {
 	position: absolute;
 	z-index: -1;
 	content: '';
 	display: block;
 	border: 5px solid #2980b9;
-  }
-  .ribbon span {
+}
+.ribbon span {
 	position: absolute;
 	display: block;
 	width: 225px;
@@ -367,34 +368,43 @@ dt {
 	text-shadow: 0 1px 1px rgba(0,0,0,.2);
 	text-transform: uppercase;
 	text-align: center;
-  }
+}
 
-  /* top left*/
-  .ribbon-top-left {
+/* top left*/
+.ribbon-top-left {
 	top: -10px;
 	left: -10px;
-  }
-  .ribbon-top-left::before,
-  .ribbon-top-left::after {
+}
+.ribbon-top-left::before,
+.ribbon-top-left::after {
 	border-top-color: transparent;
 	border-left-color: transparent;
-  }
-  .ribbon-top-left::before {
+}
+.ribbon-top-left::before {
 	top: 0;
 	right: 0;
-  }
-  .ribbon-top-left::after {
+}
+.ribbon-top-left::after {
 	bottom: 0;
 	left: 0;
-  }
-  .ribbon-top-left span {
+}
+.ribbon-top-left span {
 	right: -25px;
 	top: 30px;
 	transform: rotate(-45deg);
-  }
+}
 
-  .event-highlighted {
+.event-highlighted {
 	background-color: #c9deebe3;
 	border-radius: 5px;
 
-  }
+}
+
+.help-block{
+	font-size: 12.8px;
+	color: #6c757d;
+}
+.input-group-text{
+	border: 0px !important;
+	background-color: #fff;
+}

@@ -1,5 +1,6 @@
-<li class="nav-item"><a class="nav-link main {% if active_link == "projects" %}active{% endif %}" href="{% url 'projects' %}">SEARCH</a></li>
-<li class="nav-item"><a class="nav-link main {% if active_link == "blog" %}active{% endif %}" href="{% url 'blog' %}">BLOG</a></li>
-<li class="nav-item"><a class="nav-link main {% if active_link == "events" %}active{% endif %}" href="{% url 'events' %}">EVENTS</a></li>
-<li class="nav-item"><a class="nav-link main {% if active_link == "about" %}active{% endif %}" href="{% url 'about' %}">ABOUT</a></li>
+{% load active_link_tags %}
+<li class="nav-item"><a class="nav-link main {% active_link  'projects || resources || training_resources || organisations || curated' %}" href="{% url 'projects' %}">SEARCH</a></li>
+<li class="nav-item"><a class="nav-link main {% active_link  'blog' %}" href="{% url 'blog' %}">BLOG</a></li>
+<li class="nav-item"><a class="nav-link main {% active_link  'events' %}" href="{% url 'events' %}">EVENTS</a></li>
+<li class="nav-item"><a class="nav-link main {% active_link  'about' %}" href="{% url 'about' %}">ABOUT</a></li>
 <!--li class="nav-item"><a class="nav-link {% if active_link == "contact" %}active{% endif %}" href="{% url 'contact' %}">CONTACT</a></li-->

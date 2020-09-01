@@ -183,7 +183,7 @@ def editProject(request, pk):
             return redirect('/project/'+ str(pk))
         else:
             print(form.errors)
-    return render(request, 'editProject.html', {'form': form, 'project':project, 'user':user, 'cField_formset':cField_formset, 
+    return render(request, 'editProject.html', {'form': form, 'project':project, 'user':user, 'cField_formset':cField_formset,
                 'permissionForm': permissionForm})
 
 
@@ -231,7 +231,7 @@ def saveImage(request, form, element, ref):
         x = form.cleaned_data.get('x' + ref)
         y = form.cleaned_data.get('y' + ref)
         w = form.cleaned_data.get('width' + ref)
-        h = form.cleaned_data.get('height' + ref)        
+        h = form.cleaned_data.get('height' + ref)
         photo = request.FILES[element]
         image = Image.open(photo)
         cropped_image = image.crop((x, y, w+x, h+y))
@@ -279,7 +279,7 @@ def getNamesKeywords(text):
     return report
 
 def preFilteredProjects(request):
-    projects = Project.objects.get_queryset().order_by('id')   
+    projects = Project.objects.get_queryset().order_by('id')
     return applyFilters(request, projects)
 
 def applyFilters(request, projects):
@@ -306,7 +306,7 @@ def applyFilters(request, projects):
             projects = projects
     else:
         projects = projects.filter(id__in=approvedProjects)
-    
+
     return projects
 
 def setFilters(request, filters):
@@ -337,7 +337,7 @@ def setProjectApproved(id, approved):
     approved= False if approved in ['False','false','0'] else True
     aProject = get_object_or_404(Project, id=id)
     if approved == True:
-        #Insert        
+        #Insert
         ApprovedProjects.objects.get_or_create(project=aProject)
     else:
         #Delete
@@ -346,7 +346,7 @@ def setProjectApproved(id, approved):
             obj.delete()
         except ApprovedProjects.DoesNotExist:
             print("Does not exist this approved project")
-        
+
 
 @staff_member_required()
 def setHidden(request):
@@ -356,7 +356,7 @@ def setHidden(request):
     setProjectHidden(id, hidden)
     return JsonResponse(response, safe=False)
 
-def setProjectHidden(id, hidden):    
+def setProjectHidden(id, hidden):
     project = get_object_or_404(Project, id=id)
     project.hidden = False if hidden in ['False','false','0'] else True
     project.save()
@@ -392,19 +392,19 @@ def followProject(projectId, userId, follow):
         followedProject = FollowedProjects.objects.get_or_create(project=fProject, user=fUser)
     else:
         #Delete
-        try:            
+        try:
             obj = FollowedProjects.objects.get(project_id=projectId,user_id=userId)
             obj.delete()
         except FollowedProjects.DoesNotExist:
             print("Does not exist this followed project")
-        
 
-def allowUser(request):   
+
+def allowUser(request):
     response = {}
     projectId = request.POST.get("project_id")
     users = request.POST.get("users")
     project = get_object_or_404(Project, id=projectId)
-    
+
     if request.user != project.creator and not request.user.is_staff:
         #TODO return JsonResponse with error code
         return redirect('../projects', {})
@@ -415,7 +415,7 @@ def allowUser(request):
         for obj in objs:
             obj.delete()
 
-    #Insert all    
+    #Insert all
     users = users.split(',')
     for user in users:
         fUser = User.objects.filter(email=user)[:1].get()
@@ -508,5 +508,5 @@ def getOrganisations(request):
         response['organisations'] = options
     else:
         response['organisations'] = '<select id="id_organisation" class="select form-control" disabled></select>'
-   
+
     return JsonResponse(response)

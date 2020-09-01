@@ -5,6 +5,7 @@
 {% load i18n %}
 {% load leaflet_tags %}
 {% load cookielaw_tags %}
+
 {% load countries %}
 {% get_countries as countries %}
 <head>
@@ -53,7 +54,9 @@
             <li class="nav-item"><a class="nav-link pt-3" href="{% url 'accounts:login' %}">LOGIN</a></li>
             <li class="nav-item"><a class="nav-link pt-3" href="{% url 'accounts:signup' %}" role="button">SIGN UP</a></li>
             {% else %}
-            <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">PERSONAL AREA</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false" href="#">PERSONAL AREA</a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="{% url 'profiles:show_self' %}">My Profile</a>
                 <a class="dropdown-item" href="{% url 'profiles:self_projects' %}">Submitted projects</a>
@@ -68,9 +71,8 @@
             <li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}">LOGOUT</a></li></li>
           </ul>
           {% endif %}
-          <a data-toggle="modal" data-target="#modalinfo" class="nav-link redbackground text-dark pt-3 pb-3 bg-default" type="submit">SUBMIT</a>
-
-
+          <a data-toggle="modal" data-target="#modalinfo" class="nav-link redbackground text-dark pt-3 pb-3 bg-default"
+          type="submit">SUBMIT</a>
         </div>
       </div>
     </nav>
