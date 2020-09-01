@@ -29,6 +29,9 @@
 		{% include "projects_cards.html" %}
 		{% include "resources_cards.html" %}
 		{% include "resources_cards.html" with resources=tresources %}
+		{% if organisations %}
+			{% include "organisations_cards.html" %}
+		{% endif %}
 		<div class="col-12 text-center mt-4 mb-5">
 			<a type="button" class="btn  btn-red btn-lg shadow-sm" href="/projects">SEE ALL PROJECTS</a>
 		</div>
