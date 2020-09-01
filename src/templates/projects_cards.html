@@ -2,7 +2,7 @@
 {% load reviews %}
 {% if projects %}
 {% for project in projects %}
-<div class="col-lg-3 col-sm-12 mb-4">
+<div class="col-lg-3 col-sm-12 mb-5">
 	<div class="card h-100 shadow border-0">
 		<a class="card-img-wrap "href="/project/{{project.id }}">
 			{% if project.image1 %}
@@ -17,88 +17,99 @@
 				{% endif %}{% endif %}
 				{% for country in countries %}
 				{% if country.code == project.country %}
-				<a class="badge frontpage" href="projects?country={{country.code}}">{{ country.name | upper }}</a>
+				<a class="badge badge-dark" href="projects?country={{country.code}}">{{ country.name | upper }}</a>
 				{% endif %}
 				{% endfor %}
 			</div>
-		</a>
-		<div class="card-body">
-			<h6 class="card-title mt-1 mb-2">
-
-				 <a class="card-link" href="/project/{{project.id }}">{{ project.name }}</a></h6>
-			{% get_rating for project as avg_rating %}
-			{% get_review_count for project as review_count %}
-			<span class="gl-star-rating-stars s{{ avg_rating | stringformat:'d'}}0 readonly">
-				<span data-value="1" data-text="Terrible"></span>
-				<span data-value="2" data-text="Poor"></span>
-				<span data-value="3" data-text="Average"></span>
-				<span data-value="4" data-text="Very Good"></span>
-				<span data-value="5" data-text="Excellent"></span>
-			</span>
-			{{ review_count }} {% if review_count == 1 %} review {% else %} reviews {% endif %}
-			<!--div class="card-text mt-3">{{project.description | safe | truncatechars:180 }}
-				<a class="project" href="/project/{{project.id}}" target="_blank">Read more</a>
-			</div-->
-			<br>
-			{% for topic in project.topic.all %}<a class="badge badge-dark" href="projects?keywords=&topic={{topic|urlencode}}">{{topic | upper}}</a> {% endfor %}<br>
-			{% for keyword in project.keywords.all %} <a class="badge badge-light" href="projects?keywords={{keyword|urlencode}}">{{keyword | upper}}</a>  {% endfor %}
-		</div><!-- End of card-body -->
-		<div class="card-footer bg-white">
-			<div class="row">
-				<div class="col-8">
-					<div id="approved{{project.id}}" class="float-left">
-						{% if user.is_staff %}
-						{% if project.id in approvedProjects %}
-						<img  class="img-fluid mt-2"  onclick="setApproved({{project.id}}, false)" src="{% static 'site/img/icon_color.png' %}" />
-						{% else %}
-						<img  class="img-fluid mt-2" onclick="setApproved({{project.id}}, true)" src="{% static 'site/img/icon_bw.png' %}" />
-						{% endif %}
-						{% else %}
-						{% if project.id in approvedProjects %}
-						<img  class="img-fluid mt-2" src="{% static 'site/img/icon_color.png' %}" />
-						{% else %}
-						<img  class="img-fluid mt-2" src="{% static 'site/img/icon_bw.png' %}" />
-						{% endif %}
-						{% endif %}
-						<div id="hidden{{project.id}}" style="display:inline-block">
-							{% if user.is_staff %}
-								{% if project.hidden %}
-								<a  onclick="setHidden({{project.id}}, false)"><i class="fas fa-eye-slash"></i></a>
-								{% else %}
-								<a  onclick="setHidden({{project.id}}, true)"><i class="fas fa-eye"></i></a>
-								{% endif %}
-							{% else %}
-								{% if project.hidden %}
-									<i class="fas fa-eye-slash"></i>
-								{% endif %}
-							{% endif %}
-						</div>
-						<div id="featured{{project.id}}" style="display:inline-block">
-							{% if user.is_staff %}
-								{% if project.featured %}
-								<a  onclick="setFeatured({{project.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
-								{% else %}
-								<a  onclick="setFeatured({{project.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
-								{% endif %}
-							{% endif %}
-						</div>
+			<div class="container">
+				<div class="row">
+					{% if project.featured %}
+					<div class="col-12 w-100 redbackground">
+						FEATURED PROJECT
 					</div>
-				</div>
-				<div class="col-4">
-					{% if user.is_authenticated %}
-					<div id="followed{{project.id}}">
-						{% if project.id in followedProjects %}
-						<button type="button" class="btn btn-outline-primary float-right" onclick="setFollowedProject({{project.id}},{{user.id}}, false)">Following</button>
-						{% else %}
-						<button type="button" class="btn btn-outline-secondary float-right" onclick="setFollowedProject({{project.id}},{{user.id}}, true)">Follow</button>
-						{% endif %}
+					{% else %}
+					<div class="col-12 w-100 redbackground">
+						PROJECT
 					</div>
 					{% endif %}
 				</div>
 			</div>
-		</div><!-- end of card footer -->
-	</div><!-- end of card -->
-</div>
+		</a>
+		<div class="card-body">
+			<h6 class="card-title mt-1 mb-2">
+				<a class="card-link" href="/project/{{project.id }}">{{ project.name }}</a></h6>
+				{% get_rating for project as avg_rating %}
+				{% get_review_count for project as review_count %}
+				<span class="gl-star-rating-stars s{{ avg_rating | stringformat:'d'}}0 readonly">
+					<span data-value="1" data-text="Terrible"></span>
+					<span data-value="2" data-text="Poor"></span>
+					<span data-value="3" data-text="Average"></span>
+					<span data-value="4" data-text="Very Good"></span>
+					<span data-value="5" data-text="Excellent"></span>
+				</span>
+				{{ review_count }} {% if review_count == 1 %} review {% else %} reviews {% endif %}
+				<!--div class="card-text mt-3">{{project.description | safe | truncatechars:180 }}
+				<a class="project" href="/project/{{project.id}}" target="_blank">Read more</a>
+			</div-->
+
+			{% for topic in project.topic.all %}
+			<a class="badge badge-light pt-1" href="projects?keywords=&topic={{topic|urlencode}}">{{topic | upper}}</a>
+			{% endfor %}
+			{% for keyword in project.keywords.all %} <a class="badge badge-light pt-1" href="projects?keywords={{keyword|urlencode}}">{{keyword | upper}}</a>  {% endfor %}
+		</div><!-- End of card-body -->
+		<div class="card-footer bg-white p-0">
+			<div class="row">
+				<div class="col-12 w-100" id="saved{{rsc.id}}">
+					{% if project.id in followedProjects %}
+					<button type="button" class="btn btn-outline-primary w-100" onclick="setFollowedProject({{project.id}},{{user.id}}, false)">Following</button>
+					{% else %}
+					<button type="button" class="btn btn-outline-secondary w-100" onclick="setFollowedProject({{project.id}},{{user.id}}, true)">Follow</button>
+					{% endif %}
+				</div>
+			</div>
+			<div class="col-8">
+				<div id="approved{{project.id}}" class="float-left">
+					{% if user.is_staff %}
+					{% if project.id in approvedProjects %}
+					<img  class="img-fluid mt-2"  onclick="setApproved({{project.id}}, false)" src="{% static 'site/img/icon_color.png' %}" />
+					{% else %}
+					<img  class="img-fluid mt-2" onclick="setApproved({{project.id}}, true)" src="{% static 'site/img/icon_bw.png' %}" />
+					{% endif %}
+					{% else %}
+					{% if project.id in approvedProjects %}
+					<img  class="img-fluid mt-2" src="{% static 'site/img/icon_color.png' %}" />
+					{% else %}
+					<img  class="img-fluid mt-2" src="{% static 'site/img/icon_bw.png' %}" />
+					{% endif %}
+					{% endif %}
+					<div id="hidden{{project.id}}" style="display:inline-block">
+						{% if user.is_staff %}
+						{% if project.hidden %}
+						<a  onclick="setHidden({{project.id}}, false)"><i class="fas fa-eye-slash"></i></a>
+						{% else %}
+						<a  onclick="setHidden({{project.id}}, true)"><i class="fas fa-eye"></i></a>
+						{% endif %}
+						{% else %}
+						{% if project.hidden %}
+						<i class="fas fa-eye-slash"></i>
+						{% endif %}
+						{% endif %}
+					</div>
+					<div id="featured{{project.id}}" style="display:inline-block">
+						{% if user.is_staff %}
+						{% if project.featured %}
+						<a  onclick="setFeatured({{project.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
+						{% else %}
+						<a  onclick="setFeatured({{project.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
+						{% endif %}
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div><!-- end of card footer -->
+</div><!-- end of card -->
+
 {% endfor %}
 <div class="col-lg-12">
 	{% include "paginator.html" %}

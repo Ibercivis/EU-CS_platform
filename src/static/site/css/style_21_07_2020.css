@@ -31,6 +31,7 @@ main.nomargintop {
 .jumbotron-main{
 	background-image: url('../img/cancitizensc.webp');
 	background-color: #405883;
+	min-height: 30vh;
 	background-blend-mode: overlay;
 	background-size: cover;
 	background-position: center;
@@ -220,7 +221,8 @@ display:none;
 }
 .badge{
 	font-family: "Poppins", Helvetica, sans-serif;
-	font-weight: 500;
+	font-weight: 200;
+	font-size: 11px !important;
 }
 .btn-approved{
 	color: #17a398;
@@ -286,8 +288,9 @@ dt {
 	color: #333;
 }
 .redbackground{
-	background-color: #e28683 ;
+	background-color: #e28683;
 }
+
 .greenbackground{
 	background-color: #a6d49f;
 }

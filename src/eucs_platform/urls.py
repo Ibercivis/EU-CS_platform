@@ -35,7 +35,7 @@ admin.site.site_header = "Eucs_Platform Administration"
 
 urlpatterns = [
     path("", views.home, name="home"),
-    path("home_r2/", views.home_r2,name="home_r2"),
+    path("all/", views.all,name="all"),
     path("curated/", views.curated,name="curated"),
     path("imprint/", views.imprint,name="imprint"),
     path("terms/", views.terms,name="terms"),

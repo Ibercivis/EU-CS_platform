@@ -8,7 +8,7 @@ Read more about our <a href="/faq">moderation process</a>.
 </div>
 </div-->
 
-<form class="form-inline" id="searchProjects" action="{% url 'home_r2' %}">
+<form class="form-inline" id="searchProjects" action="{% url 'all' %}">
 	<div class="col-lg-6 col-6 mb-3 pl-0">
 		{{ counter }} results
 		{% if user.is_authenticated %}
@@ -22,7 +22,7 @@ Read more about our <a href="/faq">moderation process</a>.
 <div class="col-lg-6 col-6 text-right mb-3">
 	{% if request.get_full_path != "/" %}
 
-	<a class="text-decoration-none text-muted" href="/home_r2">
+	<a class="text-decoration-none text-muted" href="/all">
 		<i class="fas fa-times"></i> Clear current search query and filters</a>
 
 	{% endif %}

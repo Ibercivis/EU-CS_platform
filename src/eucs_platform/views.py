@@ -15,45 +15,23 @@ import json
 
 
 def home(request):
-    approvedProjects = ApprovedProjects.objects.all().order_by('-id')[:3].values_list('project_id',flat=True)
-    allapprovedProjects = ApprovedProjects.objects.all().order_by('-id').values_list('project_id',flat=True)
-    projects = Project.objects.all().order_by('-id')
-    allprojects =  projects.filter(id__in=allapprovedProjects)
-    projects = projects.filter(id__in=approvedProjects)
-    featuredProjects = Project.objects.all().filter(featured=True)[:3]
-    featuredResources = Resource.objects.all().filter(featured=True)[:3]
-    entries = Post.objects.filter(status=1).order_by('-created_on')[:3]
-    approvedResources = ApprovedResources.objects.all().order_by('-id')[:3].values_list('resource_id',flat=True)
-    resources = Resource.objects.all().order_by('-id')
-    resources = resources.filter(id__in=approvedResources)
-    return render(request, 'home.html', {'projects':projects, 'allprojects': allprojects, 'featuredProjects': featuredProjects, 'resources':resources, 'featuredResources': featuredResources, 'entries': entries}, )
-
-def home_r2(request):
     #Projects
-    projects = Project.objects.get_queryset()
-    approvedProjects = ApprovedProjects.objects.all().values_list('project_id',flat=True)
     user = request.user
-    followedProjects = None
+    projects = Project.objects.get_queryset().filter(~Q(hidden=True)).order_by('featured','id')
+    approvedProjects = ApprovedProjects.objects.all().values_list('project_id',flat=True)
     followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id',flat=True)
-    countriesWithContent = Project.objects.all().values_list('country',flat=True).distinct()
+
     filters = {'keywords': ''}
 
     if request.GET.get('keywords'):
         projects = projects.filter( Q(name__icontains = request.GET['keywords']) |
                                     Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
         filters['keywords'] = request.GET['keywords']
-
-    projects = projects.filter(~Q(hidden=True))
-    projectsTop = projects.filter(featured=True)
-    projectsTopIds = list(projectsTop.values_list('id',flat=True))
-    projects = projects.exclude(id__in=projectsTopIds)
-    # Pin projects to top
-    projects = list(projectsTop) + list(projects)
+    projects = projects[:8]
 
 
     #Resources
-    resources = Resource.objects.all().filter(~Q(isTrainingResource=True)).order_by('id')
-
+    resources = Resource.objects.all().filter(~Q(isTrainingResource=True)).filter(~Q(hidden=True)).order_by('featured','id')
     approvedResources = ApprovedResources.objects.all().values_list('resource_id',flat=True)
     savedResources = None
     savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True)
@@ -65,11 +43,9 @@ def home_r2(request):
                                     Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
         filters['keywords'] = request.GET['keywords']
 
-    resources = resources.filter(~Q(hidden=True))
-    resourcesTop = resources.filter(featured=True)
-    resourcesTopIds = list(resourcesTop.values_list('id',flat=True))
-    resources = resources.exclude(id__in=resourcesTopIds)
-    resources = list(resourcesTop) + list(resources)
+    resources = resources[:8]
+
+
 
     #Training Resources
     tresources = Resource.objects.all().filter(isTrainingResource=True).order_by('id')
@@ -86,21 +62,12 @@ def home_r2(request):
     tresourcesTopIds = list(tresourcesTop.values_list('id',flat=True))
     tresources = tresources.exclude(id__in=tresourcesTopIds)
     tresources = list(tresourcesTop) + list(tresources)
-
     organisations = Organisation.objects.all().order_by('-id')
 
-    return render(request, 'home_r2.html', {'projects':projects, 'resources':resources, 'tresources':tresources, 'organisations': organisations})
+    return render(request, 'home.html', {'projects':projects, 'resources':resources, 'tresources':tresources, 'organisations': organisations})
 
 def all(request):
-    approvedProjects = ApprovedProjects.objects.all().order_by('-id')[:6].values_list('project_id',flat=True)
-    projects = Project.objects.all().order_by('-id')
-    projects = projects.filter(id__in=approvedProjects)
-    approvedResources = ApprovedResources.objects.all().order_by('-id')[:6].values_list('resource_id',flat=True)
-    resources = Resource.objects.all().order_by('-id')
-    resources = resources.filter(id__in=approvedResources).filter(~Q(isTrainingResource=True))
-    trainingResources = Resource.objects.all().filter(isTrainingResource=True).order_by('id')[:6]
-    organisations = Organisation.objects.all().order_by('-id')[:6]
-    return None
+    return home(request)
 
 class AboutPage(generic.TemplateView):
     template_name = "about.html"
