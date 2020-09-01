@@ -16,42 +16,35 @@
 <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
-<div class="jumbotron jumbotron-fluid jumbotron-main mb-0">
-	<div class="container">
-		<h4 class="mt-5 text-white">
-			Welcome to EU-Citizen.Science, the platform for sharing knowledge,
-			tools, training, and resources for Citizen Science</h4>
-			<!--h4 class="mt-4 white">Join the community to share your favourite citizen science resources, profile your own citizen science projects, and more. </h4-->
+
+{% endblock splash %}
+{% block page_header %}
+{% include "finder_all.html" %}
+{% endblock page_header %}
+{% block list_of_items %}
+
+
+<div class="container">
+	<div class="row">
+		{% include "projects_cards.html" %}
+		{% include "resources_cards.html" %}
+		{% include "resources_cards.html" with resources=tresources %}
+		<div class="col-12 text-center mt-4 mb-5">
+			<a type="button" class="btn  btn-red btn-lg shadow-sm" href="/projects">SEE ALL PROJECTS</a>
 		</div>
 	</div>
-	{% endblock splash %}
-	{% block page_header %}
-	{% include "finder_all.html" %}
-	{% endblock page_header %}
-	{% block list_of_items %}
+	<div class="col-12">&nbsp;</div>
+</div>
+{% endblock list_of_items %}
 
-
-	<div class="container">
-		<div class="row">
-			{% include "projects_cards.html" %}
-			{% include "resources_cards.html" %}
-			{% include "resources_cards.html" with resources=tresources %}
-			<div class="col-12 text-center mt-4 mb-5">
-				<a type="button" class="btn  btn-red btn-lg shadow-sm" href="/projects">SEE ALL PROJECTS</a>
-			</div>
-		</div>
-		<div class="col-12">&nbsp;</div>
-	</div>
-	{% endblock list_of_items %}
-
-	{% block scripts %}
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js"
-	integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="anonymous"></script>
-	<script
-	src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
-	<script>
-		$('.basicAutoComplete').autoComplete(
-		{ minLength: 3 }
-		);
-	</script>
-	{% endblock scripts %}
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js"
+integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="anonymous"></script>
+<script
+src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
+<script>
+	$('.basicAutoComplete').autoComplete(
+	{ minLength: 3 }
+	);
+</script>
+{% endblock scripts %}
