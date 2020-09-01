@@ -144,14 +144,6 @@ display:none;
 #approvedCheck:checked + .mylabel {
 	background-image: url(../img/icon_color.png);
 }
-
-
-.nav-link.main.active{
-	border-bottom: 2px solid #a4b494;
-}
-.nav-link.main:hover{
-	border-bottom: 2px solid #a4b494;
-}
 .nav-link.sub.active{
 	color: #333;
 }
@@ -407,4 +399,13 @@ dt {
 .input-group-text{
 	border: 0px !important;
 	background-color: #fff;
+}
+.inhead{
+	background-color: #ddd !important;
+	color: #555;
+	border: 0px;
+	transition: all .2s ease-out;
+}
+.inhead:focus{
+	background-color: #fff !important;
 }

@@ -1,4 +1,4 @@
-{% extends "base2.html" %}
+{% extends "base_r2.html" %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% load i18n %}
@@ -6,7 +6,7 @@
 {% load reviews %}
 {% block title %}{{ block.super }} :: {{resource.name}}{% endblock %}
 {% block navbar-left %}
-{% include "_navbar.html" with active_link="resources" %}
+{% include "_navbar_r2.html" with active_link="resources" %}
 {% endblock %}
 
 {% block list_of_items %}
@@ -131,7 +131,7 @@
               <div class="col-12 col-xl-4 mt-5">
                 <h4>Training resource</h4>
               </div>
-              <div class="col-12 col-xl-8 mt-5">               
+              <div class="col-12 col-xl-8 mt-5">
                 <b>Education level: </b>{{ resource.educationLevel }}<br>
                 <b>Learning Resource Type: </b>{{ resource.learningResourceType }}<br>
                 <b>Time required: </b> {{ resource.timeRequired }}<br>
@@ -191,7 +191,7 @@
                   <a  onclick="setFeatured({{resource.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
                   {% else %}
                   <a  onclick="setFeatured({{resource.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
-                  {% endif %}							
+                  {% endif %}
                 {% endif %}
               </div>
             </div>
@@ -291,7 +291,7 @@
 		}
 		);
 	}
-  
+
   function setSavedResource(idResource, idUser, save){
     var htmlId = "saved" + idResource;
     var request = $.ajax(
