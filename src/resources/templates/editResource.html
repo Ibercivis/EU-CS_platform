@@ -108,7 +108,7 @@
 
         <div class="card-text pl-5 pr-5">
           <table class="table mb-0">
-            <form action="/editResource/{{resource.id}}" class="edit-resource" method="post" enctype="multipart/form-data">
+            <form action="{% if isTrainingResource %}{% url 'editTrainingResource' resource.id %}{% else %}{% url 'editResource' resource.id %}{% endif %}" class="edit-resource" method="post" enctype="multipart/form-data">
               {% csrf_token %}
 
               <div class="form-row">

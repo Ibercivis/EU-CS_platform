@@ -141,6 +141,8 @@ def editResource(request, pk, isTrainingResource=False):
     user = request.user
     cooperators = getCooperators(pk)
     if user != resource.creator and not user.is_staff and not user.id in cooperators:
+        if(isTrainingResource):
+            return redirect('/training_resources')
         return redirect('../resources', {})
 
     users = getOtherUsers(resource.creator)
@@ -187,8 +189,9 @@ def editResource(request, pk, isTrainingResource=False):
             images.append(image2_path)
             form.save(request, images)
             messages.success(request, "Resource uploaded with success!")
-
-            return redirect('/resource/'+ str(pk))
+            if(isTrainingResource):
+                return redirect('/training_resource/' + str(pk))
+            return redirect('/resource/' + str(pk))
 
     return render(request, 'editResource.html', {'form': form, 'resource': resource, 'curatedGroups': curatedGroups,
      'user': user, 'settings': settings, 'permissionForm': permissionForm, 'isTrainingResource': isTrainingResource })
