@@ -75,6 +75,8 @@ def home(request):
     tresources = paginatortresources.get_page(page)
 
     organisations = Organisation.objects.all().order_by('-id')
+    if request.GET.get('keywords'):
+        organisations = organisations.filter( Q(name__icontains = request.GET['keywords']) ).distinct()
 
     return render(request, 'home.html', {'projects':projects, 'counterprojects':counterprojects, \
         'resources':resources, 'counterresources':counterresources,\
@@ -125,8 +127,13 @@ def home_autocomplete(request):
         text = request.GET['q']
         resources = getRscNamesKeywords(text)
         projects = getNamesKeywords(text)
-        report = chain(resources, projects)
+        organisations = getOrganisationNames(text)
+        report = chain(resources, projects, organisations)
         json = list(report)
         return JsonResponse(json, safe=False)
     else:
         return HttpResponse("No cookies")
+
+def getOrganisationNames(text):
+    organisations = Organisation.objects.filter(name__icontains=text).values_list('name',flat=True).distinct()
+    return organisations
