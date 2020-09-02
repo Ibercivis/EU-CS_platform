@@ -29,7 +29,7 @@ def home(request):
                                     Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
         filters['keywords'] = request.GET['keywords']
     counterprojects = len(projects)
-    paginatorprojects = Paginator(projects, 8)
+    paginatorprojects = Paginator(projects, 9)
     page = request.GET.get('page')
     projects = paginatorprojects.get_page(page)
 
@@ -49,7 +49,7 @@ def home(request):
                                     Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
         filters['keywords'] = request.GET['keywords']
     counterresources = len(resources)
-    paginatorresources = Paginator(resources, 8)
+    paginatorresources = Paginator(resources, 9)
     page = request.GET.get('page')
     resources = paginatorresources.get_page(page)
 
@@ -70,7 +70,7 @@ def home(request):
     tresources = tresources.exclude(id__in=tresourcesTopIds)
     tresources = list(tresourcesTop) + list(tresources)
     countertresources = len(tresources)
-    paginatortresources = Paginator(tresources, 8)
+    paginatortresources = Paginator(tresources, 9)
     page = request.GET.get('page')
     tresources = paginatortresources.get_page(page)
 

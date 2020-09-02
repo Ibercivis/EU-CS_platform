@@ -53,17 +53,20 @@
 	<div class="row">
 		{% if counterprojects > 0 %}
 		<div class="col-12 mb-2">
-			{{ counterprojects }} result{% if counterprojects > 1 %}s{% endif %} in projects
-			{% if counterprojects > 8 %}, click here to see all of them {% endif %}
+			{{ counterprojects }} result{% if counterprojects != 1 %}s{% endif %} in projects
+			{% if counterprojects > 9 %}, click <a href="/projects">here</a> to see all of them {% endif %}
 		</div>
 		{% endif %}
 		{% include "projects_cards.html" %}
 		<div class="col-12 mb-2">
-			{{ counterresources }} results found in resources, click here to see all of them
+			{{ counterresources }} result{% if counterresources != 1 %}s{% endif %} in resources,
+			{% if counterresources > 9 %}click <a href="/resources">here</a> to see all of them{% endif %}
 		</div>
 		{% include "resources_cards.html" %}
 		<div class="col-12 mb-2">
-			{{ countertresources }} results found in training, click here to see all of them
+			{{ countertresources }} result{% if counterresources != 1 %}s{% endif %} in training,
+			{% if countertresources > 9 %}click <a href="/training_resources">here</a> to see all of them{% endif %}
+
 		</div>
 		{% include "resources_cards.html" with resources=tresources %}
 		{% if organisations %}
