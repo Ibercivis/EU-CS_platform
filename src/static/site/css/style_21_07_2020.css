@@ -2,8 +2,8 @@ body{
 	min-height: 100vh;
 }
 main {
-	font-family: arial, sans-serif !important;
-	font-weight: 200;
+	font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
+	font-weight: 400;
 	color: #333;
 	min-height: 100vh;
 	background-color: #fafafa;
@@ -144,6 +144,9 @@ display:none;
 }
 #approvedCheck:checked + .mylabel {
 	background-image: url(../img/icon_color.png);
+}
+.nav-link.sub{
+	color: #777;
 }
 .nav-link.sub.active{
 	color: #333;
@@ -288,9 +291,26 @@ dt {
 	color: #333;
 }
 .redbackground{
-	background-color: #e28683;
+	background-color: #dc3545;
 }
-
+.colorred{
+	color: #dc3545;
+	font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
+	font-size: 0.9em;
+	font-weight: 500;
+}
+.colorgreen{
+	color: #28a745;
+	font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
+	font-size: 0.9em;
+	font-weight: 500;
+}
+.colorblue{
+	color: #17a2b8;
+	font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
+	font-size: 0.9em;
+	font-weight: 500;
+}
 .greenbackground{
 	background-color: #a6d49f;
 }
@@ -339,6 +359,12 @@ dt {
 .linkwhite{
 	color: #fff;
 	text-decoration: underline;
+}
+.mysubmit{
+	transition: background-color 0.25s;
+}
+.mysubmit:hover{
+	background-color: #a6d49f;
 }
 
 .ribbon {
@@ -415,4 +441,7 @@ dt {
 }
 .inhead:focus{
 	background-color: #fff !important;
+}
+.clickable{
+	cursor: pointer !important;
 }
