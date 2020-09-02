@@ -93,7 +93,7 @@ def projects(request):
     projects = list(projectsTop) + list(projects)
     counter = len(projects)
 
-    paginator = Paginator(projects, 9)
+    paginator = Paginator(projects, 12)
     page = request.GET.get('page')
     projects = paginator.get_page(page)
 

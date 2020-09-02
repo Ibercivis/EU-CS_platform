@@ -36,7 +36,6 @@
 			</div>
 		</form>
 		<!--h4 class="mt-4 white">Join the community to share your favourite citizen science resources, profile your own citizen science projects, and more. </h4-->
-
 	</div>
 </div>
 {% endif %}
@@ -49,15 +48,22 @@
 
 <div class="container">
 	<div class="row">
+		<div class="col-12 mb-2">
+			{{ counterprojects }} results found in projects, click here to see all of them
+		</div>
 		{% include "projects_cards.html" %}
+		<div class="col-12 mb-2">
+			{{ counterresources }} results found in resources, click here to see all of them
+		</div>
 		{% include "resources_cards.html" %}
+		<div class="col-12 mb-2">
+			{{ countertresources }} results found in training, click here to see all of them
+		</div>
 		{% include "resources_cards.html" with resources=tresources %}
 		{% if organisations %}
-			{% include "organisations_cards.html" %}
+		{% include "organisations_cards.html" %}
 		{% endif %}
-		<div class="col-12 text-center mt-4 mb-5">
-			<a type="button" class="btn  btn-red btn-lg shadow-sm" href="/projects">SEE ALL PROJECTS</a>
-		</div>
+
 	</div>
 	<div class="col-12">&nbsp;</div>
 </div>
@@ -72,5 +78,8 @@ src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bo
 	$('.basicAutoComplete').autoComplete(
 	{ minLength: 3 }
 	);
+	$('.basicAutoComplete').on('autocomplete.select', function (evt, item) {
+		$('#finder').submit();
+	});
 </script>
 {% endblock scripts %}

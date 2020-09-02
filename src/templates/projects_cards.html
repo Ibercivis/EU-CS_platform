@@ -1,6 +1,5 @@
 {% load staticfiles %}
 {% load reviews %}
-{% if projects %}
 {% for project in projects %}
 <div class="col-lg-3 col-sm-12 mb-5">
 	<div class="card h-100 shadow border-0">
@@ -114,9 +113,3 @@
 <div class="col-lg-12">
 	{% include "paginator.html" %}
 </div>
-{% else %}
-<div class="col-12">
-	<img  class="img-fluid img-zoom col-12 mt-5" src="{% static 'site/img/undraw_empty_xct9.svg' %}">
-	<h5 class="mb-4">Sorry, nothing found</h5>
-</div>
-{% endif %}

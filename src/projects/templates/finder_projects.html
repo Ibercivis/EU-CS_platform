@@ -22,6 +22,7 @@ Read more about our <a href="/faq">moderation process</a>.
 				</div>
 			</div>
 		</div!-->
+		<input type="hidden" name="keywords" value="{{filters.keywords}}">
 		<div class="col-lg-3 col-12  text-right float-rigth">
 			<div class="input-group input-group-sm mb-3">
 				<div class="input-group-prepend">
@@ -82,7 +83,7 @@ Read more about our <a href="/faq">moderation process</a>.
 						</div>
 					</div>
 					<div class="col-lg-6 col-6 mb-3">
-						{{ counter }} results
+						{{ counter }} result{% if counter != 1 %}s{% endif %} found
 						{% if user.is_authenticated %}
 						<!--a class="btn btn-dark mb-1" href="{% url 'downloadProjects' %}" data-toggle="tooltip" data-placement="top" title="Click here to download all the projects">
 						<i class="fas fa-download"></i>&nbsp;DOWNLOAD
