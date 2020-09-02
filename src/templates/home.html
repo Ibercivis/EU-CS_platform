@@ -48,9 +48,12 @@
 
 <div class="container">
 	<div class="row">
+		{% if counterprojects > 0 %}
 		<div class="col-12 mb-2">
-			{{ counterprojects }} results found in projects, click here to see all of them
+			{{ counterprojects }} result{% if counterprojects > 1 %}s{% endif %} in projects
+			{% if counterprojects > 8 %}, click here to see all of them {% endif %}
 		</div>
+		{% endif %}
 		{% include "projects_cards.html" %}
 		<div class="col-12 mb-2">
 			{{ counterresources }} results found in resources, click here to see all of them

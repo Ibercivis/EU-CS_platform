@@ -3,7 +3,7 @@
 {% if request.get_full_path == "/" %} mt-0 {% else %} mt-5 {% endif %} pb-0 pl-0" >
   <div class="navbar order-1 order-md-0 pb-0 pl-0">
     <ul class="nav pl-0">
-      <li class="nav-item pl-1">
+      <li class="nav-item pl-0">
         <a class="nav-link sub {% active_link 'all' %}"
         href="{% url 'all' %}{% if request.GET.keywords %}?keywords={{request.GET.keywords}}{%endif%}">All</a>
       </li>

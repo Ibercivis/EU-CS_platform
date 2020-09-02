@@ -29,7 +29,7 @@ def home(request):
                                     Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
         filters['keywords'] = request.GET['keywords']
     counterprojects = len(projects)
-    paginatorprojects = Paginator(projects, 4)
+    paginatorprojects = Paginator(projects, 8)
     page = request.GET.get('page')
     projects = paginatorprojects.get_page(page)
 
