@@ -45,7 +45,19 @@
           </span>
         </div>
         {% if request.get_full_path != "/" %}
-        <form class="form-inline" id="searchTop" action="{% url 'projects' %}">
+        <form class="form-inline" id="searchTop" action="
+        {% if 'all' in request.get_full_path %}
+        /all
+        {% elif 'training_resources' in request.get_full_path %}
+        /training_resources
+        {% elif 'resources' in request.get_full_path %}
+        /resources
+        {% elif 'organisations' in request.get_full_path %}
+        /organisations
+        {% else %}
+        /projects
+        {% endif %}"
+        >
           <div class="col-12 col-lg-12 text-center">
             <div class="input-group">
               <div class="input-group-prepend">
@@ -54,7 +66,7 @@
               <input  type="text" id="keywords" name="keywords"  autocomplete="off"
               value="{{filters.keywords}}" class="basicAutoComplete form-control form-control-lg inhead"
               placeholder="Search..."
-              data-url="text_autocomplete/?status={{filters.status}}&country={{filters.country}}&topic={{filters.topic}}&doingAtHome={{filters.doingAtHome}}&approvedCheck={{filters.approvedCheck}}">
+              data-url="./text_autocomplete/">
               <!--div class="input-group-append">
               <div class="input-group-text inhead"><a href="#" data-toggle="modal" data-target="#projectsinfo" ><i class="fas fa-info-circle"></i></a></div>
             </div-->

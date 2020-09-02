@@ -16,9 +16,9 @@
 {% block page_header %}
 {% include "finder_resources.html" %}
 {% endblock page_header %}
-{%block list_of_items %}
+{% block list_of_items %}
 {% include "modal_resources.html" %}
-<div class="container" id="content-1">
+<div class="container">
   <div class="row">
     {% include "resources_cards.html" %}
   </div>
@@ -150,13 +150,5 @@ src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bo
     });
   });
 
-  $(document).ready(function () {
-    $(".card").hover(
-    function () {
-      $(this).addClass('shadow-none').css('cursor', 'pointer');
-    }, function () {
-      $(this).removeClass('shadow-none');
-    });
-  });
 </script>
 {% endblock scripts %}

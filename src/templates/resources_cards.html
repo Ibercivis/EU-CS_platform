@@ -1,7 +1,6 @@
 {% load staticfiles %}
 {% load i18n %}
 {% load l10n %}
-{% if resources %}
 {% for rsc in resources  %}
 {% load reviews %}
 <div class="col-lg-3 col-md-12 mb-4">
@@ -27,12 +26,14 @@
       <div class="container">
         <div class="row">
           {% if rsc.featured %}
-          <div class="col-12 w-100 greenbackground">
-            FEATURED RESOURCE
+          <div class="col-12 w-100 {%if rsc.isTrainingResource %} bluebackground text-light
+           {% else %} greenbackground {% endif %}">
+            FEATURED {%if rsc.isTrainingResource %} TRAINING {% else %} RESOURCE {% endif %}
           </div>
           {% else %}
-          <div class="col-12 w-100 greenbackground">
-            RESOURCE
+          <div class="col-12 w-100  {%if rsc.isTrainingResource %} bluebackground text-light
+           {% else %} greenbackground {% endif %}">
+            {% if rsc.isTrainingResource %} TRAINING {% else %} RESOURCE {% endif %}
           </div>
           {% endif %}
         </div>
@@ -120,9 +121,3 @@
 <div class="col-lg-12">
   {% include "fr2.html" %}
 </div>
-{% else %}
-<div class="col-12">
-  <img  class="img-fluid img-zoom col-12 mt-5" src="{% static 'site/img/undraw_empty_xct9.svg' %}">
-  <h5>Sorry, nothing found</h5>
-</div>
-{% endif %}

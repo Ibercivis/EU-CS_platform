@@ -2,6 +2,7 @@ from django.views import generic
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404
+from django.core.paginator import Paginator
 from django.db.models import Q
 from itertools import chain
 from projects.models import Project,ApprovedProjects, FollowedProjects
@@ -27,11 +28,16 @@ def home(request):
         projects = projects.filter( Q(name__icontains = request.GET['keywords']) |
                                     Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
         filters['keywords'] = request.GET['keywords']
-    projects = projects[:8]
+    counterprojects = len(projects)
+    paginatorprojects = Paginator(projects, 4)
+    page = request.GET.get('page')
+    projects = paginatorprojects.get_page(page)
+
+
 
 
     #Resources
-    resources = Resource.objects.all().filter(~Q(isTrainingResource=True)).filter(~Q(hidden=True)).order_by('featured','id')
+    resources = Resource.objects.get_queryset().filter(~Q(isTrainingResource=True)).filter(~Q(hidden=True)).order_by('featured','id')
     approvedResources = ApprovedResources.objects.all().values_list('resource_id',flat=True)
     savedResources = None
     savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True)
@@ -42,13 +48,14 @@ def home(request):
         resources = resources.filter( Q(name__icontains = request.GET['keywords'])  |
                                     Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
         filters['keywords'] = request.GET['keywords']
-
-    resources = resources[:8]
-
+    counterresources = len(resources)
+    paginatorresources = Paginator(resources, 8)
+    page = request.GET.get('page')
+    resources = paginatorresources.get_page(page)
 
 
     #Training Resources
-    tresources = Resource.objects.all().filter(isTrainingResource=True).order_by('id')
+    tresources = Resource.objects.get_queryset().filter(isTrainingResource=True).order_by('id')
     tapprovedResources = ApprovedResources.objects.all().values_list('resource_id',flat=True)
     tsavedResources = None
     tsavedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True)
@@ -62,9 +69,18 @@ def home(request):
     tresourcesTopIds = list(tresourcesTop.values_list('id',flat=True))
     tresources = tresources.exclude(id__in=tresourcesTopIds)
     tresources = list(tresourcesTop) + list(tresources)
+    countertresources = len(tresources)
+    paginatortresources = Paginator(tresources, 8)
+    page = request.GET.get('page')
+    tresources = paginatortresources.get_page(page)
+
     organisations = Organisation.objects.all().order_by('-id')
 
-    return render(request, 'home.html', {'projects':projects, 'resources':resources, 'tresources':tresources, 'organisations': organisations})
+    return render(request, 'home.html', {'projects':projects, 'counterprojects':counterprojects, \
+        'resources':resources, 'counterresources':counterresources,\
+        'filters': filters, \
+        'tresources':tresources, 'countertresources':countertresources,
+        'organisations': organisations})
 
 def all(request):
     return home(request)

@@ -7,24 +7,3 @@ Submitted projects that have been checked by our Moderator, have been marked as 
 Read more about our <a href="/faq">moderation process</a>.
 </div>
 </div-->
-
-<form class="form-inline" id="searchProjects" action="{% url 'all' %}">
-	<div class="col-lg-6 col-6 mb-3 pl-0">
-		{{ counter }} results
-		{% if user.is_authenticated %}
-		<!--a class="btn btn-dark mb-1" href="{% url 'downloadProjects' %}" data-toggle="tooltip" data-placement="top" title="Click here to download all the projects">
-		<i class="fas fa-download"></i>&nbsp;DOWNLOAD
-	</a-->
-	{% else %}
-	<!--a href="/signup">Sign up</a-->
-	{% endif %}
-</div>
-<div class="col-lg-6 col-6 text-right mb-3">
-	{% if request.get_full_path != "/" %}
-
-	<a class="text-decoration-none text-muted" href="/all">
-		<i class="fas fa-times"></i> Clear current search query and filters</a>
-
-	{% endif %}
-</div>
-</form>
