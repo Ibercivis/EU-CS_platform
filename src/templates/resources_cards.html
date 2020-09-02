@@ -3,7 +3,7 @@
 {% load l10n %}
 {% for rsc in resources  %}
 {% load reviews %}
-<div class="col-lg-4 col-md-6 col-xs-12 mb-4">
+<div class="col-lg-4 col-md-6 col-xs-12 mb-5">
   <div class="card h-100 shadow border-0">
     <a class="card-img-wrap" href="{% if isTrainingResource %}/training_resource/{{rsc.id}}{% else %}/resource/{{rsc.id}}{% endif %}">
       {% if rsc.image1 %}
@@ -35,21 +35,6 @@
         <a class="card-link"
         href="{% if isTrainingResource %}/training_resource/{{rsc.id}}{% else %}/resource/{{rsc.id}}{% endif %}"
         class="card-link">{{ rsc.name | truncatewords:12 }}</a></h6>
-        {% get_rating for rsc as avg_rating %}
-        {% get_review_count for rsc as review_count %}
-        <div class="mb-2">
-        <span class="gl-star-rating-stars s{{ avg_rating | stringformat:'d'}}0 readonly">
-          <span data-value="1" data-text="Terrible"></span>
-          <span data-value="2" data-text="Poor"></span>
-          <span data-value="3" data-text="Average"></span>
-          <span data-value="4" data-text="Very Good"></span>
-          <span data-value="5" data-text="Excellent"></span>
-        </span>
-        {{ review_count }} {% if review_count == 1 %} review {% else %} reviews {% endif %}
-        </div>
-        <div class="mb-2">
-        {{ rsc.abstract |truncatechars:100 }}
-        </div>
         <a class="badge badge-light pt-1" href="/resources?category={{rsc.category.id}}">{{ rsc.category | title }}</a><br>
         {% for theme in rsc.theme.all %}<a class="badge badge-light" href="/resources?theme={{theme.id}}">{{ theme | title}}</a> {% endfor %}<br>
         {% for keyword in rsc.keywords.all %} <a class="badge  badge-light" href="/resources?keywords={{keyword}}">{{keyword | title}}</a>  {% endfor %}
