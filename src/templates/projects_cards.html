@@ -1,7 +1,7 @@
 {% load staticfiles %}
 {% load reviews %}
 {% for project in projects %}
-<div class="col-lg-3 col-sm-12 mb-5">
+<div class="col-lg-4 col-sm-12 mb-5">
 	<div class="card h-100 shadow border-0">
 		<a class="card-img-wrap "href="/project/{{project.id }}">
 			{% if project.image1 %}
@@ -20,22 +20,12 @@
 				{% endif %}
 				{% endfor %}
 			</div>
-			<div class="container">
-				<div class="row">
-					{% if project.featured %}
-					<div class="col-12 w-100 redbackground">
-						FEATURED PROJECT
-					</div>
-					{% else %}
-					<div class="col-12 w-100 redbackground">
-						PROJECT
-					</div>
-					{% endif %}
-				</div>
-			</div>
 		</a>
 		<div class="card-body">
-			<h6 class="card-title mt-1 mb-2">
+			<h6 class="card-title">
+				<div class="col-12 colorred pl-0 mb-3">
+					<i class="fas fa-binoculars"></i> {% if project.featured %} Featured project {% else %} Project {% endif %}
+				</div>
 				<a class="card-link" href="/project/{{project.id }}">{{ project.name }}</a></h6>
 				{% get_rating for project as avg_rating %}
 				{% get_review_count for project as review_count %}
@@ -57,7 +47,7 @@
 			{% for keyword in project.keywords.all %} <a class="badge badge-light pt-1" href="projects?keywords={{keyword|urlencode}}">{{keyword | upper}}</a>  {% endfor %}
 		</div><!-- End of card-body -->
 		<div class="card-footer bg-white p-0">
-			<div class="row">
+			<!--div class="row">
 				<div class="col-12 w-100" id="saved{{rsc.id}}">
 					{% if project.id in followedProjects %}
 					<button type="button" class="btn btn-outline-primary w-100" onclick="setFollowedProject({{project.id}},{{user.id}}, false)">Following</button>
@@ -65,7 +55,7 @@
 					<button type="button" class="btn btn-outline-secondary w-100" onclick="setFollowedProject({{project.id}},{{user.id}}, true)">Follow</button>
 					{% endif %}
 				</div>
-			</div>
+			</div-->
 			<div class="col-8">
 				<div id="approved{{project.id}}" class="float-left">
 					{% if user.is_staff %}
@@ -75,11 +65,7 @@
 					<img  class="img-fluid mt-2" onclick="setApproved({{project.id}}, true)" src="{% static 'site/img/icon_bw.png' %}" />
 					{% endif %}
 					{% else %}
-					{% if project.id in approvedProjects %}
-					<img  class="img-fluid mt-2" src="{% static 'site/img/icon_color.png' %}" />
-					{% else %}
-					<img  class="img-fluid mt-2" src="{% static 'site/img/icon_bw.png' %}" />
-					{% endif %}
+
 					{% endif %}
 					<div id="hidden{{project.id}}" style="display:inline-block">
 						{% if user.is_staff %}
