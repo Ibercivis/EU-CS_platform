@@ -81,7 +81,7 @@
             </div>
             <div class="col-6">
               <button type="submit" onclick="$('form').submit()" class="btn btn-green"><i class="fas fa-share-square"></i> Save</button>
-              <button type="submit" class="btn btn-red float-right" data-href="{% url 'deleteResource' resource.id %}"
+              <button type="submit" class="btn btn-red float-right" data-href="{% if isTrainingResource %} {% url 'deleteResource' resource.id  1 %} {% else %} {% url 'deleteResource' resource.id  0 %} {% endif %}"
                 data-toggle="modal" data-target="#confirm-delete" name='deleteResource'>
                 <span class="fas fa-trash-alt"></span> Delete
               </button>

@@ -196,13 +196,15 @@ def editResource(request, pk, isTrainingResource=False):
     return render(request, 'editResource.html', {'form': form, 'resource': resource, 'curatedGroups': curatedGroups,
      'user': user, 'settings': settings, 'permissionForm': permissionForm, 'isTrainingResource': isTrainingResource })
 
-def deleteResource(request, pk):
+def deleteResource(request, pk, isTrainingResource):
     obj = get_object_or_404(Resource, id=pk)
     if request.user == obj.creator or request.user.is_staff or request.user.id in getCooperators(pk):
         obj.delete()
         reviews = Review.objects.filter(content_type=ContentType.objects.get(model="resource"), object_pk=pk)
         for r in reviews:
             r.delete()
+    if(isTrainingResource):
+        return redirect('training_resources')
     return redirect('resources')
 
 def resources_autocomplete(request):
