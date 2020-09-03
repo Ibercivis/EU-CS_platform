@@ -31,7 +31,7 @@
 					<input type="text" id="keywords" name="keywords" autocomplete="off"
 					class="basicAutoComplete form-control form-control-lg inhead"
 					placeholder="Search for citizen science resources, projects, tools, training, and more...."
-					data-url="home_autocomplete/">
+					data-url="/home_autocomplete/">
 					<div class="input-group-append">
 						<div class="input-group-text inhead clickable" id="backsign"></div>
 					</div>
@@ -68,7 +68,6 @@
 			{% if countertresources > 6 %}click <a href="/training_resources">here</a> to see all of them{% endif %}
 		</div>
 		{% include "resources_cards.html" with resources=tresources %}
-
 		<div class="col-12 mb-2">
 			{{ counterorganisations}} result{% if counterorganisations != 1 %}s{% endif %} in organisations,
 			{% if counterorganisations > 6 %}click <a href="/training_resources">here</a> to see all of them{% endif %}
