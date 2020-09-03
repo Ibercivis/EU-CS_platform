@@ -64,7 +64,7 @@
 
       <div class="input-group pr-2">
         <div class="input-group-prepend">
-          <div class="input-group-text inhead"><i class="fas fa-search"></i></div>
+          <div class="input-group-text inhead clickable "><i class="fas fa-search"></i></div>
         </div>
         <input  type="text" id="keywords" name="keywords"  autocomplete="off"
         value="{{filters.keywords}}" class="basicAutoComplete form-control inhead"
@@ -76,6 +76,9 @@
         {% else %}
         data-url="../text_autocomplete/">
         {% endif %}
+        <div class="input-group-append">
+          <div class="input-group-text inhead clickable" id="backsign"></div>
+        </div>
       </div>
 
     </form>
@@ -187,8 +190,25 @@ $(".navbar-toggler-icon").click(function () {
     $(".ribbon-top-left").show();
   }
 });
+
+$('#mysearch').click(function(){
+  $('#finder').submit();
+});
+$('#backsign').click(function(){
+  $('#keywords').val('');
+  $('#backsign').html('')
+});
+
+$('.basicAutoComplete').keyup(function(){
+  if(($(".basicAutoComplete").val().length)>0){
+    $('#backsign').html('<i class="fas fa-backspace"></i>')
+  }else{
+    $('#backsign').html('')
+  }
+});
 </script>
 {% block scripts %}
 {% endblock scripts %}
+
 </body>
 </html>

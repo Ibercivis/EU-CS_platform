@@ -3,23 +3,23 @@
 {% if request.get_full_path == "/" %} mt-0 {% else %} mt-5 {% endif %} pb-0 pl-0" >
 <ul class="nav pl-0">
   <li class="nav-item">
-    <a class="nav-link sub pl-0 pr-2 {% active_link 'all' %}"
+    <a class="nav-link sub pl-0 pr-5 {% active_link 'all' %}"
     href="{% url 'all' %}{% if request.GET.keywords %}?keywords={{request.GET.keywords}}{%endif%}"><i class="fas fa-search"></i> All</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link sub {% active_link 'projects' %}"
+    <a class="nav-link sub pl-0 pr-5 {% active_link 'projects' %}"
     href="{% url 'projects' %}{% if request.GET.keywords %}?keywords={{request.GET.keywords}}{%endif%}"><i class="fas fa-binoculars"></i> Projects</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link sub {% active_link 'resources' %}"
+    <a class="nav-link sub pl-0 pr-5 {% active_link 'resources' %}"
     href="{% url 'resources' %}{% if request.GET.keywords %}?keywords={{request.GET.keywords}}{%endif%}"><i class="fas fa-book"></i> Resources</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link sub {% active_link 'training_resources' %}"
+    <a class="nav-link sub pl-0 pr-5 {% active_link 'training_resources' %}"
     href="{% url 'training_resources' %}{% if request.GET.keywords %}?keywords={{request.GET.keywords}}{%endif%}"><i class="fas fa-graduation-cap"></i> Training</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link sub {% active_link 'organisations' %}"
+    <a class="nav-link sub pl-0 pr-5 {% active_link 'organisations' %}"
     href="{% url 'organisations'%}{% if request.GET.keywords %}?keywords={{request.GET.keywords}}{%endif%}"><i class="fas fa-university"></i> Organisations</a>
   </li>
 </ul>
