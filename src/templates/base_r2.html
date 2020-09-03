@@ -73,6 +73,8 @@
         data-url="../home_autocomplete/">
         {% elif 'resources' in request.get_full_path %}
         data-url="../resources_autocomplete">
+        {% elif 'organisations' in request.get_full_path %}
+        data-url="../organisations_autocomplete">
         {% else %}
         data-url="../text_autocomplete/">
         {% endif %}
