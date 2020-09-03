@@ -54,27 +54,29 @@
 		{% if counterprojects > 0 %}
 		<div class="col-12 mb-2">
 			{{ counterprojects }} result{% if counterprojects != 1 %}s{% endif %} in projects
-			{% if counterprojects > 9 %}, click <a href="/projects">here</a> to see all of them {% endif %}
+			{% if counterprojects > 6 %}, click <a href="/projects">here</a> to see all of them {% endif %}
 		</div>
 		{% endif %}
 		{% include "projects_cards.html" %}
 		<div class="col-12 mb-2">
 			{{ counterresources }} result{% if counterresources != 1 %}s{% endif %} in resources,
-			{% if counterresources > 9 %}click <a href="/resources">here</a> to see all of them{% endif %}
+			{% if counterresources > 6 %}click <a href="/resources">here</a> to see all of them{% endif %}
 		</div>
 		{% include "resources_cards.html" %}
 		<div class="col-12 mb-2">
 			{{ countertresources }} result{% if counterresources != 1 %}s{% endif %} in training,
-			{% if countertresources > 9 %}click <a href="/training_resources">here</a> to see all of them{% endif %}
-
+			{% if countertresources > 6 %}click <a href="/training_resources">here</a> to see all of them{% endif %}
 		</div>
 		{% include "resources_cards.html" with resources=tresources %}
-		{% if organisations %}
-		{% include "organisations_cards.html" %}
-		{% endif %}
 
+		<div class="col-12 mb-2">
+			{{ counterorganisations}} result{% if counterorganisations != 1 %}s{% endif %} in organisations,
+			{% if counterorganisations > 6 %}click <a href="/training_resources">here</a> to see all of them{% endif %}
+
+		</div>
+		{% include "organisations_cards.html" %}
+		<div class="col-12">&nbsp;</div>
 	</div>
-	<div class="col-12">&nbsp;</div>
 </div>
 {% endblock list_of_items %}
 
@@ -93,11 +95,11 @@ src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bo
 	});
 
 	$('.basicAutoComplete').keyup(function(){
-			if(($(".basicAutoComplete").val().length)>0){
-				$('#backsign').html('<i class="fas fa-backspace"></i>')
-			}else{
-				$('#backsign').html('')
-			}
+		if(($(".basicAutoComplete").val().length)>0){
+			$('#backsign').html('<i class="fas fa-backspace"></i>')
+		}else{
+			$('#backsign').html('')
+		}
 	});
 
 	$('.basicAutoComplete').autoComplete(
