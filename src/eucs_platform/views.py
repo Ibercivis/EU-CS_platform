@@ -29,7 +29,7 @@ def home(request):
                                     Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
         filters['keywords'] = request.GET['keywords']
     counterprojects = len(projects)
-    paginatorprojects = Paginator(projects, 9)
+    paginatorprojects = Paginator(projects, 6)
     page = request.GET.get('page')
     projects = paginatorprojects.get_page(page)
 
@@ -49,7 +49,7 @@ def home(request):
                                     Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
         filters['keywords'] = request.GET['keywords']
     counterresources = len(resources)
-    paginatorresources = Paginator(resources, 9)
+    paginatorresources = Paginator(resources, 6)
     page = request.GET.get('page')
     resources = paginatorresources.get_page(page)
 
@@ -70,19 +70,24 @@ def home(request):
     tresources = tresources.exclude(id__in=tresourcesTopIds)
     tresources = list(tresourcesTop) + list(tresources)
     countertresources = len(tresources)
-    paginatortresources = Paginator(tresources, 9)
+    paginatortresources = Paginator(tresources, 6)
     page = request.GET.get('page')
     tresources = paginatortresources.get_page(page)
 
     organisations = Organisation.objects.all().order_by('-id')
     if request.GET.get('keywords'):
         organisations = organisations.filter( Q(name__icontains = request.GET['keywords']) ).distinct()
+    counterorganisations = len(organisations)
+    paginatororganisation = Paginator(organisations,6)
+    page = request.GET.get('page')
+    organisations = paginatororganisation.get_page(page)
+
 
     return render(request, 'home.html', {'projects':projects, 'counterprojects':counterprojects, \
         'resources':resources, 'counterresources':counterresources,\
         'filters': filters, \
         'tresources':tresources, 'countertresources':countertresources,
-        'organisations': organisations})
+        'organisations': organisations, 'counterorganisations': counterorganisations})
 
 def all(request):
     return home(request)
