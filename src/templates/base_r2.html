@@ -62,7 +62,7 @@
       {% endif %}"
       >
 
-      <div class="input-group">
+      <div class="input-group pr-2">
         <div class="input-group-prepend">
           <div class="input-group-text inhead"><i class="fas fa-search"></i></div>
         </div>
@@ -97,7 +97,7 @@
       {% else %}
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false" href="#"><i class="fas fa-user-circle"></i></a>
+        aria-haspopup="true" aria-expanded="false" href="#"></a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="{% url 'profiles:show_self' %}">My Profile</a>
           <a class="dropdown-item" href="{% url 'profiles:self_projects' %}">Submitted projects</a>
@@ -111,11 +111,12 @@
           {% endif %}
         </div>
       </li>
+      {% endif %}
     </ul>
-    {% endif %}
+
     <a data-toggle="modal" data-target="#modalinfo" class="nav-link redbackground
     text-dark pt-3 pb-3 ml-3 bg-default mysubmit"
-    type="submit">ADD</a>
+    type="submit">&nbsp;&nbsp;ADD&nbsp;&nbsp;</a>
   </div>
 </div>
 </nav>
