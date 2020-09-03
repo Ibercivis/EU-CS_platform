@@ -29,8 +29,8 @@
 <body>
   <header>
     <!--Navbar-->
-    <nav class="navbar navbar-expand-xl navbar-dark navbar-front text-white text-weight-bold fixed-top b-0 pt-0 pb-0">
-      <div class="container text-weight-bold">
+    <nav class="navbar navbar-expand-md navbar-dark navbar-front text-white text-weight-bold fixed-top b-0 pt-0 pb-0">
+      <div class="container">
         <a class="navbar-brand" href="/">
           <img src="{% static 'site/img/icon.png' %}" width="30" height="30" alt=""/>
         </a>
@@ -39,78 +39,87 @@
         <span class="navbar-toggler-icon"></span></button>
 
         <!--div class="ribbon ribbon-top-left">
-          <span>
-            <a style="text-decoration:none;color:white"
-            href="https://eu-citizen.science/blog/2020/04/03/welcome-alpha-release-eu-citizenscience-platform/">ALPHA-2</a>
-          </span>
-        </div-->
-        {% if request.get_full_path != "/" %}
-        <form class="form-inline" id="searchTop" action="
-        {% if 'all' in request.get_full_path %}
-        /all
-        {% elif 'training_resources' in request.get_full_path %}
-        /training_resources
-        {% elif 'resources' in request.get_full_path %}
-        /resources
-        {% elif 'organisations' in request.get_full_path %}
-        /organisations
-        {% else %}
-        /projects
-        {% endif %}"
-        >
-          <div class="col-12 col-lg-12 text-center">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <div class="input-group-text inhead"><i class="fas fa-search"></i></div>
-              </div>
-              <input  type="text" id="keywords" name="keywords"  autocomplete="off"
-              value="{{filters.keywords}}" class="basicAutoComplete form-control form-control-lg inhead"
-              placeholder="Search..."
-              data-url="./text_autocomplete/">
-              <!--div class="input-group-append">
-              <div class="input-group-text inhead"><a href="#" data-toggle="modal" data-target="#projectsinfo" ><i class="fas fa-info-circle"></i></a></div>
-            </div-->
-          </div>
-        </div>
-      </form>
+        <span>
+        <a style="text-decoration:none;color:white"
+        href="https://eu-citizen.science/blog/2020/04/03/welcome-alpha-release-eu-citizenscience-platform/">ALPHA-2</a>
+      </span>
+    </div-->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      {% if request.get_full_path != "/" %}
+      <form class="mx-auto my-auto d-inline w-100" id="searchTop" action="
+      {% if 'all' in request.get_full_path %}
+      /all
+      {% elif 'training_resources' in request.get_full_path %}
+      /training_resources
+      {% elif 'resources' in request.get_full_path %}
+      /resources
+      {% elif 'organisations' in request.get_full_path %}
+      /organisations
       {% else %}
-      <div class="navbar-brand">EU-CITIZEN.SCIENCE</div>
-      {% endif%}
+      /projects
+      {% endif %}"
+      >
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-          {% block navbar-left %}
-          {% endblock navbar-left %}
-        </ul>
-        <ul class="navbar-nav">
-          {% if not user.is_authenticated %}
-          <li class="nav-item"><a class="nav-link pt-3" href="{% url 'accounts:login' %}">LOGIN</a></li>
-          <li class="nav-item"><a class="nav-link pt-3" href="{% url 'accounts:signup' %}" role="button">SIGN UP</a></li>
-          {% else %}
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false" href="#"><i class="fas fa-user-circle"></i></a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="{% url 'profiles:show_self' %}">My Profile</a>
-              <a class="dropdown-item" href="{% url 'profiles:self_projects' %}">Submitted projects</a>
-              <a class="dropdown-item" href="{% url 'profiles:self_resources' %}">Submitted resources</a>
-              <a class="dropdown-item" href="{% url 'profiles:followed_projects' %}">Followed projects</a>
-              <a class="dropdown-item" href="{% url 'profiles:saved_resources' %}">Resources library</a>
-              <a class="dropdown-item" href="{% url 'accounts:logout' %}">Logout</a>
-              {% if user.is_staff %}
-              <a  class="dropdown-item" href="{% url 'admin:index' %}">Admin</a>
-              {% endif %}
-            </div>
-          </li>
-        </ul>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text inhead"><i class="fas fa-search"></i></div>
+        </div>
+        <input  type="text" id="keywords" name="keywords"  autocomplete="off"
+        value="{{filters.keywords}}" class="basicAutoComplete form-control form-control-lg inhead"
+        placeholder="Search..."
+        {% if 'all' in request.get_full_path %}
+        data-url="../home_autocomplete/">
+        {% elif 'resources' in request.get_full_path %}
+        data-url="../resources_autocomplete">
+        {% else %}
+        data-url="../text_autocomplete/">
         {% endif %}
-        <a data-toggle="modal" data-target="#modalinfo" class="nav-link redbackground
-        text-dark pt-3 pb-3 ml-3 bg-default mysubmit"
-        type="submit">SUBMIT</a>
       </div>
-    </div>
-  </nav>
-  <!--/.Navbar-->
+
+    </form>
+    {% else %}
+    <div class="navbar-brand">EU-CITIZEN.SCIENCE</div>
+    {% endif%}
+
+
+    <ul class="navbar-nav ml-auto">
+      {% block navbar-left %}
+      {% endblock navbar-left %}
+      {% if not user.is_authenticated %}
+      <li class="nav-item dropdown mt-2">
+        <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false" href="#"><i class="fas fa-user-circle"></i></a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="{% url 'accounts:login' %}">LOGIN</a>
+        <a class="dropdown-item" href="{% url 'accounts:signup' %}" role="button">SIGN UP</a>
+        </div>
+      </li>
+      {% else %}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false" href="#"><i class="fas fa-user-circle"></i></a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'profiles:show_self' %}">My Profile</a>
+          <a class="dropdown-item" href="{% url 'profiles:self_projects' %}">Submitted projects</a>
+          <a class="dropdown-item" href="{% url 'profiles:self_resources' %}">Submitted resources</a>
+          <a class="dropdown-item" href="{% url 'profiles:followed_projects' %}">Followed projects</a>
+          <a class="dropdown-item" href="{% url 'profiles:saved_resources' %}">Resources library</a>
+
+          {% if user.is_staff %}
+          <a  class="dropdown-item" href="{% url 'admin:index' %}">Admin</a>
+          <a class="dropdown-item" href="{% url 'accounts:logout' %}">Logout</a>
+          {% endif %}
+        </div>
+      </li>
+    </ul>
+    {% endif %}
+    <a data-toggle="modal" data-target="#modalinfo" class="nav-link redbackground
+    text-dark pt-3 pb-3 ml-3 bg-default mysubmit"
+    type="submit">ADD</a>
+  </div>
+</div>
+</nav>
+<!--/.Navbar-->
 </header>
 
 <main class="flex-fill">

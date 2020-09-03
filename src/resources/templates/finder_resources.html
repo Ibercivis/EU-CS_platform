@@ -11,7 +11,7 @@ have been marked as 'Moderated'. Read more about our <a href="/faq">moderation p
 </div-->
 <div class="row">
 	<form class="form-inline float-lg-right" id="searchResources" action="{% if isTrainingResource %} {% url 'training_resources' %} {% else %}{% url 'resources' %} {% endif %}">
-
+		<input type="hidden" name="keywords" value="{{filters.keywords}}">
 		<div class="col-lg-3 col-12  text-right float-rigth">
 			<div class="input-group input-group-sm mb-3">
 				<div class="input-group-prepend">
