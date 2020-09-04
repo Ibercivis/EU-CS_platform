@@ -8,11 +8,11 @@ class OrganisationForm(forms.Form):
 
     name = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder':'The name of the organisation'}))
     url = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'placeholder':'URL of the organisation'}))
-    description = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Please briefly describe the organisation (ideally in 500 words or less'}), max_length = 3000)
+    description = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Please briefly describe the organisation (ideally in 500 words or less)'}), max_length = 3000)
     orgType = forms.ModelChoiceField(queryset=OrganisationType.objects.all(), label="Type (Select one)", widget=forms.Select(attrs={'class':'js-example-basic-single'}))
-    logo = forms.ImageField(required=False,label="Please provide the URL of the logo image for your organisation (.jpg or .png)", widget=forms.FileInput)
-    contact_point = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder':'Contact point'}))
-    contact_point_email = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder':'Please provide the email address of the contact point for the organisation'}))
+    logo = forms.ImageField(required=False,label="Please upload the logo of your organisation (.jpg or .png)", widget=forms.FileInput)
+    contact_point = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder':'Please name the contact person or contact point for the organisation'}))
+    contact_point_email = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder':'Please provide the email address of the contact person or contact point'}))
     latitude = forms.DecimalField(max_digits=9,decimal_places=6, widget=forms.HiddenInput())
     longitude = forms.DecimalField(max_digits=9,decimal_places=6, widget=forms.HiddenInput())
 
