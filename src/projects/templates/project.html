@@ -15,7 +15,107 @@
 {% endblock %}
 
 {% block list_of_items %}
-<div class="container mt-5">
+<div class="container">
+
+  <div class="card text-center">
+    {% if project.image3 %}
+    <img class="card-img  {% if project.id not in approvedProjects %} nonmoderated {% endif %}" src="{{ project.image3 }}" >
+    {% else %}
+    <img class="card-img  {% if project.id not in approvedProjects %} nonmoderated {% endif %}" src='/static/site/img/project_default_header.png'>
+    {% endif %}
+    <div class="card-header flex  flex-row-reverse">
+      <ul class="nav nav nav-tabs card-header-tabs mr-auto flex-row-reverse">
+        <li class="nav-item">
+          <a class="nav-link" href="#" onClick="$('#one').hide(); $('#two').show()">Participation</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#" onClick="$('#two').hide(); $('#one').show()">Description</a>
+        </li>
+
+      </ul>
+    </div>
+    <div class="card-block text-left p-4">
+      <div class="row">
+        <div class="col-xl-3 col-md-6 col-12" id="profileleft">
+          {% if project.image2 %}
+          <img class="card-img  {% if project.id not in approvedProjects %} nonmoderated {% endif %}" src="{{ project.image2 }}" >
+          {% else %}
+          <img class="card-img  {% if project.id not in approvedProjects %} nonmoderated {% endif %}" src='/static/site/img/project_default_card.webp'>
+          {% endif %}
+          <a target="_blank" href="{% if 'http' not in project.url %}//{%endif%}{{project.url}}">{{project.url}}</a>
+          <br>
+          {{ project.status}}<br>
+          Start: {{ project.start_date | date:"d/m/Y"}}<br>
+          End:&nbsp;&nbsp;{{ project.end_date | date:"d/m/Y"}}
+          <hr>
+          <div><b>Science Topic</b></div>
+          <div>
+            {% for topic in project.topic.all %}
+            <a class="badge badge-light" href="/projects?keywords=&topic={{topic|urlencode}}">{{topic}}</a>
+            {% endfor %}
+          </div>
+          <hr>
+          <b>Keywords</b>
+          <div>
+            {% for keyword in project.keywords.all %}
+            <a class="badge badge-light" href="/projects?keywords={{keyword|urlencode}}">{{keyword}}</a>
+            {% endfor %}
+          </div>
+          <hr>
+          <b>Location</b>
+          <div>
+            {% for country in countries %}
+            {% if country.code == project.country %}
+            <a class="badge badge-light" href="projects?country={{country.code}}">{{ country.name | title }}</a>
+            {% endif %}
+            {% endfor %}
+          </div>
+          <hr>
+          <b>Contact</b>
+          <div>
+            <a class="badge badge-light" href="">{{project.host}}</a>
+            {% if project.mainOrganisation %}
+            <a class="badge badge-light"
+            href="/organisation/{{project.mainOrganisation.id}}">{{ project.mainOrganisation }} </a> (Main organisation)
+            {% endif %}
+            {% for organisation in project.organisation.all %}
+            <a class="badge badge-light" href="/organisation/{{organisation.id}}">{{organisation}}</a>
+            {% endfor %}
+
+          </div>
+        </div>
+        <div class="col-xl-9 col-md-6 col-12" id="one">
+          <h5>{{project.name}}</h5>
+          {% get_rating for project as avg_rating %}
+          {% get_review_count for project as review_count %}
+          <span class="gl-star-rating-stars s{{ avg_rating | stringformat:'d'}}0 readonly">
+            <span data-value="1" data-text="Terrible"></span>
+            <span data-value="2" data-text="Poor"></span>
+            <span data-value="3" data-text="Average"></span>
+            <span data-value="4" data-text="Very Good"></span>
+            <span data-value="5" data-text="Excellent"></span>
+          </span>
+          {{ review_count }} <a href="#review-list">{% if review_count == 1 %} review {% else %} reviews {% endif %}</a>
+          <p><b>{{project.aim | safe}}</b></p>
+          <p>{{project.description | safe}}</p>
+        </div>
+        <div class="col-xl-9 col-md-6 col-12 myhidden" id="two">
+          <h5>{{project.name}}</h5>
+          <b>How to participate: </b>
+          <div>{{project.howToParticipate | safe}}</div><br>
+          <b>Needed equipment:</b>
+          <div>{{project.equipment |safe}}</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="container">
   <div class="row">
     {{ permissionForm.media.css }}
     <div class="main-content-container container-fluid" >
@@ -33,27 +133,27 @@
           <div class="row">
             <div class="col-lg-6 col-12">
               {% if user.is_authenticated %}
-                {% if project.creator == user or user.is_staff or user.id in cooperators %}
-                <a class="btn btn-red float-left mt-4" href="{% url 'editProject' project.id %}"><i class="fas fa-edit"></i> Edit </a>
-                {% endif %}
-            </div>
-              {% if project.creator == user or user.is_staff %}
-                <div class="col-6">
-                  <permissionForm>
-                    {% csrf_token %}
-                    {{ permissionForm.usersAllowed | as_crispy_field }}
-                    {{ permissionForm.selectedUsers | as_crispy_field }}
-                    {{ permissionForm.usersCollection | as_crispy_field }}
-                  </permissionForm>
-                </div>
+              {% if user.is_staff %}
+              <a class="btn btn-red float-left mt-4" href="{% url 'editProject' project.id %}"><i class="fas fa-edit"></i> Edit </a>
               {% endif %}
+            </div>
+            {% if project.creator == user or user.is_staff %}
+            <div class="col-6">
+              <permissionForm>
+                {% csrf_token %}
+                {{ permissionForm.usersAllowed | as_crispy_field }}
+                {{ permissionForm.selectedUsers | as_crispy_field }}
+                {{ permissionForm.usersCollection | as_crispy_field }}
+              </permissionForm>
+            </div>
+            {% endif %}
             {% endif %}
           </div>
         </div>
         <div class="card-text p-3">
           <div class="row">
             <div class="col-12 col-xl-4 mt-2 mt-4">
-              <h2>{{project.name}}</h2>
+              <h2><b>{{project.name}}</b></h2>
               {% get_rating for project as avg_rating %}
               {% get_review_count for project as review_count %}
               <span class="gl-star-rating-stars s{{ avg_rating | stringformat:'d'}}0 readonly">
@@ -115,8 +215,8 @@
               <b>Date created:</b> {{project.dateCreated  | date:"d/m/Y"}}<br>
               <b>Date updated:</b>{{project.dateUpdated  | date:"d/m/Y"}}<br>
               <b>Organisation:</b>
-                  {% if project.mainOrganisation %} <a class="badge" href="/organisation/{{project.mainOrganisation.id}}">{{ project.mainOrganisation }} </a> (Main organisation){% endif %}
-                  {% for organisation in project.organisation.all %} <a class="badge" href="/organisation/{{organisation.id}}">{{organisation}}</a>  {% endfor %}
+              {% if project.mainOrganisation %} <a class="badge" href="/organisation/{{project.mainOrganisation.id}}">{{ project.mainOrganisation }} </a> (Main organisation){% endif %}
+              {% for organisation in project.organisation.all %} <a class="badge" href="/organisation/{{organisation.id}}">{{organisation}}</a>  {% endfor %}
               <br/>
               <b>Website: </b><a target="_blank" href="{% if 'http' not in project.url %}//{%endif%}{{project.url}}">{{project.url}}</a><br>
             </div>
@@ -197,17 +297,17 @@
             <div class="col-6">
               <div id="approved{{project.id}}" class="float-left">
                 {% if user.is_staff %}
-                  {% if project.id in approvedProjects %}
-                  <img  class="img-fluid mt-2" onclick="setApproved({{project.id}}, false)" src="{% static 'site/img/icon_color.png' %}" />
-                  {% else %}
-                  <img  class="img-fluid mt-2" onclick="setApproved({{project.id}}, true)" src="{% static 'site/img/icon_bw.png' %}" />
-                  {% endif %}
+                {% if project.id in approvedProjects %}
+                <img  class="img-fluid mt-2" onclick="setApproved({{project.id}}, false)" src="{% static 'site/img/icon_color.png' %}" />
                 {% else %}
-                  {% if project.id in approvedProjects %}
-                  <img  class="img-fluid mt-2" src="{% static 'site/img/icon_color.png' %}" />
-                  {% else %}
-                  <img  class="img-fluid mt-2" src="{% static 'site/img/icon_bw.png' %}" />
-                  {% endif %}
+                <img  class="img-fluid mt-2" onclick="setApproved({{project.id}}, true)" src="{% static 'site/img/icon_bw.png' %}" />
+                {% endif %}
+                {% else %}
+                {% if project.id in approvedProjects %}
+                <img  class="img-fluid mt-2" src="{% static 'site/img/icon_color.png' %}" />
+                {% else %}
+                <img  class="img-fluid mt-2" src="{% static 'site/img/icon_bw.png' %}" />
+                {% endif %}
                 {% endif %}
               </div>
               {% if user.is_staff and project.id not in approvedProjects %}
@@ -217,11 +317,11 @@
               {% endif %}
               <div id="featured{{project.id}}" style="display:inline-block">
                 {% if user.is_staff %}
-                  {% if project.featured %}
-                  <a  onclick="setFeatured({{project.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
-                  {% else %}
-                  <a  onclick="setFeatured({{project.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
-                  {% endif %}
+                {% if project.featured %}
+                <a  onclick="setFeatured({{project.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
+                {% else %}
+                <a  onclick="setFeatured({{project.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
+                {% endif %}
                 {% endif %}
               </div>
             </div>
@@ -247,7 +347,7 @@
   {% block scripts %}
   <script type="text/javascript">
 
-  $(function () {
+    $(function () {
       var users = $("#id_usersCollection").val();
       var users = users.split(",");
       var selectedUsers = $("#id_selectedUsers").val().split(",");
