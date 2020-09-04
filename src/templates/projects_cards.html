@@ -1,18 +1,22 @@
 {% load staticfiles %}
 {% load reviews %}
 {% for project in projects %}
-<div class="col-lg-4 col-sm-12 mb-5">
+<div class="col-lg-4 col-sm-6 col-12 mb-5">
 	<div class="card h-100 shadow border-0">
 		<a class="card-img-wrap "href="/project/{{project.id }}">
 			{% if project.image1 %}
-			<img class="card-img-top img-fluid img-zoom lazyload {% if project.id not in approvedProjects %} nonmoderated {% endif %}" src="{{ project.image1 }}" />
+			<img class="card-img-top img-fluid img-zoom lazyload {% if project.id not in approvedProjects %}
+			nonmoderated {% endif %}" src="{{ project.image1 }}" />
 			{% else %}
-			<img class="card-img-top img-fluid img-zoom lazyload {% if project.id not in approvedProjects %} nonmoderated {% endif %}" src="{% static 'site/img/project_default_card.webp' %}" />
+			<img class="card-img-top img-fluid img-zoom lazyload {% if project.id not in approvedProjects %}
+			nonmoderated {% endif %}" src="{% static 'site/img/project_default_card.webp' %}" />
 			{% endif %}
 			<div class="upper">
 				{% if project.hidden %}<a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT ACCEPTED</a><br/>
-				{% else %} {% if project.id not in approvedProjects %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br/>
-				{% else %} {% if filters.approvedCheck == "All" %}  <a class="badge frontpage frontpage-green mb-2" href="/faq#moderation">MODERATED</a><br/> {% endif %}
+				{% else %} {% if project.id not in approvedProjects %} <a class="badge frontpage frontpage-red mb-2"
+				href="/faq#moderation">NOT YET MODERATED</a><br/>
+				{% else %} {% if filters.approvedCheck == "All" %}  <a class="badge frontpage frontpage-green mb-2"
+				href="/faq#moderation">MODERATED</a><br/> {% endif %}
 				{% endif %}{% endif %}
 				{% for country in countries %}
 				{% if country.code == project.country %}
@@ -30,74 +34,14 @@
 				{% for topic in project.topic.all %}
 				<a class="badge badge-light pt-1" href="projects?keywords=&topic={{topic|urlencode}}">{{topic | upper}}</a>
 				{% endfor %}
-				{% for keyword in project.keywords.all %} <a class="badge badge-light pt-1" href="projects?keywords={{keyword|urlencode}}">{{keyword | upper}}</a>  {% endfor %}
-
+				{% for keyword in project.keywords.all %} <a class="badge badge-light pt-1"
+				href="projects?keywords={{keyword|urlencode}}">{{keyword | upper}}</a>  {% endfor %}
 			</div><!-- End of card-body -->
-			<div class="card-footer bg-white">
-				<!--div class="mb-2 text-right">
-				{{ review_count }} {% if review_count == 1 %} review {% else %} reviews {% endif %}
-
-				<span class="gl-star-rating-stars s{{ avg_rating | stringformat:'d'}}0 readonly">
-				<span data-value="1" data-text="Terrible"></span>
-				<span data-value="2" data-text="Poor"></span>
-				<span data-value="3" data-text="Average"></span>
-				<span data-value="4" data-text="Very Good"></span>
-				<span data-value="5" data-text="Excellent"></span>
-			</span>
-			<!--div class="card-text mt-3">{{project.description | safe | truncatechars:180 }}
-			<a class="project" href="/project/{{project.id}}" target="_blank">Read more</a>
-		</div-->
-		<!--div class="row">
-		<div class="col-12 w-100" id="saved{{rsc.id}}">
-		{% if project.id in followedProjects %}
-		<button type="button" class="btn btn-outline-primary w-100" onclick="setFollowedProject({{project.id}},{{user.id}}, false)">Following</button>
-		{% else %}
-		<button type="button" class="btn btn-outline-secondary w-100" onclick="setFollowedProject({{project.id}},{{user.id}}, true)">Follow</button>
-		{% endif %}
+		</div><!-- end of card -->
+	</div><!-- end of col -->
+	{% endfor %}
+	{% if 'projects' in request.get_full_path %}
+	<div class="col-lg-12">
+		{% include "paginator.html" %}
 	</div>
-</div-->
-<div class="col-8">
-	<div id="approved{{project.id}}" class="float-left">
-		{% if user.is_staff %}
-		{% if project.id in approvedProjects %}
-		<img  class="img-fluid mt-2"  onclick="setApproved({{project.id}}, false)" src="{% static 'site/img/icon_color.png' %}" />
-		{% else %}
-		<img  class="img-fluid mt-2" onclick="setApproved({{project.id}}, true)" src="{% static 'site/img/icon_bw.png' %}" />
-		{% endif %}
-		{% else %}
-		
-		{% endif %}
-		<div id="hidden{{project.id}}" style="display:inline-block">
-			{% if user.is_staff %}
-			{% if project.hidden %}
-			<a  onclick="setHidden({{project.id}}, false)"><i class="fas fa-eye-slash"></i></a>
-			{% else %}
-			<a  onclick="setHidden({{project.id}}, true)"><i class="fas fa-eye"></i></a>
-			{% endif %}
-			{% else %}
-			{% if project.hidden %}
-			<i class="fas fa-eye-slash"></i>
-			{% endif %}
-			{% endif %}
-		</div>
-		<div id="featured{{project.id}}" style="display:inline-block">
-			{% if user.is_staff %}
-			{% if project.featured %}
-			<a  onclick="setFeatured({{project.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
-			{% else %}
-			<a  onclick="setFeatured({{project.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
-			{% endif %}
-			{% endif %}
-		</div>
-	</div>
-</div>
-</div>
-</div><!-- end of card footer -->
-</div><!-- end of card -->
-
-{% endfor %}
-{% if 'projects' in request.get_full_path %}
-<div class="col-lg-12">
-	{% include "paginator.html" %}
-</div>
-{% endif %}
+	{% endif %}

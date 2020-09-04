@@ -148,11 +148,27 @@ display:none;
 .nav-link.sub{
 	color: #777;
 }
-.nav-link.sub.active{
-	color: #333;
+.nav-link.sub.sub-project.active{
+	color: #dc3545;
 }
+.nav-link.sub.sub-resource.active{
+	color: #28a745;
+}
+.nav-link.sub.sub-training.active{
+	color: #17a2b8;
+}
+.nav-link.sub.sub-all.active{
+	color: #203863;
+}
+.nav-link.sub.sub-organisation.active{
+	color: #390040;
+}
+
 .nav-link.sub:hover{
 	color: #333;
+}
+.sub-nav-bar{
+	margin-top: 38px;
 }
 .card-link{
 	color: #333;
@@ -361,10 +377,14 @@ dt {
 	text-decoration: underline;
 }
 .mysubmit{
+	min-width: 100px;
+	height: 44px;
+	background-color: #dc3545;
+	border: 0px !important;
 	transition: background-color 0.25s;
 }
 .mysubmit:hover{
-	background-color: #a6d49f;
+	background-color: #28a745;
 }
 
 .ribbon {
