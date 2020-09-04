@@ -39,57 +39,7 @@
         {% for theme in rsc.theme.all %}<a class="badge badge-light" href="/resources?theme={{theme.id}}">{{ theme | title}}</a> {% endfor %}<br>
         {% for keyword in rsc.keywords.all %} <a class="badge  badge-light" href="/resources?keywords={{keyword}}">{{keyword | title}}</a>  {% endfor %}
       </div><!-- end of card-body -->
-      <div class="card-footer bg-white p-0">
-        <div class="row">
-
-          {% if user.is_authenticated %}
-          <div class="col-12 w-100" id="saved{{rsc.id}}">
-            {% if rsc.id in savedResources %}
-            <button type="button" class="btn btn-outline-primary w-100" onclick="setSavedResource({{rsc.id}},{{user.id}}, false)">In my library</button>
-            {% else %}
-            <button type="button" class="btn btn-outline-secondary w-100" onclick="setSavedResource({{rsc.id}},{{user.id}}, true)">Add to library</button>
-            {% endif %}
-          </div>
-          {% endif %}
-
-          <div class="col-6">
-            <div id="approved{{rsc.id}}" class="float-left">
-              {% if user.is_staff %}
-              {% if rsc.id in approvedResources %}
-              <img onclick="setApprovedRsc({{rsc.id}}, false)" class="img-fluid mt-2" src="{% static 'site/img/icon_color.png' %}" />
-              {% else %}
-              <img onclick="setApprovedRsc({{rsc.id}}, true)" class="img-fluid mt-2" src="{% static 'site/img/icon_bw.png' %}" />
-              {% endif %}
-              {% else %}
-              {% endif %}
-            </div>
-            <div id="hidden{{rsc.id}}">
-              {% if user.is_staff %}
-              {% if rsc.hidden %}
-              <a onclick="setHiddenResource({{rsc.id}}, false)"><i class="fas fa-eye-slash"></i></a>
-              {% else %}
-              <a onclick="setHiddenResource({{rsc.id}}, true)"><i class="fas fa-eye"></i></a>
-              {% endif %}
-              {% else %}
-              {% if rsc.hidden %}
-              <i class="fas fa-eye-slash"></i>
-              {% endif %}
-              {% endif %}
-            </div>
-            <div id="featured{{rsc.id}}" style="display:inline-block">
-              {% if user.is_staff %}
-              {% if rsc.featured %}
-              <a  onclick="setFeatured({{rsc.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
-              {% else %}
-              <a  onclick="setFeatured({{rsc.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
-              {% endif %}
-              {% endif %}
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
+    </div><!-- end of card -->
   </div>
   {% endfor %}
   {% if 'resources' in request.get_full_path %}
