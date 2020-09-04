@@ -19,15 +19,15 @@ class ProjectForm(forms.Form):
     keywords = forms.MultipleChoiceField(choices=(), \
         widget=Select2MultipleWidget(), required=False, \
         help_text='Please enter 2-3 keywords (comma separated) to further describe your project and assist search on the platform',label='Keywords')
-    
+
     #aim = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 2000}}), label="Aim of the project (max 2000 characters)")
     aim = forms.CharField(\
         widget=forms.Textarea(), help_text='Primary aim, goal or objective of the project. Max 2000 characters',\
         max_length = 2000)
-    
+
     #description = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 3000}}), label="Description of Citizen Science Aspects (max 3000 haracters)")
     description = forms.CharField(\
-        widget=forms.Textarea(), help_text='Please describe the citizen science aspect(s) of the project - see the <a href='https://zenodo.org/communities/citscicharacteristics'>ECSA Characteristics of Citizen Science</a> for guidance',\
+        widget=forms.Textarea(), help_text='Please describe the citizen science aspect(s) of the project - see the <a href="https://zenodo.org/communities/citscicharacteristics">ECSA Characteristics of Citizen Science</a> for guidance',\
         max_length = 3000)
     topic = forms.ModelMultipleChoiceField(queryset=Topic.objects.all(),\
         widget=Select2MultipleWidget(), help_text='The project topic(s) or field(s) of science, multiple selection', \
@@ -98,7 +98,7 @@ class ProjectForm(forms.Form):
     height3 = forms.FloatField(widget=forms.HiddenInput(), required=False, label="provide image credit, if applicable")
     withImage3 = forms.BooleanField(widget=forms.HiddenInput(), required=False, initial=False)
     image_credit3 = forms.CharField(max_length=300, required=False)
-    
+
     #Geography
     latitude = forms.DecimalField(max_digits=9,decimal_places=6)
     longitude = forms.DecimalField(max_digits=9,decimal_places=6)
