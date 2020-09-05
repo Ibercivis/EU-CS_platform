@@ -17,12 +17,9 @@
     {% else %}
     <img class="img-fluid img-responsive img-zoom {% if resource.id not in approvedResources %} nonmoderated {% endif %}" src='/static/site/img/resource_default_header.png'>
     {% endif %}
-    <div class="card-header flex  flex-row-reverse">
-    </div>
+
     <div class="card-block text-left p-4">
       <div class="row">
-
-
         <div class="col-xl-9 col-md-6 col-12" id="one">
           <h5>{{resource.name}}</h5>
           {% get_rating for resource as avg_rating %}
@@ -36,9 +33,49 @@
           </span>
           {{ review_count }} {% if review_count == 1 %} review {% else %} reviews {% endif %}
           <br><br>{{ resource.abstract | safe }}
+          <div>
+            <b>License: </b>{{ resource.license }}<br>
+            <b>Audience: </b>{% for audience in resource.audience.all %}{{ audience }} {% endfor %}<br>
+            <b>Publisher: </b> {{ resource.publisher }}<br>
+            <b>Organisation(s):</b>
+            {% for organisation in resource.organisation.all %}
+            <a class="badge" href="/organisation/{{organisation.id}}">{{organisation}}</a>
+            {% endfor %}
+            <br/>
+            <b>Year of publication: </b> {{ resource.datePublished }}<br>
+            <b>Resource DOI: </b> {{ resource.resourceDOI }}<br>
+          </div>
+          <a class="btn btn-outline-secondary float-right ml-2 mt-2" href="{% if 'http' not in resource.url %}//{%endif%}{{resource.url}}" target="_blank">Download</a>
+          {% if user.is_authenticated %}
+          <div id="saved{{resource.id}}">
+            {% if resource.id in savedResources %}
+            <button type="button" class="btn btn-outline-primary float-right mt-2" onclick="setSavedResource({{resource.id}},{{user.id}}, false)">In my library</button>
+            {% else %}
+            <button type="button" class="btn btn-outline-secondary float-right mt-2" onclick="setSavedResource({{resource.id}},{{user.id}}, true)">Add to library</button>
+            {% endif %}
+          </div>
+
+          <a  class="btn btn-outline-secondary float-right mr-2 mt-2" href="/resource_review/{{resource.id}}">Review</a>
+
+          {% endif %}
+          {% if review_count > 0 %}
+          <br><b>Reviews</b><br>
+          {% get_review_list for resource as review_list %}
+          {% for review in review_list %}
+          <span class="gl-star-rating-stars s{{ review.rating | stringformat:'d'}}0 readonly">
+            <span data-value="1" data-text="Terrible"></span>
+            <span data-value="2" data-text="Poor"></span>
+            <span data-value="3" data-text="Average"></span>
+            <span data-value="4" data-text="Very Good"></span>
+            <span data-value="5" data-text="Excellent"></span>
+          </span><br>
+          {{review.submit_date}} - {{review.user.name}}
+          <p>{{review.comment}}</p>
+          {% endfor %}
+          {% endif %}
         </div>
         <div class="col-xl-3 col-md-6 col-12" id="profileright">
-          <div class="card mb-4">
+          <div class="card mb-4 border border-0">
             <div class="card-body">
               <h1><i class="fas fa-language" ></i></h1>
               <h5 class="text-dark">Language</h5>
@@ -50,21 +87,21 @@
               {% endfor %}
             </div>
           </div>
-          <div class="card mb-4">
+          <div class="card mb-4 border border-0">
             <div class="card-body">
               <h1><i class="fas fa-grip-horizontal" ></i></h1>
               <h5 class="text-dark">Category</h5>
               <a class="badge badge-light" href="/category?theme={{resource.category.id}}">{{resource.category | upper }}</a>
             </div>
           </div>
-          <div class="card mb-4">
+          <div class="card mb-4 border border-0">
             <div class="card-body">
               <h1><i class="fas fa-book" ></i></h1>
               <h5 class="text-dark">Theme</h5>
               {% for theme in resource.theme.all %}<a class="badge badge-light" href="/resources?theme={{theme.id}}">{{ theme | upper }}</a> {% endfor %}
             </div>
           </div>
-          <div class="card">
+          <div class="card mb-4 border border-0">
             <div class="card-body">
               <h1><i class="far fa-lightbulb"></i></h1>
               <h5 class="text-dark">Keywords</h5>
