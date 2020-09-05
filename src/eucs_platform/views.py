@@ -87,7 +87,8 @@ def home(request):
         'resources':resources, 'counterresources':counterresources,\
         'filters': filters, \
         'tresources':tresources, 'countertresources':countertresources,
-        'organisations': organisations, 'counterorganisations': counterorganisations})
+        'organisations': organisations, 'counterorganisations': counterorganisations,
+        'isSearchPage': True})
 
 def all(request):
     return home(request)
@@ -98,7 +99,7 @@ class AboutPage(generic.TemplateView):
 def curated(request):
     groups = ResourceGroup.objects.get_queryset().order_by('id')
     resourcesgrouped = ResourcesGrouped.objects.get_queryset().order_by('group')
-    return render(request, 'curated.html', {'groups': groups, 'resourcesgrouped': resourcesgrouped})
+    return render(request, 'curated.html', {'groups': groups, 'resourcesgrouped': resourcesgrouped, 'isSearchPage': True})
 
 def imprint(request):
     return render(request, 'imprint.html')

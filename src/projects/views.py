@@ -98,7 +98,8 @@ def projects(request):
     projects = paginator.get_page(page)
 
     return render(request, 'projects.html', {'projects': projects, 'topics': topics, 'countriesWithContent': countriesWithContent,
-    'status': status, 'filters': filters, 'approvedProjects': approvedProjects, 'followedProjects': followedProjects, 'counter': counter })
+    'status': status, 'filters': filters, 'approvedProjects': approvedProjects, 'followedProjects': followedProjects,
+    'counter': counter, 'isSearchPage': True })
 
 
 def project(request, pk):
@@ -112,7 +113,8 @@ def project(request, pk):
     followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id',flat=True)
     approvedProjects = ApprovedProjects.objects.all().values_list('project_id',flat=True)
     return render(request, 'project.html', {'project':project, 'followedProjects':followedProjects,
-    'approvedProjects':approvedProjects, 'permissionForm': permissionForm, 'cooperators': getCooperators(pk)})
+    'approvedProjects':approvedProjects, 'permissionForm': permissionForm, 'cooperators': getCooperators(pk),
+    'isSearchPage': True})
 
 
 def editProject(request, pk):

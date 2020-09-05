@@ -25,6 +25,9 @@ main.nomargintop {
 	background-position: center center;
 	padding-bottom: 0 !important;
 }
+.bg-primary {
+		background-color: #203863 !important;
+}
 .jumbotron-default{
 	background-color: #203863;
 	color: #fff;
@@ -37,22 +40,7 @@ main.nomargintop {
 	background-size: cover;
 	background-position: center;
 }
-.jumbotron-projects{
-	/*background-image: url('../img/projects.webp');*/
-	min-height: 10vh;
-	background-color: #405883;
-	background-blend-mode: overlay;
-	background-size: cover;
-	background-position: center;
-}
-.jumbotron-resources{
-	/* background-image: url('../img/resources.jpg'); */
-	background-size: cover;
-	min-height: 13vh;
-	background-color: #567;
-	background-blend-mode: overlay;
-	background-size: cover;
-	background-position: center;
+
 }
 .jumbotron-lists{
 	background-image: url('../img/selection.webp');
@@ -81,7 +69,7 @@ main.nomargintop {
 .jumbotron-events{
 	background-image: url('../img/events.jpg');
 	background-size: cover;
-	min-height: 15vh;
+	min-height: 10vh;
 	background-color: #405883;
 	background-blend-mode: overlay;
 	background-size: cover;

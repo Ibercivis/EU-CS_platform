@@ -30,7 +30,7 @@ def new_organisation(request):
                 random_num = random.randint(0, 1000)
                 image_path = "media/images/" + _datetime + '_' + str(random_num) + '_' + photo.name
                 image.thumbnail((144,144))
-                image.save(image_path)        
+                image.save(image_path)
             form.save(request, '/' + image_path)
             return redirect('../organisations', {})
         else:
@@ -46,25 +46,25 @@ def organisation(request, pk):
     if user != organisation.creator and not user.is_staff:
         editable = False
     else:
-        editable = True 
+        editable = True
     mainProjects = Project.objects.all().filter(mainOrganisation__id=pk)
     associatedProjects = Project.objects.all().filter(organisation__id=pk)
     associatedProjects |=  mainProjects
     associatedResources = Resource.objects.all().filter(organisation__id=pk)
     members = Profile.objects.all().filter(organisation__id=pk)
-    return render(request, 'organisation.html', {'organisation':organisation, 'associatedProjects': associatedProjects, 'associatedResources': associatedResources,
-    'members': members, 'editable': editable})
+    return render(request, 'organisation.html', {'organisation':organisation, 'associatedProjects': associatedProjects,
+    'associatedResources': associatedResources, 'members': members, 'editable': editable, 'isSearchPage': True})
 
 
 def edit_organisation(request, pk):
     organisation = get_object_or_404(Organisation, id=pk)
     user = request.user
-    
+
     if user != organisation.creator and not user.is_staff:
         return redirect('../organisations', {})
 
     form = OrganisationForm(initial={
-        'name':organisation.name,'url': organisation.url, 'description': organisation.description, 
+        'name':organisation.name,'url': organisation.url, 'description': organisation.description,
         'orgType': organisation.orgType, 'logo': organisation.logo, 'contact_point': organisation.contactPoint,
         'contact_point_email': organisation.contactPointEmail, 'latitude': organisation.latitude, 'longitude': organisation.longitude
     })
@@ -103,16 +103,17 @@ def organisations(request):
     if request.GET.get('orgType'):
         organisations = organisations.filter(orgType = request.GET['orgType'])
         filters['orgType'] = request.GET['orgType']
-    
+
     counter = len(organisations)
 
-    return render(request, 'organisations.html', {'organisations': organisations, 'counter': counter, 
-    'filters': filters, 'countriesWithContent': countriesWithContent, 'orgTypes': orgTypes})
+    return render(request, 'organisations.html', {'organisations': organisations, 'counter': counter,
+    'filters': filters, 'countriesWithContent': countriesWithContent, 'orgTypes': orgTypes,
+    'isSearchPage': True})
 
 def delete_organisation(request, pk):
     organisation = get_object_or_404(Organisation, id=pk)
     user = request.user
-    
+
     if user != organisation.creator and not user.is_staff:
         return redirect('../organisations', {})
 

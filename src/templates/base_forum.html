@@ -7,6 +7,7 @@
 {% load cookielaw_tags %}
 {% load countries %}
 {% get_countries as countries %}
+{% load active_link_tags %}
 {% get_current_language as LANGUAGE_CODE %}lang="{{ LANGUAGE_CODE }}"%}
 <head>
   {% block head %}
@@ -30,8 +31,7 @@
   <!--link rel="stylesheet" href="{% static 'styles/extras.1.1.0.min.css' %}"-->
   <link rel="stylesheet" href="{% static 'cookielaw/css/cookielaw.css' %}">
   {% endblock head %}
-  {% block css %}
-  {% endblock css %}
+
 
   {% block extra_css %}
   {% endblock extra_css %}
@@ -39,8 +39,8 @@
 <body>
   <header>
     <!--Navbar-->
-    <nav class="navbar navbar-expand-xl navbar-dark navbar-front text-white text-weight-bold fixed-top">
-      <div class="container text-weight-bold">
+    <nav class="navbar navbar-expand-md navbar-dark navbar-front text-white text-weight-bold fixed-top b-0 pt-0 pb-0">
+      <div class="container">
         <a class="navbar-brand" href="/">
           <img src="{% static 'site/img/icon.png' %}" width="30" height="30" alt=""/>
         </a>
@@ -48,20 +48,19 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span></button>
-        
-        <div class="ribbon ribbon-top-left"><span><a style="text-decoration:none;color:white" href="https://eu-citizen.science/blog/2020/04/03/welcome-alpha-release-eu-citizenscience-platform/">ALPHA</a></span></div>
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            {% block navbar-left %}
-            {% endblock navbar-left %}
-          </ul>
-          <ul class="navbar-nav">
+
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link main {% active_link  'blog' %}" href="{% url 'blog' %}">BLOG</a></li>
+            <li class="nav-item"><a class="nav-link main {% active_link  'events' %}" href="{% url 'events' %}">EVENTS</a></li>
+            <li class="nav-item"><a class="nav-link main  {% active_link  'forum' %}" href="/forum">FORUM</a></li>
             {% if not user.is_authenticated %}
             <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">LOGIN</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'accounts:signup' %}" role="button">SIGN UP</a></li>
             {% else %}
-            <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">PERSONAL AREA</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false" href="#"><i class="fas fa-user-edit"></i></a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="{% url 'profiles:show_self' %}">My Profile</a>
                 <a class="dropdown-item" href="{% url 'profiles:self_projects' %}">Submitted projects</a>
@@ -70,43 +69,38 @@
                 <a class="dropdown-item" href="{% url 'profiles:saved_resources' %}">Resources library</a>
                 {% if user.is_staff %}
                 <a  class="dropdown-item" href="{% url 'admin:index' %}">Admin</a>
+                <a class="dropdown-item" href="{% url 'accounts:logout' %}">Logout</a>
+
                 {% endif %}
               </div>
             </li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}">LOGOUT</a></li></li>
             {% endif %}
 
           </ul>
+          <button data-toggle="modal" data-target="#modalinfo" class="btn btn-green mysubmit redbackground ml-2"
+          type="submit"><i class="fas fa-plus-circle"></i>&nbsp;&nbsp;ADD</button>
         </div>
       </div>
     </nav>
     <!--/.Navbar-->
   </header>
   <main class="flex-fill">
-    {% block splash %}
-    {% endblock splash %}
-    
-    <div class="container">
-      <div class="row mt-4">  
-        <div class="col-12">
-          {% block page_header %}
-          {% endblock page_header %}
-        </div>
-      </div>
-    </div>
-    
+    <div class="container mt-5">
+
+
+
     {% block js %}
     {% endblock js %}
-  
+
     {% block body %}
       {# The forum content will go in this 'body' block #}
     {% endblock body %}
-  
+
     {% block extra_js %}
     {% endblock extra_js %}
-
+</div>
   </main>
- 
+
 
 
   {% cookielaw_banner %}

@@ -88,7 +88,7 @@ def resources(request, isTrainingResource=False):
 
     return render(request, 'resources.html', {'resources':resources, 'approvedResources': approvedResources, 'counter': counter,
     'savedResources': savedResources, 'filters': filters, 'settings': settings, 'languagesWithContent': languagesWithContent,
-    'themes':themes, 'categories': categories, 'isTrainingResource': isTrainingResource})
+    'themes':themes, 'categories': categories, 'isTrainingResource': isTrainingResource, 'isSearchPage': True})
 
 @login_required(login_url='/login')
 def new_training_resource(request):
@@ -132,7 +132,8 @@ def resource(request, pk):
     savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True) #TODO: Only ask for the resource
     approvedResources = ApprovedResources.objects.all().values_list('resource_id',flat=True)
     return render(request, 'resource.html', {'resource':resource, 'savedResources':savedResources, 'approvedResources':approvedResources,
-        'cooperators': getCooperators(pk), 'permissionForm': permissionForm, 'isTrainingResource': isTrainingResource})
+        'cooperators': getCooperators(pk), 'permissionForm': permissionForm, 'isTrainingResource': isTrainingResource,
+        'isSearchPage': True})
 
 def editTrainingResource(request, pk):
     return editResource(request, pk)
