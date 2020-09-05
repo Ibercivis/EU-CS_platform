@@ -8,6 +8,7 @@ main {
 	min-height: 100vh;
 	background-color: #fafafa;
 }
+
 main.nomargintop {
 	margin-top: 0px;
 	font-weight: 200;
@@ -310,7 +311,7 @@ dt {
 	background-color: #dc3545;
 }
 .colorred{
-	color: #dc3545;
+	color: #dc3545 !important;
 	font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
 	font-size: 0.9em;
 	font-weight: 500;

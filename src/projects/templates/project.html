@@ -27,13 +27,13 @@
     <div class="card-header flex  flex-row-reverse">
       <ul class="nav nav nav-tabs card-header-tabs mr-auto flex-row-reverse">
         <li class="nav-item">
-          <a class="nav-link" id="parttab" href="#"
+          <a class="nav-link sub" id="parttab" href="#"
           onClick="$('#one').hide(); $('#two').show()
           $('#parttab').addClass('active')
           $('#desctab').removeClass('active') ">Participation</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" id="desctab" href="#"
+          <a class="nav-link sub active" id="desctab" href="#"
           onClick="$('#two').hide(); $('#one').show();
           $('#desctab').addClass('active')
           $('#parttab').removeClass('active')">Description</a>
@@ -46,13 +46,17 @@
           {% if project.image2 %}
           <img class="card-img  {% if project.id not in approvedProjects %} nonmoderated {% endif %}" src="{{ project.image2 }}" >
           {% else %}
-          <img class="card-img  {% if project.id not in approvedProjects %} nonmoderated {% endif %}" src='/static/site/img/project_default_card.webp'>
+          <!--img class="card-img
+          {% if project.id not in approvedProjects %} nonmoderated {% endif %}" src='/static/site/img/project_default_card.webp'-->
           {% endif %}
-          <a target="_blank" href="{% if 'http' not in project.url %}//{%endif%}{{project.url}}">{{project.url}}</a>
+          <a target="_blank" href="{% if 'http' not in project.url %}//{%endif%}{{project.url}}"
+          class="colorred"><i class="fas fa-link"></i> Website</a>
           <br>
+          <div class="small">
           {{ project.status}}<br>
           Start: {{ project.start_date | date:"d/m/Y"}}<br>
           End:&nbsp;&nbsp;{{ project.end_date | date:"d/m/Y"}}
+          </div>
           <hr>
           <div><b>Science Topic</b></div>
           <div>
@@ -101,7 +105,7 @@
             <span data-value="4" data-text="Very Good"></span>
             <span data-value="5" data-text="Excellent"></span>
           </span>
-          {{ review_count }} <a href="#review-list">{% if review_count == 1 %} review {% else %} reviews {% endif %}</a>
+          {{ review_count }} {% if review_count == 1 %} review {% else %} reviews {% endif %}
           <p><b>{{project.aim | safe}}</b></p>
           <p>{{project.description | safe}}</p>
           {% if user.is_authenticated %}
