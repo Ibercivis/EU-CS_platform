@@ -5,8 +5,8 @@ from .models import Event
 
 class EventForm(forms.Form):
     title = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder':'Title of the event'}))
-    description = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'A little description of the event. Max 3000 characters'}), max_length = 3000)
-    place = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder':'Place where event happens'}),required=False)
+    description = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'A brief description of the event'}), max_length = 3000)
+    place = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder':'Location of the Event'}),required=False)
     start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}))
     end_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}))
     hour = forms.TimeField(widget=forms.TextInput(attrs={'type': 'time'}), required=False)
