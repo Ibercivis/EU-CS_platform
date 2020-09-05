@@ -1,4 +1,4 @@
-{% extends "base2.html" %}
+{% extends "base_r2.html" %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% load i18n %}
@@ -150,7 +150,7 @@
                   {{form.selectedAuthors|as_crispy_field}}
                 </div>
                 <div class="col-12">
-                  
+
                 </div>
               </div>
 
@@ -186,9 +186,9 @@
                   {{ form.width1|as_crispy_field }}
                   {{ form.withImage1|as_crispy_field }}
                   <a id="imgResult1" href="#"> <img class="img-fluid img-zoom" id="imageResult1" src="{{ resource.image1 }}" alt=""></a>
-                  <div id="deleteImage1">                   
+                  <div id="deleteImage1">
                   {% if resource.image1 %}
-                    <a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>                  
+                    <a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>
                   {% endif %}
                   </div>
                 </div>
@@ -206,9 +206,9 @@
                   {{ form.width2|as_crispy_field }}
                   {{ form.withImage2|as_crispy_field }}
                   <a id="imgResult2" href="#"> <img class="img-fluid img-zoom" id="imageResult2" src="{{ resource.image2 }}" alt=""></a>
-                  <div id="deleteImage2">                   
+                  <div id="deleteImage2">
                   {% if resource.image2 %}
-                    <a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>                  
+                    <a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>
                   {% endif %}
                   </div>
                 </div>
@@ -216,13 +216,13 @@
                   {{ form.image_credit2|as_crispy_field }}
                 </div>
               </div>
-              
+
               <div class="form-row">
                 <div class="col-12">
                   {{ form.organisation|as_crispy_field }}
                 </div>
                 <div class="col-12">
-                 
+
                 </div>
               </div>
 
@@ -261,7 +261,7 @@
       </div>
     </div>
     {% endblock list_of_items %}
-    
+
     {% block scripts %}
     <script src="{% static 'site/js/site.js' %}"></script>
     <script src="{% static 'scripts/cropper.min.js' %}"></script>
@@ -403,7 +403,7 @@
             var word =key.slice(0, -1);
             $("#div_id_education_level .selection input").val("");
             $("#id_education_level").append("<option value='" + word +"' selected> " + word + " </option>");
-            
+
           }
         });
 
@@ -434,7 +434,7 @@
           if (key.indexOf(',') > -1) {
             var word =key.slice(0, -1);
             $("#div_id_learning_resource_type .selection input").val("");
-            $("#id_learning_resource_type").append("<option value='" + word +"' selected> " + word + " </option>");            
+            $("#id_learning_resource_type").append("<option value='" + word +"' selected> " + word + " </option>");
           }
         });
 
