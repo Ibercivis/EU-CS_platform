@@ -15,6 +15,7 @@
 {% endblock %}
 
 {% block list_of_items %}
+    {{ permissionForm.media.css }}
 <div class="container">
 
   <div class="card text-center">
@@ -26,12 +27,17 @@
     <div class="card-header flex  flex-row-reverse">
       <ul class="nav nav nav-tabs card-header-tabs mr-auto flex-row-reverse">
         <li class="nav-item">
-          <a class="nav-link" href="#" onClick="$('#one').hide(); $('#two').show()">Participation</a>
+          <a class="nav-link" id="parttab" href="#"
+          onClick="$('#one').hide(); $('#two').show()
+          $('#parttab').addClass('active')
+          $('#desctab').removeClass('active') ">Participation</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="#" onClick="$('#two').hide(); $('#one').show()">Description</a>
+          <a class="nav-link active" id="desctab" href="#"
+          onClick="$('#two').hide(); $('#one').show();
+          $('#desctab').addClass('active')
+          $('#parttab').removeClass('active')">Description</a>
         </li>
-
       </ul>
     </div>
     <div class="card-block text-left p-4">
@@ -98,6 +104,35 @@
           {{ review_count }} <a href="#review-list">{% if review_count == 1 %} review {% else %} reviews {% endif %}</a>
           <p><b>{{project.aim | safe}}</b></p>
           <p>{{project.description | safe}}</p>
+          {% if user.is_authenticated %}
+          <div class="col-12">
+            <a class="btn btn-outline-secondary float-right" href="/project_review/{{project.id}}">Review</a>
+            <div id="followed{{project.id}}" class="float-right mr-4">
+              {% if project.id in followedProjects %}
+              <button type="button" class="btn btn-outline-primary float-right"
+              onclick="setFollowedProject({{project.id}},{{user.id}}, false)">Following</button>
+              {% else %}
+              <button type="button" class="btn btn-outline-secondary float-right"
+              onclick="setFollowedProject({{project.id}},{{user.id}}, true)">&nbsp;&nbsp;Follow&nbsp;</button>
+              {% endif %}
+            </div>
+          </div>
+          {% endif %}
+          {% if review_count > 0 %}
+          <br><b>Reviews</b><br>
+          {% get_review_list for project as review_list %}
+          {% for review in review_list %}
+          <span class="gl-star-rating-stars s{{ review.rating | stringformat:'d'}}0 readonly">
+            <span data-value="1" data-text="Terrible"></span>
+            <span data-value="2" data-text="Poor"></span>
+            <span data-value="3" data-text="Average"></span>
+            <span data-value="4" data-text="Very Good"></span>
+            <span data-value="5" data-text="Excellent"></span>
+          </span><br>
+          {{review.submit_date}} - {{review.user.name}}
+          <p>{{review.comment}}</p>
+          {% endfor %}
+          {% endif %}
         </div>
         <div class="col-xl-9 col-md-6 col-12 myhidden" id="two">
           <h5>{{project.name}}</h5>
@@ -105,243 +140,47 @@
           <div>{{project.howToParticipate | safe}}</div><br>
           <b>Needed equipment:</b>
           <div>{{project.equipment |safe}}</div>
-
         </div>
       </div>
     </div>
+    <div class="card-footer text-left">
+
+      {% if user.is_staff %}
+
+        <permissionForm>
+          {% csrf_token %}
+          {{ permissionForm.usersAllowed | as_crispy_field }}
+          {{ permissionForm.selectedUsers | as_crispy_field }}
+          {{ permissionForm.usersCollection | as_crispy_field }}
+        </permissionForm>
+
+        <a href="{% url 'submitter_contact' 'project' project.id %}">
+          <i class="far fa-envelope"></i>
+        </a>
+
+      {% if project.id in approvedProjects %}
+      <a onclick="setApproved({{project.id}}, false)"><i class="far fa-thumbs-up"></i></a>
+      {% else %}
+      <a onclick="setApproved({{project.id}}, true)"><i class="far fa-thumbs-down"></i></a>
+      {% endif %}
+
+
+      {% if project.featured %}
+      <a  onclick="setFeatured({{project.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
+      {% else %}
+      <a  onclick="setFeatured({{project.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
+      {% endif %}
+      {% endif %}
+      {% if project.creator == user or user.is_staff %}
+      <a class="btn btn-red float-right mt-4" href="{% url 'editProject' project.id %}"><i class="fas fa-edit"></i> Edit </a>
+      {% endif %}
+    </div><!-- End of card footer -->
   </div>
 </div>
 
 
 
 
-<div class="container">
-  <div class="row">
-    {{ permissionForm.media.css }}
-    <div class="main-content-container container-fluid" >
-      <div class="card mb-4 mt-5 shadow">
-        {% if project.image3 %}
-        <img class="img-fluid img-responsive img-zoom  {% if project.id not in approvedProjects %} nonmoderated {% endif %}" src="{{ project.image3 }}" >
-        {% else %}
-        <img class="img-fluid img-responsive img-zoom  {% if project.id not in approvedProjects %} nonmoderated {% endif %}" src='/static/site/img/project_default_header.png'>
-        {% endif %}
-        <div class="upper">
-          {% if project.hidden %}<a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT ACCEPTED</a><br/>
-          {% else %}{% if project.id not in approvedProjects %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br> {% endif %}{% endif %}
-        </div>
-        <div class="card-header">
-          <div class="row">
-            <div class="col-lg-6 col-12">
-              {% if user.is_authenticated %}
-              {% if user.is_staff %}
-              <a class="btn btn-red float-left mt-4" href="{% url 'editProject' project.id %}"><i class="fas fa-edit"></i> Edit </a>
-              {% endif %}
-            </div>
-            {% if project.creator == user or user.is_staff %}
-            <div class="col-6">
-              <permissionForm>
-                {% csrf_token %}
-                {{ permissionForm.usersAllowed | as_crispy_field }}
-                {{ permissionForm.selectedUsers | as_crispy_field }}
-                {{ permissionForm.usersCollection | as_crispy_field }}
-              </permissionForm>
-            </div>
-            {% endif %}
-            {% endif %}
-          </div>
-        </div>
-        <div class="card-text p-3">
-          <div class="row">
-            <div class="col-12 col-xl-4 mt-2 mt-4">
-              <h2><b>{{project.name}}</b></h2>
-              {% get_rating for project as avg_rating %}
-              {% get_review_count for project as review_count %}
-              <span class="gl-star-rating-stars s{{ avg_rating | stringformat:'d'}}0 readonly">
-                <span data-value="1" data-text="Terrible"></span>
-                <span data-value="2" data-text="Poor"></span>
-                <span data-value="3" data-text="Average"></span>
-                <span data-value="4" data-text="Very Good"></span>
-                <span data-value="5" data-text="Excellent"></span>
-              </span>
-              {{ review_count }} <a href="#review-list">{% if review_count == 1 %} review {% else %} reviews {% endif %}</a>
-            </div>
-            <div class="col-12 col-xl-8 mt-2">
-              <p><b>{{project.aim | safe}}</b></p>
-              <p>{{project.description | safe}}</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-4 mt-5">
-              <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                  <h1><i class="fas fa-globe-europe"></i></h1>
-                  <h5 class="text-dark">Location</h5>
-                  {% for country in countries %}
-                  {% if country.code == project.country %}
-                  {{ country.name }}
-                  {% endif %}
-                  {% endfor %}
-                </div>
-              </div>
-            </div>
-            <div class="col-4 mt-5">
-              <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                  <h1><i class="fas fa-flask"></i></h1>
-                  <h5 class="text-dark">Topic</h5>
-                  {% for topic in project.topic.all %} <a class="badge badge-light" href="/projects?keywords=&topic={{topic|urlencode}}">{{topic}}</a>  {% endfor %}
-                </div>
-              </div>
-            </div>
-            <div class="col-4 mt-5">
-              <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                  <h1><i class="far fa-lightbulb"></i></h1>
-                  <h5 class="text-dark">Keywords</h5>
-                  {% for keyword in project.keywords.all %} <a class="badge badge-light" href="/projects?keywords={{keyword|urlencode}}">{{keyword}}</a>  {% endfor %}
-                </div>
-              </div>
-            </div>
-          </div><!-- End of icon rows -->
-          <div class="row">
-            <div class="col-12 col-xl-4 mt-5">
-              <h4>Main info</h4>
-            </div>
-            <div class="col-xl-6 mt-5 pt-2">
-              <b>Host: </b>{{project.host}}<br>
-              <b>Start date: </b>{{ project.start_date | date:"d/m/Y"}}<br>
-              <b>End date: </b>{{ project.end_date | date:"d/m/Y"}}<br>
-              <b>Status: </b>{{ project.status}}<br>
-              <b>Date created:</b> {{project.dateCreated  | date:"d/m/Y"}}<br>
-              <b>Date updated:</b>{{project.dateUpdated  | date:"d/m/Y"}}<br>
-              <b>Organisation:</b>
-              {% if project.mainOrganisation %} <a class="badge" href="/organisation/{{project.mainOrganisation.id}}">{{ project.mainOrganisation }} </a> (Main organisation){% endif %}
-              {% for organisation in project.organisation.all %} <a class="badge" href="/organisation/{{organisation.id}}">{{organisation}}</a>  {% endfor %}
-              <br/>
-              <b>Website: </b><a target="_blank" href="{% if 'http' not in project.url %}//{%endif%}{{project.url}}">{{project.url}}</a><br>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              <h4>Geography</h4>
-              <p>Latitude: {{project.latitude}}</p>
-              <p>Longitude: {{project.longitude}}</p>
-              {% leaflet_map "map" callback="window.map_init_basic" %}
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12 col-xl-4 mt-5">
-              <h4>Participation</h4>
-            </div>
-            <div class="col-12 col-xl-8 mt-5 pt-2">
-              {% if project.doingAtHome %} <p><b>This project can be done at home</b></p> {% endif %}
-              <p><b>How to participate: </b>{{project.howToParticipate | safe}}</p>
-              <p><b>Needed equipment:</b>{{project.equipment |safe}}</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12 col-xl-4 mt-5">
-              <h4>Funding</h4>
-            </div>
-            <div class="col-12 col-xl-8 mt-5 pt-2">
-              <b>Funding body: </b>{% if project.fundingBody %} {{ project.fundingBody }} {% endif %}<br>
-              <b>Funding program:</b>{{ project.fundingProgram }}<br>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12 col-xl-4 mt-5">
-              <h4>Origin information</h4>
-            </div>
-            <div class="col-12 col-xl-8 mt-5 pt-2">
-              <b>Origin database: </b>{% if project.originDatabase %} {{ project.originDatabase }} {% endif %}<br>
-              <b>Origin UID:</b>{{ project.originUID }}<br>
-              <b>Origin URL: </b>{{ project.originURL }}<br>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12 col-xl-4 mt-5">
-              <h4>Further info</h4>
-            </div>
-            <div class="col-12 col-xl-8 mt-5 pt-2">
-              {% for customField in project.customField.all %}
-              <p><b>{{customField.title}}</b></p>
-              <p>{{customField.paragraph | safe }}</p>
-              {% endfor %}
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12 col-xl-4 mt-5">
-              <h4>Reviews</h4>
-            </div>
-            <div class="col-12 col-xl-8 mt-5">
-              {% get_review_list for project as review_list %}
-              {% for review in review_list %}
-              <span class="gl-star-rating-stars s{{ review.rating | stringformat:'d'}}0 readonly">
-                <span data-value="1" data-text="Terrible"></span>
-                <span data-value="2" data-text="Poor"></span>
-                <span data-value="3" data-text="Average"></span>
-                <span data-value="4" data-text="Very Good"></span>
-                <span data-value="5" data-text="Excellent"></span>
-              </span>
-              {{review.submit_date}} - {{review.user.name}}
-              <p>{{review.comment}}</p>
-              {% endfor %}
-              {% if user.is_authenticated %}
-              <a class="btn btn-outline-secondary" href="/project_review/{{project.id}}">Review</a>
-              {% endif %}
-            </div>
-          </div>
-        </div><!-- End of card-text -->
-        <div class="card-footer bg-white">
-          <div class="row">
-            <div class="col-6">
-              <div id="approved{{project.id}}" class="float-left">
-                {% if user.is_staff %}
-                {% if project.id in approvedProjects %}
-                <img  class="img-fluid mt-2" onclick="setApproved({{project.id}}, false)" src="{% static 'site/img/icon_color.png' %}" />
-                {% else %}
-                <img  class="img-fluid mt-2" onclick="setApproved({{project.id}}, true)" src="{% static 'site/img/icon_bw.png' %}" />
-                {% endif %}
-                {% else %}
-                {% if project.id in approvedProjects %}
-                <img  class="img-fluid mt-2" src="{% static 'site/img/icon_color.png' %}" />
-                {% else %}
-                <img  class="img-fluid mt-2" src="{% static 'site/img/icon_bw.png' %}" />
-                {% endif %}
-                {% endif %}
-              </div>
-              {% if user.is_staff and project.id not in approvedProjects %}
-              <a class="btn btn-outline-secondary mb-1" style="margin-left: 15px;" href="{% url 'submitter_contact' 'project' project.id %}">
-                Contact the Submitter
-              </a>
-              {% endif %}
-              <div id="featured{{project.id}}" style="display:inline-block">
-                {% if user.is_staff %}
-                {% if project.featured %}
-                <a  onclick="setFeatured({{project.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
-                {% else %}
-                <a  onclick="setFeatured({{project.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
-                {% endif %}
-                {% endif %}
-              </div>
-            </div>
-            <div class="col-6">
-              {% if user.is_authenticated %}
-              <div id="followed{{project.id}}" class="float-right">
-                {% if project.id in followedProjects %}
-                <button type="button" class="btn btn-outline-primary float-right" onclick="setFollowedProject({{project.id}},{{user.id}}, false)">Following</button>
-                {% else %}
-                <button type="button" class="btn btn-outline-secondary float-right" onclick="setFollowedProject({{project.id}},{{user.id}}, true)">Follow</button>
-                {% endif %}
-              </div>
-              {% endif %}
-            </div>
-          </div><!-- End of card footer -->
-        </div><!-- End of card -->
-      </div>
-    </div>
-
-  </div>
   {% endblock list_of_items %}
 
   {% block scripts %}
@@ -407,7 +246,7 @@
           csrfmiddlewaretoken: '{{ csrf_token }}'
         },
         success: function (response) {
-          $(".main-content-container").load(" .main-content-container");
+        window.location.reload(false)
         }
       }
       );
