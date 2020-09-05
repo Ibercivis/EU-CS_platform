@@ -47,7 +47,7 @@
       </span>
     </div-->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      {% if request.get_full_path != "/" %}
+      {% if request.get_full_path != "/"  %}
       <form class="mx-auto my-auto d-inline w-100" id="searchTop" action="
       {% if 'all' in request.get_full_path %}
       /all

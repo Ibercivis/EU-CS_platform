@@ -219,7 +219,7 @@
       {% endif %}
       {% endif %}
       {% if project.creator == user or user.is_staff %}
-      <a class="btn btn-red float-right mt-4" href="{% url 'editProject' project.id %}"><i class="fas fa-edit"></i> Edit </a>
+      <a class="btn btn-red float-right" href="{% url 'editProject' project.id %}"><i class="fas fa-edit"></i> Edit </a>
       {% endif %}
     </div><!-- End of card footer -->
   </div>
