@@ -53,23 +53,23 @@
 	<div class="row">
 		{% if counterprojects > 0 %}
 		<div class="col-12 mb-2">
-			{{ counterprojects }} result{% if counterprojects != 1 %}s{% endif %} in projects
+			{{ counterprojects }} result{% if counterprojects != 1 %}s{% endif %} in Projects
 			{% if counterprojects > 6 %}, click <a href="/projects">here</a> to see all of them {% endif %}
 		</div>
 		{% endif %}
 		{% include "projects_cards.html" %}
 		<div class="col-12 mb-2">
-			{{ counterresources }} result{% if counterresources != 1 %}s{% endif %} in resources,
+			{{ counterresources }} result{% if counterresources != 1 %}s{% endif %} in Resources,
 			{% if counterresources > 6 %}click <a href="/resources">here</a> to see all of them{% endif %}
 		</div>
 		{% include "resources_cards.html" %}
 		<div class="col-12 mb-2">
-			{{ countertresources }} result{% if counterresources != 1 %}s{% endif %} in training,
+			{{ countertresources }} result{% if counterresources != 1 %}s{% endif %} in Training,
 			{% if countertresources > 6 %}click <a href="/training_resources">here</a> to see all of them{% endif %}
 		</div>
 		{% include "resources_cards.html" with resources=tresources %}
 		<div class="col-12 mb-2">
-			{{ counterorganisations}} result{% if counterorganisations != 1 %}s{% endif %} in organisations,
+			{{ counterorganisations}} result{% if counterorganisations != 1 %}s{% endif %} in Organisations,
 			{% if counterorganisations > 6 %}click <a href="/organisations">here</a> to see all of them{% endif %}
 
 		</div>
