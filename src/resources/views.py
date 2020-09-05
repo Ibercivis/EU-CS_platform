@@ -118,10 +118,11 @@ def new_resource(request, isTrainingResource=False):
     return render(request, 'new_resource.html', {'form': form, 'settings': settings, 'isTrainingResource': isTrainingResource})
 
 def training_resource(request, pk):
-    return resource(request, pk, True)
+    return resource(request, pk)
 
-def resource(request, pk, isTrainingResource=False):
+def resource(request, pk):
     resource = get_object_or_404(Resource, id=pk)
+    isTrainingResource = resource.isTrainingResource
     user = request.user
     users = getOtherUsers(resource.creator)
     cooperators = getCooperatorsEmail(pk)
@@ -134,10 +135,11 @@ def resource(request, pk, isTrainingResource=False):
         'cooperators': getCooperators(pk), 'permissionForm': permissionForm, 'isTrainingResource': isTrainingResource})
 
 def editTrainingResource(request, pk):
-    return editResource(request, pk, True)
+    return editResource(request, pk)
 
-def editResource(request, pk, isTrainingResource=False):
+def editResource(request, pk):
     resource = get_object_or_404(Resource, id=pk)
+    isTrainingResource  = resource.isTrainingResource
     user = request.user
     cooperators = getCooperators(pk)
     if user != resource.creator and not user.is_staff and not user.id in cooperators:
@@ -358,6 +360,8 @@ def setApprovedRsc(request):
     setResourceApproved(id, approved)
     return JsonResponse(response, safe=False)
 
+
+
 def setResourceApproved(id, approved):
     approved= False if approved in ['False','false','0'] else True
     aResource = get_object_or_404(Resource, id=id)
@@ -423,6 +427,20 @@ def setResourceFeatured(id, featured):
     resource.featured = featured
     resource.featured = False if featured in ['False','false','0'] else True
     resource.save()
+
+@staff_member_required()
+def setTraining(request):
+    response = {}
+    id = request.POST.get("resource_id")
+    status = request.POST.get("status")
+    print(status)
+    resource = get_object_or_404(Resource, id=id)
+    resource.isTrainingResource = status
+    resource.save()
+
+    return JsonResponse(response,safe=False)
+
+
 
 def allowUserResource(request):
     response = {}

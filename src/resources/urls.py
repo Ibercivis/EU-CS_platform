@@ -23,4 +23,5 @@ urlpatterns = [
     path('training_resources', views.training_resources, name='training_resources'),
     path('training_resource/<int:pk>', views.training_resource, name='training_resource'),
     path('editTrainingResource/<int:pk>', views.editTrainingResource, name='editTrainingResource'),
+    path('setTraining', views.setTraining, name='setTraining'),
 ]
