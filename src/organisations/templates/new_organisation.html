@@ -1,4 +1,4 @@
-{% extends "base2.html" %}
+{% extends "base_r2.html" %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% load leaflet_tags %}
@@ -13,10 +13,6 @@
 
 {% block title %}{{ block.super }} :: New organisation{% endblock %}
 
-{% block navbar-left %}
-{% include "_navbar.html" with active_link="organisations" %}
-{% endblock %}
-
 
 {% block list_of_items %}
 <div class="container">
@@ -30,17 +26,17 @@
               <div class="row">
                 <div class="col-12">
                   <h2>New Organisation Profile</h2>
-                  Thank you for creating a profile for your organisation on the EU-Citizen.Science Platform. 
-                  This can be linked with the Personal Profiles of the people in your organisation, the Project Profiles 
-                  of the projects that your organisation is involved in, and the Resource Profiles of the resources that 
+                  Thank you for creating a profile for your organisation on the EU-Citizen.Science Platform.
+                  This can be linked with the Personal Profiles of the people in your organisation, the Project Profiles
+                  of the projects that your organisation is involved in, and the Resource Profiles of the resources that
                   were published by your organisation. <br/>
 
                   Please fill in all of the mandatory information in the fields below (indicated with an asterisk*),
                   and as much of the non-mandatory information as possible.<br/>
-                  
-                  Upon saving this profile, your organisational profile will be submitted for moderation by one of 
-                  the members of the EU-Citizen.Science consortium. This step is simply to check for ‘spam’ or 
-                  inappropriate uses of the profile form.                   
+
+                  Upon saving this profile, your organisational profile will be submitted for moderation by one of
+                  the members of the EU-Citizen.Science consortium. This step is simply to check for ‘spam’ or
+                  inappropriate uses of the profile form.
                 </div>
               </div>
             </div>
@@ -98,9 +94,9 @@
                         </div>
                       </div>
                     </div>
-                  </div>                                 
-                 
-               
+                  </div>
+
+
                   <hr />
                   <button type="submit" class="btn btn-green"><i class="fas fa-share-square"></i> Save</button>
                 </form>

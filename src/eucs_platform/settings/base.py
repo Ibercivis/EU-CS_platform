@@ -315,7 +315,7 @@ DJOSER = {
         'activation': 'accounts.views.ActivationEmail',
         'confirmation': 'accounts.views.ConfirmationEmail',
         'password_reset': 'accounts.views.PasswordResetEmail',
-    },    
+    },
     'SEND_ACTIVATION_EMAIL': True,
 }
 
@@ -337,6 +337,7 @@ HAYSTACK_CONNECTIONS = {
 }
 
 MACHINA_BASE_TEMPLATE_NAME = 'base_forum.html'
+MACHINA_FORUM_NAME = 'Community Forums'
 
 MACHINA_DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = [
     'can_see_forum',

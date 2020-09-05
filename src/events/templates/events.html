@@ -1,17 +1,14 @@
-{% extends "base2.html" %}
+{% extends "base_r2.html" %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% block title %}{{ block.super }} :: Events{% endblock %}
-{% block navbar-left %}
-{% include "_navbar.html" with active_link="events" %}
-{% endblock %}
+
 
 {% block splash %}
 <div class="jumbotron jumbotron-fluid jumbotron-events mb-0">
     <div class="container-fluid">
         <div class="container">
-            <h1 class="display-4 pb-0 pt-0 text-white"><br>Events</h1>
-            <p class="lead text-light">Upcoming events related to citizen science</p>
+            <p class="lead text-light mt-3 mb-4">Upcoming <b>events</b> related to citizen science</p>
         </div>
     </div>
 </div>
@@ -27,7 +24,7 @@
         </a>
         {% endif %}
     </div>
-    
+
     {% if events %}
     {% for event in events %}
 
@@ -50,7 +47,7 @@
                 <a class="btn btn-red float-left mt-4" onclick="setFeaturedEvent({{event.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
                 {% else %}
                 <a class="btn btn-red float-left mt-4" onclick="setFeaturedEvent({{event.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
-                {% endif %}	
+                {% endif %}
             </span>
             <a class="btn btn-red float-left mt-4" href="{% url 'editEvent' event.id %}" ><i class="fas fa-edit"></i></a>
             <a class="btn btn-red float-left mt-4" href="{% url 'deleteEvent' event.id %}"><i class="fas fa-trash-alt"></i></a>

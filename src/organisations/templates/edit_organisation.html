@@ -1,4 +1,4 @@
-{% extends "base2.html" %}
+{% extends "base_r2.html" %}
 {% load staticfiles %}
 {% load leaflet_tags %}
 {% load crispy_forms_tags %}
@@ -13,10 +13,6 @@
 {% endblock head %}
 
 {% block title %}{{ block.super }} :: Edit organisation{% endblock %}
-
-{% block navbar-left %}
-{% include "_navbar.html" with active_link="organisations" %}
-{% endblock %}
 
 
 {% block list_of_items %}
@@ -66,9 +62,9 @@
                     <div class="col-12">
                       {{ form.logo|as_crispy_field }}
                       <a href="#"> <img class="img-fluid img-zoom" id="logo" src="{{ organisation.logo }}" alt="Image not upload"></a>
-                      <div id="deleteLogo">                   
+                      <div id="deleteLogo">
                       {% if organisation.logo %}
-                        <a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>                  
+                        <a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>
                       {% endif %}
                       </div>
                     </div>
@@ -94,9 +90,9 @@
                         </div>
                       </div>
                     </div>
-                  </div>                                 
-                 
-               
+                  </div>
+
+
                   <hr />
                   <button type="submit" class="btn btn-green"><i class="fas fa-share-square"></i> Save</button>
                 </form>
@@ -117,7 +113,7 @@
 <script src="https://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"></script>
 <script src="{% static 'site/js/leaflet-geosearch_2_7.min.js' %}"></script>
 <script>
-  $(document).ready(function () {    
+  $(document).ready(function () {
     $('#deleteLogo > a').click(function () {
       $('#logo').attr('src', '');
       $("#deleteLogo").empty();

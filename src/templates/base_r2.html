@@ -47,7 +47,7 @@
       </span>
     </div-->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      {% if request.get_full_path != "/"  %}
+      {% if isSearchPage  %}
       <form class="mx-auto my-auto d-inline w-100" id="searchTop" action="
       {% if 'all' in request.get_full_path %}
       /all
@@ -90,8 +90,7 @@
 
 
     <ul class="navbar-nav ml-auto">
-      {% block navbar-left %}
-      {% endblock navbar-left %}
+    
       <li class="nav-item"><a class="nav-link main {% active_link  'blog' %}" href="{% url 'blog' %}">BLOG</a></li>
       <li class="nav-item"><a class="nav-link main {% active_link  'events' %}" href="{% url 'events' %}">EVENTS</a></li>
       <li class="nav-item"><a class="nav-link main" href="/forum">FORUM</a></li>
@@ -114,7 +113,7 @@
           <a  class="dropdown-item" href="{% url 'admin:index' %}">Admin</a>
           {% endif %}
           <a class="dropdown-item" href="{% url 'accounts:logout' %}">Logout</a>
-          
+
         </div>
       </li>
       {% endif %}
@@ -133,17 +132,13 @@
   {% block splash %}
 
   {% endblock splash %}
-  <div class="container">
-    <div class="row col-12 m-0 p-0">
-      {% block searchbar %}
-      {% endblock searchbar %}
-    </div>
-  </div>
+  {% if isSearchPage %}
   <div class="fluid-container whitebackground">
     <div class="container">
       {% include "_subnavbar.html"  %}
     </div>
   </div>
+  {% endif %}
 
   <div class="container">
     <div class="row mt-4">

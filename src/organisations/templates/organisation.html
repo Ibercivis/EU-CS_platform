@@ -10,10 +10,6 @@
 
 {% endblock head %}
 {% block title %}Organisation{% endblock %}
-{% block navbar-left %}
-{% include "_navbar.html" with active_link="organisations" %}
-{% endblock %}
-
 
 {% block list_of_items %}
 <div class="container">
@@ -41,7 +37,7 @@
 						</div>
 						<div class="col-12 col-sm-6">
 							<p><strong>Contact Point</strong>: {{ organisation.contactPoint }} </p>
-							<p><strong>Contact Point Email</strong>: {{ organisation.contactPointEmail }}</p>							
+							<p><strong>Contact Point Email</strong>: {{ organisation.contactPointEmail }}</p>
 						</div>
 						<div class="col-12 col-sm-6">
 							<p><strong>Address</strong>: </p>

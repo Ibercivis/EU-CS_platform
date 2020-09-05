@@ -1,12 +1,7 @@
-{% extends "base2.html" %}
+{% extends "base_r2.html" %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% block title %}{{ block.super }}Blog{% endblock %}
-{% block navbar-left %}
-{% include "_navbar_r2.html" with active_link="blog" %}
-{% endblock %}
-
-
 
 {% block list_of_items %}
 
