@@ -45,7 +45,8 @@
             <b>Year of publication: </b> {{ resource.datePublished }}<br>
             <b>Resource DOI: </b> {{ resource.resourceDOI }}<br>
           </div>
-          <a class="btn btn-outline-secondary float-right ml-2 mt-2" href="{% if 'http' not in resource.url %}//{%endif%}{{resource.url}}" target="_blank">Download</a>
+          <a class="btn btn-outline-secondary float-right ml-2 mt-2"
+          href="{% if 'http' not in resource.url %}//{%endif%}{{resource.url}}" target="_blank">Go to Resource</a>
           {% if user.is_authenticated %}
           <div id="saved{{resource.id}}">
             {% if resource.id in savedResources %}
