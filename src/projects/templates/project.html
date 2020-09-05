@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block list_of_items %}
-    {{ permissionForm.media.css }}
+{{ permissionForm.media.css }}
 <div class="container">
 
   <div class="card text-center">
@@ -42,7 +42,7 @@
     </div>
     <div class="card-block text-left p-4">
       <div class="row">
-        <div class="col-xl-3 col-md-6 col-12" id="profileleft">
+        <div class="col-xl-3 col-md-6 col-12 d-none d-md-block" id="profileleft">
           {% if project.image2 %}
           <img class="card-img  {% if project.id not in approvedProjects %} nonmoderated {% endif %}" src="{{ project.image2 }}" >
           {% else %}
@@ -53,9 +53,9 @@
           class="colorred"><i class="fas fa-link"></i> Website</a>
           <br>
           <div class="small">
-          {{ project.status}}<br>
-          Start: {{ project.start_date | date:"d/m/Y"}}<br>
-          End:&nbsp;&nbsp;{{ project.end_date | date:"d/m/Y"}}
+            {{ project.status}}<br>
+            Start: {{ project.start_date | date:"d/m/Y"}}<br>
+            End:&nbsp;&nbsp;{{ project.end_date | date:"d/m/Y"}}
           </div>
           <hr>
           <div><b>Science Topic</b></div>
@@ -145,30 +145,75 @@
           <b>Needed equipment:</b>
           <div>{{project.equipment |safe}}</div>
         </div>
+        <div class="d-md-none">
+          {% if project.image2 %}
+          <img class="card-img  {% if project.id not in approvedProjects %} nonmoderated {% endif %}" src="{{ project.image2 }}" >
+          {% else %}
+          <!--img class="card-img
+          {% if project.id not in approvedProjects %} nonmoderated {% endif %}" src='/static/site/img/project_default_card.webp'-->
+          {% endif %}
+          <a target="_blank" href="{% if 'http' not in project.url %}//{%endif%}{{project.url}}"
+          class="colorred"><i class="fas fa-link"></i> Website</a>
+          <br>
+          <div class="small">
+            {{ project.status}}<br>
+            Start: {{ project.start_date | date:"d/m/Y"}}<br>
+            End:&nbsp;&nbsp;{{ project.end_date | date:"d/m/Y"}}
+          </div>
+          <hr>
+          <div><b>Science Topic</b></div>
+          <div>
+            {% for topic in project.topic.all %}
+            <a class="badge badge-light" href="/projects?keywords=&topic={{topic|urlencode}}">{{topic}}</a>
+            {% endfor %}
+          </div>
+          <hr>
+          <b>Keywords</b>
+          <div>
+            {% for keyword in project.keywords.all %}
+            <a class="badge badge-light" href="/projects?keywords={{keyword|urlencode}}">{{keyword}}</a>
+            {% endfor %}
+          </div>
+          <hr>
+          <b>Location</b>
+          <div>
+            {% for country in countries %}
+            {% if country.code == project.country %}
+            <a class="badge badge-light" href="projects?country={{country.code}}">{{ country.name | title }}</a>
+            {% endif %}
+            {% endfor %}
+          </div>
+          <hr>
+          <b>Contact</b>
+          <div>
+            <a class="badge badge-light" href="">{{project.host}}</a>
+            {% if project.mainOrganisation %}
+            <a class="badge badge-light"
+            href="/organisation/{{project.mainOrganisation.id}}">{{ project.mainOrganisation }} </a> (Main organisation)
+            {% endif %}
+            {% for organisation in project.organisation.all %}
+            <a class="badge badge-light" href="/organisation/{{organisation.id}}">{{organisation}}</a>
+            {% endfor %}
+          </div>
+        </div>
       </div>
     </div>
     <div class="card-footer text-left">
-
       {% if user.is_staff %}
-
-        <permissionForm>
-          {% csrf_token %}
-          {{ permissionForm.usersAllowed | as_crispy_field }}
-          {{ permissionForm.selectedUsers | as_crispy_field }}
-          {{ permissionForm.usersCollection | as_crispy_field }}
-        </permissionForm>
-
-        <a href="{% url 'submitter_contact' 'project' project.id %}">
-          <i class="far fa-envelope"></i>
-        </a>
-
+      <permissionForm>
+        {% csrf_token %}
+        {{ permissionForm.usersAllowed | as_crispy_field }}
+        {{ permissionForm.selectedUsers | as_crispy_field }}
+        {{ permissionForm.usersCollection | as_crispy_field }}
+      </permissionForm>
+      <a href="{% url 'submitter_contact' 'project' project.id %}">
+        <i class="far fa-envelope"></i>
+      </a>
       {% if project.id in approvedProjects %}
       <a onclick="setApproved({{project.id}}, false)"><i class="far fa-thumbs-up"></i></a>
       {% else %}
       <a onclick="setApproved({{project.id}}, true)"><i class="far fa-thumbs-down"></i></a>
       {% endif %}
-
-
       {% if project.featured %}
       <a  onclick="setFeatured({{project.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
       {% else %}
@@ -185,113 +230,113 @@
 
 
 
-  {% endblock list_of_items %}
+{% endblock list_of_items %}
 
-  {% block scripts %}
-  <script type="text/javascript">
+{% block scripts %}
+<script type="text/javascript">
 
-    $(function () {
-      var users = $("#id_usersCollection").val();
-      var users = users.split(",");
-      var selectedUsers = $("#id_selectedUsers").val().split(",");
-      for (user of users){
-        var found = false;
-        for(sel of selectedUsers){
-          if(sel.trim() == user.trim()){
-            found = true;
-            $("#id_usersAllowed").append("<option value='" + user +"' selected> " + user + " </option>");
-          }
-        }
-        if(!found){
-          $("#id_usersAllowed").append("<option value='" + user +"'> " + user + " </option>");
+  $(function () {
+    var users = $("#id_usersCollection").val();
+    var users = users.split(",");
+    var selectedUsers = $("#id_selectedUsers").val().split(",");
+    for (user of users){
+      var found = false;
+      for(sel of selectedUsers){
+        if(sel.trim() == user.trim()){
+          found = true;
+          $("#id_usersAllowed").append("<option value='" + user +"' selected> " + user + " </option>");
         }
       }
+      if(!found){
+        $("#id_usersAllowed").append("<option value='" + user +"'> " + user + " </option>");
+      }
+    }
 
-      $('#id_usersAllowed').on('change', function () {
-        users = $("#id_usersAllowed option:selected").map(function () {
-          return $.trim($(this).text());
-        }).get().join(',');
+    $('#id_usersAllowed').on('change', function () {
+      users = $("#id_usersAllowed option:selected").map(function () {
+        return $.trim($(this).text());
+      }).get().join(',');
 
-        var idProject = {{project.id}};
-        var request = $.ajax(
-        {
-          type: "POST",
-          url: "{% url 'allowUser' %}",
-          data: {
-            "project_id": idProject,
-            "users": users,
-            csrfmiddlewaretoken: '{{ csrf_token }}'
-          },
-          success: function (response) {
+      var idProject = {{project.id}};
+      var request = $.ajax(
+      {
+        type: "POST",
+        url: "{% url 'allowUser' %}",
+        data: {
+          "project_id": idProject,
+          "users": users,
+          csrfmiddlewaretoken: '{{ csrf_token }}'
+        },
+        success: function (response) {
 
-          }
         }
-        );
-      });
+      }
+      );
     });
+  });
 
-    var map;
-    var marker_layer = new L.marker([50.5, 30.5]);
+  var map;
+  var marker_layer = new L.marker([50.5, 30.5]);
 
-    function map_init_basic (leafmap, options) {
-      map = leafmap;
-      map.setView([{{project.latitude}}, {{project.longitude}}], 12)
-      new L.marker([{{project.latitude}},{{project.longitude}}]).addTo(map);
-    }
+  function map_init_basic (leafmap, options) {
+    map = leafmap;
+    map.setView([{{project.latitude}}, {{project.longitude}}], 12)
+    new L.marker([{{project.latitude}},{{project.longitude}}]).addTo(map);
+  }
 
-    function setApproved(idProject, approved){
-      var request = $.ajax(
-      {
-        type: "POST",
-        url: "{% url 'setApproved' %}",
-        data: {
-          "project_id": idProject,
-          "approved": approved,
-          csrfmiddlewaretoken: '{{ csrf_token }}'
-        },
-        success: function (response) {
+  function setApproved(idProject, approved){
+    var request = $.ajax(
+    {
+      type: "POST",
+      url: "{% url 'setApproved' %}",
+      data: {
+        "project_id": idProject,
+        "approved": approved,
+        csrfmiddlewaretoken: '{{ csrf_token }}'
+      },
+      success: function (response) {
         window.location.reload(false)
-        }
       }
-      );
     }
+    );
+  }
 
-    function setFeatured(idProject, featured){
-      var htmlId = "featured" + idProject;
-      var request = $.ajax(
-      {
-        type: "POST",
-        url: "{% url 'setFeatured' %}",
-        data: {
-          "project_id": idProject,
-          "featured": featured,
-          csrfmiddlewaretoken: '{{ csrf_token }}'
-        },
-        success: function (response) {
-          window.location.reload(false);
-        }
+  function setFeatured(idProject, featured){
+    var htmlId = "featured" + idProject;
+    var request = $.ajax(
+    {
+      type: "POST",
+      url: "{% url 'setFeatured' %}",
+      data: {
+        "project_id": idProject,
+        "featured": featured,
+        csrfmiddlewaretoken: '{{ csrf_token }}'
+      },
+      success: function (response) {
+        window.location.reload(false);
       }
-      );
     }
+    );
+  }
 
-    function setFollowedProject(idProject, idUser, follow){
-      var htmlId = "followed" + idProject;
-      var request = $.ajax(
-      {
-        type: "POST",
-        url: "{% url 'setFollowedProject' %}",
-        data: {
-          "project_id": idProject,
-          "user_id": idUser,
-          "follow": follow,
-          csrfmiddlewaretoken: '{{ csrf_token }}'
-        },
-        success: function (response) {
-          $("#"+htmlId).load(" #"+htmlId);
-        }
+  function setFollowedProject(idProject, idUser, follow){
+    var htmlId = "followed" + idProject;
+    var request = $.ajax(
+    {
+      type: "POST",
+      url: "{% url 'setFollowedProject' %}",
+      data: {
+        "project_id": idProject,
+        "user_id": idUser,
+        "follow": follow,
+        csrfmiddlewaretoken: '{{ csrf_token }}'
+      },
+      success: function (response) {
+        $("#"+htmlId).load(" #"+htmlId);
       }
-      );
     }
-  </script>
-  {{ permissionForm.media.js }}
-  {% endblock scripts %}
+    );
+  }
+</script>
+{{ permissionForm.media.js }}
+{% endblock scripts %}
