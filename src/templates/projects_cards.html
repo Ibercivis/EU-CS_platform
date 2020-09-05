@@ -20,7 +20,7 @@
 				{% endif %}{% endif %}
 				{% for country in countries %}
 				{% if country.code == project.country %}
-				<a class="badge badge-dark" href="projects?country={{country.code}}">{{ country.name | upper }}</a>
+				<a class="badge badge-dark" href="/projects?country={{country.code}}">{{ country.name | upper }}</a>
 				{% endif %}
 				{% endfor %}
 			</div>
@@ -32,10 +32,10 @@
 				</div>
 				<a class="card-link" href="/project/{{project.id }}">{{ project.name }}</a></h6>
 				{% for topic in project.topic.all %}
-				<a class="badge badge-light pt-1" href="projects?keywords=&topic={{topic|urlencode}}">{{topic | upper}}</a>
+				<a class="badge badge-light pt-1" href="/projects?keywords=&topic={{topic|urlencode}}">{{topic | upper}}</a>
 				{% endfor %}
 				{% for keyword in project.keywords.all %} <a class="badge badge-light pt-1"
-				href="projects?keywords={{keyword|urlencode}}">{{keyword | upper}}</a>  {% endfor %}
+				href="/projects?keywords={{keyword|urlencode}}">{{keyword | upper}}</a>  {% endfor %}
 			</div><!-- End of card-body -->
 		</div><!-- end of card -->
 	</div><!-- end of col -->

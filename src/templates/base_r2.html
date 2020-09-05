@@ -47,7 +47,7 @@
       </span>
     </div-->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      {% if isSearchPage  %}
+      {% if isSearchPage  and request.get_full_path != '/' %}
       <form class="mx-auto my-auto d-inline w-100" id="searchTop" action="
       {% if 'all' in request.get_full_path %}
       /all
@@ -121,7 +121,7 @@
       {% endif %}
     </ul>
 
-    <button data-toggle="modal" data-target="#modalinfo" class="btn btn-green mysubmit redbackground ml-2"
+    <button data-toggle="modal" data-target="#modalinfo" class="btn btn-green mysubmit greenbackground ml-2"
     type="submit"><i class="fas fa-plus-circle"></i>&nbsp;&nbsp;ADD</button>
   </div>
 </div>
