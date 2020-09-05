@@ -1,4 +1,4 @@
-{% extends "base2.html" %}
+{% extends "base_r2.html" %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% load reviews %}
@@ -27,12 +27,12 @@
 			<div class="card  shadow">
 				<div class="card-text p-3">
                 {% get_review_form for projects.project projectID as form %}
-                    
+
                     <form action="{% review_form_target %}" method="post">
                         {% csrf_token %}
                         <div class="row">
                             <div class="col-12 col-sm-12">
-                                {{ form.rating | as_crispy_field}}                               
+                                {{ form.rating | as_crispy_field}}
                             </div>
                         </div>
                         <div class="row">
@@ -40,16 +40,16 @@
                             {{ form.comment | as_crispy_field}}
                             </div>
                         </div>
-                        
+
                         {{form.honeypot}}
                         {{form.id}}
                         {{form.content_type}}
                         {{form.object_pk}}
                         {{form.timestamp}}
                         {{form.security_hash}}
-                    
-                        <input type="hidden" name="next" value="{% url 'project' projectID %}" />                    
-                        <input type="submit" name="submit" value="Send">                                                
+
+                        <input type="hidden" name="next" value="{% url 'project' projectID %}" />
+                        <input type="submit" name="submit" value="Send">
                     </form>
                 </div>
             </div>
@@ -59,7 +59,7 @@
 {% endblock %}
 {% block scripts %}
 <script type="text/javascript" src="/static/reviews/js/star-rating.js"></script>
-<script>    
+<script>
     var starRatingControls = new StarRating('#id_rating', {clearable: false, showText: true, initialText: 'Select a rating'});
 </script>
 {% endblock %}

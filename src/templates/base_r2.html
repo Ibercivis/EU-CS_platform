@@ -90,7 +90,9 @@
 
 
     <ul class="navbar-nav ml-auto">
-    
+      {% if isSearchPage == None %}
+      <li class="nav-item"><a class="nav-link main" href="{% url 'all' %}">SEARCH</a></li>
+      {% endif %}
       <li class="nav-item"><a class="nav-link main {% active_link  'blog' %}" href="{% url 'blog' %}">BLOG</a></li>
       <li class="nav-item"><a class="nav-link main {% active_link  'events' %}" href="{% url 'events' %}">EVENTS</a></li>
       <li class="nav-item"><a class="nav-link main" href="/forum">FORUM</a></li>

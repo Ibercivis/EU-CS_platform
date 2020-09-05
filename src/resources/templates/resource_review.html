@@ -1,4 +1,4 @@
-{% extends "base2.html" %}
+{% extends "base_r2.html" %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% load reviews %}
@@ -32,7 +32,7 @@
                         {% csrf_token %}
                         <div class="row">
                             <div class="col-12 col-sm-12">
-                                {{ form.rating | as_crispy_field}}                               
+                                {{ form.rating | as_crispy_field}}
                             </div>
                         </div>
                         <div class="row">
@@ -50,7 +50,7 @@
 
                         <input type="hidden" name="next" value="{% url 'resource' resourceID %}" />
 
-                        <input type="submit" name="submit" value="Send">                        
+                        <input type="submit" name="submit" value="Send">
 
                     </form>
                 </div>
@@ -61,7 +61,7 @@
 {% endblock %}
 {% block scripts %}
 <script type="text/javascript" src="/static/reviews/js/star-rating.js"></script>
-<script>    
+<script>
     var starRatingControls = new StarRating('#id_rating', {clearable: false, showText: true, initialText: 'Select a rating'});
 </script>
-{% endblock %} 
+{% endblock %}
