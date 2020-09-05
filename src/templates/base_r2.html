@@ -102,7 +102,7 @@
       {% else %}
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false" href="#"></a>
+        aria-haspopup="true" aria-expanded="false" href="#"><i class="fas fa-user-edit"></i></a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="{% url 'profiles:show_self' %}">My Profile</a>
           <a class="dropdown-item" href="{% url 'profiles:self_projects' %}">Submitted projects</a>
@@ -112,15 +112,16 @@
 
           {% if user.is_staff %}
           <a  class="dropdown-item" href="{% url 'admin:index' %}">Admin</a>
-          <a class="dropdown-item" href="{% url 'accounts:logout' %}">Logout</a>
           {% endif %}
+          <a class="dropdown-item" href="{% url 'accounts:logout' %}">Logout</a>
+          
         </div>
       </li>
       {% endif %}
     </ul>
 
-    <button data-toggle="modal" data-target="#modalinfo" class="btn btn-green mysubmit redbackground"
-    type="submit"><i class="fas fa-plus-circle"></i>&nbsp;&nbsp;ADD&nbsp;&nbsp;</button>
+    <button data-toggle="modal" data-target="#modalinfo" class="btn btn-green mysubmit redbackground ml-2"
+    type="submit"><i class="fas fa-plus-circle"></i>&nbsp;&nbsp;ADD</button>
   </div>
 </div>
 </nav>
