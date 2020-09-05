@@ -8,9 +8,45 @@
 {% block navbar-left %}
 {% include "_navbar_r2.html" with active_link="resources" %}
 {% endblock %}
-
 {% block list_of_items %}
 {{ permissionForm.media.css }}
+<div class="container">
+  <div class="card text-center">
+    {% if resource.image2 %}
+    <img class="img-fluid img-responsive img-zoom {% if resource.id not in approvedResources %} nonmoderated {% endif %}" src="{{ resource.image2 }}" >
+    {% else %}
+    <img class="img-fluid img-responsive img-zoom {% if resource.id not in approvedResources %} nonmoderated {% endif %}" src='/static/site/img/resource_default_header.png'>
+    {% endif %}
+    <div class="card-header flex  flex-row-reverse">
+    </div>
+    <div class="card-block text-left p-4">
+      <div class="row">
+        <div class="col-xl-3 col-md-6 col-12 d-none d-md-block" id="profileleft">
+        </div>
+        <div class="col-xl-9 col-md-6 col-12" id="one">
+          <h5>{{resource.name}}</h5>
+          {% get_rating for resource as avg_rating %}
+          {% get_review_count for resource as review_count %}
+          <span class="gl-star-rating-stars s{{ avg_rating | stringformat:'d'}}0 readonly">
+            <span data-value="1" data-text="Terrible"></span>
+            <span data-value="2" data-text="Poor"></span>
+            <span data-value="3" data-text="Average"></span>
+            <span data-value="4" data-text="Very Good"></span>
+            <span data-value="5" data-text="Excellent"></span>
+          </span>
+          {{ review_count }} {% if review_count == 1 %} review {% else %} reviews {% endif %}
+          <br><br>{{ resource.abstract | safe }}
+        </div>
+      </div>
+    </div>
+    <div class="card-footer text-left">
+    </div><!-- End of card footer -->
+  </div>
+</div>
+
+
+
+
 <div class="container mt-5">
   <div class="row">
     <div class="container-fluid main-content-container">
@@ -127,17 +163,17 @@
             </div>
           </div>
           {% if isTrainingResource %}
-            <div class="row">
-              <div class="col-12 col-xl-4 mt-5">
-                <h4>Training resource</h4>
-              </div>
-              <div class="col-12 col-xl-8 mt-5">
-                <b>Education level: </b>{{ resource.educationLevel }}<br>
-                <b>Learning Resource Type: </b>{{ resource.learningResourceType }}<br>
-                <b>Time required: </b> {{ resource.timeRequired }}<br>
-                <b>Conditions of access: </b> {{ resource.conditionsOfAccess }}<br>
-              </div>
+          <div class="row">
+            <div class="col-12 col-xl-4 mt-5">
+              <h4>Training resource</h4>
             </div>
+            <div class="col-12 col-xl-8 mt-5">
+              <b>Education level: </b>{{ resource.educationLevel }}<br>
+              <b>Learning Resource Type: </b>{{ resource.learningResourceType }}<br>
+              <b>Time required: </b> {{ resource.timeRequired }}<br>
+              <b>Conditions of access: </b> {{ resource.conditionsOfAccess }}<br>
+            </div>
+          </div>
           {% endif %}
           <div class="row">
             <div class="col-12 col-xl-4 mt-5">
@@ -153,8 +189,8 @@
                 <span data-value="4" data-text="Very Good"></span>
                 <span data-value="5" data-text="Excellent"></span>
               </span>
-                {{review.submit_date}} - {{review.user.name}}
-                <p>{{review.comment}}</p>
+              {{review.submit_date}} - {{review.user.name}}
+              <p>{{review.comment}}</p>
               {% endfor %}
               {% if user.is_authenticated %}
               <a  class="btn btn-outline-secondary float-left mt-2" href="/resource_review/{{resource.id}}">Review</a>
@@ -187,11 +223,11 @@
               {% endif %}
               <div id="featured{{resource.id}}" style="display:inline-block">
                 {% if user.is_staff %}
-                  {% if resource.featured %}
-                  <a  onclick="setFeatured({{resource.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
-                  {% else %}
-                  <a  onclick="setFeatured({{resource.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
-                  {% endif %}
+                {% if resource.featured %}
+                <a  onclick="setFeatured({{resource.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
+                {% else %}
+                <a  onclick="setFeatured({{resource.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
+                {% endif %}
                 {% endif %}
               </div>
             </div>
@@ -275,22 +311,22 @@
   }
 
   function setFeatured(idResource, featured){
-		var htmlId = "featured" + idResource;
-		var request = $.ajax(
-		{
-			type: "POST",
-			url: "{% url 'setFeaturedResource' %}",
-			data: {
-				"resource_id": idResource,
-				"featured": featured,
-				csrfmiddlewaretoken: '{{ csrf_token }}'
-			},
-			success: function (response) {
-				window.location.reload(false);
-			}
-		}
-		);
-	}
+    var htmlId = "featured" + idResource;
+    var request = $.ajax(
+    {
+      type: "POST",
+      url: "{% url 'setFeaturedResource' %}",
+      data: {
+        "resource_id": idResource,
+        "featured": featured,
+        csrfmiddlewaretoken: '{{ csrf_token }}'
+      },
+      success: function (response) {
+        window.location.reload(false);
+      }
+    }
+    );
+  }
 
   function setSavedResource(idResource, idUser, save){
     var htmlId = "saved" + idResource;

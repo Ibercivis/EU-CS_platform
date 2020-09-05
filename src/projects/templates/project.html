@@ -13,11 +13,9 @@
 {% block navbar-left %}
 {% include "_navbar_r2.html" with active_link="projects" %}
 {% endblock %}
-
 {% block list_of_items %}
 {{ permissionForm.media.css }}
 <div class="container">
-
   <div class="card text-center">
     {% if project.image3 %}
     <img class="card-img  {% if project.id not in approvedProjects %} nonmoderated {% endif %}" src="{{ project.image3 }}" >
@@ -106,7 +104,7 @@
             <span data-value="5" data-text="Excellent"></span>
           </span>
           {{ review_count }} {% if review_count == 1 %} review {% else %} reviews {% endif %}
-          <p><b>{{project.aim | safe}}</b></p>
+          <p>{{project.aim | safe}}</p>
           <p>{{project.description | safe}}</p>
           {% if user.is_authenticated %}
           <div class="col-12">
