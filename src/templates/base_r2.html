@@ -36,9 +36,7 @@
         <a class="navbar-brand" href="/">
           <img src="{% static 'site/img/icon.png' %}" width="30" height="30" alt=""/>
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span></button>
+
 
         <!--div class="ribbon ribbon-top-left">
         <span>
@@ -46,9 +44,45 @@
         href="https://eu-citizen.science/blog/2020/04/03/welcome-alpha-release-eu-citizenscience-platform/">ALPHA-2</a>
       </span>
     </div-->
+    <form class="mx-auto my-auto d-sm-none" id="searchTopMobile" action="
+    {% if 'all' in request.get_full_path %}
+    /all
+    {% elif 'training_resources' in request.get_full_path %}
+    /training_resources
+    {% elif 'resources' in request.get_full_path %}
+    /resources
+    {% elif 'organisations' in request.get_full_path %}
+    /organisations
+    {% else %}
+    /projects
+    {% endif %}"
+    >
+
+    <div class="input-group pr-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text inhead clickable "><i class="fas fa-search"></i></div>
+      </div>
+      <input  type="text" id="keywordsMobile" name="keywords"  autocomplete="off"
+      value="{{filters.keywords}}" class="basicAutoCompleteMobile form-control inhead"
+      placeholder="Search..."
+      {% if 'all' in request.get_full_path %}
+      data-url="../home_autocomplete/">
+      {% elif 'resources' in request.get_full_path %}
+      data-url="../resources_autocomplete">
+      {% elif 'organisations' in request.get_full_path %}
+      data-url="../organisations_autocomplete">
+      {% else %}
+      data-url="../text_autocomplete/">
+      {% endif %}
+    </div>
+
+  </form>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       {% if isSearchPage  and request.get_full_path != '/' %}
-      <form class="mx-auto my-auto d-inline w-100" id="searchTop" action="
+      <form class="mx-auto my-auto  w-100 d-none d-sm-block" id="searchTop" action="
       {% if 'all' in request.get_full_path %}
       /all
       {% elif 'training_resources' in request.get_full_path %}
@@ -87,6 +121,7 @@
     {% else %}
     <div class="navbar-brand">EU-CITIZEN.SCIENCE</div>
     {% endif%}
+
 
 
     <ul class="navbar-nav ml-auto">
