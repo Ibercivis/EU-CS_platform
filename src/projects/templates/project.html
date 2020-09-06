@@ -48,7 +48,7 @@
           {% if project.id not in approvedProjects %} nonmoderated {% endif %}" src='/static/site/img/project_default_card.webp'-->
           {% endif %}
           <a target="_blank" href="{% if 'http' not in project.url %}//{%endif%}{{project.url}}"
-          class="colorred"><i class="fas fa-link"></i> Website</a>
+          class="colorred"><i class="fas fa-external-link-square-alt"></i> Go to Project</a>
           <br>
           <div class="small">
             {{ project.status}}<br>
@@ -151,7 +151,7 @@
           {% if project.id not in approvedProjects %} nonmoderated {% endif %}" src='/static/site/img/project_default_card.webp'-->
           {% endif %}
           <a target="_blank" href="{% if 'http' not in project.url %}//{%endif%}{{project.url}}"
-          class="colorred"><i class="fas fa-link"></i> Website</a>
+          class="colorred"><i class="fas fa-link"></i>Go to project</a>
           <br>
           <div class="small">
             {{ project.status}}<br>
