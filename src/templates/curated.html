@@ -33,9 +33,9 @@ Curated Resources
 <div class="container">
 	<div class="row">
 		<div class="col-12">
-			<hr/>
+
 		</div>
-		<div class="col-lg-12 mt-3">
+		<div class="col-lg-12 mt-5">
 			<h2>{{group.name}}</h2>
 		</div>
 	</div>
@@ -44,51 +44,44 @@ Curated Resources
 		{% for rg in resourcesgrouped %}
 		{% if rg.group == group %}
 
-		<div class="col-lg-4 col-md-12 mb-4">
-			<div class="card h-100 shadow">
-				<a class="card-img-wrap" href="/resource/{{rg.resource.id}}">
-					{% if rg.resource.image1 %}
-					<img class="img-fluid img-zoom" src="{{ rg.resource.image1 }}" />
-					{% else %}
-					<img class="img-fluid img-zoom" src="{% static 'site/img/proct.png' %}" />
-					{% endif %}
-				</a>
-				<div class="upper">
-					{% get_language_info_list for LANGUAGES as languages %}
-					{% for language in languages %}
-					{% if language.code == rg.resource.inLanguage %}
-					<a class="badge frontpage" href="/resources?language={{rsc.inLanguage}}">{{language.name_local | upper}}</a>
-					{% endif %}
-					{% endfor %}
-				</div>
-				<div class="card-body">
-					<h6 class="card-title mt-3 mb-3"><a class="card-link card-link-resource" href="/resource/{{rg.resource.id}}" class="card-link">{{ rg.resource.name | truncatewords:12 }}</a></h6>
-					<div class="card-text mt-3">{{rg.resource.abstract | safe | truncatewords:30 }}
-						<a class="" href="/resource/{{rg.resource.id}}" target="_blank">Read more</a>
-					</div>
-					<a class="badge badge-dark" href="/resources?category={{rsc.category.id}}">{{ rg.resource.category | upper }}</a><br>
-					{% for theme in rg.resource.theme.all %}<a class="badge badge-light" href="/resources?theme={{theme.id}}">{{ theme | upper}}</a> {% endfor %}<br>
-					{% for keyword in rg.resource.keywords.all %} <a class="badge  badge-light" href="/resources?keywords={{keyword}}">{{keyword | upper}}</a>  {% endfor %}
-				</div><!-- end of card-body -->
-				<div class="card-footer bg-white">
-					<div class="row">
-						<div class="col-6">
-						</div>
-						<div class="col-6">
-							{% if user.is_authenticated %}
-							<div id="saved{{rsc.id}}">
-								{% if rg.resource.id in savedResources %}
-								<button type="button" class="btn btn-outline-primary float-right mt-2" onclick="setSavedResource({{rg.resource.id}},{{user.id}}, false)">In my library</button>
-								{% else %}
-								<button type="button" class="btn btn-outline-secondary float-right mt-2" onclick="setSavedResource({{rg.resource.id}},{{user.id}}, true)">To my library</button>
-								{% endif %}
-							</div>
-							{% endif %}
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		<div class="col-lg-4 col-md-6 col-xs-12 mb-5">
+		  <div class="card h-100 shadow border-0">
+		    <a class="card-img-wrap" href="{% if isTrainingResource %}/training_resource/{{rg.resource.id}}{% else %}/resource/{{rg.resource.id}}{% endif %}">
+		      {% if rg.resource.image1 %}
+		      <img class="img-fluid img-zoom {% if rg.resource.id not in approvedResources %} nonmoderated {% endif %} " src="{{ rg.resource.image1 }}" />
+		      {% else %}
+		      <img class="img-fluid img-zoom {% if rg.resource.id not in approvedResources %} nonmoderated {% endif %}" src="{% static 'site/img/resource_default_card.png' %}" />
+		      {% endif %}
+		      <div class="upper">
+		        {% if rg.resource.hidden %}<a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT ACCEPTED</a><br/>
+		        {% else %} {% if rg.resource.id not in approvedResources %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br/>
+		        {% else %} {% if filters.approvedCheck == "All" %}  <a class="badge frontpage frontpage-green mb-2" href="/faq#moderation">MODERATED</a><br/>{% endif %}
+		        {% endif %}{% endif %}
+		        {% get_language_info_list for LANGUAGES as languages %}
+		        {% for language in languages %}
+		        {% if language.code == rg.resource.inLanguage %}
+		        <a class="badge badge-dark" href="/resources?language={{rg.resource.inLanguage}}">{{language.name | upper}}</a><br/>
+		        {% endif %}
+		        {% endfor %}
+		      </div>
+
+		    </a>
+
+		    <div class="card-body">
+		      <h6 class="card-title">
+		        <div class="col-12 {%if rg.resource.isTrainingResource %} colorblue {% else %} colorgreen {% endif %} pl-0 mb-3">
+		          <i class="fas fa-book"></i>{% if rg.resource.featured %} Featured {% endif %}
+		          {%if rg.resource.isTrainingResource %} Training {% else %} Resource {% endif %}
+		        </div>
+		        <a class="card-link"
+		        href="{% if isTrainingResource %}/training_resource/{{rg.resource.id}}{% else %}/resource/{{rg.resource.id}}{% endif %}"
+		        class="card-link">{{ rg.resource.name | truncatewords:12 }}</a></h6>
+		        <a class="badge badge-light pt-1" href="/resources?category={{rg.resource.category.id}}">{{ rg.resource.category | title }}</a><br>
+		        {% for theme in rg.resource.theme.all %}<a class="badge badge-light" href="/resources?theme={{theme.id}}">{{ theme | title}}</a> {% endfor %}<br>
+		        {% for keyword in rg.resource.keywords.all %} <a class="badge  badge-light" href="/resources?keywords={{keyword}}">{{keyword | title}}</a>  {% endfor %}
+		      </div><!-- end of card-body -->
+		    </div><!-- end of card -->
+		  </div>
 		{% endif %}
 		{% endfor %}
 	</div>
