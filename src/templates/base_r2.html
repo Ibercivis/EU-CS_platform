@@ -45,6 +45,7 @@
       </span>
     </div-->
 
+    {% if isSearchPage and request.get_full_path != '/' %}
     <form class="mx-auto my-auto d-sm-none" id="searchTopMobile" action="
     {% if 'all' in request.get_full_path %}
     /all
@@ -76,8 +77,8 @@
       data-url="../text_autocomplete/">
       {% endif %}
     </div>
-
-  </form>
+    </form>
+    {% endif %}
 
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
