@@ -29,74 +29,7 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 <script
 src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
 <script>
-	function setApproved(idProject, approved){
-		var request = $.ajax(
-		{
-			type: "POST",
-			url: "{% url 'setApproved' %}",
-			data: {
-				"project_id": idProject,
-				"approved": approved,
-				csrfmiddlewaretoken: '{{ csrf_token }}'
-			},
-			success: function (response) {
-				window.location.reload(false);
-			}
-		}
-		);
-	}
-	function setHidden(idProject, hidden){
-		var htmlId = "hidden" + idProject;
-		var request = $.ajax(
-		{
-			type: "POST",
-			url: "{% url 'setHidden' %}",
-			data: {
-				"project_id": idProject,
-				"hidden": hidden,
-				csrfmiddlewaretoken: '{{ csrf_token }}'
-			},
-			success: function (response) {
-				window.location.reload(false);
-			}
-		}
-		);
-	}
-	function setFeatured(idProject, featured){
-		var htmlId = "featured" + idProject;
-		var request = $.ajax(
-		{
-			type: "POST",
-			url: "{% url 'setFeatured' %}",
-			data: {
-				"project_id": idProject,
-				"featured": featured,
-				csrfmiddlewaretoken: '{{ csrf_token }}'
-			},
-			success: function (response) {
-				window.location.reload(false);
-			}
-		}
-		);
-	}
-	function setFollowedProject(idProject, idUser, follow){
-		var htmlId = "followed" + idProject;
-		var request = $.ajax(
-		{
-			type: "POST",
-			url: "{% url 'setFollowedProject' %}",
-			data: {
-				"project_id": idProject,
-				"user_id": idUser,
-				"follow": follow,
-				csrfmiddlewaretoken: '{{ csrf_token }}'
-			},
-			success: function (response) {
-				$("#"+htmlId).load(" #"+htmlId);
-			}
-		}
-		);
-	}
+
 
 	$('.basicAutoComplete').autoComplete(
 	{ minLength: 3 }
@@ -104,6 +37,13 @@ src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bo
 
 	$('.basicAutoComplete').on('autocomplete.select', function (evt, item) {
 		$('#searchTop').submit();
+	});
+	$('.basicAutoCompleteMobile').autoComplete(
+	{ minLength: 3 }
+	);
+
+	$('.basicAutoCompleteMobile').on('autocomplete.select', function (evt, item) {
+		$('#searchTopMobile').submit();
 	});
 
 	$(function () {
