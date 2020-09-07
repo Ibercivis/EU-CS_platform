@@ -175,7 +175,7 @@
           reader.readAsDataURL(this.files[0]);
         }
       });
-     
+
 
       $("#imageResult").click(function () {
         if(!changed)
@@ -192,8 +192,8 @@
       $("#modalCrop").on("shown.bs.modal", function () {
         $image.cropper({
           viewMode: 0,
-          aspectRatio: 1,
-          minCropBoxWidth: 400,
+          aspectRatio: 3/2,
+          minCropBoxWidth: 600,
           minCropBoxHeight: 400,
           dragMode: 'move',
           guides: false,
@@ -229,7 +229,7 @@
         $("#id_width").val(cropData["width"]);
         $("#modalCrop").modal("hide");
         $('#imageResult').attr('src', $image.cropper('getCroppedCanvas',
-        {width: 400, height: 400}).toDataURL());
+        {width: 600, height: 400}).toDataURL());
 
         $("#deleteLogo").html('<a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>  ');
         $("#deleteLogo").click(function () {
@@ -238,7 +238,7 @@
           $("#deleteLogo").empty();
           $("#id_withLogo").val(false);
         });
-        
+
       });
 
     });
