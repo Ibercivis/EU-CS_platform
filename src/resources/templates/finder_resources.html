@@ -11,7 +11,7 @@ have been marked as 'Moderated'. Read more about our <a href="/faq">moderation p
 </div-->
 <div class="row">
 	<form class="form-inline float-lg-right" id="searchResources" action="{% if isTrainingResource %} {% url 'training_resources' %} {% else %}{% url 'resources' %} {% endif %}">
-		<input type="hidden" name="keywords" value="{{filters.keywords}}">
+		<input type="hidden" name="keywords" value="{{filters.keywords}} ">
 		<div class="col-lg-3 col-12  text-right float-rigth">
 			<div class="input-group input-group-sm mb-3">
 				<div class="input-group-prepend">
@@ -21,7 +21,7 @@ have been marked as 'Moderated'. Read more about our <a href="/faq">moderation p
 					<!--option value="-id" {% if filters.orderby == "-id" %} selected {% endif %}>Newest to Oldest</option>
 					<option value="id" {% if filters.orderby == "id" %} selected {% endif %}>Oldest to Newest</option-->
 					<option value="theme" {% if filters.orderby == "theme" %} selected {% endif %}">Theme</option>
-					<option value="-avg_rating" {% if filters.orderby == "-avg_rating" %} selected {% endif %}>Higest to Lowest</option>
+					<!-- option value="-avg_rating" {% if filters.orderby == "-avg_rating" %} selected {% endif %}>Sort by rating</option-->
 					<!--option value="avg_rating" {% if filters.orderby == "avg_rating" %} selected {% endif %}>Worst average rating</option-->
 				</select>
 			</div>
