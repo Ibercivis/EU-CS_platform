@@ -10,7 +10,6 @@
 {% endblock %}
 {% block page_title %}
 {% endblock page_title %}
-
 {% block splash %}
 {% endblock splash %}
 {% block page_header %}
@@ -120,6 +119,12 @@ src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bo
 
   $('.basicAutoComplete').on('autocomplete.select', function (evt, item) {
     $('#searchTop').submit();
+  });
+  $('.basicAutoCompleteMobile').autoComplete(
+  { minLength: 3 }
+  );
+  $('.basicAutoCompleteMobile').on('autocomplete.select', function (evt, item) {
+    $('#searchTopMobile').submit();
   });
 
   $(function () {

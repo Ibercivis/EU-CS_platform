@@ -210,12 +210,15 @@ def deleteResource(request, pk, isTrainingResource):
         return redirect('training_resources')
     return redirect('resources')
 
-def resources_autocomplete(request):
+def tresources_autocomplete(request):
+    return resources_autocomplete(request, True)
+
+def resources_autocomplete(request, isTrainingResource=False):
     resources = preFilteredResources(request)
     if request.GET.get('q'):
         text = request.GET['q']
-        resourceNames = resources.filter( Q(name__icontains = text) ).distinct()
-        resourceKeywords = resources.filter( Q(keywords__keyword__icontains = text) ).distinct()
+        resourceNames = resources.filter( Q(name__icontains = text) ).filter(isTrainingResource=isTrainingResource).distinct()
+        resourceKeywords = resources.filter( Q(keywords__keyword__icontains = text) ).filter(isTrainingResource=isTrainingResource).distinct()
         rsc_names = resourceNames.values_list('name',flat=True).distinct()
         keywords = resourceKeywords.values_list('keywords__keyword',flat=False).distinct()
         keywords = Keyword.objects.filter(keyword__in = keywords).values_list('keyword',flat=True).distinct()
