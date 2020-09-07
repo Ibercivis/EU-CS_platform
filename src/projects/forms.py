@@ -52,8 +52,14 @@ class ProjectForm(forms.Form):
         widget=forms.TextInput(), help_text='Please provide a URL to an external web site for the project')
 
     geographicextend = forms.ModelMultipleChoiceField(queryset=GeographicExtend.objects.all(),\
-        widget=Select2MultipleWidget(), help_text='Please indicate the spatial scale of the project', \
+        widget=Select2MultipleWidget(),
+        help_text='Please indicate the spatial scale of the projec', \
         required=False,label="Geographic Extend")
+
+    projectlocality = forms.CharField(max_length=300, \
+        widget=forms.TextInput(), required=False,
+        help_text='Please describe the locality of the project, in terms of where the main participant activities take place, \
+        E.g. in your backyard, parks in London, rivers in Europe, online globally, etc.')
 
     mainOrganisation = forms.ModelChoiceField(queryset=Organisation.objects.all(), \
         widget=forms.Select(attrs={'class':'js-example-basic-single'}), \
@@ -154,6 +160,7 @@ class ProjectForm(forms.Form):
         end_dateData = self.data['end_date']
         latitude = self.data['latitude']
         longitude = self.data['longitude']
+        projectlocality = self.data['projectlocality']
         country = getCountryCode(latitude,longitude).upper()
         status = get_object_or_404(Status, id=self.data['status'])
         mainOrganisation = get_object_or_404(Organisation, id=self.data['mainOrganisation'])
@@ -219,7 +226,8 @@ class ProjectForm(forms.Form):
 
 
     def createProject(self, latitude, longitude, country, status, doingAtHome, mainOrganisation, args):
-         return Project(name = self.data['project_name'], url = self.data['url'], creator=args.user,
+         return Project(name = self.data['project_name'], url = self.data['url'], projectlocality = self.data['projectlocality'],
+                         creator=args.user,
                          author = self.data['contact_person'], author_email = self.data['contact_person_email'],
                          latitude = latitude, longitude = longitude, country = country,
                          aim = self.data['aim'], description = self.data['description'],
@@ -232,6 +240,7 @@ class ProjectForm(forms.Form):
     def updateFields(self, project, latitude, longitude, country, status, doingAtHome, mainOrganisation):
         project.name = self.data['project_name']
         project.url = self.data['url']
+        project.projectlocality = self.data['projectlocality']
         project.author = self.data['contact_person']
         project.author_email = self.data['contact_person_email']
         project.latitude = latitude
