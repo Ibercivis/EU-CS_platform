@@ -23,8 +23,9 @@
     href="{% url 'organisations'%}{% if request.GET.keywords %}?keywords={{request.GET.keywords}}{%endif%}"><i class="fas fa-university"></i> Organisations</a>
   </li>
 </ul>
-<ul class="nav navbar-nav navbar-right pl-0">
+<ul class="nav navbar-nav sub sub-star navbar-right pl-0 {% active_link 'curated'%}">
   <li class="nav-item">
-    <a class="nav-link sub {% active_link 'curated' %}" href="{% url 'curated' %}"><i class="fas fa-star"></i> Our Gold Star Selection</a></li>
+    <a class="nav-link sub sub-star {% active_link 'curated' %}" href="{% url 'curated' %}"><i class="fas fa-star"></i> Our Gold Star Selection</a>
+  </li>
   </ul>
 </nav>
