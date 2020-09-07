@@ -14,6 +14,16 @@ class Topic(models.Model):
     def __str__(self):
         return f'{self.topic}'
 
+class ParticipationTask(models.Model):
+    participationtask = models.TextField()
+    def __str__(self):
+        return f'{self.participationtask}'
+
+class GeographicExtend(models.Model):
+    geographicextend = models.TextField()
+    def __str__(self):
+        return f'{self.geographicextend}'
+
 class Keyword(models.Model):
     keyword = models.TextField()
     def __str__(self):
@@ -48,6 +58,8 @@ class Project(models.Model):
     start_date = models.DateTimeField('Start date', null=True, blank=True)
     end_date = models.DateTimeField('End date', null=True, blank=True)
     topic = models.ManyToManyField(Topic)
+    participationtask = models.ManyToManyField(ParticipationTask)
+    geographicextend = models.ManyToManyField(GeographicExtend)
     url = models.CharField(max_length=200,null=True, blank=True)
     #Contact person info
     author = models.CharField(max_length=100, null=True, blank=True)

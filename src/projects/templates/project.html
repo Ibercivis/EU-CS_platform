@@ -72,6 +72,9 @@
           <hr>
           <b>Location</b>
           <div>
+            {% for geographicextend in project.geographicextend.all %}
+            <a class="badge badge-light" href="">{{geographicextend}}</a>
+            {% endfor %}
             {% for country in countries %}
             {% if country.code == project.country %}
             <a class="badge badge-light" href="projects?country={{country.code}}">{{ country.name | title }}</a>
@@ -105,6 +108,8 @@
                 <span data-value="4" data-text="Very Good"></span>
                 <span data-value="5" data-text="Excellent"></span>
               </span>
+              {{ review_count }} {% if review_count == 1 %} review {% else %} reviews {% endif %}
+
             </div>
             <div class="col-3 text-right">
               <a target="_blank" href="{% if 'http' not in project.url %}//{%endif%}{{project.url}}"
@@ -112,7 +117,6 @@
             </div>
           </div>
 
-          {{ review_count }} {% if review_count == 1 %} review {% else %} reviews {% endif %}
           <p>{{project.aim | safe}}</p>
           <p>{{project.description | safe}}</p>
           {% if user.is_authenticated %}
@@ -148,9 +152,16 @@
         <div class="col-xl-9 col-md-6 col-12 myhidden" id="two">
           <h5>{{project.name}}</h5>
           <b>How to participate: </b>
-          <div>{{project.howToParticipate | safe}}</div><br>
+          <div>{{project.howToParticipate | safe}}</div>
+
           <b>Needed equipment:</b>
           <div>{{project.equipment |safe}}</div>
+          <b>Participation task</b>
+          <div>
+            {% for participationtask in project.participationtask.all %}
+            <a class="badge badge-light" href="#">{{participationtask}}</a>
+            {% endfor %}
+          </div>
         </div>
         <div class="d-md-none">
           {% if project.image2 %}
@@ -182,6 +193,9 @@
           <hr>
           <b>Location</b>
           <div>
+            {% for geographicextend in project.geographicextend.all %}
+            <a class="badge badge-light" href="">{{geographicextend}}</a>
+            {% endfor %}
             {% for country in countries %}
             {% if country.code == project.country %}
             <a class="badge badge-light" href="projects?country={{country.code}}">{{ country.name | title }}</a>
