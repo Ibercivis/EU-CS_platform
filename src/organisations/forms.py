@@ -16,6 +16,11 @@ class OrganisationForm(forms.Form):
     help_text='Select One', widget=forms.Select(attrs={'class':'js-example-basic-single'}))
     logo = forms.ImageField(required=False, help_text='Please upload the logo of your organisation (.jpg or .png)',
     label="Logo", widget=forms.FileInput)
+    x = forms.FloatField(widget=forms.HiddenInput(),required=False)
+    y = forms.FloatField(widget=forms.HiddenInput(), required=False)
+    width = forms.FloatField(widget=forms.HiddenInput(),required=False)
+    height = forms.FloatField(widget=forms.HiddenInput(), required=False)
+    withLogo = forms.BooleanField(widget=forms.HiddenInput(), required=False, initial=False)
     contact_point = forms.CharField(max_length=100,
     help_text='Please name the contact person or contact point for the organisation',
     widget=forms.TextInput())

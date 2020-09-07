@@ -25,13 +25,18 @@ def new_organisation(request):
         if form.is_valid():
             image_path = ''
             if(request.FILES.get('logo', False)):
+                x = form.cleaned_data.get('x')
+                y = form.cleaned_data.get('y')
+                w = form.cleaned_data.get('width')
+                h = form.cleaned_data.get('height')
                 photo = request.FILES['logo']
                 image = Image.open(photo)
+                cropped_image = image.crop((x, y, w+x, h+y))
+                resized_image = cropped_image.resize((400, 400), Image.ANTIALIAS)
                 _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
                 random_num = random.randint(0, 1000)
                 image_path = "media/images/" + _datetime + '_' + str(random_num) + '_' + photo.name
-                image.thumbnail((144,144))
-                image.save(image_path)
+                resized_image.save(image_path)
             form.save(request, '/' + image_path)
             return redirect('../organisations', {})
         else:
@@ -66,23 +71,34 @@ def edit_organisation(request, pk):
 
     form = OrganisationForm(initial={
         'name':organisation.name,'url': organisation.url, 'description': organisation.description,
-        'orgType': organisation.orgType, 'logo': organisation.logo, 'contact_point': organisation.contactPoint,
-        'contact_point_email': organisation.contactPointEmail, 'latitude': organisation.latitude, 'longitude': organisation.longitude
+        'orgType': organisation.orgType, 'logo': organisation.logo, 'withLogo': (True, False)[organisation.logo == ""], 
+        'contact_point': organisation.contactPoint,'contact_point_email': organisation.contactPointEmail, 
+        'latitude': organisation.latitude, 'longitude': organisation.longitude
     })
 
     if request.method == 'POST':
         form = OrganisationForm(request.POST, request.FILES)
         if form.is_valid():
             image_path = ''
-            if(request.FILES.get('logo', False)):
+            withLogo = form.cleaned_data.get('withLogo')
+            if(request.FILES.get('logo', False)):               
+                x = form.cleaned_data.get('x')
+                y = form.cleaned_data.get('y')
+                w = form.cleaned_data.get('width')
+                h = form.cleaned_data.get('height')
                 photo = request.FILES['logo']
                 image = Image.open(photo)
+                cropped_image = image.crop((x, y, w+x, h+y))
+                resized_image = cropped_image.resize((400, 400), Image.ANTIALIAS)
                 _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
                 random_num = random.randint(0, 1000)
-                image_path = "media/images/" + _datetime + '_' + str(random_num) + '_' + photo.name
-                image.thumbnail((144,144))
-                image.save(image_path)
+                image_path = "media/images/" + _datetime + '_' + str(random_num) + '_' + photo.name               
+                resized_image.save(image_path)
                 image_path = '/' + image_path
+            elif withLogo:
+                    image_path = '/'
+            else:
+                image_path = ''
             form.save(request, image_path)
             return redirect('../organisations', {})
         else:
