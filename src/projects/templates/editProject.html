@@ -88,24 +88,24 @@
               <button type="submit" onclick="$('form').submit()" class="btn btn-green"><i class="fas fa-share-square"></i> Save</button>
               <button type="submit" class="btn btn-red float-right" data-href="{% url 'deleteProject' project.id %}"
               data-toggle="modal" data-target="#confirm-delete" name='deleteProject'><i class="fas fa-trash-alt"></i> Delete
-              </button>
+            </button>
           </div>
         </div>
 
         {% if user.is_authenticated %}
-          {% if project.creator == user or user.is_staff %}
-          <div class="row">
-            <div class="col-6"></div>
-            <div class="col-6">
-              <permissionForm>
-                {% csrf_token %}
-                {{ permissionForm.usersAllowed | as_crispy_field }}
-                {{ permissionForm.selectedUsers | as_crispy_field }}
-                {{ permissionForm.usersCollection | as_crispy_field }}
-              </permissionForm>
-            </div>
+        {% if project.creator == user or user.is_staff %}
+        <div class="row">
+          <div class="col-6"></div>
+          <div class="col-6">
+            <permissionForm>
+              {% csrf_token %}
+              {{ permissionForm.usersAllowed | as_crispy_field }}
+              {{ permissionForm.selectedUsers | as_crispy_field }}
+              {{ permissionForm.usersCollection | as_crispy_field }}
+            </permissionForm>
           </div>
-          {% endif %}
+        </div>
+        {% endif %}
         {% endif %}
 
       </div>
@@ -173,168 +173,168 @@
             <div id="contactinfoform">
               <div class="form-row">
                 <!--div class="col-12">
-                  {{ form.host|as_crispy_field }}
-                </div-->
-                <div class="col-12">
-                  {{ form.contact_person|as_crispy_field }}
-                </div>
-                <div class="col-12">
-                  {{ form.contact_person_email|as_crispy_field }}
-                </div>
+                {{ form.host|as_crispy_field }}
+              </div-->
+              <div class="col-12">
+                {{ form.contact_person|as_crispy_field }}
               </div>
-
+              <div class="col-12">
+                {{ form.contact_person_email|as_crispy_field }}
+              </div>
             </div>
-            <hr />
-            <h4>Project profile images</h4>
-            <div id="imagesform">
-              <div class="form-row">
-                <div class="col-sm-8 col-12 mb-3">
-                  {{ form.image1|as_crispy_field }}
-                  {{ form.x1|as_crispy_field }}
-                  {{ form.y1|as_crispy_field }}
-                  {{ form.height1|as_crispy_field }}
-                  {{ form.width1|as_crispy_field }}
-                  {{ form.withImage1|as_crispy_field }}
-                  <a id="imgResult1" href="#"> <img class="img-fluid img-zoom" id="imageResult1" src="{{ project.image1 }}" alt="Image not upload"></a>
-                  <div id="deleteImage1">
+
+          </div>
+          <hr />
+          <h4>Project profile images</h4>
+          <div id="imagesform">
+            <div class="form-row">
+              <div class="col-sm-8 col-12 mb-3">
+                {{ form.image1|as_crispy_field }}
+                {{ form.x1|as_crispy_field }}
+                {{ form.y1|as_crispy_field }}
+                {{ form.height1|as_crispy_field }}
+                {{ form.width1|as_crispy_field }}
+                {{ form.withImage1|as_crispy_field }}
+                <a id="imgResult1" href="#"> <img class="img-fluid img-zoom" id="imageResult1" src="{{ project.image1 }}" alt="Image not upload"></a>
+                <div id="deleteImage1">
                   {% if project.image1 %}
-                    <a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>
+                  <a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>
                   {% endif %}
-                  </div>
-                </div>
-                <div class="col-sm-4 col-12 mb-3">
-                  {{ form.image_credit1|as_crispy_field }}
                 </div>
               </div>
-              <div class="form-row">
-                <div class="col-sm-8 col-12 mt-3">
-                  {{ form.image2|as_crispy_field }}
-                  {{ form.x2|as_crispy_field }}
-                  {{ form.y2|as_crispy_field }}
-                  {{ form.height2|as_crispy_field }}
-                  {{ form.width2|as_crispy_field }}
-                  {{ form.withImage2|as_crispy_field }}
-                  <a id="imgResult2" href="#"> <img class="img-fluid img-zoom" id="imageResult2" src="{{ project.image2 }}" alt="Image not upload"></a>
-                  <div id="deleteImage2">
+              <div class="col-sm-4 col-12 mb-3">
+                {{ form.image_credit1|as_crispy_field }}
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-sm-8 col-12 mt-3">
+                {{ form.image2|as_crispy_field }}
+                {{ form.x2|as_crispy_field }}
+                {{ form.y2|as_crispy_field }}
+                {{ form.height2|as_crispy_field }}
+                {{ form.width2|as_crispy_field }}
+                {{ form.withImage2|as_crispy_field }}
+                <a id="imgResult2" href="#"> <img class="img-fluid img-zoom" id="imageResult2" src="{{ project.image2 }}" alt="Image not upload"></a>
+                <div id="deleteImage2">
                   {% if project.image2 %}
-                    <a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>
+                  <a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>
                   {% endif %}
-                  </div>
-                </div>
-                <div class="col-sm-4 col-12">
-                  {{ form.image_credit2|as_crispy_field }}
                 </div>
               </div>
-              <div class="form-row">
-                <div class="col-sm-8 col-12 mt-3">
-                  {{ form.image3|as_crispy_field }}
-                  {{ form.x3|as_crispy_field }}
-                  {{ form.y3|as_crispy_field }}
-                  {{ form.height3|as_crispy_field }}
-                  {{ form.width3|as_crispy_field }}
-                  {{ form.withImage3|as_crispy_field }}
-                  <a id="imgResult3" href="#"> <img class="img-fluid img-zoom" id="imageResult3" src="{{ project.image3 }}" alt="Image not upload"></a>
-                  <div id="deleteImage3">
+              <div class="col-sm-4 col-12">
+                {{ form.image_credit2|as_crispy_field }}
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-sm-8 col-12 mt-3">
+                {{ form.image3|as_crispy_field }}
+                {{ form.x3|as_crispy_field }}
+                {{ form.y3|as_crispy_field }}
+                {{ form.height3|as_crispy_field }}
+                {{ form.width3|as_crispy_field }}
+                {{ form.withImage3|as_crispy_field }}
+                <a id="imgResult3" href="#"> <img class="img-fluid img-zoom" id="imageResult3" src="{{ project.image3 }}" alt="Image not upload"></a>
+                <div id="deleteImage3">
                   {% if project.image3 %}
-                    <a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>
+                  <a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>
                   {% endif %}
-                  </div>
-                </div>
-                <div class="col-sm-4 col-12">
-                  {{ form.image_credit3|as_crispy_field }}
                 </div>
               </div>
+              <div class="col-sm-4 col-12">
+                {{ form.image_credit3|as_crispy_field }}
+              </div>
             </div>
-            <hr />
+          </div>
+          <hr />
 
-            <h4>Geography</h4>
-            <p>Main location where the project takes place (Enter address or click on the map)</p>
-            <div id="geographyform">
-              {% leaflet_map "map" callback="window.map_init_basic" %}
-              <div class="form-row">
-                <div class="col-sm-6 col-12 mb-3">
-                  {{ form.latitude|as_crispy_field }}
-                </div>
-                <div class="col-sm-6 col-12 mb-3">
-                  {{ form.longitude|as_crispy_field }}
-                </div>
-                <div class="col-12 mb-3">
-                  {{ form.geographicextend |as_crispy_field }}
-                  {{ form.projectlocality |as_crispy_field }}
-                </div>
+          <h4>Geography</h4>
+          <p>Main location where the project takes place (Enter address or click on the map)</p>
+          <div id="geographyform">
+            {% leaflet_map "map" callback="window.map_init_basic" %}
+            <div class="form-row">
+              <div class="col-sm-6 col-12 mb-3">
+                {{ form.latitude|as_crispy_field }}
+              </div>
+              <div class="col-sm-6 col-12 mb-3">
+                {{ form.longitude|as_crispy_field }}
+              </div>
+              <div class="col-12 mb-3">
+                {{ form.geographicextend |as_crispy_field }}
+                {{ form.projectlocality |as_crispy_field }}
               </div>
             </div>
-            <hr />
-            <h4>Supplementary information for Citizen Science</h4>
-            <div id="informationform">
-              <div class="form-row">
-                <div class="col-12 mb-3">
-                  {{ form.how_to_participate|as_crispy_field }}
-                </div>
-                <div class="col-12 mb-3">
-                  {{ form.doingAtHome|as_crispy_field }}
-                </div>
-                <div class="col-12 mb-3">
-                  {{ form.equipment|as_crispy_field }}
-                </div>
+          </div>
+          <hr />
+          <h4>Supplementary information for Citizen Science</h4>
+          <div id="informationform">
+            <div class="form-row">
+              <div class="col-12 mb-3">
+                {{ form.how_to_participate|as_crispy_field }}
+              </div>
+              <div class="col-12 mb-3">
+                {{ form.doingAtHome|as_crispy_field }}
+              </div>
+              <div class="col-12 mb-3">
+                {{ form.equipment|as_crispy_field }}
               </div>
             </div>
-            <hr />
+          </div>
+          <hr />
 
-            <h4>Funding</h4>
-            <div id="fundingform">
-              <div class="form-row">
-                <div class="col-sm-6 col-12 mb-3">
-                  {{ form.funding_body|as_crispy_field }}
-                  {{ form.fundingBodySelected|as_crispy_field }}
-                </div>
-                <div class="col-sm-6 col-12 mb-3">
-                  {{ form.funding_program|as_crispy_field }}
-                </div>
+          <h4>Funding</h4>
+          <div id="fundingform">
+            <div class="form-row">
+              <div class="col-sm-6 col-12 mb-3">
+                {{ form.funding_body|as_crispy_field }}
+                {{ form.fundingBodySelected|as_crispy_field }}
+              </div>
+              <div class="col-sm-6 col-12 mb-3">
+                {{ form.funding_program|as_crispy_field }}
               </div>
             </div>
-            <hr />
-            <h4>Origin information</h4>
-            <div id="originform">
-              <div class="form-row">
-                <div class="col-12 mb-3">
-                  {{ form.origin_database|as_crispy_field }}
-                  {{ form.originDatabaseSelected|as_crispy_field }}
-                </div>
-                <div class="col-12 mb-3">
-                  {{ form.originUID|as_crispy_field }}
-                </div>
+          </div>
+          <hr />
+          <h4>Origin information</h4>
+          <div id="originform">
+            <div class="form-row">
+              <div class="col-12 mb-3">
+                {{ form.origin_database|as_crispy_field }}
+                {{ form.originDatabaseSelected|as_crispy_field }}
               </div>
-              <div class="form-row">
-                <div class="col-12 mb-3">
-                  {{ form.originURL|as_crispy_field }}
-                </div>
+              <div class="col-12 mb-3">
+                {{ form.originUID|as_crispy_field }}
               </div>
             </div>
-            <hr />
-            <h4> Custom fields</h4>
-            <div id="customFields"></div>
+            <div class="form-row">
+              <div class="col-12 mb-3">
+                {{ form.originURL|as_crispy_field }}
+              </div>
+            </div>
+          </div>
+          <hr />
+          <h4> Custom fields</h4>
+          <div id="customFields"></div>
 
-            {{ cField_formset.management_form }}
-            {% for cField_form in cField_formset.forms %}
-            <div  class="customField-formset">
-              <div class="form-row">
-                <div class="col-12">
-                  {{ cField_form.title |as_crispy_field }}
-                </div>
-                <div class="col-12">
-                  {{ cField_form.paragraph|as_crispy_field }}
-                </div>
+          {{ cField_formset.management_form }}
+          {% for cField_form in cField_formset.forms %}
+          <div  class="customField-formset">
+            <div class="form-row">
+              <div class="col-12">
+                {{ cField_form.title |as_crispy_field }}
+              </div>
+              <div class="col-12">
+                {{ cField_form.paragraph|as_crispy_field }}
               </div>
             </div>
-            <hr/>
-            {% endfor %}
-            <button type="submit" class="btn btn-green mb-5"><i class="fas fa-share-square"></i> Save</button>
-          </form>
-        </table>
-      </div>
+          </div>
+          <hr/>
+          {% endfor %}
+          <button type="submit" class="btn btn-green mb-5"><i class="fas fa-share-square"></i> Save</button>
+        </form>
+      </table>
     </div>
   </div>
+</div>
 </div>
 </div>
 
@@ -451,24 +451,24 @@
     }
 
     $('#id_usersAllowed').on('change', function () {
-        users = $("#id_usersAllowed option:selected").map(function () {
-          return $.trim($(this).text());
-        }).get().join(',');
+      users = $("#id_usersAllowed option:selected").map(function () {
+        return $.trim($(this).text());
+      }).get().join(',');
 
-        var idProject = {{project.id}};
-        var request = $.ajax(
-        {
-          type: "POST",
-          url: "{% url 'allowUser' %}",
-          data: {
-            "project_id": idProject,
-            "users": users,
-            csrfmiddlewaretoken: '{{ csrf_token }}'
-          },
-          success: function (response) {
+      var idProject = {{project.id}};
+      var request = $.ajax(
+      {
+        type: "POST",
+        url: "{% url 'allowUser' %}",
+        data: {
+          "project_id": idProject,
+          "users": users,
+          csrfmiddlewaretoken: '{{ csrf_token }}'
+        },
+        success: function (response) {
 
-          }
         }
+      }
       );
     });
 
@@ -495,22 +495,22 @@
 
 
     function getOrganisations() {
-        var mainOrganisation = $("#id_mainOrganisation").val();
-        var organisationsSelected = $("#id_organisation").val()
-        var request = $.ajax(
-          {
-            type: "GET",
-            url: "{% url 'getOrganisations' %}",
-            data: {
-              "mainOrganisation": mainOrganisation,
-              "organisationsSelected": organisationsSelected
-            },
-            success: function (response) {
-              $("#id_organisation").html(response.organisations);
-            }
-          }
-        );
+      var mainOrganisation = $("#id_mainOrganisation").val();
+      var organisationsSelected = $("#id_organisation").val()
+      var request = $.ajax(
+      {
+        type: "GET",
+        url: "{% url 'getOrganisations' %}",
+        data: {
+          "mainOrganisation": mainOrganisation,
+          "organisationsSelected": organisationsSelected
+        },
+        success: function (response) {
+          $("#id_organisation").html(response.organisations);
+        }
       }
+      );
+    }
 
     $("form").submit(function (e) {
       var validationFailed = false;
