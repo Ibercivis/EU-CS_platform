@@ -1,0 +1,36 @@
+{% load my_tags %}
+{% if organisations.has_other_pages %}
+<ul class="pagination">
+
+  {% if organisations.number|add:'-3' > 1 %}
+  <a href="?{% param_replace page=1 %}">
+    <li class="btn mb-4 btn-light">{{ 1 }}</li>
+  </a>
+  {% endif %}
+
+  {% if organisations.number|add:'-3' > 1 and organisations.number|add:'-4' > 1 %}
+    <li><a href="?page={{ organisations.number|add:'-4' }}">&hellip;</a></li>
+  {% endif %}
+
+  {% for i in organisations.paginator.page_range %}
+    {% if organisations.number == i %}
+      <li class="active btn btn-info mb-4"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+    {% elif i > organisations.number|add:'-4' and i < organisations.number|add:'4' %}
+      <a href="?{% param_replace page=i %}">
+        <li class="btn mb-4 btn-light">{{ i }}</li>
+      </a>
+    {% endif %}
+  {% endfor %}
+
+  {% if organisations.paginator.num_pages > organisations.number|add:'3' and organisations.paginator.num_pages > organisations.number|add:'4' %}
+    <li><a href="?page={{ organisations.number|add:'4' }}">&hellip;</a></li>
+  {% endif %}
+
+  {% if organisations.paginator.num_pages > organisations.number|add:'3' %}
+  <a href="?{% param_replace page=organisations.paginator.num_pages %}">
+    <li class="btn mb-4 btn-light">{{ organisations.paginator.num_pages }}</li>
+  </a>
+  {% endif %}
+
+</ul>
+{% endif %}

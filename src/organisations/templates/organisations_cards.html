@@ -27,3 +27,8 @@
     </div><!-- end of card -->
 </div>
 {% endfor %}
+{% if 'organisations' in request.get_full_path %}
+<div class="col-lg-12">
+  {% include "organisations_paginator.html" %}
+</div>
+{% endif %}

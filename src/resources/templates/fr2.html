@@ -1,14 +1,38 @@
 {% load my_tags %}
 {% if resources.has_other_pages %}
 <ul class="pagination">
+
+  {% if resources.number|add:'-3' > 1 %}
+  <a href="?{% param_replace page=1 %}">
+    <li class="btn mb-4 btn-light">{{ 1 }}</li>
+  </a>
+  {% endif %}
+
+  {% if resources.number|add:'-3' > 1 and resources.number|add:'-4' > 1 %}
+    <a href="?{% param_replace page=resources.number|add:'-4' %}">
+      <li class="btn mb-4 btn-light">&hellip;</li>
+    </a>
+  {% endif %}
   {% for i in resources.paginator.page_range %}
   {% if resources.number == i %}
   <li class="active btn btn-info mb-4"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-  {% else %}
+   {% elif i > resources.number|add:'-4' and i < resources.number|add:'4' %}
   <a href="?{% param_replace page=i %}">
     <li class="btn mb-4 btn-light">{{ i }}</li>
   </a>
   {% endif %}
   {% endfor %}
+  
+  {% if resources.paginator.num_pages > resources.number|add:'3' and resources.paginator.num_pages > resources.number|add:'4' %}
+    <a href="?{% param_replace page=resources.number|add:'4' %}">
+      <li class="btn mb-4 btn-light">&hellip;</li>
+    </a>
+  {% endif %}
+
+  {% if resources.paginator.num_pages > resources.number|add:'3' %}
+    <a href="?{% param_replace page=resources.paginator.num_pages %}">
+      <li class="btn mb-4 btn-light">{{ resources.paginator.num_pages }}</li>
+    </a>
+  {% endif %}
 </ul>
 {% endif %}
