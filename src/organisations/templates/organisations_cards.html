@@ -1,6 +1,6 @@
 {% load staticfiles %}
 {% for organisation in organisations %}
-<div class="col-lg-3 col-sm-12 mb-4">
+<div class="col-lg-4 col-sm-12 mb-4">
 	<div class="card h-100 shadow border-0">
         <a class="card-img-wrap "href="/organisation/{{organisation.id }}">
             {% if organisation.logo %}
@@ -11,14 +11,19 @@
 
         </a>
         <div class="card-body">
-            <h6 class="card-title mt-3 mb-3"> <a class="card-link" href="/organisation/{{organisation.id }}">{{ organisation.name }}</a></h6>
+            <h6 class="card-title">
+							<div class="col-12  pl-0 mb-4 colorpurple">
+								<i class="fas fa-university"></i> Organisation
+							</div>
+							<a class="card-link mt-3" href="/organisation/{{organisation.id }}">{{ organisation.name }}</a></h6>
 
-            <div class="card-text mt-3">{{organisation.description | safe | truncatechars:180 }}
-                <a class="organisation" href="/organisation/{{organisation.id}}" target="_blank">Read more</a>
+
+            <div class="card-text mt-3">
+							{{ organisation.orgType }}
+							<p class="mt-3">{{organisation.description | safe | truncatechars:180 }}
+								<a class="organisation" href="/organisation/{{organisation.id}}"> Read more</a>
             </div>
-            <br>
         </div><!-- End of card-body -->
-
     </div><!-- end of card -->
 </div>
 {% endfor %}
