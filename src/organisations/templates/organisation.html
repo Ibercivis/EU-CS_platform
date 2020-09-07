@@ -13,66 +13,61 @@
 
 {% block list_of_items %}
 <div class="container">
-	<div class="row mt-5">
-		<div class="container-fluid">
-			<div class="card mt-5 shadow">
-				<div class="card-body">
-					<div class="card-title">
-						<h1>
-							<img title="organisation logo" class="img-fluid rounded-circle" src="{{ organisation.logo|default:'/media/default_profile.png' }} " width="144" height="144">
-							{{ organisation.name }}
-							{% if editable %}
-							<a href="{% url 'delete_organisation' organisation.id %}" class="btn btn-outline btn-red float-right ml-2 mt-5"><span class="fas fa-trash-alt"></span>&nbsp;Delete Organisation</a>
-							<a href="{% url 'edit_organisation' organisation.id %}" class="btn btn-outline btn-green float-right ml-2 mt-5"><i class="fas fa-edit"></i> Edit Organisation</a>
-							{% endif %}
-						</h1>
-					</div>
-				</div>
-				<div class="card-text">
-					<div class="row p-3">
-						<div class="col-12 col-sm-6">
-							<p><b>Url: </b><a target="_blank" href="{% if 'http' not in organisation.url %}//{%endif%}{{organisation.url}}">{{organisation.url}}</a></p>
-							<p><b>Description: </b>{{ organisation.description }}</p>
-							<p><b>Organisation type: </b>{{ organisation.orgType }}</p>
-						</div>
-						<div class="col-12 col-sm-6">
-							<p><strong>Contact Point</strong>: {{ organisation.contactPoint }} </p>
-							<p><strong>Contact Point Email</strong>: {{ organisation.contactPointEmail }}</p>
-						</div>
-						<div class="col-12 col-sm-6">
-							<p><strong>Address</strong>: </p>
-							{% leaflet_map "map" callback="window.map_init_basic" %}
-						</div>
+	<div class="card">
+		<div class="card-body">
+			<div class="row">
+				<div class="col-sm-3 col-12">
+					<img title="organisation logo" target="_blank"
+					class="img-fluid mb-3" src="{{ organisation.logo|default:'/media/default_profile.png' }}">
+					<a class="mb-5" href="{% if 'http' not in organisation.url %}//{%endif%}{{organisation.url}}"><i class="fas fa-link"></i>{{organisation.url}}</a>
+					<div><strong>Contact Point</strong>: {{ organisation.contactPoint }} </div>
+					<div><strong>Contact Point Email</strong>: {{ organisation.contactPointEmail }}</div>
 
-						<div class="col-12 col-sm-6">
-							<h5>Projects</h5>
-							{% for project in associatedProjects.all %} <a class="badge" href="/project/{{project.id}}">{{project}}</a> <br/> {% endfor %}
-						</div>
-						<div class="col-12 col-sm-6">
-							<h5>Resources</h5>
-							{% for resource in associatedResources.all %} <a class="badge" href="/resource/{{resource.id}}">{{resource}}</a> <br/> {% endfor %}
-						</div>
-						<div class="col-12 col-sm-6">
-							<h5>Members</h5>
-							{% for member in members.all %} <a class="badge" href="/users/{{member.slug}}">{{member.user.name}}</a> <br/> {% endfor %}
-						</div>
+
+
+				</div>
+				<div class="col-sm-9 col-12">
+					<h3>{{ organisation.name }}</h3>
+					{{ organisation.description }}
+					<h5 class="mt-3">Projects</h5>
+					{% for project in associatedProjects.all %} <a class="badge badge-light pt-1" href="/project/{{project.id}}">{{project|upper}}</a> {% endfor %}
+					<h5 class="mt-3">Resources</h5>
+					{% for resource in associatedResources.all %} <a class="badge badge-light pt-1" href="/resource/{{resource.id}}">{{resource|upper}}</a>{% endfor %}
+					<h5 class="mt-3">Members</h5>
+					{% for member in members.all %} <a class="badge badge-light pt-1" href="/users/{{member.slug}}">{{member.user.name | upper}}</a>{% endfor %}
+
+
+					<div class="mt-4">
+						{% leaflet_map "map" callback="window.map_init_basic" %}
 					</div>
 
 				</div>
 			</div>
+		</div><!-- end of card body -->
+		{% if editable %}
+		<div class="card-footer">
+			<a href="{% url 'delete_organisation' organisation.id %}" class="btn btn-outline btn-red float-right ml-2 mt-2">
+				<span class="fas fa-trash-alt"></span>&nbsp;Delete Organisation
+			</a>
+			<a href="{% url 'edit_organisation' organisation.id %}" class="btn btn-outline btn-green float-right ml-2 mt-2">
+				<i class="fas fa-edit"></i> Edit Organisation
+			</a>
 		</div>
+		{% endif %}
+
 	</div>
 </div>
+
 {% endblock list_of_items%}
 
 {% block scripts %}
 <script>
 	var map;
-    var marker_layer = new L.marker([50.5, 30.5]);
-    function map_init_basic (leafmap, options) {
-      map = leafmap;
-      map.setView([{{organisation.latitude}}, {{organisation.longitude}}], 12)
-      new L.marker([{{organisation.latitude}},{{organisation.longitude}}]).addTo(map);
-    }
+	var marker_layer = new L.marker([50.5, 30.5]);
+	function map_init_basic (leafmap, options) {
+		map = leafmap;
+		map.setView([{{organisation.latitude}}, {{organisation.longitude}}], 12)
+		new L.marker([{{organisation.latitude}},{{organisation.longitude}}]).addTo(map);
+	}
 </script>
 {% endblock scripts %}
