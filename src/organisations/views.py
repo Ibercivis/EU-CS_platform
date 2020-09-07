@@ -2,6 +2,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from PIL import Image
+from django.core.paginator import Paginator
 from django.contrib.auth import get_user_model
 from django.utils import formats
 from django.db.models import Q
@@ -105,6 +106,10 @@ def organisations(request):
         filters['orgType'] = request.GET['orgType']
 
     counter = len(organisations)
+
+    paginator = Paginator(organisations, 12)
+    page = request.GET.get('page')
+    organisations = paginator.get_page(page)
 
     return render(request, 'organisations.html', {'organisations': organisations, 'counter': counter,
     'filters': filters, 'countriesWithContent': countriesWithContent, 'orgTypes': orgTypes,

@@ -82,7 +82,7 @@ def resources(request, isTrainingResource=False):
     resources = list(resourcesTop) + list(resources)
     counter = len(resources)
 
-    paginator = Paginator(resources, 12)
+    paginator = Paginator(resources, 1)
     page = request.GET.get('page')
     resources = paginator.get_page(page)
 
