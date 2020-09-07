@@ -61,18 +61,18 @@
 
 		{% include "projects_cards.html" %}
 		<div class="col-12 mb-2">
-			{{ counterresources }} result{% if counterresources != 1 %}s{% endif %} in Resources,
-			{% if counterresources > 6 %}click <a href="/resources">here</a> to see all of them{% endif %}
+			{{ counterresources }} result{% if counterresources != 1 %}s{% endif %} in Resources
+			{% if counterresources > 6 %}, click <a href="/resources">here</a> to see all of them{% endif %}
 		</div>
 		{% include "resources_cards.html" %}
 		<div class="col-12 mb-2">
-			{{ countertresources }} result{% if counterresources != 1 %}s{% endif %} in Training,
-			{% if countertresources > 6 %}click <a href="/training_resources">here</a> to see all of them{% endif %}
+			{{ countertresources }} result{% if counterresources != 1 %}s{% endif %} in Training
+			{% if countertresources > 6 %}, click <a href="/training_resources">here</a> to see all of them{% endif %}
 		</div>
 		{% include "resources_cards.html" with resources=tresources %}
 		<div class="col-12 mb-2">
-			{{ counterorganisations}} result{% if counterorganisations != 1 %}s{% endif %} in Organisations,
-			{% if counterorganisations > 6 %}click <a href="/organisations">here</a> to see all of them{% endif %}
+			{{ counterorganisations}} result{% if counterorganisations != 1 %}s{% endif %} in Organisations
+			{% if counterorganisations > 6 %}, click <a href="/organisations">here</a> to see all of them{% endif %}
 
 		</div>
 
@@ -102,6 +102,12 @@ src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bo
 	);
 	$('.basicAutoComplete').on('autocomplete.select', function (evt, item) {
 		$('#finder').submit();
+	});
+	$('.basicAutoCompleteMobile').autoComplete(
+	{ minLength: 3 }
+	);
+	$('.basicAutoCompleteMobile').on('autocomplete.select', function (evt, item) {
+		$('#searchTopMobile').submit();
 	});
 </script>
 {% endblock scripts %}

@@ -67,18 +67,22 @@
       <input  type="text" id="keywordsMobile" name="keywords"  autocomplete="off"
       value="{{filters.keywords}}" class="basicAutoCompleteMobile form-control inhead"
       placeholder="Search..."
-      {% if 'all' in request.get_full_path %}
+      {% if 'all' in request.get_full_path %}}
       data-url="../home_autocomplete/">
+      {% elif 'training_resources' in request.get_full_path %}
+      data-url="../tresources_autocomplete/">
       {% elif 'resources' in request.get_full_path %}
       data-url="../resources_autocomplete">
+
       {% elif 'organisations' in request.get_full_path %}
       data-url="../organisations_autocomplete">
       {% else %}
       data-url="../text_autocomplete/">
       {% endif %}
+
     </div>
-    </form>
-    {% endif %}
+  </form>
+  {% endif %}
 
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -100,6 +104,7 @@
     {% endif %}"
     >
 
+
     <div class="input-group pr-2">
       <div class="input-group-prepend">
         <div class="input-group-text inhead clickable "><i class="fas fa-search"></i></div>
@@ -109,17 +114,22 @@
       placeholder="Search..."
       {% if 'all' in request.get_full_path %}
       data-url="../home_autocomplete/">
+      {% elif 'training_resources' in request.get_full_path %}
+      data-url="../tresources_autocomplete/">
       {% elif 'resources' in request.get_full_path %}
       data-url="../resources_autocomplete">
+
       {% elif 'organisations' in request.get_full_path %}
       data-url="../organisations_autocomplete">
       {% else %}
       data-url="../text_autocomplete/">
       {% endif %}
+
       <div class="input-group-append">
         <div class="input-group-text inhead clickable" id="backsign"></div>
       </div>
     </div>
+
 
   </form>
   {% else %}
@@ -246,6 +256,7 @@ $('.basicAutoComplete').keyup(function(){
     $('#backsign').html('')
   }
 });
+
 </script>
 {% block scripts %}
 {% endblock scripts %}
