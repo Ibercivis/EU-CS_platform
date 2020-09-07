@@ -21,8 +21,15 @@
 <div class="jumbotron jumbotron-fluid jumbotron-blue mb-0">
 	<div class="container">
 		<!--h1 class=" mt-5 text-white display-4 mb-2">Welcome to EU-Citizen.Science<br></h1-->
-    <h1 class="display-4 text-white"><br>EU-CITIZEN.SCIENCE</h1>
-		<h4 class="mb-4 mt-4 text-light font-weight-light"> Welcome to the platform for sharing Citizen Science projects, resources, tools, and training</h4>
+		<div class="d-md-none">
+			<h3 class="display-5 text-white"><br>EU-CITIZEN.SCIENCE</h3>
+
+		</div>
+		<div class="d-none d-md-block">
+			<h1 class="display-4 text-white"><br>EU-CITIZEN.SCIENCE</h1>
+
+			<h4 class="mb-4 mt-4 text-light font-weight-light"> Welcome to the platform for sharing Citizen Science projects, resources, tools, and training</h4>
+		</div>
 		<form id="finder" class="mb-4" action="/all" >
 			<div class="form-row">
 				<div class="input-group">
@@ -78,12 +85,12 @@
 
 		{% include "organisations_cards.html" %}
 		<div class="col-12">
-		{% if total == 0  %}
-		<img  class="img-fluid img-zoom col-12 mt-5" src="{% static 'site/img/undraw_empty_xct9.svg' %}">
-		<h5 class="mb-4">Sorry, nothing found</h5>
-		{% else %}
-		&nbsp;
-		{% endif %}
+			{% if total == 0  %}
+			<img  class="img-fluid img-zoom col-12 mt-5" src="{% static 'site/img/undraw_empty_xct9.svg' %}">
+			<h5 class="mb-4">Sorry, nothing found</h5>
+			{% else %}
+			&nbsp;
+			{% endif %}
 		</div>
 	</div>
 </div>
