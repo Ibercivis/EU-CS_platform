@@ -57,7 +57,7 @@ class ProjectForm(forms.Form):
         required=False,label="Geographic Extend")
 
     projectlocality = forms.CharField(max_length=300, \
-        widget=forms.TextInput(), required=False,
+        widget=forms.TextInput(), required=False, label= "Project locality",
         help_text='Please describe the locality of the project, in terms of where the main participant activities take place, \
         E.g. in your backyard, parks in London, rivers in Europe, online globally, etc.')
 

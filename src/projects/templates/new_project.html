@@ -167,12 +167,7 @@
                     <div class="col-12 mb-3">
                       {{ form.url|as_crispy_field }}
                     </div>
-                    <div class="col-12 mb-3">
-                      {{ form.geographicextend |as_crispy_field }}
-                    </div>
-                    <div class="col-12 mb-3">
-                      {{ form.projectlocality |as_crispy_field }}
-                    </div>
+
                     <div class="col-12 mb-3">
                       {{ form.mainOrganisation|as_crispy_field }}
                     </div>
@@ -186,429 +181,439 @@
                   <div id="contactinfoform">
                     <div class="form-row">
                       <!--div class="col-12">
-                        {{ form.host|as_crispy_field }}
-                      </div-->
-                      <div class="col-12 mb-3">
-                        {{ form.contact_person|as_crispy_field }}
+                      {{ form.host|as_crispy_field }}
+                    </div-->
+                    <div class="col-12 mb-3">
+                      {{ form.contact_person|as_crispy_field }}
+                    </div>
+                    <div class="col-12 mb-3">
+                      {{ form.contact_person_email|as_crispy_field }}
+                    </div>
+                  </div>
+
+                  <hr />
+                  <h4>Project profile images</h4>
+                  <div id="imagesform">
+                    <div class="form-row">
+                      <div class="col-sm-8 col-12 mb-3">
+                        {{ form.image1|as_crispy_field }}
+                        {{ form.x1|as_crispy_field }}
+                        {{ form.y1|as_crispy_field }}
+                        {{ form.height1|as_crispy_field }}
+                        {{ form.width1|as_crispy_field }}
+                        {{ form.withImage1|as_crispy_field }}
+                        <a id="imgResult1" href="#"> <img class="img-fluid img-zoom" id="imageResult1" src="" alt=""></a>
                       </div>
-                      <div class="col-12 mb-3">
-                        {{ form.contact_person_email|as_crispy_field }}
+                      <div class="col-sm-4 col-12 mb-3">
+                        {{ form.image_credit1|as_crispy_field }}
                       </div>
                     </div>
 
+                    <div class="form-row">
+                      <div class="col-sm-8 col-12 mb-3">
+                        {{ form.image2|as_crispy_field }}
+                        {{ form.x2|as_crispy_field }}
+                        {{ form.y2|as_crispy_field }}
+                        {{ form.height2|as_crispy_field }}
+                        {{ form.width2|as_crispy_field }}
+                        {{ form.withImage2|as_crispy_field }}
+                        <a id="imgResult2" href="#"><img class="img-fluid img-zoom" id="imageResult2" src="" alt=""></a>
+                      </div>
+                      <div class="col-sm-4 col-12 mb-3">
+                        {{ form.image_credit2|as_crispy_field }}
+                      </div>
+                    </div>
+
+                    <div class="form-row">
+                      <div class="col-sm-8 col-12 mb-3">
+                        {{ form.image3|as_crispy_field }}
+                        {{ form.x3|as_crispy_field }}
+                        {{ form.y3|as_crispy_field }}
+                        {{ form.height3|as_crispy_field }}
+                        {{ form.width3|as_crispy_field }}
+                        {{ form.withImage3|as_crispy_field }}
+                        <a id="imgResult3" href="#"><img class="img-fluid img-zoom" id="imageResult3" src="" alt=""></a>
+                      </div>
+                      <div class="col-sm-4 col-12 mb-3">
+                        {{ form.image_credit3|as_crispy_field }}
+                      </div>
+                    </div>
+                  </div>
+                  <hr />
+                  <h4>Geography</h4>
+                  <p>Indicate the location where the project takes place when one location can be indicated, and otherwise indicate
+                    the address of the Coordinator or Leading Partner. (Enter address or click on the map)</p>
+                    <div id="geographyform">
+                      {% leaflet_map "map" callback="window.map_init_basic" %}
+
+                      <div class="form-row">
+                        <div class="col-sm-6 col-12">
+                          {{ form.latitude|as_crispy_field }}
+                        </div>
+                        <div class="col-sm-6 col-12">
+                          {{ form.longitude|as_crispy_field }}
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="form-row">
+                      <div class="col-12 mb-3">
+                        {{ form.geographicextend |as_crispy_field }}
+                      </div>
+                      <div class="col-12 mb-3">
+                        {{ form.projectlocality |as_crispy_field }}
+                      </div>
+                    </div>
                     <hr />
-                    <h4>Project profile images</h4>
-                    <div id="imagesform">
-                      <div class="form-row">
-                        <div class="col-sm-8 col-12 mb-3">
-                          {{ form.image1|as_crispy_field }}
-                          {{ form.x1|as_crispy_field }}
-                          {{ form.y1|as_crispy_field }}
-                          {{ form.height1|as_crispy_field }}
-                          {{ form.width1|as_crispy_field }}
-                          {{ form.withImage1|as_crispy_field }}
-                          <a id="imgResult1" href="#"> <img class="img-fluid img-zoom" id="imageResult1" src="" alt=""></a>
-                        </div>
-                        <div class="col-sm-4 col-12 mb-3">
-                          {{ form.image_credit1|as_crispy_field }}
-                        </div>
-                      </div>
 
+                    <h4>Supplementary information for Citizen Science</h4>
+                    <div id="informationform">
                       <div class="form-row">
-                        <div class="col-sm-8 col-12 mb-3">
-                          {{ form.image2|as_crispy_field }}
-                          {{ form.x2|as_crispy_field }}
-                          {{ form.y2|as_crispy_field }}
-                          {{ form.height2|as_crispy_field }}
-                          {{ form.width2|as_crispy_field }}
-                          {{ form.withImage2|as_crispy_field }}
-                          <a id="imgResult2" href="#"><img class="img-fluid img-zoom" id="imageResult2" src="" alt=""></a>
+                        <div class="col-12 mb-3">
+                          {{ form.how_to_participate|as_crispy_field }}
                         </div>
-                        <div class="col-sm-4 col-12 mb-3">
-                          {{ form.image_credit2|as_crispy_field }}
+                        <div class="col-12 mb-3">
+                          {{ form.doingAtHome|as_crispy_field }}
                         </div>
-                      </div>
-
-                      <div class="form-row">
-                        <div class="col-sm-8 col-12 mb-3">
-                          {{ form.image3|as_crispy_field }}
-                          {{ form.x3|as_crispy_field }}
-                          {{ form.y3|as_crispy_field }}
-                          {{ form.height3|as_crispy_field }}
-                          {{ form.width3|as_crispy_field }}
-                          {{ form.withImage3|as_crispy_field }}
-                          <a id="imgResult3" href="#"><img class="img-fluid img-zoom" id="imageResult3" src="" alt=""></a>
-                        </div>
-                        <div class="col-sm-4 col-12 mb-3">
-                          {{ form.image_credit3|as_crispy_field }}
+                        <div class="col-12 mb-3">
+                          {{ form.equipment|as_crispy_field }}
                         </div>
                       </div>
                     </div>
                     <hr />
-                    <h4>Geography</h4>
-                    <p>Indicate the location where the project takes place when one location can be indicated, and otherwise indicate
-                      the address of the Coordinator or Leading Partner. (Enter address or click on the map)</p>
-                      <div id="geographyform">
-                        {% leaflet_map "map" callback="window.map_init_basic" %}
-                        <div class="form-row">
-                          <div class="col-sm-6 col-12">
-                            {{ form.latitude|as_crispy_field }}
-                          </div>
-                          <div class="col-sm-6 col-12">
-                            {{ form.longitude|as_crispy_field }}
-                          </div>
+                    <h4>Funding</h4>
+                    <div id="fundingform">
+                      <div class="form-row">
+                        <div class="col-12 mb-3">
+                          {{ form.funding_body|as_crispy_field }}
+                          {{ form.fundingBodySelected|as_crispy_field }}
+                        </div>
+                        <div class="col-12 mb-3">
+                          {{ form.funding_program|as_crispy_field }}
                         </div>
                       </div>
-                      <hr />
-
-                      <h4>Supplementary information for Citizen Science</h4>
-                      <div id="informationform">
-                        <div class="form-row">
-                          <div class="col-12 mb-3">
-                            {{ form.how_to_participate|as_crispy_field }}
-                          </div>
-                          <div class="col-12 mb-3">
-                            {{ form.doingAtHome|as_crispy_field }}
-                          </div>
-                          <div class="col-12 mb-3">
-                            {{ form.equipment|as_crispy_field }}
-                          </div>
+                    </div>
+                    <hr />
+                    <h4>Origin information</h4>
+                    <div id="originform">
+                      <div class="form-row">
+                        <div class="col-12 mb-3">
+                          {{ form.origin_database|as_crispy_field }}
+                          {{ form.originDatabaseSelected|as_crispy_field }}
+                        </div>
+                        <div class="col-12 mb-3">
+                          {{ form.originUID|as_crispy_field }}
                         </div>
                       </div>
-                      <hr />
-                      <h4>Funding</h4>
-                      <div id="fundingform">
-                        <div class="form-row">
-                          <div class="col-12 mb-3">
-                            {{ form.funding_body|as_crispy_field }}
-                            {{ form.fundingBodySelected|as_crispy_field }}
-                          </div>
-                          <div class="col-12 mb-3">
-                            {{ form.funding_program|as_crispy_field }}
-                          </div>
+                      <div class="form-row">
+                        <div class="col-12 mb-3">
+                          {{ form.originURL|as_crispy_field }}
                         </div>
                       </div>
-                      <hr />
-                      <h4>Origin information</h4>
-                      <div id="originform">
-                        <div class="form-row">
-                          <div class="col-12 mb-3">
-                            {{ form.origin_database|as_crispy_field }}
-                            {{ form.originDatabaseSelected|as_crispy_field }}
-                          </div>
-                          <div class="col-12 mb-3">
-                            {{ form.originUID|as_crispy_field }}
-                          </div>
-                        </div>
-                        <div class="form-row">
-                          <div class="col-12 mb-3">
-                            {{ form.originURL|as_crispy_field }}
-                          </div>
-                        </div>
-                      </div>
-                      <hr />
-                      <button type="submit" class="btn btn-green"><i class="fas fa-share-square"></i> Submit</button>
-                    </form>
-                  </table>
-                </div>
+                    </div>
+                    <hr />
+                    <button type="submit" class="btn btn-green"><i class="fas fa-share-square"></i> Submit</button>
+                  </form>
+                </table>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    {% endblock list_of_items %}
+  </div>
+  {% endblock list_of_items %}
 
-    {% block scripts %}
-    <script src="{% static 'site/js/site.js' %}"></script>
-    <script src="{% static 'scripts/cropper.min.js' %}"></script>
-    <script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
-    <script src="https://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"></script>
-    <script src="{% static 'site/js/leaflet-geosearch_2_7.min.js' %}"></script>
-    <script>
-      var readSavedConfirmation = false;
-      $(document).ready(function () {
-        $('.js-example-basic-single').select2();
+  {% block scripts %}
+  <script src="{% static 'site/js/site.js' %}"></script>
+  <script src="{% static 'scripts/cropper.min.js' %}"></script>
+  <script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
+  <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
+  <script src="https://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"></script>
+  <script src="{% static 'site/js/leaflet-geosearch_2_7.min.js' %}"></script>
+  <script>
+    var readSavedConfirmation = false;
+    $(document).ready(function () {
+      $('.js-example-basic-single').select2();
 
 
-        var choices = $("#id_choices").val();
-        var choices = choices.split(",");
+      var choices = $("#id_choices").val();
+      var choices = choices.split(",");
 
-        for (choice of choices){
-          $("#id_keywords").append("<option value='" + choice +"'> " + choice + " </option>");
+      for (choice of choices){
+        $("#id_keywords").append("<option value='" + choice +"'> " + choice + " </option>");
+      }
+
+      $("#div_id_keywords div").on('keyup', function(){
+        var key = $("#div_id_keywords .selection input").val();
+        if (key.indexOf(',') > -1) {
+          var word =key.slice(0, -1);
+          $("#div_id_keywords .selection input").val("");
+          $("#id_keywords").append("<option value='" + word +"' selected> " + word + " </option>");
         }
-
-        $("#div_id_keywords div").on('keyup', function(){
-          var key = $("#div_id_keywords .selection input").val();
-          if (key.indexOf(',') > -1) {
-            var word =key.slice(0, -1);
-            $("#div_id_keywords .selection input").val("");
-            $("#id_keywords").append("<option value='" + word +"' selected> " + word + " </option>");
-          }
-        });
-
-        $("#div_id_funding_body div").on('change', function(){
-          $("#id_funding_body").removeAttr('multiple');
-        });
-
-        $("#div_id_funding_body div").on('keyup', function(){
-          var key = $("#div_id_funding_body .selection input").val();
-          if (key.indexOf(',') > -1) {
-            var word =key.slice(0, -1);
-            $("#div_id_funding_body .selection input").val("");
-            $("#id_funding_body").append("<option value='" + word +"' selected> " + word + " </option>");
-            $("#id_funding_body").removeAttr('multiple');
-          }
-        });
-
-        $("#div_id_origin_database div").on('change', function(){
-          $("#id_origin_database").removeAttr('multiple');
-        });
-
-        $("#div_id_origin_database div").on('keyup', function(){
-          var key = $("#div_id_origin_database .selection input").val();
-          if (key.indexOf(',') > -1) {
-            var word =key.slice(0, -1);
-            $("#div_id_origin_database .selection input").val("");
-            $("#id_origin_database").append("<option value='" + word +"' selected> " + word + " </option>");
-            $("#id_origin_database").removeAttr('multiple');
-          }
-        });
-
-        $("#id_mainOrganisation").on('change', function(){
-          getOrganisations();
-          $("#id_organisation").empty();
-        });
-
-        function getOrganisations() {
-          var mainOrganisation = $("#id_mainOrganisation").val();
-          var request = $.ajax(
-          {
-            type: "GET",
-            url: "{% url 'getOrganisations' %}",
-            data: {
-              "mainOrganisation": mainOrganisation
-            },
-            success: function (response) {
-              $("#id_organisation").html(response.organisations);
-            }
-          }
-          );
-        }
-
-        $("form").submit(function (e) {
-          var validationFailed = false;
-          if(!readSavedConfirmation){
-            $.each($("[required]"), function (index, value) {
-              var id = $(value).parent().parent().attr('id');
-              $("#" + id + " .errorMsg").remove();
-              if(!$(value).val()){
-                validationFailed = true;
-                $(value).parent().append("<span class='errorMsg'> <b>Required field (*)</b></span>");
-              }
-            });
-            var email = $("#id_contact_person_email").val();
-            if(email && !validateEmail(email)){
-              validationFailed = true;
-              $("#div_id_contact_person_email").append("<span class='errorMsg'> <b>Enter a valid email address.</b></span>");
-            }
-            //Check dates
-            var start_date = $("#id_start_date").val();
-            var end_date = $("#id_end_date").val();
-            if (start_date != '' && end_date != '' && end_date < start_date){
-              validationFailed = true;
-              $("#div_id_end_date").append("<span class='errorMsg'> <b>End date should be greater than start date.</b></span>");
-            }
-          }
-
-          if (validationFailed) {
-            e.preventDefault();
-            $('html,body').animate({ scrollTop: $(".add-new-project").offset().top - 160 }, { duration: "slow" });
-            return false;
-          }else{
-            if(!readSavedConfirmation){
-              e.preventDefault();
-              $("#savedModal").modal("show");
-            }
-
-            var option_all = $("#id_keywords option:selected").map(function () {
-              return $.trim($(this).text());
-            }).get().join(',');
-            $("#id_choices").val(option_all);
-            $("#id_keywords").empty();
-
-            var fundingBody = $("#id_funding_body option:selected").map(function () {
-              return $.trim($(this).text());
-            }).get().join(',');
-            $("#id_fundingBodySelected").val(fundingBody);
-            $("#id_funding_body").empty();
-
-            var originDatabase = $("#id_origin_database option:selected").map(function () {
-              return $.trim($(this).text());
-            }).get().join(',');
-            $("#id_originDatabaseSelected").val(originDatabase);
-            $("#id_origin_database").empty();
-          }
-        });
-
       });
 
+      $("#div_id_funding_body div").on('change', function(){
+        $("#id_funding_body").removeAttr('multiple');
+      });
 
-      $(function () {
-        var imgSelected;
-        /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
-        $("#id_image1").change(function () {
-          imgSelected = 1;
-          $('#imageResult1').attr('src', '');
-          if (this.files && this.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-              $("#image").attr("src", e.target.result);
-              $("#modalCrop").modal("show");
-            }
-            reader.readAsDataURL(this.files[0]);
+      $("#div_id_funding_body div").on('keyup', function(){
+        var key = $("#div_id_funding_body .selection input").val();
+        if (key.indexOf(',') > -1) {
+          var word =key.slice(0, -1);
+          $("#div_id_funding_body .selection input").val("");
+          $("#id_funding_body").append("<option value='" + word +"' selected> " + word + " </option>");
+          $("#id_funding_body").removeAttr('multiple');
+        }
+      });
+
+      $("#div_id_origin_database div").on('change', function(){
+        $("#id_origin_database").removeAttr('multiple');
+      });
+
+      $("#div_id_origin_database div").on('keyup', function(){
+        var key = $("#div_id_origin_database .selection input").val();
+        if (key.indexOf(',') > -1) {
+          var word =key.slice(0, -1);
+          $("#div_id_origin_database .selection input").val("");
+          $("#id_origin_database").append("<option value='" + word +"' selected> " + word + " </option>");
+          $("#id_origin_database").removeAttr('multiple');
+        }
+      });
+
+      $("#id_mainOrganisation").on('change', function(){
+        getOrganisations();
+        $("#id_organisation").empty();
+      });
+
+      function getOrganisations() {
+        var mainOrganisation = $("#id_mainOrganisation").val();
+        var request = $.ajax(
+        {
+          type: "GET",
+          url: "{% url 'getOrganisations' %}",
+          data: {
+            "mainOrganisation": mainOrganisation
+          },
+          success: function (response) {
+            $("#id_organisation").html(response.organisations);
           }
-        });
-        $("#id_image2").change(function () {
-          imgSelected = 2;
-          $('#imageResult2').attr('src', '');
-          if (this.files && this.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-              $("#image").attr("src", e.target.result);
-              $("#modalCrop").modal("show");
-            }
-            reader.readAsDataURL(this.files[0]);
-          }
-        });
-        $("#id_image3").change(function () {
-          imgSelected = 3;
-          $('#imageResult3').attr('src', '');
-          if (this.files && this.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-              $("#image").attr("src", e.target.result);
-              $("#modalCrop").modal("show");
-            }
-            reader.readAsDataURL(this.files[0]);
-          }
-        });
-        $("#imageResult").click(function () {
-          $("#modalCrop").modal("show");
-        });
-        $("#imageResult2").click(function () {
-          $("#modalCrop").modal("show");
-        });
-        $("#imageResult3").click(function () {
-          $("#modalCrop").modal("show");
-        });
-        /* SCRIPTS TO HANDLE THE CROPPER BOX */
-        var $image = $("#image");
-        var cropBoxData;
-        var canvasData;
-        $("#modalCrop").on("shown.bs.modal", function () {
-          $image.cropper({
-            viewMode: 0,
-            aspectRatio: imgSelected == 3 ? 11/4 : 3/2,
-            minCropBoxWidth: imgSelected == 3 ? 1100 : 600,
-            minCropBoxHeight: 400,
-            dragMode: 'move',
-            guides: false,
-            center: false,
-            highlight: false,
-            cropBoxResizable: false,
-            toggleDragModeOnDblclick: false,
-            ready: function () {
-              $image.cropper("setCanvasData", canvasData);
-              $image.cropper("setCropBoxData", cropBoxData);
+        }
+        );
+      }
+
+      $("form").submit(function (e) {
+        var validationFailed = false;
+        if(!readSavedConfirmation){
+          $.each($("[required]"), function (index, value) {
+            var id = $(value).parent().parent().attr('id');
+            $("#" + id + " .errorMsg").remove();
+            if(!$(value).val()){
+              validationFailed = true;
+              $(value).parent().append("<span class='errorMsg'> <b>Required field (*)</b></span>");
             }
           });
-        }).on("hidden.bs.modal", function () {
-          cropBoxData = $image.cropper("getCropBoxData");
-          canvasData = $image.cropper("getCanvasData");
-          $image.cropper("destroy");
-        });
+          var email = $("#id_contact_person_email").val();
+          if(email && !validateEmail(email)){
+            validationFailed = true;
+            $("#div_id_contact_person_email").append("<span class='errorMsg'> <b>Enter a valid email address.</b></span>");
+          }
+          //Check dates
+          var start_date = $("#id_start_date").val();
+          var end_date = $("#id_end_date").val();
+          if (start_date != '' && end_date != '' && end_date < start_date){
+            validationFailed = true;
+            $("#div_id_end_date").append("<span class='errorMsg'> <b>End date should be greater than start date.</b></span>");
+          }
+        }
 
-        $(".js-zoom-in").click(function () {
-          $image.cropper("zoom", 0.1);
-        });
+        if (validationFailed) {
+          e.preventDefault();
+          $('html,body').animate({ scrollTop: $(".add-new-project").offset().top - 160 }, { duration: "slow" });
+          return false;
+        }else{
+          if(!readSavedConfirmation){
+            e.preventDefault();
+            $("#savedModal").modal("show");
+          }
 
-        $(".js-zoom-out").click(function () {
-          $image.cropper("zoom", -0.1);
-        });
+          var option_all = $("#id_keywords option:selected").map(function () {
+            return $.trim($(this).text());
+          }).get().join(',');
+          $("#id_choices").val(option_all);
+          $("#id_keywords").empty();
 
-        /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
-        $(".js-crop-and-upload").click(function () {
-          var cropData = $image.cropper("getData");
-          $("#id_x" + imgSelected).val(cropData["x"]);
-          $("#id_y" + imgSelected).val(cropData["y"]);
-          $("#id_height" + imgSelected).val(cropData["height"]);
-          $("#id_width" + imgSelected).val(cropData["width"]);
-          $("#modalCrop").modal("hide");
-          $('#imageResult' + imgSelected).attr('src', $image.cropper('getCroppedCanvas',
-          {width: imgSelected == 3 ? 1100 : 600, height: 400}).toDataURL());
-        });
+          var fundingBody = $("#id_funding_body option:selected").map(function () {
+            return $.trim($(this).text());
+          }).get().join(',');
+          $("#id_fundingBodySelected").val(fundingBody);
+          $("#id_funding_body").empty();
 
-        $(".read-before-save").click(function () {
-          readSavedConfirmation = true;
-          $("#savedModal").modal("hide");
-          $('form').submit();
-        });
-
+          var originDatabase = $("#id_origin_database option:selected").map(function () {
+            return $.trim($(this).text());
+          }).get().join(',');
+          $("#id_originDatabaseSelected").val(originDatabase);
+          $("#id_origin_database").empty();
+        }
       });
-    </script>
 
-    <script type="text/javascript">
-      var map;
-      var marker_layer = new L.marker([50.5, 30.5]);
+    });
 
-      function addMarker(e){
-        map.removeLayer(marker_layer);
-        marker_layer = new L.marker(e.latlng, {draggable:true});
-        marker_layer.on('drag', function (e) {
-          $("#id_latitude").val((e.latlng.lat).toFixed(6));
-          $("#id_longitude").val((e.latlng.lng).toFixed(6));
+
+    $(function () {
+      var imgSelected;
+      /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
+      $("#id_image1").change(function () {
+        imgSelected = 1;
+        $('#imageResult1').attr('src', '');
+        if (this.files && this.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            $("#image").attr("src", e.target.result);
+            $("#modalCrop").modal("show");
+          }
+          reader.readAsDataURL(this.files[0]);
+        }
+      });
+      $("#id_image2").change(function () {
+        imgSelected = 2;
+        $('#imageResult2').attr('src', '');
+        if (this.files && this.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            $("#image").attr("src", e.target.result);
+            $("#modalCrop").modal("show");
+          }
+          reader.readAsDataURL(this.files[0]);
+        }
+      });
+      $("#id_image3").change(function () {
+        imgSelected = 3;
+        $('#imageResult3').attr('src', '');
+        if (this.files && this.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            $("#image").attr("src", e.target.result);
+            $("#modalCrop").modal("show");
+          }
+          reader.readAsDataURL(this.files[0]);
+        }
+      });
+      $("#imageResult").click(function () {
+        $("#modalCrop").modal("show");
+      });
+      $("#imageResult2").click(function () {
+        $("#modalCrop").modal("show");
+      });
+      $("#imageResult3").click(function () {
+        $("#modalCrop").modal("show");
+      });
+      /* SCRIPTS TO HANDLE THE CROPPER BOX */
+      var $image = $("#image");
+      var cropBoxData;
+      var canvasData;
+      $("#modalCrop").on("shown.bs.modal", function () {
+        $image.cropper({
+          viewMode: 0,
+          aspectRatio: imgSelected == 3 ? 11/4 : 3/2,
+          minCropBoxWidth: imgSelected == 3 ? 1100 : 600,
+          minCropBoxHeight: 400,
+          dragMode: 'move',
+          guides: false,
+          center: false,
+          highlight: false,
+          cropBoxResizable: false,
+          toggleDragModeOnDblclick: false,
+          ready: function () {
+            $image.cropper("setCanvasData", canvasData);
+            $image.cropper("setCropBoxData", cropBoxData);
+          }
         });
-        map.addLayer(marker_layer);
+      }).on("hidden.bs.modal", function () {
+        cropBoxData = $image.cropper("getCropBoxData");
+        canvasData = $image.cropper("getCanvasData");
+        $image.cropper("destroy");
+      });
+
+      $(".js-zoom-in").click(function () {
+        $image.cropper("zoom", 0.1);
+      });
+
+      $(".js-zoom-out").click(function () {
+        $image.cropper("zoom", -0.1);
+      });
+
+      /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
+      $(".js-crop-and-upload").click(function () {
+        var cropData = $image.cropper("getData");
+        $("#id_x" + imgSelected).val(cropData["x"]);
+        $("#id_y" + imgSelected).val(cropData["y"]);
+        $("#id_height" + imgSelected).val(cropData["height"]);
+        $("#id_width" + imgSelected).val(cropData["width"]);
+        $("#modalCrop").modal("hide");
+        $('#imageResult' + imgSelected).attr('src', $image.cropper('getCroppedCanvas',
+        {width: imgSelected == 3 ? 1100 : 600, height: 400}).toDataURL());
+      });
+
+      $(".read-before-save").click(function () {
+        readSavedConfirmation = true;
+        $("#savedModal").modal("hide");
+        $('form').submit();
+      });
+
+    });
+  </script>
+
+  <script type="text/javascript">
+    var map;
+    var marker_layer = new L.marker([50.5, 30.5]);
+
+    function addMarker(e){
+      map.removeLayer(marker_layer);
+      marker_layer = new L.marker(e.latlng, {draggable:true});
+      marker_layer.on('drag', function (e) {
         $("#id_latitude").val((e.latlng.lat).toFixed(6));
         $("#id_longitude").val((e.latlng.lng).toFixed(6));
-      }
+      });
+      map.addLayer(marker_layer);
+      $("#id_latitude").val((e.latlng.lat).toFixed(6));
+      $("#id_longitude").val((e.latlng.lng).toFixed(6));
+    }
 
 
-      function searchedMarker(e){
-        map.removeLayer(marker_layer);
-        marker_layer = new L.marker([e.location.y,e.location.x], {draggable:true});
-        marker_layer.on('drag', function (e) {
-          $("#id_latitude").val((e.latlng.lat).toFixed(6));
-          $("#id_longitude").val((e.latlng.lng).toFixed(6));
-        });
-        map.addLayer(marker_layer);
-        $("#id_latitude").val(parseFloat(e.location.y).toFixed(6));
-        $("#id_longitude").val(parseFloat(e.location.x).toFixed(6));
-      }
+    function searchedMarker(e){
+      map.removeLayer(marker_layer);
+      marker_layer = new L.marker([e.location.y,e.location.x], {draggable:true});
+      marker_layer.on('drag', function (e) {
+        $("#id_latitude").val((e.latlng.lat).toFixed(6));
+        $("#id_longitude").val((e.latlng.lng).toFixed(6));
+      });
+      map.addLayer(marker_layer);
+      $("#id_latitude").val(parseFloat(e.location.y).toFixed(6));
+      $("#id_longitude").val(parseFloat(e.location.x).toFixed(6));
+    }
 
-      function map_init_basic (leafmap, options) {
-        map = leafmap;
-        map.on('click', addMarker);
+    function map_init_basic (leafmap, options) {
+      map = leafmap;
+      map.on('click', addMarker);
 
-        var GeoSearchControl = window.GeoSearch.GeoSearchControl;
-        var OpenStreetMapProvider = window.GeoSearch.OpenStreetMapProvider;
-        var provider = new OpenStreetMapProvider({});
+      var GeoSearchControl = window.GeoSearch.GeoSearchControl;
+      var OpenStreetMapProvider = window.GeoSearch.OpenStreetMapProvider;
+      var provider = new OpenStreetMapProvider({});
 
-        //  Define search controls
-        var searchControl = new GeoSearchControl({
-          provider: provider,
-          style: 'bar',
-          showMarker: false,
-          autoClose: true,
-          keepResult: true,
-          //retainZoomLevel: true,
-        });
+      //  Define search controls
+      var searchControl = new GeoSearchControl({
+        provider: provider,
+        style: 'bar',
+        showMarker: false,
+        autoClose: true,
+        keepResult: true,
+        //retainZoomLevel: true,
+      });
 
-        map.addControl(searchControl);
-        map.on('geosearch/showlocation', searchedMarker);
-      }
-    </script>
-    {{ form.media.js }}
-    {% endblock scripts %}
+      map.addControl(searchControl);
+      map.on('geosearch/showlocation', searchedMarker);
+    }
+  </script>
+  {{ form.media.js }}
+  {% endblock scripts %}

@@ -162,10 +162,7 @@
               <div class="col-12 mb-3">
                 {{ form.url|as_crispy_field }}
               </div>
-              <div class="col-12 mb-3">
-                {{ form.geographicextend |as_crispy_field }}
-                {{ form.projectlocality |as_crispy_field }}
-              </div>
+
               <div class="col-12 mb-3">
                 {{ form.mainOrganisation|as_crispy_field }}
                 {{ form.organisation|as_crispy_field }}
@@ -260,6 +257,10 @@
                 </div>
                 <div class="col-sm-6 col-12 mb-3">
                   {{ form.longitude|as_crispy_field }}
+                </div>
+                <div class="col-12 mb-3">
+                  {{ form.geographicextend |as_crispy_field }}
+                  {{ form.projectlocality |as_crispy_field }}
                 </div>
               </div>
             </div>
