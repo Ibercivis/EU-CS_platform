@@ -7,7 +7,7 @@ from django_select2.forms import Select2MultipleWidget
 from django_summernote.widgets import SummernoteWidget
 from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderServiceError
-from .models import Project, Topic, Status, Keyword, FundingBody, CustomField, OriginDatabase
+from .models import Project, Topic, Status, Keyword, FundingBody, CustomField, OriginDatabase, ParticipationTask, GeographicExtend
 from organisations.models import Organisation
 
 geolocator = Nominatim(timeout=None)
@@ -33,6 +33,12 @@ class ProjectForm(forms.Form):
         widget=Select2MultipleWidget(), help_text='The project topic(s) or field(s) of science, multiple selection', \
         required=False,label="Topic")
 
+    participationtask = forms.ModelMultipleChoiceField(queryset=ParticipationTask.objects.all(),\
+        widget=Select2MultipleWidget(), help_text='Please select the task(s) undertaken by participants', \
+        required=False,label="Participation Task")
+
+
+
     status = forms.ModelChoiceField(queryset=Status.objects.all(), label="Activity Status",\
         widget=forms.Select(attrs={'class':'js-example-basic-single'}),help_text='Select one')
 
@@ -44,6 +50,10 @@ class ProjectForm(forms.Form):
 
     url = forms.CharField(max_length=200, \
         widget=forms.TextInput(), help_text='Please provide a URL to an external web site for the project')
+
+    geographicextend = forms.ModelMultipleChoiceField(queryset=GeographicExtend.objects.all(),\
+        widget=Select2MultipleWidget(), help_text='Please indicate the spatial scale of the project', \
+        required=False,label="Geographic Extend")
 
     mainOrganisation = forms.ModelChoiceField(queryset=Organisation.objects.all(), \
         widget=forms.Select(attrs={'class':'js-example-basic-single'}), \
@@ -190,11 +200,12 @@ class ProjectForm(forms.Form):
             project = get_object_or_404(Project, id=pk)
             project.customField.set(cfields)
 
-        project.save()
+
         project.topic.set(self.data.getlist('topic'))
-
+        project.participationtask.set(self.data.getlist('participationtask'))
+        project.geographicextend.set(self.data.getlist('geographicextend'))
         project.organisation.set(self.data.getlist('organisation'))
-
+        project.save()
         choices = self.data['choices']
         choices = choices.split(',')
         for choice in choices:
