@@ -48,7 +48,8 @@
           {% if project.id not in approvedProjects %} nonmoderated {% endif %}" src='/static/site/img/project_default_card.webp'-->
           {% endif %}
 
-          <br>
+          <hr/>
+          <b>Status</b>
           <div class="small">
             {{ project.status}}<br>
             Start: {{ project.start_date | date:"d/m/Y"}}<br>
@@ -158,8 +159,6 @@
           <!--img class="card-img
           {% if project.id not in approvedProjects %} nonmoderated {% endif %}" src='/static/site/img/project_default_card.webp'-->
           {% endif %}
-          <a target="_blank" href="{% if 'http' not in project.url %}//{%endif%}{{project.url}}"
-          class="colorred"><i class="fas fa-link"></i>Go to project</a>
           <br>
           <div class="small">
             {{ project.status}}<br>
