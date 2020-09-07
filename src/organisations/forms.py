@@ -6,13 +6,22 @@ from projects.forms import getCountryCode
 
 class OrganisationForm(forms.Form):
 
-    name = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder':'The name of the organisation'}))
-    url = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'placeholder':'URL of the organisation'}))
-    description = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Please briefly describe the organisation (ideally in 500 words or less)'}), max_length = 3000)
-    orgType = forms.ModelChoiceField(queryset=OrganisationType.objects.all(), label="Type (Select one)", widget=forms.Select(attrs={'class':'js-example-basic-single'}))
-    logo = forms.ImageField(required=False,label="Please upload the logo of your organisation (.jpg or .png)", widget=forms.FileInput)
-    contact_point = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder':'Please name the contact person or contact point for the organisation'}))
-    contact_point_email = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder':'Please provide the email address of the contact person or contact point'}))
+    name = forms.CharField(max_length=200, help_text='The name or the organisation',
+    widget=forms.TextInput())
+    url = forms.CharField(max_length=200, help_text='URL of the organisation' ,
+    widget=forms.TextInput())
+    description = forms.CharField(help_text='Please briefly describe the organisation (ideally in 500 words or less)',
+    widget=forms.Textarea(), max_length = 3000)
+    orgType = forms.ModelChoiceField(queryset=OrganisationType.objects.all(), label="Type",
+    help_text='Select One', widget=forms.Select(attrs={'class':'js-example-basic-single'}))
+    logo = forms.ImageField(required=False, help_text='Please upload the logo of your organisation (.jpg or .png)',
+    label="Logo", widget=forms.FileInput)
+    contact_point = forms.CharField(max_length=100,
+    help_text='Please name the contact person or contact point for the organisation',
+    widget=forms.TextInput())
+    contact_point_email = forms.CharField(max_length=100,
+    help_text='Please provide the email address of the contact person or contact point. Note you will need permission to do that',
+    widget=forms.TextInput())
     latitude = forms.DecimalField(max_digits=9,decimal_places=6, widget=forms.HiddenInput())
     longitude = forms.DecimalField(max_digits=9,decimal_places=6, widget=forms.HiddenInput())
 
@@ -29,11 +38,11 @@ class OrganisationForm(forms.Form):
             organisation.contactPointEmail = self.data['contact_point_email']
             organisation.latitude = self.data['latitude']
             organisation.longitude = self.data['longitude']
-        else:   
-            organisation = Organisation(name = self.data['name'], url = self.data['url'], creator=args.user, latitude=self.data['latitude'], 
+        else:
+            organisation = Organisation(name = self.data['name'], url = self.data['url'], creator=args.user, latitude=self.data['latitude'],
                     longitude = self.data['longitude'], description = self.data['description'], orgType = orgType, contactPoint = self.data['contact_point'],
                     contactPointEmail = self.data['contact_point_email'])
-        
+
         if(logo_path != '/'):
             organisation.logo = logo_path
 
