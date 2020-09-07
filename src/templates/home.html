@@ -53,12 +53,12 @@
 
 <div class="container">
 	<div class="row">
-		{% if counterprojects > 0 %}
+
 		<div class="col-12 mb-2">
 			{{ counterprojects }} result{% if counterprojects != 1 %}s{% endif %} in Projects
 			{% if counterprojects > 6 %}, click <a href="/projects">here</a> to see all of them {% endif %}
 		</div>
-		{% endif %}
+
 		{% include "projects_cards.html" %}
 		<div class="col-12 mb-2">
 			{{ counterresources }} result{% if counterresources != 1 %}s{% endif %} in Resources,
@@ -75,8 +75,16 @@
 			{% if counterorganisations > 6 %}click <a href="/organisations">here</a> to see all of them{% endif %}
 
 		</div>
+
 		{% include "organisations_cards.html" %}
-		<div class="col-12">&nbsp;</div>
+		<div class="col-12">
+		{% if total == 0  %}
+		<img  class="img-fluid img-zoom col-12 mt-5" src="{% static 'site/img/undraw_empty_xct9.svg' %}">
+		<h5 class="mb-4">Sorry, nothing found</h5>
+		{% else %}
+		&nbsp;
+		{% endif %}
+		</div>
 	</div>
 </div>
 {% endblock list_of_items %}

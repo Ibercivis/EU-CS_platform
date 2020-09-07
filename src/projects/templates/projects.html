@@ -20,6 +20,14 @@
 	<div class="row .projects">
 		{% include "projects_cards.html" %}
 	</div>
+	<div class="col-12">
+	{% if counter == 0  %}
+	<img  class="img-fluid img-zoom col-12 mt-5" src="{% static 'site/img/undraw_empty_xct9.svg' %}">
+	<h5 class="mb-4">Sorry, nothing found</h5>
+	{% else %}
+	&nbsp;
+	{% endif %}
+	</div>
 </div>
 {% endblock list_of_items %}
 
