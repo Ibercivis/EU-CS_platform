@@ -82,12 +82,14 @@ def home(request):
     page = request.GET.get('page')
     organisations = paginatororganisation.get_page(page)
 
+    total = countertresources + counterprojects + countertresources + counterorganisations
+
 
     return render(request, 'home.html', {'projects':projects, 'counterprojects':counterprojects, \
         'resources':resources, 'counterresources':counterresources,\
         'filters': filters, \
         'tresources':tresources, 'countertresources':countertresources,
-        'organisations': organisations, 'counterorganisations': counterorganisations,
+        'organisations': organisations, 'counterorganisations': counterorganisations, 'total': total, \
         'isSearchPage': True})
 
 def all(request):
