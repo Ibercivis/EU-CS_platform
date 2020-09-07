@@ -108,7 +108,7 @@
                       {{ form.y|as_crispy_field }}
                       {{ form.height|as_crispy_field }}
                       {{ form.width|as_crispy_field }}
-                      {{ form.withImage|as_crispy_field }}
+                      {{ form.withLogo|as_crispy_field }}
                       <a id="imgResult" href="#"> <img class="img-fluid img-zoom" id="imageResult" src="" alt=""></a>
                     </div>
                     <div class="col-12">
@@ -175,7 +175,7 @@
         reader.readAsDataURL(this.files[0]);
       }
     });
-    
+
     $("#imageResult").click(function () {
       $("#modalCrop").modal("show");
     });

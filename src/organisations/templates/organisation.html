@@ -19,9 +19,8 @@
 				<div class="col-sm-3 col-12">
 					<img title="organisation logo" target="_blank"
 					class="img-fluid mb-3" src="{{ organisation.logo|default:'/media/default_profile.png' }}">
-					<a class="mb-5" href="{% if 'http' not in organisation.url %}//{%endif%}{{organisation.url}}"><i class="fas fa-link"></i>{{organisation.url}}</a>
 					<div><strong>Contact Point</strong>: {{ organisation.contactPoint }} </div>
-					<div><strong>Contact Point Email</strong>: {{ organisation.contactPointEmail }}</div>
+					<div class="mb-5"><strong>Contact Point Email</strong>: {{ organisation.contactPointEmail }}</div>
 				</div>
 				<div class="col-sm-9 col-12">
 					<div class="row">
