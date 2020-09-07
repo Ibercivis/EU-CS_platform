@@ -13,9 +13,11 @@
 <div class="container">
   <div class="card text-center">
     {% if resource.image2 %}
-    <img class="img-fluid img-responsive img-zoom {% if resource.id not in approvedResources %} nonmoderated {% endif %}" src="{{ resource.image2 }}" >
+    <img class="img-fluid img-responsive img-zoom {% if resource.id not in approvedResources %} nonmoderated {% endif %}"
+    src="{{ resource.image2 }}" >
     {% else %}
-    <img class="img-fluid img-responsive img-zoom {% if resource.id not in approvedResources %} nonmoderated {% endif %}" src='/static/site/img/resource_default_header.png'>
+    <img class="img-fluid img-responsive img-zoom {% if resource.id not in approvedResources %} nonmoderated {% endif %}"
+    src='/static/site/img/resource_default_header.png'>
     {% endif %}
 
     <div class="card-block text-left p-4">
@@ -56,17 +58,34 @@
           </div>
         </div>
         <div class="col-xl-9 col-md-6 col-12" id="one">
-          <h5>{{resource.name}}</h5>
-          {% get_rating for resource as avg_rating %}
-          {% get_review_count for resource as review_count %}
-          <span class="gl-star-rating-stars s{{ avg_rating | stringformat:'d'}}0 readonly">
-            <span data-value="1" data-text="Terrible"></span>
-            <span data-value="2" data-text="Poor"></span>
-            <span data-value="3" data-text="Average"></span>
-            <span data-value="4" data-text="Very Good"></span>
-            <span data-value="5" data-text="Excellent"></span>
-          </span>
-          {{ review_count }} {% if review_count == 1 %} review {% else %} reviews {% endif %}
+
+          <div class="row">
+            <div class="col-9">
+              <h5>{{resource.name}}</h5>
+              {% get_rating for resource as avg_rating %}
+              {% get_review_count for resource as review_count %}
+              <span class="gl-star-rating-stars s{{ avg_rating | stringformat:'d'}}0 readonly">
+                <span data-value="1" data-text="Terrible"></span>
+                <span data-value="2" data-text="Poor"></span>
+                <span data-value="3" data-text="Average"></span>
+                <span data-value="4" data-text="Very Good"></span>
+                <span data-value="5" data-text="Excellent"></span>
+              </span>
+              {{ review_count }} {% if review_count == 1 %} review {% else %} reviews {% endif %}
+            </div>
+            <div class="col-3 text-right">
+              {%if isTrainingResource %}
+              <a target="_blank" href="{% if 'http' not in resource.url %}//{%endif%}{{resource.url}}"
+              class="colorblue"><i class="fas fa-external-link-square-alt"></i> Go to Training</a>
+              {% else %}
+              <a target="_blank" href="{% if 'http' not in resource.url %}//{%endif%}{{resource.url}}"
+              class="colorgreen"><i class="fas fa-external-link-square-alt"></i> Go to Resource</a>
+              {% endif %}
+            </div>
+          </div>
+
+
+
           <br><br>{{ resource.abstract | safe }}
           {% if isTrainingResource %}
           <div>

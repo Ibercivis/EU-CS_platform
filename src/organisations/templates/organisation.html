@@ -22,25 +22,34 @@
 					<a class="mb-5" href="{% if 'http' not in organisation.url %}//{%endif%}{{organisation.url}}"><i class="fas fa-link"></i>{{organisation.url}}</a>
 					<div><strong>Contact Point</strong>: {{ organisation.contactPoint }} </div>
 					<div><strong>Contact Point Email</strong>: {{ organisation.contactPointEmail }}</div>
-
-
-
 				</div>
 				<div class="col-sm-9 col-12">
-					<h3>{{ organisation.name }}</h3>
+					<div class="row">
+						<div class="col-9">
+							<h3>{{ organisation.name }}</h3>
+						</div>
+						<div class="col-3 text-right">
+							<a target="_blank" href="{% if 'http' not in organisation.url %}//{%endif%}{{organisation.url}}"
+							class="colorpurple"><i class="fas fa-external-link-square-alt"></i> Go to Organisation</a>
+						</div>
+					</div>
+
 					{{ organisation.description }}
 					<h5 class="mt-3">Projects</h5>
-					{% for project in associatedProjects.all %} <a class="badge badge-light pt-1" href="/project/{{project.id}}">{{project|upper}}</a> {% endfor %}
+					{% for project in associatedProjects.all %}
+					<a class="badge badge-light pt-1" href="/project/{{project.id}}">{{project|upper}}</a>
+					{% endfor %}
 					<h5 class="mt-3">Resources</h5>
-					{% for resource in associatedResources.all %} <a class="badge badge-light pt-1" href="/resource/{{resource.id}}">{{resource|upper}}</a>{% endfor %}
+					{% for resource in associatedResources.all %}
+					<a class="badge badge-light pt-1" href="/resource/{{resource.id}}">{{resource|upper}}</a>
+					{% endfor %}
 					<h5 class="mt-3">Members</h5>
-					{% for member in members.all %} <a class="badge badge-light pt-1" href="/users/{{member.slug}}">{{member.user.name | upper}}</a>{% endfor %}
-
-
+					{% for member in members.all %}
+					<a class="badge badge-light pt-1" href="/users/{{member.slug}}">{{member.user.name | upper}}</a>
+					{% endfor %}
 					<div class="mt-4">
 						{% leaflet_map "map" callback="window.map_init_basic" %}
 					</div>
-
 				</div>
 			</div>
 		</div><!-- end of card body -->
