@@ -41,6 +41,12 @@ main.nomargintop {
 	background-position: center;
 }
 
+.jumbotron-white{
+
+	background-color: #fff !important;
+	background-blend-mode: overlay;
+	background-size: cover;
+	background-position: center;
 }
 .jumbotron-lists{
 	background-image: url('../img/selection.webp');
@@ -67,10 +73,11 @@ main.nomargintop {
 	background-position: center;
 }
 .jumbotron-events{
-	background-image: url('../img/events.jpg');
+	/*background-image: url('../img/events.jpg');*/
 	background-size: cover;
 	min-height: 10vh;
-	background-color: #405883;
+	background-color: #fff;
+	color: #333;
 	background-blend-mode: overlay;
 	background-size: cover;
 	background-position: center;
@@ -321,6 +328,9 @@ dt {
 	font-size: 0.9em;
 	font-weight: 400;
 	color: #390040 !important;
+}
+.colorgray{
+	color: #586069;
 }
 .greenbackground{
 	background-color: #a6d49f;
