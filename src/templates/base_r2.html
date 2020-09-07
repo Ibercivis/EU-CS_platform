@@ -135,6 +135,7 @@
     <li class="nav-item"><a class="nav-link main {% active_link  'blog' %}" href="{% url 'blog' %}">BLOG</a></li>
     <li class="nav-item"><a class="nav-link main {% active_link  'events' %}" href="{% url 'events' %}">EVENTS</a></li>
     <li class="nav-item"><a class="nav-link main" href="/forum">FORUM</a></li>
+    <li class="nav-item"><a class="nav-link main" href="/about">ABOUT</a></li>
     {% if not user.is_authenticated %}
     <li class="nav-item"><a class="nav-link main" href="{% url 'accounts:login' %}">LOGIN</a></li>
     <li class="nav-item"><a class="nav-link main" href="{% url 'accounts:signup' %}">SIGNUP</a></li>
