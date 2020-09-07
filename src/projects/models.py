@@ -59,8 +59,9 @@ class Project(models.Model):
     end_date = models.DateTimeField('End date', null=True, blank=True)
     topic = models.ManyToManyField(Topic)
     participationtask = models.ManyToManyField(ParticipationTask)
-    geographicextend = models.ManyToManyField(GeographicExtend)
     url = models.CharField(max_length=200,null=True, blank=True)
+    geographicextend = models.ManyToManyField(GeographicExtend)
+    projectlocality = models.CharField(max_length=300, null=True, blank=True)
     #Contact person info
     author = models.CharField(max_length=100, null=True, blank=True)
     author_email =  models.CharField(max_length=100, null=True, blank=True)

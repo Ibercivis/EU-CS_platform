@@ -35,6 +35,8 @@ python manage.py migrate
 ```
 python manage.py loaddata projects/fixtures/topics.json
 python manage.py loaddata projects/fixtures/status.json
+python manage.py loaddata projects/fixtures/participationtask.json
+python manage.py loaddata projects/fixtures/geographicextend.json
 python manage.py loaddata resources/fixtures/categories.json
 python manage.py loaddata resources/fixtures/themes.json
 python manage.py loaddata resources/fixtures/audiences.json

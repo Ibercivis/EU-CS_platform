@@ -150,7 +150,7 @@ def editProject(request, pk):
     originDatabase = ", ".join(originDatabase)
 
     form = ProjectForm(initial={
-        'project_name':project.name,'url': project.url,'start_date': start_datetime,
+        'project_name':project.name,'url': project.url,'start_date': start_datetime, 'projectlocality': project.projectlocality,
         'end_date':end_datetime, 'aim': project.aim, 'description': project.description,
         'status': project.status, 'choices': choices, 'choicesSelected':keywordsList, 'mainOrganisation': project.mainOrganisation,
         'organisation': project.organisation.all,
@@ -466,6 +466,7 @@ def get_data(item):
         'participationtask' : participationtaskList,
         'geographicextend' : geographicextendList,
         'url': item.url,
+        'projectlocality': item.projectlocality,
         'country': item.country,
         'host': item.host,
         'howToParticipate': item.howToParticipate,
