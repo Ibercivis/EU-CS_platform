@@ -210,12 +210,11 @@ class ProjectForm(forms.Form):
             project = get_object_or_404(Project, id=pk)
             project.customField.set(cfields)
 
-
+        project.save()
         project.topic.set(self.data.getlist('topic'))
         project.participationtask.set(self.data.getlist('participationtask'))
         project.geographicextend.set(self.data.getlist('geographicextend'))
         project.organisation.set(self.data.getlist('organisation'))
-        project.save()
         choices = self.data['choices']
         choices = choices.split(',')
         for choice in choices:

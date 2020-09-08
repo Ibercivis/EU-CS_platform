@@ -6,6 +6,7 @@
 
 <div class="row">
 	<form class="form-inline float-lg-right" id="searchOrganisations" action="{% url 'organisations' %}">
+		<input type="hidden" name="keywords" value="{{filters.keywords}}">
 		<div class="col-12 col-lg-9 d-none d-sm-block">
 			<div class="float-left">
 				<div class="input-group mb-3">

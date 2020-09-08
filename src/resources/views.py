@@ -48,6 +48,7 @@ def resources(request, isTrainingResource=False):
 
     resources = applyFilters(request, resources)
     filters = setFilters(request, filters)
+    resources = resources.distinct()
     resources = resources.filter(~Q(hidden=True))
     resourcesTop = resources.filter(featured=True)
     resourcesTopIds = list(resourcesTop.values_list('id',flat=True))
@@ -77,6 +78,7 @@ def resources(request, isTrainingResource=False):
         filters['orderby']=request.GET['orderby']
     else:
         resources=resources.order_by('-id')
+
 
     # Pin resources to top
     resources = list(resourcesTop) + list(resources)
