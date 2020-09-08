@@ -149,7 +149,8 @@ class ResourceForm(forms.ModelForm):
             if(learningResourceTypeSelected != ''):
                 learning_resource_type, exist = LearningResourceType.objects.get_or_create(learningResourceType=learningResourceTypeSelected)
                 rsc.learningResourceType = learning_resource_type
-            rsc.timeRequired = self.data['time_required']
+            if(self.data['time_required']!=''):
+                rsc.timeRequired = self.data['time_required']
             rsc.conditionsOfAccess = self.data['conditions_of_access']
         #End training resource fields
 

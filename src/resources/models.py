@@ -40,7 +40,7 @@ class LearningResourceType(models.Model):
 
 class Resource(models.Model):
     name = models.CharField(max_length=200)
-    url = models.CharField(max_length=200)   
+    url = models.CharField(max_length=200)
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     authors =  models.ManyToManyField(Author)
     abstract = models.CharField(max_length=3000)
@@ -57,7 +57,7 @@ class Resource(models.Model):
     imageCredit1 = models.CharField(max_length=300, null=True, blank=True)
     image2 = models.ImageField(upload_to='images/', max_length=300,null=True, blank=True)
     imageCredit2 = models.CharField(max_length=300, null=True, blank=True)
-    resourceDOI = models.CharField(max_length=100, null=True,blank=True)   
+    resourceDOI = models.CharField(max_length=100, null=True,blank=True)
     hidden = models.BooleanField(null=True, blank=True)
     featured = models.BooleanField(null=True, blank=True)
 
@@ -69,7 +69,7 @@ class Resource(models.Model):
     learningResourceType = models.ForeignKey(LearningResourceType, on_delete=models.CASCADE,null=True, blank=True)
     timeRequired =  models.FloatField(null=True, blank=True)
     conditionsOfAccess = models.CharField(max_length=300, null=True, blank=True)
-    
+
     def __str__(self):
         return self.name
 
