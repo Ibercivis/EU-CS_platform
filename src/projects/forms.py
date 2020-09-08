@@ -61,8 +61,8 @@ class ProjectForm(forms.Form):
         help_text='Please describe the locality of the project, in terms of where the main participant activities take place, \
         E.g. in your backyard, parks in London, rivers in Europe, online globally, etc.')
 
-    mainOrganisation = forms.ModelChoiceField(queryset=Organisation.objects.all(), \
-        widget=forms.Select(attrs={'class':'js-example-basic-single'}), \
+    mainOrganisation = forms.ModelMultipleChoiceField(queryset=Organisation.objects.all(), \
+        widget=Select2MultipleWidget(), \
         help_text='Organisation coordinating the project. If not listed, please add it <a href="/new_organisation">here</a> \
         before submitting the project', \
         label='Lead Organisation / Coordinator', required=False)
@@ -154,7 +154,7 @@ class ProjectForm(forms.Form):
     title = forms.CharField(max_length=100, required=False)
     paragraph = forms.CharField(widget=SummernoteWidget(), required=False)
 
-    def save(self, args, images, cFields):
+    def save(self, args, images, cFields, mainOrganisationFixed):
         pk = self.data.get('projectID', '')
         start_dateData = self.data['start_date']
         end_dateData = self.data['end_date']
@@ -163,7 +163,10 @@ class ProjectForm(forms.Form):
         projectlocality = self.data['projectlocality']
         country = getCountryCode(latitude,longitude).upper()
         status = get_object_or_404(Status, id=self.data['status'])
-        mainOrganisation = get_object_or_404(Organisation, id=self.data['mainOrganisation'])
+        if(mainOrganisationFixed):
+            mainOrganisation = get_object_or_404(Organisation, id=mainOrganisationFixed)
+        else:
+            mainOrganisation = None
         doingAtHome=False
         if('doingAtHome' in self.data and self.data['doingAtHome'] == 'on'):
             doingAtHome=True
