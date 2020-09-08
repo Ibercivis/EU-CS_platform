@@ -28,10 +28,11 @@ def new_project(request):
     choices = ", ".join(choices)
     form = ProjectForm(initial={'choices': choices})
     if request.method == 'POST':
+        mainOrganisationFixed = request.POST.get('mainOrganisation', False)
         form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
             images = setImages(request, form)
-            form.save(request, images, [])
+            form.save(request, images, [],mainOrganisationFixed)
             return redirect('/projects')
         else:
             print(form.errors)
@@ -72,7 +73,8 @@ def projects(request):
             projects=projects.order_by(request.GET['orderby'])
         else:
             reviews = Review.objects.filter(content_type=ContentType.objects.get(model="project"))
-            reviews = reviews.values("object_pk", "content_type").annotate(avg_rating=Avg('rating')).order_by(orderBy).values_list('object_pk',flat=True)
+            reviews = reviews.values("object_pk",
+            "content_type").annotate(avg_rating=Avg('rating')).order_by(orderBy).values_list('object_pk',flat=True)
             reviews = list(reviews)
             projectsVoted = []
             for r in reviews:
