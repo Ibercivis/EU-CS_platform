@@ -173,6 +173,7 @@ def editProject(request, pk):
     cField_formset = CustomFieldFormset(initial=data)
 
     if request.method == 'POST':
+        mainOrganisationFixed = request.POST.get('mainOrganisation', False)
         form = ProjectForm(request.POST, request.FILES)
         cField_formset = CustomFieldFormset(request.POST)
         if form.is_valid() and cField_formset.is_valid():
@@ -183,7 +184,7 @@ def editProject(request, pk):
                 if title and paragraph:
                     new_cFields.append(CustomField(title=title, paragraph=paragraph))
             images = setImages(request, form)
-            form.save(request, images,[])
+            form.save(request, images,[],mainOrganisationFixed)
             return redirect('/project/'+ str(pk))
         else:
             print(form.errors)

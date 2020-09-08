@@ -96,7 +96,8 @@ class Project(models.Model):
 
     customField = models.ManyToManyField(CustomField, blank=True)
 
-    mainOrganisation = models.ForeignKey(Organisation, on_delete=models.CASCADE,null=True, blank=True, related_name='main_organisation')
+    mainOrganisation = models.ForeignKey(Organisation, on_delete=models.CASCADE,null=True, \
+        blank=True, related_name='main_organisation')
     organisation = models.ManyToManyField(Organisation)
 
     def __str__(self):
