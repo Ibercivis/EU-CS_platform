@@ -4,7 +4,6 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.core.paginator import Paginator
 from django.utils import timezone
 from django.core.files.storage import FileSystemStorage
-from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
@@ -111,8 +110,7 @@ def new_resource(request, isTrainingResource=False):
             image2_path = saveImage(request, form, 'image2','2')
             images.append(image1_path)
             images.append(image2_path)
-            form.save(request, images)
-            messages.success(request, "Resource uploaded with success!")
+            form.save(request, images)           
             if(isTrainingResource):
                 return redirect('/training_resources')
             return redirect('/resources')
@@ -193,7 +191,6 @@ def editResource(request, pk):
             images.append(image1_path)
             images.append(image2_path)
             form.save(request, images)
-            messages.success(request, "Resource uploaded with success!")
             if(isTrainingResource):
                 return redirect('/training_resource/' + str(pk))
             return redirect('/resource/' + str(pk))
