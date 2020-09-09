@@ -487,10 +487,18 @@
       $("#deleteImage3").empty();
       $("#id_withImage3").val(false);
     });
+
+    
     getOrganisations();
     $("#id_mainOrganisation").on('change', function(){
       getOrganisations();
       //$("#id_organisation").empty();
+    });
+
+    $("#div_id_mainOrganisation div").on('select2:open', function(){
+      if($("#id_mainOrganisation").val().length > 0){
+        $("#id_mainOrganisation").removeAttr('multiple');
+      }
     });
 
 
@@ -506,6 +514,7 @@
           "organisationsSelected": organisationsSelected
         },
         success: function (response) {
+          $("#id_organisation").empty();
           $("#id_organisation").html(response.organisations);
         }
       }

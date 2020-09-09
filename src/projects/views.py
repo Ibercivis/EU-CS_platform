@@ -495,7 +495,11 @@ def iter_items(items, pseudo_buffer):
         yield writer.writerow(get_data(item))
 
 def getOrganisations(request):
-    mainOrganisation = request.GET.get("mainOrganisation")
+    mainOrganisation = request.GET.getlist("mainOrganisation[]")
+    if(mainOrganisation):
+        mainOrganisation = mainOrganisation[0]
+    else:
+        mainOrganisation = request.GET.get("mainOrganisation")
     organisationsSelected = request.GET.getlist("organisationsSelected[]")
     organisationsSelected = list(organisationsSelected)
     organisationsSelected = ", ".join(organisationsSelected)
@@ -504,9 +508,9 @@ def getOrganisations(request):
     organisations = Organisation.objects.get_queryset()
     organisations = organisations.values_list("id","name")
     organisations = tuple(organisations)
-    if organisations:
+    if organisations:        
         for organisation in organisations:
-            if(int(organisation[0]) != int(mainOrganisation)):
+            if(not mainOrganisation or int(organisation[0]) != int(mainOrganisation)):
                 if(str(organisation[0]) in organisationsSelected):
                     options += '<option value = "%s" selected>%s</option>' % (
                         organisation[0],
@@ -523,3 +527,16 @@ def getOrganisations(request):
         response['organisations'] = '<select id="id_organisation" class="select form-control" disabled></select>'
 
     return JsonResponse(response)
+
+
+def getKeywordsSelector(request):
+    project_id = request.GET.get("project_id")
+    #keywordsSelected = 
+    keywordsSelected = list(keywordsSelected)
+    keywordsSelected = ", ".join(keywordsSelected)
+    options = '<select id="id_organisation" class="select form-control">'
+    response = {}
+    keywords = Keyword.objects.get_queryset()
+    keywords = keywords.values_list("id","name")
+    keywords = tuple(keywords)
+    #if keywords:
