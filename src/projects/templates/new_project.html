@@ -381,21 +381,33 @@
         }
       });
 
+      getOrganisations();
       $("#id_mainOrganisation").on('change', function(){
         getOrganisations();
         //$("#id_organisation").empty();
       });
 
+      $("#div_id_mainOrganisation div").on('select2:open', function(){
+        console.log("open")
+        if($("#id_mainOrganisation").val().length > 0){
+          $("#id_mainOrganisation").removeAttr('multiple');
+        }
+      });
+
       function getOrganisations() {
+        console.log("llamada")
         var mainOrganisation = $("#id_mainOrganisation").val();
+        var organisationsSelected = $("#id_organisation").val()
         var request = $.ajax(
         {
           type: "GET",
           url: "{% url 'getOrganisations' %}",
           data: {
-            "mainOrganisation": mainOrganisation
+            "mainOrganisation": mainOrganisation,
+            "organisationsSelected": organisationsSelected
           },
           success: function (response) {
+            $("#id_organisation").empty();
             $("#id_organisation").html(response.organisations);
           }
         }
