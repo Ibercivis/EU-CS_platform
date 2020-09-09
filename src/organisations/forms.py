@@ -58,3 +58,9 @@ class OrganisationForm(forms.Form):
         organisation.save()
 
         return 'success'
+
+
+class OrganisationPermissionForm(forms.Form):
+    selectedUsers = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
+    usersCollection = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
+    usersAllowed =   forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False, label="Give additional users permission to edit")
