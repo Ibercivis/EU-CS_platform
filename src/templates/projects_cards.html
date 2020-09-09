@@ -18,11 +18,9 @@
 				{% else %} {% if filters.approvedCheck == "All" %}  <a class="badge frontpage frontpage-green mb-2"
 				href="/faq#moderation">MODERATED</a><br/> {% endif %}
 				{% endif %}{% endif %}
-				{% for country in countries %}
-				{% if country.code == project.country %}
+				{% for country in countries %}{% if country.code == project.country %}
 				<a class="badge badge-dark" href="/projects?country={{country.code}}">{{ country.name | upper }}</a>
-				{% endif %}
-				{% endfor %}
+				{% endif %}{% endfor %}
 			</div>
 		</a>
 		<div class="card-body">
