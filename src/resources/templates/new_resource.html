@@ -277,14 +277,9 @@
     $("#div_id_keywords label").append('<span class="asteriskField">*</span>');
     getKeywordsSelector();
 
-    var authorsCollection = $("#id_authorsCollection").val();
-    var authorsCollection = authorsCollection.split(",");
-
     $("#id_authors").attr('required', true);
     $("#div_id_authors label").append('<span class="asteriskField">*</span>');
-    for (author of authorsCollection){
-      $("#id_authors").append("<option value='" + author +"'> " + author + " </option>");
-    }
+    getAuthorsSelector();
 
     $("#div_id_keywords div").on('keyup', function(){
       var key = $("#div_id_keywords .selection input").val();
@@ -417,7 +412,7 @@
     );
   }
 
-  function getKeywordsSelector() {        
+  function getKeywordsSelector() {
     var request = $.ajax(
     {
       type: "GET",
@@ -427,6 +422,21 @@
       },
       success: function (response) {
         $("#id_keywords").html(response.keywords);
+      }
+    }
+    );
+  }
+
+  function getAuthorsSelector() {
+    var request = $.ajax(
+    {
+      type: "GET",
+      url: "{% url 'getResourceAuthorsSelector' %}",
+      data: {
+        "resource_id": 0
+      },
+      success: function (response) {
+        $("#id_authors").html(response.authors);
       }
     }
     );

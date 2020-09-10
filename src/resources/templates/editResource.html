@@ -137,7 +137,6 @@
                 <div class="col-12">
                   {{form.keywords|as_crispy_field }}
                   {{form.choices |as_crispy_field}}
-                  {{form.choicesSelected|as_crispy_field}}
                 </div>
                 <div class="col-12">
                   {{ form.resource_DOI|as_crispy_field }}
@@ -147,7 +146,6 @@
                 <div class="col-12">
                   {{ form.authors|as_crispy_field }}
                   {{form.authorsCollection |as_crispy_field}}
-                  {{form.selectedAuthors|as_crispy_field}}
                 </div>
                 <div class="col-12">
 
@@ -320,21 +318,7 @@
           }
         });
 
-        var authorsCollection = $("#id_authorsCollection").val();
-        var authorsCollection = authorsCollection.split(",");
-        var selectedAuthors = $("#id_selectedAuthors").val().split(",");
-        for (author of authorsCollection) {
-          var found = false;
-          for (sel of selectedAuthors) {
-            if (sel.trim() == author.trim()) {
-              found = true;
-              $("#id_authors").append("<option value='" + author + "' selected> " + author + " </option>");
-            }
-          }
-          if (!found) {
-            $("#id_authors").append("<option value='" + author + "'> " + author + " </option>");
-          }
-        }
+        getAuthorsSelector();
         $("#id_authors").attr('required', true);
         $("#div_id_authors label").append('<span class="asteriskField">*</span>');
         $("#div_id_authors div").on('keyup', function () {
@@ -522,6 +506,22 @@
           },
           success: function (response) {
             $("#id_keywords").html(response.keywords);
+          }
+        }
+        );
+      }
+
+      function getAuthorsSelector() {
+        var resource_id = $("#resourceID").val();    
+        var request = $.ajax(
+        {
+          type: "GET",
+          url: "{% url 'getResourceAuthorsSelector' %}",
+          data: {
+            "resource_id": resource_id
+          },
+          success: function (response) {
+            $("#id_authors").html(response.authors);
           }
         }
         );

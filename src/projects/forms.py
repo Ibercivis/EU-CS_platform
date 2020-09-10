@@ -73,8 +73,6 @@ class ProjectForm(forms.Form):
         required=False,label="Other Organisations")
 
     choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
-    choicesSelected = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
-
 
     #Contact Information
     host = forms.CharField(max_length=100, \
