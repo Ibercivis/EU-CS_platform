@@ -350,21 +350,7 @@
 <script src="{% static 'site/js/leaflet-geosearch_2_7.min.js' %}"></script>
 <script>
   $(function () {
-    var choices = $("#id_choices").val();
-    var choices = choices.split(",");
-    var choicesSelected = $("#id_choicesSelected").val().split(",");
-    for (choice of choices){
-      var found = false;
-      for(sel of choicesSelected){
-        if(sel.trim() == choice.trim()){
-          found = true;
-          $("#id_keywords").append("<option value='" + choice +"' selected> " + choice + " </option>");
-        }
-      }
-      if(!found){
-        $("#id_keywords").append("<option value='" + choice +"'> " + choice + " </option>");
-      }
-    }
+    getKeywordsSelector();
 
     var funding_body = $("#id_funding_body option").map(function () {
       return $.trim($(this).text());
@@ -520,6 +506,22 @@
       }
       );
     }
+
+    function getKeywordsSelector() {
+        var project_id = $("#projectID").val();    
+        var request = $.ajax(
+        {
+          type: "GET",
+          url: "{% url 'getKeywordsSelector' %}",
+          data: {
+            "project_id": project_id
+          },
+          success: function (response) {
+            $("#id_keywords").html(response.keywords);
+          }
+        }
+        );
+      }
 
     $("form").submit(function (e) {
       var validationFailed = false;

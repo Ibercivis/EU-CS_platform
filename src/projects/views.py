@@ -531,12 +531,36 @@ def getOrganisations(request):
 
 def getKeywordsSelector(request):
     project_id = request.GET.get("project_id")
-    #keywordsSelected = 
-    keywordsSelected = list(keywordsSelected)
-    keywordsSelected = ", ".join(keywordsSelected)
-    options = '<select id="id_organisation" class="select form-control">'
+    keywordsSelected = []
+    if project_id != '0':
+        project = get_object_or_404(Project, id=project_id)
+        keywordsSelected = list(project.keywords.all().values_list('keyword', flat=True))
+    
+    options = '<select id="id_keywords" class="select form-control">'
     response = {}
     keywords = Keyword.objects.get_queryset()
-    keywords = keywords.values_list("id","name")
+    keywords = keywords.values_list("id","keyword")
     keywords = tuple(keywords)
-    #if keywords:
+    if keywords:
+        for keyword in keywords:
+            found = False
+            if(keywordsSelected):                
+                for key in keywordsSelected:
+                    if(str(keyword[1]) == key):
+                        found=True
+                        options += '<option value = "%s" selected>%s</option>' % (
+                            keyword[0],
+                            keyword[1]
+                        )
+                        break
+            if(not found or not keywordsSelected):
+                options += '<option value = "%s">%s</option>' % (
+                    keyword[0],
+                    keyword[1]
+                )
+        options += '</select>'
+        response['keywords'] = options
+    else:
+        response['keywords'] = '<select id="id_keywords" class="select form-control" disabled></select>'
+
+    return JsonResponse(response)
