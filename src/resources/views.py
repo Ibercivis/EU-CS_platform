@@ -522,3 +522,40 @@ def iter_items(items, pseudo_buffer):
 
     for item in items:
         yield writer.writerow(get_data(item))
+
+
+def getResourceKeywordsSelector(request):
+    resource_id = request.GET.get("resource_id")
+    keywordsSelected = []
+    if resource_id != '0':
+        resource = get_object_or_404(Resource, id=resource_id)
+        keywordsSelected = list(resource.keywords.all().values_list('keyword', flat=True))
+    
+    options = '<select id="id_keywords" class="select form-control">'
+    response = {}
+    keywords = Keyword.objects.get_queryset()
+    keywords = keywords.values_list("id","keyword")
+    keywords = tuple(keywords)
+    if keywords:
+        for keyword in keywords:
+            found = False
+            if(keywordsSelected):                
+                for key in keywordsSelected:
+                    if(str(keyword[1]) == key):
+                        found=True
+                        options += '<option value = "%s" selected>%s</option>' % (
+                            keyword[0],
+                            keyword[1]
+                        )
+                        break
+            if(not found or not keywordsSelected):
+                options += '<option value = "%s">%s</option>' % (
+                    keyword[0],
+                    keyword[1]
+                )
+        options += '</select>'
+        response['keywords'] = options
+    else:
+        response['keywords'] = '<select id="id_keywords" class="select form-control" disabled></select>'
+
+    return JsonResponse(response)

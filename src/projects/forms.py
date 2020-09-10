@@ -218,13 +218,11 @@ class ProjectForm(forms.Form):
 
         choices = self.data['choices']
         choices = choices.split(',')
-        print(choices)
         for choice in choices:
             if(choice != ''):
                 keyword = Keyword.objects.get_or_create(keyword=choice)
         keywords = Keyword.objects.all()
         keywords = keywords.filter(keyword__in = choices)
-        print(keywords)
         project.keywords.set(keywords)
         project.save()
 

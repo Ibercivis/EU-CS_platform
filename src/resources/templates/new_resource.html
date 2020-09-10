@@ -273,14 +273,9 @@
   var readSavedConfirmation = false;
   $(function () {
 
-    var choices = $("#id_choices").val();
-    var choices = choices.split(",");
-
     $("#id_keywords").attr('required', true);
     $("#div_id_keywords label").append('<span class="asteriskField">*</span>');
-    for (choice of choices){
-      $("#id_keywords").append("<option value='" + choice +"'> " + choice + " </option>");
-    }
+    getKeywordsSelector();
 
     var authorsCollection = $("#id_authorsCollection").val();
     var authorsCollection = authorsCollection.split(",");
@@ -361,37 +356,39 @@
         if(!readSavedConfirmation){
           e.preventDefault();
           $("#savedModal").modal("show");
+        }else{
+          var option_all = $("#id_keywords option:selected").map(function () {
+            return $.trim($(this).text());
+          }).get().join(',');
+          $("#id_choices").val(option_all);
+          $("#id_keywords").empty();
+
+          option_all = $("#id_authors option:selected").map(function () {
+            return $.trim($(this).text());
+          }).get().join(',');
+          $("#id_authorsCollection").val(option_all);
+          $("#id_authors").empty();
+
+          var category = $("#id_category").val();
+          $("#id_categorySelected").val(category);
+          var subcategory = $("#id_subcategory").val();
+          if(subcategory){
+            $("#id_categorySelected").val(subcategory);
+          }
+
+          var educationLevel = $("#id_education_level option:selected").map(function () {
+            return $.trim($(this).text());
+          }).get().join(',');
+          $("#id_educationLevelSelected").val(educationLevel);
+          $("#id_education_level").empty();
+
+          var learningResourceType = $("#id_learning_resource_type option:selected").map(function () {
+            return $.trim($(this).text());
+          }).get().join(',');
+          $("#id_learningResourceTypeSelected").val(learningResourceType);
+          $("#id_learning_resource_type").empty();
         }
-        var option_all = $("#id_keywords option:selected").map(function () {
-          return $.trim($(this).text());
-        }).get().join(',');
-        $("#id_choices").val(option_all);
-        $("#id_keywords").empty();
-
-        option_all = $("#id_authors option:selected").map(function () {
-          return $.trim($(this).text());
-        }).get().join(',');
-        $("#id_authorsCollection").val(option_all);
-        $("#id_authors").empty();
-
-        var category = $("#id_category").val();
-        $("#id_categorySelected").val(category);
-        var subcategory = $("#id_subcategory").val();
-        if(subcategory){
-          $("#id_categorySelected").val(subcategory);
-        }
-
-        var educationLevel = $("#id_education_level option:selected").map(function () {
-          return $.trim($(this).text());
-        }).get().join(',');
-        $("#id_educationLevelSelected").val(educationLevel);
-        $("#id_education_level").empty();
-
-        var learningResourceType = $("#id_learning_resource_type option:selected").map(function () {
-          return $.trim($(this).text());
-        }).get().join(',');
-        $("#id_learningResourceTypeSelected").val(learningResourceType);
-        $("#id_learning_resource_type").empty();
+        
       }
     });
 
@@ -415,6 +412,21 @@
       success: function (response) {
         $("#id_sub_categories").html(response.sub_categories);
 
+      }
+    }
+    );
+  }
+
+  function getKeywordsSelector() {        
+    var request = $.ajax(
+    {
+      type: "GET",
+      url: "{% url 'getResourceKeywordsSelector' %}",
+      data: {
+        "resource_id": 0
+      },
+      success: function (response) {
+        $("#id_keywords").html(response.keywords);
       }
     }
     );
