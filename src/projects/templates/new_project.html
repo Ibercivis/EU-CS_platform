@@ -336,14 +336,6 @@
     $(document).ready(function () {
       $('.js-example-basic-single').select2();
 
-
-      var choices = $("#id_choices").val();
-      var choices = choices.split(",");
-
-      for (choice of choices){
-        $("#id_keywords").append("<option value='" + choice +"'> " + choice + " </option>");
-      }
-
       $("#div_id_keywords div").on('keyup', function(){
         var key = $("#div_id_keywords .selection input").val();
         if (key.indexOf(',') > -1) {
@@ -352,6 +344,9 @@
           $("#id_keywords").append("<option value='" + word +"' selected> " + word + " </option>");
         }
       });
+      
+
+      getKeywordsSelector();
 
       $("#div_id_funding_body div").on('change', function(){
         $("#id_funding_body").removeAttr('multiple');
@@ -395,7 +390,6 @@
       });
 
       function getOrganisations() {
-        console.log("llamada")
         var mainOrganisation = $("#id_mainOrganisation").val();
         var organisationsSelected = $("#id_organisation").val()
         var request = $.ajax(
@@ -409,6 +403,21 @@
           success: function (response) {
             $("#id_organisation").empty();
             $("#id_organisation").html(response.organisations);
+          }
+        }
+        );
+      }
+      
+      function getKeywordsSelector() {        
+        var request = $.ajax(
+        {
+          type: "GET",
+          url: "{% url 'getKeywordsSelector' %}",
+          data: {
+            "project_id": 0
+          },
+          success: function (response) {
+            $("#id_keywords").html(response.keywords);
           }
         }
         );
@@ -447,25 +456,25 @@
           if(!readSavedConfirmation){
             e.preventDefault();
             $("#savedModal").modal("show");
+          }else{
+            var option_all = $("#id_keywords option:selected").map(function () {
+              return $.trim($(this).text());
+            }).get().join(',');          
+            $("#id_choices").val(option_all);
+            $("#id_keywords").empty();
+
+            var fundingBody = $("#id_funding_body option:selected").map(function () {
+              return $.trim($(this).text());
+            }).get().join(',');
+            $("#id_fundingBodySelected").val(fundingBody);
+            $("#id_funding_body").empty();
+
+            var originDatabase = $("#id_origin_database option:selected").map(function () {
+              return $.trim($(this).text());
+            }).get().join(',');
+            $("#id_originDatabaseSelected").val(originDatabase);
+            $("#id_origin_database").empty();
           }
-
-          var option_all = $("#id_keywords option:selected").map(function () {
-            return $.trim($(this).text());
-          }).get().join(',');
-          $("#id_choices").val(option_all);
-          $("#id_keywords").empty();
-
-          var fundingBody = $("#id_funding_body option:selected").map(function () {
-            return $.trim($(this).text());
-          }).get().join(',');
-          $("#id_fundingBodySelected").val(fundingBody);
-          $("#id_funding_body").empty();
-
-          var originDatabase = $("#id_origin_database option:selected").map(function () {
-            return $.trim($(this).text());
-          }).get().join(',');
-          $("#id_originDatabaseSelected").val(originDatabase);
-          $("#id_origin_database").empty();
         }
       });
 

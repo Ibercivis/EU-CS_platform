@@ -215,14 +215,18 @@ class ProjectForm(forms.Form):
         project.participationtask.set(self.data.getlist('participationtask'))
         project.geographicextend.set(self.data.getlist('geographicextend'))
         project.organisation.set(self.data.getlist('organisation'))
+
         choices = self.data['choices']
         choices = choices.split(',')
+        print(choices)
         for choice in choices:
             if(choice != ''):
                 keyword = Keyword.objects.get_or_create(keyword=choice)
         keywords = Keyword.objects.all()
         keywords = keywords.filter(keyword__in = choices)
+        print(keywords)
         project.keywords.set(keywords)
+        project.save()
 
         return 'success'
 

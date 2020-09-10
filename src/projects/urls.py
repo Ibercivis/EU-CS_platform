@@ -20,4 +20,5 @@ urlpatterns = [
     url(r'^api/', include('projects.api.urls')),
     path('downloadProjects', views.downloadProjects, name='downloadProjects'),
     path('getOrganisations', views.getOrganisations, name='getOrganisations'),
+    path('getKeywordsSelector', views.getKeywordsSelector, name='getKeywordsSelector'),
 ]
