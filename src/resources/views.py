@@ -152,12 +152,9 @@ def editResource(request, pk):
     cooperators = getCooperatorsEmail(pk)
     permissionForm = ResourcePermissionForm(initial={'usersCollection':users, 'selectedUsers': cooperators})
 
-    keywordsList = list(resource.keywords.all().values_list('keyword', flat=True))
-    keywordsList = ", ".join(keywordsList)
     choices = list(Keyword.objects.all().values_list('keyword',flat=True))
     choices = ", ".join(choices)
-    selectedAuthors = list(resource.authors.all().values_list('author',flat=True))
-    selectedAuthors = ", ".join(selectedAuthors)
+
     authorsCollection = list(Author.objects.all().values_list('author',flat=True))
     authorsCollection = ", ".join(authorsCollection)
 
@@ -174,8 +171,8 @@ def editResource(request, pk):
         'withImage1': (True, False)[resource.image1 == ""],'withImage2': (True, False)[resource.image2 == ""],
         'url': resource.url,'license': resource.license, 'choices': choices, 'theme': resource.theme.all,'organisation': resource.organisation.all,
         'audience' : resource.audience.all, 'publisher': resource.publisher, 'year_of_publication': resource.datePublished,
-        'authors': resource.authors.all, 'selectedAuthors': selectedAuthors, 'authorsCollection': authorsCollection,
-        'image_credit1': resource.imageCredit1,'image_credit2': resource.imageCredit2, 'choicesSelected':keywordsList,
+        'authors': resource.authors.all, 'authorsCollection': authorsCollection,
+        'image_credit1': resource.imageCredit1,'image_credit2': resource.imageCredit2,
         'category': getCategory(resource.category), 'categorySelected': resource.category.id,
         'education_level': educationLevel, 'educationLevelSelected': resource.educationLevel,
         'learning_resource_type': learningResourceType, 'learningResourceTypeSelected': resource.learningResourceType,
@@ -557,5 +554,42 @@ def getResourceKeywordsSelector(request):
         response['keywords'] = options
     else:
         response['keywords'] = '<select id="id_keywords" class="select form-control" disabled></select>'
+
+    return JsonResponse(response)
+
+
+def getResourceAuthorsSelector(request):
+    resource_id = request.GET.get("resource_id")
+    authorsSelected = []
+    if resource_id != '0':
+        resource = get_object_or_404(Resource, id=resource_id)
+        authorsSelected = list(resource.authors.all().values_list('author', flat=True))
+    
+    options = '<select id="id_authors" class="select form-control">'
+    response = {}
+    authors = Author.objects.get_queryset()
+    authors = authors.values_list("id","author")
+    authors = tuple(authors)
+    if authors:
+        for author in authors:
+            found = False
+            if(authorsSelected):                
+                for key in authorsSelected:
+                    if(str(author[1]) == key):
+                        found=True
+                        options += '<option value = "%s" selected>%s</option>' % (
+                            author[0],
+                            author[1]
+                        )
+                        break
+            if(not found or not authorsSelected):
+                options += '<option value = "%s">%s</option>' % (
+                    author[0],
+                    author[1]
+                )
+        options += '</select>'
+        response['authors'] = options
+    else:
+        response['authors'] = '<select id="id_authors" class="select form-control" disabled></select>'
 
     return JsonResponse(response)
