@@ -1,6 +1,7 @@
 {% extends "base_r2.html" %}
 
 {% load staticfiles %}
+{% load crispy_forms_tags %}
 {% load leaflet_tags %}
 {% load thumbnail %}
 {% block head %}
@@ -12,6 +13,7 @@
 {% block title %}Organisation{% endblock %}
 
 {% block list_of_items %}
+{{ permissionForm.media.css }}
 <div class="container">
 	<div class="card">
 		<div class="card-body">
@@ -58,6 +60,14 @@
 				</div>
 			</div>
 		</div><!-- end of card body -->
+		{% if user.is_staff %}
+			<permissionForm>
+				{% csrf_token %}
+				{{ permissionForm.usersAllowed | as_crispy_field }}
+				{{ permissionForm.selectedUsers | as_crispy_field }}
+				{{ permissionForm.usersCollection | as_crispy_field }}
+			</permissionForm>
+		{% endif %}
 		{% if editable %}
 		<div class="card-footer">
 			<a href="{% url 'delete_organisation' organisation.id %}" class="btn btn-outline btn-red float-right ml-2 mt-2">
@@ -76,6 +86,48 @@
 
 {% block scripts %}
 <script>
+
+	$(function () {
+		var users = $("#id_usersCollection").val();
+		var users = users.split(",");		
+		var selectedUsers = $("#id_selectedUsers").val().split(",");
+		for (user of users){
+		var found = false;
+		for(sel of selectedUsers){
+			if(sel.trim() == user.trim()){
+			found = true;
+			$("#id_usersAllowed").append("<option value='" + user +"' selected> " + user + " </option>");
+			}
+		}
+		if(!found){
+			$("#id_usersAllowed").append("<option value='" + user +"'> " + user + " </option>");
+		}
+		}
+
+		$('#id_usersAllowed').on('change', function () {
+			users = $("#id_usersAllowed option:selected").map(function () {
+				return $.trim($(this).text());
+			}).get().join(',');
+
+			var idOrganisation = {{organisation.id}};
+			var request = $.ajax(
+			{
+				type: "POST",
+				url: "{% url 'allowUserOrganisation' %}",
+				data: {
+				"organisation_id": idOrganisation,
+				"users": users,
+				csrfmiddlewaretoken: '{{ csrf_token }}'
+				},
+				success: function (response) {
+
+				}
+			}
+		);
+		});
+	});
+
+
 	var map;
 	var marker_layer = new L.marker([50.5, 30.5]);
 	function map_init_basic (leafmap, options) {
@@ -84,4 +136,5 @@
 		new L.marker([{{organisation.latitude}},{{organisation.longitude}}]).addTo(map);
 	}
 </script>
+{{ permissionForm.media.js }}
 {% endblock scripts %}
