@@ -22,7 +22,7 @@ have been marked as 'Moderated'. Read more about our <a href="/faq">moderation p
 				<!--option value="-id" {% if filters.orderby == "-id" %} selected {% endif %}>Newest to Oldest</option-->
 				<option value="" {% if filters.orderby == "" %} selected {% endif %}>Last Updated</option>
 				<option value="theme" {% if filters.orderby == "theme" %} selected {% endif %}">Theme</option>
-				<option value="avg_rating" {% if filters.orderby == "avg_rating" %} selected {% endif %}>Sort by rating</option>
+				<option value="-avg_rating" {% if filters.orderby == "-avg_rating" %} selected {% endif %}>Sort by rating</option>
 				<!--option value="avg_rating" {% if filters.orderby == "avg_rating" %} selected {% endif %}>Worst average rating</option-->
 			</select>
 		</div>
