@@ -115,6 +115,7 @@ class ResourceForm(forms.ModelForm):
             rsc.url = self.data['url']
             rsc.license = self.data['license']
             rsc.publisher = self.data['publisher']
+            rsc.dateLastModification = datetime.now()
         else:
             rsc.dateUploaded = publication_date
             rsc.creator = args.user

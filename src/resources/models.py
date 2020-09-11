@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from authors.models import Author
 from organisations.models import Organisation
+from django.utils import timezone
 
 class Keyword(models.Model):
     keyword = models.TextField()
@@ -46,6 +47,7 @@ class Resource(models.Model):
     abstract = models.CharField(max_length=3000)
     audience = models.ManyToManyField(Audience)
     dateUploaded = models.DateTimeField('Date Uploaded')
+    dateLastModification = models.DateTimeField('Last modification',blank=True,default=timezone.now)
     inLanguage = models.CharField(max_length=100)
     keywords = models.ManyToManyField(Keyword)
     category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.CASCADE)
