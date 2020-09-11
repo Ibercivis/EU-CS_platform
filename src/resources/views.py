@@ -58,7 +58,7 @@ def resources(request, isTrainingResource=False):
         orderBy = request.GET.get('orderby')
         if("id" in orderBy or "theme" in orderBy):
             resources=resources.order_by('id',request.GET['orderby']).distinct('id')
-        else:
+        elif("avg" in orderBy):
             reviews = Review.objects.filter(content_type=ContentType.objects.get(model="resource"))
             reviews = reviews.values("object_pk", "content_type").annotate(avg_rating=Avg('rating')).order_by(orderBy).values_list('object_pk',flat=True)
             reviews = list(reviews)
@@ -69,9 +69,10 @@ def resources(request, isTrainingResource=False):
                     resourcesVoted.append(rsc)
             resources = resources.exclude(id__in=reviews)
             resources = list(resourcesVoted) + list(resources)
+        else:
+            resources=resources.order_by('-dateLastModification')
         filters['orderby']=request.GET['orderby']
     else:
-        print("default")
         resources=resources.order_by('-dateLastModification')
 
 
