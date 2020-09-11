@@ -8,5 +8,6 @@ urlpatterns = [
     path('organisations', views.organisations, name='organisations'),
     path('delete_organisation/<int:pk>', views.delete_organisation, name='delete_organisation'),
     path('organisations_autocomplete/', views.organisations_autocomplete, name='organisations_autocomplete'),
+    path('allowUserOrganisation/', views.allowUserOrganisation, name='allowUserOrganisation'),
 
 ]
