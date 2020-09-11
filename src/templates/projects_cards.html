@@ -35,6 +35,21 @@
 				{% for keyword in project.keywords.all %} <a class="badge badge-light pt-1"
 				href="/projects?keywords={{keyword|urlencode}}">{{keyword | upper}}</a>  {% endfor %}
 			</div><!-- End of card-body -->
+			<div class="card-footer">
+				<div class=" small text-right">
+					{% get_rating for project as avg_rating %}
+					{% get_review_count for project as review_count %}
+					<span class="gl-star-rating-stars s{{ avg_rating | stringformat:'d'}}0 readonly">
+						<span class="align-middle" data-value="1" data-text="Terrible"></span>
+						<span  class="align-middle" data-value="2" data-text="Poor"></span>
+						<span  class="align-middle" data-value="3" data-text="Average"></span>
+						<span  class="align-middle" data-value="4" data-text="Very Good"></span>
+						<span  class="align-middle" data-value="5" data-text="Excellent"></span>
+					</span>
+					{{ review_count }} {% if review_count == 1 %} review {% else %} reviews {% endif %}
+					<!--div class="small text-right">Last updated: {{rsc.dateLastModification}}</div-->
+				</div>
+			</div>
 		</div><!-- end of card -->
 	</div><!-- end of col -->
 	{% endfor %}

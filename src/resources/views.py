@@ -28,9 +28,9 @@ def training_resources(request):
 
 def resources(request, isTrainingResource=False):
     if(isTrainingResource):
-        resources = Resource.objects.all().filter(isTrainingResource=True).order_by('id')
+        resources = Resource.objects.all().filter(isTrainingResource=True).order_by('-dateLastModification')
     else:
-        resources = Resource.objects.all().filter(~Q(isTrainingResource=True)).order_by('id')
+        resources = Resource.objects.all().filter(~Q(isTrainingResource=True)).order_by('-dateLastModification')
     approvedResources = ApprovedResources.objects.all().values_list('resource_id',flat=True)
     user = request.user
     savedResources = None
@@ -48,39 +48,35 @@ def resources(request, isTrainingResource=False):
     resources = applyFilters(request, resources)
     filters = setFilters(request, filters)
     resources = resources.distinct()
-    resources = resources.filter(~Q(hidden=True))
-    resourcesTop = resources.filter(featured=True)
-    resourcesTopIds = list(resourcesTop.values_list('id',flat=True))
-    resources = resources.exclude(id__in=resourcesTopIds)
+    #resources = resources.filter(~Q(hidden=True))
+    #resourcesTop = resources.filter(featured=True)
+    #resourcesTopIds = list(resourcesTop.values_list('id',flat=True))
+    #resources = resources.exclude(id__in=resourcesTopIds)
 
     # Ordering
     if request.GET.get('orderby'):
         orderBy = request.GET.get('orderby')
         if("id" in orderBy or "theme" in orderBy):
-            resources=resources.order_by(request.GET['orderby'])
+            resources=resources.order_by('id',request.GET['orderby']).distinct('id')
         else:
             reviews = Review.objects.filter(content_type=ContentType.objects.get(model="resource"))
             reviews = reviews.values("object_pk", "content_type").annotate(avg_rating=Avg('rating')).order_by(orderBy).values_list('object_pk',flat=True)
             reviews = list(reviews)
             resourcesVoted = []
             for r in reviews:
-                rsc = get_object_or_404(Resource, id=r)
+                rsc = Resource.objects.get(pk=r)
                 if rsc in resources:
                     resourcesVoted.append(rsc)
-
             resources = resources.exclude(id__in=reviews)
-            if(orderBy == "avg_rating"):
-                resources = list(resources) + list(resourcesVoted)
-            else:
-                resources = list(resourcesVoted) + list(resources)
-
+            resources = list(resourcesVoted) + list(resources)
         filters['orderby']=request.GET['orderby']
     else:
-        resources=resources.order_by('-id')
+        print("default")
+        resources=resources.order_by('-dateLastModification')
 
 
     # Pin resources to top
-    resources = list(resourcesTop) + list(resources)
+    #resources = list(resourcesTop) + list(resources)
     counter = len(resources)
 
     paginator = Paginator(resources, 12)
@@ -110,7 +106,7 @@ def new_resource(request, isTrainingResource=False):
             image2_path = saveImage(request, form, 'image2','2')
             images.append(image1_path)
             images.append(image2_path)
-            form.save(request, images)           
+            form.save(request, images)
             if(isTrainingResource):
                 return redirect('/training_resources')
             return redirect('/resources')
@@ -527,7 +523,7 @@ def getResourceKeywordsSelector(request):
     if resource_id != '0':
         resource = get_object_or_404(Resource, id=resource_id)
         keywordsSelected = list(resource.keywords.all().values_list('keyword', flat=True))
-    
+
     options = '<select id="id_keywords" class="select form-control">'
     response = {}
     keywords = Keyword.objects.get_queryset()
@@ -536,7 +532,7 @@ def getResourceKeywordsSelector(request):
     if keywords:
         for keyword in keywords:
             found = False
-            if(keywordsSelected):                
+            if(keywordsSelected):
                 for key in keywordsSelected:
                     if(str(keyword[1]) == key):
                         found=True
@@ -564,7 +560,7 @@ def getResourceAuthorsSelector(request):
     if resource_id != '0':
         resource = get_object_or_404(Resource, id=resource_id)
         authorsSelected = list(resource.authors.all().values_list('author', flat=True))
-    
+
     options = '<select id="id_authors" class="select form-control">'
     response = {}
     authors = Author.objects.get_queryset()
@@ -573,7 +569,7 @@ def getResourceAuthorsSelector(request):
     if authors:
         for author in authors:
             found = False
-            if(authorsSelected):                
+            if(authorsSelected):
                 for key in authorsSelected:
                     if(str(author[1]) == key):
                         found=True
