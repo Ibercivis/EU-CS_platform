@@ -7,13 +7,14 @@ from django.contrib.auth import get_user_model
 from django.utils import formats
 from django.db.models import Q
 from datetime import datetime
-from .forms import OrganisationForm
-from .models import Organisation, OrganisationType
+from .forms import OrganisationForm, OrganisationPermissionForm
+from .models import Organisation, OrganisationType, OrganisationPermission
 from projects.models import Project
 from resources.models import Resource
 from profiles.models import Profile
 import random
 
+User = get_user_model()
 
 @login_required(login_url='/login')
 def new_organisation(request):
@@ -58,8 +59,11 @@ def organisation(request, pk):
     associatedProjects |=  mainProjects
     associatedResources = Resource.objects.all().filter(organisation__id=pk)
     members = Profile.objects.all().filter(organisation__id=pk)
+    users = getOtherUsers(organisation.creator)
+    cooperators = getCooperatorsEmail(pk)
+    permissionForm = OrganisationPermissionForm(initial={'usersCollection':users, 'selectedUsers': cooperators})
     return render(request, 'organisation.html', {'organisation':organisation, 'associatedProjects': associatedProjects,
-    'associatedResources': associatedResources, 'members': members, 'editable': editable, 'isSearchPage': True})
+    'associatedResources': associatedResources, 'members': members, 'permissionForm': permissionForm, 'editable': editable, 'isSearchPage': True})
 
 
 def edit_organisation(request, pk):
@@ -164,3 +168,44 @@ def applyFilters(request, organisations):
     if request.GET.get('orgType'):
         organisations = organisations.filter(orgType = request.GET['orgType'])
     return organisations
+
+def getOtherUsers(creator):
+    users = list(User.objects.all().exclude(is_superuser=True).exclude(id=creator.id).values_list('email',flat=True))
+    users = ", ".join(users)
+    return users
+
+def getCooperators(organisationID):
+    users = list(OrganisationPermission.objects.all().filter(organisation_id=organisationID).values_list('user',flat=True))
+    return users
+
+def getCooperatorsEmail(organisationID):
+    users = getCooperators(organisationID)
+    cooperators = ""
+    for user in users:
+        userObj = get_object_or_404(User, id=user)
+        cooperators += userObj.email + ", "
+    return cooperators
+
+def allowUserOrganisation(request):
+    response = {}
+    organisationID = request.POST.get("organisation_id")
+    users = request.POST.get("users")
+    organisation = get_object_or_404(Organisation, id=organisationID)
+    if request.user != organisation.creator and not request.user.is_staff:
+        #TODO return JsonResponse with error code
+        return redirect('../organisations', {})
+
+    #Delete all
+    objs = OrganisationPermission.objects.all().filter(organisation_id=organisationID)
+    if(objs):
+        for obj in objs:
+            obj.delete()
+
+    #Insert all
+    users = users.split(',')
+    for user in users:
+        fUser = User.objects.filter(email=user)[:1].get()
+        organisationPermission = OrganisationPermission(organisation=organisation, user=fUser)
+        organisationPermission.save()
+
+    return JsonResponse(response, safe=False)

@@ -25,3 +25,8 @@ class Organisation(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+
+class OrganisationPermission(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    organisation = models.ForeignKey(Organisation, on_delete=models.CASCADE)
