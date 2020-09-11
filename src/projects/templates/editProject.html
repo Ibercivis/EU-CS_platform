@@ -124,7 +124,6 @@
               <div class="col-12 mb-3">
                 {{form.keywords|as_crispy_field }}
                 {{form.choices |as_crispy_field}}
-                {{form.choicesSelected|as_crispy_field}}
               </div>
             </div>
 
@@ -474,7 +473,7 @@
       $("#id_withImage3").val(false);
     });
 
-    
+
     getOrganisations();
     $("#id_mainOrganisation").on('change', function(){
       getOrganisations();
@@ -508,7 +507,7 @@
     }
 
     function getKeywordsSelector() {
-        var project_id = $("#projectID").val();    
+        var project_id = $("#projectID").val();
         var request = $.ajax(
         {
           type: "GET",
