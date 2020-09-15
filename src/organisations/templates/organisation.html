@@ -60,7 +60,7 @@
 				</div>
 			</div>
 		</div><!-- end of card body -->
-		{% if user.is_staff %}
+		{% if user.is_staff or organisation.creator == user or user.id in cooperators %}
 			<permissionForm>
 				{% csrf_token %}
 				{{ permissionForm.usersAllowed | as_crispy_field }}
