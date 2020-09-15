@@ -50,7 +50,8 @@ def new_organisation(request):
 def organisation(request, pk):
     organisation = get_object_or_404(Organisation, id=pk)
     user = request.user
-    if user != organisation.creator and not user.is_staff:
+    cooperatorsPK = getCooperators(pk)
+    if user != organisation.creator and not user.is_staff and not user.id in cooperatorsPK:
         editable = False
     else:
         editable = True
@@ -59,18 +60,18 @@ def organisation(request, pk):
     associatedProjects |=  mainProjects
     associatedResources = Resource.objects.all().filter(organisation__id=pk)
     members = Profile.objects.all().filter(organisation__id=pk)
-    users = getOtherUsers(organisation.creator)
+    users = getOtherUsers(organisation.creator, members)
     cooperators = getCooperatorsEmail(pk)
     permissionForm = OrganisationPermissionForm(initial={'usersCollection':users, 'selectedUsers': cooperators})
-    return render(request, 'organisation.html', {'organisation':organisation, 'associatedProjects': associatedProjects,
+    return render(request, 'organisation.html', {'organisation':organisation, 'associatedProjects': associatedProjects,'cooperators': cooperatorsPK,
     'associatedResources': associatedResources, 'members': members, 'permissionForm': permissionForm, 'editable': editable, 'isSearchPage': True})
 
 
 def edit_organisation(request, pk):
     organisation = get_object_or_404(Organisation, id=pk)
     user = request.user
-
-    if user != organisation.creator and not user.is_staff:
+    cooperatorsPK = getCooperators(pk)
+    if user != organisation.creator and not user.is_staff and not user.id in cooperatorsPK:
         return redirect('../organisations', {})
 
     form = OrganisationForm(initial={
@@ -169,8 +170,12 @@ def applyFilters(request, organisations):
         organisations = organisations.filter(orgType = request.GET['orgType'])
     return organisations
 
-def getOtherUsers(creator):
-    users = list(User.objects.all().exclude(is_superuser=True).exclude(id=creator.id).values_list('name','email'))
+def getOtherUsers(creator, members):
+    users = []
+    for member in members:
+        user = get_object_or_404(User, id=member.user_id)
+        users.append(user.id)
+    users = list(User.objects.filter(id__in=users).exclude(is_superuser=True).exclude(id=creator.id).values_list('name','email'))
     return users
 
 def getCooperators(organisationID):
