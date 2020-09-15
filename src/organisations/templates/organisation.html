@@ -91,24 +91,36 @@
 		var users = $("#id_usersCollection").val();
 		var users = users.split(",");		
 		var selectedUsers = $("#id_selectedUsers").val().split(",");
-		for (user of users){
-		var found = false;
-		for(sel of selectedUsers){
-			if(sel.trim() == user.trim()){
-			found = true;
-			$("#id_usersAllowed").append("<option value='" + user +"' selected> " + user + " </option>");
+		var i = 0
+		var name = ''
+		var email = ''
+		for (user of users){			
+			if (i % 2 == 0){			
+				var init = user.indexOf('\'')
+				var end = user.indexOf('\'', init+1)
+				name = user.substring(init+1,end)
+			}else{
+				var init = user.indexOf('\'')
+				var end = user.indexOf('\'', init+1)
+				email = user.substring(init+1,end)
+				var found = false;
+				for(sel of selectedUsers){
+					if(sel.trim() == email.trim()){
+					found = true;
+					$("#id_usersAllowed").append("<option value='" + email +"' selected> " + name + " </option>");
+					}
+				}
+				if(!found){
+					$("#id_usersAllowed").append("<option value='" + email +"'> " + name + " </option>");
+				}
 			}
-		}
-		if(!found){
-			$("#id_usersAllowed").append("<option value='" + user +"'> " + user + " </option>");
-		}
+			i++
 		}
 
 		$('#id_usersAllowed').on('change', function () {
 			users = $("#id_usersAllowed option:selected").map(function () {
-				return $.trim($(this).text());
+				return $.trim($(this).val());
 			}).get().join(',');
-
 			var idOrganisation = {{organisation.id}};
 			var request = $.ajax(
 			{

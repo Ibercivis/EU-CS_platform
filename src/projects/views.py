@@ -260,8 +260,7 @@ def saveImageWithPath(image, photoName):
     return image_path
 
 def getOtherUsers(creator):
-    users = list(User.objects.all().exclude(is_superuser=True).exclude(id=creator.id).values_list('email',flat=True))
-    users = ", ".join(users)
+    users = list(User.objects.all().exclude(is_superuser=True).exclude(id=creator.id).values_list('name','email'))
     return users
 
 def getCooperators(projectID):
