@@ -202,7 +202,7 @@
       {% endif %}
 
       {% endif %}
-      {% if resource.creator == user or user.is_staff %}
+      {% if resource.creator == user or user.is_staff or user.id in cooperators %}
       <a class="btn btn-red float-right" href="{% if isTrainingResource %}
       {% url 'editTrainingResource' resource.id %}{% else %}{% url 'editResource' resource.id %}{% endif %}"><i class="fas fa-edit"></i> Edit</a>
 

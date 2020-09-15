@@ -241,7 +241,7 @@
       <a  onclick="setFeatured({{project.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
       {% endif %}
       {% endif %}
-      {% if project.creator == user or user.is_staff %}
+      {% if project.creator == user or user.is_staff or user.id in cooperators %}
       <a class="btn btn-red float-right" href="{% url 'editProject' project.id %}"><i class="fas fa-edit"></i> Edit </a>
       {% endif %}
     </div><!-- End of card footer -->
