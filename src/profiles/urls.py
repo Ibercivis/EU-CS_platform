@@ -10,4 +10,5 @@ urlpatterns = [
     path("me/resources", views.resources, name="self_resources"),
     path("me/followed_projects", views.followedProjects, name="followed_projects"),
     path("me/saved_resources", views.savedResources, name="saved_resources"),
+    path("me/organisations", views.organisations, name="self_organisations"),
 ]
