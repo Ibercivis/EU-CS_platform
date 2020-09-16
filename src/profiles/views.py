@@ -9,6 +9,7 @@ from . import forms
 from . import models
 from projects.models import Project, FollowedProjects, ProjectPermission, ApprovedProjects
 from resources.models import Resource, SavedResources, ResourcePermission, ApprovedResources
+from organisations.models import Organisation, OrganisationPermission
 
 
 class ShowProfile(LoginRequiredMixin, generic.TemplateView):
@@ -104,3 +105,15 @@ def getProjectsWithPermission(user):
 def getResourcesWithPermission(user):
     resources = list(ResourcePermission.objects.all().filter(user_id=user).values_list('resource',flat=True))
     return resources
+
+def organisations(request):
+    user = request.user
+    organisationsCreated = Organisation.objects.all().filter(creator=user)
+    organisationsWithPermission = getOrganisationsWithPermission(user)
+    organisationsWithPermission = Organisation.objects.all().filter(id__in=organisationsWithPermission)
+    organisations = chain(organisationsCreated, organisationsWithPermission)
+    return render(request, 'profiles/my_organisations.html', {'show_user': user, 'organisations': organisations})
+
+def getOrganisationsWithPermission(user):
+    organisations = list(OrganisationPermission.objects.all().filter(user_id=user).values_list('organisation',flat=True))
+    return organisations
