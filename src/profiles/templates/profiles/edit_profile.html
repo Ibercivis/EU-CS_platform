@@ -33,7 +33,10 @@
 					</div>
 					<div class="card-text">
 						<form enctype="multipart/form-data" method="post">
-							{% crispy user_form %}
+							{% csrf_token %}
+							{{ user_form.name|as_crispy_field }}							
+							{{ user_form.email|as_crispy_field }}
+
 							{{ profile_form.picture|as_crispy_field }}
 							{{ profile_form.title|as_crispy_field }}
 							{{ profile_form.bio|as_crispy_field }}
