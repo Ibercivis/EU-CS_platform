@@ -213,3 +213,11 @@ def allowUserOrganisation(request):
         organisationPermission.save()
 
     return JsonResponse(response, safe=False)
+
+def saveImageWithPath(image, photoName):
+    _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
+    random_num = random.randint(0, 1000)
+    image_path = "media/images/" + _datetime + '_' + str(random_num) + '_' + photoName
+    image.save(image_path)
+    image_path = '/' + image_path
+    return image_path
