@@ -7,6 +7,7 @@ from crispy_forms.bootstrap import StrictButton
 from authtools import forms as authtoolsforms
 from django.contrib.auth import forms as authforms
 from django.urls import reverse
+from captcha.fields import ReCaptchaField
 
 
 class LoginForm(AuthenticationForm):
@@ -37,12 +38,13 @@ class SignupForm(authtoolsforms.UserCreationForm):
         self.fields["orcid"] = forms.CharField(required=False)
         self.helper = FormHelper()
         self.fields["email"].widget.input_type = "email"  # ugly hack
-
+        self.fields["captcha"] = ReCaptchaField()
         self.helper.layout = Layout(
             Field("email", placeholder="Enter Email", autofocus=""),
             Field("name", placeholder="Enter Full Name"),
             Field("password1", placeholder="Enter Password"),
             Field("password2", placeholder="Re-enter Password"),
+            Field("captcha"),
             StrictButton("Sign up", css_class="btn-green", type="Submit"),
         )
 
