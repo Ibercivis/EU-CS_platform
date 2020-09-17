@@ -9,8 +9,8 @@ from rest_framework.permissions import BasePermission, IsAuthenticated, IsAuthen
 from rest_framework.response import Response
 from rest_framework.status import (HTTP_200_OK, HTTP_201_CREATED, HTTP_204_NO_CONTENT, HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND)
 from rest_framework.views import APIView
-from projects.api.serializers import ProjectSerializer, ProjectSerializerCreateUpdate, StatusSerializer, TopicSerializer
-from projects.models import Project, Status, Topic, ApprovedProjects
+from projects.api.serializers import ProjectSerializer, ProjectSerializerCreateUpdate, StatusSerializer, TopicSerializer, ParticipationTaskSerializer, GeographicExtendSerializer
+from projects.models import Project, Status, Topic, ApprovedProjects, ParticipationTask, GeographicExtend
 from projects.views import getCooperators, setProjectApproved, setProjectHidden, setProjectFeatured, followProject
 from reviews.models import Review
 
@@ -30,6 +30,17 @@ class TopicViewSet(viewsets.ModelViewSet):
     permission_classes = (AdminPermissionsClass,)
     serializer_class = TopicSerializer
     queryset = Topic.objects.all()
+
+class ParticipationTaskViewSet(viewsets.ModelViewSet):
+    permission_classes = (AdminPermissionsClass,)
+    serializer_class = ParticipationTaskSerializer
+    queryset = ParticipationTask.objects.all()
+
+class GeographicExtendViewSet(viewsets.ModelViewSet):
+    permission_classes = (AdminPermissionsClass,)
+    serializer_class = GeographicExtendSerializer
+    queryset = GeographicExtend.objects.all()
+
 
 class ProjectList(APIView):
 

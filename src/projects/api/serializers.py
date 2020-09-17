@@ -2,7 +2,7 @@ from rest_framework import serializers
 from django_countries.serializer_fields import CountryField
 from django.shortcuts import get_object_or_404
 from PIL import Image
-from projects.models import Project, Topic, Status, Keyword, FundingBody, OriginDatabase, CustomField
+from projects.models import Project, Topic, Status, Keyword, FundingBody, OriginDatabase, CustomField, ParticipationTask, GeographicExtend
 from projects.forms import getCountryCode
 from projects.views import saveImageWithPath
 
@@ -34,6 +34,16 @@ class OriginDatabaseSerializer(serializers.ModelSerializer):
 class CustomFieldSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomField
+        fields = '__all__'
+
+class ParticipationTaskSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ParticipationTask
+        fields = '__all__'
+
+class GeographicExtendSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GeographicExtend
         fields = '__all__'
 
 
