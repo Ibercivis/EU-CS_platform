@@ -47,7 +47,7 @@ class LoginForm(AuthenticationForm):
                 if user_temp is not None:
                     if not user_temp.is_active:
                         raise forms.ValidationError(
-                            "We see that your email address is in our database, but that you have not yet confirmed your address. Review your inbox and search the confirmation email to activate your account"
+                            "We see that your email address is in our database, but that you have not yet confirmed your address. Please search for the confirmation email in your inbox (or spam) to activate your account"
                         )
                     else:
                         self.confirm_login_allowed(user_temp)
