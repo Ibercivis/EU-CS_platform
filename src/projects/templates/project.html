@@ -231,9 +231,12 @@
         <i class="far fa-envelope"></i>
       </a>
       {% if project.id in approvedProjects %}
-      <a onclick="setApproved({{project.id}}, false)"><i class="far fa-thumbs-up"></i></a>
+        <a onclick="setApproved({{project.id}}, false)"><i class="far fa-thumbs-down"></i></a>
+      {% elif project.id in unApprovedProjects %}
+        <a onclick="setApproved({{project.id}}, true)"><i class="far fa-thumbs-up"></i></a>
       {% else %}
-      <a onclick="setApproved({{project.id}}, true)"><i class="far fa-thumbs-down"></i></a>
+        <a onclick="setApproved({{project.id}}, true)"><i class="far fa-thumbs-up"></i></a>
+        <a onclick="setApproved({{project.id}}, false)"><i class="far fa-thumbs-down"></i></a>
       {% endif %}
       {% if project.featured %}
       <a  onclick="setFeatured({{project.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
@@ -330,6 +333,9 @@
       },
       success: function (response) {
         window.location.reload(false)
+        if(!approved){
+          window.location.href ="{% url 'submitter_contact' 'project' project.id %}"
+        }
       }
     }
     );

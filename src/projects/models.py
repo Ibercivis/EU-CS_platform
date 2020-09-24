@@ -109,6 +109,11 @@ class ApprovedProjects(models.Model):
     def __str__(self):
         return f'{self.project}'
 
+class UnApprovedProjects(models.Model):
+    project = models.OneToOneField(Project, on_delete=models.CASCADE)
+    def __str__(self):
+        return f'{self.project}'
+
 
 class FollowedProjects(models.Model):
     class Meta:
