@@ -184,9 +184,12 @@
         {{ permissionForm.usersCollection | as_crispy_field }}
       </permissionForm>
       {% if resource.id in approvedResources %}
-      <a onclick="setApprovedRsc({{resource.id}}, false)"><i class="far fa-thumbs-up"></i></a>
+      <a onclick="setApprovedRsc({{resource.id}}, false)"><i class="far fa-thumbs-down"></i></a>
+      {% elif resource.id in unApprovedResources %}
+        <a onclick="setApprovedRsc({{resource.id}}, true)"><i class="far fa-thumbs-up"></i></a>
       {% else %}
-      <a onclick="setApprovedRsc({{resource.id}}, true)"><i class="far fa-thumbs-down"></i></a>
+        <a onclick="setApprovedRsc({{resource.id}}, true)"><i class="far fa-thumbs-up"></i></a>
+        <a onclick="setApprovedRsc({{resource.id}}, false)"><i class="far fa-thumbs-down"></i></a>
       {% endif %}
       {% if resource.featured %}
       <a  onclick="setFeatured({{resource.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
@@ -280,6 +283,9 @@
       },
       success: function (response) {
         window.location.reload(false);
+        if(!approved){
+          window.location.href ="{% url 'submitter_contact' 'resource' resource.id %}"
+        }
       }
     }
     );

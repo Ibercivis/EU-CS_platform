@@ -16,7 +16,8 @@ from authors.models import Author
 from PIL import Image
 from datetime import datetime
 from reviews.models import Review
-from .models import Resource, Keyword, Category, ApprovedResources, SavedResources, Theme, Category, ResourcesGrouped, ResourcePermission, EducationLevel, LearningResourceType
+from .models import Resource, Keyword, Category, ApprovedResources, SavedResources, Theme, Category, ResourcesGrouped,\
+     ResourcePermission, EducationLevel, LearningResourceType, UnApprovedResources
 from .forms import ResourceForm, ResourcePermissionForm
 import csv
 import random
@@ -32,6 +33,7 @@ def resources(request, isTrainingResource=False):
     else:
         resources = Resource.objects.all().filter(~Q(isTrainingResource=True)).order_by('-dateLastModification')
     approvedResources = ApprovedResources.objects.all().values_list('resource_id',flat=True)
+    unApprovedResources = UnApprovedResources.objects.all().values_list('resource_id',flat=True)
     user = request.user
     savedResources = None
     savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True)
@@ -52,6 +54,9 @@ def resources(request, isTrainingResource=False):
     #resourcesTop = resources.filter(featured=True)
     #resourcesTopIds = list(resourcesTop.values_list('id',flat=True))
     #resources = resources.exclude(id__in=resourcesTopIds)
+
+    if not user.is_staff:
+        resources = resources.exclude(id__in=unApprovedResources)
 
     # Ordering
     if request.GET.get('orderby'):
@@ -84,7 +89,7 @@ def resources(request, isTrainingResource=False):
     page = request.GET.get('page')
     resources = paginator.get_page(page)
 
-    return render(request, 'resources.html', {'resources':resources, 'approvedResources': approvedResources, 'counter': counter,
+    return render(request, 'resources.html', {'resources':resources, 'approvedResources': approvedResources, 'unApprovedResources': unApprovedResources, 'counter': counter,
     'savedResources': savedResources, 'filters': filters, 'settings': settings, 'languagesWithContent': languagesWithContent,
     'themes':themes, 'categories': categories, 'isTrainingResource': isTrainingResource, 'isSearchPage': True})
 
@@ -123,13 +128,14 @@ def resource(request, pk):
     user = request.user
     users = getOtherUsers(resource.creator)
     cooperators = getCooperatorsEmail(pk)
-    if resource.hidden and ( user.is_anonymous or (user != resource.creator and not user.is_staff and not user.id in getCooperators(pk))):
+    unApprovedResources = UnApprovedResources.objects.all().values_list('resource_id',flat=True)
+    if (resource.id in unApprovedResources or resource.hidden) and ( user.is_anonymous or (user != resource.creator and not user.is_staff and not user.id in getCooperators(pk))):
         return redirect('../resources', {})
     permissionForm = ResourcePermissionForm(initial={'usersCollection':users, 'selectedUsers': cooperators})
     savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True) #TODO: Only ask for the resource
     approvedResources = ApprovedResources.objects.all().values_list('resource_id',flat=True)
     return render(request, 'resource.html', {'resource':resource, 'savedResources':savedResources, 'approvedResources':approvedResources,
-        'cooperators': getCooperators(pk), 'permissionForm': permissionForm, 'isTrainingResource': isTrainingResource,
+        'unApprovedResources': unApprovedResources, 'cooperators': getCooperators(pk), 'permissionForm': permissionForm, 'isTrainingResource': isTrainingResource,
         'isSearchPage': True})
 
 def editTrainingResource(request, pk):
@@ -364,7 +370,15 @@ def setResourceApproved(id, approved):
     if approved == True:
         #Insert
         ApprovedResources.objects.get_or_create(resource=aResource)
+        #Delete UnApprovedResources
+        try:
+            obj = UnApprovedResources.objects.get(resource_id=id)
+            obj.delete()
+        except UnApprovedResources.DoesNotExist:
+            print("Does not exist this unapproved resource")
     else:
+        #Insert UnApprovedResources
+        UnApprovedResources.objects.get_or_create(resource=aResource)
         #Delete
         try:
             obj = ApprovedResources.objects.get(resource_id=id)

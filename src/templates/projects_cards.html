@@ -12,7 +12,7 @@
 			nonmoderated {% endif %}" src="{% static 'site/img/project_default_card.webp' %}" />
 			{% endif %}
 			<div class="upper">
-				{% if project.hidden %}<a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT ACCEPTED</a><br/>
+				{% if project.hidden or project.id in unApprovedProjects %}<a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT ACCEPTED</a><br/>
 				{% else %} {% if project.id not in approvedProjects %} <a class="badge frontpage frontpage-red mb-2"
 				href="/faq#moderation">NOT YET MODERATED</a><br/>
 				{% else %} {% if filters.approvedCheck == "All" %}  <a class="badge frontpage frontpage-green mb-2"
