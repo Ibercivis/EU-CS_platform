@@ -65,6 +65,7 @@
 	<script>
 
 		$(document).ready(function () {
+			$('.js-example-basic-single').select2();
 			var choices = $("#id_choices").val();
 			var choices = choices.split(",");
 
@@ -73,11 +74,14 @@
 			}
 
 			$("#div_id_interestAreas div").on('keyup', function(){
-				var key = $(".selection input").val();
+				var key = $("#div_id_interestAreas .selection input").val();
 				if (key.indexOf(',') > -1) {
-					var word =key.slice(0, -1);
-					$(".selection input").val("");
-					$("#id_interestAreas").append("<option value='" + word +"' selected> " + word + " </option>");
+					var word =key.slice(0, -1);				
+					$("#div_id_interestAreas .selection input").val("");
+					if(word.length > 1){
+						$("#id_interestAreas").append("<option value='" + word +"' selected> " + word + " </option>");
+					}
+						
 				}
 			});
 
