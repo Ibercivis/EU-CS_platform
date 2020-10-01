@@ -85,7 +85,7 @@
           <hr>
           <b>Contact</b>
           <div>
-            <a class="badge badge-light" href="">{{project.host | truncatechars:20 }}</a>
+            <a class="badge badge-light">{{project.host | truncatechars:20 }}</a> (Host)
             {% if project.mainOrganisation %}
             <a class="badge badge-light"
             href="/organisation/{{project.mainOrganisation.id}}">{{ project.mainOrganisation }} </a> (Main organisation)
