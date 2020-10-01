@@ -36,7 +36,7 @@
         href="{% if isTrainingResource %}/training_resource/{{rsc.id}}{% else %}/resource/{{rsc.id}}{% endif %}"
         class="card-link">{{ rsc.name | truncatewords:12 }}</a></h6>
         <a class="badge badge-light pt-1" href="/resources?category={{rsc.category.id}}">{{ rsc.category | title }}</a><br>
-        {% for theme in rsc.theme.all %}<a class="badge badge-light" href="/resources?theme={{theme.id}}">{{ theme | title}}</a> {% endfor %}<br>
+        {% for theme in rsc.theme.all %}<a class="badge badge-light" href="/resources?theme={{theme.id}}">{{ theme }}</a> {% endfor %}<br>
         {% for keyword in rsc.keywords.all %} <a class="badge  badge-light" href="/resources?keywords={{keyword}}">{{keyword | title}}</a>  {% endfor %}
 
       </div><!-- end of card-body -->
