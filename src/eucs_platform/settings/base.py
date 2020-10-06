@@ -332,9 +332,12 @@ RECAPTCHA_PRIVATE_KEY = env("RECAPTCHA_PRIVATE_KEY")
 #Machina - search for forum conversations
 HAYSTACK_CONNECTIONS = {
     'default': {
-        'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': str(Path(__file__).parents[2] / 'whoosh_index'),
     },
 }
+
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 MACHINA_BASE_TEMPLATE_NAME = 'base_forum.html'
 MACHINA_FORUM_NAME = 'Community Forums'
