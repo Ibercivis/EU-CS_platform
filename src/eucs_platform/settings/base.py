@@ -138,6 +138,8 @@ INSTALLED_APPS = (
     'machina.apps.forum_permission',
 
     'organisations',
+    "django_cron",
+    'django_crontab',
 )
 
 MIDDLEWARE = [
@@ -353,4 +355,14 @@ MACHINA_DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = [
     'can_create_polls',
     'can_vote_in_polls',
     'can_download_file',
+]
+
+
+CRON_CLASSES = [
+    "eucs_platform.cron.ExpiredUsersCronJob",
+    # ...
+]
+
+CRONJOBS = [
+    ('*/1 * * * *', 'eucs_platform.cron.ExpiredUsersCronJob')
 ]
