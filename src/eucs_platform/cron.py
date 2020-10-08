@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 User = get_user_model()
 
 class ExpiredUsersCronJob(CronJobBase):
-    RUN_EVERY_MINS = 1
+    RUN_EVERY_MINS = 1440
 
     schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
     code = 'eucs_platform.expired_users_cron_job'

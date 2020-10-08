@@ -364,5 +364,5 @@ CRON_CLASSES = [
 ]
 
 CRONJOBS = [
-    ('*/1 * * * *', 'eucs_platform.cron.ExpiredUsersCronJob')
+    ('0 1 * * *', 'eucs_platform.cron.ExpiredUsersCronJob')
 ]
