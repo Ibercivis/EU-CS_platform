@@ -138,6 +138,8 @@ INSTALLED_APPS = (
     'machina.apps.forum_permission',
 
     'organisations',
+    "django_cron",
+    'django_crontab',
 )
 
 MIDDLEWARE = [
@@ -332,9 +334,12 @@ RECAPTCHA_PRIVATE_KEY = env("RECAPTCHA_PRIVATE_KEY")
 #Machina - search for forum conversations
 HAYSTACK_CONNECTIONS = {
     'default': {
-        'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': str(Path(__file__).parents[2] / 'whoosh_index'),
     },
 }
+
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 MACHINA_BASE_TEMPLATE_NAME = 'base_forum.html'
 MACHINA_FORUM_NAME = 'Community Forums'
@@ -350,4 +355,14 @@ MACHINA_DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = [
     'can_create_polls',
     'can_vote_in_polls',
     'can_download_file',
+]
+
+
+CRON_CLASSES = [
+    "eucs_platform.cron.ExpiredUsersCronJob",
+    # ...
+]
+
+CRONJOBS = [
+    ('0 1 * * *', 'eucs_platform.cron.ExpiredUsersCronJob')
 ]

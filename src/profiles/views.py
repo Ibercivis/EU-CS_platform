@@ -7,8 +7,9 @@ from django.db.models import Q
 from itertools import chain
 from . import forms
 from . import models
-from projects.models import Project, FollowedProjects, ProjectPermission, ApprovedProjects
-from resources.models import Resource, SavedResources, ResourcePermission, ApprovedResources
+from projects.models import Project, FollowedProjects, ProjectPermission, ApprovedProjects, UnApprovedProjects
+from resources.models import Resource, SavedResources, ResourcePermission, ApprovedResources, UnApprovedResources
+from organisations.models import Organisation, OrganisationPermission
 
 
 class ShowProfile(LoginRequiredMixin, generic.TemplateView):
@@ -72,7 +73,8 @@ def projects(request):
     projectsWithPermission = Project.objects.all().filter(id__in=projectsWithPermission)
     projects = chain(projectsCreated, projectsWithPermission)
     approvedProjects = ApprovedProjects.objects.all().values_list('project_id',flat=True)
-    return render(request, 'profiles/my_projects.html', {'show_user': user, 'projects': projects, 'approvedProjects': approvedProjects})
+    unApprovedProjects = UnApprovedProjects.objects.all().values_list('project_id',flat=True)
+    return render(request, 'profiles/my_projects.html', {'show_user': user, 'projects': projects, 'approvedProjects': approvedProjects, 'unApprovedProjects': unApprovedProjects})
 
 def resources(request):
     user = request.user
@@ -81,7 +83,8 @@ def resources(request):
     resourcesWithPermission = Resource.objects.all().filter(id__in=resourcesWithPermission)
     resources = chain(resourcesCreated, resourcesWithPermission)
     approvedResources = ApprovedResources.objects.all().values_list('resource_id',flat=True)
-    return render(request, 'profiles/my_resources.html', {'show_user': user, 'resources': resources, 'approvedResources': approvedResources})
+    unApprovedResources = UnApprovedResources.objects.all().values_list('resource_id',flat=True)
+    return render(request, 'profiles/my_resources.html', {'show_user': user, 'resources': resources, 'approvedResources': approvedResources, 'unApprovedResources': unApprovedResources})
 
 def followedProjects(request):
     user = request.user
@@ -104,3 +107,15 @@ def getProjectsWithPermission(user):
 def getResourcesWithPermission(user):
     resources = list(ResourcePermission.objects.all().filter(user_id=user).values_list('resource',flat=True))
     return resources
+
+def organisations(request):
+    user = request.user
+    organisationsCreated = Organisation.objects.all().filter(creator=user)
+    organisationsWithPermission = getOrganisationsWithPermission(user)
+    organisationsWithPermission = Organisation.objects.all().filter(id__in=organisationsWithPermission)
+    organisations = chain(organisationsCreated, organisationsWithPermission)
+    return render(request, 'profiles/my_organisations.html', {'show_user': user, 'organisations': organisations})
+
+def getOrganisationsWithPermission(user):
+    organisations = list(OrganisationPermission.objects.all().filter(user_id=user).values_list('organisation',flat=True))
+    return organisations

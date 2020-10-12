@@ -184,9 +184,12 @@
         {{ permissionForm.usersCollection | as_crispy_field }}
       </permissionForm>
       {% if resource.id in approvedResources %}
-      <a onclick="setApprovedRsc({{resource.id}}, false)"><i class="far fa-thumbs-up"></i></a>
+      <a onclick="setApprovedRsc({{resource.id}}, false)"><i class="far fa-thumbs-down"></i></a>
+      {% elif resource.id in unApprovedResources %}
+        <a onclick="setApprovedRsc({{resource.id}}, true)"><i class="far fa-thumbs-up"></i></a>
       {% else %}
-      <a onclick="setApprovedRsc({{resource.id}}, true)"><i class="far fa-thumbs-down"></i></a>
+        <a onclick="setApprovedRsc({{resource.id}}, true)"><i class="far fa-thumbs-up"></i></a>
+        <a onclick="setApprovedRsc({{resource.id}}, false)"><i class="far fa-thumbs-down"></i></a>
       {% endif %}
       {% if resource.featured %}
       <a  onclick="setFeatured({{resource.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
@@ -202,7 +205,7 @@
       {% endif %}
 
       {% endif %}
-      {% if resource.creator == user or user.is_staff %}
+      {% if resource.creator == user or user.is_staff or user.id in cooperators %}
       <a class="btn btn-red float-right" href="{% if isTrainingResource %}
       {% url 'editTrainingResource' resource.id %}{% else %}{% url 'editResource' resource.id %}{% endif %}"><i class="fas fa-edit"></i> Edit</a>
 
@@ -219,26 +222,37 @@
 <script>
   $(function () {
     var users = $("#id_usersCollection").val();
-    if(users){
-      var users = users.split(",");
-      var selectedUsers = $("#id_selectedUsers").val().split(",");
-      for (user of users){
-        var found = false;
-        for(sel of selectedUsers){
-          if(sel.trim() == user.trim()){
-            found = true;
-            $("#id_usersAllowed").append("<option value='" + user +"' selected> " + user + " </option>");
-          }
-        }
-        if(!found){
-          $("#id_usersAllowed").append("<option value='" + user +"'> " + user + " </option>");
-        }
-      }
-    }
+    var users = users.split(",");
+    var selectedUsers = $("#id_selectedUsers").val().split(",");
+    var i = 0
+		var name = ''
+		var email = ''
+		for (user of users){			
+			if (i % 2 == 0){			
+				var init = user.indexOf('\'')
+				var end = user.indexOf('\'', init+1)
+				name = user.substring(init+1,end)
+			}else{
+				var init = user.indexOf('\'')
+				var end = user.indexOf('\'', init+1)
+				email = user.substring(init+1,end)
+				var found = false;
+				for(sel of selectedUsers){
+					if(sel.trim() == email.trim()){
+					found = true;
+					$("#id_usersAllowed").append("<option value='" + email +"' selected> " + name + " </option>");
+					}
+				}
+				if(!found){
+					$("#id_usersAllowed").append("<option value='" + email +"'> " + name + " </option>");
+				}
+			}
+			i++
+		}
 
     $('#id_usersAllowed').on('change', function () {
       users = $("#id_usersAllowed option:selected").map(function () {
-        return $.trim($(this).text());
+        return $.trim($(this).val());
       }).get().join(',');
       var idResource = {{ resource.id }};
       var request = $.ajax(
@@ -269,6 +283,9 @@
       },
       success: function (response) {
         window.location.reload(false);
+        if(!approved){
+          window.location.href ="{% url 'submitter_contact' 'resource' resource.id %}"
+        }
       }
     }
     );

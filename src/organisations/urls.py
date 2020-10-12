@@ -1,4 +1,5 @@
 from django.urls import path, include
+from django.conf.urls import url
 from . import views
 
 urlpatterns = [
@@ -8,5 +9,6 @@ urlpatterns = [
     path('organisations', views.organisations, name='organisations'),
     path('delete_organisation/<int:pk>', views.delete_organisation, name='delete_organisation'),
     path('organisations_autocomplete/', views.organisations_autocomplete, name='organisations_autocomplete'),
-
+    path('allowUserOrganisation/', views.allowUserOrganisation, name='allowUserOrganisation'),
+    url(r'^api/', include('organisations.api.urls')),
 ]

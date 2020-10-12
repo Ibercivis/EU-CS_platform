@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate, get_user_model
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, HTML, Field
@@ -7,7 +8,9 @@ from crispy_forms.bootstrap import StrictButton
 from authtools import forms as authtoolsforms
 from django.contrib.auth import forms as authforms
 from django.urls import reverse
+from captcha.fields import ReCaptchaField
 
+User = get_user_model()
 
 class LoginForm(AuthenticationForm):
     remember_me = forms.BooleanField(required=False, initial=False)
@@ -29,6 +32,35 @@ class LoginForm(AuthenticationForm):
 
         )
 
+    def clean(self):
+        username = self.cleaned_data.get('username')
+        password = self.cleaned_data.get('password')
+
+        if username is not None and password:
+            self.user_cache = authenticate(self.request, username=username, password=password)
+            if self.user_cache is None:
+                try:
+                    user_temp = User.objects.get(email=username)
+                except:
+                    user_temp = None
+
+                if user_temp is not None:
+                    if not user_temp.is_active:
+                        raise forms.ValidationError(
+                            "We see that your email address is in our database, but that you have not yet confirmed your address. Please search for the confirmation email in your inbox (or spam) to activate your account"
+                        )
+                    else:
+                        self.confirm_login_allowed(user_temp)
+
+                else:
+                    raise forms.ValidationError(
+                        self.error_messages['invalid_login'],
+                        code='invalid_login',
+                        params={'username': self.username_field.verbose_name},
+                    )
+
+        return self.cleaned_data
+
 
 class SignupForm(authtoolsforms.UserCreationForm):
 
@@ -37,12 +69,13 @@ class SignupForm(authtoolsforms.UserCreationForm):
         self.fields["orcid"] = forms.CharField(required=False)
         self.helper = FormHelper()
         self.fields["email"].widget.input_type = "email"  # ugly hack
-
+        self.fields["captcha"] = ReCaptchaField()
         self.helper.layout = Layout(
             Field("email", placeholder="Enter Email", autofocus=""),
             Field("name", placeholder="Enter Full Name"),
             Field("password1", placeholder="Enter Password"),
             Field("password2", placeholder="Re-enter Password"),
+            Field("captcha"),
             StrictButton("Sign up", css_class="btn-green", type="Submit"),
         )
 

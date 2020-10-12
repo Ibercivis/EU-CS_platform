@@ -12,7 +12,7 @@
       <img class="img-fluid img-zoom {% if rsc.id not in approvedResources %} nonmoderated {% endif %}" src="{% static 'site/img/resource_default_card.png' %}" />
       {% endif %}
       <div class="upper">
-        {% if rsc.hidden %}<a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT ACCEPTED</a><br/>
+        {% if rsc.hidden or rsc.id in unApprovedResources %}<a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT ACCEPTED</a><br/>
         {% else %} {% if rsc.id not in approvedResources %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br/>
         {% else %} {% if filters.approvedCheck == "All" %}  <a class="badge frontpage frontpage-green mb-2" href="/faq#moderation">MODERATED</a><br/>{% endif %}
         {% endif %}{% endif %}
@@ -36,7 +36,7 @@
         href="{% if isTrainingResource %}/training_resource/{{rsc.id}}{% else %}/resource/{{rsc.id}}{% endif %}"
         class="card-link">{{ rsc.name | truncatewords:12 }}</a></h6>
         <a class="badge badge-light pt-1" href="/resources?category={{rsc.category.id}}">{{ rsc.category | title }}</a><br>
-        {% for theme in rsc.theme.all %}<a class="badge badge-light" href="/resources?theme={{theme.id}}">{{ theme | title}}</a> {% endfor %}<br>
+        {% for theme in rsc.theme.all %}<a class="badge badge-light" href="/resources?theme={{theme.id}}">{{ theme }}</a> {% endfor %}<br>
         {% for keyword in rsc.keywords.all %} <a class="badge  badge-light" href="/resources?keywords={{keyword}}">{{keyword | title}}</a>  {% endfor %}
 
       </div><!-- end of card-body -->

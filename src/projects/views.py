@@ -13,7 +13,7 @@ from itertools import chain
 from reviews.models import Review
 from .forms import ProjectForm, CustomFieldFormset, ProjectPermissionForm
 from .models import Project, Topic,ParticipationTask, Status, Keyword, ApprovedProjects, \
- FollowedProjects, FundingBody, CustomField, ProjectPermission, OriginDatabase, GeographicExtend
+ FollowedProjects, FundingBody, CustomField, ProjectPermission, OriginDatabase, GeographicExtend, UnApprovedProjects
 from organisations.models import Organisation
 import csv
 import json
@@ -43,6 +43,7 @@ def new_project(request):
 def projects(request):
     projects = Project.objects.get_queryset()
     approvedProjects = ApprovedProjects.objects.all().values_list('project_id',flat=True)
+    unApprovedProjects = UnApprovedProjects.objects.all().values_list('project_id',flat=True)
     user = request.user
     followedProjects = None
     followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id',flat=True)
@@ -65,6 +66,8 @@ def projects(request):
     projectsTop = projects.filter(featured=True)
     projectsTopIds = list(projectsTop.values_list('id',flat=True))
     projects = projects.exclude(id__in=projectsTopIds)
+    if not user.is_staff:
+        projects = projects.exclude(id__in=unApprovedProjects)
 
     # Ordering
     if request.GET.get('orderby'):
@@ -101,7 +104,7 @@ def projects(request):
     projects = paginator.get_page(page)
 
     return render(request, 'projects.html', {'projects': projects, 'topics': topics, 'countriesWithContent': countriesWithContent,
-    'status': status, 'filters': filters, 'approvedProjects': approvedProjects, 'followedProjects': followedProjects,
+    'status': status, 'filters': filters, 'approvedProjects': approvedProjects, 'unApprovedProjects': unApprovedProjects,'followedProjects': followedProjects,
     'counter': counter, 'isSearchPage': True })
 
 
@@ -110,13 +113,14 @@ def project(request, pk):
     project = get_object_or_404(Project, id=pk)
     users = getOtherUsers(project.creator)
     cooperators = getCooperatorsEmail(pk)
-    if project.hidden and ( user.is_anonymous or (user != project.creator and not user.is_staff and not user.id in getCooperators(pk))):
+    unApprovedProjects = UnApprovedProjects.objects.all().values_list('project_id',flat=True)
+    if (project.id in unApprovedProjects or project.hidden) and ( user.is_anonymous or (user != project.creator and not user.is_staff and not user.id in getCooperators(pk))):
         return redirect('../projects', {})
     permissionForm = ProjectPermissionForm(initial={'usersCollection':users, 'selectedUsers': cooperators})
     followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id',flat=True)
-    approvedProjects = ApprovedProjects.objects.all().values_list('project_id',flat=True)
+    approvedProjects = ApprovedProjects.objects.all().values_list('project_id',flat=True)    
     return render(request, 'project.html', {'project':project, 'followedProjects':followedProjects,
-    'approvedProjects':approvedProjects, 'permissionForm': permissionForm, 'cooperators': getCooperators(pk),
+    'approvedProjects':approvedProjects, 'unApprovedProjects': unApprovedProjects,'permissionForm': permissionForm, 'cooperators': getCooperators(pk),
     'isSearchPage': True})
 
 
@@ -260,8 +264,7 @@ def saveImageWithPath(image, photoName):
     return image_path
 
 def getOtherUsers(creator):
-    users = list(User.objects.all().exclude(is_superuser=True).exclude(id=creator.id).values_list('email',flat=True))
-    users = ", ".join(users)
+    users = list(User.objects.all().exclude(is_superuser=True).exclude(id=creator.id).values_list('name','email'))
     return users
 
 def getCooperators(projectID):
@@ -343,7 +346,15 @@ def setProjectApproved(id, approved):
     if approved == True:
         #Insert
         ApprovedProjects.objects.get_or_create(project=aProject)
+        #Delete UnApprovedProjects
+        try:
+            obj = UnApprovedProjects.objects.get(project_id=id)
+            obj.delete()
+        except UnApprovedProjects.DoesNotExist:
+            print("Does not exist this unapproved project")
     else:
+        #Insert UnApprovedProjects
+        UnApprovedProjects.objects.get_or_create(project=aProject)
         #Delete
         try:
             obj = ApprovedProjects.objects.get(project_id=id)
