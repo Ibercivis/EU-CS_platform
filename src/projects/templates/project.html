@@ -85,7 +85,7 @@
           <hr>
           <b>Contact</b>
           <div>
-            <a class="badge badge-light" href="">{{project.host | truncatechars:20 }}</a>
+            <a class="badge badge-light">{{project.host | truncatechars:20 }}</a> (Host)
             {% if project.mainOrganisation %}
             <a class="badge badge-light"
             href="/organisation/{{project.mainOrganisation.id}}">{{ project.mainOrganisation }} </a> (Main organisation)
@@ -231,9 +231,12 @@
         <i class="far fa-envelope"></i>
       </a>
       {% if project.id in approvedProjects %}
-      <a onclick="setApproved({{project.id}}, false)"><i class="far fa-thumbs-up"></i></a>
+        <a onclick="setApproved({{project.id}}, false)"><i class="far fa-thumbs-down"></i></a>
+      {% elif project.id in unApprovedProjects %}
+        <a onclick="setApproved({{project.id}}, true)"><i class="far fa-thumbs-up"></i></a>
       {% else %}
-      <a onclick="setApproved({{project.id}}, true)"><i class="far fa-thumbs-down"></i></a>
+        <a onclick="setApproved({{project.id}}, true)"><i class="far fa-thumbs-up"></i></a>
+        <a onclick="setApproved({{project.id}}, false)"><i class="far fa-thumbs-down"></i></a>
       {% endif %}
       {% if project.featured %}
       <a  onclick="setFeatured({{project.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
@@ -241,7 +244,7 @@
       <a  onclick="setFeatured({{project.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
       {% endif %}
       {% endif %}
-      {% if project.creator == user or user.is_staff %}
+      {% if project.creator == user or user.is_staff or user.id in cooperators %}
       <a class="btn btn-red float-right" href="{% url 'editProject' project.id %}"><i class="fas fa-edit"></i> Edit </a>
       {% endif %}
     </div><!-- End of card footer -->
@@ -260,22 +263,35 @@
     var users = $("#id_usersCollection").val();
     var users = users.split(",");
     var selectedUsers = $("#id_selectedUsers").val().split(",");
-    for (user of users){
-      var found = false;
-      for(sel of selectedUsers){
-        if(sel.trim() == user.trim()){
-          found = true;
-          $("#id_usersAllowed").append("<option value='" + user +"' selected> " + user + " </option>");
-        }
-      }
-      if(!found){
-        $("#id_usersAllowed").append("<option value='" + user +"'> " + user + " </option>");
-      }
-    }
+    var i = 0
+		var name = ''
+		var email = ''
+		for (user of users){			
+			if (i % 2 == 0){			
+				var init = user.indexOf('\'')
+				var end = user.indexOf('\'', init+1)
+				name = user.substring(init+1,end)
+			}else{
+				var init = user.indexOf('\'')
+				var end = user.indexOf('\'', init+1)
+				email = user.substring(init+1,end)
+				var found = false;
+				for(sel of selectedUsers){
+					if(sel.trim() == email.trim()){
+					found = true;
+					$("#id_usersAllowed").append("<option value='" + email +"' selected> " + name + " </option>");
+					}
+				}
+				if(!found){
+					$("#id_usersAllowed").append("<option value='" + email +"'> " + name + " </option>");
+				}
+			}
+			i++
+		}
 
     $('#id_usersAllowed').on('change', function () {
       users = $("#id_usersAllowed option:selected").map(function () {
-        return $.trim($(this).text());
+        return $.trim($(this).val());
       }).get().join(',');
 
       var idProject = {{project.id}};
@@ -317,6 +333,9 @@
       },
       success: function (response) {
         window.location.reload(false)
+        if(!approved){
+          window.location.href ="{% url 'submitter_contact' 'project' project.id %}"
+        }
       }
     }
     );

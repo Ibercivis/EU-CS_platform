@@ -97,6 +97,11 @@ class ApprovedResources(models.Model):
     def __str__(self):
         return f'{self.resource}'
 
+class UnApprovedResources(models.Model):
+    resource = models.OneToOneField(Resource, on_delete=models.CASCADE)
+    def __str__(self):
+        return f'{self.resource}'
+
 class SavedResources(models.Model):
     class Meta:
         unique_together = (('user', 'resource'),)

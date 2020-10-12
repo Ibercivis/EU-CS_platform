@@ -40,11 +40,11 @@
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span></button>
 
-        <div class="ribbon ribbon-top-left"><span>
+<!--         <div class="ribbon ribbon-top-left"><span>
           <a style="text-decoration:none;color:white"
           href="https://eu-citizen.science/blog/2020/04/03/welcome-alpha-release-eu-citizenscience-platform/">ALPHA</a>
         </span>
-      </div>
+      </div> -->
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
@@ -59,6 +59,7 @@
           <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">PERSONAL AREA</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="{% url 'profiles:show_self' %}">My Profile</a>
+              <a class="dropdown-item" href="{% url 'profiles:self_organisations' %}">My organisations</a>
               <a class="dropdown-item" href="{% url 'profiles:self_projects' %}">Submitted projects</a>
               <a class="dropdown-item" href="{% url 'profiles:self_resources' %}">Submitted resources</a>
               <a class="dropdown-item" href="{% url 'profiles:followed_projects' %}">Followed projects</a>
