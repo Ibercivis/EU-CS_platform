@@ -140,32 +140,32 @@
 
   <ul class="navbar-nav ml-auto">
     {% if isSearchPage == None %}
-    <li class="nav-item"><a class="nav-link main" href="{% url 'all' %}">SEARCH</a></li>
+    <li class="nav-item"><a class="nav-link main" href="{% url 'all' %}">{% trans "SEARCH" %}</a></li>
     {% endif %}
-    <li class="nav-item"><a class="nav-link main {% active_link  'blog' %}" href="{% url 'blog' %}">BLOG</a></li>
-    <li class="nav-item"><a class="nav-link main {% active_link  'events' %}" href="{% url 'events' %}">EVENTS</a></li>
-    <li class="nav-item"><a class="nav-link main" href="/forum">FORUM</a></li>
-    <li class="nav-item"><a class="nav-link main" href="/about">ABOUT</a></li>
+    <li class="nav-item"><a class="nav-link main {% active_link  'blog' %}" href="{% url 'blog' %}">{% trans "BLOG" %}</a></li>
+    <li class="nav-item"><a class="nav-link main {% active_link  'events' %}" href="{% url 'events' %}">{% trans "EVENTS" %}</a></li>
+    <li class="nav-item"><a class="nav-link main" href="/forum">{% trans "FORUM" %}</a></li>
+    <li class="nav-item"><a class="nav-link main" href="/about">{% trans "ABOUT" %}</a></li>
     {% if not user.is_authenticated %}
-    <li class="nav-item"><a class="nav-link main" href="{% url 'accounts:login' %}">LOGIN</a></li>
-    <li class="nav-item"><a class="nav-link main" href="{% url 'accounts:signup' %}">SIGNUP</a></li>
+    <li class="nav-item"><a class="nav-link main" href="{% url 'accounts:login' %}">{% trans "LOGIN" %}</a></li>
+    <li class="nav-item"><a class="nav-link main" href="{% url 'accounts:signup' %}">{% trans "SIGNUP" %}</a></li>
 
     {% else %}
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false" href="#"><i class="fas fa-user-edit"></i></a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="{% url 'profiles:show_self' %}">My Profile</a>
-        <a class="dropdown-item" href="{% url 'profiles:self_organisations' %}">My organisations</a>
-        <a class="dropdown-item" href="{% url 'profiles:self_projects' %}">Submitted projects</a>
-        <a class="dropdown-item" href="{% url 'profiles:self_resources' %}">Submitted resources</a>
-        <a class="dropdown-item" href="{% url 'profiles:followed_projects' %}">Followed projects</a>
-        <a class="dropdown-item" href="{% url 'profiles:saved_resources' %}">Resources library</a>
+        <a class="dropdown-item" href="{% url 'profiles:show_self' %}">{% trans "My Profile" %}</a>
+        <a class="dropdown-item" href="{% url 'profiles:self_organisations' %}">{% trans "My organisations" %}</a>
+        <a class="dropdown-item" href="{% url 'profiles:self_projects' %}">{% trans "SEARSubmitted projectsCH" %}</a>
+        <a class="dropdown-item" href="{% url 'profiles:self_resources' %}">{% trans "Submitted resources" %}</a>
+        <a class="dropdown-item" href="{% url 'profiles:followed_projects' %}">{% trans "Followed projects" %}</a>
+        <a class="dropdown-item" href="{% url 'profiles:saved_resources' %}">{% trans "Resources library" %}</a>
 
         {% if user.is_staff %}
-        <a  class="dropdown-item" href="{% url 'admin:index' %}">Admin</a>
+        <a  class="dropdown-item" href="{% url 'admin:index' %}">{% trans "Admin" %}</a>
         {% endif %}
-        <a class="dropdown-item" href="{% url 'accounts:logout' %}">Logout</a>
+        <a class="dropdown-item" href="{% url 'accounts:logout' %}">{% trans "Logout" %}</a>
 
       </div>
     </li>
@@ -174,7 +174,7 @@
 
   <button data-toggle="modal" data-target="#modalinfo"
   class="btn btn-green mysubmit greenbackground ml-2 d-none d-sm-block"
-  type="submit"><i class="fas fa-plus-circle"></i>&nbsp;&nbsp;ADD</button>
+  type="submit"><i class="fas fa-plus-circle"></i>&nbsp;&nbsp;{% trans "ADD" %}</button>
 </div>
 </div>
 </nav>
