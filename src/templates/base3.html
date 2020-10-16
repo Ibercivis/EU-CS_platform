@@ -46,14 +46,14 @@
         </ul>
 				<ul class="navbar-nav">
 				{% if not user.is_authenticated %}
-        <li class="nav-item"><a class="nav-link ml-4" href="{% url 'accounts:login' %}">LOGIN</a></li>
-				<li class="nav-item"><a class="nav-link" href="{% url 'accounts:signup' %}">SIGN UP</a></li>
+        <li class="nav-item"><a class="nav-link ml-4" href="{% url 'accounts:login' %}">{% trans "LOGIN" %}</a></li>
+				<li class="nav-item"><a class="nav-link" href="{% url 'accounts:signup' %}">{% trans "SIGN UP" %}</a></li>
 				{% else %}
-				<li class="nav-item"><a class="nav-link" href="{% url 'profiles:show_self' %}">PROFILE</a></li>
-     		<li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}">LOGOUT</a></li>
+				<li class="nav-item"><a class="nav-link" href="{% url 'profiles:show_self' %}">{% trans "PROFILE" %}</a></li>
+     		<li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}">{% trans "LOGOUT" %}</a></li>
 				{% endif %}
         {% if user.is_staff %}
-        <li class="nav-item"><a class="nav-link" href="{% url 'admin:index' %}">ADMIN</a>
+        <li class="nav-item"><a class="nav-link" href="{% url 'admin:index' %}">{% trans "ADMIN" %}</a>
         {% endif %}
 				</ul>
       </div>

@@ -14,8 +14,8 @@
       {% endif %}
     </a>
     <div class="upper">
-      {% if rsc.id not in approvedResources %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br/>
-      {% else %} {% if filters.approvedCheck == "All" %}  <a class="badge frontpage frontpage-green mb-2" href="/faq#moderation">MODERATED</a><br/>{% endif %}
+      {% if rsc.id not in approvedResources %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">{% trans "NOT YET MODERATED" %}</a><br/>
+      {% else %} {% if filters.approvedCheck == "All" %}  <a class="badge frontpage frontpage-green mb-2" href="/faq#moderation">{% trans "MODERATED" %}</a><br/>{% endif %}
       {% endif %}
       {% get_language_info_list for LANGUAGES as languages %}
       {% for language in languages %}
@@ -27,7 +27,7 @@
     <div class="card-body">
       <h6 class="card-title mt-3 mb-3"><a class="card-link card-link-resource" href="/resource/{{rsc.id}}" class="card-link">{{ rsc.name | truncatewords:12 }}</a></h6>
       <div class="card-text mt-3">{{rsc.abstract | safe | truncatewords:30 }}
-        <a class="" href="/resource/{{rsc.id}}" target="_blank">Read more</a>
+        <a class="" href="/resource/{{rsc.id}}" target="_blank">{% trans "Read more" %}</a>
       </div>
     </div><!-- end of card-body -->
   </div>

@@ -28,7 +28,7 @@
 		<div class="d-none d-md-block">
 			<h1 class="display-4 text-white"><br>EU-CITIZEN.SCIENCE</h1>
 
-			<h4 class="mb-4 mt-4 text-light font-weight-light"> Welcome to the platform for sharing Citizen Science projects, resources, tools, and training</h4>
+			<h4 class="mb-4 mt-4 text-light font-weight-light"> {% trans "Welcome to the platform for sharing Citizen Science projects, resources, tools, and training" %}</h4>
 		</div>
 		<form id="finder" class="mb-4" action="/all" >
 			<div class="form-row">
@@ -62,24 +62,24 @@
 	<div class="row">
 
 		<div class="col-12 mb-2">
-			{{ counterprojects }} result{% if counterprojects != 1 %}s{% endif %} in Projects
-			{% if counterprojects > 6 %}, click <a href="/projects">here</a> to see all of them {% endif %}
+			{{ counterprojects }} {% trans "result" %}{% if counterprojects != 1 %}s{% endif %} {% trans "in Projects" %}
+			{% if counterprojects > 6 %}, click <a href="/projects">{% trans "here" %}</a> {% trans "to see all of them" %} {% endif %}
 		</div>
 
 		{% include "projects_cards.html" %}
 		<div class="col-12 mb-2">
-			{{ counterresources }} result{% if counterresources != 1 %}s{% endif %} in Resources
-			{% if counterresources > 6 %}, click <a href="/resources">here</a> to see all of them{% endif %}
+			{{ counterresources }} {% trans "result" %}{% if counterresources != 1 %}s{% endif %} {% trans "in Resources" %}
+			{% if counterresources > 6 %}, click <a href="/resources">{% trans "here" %}</a> {% trans "to see all of them" %}{% endif %}
 		</div>
 		{% include "resources_cards.html" %}
 		<div class="col-12 mb-2">
-			{{ countertresources }} result{% if counterresources != 1 %}s{% endif %} in Training
-			{% if countertresources > 6 %}, click <a href="/training_resources">here</a> to see all of them{% endif %}
+			{{ countertresources }} {% trans "result" %}{% if counterresources != 1 %}s{% endif %} {% trans "in Training" %}
+			{% if countertresources > 6 %}, click <a href="/training_resources">{% trans "here" %}</a> {% trans "to see all of them" %}{% endif %}
 		</div>
 		{% include "resources_cards.html" with resources=tresources %}
 		<div class="col-12 mb-2">
-			{{ counterorganisations}} result{% if counterorganisations != 1 %}s{% endif %} in Organisations
-			{% if counterorganisations > 6 %}, click <a href="/organisations">here</a> to see all of them{% endif %}
+			{{ counterorganisations}} {% trans "result" %}{% if counterorganisations != 1 %}s{% endif %} {% trans "in Organisations" %}
+			{% if counterorganisations > 6 %}, click <a href="/organisations">{% trans "here" %}</a> {% trans "to see all of them" %}{% endif %}
 
 		</div>
 
@@ -87,7 +87,7 @@
 		<div class="col-12">
 			{% if total == 0  %}
 			<img  class="img-fluid img-zoom col-12 mt-5" src="{% static 'site/img/undraw_empty_xct9.svg' %}">
-			<h5 class="mb-4">Sorry, nothing found</h5>
+			<h5 class="mb-4">{% trans "Sorry, nothing found" %}</h5>
 			{% else %}
 			&nbsp;
 			{% endif %}

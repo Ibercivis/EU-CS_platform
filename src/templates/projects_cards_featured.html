@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load staticfiles %}
 {% load reviews %}
 {% if projects %}
@@ -11,8 +12,8 @@
 			<img class="card-img-top img-fluid img-zoom lazyload {% if project.id not in approvedProjects %} nonmoderated {% endif %}" alt="{{ project.name }}"src="{% static 'site/img/project_default_card.webp' %}" />
 			{% endif %}
 			<div class="upper">
-				{% if project.id not in approvedProjects %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br/>
-				{% else %} {% if filters.approvedCheck == "All" %}  <a class="badge frontpage frontpage-green mb-2" href="/faq#moderation">MODERATED</a><br/> {% endif %}
+				{% if project.id not in approvedProjects %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">{% trans "NOT YET MODERATED" %}</a><br/>
+				{% else %} {% if filters.approvedCheck == "All" %}  <a class="badge frontpage frontpage-green mb-2" href="/faq#moderation">{% trans "MODERATED" %}</a><br/> {% endif %}
 				{% endif %}
 				{% for country in countries %}
 				{% if country.code == project.country %}
@@ -25,7 +26,7 @@
 			<h6 class="card-title mt-3 mb-3"> <a class="card-link" href="/project/{{project.id }}">{{ project.name }}</a></h6>
 
 			<div class="card-text mt-3">{{project.description | safe | truncatechars:180 }}
-				<a class="project" href="/project/{{project.id}}" target="_blank">Read more</a>
+				<a class="project" href="/project/{{project.id}}" target="_blank">{% trans "Read more" %}</a>
 			</div>
 			<br>
 

@@ -1,5 +1,5 @@
 {% extends "base_r2.html" %}
-
+{% load i18n %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 
@@ -11,13 +11,13 @@
 {% endblock %}
 
 {% block page_title %}
-FAQ
+{% trans "FAQ" %}
 {% endblock page_title %}
 
 {% block list_of_items %}
 <div class="jumbotron jumbotron-fluid jumbotron-default">
 	<div class="container">
-		<h1 class="display-4  text-white"><br>Frequently Asked Questions</h1>
+		<h1 class="display-4  text-white"><br>{% trans "Frequently Asked Questions" %}</h1>
 		<p class="lead text-light">&nbsp</p>
 	</div>
 </div>
