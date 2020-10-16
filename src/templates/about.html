@@ -1,6 +1,7 @@
 {% extends "base_r2.html" %}
+{% load i18n %}
 {% load staticfiles %}
-{% block title %}{{ block.super }} :: About{% endblock %}
+{% block title %}{{ block.super }} :: {% trans "About" %}{% endblock %}
 {% block splash %}
 <div class="jumbotron jumbotron-fluid jumbotron-blue">
 	<div class="container">

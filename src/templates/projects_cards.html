@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load staticfiles %}
 {% load reviews %}
 {% for project in projects %}
@@ -12,11 +13,11 @@
 			nonmoderated {% endif %}" src="{% static 'site/img/project_default_card.webp' %}" />
 			{% endif %}
 			<div class="upper">
-				{% if project.hidden or project.id in unApprovedProjects %}<a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT ACCEPTED</a><br/>
+				{% if project.hidden or project.id in unApprovedProjects %}<a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">{% trans "NOT ACCEPTED" %}</a><br/>
 				{% else %} {% if project.id not in approvedProjects %} <a class="badge frontpage frontpage-red mb-2"
-				href="/faq#moderation">NOT YET MODERATED</a><br/>
+				href="/faq#moderation">{% trans "NOT YET MODERATED" %}</a><br/>
 				{% else %} {% if filters.approvedCheck == "All" %}  <a class="badge frontpage frontpage-green mb-2"
-				href="/faq#moderation">MODERATED</a><br/> {% endif %}
+				href="/faq#moderation">{% trans "MODERATED" %}</a><br/> {% endif %}
 				{% endif %}{% endif %}
 				{% for country in countries %}{% if country.code == project.country %}
 				<a class="badge badge-dark" href="/projects?country={{country.code}}">{{ country.name | upper }}</a>
@@ -26,7 +27,7 @@
 		<div class="card-body">
 			<h6 class="card-title">
 				<div class="col-12 colorred pl-0 mb-3">
-					<i class="fas fa-binoculars"></i> {% if project.featured %} Featured project {% else %} Project {% endif %}
+					<i class="fas fa-binoculars"></i> {% if project.featured %} {% trans "Featured project" %} {% else %} {% trans "Project" %} {% endif %}
 				</div>
 				<a class="card-link" href="/project/{{project.id }}">{{ project.name }}</a></h6>
 				{% for topic in project.topic.all %}
@@ -46,7 +47,7 @@
 						<span  class="align-middle" data-value="4" data-text="Very Good"></span>
 						<span  class="align-middle" data-value="5" data-text="Excellent"></span>
 					</span>
-					{{ review_count }} {% if review_count == 1 %} review {% else %} reviews {% endif %}
+					{{ review_count }} {% if review_count == 1 %} {% trans "review" %} {% else %} {% trans "reviews" %} {% endif %}
 					<!--div class="small text-right">Last updated: {{rsc.dateLastModification}}</div-->
 				</div>
 			</div>

@@ -53,21 +53,21 @@
         </ul>
         <ul class="navbar-nav">
           {% if not user.is_authenticated %}
-          <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">LOGIN</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'accounts:signup' %}" role="button">SIGN UP</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">{% trans "LOGIN" %}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'accounts:signup' %}" role="button">{% trans "SIGN UP" %}</a></li>
           {% else %}
           <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">PERSONAL AREA</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="{% url 'profiles:show_self' %}">My Profile</a>
-              <a class="dropdown-item" href="{% url 'profiles:self_organisations' %}">My organisations</a>
-              <a class="dropdown-item" href="{% url 'profiles:self_projects' %}">Submitted projects</a>
-              <a class="dropdown-item" href="{% url 'profiles:self_resources' %}">Submitted resources</a>
-              <a class="dropdown-item" href="{% url 'profiles:followed_projects' %}">Followed projects</a>
-              <a class="dropdown-item" href="{% url 'profiles:saved_resources' %}">Resources library</a>
+              <a class="dropdown-item" href="{% url 'profiles:show_self' %}">{% trans "My Profile" %}</a>
+              <a class="dropdown-item" href="{% url 'profiles:self_organisations' %}">{% trans "My organisations" %}</a>
+              <a class="dropdown-item" href="{% url 'profiles:self_projects' %}">{% trans "Submitted projects" %}</a>
+              <a class="dropdown-item" href="{% url 'profiles:self_resources' %}">{% trans "Submitted resources" %}</a>
+              <a class="dropdown-item" href="{% url 'profiles:followed_projects' %}">{% trans "Followed projects" %}</a>
+              <a class="dropdown-item" href="{% url 'profiles:saved_resources' %}">{% trans "Resources library" %}</a>
               {% if user.is_staff %}
-              <a  class="dropdown-item" href="{% url 'admin:index' %}">Admin</a>
+              <a  class="dropdown-item" href="{% url 'admin:index' %}">{% trans "Admin" %}</a>
               {% endif %}
-              <a class="dropdown-item" href="{% url 'accounts:logout' %}">Logout</a>
+              <a class="dropdown-item" href="{% url 'accounts:logout' %}">{% trans "Logout" %}</a>
             </div>
           </li>
           {% endif %}

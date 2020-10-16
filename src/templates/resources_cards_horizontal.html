@@ -16,9 +16,9 @@
       </a>
 
       <div class="upper">
-        {% if rsc.hidden %}<a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT ACCEPTED</a><br/>
-        {% else %} {% if rsc.id not in approvedResources %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br/>
-        {% else %} {% if filters.approvedCheck == "All" %}  <a class="badge frontpage frontpage-green mb-2" href="/faq#moderation">MODERATED</a><br/>{% endif %}
+        {% if rsc.hidden %}<a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">{% trans "NOT ACCEPTED" %}</a><br/>
+        {% else %} {% if rsc.id not in approvedResources %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">{% trans "NOT YET MODERATED" %}</a><br/>
+        {% else %} {% if filters.approvedCheck == "All" %}  <a class="badge frontpage frontpage-green mb-2" href="/faq#moderation">{% trans "MODERATED" %}</a><br/>{% endif %}
         {% endif %}{% endif %}
         {% get_language_info_list for LANGUAGES as languages %}
         {% for language in languages %}
@@ -40,9 +40,9 @@
         <span data-value="4" data-text="Very Good"></span>
         <span data-value="5" data-text="Excellent"></span>
       </span>
-      {{ review_count }} {% if review_count == 1 %} review {% else %} reviews {% endif %}
+      {{ review_count }} {% if review_count == 1 %} {% trans "review" %} {% else %} {% trans "reviews" %} {% endif %}
       <div class="card-text">{{rsc.abstract | safe | truncatewords:25 }}
-        <a class="" href="/resource/{{rsc.id}}" target="_blank">Read more</a>
+        <a class="" href="/resource/{{rsc.id}}" target="_blank">{% trans "Read more" %}</a>
       </div>
       <a class="badge badge-dark" href="/resources?category={{rsc.category.id}}">{{ rsc.category | upper }}</a>
       {% for theme in rsc.theme.all %}<a class="badge badge-light" href="/resources?theme={{theme.id}}">{{ theme | upper}}</a> {% endfor %}
@@ -93,9 +93,9 @@
           {% if user.is_authenticated %}
           <div id="saved{{rsc.id}}">
             {% if rsc.id in savedResources %}
-            <button type="button" class="btn btn-outline-primary float-right mt-2" onclick="setSavedResource({{rsc.id}},{{user.id}}, false)">In my library</button>
+            <button type="button" class="btn btn-outline-primary float-right mt-2" onclick="setSavedResource({{rsc.id}},{{user.id}}, false)">{% trans "In my library" %}</button>
             {% else %}
-            <button type="button" class="btn btn-outline-secondary float-right mt-2" onclick="setSavedResource({{rsc.id}},{{user.id}}, true)">Add to library</button>
+            <button type="button" class="btn btn-outline-secondary float-right mt-2" onclick="setSavedResource({{rsc.id}},{{user.id}}, true)">{% trans "Add to library" %}</button>
             {% endif %}
           </div>
           {% endif %}

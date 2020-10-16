@@ -1,5 +1,5 @@
 {% extends "base_r2.html" %}
-
+{% load i18n %}
 {% load staticfiles %}
 {% block title %}{{ block.super }} :: Moderation{% endblock %}
 
@@ -7,7 +7,7 @@
 {% block splash %}
 <div class="jumbotron jumbotron-fluid  jumbotron-default">
 	<div class="container">
-		<h1 class="display-4 text-white"><br>The moderation process</h1>
+		<h1 class="display-4 text-white"><br>{% trans "The moderation process" %}</h1>
 		<p class="lead text-light">&nbsp</p>
 	</div>
 </div>
@@ -21,7 +21,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-sm-4 col-12 mt-4 mb-4">
-			<h2>The Moderation Process</h2>
+			<h2>{% trans "The Moderation Process" %}</h2>
 		</div>
 		<div class="col-sm-8 col-12 mt-4 mb-4">
 			Our ambitious goal is to become the place to share useful resources about planning,

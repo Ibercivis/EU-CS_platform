@@ -1,5 +1,5 @@
 {% extends "base_r2.html" %}
-
+{% load i18n %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 
@@ -7,7 +7,7 @@
 {% block splash %}
 <div class="jumbotron jumbotron-fluid jumbotron-default">
 	<div class="container">
-		<h1 class="display-4 pb-0 text-white"><br>Privacy</h1>
+		<h1 class="display-4 pb-0 text-white"><br>{% trans "Privacy" %}</h1>
 		<p class="lead text-light">&nbsp</p>
 	</div>
 </div>
@@ -19,7 +19,7 @@
 
 <div class="jumbotron jumbotron-fluid">
 	<div class="container">
-		<h1 class="display-5"><br>Privacy</h1>
+		<h1 class="display-5"><br>{% trans "Privacy" %}</h1>
 		<p class="lead text-light"></p>
 	</div>
 </div>

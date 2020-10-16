@@ -1,5 +1,5 @@
 {% extends "base_r2.html" %}
-
+{% load i18n %}
 {% load staticfiles %}
 {% block title %}{{ block.super }} :: Criteria{% endblock %}
 
@@ -7,7 +7,7 @@
 {% block splash %}
 <div class="jumbotron jumbotron-fluid jumbotron-default">
 	<div class="container">
-		<h1 class="display-4 text-white"><br>Quality criteria</h1>
+		<h1 class="display-4 text-white"><br>{% trans "Quality criteria" %}</h1>
 		<p class="lead text-light">&nbsp</p>
 	</div>
 </div>

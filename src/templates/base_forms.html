@@ -40,15 +40,15 @@
         </ul>
         <form class="form-inline">
 				{% if not user.is_authenticated %}
-        <a  class="btn btn-outline-info rounded ml-2" onclick="return abrir_modal('{% url 'accounts:login' %}')">Login</a>
-        <a class="btn btn-outline-info rounded ml-2"  onclick="return abrir_modal('{% url 'accounts:signup' %}')" role="button">Sign up</a>
+        <a  class="btn btn-outline-info rounded ml-2" onclick="return abrir_modal('{% url 'accounts:login' %}')">{% trans "Login" %}</a>
+        <a class="btn btn-outline-info rounded ml-2"  onclick="return abrir_modal('{% url 'accounts:signup' %}')" role="button">{% trans "Sign up" %}</a>
 				{% else %}
-					<a class="btn btn-outline-info rounded ml-2" href="{% url 'profiles:show_self' %}">profile</a>
-     			<a class="btn btn-outline-info rounded ml-2" href="{% url 'accounts:logout' %}">logout</a>
+					<a class="btn btn-outline-info rounded ml-2" href="{% url 'profiles:show_self' %}">{% trans "profile" %}</a>
+     			<a class="btn btn-outline-info rounded ml-2" href="{% url 'accounts:logout' %}">{% trans "logout" %}</a>
 				{% endif %}
 
         {% if user.is_staff %}
-        <a class="btn btn-outline-danger rounded ml-2" href="{% url 'admin:index' %}">Admin</a>
+        <a class="btn btn-outline-danger rounded ml-2" href="{% url 'admin:index' %}">{% trans "Admin" %}</a>
         {% endif %}
         </form>
       </div>
@@ -72,10 +72,10 @@
 		  <div class="row">
 			  <div class="col-lg-1"></div>
 			  <div class="col-lg-5">
-				  <p>&#127279; Company {% now 'Y' %}</p>
+				  <p>&#127279; {% trans "Company" %} {% now 'Y' %}</p>
 			  </div>
 			  <div class="col-lg-5 text-right">
-				  Connect with us on
+				  {% trans "Connect with us on" %}
 				  <a href="https://www.facebook.com/EUCitSciProject/" target="_blank"><i class="fab fa-facebook"></i>
 					  Facebook</a> or
 				  <a href="https://twitter.com/eucitsci?lang=es" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
