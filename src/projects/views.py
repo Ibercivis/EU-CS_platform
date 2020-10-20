@@ -81,11 +81,8 @@ def projects(request):
             reviews = list(reviews)
             projectsVoted = []
             for r in reviews:
-                #proj = get_object_or_404(Project, id=r)
-                #Improve bottom, the reason to put in this way is because 404 is returned if there is not project
-                # matching review
-                proj = Project.objects.all().filter(id=r)
-                if proj in projects:
+                proj = Project.objects.all().filter(id=r).first()
+                if projects.filter(id=proj.id).exists():
                     projectsVoted.append(proj)
 
             projects = projects.exclude(id__in=reviews)
