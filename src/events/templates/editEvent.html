@@ -1,4 +1,5 @@
 {% extends "base2.html" %}
+{% load i18n %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% block head %}
@@ -21,7 +22,7 @@
                         <div class="card-title  p-5">
                             <div class="row">
                                 <div class="col-12">
-                                    <h2>Edit event</h2>
+                                    <h2>{% trans "Edit event" %}</h2>
                                 </div>
                             </div>
                         </div>
@@ -30,7 +31,7 @@
                                 <form action="/editEvent/{{event.id}}" method="post" class="save-event" autocomplete="off">
                                     {% csrf_token %}
                                     <div>
-                                        <h4>Event info</h4>
+                                        <h4>{% trans "Event info" %}</h4>
                                     </div>
                                     <input type="hidden" id="eventID" name="eventID" value={{event.id}}>
                                     <div class="form-row">

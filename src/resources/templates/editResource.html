@@ -20,9 +20,9 @@
   <div class="modal-dialog mdialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Crop the photo</h4>
+        <h4 class="modal-title">{% trans "Crop the photo" %}</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+          <span aria-hidden="true">&times;</span><span class="sr-only">{% trans "Close" %}</span>
         </button>
       </div>
       <div class="modal-body">
@@ -35,14 +35,14 @@
       <div class="modal-footer">
         <div class="btn-group pull-left" role="group">
           <button type="button" class="btn btn-default js-zoom-in">
-            <span><i class="material-icons" style="font-size: 18px;">zoom_in</i> </span>
+            <span><i class="material-icons" style="font-size: 18px;">{% trans "zoom_in" %}</i> </span>
           </button>
           <button type="button" class="btn btn-default js-zoom-out">
-            <span><i class="material-icons" style="font-size: 18px;">zoom_out</i></span>
+            <span><i class="material-icons" style="font-size: 18px;">{% trans "zoom_out" %}</i></span>
           </button>
         </div>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary js-crop-and-upload">Crop and upload</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+        <button type="button" class="btn btn-primary js-crop-and-upload">{% trans "Crop and upload" %}</button>
       </div>
     </div>
   </div>
@@ -55,16 +55,16 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Confirm delete</h4>
+        <h4 class="modal-title" id="myModalLabel">{% trans "Confirm delete" %}</h4>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
       <div class="modal-body">
-        <p>You are going to delete this resource, this procedure is irreversible.</p>
-        <p>Do you want to proceed?</p>
+        <p>{% trans "You are going to delete this resource, this procedure is irreversible." %}</p>
+        <p>{% trans "Do you want to proceed?" %}</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <a class="btn btn-red btn-delete"><span class="fas fa-trash-alt"></span> Delete</a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+        <a class="btn btn-red btn-delete"><span class="fas fa-trash-alt"></span> {% trans "Delete" %}</a>
       </div>
     </div>
   </div>
@@ -77,13 +77,13 @@
         <div class="card-title p-5">
           <div class="row">
             <div class="col-6">
-              <h2 clas="float-left">Edit resource</h2>
+              <h2 clas="float-left">{% trans "Edit resource" %}</h2>
             </div>
             <div class="col-6">
-              <button type="submit" onclick="$('form').submit()" class="btn btn-green"><i class="fas fa-share-square"></i> Save</button>
+              <button type="submit" onclick="$('form').submit()" class="btn btn-green"><i class="fas fa-share-square"></i> {% trans "Save" %}</button>
               <button type="submit" class="btn btn-red float-right" data-href="{% if isTrainingResource %} {% url 'deleteResource' resource.id  1 %} {% else %} {% url 'deleteResource' resource.id  0 %} {% endif %}"
                 data-toggle="modal" data-target="#confirm-delete" name='deleteResource'>
-                <span class="fas fa-trash-alt"></span> Delete
+                <span class="fas fa-trash-alt"></span> {% trans "Delete" %}
               </button>
             </div>
           </div>
@@ -252,7 +252,7 @@
                 {{ form.time_required|as_crispy_field }}
                 {{ form.conditions_of_access|as_crispy_field }}
               {% endif %}
-              <button type="submit" class="btn btn-green mb-5"><i class="fas fa-share-square"></i> Save</button>
+              <button type="submit" class="btn btn-green mb-5"><i class="fas fa-share-square"></i> {% trans "Save" %}</button>
             </form>
           </table>
         </div>

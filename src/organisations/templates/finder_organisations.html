@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load staticfiles %}
 {% load i18n %}
 {% load l10n %}
@@ -15,7 +16,7 @@
 					</div>
 
 					<select id="orgType" name="orgType" class="custom-select orgType-select form-control">
-						<option value="">Type
+						<option value="">{% trans "Type" %}
 						</option>
 						{% for s in orgTypes %}
 						<option {% if s.id ==  filters.orgType %} selected {% endif %} value="{{s.id}}">
@@ -25,7 +26,7 @@
 					</select>
 
 					<select id="country" name="country" class="custom-select form-control">
-						<option value="">Country
+						<option value="">{% trans "Country" %}
 						</option>
 						{% for country in countries %}
 						{% for cwc in countriesWithContent %}
@@ -41,7 +42,7 @@
 			</div>
 		</div>
 		<div class="col-lg-6 col-6 mb-3 text">
-			{{ counter }} result{% if counter != 1 %}s{% endif %} found
+			{{ counter }} {% trans "result" %}{% if counter != 1 %}s{% endif %} {% trans "found" %}
 			{% if user.is_authenticated %}
 			<!--a href=""></a-->
 
@@ -51,8 +52,8 @@
 		</div>
 		{% if request.get_full_path != "/organisations" %}
 		<div class="col-lg-6 text-right mb-3">
-			<a class="text-decoration-none text-muted mb-4" href="/organisations"><i class="fas fa-times"></i> Clear
-				current search query and filters</a>
+			<a class="text-decoration-none text-muted mb-4" href="/organisations"><i class="fas fa-times"></i> {% trans "Clear
+				current search query and filters" %}</a>
 			</div>
 			{% endif %}
 		</form>

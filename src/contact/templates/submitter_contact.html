@@ -1,5 +1,5 @@
 {% extends "base_r2.html" %}
-
+{% load i18n %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 
@@ -7,7 +7,7 @@
 {% block splash %}
 <div class="jumbotron jumbotron-fluid jumbotron-default">
 	<div class="container">
-		<h1 class="display-4 pb-0 text-white"><br>Submitter Contact</h1>
+		<h1 class="display-4 pb-0 text-white"><br>{% trans "Submitter Contact" %}</h1>
 		<p class="lead text-light">&nbsp</p>
 		<p class="lead text-light"></p>
 	</div>
@@ -18,7 +18,7 @@
 {% endblock %}
 
 {% block page_title %}
-Contact
+{% trans "Contact" %}
 {% endblock page_title %}
 
 {% block list_of_items %}
@@ -27,8 +27,8 @@ Contact
 		<div class="col-12 col-sm-12 mt-4 mb-4">
 			<div class="card mb-4 mt-5 shadow">
 				<div class="card-text p-3">
-					<h3>Contact</h3>
-					<p>This email will be sent to submitter of <a target="_blank" href="{{ referenceURL }}">{{ referenceURL }}</a></p>
+					<h3>{% trans "Contact" %}</h3>
+					<p>{% trans "This email will be sent to submitter of" %} <a target="_blank" href="{{ referenceURL }}">{{ referenceURL }}</a></p>
 					<form method="post" autocomplete="off">
 						{% csrf_token %}
 						<div class="row">
@@ -43,7 +43,7 @@ Contact
 						</div>
 						<div class="row">
 							<div class="col-12 col-sm-6">
-								<button type="submit" class="btn btn-success">Send</button>
+								<button type="submit" class="btn btn-success">{% trans "Send" %}</button>
 							</div>
 					</form>
 				</div>

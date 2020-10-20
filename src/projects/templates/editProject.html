@@ -1,4 +1,5 @@
 {% extends "base_r2.html" %}
+{% load i18n %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% load leaflet_tags %}
@@ -25,9 +26,9 @@
   <div class="modal-dialog mdialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Crop the photo</h4>
+        <h4 class="modal-title">{% trans "Crop the photo" %}</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+          <span aria-hidden="true">&times;</span><span class="sr-only">{% trans "Close" %}</span>
         </button>
       </div>
       <div class="modal-body">
@@ -40,14 +41,14 @@
       <div class="modal-footer">
         <div class="btn-group pull-left" role="group">
           <button type="button" class="btn btn-default js-zoom-in">
-            <span><i class="material-icons" style="font-size: 18px;">zoom_in</i> </span>
+            <span><i class="material-icons" style="font-size: 18px;">{% trans "zoom_in" %}</i> </span>
           </button>
           <button type="button" class="btn btn-default js-zoom-out">
-            <span><i class="material-icons" style="font-size: 18px;">zoom_out</i></span>
+            <span><i class="material-icons" style="font-size: 18px;">{% trans "zoom_out" %}</i></span>
           </button>
         </div>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary js-crop-and-upload">Crop and upload</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+        <button type="button" class="btn btn-primary js-crop-and-upload">{% trans "Crop and upload" %}</button>
       </div>
     </div>
   </div>
@@ -59,16 +60,16 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Confirm delete</h4>
+        <h4 class="modal-title" id="myModalLabel">{% trans "Confirm delete" %}</h4>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
       <div class="modal-body">
-        <p>You are going to delete this project, this procedure is irreversible.</p>
-        <p>Do you want to proceed?</p>
+        <p>{% trans "You are going to delete this project, this procedure is irreversible." %}</p>
+        <p>{% trans "Do you want to proceed?" %}</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <a class="btn btn-red btn-delete"><i class="fas fa-trash-alt"></i> Delete</a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+        <a class="btn btn-red btn-delete"><i class="fas fa-trash-alt"></i> {% trans "Delete" %}</a>
       </div>
     </div>
   </div>
@@ -82,12 +83,12 @@
         <div class="card-title p-5">
           <div class="row">
             <div class="col-6">
-              <h2 class="float-left">Edit project</h2>
+              <h2 class="float-left">{% trans "Edit project" %}</h2>
             </div>
             <div class="col-6">
-              <button type="submit" onclick="$('form').submit()" class="btn btn-green"><i class="fas fa-share-square"></i> Save</button>
+              <button type="submit" onclick="$('form').submit()" class="btn btn-green"><i class="fas fa-share-square"></i> {% trans "Save" %}</button>
               <button type="submit" class="btn btn-red float-right" data-href="{% url 'deleteProject' project.id %}"
-              data-toggle="modal" data-target="#confirm-delete" name='deleteProject'><i class="fas fa-trash-alt"></i> Delete
+              data-toggle="modal" data-target="#confirm-delete" name='deleteProject'><i class="fas fa-trash-alt"></i> {% trans "Delete" %}
             </button>
           </div>
         </div>
@@ -114,7 +115,7 @@
           <form action="/editProject/{{project.id}}" class="edit-project" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div>
-              <h4>Project info</h4>
+              <h4>{% trans "Project info" %}</h4>
             </div>
             <div class="form-row">
               <div class="col-12 mb-3">
@@ -168,7 +169,7 @@
               </div>
             </div>
             <hr />
-            <h4>Contact details</h4>
+            <h4>{% trans "Contact details" %}</h4>
             <div id="contactinfoform">
               <div class="form-row">
                 <!--div class="col-12">
@@ -184,7 +185,7 @@
 
           </div>
           <hr />
-          <h4>Project profile images</h4>
+          <h4>{% trans "Project profile images" %}</h4>
           <div id="imagesform">
             <div class="form-row">
               <div class="col-sm-8 col-12 mb-3">
@@ -246,8 +247,8 @@
           </div>
           <hr />
 
-          <h4>Geography</h4>
-          <p>Main location where the project takes place (Enter address or click on the map)</p>
+          <h4>{% trans "Geography" %}</h4>
+          <p>{% trans "Main location where the project takes place (Enter address or click on the map)" %}</p>
           <div id="geographyform">
             {% leaflet_map "map" callback="window.map_init_basic" %}
             <div class="form-row">
@@ -264,7 +265,7 @@
             </div>
           </div>
           <hr />
-          <h4>Supplementary information for Citizen Science</h4>
+          <h4>{% trans "Supplementary information for Citizen Science" %}</h4>
           <div id="informationform">
             <div class="form-row">
               <div class="col-12 mb-3">
@@ -280,7 +281,7 @@
           </div>
           <hr />
 
-          <h4>Funding</h4>
+          <h4>{% trans "Funding" %}</h4>
           <div id="fundingform">
             <div class="form-row">
               <div class="col-sm-6 col-12 mb-3">
@@ -293,7 +294,7 @@
             </div>
           </div>
           <hr />
-          <h4>Origin information</h4>
+          <h4>{% trans "Origin information" %}</h4>
           <div id="originform">
             <div class="form-row">
               <div class="col-12 mb-3">
@@ -311,7 +312,7 @@
             </div>
           </div>
           <hr />
-          <h4> Custom fields</h4>
+          <h4> {% trans "Custom fields" %}</h4>
           <div id="customFields"></div>
 
           {{ cField_formset.management_form }}
@@ -328,7 +329,7 @@
           </div>
           <hr/>
           {% endfor %}
-          <button type="submit" class="btn btn-green mb-5"><i class="fas fa-share-square"></i> Save</button>
+          <button type="submit" class="btn btn-green mb-5"><i class="fas fa-share-square"></i> {% trans "Save" %}</button>
         </form>
       </table>
     </div>

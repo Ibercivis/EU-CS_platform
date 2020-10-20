@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load staticfiles %}
 {% load countries %}
 {% get_countries as countries %}
@@ -31,7 +32,7 @@ Read more about our <a href="/faq">moderation process</a>.
 				<select id="orderby" name="orderby" class="custom-select form-control float-right">
 					<!--option value="-id" {% if filters.orderby == "-id" %} selected {% endif %}>Newest to Oldest</option>
 					<option value="id" {% if filters.orderby == "id" %} selected {% endif %}>Oldest to Newest</option-->
-					<option value="-avg_rating" {% if filters.orderby == "-avg_rating" %} selected {% endif %}>Sort by rating</option>
+					<option value="-avg_rating" {% if filters.orderby == "-avg_rating" %} selected {% endif %}>{% trans "Sort by rating" %}</option>
 					<!--option value="avg_rating" {% if filters.orderby == "avg_rating" %} selected {% endif %}>Worst average rating</option-->
 				</select>
 			</div>
@@ -43,7 +44,7 @@ Read more about our <a href="/faq">moderation process</a>.
 						<div class="input-group-text"><i class="fas fa-filter"></i></div>
 					</div>
 					<select id="status" name="status" class="custom-select status-select form-control">
-						<option value="">Status<option>
+						<option value="">{% trans "Status" %}<option>
 							{% for s in status %}
 							<option {% if s.id ==  filters.status %} selected {% endif %} value="{{s.id}}">
 								{{s.status|capfirst}}
@@ -51,14 +52,14 @@ Read more about our <a href="/faq">moderation process</a>.
 							{% endfor %}
 						</select>
 						<select id="country" name="country" class="custom-select form-control">
-							<option value="">Country<option>
+							<option value="">{% trans "Country" %}<option>
 								{% for country in countries %}{% for cwc in countriesWithContent %}{% if country.code == cwc %}
 								<option {% if country.code ==  filters.country %}
 								selected {% endif %} value="{{ country.code }}">{{ country.name }}</option>
 								{% endif %}{% endfor %}{% endfor %}
 							</select>
 							<select id="topic" name="topic" class="custom-select form-control">
-								<option value="">Topic</option>
+								<option value="">{% trans "Topic" %}</option>
 								{% for topic in topics %}
 								<option {% if topic.topic ==  filters.topic %} selected {% endif %} value="{{topic}}">
 									{{topic|capfirst}}
@@ -66,20 +67,20 @@ Read more about our <a href="/faq">moderation process</a>.
 								{% endfor %}
 							</select>
 							<select id="doingAtHome" name="doingAtHome" class="custom-select form-control">
-								<option value="">Doable at home<option>
-									<option value=1 {% if filters.doingAtHome == 1 %} selected {% endif %}>Yes</option>
-									<option value=0 {% if filters.doingAtHome == 0 %} selected {% endif %}>No</option>
+								<option value="">{% trans "Doable at home" %}<option>
+									<option value=1 {% if filters.doingAtHome == 1 %} selected {% endif %}>{% trans "Yes" %}</option>
+									<option value=0 {% if filters.doingAtHome == 0 %} selected {% endif %}>{% trans "No" %}</option>
 								</select>
 								<select id="approvedCheck" name="approvedCheck" class="custom-select form-control">
-									<option value="On" {% if filters.approvedCheck == "On" %} selected {% endif %}>Moderated</option>
-									<option value="Off" {% if filters.approvedCheck == "Off" %} selected {% endif %}>Not yet moderated</option>
-									<option value="All" {% if filters.approvedCheck == "All" %} selected {% endif %}">All</option>
+									<option value="On" {% if filters.approvedCheck == "On" %} selected {% endif %}>{% trans "Moderated" %}</option>
+									<option value="Off" {% if filters.approvedCheck == "Off" %} selected {% endif %}>{% trans "Not yet moderated" %}</option>
+									<option value="All" {% if filters.approvedCheck == "All" %} selected {% endif %}>{% trans "All" %}</option>
 								</select>
 							</div>
 						</div>
 					</div>
 					<div class="col-lg-6 col-6 mb-3">
-						{{ counter }} result{% if counter != 1 %}s{% endif %} found
+						{{ counter }} {% trans "result" %}{% if counter != 1 %}s{% endif %} {% trans "found" %}
 						{% if user.is_authenticated %}
 						<!--a class="btn btn-dark mb-1" href="{% url 'downloadProjects' %}" data-toggle="tooltip" data-placement="top" title="Click here to download all the projects">
 						<i class="fas fa-download"></i>&nbsp;DOWNLOAD
@@ -90,7 +91,7 @@ Read more about our <a href="/faq">moderation process</a>.
 				</div>
 				{% if request.get_full_path != "/projects" %}
 				<div class="col-lg-6 col-6 text-right mb-2">
-					<a class="text-decoration-none text-muted" href="/projects"><i class="fas fa-times"></i> Clear current search query and filters</a>
+					<a class="text-decoration-none text-muted" href="/projects"><i class="fas fa-times"></i> {% trans "Clear current search query and filters" %}</a>
 				</div>
 				{% endif %}
 			</form>

@@ -1,4 +1,5 @@
 {% extends "base_r2.html" %}
+{% load i18n %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% block title %}{{ block.super }} :: Events{% endblock %}
@@ -8,7 +9,7 @@
 <div class="jumbotron jumbotron-fluid jumbotron-blue mb-0">
     <div class="container-fluid">
         <div class="container">
-          <h1 class="display-4 text-white"><br>Upcoming events</h1>
+          <h1 class="display-4 text-white"><br>{% trans "Upcoming events" %}</h1>
           <p class="lead text-light">&nbsp</p>
         </div>
     </div>
@@ -21,7 +22,7 @@
         {% if user.is_staff %}
         <a class="btn btn-green mb-1" href="{% url 'new_event' %}" data-toggle="tooltip" data-placement="top"
             title="Click here to add a new event">
-            <i class="fas fa-plus-circle"></i>&nbsp;ADD
+            <i class="fas fa-plus-circle"></i>&nbsp;{% trans "ADD" %}
         </a>
         {% endif %}
     </div>
@@ -39,7 +40,7 @@
         <div class="col-sm-7 col-12 mt-4 mb-4">
             {{event.description}}
             <br/><br/>
-            {% if event.url %} <p>More info: <a href="{% if 'http' not in event.url %}//{%endif%}{{event.url}}" target="_blank">{{event.url}}</a></p>{% endif %}
+            {% if event.url %} <p>{% trans "More info" %}: <a href="{% if 'http' not in event.url %}//{%endif%}{{event.url}}" target="_blank">{{event.url}}</a></p>{% endif %}
         </div>
         <div class="col-sm-1 col-12 mt-4 mb-4">
         {% if user.is_staff %}
@@ -60,7 +61,7 @@
     {% else %}
     <div class="col-12">
         <img class="img-fluid img-zoom col-12 mt-5" src="{% static 'site/img/undraw_empty_xct9.svg' %}">
-        <h5 class="mb-4">Sorry, nothing found</h5>
+        <h5 class="mb-4">{% trans "Sorry, nothing found" %}</h5>
     </div>
     {% endif %}
 </div>

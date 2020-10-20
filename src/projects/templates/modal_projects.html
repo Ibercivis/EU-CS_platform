@@ -1,22 +1,23 @@
+{% load i18n %}
 <div class="container">
   <div class="row">
     <div class="modal fade" id="projectsinfo">
       <div class="modal-dialog mdialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title">Info</h4>
+            <h4 class="modal-title">{% trans "Info" %}</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+              <span aria-hidden="true">&times;</span><span class="sr-only">{% trans "Close" %}</span>
             </button>
           </div>
           <div class="modal-body">
-            <b>Search</b> projects by title or keywords by typing text directly into the the search bar<br/><br/>
-            <b>Sort</b> projects by date or by rating<br/><br/>
-            <b>Filter</b> search results by project status, country, or topic<br/><br/>
+            <b>{% trans "Search" %}</b> {% trans "projects by title or keywords by typing text directly into the the search bar" %}<br/><br/>
+            <b>{% trans "Sort" %}</b> {% trans "projects by date or by rating" %}<br/><br/>
+            <b>{% trans "Filter" %}</b> {% trans "search results by project status, country, or topic" %}<br/><br/>
 
-            Submitted projects that have been through the moderation process are marked as 'Moderated'.Only these will show in your search results unless you filter for 'not yet moderated' or 'All'.<br/><br/>
+            {% trans "Submitted projects that have been through the moderation process are marked as 'Moderated'.Only these will show in your search results unless you filter for 'not yet moderated' or 'All'." %}<br/><br/>
 
-            Read more about our <a href="/moderation">moderation process</a><br/>
+            {% trans "Read more about our" %} <a href="/moderation">{% trans "moderation process" %}</a><br/>
           </div>
         </div>
       </div>
