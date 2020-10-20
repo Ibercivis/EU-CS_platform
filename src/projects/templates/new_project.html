@@ -1,4 +1,5 @@
 {% extends "base_r2.html" %}
+{% load i18n %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% load leaflet_tags %}
@@ -27,9 +28,9 @@
       <div class="modal-dialog mdialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title">Crop the photo</h4>
+            <h4 class="modal-title">{% trans "Crop the photo" %}</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+              <span aria-hidden="true">&times;</span><span class="sr-only">{% trans "Close" %}</span>
             </button>
           </div>
           <div class="modal-body">
@@ -42,14 +43,14 @@
           <div class="modal-footer">
             <div class="btn-group pull-left" role="group">
               <button type="button" class="btn btn-default js-zoom-in">
-                <span><i class="material-icons" style="font-size: 18px;">zoom_in</i> </span>
+                <span><i class="material-icons" style="font-size: 18px;">{% trans "zoom_in" %}</i> </span>
               </button>
               <button type="button" class="btn btn-default js-zoom-out">
-                <span><i class="material-icons" style="font-size: 18px;">zoom_out</i></span>
+                <span><i class="material-icons" style="font-size: 18px;">{% trans "zoom_out" %}</i></span>
               </button>
             </div>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary js-crop-and-upload">Crop and upload</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+            <button type="button" class="btn btn-primary js-crop-and-upload">{% trans "Crop and upload" %}</button>
           </div>
         </div>
       </div>
@@ -60,18 +61,18 @@
       <div class="modal-dialog mdialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title">Project is going to saved</h4>
+            <h4 class="modal-title">{% trans "Project is going to saved" %}</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+              <span aria-hidden="true">&times;</span><span class="sr-only">{% trans "Close" %}</span>
             </button>
           </div>
           <div class="modal-body">
             <div class="row">
               <div class="col-sm">
-                <p>Thank you</p>
-                <p>Thank you for submitting your project profile. This has been sent to the EU-Citizen.Science moderation team, who will check it to ensure that all of the projects shared on the platform can indeed be considered citizen science projects.</p>
-                <p>We will be in touch with you if we have any questions, and otherwise you will see that your project changes from 'not yet moderated' to 'moderated' on the platform.</p>
-                <p>You can make updates or changes to this project profile at any time, by going to the Submitted projects section in your Personal Area (see the top-right of the platform menu).</p>
+                <p>{% trans "Thank you" %}</p>
+                <p>{% trans "Thank you for submitting your project profile. This has been sent to the EU-Citizen.Science moderation team, who will check it to ensure that all of the projects shared on the platform can indeed be considered citizen science projects." %}</p>
+                <p>{% trans "We will be in touch with you if we have any questions, and otherwise you will see that your project changes from 'not yet moderated' to 'moderated' on the platform." %}</p>
+                <p>{% trans "You can make updates or changes to this project profile at any time, by going to the Submitted projects section in your Personal Area (see the top-right of the platform menu)." %}</p>
               </div>
             </div>
           </div>
@@ -89,25 +90,16 @@
             <div class="card-title  p-5">
               <div class="row">
                 <div class="col-12">
-                  <h2>New project</h2>
-                  Thank you for sharing your citizen science project on the EU-Citizen.Science platform.
-                  Please fill in all of the mandatory information in the fields below (indicated with an asterisk*),
-                  and as much of the non-mandatory information as possible.<br><br>
-                  Citizen science embraces a wide range of project types, that can be adapted and applied within diverse
-                  situations and disciplines, represent a range of approaches and historical practices for public
-                  participation in scientific research, and involve participants in a range of activities across the research lifecycle.
-                  For guidance on whether your project can be considered to be citizen science, please refer to the
-                  <a href="https://zenodo.org/communities/citscicharacteristics">ECSA Characteristics of Citizen Science</a>.
+                  <h2>{% trans "New project" %}</h2>
+                  {% trans "Thank you for sharing your citizen science project on the EU-Citizen.Science platform. Please fill in all of the mandatory information in the fields below (indicated with an asterisk*), and as much of the non-mandatory information as possible." %}<br><br>
+                  {% trans "Citizen science embraces a wide range of project types, that can be adapted and applied within diverse situations and disciplines, represent a range of approaches and historical practices for public participation in scientific research, and involve participants in a range of activities across the research lifecycle. For guidance on whether your project can be considered to be citizen science, please refer to the" %}
+                  <a href="https://zenodo.org/communities/citscicharacteristics">{% trans "ECSA Characteristics of Citizen Science" %}</a>.
                   <br><br>
-                  In the form below, along with other descriptive information, we require that you describe the citizen science aspects of your
-                  project, and the type of task(s) that participants undertake. Your project should engage meaningfully with the
-                  <a href="https://osf.io/xpr2n/wiki/home/">ECSA 10 Principles of Citizen Science</a>.<br><br>
-                  This form asks you for basic Project Information, Participation Information, links to any Project Documentation,
-                  Contact Details, and Project Images that can be used for the project profile (the logo, a thumbnail image representing
-                  the project, and a banner header representing the project).<br><br>
-                  Upon saving this profile, your project will be submitted for moderation.
-                  The <a href="https://eu-citizen.science/moderation/">moderation process</a> is meant to ensure that all of the projects shared on
-                  the platform can indeed be considered to be citizen science projects, and to prevent unintended uses of the platform.
+                  {% trans "In the form below, along with other descriptive information, we require that you describe the citizen science aspects of your project, and the type of task(s) that participants undertake. Your project should engage meaningfully with the" %}
+                  <a href="https://osf.io/xpr2n/wiki/home/">{% trans "ECSA 10 Principles of Citizen Science" %}</a>.<br><br>
+                  {% trans "This form asks you for basic Project Information, Participation Information, links to any Project Documentation, Contact Details, and Project Images that can be used for the project profile (the logo, a thumbnail image representing the project, and a banner header representing the project)." %}<br><br>
+                  {% trans "Upon saving this profile, your project will be submitted for moderation." %}
+                  {% trans "The" %} <a href="https://eu-citizen.science/moderation/">{% trans "moderation process" %}</a> {% trans "is meant to ensure that all of the projects shared on the platform can indeed be considered to be citizen science projects, and to prevent unintended uses of the platform." %}
                 </div>
               </div>
             </div>
@@ -116,11 +108,11 @@
                 <form action="/new_project" method="post" enctype="multipart/form-data" class="add-new-project" autocomplete="off">
                   {% csrf_token %}
                   <div>
-                    <button type="submit" class="btn btn-green float-right"><i class="fas fa-share-square"></i>Submit</button>
+                    <button type="submit" class="btn btn-green float-right"><i class="fas fa-share-square"></i>{% trans "Submit" %}</button>
                     <br/><br/>
                   </div>
                   <div>
-                    <h4>Project info</h4>
+                    <h4>{% trans "Project info" %}</h4>
                   </div>
 
                   <div class="form-row">
@@ -177,7 +169,7 @@
                   </div>
 
                   <hr />
-                  <h4>Contact details</h4>
+                  <h4>{% trans "Contact details" %}</h4>
                   <div id="contactinfoform">
                     <div class="form-row">
                       <!--div class="col-12">
@@ -192,7 +184,7 @@
                   </div>
 
                   <hr />
-                  <h4>Project profile images</h4>
+                  <h4>{% trans "Project profile images" %}</h4>
                   <div id="imagesform">
                     <div class="form-row">
                       <div class="col-sm-8 col-12 mb-3">
@@ -240,9 +232,8 @@
                     </div>
                   </div>
                   <hr />
-                  <h4>Geography</h4>
-                  <p>Indicate the location where the project takes place when one location can be indicated, and otherwise indicate
-                    the address of the Coordinator or Leading Partner. (Enter address or click on the map)</p>
+                  <h4>{% trans "Geography" %}</h4>
+                  <p>{% trans "Indicate the location where the project takes place when one location can be indicated, and otherwise indicate the address of the Coordinator or Leading Partner. (Enter address or click on the map)" %}</p>
                     <div id="geographyform">
                       {% leaflet_map "map" callback="window.map_init_basic" %}
 
@@ -266,7 +257,7 @@
                     </div>
                     <hr />
 
-                    <h4>Supplementary information for Citizen Science</h4>
+                    <h4>{% trans "Supplementary information for Citizen Science" %}</h4>
                     <div id="informationform">
                       <div class="form-row">
                         <div class="col-12 mb-3">
@@ -281,7 +272,7 @@
                       </div>
                     </div>
                     <hr />
-                    <h4>Funding</h4>
+                    <h4>{% trans "Funding" %}</h4>
                     <div id="fundingform">
                       <div class="form-row">
                         <div class="col-12 mb-3">
@@ -294,7 +285,7 @@
                       </div>
                     </div>
                     <hr />
-                    <h4>Origin information</h4>
+                    <h4>{% trans "Origin information" %}</h4>
                     <div id="originform">
                       <div class="form-row">
                         <div class="col-12 mb-3">
@@ -312,7 +303,7 @@
                       </div>
                     </div>
                     <hr />
-                    <button type="submit" class="btn btn-green"><i class="fas fa-share-square"></i> Submit</button>
+                    <button type="submit" class="btn btn-green"><i class="fas fa-share-square"></i> {% trans "Submit" %}</button>
                   </form>
                 </table>
               </div>

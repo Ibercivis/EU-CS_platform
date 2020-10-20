@@ -1,4 +1,5 @@
 {% extends "base_r2.html" %}
+{% load i18n %}
 {% load staticfiles %}
 
 {% block title %}{{ block.super }}Contact email sended{% endblock %}
@@ -22,7 +23,7 @@
     Success!
     <div class="form-message">
       <p>
-        Thank you for your message.
+        {% trans "Thank you for your message." %}
       </p>
     </div>
   </div>

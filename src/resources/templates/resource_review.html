@@ -1,4 +1,5 @@
 {% extends "base_r2.html" %}
+{% load i18n %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% load reviews %}
@@ -14,8 +15,8 @@
 {% block splash %}
 <div class="jumbotron jumbotron-fluid jumbotron-resources">
 	<div class="container">
-		<h1 class="display-5 pb-0"><br>Review</h1>
-		<p class="lead text-light">Rate and comment</p>
+		<h1 class="display-5 pb-0"><br>{% trans "Review" %}</h1>
+		<p class="lead text-light">{% trans "Rate and comment" %}</p>
 	</div>
 </div>
 {% endblock splash %}

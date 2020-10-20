@@ -1,5 +1,5 @@
 {% extends "base_r2.html" %}
-
+{% load i18n %}
 {% load staticfiles %}
 {% load thumbnail %}
 {% load leaflet_tags %}
@@ -35,21 +35,21 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 					<div class="card-text">
 						<div class="row p-3">
 							<div class="col-12 col-sm-6">
-								<p><b>Email: </b>{{ show_user.email|default:"missing"}}</p>
-								<p><b>Joined: </b>{{ show_user.date_joined }}</p>
-								<p><b>Last seen: </b>{{ show_user.last_login }}</p>
+								<p><b>{% trans "Email" %}: </b>{{ show_user.email|default:"missing"}}</p>
+								<p><b>{% trans "Joined" %}: </b>{{ show_user.date_joined }}</p>
+								<p><b>{% trans "Last seen" %}: </b>{{ show_user.last_login }}</p>
 							</div>
 							<div class="col-12 col-sm-6">
-								<p><strong>Title</strong>: {{ show_user.profile.title }} </p>
-								<p><strong>Bio and disciplinary background</strong>: {{ show_user.profile.bio }}</p>
-								<p><strong>Institution</strong>: {{ show_user.profile.institution }}</p>
-								<p><strong>ORCID profile</strong>: {% if show_user.profile.orcid %} <a href="https://orcid.org/{{ show_user.profile.orcid }}" target="_blank">{{ show_user.profile.orcid }}</a>{% endif %}</p>
-								<b>Organisation:</b>
+								<p><strong>{% trans "Title" %}</strong>: {{ show_user.profile.title }} </p>
+								<p><strong>{% trans "Bio and disciplinary background" %}</strong>: {{ show_user.profile.bio }}</p>
+								<p><strong>{% trans "Institution" %}</strong>: {{ show_user.profile.institution }}</p>
+								<p><strong>{% trans "ORCID profile" %}</strong>: {% if show_user.profile.orcid %} <a href="https://orcid.org/{{ show_user.profile.orcid }}" target="_blank">{{ show_user.profile.orcid }}</a>{% endif %}</p>
+								<b>{% trans "Organisation" %}:</b>
 								{% for organisation in show_user.profile.organisation.all %} <a class="badge" href="/organisation/{{organisation.id}}">{{organisation}}</a>  {% endfor %}
 								<br/>
 							</div>
 							<div class="col-12 col-sm-6">
-								<p><strong>Interest Areas</strong>:
+								<p><strong>{% trans "Interest Areas" %}</strong>:
 									{% for area in show_user.profile.interestAreas.all %}
 									{{ area }}
 									{% endfor %}
@@ -57,7 +57,7 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 							</div>
 						</div>
 						<div >
-							<label><strong>Geographical location</strong></label>
+							<label><strong>{% trans "Geographical location" %}</strong></label>
 							{% leaflet_map "map" callback="window.map_init_basic" %}
 						</div>
 					</div>

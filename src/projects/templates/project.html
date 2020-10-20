@@ -1,4 +1,5 @@
 {% extends "base_r2.html" %}
+{% load i18n %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% load leaflet_tags %}
@@ -28,13 +29,13 @@
           <a class="nav-link sub" id="parttab" href="#"
           onClick="$('#one').hide(); $('#two').show()
           $('#parttab').addClass('active')
-          $('#desctab').removeClass('active') ">Participation</a>
+          $('#desctab').removeClass('active') ">{% trans "Participation" %}</a>
         </li>
         <li class="nav-item">
           <a class="nav-link sub active" id="desctab" href="#"
           onClick="$('#two').hide(); $('#one').show();
           $('#desctab').addClass('active')
-          $('#parttab').removeClass('active')">Description</a>
+          $('#parttab').removeClass('active')">{% trans "Description" %}</a>
         </li>
       </ul>
     </div>
@@ -49,28 +50,28 @@
           {% endif %}
 
           <hr/>
-          <b>Status</b>
+          <b>{% trans "Status" %}</b>
           <div class="small">
             {{ project.status}}<br>
             Start: {{ project.start_date | date:"d/m/Y"}}<br>
             End:&nbsp;&nbsp;{{ project.end_date | date:"d/m/Y"}}
           </div>
           <hr>
-          <div><b>Science Topic</b></div>
+          <div><b>{% trans "Science Topic" %}</b></div>
           <div>
             {% for topic in project.topic.all %}
             <a class="badge badge-light" href="/projects?keywords=&topic={{topic|urlencode}}">{{topic}}</a>
             {% endfor %}
           </div>
           <hr>
-          <b>Keywords</b>
+          <b>{% trans "Keywords" %}</b>
           <div>
             {% for keyword in project.keywords.all %}
             <a class="badge badge-light" href="/projects?keywords={{keyword|urlencode}}">{{keyword}}</a>
             {% endfor %}
           </div>
           <hr>
-          <b>Location</b>
+          <b>{% trans "Location" %}</b>
           <div>
             {% for geographicextend in project.geographicextend.all %}
             <a class="badge badge-light" href="">{{geographicextend}}</a>
@@ -83,12 +84,12 @@
             <a class="badge badge-light" href="">{{project.projectlocality}}</a>
           </div>
           <hr>
-          <b>Contact</b>
+          <b>{% trans "Contact" %}</b>
           <div>
-            <a class="badge badge-light">{{project.host | truncatechars:20 }}</a> (Host)
+            <a class="badge badge-light">{{project.host | truncatechars:20 }}</a> {% trans "(Host)" %}
             {% if project.mainOrganisation %}
             <a class="badge badge-light"
-            href="/organisation/{{project.mainOrganisation.id}}">{{ project.mainOrganisation }} </a> (Main organisation)
+            href="/organisation/{{project.mainOrganisation.id}}">{{ project.mainOrganisation }} </a> {% trans "(Main organisation)" %}
             {% endif %}
             {% for organisation in project.organisation.all %}
             <a class="badge badge-light" href="/organisation/{{organisation.id}}">{{organisation}}</a>
@@ -109,12 +110,12 @@
                 <span data-value="4" data-text="Very Good"></span>
                 <span data-value="5" data-text="Excellent"></span>
               </span>
-              {{ review_count }} {% if review_count == 1 %} review {% else %} reviews {% endif %}
+              {{ review_count }} {% if review_count == 1 %} {% trans "review" %} {% else %} {% trans "Reviews" %} {% endif %}
 
             </div>
             <div class="col-3 text-right">
               <a target="_blank" href="{% if 'http' not in project.url %}//{%endif%}{{project.url}}"
-              class="colorred"><i class="fas fa-external-link-square-alt"></i> Go to Project</a>
+              class="colorred"><i class="fas fa-external-link-square-alt"></i> {% trans "Go to Project" %}</a>
             </div>
           </div>
 
@@ -122,14 +123,14 @@
           <p>{{project.description | safe}}</p>
           {% if user.is_authenticated %}
           <div class="col-12">
-            <a class="btn btn-outline-secondary float-right" href="/project_review/{{project.id}}">Review</a>
+            <a class="btn btn-outline-secondary float-right" href="/project_review/{{project.id}}">{% trans "Review" %}</a>
             <div id="followed{{project.id}}" class="float-right mr-4">
               {% if project.id in followedProjects %}
               <button type="button" class="btn btn-outline-primary float-right"
-              onclick="setFollowedProject({{project.id}},{{user.id}}, false)">Following</button>
+              onclick="setFollowedProject({{project.id}},{{user.id}}, false)">{% trans "Following" %}</button>
               {% else %}
               <button type="button" class="btn btn-outline-secondary float-right"
-              onclick="setFollowedProject({{project.id}},{{user.id}}, true)">&nbsp;&nbsp;Follow&nbsp;</button>
+              onclick="setFollowedProject({{project.id}},{{user.id}}, true)">&nbsp;&nbsp;{% trans "Follow" %}&nbsp;</button>
               {% endif %}
             </div>
           </div>
@@ -178,21 +179,21 @@
             End:&nbsp;&nbsp;{{ project.end_date | date:"d/m/Y"}}
           </div>
           <hr>
-          <div><b>Science Topic</b></div>
+          <div><b>{% trans "Science Topic" %}</b></div>
           <div>
             {% for topic in project.topic.all %}
             <a class="badge badge-light" href="/projects?keywords=&topic={{topic|urlencode}}">{{topic}}</a>
             {% endfor %}
           </div>
           <hr>
-          <b>Keywords</b>
+          <b>{% trans "Keywords" %}</b>
           <div>
             {% for keyword in project.keywords.all %}
             <a class="badge badge-light" href="/projects?keywords={{keyword|urlencode}}">{{keyword}}</a>
             {% endfor %}
           </div>
           <hr>
-          <b>Location</b>
+          <b>{% trans "Location" %}</b>
           <div>
             {% for geographicextend in project.geographicextend.all %}
             <a class="badge badge-light" href="">{{geographicextend}}</a>
@@ -205,12 +206,12 @@
             <a class="badge badge-light" href="">{{project.projectlocality}}</a>
           </div>
           <hr>
-          <b>Contact</b>
+          <b>{% trans "Contact" %}</b>
           <div>
             <a class="badge badge-light" href="">{{project.host | truncatechars:20}}</a>
             {% if project.mainOrganisation %}
             <a class="badge badge-light"
-            href="/organisation/{{project.mainOrganisation.id}}">{{ project.mainOrganisation }} </a> (Main organisation)
+            href="/organisation/{{project.mainOrganisation.id}}">{{ project.mainOrganisation }} </a> {% trans "(Main organisation)" %}
             {% endif %}
             {% for organisation in project.organisation.all %}
             <a class="badge badge-light" href="/organisation/{{organisation.id}}">{{organisation}}</a>

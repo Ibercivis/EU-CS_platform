@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load staticfiles %}
 {% for organisation in organisations %}
 <div class="col-lg-4 col-sm-12 mb-4">
@@ -13,7 +14,7 @@
         <div class="card-body">
             <h6 class="card-title">
 							<div class="col-12  pl-0 mb-4 colorpurple">
-								<i class="fas fa-university"></i> Organisation
+								<i class="fas fa-university"></i> {% trans "Organisation" %}
 							</div>
 							<a class="card-link mt-3" href="/organisation/{{organisation.id }}">{{ organisation.name }}</a></h6>
 

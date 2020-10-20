@@ -1,4 +1,5 @@
 {% extends "base_r2.html" %}
+{% load i18n %}
 {% load staticfiles %}
 {% load thumbnail %}
 {% block head %}
@@ -23,7 +24,7 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 					</h1>
 				</div>
 				<div class="col-12">
-					<h2>Followed projects</h2><br />
+					<h2>{% trans "Followed projects" %}</h2><br />
 				</div>
 			</div>
 		</div>

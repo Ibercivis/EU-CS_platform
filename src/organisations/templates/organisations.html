@@ -1,4 +1,5 @@
 {% extends "base_r2.html" %}
+{% load i18n %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% block title %}{{ block.super }} :: Organisations{% endblock %}
@@ -22,7 +23,7 @@
     {% else %}
     <div class="col-12">
         <img  class="img-fluid img-zoom col-12 mt-5" src="{% static 'site/img/undraw_empty_xct9.svg' %}">
-        <h5 class="mb-4">Sorry, nothing found</h5>
+        <h5 class="mb-4">{% trans "Sorry, nothing found" %}</h5>
     </div>
     {% endif %}
 	</div>

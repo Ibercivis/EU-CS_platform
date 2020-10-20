@@ -1,4 +1,5 @@
 {% extends "base_r2.html" %}
+{% load i18n %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% load leaflet_tags %}
@@ -23,7 +24,7 @@
 	<div class="col-12">
 	{% if counter == 0  %}
 	<img  class="img-fluid img-zoom col-12 mt-5" src="{% static 'site/img/undraw_empty_xct9.svg' %}">
-	<h5 class="mb-4">Sorry, nothing found</h5>
+	<h5 class="mb-4">{% trans "Sorry, nothing found" %}</h5>
 	{% else %}
 	&nbsp;
 	{% endif %}

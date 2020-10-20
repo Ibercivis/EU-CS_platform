@@ -152,6 +152,8 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     # Machina
     'machina.apps.forum_permission.middleware.ForumPermissionMiddleware',
+    
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = "eucs_platform.urls"

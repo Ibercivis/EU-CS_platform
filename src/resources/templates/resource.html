@@ -25,7 +25,7 @@
         <div class="col-xl-3 col-md-6 col-12 d-none d-md-block" id="profileright">
           <div class="card mb-4 border border-0">
             <div class="card-body">
-              <b>Language</b>
+              <b>{% trans "Language" %}</b>
               <div>
                 {% get_language_info_list for LANGUAGES as languages %}
                 {% for language in languages %}
@@ -35,20 +35,20 @@
                 {% endfor %}
               </div>
               <hr/>
-              <b class="text-dark">Category</b>
+              <b class="text-dark">{% trans "Category" %}</b>
               <div>
                 <a class="badge badge-light"
                 href="/resources?category={{resource.category.id}}">{{resource.category | upper }}</a>
               </div>
               <hr/>
-              <b>Theme</b>
+              <b>{% trans "Theme" %}</b>
               <div>
                 {% for theme in resource.theme.all %}
                 <a class="badge badge-light" href="/resources?theme={{theme.id}}">{{ theme | upper }}</a>
                 {% endfor %}
               </div>
               <hr />
-              <b>Keywords</b>
+              <b>{% trans "Keywords" %}</b>
               <div>
                 {% for keyword in resource.keywords.all %}
                 <a class="badge badge-light" href="/resources?keywords={{keyword}}">{{keyword  | upper}}</a>
@@ -71,15 +71,15 @@
                 <span data-value="4" data-text="Very Good"></span>
                 <span data-value="5" data-text="Excellent"></span>
               </span>
-              {{ review_count }} {% if review_count == 1 %} review {% else %} reviews {% endif %}
+              {{ review_count }} {% if review_count == 1 %} {% trans "review" %} {% else %} {% trans "reviews" %} {% endif %}
             </div>
             <div class="col-3 text-right">
               {%if isTrainingResource %}
               <a target="_blank" href="{% if 'http' not in resource.url %}//{%endif%}{{resource.url}}"
-              class="colorblue"><i class="fas fa-external-link-square-alt"></i> Go to Training</a>
+              class="colorblue"><i class="fas fa-external-link-square-alt"></i> {% trans "Go to Training" %}</a>
               {% else %}
               <a target="_blank" href="{% if 'http' not in resource.url %}//{%endif%}{{resource.url}}"
-              class="colorgreen"><i class="fas fa-external-link-square-alt"></i> Go to Resource</a>
+              class="colorgreen"><i class="fas fa-external-link-square-alt"></i> {% trans "Go to Resource" %}</a>
               {% endif %}
             </div>
           </div>
@@ -89,40 +89,40 @@
           <br><br>{{ resource.abstract | safe }}
           {% if isTrainingResource %}
           <div>
-            <b>Education level: </b>{{ resource.educationLevel }}<br>
-            <b>Learning Resource Type: </b>{{ resource.learningResourceType }}<br>
-            <b>Time required: </b> {{ resource.timeRequired }}<br>
-            <b>Conditions of access: </b> {{ resource.conditionsOfAccess }}<br>
+            <b>{% trans "Education level" %}: </b>{{ resource.educationLevel }}<br>
+            <b>{% trans "Learning Resource Type" %}: </b>{{ resource.learningResourceType }}<br>
+            <b>{% trans "Time required" %}: </b> {{ resource.timeRequired }}<br>
+            <b>{% trans "Conditions of access" %}: </b> {{ resource.conditionsOfAccess }}<br>
           </div>
           {% endif %}
           <div>
-            <b>License: </b>{{ resource.license }}<br>
-            <b>Audience: </b>{% for audience in resource.audience.all %}{{ audience }} {% endfor %}<br>
-            <b>Publisher: </b> {{ resource.publisher }}<br>
-            <b>Organisation(s):</b>
+            <b>{% trans "License" %}: </b>{{ resource.license }}<br>
+            <b>{% trans "Audience" %}: </b>{% for audience in resource.audience.all %}{{ audience }} {% endfor %}<br>
+            <b>{% trans "Publisher" %}: </b> {{ resource.publisher }}<br>
+            <b>{% trans "Organisation(s)" %}:</b>
             {% for organisation in resource.organisation.all %}
             <a class="badge" href="/organisation/{{organisation.id}}">{{organisation}}</a>
             {% endfor %}
             <br/>
-            <b>Year of publication: </b> {{ resource.datePublished }}<br>
-            <b>Resource DOI: </b> {{ resource.resourceDOI }}<br>
+            <b>{% trans "Year of publication" %}: </b> {{ resource.datePublished }}<br>
+            <b>{% trans "Resource DOI" %}: </b> {{ resource.resourceDOI }}<br>
           </div>
           <a class="btn btn-outline-secondary float-right ml-2 mt-2"
-          href="{% if 'http' not in resource.url %}//{%endif%}{{resource.url}}" target="_blank">Go to Resource</a>
+          href="{% if 'http' not in resource.url %}//{%endif%}{{resource.url}}" target="_blank">{% trans "Go to Resource" %}</a>
           {% if user.is_authenticated %}
           <div id="saved{{resource.id}}">
             {% if resource.id in savedResources %}
-            <button type="button" class="btn btn-outline-primary float-right mt-2" onclick="setSavedResource({{resource.id}},{{user.id}}, false)">In my library</button>
+            <button type="button" class="btn btn-outline-primary float-right mt-2" onclick="setSavedResource({{resource.id}},{{user.id}}, false)">{% trans "In my library" %}</button>
             {% else %}
-            <button type="button" class="btn btn-outline-secondary float-right mt-2" onclick="setSavedResource({{resource.id}},{{user.id}}, true)">Add to library</button>
+            <button type="button" class="btn btn-outline-secondary float-right mt-2" onclick="setSavedResource({{resource.id}},{{user.id}}, true)">{% trans "Add to library" %}</button>
             {% endif %}
           </div>
 
-          <a  class="btn btn-outline-secondary float-right mr-2 mt-2" href="/resource_review/{{resource.id}}">Review</a>
+          <a  class="btn btn-outline-secondary float-right mr-2 mt-2" href="/resource_review/{{resource.id}}">{% trans "Review" %}</a>
 
           {% endif %}
           {% if review_count > 0 %}
-          <br><b>Reviews</b><br>
+          <br><b>{% trans "Reviews" %}</b><br>
           {% get_review_list for resource as review_list %}
           {% for review in review_list %}
           <span class="gl-star-rating-stars s{{ review.rating | stringformat:'d'}}0 readonly">
@@ -140,7 +140,7 @@
         <div class="d-md-none">
           <div class="card mb-4 border border-0">
             <div class="card-body">
-              <b>Language</b>
+              <b>{% trans "Language" %}</b>
               <div>
                 {% get_language_info_list for LANGUAGES as languages %}
                 {% for language in languages %}
@@ -150,20 +150,20 @@
                 {% endfor %}
               </div>
               <hr/>
-              <b class="text-dark">Category</b>
+              <b class="text-dark">{% trans "Category" %}</b>
               <div>
                 <a class="badge badge-light"
                 href="/resources?category={{resource.category.id}}">{{resource.category | upper }}</a>
               </div>
               <hr/>
-              <b>Theme</b>
+              <b>{% trans "Theme" %}</b>
               <div>
                 {% for theme in resource.theme.all %}
                 <a class="badge badge-light" href="/resources?theme={{theme.id}}">{{ theme | upper }}</a>
                 {% endfor %}
               </div>
               <hr />
-              <b>Keywords</b>
+              <b>{% trans "Keywords" %}</b>
               <div>
                 {% for keyword in resource.keywords.all %}
                 <a class="badge badge-light" href="/resources?keywords={{keyword}}">{{keyword  | upper}}</a>
@@ -207,7 +207,7 @@
       {% endif %}
       {% if resource.creator == user or user.is_staff or user.id in cooperators %}
       <a class="btn btn-red float-right" href="{% if isTrainingResource %}
-      {% url 'editTrainingResource' resource.id %}{% else %}{% url 'editResource' resource.id %}{% endif %}"><i class="fas fa-edit"></i> Edit</a>
+      {% url 'editTrainingResource' resource.id %}{% else %}{% url 'editResource' resource.id %}{% endif %}"><i class="fas fa-edit"></i> {% trans "Edit" %}</a>
 
       {% endif %}
 

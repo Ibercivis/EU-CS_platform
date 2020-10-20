@@ -1,4 +1,5 @@
 {% extends "base_r2.html" %}
+{% load i18n %}
 {% load staticfiles %}
 {% load thumbnail %}
 {% load i18n %}
@@ -24,7 +25,7 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 						{{ show_user.get_full_name }}
 					</div>
 					<div class="col-12">
-						<h2>My library</h2><br />
+						<h2>{% trans "My library" %}</h2><br />
 					</div>
 				</div>
 			</div>

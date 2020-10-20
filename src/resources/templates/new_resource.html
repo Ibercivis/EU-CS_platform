@@ -22,9 +22,9 @@
       <div class="modal-dialog mdialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title">Crop the photo</h4>
+            <h4 class="modal-title">{% trans "Crop the photo" %}</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+              <span aria-hidden="true">&times;</span><span class="sr-only">{% trans "Close" %}</span>
             </button>
           </div>
           <div class="modal-body">
@@ -37,14 +37,14 @@
           <div class="modal-footer">
             <div class="btn-group pull-left" role="group">
               <button type="button" class="btn btn-default js-zoom-in">
-                <span><i class="material-icons" style="font-size: 18px;">zoom_in</i> </span>
+                <span><i class="material-icons" style="font-size: 18px;">{% trans "zoom_in" %}</i> </span>
               </button>
               <button type="button" class="btn btn-default js-zoom-out">
-                <span><i class="material-icons" style="font-size: 18px;">zoom_out</i></span>
+                <span><i class="material-icons" style="font-size: 18px;">{% trans "zoom_out" %}</i></span>
               </button>
             </div>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary js-crop-and-upload">Crop and upload</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+            <button type="button" class="btn btn-primary js-crop-and-upload">{% trans "Crop and upload" %}</button>
           </div>
         </div>
       </div>
@@ -56,26 +56,26 @@
       <div class="modal-dialog mdialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title">Resource is going to saved</h4>
+            <h4 class="modal-title">{% trans "Resource is going to saved" %}</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+              <span aria-hidden="true">&times;</span><span class="sr-only">{% trans "Close" %}</span>
             </button>
           </div>
           <div class="modal-body">
             <div class="row">
               <div class="col-sm">
-                <p>Thank you</p>
+                <p>{% trans "Thank you" %}</p>
 
-                <p>Thank you for submitting your resource profile. This has been sent to the EU-Citizen.Science moderation team, who will check it to ensure that all of the resources shared on the platform are indeed useful for citizen science projects and practitioners, and are of good quality.</p>
+                <p>{% trans "Thank you for submitting your resource profile. This has been sent to the EU-Citizen.Science moderation team, who will check it to ensure that all of the resources shared on the platform are indeed useful for citizen science projects and practitioners, and are of good quality." %}</p>
 
-                <p>We will be in touch with you if we have any questions, and otherwise you will receive an alert that your resource has been moderated and published to the platform. Your resource profile will be visible to the public in the meantime, but will be marked as unmoderated.</p>
+                <p>{% trans "We will be in touch with you if we have any questions, and otherwise you will receive an alert that your resource has been moderated and published to the platform. Your resource profile will be visible to the public in the meantime, but will be marked as unmoderated." %}</p>
 
-                <p>You can make updates or changes to this resource profile at any time, by going to the Submitted resources section in your Personal Area (see the top-right of the platform menu).</p>
+                <p>{% trans "You can make updates or changes to this resource profile at any time, by going to the Submitted resources section in your Personal Area (see the top-right of the platform menu)." %}</p>
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary read-before-save">OK</button>
+            <button type="button" class="btn btn-primary read-before-save">{% trans "OK" %}</button>
           </div>
         </div>
       </div>
@@ -88,27 +88,20 @@
             <div class="card-title p-5">
               <div class="form-row">
                 <div class="col-12">
-                  <h2>New {% if isTrainingResource %}training {% endif %} resource</h2>
-                  Thank you for proposing a new citizen science resource to be shared on the EU-Citizen.Science Platform.
-                  Please fill in all of the mandatory information in the fields below (indicated with an asterisk*),
-                  and as much of the non-mandatory information as possible.<br><br>
+                  <h2>{% trans "New" %} {% if isTrainingResource %}{% trans "training" %} {% endif %} {% trans "resource" %}</h2>
+                  {% trans "Thank you for proposing a new citizen science resource to be shared on the EU-Citizen.Science Platform. Please fill in all of the mandatory information in the fields below (indicated with an asterisk*), and as much of the non-mandatory information as possible." %}<br><br>
 
-                  Resources can include documents such as guidelines, reports, policy briefs, and protocols;
-                  tools such as software or hardware, and other file formats such as videos or podcasts.
-                  Read our blog post on Types of Resources.<br><br>
+                  {% trans "Resources can include documents such as guidelines, reports, policy briefs, and protocols; tools such as software or hardware, and other file formats such as videos or podcasts. Read our blog post on Types of Resources." %}<br><br>
 
-                  Upon saving this profile, your resource will be submitted for moderation by one of the members of the
-                  EU-Citizen.Science consortium. The moderation process is meant to ensure that all of the resources shared
-                  on the platform are indeed useful for citizen science projects and practitioners, and are of good quality.
-                  Read more about <a href="/faq" target="_blank">The Moderation Process</a> here.<br><br>
+                  {% trans "Upon saving this profile, your resource will be submitted for moderation by one of the members of the EU-Citizen.Science consortium. The moderation process is meant to ensure that all of the resources shared on the platform are indeed useful for citizen science projects and practitioners, and are of good quality. Read more about " %}
+                  <a href="/faq" target="_blank">{% trans "The Moderation Process" %}</a> {% trans "here." %}<br><br>
 
-                  Quality factors that we consider include whether your resource is easy to access, is structured clearly,
-                  is easy to read (or hear or view) and understand. Read our <a href="/faq" target="_blank">Quality Guidelines</a>  here.<br><br>
+                  {% trans "Quality factors that we consider include whether your resource is easy to access, is structured clearly, is easy to read (or hear or view) and understand. Read our" %}
+                   <a href="/faq" target="_blank">{% trans "Quality Guidelines" %}</a>  {% trans "here." %}<br><br>
 
-                  Please note that we strongly recommend that you first ensure that your resource is hosted in a permanent
-                  repository (such as on a website that will be maintained and can provide a permalink, or a repository such
-                  as a publisher, <a href="https://zenodo.org/" target="_blank">Zenodo<a> , <a href="https://osf.io/" target="_blank">OSF</a>
-                  or the <a href="https://riojournal.com/" target="_blank">RIO Journal</a>.
+                  {% trans "Please note that we strongly recommend that you first ensure that your resource is hosted in a permanent repository (such as on a website that will be maintained and can provide a permalink, or a repository such as a publisher, " %}
+                  <a href="https://zenodo.org/" target="_blank">Zenodo<a> , <a href="https://osf.io/" target="_blank">OSF</a>
+                  {% trans "or the" %} <a href="https://riojournal.com/" target="_blank">RIO Journal</a>.
                 </div>
               </div>
             </div>
@@ -117,7 +110,7 @@
                 <form action="/new_resource" method="post" class="add-new-resource" enctype="multipart/form-data" autocomplete="off">
                   {% csrf_token %}
                   <div>
-                    <button type="submit" class="btn btn-green float-right"><i class="fas fa-share-square"></i> Save</button>
+                    <button type="submit" class="btn btn-green float-right"><i class="fas fa-share-square"></i> {% trans "Save" %}</button>
                     <br/><br/>
                   </div>
                   <div class="form-row">
@@ -182,7 +175,7 @@
                       {% endfor %}
                     </select>
                     {% endif %}
-                    <p class="help-block">Please indicate the (main) language that the resource is made available</p>
+                    <p class="help-block">{% trans "Please indicate the (main) language that the resource is made available" %}</p>
                   </div>
                 </div>
                 <div class="form-row">
@@ -251,7 +244,7 @@
                 {{ form.time_required|as_crispy_field }}
                 {{ form.conditions_of_access|as_crispy_field }}
                 {% endif %}
-                <button type="submit" class="btn btn-green mt-2"> <i class="fas fa-share-square"></i> Save</button>
+                <button type="submit" class="btn btn-green mt-2"> <i class="fas fa-share-square"></i> {% trans "Save" %}</button>
               </form>
             </table>
           </div>
