@@ -93,7 +93,8 @@ def projects(request):
 
         filters['orderby']=request.GET['orderby']
     else:
-        projects=projects.order_by('-id')
+        projects=projects.order_by('-dateUpdated')
+
 
     # Pin projects to top
     projects = list(projectsTop) + list(projects)

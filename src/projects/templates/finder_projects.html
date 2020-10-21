@@ -32,6 +32,7 @@ Read more about our <a href="/faq">moderation process</a>.
 				<select id="orderby" name="orderby" class="custom-select form-control float-right">
 					<!--option value="-id" {% if filters.orderby == "-id" %} selected {% endif %}>Newest to Oldest</option>
 					<option value="id" {% if filters.orderby == "id" %} selected {% endif %}>Oldest to Newest</option-->
+					<option value="" {% if filters.orderby == "" %} selected {% endif %}>{% trans "Sort by Most Recent Updated" %}</option>
 					<option value="-avg_rating" {% if filters.orderby == "-avg_rating" %} selected {% endif %}>{% trans "Sort by rating" %}</option>
 					<!--option value="avg_rating" {% if filters.orderby == "avg_rating" %} selected {% endif %}>Worst average rating</option-->
 				</select>
