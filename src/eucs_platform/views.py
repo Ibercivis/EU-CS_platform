@@ -20,6 +20,7 @@ def home(request):
     user = request.user
     projects = Project.objects.get_queryset().filter(~Q(hidden=True)).order_by('featured','id')
     approvedProjects = ApprovedProjects.objects.all().values_list('project_id',flat=True)
+    projects = projects.filter(id__in=approvedProjects)
     followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id',flat=True)
 
     filters = {'keywords': ''}
@@ -39,6 +40,7 @@ def home(request):
     #Resources
     resources = Resource.objects.get_queryset().filter(~Q(isTrainingResource=True)).filter(~Q(hidden=True)).order_by('featured','id')
     approvedResources = ApprovedResources.objects.all().values_list('resource_id',flat=True)
+    resources = resources.filter(id__in=approvedResources)
     savedResources = None
     savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True)
     languagesWithContent = Resource.objects.all().values_list('inLanguage',flat=True).distinct()
@@ -57,6 +59,7 @@ def home(request):
     #Training Resources
     tresources = Resource.objects.get_queryset().filter(isTrainingResource=True).order_by('id')
     tapprovedResources = ApprovedResources.objects.all().values_list('resource_id',flat=True)
+    tresources = tresources.filter(id__in=tapprovedResources)
     tsavedResources = None
     tsavedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True)
     if request.GET.get('keywords'):
