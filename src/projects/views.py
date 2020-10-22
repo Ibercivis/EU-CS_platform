@@ -82,8 +82,9 @@ def projects(request):
             projectsVoted = []
             for r in reviews:
                 proj = Project.objects.all().filter(id=r).first()
-                if projects.filter(id=proj.id).exists():
-                    projectsVoted.append(proj)
+                if(proj):
+                    if projects.filter(id=proj.id).exists():
+                        projectsVoted.append(proj)
 
             projects = projects.exclude(id__in=reviews)
             if(orderBy == "avg_rating"):
