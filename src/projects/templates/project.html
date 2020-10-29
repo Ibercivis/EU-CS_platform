@@ -78,7 +78,7 @@
             {% endfor %}
             {% for country in countries %}
             {% if country.code == project.country %}
-            <a class="badge badge-light" href="projects?country={{country.code}}">{{ country.name | title }}</a>
+            <a class="badge badge-light" href="/projects?country={{country.code}}">{{ country.name | title }}</a>
             {% endif %}
             {% endfor %}
             <a class="badge badge-light" href="">{{project.projectlocality}}</a>
@@ -200,7 +200,7 @@
             {% endfor %}
             {% for country in countries %}
             {% if country.code == project.country %}
-            <a class="badge badge-light" href="projects?country={{country.code}}">{{ country.name | title }}</a>
+            <a class="badge badge-light" href="/projects?country={{country.code}}">{{ country.name | title }}</a>
             {% endif %}
             {% endfor %}
             <a class="badge badge-light" href="">{{project.projectlocality}}</a>
