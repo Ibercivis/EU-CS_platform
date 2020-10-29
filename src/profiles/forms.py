@@ -34,7 +34,7 @@ class ProfileForm(forms.ModelForm):
             Field("title"),
             Field("bio"),
             Field("institution"),
-            Field("orcid", label="Orciddd"),
+            Field("orcid"),
             Field("interestAreas"),
             Field("choices"),
             Field("latitude"),
