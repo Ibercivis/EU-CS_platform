@@ -38,7 +38,7 @@ def home(request):
 
 
     #Resources
-    resources = Resource.objects.get_queryset().filter(~Q(isTrainingResource=True)).filter(~Q(hidden=True)).order_by('featured','id')
+    resources = Resource.objects.get_queryset().filter(~Q(isTrainingResource=True)).filter(~Q(hidden=True)).order_by('-featured','id')
     approvedResources = ApprovedResources.objects.all().values_list('resource_id',flat=True)
     resources = resources.filter(id__in=approvedResources)
     savedResources = None

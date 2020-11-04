@@ -61,7 +61,7 @@ class Resource(models.Model):
     imageCredit2 = models.CharField(max_length=300, null=True, blank=True)
     resourceDOI = models.CharField(max_length=100, null=True,blank=True)
     hidden = models.BooleanField(null=True, blank=True)
-    featured = models.BooleanField(null=True, blank=True)
+    featured = models.BooleanField(default=False)
 
     organisation = models.ManyToManyField(Organisation)
 
