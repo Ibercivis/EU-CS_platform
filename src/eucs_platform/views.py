@@ -18,7 +18,7 @@ import json
 def home(request):
     #Projects
     user = request.user
-    projects = Project.objects.get_queryset().filter(~Q(hidden=True)).order_by('featured','id')
+    projects = Project.objects.get_queryset().filter(~Q(hidden=True)).order_by('-featured','id')
     approvedProjects = ApprovedProjects.objects.all().values_list('project_id',flat=True)
     projects = projects.filter(id__in=approvedProjects)
     followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id',flat=True)
