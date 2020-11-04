@@ -33,7 +33,6 @@ class ProfileForm(forms.ModelForm):
             Field("picture"),
             Field("title"),
             Field("bio"),
-            Field("institution"),
             Field("orcid"),
             Field("interestAreas"),
             Field("choices"),
@@ -52,7 +51,7 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = models.Profile
-        fields = ["picture", "title", "bio", "institution", "orcid", "interestAreas", "choices", "organisation",
+        fields = ["picture", "title", "bio", "orcid", "interestAreas", "choices", "organisation",
                 "latitude", "longitude"]
 
 

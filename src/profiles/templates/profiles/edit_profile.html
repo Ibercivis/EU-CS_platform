@@ -40,7 +40,6 @@
 							{{ profile_form.picture|as_crispy_field }}
 							{{ profile_form.title|as_crispy_field }}
 							{{ profile_form.bio|as_crispy_field }}
-							{{ profile_form.institution|as_crispy_field }}
 							{{ profile_form.orcid|as_crispy_field }}
 							{{ profile_form.organisation|as_crispy_field }}
 							{{ profile_form.interestAreas|as_crispy_field }}
@@ -127,13 +126,13 @@
 		function map_init_basic (leafmap) {
 			map = leafmap;
 			if($("#id_latitude").val() !== '')
-			map.setView([parseFloat($("#id_latitude").val()),parseFloat($("#id_longitude").val())], 12)
+				map.setView([parseFloat($("#id_latitude").val()),parseFloat($("#id_longitude").val())], 12)
 			var obj = { latlng: {
 				lat: parseFloat($("#id_latitude").val()),
 				lng: parseFloat($("#id_longitude").val()) }
 			}
 			if($("#id_latitude").val())
-			editMarker(obj);
+				editMarker(obj);
 			map.on('click', editMarker);
 
 			var GeoSearchControl = window.GeoSearch.GeoSearchControl;
