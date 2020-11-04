@@ -92,7 +92,7 @@ class Project(models.Model):
 
     hidden = models.BooleanField(null=True, blank=True)
 
-    featured = models.BooleanField(null=True, blank=True)
+    featured = models.BooleanField(default=False)
 
     customField = models.ManyToManyField(CustomField, blank=True)
 
