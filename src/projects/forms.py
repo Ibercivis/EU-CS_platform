@@ -5,6 +5,7 @@ from django.forms import formset_factory
 from django.shortcuts import get_object_or_404
 from django_select2.forms import Select2MultipleWidget
 from django_summernote.widgets import SummernoteWidget
+from django.utils.translation import ugettext as _
 from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderServiceError
 from .models import Project, Topic, Status, Keyword, FundingBody, CustomField, OriginDatabase, ParticipationTask, GeographicExtend
@@ -15,62 +16,62 @@ geolocator = Nominatim(timeout=None)
 class ProjectForm(forms.Form):
     #Basic Project Information
     project_name = forms.CharField(max_length=200, \
-        widget=forms.TextInput(),help_text='Short name or title of the project')
+        widget=forms.TextInput(),help_text=_('Short name or title of the project'))
     keywords = forms.MultipleChoiceField(choices=(), \
         widget=Select2MultipleWidget(), required=False, \
-        help_text='Please enter 2-3 keywords (comma separated) to further describe your project and assist search on the platform',label='Keywords')
+        help_text=_('Please enter 2-3 keywords (comma separated) to further describe your project and assist search on the platform'),label=_('Keywords'))
 
     #aim = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 2000}}), label="Aim of the project (max 2000 characters)")
     aim = forms.CharField(\
-        widget=forms.Textarea(), help_text='Primary aim, goal or objective of the project. Max 2000 characters',\
+        widget=forms.Textarea(), help_text=_('Primary aim, goal or objective of the project. Max 2000 characters'),\
         max_length = 2000)
 
     #description = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 3000}}), label="Description of Citizen Science Aspects (max 3000 haracters)")
     description = forms.CharField(\
-        widget=forms.Textarea(), help_text='Please describe the citizen science aspect(s) of the project - see the <a href="https://zenodo.org/communities/citscicharacteristics">ECSA Characteristics of Citizen Science</a> for guidance',\
+        widget=forms.Textarea(), help_text=_('Please describe the citizen science aspect(s) of the project - see the <a href="https://zenodo.org/communities/citscicharacteristics">ECSA Characteristics of Citizen Science</a> for guidance'),\
         max_length = 3000)
     topic = forms.ModelMultipleChoiceField(queryset=Topic.objects.all(),\
-        widget=Select2MultipleWidget(), help_text='The project topic(s) or field(s) of science, multiple selection', \
-        required=False,label="Topic")
+        widget=Select2MultipleWidget(), help_text=_('The project topic(s) or field(s) of science, multiple selection'), \
+        required=False,label=_("Topic"))
 
     participationtask = forms.ModelMultipleChoiceField(queryset=ParticipationTask.objects.all(),\
-        widget=Select2MultipleWidget(), help_text='Please select the task(s) undertaken by participants', \
-        required=False,label="Participation Task")
+        widget=Select2MultipleWidget(), help_text=_('Please select the task(s) undertaken by participants'), \
+        required=False,label=_("Participation Task"))
 
 
 
-    status = forms.ModelChoiceField(queryset=Status.objects.all(), label="Activity Status",\
-        widget=forms.Select(attrs={'class':'js-example-basic-single'}),help_text='Select one')
+    status = forms.ModelChoiceField(queryset=Status.objects.all(), label=_("Activity Status"),\
+        widget=forms.Select(attrs={'class':'js-example-basic-single'}),help_text=_('Select one'))
 
     start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), \
-        required=False, label="Closest approximate start date of the project")
+        required=False, label=_("Closest approximate start date of the project"))
 
     end_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), \
-        required=False, label="Approximate end date of the project")
+        required=False, label=_("Approximate end date of the project"))
 
     url = forms.CharField(max_length=200, \
-        widget=forms.TextInput(), help_text='Please provide a URL to an external web site for the project')
+        widget=forms.TextInput(), help_text=_('Please provide a URL to an external web site for the project'))
 
     geographicextend = forms.ModelMultipleChoiceField(queryset=GeographicExtend.objects.all(),\
         widget=Select2MultipleWidget(),
-        help_text='Please indicate the spatial scale of the projec', \
-        required=False,label="Geographic Extend")
+        help_text=_('Please indicate the spatial scale of the projec'), \
+        required=False,label=_("Geographic Extend"))
 
     projectlocality = forms.CharField(max_length=300, \
-        widget=forms.TextInput(), required=False, label= "Project locality",
-        help_text='Please describe the locality of the project, in terms of where the main participant activities take place, \
-        E.g. in your backyard, parks in London, rivers in Europe, online globally, etc.')
+        widget=forms.TextInput(), required=False, label= _("Project locality"),
+        help_text=_('Please describe the locality of the project, in terms of where the main participant activities take place, \
+        E.g. in your backyard, parks in London, rivers in Europe, online globally, etc.'))
 
     mainOrganisation = forms.ModelMultipleChoiceField(queryset=Organisation.objects.all(), \
         widget=Select2MultipleWidget(), \
-        help_text='Organisation coordinating the project. If not listed, please add it <a href="/new_organisation">here</a> \
-        before submitting the project', \
-        label='Lead Organisation / Coordinator', required=False)
+        help_text=_('Organisation coordinating the project. If not listed, please add it <a href="/new_organisation">here</a> \
+        before submitting the project'), \
+        label=_('Lead Organisation / Coordinator'), required=False)
 
     organisation = forms.ModelMultipleChoiceField(queryset=Organisation.objects.all(), \
-        widget=Select2MultipleWidget(), help_text='Other Organisation participating in the project. If not listed, please add it \
-        <a href="/new_organisation">here</a> before submitting the project',\
-        required=False,label="Other Organisations")
+        widget=Select2MultipleWidget(), help_text=_('Other Organisation participating in the project. If not listed, please add it \
+        <a href="/new_organisation">here</a> before submitting the project'),\
+        required=False,label=_("Other Organisations"))
 
     choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
 
@@ -81,35 +82,35 @@ class ProjectForm(forms.Form):
 
     contact_person = forms.CharField(max_length=100, \
         widget=forms.TextInput(), \
-        help_text='Please name the contact person or contact point for the Project', required=False, label="Public Contact Point")
+        help_text=_('Please name the contact person or contact point for the Project'), required=False, label=_("Public Contact Point"))
 
     contact_person_email = forms.EmailField(required=False, \
         widget=forms.TextInput(), \
-        help_text='Please provide the email for the contact person or contact point', label="Contact Point Email")
+        help_text=_('Please provide the email for the contact person or contact point'), label=_("Contact Point Email"))
 
     #Profile Images
-    image1 = forms.ImageField(required=False,label="Project image for the thumbnail profile",\
-        help_text='Will be resized to 600x400 pixels',widget=forms.FileInput)
+    image1 = forms.ImageField(required=False,label=_("Project image for the thumbnail profile"),\
+        help_text=_('Will be resized to 600x400 pixels'),widget=forms.FileInput)
     x1 = forms.FloatField(widget=forms.HiddenInput(),required=False)
     y1 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     width1 = forms.FloatField(widget=forms.HiddenInput(),required=False)
     height1 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     withImage1 = forms.BooleanField(widget=forms.HiddenInput(), required=False, initial=False)
-    image_credit1 = forms.CharField(max_length=300, required=False, label="provide image credit, if applicable")
-    image2 = forms.ImageField(required=False, label="Project Logo",\
-        help_text='Will be resized to 600x400 pixels)',widget=forms.FileInput)
+    image_credit1 = forms.CharField(max_length=300, required=False, label=_("provide image credit, if applicable"))
+    image2 = forms.ImageField(required=False, label=_("Project Logo"),\
+        help_text=_('Will be resized to 600x400 pixels)'),widget=forms.FileInput)
     x2 = forms.FloatField(widget=forms.HiddenInput(),required=False)
     y2 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     width2 = forms.FloatField(widget=forms.HiddenInput(),required=False)
     height2 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     withImage2 = forms.BooleanField(widget=forms.HiddenInput(), required=False, initial=False)
-    image_credit2 = forms.CharField(max_length=300, required=False, label="provide Logo credit, if applicable")
-    image3 = forms.ImageField(required=False, label="Project image for the profile heading",\
-        help_text='Will be resized to 1100x400 pixels', widget=forms.FileInput)
+    image_credit2 = forms.CharField(max_length=300, required=False, label=_("provide Logo credit, if applicable"))
+    image3 = forms.ImageField(required=False, label=_("Project image for the profile heading"),\
+        help_text=_('Will be resized to 1100x400 pixels'), widget=forms.FileInput)
     x3 = forms.FloatField(widget=forms.HiddenInput(),required=False)
     y3 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     width3 = forms.FloatField(widget=forms.HiddenInput(),required=False)
-    height3 = forms.FloatField(widget=forms.HiddenInput(), required=False, label="provide image credit, if applicable")
+    height3 = forms.FloatField(widget=forms.HiddenInput(), required=False, label=_("provide image credit, if applicable"))
     withImage3 = forms.BooleanField(widget=forms.HiddenInput(), required=False, initial=False)
     image_credit3 = forms.CharField(max_length=300, required=False)
 
@@ -121,32 +122,32 @@ class ProjectForm(forms.Form):
     #Participation Information
     #how_to_participate = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 1000}}), required=False, label="How to participate (max 1000 characters)")
     how_to_participate = forms.CharField(widget=forms.Textarea(),\
-        help_text='Please describe how people can get involved in the project', max_length = 2000)
-    doingAtHome =  forms.BooleanField(required=False,label="Can participate at home")
+        help_text=_('Please describe how people can get involved in the project'), max_length = 2000)
+    doingAtHome =  forms.BooleanField(required=False,label=_("Can participate at home"))
     #equipment = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 1000}}), required=False, label="Project Equipment")
 
     equipment = forms.CharField(widget=forms.Textarea(),\
-        help_text='Describe any required or suggested equipment to be used in the project', max_length = 2000, required=False)
+        help_text=_('Describe any required or suggested equipment to be used in the project'), max_length = 2000, required=False)
     #Funding
     funding_body =  forms.ModelMultipleChoiceField(queryset=FundingBody.objects.all(), widget=Select2MultipleWidget(),\
-        help_text='Please enter the funding agencies of the project (e.g. European Commission). \
-        Select them from the list or add your own ended by comma ', required=False, label="Funding body (Put a comma after each name to add a new funding body)")
+        help_text=_('Please enter the funding agencies of the project (e.g. European Commission). \
+        Select them from the list or add your own ended by comma '), required=False, label=_("Funding body (Put a comma after each name to add a new funding body)"))
     fundingBodySelected = forms.CharField(widget=forms.HiddenInput(), max_length=100, required=False)
 
     funding_program = forms.CharField(max_length=500, widget=forms.TextInput(),\
-        help_text='Indication of the programme that funds or funded a project',required=False)
+        help_text=_('Indication of the programme that funds or funded a project'),required=False)
     #Origin information
     origin_database =  forms.ModelMultipleChoiceField(queryset=OriginDatabase.objects.all(), widget=Select2MultipleWidget(),\
-        help_text='Do you know the name of the database where the project first appeared?, add it here ended by comma.',\
+        help_text=_('Do you know the name of the database where the project first appeared?, add it here ended by comma.'),\
         required=False)
     originDatabaseSelected = forms.CharField(widget=forms.HiddenInput(), max_length=300, required=False)
 
     originUID = forms.CharField(max_length=200, widget=forms.TextInput(),\
-        help_text='Do you know the Unique identificator of the project in the previous database?, add it here.',required=False, \
-        label="Origin UID")
+        help_text=_('Do you know the Unique identificator of the project in the previous database?, add it here.'),required=False, \
+        label=_("Origin UID"))
 
     originURL = forms.CharField(max_length=200, widget=forms.TextInput(),\
-        help_text='Do you know the origin URL in the previous database?, add it here',required=False, label="Origin URL")
+        help_text=_('Do you know the origin URL in the previous database?, add it here'),required=False, label=_("Origin URL"))
 
     #Custom fields
     title = forms.CharField(max_length=100, required=False)
@@ -284,4 +285,4 @@ CustomFieldFormset = formset_factory(CustomFieldForm,extra=1)
 class ProjectPermissionForm(forms.Form):
     selectedUsers = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     usersCollection = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
-    usersAllowed =   forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False, label="Give additional users permission to edit")
+    usersAllowed =   forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False, label=_("Give additional users permission to edit"))

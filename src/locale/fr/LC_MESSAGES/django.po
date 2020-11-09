@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-20 10:49+0200\n"
+"POT-Creation-Date: 2020-11-09 10:36+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,65 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\accounts\forms.py:25 .\accounts\forms.py:75
+msgid "Enter Email"
+msgstr ""
+
+#: .\accounts\forms.py:26 .\accounts\forms.py:77
+msgid "Enter Password"
+msgstr ""
+
+#: .\accounts\forms.py:32 .\templates\base.html:69
+#: .\templates\registration\password_reset_complete.html:18
+msgid "Log in"
+msgstr ""
+
+#: .\accounts\forms.py:51
+msgid ""
+"We see that your email address is in our database, but that you have not yet "
+"confirmed your address. Please search for the confirmation email in your "
+"inbox (or spam) to activate your account"
+msgstr ""
+
+#: .\accounts\forms.py:76
+msgid "Enter Full Name"
+msgstr ""
+
+#: .\accounts\forms.py:78
+msgid "Re-enter Password"
+msgstr ""
+
+#: .\accounts\forms.py:80 .\templates\base.html:70
+#: .\templates\base_forms.html:44
+msgid "Sign up"
+msgstr ""
+
+#: .\accounts\forms.py:89
+msgid "Enter old password"
+msgstr ""
+
+#: .\accounts\forms.py:90 .\accounts\forms.py:111
+#: .\templates\registration\password_reset_confirm.html:18
+msgid "Enter new password"
+msgstr ""
+
+#: .\accounts\forms.py:91 .\accounts\forms.py:112
+msgid "Enter new password (again)"
+msgstr ""
+
+#: .\accounts\forms.py:92 .\accounts\forms.py:113
+#: .\profiles\templates\profiles\edit_profile.html:53
+msgid "Change Password"
+msgstr ""
+
+#: .\accounts\forms.py:102
+msgid "Enter email"
+msgstr ""
+
+#: .\accounts\forms.py:103
+msgid "Reset Password"
+msgstr ""
 
 #: .\accounts\templates\accounts\acc_active_email.html:4
 msgid "Activate your EU-Citizen.Science account."
@@ -87,6 +146,45 @@ msgstr ""
 msgid "New event"
 msgstr ""
 
+#: .\organisations\forms.py:10
+msgid "The name or the organisation"
+msgstr ""
+
+#: .\organisations\forms.py:12
+msgid "URL of the organisation"
+msgstr ""
+
+#: .\organisations\forms.py:14
+msgid "Please briefly describe the organisation (ideally in 500 words or less)"
+msgstr ""
+
+#: .\organisations\forms.py:16
+#: .\organisations\templates\finder_organisations.html:19
+msgid "Type"
+msgstr ""
+
+#: .\organisations\forms.py:18
+msgid "Please upload the logo of your organisation (.jpg or .png)"
+msgstr ""
+
+#: .\organisations\forms.py:19
+msgid "Logo"
+msgstr ""
+
+#: .\organisations\forms.py:26
+msgid "Please name the contact person or contact point for the organisation"
+msgstr ""
+
+#: .\organisations\forms.py:29
+msgid ""
+"Please provide the email address of the contact person or contact point. "
+"Note you will need permission to do that"
+msgstr ""
+
+#: .\organisations\forms.py:67 .\resources\forms.py:200
+msgid "Give additional users permission to edit"
+msgstr ""
+
 #: .\organisations\templates\edit_organisation.html:28
 #: .\organisations\templates\new_organisation.html:27
 #: .\resources\templates\editResource.html:23
@@ -141,16 +239,12 @@ msgstr ""
 #: .\organisations\templates\edit_organisation.html:137
 #: .\organisations\templates\new_organisation.html:78
 #: .\organisations\templates\new_organisation.html:137
-#: .\profiles\templates\profiles\edit_profile.html:53
+#: .\profiles\templates\profiles\edit_profile.html:52
 #: .\resources\templates\editResource.html:83
 #: .\resources\templates\editResource.html:255
 #: .\resources\templates\new_resource.html:113
 #: .\resources\templates\new_resource.html:247
 msgid "Save"
-msgstr ""
-
-#: .\organisations\templates\finder_organisations.html:19
-msgid "Type"
 msgstr ""
 
 #: .\organisations\templates\finder_organisations.html:29
@@ -252,7 +346,7 @@ msgid "Edit Organisation"
 msgstr ""
 
 #: .\organisations\templates\organisations_cards.html:17
-#: .\profiles\templates\profiles\show_profile.html:47
+#: .\profiles\templates\profiles\show_profile.html:46
 #: .\templates\modalinfo.html:20
 msgid "Organisation"
 msgstr ""
@@ -261,13 +355,9 @@ msgstr ""
 msgid "Edit profile"
 msgstr ""
 
-#: .\profiles\templates\profiles\edit_profile.html:50
-#: .\profiles\templates\profiles\show_profile.html:60
+#: .\profiles\templates\profiles\edit_profile.html:49
+#: .\profiles\templates\profiles\show_profile.html:59
 msgid "Geographical location"
-msgstr ""
-
-#: .\profiles\templates\profiles\edit_profile.html:54
-msgid "Change Password"
 msgstr ""
 
 #: .\profiles\templates\profiles\followed_projects.html:27
@@ -313,15 +403,123 @@ msgid "Bio and disciplinary background"
 msgstr ""
 
 #: .\profiles\templates\profiles\show_profile.html:45
-msgid "Institution"
-msgstr ""
-
-#: .\profiles\templates\profiles\show_profile.html:46
 msgid "ORCID profile"
 msgstr ""
 
-#: .\profiles\templates\profiles\show_profile.html:52
+#: .\profiles\templates\profiles\show_profile.html:51
 msgid "Interest Areas"
+msgstr ""
+
+#: .\resources\forms.py:19
+msgid "Insert here the title or name of the resource"
+msgstr ""
+
+#: .\resources\forms.py:22
+msgid ""
+"URL to where the document is hosted by the publisher,         or in a "
+"permanent repository such as Zenodo, OSF, the RIO Journal, or similar"
+msgstr ""
+
+#: .\resources\forms.py:26
+msgid "Please briefly describe the resource (ideally in 500 words or less)"
+msgstr ""
+
+#: .\resources\forms.py:29
+msgid "Select one of the proposed categories"
+msgstr ""
+
+#: .\resources\forms.py:34
+msgid ""
+"Select the audience(s) for which the resource is intended. Multiple options "
+"can be selected"
+msgstr ""
+
+#: .\resources\forms.py:37
+msgid ""
+"Please write or select keywords to describe the resource, separated by commas"
+msgstr ""
+
+#: .\resources\forms.py:40
+msgid "The thematic content of the resource (select as many as apply)"
+msgstr ""
+
+#: .\resources\forms.py:44
+msgid ""
+"Please provide the Digital Object Signifier that is unique to your "
+"resource,        generated by the Publisher, Zenodo..."
+msgstr ""
+
+#: .\resources\forms.py:45 .\resources\templates\resource.html:108
+msgid "Resource DOI"
+msgstr ""
+
+#: .\resources\forms.py:49
+msgid ""
+"Author(s) of the resource. Enter <i>FirstInitial LastName</i> and close with "
+"a comma to add an author,        or multiple authors. If not known, name the "
+"project within the resource was created."
+msgstr ""
+
+#: .\resources\forms.py:51
+msgid "Authors"
+msgstr ""
+
+#: .\resources\forms.py:54
+msgid ""
+"Indicate the resource license, such as Creative Commons CC-BY.         Enter "
+"a URL link to the license if available."
+msgstr ""
+
+#: .\resources\forms.py:58
+msgid ""
+"Organisation(s) contributing the resource (multiple selection separated by "
+"comma).         If not listed, please add them <a href=\"/new_organisation"
+"\">here</a > before submitting"
+msgstr ""
+
+#: .\resources\forms.py:59 .\resources\templates\resource.html:102
+msgid "Organisation(s)"
+msgstr ""
+
+#: .\resources\forms.py:62
+msgid ""
+"The publisher of the resource (or the project name, or the lead institution)."
+msgstr ""
+
+#: .\resources\forms.py:65
+msgid "Enter the year (YYYY) that this version of the resource was published"
+msgstr ""
+
+#: .\resources\forms.py:70
+msgid "Image 1 credit"
+msgstr ""
+
+#: .\resources\forms.py:77
+msgid "Image 2 credit"
+msgstr ""
+
+#: .\resources\forms.py:83
+msgid "Curated lists"
+msgstr ""
+
+#: .\resources\forms.py:88 .\resources\templates\resource.html:92
+msgid "Education level"
+msgstr ""
+
+#: .\resources\forms.py:89
+msgid "Insert education level needed, end using comma"
+msgstr ""
+
+#: .\resources\forms.py:93
+msgid "Learning resource type"
+msgstr ""
+
+#: .\resources\forms.py:94 .\resources\forms.py:97
+msgid "Help text here"
+msgstr ""
+
+#: .\resources\forms.py:96
+msgid "Aproximate hours required to finish the training"
 msgstr ""
 
 #: .\resources\templates\editResource.html:62
@@ -558,10 +756,6 @@ msgstr ""
 msgid "Go to Resource"
 msgstr ""
 
-#: .\resources\templates\resource.html:92
-msgid "Education level"
-msgstr ""
-
 #: .\resources\templates\resource.html:93
 msgid "Learning Resource Type"
 msgstr ""
@@ -586,16 +780,8 @@ msgstr ""
 msgid "Publisher"
 msgstr ""
 
-#: .\resources\templates\resource.html:102
-msgid "Organisation(s)"
-msgstr ""
-
 #: .\resources\templates\resource.html:107
 msgid "Year of publication"
-msgstr ""
-
-#: .\resources\templates\resource.html:108
-msgid "Resource DOI"
 msgstr ""
 
 #: .\resources\templates\resource.html:115
@@ -1073,15 +1259,6 @@ msgid ""
 "any activities."
 msgstr ""
 
-#: .\templates\base.html:69
-#: .\templates\registration\password_reset_complete.html:18
-msgid "Log in"
-msgstr ""
-
-#: .\templates\base.html:70 .\templates\base_forms.html:44
-msgid "Sign up"
-msgstr ""
-
 #: .\templates\base.html:74 .\templates\base2.html:68
 #: .\templates\base_forms.html:51 .\templates\base_forum.html:76
 #: .\templates\base_r2.html:166
@@ -1369,10 +1546,6 @@ msgstr ""
 #: .\templates\registration\password_reset_form.html:11
 #: .\templates\registration\password_reset_form.html:12
 msgid "Password reset"
-msgstr ""
-
-#: .\templates\registration\password_reset_confirm.html:18
-msgid "Enter new password"
 msgstr ""
 
 #: .\templates\registration\password_reset_confirm.html:20
