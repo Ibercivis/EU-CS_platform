@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, get_user_model
+from django.utils.translation import ugettext as _
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, HTML, Field
@@ -21,14 +22,14 @@ class LoginForm(AuthenticationForm):
         self.fields["username"].widget.input_type = "email"  # ugly hack
 
         self.helper.layout = Layout(
-            Field("username", placeholder="Enter Email", autofocus=""),
-            Field("password", placeholder="Enter Password"),
+            Field("username", placeholder=_("Enter Email"), autofocus=""),
+            Field("password", placeholder=_("Enter Password")),
             HTML(
                 'Forgot Password? <a href="{}">Remember me</a><br><br>'.format(
                     reverse("accounts:password-reset")
                 )
             ),
-            StrictButton("Log in", css_class="btn-green", type="Submit")
+            StrictButton(_("Log in"), css_class="btn-green", type="Submit")
 
         )
 
@@ -47,7 +48,7 @@ class LoginForm(AuthenticationForm):
                 if user_temp is not None:
                     if not user_temp.is_active:
                         raise forms.ValidationError(
-                            "We see that your email address is in our database, but that you have not yet confirmed your address. Please search for the confirmation email in your inbox (or spam) to activate your account"
+                            _("We see that your email address is in our database, but that you have not yet confirmed your address. Please search for the confirmation email in your inbox (or spam) to activate your account")
                         )
                     else:
                         self.confirm_login_allowed(user_temp)
@@ -71,12 +72,12 @@ class SignupForm(authtoolsforms.UserCreationForm):
         self.fields["email"].widget.input_type = "email"  # ugly hack
         self.fields["captcha"] = ReCaptchaField()
         self.helper.layout = Layout(
-            Field("email", placeholder="Enter Email", autofocus=""),
-            Field("name", placeholder="Enter Full Name"),
-            Field("password1", placeholder="Enter Password"),
-            Field("password2", placeholder="Re-enter Password"),
+            Field("email", placeholder=_("Enter Email"), autofocus=""),
+            Field("name", placeholder=_("Enter Full Name")),
+            Field("password1", placeholder=_("Enter Password")),
+            Field("password2", placeholder=_("Re-enter Password")),
             Field("captcha"),
-            StrictButton("Sign up", css_class="btn-green", type="Submit"),
+            StrictButton(_("Sign up"), css_class="btn-green", type="Submit"),
         )
 
 
@@ -85,10 +86,10 @@ class PasswordChangeForm(authforms.PasswordChangeForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
-            Field("old_password", placeholder="Enter old password", autofocus=""),
-            Field("new_password1", placeholder="Enter new password"),
-            Field("new_password2", placeholder="Enter new password (again)"),
-            StrictButton("Change Password", css_class="btn-red", type="Submit"),
+            Field("old_password", placeholder=_("Enter old password"), autofocus=""),
+            Field("new_password1", placeholder=_("Enter new password")),
+            Field("new_password2", placeholder=_("Enter new password (again)")),
+            StrictButton(_("Change Password"), css_class="btn-red", type="Submit"),
         )
 
 
@@ -98,8 +99,8 @@ class PasswordResetForm(authtoolsforms.FriendlyPasswordResetForm):
         self.helper = FormHelper()
 
         self.helper.layout = Layout(
-            Field("email", placeholder="Enter email", autofocus=""),
-            StrictButton("Reset Password", css_class="btn-red", type="Submit"),
+            Field("email", placeholder=_("Enter email"), autofocus=""),
+            StrictButton(_("Reset Password"), css_class="btn-red", type="Submit"),
         )
 class SetPasswordForm(authforms.SetPasswordForm):
     def __init__(self, *args, **kwargs):
@@ -107,7 +108,7 @@ class SetPasswordForm(authforms.SetPasswordForm):
         self.helper = FormHelper()
 
         self.helper.layout = Layout(
-            Field("new_password1", placeholder="Enter new password", autofocus=""),
-            Field("new_password2", placeholder="Enter new password (again)"),
-            Submit("pass_change", "Change Password", css_class="btn-red"),
+            Field("new_password1", placeholder=_("Enter new password"), autofocus=""),
+            Field("new_password2", placeholder=_("Enter new password (again)")),
+            Submit("pass_change", _("Change Password"), css_class="btn-red"),
         )

@@ -1,31 +1,32 @@
 from django import forms
 from django_select2.forms import Select2MultipleWidget
 from django.shortcuts import get_object_or_404
+from django.utils.translation import ugettext as _
 from .models import Organisation, OrganisationType
 from projects.forms import getCountryCode
 
 class OrganisationForm(forms.Form):
 
-    name = forms.CharField(max_length=200, help_text='The name or the organisation',
+    name = forms.CharField(max_length=200, help_text=_('The name or the organisation'),
     widget=forms.TextInput())
-    url = forms.CharField(max_length=200, help_text='URL of the organisation' ,
+    url = forms.CharField(max_length=200, help_text=_('URL of the organisation') ,
     widget=forms.TextInput())
-    description = forms.CharField(help_text='Please briefly describe the organisation (ideally in 500 words or less)',
+    description = forms.CharField(help_text=_('Please briefly describe the organisation (ideally in 500 words or less)'),
     widget=forms.Textarea(), max_length = 3000)
-    orgType = forms.ModelChoiceField(queryset=OrganisationType.objects.all(), label="Type",
+    orgType = forms.ModelChoiceField(queryset=OrganisationType.objects.all(), label=_("Type"),
     help_text='Select One', widget=forms.Select(attrs={'class':'js-example-basic-single'}))
-    logo = forms.ImageField(required=False, help_text='Please upload the logo of your organisation (.jpg or .png)',
-    label="Logo", widget=forms.FileInput)
+    logo = forms.ImageField(required=False, help_text=_('Please upload the logo of your organisation (.jpg or .png)'),
+    label=_("Logo"), widget=forms.FileInput)
     x = forms.FloatField(widget=forms.HiddenInput(),required=False)
     y = forms.FloatField(widget=forms.HiddenInput(), required=False)
     width = forms.FloatField(widget=forms.HiddenInput(),required=False)
     height = forms.FloatField(widget=forms.HiddenInput(), required=False)
     withLogo = forms.BooleanField(widget=forms.HiddenInput(), required=False, initial=False)
     contact_point = forms.CharField(max_length=100,
-    help_text='Please name the contact person or contact point for the organisation',
+    help_text=_('Please name the contact person or contact point for the organisation'),
     widget=forms.TextInput())
     contact_point_email = forms.CharField(max_length=100,
-    help_text='Please provide the email address of the contact person or contact point. Note you will need permission to do that',
+    help_text=_('Please provide the email address of the contact person or contact point. Note you will need permission to do that'),
     widget=forms.TextInput())
     latitude = forms.DecimalField(max_digits=9,decimal_places=6, widget=forms.HiddenInput())
     longitude = forms.DecimalField(max_digits=9,decimal_places=6, widget=forms.HiddenInput())
@@ -63,4 +64,4 @@ class OrganisationForm(forms.Form):
 class OrganisationPermissionForm(forms.Form):
     selectedUsers = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     usersCollection = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
-    usersAllowed =  forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False, label="Give additional users permission to edit")
+    usersAllowed =  forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False, label=_("Give additional users permission to edit"))
