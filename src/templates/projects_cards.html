@@ -8,9 +8,13 @@
 			{% if project.image1 %}
 			<img class="card-img-top img-fluid img-zoom lazyload {% if project.id not in approvedProjects %}
 			nonmoderated {% endif %}" src="{{ project.image1 }}" />
-			{% else %}
-			<img class="card-img-top img-fluid img-zoom lazyload {% if project.id not in approvedProjects %}
-			nonmoderated {% endif %}" src="{% static 'site/img/project_default_card.webp' %}" />
+			{% else %}			
+			<picture>
+				<source srcset="{% static 'site/img/project_default_card.png' %}" type="image/png">
+				<source srcset="{% static 'site/img/project_default_card.webp' %}" type="image/webp">
+				<img src="site/img/project_default_card.png" class="card-img-top img-fluid img-zoom lazyload {% if project.id not in approvedProjects %}
+				nonmoderated {% endif %}">	
+			</picture>	  
 			{% endif %}
 			<div class="upper">
 				{% if project.hidden or project.id in unApprovedProjects %}<a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">{% trans "NOT ACCEPTED" %}</a><br/>
