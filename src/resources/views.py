@@ -50,10 +50,8 @@ def resources(request, isTrainingResource=False):
     resources = applyFilters(request, resources)
     filters = setFilters(request, filters)
     resources = resources.distinct()
-    #resources = resources.filter(~Q(hidden=True))
-    #resourcesTop = resources.filter(featured=True)
-    #resourcesTopIds = list(resourcesTop.values_list('id',flat=True))
-    #resources = resources.exclude(id__in=resourcesTopIds)
+    resources = resources.filter(~Q(hidden=True))
+
 
     if not user.is_staff:
         resources = resources.exclude(id__in=unApprovedResources)
@@ -61,8 +59,11 @@ def resources(request, isTrainingResource=False):
     # Ordering
     if request.GET.get('orderby'):
         orderBy = request.GET.get('orderby')
-        if("id" in orderBy or "theme" in orderBy):
-            resources=resources.order_by('id',request.GET['orderby']).distinct('id')
+        if("featured" in orderBy):
+            resourcesTop = resources.filter(featured=True)
+            resourcesTopIds = list(resourcesTop.values_list('id',flat=True))
+            resources = resources.exclude(id__in=resourcesTopIds)
+            resources = list(resourcesTop) + list(resources)
         elif("avg" in orderBy):
             reviews = Review.objects.filter(content_type=ContentType.objects.get(model="resource"))
             reviews = reviews.values("object_pk", "content_type").annotate(avg_rating=Avg('rating')).order_by(orderBy).values_list('object_pk',flat=True)
@@ -81,8 +82,6 @@ def resources(request, isTrainingResource=False):
         resources=resources.order_by('-dateLastModification')
 
 
-    # Pin resources to top
-    #resources = list(resourcesTop) + list(resources)
     counter = len(resources)
 
     paginator = Paginator(resources, 12)

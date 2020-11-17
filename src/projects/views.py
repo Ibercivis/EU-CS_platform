@@ -63,17 +63,18 @@ def projects(request):
 
     projects = projects.filter(~Q(hidden=True))
 
-    projectsTop = projects.filter(featured=True)
-    projectsTopIds = list(projectsTop.values_list('id',flat=True))
-    projects = projects.exclude(id__in=projectsTopIds)
+
     if not user.is_staff:
         projects = projects.exclude(id__in=unApprovedProjects)
 
     # Ordering
     if request.GET.get('orderby'):
         orderBy = request.GET.get('orderby')
-        if("id" in orderBy):
-            projects=projects.order_by(request.GET['orderby'])
+        if("featured" in orderBy):
+            projectsTop = projects.filter(featured=True)
+            projectsTopIds = list(projectsTop.values_list('id',flat=True))
+            projects = projects.exclude(id__in=projectsTopIds)
+            projects = list(projectsTop) + list(projects)
         else:
             reviews = Review.objects.filter(content_type=ContentType.objects.get(model="project"))
             reviews = reviews.values("object_pk",
@@ -96,9 +97,7 @@ def projects(request):
     else:
         projects=projects.order_by('-dateUpdated')
 
-
-    # Pin projects to top
-    projects = list(projectsTop) + list(projects)
+    
     counter = len(projects)
 
     paginator = Paginator(projects, 12)
