@@ -34,6 +34,7 @@ main.nomargintop {
 }
 .jumbotron-main{
 	background-image: url('../img/cancitizensc.webp');
+	background-image: image-set( url('../img/cancitizensc.jpg') ); /* Safari */
 	background-color: #405883;
 	min-height: 10vh !important;
 	background-blend-mode: overlay;
@@ -56,6 +57,7 @@ main.nomargintop {
 }
 .jumbotron-lists{
 	background-image: url('../img/selection.webp');
+	background-image: image-set( url('../img/selection.jpeg') ); /* Safari */
 	min-height: 15vh;
 	background-color: #405883;
 	background-blend-mode: overlay;
@@ -64,6 +66,7 @@ main.nomargintop {
 }
 .jumbotron-contact{
 	background-image: url('../img/cancitizensc.webp');
+	background-image: image-set( url('../img/cancitizensc.jpg') ); /* Safari */
 	min-height: 15vh;
 	background-color: #405883;
 	background-blend-mode: overlay;
@@ -72,6 +75,7 @@ main.nomargintop {
 }
 .jumbotron-about{
 	background-image: url('../img/about.webp');
+	background-image: image-set( url('../img/about.png') ); /* Safari */
 	min-height: 15vh;
 	background-color: #405883;
 	background-blend-mode: overlay;
