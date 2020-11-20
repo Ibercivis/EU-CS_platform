@@ -19,10 +19,26 @@
 		<div class="col-sm-4 col-12 mt-4 mb-4">
 			<h3>{% trans "Teaser video" %}</h3>
 		</div>
-		                <div class="col-sm-8 col-12 mt-4 mb-4">
-
-			<iframe width="640" height="360" src="https://www.youtube.com/embed/hfPn85aupcU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-				</div>
+		<div class="col-sm-8 col-12 mt-4 mb-4">
+			<div class="col-sm-4 col-12">
+				<select id="id_teaser" class="select form-control" onchange="loadTeaserVideo()">
+					<option value = "NL">Dutch</option>
+					<option value = "EN" selected>English</option>
+					<option value = "ET">Estonian</option>
+					<option value = "FR">French</option>
+					<option value = "DE">German</option>
+					<option value = "EL">Greek</option>					
+					<option value = "HU">Hungarian</option>
+					<option value = "IT">Italian</option>
+					<option value = "LT">Lithuanian</option>			
+					<option value = "PT">Portuguese</option>
+					<option value = "ES">Spanish</option>
+					<option value = "SV">Swedish</option>
+				</select>
+			</div>
+			<br/>
+			<iframe id="teaserIframe" width="640" height="360" src="https://www.youtube.com/embed/jBfgV8LkYl8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		</div>
 	</div>
 	<div class="row">
 		<div class="col-sm-4 col-12 mt-4 mb-4">
@@ -273,5 +289,25 @@
 {% endblock list_of_items %}
 
 {% block scripts %}
-
+<script>
+	function loadTeaserVideo(){
+		var code = $("#id_teaser").val();
+		switch (code) {
+			case "NL": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/hPMN9LUo2x0"); break;
+			case "EN": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/jBfgV8LkYl8"); break;
+			case "ET": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/94wsDZDwU2A"); break;			
+			case "FR": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/cTsiWL7kzjc"); break;
+			case "DE": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/E4Nl2qT3UVU"); break;
+			case "EL": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/sVAsKEzbOSg"); break;
+			case "HU": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/P4qvioSYLEk"); break;
+			case "IT": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/szQTUB4fzqs"); break;
+			case "LT": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/LPytoycYlio"); break;
+			case "PT": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/eJl0CyHVoF8"); break;
+			case "ES": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/6dF63l4sLRw"); break;
+			case "SV": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/h2qNh32QIfs"); break;
+			default: $("#teaserIframe").attr("src", "https://www.youtube.com/embed/jBfgV8LkYl8");
+		}
+		
+	}
+</script>
 {% endblock scripts %}
