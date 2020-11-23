@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 
-{% load staticfiles %}
 {% load thumbnail %}
 {% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}">
+{% load staticfiles %}
 {% load leaflet_tags %}
 {% load cookielaw_tags %}
 {% load countries %}
 {% get_countries as countries %}
 {% load active_link_tags %}
-{% get_current_language as LANGUAGE_CODE %}
-<html lang="{{ LANGUAGE_CODE }}">
+
 <head>
   {% block head %}
   <meta charset="UTF-8">
