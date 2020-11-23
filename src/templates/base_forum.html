@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+
 {% load staticfiles %}
 {% load thumbnail %}
 {% load i18n %}
@@ -8,7 +8,8 @@
 {% load countries %}
 {% get_countries as countries %}
 {% load active_link_tags %}
-{% get_current_language as LANGUAGE_CODE %}lang="{{ LANGUAGE_CODE }}"%}
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
   {% block head %}
   <meta charset="UTF-8">
