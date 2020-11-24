@@ -141,6 +141,7 @@ INSTALLED_APPS = (
     "django_cron",
     'django_crontab',
     'ckeditor',
+    'ckeditor_uploader',
 )
 
 MIDDLEWARE = [
@@ -361,7 +362,11 @@ MACHINA_DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = [
 ]
 
 MACHINA_MARKUP_LANGUAGE = None
-MACHINA_MARKUP_WIDGET = 'ckeditor.widgets.CKEditorWidget'
+MACHINA_MARKUP_WIDGET = 'ckeditor_uploader.widgets.CKEditorUploadingWidget'
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
+CKEDITOR_REQUIRE_STAFF=False
 
 CRON_CLASSES = [
     "eucs_platform.cron.ExpiredUsersCronJob",

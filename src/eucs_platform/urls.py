@@ -2,8 +2,9 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic import RedirectView
-from django.urls import include, path
+from django.urls import include, path, re_path
 from django.conf.urls import url
+from django.views.decorators.cache import never_cache
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from machina import urls as machina_urls
@@ -15,6 +16,7 @@ import projects.urls
 import resources.urls
 import events.urls
 import contact.urls
+import ckeditor_uploader.views
 from . import views
 
 
@@ -68,6 +70,8 @@ urlpatterns = [
     url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     url(r'^openid/', include('oidc_provider.urls', namespace='oidc_provider')),
+   re_path(r"^upload/", ckeditor_uploader.views.upload, name="ckeditor_upload"),
+   re_path(r"^browse/",never_cache(ckeditor_uploader.views.browse),name="ckeditor_browse",),
 ]
 
 # User-uploaded files like profile pics need to be served in development
