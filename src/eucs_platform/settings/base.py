@@ -140,6 +140,7 @@ INSTALLED_APPS = (
     'organisations',
     "django_cron",
     'django_crontab',
+    'ckeditor',
 )
 
 MIDDLEWARE = [
@@ -359,6 +360,8 @@ MACHINA_DEFAULT_AUTHENTICATED_USER_FORUM_PERMISSIONS = [
     'can_download_file',
 ]
 
+MACHINA_MARKUP_LANGUAGE = None
+MACHINA_MARKUP_WIDGET = 'ckeditor.widgets.CKEditorWidget'
 
 CRON_CLASSES = [
     "eucs_platform.cron.ExpiredUsersCronJob",
