@@ -5,8 +5,7 @@
 {% block splash %}
 <div class="jumbotron jumbotron-fluid jumbotron-blue">
 	<div class="container">
-		<h1 class="display-4 pb-0 text-white"><br>{% trans "About" %}</h1>
-		<p class="lead text-white">&nbsp;</p>
+		<h1 class="display-4 pt-4 pb-4 text-white">{% trans "About" %}</h1>
 	</div>
 </div>
 {% endblock splash %}
@@ -27,10 +26,10 @@
 					<option value = "ET">Estonian</option>
 					<option value = "FR">French</option>
 					<option value = "DE">German</option>
-					<option value = "EL">Greek</option>					
+					<option value = "EL">Greek</option>
 					<option value = "HU">Hungarian</option>
 					<option value = "IT">Italian</option>
-					<option value = "LT">Lithuanian</option>			
+					<option value = "LT">Lithuanian</option>
 					<option value = "PT">Portuguese</option>
 					<option value = "ES">Spanish</option>
 					<option value = "SV">Swedish</option>
@@ -295,7 +294,7 @@
 		switch (code) {
 			case "NL": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/hPMN9LUo2x0"); break;
 			case "EN": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/jBfgV8LkYl8"); break;
-			case "ET": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/94wsDZDwU2A"); break;			
+			case "ET": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/94wsDZDwU2A"); break;
 			case "FR": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/cTsiWL7kzjc"); break;
 			case "DE": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/E4Nl2qT3UVU"); break;
 			case "EL": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/sVAsKEzbOSg"); break;
@@ -307,7 +306,7 @@
 			case "SV": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/h2qNh32QIfs"); break;
 			default: $("#teaserIframe").attr("src", "https://www.youtube.com/embed/jBfgV8LkYl8");
 		}
-		
+
 	}
 </script>
 {% endblock scripts %}
