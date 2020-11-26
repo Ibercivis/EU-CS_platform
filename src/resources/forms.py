@@ -34,7 +34,7 @@ class ResourceForm(forms.ModelForm):
         help_text=_('Select the audience(s) for which the resource is intended. Multiple options can be selected'))
 
     keywords = forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget(),\
-        help_text=_('Please write or select keywords to describe the resource, separated by commas'), required=False)
+        help_text=_('Please write or select keywords to describe the resource, separated by commas or pressing enter'), required=False)
 
     theme = forms.ModelMultipleChoiceField(queryset=Theme.objects.all(), widget=Select2MultipleWidget(),\
         help_text=_('The thematic content of the resource (select as many as apply)'))
@@ -46,7 +46,7 @@ class ResourceForm(forms.ModelForm):
 
     authorsCollection = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     authors = forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget(),\
-        help_text=_('Author(s) of the resource. Enter <i>FirstInitial LastName</i> and close with a comma to add an author,\
+        help_text=_('Author(s) of the resource. Enter <i>FirstInitial LastName</i> and close with a comma or pressing enter to add an author,\
         or multiple authors. If not known, name the project within the resource was created.'), \
         required=False,label=_("Authors"))
 
@@ -55,7 +55,7 @@ class ResourceForm(forms.ModelForm):
          Enter a URL link to the license if available.'), required=False)
 
     organisation = forms.ModelMultipleChoiceField(queryset=Organisation.objects.all(), widget=Select2MultipleWidget(),\
-        help_text=_('Organisation(s) contributing the resource (multiple selection separated by comma). \
+        help_text=_('Organisation(s) contributing the resource (multiple selection separated by comma or pressing enter). \
         If not listed, please add them <a href="/new_organisation">here</a > before submitting'), required=False,label=_("Organisation(s)"))
 
     publisher = forms.CharField(max_length=100, widget=forms.TextInput(),\
@@ -86,7 +86,7 @@ class ResourceForm(forms.ModelForm):
     #Training resources fields
     education_level = forms.ModelMultipleChoiceField(queryset=EducationLevel.objects.all(),\
         widget=Select2MultipleWidget(), required=False, label=_("Education level"),\
-        help_text= _('Insert education level needed, end using comma'))
+        help_text= _('Insert education level needed, end using comma or pressing enter'))
     educationLevelSelected = forms.CharField(widget=forms.HiddenInput(), max_length=100, required=False)
     learning_resource_type =forms.ModelMultipleChoiceField(queryset=LearningResourceType.objects.all(),\
         widget=Select2MultipleWidget(),\

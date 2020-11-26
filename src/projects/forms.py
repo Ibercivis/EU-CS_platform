@@ -19,7 +19,7 @@ class ProjectForm(forms.Form):
         widget=forms.TextInput(),help_text=_('Short name or title of the project'))
     keywords = forms.MultipleChoiceField(choices=(), \
         widget=Select2MultipleWidget(), required=False, \
-        help_text=_('Please enter 2-3 keywords (comma separated) to further describe your project and assist search on the platform'),label=_('Keywords'))
+        help_text=_('Please enter 2-3 keywords (comma separated) or pressing enter to further describe your project and assist search on the platform'),label=_('Keywords'))
 
     #aim = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 2000}}), label="Aim of the project (max 2000 characters)")
     aim = forms.CharField(\
@@ -131,14 +131,14 @@ class ProjectForm(forms.Form):
     #Funding
     funding_body =  forms.ModelMultipleChoiceField(queryset=FundingBody.objects.all(), widget=Select2MultipleWidget(),\
         help_text=_('Please enter the funding agencies of the project (e.g. European Commission). \
-        Select them from the list or add your own ended by comma '), required=False, label=_("Funding body (Put a comma after each name to add a new funding body)"))
+        Select them from the list or add your own ended by comma or pressing enter'), required=False, label=_("Funding body (Put a comma after each name or pressing enter to add a new funding body)"))
     fundingBodySelected = forms.CharField(widget=forms.HiddenInput(), max_length=100, required=False)
 
     funding_program = forms.CharField(max_length=500, widget=forms.TextInput(),\
         help_text=_('Indication of the programme that funds or funded a project'),required=False)
     #Origin information
     origin_database =  forms.ModelMultipleChoiceField(queryset=OriginDatabase.objects.all(), widget=Select2MultipleWidget(),\
-        help_text=_('Do you know the name of the database where the project first appeared?, add it here ended by comma.'),\
+        help_text=_('Do you know the name of the database where the project first appeared?, add it here ended by comma or pressing enter.'),\
         required=False)
     originDatabaseSelected = forms.CharField(widget=forms.HiddenInput(), max_length=300, required=False)
 
