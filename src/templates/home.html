@@ -62,36 +62,41 @@
 	<div class="row">
 
 		<div class="col-12 mb-2">
+			<h3>Projects</h3>
 			{{ counterprojects }} {% trans "result" %}{% if counterprojects != 1 %}s{% endif %} {% trans "in Projects" %}
 			{% if counterprojects > 6 %}, click <a href="/projects">{% trans "here" %}</a> {% trans "to see all of them" %} {% endif %}
 		</div>
-
 		{% include "projects_cards.html" %}
 		<div class="col-12 mb-2">
+			<hr>
+		</div>
+
+		<div class="col-12 mb-2">
+			<h3>Resources</h3>
 			{{ counterresources }} {% trans "result" %}{% if counterresources != 1 %}s{% endif %} {% trans "in Resources" %}
 			{% if counterresources > 6 %}, click <a href="/resources">{% trans "here" %}</a> {% trans "to see all of them" %}{% endif %}
 		</div>
 		{% include "resources_cards.html" %}
 		<div class="col-12 mb-2">
+			<hr>
+		</div>
+
+		<div class="col-12 mb-2">
+			<h3>Training</h3>
 			{{ countertresources }} {% trans "result" %}{% if counterresources != 1 %}s{% endif %} {% trans "in Training" %}
 			{% if countertresources > 6 %}, click <a href="/training_resources">{% trans "here" %}</a> {% trans "to see all of them" %}{% endif %}
 		</div>
 		{% include "resources_cards.html" with resources=tresources %}
 		<div class="col-12 mb-2">
+			<hr>
+		</div>
+		
+		<div class="col-12 mb-2">
+			<h3>Organisations</h3>
 			{{ counterorganisations}} {% trans "result" %}{% if counterorganisations != 1 %}s{% endif %} {% trans "in Organisations" %}
 			{% if counterorganisations > 6 %}, click <a href="/organisations">{% trans "here" %}</a> {% trans "to see all of them" %}{% endif %}
-
 		</div>
-
 		{% include "organisations_cards.html" %}
-		<div class="col-12">
-			{% if total == 0  %}
-			<img  class="img-fluid img-zoom col-12 mt-5" src="{% static 'site/img/undraw_empty_xct9.svg' %}">
-			<h5 class="mb-4">{% trans "Sorry, nothing found" %}</h5>
-			{% else %}
-			&nbsp;
-			{% endif %}
-		</div>
 	</div>
 </div>
 {% endblock list_of_items %}
