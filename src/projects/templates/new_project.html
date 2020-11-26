@@ -327,28 +327,36 @@
     $(document).ready(function () {
       $('.js-example-basic-single').select2();
 
-      $("#div_id_keywords div").on('keyup', function(){
+      $("#div_id_keywords div").on('keyup', function(e){
         var key = $("#div_id_keywords .selection input").val();
         if (key.indexOf(',') > -1) {
           var word =key.slice(0, -1);
           $("#div_id_keywords .selection input").val("");
           $("#id_keywords").append("<option value='" + word +"' selected> " + word + " </option>");
         }
+        if(e.which == 13) {
+          $("#div_id_keywords .selection input").val("");
+          $("#id_keywords").append("<option value='" + key +"' selected> " + key + " </option>");
+        }
       });
-      
-
+     
       getKeywordsSelector();
 
       $("#div_id_funding_body div").on('change', function(){
         $("#id_funding_body").removeAttr('multiple');
       });
 
-      $("#div_id_funding_body div").on('keyup', function(){
+      $("#div_id_funding_body div").on('keyup', function(e){
         var key = $("#div_id_funding_body .selection input").val();
         if (key.indexOf(',') > -1) {
           var word =key.slice(0, -1);
           $("#div_id_funding_body .selection input").val("");
           $("#id_funding_body").append("<option value='" + word +"' selected> " + word + " </option>");
+          $("#id_funding_body").removeAttr('multiple');
+        }
+        if(e.which == 13) {
+          $("#div_id_funding_body .selection input").val("");
+          $("#id_funding_body").append("<option value='" + key +"' selected> " + key + " </option>");
           $("#id_funding_body").removeAttr('multiple');
         }
       });
@@ -357,12 +365,17 @@
         $("#id_origin_database").removeAttr('multiple');
       });
 
-      $("#div_id_origin_database div").on('keyup', function(){
+      $("#div_id_origin_database div").on('keyup', function(e){
         var key = $("#div_id_origin_database .selection input").val();
         if (key.indexOf(',') > -1) {
           var word =key.slice(0, -1);
           $("#div_id_origin_database .selection input").val("");
           $("#id_origin_database").append("<option value='" + word +"' selected> " + word + " </option>");
+          $("#id_origin_database").removeAttr('multiple');
+        }
+        if(e.which == 13) {
+          $("#div_id_origin_database .selection input").val("");
+          $("#id_origin_database").append("<option value='" + key +"' selected> " + key + " </option>");
           $("#id_origin_database").removeAttr('multiple');
         }
       });

@@ -5,6 +5,7 @@ from crispy_forms.layout import Layout, Div, Submit, HTML, Button, Row, Field
 from crispy_forms.bootstrap import AppendedText, PrependedText, FormActions
 from django.contrib.auth import get_user_model
 from . import models
+from django.utils.translation import ugettext as _
 from django_select2.forms import Select2MultipleWidget
 from organisations.models import Organisation
 
@@ -44,7 +45,7 @@ class ProfileForm(forms.ModelForm):
     CHOICES = ()
     choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=CHOICES)
     interestAreas = forms.MultipleChoiceField(choices=CHOICES, widget=Select2MultipleWidget,
-                        required=False, label="Interest Areas")
+                        required=False, label="Interest Areas",help_text=_('Please write or select interest areas, separated by commas or pressing enter'))
     latitude = forms.DecimalField(widget=forms.HiddenInput(),max_digits=9,decimal_places=6,required=False)
     longitude = forms.DecimalField(widget=forms.HiddenInput(),max_digits=9,decimal_places=6,required=False)
     organisation = forms.ModelMultipleChoiceField(queryset=Organisation.objects.all(), widget=Select2MultipleWidget(attrs={'data-placeholder':'Related organisations'}), required=False,label="Organisation (Multiple selection)")

@@ -72,7 +72,7 @@
 				$("#id_interestAreas").append("<option value='" + choice +"' selected> " + choice + " </option>");
 			}
 
-			$("#div_id_interestAreas div").on('keyup', function(){
+			$("#div_id_interestAreas div").on('keyup', function(e){
 				var key = $("#div_id_interestAreas .selection input").val();
 				if (key.indexOf(',') > -1) {
 					var word =key.slice(0, -1);				
@@ -80,7 +80,10 @@
 					if(word.length > 1){
 						$("#id_interestAreas").append("<option value='" + word +"' selected> " + word + " </option>");
 					}
-						
+				}
+				if(e.which == 13) {
+					$("#div_id_interestAreas .selection input").val("");
+					$("#id_interestAreas").append("<option value='" + key +"' selected> " + key + " </option>");
 				}
 			});
 
