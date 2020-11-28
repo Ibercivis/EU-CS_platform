@@ -3,6 +3,9 @@
 
 {% block list_of_items %}
 <link href="/static/reviews/css/star-rating.css" type="text/css" media="all" rel="stylesheet">
+<meta property="og:title" content="{{post.title}}" />
+<meta property="og:description" content="{{post.excerpt}}" />
+<meta property="og:image" content="/media/{{post.image}}" />
 <div class="container">
   <div class="row">
     <div class="container mt-5">
@@ -15,7 +18,7 @@
                 <img class="img-fluid img-responsive img-zoom" src="/media/{{post.image}}" alt="Card image">
               </div>
               {% endif %}
-              <h1>{% block title %} {{ post.title }} {% endblock title %}</h1>              
+              <h1>{% block title %} {{ post.title }} {% endblock title %}</h1>
               <p class=" text-muted">{% if post.author.name != "Empty user" %}
 								{{ post.author.name }} {% endif %} <br /> {{ post.created_on }}</p>
               {% if post.image.width < post.image.height %}
