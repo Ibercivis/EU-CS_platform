@@ -91,7 +91,6 @@ class ResourcesGrouped(models.Model):
     def __str__(self):
         return str(self.group) + ' - ' + str(self.resource)
 
-
 class ApprovedResources(models.Model):
     resource = models.OneToOneField(Resource, on_delete=models.CASCADE)
     def __str__(self):
