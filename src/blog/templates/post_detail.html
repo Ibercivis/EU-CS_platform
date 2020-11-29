@@ -1,7 +1,6 @@
 {% extends 'baseblog.html' %}
 {% load reviews %}
-
-{% block list_of_items %}
+{% block meta %}
 <link href="/static/reviews/css/star-rating.css" type="text/css" media="all" rel="stylesheet">
 <meta property="og:title" content="{{post.title}}" />
 <meta property="og:description" content="{{post.excerpt}}" />
@@ -10,6 +9,10 @@
 <meta name="twitter:title" content="{{post.title}}" />
 <meta name="twitter:description" content="{{post.excerpt}}" />
 <meta name="twitter:image" content="https://eu-citizen.science/media/{{post.image}}" />
+{% endblock meta %}
+
+{% block list_of_items %}
+
 <div class="container">
   <div class="row">
     <div class="container mt-5">
