@@ -1,18 +1,25 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.utils import formats
-from .models import Event
+from .models import Event, ApprovedEvents, UnApprovedEvents
 from .forms import EventForm
 
 
 def events(request):
     user = request.user
     events = Event.objects.get_queryset().order_by('-featured','start_date')
+    approvedEvents = ApprovedEvents.objects.all().values_list('event_id',flat=True)
+    unApprovedEvents = UnApprovedEvents.objects.all().values_list('event_id',flat=True)
 
-    return render(request, 'events.html', {'events': events, 'user':user})
+    if not user.is_staff:
+        events = events.exclude(id__in=unApprovedEvents)
 
-@staff_member_required()
+    return render(request, 'events.html', {'events': events, 'approvedEvents': approvedEvents,
+    'unApprovedEvents': unApprovedEvents,'user':user})
+
+@login_required(login_url='/login')
 def new_event(request):
     user = request.user
     form = EventForm()
@@ -25,10 +32,14 @@ def new_event(request):
             print(form.errors)
     return render(request, 'new_event.html', {'form': form, 'user':user})
 
-@staff_member_required()
+
 def editEvent(request, pk):
     user = request.user
     event = get_object_or_404(Event, id=pk)
+
+    if user != event.creator and not user.is_staff:
+        return redirect('../events', {})
+
     start_datetime = None
     end_datetime = None
     if event.start_date:
@@ -46,10 +57,10 @@ def editEvent(request, pk):
             print(form.errors)
     return render(request, 'editEvent.html', {'form': form, 'user':user, 'event': event})
 
-@staff_member_required()
+
 def deleteEvent(request, pk):
     obj = get_object_or_404(Event, id=pk)
-    if request.user.is_staff:
+    if request.user == obj.creator or request.user.is_staff:
         obj.delete()
     return redirect('events')
 
@@ -62,3 +73,33 @@ def setFeaturedEvent(request):
     event.featured = False if featured == 'false' else True
     event.save()
     return JsonResponse(response, safe=False)
+
+@staff_member_required()
+def setApprovedEvent(request):
+    response = {}
+    id = request.POST.get("event_id")
+    approved = request.POST.get("approved")
+    setApprovedOrUnapprovedEvent(id, approved)
+    return JsonResponse(response, safe=False)
+
+def setApprovedOrUnapprovedEvent(id, approved):
+    approved= False if approved in ['False','false','0'] else True
+    aEvent = get_object_or_404(Event, id=id)
+    if approved == True:
+        #Insert
+        ApprovedEvents.objects.get_or_create(event=aEvent)
+        #Delete UnApprovedEvents
+        try:
+            obj = UnApprovedEvents.objects.get(event_id=id)
+            obj.delete()
+        except UnApprovedEvents.DoesNotExist:
+            print("Does not exist this unapproved event")
+    else:
+        #Insert UnApprovedEvents
+        UnApprovedEvents.objects.get_or_create(event=aEvent)
+        #Delete
+        try:
+            obj = ApprovedEvents.objects.get(event_id=id)
+            obj.delete()
+        except ApprovedEvents.DoesNotExist:
+            print("Does not exist this approved event")

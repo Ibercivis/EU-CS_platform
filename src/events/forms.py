@@ -26,8 +26,10 @@ class EventForm(forms.Form):
             event.end_date = self.data['end_date']
             event.hour = hour
             event.url = self.data['url']
+            event.creator=args.user
         else:
             event = Event(title =  self.data['title'], description =  self.data['description'], place =  self.data['place'],
-                        start_date =  self.data['start_date'], end_date =  self.data['end_date'], hour = hour, url =  self.data['url']
+                        start_date =  self.data['start_date'], end_date =  self.data['end_date'], hour = hour, url =  self.data['url'],
+                        creator = args.user
                     )
         event.save()
