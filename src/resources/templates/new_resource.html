@@ -280,11 +280,15 @@
       if (key.indexOf(',') > -1) {
         var word =key.slice(0, -1);
         $("#div_id_keywords .selection input").val("");
-        $("#id_keywords").append("<option value='" + word +"' selected> " + word + " </option>");
+        if(word.length > 1){
+          $("#id_keywords").append("<option value='" + word +"' selected> " + word + " </option>");
+        }
       }
       if(e.which == 13) {
         $("#div_id_keywords .selection input").val("");
-        $("#id_keywords").append("<option value='" + key +"' selected> " + key + " </option>");
+        if(key.length > 1){
+          $("#id_keywords").append("<option value='" + key +"' selected> " + key + " </option>");
+        }
       }
     });
 
@@ -293,11 +297,15 @@
       if (key.indexOf(',') > -1) {
         var word =key.slice(0, -1);
         $("#div_id_authors .selection input").val("");
-        $("#id_authors").append("<option value='" + word +"' selected> " + word + " </option>");
+        if(word.length > 1){
+          $("#id_authors").append("<option value='" + word +"' selected> " + word + " </option>");
+        }
       }
       if(e.which == 13) {
         $("#div_id_authors .selection input").val("");
-        $("#id_authors").append("<option value='" + key +"' selected> " + key + " </option>");
+        if(key.length > 1){
+          $("#id_authors").append("<option value='" + key +"' selected> " + key + " </option>");
+        }
       }
     });
 
@@ -313,12 +321,16 @@
       if (key.indexOf(',') > -1) {
         var word =key.slice(0, -1);
         $("#div_id_education_level .selection input").val("");
-        $("#id_education_level").append("<option value='" + word +"' selected> " + word + " </option>");
+        if(word.length > 1){
+         $("#id_education_level").append("<option value='" + word +"' selected> " + word + " </option>");
+        }
         $("#id_education_level").removeAttr('multiple');
       }
       if(e.which == 13) {
         $("#div_id_education_level .selection input").val("");
-        $("#id_education_level").append("<option value='" + key +"' selected> " + key + " </option>");
+        if(key.length > 1){
+          $("#id_education_level").append("<option value='" + key +"' selected> " + key + " </option>");
+        }
         $("#id_education_level").removeAttr('multiple');
       }
     });
@@ -332,12 +344,16 @@
       if (key.indexOf(',') > -1) {
         var word =key.slice(0, -1);
         $("#div_id_learning_resource_type .selection input").val("");
-        $("#id_learning_resource_type").append("<option value='" + word +"' selected> " + word + " </option>");
+        if(word.length > 1){
+          $("#id_learning_resource_type").append("<option value='" + word +"' selected> " + word + " </option>");
+        }
         $("#id_learning_resource_type").removeAttr('multiple');
       }
       if(e.which == 13) {
         $("#div_id_learning_resource_type .selection input").val("");
-        $("#id_learning_resource_type").append("<option value='" + key +"' selected> " + key + " </option>");
+        if(key.length > 1){
+          $("#id_learning_resource_type").append("<option value='" + key +"' selected> " + key + " </option>");
+        }
         $("#id_learning_resource_type").removeAttr('multiple');
       }
     });

@@ -83,7 +83,9 @@
 				}
 				if(e.which == 13) {
 					$("#div_id_interestAreas .selection input").val("");
-					$("#id_interestAreas").append("<option value='" + key +"' selected> " + key + " </option>");
+					if(key.length > 1){
+						$("#id_interestAreas").append("<option value='" + key +"' selected> " + key + " </option>");
+					}
 				}
 			});
 
