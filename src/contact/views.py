@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.conf import settings
 from resources.models import Resource
 from projects.models import Project
+from events.models import Event
 from .forms import ContactForm, SubmitterContactForm
 
 def contactView(request):
@@ -42,9 +43,12 @@ def submitterContactView(request, group, pk):
             if (group =="project"):
                 project = get_object_or_404(Project, id=pk)
                 to_email = project.creator.email
-            else:
+            elif(group =="resource"):
                 resource = get_object_or_404(Resource, id=pk)
                 to_email = resource.creator.email
+            else:
+                event = get_object_or_404(Event, id=pk)
+                to_email = event.creator.email
             message = form.cleaned_data['message']
             try:
                 send_mail(subject, message, settings.EMAIL_HOST_USER, [to_email])

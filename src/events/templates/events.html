@@ -43,6 +43,15 @@
         </div>
         <div class="col-sm-1 col-12 mt-4 mb-4">
         {% if user.is_staff %}
+            {% if event.id in approvedEvents %}
+                <a onclick="setApprovedEvent({{event.id}}, false)"><i class="far fa-thumbs-down"></i></a>
+            {% elif event.id in unApprovedEvents %}
+                <a onclick="setApprovedEvent({{event.id}}, true)"><i class="far fa-thumbs-up"></i></a>
+            {% else %}
+                <a onclick="setApprovedEvent({{event.id}}, true)"><i class="far fa-thumbs-up"></i></a>
+                <a onclick="setApprovedEvent({{event.id}}, false)"><i class="far fa-thumbs-down"></i></a>
+            {% endif %}
+            <br/>
             <span id="featured{{event.id}}">
                 {% if event.featured %}
                 <a class="btn btn-red float-left mt-4" onclick="setFeaturedEvent({{event.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
@@ -84,6 +93,29 @@
         }
       }
       );
+    }
+
+    function setApprovedEvent(idEvent, approved){
+        var eventID= 0;
+        
+        var request = $.ajax(
+        {
+        type: "POST",
+        url: "{% url 'setApprovedEvent' %}",
+        data: {
+            "event_id": idEvent,
+            "approved": approved,
+            csrfmiddlewaretoken: '{{ csrf_token }}'
+        },
+        success: function (response) {
+            window.location.reload(false)
+            if(!approved){
+                eventID = idEvent
+                window.location.href ="{% url 'submitter_contact' group='editEvent' pk=12345 %}".replace(/12345/, eventID.toString());
+            }
+        }
+        }
+        );
     }
 </script>
 {% endblock scripts %}
