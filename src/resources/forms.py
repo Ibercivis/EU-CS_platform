@@ -1,3 +1,4 @@
+from ckeditor.widgets import CKEditorWidget
 from django import forms
 from django.db import models
 from django.utils import timezone
@@ -14,7 +15,6 @@ from organisations.models import Organisation
 
 
 class ResourceForm(forms.ModelForm):
-    #abstract = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 3000}}), max_length=3000)
     name = forms.CharField(max_length=200, widget=forms.TextInput(),
         help_text=_('Insert here the title or name of the resource'))
 
@@ -22,7 +22,7 @@ class ResourceForm(forms.ModelForm):
         help_text=_('URL to where the document is hosted by the publisher, \
         or in a permanent repository such as Zenodo, OSF, the RIO Journal, or similar'))
 
-    abstract = forms.CharField(widget=forms.Textarea(),\
+    abstract = forms.CharField(widget=CKEditorWidget(config_name='frontpage'),\
         help_text=_('Please briefly describe the resource (ideally in 500 words or less)'), max_length = 3000)
 
     category = forms.ModelChoiceField(queryset=Category.objects.filter(parent__isnull=True),\

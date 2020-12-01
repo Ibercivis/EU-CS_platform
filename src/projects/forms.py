@@ -1,3 +1,4 @@
+from ckeditor.widgets import CKEditorWidget
 from django import forms
 from django.db import models
 from django.core.files import File
@@ -10,7 +11,7 @@ from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderServiceError
 from .models import Project, Topic, Status, Keyword, FundingBody, CustomField, OriginDatabase, ParticipationTask, GeographicExtend
 from organisations.models import Organisation
-from ckeditor.widgets import CKEditorWidget
+
 
 geolocator = Nominatim(timeout=None)
 
@@ -21,18 +22,13 @@ class ProjectForm(forms.Form):
     keywords = forms.MultipleChoiceField(choices=(), \
         widget=Select2MultipleWidget(), required=False, \
         help_text=_('Please enter 2-3 keywords (comma separated) or pressing enter to further describe your project and assist search on the platform'),label=_('Keywords'))
-
-    #aim = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 2000}}), label="Aim of the project (max 2000 characters)")
+    
     aim = forms.CharField(\
-        widget=forms.Textarea(), help_text=_('Primary aim, goal or objective of the project. Max 2000 characters'),\
+        widget=CKEditorWidget(config_name='frontpage'), help_text=_('Primary aim, goal or objective of the project. Max 2000 characters'),\
         max_length = 2000)
 
-    #description = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 3000}}), label="Description of Citizen Science Aspects (max 3000 haracters)")
-    #description = forms.CharField(\
-     #   widget=forms.Textarea(), help_text=_('Please describe the citizen science aspect(s) of the project - see the <a href="https://zenodo.org/communities/citscicharacteristics">ECSA Characteristics of Citizen Science</a> for guidance'),\
-      #  max_length = 3000)
-
-    description = forms.CharField(widget=CKEditorWidget(config_name='frontpage'))
+    description = forms.CharField(widget=CKEditorWidget(config_name='frontpage'), help_text=_('Please describe the citizen science aspect(s) of the project - see the <a href="https://zenodo.org/communities/citscicharacteristics">ECSA Characteristics of Citizen Science</a> for guidance'),\
+        max_length = 3000)
 
     topic = forms.ModelMultipleChoiceField(queryset=Topic.objects.all(),\
         widget=Select2MultipleWidget(), help_text=_('The project topic(s) or field(s) of science, multiple selection'), \
@@ -124,13 +120,11 @@ class ProjectForm(forms.Form):
 
     #Personal and Organizational Affiliates
     #Participation Information
-    #how_to_participate = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 1000}}), required=False, label="How to participate (max 1000 characters)")
-    how_to_participate = forms.CharField(widget=forms.Textarea(),\
+    how_to_participate = forms.CharField(widget=CKEditorWidget(config_name='frontpage'),\
         help_text=_('Please describe how people can get involved in the project'), max_length = 2000)
     doingAtHome =  forms.BooleanField(required=False,label=_("Can participate at home"))
-    #equipment = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 1000}}), required=False, label="Project Equipment")
 
-    equipment = forms.CharField(widget=forms.Textarea(),\
+    equipment = forms.CharField(widget=CKEditorWidget(config_name='frontpage'),\
         help_text=_('Describe any required or suggested equipment to be used in the project'), max_length = 2000, required=False)
     #Funding
     funding_body =  forms.ModelMultipleChoiceField(queryset=FundingBody.objects.all(), widget=Select2MultipleWidget(),\
