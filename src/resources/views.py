@@ -264,9 +264,28 @@ def saveImage(request, form, element, ref):
         image = Image.open(photo)
         cropped_image = image.crop((x, y, w+x, h+y))
         if(ref == '2'):
-            resized_image = cropped_image.resize((1100, 400), Image.ANTIALIAS)
+            finalSize = (1100, 400)
         else:
-            resized_image = cropped_image.resize((600, 400), Image.ANTIALIAS)
+            finalSize = (600, 400)
+        
+        resized_image = cropped_image.resize(finalSize, Image.ANTIALIAS)
+
+        if(cropped_image.width > image.width):
+            size = (abs(int((finalSize[0]-(finalSize[0]/cropped_image.width*image.width))/2)), finalSize[1])
+            whitebackground = Image.new(mode='RGBA',size=size,color=(255,255,255,0))
+            position = ((finalSize[0] - whitebackground.width), 0)
+            resized_image.paste(whitebackground, position)
+            position = (0, 0)
+            resized_image.paste(whitebackground, position)
+        
+        if(cropped_image.height > image.height):
+            size = (finalSize[0], abs(int((finalSize[1]-(finalSize[1]/cropped_image.height*image.height))/2)))
+            whitebackground = Image.new(mode='RGBA',size=size,color=(255,255,255,0))
+            position = (0, (finalSize[1] - whitebackground.height))
+            resized_image.paste(whitebackground, position)
+            position = (0, 0)
+            resized_image.paste(whitebackground, position)
+
         image_path = saveImageWithPath(resized_image, photo.name)
     elif withImage:
             image_path = '/'
