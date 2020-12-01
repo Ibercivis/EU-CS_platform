@@ -368,6 +368,35 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 CKEDITOR_REQUIRE_STAFF=False
 
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'default_custom',
+        'toolbar_default_custom': [
+            {'name': 'basicstyles',
+             'items': ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']},
+            {'name': 'paragraph',
+             'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-',
+                       'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl',
+                       'Language']},
+            {'name': 'links', 'items': ['Link', 'Unlink', 'Anchor']},
+            {'name': 'insert','items': ['Image']},
+            '/',
+            {'name': 'styles', 'items': ['Styles', 'Format', 'FontSize']},
+            {'name': 'colors', 'items': ['TextColor', 'BGColor']},
+        ],
+    },
+    'frontpage': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['Link', 'Unlink'],
+            ['RemoveFormat']
+        ]
+    },
+}
+
+
 CRON_CLASSES = [
     "eucs_platform.cron.ExpiredUsersCronJob",
     # ...

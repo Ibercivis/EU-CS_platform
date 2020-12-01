@@ -10,6 +10,7 @@ from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderServiceError
 from .models import Project, Topic, Status, Keyword, FundingBody, CustomField, OriginDatabase, ParticipationTask, GeographicExtend
 from organisations.models import Organisation
+from ckeditor.widgets import CKEditorWidget
 
 geolocator = Nominatim(timeout=None)
 
@@ -27,9 +28,12 @@ class ProjectForm(forms.Form):
         max_length = 2000)
 
     #description = forms.CharField(widget=SummernoteWidget(attrs={'summernote': {'width': '100%', 'maxTextLength': 3000}}), label="Description of Citizen Science Aspects (max 3000 haracters)")
-    description = forms.CharField(\
-        widget=forms.Textarea(), help_text=_('Please describe the citizen science aspect(s) of the project - see the <a href="https://zenodo.org/communities/citscicharacteristics">ECSA Characteristics of Citizen Science</a> for guidance'),\
-        max_length = 3000)
+    #description = forms.CharField(\
+     #   widget=forms.Textarea(), help_text=_('Please describe the citizen science aspect(s) of the project - see the <a href="https://zenodo.org/communities/citscicharacteristics">ECSA Characteristics of Citizen Science</a> for guidance'),\
+      #  max_length = 3000)
+
+    description = forms.CharField(widget=CKEditorWidget(config_name='frontpage'))
+
     topic = forms.ModelMultipleChoiceField(queryset=Topic.objects.all(),\
         widget=Select2MultipleWidget(), help_text=_('The project topic(s) or field(s) of science, multiple selection'), \
         required=False,label=_("Topic"))
