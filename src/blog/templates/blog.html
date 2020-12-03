@@ -1,4 +1,5 @@
 {% extends "base_r2.html" %}
+{% load i18n %}
 {% block title %}{{ block.super }} :: Blog {% endblock %}
 {% block navbar-left %}
 {% include "_navbar_r2.html" with active_link="blog" %}
@@ -30,7 +31,7 @@
 							<p class="card-text text-muted h6">{% if post.author.name != "Empty user" %}
 								{{ post.author.name }} {% endif %} <br /> {{ post.created_on}} </p>
 							<p class="card-text">{{post.excerpt | safe }}<br /><br />
-								<a href="{{ post.get_absolute_url }}">Read More >></a></p>
+								<a href="{{ post.get_absolute_url }}">{% trans "Read More" %} >></a></p>
 						</div>
 					</div>
 					<br />

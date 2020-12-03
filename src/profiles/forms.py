@@ -5,7 +5,7 @@ from crispy_forms.layout import Layout, Div, Submit, HTML, Button, Row, Field
 from crispy_forms.bootstrap import AppendedText, PrependedText, FormActions
 from django.contrib.auth import get_user_model
 from . import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from django_select2.forms import Select2MultipleWidget
 from organisations.models import Organisation
 
