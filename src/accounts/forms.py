@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, get_user_model
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, HTML, Field
