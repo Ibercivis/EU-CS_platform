@@ -49,6 +49,13 @@ python manage.py loaddata organisations/fixtures/organisation_types.json
 python manage.py runserver
 ```
 
+## Cron jobs commands
+```
+python manage.py runcrons
+python manage.py runcrons --force
+And for do this automatically:
+python manage.py crontab add
+```
 
 
 [0]: https://www.python.org/
