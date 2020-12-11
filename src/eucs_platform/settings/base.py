@@ -399,9 +399,10 @@ CKEDITOR_CONFIGS = {
 
 CRON_CLASSES = [
     "eucs_platform.cron.ExpiredUsersCronJob",
-    # ...
+    "eucs_platform.cron.NewForumResponseCronJob",
 ]
 
 CRONJOBS = [
-    ('0 1 * * *', 'eucs_platform.cron.ExpiredUsersCronJob')
+    ('0 1 * * *', 'eucs_platform.cron.ExpiredUsersCronJob'),
+    ('0 * * * *', 'eucs_platform.cron.NewForumResponseCronJob')
 ]
