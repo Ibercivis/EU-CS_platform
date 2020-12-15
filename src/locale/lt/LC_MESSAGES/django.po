@@ -2,13 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-04 11:21+0100\n"
+"POT-Creation-Date: 2020-12-15 18:45+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,18 +19,19 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n % 10 == 1 && (n % 100 > 19 || n % 100 < "
 "11) ? 0 : (n % 10 >= 2 && n % 10 <=9) && (n % 100 > 19 || n % 100 < 11) ? "
 "1 : n % 1 != 0 ? 2: 3);\n"
+
 #: .\src\accounts\forms.py:25 .\src\accounts\forms.py:78
 msgid "Enter Email"
-msgstr ""
+msgstr "El. pašto adresas"
 
 #: .\src\accounts\forms.py:26 .\src\accounts\forms.py:80
 msgid "Enter Password"
-msgstr ""
+msgstr "Slaptažodis"
 
 #: .\src\accounts\forms.py:32 .\src\templates\base.html:69
 #: .\src\templates\registration\password_reset_complete.html:18
 msgid "Log in"
-msgstr ""
+msgstr "Prisijungti"
 
 #: .\src\accounts\forms.py:50
 msgid ""
@@ -38,41 +39,44 @@ msgid ""
 "confirmed your address. Please search for the confirmation email in your "
 "inbox (or spam) to activate your account"
 msgstr ""
+"Jūsų el. pašto adresas jau yra duomenų bazėje, tačiaudar jo nepatvirtinote. "
+"Paieškokite registraciją patvirtinančio laiškosavo el. pašto dėžutėje (arba "
+"“Spam” aplanke) ir aktyvuokite paskyrą"
 
 #: .\src\accounts\forms.py:79
 msgid "Enter Full Name"
-msgstr ""
+msgstr "Jūsų vardas"
 
 #: .\src\accounts\forms.py:81
 msgid "Re-enter Password"
-msgstr ""
+msgstr "Pakartokite slaptažodį"
 
 #: .\src\accounts\forms.py:83 .\src\templates\base.html:70
 #: .\src\templates\base_forms.html:44
 msgid "Sign up"
-msgstr ""
+msgstr "Užsiregistruoti"
 
 #: .\src\accounts\forms.py:92
 msgid "Enter old password"
-msgstr ""
+msgstr "Senas slaptažodis"
 
 #: .\src\accounts\forms.py:93 .\src\accounts\forms.py:114
 #: .\src\templates\registration\password_reset_confirm.html:18
 msgid "Enter new password"
-msgstr ""
+msgstr "Naujas slaptažodis"
 
 #: .\src\accounts\forms.py:94 .\src\accounts\forms.py:115
 msgid "Enter new password (again)"
-msgstr ""
+msgstr "Pakartokite slaptažodį"
 
 #: .\src\accounts\forms.py:95 .\src\accounts\forms.py:116
 #: .\src\profiles\templates\profiles\edit_profile.html:53
 msgid "Change Password"
-msgstr ""
+msgstr "Pakeisti slaptažodį"
 
 #: .\src\accounts\forms.py:105
 msgid "Enter email"
-msgstr ""
+msgstr "El. pašto adresas"
 
 #: .\src\accounts\forms.py:106
 msgid "Reset Password"
@@ -80,21 +84,21 @@ msgstr ""
 
 #: .\src\accounts\templates\accounts\acc_active_email.html:4
 msgid "Activate your EU-Citizen.Science account."
-msgstr ""
+msgstr "Aktyvuokite savo EU-Citizen.Science paskyrą."
 
 #: .\src\accounts\templates\accounts\emails\password-reset-email.html:3
 #: .\src\accounts\templates\accounts\emails\password-reset-subject.txt:1
 #, python-format
 msgid "Password reset on %(site_name)s"
-msgstr ""
+msgstr "Slaptažodžio atnaujinimas %(site_name)s"
 
 #: .\src\accounts\templates\accounts\welcome_email.html:4
 msgid "Welcome to EU-Citizen.Science."
-msgstr ""
+msgstr "Sveiki atvykę į EU-Citizen.Science."
 
 #: .\src\blog\templates\blog.html:34
 msgid "Read More"
-msgstr ""
+msgstr "Žr. daugiau"
 
 #: .\src\contact\templates\contact.html:10
 #: .\src\contact\templates\contact.html:19
@@ -104,12 +108,12 @@ msgstr ""
 #: .\src\projects\templates\project.html:87
 #: .\src\projects\templates\project.html:209 .\src\templates\_footer.html:81
 msgid "Contact"
-msgstr ""
+msgstr "Kontaktai"
 
 #: .\src\contact\templates\contact.html:56
 #: .\src\contact\templates\submitter_contact.html:45
 msgid "Send"
-msgstr ""
+msgstr "Siųsti"
 
 #: .\src\contact\templates\submitter_contact.html:10
 msgid "Submitter Contact"
@@ -117,11 +121,11 @@ msgstr ""
 
 #: .\src\contact\templates\submitter_contact.html:30
 msgid "This email will be sent to submitter of"
-msgstr ""
+msgstr "Šis laiškas bus išsiųstas įrašiusiam"
 
 #: .\src\contact\templates\success.html:26
 msgid "Thank you for your message."
-msgstr ""
+msgstr "Ačiū už žinutę."
 
 #: .\src\events\forms.py:8
 msgid "Title of the event"
@@ -141,76 +145,78 @@ msgstr ""
 
 #: .\src\events\templates\editEvent.html:25
 msgid "Edit event"
-msgstr ""
+msgstr "Redaguoti renginį"
 
 #: .\src\events\templates\editEvent.html:34
 #: .\src\events\templates\new_event.html:35
 msgid "Event info"
-msgstr ""
+msgstr "Renginio informacija"
 
 #: .\src\events\templates\events.html:12
 msgid "Upcoming events"
-msgstr ""
+msgstr "Artėjantys renginiai"
 
 #: .\src\events\templates\events.html:24 .\src\templates\base_forum.html:89
 #: .\src\templates\base_r2.html:179
 msgid "ADD"
-msgstr ""
+msgstr "PRIDĖTI"
 
 #: .\src\events\templates\events.html:42
 msgid "More info"
-msgstr ""
+msgstr "Daugiau informacijos"
 
 #: .\src\events\templates\events.html:72
 #: .\src\organisations\templates\organisations.html:26
 #: .\src\projects\templates\projects.html:27
 #: .\src\resources\templates\resources.html:27
 msgid "Sorry, nothing found"
-msgstr ""
+msgstr "Atsiprašome, nieko nerasta"
 
 #: .\src\events\templates\new_event.html:25
 msgid "New event"
-msgstr ""
+msgstr "Naujas renginys"
 
 #: .\src\organisations\forms.py:10
 msgid "The name or the organisation"
-msgstr ""
+msgstr "Organizacijos pavadinimas"
 
 #: .\src\organisations\forms.py:12
 msgid "URL of the organisation"
-msgstr ""
+msgstr "Organizacijos interneto svetainė"
 
 #: .\src\organisations\forms.py:14
 msgid "Please briefly describe the organisation (ideally in 500 words or less)"
-msgstr ""
+msgstr "Trumpai apibūdinkite organizaciją (iki 500 žodžių)"
 
 #: .\src\organisations\forms.py:16
 #: .\src\organisations\templates\finder_organisations.html:19
 msgid "Type"
-msgstr ""
+msgstr "Tipas"
 
 #: .\src\organisations\forms.py:18
 msgid "Please upload the logo of your organisation (.jpg or .png)"
-msgstr ""
+msgstr "Įkelkite organizacijos logotipą (.jpg arba .png)"
 
 #: .\src\organisations\forms.py:19
 msgid "Logo"
-msgstr ""
+msgstr "Logotipas"
 
 #: .\src\organisations\forms.py:26
 msgid "Please name the contact person or contact point for the organisation"
-msgstr ""
+msgstr "Kontaktinis asmuo"
 
 #: .\src\organisations\forms.py:29
 msgid ""
 "Please provide the email address of the contact person or contact point. "
 "Note you will need permission to do that"
 msgstr ""
+"Įrašykite kontaktinio asmens el. pašto adresą.Įsitikinkite, kad turite "
+"leidimą dalintis šiuo adresu"
 
 #: .\src\organisations\forms.py:67 .\src\projects\forms.py:286
 #: .\src\resources\forms.py:200
 msgid "Give additional users permission to edit"
-msgstr ""
+msgstr "Leiskite redaguoti kitiems naudotojams"
 
 #: .\src\organisations\templates\edit_organisation.html:28
 #: .\src\organisations\templates\new_organisation.html:27
@@ -219,7 +225,7 @@ msgstr ""
 #: .\src\resources\templates\editResource.html:23
 #: .\src\resources\templates\new_resource.html:25
 msgid "Crop the photo"
-msgstr ""
+msgstr "Apkarpyti nuotrauką"
 
 #: .\src\organisations\templates\edit_organisation.html:30
 #: .\src\organisations\templates\new_organisation.html:29
@@ -233,7 +239,7 @@ msgstr ""
 #: .\src\resources\templates\new_resource.html:62
 #: .\src\templates\modalinfo.html:10
 msgid "Close"
-msgstr ""
+msgstr "Uždaryti"
 
 #: .\src\organisations\templates\edit_organisation.html:44
 #: .\src\organisations\templates\new_organisation.html:43
@@ -242,7 +248,7 @@ msgstr ""
 #: .\src\resources\templates\editResource.html:39
 #: .\src\resources\templates\new_resource.html:41
 msgid "zoom_in"
-msgstr ""
+msgstr "padidinti"
 
 #: .\src\organisations\templates\edit_organisation.html:47
 #: .\src\organisations\templates\new_organisation.html:46
@@ -251,7 +257,7 @@ msgstr ""
 #: .\src\resources\templates\editResource.html:42
 #: .\src\resources\templates\new_resource.html:44
 msgid "zoom_out"
-msgstr ""
+msgstr "sumažinti"
 
 #: .\src\organisations\templates\edit_organisation.html:50
 #: .\src\organisations\templates\new_organisation.html:49
@@ -263,7 +269,7 @@ msgstr ""
 #: .\src\resources\templates\editResource.html:67
 #: .\src\resources\templates\new_resource.html:47
 msgid "Cancel"
-msgstr ""
+msgstr "Atšaukti"
 
 #: .\src\organisations\templates\edit_organisation.html:51
 #: .\src\organisations\templates\new_organisation.html:50
@@ -272,11 +278,11 @@ msgstr ""
 #: .\src\resources\templates\editResource.html:46
 #: .\src\resources\templates\new_resource.html:48
 msgid "Crop and upload"
-msgstr ""
+msgstr "Apkarpyti ir įkelti"
 
 #: .\src\organisations\templates\edit_organisation.html:65
 msgid "Edit Organisation Profile"
-msgstr ""
+msgstr "Redaguoti organizacijos profilį"
 
 #: .\src\organisations\templates\edit_organisation.html:74
 #: .\src\organisations\templates\edit_organisation.html:138
@@ -290,12 +296,12 @@ msgstr ""
 #: .\src\resources\templates\new_resource.html:114
 #: .\src\resources\templates\new_resource.html:248
 msgid "Save"
-msgstr ""
+msgstr "Išsaugoti"
 
 #: .\src\organisations\templates\finder_organisations.html:29
 #: .\src\projects\templates\finder_projects.html:54
 msgid "Country"
-msgstr ""
+msgstr "Šalis"
 
 #: .\src\organisations\templates\finder_organisations.html:45
 #: .\src\projects\templates\finder_projects.html:82
@@ -303,23 +309,24 @@ msgstr ""
 #: .\src\templates\home.html:66 .\src\templates\home.html:76
 #: .\src\templates\home.html:86 .\src\templates\home.html:96
 msgid "result"
-msgstr ""
+msgstr "rezultatai"
 
 #: .\src\organisations\templates\finder_organisations.html:45
 #: .\src\projects\templates\finder_projects.html:82
 #: .\src\resources\templates\finder_resources.html:69
 msgid "found"
-msgstr ""
+msgstr "rasta"
 
 #: .\src\organisations\templates\new_organisation.html:64
 msgid "New Organisation Profile"
-msgstr ""
+msgstr "Naujos organizacijos profilis"
 
 #: .\src\organisations\templates\new_organisation.html:65
 msgid ""
 "Thank you for creating a profile for your organisation on the EU-Citizen."
 "Science Platform."
 msgstr ""
+"Ačiū, kad sukūrėte profilį savo organizacijai EU-Citizen.Science platformoje"
 
 #: .\src\organisations\templates\new_organisation.html:66
 msgid ""
@@ -328,6 +335,9 @@ msgid ""
 "involved in, and the Resource Profiles of the resources that were published "
 "by your organisation."
 msgstr ""
+"Galite susieti su asmeniniais Jūsų organizacijos narių profiliais,Jūsų "
+"organizacijos projektų profiliais,bei resursų, kuriuos įkėlė Jūsų "
+"organizacijaprofiliais."
 
 #: .\src\organisations\templates\new_organisation.html:68
 msgid ""
@@ -335,6 +345,8 @@ msgid ""
 "(indicated with an asterisk*), and as much of the non-mandatory information "
 "as possible."
 msgstr ""
+"Įrašykite privalomą informaciją žemiau esančiuose laukuose(pažymėta *), ir "
+"kiek įmanoma daugiau informacijosneprivalomuose laukuose."
 
 #: .\src\organisations\templates\new_organisation.html:70
 msgid ""
@@ -342,23 +354,26 @@ msgid ""
 "moderation by one of the members of the EU-Citizen.Science consortium. This "
 "step is simply to check for ‘spam’ or inappropriate uses of the profile form."
 msgstr ""
+"Kai išsaugosite profilį, jis bus nusiųstasperžiūrai vienam iš EU-Citizen."
+"Science konsortiumo narių. Šisžingsnis reikalingas, kad išvengtume šlamšto "
+"(„spam“) ir netinkamo profilio formos naudojimo."
 
 #: .\src\organisations\templates\organisation.html:21
 #: .\src\projects\templates\editProject.html:64
 #: .\src\resources\templates\editResource.html:59
 msgid "Confirm delete"
-msgstr ""
+msgstr "Patvirtinkite trynimą"
 
 #: .\src\organisations\templates\organisation.html:25
 msgid ""
 "You are going to delete this organisation, this procedure is irreversible."
-msgstr ""
+msgstr "Ištrinsite šią organizaciją. Šis procesas yra negrįžtamas."
 
 #: .\src\organisations\templates\organisation.html:26
 #: .\src\projects\templates\editProject.html:69
 #: .\src\resources\templates\editResource.html:64
 msgid "Do you want to proceed?"
-msgstr ""
+msgstr "Ar norite tęsti?"
 
 #: .\src\organisations\templates\organisation.html:30
 #: .\src\projects\templates\editProject.html:73
@@ -366,46 +381,46 @@ msgstr ""
 #: .\src\resources\templates\editResource.html:68
 #: .\src\resources\templates\editResource.html:87
 msgid "Delete"
-msgstr ""
+msgstr "Ištrinti"
 
 #: .\src\organisations\templates\organisation.html:44
 #: .\src\projects\forms.py:89
 msgid "Contact Point Email"
-msgstr ""
+msgstr "Kontaktinis el. pašto adresas"
 
 #: .\src\organisations\templates\organisation.html:53
 msgid "Go to Organisation"
-msgstr ""
+msgstr "Eiti į organizaciją"
 
 #: .\src\organisations\templates\organisation.html:59
 #: .\src\templates\_subnavbar.html:12 .\src\templates\about.html:55
 #: .\src\templates\home.html:65
 msgid "Projects"
-msgstr ""
+msgstr "Projektai"
 
 #: .\src\organisations\templates\organisation.html:65
 #: .\src\templates\_subnavbar.html:16 .\src\templates\about.html:54
 #: .\src\templates\home.html:75
 msgid "Resources"
-msgstr ""
+msgstr "Resursai"
 
 #: .\src\organisations\templates\organisation.html:71
 msgid "Members"
-msgstr ""
+msgstr "Nariai"
 
 #: .\src\organisations\templates\organisation.html:94
 msgid "Delete Organisation"
-msgstr ""
+msgstr "Ištrinti organizaciją"
 
 #: .\src\organisations\templates\organisation.html:97
 msgid "Edit Organisation"
-msgstr ""
+msgstr "Redaguoti organizaciją"
 
 #: .\src\organisations\templates\organisations_cards.html:17
 #: .\src\profiles\templates\profiles\show_profile.html:46
 #: .\src\templates\modalinfo.html:20
 msgid "Organisation"
-msgstr ""
+msgstr "Organizacija"
 
 #: .\src\profiles\forms.py:48
 msgid ""
@@ -419,11 +434,11 @@ msgstr ""
 #: .\src\profiles\models.py:25
 #: .\src\profiles\templates\profiles\show_profile.html:43
 msgid "Title"
-msgstr ""
+msgstr "Pavadinimas"
 
 #: .\src\profiles\models.py:26
 msgid "Short Bio and disciplinary background"
-msgstr ""
+msgstr "Trumpa biografija ir išsilavinimas / profesinė patirtis"
 
 #: .\src\profiles\models.py:30
 msgid "Email verified"
@@ -439,34 +454,34 @@ msgstr ""
 
 #: .\src\profiles\templates\profiles\edit_profile.html:31
 msgid "Edit profile"
-msgstr ""
+msgstr "Redaguoti profilį"
 
 #: .\src\profiles\templates\profiles\edit_profile.html:49
 #: .\src\profiles\templates\profiles\show_profile.html:59
 msgid "Geographical location"
-msgstr ""
+msgstr "Geografinė vieta"
 
 #: .\src\profiles\templates\profiles\followed_projects.html:27
 #: .\src\templates\base2.html:65 .\src\templates\base_forum.html:76
 #: .\src\templates\base_r2.html:164
 msgid "Followed projects"
-msgstr ""
+msgstr "Sekami projektai"
 
 #: .\src\profiles\templates\profiles\my_organisations.html:31
 msgid "Submitted organisations"
-msgstr ""
+msgstr "Sukurtos organizacijos"
 
 #: .\src\profiles\templates\profiles\my_projects.html:31
 msgid "Uploaded projects"
-msgstr ""
+msgstr "Įkelti projektai"
 
 #: .\src\profiles\templates\profiles\my_resources.html:31
 msgid "Uploaded resources"
-msgstr ""
+msgstr "Įkelti resursai"
 
 #: .\src\profiles\templates\profiles\saved_resources.html:28
 msgid "My library"
-msgstr ""
+msgstr "Mano biblioteka"
 
 #: .\src\profiles\templates\profiles\show_profile.html:30
 msgid "Delete Profile"
@@ -474,31 +489,31 @@ msgstr ""
 
 #: .\src\profiles\templates\profiles\show_profile.html:31
 msgid "Edit Profile"
-msgstr ""
+msgstr "Redaguoti profilį"
 
 #: .\src\profiles\templates\profiles\show_profile.html:38
 msgid "Email"
-msgstr ""
+msgstr "El. pašto adresas"
 
 #: .\src\profiles\templates\profiles\show_profile.html:39
 msgid "Joined"
-msgstr ""
+msgstr "Prisijungė"
 
 #: .\src\profiles\templates\profiles\show_profile.html:40
 msgid "Last seen"
-msgstr ""
+msgstr "Paskutinį kartą prisijungė"
 
 #: .\src\profiles\templates\profiles\show_profile.html:44
 msgid "Bio and disciplinary background"
-msgstr ""
+msgstr "Trumpa biografija ir išsilavinimas / profesinė patirtis"
 
 #: .\src\profiles\templates\profiles\show_profile.html:45
 msgid "ORCID profile"
-msgstr ""
+msgstr "ORCID profilis"
 
 #: .\src\profiles\templates\profiles\show_profile.html:51
 msgid "Interest Areas"
-msgstr ""
+msgstr "Dominančios sritys"
 
 #: .\src\projects\forms.py:21
 msgid "Short name or title of the project"
@@ -515,7 +530,7 @@ msgstr ""
 #: .\src\resources\templates\resource.html:51
 #: .\src\resources\templates\resource.html:166
 msgid "Keywords"
-msgstr ""
+msgstr "Raktažodžiai"
 
 #: .\src\projects\forms.py:27
 msgid "Primary aim, goal or objective of the project. Max 2000 characters"
@@ -757,7 +772,7 @@ msgstr ""
 #: .\src\projects\templates\finder_projects.html:33
 #: .\src\resources\templates\finder_resources.html:22
 msgid "Sort by Most Recent Updated"
-msgstr ""
+msgstr "Rūšiuoti pagal naujausius pakeitimus"
 
 #: .\src\projects\templates\finder_projects.html:34
 #: .\src\resources\templates\finder_resources.html:23
@@ -767,7 +782,7 @@ msgstr ""
 #: .\src\projects\templates\finder_projects.html:35
 #: .\src\resources\templates\finder_resources.html:24
 msgid "Sort by rating"
-msgstr ""
+msgstr "Rūšiuoti pagal įvertinimą"
 
 #: .\src\projects\templates\finder_projects.html:46
 #: .\src\projects\templates\project.html:53
@@ -789,18 +804,18 @@ msgstr ""
 #: .\src\projects\templates\finder_projects.html:74
 #: .\src\resources\templates\finder_resources.html:61
 msgid "Moderated"
-msgstr ""
+msgstr "Peržiūrėti moderatoriaus"
 
 #: .\src\projects\templates\finder_projects.html:75
 #: .\src\resources\templates\finder_resources.html:62
 msgid "Not yet moderated"
-msgstr ""
+msgstr "Neperžiūrėti moderatoriaus"
 
 #: .\src\projects\templates\finder_projects.html:76
 #: .\src\resources\templates\finder_resources.html:63
 #: .\src\templates\_subnavbar.html:8
 msgid "All"
-msgstr ""
+msgstr "Visi"
 
 #: .\src\projects\templates\finder_projects.html:93
 msgid "Clear current search query and filters"
@@ -809,12 +824,12 @@ msgstr ""
 #: .\src\projects\templates\modal_projects.html:8
 #: .\src\resources\templates\modal_resources.html:8
 msgid "Info"
-msgstr ""
+msgstr "Informacija"
 
 #: .\src\projects\templates\modal_projects.html:14
 #: .\src\resources\templates\modal_resources.html:14
 msgid "Search"
-msgstr ""
+msgstr "Ieškoti"
 
 #: .\src\projects\templates\modal_projects.html:14
 msgid ""
@@ -824,7 +839,7 @@ msgstr ""
 #: .\src\projects\templates\modal_projects.html:15
 #: .\src\resources\templates\modal_resources.html:15
 msgid "Sort"
-msgstr ""
+msgstr "Rūšiuoti"
 
 #: .\src\projects\templates\modal_projects.html:15
 msgid "projects by date or by rating"
@@ -833,7 +848,7 @@ msgstr ""
 #: .\src\projects\templates\modal_projects.html:16
 #: .\src\resources\templates\modal_resources.html:16
 msgid "Filter"
-msgstr ""
+msgstr "Filtruoti"
 
 #: .\src\projects\templates\modal_projects.html:16
 msgid "search results by project status, country, or topic"
@@ -849,13 +864,13 @@ msgstr ""
 #: .\src\projects\templates\modal_projects.html:20
 #: .\src\resources\templates\modal_resources.html:20
 msgid "Read more about our"
-msgstr ""
+msgstr "Sužinokite daugiau apie"
 
 #: .\src\projects\templates\modal_projects.html:20
 #: .\src\projects\templates\new_project.html:103
 #: .\src\resources\templates\modal_resources.html:20
 msgid "moderation process"
-msgstr ""
+msgstr "moderavimo procesą"
 
 #: .\src\projects\templates\new_project.html:65
 msgid "Project is going to saved"
@@ -864,7 +879,7 @@ msgstr ""
 #: .\src\projects\templates\new_project.html:73
 #: .\src\resources\templates\new_resource.html:68
 msgid "Thank you"
-msgstr ""
+msgstr "Ačiū"
 
 #: .\src\projects\templates\new_project.html:74
 msgid ""
@@ -924,7 +939,7 @@ msgstr ""
 
 #: .\src\projects\templates\new_project.html:100
 msgid "ECSA 10 Principles of Citizen Science"
-msgstr ""
+msgstr "10 piliečių mokslo principų"
 
 #: .\src\projects\templates\new_project.html:101
 msgid ""
@@ -1005,12 +1020,12 @@ msgstr ""
 #: .\src\templates\resources_cards.html:54
 #: .\src\templates\resources_cards_horizontal.html:43
 msgid "review"
-msgstr ""
+msgstr "recenzuoti"
 
 #: .\src\projects\templates\project.html:113
 #: .\src\resources\templates\resource.html:125
 msgid "Reviews"
-msgstr ""
+msgstr "Recenzijos"
 
 #: .\src\projects\templates\project.html:118
 msgid "Go to Project"
@@ -1021,7 +1036,7 @@ msgstr ""
 #: .\src\resources\templates\resource.html:121
 #: .\src\resources\templates\resource_review.html:18
 msgid "Review"
-msgstr ""
+msgstr "Recenzuoti"
 
 #: .\src\projects\templates\project.html:130
 msgid "Following"
@@ -1046,31 +1061,35 @@ msgstr ""
 #: .\src\projects\templates\project_review.html:19
 #: .\src\resources\templates\resource_review.html:19
 msgid "Rate and comment"
-msgstr ""
+msgstr "Įvertinti ir pakomentuoti"
 
 #: .\src\resources\forms.py:19
 msgid "Insert here the title or name of the resource"
-msgstr ""
+msgstr "Resurso pavadinimas"
 
 #: .\src\resources\forms.py:22
 msgid ""
 "URL to where the document is hosted by the publisher,         or in a "
 "permanent repository such as Zenodo, OSF, the RIO Journal, or similar"
 msgstr ""
+"Dokumento originalus URL, arbanuoroda į talpyklą (Zenodo, OSF, RIO Journal, "
+"ir kt.)"
 
 #: .\src\resources\forms.py:26
 msgid "Please briefly describe the resource (ideally in 500 words or less)"
-msgstr ""
+msgstr "Trumpai apibūdinkite resursą (iki 500 žodžių)"
 
 #: .\src\resources\forms.py:29
 msgid "Select one of the proposed categories"
-msgstr ""
+msgstr "Pasirinkite kategoriją"
 
 #: .\src\resources\forms.py:34
 msgid ""
 "Select the audience(s) for which the resource is intended. Multiple options "
 "can be selected"
 msgstr ""
+"Pasirinkite, kam skirtas šis resursas. Galimas daugiau nei vienas "
+"pasirinkimas"
 
 #: .\src\resources\forms.py:37
 msgid ""
@@ -1080,7 +1099,7 @@ msgstr ""
 
 #: .\src\resources\forms.py:40
 msgid "The thematic content of the resource (select as many as apply)"
-msgstr ""
+msgstr "Resurso teminis turinys (pažymėkite visus tinkamus pasirinkimus)"
 
 #: .\src\resources\forms.py:44
 msgid ""
@@ -1090,7 +1109,7 @@ msgstr ""
 
 #: .\src\resources\forms.py:45 .\src\resources\templates\resource.html:108
 msgid "Resource DOI"
-msgstr ""
+msgstr "Resurso DOI"
 
 #: .\src\resources\forms.py:49
 msgid ""
@@ -1101,13 +1120,15 @@ msgstr ""
 
 #: .\src\resources\forms.py:51
 msgid "Authors"
-msgstr ""
+msgstr "Autoriai"
 
 #: .\src\resources\forms.py:54
 msgid ""
 "Indicate the resource license, such as Creative Commons CC-BY.         Enter "
 "a URL link to the license if available."
 msgstr ""
+"Įrašykite resurso licenciją, pvz., Creative Commons CC-BY. Įrašykite "
+"licencijos URL, jei yra."
 
 #: .\src\resources\forms.py:58
 msgid ""
@@ -1118,32 +1139,32 @@ msgstr ""
 
 #: .\src\resources\forms.py:59 .\src\resources\templates\resource.html:102
 msgid "Organisation(s)"
-msgstr ""
+msgstr "Organizacija(os)"
 
 #: .\src\resources\forms.py:62
 msgid ""
 "The publisher of the resource (or the project name, or the lead institution)."
-msgstr ""
+msgstr "Resurso leidėjas (arba projekto pavadinimas, organizacija)"
 
 #: .\src\resources\forms.py:65
 msgid "Enter the year (YYYY) that this version of the resource was published"
-msgstr ""
+msgstr "Įrašykite šios resurso versijos publikavimo metus (MMMM)"
 
 #: .\src\resources\forms.py:70
 msgid "Image 1 credit"
-msgstr ""
+msgstr "Pav. 1 autorystė"
 
 #: .\src\resources\forms.py:77
 msgid "Image 2 credit"
-msgstr ""
+msgstr "Pav. 2 autorystė"
 
 #: .\src\resources\forms.py:83
 msgid "Curated lists"
-msgstr ""
+msgstr "Kuruoti sąrašai"
 
 #: .\src\resources\forms.py:88 .\src\resources\templates\resource.html:92
 msgid "Education level"
-msgstr ""
+msgstr "Išsilavinimo lygis"
 
 #: .\src\resources\forms.py:89
 msgid "Insert education level needed, end using comma or pressing enter"
@@ -1151,49 +1172,51 @@ msgstr ""
 
 #: .\src\resources\forms.py:93
 msgid "Learning resource type"
-msgstr ""
+msgstr "Mokomojo resurso tipas"
 
 #: .\src\resources\forms.py:94 .\src\resources\forms.py:97
 msgid "Help text here"
-msgstr ""
+msgstr "Pagalba"
 
 #: .\src\resources\forms.py:96
 msgid "Aproximate hours required to finish the training"
-msgstr ""
+msgstr "Valandų skaičius, reikalingas mokymams"
 
 #: .\src\resources\templates\editResource.html:63
 msgid "You are going to delete this resource, this procedure is irreversible."
-msgstr ""
+msgstr "Ištrinsite šį resursą. Šis procesas yra negrįžtamas."
 
 #: .\src\resources\templates\editResource.html:81
 msgid "Edit resource"
-msgstr ""
+msgstr "Redaguoti resursą"
 
 #: .\src\resources\templates\finder_resources.html:35
 msgid "All languages"
-msgstr ""
+msgstr "Visos kalbos"
 
 #: .\src\resources\templates\finder_resources.html:49
 msgid "All themes"
-msgstr ""
+msgstr "Visos temos"
 
 #: .\src\resources\templates\finder_resources.html:55
 msgid "All Resource Types"
-msgstr ""
+msgstr "Visi resursų tipai"
 
 #: .\src\resources\templates\modal_resources.html:14
 msgid ""
 "resources by title or keywords by typing text directly into the the search "
 "bar"
 msgstr ""
+"resursų pagal pavadinimą ar raktažodžius, įrašant tekstą tiesiai į paieškos "
+"lauką"
 
 #: .\src\resources\templates\modal_resources.html:15
 msgid "resources by date or by rating"
-msgstr ""
+msgstr "resursus pagal datą ar įvertinimą"
 
 #: .\src\resources\templates\modal_resources.html:16
 msgid "search results by language, theme or category"
-msgstr ""
+msgstr "paieškos rezultatus pagal kalbą, temą ar kategoriją"
 
 #: .\src\resources\templates\modal_resources.html:18
 msgid ""
@@ -1201,10 +1224,13 @@ msgid ""
 "as 'Moderated'.Only these will show in your search results unless you filter "
 "for 'not yet moderated' or 'All'."
 msgstr ""
+"Įkelti resursai, kuriuos jau peržiūrėjo moderatorius, yra pažymėti kaip "
+"„Peržiūrėti moderatoriaus“. Paieškos rezultatuose matysite tik šiuos "
+"resursus, nebent pasirinksite „Neperžiūrėti moderatoriaus“ arba „Visi“."
 
 #: .\src\resources\templates\new_resource.html:60
 msgid "Resource is going to saved"
-msgstr ""
+msgstr "Resursas bus išsaugotas"
 
 #: .\src\resources\templates\new_resource.html:70
 msgid ""
@@ -1213,6 +1239,10 @@ msgid ""
 "resources shared on the platform are indeed useful for citizen science "
 "projects and practitioners, and are of good quality."
 msgstr ""
+"Ačiū, kad įkėlėte naują resursą. Jūsų įrašas nusiųstas EU-Citizen.Science "
+"moderatoriams, kurie jį patikrins, kad įsitikintų, kad visi į platformą "
+"įkelti resursai naudingi piliečių mokslo projektams ir praktikams, bei yra "
+"geros kokybės."
 
 #: .\src\resources\templates\new_resource.html:72
 msgid ""
@@ -1221,6 +1251,10 @@ msgid ""
 "the platform. Your resource profile will be visible to the public in the "
 "meantime, but will be marked as unmoderated."
 msgstr ""
+"Susisieksime su Jumis, jei turėsime klausimų. Gausite pranešimą, kai "
+"resursas bus peržiūrėtas ir publikuotas platformoje. Kol kas Jūsų resurso "
+"profilis bus matomas naudotojams, tačiau pažymėtas kaip dar neperžiūrėtas "
+"moderatorių."
 
 #: .\src\resources\templates\new_resource.html:74
 msgid ""
@@ -1228,22 +1262,24 @@ msgid ""
 "going to the Submitted resources section in your Personal Area (see the top-"
 "right of the platform menu)."
 msgstr ""
+"Galite bet kada redaguoti šį resurso profilį per „Įkeltų resursų“ skyrių "
+"savo Asmeninėje paskyroje (žr. viršuje dešinėje platformos meniu)."
 
 #: .\src\resources\templates\new_resource.html:79
 msgid "OK"
-msgstr ""
+msgstr "Gerai"
 
 #: .\src\resources\templates\new_resource.html:92
 msgid "New"
-msgstr ""
+msgstr "Naujas"
 
 #: .\src\resources\templates\new_resource.html:92
 msgid "training"
-msgstr ""
+msgstr "mokymai"
 
 #: .\src\resources\templates\new_resource.html:92
 msgid "resource"
-msgstr ""
+msgstr "resursas"
 
 #: .\src\resources\templates\new_resource.html:93
 msgid ""
@@ -1252,6 +1288,10 @@ msgid ""
 "in the fields below (indicated with an asterisk*), and as much of the non-"
 "mandatory information as possible."
 msgstr ""
+"Ačiū, kad pasiūlėte pasidalinti nauju piliečių mokslo resursu EU-Citizen."
+"Science platformoje. Įrašykite privalomą informaciją žemiau esančiuose "
+"laukuose (pažymėta *), ir kiek įmanoma daugiau informacijosneprivalomuose "
+"laukuose."
 
 #: .\src\resources\templates\new_resource.html:95
 msgid ""
@@ -1259,6 +1299,10 @@ msgid ""
 "and protocols; tools such as software or hardware, and other file formats "
 "such as videos or podcasts. Read our blog post on Types of Resources."
 msgstr ""
+"Resursais gali būti dokumentai, pvz., gairės, ataskaitos, politikos "
+"santraukos, protokolai; priemonės, įrankiai ir programinė įranga, ir kitos "
+"laikmenos, pvz., vaizdo įrašai ir tinklalaidės. Daugiau informacijos rasite "
+"tinklaraščio įraše apie Resursų tipus."
 
 #: .\src\resources\templates\new_resource.html:97
 msgid ""
@@ -1268,16 +1312,20 @@ msgid ""
 "are indeed useful for citizen science projects and practitioners, and are of "
 "good quality. Read more about "
 msgstr ""
+"Kai išsaugosite profilį, resursas bus nusiųstas peržiūraivienam iš EU-"
+"Citizen.Science konsortiumo narių. Šis procesas reikalingas, kad "
+"užtikrintume, jog visi į platformą įkelti resursai naudingi piliečių mokslo "
+"projektams ir praktikams, bei yra geros kokybės. Daugiau informacijos apie "
 
 #: .\src\resources\templates\new_resource.html:98
 #: .\src\templates\moderation.html:23
 msgid "The Moderation Process"
-msgstr ""
+msgstr "Moderavimo procesą"
 
 #: .\src\resources\templates\new_resource.html:98
 #: .\src\resources\templates\new_resource.html:101
 msgid "here."
-msgstr ""
+msgstr "čia"
 
 #: .\src\resources\templates\new_resource.html:100
 msgid ""
@@ -1285,10 +1333,13 @@ msgid ""
 "access, is structured clearly, is easy to read (or hear or view) and "
 "understand. Read our"
 msgstr ""
+"Kokybės rodikliai, į kuriuos atkreipiame dėmesį yra tai, ar resursą lengva "
+"pasiekti, ar aiški jo struktūra, ar lengva jį skaityti (ar klausyti, "
+"žiūrėti) ir suprasti. Žr. mūsų "
 
 #: .\src\resources\templates\new_resource.html:101
 msgid "Quality Guidelines"
-msgstr ""
+msgstr "Kokybės gaires"
 
 #: .\src\resources\templates\new_resource.html:103
 msgid ""
@@ -1297,101 +1348,106 @@ msgid ""
 "be maintained and can provide a permalink, or a repository such as a "
 "publisher, "
 msgstr ""
+"Atkreipkite dėmesį ir įsitikinkite, kad resursas yra publikuotas nuolatinėje "
+"saugykloje (pvz., interneto svetainėje, kuri bus palaikoma, ir gali sukurti "
+"nuolatinę nuorodą, arba leidėjo talpykloje."
 
 #: .\src\resources\templates\new_resource.html:105
 msgid "or the"
-msgstr ""
+msgstr "arba"
 
 #: .\src\resources\templates\new_resource.html:179
 msgid "Please indicate the (main) language that the resource is made available"
-msgstr ""
+msgstr "Nurodykite (pirminę) resurso kalbą"
 
 #: .\src\resources\templates\resource.html:28
 #: .\src\resources\templates\resource.html:143
 msgid "Language"
-msgstr ""
+msgstr "Kalba"
 
 #: .\src\resources\templates\resource.html:38
 #: .\src\resources\templates\resource.html:153
 msgid "Category"
-msgstr ""
+msgstr "Kategorija"
 
 #: .\src\resources\templates\resource.html:44
 #: .\src\resources\templates\resource.html:159
 msgid "Theme"
-msgstr ""
+msgstr "Tema"
 
 #: .\src\resources\templates\resource.html:74
 #: .\src\templates\projects_cards.html:54
 #: .\src\templates\resources_cards.html:54
 #: .\src\templates\resources_cards_horizontal.html:43
 msgid "reviews"
-msgstr ""
+msgstr "recenzijos"
 
 #: .\src\resources\templates\resource.html:79
 msgid "Go to Training"
-msgstr ""
+msgstr "Eiti į mokymus"
 
 #: .\src\resources\templates\resource.html:82
 #: .\src\resources\templates\resource.html:111
 msgid "Go to Resource"
-msgstr ""
+msgstr "Eiti į resursą"
 
 #: .\src\resources\templates\resource.html:93
 msgid "Learning Resource Type"
-msgstr ""
+msgstr "Ugdomojo resurso tipas"
 
 #: .\src\resources\templates\resource.html:94
 msgid "Time required"
-msgstr ""
+msgstr "Reikalingas laikas"
 
 #: .\src\resources\templates\resource.html:95
 msgid "Conditions of access"
-msgstr ""
+msgstr "Prieigos sąlygos"
 
 #: .\src\resources\templates\resource.html:99
 msgid "License"
-msgstr ""
+msgstr "Licensija"
 
 #: .\src\resources\templates\resource.html:100
 msgid "Audience"
-msgstr ""
+msgstr "Auditorija"
 
 #: .\src\resources\templates\resource.html:101
 msgid "Publisher"
-msgstr ""
+msgstr "Leidėjas"
 
 #: .\src\resources\templates\resource.html:107
 msgid "Year of publication"
-msgstr ""
+msgstr "Leidimo metai"
 
 #: .\src\resources\templates\resource.html:115
 #: .\src\templates\resources_cards_horizontal.html:96
 msgid "In my library"
-msgstr ""
+msgstr "Mano bibliotekoje"
 
 #: .\src\resources\templates\resource.html:117
 #: .\src\templates\resources_cards_horizontal.html:98
 msgid "Add to library"
-msgstr ""
+msgstr "Pridėti į biblioteką"
 
 #: .\src\resources\templates\resource.html:210
 msgid "Edit"
-msgstr ""
+msgstr "Redaguoti"
 
 #: .\src\templates\_footer.html:12
 msgid ""
 "You are in the alpha version of the EU-Citizen.Science platform. Please "
 "provide your feedback in the official"
 msgstr ""
+"Naudojatės EU-Citizen.Science platformos alfa versija. Prašome palikti "
+"atsiliepimą oficialioje"
 
 #: .\src\templates\_footer.html:13
 msgid "GitHub repository"
-msgstr ""
+msgstr "GitHub talpykloje"
 
 #: .\src\templates\_footer.html:14
 msgid "here to subscribe to our newsletter"
-msgstr ""
+msgstr "čia, kad užsiprenumeruotumėte mūsų naujienlaiškį"
 
 #: .\src\templates\_footer.html:56
 msgid ""
@@ -1399,85 +1455,87 @@ msgid ""
 "2020 Framework Programme for Research and Innovation under grant agreement "
 "No. 824580"
 msgstr ""
+"EU-Citizen.Science projektas finansuojamas Europos Sąjungos Horizontas 2020 "
+"mokslinių tyrimų ir inovacijų programos, donacijos Nr. 824580"
 
 #: .\src\templates\_footer.html:66
 msgid "Links"
-msgstr ""
+msgstr "Nuorodos"
 
 #: .\src\templates\_footer.html:69
 msgid "Terms of Use"
-msgstr ""
+msgstr "Naudojimosi sąlygos"
 
 #: .\src\templates\_footer.html:72 .\src\templates\privacy.html:10
 #: .\src\templates\privacy.html:21
 msgid "Privacy"
-msgstr ""
+msgstr "Privatumas"
 
 #: .\src\templates\_footer.html:75 .\src\templates\imprint.html:10
 #: .\src\templates\imprint.html:22
 msgid "Imprint"
-msgstr ""
+msgstr "Žymė"
 
 #: .\src\templates\_footer.html:78
 msgid "Deliverables"
-msgstr ""
+msgstr "Rezultatai"
 
 #: .\src\templates\_footer.html:94 .\src\templates\faq.html:14
 msgid "FAQ"
-msgstr ""
+msgstr "DUK"
 
 #: .\src\templates\_footer.html:97
 msgid "Quality Criteria"
-msgstr ""
+msgstr "Kokybės kriterijai"
 
 #: .\src\templates\_footer.html:102
 msgid "Moderation"
-msgstr ""
+msgstr "Moderavimas"
 
 #: .\src\templates\_footer.html:105 .\src\templates\development.html:10
 msgid "Development"
-msgstr ""
+msgstr "Programavimas"
 
 #: .\src\templates\_footer.html:108
 msgid "API"
-msgstr ""
+msgstr "API"
 
 #: .\src\templates\_navbar.html:3 .\src\templates\base_forum.html:58
 #: .\src\templates\base_r2.html:145
 msgid "SEARCH"
-msgstr ""
+msgstr "PAIEŠKA"
 
 #: .\src\templates\_navbar.html:4 .\src\templates\base_forum.html:60
 #: .\src\templates\base_r2.html:147
 msgid "BLOG"
-msgstr ""
+msgstr "TINKLARAŠTIS"
 
 #: .\src\templates\_navbar.html:5 .\src\templates\base_forum.html:61
 #: .\src\templates\base_r2.html:148
 msgid "EVENTS"
-msgstr ""
+msgstr "RENGINIAI"
 
 #: .\src\templates\_navbar.html:6 .\src\templates\base_forum.html:63
 #: .\src\templates\base_r2.html:150
 msgid "ABOUT"
-msgstr ""
+msgstr "APIE"
 
 #: .\src\templates\_subnavbar.html:20 .\src\templates\home.html:85
 #: .\src\templates\modalinfo.html:18 .\src\templates\resources_cards.html:33
 msgid "Training"
-msgstr ""
+msgstr "Mokymai"
 
 #: .\src\templates\_subnavbar.html:24 .\src\templates\home.html:95
 msgid "Organisations"
-msgstr ""
+msgstr "Organizacijos"
 
 #: .\src\templates\_subnavbar.html:29
 msgid "Our Gold Star Selection"
-msgstr ""
+msgstr "Auksinė kolekcija"
 
 #: .\src\templates\about.html:4 .\src\templates\about.html:8
 msgid "About"
-msgstr ""
+msgstr "Apie"
 
 #: .\src\templates\about.html:19
 msgid "Watch our teaser, in 12 different languages!"
@@ -1485,7 +1543,7 @@ msgstr ""
 
 #: .\src\templates\about.html:44
 msgid "The Platform"
-msgstr ""
+msgstr "Platforma"
 
 #: .\src\templates\about.html:47
 msgid ""
@@ -1493,6 +1551,9 @@ msgid ""
 "training and resources for citizen science – by the community, for the "
 "community."
 msgstr ""
+"EU-Citizen.Science yra internetinė platforma, skirta dalintis žiniomis, "
+"priemonėmis, mokymais ir resursais, skirtais piliečių mokslui - iš "
+"bendruomenės, bendruomenei."
 
 #: .\src\templates\about.html:48
 msgid ""
@@ -1501,33 +1562,38 @@ msgid ""
 "citizens participating in research across the full range of scientific "
 "enquiry."
 msgstr ""
+"Platformos vizija - sukurti žinių centrą, skirtą populiarinti piliečių "
+"mokslą, ir pasinaudoti vis didėjančia piliečių, dalyvaujančių įvairių sričių "
+"mokslo procese įtaka."
 
 #: .\src\templates\about.html:49
 msgid ""
 "We accomplish this by supporting the sharing of knowledge, know-how, and "
 "experience between anyone doing or wanting to do citizen science."
 msgstr ""
+"To siekiame skatindami dalintis žiniomis, patyrimu ir patirtimi tarp visų "
+"dalyvaujančių ar siekiančių dalyvauti piliečių moksle."
 
 #: .\src\templates\about.html:52
 msgid "On this platform you will find"
-msgstr ""
+msgstr "Šioje platformoje rasite"
 
 #: .\src\templates\about.html:54
 msgid "that are useful for citizen science practitioners"
-msgstr ""
+msgstr "kurie naudingi piliečių mokslo praktikams"
 
 #: .\src\templates\about.html:55
 msgid "that are engaging the public in research via citizen science activities"
-msgstr ""
+msgstr "kurie įtraukia visuomenę į mokslą per piliečių mokslo veiklas"
 
 #: .\src\templates\about.html:56
 msgid "Training resources and materials citizen science as a practice"
-msgstr ""
+msgstr "Piliečių mokslo praktikos mokymai ir medžiaga"
 
 #: .\src\templates\about.html:57
 msgid ""
 "Organisations that are involved in citizen science projects and research"
-msgstr ""
+msgstr "Organizacijos, įsitraukusios į piliečių mokslo projektus ir tyrimus"
 
 #: .\src\templates\about.html:58
 msgid "an"
@@ -1535,21 +1601,23 @@ msgstr ""
 
 #: .\src\templates\about.html:58
 msgid "Events"
-msgstr ""
+msgstr "Renginiai"
 
 #: .\src\templates\about.html:58
 msgid "calendar"
-msgstr ""
+msgstr "kalendorius"
 
 #: .\src\templates\about.html:58
 msgid "and"
-msgstr ""
+msgstr "ir"
 
 #: .\src\templates\about.html:59
 msgid ""
 "Community Forums for questions, conversations, and collaboration with the "
 "rest of the community."
 msgstr ""
+"Bendruomenės forumai klausimams, pokalbiams ir bendradarbiavimui su visa "
+"bendruomene."
 
 #: .\src\templates\about.html:63
 msgid ""
@@ -1558,18 +1626,21 @@ msgid ""
 "suggestion for us? Please share your thoughts in our community feedback "
 "forum or in the"
 msgstr ""
+"Pastebėjote, jog kažko trūksta? Galite patys įrašyti resursus, projektus ir "
+"mokymus, naudodami +PRIDĖTI mygtuką meniu viršuje. Turite pasiūlymų? "
+"Pasidalinkite savo mintimis bendruomenės forume arba"
 
 #: .\src\templates\about.html:63
 msgid "contact"
-msgstr ""
+msgstr "kontaktų"
 
 #: .\src\templates\about.html:63
 msgid "section"
-msgstr ""
+msgstr "skiltį"
 
 #: .\src\templates\about.html:72
 msgid "The Project"
-msgstr ""
+msgstr "Projektas"
 
 #: .\src\templates\about.html:76
 msgid ""
@@ -1580,20 +1651,27 @@ msgid ""
 "for citizen science participants, practitioners, researchers, policy makers "
 "and society across Europe"
 msgstr ""
+"EU-Citizen.Science projektas finansuotas Europos Komisijos Horizontas 2020 "
+"programos, „Mokslas dalyvaujant visuomenei ir jai skirtas mokslas“ (SwafS) "
+"teminės srities. Mūsų misija ambicinga - tapti pagrindiniu piliečių mokslo "
+"orientyru dalinantis žiniomis tarp visų piliečių mokslo dalyvių, praktikų, "
+"tyrėjų, politikos kūrėjų ir bendruomenės visoje Europoje."
 
 #: .\src\templates\about.html:81
 msgid "Our Vision"
-msgstr ""
+msgstr "Mūsų vizija"
 
 #: .\src\templates\about.html:82
 msgid ""
 "is that Citizen Science becomes an appreciated and widely established means "
 "for the democratization of science in Europe"
 msgstr ""
+"- kad piliečių mokslas taptų vertinama ir plačiai naudojama priemone mokslo "
+"demokratizavimui Europoje."
 
 #: .\src\templates\about.html:89
 msgid "Our Core Mission"
-msgstr ""
+msgstr "Mūsų pagrindinė misija"
 
 #: .\src\templates\about.html:90
 msgid ""
@@ -1601,56 +1679,69 @@ msgid ""
 "knowledge sharing for citizen science participants, practitioners, "
 "researchers, policy makers and society across Europe"
 msgstr ""
+"tapti pagrindiniu piliečių mokslo orientyru Europoje, dalinantis žiniomis "
+"tarp visų piliečių mokslo dalyvių, praktikų, tyrėjų, politikos kūrėjų ir "
+"bendruomenės visoje Europoje."
 
 #: .\src\templates\about.html:97
 msgid "Objective 1: Establish"
-msgstr ""
+msgstr "Tikslas 1: Įsteigti"
 
 #: .\src\templates\about.html:98
 msgid ""
 "EU-Citizen.Science as the knowledge and community hub for high-quality CS "
 "exchange and learning in Europe"
 msgstr ""
+"EU-Citizen.Science kaip žinių ir bendruomenės centrą aukštos kokybės "
+"piliečių mokslo mainams ir pažinimui Europoje"
 
 #: .\src\templates\about.html:105
 msgid "Objective 2: Consolidate"
-msgstr ""
+msgstr "Tikslas 2: Sutvirtinti"
 
 #: .\src\templates\about.html:106
 msgid ""
 "the CS knowledge base and celebrate outstanding practices and state of the "
 "art in CS in Europe"
 msgstr ""
+"piliečių mokslą žinių pagrindą ir paryškinti gerąsias praktikas bei piliečių "
+"mokslo naujoves Europoje"
 
 #: .\src\templates\about.html:113
 msgid "Objective 3: Empower"
-msgstr ""
+msgstr "Tikslas 3: Įgalinti"
 
 #: .\src\templates\about.html:114
 msgid ""
 "diverse stakeholders to become citizen scientists, start CS initiatives, and "
 "implement CS approaches professionally"
 msgstr ""
+"įvairių suinteresuotų šalių atstovus tapti piliečiais mokslininkas, kurti "
+"piliečių mokslo iniciatyvas ir profesionaliai naudoti piliečių mokslo metodą"
 
 #: .\src\templates\about.html:121
 msgid "Objective 4: Explore"
-msgstr ""
+msgstr "Tikslas 4: Ištirti"
 
 #: .\src\templates\about.html:122
 msgid ""
 "new pathways for participatory governance, by strengthening links between CS "
 "and policy making"
 msgstr ""
+"naujus kelius dalyvavimo valdymui, sustiprinant sąsajas tarp piliečių mokslo "
+"ir politikos formavimo"
 
 #: .\src\templates\about.html:129
 msgid "Objective 5: Advance"
-msgstr ""
+msgstr "Tikslas 5: Paskatinti"
 
 #: .\src\templates\about.html:130
 msgid ""
 "CS into the mainstream of public engagement, science communication and "
 "education"
 msgstr ""
+"piliečių mokslo populiarinimą visuomenės įtraukimo, mokslo komunikacijos ir "
+"ugdymo srityse"
 
 #: .\src\templates\about.html:137
 msgid ""
@@ -1661,10 +1752,15 @@ msgid ""
 "requirements, and how we can build a community of engaged users of the "
 "Platform."
 msgstr ""
+"vadovaudamiesi savo misija, stengsimės vienodai įtraukti piliečių mokslo "
+"dalyvius, praktikus, tyrėjus, politikos formuotojus ir visuomenę apskritai, "
+"visu projekto vykdymo metu. Kad galėtume tai efektyviai įvykdyti, mums "
+"svarbu pažinti savo tikslinę auditoriją, jos poreikius ir reikmes, ir kaip "
+"galime sukurti įsitraukusių platformos naudotojų bendruomenę."
 
 #: .\src\templates\about.html:147
 msgid "The Team"
-msgstr ""
+msgstr "Komanda"
 
 #: .\src\templates\about.html:150
 msgid ""
@@ -1674,18 +1770,23 @@ msgid ""
 "citizen science, including universities, non-governmental organisations, "
 "local authorities, community service organisations and museums."
 msgstr ""
+"EU-Citizen.Science konsortiumas sudarytas iš 14 partnerių ir 9 trečiųjų "
+"šalių iš 14 Europos sąjungos narių, bei kitų projekto draugų. Atstovaujame "
+"daugybę skirtingų suinteresuotų šalių, įsitraukusių į piliečių mokslą, "
+"įskaitant universitetus, nevalstybines organizacijas, vietines institucijas, "
+"visuomeninės veiklos organizacijas ir muziejus."
 
 #: .\src\templates\about.html:159
 msgid "Consortium partners"
-msgstr ""
+msgstr "Konsortiumo partneriai"
 
 #: .\src\templates\about.html:216
 msgid "Third party partners"
-msgstr ""
+msgstr "Trečiųjų šalių partneriai"
 
 #: .\src\templates\about.html:257
 msgid "Citizen Science"
-msgstr ""
+msgstr "Piliečių mokslas"
 
 #: .\src\templates\about.html:260
 msgid ""
@@ -1697,6 +1798,12 @@ msgid ""
 "innovation and the development of evidence-based policy, at local, national "
 "and EU levels."
 msgstr ""
+"Piliečių mokslas aktyviai įtraukia visuomenę į mokslo veiklas, sukuriančias "
+"naujų žinių, todėl turi galimybę prasmingaisujungti mokslą, politikos "
+"formuotojus ir visuomenę apskritai. Kaip kertinė atviro mokslo dalis, "
+"piliečių mokslas atveria galimybę visiems visuomenės nariams aktyviai "
+"įsitraukti į mokslą, inovacijas ir įrodymais paremtos politikos kūrimą, "
+"vietiniu, šalies ar ES lygiu."
 
 #: .\src\templates\about.html:261
 msgid ""
@@ -1705,30 +1812,36 @@ msgid ""
 "key principles which we as a community believe underlie good practice in "
 "citizen science, the following"
 msgstr ""
+"Piliečių mokslas yra lanksti sąvoka, kurią galima adaptuoti ir pritaikyti "
+"įvairiose situacijose bei disciplinose. Kad išskirtume pagrindinius "
+"principus, kurie, bendruomenės manymu, sudaro gerosios piliečių mokslo "
+"praktikos pagrindą, buvo sukurti "
 
 #: .\src\templates\about.html:261
 msgid "10 Principles of Citizen Science"
-msgstr ""
+msgstr "10 piliečių mokslo principų"
 
 #: .\src\templates\about.html:261
 msgid ""
 "were developed by the ‘Sharing best practice and building capacity’ working "
 "group of the"
-msgstr ""
+msgstr "suformuluoti „Geriausių praktikų ir pajėgumo kūrimo“ darbo grupės"
 
 #: .\src\templates\about.html:261
 msgid "European Citizen Science Association"
-msgstr ""
+msgstr "Europos piliečių mokslo asociacijoje"
 
 #: .\src\templates\about.html:261
 msgid ""
 "led by the Natural History Museum London with input from many members of the "
 "Association."
 msgstr ""
+"vadovaujant Londono gamtos istorijos muziejaus, bei prisidedant daugybei "
+"asociacijos narių."
 
 #: .\src\templates\about.html:269
 msgid "Ten principles of citizen science"
-msgstr ""
+msgstr "Dešimt piliečių mokslo principų"
 
 #: .\src\templates\about.html:273
 msgid ""
@@ -1737,22 +1850,30 @@ msgid ""
 "contributors, collaborators, or as project leader and have a meaningful role "
 "in the project."
 msgstr ""
+"Piliečių mokslo projektai aktyviai įtraukia piliečius į mokslo veiklas, "
+"sukuriančias naujų žinių. Piliečiai gali įsitraukti kaip pagalbinkai, "
+"bendradarbiaujantys nariai arba projektų vadovai, ir turėti prasmingą "
+"vaidmenį projekte."
 
 #: .\src\templates\about.html:274
 msgid "Citizen science projects have a genuine science outcome."
-msgstr ""
+msgstr "Piliečių mokslo projektai kuria realius mokslinius rezultatus."
 
 #: .\src\templates\about.html:274
 msgid ""
 "For example, answering a research question or informing conservation action, "
 "management decisions or environmental policy."
 msgstr ""
+"Pavyzdžiui, randami atsakymai ar suteikiama informacijos rūšių išsaugojimo, "
+"sprendimų darymo ar aplinkos politikos klausimais."
 
 #: .\src\templates\about.html:275
 msgid ""
 "Both the professional scientists and the citizen scientists benefit from "
 "taking part."
 msgstr ""
+"Tiek profesionalūs mokslininkai, tiek piliečiai mokslininkai dalyvaudami "
+"gauna naudos."
 
 #: .\src\templates\about.html:275
 msgid ""
@@ -1761,63 +1882,87 @@ msgid ""
 "contributing to scientific evidence e.g. to address local, national and "
 "international issues, and through that, the potential to influence policy."
 msgstr ""
+"Tai gali būti tyrimų rezultatų publikavimas, ugdymosi galimybės, maloniai "
+"praleistas laikas, socialinė nauda, pasitenkinimas prisidedant prie "
+"mokslinių įrodymų rinkimo, pvz., sprendžiant vietines, šalies ir "
+"tarptautines problemas, ir galimybė daryti įtaka politiniams sprendimas."
 
 #: .\src\templates\about.html:276
 msgid ""
 "Citizen scientists may, if they wish, participate in multiple stages of the "
 "scientific process."
 msgstr ""
+"Jei pageidauja, piliečiai mokslininkai gali dalyvauti įvairiose mokslinio "
+"proceso stadijose."
 
 #: .\src\templates\about.html:276
 msgid ""
 "This may include developing the research question, designing the method, "
 "gathering and analysing data, and communicating the results."
 msgstr ""
+"Tai gali būti tiriamųjų klausimų formulavimas, metodo parinkimas, duomenų "
+"rinkimas ir analizė, ir rezultatų komunikavimas."
 
 #: .\src\templates\about.html:277
 msgid "Citizen scientists receive feedback from the project."
-msgstr ""
+msgstr "Piliečiai mokslininkai iš projekto gauna grįžtamąjį ryšį."
 
 #: .\src\templates\about.html:277
 msgid ""
 "For example, how their data are being used and what the research, policy or "
 "societal outcomes are."
 msgstr ""
+"Pavyzdžiui, apie tai, kaip naudojami jų duomenys ir prie kokių tyrimų, "
+"politikos ar visuomeninių rezultatų jie prisideda."
 
 #: .\src\templates\about.html:278
 msgid ""
 "Citizen science is considered a research approach like any other, with "
 "limitations and biases that should be considered and controlled for."
 msgstr ""
+"Piliečių mokslas laikomas lygiaverčiu kitiems mokslinių tyrimų metodams, su "
+"tam tikrais apribojimais ir tendencijomis, į kurias reikia atkreipti dėmesį "
+"ir kontroliuoti."
 
 #: .\src\templates\about.html:278
 msgid ""
 "However unlike traditional research approaches, citizen science provides "
 "opportunity for greater public engagement and democratisation of science."
 msgstr ""
+"Tačiau skirtingai nuo įprastų tyrimų metodų, piliečių mokslas suteikia "
+"galimybę plačiau įsitraukti visuomenei ir demokratizuoti mokslą."
 
 #: .\src\templates\about.html:279
 msgid ""
 "Citizen science project data and meta-data are made publicly available and "
 "where possible, results are published in an open access format."
 msgstr ""
+"Piliečių mokslo projekto duomenys ir metaduomenys yra viešai publikuojami "
+"ir, kai tai įmanoma, rezultatai publikuojami atviros prieigos formatu."
 
 #: .\src\templates\about.html:279
 msgid ""
 "Data sharing may occur during or after the project, unless there are "
 "security or privacy concerns that prevent this."
 msgstr ""
+"Dalijimasis duomenimis gali vykta projekto metu ar po jo, nebent yra su "
+"saugumu ar privatumu susijusių priežasčių to nedaryti."
 
 #: .\src\templates\about.html:280
 msgid ""
 "Citizen scientists are acknowledged in project results and publications."
 msgstr ""
+"Piliečiai mokslininkai yra įtraukiami ir minimi projekto rezultatuose ir "
+"publikacijose."
 
 #: .\src\templates\about.html:281
 msgid ""
 "Citizen science programmes are evaluated for their scientific output, data "
 "quality, participant experience and wider societal or policy impact."
 msgstr ""
+"Piliečių mokslo programos yra vertinamos pagal mokslinius rezultatus, "
+"duomenų kokybę, dalyvių patirtį ir bendrą daromą įtaką visuomenei ar "
+"politikai."
 
 #: .\src\templates\about.html:282
 msgid ""
@@ -1826,122 +1971,132 @@ msgid ""
 "agreements, confidentiality, attribution, and the environmental impact of "
 "any activities."
 msgstr ""
+"Piliečių mokslo projekto lyderiai atkreipia dėmesį į įstatymines ir etines "
+"problemas, susijusias su autorinėmis teisėmis, intelektine nuosavybe, "
+"dalijimosi duomenimis sutikimais, konfidencialumu, atribucija, ir veiklos "
+"daroma įtaka aplinkai."
 
 #: .\src\templates\base.html:74 .\src\templates\base2.html:68
 #: .\src\templates\base_forms.html:51 .\src\templates\base_forum.html:79
 #: .\src\templates\base_r2.html:168
 msgid "Admin"
-msgstr ""
+msgstr "Administratorius"
 
 #: .\src\templates\base.html:84
 msgid "Profile"
-msgstr ""
+msgstr "Profilis"
 
 #: .\src\templates\base.html:85 .\src\templates\base2.html:70
 #: .\src\templates\base_forum.html:80 .\src\templates\base_r2.html:170
 msgid "Logout"
-msgstr ""
+msgstr "Atsijungti"
 
 #: .\src\templates\base.html:141 .\src\templates\base_forms.html:75
 msgid "Company"
-msgstr ""
+msgstr "Kompanija"
 
 #: .\src\templates\base.html:144 .\src\templates\base_forms.html:78
 msgid "Connect with us on"
-msgstr ""
+msgstr "Susisiekite su mumis"
 
 #: .\src\templates\base2.html:56 .\src\templates\base3.html:49
 #: .\src\templates\base_forum.html:65 .\src\templates\base_r2.html:152
 msgid "LOGIN"
-msgstr ""
+msgstr "PRISIJUNGTI"
 
 #: .\src\templates\base2.html:57 .\src\templates\base3.html:50
 #: .\src\templates\base_forum.html:66
 msgid "SIGN UP"
-msgstr ""
+msgstr "UŽSIREGISTRUOTI"
 
 #: .\src\templates\base2.html:61 .\src\templates\base_forum.html:72
 #: .\src\templates\base_r2.html:160
 msgid "My Profile"
-msgstr ""
+msgstr "Mano profilis"
 
 #: .\src\templates\base2.html:62 .\src\templates\base_forum.html:73
 #: .\src\templates\base_r2.html:161
 msgid "My organisations"
-msgstr ""
+msgstr "Mano organizacijos"
 
 #: .\src\templates\base2.html:63 .\src\templates\base_forum.html:74
 #: .\src\templates\base_r2.html:162
 msgid "Submitted projects"
-msgstr ""
+msgstr "Įkelti projektai"
 
 #: .\src\templates\base2.html:64 .\src\templates\base_forum.html:75
 #: .\src\templates\base_r2.html:163
 msgid "Submitted resources"
-msgstr ""
+msgstr "Įkelti resursai"
 
 #: .\src\templates\base2.html:66 .\src\templates\base_forum.html:77
 #: .\src\templates\base_r2.html:165
 msgid "Resources library"
-msgstr ""
+msgstr "Resursų biblioteka"
 
 #: .\src\templates\base3.html:52
 msgid "PROFILE"
-msgstr ""
+msgstr "PROFILIS"
 
 #: .\src\templates\base3.html:53
 msgid "LOGOUT"
-msgstr ""
+msgstr "ATSIJUNGTI"
 
 #: .\src\templates\base3.html:56
 msgid "ADMIN"
-msgstr ""
+msgstr "ADMINISTRATORIUS"
 
 #: .\src\templates\base_forms.html:43
 msgid "Login"
-msgstr ""
+msgstr "Prisijungti"
 
 #: .\src\templates\base_forms.html:46
 msgid "profile"
-msgstr ""
+msgstr "profilis"
 
 #: .\src\templates\base_forms.html:47
 msgid "logout"
-msgstr ""
+msgstr "atsijungti"
 
 #: .\src\templates\base_forum.html:62 .\src\templates\base_r2.html:149
 msgid "FORUM"
-msgstr ""
+msgstr "FORUMAS"
 
 #: .\src\templates\base_r2.html:153
 msgid "SIGNUP"
-msgstr ""
+msgstr "UŽSIREGISTRUOTI"
 
 #: .\src\templates\criteria.html:10
 msgid "Quality criteria"
-msgstr ""
+msgstr "Kokybės kriterijai"
 
 #: .\src\templates\curated.html:27
 msgid ""
 "The EU-Citizen.Science consortium has curated a selection of Gold Star "
 "citizen science resources"
 msgstr ""
+"EU-Citizen.Science konsortiumas atrinko „Auksinę“ piliečių mokslo resursų "
+"kolekciją"
 
 #: .\src\templates\curated.html:28
 msgid ""
 "to help you get started with designing and launching your own citizen "
 "science project, categorised across the project lifecycle."
 msgstr ""
+"kad būtų lengviau suplanuoti ir pradėti savo piliečių mokslo projektą, "
+"suskirstytą pagal projektų raidos ciklą."
 
 #: .\src\templates\faq.html:20
 msgid "Frequently Asked Questions"
-msgstr ""
+msgstr "Dažnai užduodami klausimai"
 
 #: .\src\templates\home.html:31
 msgid ""
 "Welcome to the platform for sharing Citizen Science projects, resources, "
 "tools, and training"
 msgstr ""
+"Sveiki atvykę į platformą piliečių mokslo projektų, resursų, įrankių ir "
+"mokymų dalinimuisi"
 
 #: .\src\templates\home.html:41
 msgid ""
@@ -1950,60 +2105,62 @@ msgstr ""
 
 #: .\src\templates\home.html:66
 msgid "in Projects"
-msgstr ""
+msgstr "tarp projektų"
 
 #: .\src\templates\home.html:67 .\src\templates\home.html:77
 #: .\src\templates\home.html:87 .\src\templates\home.html:97
 msgid "here"
-msgstr ""
+msgstr "čia"
 
 #: .\src\templates\home.html:67 .\src\templates\home.html:77
 #: .\src\templates\home.html:87 .\src\templates\home.html:97
 msgid "to see all of them"
-msgstr ""
+msgstr "peržiūrėti visus"
 
 #: .\src\templates\home.html:76
 msgid "in Resources"
-msgstr ""
+msgstr "tarp resursų"
 
 #: .\src\templates\home.html:86
 msgid "in Training"
-msgstr ""
+msgstr "tarp mokymų"
 
 #: .\src\templates\home.html:96
 msgid "in Organisations"
-msgstr ""
+msgstr "tarp organizacijų"
 
 #: .\src\templates\modalinfo.html:8
 msgid ""
 "Select the form for the content profile you would like to add to the platform"
-msgstr ""
+msgstr "Pasirinkite anketą turiniui, kurį norėtumėte įkelti į platformą"
 
 #: .\src\templates\modalinfo.html:14 .\src\templates\projects_cards.html:34
 msgid "Project"
-msgstr ""
+msgstr "Projektas"
 
 #: .\src\templates\modalinfo.html:15
 msgid "Create a Citizen Science Project profile"
-msgstr ""
+msgstr "Sukurkite profilį piliečių mokslo projektui"
 
 #: .\src\templates\modalinfo.html:16 .\src\templates\resources_cards.html:33
 msgid "Resource"
-msgstr ""
+msgstr "Resursas"
 
 #: .\src\templates\modalinfo.html:17
 msgid "Create a profile for a Resource that is relevant for Citizen Science"
-msgstr ""
+msgstr "Sukurkite profilį resursui, susijusiam su piliečių mokslu"
 
 #: .\src\templates\modalinfo.html:19
 msgid ""
 "Create a profile for Training and Education Material related to the practice "
 "of Citizen Science"
 msgstr ""
+"Sukurkite profilį mokymo ar edukaciniai medžiagai, susijusiai su piliečių "
+"mokslo praktika"
 
 #: .\src\templates\modalinfo.html:21
 msgid "Create a profile for your Organisation"
-msgstr ""
+msgstr "Sukurkite profilį savo organizacijai"
 
 #: .\src\templates\modalinfo.html:23
 msgid "Event"
@@ -2015,13 +2172,13 @@ msgstr ""
 
 #: .\src\templates\moderation.html:10
 msgid "The moderation process"
-msgstr ""
+msgstr "Moderavimo procesas"
 
 #: .\src\templates\projects_cards.html:20
 #: .\src\templates\resources_cards.html:15
 #: .\src\templates\resources_cards_horizontal.html:19
 msgid "NOT ACCEPTED"
-msgstr ""
+msgstr "NEPRIIMTA"
 
 #: .\src\templates\projects_cards.html:22
 #: .\src\templates\projects_cards_featured.html:19
@@ -2031,7 +2188,7 @@ msgstr ""
 #: .\src\templates\resources_cards_horizontal.html:20
 #: .\src\templates\resources_cards_short.html:17
 msgid "NOT YET MODERATED"
-msgstr ""
+msgstr "NEPERŽIŪRĖTI MODERATORIAUS"
 
 #: .\src\templates\projects_cards.html:24
 #: .\src\templates\projects_cards_featured.html:20
@@ -2041,11 +2198,11 @@ msgstr ""
 #: .\src\templates\resources_cards_horizontal.html:21
 #: .\src\templates\resources_cards_short.html:18
 msgid "MODERATED"
-msgstr ""
+msgstr "PERŽIŪRĖTI MODERATORIAUS"
 
 #: .\src\templates\projects_cards.html:34
 msgid "Featured project"
-msgstr ""
+msgstr "Išskirti projektai"
 
 #: .\src\templates\projects_cards_featured.html:33
 #: .\src\templates\projects_cards_short.html:33
@@ -2053,15 +2210,15 @@ msgstr ""
 #: .\src\templates\resources_cards_horizontal.html:45
 #: .\src\templates\resources_cards_short.html:30
 msgid "Read more"
-msgstr ""
+msgstr "Žr. daugiau"
 
 #: .\src\templates\registration\logged_out.html:9
 msgid "Thanks for spending some quality time with the Web site today."
-msgstr ""
+msgstr "Ačiū, kad apsilankėte šioje svetainėje."
 
 #: .\src\templates\registration\logged_out.html:11
 msgid "Log in again"
-msgstr ""
+msgstr "Prisijungti iš naujo"
 
 #: .\src\templates\registration\password_change_done.html:6
 #: .\src\templates\registration\password_change_form.html:6
@@ -2070,56 +2227,58 @@ msgstr ""
 #: .\src\templates\registration\password_reset_done.html:6
 #: .\src\templates\registration\password_reset_form.html:6
 msgid "Home"
-msgstr ""
+msgstr "Pradinis puslapis"
 
 #: .\src\templates\registration\password_change_done.html:7
 #: .\src\templates\registration\password_change_form.html:7
 #: .\src\templates\registration\password_change_form.html:11
 #: .\src\templates\registration\password_change_form.html:12
 msgid "Password change"
-msgstr ""
+msgstr "Slaptažodžio keitimas"
 
 #: .\src\templates\registration\password_change_done.html:11
 #: .\src\templates\registration\password_change_done.html:12
 msgid "Password change successful"
-msgstr ""
+msgstr "Slaptažodis pakeistas sėkmingai"
 
 #: .\src\templates\registration\password_change_done.html:16
 msgid "Your password was changed."
-msgstr ""
+msgstr "Jūsų slaptažodis pakeistas."
 
 #: .\src\templates\registration\password_change_form.html:19
 msgid "Please correct the error below."
-msgstr ""
+msgstr "Ištaisykite klaidą."
 
 #: .\src\templates\registration\password_change_form.html:19
 msgid "Please correct the errors below."
-msgstr ""
+msgstr "Ištaisykite klaidas."
 
 #: .\src\templates\registration\password_change_form.html:23
 msgid ""
 "Please enter your old password, for security's sake, and then enter your new "
 "password twice so we can verify you typed it in correctly."
 msgstr ""
+"Įrašykite seną slaptažodį, tuomet įrašykite naują slaptažodį, ir antrą kartą "
+"jį pakartokite, kad įsitikintume, kad jį įrašėte teisingai."
 
 #: .\src\templates\registration\password_change_form.html:63
 #: .\src\templates\registration\password_reset_confirm.html:42
 msgid "Change my password"
-msgstr ""
+msgstr "Pakeisti slaptažodį"
 
 #: .\src\templates\registration\password_reset_complete.html:7
 #: .\src\templates\registration\password_reset_complete.html:11
 #: .\src\templates\registration\password_reset_complete.html:12
 msgid "Password reset complete"
-msgstr ""
+msgstr "Slaptažodis sėkmingai atnaujintas"
 
 #: .\src\templates\registration\password_reset_complete.html:16
 msgid "Your password has been set.  You may go ahead and log in now."
-msgstr ""
+msgstr "Slaptažodis išsaugotas. Dabar galite prisijungti."
 
 #: .\src\templates\registration\password_reset_confirm.html:7
 msgid "Password reset confirmation"
-msgstr ""
+msgstr "Patvirtinti slaptažodžio atnaujinimą"
 
 #: .\src\templates\registration\password_reset_confirm.html:11
 #: .\src\templates\registration\password_reset_confirm.html:12
@@ -2128,61 +2287,72 @@ msgstr ""
 #: .\src\templates\registration\password_reset_form.html:11
 #: .\src\templates\registration\password_reset_form.html:12
 msgid "Password reset"
-msgstr ""
+msgstr "Slaptažodis atnaujintas"
 
 #: .\src\templates\registration\password_reset_confirm.html:20
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
 msgstr ""
+"Prašome įvesti slaptažodį du kartus, kad įsitikintume, kad jį įvedėte "
+"teisingai."
 
 #: .\src\templates\registration\password_reset_confirm.html:25
 msgid "New password:"
-msgstr ""
+msgstr "Naujas slaptažodis"
 
 #: .\src\templates\registration\password_reset_confirm.html:34
 msgid "Confirm password:"
-msgstr ""
+msgstr "Patvirtinkite slaptažodį"
 
 #: .\src\templates\registration\password_reset_confirm.html:48
 msgid "Password reset unsuccessful"
-msgstr ""
+msgstr "Slaptažodžio atnaujinimas nesėkmingas"
 
 #: .\src\templates\registration\password_reset_confirm.html:50
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used.  Please request a new password reset."
 msgstr ""
+"Slaptažodžio atnaujinimo nuoroda neaktyvi, greičiausiai todėl, kad jau buvo "
+"panaudota. Siųskite naują užklausą slaptažodžiui atnaujinti."
 
 #: .\src\templates\registration\password_reset_done.html:11
 #: .\src\templates\registration\password_reset_done.html:12
 msgid "Password reset successful"
-msgstr ""
+msgstr "Slaptažodis atnaujintas sėkmingai"
 
 #: .\src\templates\registration\password_reset_done.html:16
 msgid ""
 "We've emailed you instructions for setting your password to the email "
 "address you submitted. You should be receiving it shortly."
 msgstr ""
+"Instrukcijos slaptažodžio atnaujinimui išsiųstos į Jūsų el. pašto dėžutę. "
+"Netrukus turėtumėte jas gauti."
 
 #: .\src\templates\registration\password_reset_form.html:16
 msgid ""
 "Forgotten your password? Enter your email address below, and we'll email "
 "instructions for setting a new one."
 msgstr ""
+"Pamiršote slaptažodį? Įrašykite savo el. parašą ir atsiųsime staptažodžio "
+"atnaujinimo instrukcijas."
 
 #: .\src\templates\registration\password_reset_form.html:21
 msgid "Email address:"
-msgstr ""
+msgstr "El. pašto adresas"
 
 #: .\src\templates\registration\password_reset_form.html:30
 msgid "Reset my password"
-msgstr ""
+msgstr "Atnaujinti slaptažodį"
 
 #: .\src\templates\resources_cards.html:32
 msgid "Featured"
-msgstr ""
+msgstr "Rodoma"
 
 #: .\src\templates\resources_cards.html:55
 msgid "Last updated"
-msgstr ""
+msgstr "Paskutinį kartą atnaujinta"
+
+#~ msgid "Teaser video"
+#~ msgstr "Video"
