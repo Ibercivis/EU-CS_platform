@@ -60,6 +60,8 @@ urlpatterns = [
     path("", include(events.urls)),
     path('summernote/', include('django_summernote.urls')),
     path('forum/', include(machina_urls)),
+    path('getTopicsResponded', views.getTopicsResponded, name='getTopicsResponded'),
+    path('getForumResponsesNumber', views.getForumResponsesNumber, name='getForumResponsesNumber'),    
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^reviews/', include('reviews.urls')),
     url(r'^citizen-science-resources-related-to-the-covid19-pandemic/', RedirectView.as_view(url='blog/2020/03/31/citizen-science-resources-related-covid19-pandemic/')),
