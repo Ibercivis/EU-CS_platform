@@ -239,7 +239,9 @@
           },
           success: function (response) {
             var forumresponses = response.forumresponses
-            $("#forumHeader").html('<a class="nav-link main" href="/forum">{% trans "FORUM" %}<sup>' + forumresponses + '</sup></a>');
+            if (forumresponses > 0){
+              $("#forumHeader").html('<a class="nav-link main" href="/forum">{% trans "FORUM" %}<sup>' + forumresponses + '</sup></a>');
+            }            
           }
         }
         );
