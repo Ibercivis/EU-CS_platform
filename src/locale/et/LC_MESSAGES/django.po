@@ -2,13 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-04 11:19+0100\n"
+"POT-Creation-Date: 2021-01-13 14:54+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,13 +17,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
 #: .\src\accounts\forms.py:25 .\src\accounts\forms.py:78
 msgid "Enter Email"
-msgstr ""
+msgstr "Sisesta e-mail"
 
 #: .\src\accounts\forms.py:26 .\src\accounts\forms.py:80
 msgid "Enter Password"
-msgstr ""
+msgstr "Sisesta salasõna"
 
 #: .\src\accounts\forms.py:32 .\src\templates\base.html:69
 #: .\src\templates\registration\password_reset_complete.html:18
@@ -36,14 +37,17 @@ msgid ""
 "confirmed your address. Please search for the confirmation email in your "
 "inbox (or spam) to activate your account"
 msgstr ""
+"On näha, et Sinu e-maili aadress on meie andmebaasis, kuid Sa ei oleseda "
+"veel kinnitanud. Palun otsi oma postkastist (või spämmist) kinnituskiri,et "
+"oma konto aktiveerida"
 
 #: .\src\accounts\forms.py:79
 msgid "Enter Full Name"
-msgstr ""
+msgstr "Sisesta täisnimi"
 
 #: .\src\accounts\forms.py:81
 msgid "Re-enter Password"
-msgstr ""
+msgstr "Sisesta uuesti salasõna"
 
 #: .\src\accounts\forms.py:83 .\src\templates\base.html:70
 #: .\src\templates\base_forms.html:44
@@ -52,16 +56,16 @@ msgstr ""
 
 #: .\src\accounts\forms.py:92
 msgid "Enter old password"
-msgstr ""
+msgstr "Sisesta vana salasõna"
 
 #: .\src\accounts\forms.py:93 .\src\accounts\forms.py:114
 #: .\src\templates\registration\password_reset_confirm.html:18
 msgid "Enter new password"
-msgstr ""
+msgstr "Sisesta uus salasõna"
 
 #: .\src\accounts\forms.py:94 .\src\accounts\forms.py:115
 msgid "Enter new password (again)"
-msgstr ""
+msgstr "Sisesta veel kord uus salasõna"
 
 #: .\src\accounts\forms.py:95 .\src\accounts\forms.py:116
 #: .\src\profiles\templates\profiles\edit_profile.html:53
@@ -70,7 +74,7 @@ msgstr ""
 
 #: .\src\accounts\forms.py:105
 msgid "Enter email"
-msgstr ""
+msgstr "Sisesta e-mail"
 
 #: .\src\accounts\forms.py:106
 msgid "Reset Password"
@@ -78,17 +82,17 @@ msgstr ""
 
 #: .\src\accounts\templates\accounts\acc_active_email.html:4
 msgid "Activate your EU-Citizen.Science account."
-msgstr ""
+msgstr "Aktiveeri oma EU-Citizen.Science konto."
 
 #: .\src\accounts\templates\accounts\emails\password-reset-email.html:3
 #: .\src\accounts\templates\accounts\emails\password-reset-subject.txt:1
 #, python-format
 msgid "Password reset on %(site_name)s"
-msgstr ""
+msgstr "Salasõna lähtestamine %(site_name)s"
 
 #: .\src\accounts\templates\accounts\welcome_email.html:4
 msgid "Welcome to EU-Citizen.Science."
-msgstr ""
+msgstr "Tere tulemast lehele EU-Citizen.Science."
 
 #: .\src\blog\templates\blog.html:34
 msgid "Read More"
@@ -102,24 +106,24 @@ msgstr ""
 #: .\src\projects\templates\project.html:87
 #: .\src\projects\templates\project.html:209 .\src\templates\_footer.html:81
 msgid "Contact"
-msgstr ""
+msgstr "Kontakt"
 
 #: .\src\contact\templates\contact.html:56
 #: .\src\contact\templates\submitter_contact.html:45
 msgid "Send"
-msgstr ""
+msgstr "Saada"
 
 #: .\src\contact\templates\submitter_contact.html:10
 msgid "Submitter Contact"
-msgstr ""
+msgstr "Kaastöötaja kontakt"
 
 #: .\src\contact\templates\submitter_contact.html:30
 msgid "This email will be sent to submitter of"
-msgstr ""
+msgstr "See e-mail saadetakse kaastöötajale"
 
 #: .\src\contact\templates\success.html:26
 msgid "Thank you for your message."
-msgstr ""
+msgstr "Täname sõnumi eest."
 
 #: .\src\events\forms.py:8
 msgid "Title of the event"
@@ -139,76 +143,78 @@ msgstr ""
 
 #: .\src\events\templates\editEvent.html:25
 msgid "Edit event"
-msgstr ""
+msgstr "Muuda sündmust"
 
 #: .\src\events\templates\editEvent.html:34
 #: .\src\events\templates\new_event.html:35
 msgid "Event info"
-msgstr ""
+msgstr "Sündmuse info"
 
 #: .\src\events\templates\events.html:12
 msgid "Upcoming events"
-msgstr ""
+msgstr "Eelolevad sündmused"
 
 #: .\src\events\templates\events.html:24 .\src\templates\base_forum.html:89
 #: .\src\templates\base_r2.html:179
 msgid "ADD"
-msgstr ""
+msgstr "LISA"
 
 #: .\src\events\templates\events.html:42
 msgid "More info"
-msgstr ""
+msgstr "Rohkem infot"
 
 #: .\src\events\templates\events.html:72
 #: .\src\organisations\templates\organisations.html:26
 #: .\src\projects\templates\projects.html:27
 #: .\src\resources\templates\resources.html:27
 msgid "Sorry, nothing found"
-msgstr ""
+msgstr "Vabandame, info puudub"
 
 #: .\src\events\templates\new_event.html:25
 msgid "New event"
-msgstr ""
+msgstr "Uus sündmus"
 
 #: .\src\organisations\forms.py:10
 msgid "The name or the organisation"
-msgstr ""
+msgstr "Organisatsiooni nimi"
 
 #: .\src\organisations\forms.py:12
 msgid "URL of the organisation"
-msgstr ""
+msgstr "Organisatsiooni URL"
 
 #: .\src\organisations\forms.py:14
 msgid "Please briefly describe the organisation (ideally in 500 words or less)"
-msgstr ""
+msgstr "Palun kirjelda lühidalt organisatsiooni (soovitavalt kuni 500 sõna)"
 
 #: .\src\organisations\forms.py:16
 #: .\src\organisations\templates\finder_organisations.html:19
 msgid "Type"
-msgstr ""
+msgstr "Tüüp"
 
 #: .\src\organisations\forms.py:18
 msgid "Please upload the logo of your organisation (.jpg or .png)"
-msgstr ""
+msgstr "Lae üles organisatsiooni logo (.jpg või .png)"
 
 #: .\src\organisations\forms.py:19
 msgid "Logo"
-msgstr ""
+msgstr "Logo"
 
 #: .\src\organisations\forms.py:26
 msgid "Please name the contact person or contact point for the organisation"
-msgstr ""
+msgstr "Palun sisesta organisatsiooni kontaktisik"
 
 #: .\src\organisations\forms.py:29
 msgid ""
 "Please provide the email address of the contact person or contact point. "
 "Note you will need permission to do that"
 msgstr ""
+"Palun sisesta kontaktisiku e-maili aadress NB! Selleks on vaja isiku või "
+"organisatsiooni luba"
 
 #: .\src\organisations\forms.py:67 .\src\projects\forms.py:286
 #: .\src\resources\forms.py:200
 msgid "Give additional users permission to edit"
-msgstr ""
+msgstr "Anna teistele kasutajatele muutmiseks luba"
 
 #: .\src\organisations\templates\edit_organisation.html:28
 #: .\src\organisations\templates\new_organisation.html:27
@@ -217,7 +223,7 @@ msgstr ""
 #: .\src\resources\templates\editResource.html:23
 #: .\src\resources\templates\new_resource.html:25
 msgid "Crop the photo"
-msgstr ""
+msgstr "Lõika fotot"
 
 #: .\src\organisations\templates\edit_organisation.html:30
 #: .\src\organisations\templates\new_organisation.html:29
@@ -231,7 +237,7 @@ msgstr ""
 #: .\src\resources\templates\new_resource.html:62
 #: .\src\templates\modalinfo.html:10
 msgid "Close"
-msgstr ""
+msgstr "Sulge"
 
 #: .\src\organisations\templates\edit_organisation.html:44
 #: .\src\organisations\templates\new_organisation.html:43
@@ -240,7 +246,7 @@ msgstr ""
 #: .\src\resources\templates\editResource.html:39
 #: .\src\resources\templates\new_resource.html:41
 msgid "zoom_in"
-msgstr ""
+msgstr "suumi_sisse"
 
 #: .\src\organisations\templates\edit_organisation.html:47
 #: .\src\organisations\templates\new_organisation.html:46
@@ -249,7 +255,7 @@ msgstr ""
 #: .\src\resources\templates\editResource.html:42
 #: .\src\resources\templates\new_resource.html:44
 msgid "zoom_out"
-msgstr ""
+msgstr "suumi_välja"
 
 #: .\src\organisations\templates\edit_organisation.html:50
 #: .\src\organisations\templates\new_organisation.html:49
@@ -261,7 +267,7 @@ msgstr ""
 #: .\src\resources\templates\editResource.html:67
 #: .\src\resources\templates\new_resource.html:47
 msgid "Cancel"
-msgstr ""
+msgstr "Tühista"
 
 #: .\src\organisations\templates\edit_organisation.html:51
 #: .\src\organisations\templates\new_organisation.html:50
@@ -270,11 +276,11 @@ msgstr ""
 #: .\src\resources\templates\editResource.html:46
 #: .\src\resources\templates\new_resource.html:48
 msgid "Crop and upload"
-msgstr ""
+msgstr "Lõika ja lae üles"
 
 #: .\src\organisations\templates\edit_organisation.html:65
 msgid "Edit Organisation Profile"
-msgstr ""
+msgstr "Muuda organisatsiooni profiili"
 
 #: .\src\organisations\templates\edit_organisation.html:74
 #: .\src\organisations\templates\edit_organisation.html:138
@@ -288,12 +294,12 @@ msgstr ""
 #: .\src\resources\templates\new_resource.html:114
 #: .\src\resources\templates\new_resource.html:248
 msgid "Save"
-msgstr ""
+msgstr "Salvesta"
 
 #: .\src\organisations\templates\finder_organisations.html:29
 #: .\src\projects\templates\finder_projects.html:54
 msgid "Country"
-msgstr ""
+msgstr "Riik"
 
 #: .\src\organisations\templates\finder_organisations.html:45
 #: .\src\projects\templates\finder_projects.html:82
@@ -301,23 +307,25 @@ msgstr ""
 #: .\src\templates\home.html:66 .\src\templates\home.html:76
 #: .\src\templates\home.html:86 .\src\templates\home.html:96
 msgid "result"
-msgstr ""
+msgstr "tulemus"
 
 #: .\src\organisations\templates\finder_organisations.html:45
 #: .\src\projects\templates\finder_projects.html:82
 #: .\src\resources\templates\finder_resources.html:69
 msgid "found"
-msgstr ""
+msgstr "leitud"
 
 #: .\src\organisations\templates\new_organisation.html:64
 msgid "New Organisation Profile"
-msgstr ""
+msgstr "Uus organisatsiooni profiil"
 
 #: .\src\organisations\templates\new_organisation.html:65
 msgid ""
 "Thank you for creating a profile for your organisation on the EU-Citizen."
 "Science Platform."
 msgstr ""
+"Täname Teie organisatsiooni profiili loomise eest EU-Citizen.Science "
+"platvormil."
 
 #: .\src\organisations\templates\new_organisation.html:66
 msgid ""
@@ -326,6 +334,10 @@ msgid ""
 "involved in, and the Resource Profiles of the resources that were published "
 "by your organisation."
 msgstr ""
+"Selle saab ühendada Teie organisatsioonis töötavate inimeste isiklike "
+"profiilidega,nende projektide profiilidega, milles Teie organisatsioonosaleb "
+"ning nende materjalide profiilidega, mis on avaldatudTeie organisatsiooni "
+"poolt."
 
 #: .\src\organisations\templates\new_organisation.html:68
 msgid ""
@@ -333,6 +345,8 @@ msgid ""
 "(indicated with an asterisk*), and as much of the non-mandatory information "
 "as possible."
 msgstr ""
+"Palun täitke allolevad kohustusliku info väljad(märgitud tärniga*), ning nii "
+"palju soovituslikke väljukui võimalik."
 
 #: .\src\organisations\templates\new_organisation.html:70
 msgid ""
@@ -340,23 +354,26 @@ msgid ""
 "moderation by one of the members of the EU-Citizen.Science consortium. This "
 "step is simply to check for ‘spam’ or inappropriate uses of the profile form."
 msgstr ""
+"Organisatsiooni rofiili salvestamise järel läheb see ülevaatamiseks EU-"
+"Citizen.Science konsortsiumi poolsele moderaatorile. See on vajalik spämmi "
+"ja kuritarvituste vältimiseks."
 
 #: .\src\organisations\templates\organisation.html:21
 #: .\src\projects\templates\editProject.html:64
 #: .\src\resources\templates\editResource.html:59
 msgid "Confirm delete"
-msgstr ""
+msgstr "Kinnita kustutamine"
 
 #: .\src\organisations\templates\organisation.html:25
 msgid ""
 "You are going to delete this organisation, this procedure is irreversible."
-msgstr ""
+msgstr "Selle sammuga kustutad organisatsiooni. Seda taastada ei saa."
 
 #: .\src\organisations\templates\organisation.html:26
 #: .\src\projects\templates\editProject.html:69
 #: .\src\resources\templates\editResource.html:64
 msgid "Do you want to proceed?"
-msgstr ""
+msgstr "Kas tahad jätkata?"
 
 #: .\src\organisations\templates\organisation.html:30
 #: .\src\projects\templates\editProject.html:73
@@ -364,46 +381,46 @@ msgstr ""
 #: .\src\resources\templates\editResource.html:68
 #: .\src\resources\templates\editResource.html:87
 msgid "Delete"
-msgstr ""
+msgstr "Kustuta"
 
 #: .\src\organisations\templates\organisation.html:44
 #: .\src\projects\forms.py:89
 msgid "Contact Point Email"
-msgstr ""
+msgstr "Kontakti e-mail"
 
 #: .\src\organisations\templates\organisation.html:53
 msgid "Go to Organisation"
-msgstr ""
+msgstr "Mine organisatsiooni juurde"
 
 #: .\src\organisations\templates\organisation.html:59
 #: .\src\templates\_subnavbar.html:12 .\src\templates\about.html:55
 #: .\src\templates\home.html:65
 msgid "Projects"
-msgstr ""
+msgstr "Projektid"
 
 #: .\src\organisations\templates\organisation.html:65
 #: .\src\templates\_subnavbar.html:16 .\src\templates\about.html:54
 #: .\src\templates\home.html:75
 msgid "Resources"
-msgstr ""
+msgstr "Materjalid"
 
 #: .\src\organisations\templates\organisation.html:71
 msgid "Members"
-msgstr ""
+msgstr "Liikmed"
 
 #: .\src\organisations\templates\organisation.html:94
 msgid "Delete Organisation"
-msgstr ""
+msgstr "Kustuta organisatsioon"
 
 #: .\src\organisations\templates\organisation.html:97
 msgid "Edit Organisation"
-msgstr ""
+msgstr "Muuda organisatsiooni"
 
 #: .\src\organisations\templates\organisations_cards.html:17
 #: .\src\profiles\templates\profiles\show_profile.html:46
 #: .\src\templates\modalinfo.html:20
 msgid "Organisation"
-msgstr ""
+msgstr "Organisatsioon"
 
 #: .\src\profiles\forms.py:48
 msgid ""
@@ -437,34 +454,34 @@ msgstr ""
 
 #: .\src\profiles\templates\profiles\edit_profile.html:31
 msgid "Edit profile"
-msgstr ""
+msgstr "Muuda profiili"
 
 #: .\src\profiles\templates\profiles\edit_profile.html:49
 #: .\src\profiles\templates\profiles\show_profile.html:59
 msgid "Geographical location"
-msgstr ""
+msgstr "Geograafiline asukoht"
 
 #: .\src\profiles\templates\profiles\followed_projects.html:27
 #: .\src\templates\base2.html:65 .\src\templates\base_forum.html:76
 #: .\src\templates\base_r2.html:164
 msgid "Followed projects"
-msgstr ""
+msgstr "Järgnevad projektid"
 
 #: .\src\profiles\templates\profiles\my_organisations.html:31
 msgid "Submitted organisations"
-msgstr ""
+msgstr "Lisatud organisatsioonid"
 
 #: .\src\profiles\templates\profiles\my_projects.html:31
 msgid "Uploaded projects"
-msgstr ""
+msgstr "Lisatud projektid"
 
 #: .\src\profiles\templates\profiles\my_resources.html:31
 msgid "Uploaded resources"
-msgstr ""
+msgstr "Lisatud materjalid"
 
 #: .\src\profiles\templates\profiles\saved_resources.html:28
 msgid "My library"
-msgstr ""
+msgstr "Minu kogu"
 
 #: .\src\profiles\templates\profiles\show_profile.html:30
 msgid "Delete Profile"
@@ -480,27 +497,27 @@ msgstr ""
 
 #: .\src\profiles\templates\profiles\show_profile.html:39
 msgid "Joined"
-msgstr ""
+msgstr "Liitunud"
 
 #: .\src\profiles\templates\profiles\show_profile.html:40
 msgid "Last seen"
-msgstr ""
+msgstr "Viimati nähtud"
 
 #: .\src\profiles\templates\profiles\show_profile.html:44
 msgid "Bio and disciplinary background"
-msgstr ""
+msgstr "Isiklik info, erialane taust"
 
 #: .\src\profiles\templates\profiles\show_profile.html:45
 msgid "ORCID profile"
-msgstr ""
+msgstr "ORCID profiil"
 
 #: .\src\profiles\templates\profiles\show_profile.html:51
 msgid "Interest Areas"
-msgstr ""
+msgstr "Huvialad"
 
 #: .\src\projects\forms.py:21
 msgid "Short name or title of the project"
-msgstr ""
+msgstr "Sisesta siia materjali pealkiri või nimetus"
 
 #: .\src\projects\forms.py:24
 msgid ""
@@ -787,18 +804,18 @@ msgstr ""
 #: .\src\projects\templates\finder_projects.html:74
 #: .\src\resources\templates\finder_resources.html:61
 msgid "Moderated"
-msgstr ""
+msgstr "Modereeritud"
 
 #: .\src\projects\templates\finder_projects.html:75
 #: .\src\resources\templates\finder_resources.html:62
 msgid "Not yet moderated"
-msgstr ""
+msgstr "Ei ole veel modereeritud"
 
 #: .\src\projects\templates\finder_projects.html:76
 #: .\src\resources\templates\finder_resources.html:63
 #: .\src\templates\_subnavbar.html:8
 msgid "All"
-msgstr ""
+msgstr "Kõik"
 
 #: .\src\projects\templates\finder_projects.html:93
 msgid "Clear current search query and filters"
@@ -807,35 +824,37 @@ msgstr ""
 #: .\src\projects\templates\modal_projects.html:8
 #: .\src\resources\templates\modal_resources.html:8
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 #: .\src\projects\templates\modal_projects.html:14
 #: .\src\resources\templates\modal_resources.html:14
 msgid "Search"
-msgstr ""
+msgstr "Otsi"
 
 #: .\src\projects\templates\modal_projects.html:14
 msgid ""
 "projects by title or keywords by typing text directly into the the search bar"
 msgstr ""
+"materjale pealkirja või märksõnade järgi, sisestades teksti otse "
+"otsinguaknasse"
 
 #: .\src\projects\templates\modal_projects.html:15
 #: .\src\resources\templates\modal_resources.html:15
 msgid "Sort"
-msgstr ""
+msgstr "Sorteeri"
 
 #: .\src\projects\templates\modal_projects.html:15
 msgid "projects by date or by rating"
-msgstr ""
+msgstr "materjale kuupäev või hinnagu järgi"
 
 #: .\src\projects\templates\modal_projects.html:16
 #: .\src\resources\templates\modal_resources.html:16
 msgid "Filter"
-msgstr ""
+msgstr "Filtreeri"
 
 #: .\src\projects\templates\modal_projects.html:16
 msgid "search results by project status, country, or topic"
-msgstr ""
+msgstr "otsingutulemused keele, teema või kategooria alusel"
 
 #: .\src\projects\templates\modal_projects.html:18
 msgid ""
@@ -843,26 +862,29 @@ msgid ""
 "as 'Moderated'.Only these will show in your search results unless you filter "
 "for 'not yet moderated' or 'All'."
 msgstr ""
+"Sisestatud materjalid, mis on modereerimise läbinud, on tähistatudkui "
+"'Modereeritud'. Ainult neid materjale näidatakse otsingutulemustes. Muu "
+"tulemuse jaoks vali 'Pole veel modereeritud' või 'Kõik'."
 
 #: .\src\projects\templates\modal_projects.html:20
 #: .\src\resources\templates\modal_resources.html:20
 msgid "Read more about our"
-msgstr ""
+msgstr "Loe lisa meie"
 
 #: .\src\projects\templates\modal_projects.html:20
 #: .\src\projects\templates\new_project.html:103
 #: .\src\resources\templates\modal_resources.html:20
 msgid "moderation process"
-msgstr ""
+msgstr "modereerimisprotsessi kohta"
 
 #: .\src\projects\templates\new_project.html:65
 msgid "Project is going to saved"
-msgstr ""
+msgstr "Materjal salvestatakse"
 
 #: .\src\projects\templates\new_project.html:73
 #: .\src\resources\templates\new_resource.html:68
 msgid "Thank you"
-msgstr ""
+msgstr "Aitäh!"
 
 #: .\src\projects\templates\new_project.html:74
 msgid ""
@@ -1044,7 +1066,7 @@ msgstr ""
 #: .\src\projects\templates\project_review.html:19
 #: .\src\resources\templates\resource_review.html:19
 msgid "Rate and comment"
-msgstr ""
+msgstr "Hinda ja kommenteeri"
 
 #: .\src\resources\forms.py:19
 msgid "Insert here the title or name of the resource"
@@ -1055,40 +1077,48 @@ msgid ""
 "URL to where the document is hosted by the publisher,         or in a "
 "permanent repository such as Zenodo, OSF, the RIO Journal, or similar"
 msgstr ""
+"dokumendi asukoha URL - kas kirjastaja juures või repositooriumis nagu "
+"Zenodo, OSF, RIO Journal vms"
 
 #: .\src\resources\forms.py:26
 msgid "Please briefly describe the resource (ideally in 500 words or less)"
 msgstr ""
+"Kirjelda palun lühidalt materjali (soovitavalt mitte rohkem kui 500 sõnaga)"
 
 #: .\src\resources\forms.py:29
 msgid "Select one of the proposed categories"
-msgstr ""
+msgstr "Vali üks pakutud kategooriatest"
 
 #: .\src\resources\forms.py:34
 msgid ""
 "Select the audience(s) for which the resource is intended. Multiple options "
 "can be selected"
 msgstr ""
+"Vali sihtrühm(ad), kellele materjal on mõeldud. Võib valida kamitu rühma"
 
 #: .\src\resources\forms.py:37
 msgid ""
 "Please write or select keywords to describe the resource, separated by "
 "commas or pressing enter"
 msgstr ""
+"Palun kirjuta või vali märksõnad, mis kirjeldavad materjali. Eralda "
+"märksõnad komaga."
 
 #: .\src\resources\forms.py:40
 msgid "The thematic content of the resource (select as many as apply)"
-msgstr ""
+msgstr "Materjali teemakäsitlus (vali nii mitu, kui vaja)"
 
 #: .\src\resources\forms.py:44
 msgid ""
 "Please provide the Digital Object Signifier that is unique to your "
 "resource,        generated by the Publisher, Zenodo..."
 msgstr ""
+"Sisesta oma materjali DOI. See on unikaalne kood, mis on väljastatudvastava "
+"teenusepakkuja (Publisher, Zenodo vm) poolt."
 
 #: .\src\resources\forms.py:45 .\src\resources\templates\resource.html:108
 msgid "Resource DOI"
-msgstr ""
+msgstr "Materjali DOI"
 
 #: .\src\resources\forms.py:49
 msgid ""
@@ -1096,16 +1126,21 @@ msgid ""
 "a comma or pressing enter to add an author,        or multiple authors. If "
 "not known, name the project within the resource was created."
 msgstr ""
+"Materjali autor(id). Sisesta <i>FirstInitial LastName</i> ja märgi "
+"komagajärgmine autor või autorid. Kui autor pole teada, nimetaprojekt, mille "
+"raames materjal loodi."
 
 #: .\src\resources\forms.py:51
 msgid "Authors"
-msgstr ""
+msgstr "Autorid"
 
 #: .\src\resources\forms.py:54
 msgid ""
 "Indicate the resource license, such as Creative Commons CC-BY.         Enter "
 "a URL link to the license if available."
 msgstr ""
+"Viita materjali litsentsile, nagu CC-BY vm. Sisesta vastavale litsentsile "
+"viitav URL."
 
 #: .\src\resources\forms.py:58
 msgid ""
@@ -1113,71 +1148,74 @@ msgid ""
 "comma or pressing enter).         If not listed, please add them <a href=\"/"
 "new_organisation\">here</a > before submitting"
 msgstr ""
+"Materjalide avaldimises osalenud organisatsioon(id) (mitmene valik eraldage "
+"komaga).Kui organisatsioone nimekirjas pole, palun lisage<a href=\"/uus "
+"organisatsioon\">here</a > enne salvestamist"
 
 #: .\src\resources\forms.py:59 .\src\resources\templates\resource.html:102
 msgid "Organisation(s)"
-msgstr ""
+msgstr "Organisatsioon(id)"
 
 #: .\src\resources\forms.py:62
 msgid ""
 "The publisher of the resource (or the project name, or the lead institution)."
-msgstr ""
+msgstr "Materjali publitseerija (või projekti nimi või juhtorganisatsioon)."
 
 #: .\src\resources\forms.py:65
 msgid "Enter the year (YYYY) that this version of the resource was published"
-msgstr ""
+msgstr "Sisesta aasta (YYYY) mil materjali käesolev versioon publitseeriti."
 
 #: .\src\resources\forms.py:70
 msgid "Image 1 credit"
-msgstr ""
+msgstr "Foto 1 autor"
 
 #: .\src\resources\forms.py:77
 msgid "Image 2 credit"
-msgstr ""
+msgstr "Foto 2 autor"
 
 #: .\src\resources\forms.py:83
 msgid "Curated lists"
-msgstr ""
+msgstr "Kureeritud nimekirjad"
 
 #: .\src\resources\forms.py:88 .\src\resources\templates\resource.html:92
 msgid "Education level"
-msgstr ""
+msgstr "Haridustase"
 
 #: .\src\resources\forms.py:89
 msgid "Insert education level needed, end using comma or pressing enter"
-msgstr ""
+msgstr "Sisestage eeldatav haridustase, kasutage koma"
 
 #: .\src\resources\forms.py:93
 msgid "Learning resource type"
-msgstr ""
+msgstr "Õppematerjali tüüp"
 
 #: .\src\resources\forms.py:94 .\src\resources\forms.py:97
 msgid "Help text here"
-msgstr ""
+msgstr "Abitekst siia"
 
 #: .\src\resources\forms.py:96
 msgid "Aproximate hours required to finish the training"
-msgstr ""
+msgstr "Ligilähedane aeg tundides, mis on vaja koolituse läbimiseks"
 
 #: .\src\resources\templates\editResource.html:63
 msgid "You are going to delete this resource, this procedure is irreversible."
-msgstr ""
+msgstr "Sellega kustutad antud materjali, seda taastada ei saa."
 
 #: .\src\resources\templates\editResource.html:81
 msgid "Edit resource"
-msgstr ""
+msgstr "Muuda materjali"
 
 #: .\src\resources\templates\finder_resources.html:35
 msgid "All languages"
-msgstr ""
+msgstr "Kõik keeled"
 
 #: .\src\resources\templates\finder_resources.html:49
 msgid "All themes"
-msgstr ""
+msgstr "Kõik teemad"
 
 #: .\src\resources\templates\finder_resources.html:55
 msgid "All Resource Types"
-msgstr ""
+msgstr "Kõik materjali tüübid"
 
 #: .\src\resources\templates\modal_resources.html:14
 msgid ""
@@ -1187,7 +1225,7 @@ msgstr ""
 
 #: .\src\resources\templates\modal_resources.html:15
 msgid "resources by date or by rating"
-msgstr ""
+msgstr "Sorteeri hinnagu alusel"
 
 #: .\src\resources\templates\modal_resources.html:16
 msgid "search results by language, theme or category"
@@ -1211,6 +1249,9 @@ msgid ""
 "resources shared on the platform are indeed useful for citizen science "
 "projects and practitioners, and are of good quality."
 msgstr ""
+"Täname materjali profiili sisestamise eest. See edastatakse EU-Citizen."
+"Science modereerimismeeskonnale, kes teksti kontrollib, ettagada materjali "
+"sobivus ja kasulikkus harrastusteaduseprojektidele ja nende elluviijaile."
 
 #: .\src\resources\templates\new_resource.html:72
 msgid ""
@@ -1219,6 +1260,10 @@ msgid ""
 "the platform. Your resource profile will be visible to the public in the "
 "meantime, but will be marked as unmoderated."
 msgstr ""
+"Kui meil tekib küsimusi, võtame ühendust. Küsimuste puudumiselsaate teate "
+"selle kohta, et materjal on üle vaadatud ja platvormil avaldatud.Selle ajani "
+"on Teie materjali profiil on avalikkusele nähtavkuid märgitud kui "
+"“modereerimata”"
 
 #: .\src\resources\templates\new_resource.html:74
 msgid ""
@@ -1226,22 +1271,24 @@ msgid ""
 "going to the Submitted resources section in your Personal Area (see the top-"
 "right of the platform menu)."
 msgstr ""
+"Materjali profiili saate igal ajal muuta, minnesjaotusesse Sisestatud "
+"materjalid Teie isiklikus menüüs(vtmenüüs ülal paremal)."
 
 #: .\src\resources\templates\new_resource.html:79
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: .\src\resources\templates\new_resource.html:92
 msgid "New"
-msgstr ""
+msgstr "Uus"
 
 #: .\src\resources\templates\new_resource.html:92
 msgid "training"
-msgstr ""
+msgstr "koolitus"
 
 #: .\src\resources\templates\new_resource.html:92
 msgid "resource"
-msgstr ""
+msgstr "materjal"
 
 #: .\src\resources\templates\new_resource.html:93
 msgid ""
@@ -1250,6 +1297,9 @@ msgid ""
 "in the fields below (indicated with an asterisk*), and as much of the non-"
 "mandatory information as possible."
 msgstr ""
+"Täname, et pakkusite välja harrastusteaduse materjali, mida jagadaEU-Citizen."
+"Science platvormil. Palun täitke allolevad kohustusliku info väljad(märgitud "
+"tärniga*), ning nii palju soovituslikke väljukui võimalik."
 
 #: .\src\resources\templates\new_resource.html:95
 msgid ""
@@ -1257,6 +1307,10 @@ msgid ""
 "and protocols; tools such as software or hardware, and other file formats "
 "such as videos or podcasts. Read our blog post on Types of Resources."
 msgstr ""
+"Materjalide all võivad olla juhendid, raportid, tegevusjuhisedja "
+"protokollid; töövahendid nagu tarkvara või riistvara ja muud "
+"failiformaadidnagu videod või podcastid. Lugege rohkem meie blogist "
+"(Materjalide tüübid)."
 
 #: .\src\resources\templates\new_resource.html:97
 msgid ""
@@ -1266,16 +1320,20 @@ msgid ""
 "are indeed useful for citizen science projects and practitioners, and are of "
 "good quality. Read more about "
 msgstr ""
+"Täname materjali profiili sisestamise eest. See edastatakse EU-Citizen."
+"Science modereerimismeeskonnale, kes teksti kontrollib, ettagada jagatud "
+"materjali sobivus ja kasulikkus harrastusteaduseprojektidele ja nende "
+"elluviijaile. Lugege lisaks"
 
 #: .\src\resources\templates\new_resource.html:98
 #: .\src\templates\moderation.html:23
 msgid "The Moderation Process"
-msgstr ""
+msgstr "modereerimisprotsessist"
 
 #: .\src\resources\templates\new_resource.html:98
 #: .\src\resources\templates\new_resource.html:101
 msgid "here."
-msgstr ""
+msgstr "siit."
 
 #: .\src\resources\templates\new_resource.html:100
 msgid ""
@@ -1283,10 +1341,12 @@ msgid ""
 "access, is structured clearly, is easy to read (or hear or view) and "
 "understand. Read our"
 msgstr ""
+"Kvaliteetse materjali tunnused: lihtneja selge ülevaade ning struktuur, "
+"lihtne lugeda (või kuulata või vaadata) jamõista. Lugege meie"
 
 #: .\src\resources\templates\new_resource.html:101
 msgid "Quality Guidelines"
-msgstr ""
+msgstr "kvaliteedijuhiseid"
 
 #: .\src\resources\templates\new_resource.html:103
 msgid ""
@@ -1295,101 +1355,106 @@ msgid ""
 "be maintained and can provide a permalink, or a repository such as a "
 "publisher, "
 msgstr ""
+"Soovitame tungivalt, et Teie materjalid oleks paigutatud alalisse hoidlasse,"
+"(nagu veebileht, mida alaliselt hooldatakse ja millel oleks permalink)või "
+"publitseerija pakutav hoidla "
 
 #: .\src\resources\templates\new_resource.html:105
 msgid "or the"
-msgstr ""
+msgstr "või"
 
 #: .\src\resources\templates\new_resource.html:179
 msgid "Please indicate the (main) language that the resource is made available"
-msgstr ""
+msgstr "Palun märkige (põhiline) keel, milles materjal on saadaval"
 
 #: .\src\resources\templates\resource.html:28
 #: .\src\resources\templates\resource.html:143
 msgid "Language"
-msgstr ""
+msgstr "Keel"
 
 #: .\src\resources\templates\resource.html:38
 #: .\src\resources\templates\resource.html:153
 msgid "Category"
-msgstr ""
+msgstr "Kategooria"
 
 #: .\src\resources\templates\resource.html:44
 #: .\src\resources\templates\resource.html:159
 msgid "Theme"
-msgstr ""
+msgstr "Teema"
 
 #: .\src\resources\templates\resource.html:74
 #: .\src\templates\projects_cards.html:54
 #: .\src\templates\resources_cards.html:54
 #: .\src\templates\resources_cards_horizontal.html:43
 msgid "reviews"
-msgstr ""
+msgstr "Märksõnad"
 
 #: .\src\resources\templates\resource.html:79
 msgid "Go to Training"
-msgstr ""
+msgstr "Vali koolitus"
 
 #: .\src\resources\templates\resource.html:82
 #: .\src\resources\templates\resource.html:111
 msgid "Go to Resource"
-msgstr ""
+msgstr "Vali materjal"
 
 #: .\src\resources\templates\resource.html:93
 msgid "Learning Resource Type"
-msgstr ""
+msgstr "Õppematerjali tüüp"
 
 #: .\src\resources\templates\resource.html:94
 msgid "Time required"
-msgstr ""
+msgstr "Vajalik aeg"
 
 #: .\src\resources\templates\resource.html:95
 msgid "Conditions of access"
-msgstr ""
+msgstr "Pääsutingimused"
 
 #: .\src\resources\templates\resource.html:99
 msgid "License"
-msgstr ""
+msgstr "Litsents"
 
 #: .\src\resources\templates\resource.html:100
 msgid "Audience"
-msgstr ""
+msgstr "Sihtrühm"
 
 #: .\src\resources\templates\resource.html:101
 msgid "Publisher"
-msgstr ""
+msgstr "Avaldaja"
 
 #: .\src\resources\templates\resource.html:107
 msgid "Year of publication"
-msgstr ""
+msgstr "Avaldamise aasta"
 
 #: .\src\resources\templates\resource.html:115
 #: .\src\templates\resources_cards_horizontal.html:96
 msgid "In my library"
-msgstr ""
+msgstr "Minu kogus"
 
 #: .\src\resources\templates\resource.html:117
 #: .\src\templates\resources_cards_horizontal.html:98
 msgid "Add to library"
-msgstr ""
+msgstr "Lisa kogusse"
 
 #: .\src\resources\templates\resource.html:210
 msgid "Edit"
-msgstr ""
+msgstr "Muuda"
 
 #: .\src\templates\_footer.html:12
 msgid ""
 "You are in the alpha version of the EU-Citizen.Science platform. Please "
 "provide your feedback in the official"
 msgstr ""
+"See on EU-Citizen.Science platvormi alfa-väljalase. Palun jätke tagasiside "
+"ametlikku"
 
 #: .\src\templates\_footer.html:13
 msgid "GitHub repository"
-msgstr ""
+msgstr "GitHub hoidlasse"
 
 #: .\src\templates\_footer.html:14
 msgid "here to subscribe to our newsletter"
-msgstr ""
+msgstr "siia, et tellida uudiskiri"
 
 #: .\src\templates\_footer.html:56
 msgid ""
@@ -1397,93 +1462,96 @@ msgid ""
 "2020 Framework Programme for Research and Innovation under grant agreement "
 "No. 824580"
 msgstr ""
+"EU-Citizen.Science on saanud toetust EL teadusuuringute ja innovatsiooni "
+"raamprogrammi Horisont 2020 pooltU-Citizen.Science on saanud toetust EL "
+"Horisont, toetuse leping nr. 824580"
 
 #: .\src\templates\_footer.html:66
 msgid "Links"
-msgstr ""
+msgstr "Viited"
 
 #: .\src\templates\_footer.html:69
 msgid "Terms of Use"
-msgstr ""
+msgstr "Kasutustingimused"
 
 #: .\src\templates\_footer.html:72 .\src\templates\privacy.html:10
 #: .\src\templates\privacy.html:21
 msgid "Privacy"
-msgstr ""
+msgstr "Privaatsusteade"
 
 #: .\src\templates\_footer.html:75 .\src\templates\imprint.html:10
 #: .\src\templates\imprint.html:22
 msgid "Imprint"
-msgstr ""
+msgstr "Imprint"
 
 #: .\src\templates\_footer.html:78
 msgid "Deliverables"
-msgstr ""
+msgstr "Tulemused"
 
 #: .\src\templates\_footer.html:94 .\src\templates\faq.html:14
 msgid "FAQ"
-msgstr ""
+msgstr "FAQ"
 
 #: .\src\templates\_footer.html:97
 msgid "Quality Criteria"
-msgstr ""
+msgstr "Kvaliteedikriteeriumid"
 
 #: .\src\templates\_footer.html:102
 msgid "Moderation"
-msgstr ""
+msgstr "Modereerimine"
 
 #: .\src\templates\_footer.html:105 .\src\templates\development.html:10
 msgid "Development"
-msgstr ""
+msgstr "Arendaminet"
 
 #: .\src\templates\_footer.html:108
 msgid "API"
-msgstr ""
+msgstr "API"
 
 #: .\src\templates\_navbar.html:3 .\src\templates\base_forum.html:58
 #: .\src\templates\base_r2.html:145
 msgid "SEARCH"
-msgstr ""
+msgstr "OTSING"
 
 #: .\src\templates\_navbar.html:4 .\src\templates\base_forum.html:60
 #: .\src\templates\base_r2.html:147
 msgid "BLOG"
-msgstr ""
+msgstr "BLOGI"
 
 #: .\src\templates\_navbar.html:5 .\src\templates\base_forum.html:61
 #: .\src\templates\base_r2.html:148
 msgid "EVENTS"
-msgstr ""
+msgstr "SÜNDMUSED"
 
 #: .\src\templates\_navbar.html:6 .\src\templates\base_forum.html:63
 #: .\src\templates\base_r2.html:150
 msgid "ABOUT"
-msgstr ""
+msgstr "MEIST"
 
 #: .\src\templates\_subnavbar.html:20 .\src\templates\home.html:85
 #: .\src\templates\modalinfo.html:18 .\src\templates\resources_cards.html:33
 msgid "Training"
-msgstr ""
+msgstr "Koolitsed"
 
 #: .\src\templates\_subnavbar.html:24 .\src\templates\home.html:95
 msgid "Organisations"
-msgstr ""
+msgstr "Organisatsioonid"
 
 #: .\src\templates\_subnavbar.html:29
 msgid "Our Gold Star Selection"
-msgstr ""
+msgstr "Meie Kuldmärgi valik"
 
 #: .\src\templates\about.html:4 .\src\templates\about.html:8
 msgid "About"
-msgstr ""
+msgstr "Meist"
 
 #: .\src\templates\about.html:19
 msgid "Watch our teaser, in 12 different languages!"
-msgstr ""
+msgstr "Tiiser"
 
 #: .\src\templates\about.html:44
 msgid "The Platform"
-msgstr ""
+msgstr "Platvorm"
 
 #: .\src\templates\about.html:47
 msgid ""
@@ -1491,6 +1559,9 @@ msgid ""
 "training and resources for citizen science – by the community, for the "
 "community."
 msgstr ""
+"EU-Citizen.Science on veebipõhine platvorm, mis on mõeldud teadmiste, "
+"vahendite, koolituste ning harrastusteaduse materjalide jagamiseks – "
+"kogukonnalt, kogukonnale."
 
 #: .\src\templates\about.html:48
 msgid ""
@@ -1499,28 +1570,35 @@ msgid ""
 "citizens participating in research across the full range of scientific "
 "enquiry."
 msgstr ""
+"Platvormi visioon on olla teadmiste sõlmpunktiks, aidata kaasa "
+"harrastusteaduse levimisele ning tugevdada ühiskonna mõju teaduste laiale "
+"spektrile"
 
 #: .\src\templates\about.html:49
 msgid ""
 "We accomplish this by supporting the sharing of knowledge, know-how, and "
 "experience between anyone doing or wanting to do citizen science."
 msgstr ""
+"Selle saavutamiseks toetame me teadmiste ja oskuste jagamist ning kogemuste "
+"vahetamist kõigi vahel, kes harrastusteaduses tegutsevad või tahavad "
+"tegutseda"
 
 #: .\src\templates\about.html:52
 msgid "On this platform you will find"
-msgstr ""
+msgstr "Sellel platvormil leiad"
 
 #: .\src\templates\about.html:54
 msgid "that are useful for citizen science practitioners"
-msgstr ""
+msgstr "mis on kasulikud harrastusteaduse edendajatele"
 
 #: .\src\templates\about.html:55
 msgid "that are engaging the public in research via citizen science activities"
 msgstr ""
+"mis kutsuvad avalikkust osalema teaduses läbi harrastusteaduse tegevuste"
 
 #: .\src\templates\about.html:56
 msgid "Training resources and materials citizen science as a practice"
-msgstr ""
+msgstr "Koolitusmaterjalid ja muud ressursid praktilisele harrastusteadusele"
 
 #: .\src\templates\about.html:57
 msgid ""
@@ -1533,21 +1611,21 @@ msgstr ""
 
 #: .\src\templates\about.html:58
 msgid "Events"
-msgstr ""
+msgstr "Sündmused"
 
 #: .\src\templates\about.html:58
 msgid "calendar"
-msgstr ""
+msgstr "kalender"
 
 #: .\src\templates\about.html:58
 msgid "and"
-msgstr ""
+msgstr "ja"
 
 #: .\src\templates\about.html:59
 msgid ""
 "Community Forums for questions, conversations, and collaboration with the "
 "rest of the community."
-msgstr ""
+msgstr "Foorumid küsimust, vestluste ja kaastöö jaoks ülejäänud kogukonnaga."
 
 #: .\src\templates\about.html:63
 msgid ""
@@ -1556,18 +1634,21 @@ msgid ""
 "suggestion for us? Please share your thoughts in our community feedback "
 "forum or in the"
 msgstr ""
+"Kas midagi tundub puudu olevat? Saate lisada materjalide, projektide ja "
+"koolituste profiile +LISA nupu abil ülamenüüst. Kas Teil on ettepanekuid? "
+"Saate jagada oma mõtteid kogukondlikus tagasisidefoorumis või siin:"
 
 #: .\src\templates\about.html:63
 msgid "contact"
-msgstr ""
+msgstr "kontakt"
 
 #: .\src\templates\about.html:63
 msgid "section"
-msgstr ""
+msgstr "ala"
 
 #: .\src\templates\about.html:72
 msgid "The Project"
-msgstr ""
+msgstr "Projekt"
 
 #: .\src\templates\about.html:76
 msgid ""
@@ -1578,20 +1659,28 @@ msgid ""
 "for citizen science participants, practitioners, researchers, policy makers "
 "and society across Europe"
 msgstr ""
+"EU-Citizen.Science projekti rahastab Euroopa Komisjoni Horisont 2020 "
+"programm Teadus koos ühiskonnaga ja ühiskonna heaks (SwafS).  Meie missioon "
+"on suurejooneline - tahame saada harrastusteaduse etaloniks "
+"võrgustikevahelise teadmise jagamisel nii harrastusteadlastele, "
+"harrastusteaduse edendajatele, teadlastele, poliitikuile ja kogu ühiskonnale "
+"terves Euroopas"
 
 #: .\src\templates\about.html:81
 msgid "Our Vision"
-msgstr ""
+msgstr "Meie visioon"
 
 #: .\src\templates\about.html:82
 msgid ""
 "is that Citizen Science becomes an appreciated and widely established means "
 "for the democratization of science in Europe"
 msgstr ""
+"näeb harrastusteaduses tunnustatud ja laialt rakendatud meedet teaduse "
+"demokratiseerimiseks Euroopas"
 
 #: .\src\templates\about.html:89
 msgid "Our Core Mission"
-msgstr ""
+msgstr "Meie süvamissiooniks"
 
 #: .\src\templates\about.html:90
 msgid ""
@@ -1599,56 +1688,69 @@ msgid ""
 "knowledge sharing for citizen science participants, practitioners, "
 "researchers, policy makers and society across Europe"
 msgstr ""
+"on saada harrastusteaduse etaloniks võrgustikevahelise teadmise jagamisel "
+"nii harrastusteadlastele, harrastusteaduse edendajatele, teadlastele, "
+"poliitikuile kui kogu ühiskonnale terves Euroopas"
 
 #: .\src\templates\about.html:97
 msgid "Objective 1: Establish"
-msgstr ""
+msgstr "Eesmärk 1: Luua"
 
 #: .\src\templates\about.html:98
 msgid ""
 "EU-Citizen.Science as the knowledge and community hub for high-quality CS "
 "exchange and learning in Europe"
 msgstr ""
+"EU-Citizen.Science kui kogukondlik teadmiste ja kogemuste vahetamise "
+"sõlmpunkt mis vahendab kõrgetasemelist harrastusteadust Euroopas."
 
 #: .\src\templates\about.html:105
 msgid "Objective 2: Consolidate"
-msgstr ""
+msgstr "Eesmärk 2: Tugevdada"
 
 #: .\src\templates\about.html:106
 msgid ""
 "the CS knowledge base and celebrate outstanding practices and state of the "
 "art in CS in Europe"
 msgstr ""
+"harrastusteaduste teadmisbaasi ning demonstreerida Euroopa parimaid "
+"praktikaid harrastusteaduses."
 
 #: .\src\templates\about.html:113
 msgid "Objective 3: Empower"
-msgstr ""
+msgstr "Ülesanne 3: Võimestada"
 
 #: .\src\templates\about.html:114
 msgid ""
 "diverse stakeholders to become citizen scientists, start CS initiatives, and "
 "implement CS approaches professionally"
 msgstr ""
+"huvigruppe nende harrastusteaduse pürgimustes ja anda "
+"võimalusharrastusteaduse metoodika professionaalseks elluviimiseks."
 
 #: .\src\templates\about.html:121
 msgid "Objective 4: Explore"
-msgstr ""
+msgstr "Eesmärk 4: Avastada"
 
 #: .\src\templates\about.html:122
 msgid ""
 "new pathways for participatory governance, by strengthening links between CS "
 "and policy making"
 msgstr ""
+"uus võimalusi osalevaks valitsemiseks, tugevdades seoseidharrastusteaduse ja "
+"poliitiliste otsuste vahel."
 
 #: .\src\templates\about.html:129
 msgid "Objective 5: Advance"
-msgstr ""
+msgstr "Eesmärk 5: Edendada"
 
 #: .\src\templates\about.html:130
 msgid ""
 "CS into the mainstream of public engagement, science communication and "
 "education"
 msgstr ""
+"harrastusteadust, et sellest saaks avalikkuse kaasamise, "
+"teaduskommunikatsiooni ja hariduse põhivahend"
 
 #: .\src\templates\about.html:137
 msgid ""
@@ -1659,10 +1761,15 @@ msgid ""
 "requirements, and how we can build a community of engaged users of the "
 "Platform."
 msgstr ""
+"Oma projekti missiooni raames tahame me samavõrra kaasata nii "
+"harrastusteadlasi, harrastusteaduse edendajaid, teadlasi, poliitikuidja "
+"tervet ühiskonda kogu projekti jooksul. Selleks on meil vaja tundma "
+"õppidaoma sihtrühmasid, nende vajadusi ja nõudeid ja seda, kuidas kujundada "
+"platvormi kasutavat aktiivset kogukonda."
 
 #: .\src\templates\about.html:147
 msgid "The Team"
-msgstr ""
+msgstr "Meeskond"
 
 #: .\src\templates\about.html:150
 msgid ""
@@ -1672,18 +1779,23 @@ msgid ""
 "citizen science, including universities, non-governmental organisations, "
 "local authorities, community service organisations and museums."
 msgstr ""
+"EU-Citizen.Science konsortsium koosneb 14 partnerist ja 9 kolmandast "
+"osapoolest kokku 14 Euroopa liikmesriigist, samuti teistest projekti "
+"toetajatest. Me esindame sidusrühmasid, kes aktiivselt tegelevad "
+"harrastusteadusega, sealhulgas ülikoolid, mittetulundusühingud, kohalikud "
+"omavalitsused, ühiskondlikud organisatsioonid ja muuseumid."
 
 #: .\src\templates\about.html:159
 msgid "Consortium partners"
-msgstr ""
+msgstr "Konsortsiumi partnerid"
 
 #: .\src\templates\about.html:216
 msgid "Third party partners"
-msgstr ""
+msgstr "Kolmandad osapooled"
 
 #: .\src\templates\about.html:257
 msgid "Citizen Science"
-msgstr ""
+msgstr "Harrastusteadus"
 
 #: .\src\templates\about.html:260
 msgid ""
@@ -1695,6 +1807,12 @@ msgid ""
 "innovation and the development of evidence-based policy, at local, national "
 "and EU levels."
 msgstr ""
+"Harrastusteadus kaasab aktiivselt avalikkust teadustöösse, mis omakorda loob "
+"uut teadmist või arusaamist ning seeläbi avaneb võimaluse mõjusalt ühendada "
+"teadust, poliitikat ja ühiskonda.Avatud teaduse ühe tuummõõtmena avab see "
+"võimaluse kõigile ühiskonna liikmetele võtta aktiivselt osa teadusest, "
+"innovatsioonist ja teaduspõhistest poliitikast nii kohalikul, rahvuslikul "
+"kui EL tasandil."
 
 #: .\src\templates\about.html:261
 msgid ""
@@ -1703,30 +1821,35 @@ msgid ""
 "key principles which we as a community believe underlie good practice in "
 "citizen science, the following"
 msgstr ""
+"Harrastusteadus on paindlik mõiste, mida saab kohandada ja rakendada "
+"erinevates valdkondades ja olukordades. Et luua ühine arusaam "
+"harrastusteaduse põhimõistetes ja -printsiipides, loodi järgnevad "
 
 #: .\src\templates\about.html:261
 msgid "10 Principles of Citizen Science"
-msgstr ""
+msgstr "Harrastusteaduse 10 põhimõtet"
 
 #: .\src\templates\about.html:261
 msgid ""
 "were developed by the ‘Sharing best practice and building capacity’ working "
 "group of the"
-msgstr ""
+msgstr "Parimate praktikate ja jõudluse arendamise töörühma poolt"
 
 #: .\src\templates\about.html:261
 msgid "European Citizen Science Association"
-msgstr ""
+msgstr "Euroopa Harrastusteaduse Assotsiatsioonis"
 
 #: .\src\templates\about.html:261
 msgid ""
 "led by the Natural History Museum London with input from many members of the "
 "Association."
 msgstr ""
+"Seda protsessi juhtis Londoni Loodusmuusem, saades sisendit "
+"teisteltassotsiatsiooni liikmetelt."
 
 #: .\src\templates\about.html:269
 msgid "Ten principles of citizen science"
-msgstr ""
+msgstr "Harrastusteaduse kümme põhimõtet"
 
 #: .\src\templates\about.html:273
 msgid ""
@@ -1735,22 +1858,29 @@ msgid ""
 "contributors, collaborators, or as project leader and have a meaningful role "
 "in the project."
 msgstr ""
+"Harrastusteaduse projektid loovad harrastajate aktiivsel osalusel uut "
+"teaduslikku teadmist ja mõistmist. Projektis saab osaleda iga "
+"teadushuviline, kes soovib jagada oma tähelepanekuid või teha kaastööd muul "
+"viisil, näiteks olla abiks projekti juhtimisel."
 
 #: .\src\templates\about.html:274
 msgid "Citizen science projects have a genuine science outcome."
-msgstr ""
+msgstr "Harrastusteaduse projektidel on otsene teaduslik väljund."
 
 #: .\src\templates\about.html:274
 msgid ""
 "For example, answering a research question or informing conservation action, "
 "management decisions or environmental policy."
 msgstr ""
+"Näiteks leitakse vastus mõnele teadusküsimusele või kogutakse teavet "
+"looduskaitseliste ja maakorralduslike tegevuste ning keskkonnapoliitika "
+"planeerimiseks."
 
 #: .\src\templates\about.html:275
 msgid ""
 "Both the professional scientists and the citizen scientists benefit from "
 "taking part."
-msgstr ""
+msgstr "Osalemisest on kasu nii tipp-teadlastel kui ka harrastajatel."
 
 #: .\src\templates\about.html:275
 msgid ""
@@ -1759,63 +1889,87 @@ msgid ""
 "contributing to scientific evidence e.g. to address local, national and "
 "international issues, and through that, the potential to influence policy."
 msgstr ""
+"Väärtus võib seisneda uurimistöö tulemuste avaldamises, õppimisvõimalustes, "
+"kaasategemise lustis, ühiskondlikus toetuses, eneseteostuses teadusliku "
+"andmestiku täiendamise kaudu, aga ka võimaluses rääkida kaasa kohaliku, "
+"rahvusliku või rahvusvahelise tähtsusega probleemküsimustes, mõjutades "
+"seeläbi ka poliitikate kujunemist."
 
 #: .\src\templates\about.html:276
 msgid ""
 "Citizen scientists may, if they wish, participate in multiple stages of the "
 "scientific process."
 msgstr ""
+"Harrastajad võivad soovi korral osaleda teadusliku uurimistöö mitmes "
+"erinevas järgus."
 
 #: .\src\templates\about.html:276
 msgid ""
 "This may include developing the research question, designing the method, "
 "gathering and analysing data, and communicating the results."
 msgstr ""
+"See võib seisneda uurimisküsimuse täpsustamises, meetodi väljakujundamises, "
+"andmete kogumises ja analüüsimises, tulemuste sõnastamises."
 
 #: .\src\templates\about.html:277
 msgid "Citizen scientists receive feedback from the project."
-msgstr ""
+msgstr "Harrastajad saavad oma tegevustele tagasiside."
 
 #: .\src\templates\about.html:277
 msgid ""
 "For example, how their data are being used and what the research, policy or "
 "societal outcomes are."
 msgstr ""
+"Näiteks, kuidas on kasutatud nende kogutud andmeid ja millised olid "
+"uurimistulemused ning töö ühiskondlikud ja poliitilised väljundid."
 
 #: .\src\templates\about.html:278
 msgid ""
 "Citizen science is considered a research approach like any other, with "
 "limitations and biases that should be considered and controlled for."
 msgstr ""
+"Harrastusteadus on üks teadustöö viise. Sellel on oma piirangud ja eeldused, "
+"mida tuleks arvesse võtta ning tähele panna."
 
 #: .\src\templates\about.html:278
 msgid ""
 "However unlike traditional research approaches, citizen science provides "
 "opportunity for greater public engagement and democratisation of science."
 msgstr ""
+"Siiski võimaldab harrastusteadus erinevalt traditsioonilistest "
+"teadusmeetoditest enam kaasata avalikkust ja muuta teadust demokraatlikumaks."
 
 #: .\src\templates\about.html:279
 msgid ""
 "Citizen science project data and meta-data are made publicly available and "
 "where possible, results are published in an open access format."
 msgstr ""
+"Harrastusteaduse projektide andmed ja meta-andmed tehakse kõigile "
+"kättesaadavaks ning tulemused avaldatakse avatud juurdepääsuga väljaannetes."
 
 #: .\src\templates\about.html:279
 msgid ""
 "Data sharing may occur during or after the project, unless there are "
 "security or privacy concerns that prevent this."
 msgstr ""
+"Andmeid võib jagada projekti ajal või pärast projekti lõppu juhul, kui ei "
+"ole vajalik kaitsta kellegi julgeolekut või privaatsust"
 
 #: .\src\templates\about.html:280
 msgid ""
 "Citizen scientists are acknowledged in project results and publications."
 msgstr ""
+"Harrastusteadlaste osalusele viidatakse projekti tulemustes ja "
+"publikatsioonides."
 
 #: .\src\templates\about.html:281
 msgid ""
 "Citizen science programmes are evaluated for their scientific output, data "
 "quality, participant experience and wider societal or policy impact."
 msgstr ""
+"Harrastusteaduse projektide juures hinnatakse nende teaduslikku väljundit, "
+"andmete adekvaatsust, osalejate kogemust ning laiemat ühiskondlikku ja "
+"poliitilist mõju."
 
 #: .\src\templates\about.html:282
 msgid ""
@@ -1824,106 +1978,112 @@ msgid ""
 "agreements, confidentiality, attribution, and the environmental impact of "
 "any activities."
 msgstr ""
+"Harrastusteaduse projektide juhid arvestavad seaduslike ja eetiliste "
+"piirangutega, mis puudutavad autoriõigust, intellektuaalset omandit, andmete "
+"jagamise kokkuleppeid, salastatust, viitamist ja mistahes tegevuste mõju "
+"keskkonnale."
 
 #: .\src\templates\base.html:74 .\src\templates\base2.html:68
 #: .\src\templates\base_forms.html:51 .\src\templates\base_forum.html:79
 #: .\src\templates\base_r2.html:168
 msgid "Admin"
-msgstr ""
+msgstr "Admin"
 
 #: .\src\templates\base.html:84
 msgid "Profile"
-msgstr ""
+msgstr "Profiil"
 
 #: .\src\templates\base.html:85 .\src\templates\base2.html:70
 #: .\src\templates\base_forum.html:80 .\src\templates\base_r2.html:170
 msgid "Logout"
-msgstr ""
+msgstr "Logi välja"
 
 #: .\src\templates\base.html:141 .\src\templates\base_forms.html:75
 msgid "Company"
-msgstr ""
+msgstr "Asutus"
 
 #: .\src\templates\base.html:144 .\src\templates\base_forms.html:78
 msgid "Connect with us on"
-msgstr ""
+msgstr "Võta meiega ühendust"
 
 #: .\src\templates\base2.html:56 .\src\templates\base3.html:49
 #: .\src\templates\base_forum.html:65 .\src\templates\base_r2.html:152
 msgid "LOGIN"
-msgstr ""
+msgstr "LOGI SISSE"
 
 #: .\src\templates\base2.html:57 .\src\templates\base3.html:50
 #: .\src\templates\base_forum.html:66
 msgid "SIGN UP"
-msgstr ""
+msgstr "REGISTREERU"
 
 #: .\src\templates\base2.html:61 .\src\templates\base_forum.html:72
 #: .\src\templates\base_r2.html:160
 msgid "My Profile"
-msgstr ""
+msgstr "Minu profiil"
 
 #: .\src\templates\base2.html:62 .\src\templates\base_forum.html:73
 #: .\src\templates\base_r2.html:161
 msgid "My organisations"
-msgstr ""
+msgstr "Minu organisatsioonid"
 
 #: .\src\templates\base2.html:63 .\src\templates\base_forum.html:74
 #: .\src\templates\base_r2.html:162
 msgid "Submitted projects"
-msgstr ""
+msgstr "Registreeritud projektid"
 
 #: .\src\templates\base2.html:64 .\src\templates\base_forum.html:75
 #: .\src\templates\base_r2.html:163
 msgid "Submitted resources"
-msgstr ""
+msgstr "Registreeritud materjalid"
 
 #: .\src\templates\base2.html:66 .\src\templates\base_forum.html:77
 #: .\src\templates\base_r2.html:165
 msgid "Resources library"
-msgstr ""
+msgstr "Materjalide kogu"
 
 #: .\src\templates\base3.html:52
 msgid "PROFILE"
-msgstr ""
+msgstr "PROFIIL"
 
 #: .\src\templates\base3.html:53
 msgid "LOGOUT"
-msgstr ""
+msgstr "LOGI VÄLJA"
 
 #: .\src\templates\base3.html:56
 msgid "ADMIN"
-msgstr ""
+msgstr "ADMIN"
 
 #: .\src\templates\base_forms.html:43
 msgid "Login"
-msgstr ""
+msgstr "Logi sisse"
 
 #: .\src\templates\base_forms.html:46
 msgid "profile"
-msgstr ""
+msgstr "profiil"
 
 #: .\src\templates\base_forms.html:47
 msgid "logout"
-msgstr ""
+msgstr "logi välja"
 
 #: .\src\templates\base_forum.html:62 .\src\templates\base_r2.html:149
 msgid "FORUM"
-msgstr ""
+msgstr "FOORUM"
 
 #: .\src\templates\base_r2.html:153
 msgid "SIGNUP"
-msgstr ""
+msgstr "REGISTREERI"
 
 #: .\src\templates\criteria.html:10
 msgid "Quality criteria"
-msgstr ""
+msgstr "Kvaliteedinõuded"
 
 #: .\src\templates\curated.html:27
 msgid ""
 "The EU-Citizen.Science consortium has curated a selection of Gold Star "
 "citizen science resources"
 msgstr ""
+"EU-Citizen.Science konsortsium on välja valinud Kuldtähe väärilised "
+"harrastusteaduse materjalid, "
 
 #: .\src\templates\curated.html:28
 msgid ""
@@ -1933,13 +2093,15 @@ msgstr ""
 
 #: .\src\templates\faq.html:20
 msgid "Frequently Asked Questions"
-msgstr ""
+msgstr "Korduma kippuvad küsimused"
 
 #: .\src\templates\home.html:31
 msgid ""
 "Welcome to the platform for sharing Citizen Science projects, resources, "
 "tools, and training"
 msgstr ""
+"Tere tulemast platvormile, mis aitab jagada harrastusteaduse projekte, "
+"materjale,töövahendeid ja koolitusi."
 
 #: .\src\templates\home.html:41
 msgid ""
@@ -1948,60 +2110,62 @@ msgstr ""
 
 #: .\src\templates\home.html:66
 msgid "in Projects"
-msgstr ""
+msgstr "projektide all"
 
 #: .\src\templates\home.html:67 .\src\templates\home.html:77
 #: .\src\templates\home.html:87 .\src\templates\home.html:97
 msgid "here"
-msgstr ""
+msgstr "siin"
 
 #: .\src\templates\home.html:67 .\src\templates\home.html:77
 #: .\src\templates\home.html:87 .\src\templates\home.html:97
 msgid "to see all of them"
-msgstr ""
+msgstr "et neid kõiki näha"
 
 #: .\src\templates\home.html:76
 msgid "in Resources"
-msgstr ""
+msgstr "materjalide all"
 
 #: .\src\templates\home.html:86
 msgid "in Training"
-msgstr ""
+msgstr "koolituste all"
 
 #: .\src\templates\home.html:96
 msgid "in Organisations"
-msgstr ""
+msgstr "organisatsioonide all"
 
 #: .\src\templates\modalinfo.html:8
 msgid ""
 "Select the form for the content profile you would like to add to the platform"
-msgstr ""
+msgstr "Vali sisuprofiilile sobiv vorm, mida tahaksid platvormile lisada"
 
 #: .\src\templates\modalinfo.html:14 .\src\templates\projects_cards.html:34
 msgid "Project"
-msgstr ""
+msgstr "Projekt"
 
 #: .\src\templates\modalinfo.html:15
 msgid "Create a Citizen Science Project profile"
-msgstr ""
+msgstr "Loo harrastusteaduse projekti profiil"
 
 #: .\src\templates\modalinfo.html:16 .\src\templates\resources_cards.html:33
 msgid "Resource"
-msgstr ""
+msgstr "Materjal"
 
 #: .\src\templates\modalinfo.html:17
 msgid "Create a profile for a Resource that is relevant for Citizen Science"
-msgstr ""
+msgstr "Loo profiil materjalile, mis seondub harrastusteadusega"
 
 #: .\src\templates\modalinfo.html:19
 msgid ""
 "Create a profile for Training and Education Material related to the practice "
 "of Citizen Science"
 msgstr ""
+"Loo profiil koolitus- ja haridusmaterjalidele, mis seonduvad "
+"harrastusteadusepraktikatega"
 
 #: .\src\templates\modalinfo.html:21
 msgid "Create a profile for your Organisation"
-msgstr ""
+msgstr "Loo oma organisatsiooni profiil"
 
 #: .\src\templates\modalinfo.html:23
 msgid "Event"
@@ -2013,13 +2177,13 @@ msgstr ""
 
 #: .\src\templates\moderation.html:10
 msgid "The moderation process"
-msgstr ""
+msgstr "Modereerimisprotsess"
 
 #: .\src\templates\projects_cards.html:20
 #: .\src\templates\resources_cards.html:15
 #: .\src\templates\resources_cards_horizontal.html:19
 msgid "NOT ACCEPTED"
-msgstr ""
+msgstr "TAGASI LÜKATUD"
 
 #: .\src\templates\projects_cards.html:22
 #: .\src\templates\projects_cards_featured.html:19
@@ -2029,7 +2193,7 @@ msgstr ""
 #: .\src\templates\resources_cards_horizontal.html:20
 #: .\src\templates\resources_cards_short.html:17
 msgid "NOT YET MODERATED"
-msgstr ""
+msgstr "EI OLE VEEL MODEREERITUD"
 
 #: .\src\templates\projects_cards.html:24
 #: .\src\templates\projects_cards_featured.html:20
@@ -2039,11 +2203,11 @@ msgstr ""
 #: .\src\templates\resources_cards_horizontal.html:21
 #: .\src\templates\resources_cards_short.html:18
 msgid "MODERATED"
-msgstr ""
+msgstr "MODEREERITUD"
 
 #: .\src\templates\projects_cards.html:34
 msgid "Featured project"
-msgstr ""
+msgstr "Esiletõstetud projekt"
 
 #: .\src\templates\projects_cards_featured.html:33
 #: .\src\templates\projects_cards_short.html:33
@@ -2051,15 +2215,15 @@ msgstr ""
 #: .\src\templates\resources_cards_horizontal.html:45
 #: .\src\templates\resources_cards_short.html:30
 msgid "Read more"
-msgstr ""
+msgstr "Read more"
 
 #: .\src\templates\registration\logged_out.html:9
 msgid "Thanks for spending some quality time with the Web site today."
-msgstr ""
+msgstr "Täname veebilehel viibitud aja eest!."
 
 #: .\src\templates\registration\logged_out.html:11
 msgid "Log in again"
-msgstr ""
+msgstr "Logi uuesti sisse"
 
 #: .\src\templates\registration\password_change_done.html:6
 #: .\src\templates\registration\password_change_form.html:6
@@ -2068,56 +2232,58 @@ msgstr ""
 #: .\src\templates\registration\password_reset_done.html:6
 #: .\src\templates\registration\password_reset_form.html:6
 msgid "Home"
-msgstr ""
+msgstr "Esileht"
 
 #: .\src\templates\registration\password_change_done.html:7
 #: .\src\templates\registration\password_change_form.html:7
 #: .\src\templates\registration\password_change_form.html:11
 #: .\src\templates\registration\password_change_form.html:12
 msgid "Password change"
-msgstr ""
+msgstr "Salasõna muutmine"
 
 #: .\src\templates\registration\password_change_done.html:11
 #: .\src\templates\registration\password_change_done.html:12
 msgid "Password change successful"
-msgstr ""
+msgstr "Salasõna muutmine oli edukas."
 
 #: .\src\templates\registration\password_change_done.html:16
 msgid "Your password was changed."
-msgstr ""
+msgstr "Teie salasõna on muudetud.."
 
 #: .\src\templates\registration\password_change_form.html:19
 msgid "Please correct the error below."
-msgstr ""
+msgstr "Palun parandage allolev viga."
 
 #: .\src\templates\registration\password_change_form.html:19
 msgid "Please correct the errors below."
-msgstr ""
+msgstr "Palun parandage järgnevad vead."
 
 #: .\src\templates\registration\password_change_form.html:23
 msgid ""
 "Please enter your old password, for security's sake, and then enter your new "
 "password twice so we can verify you typed it in correctly."
 msgstr ""
+"Turvalisuse huvides sisestage vana salasõna ning seejärel uus salasõna kahel "
+"korral, et saaksime selle korrektse sisestamise tagada."
 
 #: .\src\templates\registration\password_change_form.html:63
 #: .\src\templates\registration\password_reset_confirm.html:42
 msgid "Change my password"
-msgstr ""
+msgstr "Salasõna muutmine"
 
 #: .\src\templates\registration\password_reset_complete.html:7
 #: .\src\templates\registration\password_reset_complete.html:11
 #: .\src\templates\registration\password_reset_complete.html:12
 msgid "Password reset complete"
-msgstr ""
+msgstr "Salasõna on lähtestatud."
 
 #: .\src\templates\registration\password_reset_complete.html:16
 msgid "Your password has been set.  You may go ahead and log in now."
-msgstr ""
+msgstr "Salasõna on lähtestatud, võite sisse logida."
 
 #: .\src\templates\registration\password_reset_confirm.html:7
 msgid "Password reset confirmation"
-msgstr ""
+msgstr "Salasõna lähtestamise kinnitus"
 
 #: .\src\templates\registration\password_reset_confirm.html:11
 #: .\src\templates\registration\password_reset_confirm.html:12
@@ -2126,61 +2292,69 @@ msgstr ""
 #: .\src\templates\registration\password_reset_form.html:11
 #: .\src\templates\registration\password_reset_form.html:12
 msgid "Password reset"
-msgstr ""
+msgstr "Password reset"
 
 #: .\src\templates\registration\password_reset_confirm.html:20
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
 msgstr ""
+"Palun sisestage uus salasõna kahel korral, et saaksime selle korrektsuses "
+"kindlad olla."
 
 #: .\src\templates\registration\password_reset_confirm.html:25
 msgid "New password:"
-msgstr ""
+msgstr "Uus salasõna:"
 
 #: .\src\templates\registration\password_reset_confirm.html:34
 msgid "Confirm password:"
-msgstr ""
+msgstr "Kinnitage salasõna:"
 
 #: .\src\templates\registration\password_reset_confirm.html:48
 msgid "Password reset unsuccessful"
-msgstr ""
+msgstr "Salasõna lähtestamine ei õnnestunud."
 
 #: .\src\templates\registration\password_reset_confirm.html:50
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used.  Please request a new password reset."
 msgstr ""
+"Salasõna lähtestamise link on vigane, seda on tõenäoliselt juba kasutatud. "
+"Palune lähtestage salasõna uuesti."
 
 #: .\src\templates\registration\password_reset_done.html:11
 #: .\src\templates\registration\password_reset_done.html:12
 msgid "Password reset successful"
-msgstr ""
+msgstr "Salasõna lähtestamine oli edukas"
 
 #: .\src\templates\registration\password_reset_done.html:16
 msgid ""
 "We've emailed you instructions for setting your password to the email "
 "address you submitted. You should be receiving it shortly."
 msgstr ""
+"Teie e-mailile on saadetud juhend salasõna lähtestamiseks. See peaks kohale "
+"jõudma üsna pea."
 
 #: .\src\templates\registration\password_reset_form.html:16
 msgid ""
 "Forgotten your password? Enter your email address below, and we'll email "
 "instructions for setting a new one."
 msgstr ""
+"Kas unustasid salasõna? Sisesta oma e-maili aadress ning me saadame uue "
+"salasõna loomiseks juhendid."
 
 #: .\src\templates\registration\password_reset_form.html:21
 msgid "Email address:"
-msgstr ""
+msgstr "E-mail:"
 
 #: .\src\templates\registration\password_reset_form.html:30
 msgid "Reset my password"
-msgstr ""
+msgstr "Salasõna lähtestamine"
 
 #: .\src\templates\resources_cards.html:32
 msgid "Featured"
-msgstr ""
+msgstr "Sisaldab"
 
 #: .\src\templates\resources_cards.html:55
 msgid "Last updated"
-msgstr ""
+msgstr "Viimati muudetud"
