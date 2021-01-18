@@ -92,7 +92,7 @@
   <span class="navbar-toggler-icon"></span></button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     {% if isSearchPage  and request.get_full_path != '/' %}
-    <form class="mx-auto my-auto  w-100 d-none d-sm-block" id="searchTop" action="
+    <form class="mx-auto my-auto  w-50 d-none d-sm-block" id="searchTop" action="
     {% if 'all' in request.get_full_path %}
     /all
     {% elif 'training_resources' in request.get_full_path %}
