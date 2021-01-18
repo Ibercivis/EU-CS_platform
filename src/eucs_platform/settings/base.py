@@ -118,6 +118,7 @@ INSTALLED_APPS = (
     'drf_yasg',
     'captcha',
     'active_link',
+    'oauth2_provider',
 
     # Machina dependencies:
     'mptt',
