@@ -23,7 +23,7 @@
   <!-- Google Fonts Roboto -->
   <!--link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"-->
   <link rel="stylesheet" href="{% static 'site/css/bootstrap.min.css' %}">
-  <link rel="stylesheet" href="{% static 'site/css/style_27_11_2020.css' %}">
+  <link rel="stylesheet" href="{% static 'site/css/style_11_01_2021.css' %}">
   <!--link rel="stylesheet" href="{% static 'styles/extras.1.1.0.min.css' %}"-->
   <link rel="stylesheet" href="{% static 'cookielaw/css/cookielaw.css' %}">
   {% block meta %}
@@ -145,8 +145,8 @@
     <li class="nav-item"><a class="nav-link main" href="{% url 'all' %}">{% trans "SEARCH" %}</a></li>
     {% endif %}
     <li class="nav-item"><a class="nav-link main {% active_link  'blog' %}" href="{% url 'blog' %}">{% trans "BLOG" %}</a></li>
-    <li class="nav-item"><a class="nav-link main {% active_link  'events' %}" href="{% url 'events' %}">{% trans "EVENTS" %}</a></li>
-    <li class="nav-item"><a class="nav-link main" href="/forum">{% trans "FORUM" %}</a></li>
+    <li class="nav-item"><a class="nav-link main {% active_link  'events' %}" href="{% url 'events' %}">{% trans "EVENTS" %}</a></li>    
+    <li class="nav-item"><span id="forumHeader"><a class="nav-link main" href="/forum">{% trans "FORUM" %}</a></span></li>
     <li class="nav-item"><a class="nav-link main" href="/about">{% trans "ABOUT" %}</a></li>
     {% if not user.is_authenticated %}
     <li class="nav-item"><a class="nav-link main" href="{% url 'accounts:login' %}">{% trans "LOGIN" %}</a></li>
@@ -223,6 +223,32 @@
 <script src="{% static 'scripts/cropper.min.js' %}"></script>
 <script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
 <script src="{% static 'cookielaw/js/cookielaw.js' %}"></script>
+
+<script>
+  $(document).ready(function () {
+    
+    getForumResponsesNumber();    
+
+    function getForumResponsesNumber() {        
+        var request = $.ajax(
+        {
+          type: "GET",
+          url: "{% url 'getForumResponsesNumber' %}",
+          data: {
+            
+          },
+          success: function (response) {
+            var forumresponses = response.forumresponses
+            if (forumresponses > 0){
+              $("#forumHeader").html('<a class="nav-link main" href="/forum">{% trans "FORUM" %}<sup>' + forumresponses + '</sup></a>');
+            }            
+          }
+        }
+        );
+    }
+
+  });
+</script>
 
 <!-- Google Analytics -->
 <script>

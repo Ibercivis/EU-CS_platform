@@ -1,0 +1,8 @@
+{% load i18n %}
+
+
+{% block html_body  %}
+There is a new message in EU-Citizen.Science forum <br/>
+You're receiving this message because you're subscribed to this topic
+<a href="https://eu-citizen.science/forum/forum/{{forum}}/topic/{{slug}}"> {{topic.subject}}</a>.<br/>
+{% endblock html_body %}
