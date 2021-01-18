@@ -298,7 +298,8 @@ EMAIL_USE_TLS = True
 EMAIL_RECIPIENT_LIST = [
     "eucitsci@mfn.berlin",
     "frasanz@bifi.es",
-    "mg@margaretgold.co.uk"
+    "Antonella.Radicchi@mfn.berlin",
+    "Claudia.FaboCartas@mfn.berlin"
 ]
 
 SITE_ID = 1
