@@ -60,6 +60,8 @@ urlpatterns = [
     path("", include(events.urls)),
     path('summernote/', include('django_summernote.urls')),
     path('forum/', include(machina_urls)),
+    path('getTopicsResponded', views.getTopicsResponded, name='getTopicsResponded'),
+    path('getForumResponsesNumber', views.getForumResponsesNumber, name='getForumResponsesNumber'),    
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^reviews/', include('reviews.urls')),
     url(r'^citizen-science-resources-related-to-the-covid19-pandemic/', RedirectView.as_view(url='blog/2020/03/31/citizen-science-resources-related-covid19-pandemic/')),
@@ -72,6 +74,7 @@ urlpatterns = [
     url(r'^openid/', include('oidc_provider.urls', namespace='oidc_provider')),
    re_path(r"^upload/", ckeditor_uploader.views.upload, name="ckeditor_upload"),
    re_path(r"^browse/",never_cache(ckeditor_uploader.views.browse),name="ckeditor_browse",),
+   path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
 ]
 
 # User-uploaded files like profile pics need to be served in development

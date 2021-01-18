@@ -13,7 +13,10 @@ from organisations.models import Organisation
 from blog.models import Post
 import random
 import json
-
+from machina.apps.forum.models import Forum
+from machina.apps.forum_conversation.models import Topic, Post
+from machina.apps.forum_tracking.models import TopicReadTrack
+from machina.apps.forum_tracking.handler import TrackingHandler
 
 def home(request):
     #Projects
@@ -148,3 +151,43 @@ def home_autocomplete(request):
 def getOrganisationNames(text):
     organisations = Organisation.objects.filter(name__icontains=text).values_list('name',flat=True).distinct()
     return organisations
+
+
+def getTopicsResponded(request):
+    response = {}
+    topics = {}
+    if not request.user.is_anonymous and not request.user.is_staff:
+        own_topics = Topic.objects.get_queryset().filter(status=0, poster_id=request.user, posts_count__gt=1)
+        suscribed_topics = request.user.topic_subscriptions.all()
+        result = own_topics | suscribed_topics
+        result = result.distinct()
+        topics = TrackingHandler.get_unread_topics(request, result, request.user)        
+
+    topicshtml="</br>"
+
+    for topic in topics:
+        slug = '' + topic.slug + '-' + str(topic.id)
+        forum = get_object_or_404(Forum, id=topic.forum_id)
+        forum_slug = forum.slug + '-' + str(forum.id)
+        topicshtml += '<p class="alert alert-info" role="alert">There is a response in a topic that you follow' \
+        ' <a href="https://eu-citizen.science/forum/forum/' + forum_slug + '/topic/'+ slug + '">%s</a></p>' % (
+                        topic.subject
+                    )
+
+    response['topics'] = topicshtml
+    return JsonResponse(response)
+
+
+def getForumResponsesNumber(request):
+    response = {}
+    forumresponses = 0
+    if not request.user.is_anonymous and not request.user.is_staff:
+        own_topics = Topic.objects.get_queryset().filter(status=0, poster_id=request.user, posts_count__gt=1)
+        suscribed_topics = request.user.topic_subscriptions.all()
+        result = own_topics | suscribed_topics
+        result = result.distinct()
+        result = TrackingHandler.get_unread_topics(request, result, request.user)        
+        forumresponses = len(result)
+
+    response['forumresponses'] = forumresponses
+    return JsonResponse(response)
