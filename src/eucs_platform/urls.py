@@ -74,6 +74,7 @@ urlpatterns = [
     url(r'^openid/', include('oidc_provider.urls', namespace='oidc_provider')),
    re_path(r"^upload/", ckeditor_uploader.views.upload, name="ckeditor_upload"),
    re_path(r"^browse/",never_cache(ckeditor_uploader.views.browse),name="ckeditor_browse",),
+   path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
 ]
 
 # User-uploaded files like profile pics need to be served in development
