@@ -6,7 +6,7 @@ from django.forms import formset_factory
 from django.shortcuts import get_object_or_404
 from django_select2.forms import Select2MultipleWidget
 from django_summernote.widgets import SummernoteWidget
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderServiceError
 from .models import Project, Topic, Status, Keyword, FundingBody, CustomField, OriginDatabase, ParticipationTask, GeographicExtend
