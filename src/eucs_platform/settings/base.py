@@ -299,7 +299,8 @@ EMAIL_USE_TLS = True
 EMAIL_RECIPIENT_LIST = [
     "eucitsci@mfn.berlin",
     "frasanz@bifi.es",
-    "mg@margaretgold.co.uk"
+    "Antonella.Radicchi@mfn.berlin",
+    "Claudia.FaboCartas@mfn.berlin"
 ]
 
 SITE_ID = 1
@@ -329,6 +330,8 @@ DJOSER = {
 #OPENID
 #LOGIN_URL = '/accounts/login/'
 OIDC_SESSION_MANAGEMENT_ENABLE = True
+OIDC_USERINFO = 'eucs_platform.oidc_provider_settings.userinfo'
+
 
 #Swagger
 LOGOUT_URL = 'rest_framework:logout'
