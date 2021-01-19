@@ -330,6 +330,8 @@ DJOSER = {
 #OPENID
 #LOGIN_URL = '/accounts/login/'
 OIDC_SESSION_MANAGEMENT_ENABLE = True
+OIDC_USERINFO = 'eucs_platform.oidc_provider_settings.userinfo'
+
 
 #Swagger
 LOGOUT_URL = 'rest_framework:logout'
