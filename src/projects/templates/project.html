@@ -53,8 +53,8 @@
           <b>{% trans "Status" %}</b>
           <div class="small">
             {{ project.status}}<br>
-            Start: {{ project.start_date | date:"d/m/Y"}}<br>
-            End:&nbsp;&nbsp;{{ project.end_date | date:"d/m/Y"}}
+            {% trans "Start:" %} {{ project.start_date | date:"d/m/Y"}}<br>
+            {% trans "End:" %}&nbsp;&nbsp;{{ project.end_date | date:"d/m/Y"}}
           </div>
           <hr>
           <div><b>{% trans "Science Topic" %}</b></div>
@@ -153,12 +153,12 @@
         </div>
         <div class="col-xl-9 col-md-6 col-12 myhidden" id="two">
           <h5>{{project.name}}</h5>
-          <b>How to participate: </b>
+          <b>{% trans "How to participate:" %} </b>
           <div>{{project.howToParticipate | safe}}</div>
 
-          <b>Needed equipment:</b>
+          <b>{% trans "Needed equipment:" %}</b>
           <div>{{project.equipment |safe}}</div>
-          <b>Participation task</b>
+          <b>{% trans "Participation task" %}</b>
           <div>
             {% for participationtask in project.participationtask.all %}
             <a class="badge badge-light" href="#">{{participationtask}}</a>
@@ -175,8 +175,8 @@
           <br>
           <div class="small">
             {{ project.status}}<br>
-            Start: {{ project.start_date | date:"d/m/Y"}}<br>
-            End:&nbsp;&nbsp;{{ project.end_date | date:"d/m/Y"}}
+            {% trans "Start:" %} {{ project.start_date | date:"d/m/Y"}}<br>
+            {% trans "End:" %}&nbsp;&nbsp;{{ project.end_date | date:"d/m/Y"}}
           </div>
           <hr>
           <div><b>{% trans "Science Topic" %}</b></div>

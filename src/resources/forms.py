@@ -10,7 +10,7 @@ from .models import Resource, Keyword, Category, Audience, Theme, ResourceGroup,
 from authors.models import Author
 from PIL import Image
 from datetime import datetime, date
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from organisations.models import Organisation
 
 
