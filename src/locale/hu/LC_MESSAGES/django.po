@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-03 13:09+0100\n"
+"POT-Creation-Date: 2020-12-04 11:47+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,16 +20,16 @@ msgstr ""
 
 #: .\src\accounts\forms.py:25 .\src\accounts\forms.py:78
 msgid "Enter Email"
-msgstr "Ingrese su correo electrónico"
+msgstr "Add meg az e-mail címed"
 
 #: .\src\accounts\forms.py:26 .\src\accounts\forms.py:80
 msgid "Enter Password"
-msgstr "Ingrese su contraseña"
+msgstr "Add meg a jelszavad"
 
 #: .\src\accounts\forms.py:32 .\src\templates\base.html:69
 #: .\src\templates\registration\password_reset_complete.html:18
 msgid "Log in"
-msgstr "Iniciar sesión"
+msgstr ""
 
 #: .\src\accounts\forms.py:50
 msgid ""
@@ -37,66 +37,65 @@ msgid ""
 "confirmed your address. Please search for the confirmation email in your "
 "inbox (or spam) to activate your account"
 msgstr ""
-"Su correo electrónico se encuentra en nuestra base de datos, pero Ud. no "
-"haconfirmado todavía esta dirección. Por favor, busque el correo de "
-"confirmaciónen su bandeja de entrada (o spam) para activar su cuenta"
+"Az e-mail címedet látjuk, de még nemigazoltad vissza a rendszerben. A fiókod "
+"aktiválásához szükséges megerősítő e-mailta beérkező (vagy spam) mappában "
+"találod."
 
 #: .\src\accounts\forms.py:79
 msgid "Enter Full Name"
-msgstr "Ingrese su nombre completo"
+msgstr "Add meg a teljes neved"
 
 #: .\src\accounts\forms.py:81
 msgid "Re-enter Password"
-msgstr "Ingrese de nuevo su contraseña"
+msgstr "Add meg újra a jelszavad"
 
 #: .\src\accounts\forms.py:83 .\src\templates\base.html:70
 #: .\src\templates\base_forms.html:44
 msgid "Sign up"
-msgstr "Registrarse"
+msgstr ""
 
 #: .\src\accounts\forms.py:92
 msgid "Enter old password"
-msgstr "Ingrese su contraseña antigua"
+msgstr "Add meg a régi jelszavad"
 
 #: .\src\accounts\forms.py:93 .\src\accounts\forms.py:114
 #: .\src\templates\registration\password_reset_confirm.html:18
 msgid "Enter new password"
-msgstr "Ingrese una nueva contraseña"
+msgstr "Add meg az új jelszavad"
 
 #: .\src\accounts\forms.py:94 .\src\accounts\forms.py:115
 msgid "Enter new password (again)"
-msgstr "Ingrese otra vez su nueva contraseña"
+msgstr "Add meg az új jelszavad (újra)"
 
 #: .\src\accounts\forms.py:95 .\src\accounts\forms.py:116
 #: .\src\profiles\templates\profiles\edit_profile.html:53
 msgid "Change Password"
-msgstr "Cambiar contraseña"
+msgstr "Jelszóváltoztatás"
 
 #: .\src\accounts\forms.py:105
 msgid "Enter email"
-msgstr "Ingrese su correo electrónico"
+msgstr "Add meg az e-mail címed"
 
 #: .\src\accounts\forms.py:106
 msgid "Reset Password"
-msgstr "Restaurar mi contraseña"
+msgstr ""
 
 #: .\src\accounts\templates\accounts\acc_active_email.html:4
 msgid "Activate your EU-Citizen.Science account."
-msgstr "Active su cuenta EU-Citizen Science"
+msgstr "Aktiváld az EU-Citizen.Science profilodat"
 
 #: .\src\accounts\templates\accounts\emails\password-reset-email.html:3
 #: .\src\accounts\templates\accounts\emails\password-reset-subject.txt:1
-#, python-format
 msgid "Password reset on %(site_name)s"
-msgstr "Resetear la contraseña en %(site_name)s"
+msgstr "Új jelszó igénylése %(site_name)s"
 
 #: .\src\accounts\templates\accounts\welcome_email.html:4
 msgid "Welcome to EU-Citizen.Science."
-msgstr "Le damos la bienvenida a EU-Citizen.Science"
+msgstr "Üdvözlünk az EU-Citizen.Science oldalán"
 
 #: .\src\blog\templates\blog.html:34
 msgid "Read More"
-msgstr "Leer más"
+msgstr "Olvass tovább!"
 
 #: .\src\contact\templates\contact.html:10
 #: .\src\contact\templates\contact.html:19
@@ -106,24 +105,24 @@ msgstr "Leer más"
 #: .\src\projects\templates\project.html:87
 #: .\src\projects\templates\project.html:209 .\src\templates\_footer.html:81
 msgid "Contact"
-msgstr "Contacto"
+msgstr "Kapcsolat"
 
 #: .\src\contact\templates\contact.html:56
 #: .\src\contact\templates\submitter_contact.html:45
 msgid "Send"
-msgstr "Enviar"
+msgstr "Küldés"
 
 #: .\src\contact\templates\submitter_contact.html:10
 msgid "Submitter Contact"
-msgstr "Contacto del remitente/solicitante"
+msgstr " Az adatszolgáltató elérhetősége"
 
 #: .\src\contact\templates\submitter_contact.html:30
 msgid "This email will be sent to submitter of"
-msgstr "Este correo electrónico se enviará al remitente/solicitante"
+msgstr "Ezt az emailt küldjük az adatszolgáltatónak"
 
 #: .\src\contact\templates\success.html:26
 msgid "Thank you for your message."
-msgstr "Gracias por su mensaje"
+msgstr "Köszönjük az üzeneted!"
 
 #: .\src\events\forms.py:8
 msgid "Title of the event"
@@ -143,79 +142,78 @@ msgstr ""
 
 #: .\src\events\templates\editEvent.html:25
 msgid "Edit event"
-msgstr "Editar evento"
+msgstr "Esemény szerkesztése"
 
 #: .\src\events\templates\editEvent.html:34
 #: .\src\events\templates\new_event.html:35
 msgid "Event info"
-msgstr "Información del evento"
+msgstr "Eseményinformáció"
 
 #: .\src\events\templates\events.html:12
 msgid "Upcoming events"
-msgstr "Próximos eventos"
+msgstr "Közelgő események"
 
 #: .\src\events\templates\events.html:24 .\src\templates\base_forum.html:89
 #: .\src\templates\base_r2.html:179
 msgid "ADD"
-msgstr "AÑADIR"
+msgstr "Hozzáad"
 
 #: .\src\events\templates\events.html:42
 msgid "More info"
-msgstr "Más información"
+msgstr "További információ"
 
 #: .\src\events\templates\events.html:72
 #: .\src\organisations\templates\organisations.html:26
 #: .\src\projects\templates\projects.html:27
 #: .\src\resources\templates\resources.html:27
 msgid "Sorry, nothing found"
-msgstr "Lo sentimos, no hay resultados de búsqueda"
+msgstr "Elnézést, nincs találat "
 
 #: .\src\events\templates\new_event.html:25
 msgid "New event"
-msgstr "Nuevo evento"
+msgstr "Új esemény"
 
 #: .\src\organisations\forms.py:10
 msgid "The name or the organisation"
-msgstr "Nombre u organización"
+msgstr "Név vagy szervezet"
 
 #: .\src\organisations\forms.py:12
 msgid "URL of the organisation"
-msgstr "URL de la organización"
+msgstr "A szervezet URL-je"
 
 #: .\src\organisations\forms.py:14
 msgid "Please briefly describe the organisation (ideally in 500 words or less)"
-msgstr ""
-"Por favor, describa la organización (preferiblemente en 500 palabras o menos)"
+msgstr "Írj röviden a szervezetedről (legfeljebb 500 szóban)"
 
 #: .\src\organisations\forms.py:16
 #: .\src\organisations\templates\finder_organisations.html:19
 msgid "Type"
-msgstr "Tipo"
+msgstr "Típus"
 
 #: .\src\organisations\forms.py:18
 msgid "Please upload the logo of your organisation (.jpg or .png)"
-msgstr "Por favor, añada el logo de su organización (en .jpg o .png)"
+msgstr "Töltsd fel a szervezeted logóját (.jpg vagy .png formátumban)"
 
 #: .\src\organisations\forms.py:19
 msgid "Logo"
-msgstr "Logo"
+msgstr "Logó"
 
 #: .\src\organisations\forms.py:26
 msgid "Please name the contact person or contact point for the organisation"
-msgstr "Por favor, indique la persona o punto de contacto de la organización"
+msgstr "Nevezd meg a szervezet kapcsolattartóját"
 
 #: .\src\organisations\forms.py:29
 msgid ""
 "Please provide the email address of the contact person or contact point. "
 "Note you will need permission to do that"
 msgstr ""
-"Por favor, indique la dirección de correo electrónico del contacto de la "
-"organización.Tenga en cuenta que deberá tener permiso para ello"
+"Add meg a kapcsolattartó vagy a kapcsolattartó pont e-mail címét.Ehhez a "
+"kapcsolattartó engedélyére lesz szükséged."
 
 #: .\src\organisations\forms.py:67 .\src\projects\forms.py:286
 #: .\src\resources\forms.py:200
 msgid "Give additional users permission to edit"
-msgstr "Dar permiso a más usuarios para editar"
+msgstr "Adj szerkesztői jogot a további felhasználóknak"
 
 #: .\src\organisations\templates\edit_organisation.html:28
 #: .\src\organisations\templates\new_organisation.html:27
@@ -224,7 +222,7 @@ msgstr "Dar permiso a más usuarios para editar"
 #: .\src\resources\templates\editResource.html:23
 #: .\src\resources\templates\new_resource.html:25
 msgid "Crop the photo"
-msgstr "Recortar la foto"
+msgstr "Körbevág"
 
 #: .\src\organisations\templates\edit_organisation.html:30
 #: .\src\organisations\templates\new_organisation.html:29
@@ -238,7 +236,7 @@ msgstr "Recortar la foto"
 #: .\src\resources\templates\new_resource.html:62
 #: .\src\templates\modalinfo.html:10
 msgid "Close"
-msgstr "Cerrar"
+msgstr "Bezár"
 
 #: .\src\organisations\templates\edit_organisation.html:44
 #: .\src\organisations\templates\new_organisation.html:43
@@ -247,7 +245,7 @@ msgstr "Cerrar"
 #: .\src\resources\templates\editResource.html:39
 #: .\src\resources\templates\new_resource.html:41
 msgid "zoom_in"
-msgstr "Acercar"
+msgstr "Nagyítás"
 
 #: .\src\organisations\templates\edit_organisation.html:47
 #: .\src\organisations\templates\new_organisation.html:46
@@ -256,7 +254,7 @@ msgstr "Acercar"
 #: .\src\resources\templates\editResource.html:42
 #: .\src\resources\templates\new_resource.html:44
 msgid "zoom_out"
-msgstr "Alejar"
+msgstr "Kicsinyítés"
 
 #: .\src\organisations\templates\edit_organisation.html:50
 #: .\src\organisations\templates\new_organisation.html:49
@@ -268,7 +266,7 @@ msgstr "Alejar"
 #: .\src\resources\templates\editResource.html:67
 #: .\src\resources\templates\new_resource.html:47
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr "Törlés"
 
 #: .\src\organisations\templates\edit_organisation.html:51
 #: .\src\organisations\templates\new_organisation.html:50
@@ -277,11 +275,11 @@ msgstr "Cancelar"
 #: .\src\resources\templates\editResource.html:46
 #: .\src\resources\templates\new_resource.html:48
 msgid "Crop and upload"
-msgstr "Recortar y añadir"
+msgstr "Körbevág és feltölt"
 
 #: .\src\organisations\templates\edit_organisation.html:65
 msgid "Edit Organisation Profile"
-msgstr "Editar el Perfil de la Organización"
+msgstr "Szervezeti profil szerkesztése"
 
 #: .\src\organisations\templates\edit_organisation.html:74
 #: .\src\organisations\templates\edit_organisation.html:138
@@ -295,12 +293,12 @@ msgstr "Editar el Perfil de la Organización"
 #: .\src\resources\templates\new_resource.html:114
 #: .\src\resources\templates\new_resource.html:248
 msgid "Save"
-msgstr "Guardar"
+msgstr "Mentés"
 
 #: .\src\organisations\templates\finder_organisations.html:29
 #: .\src\projects\templates\finder_projects.html:54
 msgid "Country"
-msgstr "País"
+msgstr "Ország"
 
 #: .\src\organisations\templates\finder_organisations.html:45
 #: .\src\projects\templates\finder_projects.html:82
@@ -308,24 +306,25 @@ msgstr "País"
 #: .\src\templates\home.html:66 .\src\templates\home.html:76
 #: .\src\templates\home.html:86 .\src\templates\home.html:96
 msgid "result"
-msgstr "resultado"
+msgstr "eredmény"
 
 #: .\src\organisations\templates\finder_organisations.html:45
 #: .\src\projects\templates\finder_projects.html:82
 #: .\src\resources\templates\finder_resources.html:69
 msgid "found"
-msgstr "encontradas"
+msgstr "találat"
 
 #: .\src\organisations\templates\new_organisation.html:64
 msgid "New Organisation Profile"
-msgstr "Nuevo Perfil de Organización"
+msgstr "Új szervezeti profil"
 
 #: .\src\organisations\templates\new_organisation.html:65
 msgid ""
 "Thank you for creating a profile for your organisation on the EU-Citizen."
 "Science Platform."
 msgstr ""
-"Gracias por crear un perfil para tu organización en EU-Citizen.Science."
+"Köszönjük, hogy létrehoztad a szervezeted profilját az EU-Citizen-Science "
+"platformján."
 
 #: .\src\organisations\templates\new_organisation.html:66
 msgid ""
@@ -334,9 +333,8 @@ msgid ""
 "involved in, and the Resource Profiles of the resources that were published "
 "by your organisation."
 msgstr ""
-"Puede conectarlo a los Perfiles de las Personas de suorganización, los "
-"Perfiles de los Proyectos en los que tengaimplicación, y los Perfiles de los "
-"Recursos publicadospor su organización"
+"A szervezeti profil összeköthető a szervezet tagjainak személyes profiljával,"
+"a szervezeted projektjeivelés a szervezeted által publikált forrásokkal."
 
 #: .\src\organisations\templates\new_organisation.html:68
 msgid ""
@@ -344,9 +342,8 @@ msgid ""
 "(indicated with an asterisk*), and as much of the non-mandatory information "
 "as possible."
 msgstr ""
-"Por favor, complete la información requerida en los siguientes "
-"campos(marcados por un asterisco*), así como la información no esencialque "
-"sea posible"
+"Add meg a kötelező adatokat az alábbi (csillaggal jelölt*) mezőkbenés töltsd "
+"ki a lehető legtöbb mezőt."
 
 #: .\src\organisations\templates\new_organisation.html:70
 msgid ""
@@ -354,27 +351,26 @@ msgid ""
 "moderation by one of the members of the EU-Citizen.Science consortium. This "
 "step is simply to check for ‘spam’ or inappropriate uses of the profile form."
 msgstr ""
-"Al guardar este perfil, los datos de su organización serán enviados "
-"arevisión por uno de los miembros del consorcio de EU-Citizen.Science. Este "
-"paso se realiza solamente para comprobar si es ‘spam’ o un uso inapropiado "
-"del formulario."
+"Mentést követően a szervezeti profil beküldésre kerül, amitezt követően az "
+"EU-Citizen.Science konzorcium egyik tagja moderál.Ez a lépés a spamek és a "
+"helytelen adatlapok szűrésére szolgál."
 
 #: .\src\organisations\templates\organisation.html:21
 #: .\src\projects\templates\editProject.html:64
 #: .\src\resources\templates\editResource.html:59
 msgid "Confirm delete"
-msgstr "Confirmar eliminación"
+msgstr "Törlés megerősítése"
 
 #: .\src\organisations\templates\organisation.html:25
 msgid ""
 "You are going to delete this organisation, this procedure is irreversible."
-msgstr "Ud. va a eliminar esta organización. El proceso es irreversible."
+msgstr "A szervezetet véglegesen töröljük."
 
 #: .\src\organisations\templates\organisation.html:26
 #: .\src\projects\templates\editProject.html:69
 #: .\src\resources\templates\editResource.html:64
 msgid "Do you want to proceed?"
-msgstr "¿Desea continuar?"
+msgstr "Biztosan törlöd?"
 
 #: .\src\organisations\templates\organisation.html:30
 #: .\src\projects\templates\editProject.html:73
@@ -382,53 +378,51 @@ msgstr "¿Desea continuar?"
 #: .\src\resources\templates\editResource.html:68
 #: .\src\resources\templates\editResource.html:87
 msgid "Delete"
-msgstr "Eliminar"
+msgstr "Törlés"
 
 #: .\src\organisations\templates\organisation.html:44
 #: .\src\projects\forms.py:89
 msgid "Contact Point Email"
-msgstr "Correo electrónico del punto de contacto"
+msgstr "Kapcsolattartó pont e-mail címe"
 
 #: .\src\organisations\templates\organisation.html:53
 msgid "Go to Organisation"
-msgstr "Ir a la Organización"
+msgstr "A szervezethez"
 
 #: .\src\organisations\templates\organisation.html:59
 #: .\src\templates\_subnavbar.html:12 .\src\templates\about.html:55
 #: .\src\templates\home.html:65
 msgid "Projects"
-msgstr "Proyectos"
+msgstr "Projektek"
 
 #: .\src\organisations\templates\organisation.html:65
 #: .\src\templates\_subnavbar.html:16 .\src\templates\about.html:54
 #: .\src\templates\home.html:75
 msgid "Resources"
-msgstr "Recursos"
+msgstr "Források"
 
 #: .\src\organisations\templates\organisation.html:71
 msgid "Members"
-msgstr "Miembros"
+msgstr "Tagok"
 
 #: .\src\organisations\templates\organisation.html:94
 msgid "Delete Organisation"
-msgstr "Eliminar Organización"
+msgstr "Szervezet törlése"
 
 #: .\src\organisations\templates\organisation.html:97
 msgid "Edit Organisation"
-msgstr "Editar Organización"
+msgstr "Szervezet szerkesztése"
 
 #: .\src\organisations\templates\organisations_cards.html:17
 #: .\src\profiles\templates\profiles\show_profile.html:46
 #: .\src\templates\modalinfo.html:20
 msgid "Organisation"
-msgstr "Organización"
+msgstr "Szervezet"
 
 #: .\src\profiles\forms.py:48
 msgid ""
 "Please write or select interest areas, separated by commas or pressing enter"
 msgstr ""
-"Por favor, escriba o seleccione las palabras clave que definen el recurso, "
-"separadas por comas o pulsando enter"
 
 #: .\src\profiles\models.py:23
 msgid "Profile picture"
@@ -437,11 +431,11 @@ msgstr ""
 #: .\src\profiles\models.py:25
 #: .\src\profiles\templates\profiles\show_profile.html:43
 msgid "Title"
-msgstr "Título"
+msgstr "Cím"
 
 #: .\src\profiles\models.py:26
 msgid "Short Bio and disciplinary background"
-msgstr "Bio y ámbito profesional"
+msgstr "Bio és szakmai háttér"
 
 #: .\src\profiles\models.py:30
 msgid "Email verified"
@@ -457,34 +451,34 @@ msgstr ""
 
 #: .\src\profiles\templates\profiles\edit_profile.html:31
 msgid "Edit profile"
-msgstr "Editar Perfil"
+msgstr "Profil szerkesztése"
 
 #: .\src\profiles\templates\profiles\edit_profile.html:49
 #: .\src\profiles\templates\profiles\show_profile.html:59
 msgid "Geographical location"
-msgstr "Localización geográfica"
+msgstr "Földrajzi hely"
 
 #: .\src\profiles\templates\profiles\followed_projects.html:27
 #: .\src\templates\base2.html:65 .\src\templates\base_forum.html:76
 #: .\src\templates\base_r2.html:164
 msgid "Followed projects"
-msgstr "Proyectos seguidos"
+msgstr "Követett projektek"
 
 #: .\src\profiles\templates\profiles\my_organisations.html:31
 msgid "Submitted organisations"
-msgstr "Organizaciones añadidas"
+msgstr "Feltöltött szervezetek"
 
 #: .\src\profiles\templates\profiles\my_projects.html:31
 msgid "Uploaded projects"
-msgstr "Proyectos subidos"
+msgstr "Feltöltött projektek"
 
 #: .\src\profiles\templates\profiles\my_resources.html:31
 msgid "Uploaded resources"
-msgstr "Recursos subidos"
+msgstr "Feltöltött források"
 
 #: .\src\profiles\templates\profiles\saved_resources.html:28
 msgid "My library"
-msgstr "Mi biblioteca"
+msgstr "Könyvtáram"
 
 #: .\src\profiles\templates\profiles\show_profile.html:30
 msgid "Delete Profile"
@@ -492,31 +486,31 @@ msgstr ""
 
 #: .\src\profiles\templates\profiles\show_profile.html:31
 msgid "Edit Profile"
-msgstr "Editar Perfil"
+msgstr "Profil szerkesztése"
 
 #: .\src\profiles\templates\profiles\show_profile.html:38
 msgid "Email"
-msgstr "Correo electrónico"
+msgstr "E-mail"
 
 #: .\src\profiles\templates\profiles\show_profile.html:39
 msgid "Joined"
-msgstr "Unido"
+msgstr "Csatlakozott"
 
 #: .\src\profiles\templates\profiles\show_profile.html:40
 msgid "Last seen"
-msgstr "Última visita"
+msgstr "Utoljára megtekintett"
 
 #: .\src\profiles\templates\profiles\show_profile.html:44
 msgid "Bio and disciplinary background"
-msgstr "Bio y ámbito profesional"
+msgstr "Bio és szakmai háttér"
 
 #: .\src\profiles\templates\profiles\show_profile.html:45
 msgid "ORCID profile"
-msgstr "Perfil ORCID"
+msgstr "ORCID profil"
 
 #: .\src\profiles\templates\profiles\show_profile.html:51
 msgid "Interest Areas"
-msgstr "Áreas de interés"
+msgstr "Érdeklődési terület"
 
 #: .\src\projects\forms.py:21
 msgid "Short name or title of the project"
@@ -533,7 +527,7 @@ msgstr ""
 #: .\src\resources\templates\resource.html:51
 #: .\src\resources\templates\resource.html:166
 msgid "Keywords"
-msgstr "Palabras clave"
+msgstr "Kulcsszó"
 
 #: .\src\projects\forms.py:27
 msgid "Primary aim, goal or objective of the project. Max 2000 characters"
@@ -588,11 +582,11 @@ msgstr ""
 
 #: .\src\projects\forms.py:58
 msgid "Geographic Extend"
-msgstr "Localización geográfica"
+msgstr ""
 
 #: .\src\projects\forms.py:61
 msgid "Project locality"
-msgstr "Proyecto"
+msgstr ""
 
 #: .\src\projects\forms.py:62
 msgid ""
@@ -628,13 +622,11 @@ msgstr ""
 
 #: .\src\projects\forms.py:85
 msgid "Public Contact Point"
-msgstr "Correo electrónico del punto de contacto"
+msgstr ""
 
 #: .\src\projects\forms.py:89
 msgid "Please provide the email for the contact person or contact point"
 msgstr ""
-"Por favor, indique la dirección de correo electrónico del contacto de la "
-"organización."
 
 #: .\src\projects\forms.py:92
 msgid "Project image for the thumbnail profile"
@@ -777,7 +769,7 @@ msgstr ""
 #: .\src\projects\templates\finder_projects.html:33
 #: .\src\resources\templates\finder_resources.html:22
 msgid "Sort by Most Recent Updated"
-msgstr "Ordenar por añadidos más recientes"
+msgstr "Legfrissebb feltöltések szerint"
 
 #: .\src\projects\templates\finder_projects.html:34
 #: .\src\resources\templates\finder_resources.html:23
@@ -787,7 +779,7 @@ msgstr ""
 #: .\src\projects\templates\finder_projects.html:35
 #: .\src\resources\templates\finder_resources.html:24
 msgid "Sort by rating"
-msgstr "Ordenar por valoración"
+msgstr "Minősítés szerint"
 
 #: .\src\projects\templates\finder_projects.html:46
 #: .\src\projects\templates\project.html:53
@@ -809,18 +801,18 @@ msgstr ""
 #: .\src\projects\templates\finder_projects.html:74
 #: .\src\resources\templates\finder_resources.html:61
 msgid "Moderated"
-msgstr "Revisados"
+msgstr "Moderált"
 
 #: .\src\projects\templates\finder_projects.html:75
 #: .\src\resources\templates\finder_resources.html:62
 msgid "Not yet moderated"
-msgstr "Aún no revisados"
+msgstr "Még nem moderált"
 
 #: .\src\projects\templates\finder_projects.html:76
 #: .\src\resources\templates\finder_resources.html:63
 #: .\src\templates\_subnavbar.html:8
 msgid "All"
-msgstr "Todos"
+msgstr "Összes"
 
 #: .\src\projects\templates\finder_projects.html:93
 msgid "Clear current search query and filters"
@@ -829,12 +821,12 @@ msgstr ""
 #: .\src\projects\templates\modal_projects.html:8
 #: .\src\resources\templates\modal_resources.html:8
 msgid "Info"
-msgstr "Información"
+msgstr "Információ"
 
 #: .\src\projects\templates\modal_projects.html:14
 #: .\src\resources\templates\modal_resources.html:14
 msgid "Search"
-msgstr "Buscar"
+msgstr "Keresés"
 
 #: .\src\projects\templates\modal_projects.html:14
 msgid ""
@@ -844,16 +836,16 @@ msgstr ""
 #: .\src\projects\templates\modal_projects.html:15
 #: .\src\resources\templates\modal_resources.html:15
 msgid "Sort"
-msgstr "Ordenar"
+msgstr "Rendezés"
 
 #: .\src\projects\templates\modal_projects.html:15
 msgid "projects by date or by rating"
-msgstr "proyectos por fecha o por valoración"
+msgstr ""
 
 #: .\src\projects\templates\modal_projects.html:16
 #: .\src\resources\templates\modal_resources.html:16
 msgid "Filter"
-msgstr "Filtrar"
+msgstr "Szűrő"
 
 #: .\src\projects\templates\modal_projects.html:16
 msgid "search results by project status, country, or topic"
@@ -869,22 +861,22 @@ msgstr ""
 #: .\src\projects\templates\modal_projects.html:20
 #: .\src\resources\templates\modal_resources.html:20
 msgid "Read more about our"
-msgstr "Leer más sobre nuestro"
+msgstr "Tudj meg többet "
 
 #: .\src\projects\templates\modal_projects.html:20
 #: .\src\projects\templates\new_project.html:103
 #: .\src\resources\templates\modal_resources.html:20
 msgid "moderation process"
-msgstr "proceso de revisión"
+msgstr "a moderációs folyamatról"
 
 #: .\src\projects\templates\new_project.html:65
 msgid "Project is going to saved"
-msgstr "El proyecto va a ser guardado"
+msgstr ""
 
 #: .\src\projects\templates\new_project.html:73
 #: .\src\resources\templates\new_resource.html:68
 msgid "Thank you"
-msgstr "Gracias"
+msgstr "Köszönjük!"
 
 #: .\src\projects\templates\new_project.html:74
 msgid ""
@@ -944,7 +936,7 @@ msgstr ""
 
 #: .\src\projects\templates\new_project.html:100
 msgid "ECSA 10 Principles of Citizen Science"
-msgstr "los 10 Principios de la Ciencia Ciudadana"
+msgstr ""
 
 #: .\src\projects\templates\new_project.html:101
 msgid ""
@@ -1025,12 +1017,12 @@ msgstr ""
 #: .\src\templates\resources_cards.html:54
 #: .\src\templates\resources_cards_horizontal.html:43
 msgid "review"
-msgstr "Opinar"
+msgstr "ismertető"
 
 #: .\src\projects\templates\project.html:113
 #: .\src\resources\templates\resource.html:125
 msgid "Reviews"
-msgstr "Opiniones"
+msgstr "Ismertetők"
 
 #: .\src\projects\templates\project.html:118
 msgid "Go to Project"
@@ -1041,7 +1033,7 @@ msgstr ""
 #: .\src\resources\templates\resource.html:121
 #: .\src\resources\templates\resource_review.html:18
 msgid "Review"
-msgstr "Opinar"
+msgstr "Ismertető"
 
 #: .\src\projects\templates\project.html:130
 msgid "Following"
@@ -1066,37 +1058,33 @@ msgstr ""
 #: .\src\projects\templates\project_review.html:19
 #: .\src\resources\templates\resource_review.html:19
 msgid "Rate and comment"
-msgstr "Puntuar y comentar"
+msgstr "Értékelés és hozzászólás"
 
 #: .\src\resources\forms.py:19
 msgid "Insert here the title or name of the resource"
-msgstr "Añada aquí el título o nombre del recurso"
+msgstr "Add meg a forrás címét vagy nevét"
 
 #: .\src\resources\forms.py:22
 msgid ""
 "URL to where the document is hosted by the publisher,         or in a "
 "permanent repository such as Zenodo, OSF, the RIO Journal, or similar"
 msgstr ""
-"URL donde se encuentra originalmente el documento,        o si está en "
-"unrepositorio permanente como Zenodo, OSF, the RIO Journal, o similar"
+"Add meg a forrás URL-jét, vagyaz adattár linkjént, mint például a Zenodo, "
+"OSF, RIO Journal stb."
 
 #: .\src\resources\forms.py:26
 msgid "Please briefly describe the resource (ideally in 500 words or less)"
-msgstr ""
-"Por favor, describa brevemente el recurso (preferiblemente en 500 palabras o "
-"menos)"
+msgstr "Írj röviden a forrásról (legfeljebb 500 szóban)"
 
 #: .\src\resources\forms.py:29
 msgid "Select one of the proposed categories"
-msgstr "Seleccione una de las categorías propuestas"
+msgstr "Válassz a kategóriák közül"
 
 #: .\src\resources\forms.py:34
 msgid ""
 "Select the audience(s) for which the resource is intended. Multiple options "
 "can be selected"
-msgstr ""
-"Seleccione el público al que se dirige el recurso. Puede elegir múltiples "
-"opciones"
+msgstr "Válaszd ki a célközönséget! Több opció lehetséges."
 
 #: .\src\resources\forms.py:37
 msgid ""
@@ -1106,19 +1094,17 @@ msgstr ""
 
 #: .\src\resources\forms.py:40
 msgid "The thematic content of the resource (select as many as apply)"
-msgstr "El contenido temático del recurso (seleccione cuantas correspondan)"
+msgstr "Add meg a forrás tematikus tartalmát (több is lehetséges)"
 
 #: .\src\resources\forms.py:44
 msgid ""
 "Please provide the Digital Object Signifier that is unique to your "
 "resource,        generated by the Publisher, Zenodo..."
 msgstr ""
-"Por favor, añada el DOI (Digital Object Signifier) exclusivo de su recurso "
-"generado por la Editorial, Zenodo..."
 
 #: .\src\resources\forms.py:45 .\src\resources\templates\resource.html:108
 msgid "Resource DOI"
-msgstr "DOI del recurso"
+msgstr "Forrás DOI"
 
 #: .\src\resources\forms.py:49
 msgid ""
@@ -1126,21 +1112,18 @@ msgid ""
 "a comma or pressing enter to add an author,        or multiple authors. If "
 "not known, name the project within the resource was created."
 msgstr ""
-"Autoría del recurso. Ingrese <i>FirstInitial LastName</i> y termine con una "
-"coma o pulsando enter para añadir al autor, o múltiples autores. Si los "
-"desconoce, indique el nombre del proyecto que generó el recurso"
 
 #: .\src\resources\forms.py:51
 msgid "Authors"
-msgstr "Autoría"
+msgstr "Szerzők"
 
 #: .\src\resources\forms.py:54
 msgid ""
 "Indicate the resource license, such as Creative Commons CC-BY.         Enter "
 "a URL link to the license if available."
 msgstr ""
-"Indique la licencia del recurso, como Creative Commons CC-BY.          "
-"Enlaceal URL de la licencia si está disponible"
+"Add meg a forrás licencét! Például Creative Commons CC-BY. Add meg a licenc "
+"URL-jét."
 
 #: .\src\resources\forms.py:58
 msgid ""
@@ -1148,40 +1131,35 @@ msgid ""
 "comma or pressing enter).         If not listed, please add them <a href=\"/"
 "new_organisation\">here</a > before submitting"
 msgstr ""
-"Organización(es) que han contribuido al recurso (en caso de selección "
-"múltiple, separe con comas o pulsando enter. Si no están en el listado, por "
-"favor, añádalas <a href=\"/new_organisation\">here</a > antes de enviar"
 
 #: .\src\resources\forms.py:59 .\src\resources\templates\resource.html:102
 msgid "Organisation(s)"
-msgstr "Organización(es)"
+msgstr "Szervezet/Szervezetek"
 
 #: .\src\resources\forms.py:62
 msgid ""
 "The publisher of the resource (or the project name, or the lead institution)."
-msgstr ""
-"La editorial del recurso (o nombre del proyecto, o de la institución que lo "
-"lidera)"
+msgstr "Kiadó (a projekt vagy a szervezet neve)"
 
 #: .\src\resources\forms.py:65
 msgid "Enter the year (YYYY) that this version of the resource was published"
-msgstr "Ingrese el año (aaaa) en el que esta versión del recurso fue publicada"
+msgstr "A forrás megjelenésének éve (YYYY) "
 
 #: .\src\resources\forms.py:70
 msgid "Image 1 credit"
-msgstr "Créditos de la Imagen 1"
+msgstr "Kép 1 credit"
 
 #: .\src\resources\forms.py:77
 msgid "Image 2 credit"
-msgstr "Créditos de la Imagen 2"
+msgstr "Kép 2 credit"
 
 #: .\src\resources\forms.py:83
 msgid "Curated lists"
-msgstr "Mis listas"
+msgstr "Összeállított listák"
 
 #: .\src\resources\forms.py:88 .\src\resources\templates\resource.html:92
 msgid "Education level"
-msgstr "Nivel educativo"
+msgstr "Képzettség"
 
 #: .\src\resources\forms.py:89
 msgid "Insert education level needed, end using comma or pressing enter"
@@ -1189,51 +1167,49 @@ msgstr ""
 
 #: .\src\resources\forms.py:93
 msgid "Learning resource type"
-msgstr "Tipo de recurso de aprendizaje"
+msgstr "Oktatási anyag típusa"
 
 #: .\src\resources\forms.py:94 .\src\resources\forms.py:97
 msgid "Help text here"
-msgstr "Texto de ayuda aquí"
+msgstr "Súgó"
 
 #: .\src\resources\forms.py:96
 msgid "Aproximate hours required to finish the training"
-msgstr "Tiempo aproximado requerido para finalizar la formación"
+msgstr ""
 
 #: .\src\resources\templates\editResource.html:63
 msgid "You are going to delete this resource, this procedure is irreversible."
-msgstr "Ud. va a eliminar este recurso. El proceso es irreversible"
+msgstr "Forrás végleges törlése"
 
 #: .\src\resources\templates\editResource.html:81
 msgid "Edit resource"
-msgstr "Editar recurso"
+msgstr "Forrás szerkesztése"
 
 #: .\src\resources\templates\finder_resources.html:35
 msgid "All languages"
-msgstr "Cualquier idioma"
+msgstr "Minden nyelv"
 
 #: .\src\resources\templates\finder_resources.html:49
 msgid "All themes"
-msgstr "Cualquier temática"
+msgstr "Minden téma"
 
 #: .\src\resources\templates\finder_resources.html:55
 msgid "All Resource Types"
-msgstr "Cualquier tipo de recurso"
+msgstr "Minden forrás"
 
 #: .\src\resources\templates\modal_resources.html:14
 msgid ""
 "resources by title or keywords by typing text directly into the the search "
 "bar"
-msgstr ""
-"recursos por título o palabras clave, escribiendo el texto directamente en "
-"labarra de búsqueda"
+msgstr "Forráskeresés cím vagy kulcsszavak szerint"
 
 #: .\src\resources\templates\modal_resources.html:15
 msgid "resources by date or by rating"
-msgstr "recursos por fecha o por valoración"
+msgstr "Források dátum vagy értékelés szerint"
 
 #: .\src\resources\templates\modal_resources.html:16
 msgid "search results by language, theme or category"
-msgstr "buscar resultados por idioma, temática o categoría"
+msgstr "Keresés nyelv, téma vagy kategória szerint"
 
 #: .\src\resources\templates\modal_resources.html:18
 msgid ""
@@ -1241,13 +1217,13 @@ msgid ""
 "as 'Moderated'.Only these will show in your search results unless you filter "
 "for 'not yet moderated' or 'All'."
 msgstr ""
-"Los recursos añadidos que han pasado el proceso de revisión están marcados "
-"como ‘Revisados’. Solo estos serán mostrados en sus resultados de búsqueda, "
-"a no ser que Ud. filtre para ‘aún no revisados’’ o ‘Todos’."
+"A moderálást követően a források moderált kategóriába kerülnek. Szűréskor "
+"csak a moderált források jelennek meg, hacsak nem a 'még nem moderált' vagy "
+"'összes' kategóriát szűröd. "
 
 #: .\src\resources\templates\new_resource.html:60
 msgid "Resource is going to saved"
-msgstr "El recurso va a ser guardado"
+msgstr "A forrás mentésre kerül"
 
 #: .\src\resources\templates\new_resource.html:70
 msgid ""
@@ -1256,10 +1232,8 @@ msgid ""
 "resources shared on the platform are indeed useful for citizen science "
 "projects and practitioners, and are of good quality."
 msgstr ""
-"Gracias por añadir su recurso. Acaba de ser enviado al equipo EU-Citizen."
-"Science de revisión, que se encargará de comprobar que todos los recursos "
-"compartidos en la plataforma son de utilidad para los proyectos y "
-"profesionales de la ciencia ciudadana; así como de asegurar su calidad."
+"Köszönjük, hogy feltötted a forrásokat. Továbbítottuk az Eu-Citizen.Science "
+"moderátorának, aki a források minőség-ellenőrzést végzi a platformon."
 
 #: .\src\resources\templates\new_resource.html:72
 msgid ""
@@ -1268,10 +1242,9 @@ msgid ""
 "the platform. Your resource profile will be visible to the public in the "
 "meantime, but will be marked as unmoderated."
 msgstr ""
-"Nos pondremos en contacto con Ud. si tenemos alguna duda. Igualmente, "
-"recibirá una alerta de que su recurso ha sido revisado y publicado en la "
-"plataforma. Por el momento, el perfil de su recurso estará visible al "
-"público, pero marcado como aún no revisado."
+"Kérdés esetén felkeresünk!A moderálást követően a feltöltésed kikerül a "
+"platformra.Ezt megelőzően a forrás 'nem moderált' státusszal elérhetővé "
+"válik."
 
 #: .\src\resources\templates\new_resource.html:74
 msgid ""
@@ -1279,25 +1252,24 @@ msgid ""
 "going to the Submitted resources section in your Personal Area (see the top-"
 "right of the platform menu)."
 msgstr ""
-"En cualquier momento puede hacer actualizaciones o cambios del perfil de "
-"recurso dirigiéndose a la sección de Recursos añadidos de su Área Personal "
-"(en la zona superior-derecha del menú de la plataforma)."
+"A személyes profilod alatt (a platform jobb felső sarkában) bármikor "
+"frissítheted a feltöltött forrásokat."
 
 #: .\src\resources\templates\new_resource.html:79
 msgid "OK"
-msgstr "OK"
+msgstr "Rendben!"
 
 #: .\src\resources\templates\new_resource.html:92
 msgid "New"
-msgstr "Nuevo"
+msgstr "Új"
 
 #: .\src\resources\templates\new_resource.html:92
 msgid "training"
-msgstr "formación"
+msgstr "képzés"
 
 #: .\src\resources\templates\new_resource.html:92
 msgid "resource"
-msgstr "recurso"
+msgstr "Forrás"
 
 #: .\src\resources\templates\new_resource.html:93
 msgid ""
@@ -1306,10 +1278,9 @@ msgid ""
 "in the fields below (indicated with an asterisk*), and as much of the non-"
 "mandatory information as possible."
 msgstr ""
-"Gracias por proponer un nuevo recurso de ciencia ciudadana y compartirlo en "
-"laPlataforma EU-Citizen.Science. Por favor, complete toda la información "
-"requerida en los siguientes campos (marcados por un asterisco*), así como la "
-"información noesencial que sea posible."
+"Köszönjük, hogy új forrást javasoltál az EU-Citizen.Science platformján!Add "
+"meg a kötelező adatokat az alábbi (csillaggal jelölt*) mezőkbenés töltsd ki "
+"a lehető legtöbb mezőt."
 
 #: .\src\resources\templates\new_resource.html:95
 msgid ""
@@ -1317,10 +1288,10 @@ msgid ""
 "and protocols; tools such as software or hardware, and other file formats "
 "such as videos or podcasts. Read our blog post on Types of Resources."
 msgstr ""
-"Los recursos pueden incluir documentos como guías, dossieres, informes sobre "
-"políticas, y protocolos; herramientas como software o hardware, y otro tipo "
-"de formatos como vídeos o podcasts. Lea el post sobre Tipos de Recursos en "
-"nuestro blog."
+"A források lehetnek irányelvek, jelentések, szakpolitikai ajánlások, "
+"protokollok, eszközök, mint például szoftver vagy hardver; egyéb "
+"fájlformátumok, mint például videók vagy podcastok. Bolgbejegyzéseinkben "
+"többet megtudhatsz az források típusairól! "
 
 #: .\src\resources\templates\new_resource.html:97
 msgid ""
@@ -1330,21 +1301,18 @@ msgid ""
 "are indeed useful for citizen science projects and practitioners, and are of "
 "good quality. Read more about "
 msgstr ""
-"Al guardar este perfil, su recurso será enviado a revisión por uno de los "
-"miembros del consorcio EU-Citizen.Science. El proceso de revisión se encarga "
-"de asegurar que todos los recursos compartidos en la plataforma son de "
-"utilidad para los proyectos y profesionales de ciencia ciudadana, y que son "
-"de calidad. Leer más sobre"
+"A profilod mentésekor a feltöltött forrást továbítjuk az Eu-Citizen.Science "
+"moderátorának, aki a források minőség-ellenőrzést végzi a platformon."
 
 #: .\src\resources\templates\new_resource.html:98
 #: .\src\templates\moderation.html:23
 msgid "The Moderation Process"
-msgstr "el Proceso de Revisión"
+msgstr "Moderációs folyamat"
 
 #: .\src\resources\templates\new_resource.html:98
 #: .\src\resources\templates\new_resource.html:101
 msgid "here."
-msgstr "aquí"
+msgstr "itt"
 
 #: .\src\resources\templates\new_resource.html:100
 msgid ""
@@ -1352,13 +1320,13 @@ msgid ""
 "access, is structured clearly, is easy to read (or hear or view) and "
 "understand. Read our"
 msgstr ""
-"Los factores de calidad que consideramos incluyen si su recurso esaccesible, "
-"está estructurado con claridad, es fácil de leer (o ver u oír) y entender. "
-"Lee nuestra"
+"A minőség-ellenőrzéskor figyelembe vesszük a forrás elérhetőségét, "
+"struktúráját, olvashatóságát (hallgathatóságát vagy megtekinthetőségét) és "
+"érthetőségét."
 
 #: .\src\resources\templates\new_resource.html:101
 msgid "Quality Guidelines"
-msgstr "Guía de Calidad"
+msgstr "Minőségi irányelvek"
 
 #: .\src\resources\templates\new_resource.html:103
 msgid ""
@@ -1367,107 +1335,106 @@ msgid ""
 "be maintained and can provide a permalink, or a repository such as a "
 "publisher, "
 msgstr ""
-"Por favor, tenga en cuenta que es muy recomendable que su recurso esté "
-"alojado en un repositorio permanente (una web que seamantenida y pueda "
-"proporcionar un enlace permanente, o un repositorio como una editorial,"
+"Győződj meg arról, hogy a forrás állandó tárhelyen van-e tárolva. Például "
+"elérhető permalinket vagy adattárat biztosító weboldalon, a forrást kiadó "
+"oldalán."
 
 #: .\src\resources\templates\new_resource.html:105
 msgid "or the"
-msgstr "o el"
+msgstr "vagy a"
 
 #: .\src\resources\templates\new_resource.html:179
 msgid "Please indicate the (main) language that the resource is made available"
-msgstr ""
-"Por favor, indique el idioma principal en el que el recurso está disponible"
+msgstr "Add meg a forrás nyelvét"
 
 #: .\src\resources\templates\resource.html:28
 #: .\src\resources\templates\resource.html:143
 msgid "Language"
-msgstr "Idioma"
+msgstr "Nyelv"
 
 #: .\src\resources\templates\resource.html:38
 #: .\src\resources\templates\resource.html:153
 msgid "Category"
-msgstr "Categoría"
+msgstr "Kategória"
 
 #: .\src\resources\templates\resource.html:44
 #: .\src\resources\templates\resource.html:159
 msgid "Theme"
-msgstr "Tema"
+msgstr "Téma"
 
 #: .\src\resources\templates\resource.html:74
 #: .\src\templates\projects_cards.html:54
 #: .\src\templates\resources_cards.html:54
 #: .\src\templates\resources_cards_horizontal.html:43
 msgid "reviews"
-msgstr "Opiniones"
+msgstr "ismertetők"
 
 #: .\src\resources\templates\resource.html:79
 msgid "Go to Training"
-msgstr "Ir a Formación"
+msgstr "Irány a képzéshez!"
 
 #: .\src\resources\templates\resource.html:82
 #: .\src\resources\templates\resource.html:111
 msgid "Go to Resource"
-msgstr "Ir al Recurso"
+msgstr "Irány a forráshoz!"
 
 #: .\src\resources\templates\resource.html:93
 msgid "Learning Resource Type"
-msgstr "Tipo de recurso de aprendizaje"
+msgstr "Tanulási forrás típusa"
 
 #: .\src\resources\templates\resource.html:94
 msgid "Time required"
-msgstr "Tiempo requerido"
+msgstr "Szükséges idő"
 
 #: .\src\resources\templates\resource.html:95
 msgid "Conditions of access"
-msgstr "Condiciones de acceso"
+msgstr "Hozzáférés feltétele"
 
 #: .\src\resources\templates\resource.html:99
 msgid "License"
-msgstr "Licencia"
+msgstr "Licenc"
 
 #: .\src\resources\templates\resource.html:100
 msgid "Audience"
-msgstr "Público"
+msgstr "Közönség"
 
 #: .\src\resources\templates\resource.html:101
 msgid "Publisher"
-msgstr "Editor"
+msgstr "Kiadó"
 
 #: .\src\resources\templates\resource.html:107
 msgid "Year of publication"
-msgstr "Año de publicación"
+msgstr "Megjelenés éve"
 
 #: .\src\resources\templates\resource.html:115
 #: .\src\templates\resources_cards_horizontal.html:96
 msgid "In my library"
-msgstr "En mi biblioteca"
+msgstr "Elhelyezés a könyvtárba"
 
 #: .\src\resources\templates\resource.html:117
 #: .\src\templates\resources_cards_horizontal.html:98
 msgid "Add to library"
-msgstr "Añadir a mi biblioteca"
+msgstr "Add hozzá a könyvtárhoz"
 
 #: .\src\resources\templates\resource.html:210
 msgid "Edit"
-msgstr "Editar"
+msgstr "Szerkeszt"
 
 #: .\src\templates\_footer.html:12
 msgid ""
 "You are in the alpha version of the EU-Citizen.Science platform. Please "
 "provide your feedback in the official"
 msgstr ""
-"Ud. está en la versión alfa de la plataforma EU-Citizen.Science. Por favor, "
-"denos su feedback en la oficial"
+"Az EU-Citizen.Science alfa verziójában vagy. Visszajelzést a hivatalos "
+"oldalon tudsz írni."
 
 #: .\src\templates\_footer.html:13
 msgid "GitHub repository"
-msgstr "Repositorio GitHub"
+msgstr "GitHub adattár"
 
 #: .\src\templates\_footer.html:14
 msgid "here to subscribe to our newsletter"
-msgstr "aquí para suscribirse a nuestra newsletter"
+msgstr "Iratkozz fel a hírlevelünkre!"
 
 #: .\src\templates\_footer.html:56
 msgid ""
@@ -1475,47 +1442,47 @@ msgid ""
 "2020 Framework Programme for Research and Innovation under grant agreement "
 "No. 824580"
 msgstr ""
-"EU-Citizen.Science ha recibido financiación de Horizonte 2020, el Programa "
-"Marco de la Unión Europea para la Investigación y la Innovación, bajo "
-"acuerdo No. 824580"
+"Az EU-Citizen.Science projekt a 824580. számú megállapodás alapján, az "
+"Európai Unió Horizont 2020-as kutatási és innovációs programjából részesült "
+"támogatásban."
 
 #: .\src\templates\_footer.html:66
 msgid "Links"
-msgstr "Enlaces"
+msgstr "Linkek"
 
 #: .\src\templates\_footer.html:69
 msgid "Terms of Use"
-msgstr "Términos de Uso"
+msgstr "Használati feltételek"
 
 #: .\src\templates\_footer.html:72 .\src\templates\privacy.html:10
 #: .\src\templates\privacy.html:21
 msgid "Privacy"
-msgstr "Privacidad"
+msgstr "Adatvédelem"
 
 #: .\src\templates\_footer.html:75 .\src\templates\imprint.html:10
 #: .\src\templates\imprint.html:22
 msgid "Imprint"
-msgstr "Imprimir"
+msgstr "Lenyomat"
 
 #: .\src\templates\_footer.html:78
 msgid "Deliverables"
-msgstr "Entregables"
+msgstr "Teljesítések"
 
 #: .\src\templates\_footer.html:94 .\src\templates\faq.html:14
 msgid "FAQ"
-msgstr "Preguntas frecuentes"
+msgstr "Gyakori kérdések"
 
 #: .\src\templates\_footer.html:97
 msgid "Quality Criteria"
-msgstr "Criterios de Calidad"
+msgstr "Minőségi szempontok"
 
 #: .\src\templates\_footer.html:102
 msgid "Moderation"
-msgstr "Revisión"
+msgstr "Moderálás"
 
 #: .\src\templates\_footer.html:105 .\src\templates\development.html:10
 msgid "Development"
-msgstr "Desarrollo"
+msgstr "Fejlesztés"
 
 #: .\src\templates\_footer.html:108
 msgid "API"
@@ -1524,7 +1491,7 @@ msgstr "API"
 #: .\src\templates\_navbar.html:3 .\src\templates\base_forum.html:58
 #: .\src\templates\base_r2.html:145
 msgid "SEARCH"
-msgstr "BUSCAR"
+msgstr "KERESÉS"
 
 #: .\src\templates\_navbar.html:4 .\src\templates\base_forum.html:60
 #: .\src\templates\base_r2.html:147
@@ -1534,29 +1501,29 @@ msgstr "BLOG"
 #: .\src\templates\_navbar.html:5 .\src\templates\base_forum.html:61
 #: .\src\templates\base_r2.html:148
 msgid "EVENTS"
-msgstr "EVENTOS"
+msgstr "ESEMÉNYEK"
 
 #: .\src\templates\_navbar.html:6 .\src\templates\base_forum.html:63
 #: .\src\templates\base_r2.html:150
 msgid "ABOUT"
-msgstr "ACERCA DE"
+msgstr "RÓLUNK"
 
 #: .\src\templates\_subnavbar.html:20 .\src\templates\home.html:85
 #: .\src\templates\modalinfo.html:18 .\src\templates\resources_cards.html:33
 msgid "Training"
-msgstr "Formación"
+msgstr "Képzés"
 
 #: .\src\templates\_subnavbar.html:24 .\src\templates\home.html:95
 msgid "Organisations"
-msgstr "Organizaciones"
+msgstr "Szervezetek"
 
 #: .\src\templates\_subnavbar.html:29
 msgid "Our Gold Star Selection"
-msgstr "Nuestros destacados"
+msgstr "Aranycsillag válogatás"
 
 #: .\src\templates\about.html:4 .\src\templates\about.html:8
 msgid "About"
-msgstr "Acerca de"
+msgstr "Rólunk"
 
 #: .\src\templates\about.html:19
 msgid "Watch our teaser, in 12 different languages!"
@@ -1564,7 +1531,7 @@ msgstr ""
 
 #: .\src\templates\about.html:44
 msgid "The Platform"
-msgstr "La Plataforma"
+msgstr "A platform"
 
 #: .\src\templates\about.html:47
 msgid ""
@@ -1572,9 +1539,8 @@ msgid ""
 "training and resources for citizen science – by the community, for the "
 "community."
 msgstr ""
-"EU-Citizen.Science es una plataforma online para compartir conocimiento, "
-"herramientas,formación y recursos de ciencia ciudadana – por la comunidad, "
-"para la comunidad"
+"Az EU-Citizen.Science egy online platform, ahol a civil tudományos közösség "
+"tudást, eszközöket, képzési anyagokat és forrásokat oszt meg."
 
 #: .\src\templates\about.html:48
 msgid ""
@@ -1582,69 +1548,58 @@ msgid ""
 "mainstreaming of citizen science, and build on the growing impact of "
 "citizens participating in research across the full range of scientific "
 "enquiry."
-msgstr ""
-"La visión de la plataforma es servir como un Punto de Conocimiento que ayude "
-"a popularizar la ciencia ciudadana y catalice el creciente impacto que está "
-"teniendola participación de la sociedad en la mayoría de ámbitos de la "
-"investigación científica."
+msgstr "A platform a civil tudomány tudásmegosztó hálózataként működik."
 
 #: .\src\templates\about.html:49
 msgid ""
 "We accomplish this by supporting the sharing of knowledge, know-how, and "
 "experience between anyone doing or wanting to do citizen science."
 msgstr ""
-"Trabajaremos en esta misión apoyando el intercambio de conocimiento, "
-"tutoriales yexperiencia entre cualquiera que realice, o quiera hacer, "
-"ciencia ciudadana."
+"Támogatjuk a civil tudományban jártas és az érdeklődők közötti "
+"tudásmegosztását és tapasztalatcseréjét."
 
 #: .\src\templates\about.html:52
 msgid "On this platform you will find"
-msgstr "En esta plataforma Ud. encontrará"
+msgstr "Ezen a platformon"
 
 #: .\src\templates\about.html:54
 msgid "that are useful for citizen science practitioners"
-msgstr "que son útiles para profesionales de la ciencia ciudadana"
+msgstr "hasznos forrásokat találsz a civil tudományról,"
 
 #: .\src\templates\about.html:55
 msgid "that are engaging the public in research via citizen science activities"
-msgstr ""
-"que están implicado al público en investigación vía actividades de ciencia "
-"ciudadana"
+msgstr "hasznos projekteket, amelyek a laikusokat kutatásokba vonja be. "
 
 #: .\src\templates\about.html:56
 msgid "Training resources and materials citizen science as a practice"
-msgstr "Recursos formativos y materiales de ciencia ciudadana como actividad"
+msgstr "Képzési anyagokat"
 
 #: .\src\templates\about.html:57
 msgid ""
 "Organisations that are involved in citizen science projects and research"
-msgstr ""
-"Organizaciones que están implicadas en proyectos e investigan sobre ciencia "
-"ciudadana"
+msgstr "Civil tudományos projektekben és kutatásokban aktív szervezeteket"
 
 #: .\src\templates\about.html:58
 msgid "an"
-msgstr "un/a"
+msgstr "egy"
 
 #: .\src\templates\about.html:58
 msgid "Events"
-msgstr "Eventos"
+msgstr "Esemény"
 
 #: .\src\templates\about.html:58
 msgid "calendar"
-msgstr "calendario"
+msgstr "naptárat"
 
 #: .\src\templates\about.html:58
 msgid "and"
-msgstr "y"
+msgstr "és"
 
 #: .\src\templates\about.html:59
 msgid ""
 "Community Forums for questions, conversations, and collaboration with the "
 "rest of the community."
-msgstr ""
-"Foro para preguntas, conversaciones y colaboraciones con el resto de la "
-"comunidad"
+msgstr "együttműködésre és vitára alkalmas közösségi fórumokat"
 
 #: .\src\templates\about.html:63
 msgid ""
@@ -1653,22 +1608,21 @@ msgid ""
 "suggestion for us? Please share your thoughts in our community feedback "
 "forum or in the"
 msgstr ""
-"¿Nota que falta algo? Puede añadir sus propios perfiles de Recursos, "
-"Proyectos y Formación a través del botón +AÑADIR del menú superior. ¿Tiene "
-"una sugerencia? Por favor, comparta sus pensamientos en nuestro foro "
-"comunitarioo en el"
+"Hiányolsz valamit? Hozzáadhatod a szélyes profilodat forrásokhoz, "
+"projektekhez és képzési anyagokhoz az +HOZZÁAD gombbal. Javaslatod van? Oszd "
+"meg velünk a visszajelzésre alkalmas közösségi fórumon vagy a."
 
 #: .\src\templates\about.html:63
 msgid "contact"
-msgstr "contacto"
+msgstr "kapcsolat"
 
 #: .\src\templates\about.html:63
 msgid "section"
-msgstr "sección"
+msgstr "résznél"
 
 #: .\src\templates\about.html:72
 msgid "The Project"
-msgstr "El Proyecto"
+msgstr "A projekt"
 
 #: .\src\templates\about.html:76
 msgid ""
@@ -1679,29 +1633,27 @@ msgid ""
 "for citizen science participants, practitioners, researchers, policy makers "
 "and society across Europe"
 msgstr ""
-"El proyecto EU-Citizen.Science está financiado por el programa Horizonte "
-"2020 de la Comisión Europea, a través de su línea de trabajo ‘Ciencia con y "
-"para la Sociedad’ (SwafS, por sus siglas en inglés). Nuestra misión es "
-"ambiciosa –convertirnos en un punto de referencia para la ciencia ciudadana "
-"a través de una red de intercambio de conocimiento entre participantes de la "
-"ciencia ciudadana, profesionales, investigadores, agentes políticos y la "
-"sociedad en general a nivel europeo"
+"Az EU-Citizen.Science projektet az Európai Bizottság Horizont 2020-as "
+"programja finanszírozta a Tudomány a társadalomban és a társadalomért "
+"(SwafS) program keretén belül. Küldetésünk, hogy a platform Európai szinten "
+"az állampolgárok, szakemberek, kutatók és politikai döntéshozók számára a "
+"civil tudománnyal kapcsolatos tudás referenciapontja legyen. "
 
 #: .\src\templates\about.html:81
 msgid "Our Vision"
-msgstr "Nuestra Visión"
+msgstr "Szeretnénk,"
 
 #: .\src\templates\about.html:82
 msgid ""
 "is that Citizen Science becomes an appreciated and widely established means "
 "for the democratization of science in Europe"
 msgstr ""
-"es que la Ciencia Ciudadana se convierta en un apreciado y asentado pilar "
-"para la democratización de la ciencia en Europa"
+"hogy a civil tudomány a tudomány demokratizálása érdekében elismert és "
+"széles körben elterjedjen."
 
 #: .\src\templates\about.html:89
 msgid "Our Core Mission"
-msgstr "Nuestra Misión Principal"
+msgstr "Célunk,"
 
 #: .\src\templates\about.html:90
 msgid ""
@@ -1709,71 +1661,62 @@ msgid ""
 "knowledge sharing for citizen science participants, practitioners, "
 "researchers, policy makers and society across Europe"
 msgstr ""
-"es convertirnos en un punto de referencia europeo a través de una red de "
-"intercambio de conocimiento entre participantes de la ciencia ciudadana, "
-"profesionales, investigadores, agentes políticos y la sociedad en general a "
-"nivel de Europa"
+"hogy a platform Európai szinten az állampolgárok, szakemberek, kutatók és "
+"politikai döntéshozók számára a civil tudomány referenciapontja legyen."
 
 #: .\src\templates\about.html:97
 msgid "Objective 1: Establish"
-msgstr "Objetivo 1: Establecer"
+msgstr "1. Célkitűzés:"
 
 #: .\src\templates\about.html:98
 msgid ""
 "EU-Citizen.Science as the knowledge and community hub for high-quality CS "
 "exchange and learning in Europe"
 msgstr ""
-"EU-Citizen.Science como un punto de conocimiento y comunidad para el "
-"intercambio y aprendizaje de calidad sobre ciencia ciudadana en Europa"
+"az Eu-Citizen.Science platformot Európai szinten a civil tudomány kiváló, "
+"közösségi tanulásra és eszmecserére alkalmas tudásközpontjává tenni."
 
 #: .\src\templates\about.html:105
 msgid "Objective 2: Consolidate"
-msgstr "Objetivo 2: Consolidar"
+msgstr "2. Célkitűzés:"
 
 #: .\src\templates\about.html:106
 msgid ""
 "the CS knowledge base and celebrate outstanding practices and state of the "
 "art in CS in Europe"
 msgstr ""
-"el conocimiento basado en ciencia ciudadana y celebrar los casos de éxito de "
-"este ámbito en Europa"
+"a civil tudomány bázisának megerősítése és a civil tudomány kiemelkedő "
+"gyakorlatainak és legkorszerűbb megoldásainak nevesítése"
 
 #: .\src\templates\about.html:113
 msgid "Objective 3: Empower"
-msgstr "Objetivo 3: Empoderar"
+msgstr "3. Célkitűzés: "
 
 #: .\src\templates\about.html:114
 msgid ""
 "diverse stakeholders to become citizen scientists, start CS initiatives, and "
 "implement CS approaches professionally"
 msgstr ""
-"a diferentes agentes para que se conviertan en científicos ciudadanos, "
-"impulsen iniciativas de ciencia ciudadana, e implementen enfoques de ciencia "
-"ciudadana a nivel profesional"
 
 #: .\src\templates\about.html:121
 msgid "Objective 4: Explore"
-msgstr "Objetivo 4: Explorar"
+msgstr ""
 
 #: .\src\templates\about.html:122
 msgid ""
 "new pathways for participatory governance, by strengthening links between CS "
 "and policy making"
 msgstr ""
-"nuevas vías para una gobernanza basada en la participación, estrechando los "
-"lazos entre la ciencia ciudadana y los agentes y decisores políticos"
 
 #: .\src\templates\about.html:129
 msgid "Objective 5: Advance"
-msgstr "Objetivo 5: Fomentar"
+msgstr ""
 
 #: .\src\templates\about.html:130
 msgid ""
 "CS into the mainstream of public engagement, science communication and "
 "education"
 msgstr ""
-"que la ciencia ciudadana forme parte habitual de la participación ciudadana, "
-"la comunicación científica y la educación"
 
 #: .\src\templates\about.html:137
 msgid ""
@@ -1784,16 +1727,10 @@ msgid ""
 "requirements, and how we can build a community of engaged users of the "
 "Platform."
 msgstr ""
-"Siguiendo nuestra misión, queremos implicar por igual a participantes de la "
-"ciencia ciudadana, profesionales, investigadores, agentes políticos y "
-"sociedad en general duranteel transcurso del proyecto. Para lograrlo, es "
-"necesario tener una clara comprensión de quién es nuestro público objetivo, "
-"conocer sus necesidades yrequerimientos, y saber cómo construir una "
-"comunidad de usuarios que participen en la Plataforma"
 
 #: .\src\templates\about.html:147
 msgid "The Team"
-msgstr "El Equipo"
+msgstr ""
 
 #: .\src\templates\about.html:150
 msgid ""
@@ -1803,23 +1740,18 @@ msgid ""
 "citizen science, including universities, non-governmental organisations, "
 "local authorities, community service organisations and museums."
 msgstr ""
-"El consorcio de EU-Citizen.Science consiste en 14 socios y 9 terceros "
-"procedentes de 14 estados miembros europeos, así como otros colaboradores. "
-"Representamos una variedad de agentes activos en ciencia ciudadana, "
-"incluidas universidades, organizaciones no gubernamentales, autoridades "
-"locales, organizaciones de servicios a la comunidad y museos."
 
 #: .\src\templates\about.html:159
 msgid "Consortium partners"
-msgstr "Socios del consorcio"
+msgstr ""
 
 #: .\src\templates\about.html:216
 msgid "Third party partners"
-msgstr "Terceros asociados"
+msgstr ""
 
 #: .\src\templates\about.html:257
 msgid "Citizen Science"
-msgstr "Ciencia Ciudadana"
+msgstr ""
 
 #: .\src\templates\about.html:260
 msgid ""
@@ -1831,14 +1763,6 @@ msgid ""
 "innovation and the development of evidence-based policy, at local, national "
 "and EU levels."
 msgstr ""
-"La ciencia ciudadana involucra activamente al público que se dedica a la "
-"investigación científica ygenera nuevo conocimiento o comprensión, que a su "
-"vez tiene el potencial de implicar a agentes científicos, políticos y a la "
-"sociedad en general demanera efectiva. Como pilar principal de la Ciencia "
-"Abierta (Open Science), da a todos los miembros de la sociedad la "
-"oportunidad de formar parte activa de la investigación, innovación y el "
-"desarrollo de medidas basadas en la evidencia a nivel local, nacional "
-"yeuropeo."
 
 #: .\src\templates\about.html:261
 msgid ""
@@ -1847,38 +1771,30 @@ msgid ""
 "key principles which we as a community believe underlie good practice in "
 "citizen science, the following"
 msgstr ""
-"La ciencia ciudadana es un concepto flexible que puede ser adaptado y "
-"aplicado en diversas situaciones y disciplinas. Con la intención de asentar "
-"algunos de los principios clave que, como comunidad, consideramos buenas "
-"prácticas en ciencia ciudadana, proponemos"
 
 #: .\src\templates\about.html:261
 msgid "10 Principles of Citizen Science"
-msgstr "los 10 Principios de la Ciencia Ciudadana"
+msgstr ""
 
 #: .\src\templates\about.html:261
 msgid ""
 "were developed by the ‘Sharing best practice and building capacity’ working "
 "group of the"
 msgstr ""
-"fueron desarrollados por el grupo de trabajo ‘Compartir buenas prácticas y "
-"capacitación’ de la "
 
 #: .\src\templates\about.html:261
 msgid "European Citizen Science Association"
-msgstr "Asociación Europea para la Ciencia Ciudadana"
+msgstr ""
 
 #: .\src\templates\about.html:261
 msgid ""
 "led by the Natural History Museum London with input from many members of the "
 "Association."
 msgstr ""
-"liderado por el Museo de Historia Natural de Londres y con la participación "
-"de varios miembros de la Asociación."
 
 #: .\src\templates\about.html:269
 msgid "Ten principles of citizen science"
-msgstr "Diez principios de la ciencia ciudadana"
+msgstr ""
 
 #: .\src\templates\about.html:273
 msgid ""
@@ -1887,32 +1803,22 @@ msgid ""
 "contributors, collaborators, or as project leader and have a meaningful role "
 "in the project."
 msgstr ""
-"Los proyectos de ciencia ciudadana involucran a una ciudadanía que, con su "
-"capacidad científica, genera nuevo conocimiento o entendimiento. Los "
-"ciudadanos y ciudadanas pueden actuar como cooperadores, colaboradores, o "
-"adoptando un rol significativo de líderes de proyectos."
 
 #: .\src\templates\about.html:274
 msgid "Citizen science projects have a genuine science outcome."
 msgstr ""
-"Los proyectos de ciencia ciudadana aportan unos resultados muy especiales."
 
 #: .\src\templates\about.html:274
 msgid ""
 "For example, answering a research question or informing conservation action, "
 "management decisions or environmental policy."
 msgstr ""
-"Por ejemplo, respondiendo a una cuestión de investigación o aportando "
-"información en acciones de conservación, decisiones de gestión o políticas "
-"medioambientales."
 
 #: .\src\templates\about.html:275
 msgid ""
 "Both the professional scientists and the citizen scientists benefit from "
 "taking part."
 msgstr ""
-"Tanto los profesionales de la ciencia, como los ciudadanos científicos se "
-"benefician de formar parte de la ciencia ciudadana."
 
 #: .\src\templates\about.html:275
 msgid ""
@@ -1921,93 +1827,63 @@ msgid ""
 "contributing to scientific evidence e.g. to address local, national and "
 "international issues, and through that, the potential to influence policy."
 msgstr ""
-"Los beneficios incluyen, desde la publicación de los resultados de "
-"investigación, las oportunidades de aprendizaje, el disfrute personal, "
-"beneficios sociales y la satisfacción de contribuir a la evidencia "
-"científica, utilizada, por ejemplo, para abordar asuntos locales, nacionales "
-"e internacionales, que a su vez tienen el potencial de repercutir en la "
-"agenda política."
 
 #: .\src\templates\about.html:276
 msgid ""
 "Citizen scientists may, if they wish, participate in multiple stages of the "
 "scientific process."
 msgstr ""
-"Los ciudadanos científicos pueden, si así lo desean, participar en las "
-"múltiples fases del proceso científico"
 
 #: .\src\templates\about.html:276
 msgid ""
 "This may include developing the research question, designing the method, "
 "gathering and analysing data, and communicating the results."
 msgstr ""
-"Esto puede incluir el desarrollo y enfoque de la pregunta de investigación, "
-"el diseño de la metodología, la recogida y análisis de datos, y la "
-"comunicación de los resultados."
 
 #: .\src\templates\about.html:277
 msgid "Citizen scientists receive feedback from the project."
-msgstr "Los ciudadanos científicos reciben feedback del proyecto."
+msgstr ""
 
 #: .\src\templates\about.html:277
 msgid ""
 "For example, how their data are being used and what the research, policy or "
 "societal outcomes are."
 msgstr ""
-"Por ejemplo, sobre cómo se están utilizando sus datos y cuáles son los "
-"resultados de investigación, las medidas elaboradas o las implicaciones "
-"sociales."
 
 #: .\src\templates\about.html:278
 msgid ""
 "Citizen science is considered a research approach like any other, with "
 "limitations and biases that should be considered and controlled for."
 msgstr ""
-"La ciencia ciudadana es considerada una vía de investigación como otra "
-"cualquiera, con limitaciones y sesgos que deberán ser considerados y "
-"controlados."
 
 #: .\src\templates\about.html:278
 msgid ""
 "However unlike traditional research approaches, citizen science provides "
 "opportunity for greater public engagement and democratisation of science."
 msgstr ""
-"Sin embargo, y a diferencia de las aproximaciones de investigación "
-"tradicionales, la ciencia ciudadana tiene como valor añadido el llegar a un "
-"público mayor y contribuir a la democratización de la ciencia"
 
 #: .\src\templates\about.html:279
 msgid ""
 "Citizen science project data and meta-data are made publicly available and "
 "where possible, results are published in an open access format."
 msgstr ""
-"Los datos y meta-datos generados por un proyecto de ciencia ciudadana son de "
-"libre acceso y, cuando es posible, los resultados se publican en un formato "
-"de acceso abierto."
 
 #: .\src\templates\about.html:279
 msgid ""
 "Data sharing may occur during or after the project, unless there are "
 "security or privacy concerns that prevent this."
 msgstr ""
-"Durante o después del proyecto suelen compartirse datos, a no ser que "
-"existan unas condiciones de privacidad y de seguridad que lo prevengan."
 
 #: .\src\templates\about.html:280
 msgid ""
 "Citizen scientists are acknowledged in project results and publications."
 msgstr ""
-"Los ciudadanos científicos participantes aparecen en los agradecimientos de "
-"los resultados y las publicaciones de los proyectos."
 
 #: .\src\templates\about.html:281
 msgid ""
 "Citizen science programmes are evaluated for their scientific output, data "
 "quality, participant experience and wider societal or policy impact."
 msgstr ""
-"Los programas de ciencia ciudadana son evaluados por sus resultados "
-"científicos, la calidad de los datos, la experiencia de sus participantes y "
-"el impacto general que ha tenido a nivel político-social."
 
 #: .\src\templates\about.html:282
 msgid ""
@@ -2016,132 +1892,122 @@ msgid ""
 "agreements, confidentiality, attribution, and the environmental impact of "
 "any activities."
 msgstr ""
-"Quienes dirigen los proyectos de ciencia ciudadana tienen consideración "
-"respecto a los asuntos legales y éticos en torno al copyright, la propiedad "
-"intelectual, el intercambio de datos los acuerdos, la confidencialidad, la "
-"atribución y el impacto medioambiental de cualquiera de las actividades."
 
 #: .\src\templates\base.html:74 .\src\templates\base2.html:68
 #: .\src\templates\base_forms.html:51 .\src\templates\base_forum.html:79
 #: .\src\templates\base_r2.html:168
 msgid "Admin"
-msgstr "Administrar"
+msgstr ""
 
 #: .\src\templates\base.html:84
 msgid "Profile"
-msgstr "Perfil"
+msgstr ""
 
 #: .\src\templates\base.html:85 .\src\templates\base2.html:70
 #: .\src\templates\base_forum.html:80 .\src\templates\base_r2.html:170
 msgid "Logout"
-msgstr "Cerrar sesión"
+msgstr ""
 
 #: .\src\templates\base.html:141 .\src\templates\base_forms.html:75
 msgid "Company"
-msgstr "Equipo"
+msgstr ""
 
 #: .\src\templates\base.html:144 .\src\templates\base_forms.html:78
 msgid "Connect with us on"
-msgstr "Conecte con EU-Citizen Science en "
+msgstr ""
 
 #: .\src\templates\base2.html:56 .\src\templates\base3.html:49
 #: .\src\templates\base_forum.html:65 .\src\templates\base_r2.html:152
 msgid "LOGIN"
-msgstr "INICIAR SESIÓN"
+msgstr ""
 
 #: .\src\templates\base2.html:57 .\src\templates\base3.html:50
 #: .\src\templates\base_forum.html:66
 msgid "SIGN UP"
-msgstr "REGISTRARSE"
+msgstr ""
 
 #: .\src\templates\base2.html:61 .\src\templates\base_forum.html:72
 #: .\src\templates\base_r2.html:160
 msgid "My Profile"
-msgstr "Mi Perfil"
+msgstr ""
 
 #: .\src\templates\base2.html:62 .\src\templates\base_forum.html:73
 #: .\src\templates\base_r2.html:161
 msgid "My organisations"
-msgstr "Mis organizaciones"
+msgstr ""
 
 #: .\src\templates\base2.html:63 .\src\templates\base_forum.html:74
 #: .\src\templates\base_r2.html:162
 msgid "Submitted projects"
-msgstr "Proyectos añadidos"
+msgstr ""
 
 #: .\src\templates\base2.html:64 .\src\templates\base_forum.html:75
 #: .\src\templates\base_r2.html:163
 msgid "Submitted resources"
-msgstr "Recursos añadidos"
+msgstr ""
 
 #: .\src\templates\base2.html:66 .\src\templates\base_forum.html:77
 #: .\src\templates\base_r2.html:165
 msgid "Resources library"
-msgstr "Biblioteca de recursos"
+msgstr ""
 
 #: .\src\templates\base3.html:52
 msgid "PROFILE"
-msgstr "PERFIL"
+msgstr ""
 
 #: .\src\templates\base3.html:53
 msgid "LOGOUT"
-msgstr "CERRAR SESIÓN"
+msgstr ""
 
 #: .\src\templates\base3.html:56
 msgid "ADMIN"
-msgstr "ADMINISTRAR"
+msgstr ""
 
 #: .\src\templates\base_forms.html:43
 msgid "Login"
-msgstr "Iniciar sesión"
+msgstr ""
 
 #: .\src\templates\base_forms.html:46
 msgid "profile"
-msgstr "perfil"
+msgstr ""
 
 #: .\src\templates\base_forms.html:47
 msgid "logout"
-msgstr "cerrar sesión"
+msgstr ""
 
 #: .\src\templates\base_forum.html:62 .\src\templates\base_r2.html:149
 msgid "FORUM"
-msgstr "FORO"
+msgstr ""
 
 #: .\src\templates\base_r2.html:153
 msgid "SIGNUP"
-msgstr "REGISTRARSE"
+msgstr ""
 
 #: .\src\templates\criteria.html:10
 msgid "Quality criteria"
-msgstr "Criterios de calidad"
+msgstr ""
 
 #: .\src\templates\curated.html:27
 msgid ""
 "The EU-Citizen.Science consortium has curated a selection of Gold Star "
 "citizen science resources"
 msgstr ""
-"El consorcio de EU-Citizen Science ha hecho una selección de recursos sobre "
-"ciencia ciudadana "
 
 #: .\src\templates\curated.html:28
 msgid ""
 "to help you get started with designing and launching your own citizen "
 "science project, categorised across the project lifecycle."
 msgstr ""
-"para ayudarle a iniciarse en el diseño y lanzamiento de su propio proyecto "
-"de ciencia ciudadana. Se encuentran categorizados por fase de desarrollo."
 
 #: .\src\templates\faq.html:20
 msgid "Frequently Asked Questions"
-msgstr "Preguntas Frecuentes"
+msgstr ""
 
 #: .\src\templates\home.html:31
 msgid ""
 "Welcome to the platform for sharing Citizen Science projects, resources, "
 "tools, and training"
 msgstr ""
-"Le damos la bienvenida a la plataforma para el intercambio de proyectos de "
-"Ciencia Ciudadana, recursos, recursos, herramientas y formación"
 
 #: .\src\templates\home.html:41
 msgid ""
@@ -2150,68 +2016,64 @@ msgstr ""
 
 #: .\src\templates\home.html:66
 msgid "in Projects"
-msgstr "en Proyectos"
+msgstr ""
 
 #: .\src\templates\home.html:67 .\src\templates\home.html:77
 #: .\src\templates\home.html:87 .\src\templates\home.html:97
 msgid "here"
-msgstr "aquí"
+msgstr ""
 
 #: .\src\templates\home.html:67 .\src\templates\home.html:77
 #: .\src\templates\home.html:87 .\src\templates\home.html:97
 msgid "to see all of them"
-msgstr "para ver todos"
+msgstr ""
 
 #: .\src\templates\home.html:76
 msgid "in Resources"
-msgstr "en Recursos"
+msgstr ""
 
 #: .\src\templates\home.html:86
 msgid "in Training"
-msgstr "en Formación"
+msgstr ""
 
 #: .\src\templates\home.html:96
 msgid "in Organisations"
-msgstr "en Organizaciones"
+msgstr ""
 
 #: .\src\templates\modalinfo.html:8
 msgid ""
 "Select the form for the content profile you would like to add to the platform"
 msgstr ""
-"Seleccione el formulario según el contenido que quiera añadir a la "
-"plataforma "
 
 #: .\src\templates\modalinfo.html:14 .\src\templates\projects_cards.html:34
 msgid "Project"
-msgstr "Proyecto"
+msgstr "Projekt"
 
 #: .\src\templates\modalinfo.html:15
 msgid "Create a Citizen Science Project profile"
-msgstr "Crear Perfil para un Proyecto de Ciencia Ciudadana"
+msgstr "Civil tudományos profil létrehozása"
 
 #: .\src\templates\modalinfo.html:16 .\src\templates\resources_cards.html:33
 msgid "Resource"
-msgstr "Recurso"
+msgstr "Forrás"
 
 #: .\src\templates\modalinfo.html:17
 msgid "Create a profile for a Resource that is relevant for Citizen Science"
-msgstr "Crear Perfil de Recurso relevante para la Ciencia Ciudadana"
+msgstr "Hozd létre a civil tudományos források profilját!"
 
 #: .\src\templates\modalinfo.html:19
 msgid ""
 "Create a profile for Training and Education Material related to the practice "
 "of Citizen Science"
-msgstr ""
-"Crear Perfil para una Formación o Material Educativo relacionado con el "
-"desarrollo de la Ciencia Ciudadana"
+msgstr "Hozd létre a civil tudományos képzési és oktatási anyagok profilját! "
 
 #: .\src\templates\modalinfo.html:21
 msgid "Create a profile for your Organisation"
-msgstr "Crear Perfil para su Organización"
+msgstr "Szervezeti profil létrehozása"
 
 #: .\src\templates\modalinfo.html:23
 msgid "Event"
-msgstr "Evento"
+msgstr ""
 
 #: .\src\templates\modalinfo.html:24
 msgid "Create an Event"
@@ -2219,13 +2081,13 @@ msgstr ""
 
 #: .\src\templates\moderation.html:10
 msgid "The moderation process"
-msgstr "El proceso de revisión"
+msgstr "A moderálás folyamata"
 
 #: .\src\templates\projects_cards.html:20
 #: .\src\templates\resources_cards.html:15
 #: .\src\templates\resources_cards_horizontal.html:19
 msgid "NOT ACCEPTED"
-msgstr "NO ACEPTADO"
+msgstr "ELUTASÍTVA"
 
 #: .\src\templates\projects_cards.html:22
 #: .\src\templates\projects_cards_featured.html:19
@@ -2235,7 +2097,7 @@ msgstr "NO ACEPTADO"
 #: .\src\templates\resources_cards_horizontal.html:20
 #: .\src\templates\resources_cards_short.html:17
 msgid "NOT YET MODERATED"
-msgstr "AÚN NO REVISADO"
+msgstr "MÉG NEM MODERÁLT"
 
 #: .\src\templates\projects_cards.html:24
 #: .\src\templates\projects_cards_featured.html:20
@@ -2245,11 +2107,11 @@ msgstr "AÚN NO REVISADO"
 #: .\src\templates\resources_cards_horizontal.html:21
 #: .\src\templates\resources_cards_short.html:18
 msgid "MODERATED"
-msgstr "REVISADO"
+msgstr "MODERÁLT"
 
 #: .\src\templates\projects_cards.html:34
 msgid "Featured project"
-msgstr "Proyecto destacado"
+msgstr "Kiemelt projektek"
 
 #: .\src\templates\projects_cards_featured.html:33
 #: .\src\templates\projects_cards_short.html:33
@@ -2257,16 +2119,15 @@ msgstr "Proyecto destacado"
 #: .\src\templates\resources_cards_horizontal.html:45
 #: .\src\templates\resources_cards_short.html:30
 msgid "Read more"
-msgstr "Leer más"
+msgstr "Olvass tovább!"
 
 #: .\src\templates\registration\logged_out.html:9
 msgid "Thanks for spending some quality time with the Web site today."
-msgstr ""
-"Gracias por invertir tiempo de calidad en nuestra web durante el día de hoy."
+msgstr "Köszönjünk, hogy ma szántál időt a weboldalra! "
 
 #: .\src\templates\registration\logged_out.html:11
 msgid "Log in again"
-msgstr "Iniciar sesión otra vez"
+msgstr "Jelentkezz be újra!"
 
 #: .\src\templates\registration\password_change_done.html:6
 #: .\src\templates\registration\password_change_form.html:6
@@ -2275,59 +2136,58 @@ msgstr "Iniciar sesión otra vez"
 #: .\src\templates\registration\password_reset_done.html:6
 #: .\src\templates\registration\password_reset_form.html:6
 msgid "Home"
-msgstr "Inicio"
+msgstr "Weblap"
 
 #: .\src\templates\registration\password_change_done.html:7
 #: .\src\templates\registration\password_change_form.html:7
 #: .\src\templates\registration\password_change_form.html:11
 #: .\src\templates\registration\password_change_form.html:12
 msgid "Password change"
-msgstr "Cambiar contraseña"
+msgstr "Jelszómódosítás"
 
 #: .\src\templates\registration\password_change_done.html:11
 #: .\src\templates\registration\password_change_done.html:12
 msgid "Password change successful"
-msgstr "Cambio de contraseña realizado"
+msgstr "A jelszómódosítás sikeres volt!"
 
 #: .\src\templates\registration\password_change_done.html:16
 msgid "Your password was changed."
-msgstr "Su contraseña ha cambiado."
+msgstr "Módosult a jelszavad!"
 
 #: .\src\templates\registration\password_change_form.html:19
 msgid "Please correct the error below."
-msgstr "Por favor, corrija el error indicado."
+msgstr "Javítsd ki az alábbi hibát!"
 
 #: .\src\templates\registration\password_change_form.html:19
 msgid "Please correct the errors below."
-msgstr "Por favor, corrija los errores indicados."
+msgstr "Javítsd ki az alábbi hibákat!!"
 
 #: .\src\templates\registration\password_change_form.html:23
 msgid ""
 "Please enter your old password, for security's sake, and then enter your new "
 "password twice so we can verify you typed it in correctly."
 msgstr ""
-"Por favor, como medida de seguridad, indique su antigua contraseña. Después, "
-"escriba dos veces su nueva contraseña, así podremos validar que se ha "
-"escrito correctamente"
+"Biztonságosabb, ha kétszer addod meg a régi jelszavadat. Az új jelszavadat "
+"is kétszer add meg, hogy ellenőrizhessük.  "
 
 #: .\src\templates\registration\password_change_form.html:63
 #: .\src\templates\registration\password_reset_confirm.html:42
 msgid "Change my password"
-msgstr "Cambiar mi contraseña"
+msgstr "Változtasd meg a jelszavad"
 
 #: .\src\templates\registration\password_reset_complete.html:7
 #: .\src\templates\registration\password_reset_complete.html:11
 #: .\src\templates\registration\password_reset_complete.html:12
 msgid "Password reset complete"
-msgstr "Contraseña restaurada"
+msgstr "A jelszó visszaállítása megtörtént"
 
 #: .\src\templates\registration\password_reset_complete.html:16
 msgid "Your password has been set.  You may go ahead and log in now."
-msgstr "Su contraseña ha cambiado. Deberá salir e iniciar sesión de nuevo."
+msgstr "Beállítottuk a jelszavadat! Jelentkezz be!"
 
 #: .\src\templates\registration\password_reset_confirm.html:7
 msgid "Password reset confirmation"
-msgstr "Confirmación de cambio de contraseña"
+msgstr "A jelszó visszaállítását megerősítettük"
 
 #: .\src\templates\registration\password_reset_confirm.html:11
 #: .\src\templates\registration\password_reset_confirm.html:12
@@ -2336,72 +2196,70 @@ msgstr "Confirmación de cambio de contraseña"
 #: .\src\templates\registration\password_reset_form.html:11
 #: .\src\templates\registration\password_reset_form.html:12
 msgid "Password reset"
-msgstr "Restaurar contraseña"
+msgstr ""
 
 #: .\src\templates\registration\password_reset_confirm.html:20
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
-msgstr ""
-"Por favor, escriba su nueva contraseña dos veces, así podremos validar que "
-"se ha escrito correctamente."
+msgstr "Kétszer add meg az új jelszavadat, hogy ellenőrizni tudjuk."
 
 #: .\src\templates\registration\password_reset_confirm.html:25
 msgid "New password:"
-msgstr "Nueva contraseña:"
+msgstr "Új jelszó"
 
 #: .\src\templates\registration\password_reset_confirm.html:34
 msgid "Confirm password:"
-msgstr "Confirmar contraseña:"
+msgstr "Jelszó megerősítése"
 
 #: .\src\templates\registration\password_reset_confirm.html:48
 msgid "Password reset unsuccessful"
-msgstr "Cambio de contraseña fallido"
+msgstr "A jelszó visszaállítása sikertelen volt."
 
 #: .\src\templates\registration\password_reset_confirm.html:50
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used.  Please request a new password reset."
 msgstr ""
-"El enlace para restaurar la contraseña no es válido, posiblemente debido a "
-"que haya sido utilizado. Por favor, solicite un nuevo cambio de contraseña"
+"A jelszó visszaállító link érvénytelen volt. Valószínűleg már használatra "
+"került. Kérj új linket! "
 
 #: .\src\templates\registration\password_reset_done.html:11
 #: .\src\templates\registration\password_reset_done.html:12
 msgid "Password reset successful"
-msgstr "Contraseña restaurada"
+msgstr "Sikeres jelszó igénylése"
 
 #: .\src\templates\registration\password_reset_done.html:16
 msgid ""
 "We've emailed you instructions for setting your password to the email "
 "address you submitted. You should be receiving it shortly."
 msgstr ""
-"Le hemos enviado las instrucciones para cambiar su contraseña a la dirección "
-"de correo electrónico que indicó. Lo recibirá en breve. "
+"A jelszavad beállításához szükséges lépéseket a regisztrációkor megadott e-"
+"mail címedre továbbítottuk. Hamarosan megérkezik!."
 
 #: .\src\templates\registration\password_reset_form.html:16
 msgid ""
 "Forgotten your password? Enter your email address below, and we'll email "
 "instructions for setting a new one."
 msgstr ""
-"¿Olvidó su contraseña? Indique su correo electrónico, y le enviaremos las "
-"instrucciones para solicitar una nueva."
+"Elfelejtetted a jelszavad? Add meg az e-mail címed és e-mailben küldjük az "
+"új jelszóhoz szükséges beállításokat."
 
 #: .\src\templates\registration\password_reset_form.html:21
 msgid "Email address:"
-msgstr "Dirección de correo electrónico"
+msgstr "E-mail cím"
 
 #: .\src\templates\registration\password_reset_form.html:30
 msgid "Reset my password"
-msgstr "Restaurar mi contraseña"
+msgstr "Jelszó visszaállítása"
 
 #: .\src\templates\resources_cards.html:32
 msgid "Featured"
-msgstr "Destacado"
+msgstr "Kiemelt tartalom"
 
 #: .\src\templates\resources_cards.html:55
 msgid "Last updated"
-msgstr "Último añadido"
+msgstr "Utolsó frissítés"
 
 #~ msgid "Teaser video"
-#~ msgstr "Vídeo promocional"
+#~ msgstr "Előzetes"

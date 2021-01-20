@@ -60,6 +60,7 @@
             <li class="nav-item"><a class="nav-link main {% active_link  'blog' %}" href="{% url 'blog' %}">{% trans "BLOG" %}</a></li>
             <li class="nav-item"><a class="nav-link main {% active_link  'events' %}" href="{% url 'events' %}">{% trans "EVENTS" %}</a></li>
             <li class="nav-item"><span id="forumHeader"><a class="nav-link main  {% active_link  'forum' %}" href="/forum">{% trans "FORUM" %}</a></span></li>
+            <li class="nav-item"><a class="nav-link main" href="https://moodle.eu-citizen.science/">{% trans "MOOCS" %}</a></li>
             <li class="nav-item"><a class="nav-link main  {% active_link  'about' %}" href="/about">{% trans "ABOUT" %}</a></li>
             {% if not user.is_authenticated %}
             <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">{% trans "LOGIN" %}</a></li>
