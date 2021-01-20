@@ -1,16 +1,17 @@
 from django import forms
 from django.shortcuts import get_object_or_404
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 from .models import Event
 
 class EventForm(forms.Form):
-    title = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder':'Title of the event'}))
-    description = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'A brief description of the event'}), max_length = 3000)
-    place = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder':'Location of the Event'}),required=False)
+    title = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder':_('Title of the event')}))
+    description = forms.CharField(widget=forms.Textarea(attrs={'placeholder':_('A brief description of the event')}), max_length = 3000)
+    place = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder':_('Location of the Event')}),required=False)
     start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}))
     end_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}))
     hour = forms.TimeField(widget=forms.TextInput(attrs={'type': 'time'}), required=False)
-    url = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'placeholder':'Please provide a URL to an external web site for the event'}),required=False)
+    url = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'placeholder':_('Please provide a URL to an external web site for the event')}),required=False)
     
     def save(self, args):
         pk = self.data.get('eventID', '')
