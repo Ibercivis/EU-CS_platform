@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-22 10:26+0100\n"
+"POT-Creation-Date: 2021-01-22 10:30+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,7 +24,7 @@ msgstr "Voer E-mail in"
 
 #: .\src\accounts\forms.py:26 .\src\accounts\forms.py:80
 msgid "Enter Password"
-msgstr "Geef Paswoord"
+msgstr "Geef Wachtwoord"
 
 #: .\src\accounts\forms.py:32 .\src\templates\base.html:69
 #: .\src\templates\registration\password_reset_complete.html:18
@@ -47,30 +47,30 @@ msgstr "Geef je volledige naam"
 
 #: .\src\accounts\forms.py:81
 msgid "Re-enter Password"
-msgstr "Geef nogmaals je paswoord"
+msgstr "Geef nogmaals je wachtwoord"
 
 #: .\src\accounts\forms.py:83 .\src\templates\base.html:70
 #: .\src\templates\base_forms.html:44
 msgid "Sign up"
-msgstr ""
+msgstr "Registreren"
 
 #: .\src\accounts\forms.py:92
 msgid "Enter old password"
-msgstr "Voer je oude paswoord in"
+msgstr "Voer je oude wachtwoord in"
 
 #: .\src\accounts\forms.py:93 .\src\accounts\forms.py:114
 #: .\src\templates\registration\password_reset_confirm.html:18
 msgid "Enter new password"
-msgstr "Voer je nieuwe paswoord in"
+msgstr "Voer je nieuwe wachtwoord in"
 
 #: .\src\accounts\forms.py:94 .\src\accounts\forms.py:115
 msgid "Enter new password (again)"
-msgstr "Voer (nogmaals) je nieuwe paswoord in"
+msgstr "Voer (nogmaals) je nieuwe wachtwoord in"
 
 #: .\src\accounts\forms.py:95 .\src\accounts\forms.py:116
 #: .\src\profiles\templates\profiles\edit_profile.html:53
 msgid "Change Password"
-msgstr "Wijzig Paswoord"
+msgstr "Wijzig Wachtwoord"
 
 #: .\src\accounts\forms.py:105
 msgid "Enter email"
@@ -78,7 +78,7 @@ msgstr "Geef je e-mail"
 
 #: .\src\accounts\forms.py:106
 msgid "Reset Password"
-msgstr ""
+msgstr "Reset Wachtwoord"
 
 #: .\src\accounts\templates\accounts\acc_active_email.html:4
 msgid "Activate your EU-Citizen.Science account."
@@ -88,7 +88,7 @@ msgstr "Activeer je EU-Citizen.Science account."
 #: .\src\accounts\templates\accounts\emails\password-reset-subject.txt:1
 #, python-format
 msgid "Password reset on %(site_name)s"
-msgstr "Paswoord reset op %(site_name)s"
+msgstr "Wachtwoord reset op %(site_name)s"
 
 #: .\src\accounts\templates\accounts\welcome_email.html:4
 msgid "Welcome to EU-Citizen.Science."
@@ -96,7 +96,7 @@ msgstr "Welkom op EU-Citizen.Science."
 
 #: .\src\blog\templates\blog.html:34
 msgid "Read More"
-msgstr ""
+msgstr "Verder lezen"
 
 #: .\src\contact\templates\contact.html:10
 #: .\src\contact\templates\contact.html:19
@@ -123,23 +123,23 @@ msgstr "Deze mail wordt verstuurd aan de indiener van"
 
 #: .\src\contact\templates\success.html:26
 msgid "Thank you for your message."
-msgstr "Dank voor je bericht"
+msgstr "Bedankt voor je bericht"
 
 #: .\src\events\forms.py:8
 msgid "Title of the event"
-msgstr ""
+msgstr "Naam van de activiteit"
 
 #: .\src\events\forms.py:9
 msgid "A brief description of the event"
-msgstr ""
+msgstr "een korte beschijving van de activiteit"
 
 #: .\src\events\forms.py:10
 msgid "Location of the Event"
-msgstr ""
+msgstr "Waar is de activiteit"
 
 #: .\src\events\forms.py:14
 msgid "Please provide a URL to an external web site for the event"
-msgstr ""
+msgstr "Geef een URL naar de externe web site voor de activiteit"
 
 #: .\src\events\templates\editEvent.html:25
 msgid "Edit event"
@@ -148,7 +148,7 @@ msgstr "Bewerk activiteit"
 #: .\src\events\templates\editEvent.html:34
 #: .\src\events\templates\new_event.html:35
 msgid "Event info"
-msgstr "Activiteit info"
+msgstr "Activiteit informatie"
 
 #: .\src\events\templates\events.html:12
 msgid "Upcoming events"
@@ -157,7 +157,7 @@ msgstr "Aankomende activiteiten"
 #: .\src\events\templates\events.html:24 .\src\templates\base_forum.html:89
 #: .\src\templates\base_r2.html:180
 msgid "ADD"
-msgstr "ADD"
+msgstr "Toevoegen"
 
 #: .\src\events\templates\events.html:42
 msgid "More info"
@@ -184,7 +184,7 @@ msgstr "URL van de organisatie"
 
 #: .\src\organisations\forms.py:14
 msgid "Please briefly describe the organisation (ideally in 500 words or less)"
-msgstr "Omschrijf de organisatie (bij voorkeur in minder dan 500 woorden)"
+msgstr "Omschrijf de organisatie (bijvoorkeur in minder dan 500 woorden)"
 
 #: .\src\organisations\forms.py:16
 #: .\src\organisations\templates\finder_organisations.html:19
@@ -223,7 +223,7 @@ msgstr "Geef nog meer gebruikers toestemming om te bewerken"
 #: .\src\resources\templates\editResource.html:23
 #: .\src\resources\templates\new_resource.html:25
 msgid "Crop the photo"
-msgstr "Crop de foto"
+msgstr "Foto bijsnijden"
 
 #: .\src\organisations\templates\edit_organisation.html:30
 #: .\src\organisations\templates\new_organisation.html:29
@@ -276,11 +276,11 @@ msgstr "Annuleren"
 #: .\src\resources\templates\editResource.html:46
 #: .\src\resources\templates\new_resource.html:48
 msgid "Crop and upload"
-msgstr "Crop en upload"
+msgstr "Bijsnijden en uploaden"
 
 #: .\src\organisations\templates\edit_organisation.html:65
 msgid "Edit Organisation Profile"
-msgstr "bewerk profiel Organisatie"
+msgstr "Bewerk Organisatie profiel"
 
 #: .\src\organisations\templates\edit_organisation.html:74
 #: .\src\organisations\templates\edit_organisation.html:138
@@ -354,9 +354,9 @@ msgid ""
 "moderation by one of the members of the EU-Citizen.Science consortium. This "
 "step is simply to check for ‘spam’ or inappropriate uses of the profile form."
 msgstr ""
-"Na het opslaan van dit profiel, zal je organisatie profiel worden "
-"beoordeelddoor een van de leden van het EU-Citizen.Science consortium.Deze "
-"stap is er om ‘spam’ te weren."
+"Na het opslaan van dit profiel, zal je organisatie profiel worden beoordeeld "
+"door een van de leden van het EU-Citizen.Science consortium.Deze stap is er "
+"om ‘spam’ te weren."
 
 #: .\src\organisations\templates\organisation.html:21
 #: .\src\projects\templates\editProject.html:64
@@ -426,23 +426,25 @@ msgstr "Organisatie"
 msgid ""
 "Please write or select interest areas, separated by commas or pressing enter"
 msgstr ""
+"Geef of selecteer interesse gebieden, gescheiden door komma's of enter "
+"drukken"
 
 #: .\src\profiles\models.py:23
 msgid "Profile picture"
-msgstr ""
+msgstr "Profiel foto"
 
 #: .\src\profiles\models.py:25
 #: .\src\profiles\templates\profiles\show_profile.html:43
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 #: .\src\profiles\models.py:26
 msgid "Short Bio and disciplinary background"
-msgstr ""
+msgstr "Korte biografie en werk achtergrond"
 
 #: .\src\profiles\models.py:30
 msgid "Email verified"
-msgstr ""
+msgstr "E-mail geverifieerd"
 
 #: .\src\profiles\models.py:31
 msgid ""
@@ -451,6 +453,10 @@ msgid ""
 "this profile with your professional information such as affiliations, "
 "grants, publications, peer review, and more.)"
 msgstr ""
+"ORCID (Als je geregitreerd bent op het ORCID platform voor onderzoekers en "
+"een digitale identificatie hebt (je ORCID iD) kan je dat hietr toevoegen om "
+"dit profiel te verbinden met je professionele informatie zoals voorkeuren, "
+"subsidies, publicaties, peer review en meer.)"
 
 #: .\src\profiles\templates\profiles\edit_profile.html:31
 msgid "Edit profile"
@@ -465,7 +471,7 @@ msgstr "Geografische locatie"
 #: .\src\templates\base2.html:65 .\src\templates\base_forum.html:77
 #: .\src\templates\base_r2.html:165
 msgid "Followed projects"
-msgstr ""
+msgstr "Gevolgde Projecten"
 
 #: .\src\profiles\templates\profiles\my_organisations.html:31
 msgid "Submitted organisations"
@@ -485,11 +491,11 @@ msgstr "Mijn bibliotheek"
 
 #: .\src\profiles\templates\profiles\show_profile.html:30
 msgid "Delete Profile"
-msgstr ""
+msgstr "Verwijder profiel"
 
 #: .\src\profiles\templates\profiles\show_profile.html:31
 msgid "Edit Profile"
-msgstr ""
+msgstr "Bewerk Profiel"
 
 #: .\src\profiles\templates\profiles\show_profile.html:38
 msgid "Email"
@@ -505,7 +511,7 @@ msgstr "Laatst gezien"
 
 #: .\src\profiles\templates\profiles\show_profile.html:44
 msgid "Bio and disciplinary background"
-msgstr "Bio en achtergrond"
+msgstr "Biografie en achtergrond"
 
 #: .\src\profiles\templates\profiles\show_profile.html:45
 msgid "ORCID profile"
@@ -517,24 +523,26 @@ msgstr "Interesse gebieden"
 
 #: .\src\projects\forms.py:21
 msgid "Short name or title of the project"
-msgstr "Voer naam van de hulpbron in"
+msgstr "Korte naam of Titel van het Project"
 
 #: .\src\projects\forms.py:24
 msgid ""
 "Please enter 2-3 keywords (comma separated) or pressing enter to further "
 "describe your project and assist search on the platform"
 msgstr ""
+"Geeft 2-3 trefwoorden (door komma's gescheiden) of enter voor meeromschrijf "
+"je project en help te zoeken op het platform"
 
 #: .\src\projects\forms.py:24 .\src\projects\templates\project.html:67
 #: .\src\projects\templates\project.html:189
 #: .\src\resources\templates\resource.html:51
 #: .\src\resources\templates\resource.html:166
 msgid "Keywords"
-msgstr ""
+msgstr "Trefwoorden"
 
 #: .\src\projects\forms.py:27
 msgid "Primary aim, goal or objective of the project. Max 2000 characters"
-msgstr ""
+msgstr "Primaire doel van het project. (max. 2000 tekens)"
 
 #: .\src\projects\forms.py:30
 msgid ""
@@ -542,6 +550,9 @@ msgid ""
 "href=\"https://zenodo.org/communities/citscicharacteristics\">ECSA "
 "Characteristics of Citizen Science</a> for guidance"
 msgstr ""
+"Omschrijd de citizen science aspecten van het project - bekijk <a href="
+"\"https://zenodo.org/communities/citscicharacteristics\">ECSA "
+"Characteristics of Citizen Science</a> voor aanwijzingen"
 
 #: .\src\projects\forms.py:34
 msgid "The project topic(s) or field(s) of science, multiple selection"
@@ -549,7 +560,7 @@ msgstr ""
 
 #: .\src\projects\forms.py:35 .\src\projects\templates\finder_projects.html:61
 msgid "Topic"
-msgstr ""
+msgstr "Onderwerp"
 
 #: .\src\projects\forms.py:38
 msgid "Please select the task(s) undertaken by participants"
@@ -557,39 +568,39 @@ msgstr ""
 
 #: .\src\projects\forms.py:39
 msgid "Participation Task"
-msgstr ""
+msgstr "Deelname Taak"
 
 #: .\src\projects\forms.py:43
 msgid "Activity Status"
-msgstr ""
+msgstr "Activiteit Status"
 
 #: .\src\projects\forms.py:44
 msgid "Select one"
-msgstr ""
+msgstr "Selecteer één"
 
 #: .\src\projects\forms.py:47
 msgid "Closest approximate start date of the project"
-msgstr ""
+msgstr "Startdatum bij benadering"
 
 #: .\src\projects\forms.py:50
 msgid "Approximate end date of the project"
-msgstr ""
+msgstr "Einddatum bij benadering"
 
 #: .\src\projects\forms.py:53
 msgid "Please provide a URL to an external web site for the project"
-msgstr ""
+msgstr "Geef een URL naar de externe web site van het project"
 
 #: .\src\projects\forms.py:57
 msgid "Please indicate the spatial scale of the projec"
-msgstr ""
+msgstr "Omschrijf de schaal van het project"
 
 #: .\src\projects\forms.py:58
 msgid "Geographic Extend"
-msgstr ""
+msgstr "Geografische spreiding"
 
 #: .\src\projects\forms.py:61
 msgid "Project locality"
-msgstr ""
+msgstr "Project plaats"
 
 #: .\src\projects\forms.py:62
 msgid ""
@@ -597,16 +608,22 @@ msgid ""
 "participant activities take place,         E.g. in your backyard, parks in "
 "London, rivers in Europe, online globally, etc."
 msgstr ""
+"Omschrijf de plaats van het project, waar vinden de belangrijkste deelnemers "
+"activiteiten plaats b.v. in de achtertuin, park in Amsterdamrivieren in "
+"Europa, online wereldwijd, enz."
 
 #: .\src\projects\forms.py:67
 msgid ""
 "Organisation coordinating the project. If not listed, please add it <a href="
 "\"/new_organisation\">here</a>         before submitting the project"
 msgstr ""
+"Organisatie die het project coordineert. Niet in de lijst dan graag "
+"toevoegen <a href=\"/new_organisation\">here</a>         voordat het project "
+"toegevoegd wordt"
 
 #: .\src\projects\forms.py:69
 msgid "Lead Organisation / Coordinator"
-msgstr ""
+msgstr "Project Coordinatie / Coordinator"
 
 #: .\src\projects\forms.py:72
 msgid ""
@@ -617,63 +634,63 @@ msgstr ""
 
 #: .\src\projects\forms.py:74
 msgid "Other Organisations"
-msgstr ""
+msgstr "Andere Organisaties"
 
 #: .\src\projects\forms.py:85
 msgid "Please name the contact person or contact point for the Project"
-msgstr ""
+msgstr "Noem het kontakt persoon of kontakt punt van het project"
 
 #: .\src\projects\forms.py:85
 msgid "Public Contact Point"
-msgstr ""
+msgstr "Algemeen kontakt punt"
 
 #: .\src\projects\forms.py:89
 msgid "Please provide the email for the contact person or contact point"
-msgstr ""
+msgstr "Geef het e-mailadres van het kontakt persoon of kontakt punt"
 
 #: .\src\projects\forms.py:92
 msgid "Project image for the thumbnail profile"
-msgstr ""
+msgstr "Project foto voor profiel"
 
 #: .\src\projects\forms.py:93
 msgid "Will be resized to 600x400 pixels"
-msgstr ""
+msgstr "Wordt bijgesneden tot 600x400 pixels"
 
 #: .\src\projects\forms.py:99 .\src\projects\forms.py:113
 msgid "provide image credit, if applicable"
-msgstr ""
+msgstr "geef Logo credits indien van toepassing"
 
 #: .\src\projects\forms.py:100
 msgid "Project Logo"
-msgstr ""
+msgstr "Project Logo"
 
 #: .\src\projects\forms.py:101
 msgid "Will be resized to 600x400 pixels)"
-msgstr ""
+msgstr "Zal bijgesneden worden tot 600x400 pixels"
 
 #: .\src\projects\forms.py:107
 msgid "provide Logo credit, if applicable"
-msgstr ""
+msgstr "Geef Logo credits indien van toepassing"
 
 #: .\src\projects\forms.py:108
 msgid "Project image for the profile heading"
-msgstr ""
+msgstr "Afbeelding van het project voor profiel"
 
 #: .\src\projects\forms.py:109
 msgid "Will be resized to 1100x400 pixels"
-msgstr ""
+msgstr "Word bijgesneden tot 1100x400 pixels"
 
 #: .\src\projects\forms.py:124
 msgid "Please describe how people can get involved in the project"
-msgstr ""
+msgstr "Hoe kunnen mensen deelnemen"
 
 #: .\src\projects\forms.py:125
 msgid "Can participate at home"
-msgstr ""
+msgstr "Kan thuis deelnemen"
 
 #: .\src\projects\forms.py:128
 msgid "Describe any required or suggested equipment to be used in the project"
-msgstr ""
+msgstr "Omschijf de benodigde apparatuur voor deelname aan het project"
 
 #: .\src\projects\forms.py:131
 msgid ""
@@ -681,22 +698,28 @@ msgid ""
 "Commission).         Select them from the list or add your own ended by "
 "comma or pressing enter"
 msgstr ""
+"Wie heeft het project gesteund (e.g. European Commission).         Kies uit "
+"de lijst of voeg zelf toegescheiden door een komma of met enter"
 
 #: .\src\projects\forms.py:132
 msgid ""
 "Funding body (Put a comma after each name or pressing enter to add a new "
 "funding body)"
 msgstr ""
+"Gefinancierd door (Met een komma na elke naam of enter om nieuwe "
+"eenfinancier toe te voegen)"
 
 #: .\src\projects\forms.py:136
 msgid "Indication of the programme that funds or funded a project"
-msgstr ""
+msgstr "Geef aan welk programma het project financiert of financierde"
 
 #: .\src\projects\forms.py:139
 msgid ""
 "Do you know the name of the database where the project first appeared?, add "
 "it here ended by comma or pressing enter."
 msgstr ""
+"Is de naam van de database waar het project gestart is bekend?Voeg hier toe "
+"en sluit af met een komma of enter."
 
 #: .\src\projects\forms.py:144
 msgid ""
@@ -706,153 +729,155 @@ msgstr ""
 
 #: .\src\projects\forms.py:145
 msgid "Origin UID"
-msgstr ""
+msgstr "Oorspronkelijk UID"
 
 #: .\src\projects\forms.py:148
 msgid "Do you know the origin URL in the previous database?, add it here"
 msgstr ""
+"Als je de oorspronkelijke URL in de vorige database weet, voeg die dan hier "
+"toe"
 
 #: .\src\projects\forms.py:148
 msgid "Origin URL"
-msgstr ""
+msgstr "Oorspronkelijke URL"
 
 #: .\src\projects\templates\editProject.html:68
 msgid "You are going to delete this project, this procedure is irreversible."
-msgstr ""
+msgstr "Je gaat dit project verwijderen, deze procedure is onomkeerbaar."
 
 #: .\src\projects\templates\editProject.html:87
 msgid "Edit project"
-msgstr ""
+msgstr "Bewerk project"
 
 #: .\src\projects\templates\editProject.html:119
 #: .\src\projects\templates\new_project.html:116
 msgid "Project info"
-msgstr ""
+msgstr "Project informatie"
 
 #: .\src\projects\templates\editProject.html:173
 #: .\src\projects\templates\new_project.html:173
 msgid "Contact details"
-msgstr ""
+msgstr "Contact details"
 
 #: .\src\projects\templates\editProject.html:189
 #: .\src\projects\templates\new_project.html:188
 msgid "Project profile images"
-msgstr ""
+msgstr "Project profiel afbeeldingen"
 
 #: .\src\projects\templates\editProject.html:251
 #: .\src\projects\templates\new_project.html:236
 msgid "Geography"
-msgstr ""
+msgstr "Locatie"
 
 #: .\src\projects\templates\editProject.html:252
 msgid ""
 "Main location where the project takes place (Enter address or click on the "
 "map)"
-msgstr ""
+msgstr "Hoofd locatie van het project (Geeft het adres of klik op de kaart)"
 
 #: .\src\projects\templates\editProject.html:269
 #: .\src\projects\templates\new_project.html:261
 msgid "Supplementary information for Citizen Science"
-msgstr ""
+msgstr "Aanvullende informatie voor Citizen Science"
 
 #: .\src\projects\templates\editProject.html:285
 #: .\src\projects\templates\new_project.html:276
 msgid "Funding"
-msgstr ""
+msgstr "Financiering"
 
 #: .\src\projects\templates\editProject.html:298
 #: .\src\projects\templates\new_project.html:289
 msgid "Origin information"
-msgstr ""
+msgstr "Afkomstig van"
 
 #: .\src\projects\templates\editProject.html:316
 msgid "Custom fields"
-msgstr ""
+msgstr "Aangepaste velden"
 
 #: .\src\projects\templates\finder_projects.html:33
 #: .\src\resources\templates\finder_resources.html:22
 msgid "Sort by Most Recent Updated"
-msgstr ""
+msgstr "Gesorteerd op meest recent bewerkt"
 
 #: .\src\projects\templates\finder_projects.html:34
 #: .\src\resources\templates\finder_resources.html:23
 msgid "Sort by featured"
-msgstr ""
+msgstr "Gesorteerd op uitgelicht"
 
 #: .\src\projects\templates\finder_projects.html:35
 #: .\src\resources\templates\finder_resources.html:24
 msgid "Sort by rating"
-msgstr ""
+msgstr "Gesorteerd op beoordeling"
 
 #: .\src\projects\templates\finder_projects.html:46
 #: .\src\projects\templates\project.html:53
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: .\src\projects\templates\finder_projects.html:69
 msgid "Doable at home"
-msgstr ""
+msgstr "Haalbaar voor thuis"
 
 #: .\src\projects\templates\finder_projects.html:70
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: .\src\projects\templates\finder_projects.html:71
 msgid "No"
-msgstr ""
+msgstr "Nee"
 
 #: .\src\projects\templates\finder_projects.html:74
 #: .\src\resources\templates\finder_resources.html:61
 msgid "Moderated"
-msgstr ""
+msgstr "Beoordeeld"
 
 #: .\src\projects\templates\finder_projects.html:75
 #: .\src\resources\templates\finder_resources.html:62
 msgid "Not yet moderated"
-msgstr ""
+msgstr "Nog niet beoordeeld"
 
 #: .\src\projects\templates\finder_projects.html:76
 #: .\src\resources\templates\finder_resources.html:63
 #: .\src\templates\_subnavbar.html:8
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 #: .\src\projects\templates\finder_projects.html:93
 msgid "Clear current search query and filters"
-msgstr ""
+msgstr "Verwijder huidige zoekopdracht en filters"
 
 #: .\src\projects\templates\modal_projects.html:8
 #: .\src\resources\templates\modal_resources.html:8
 msgid "Info"
-msgstr ""
+msgstr "Informatie"
 
 #: .\src\projects\templates\modal_projects.html:14
 #: .\src\resources\templates\modal_resources.html:14
 msgid "Search"
-msgstr ""
+msgstr "Zoek"
 
 #: .\src\projects\templates\modal_projects.html:14
 msgid ""
 "projects by title or keywords by typing text directly into the the search bar"
-msgstr ""
+msgstr "projecten op naam of trefwoord in de zoekbalk"
 
 #: .\src\projects\templates\modal_projects.html:15
 #: .\src\resources\templates\modal_resources.html:15
 msgid "Sort"
-msgstr ""
+msgstr "Sorteer"
 
 #: .\src\projects\templates\modal_projects.html:15
 msgid "projects by date or by rating"
-msgstr ""
+msgstr "projecten op datum of op beoordeling"
 
 #: .\src\projects\templates\modal_projects.html:16
 #: .\src\resources\templates\modal_resources.html:16
 msgid "Filter"
-msgstr ""
+msgstr "Filteren"
 
 #: .\src\projects\templates\modal_projects.html:16
 msgid "search results by project status, country, or topic"
-msgstr ""
+msgstr "zoek projecten op status, land of onderwerp"
 
 #: .\src\projects\templates\modal_projects.html:18
 msgid ""
@@ -860,26 +885,29 @@ msgid ""
 "as 'Moderated'.Only these will show in your search results unless you filter "
 "for 'not yet moderated' or 'All'."
 msgstr ""
+"Ingediende projecten die beoordeeld zijn zijn gemarkeerdals 'Beoordeeld'. Je "
+"ziet alleen deze in de zoekresultatentenzij je filtert op 'nog niet "
+"beoordeeld' of 'Alle'."
 
 #: .\src\projects\templates\modal_projects.html:20
 #: .\src\resources\templates\modal_resources.html:20
 msgid "Read more about our"
-msgstr ""
+msgstr "Lees meer over ons"
 
 #: .\src\projects\templates\modal_projects.html:20
 #: .\src\projects\templates\new_project.html:103
 #: .\src\resources\templates\modal_resources.html:20
 msgid "moderation process"
-msgstr ""
+msgstr "beoordelings proces"
 
 #: .\src\projects\templates\new_project.html:65
 msgid "Project is going to saved"
-msgstr ""
+msgstr "Project wordt bewaard"
 
 #: .\src\projects\templates\new_project.html:73
 #: .\src\resources\templates\new_resource.html:68
 msgid "Thank you"
-msgstr ""
+msgstr "Bedankt"
 
 #: .\src\projects\templates\new_project.html:74
 msgid ""
@@ -888,6 +916,9 @@ msgid ""
 "projects shared on the platform can indeed be considered citizen science "
 "projects."
 msgstr ""
+"Bedankt voor het inzenden van je project beschrijving. het is verzonden "
+"naarEU-Citizen.Science beoordelings team, zij controleren of alle projecten "
+"op hetplatform inderdaad citizen science projecten zijn."
 
 #: .\src\projects\templates\new_project.html:75
 msgid ""
@@ -895,6 +926,9 @@ msgid ""
 "will see that your project changes from 'not yet moderated' to 'moderated' "
 "on the platform."
 msgstr ""
+"Wij zullen contact met je opnemen als we vragen hebben, anderszal je de "
+"status van jouw project zien veranderen van 'nog niet beoordeeld'naar "
+"'beoordeeld' op het platform."
 
 #: .\src\projects\templates\new_project.html:76
 msgid ""
@@ -902,10 +936,13 @@ msgid ""
 "going to the Submitted projects section in your Personal Area (see the top-"
 "right of the platform menu)."
 msgstr ""
+"Je kan altijd het project profiel bewerken of veranderen, door naar "
+"Ingezonden Projecten te gaan in je Persoonlijke Profiel(rechts-boven in het "
+"menu)"
 
 #: .\src\projects\templates\new_project.html:94
 msgid "New project"
-msgstr ""
+msgstr "Nieuw project"
 
 #: .\src\projects\templates\new_project.html:95
 msgid ""
@@ -914,6 +951,10 @@ msgid ""
 "below (indicated with an asterisk*), and as much of the non-mandatory "
 "information as possible."
 msgstr ""
+"Bedankt voor het delen van jouw citizen science project op het EU-Citizen."
+"Science platform. Geef alle verplichte informatie in de veldenhieronder "
+"(aangegeven met een asterisk *) én zo veel mogelijk nietverplichte "
+"informatie."
 
 #: .\src\projects\templates\new_project.html:96
 msgid ""
@@ -924,10 +965,16 @@ msgid ""
 "research lifecycle. For guidance on whether your project can be considered "
 "to be citizen science, please refer to the"
 msgstr ""
+"Citizen science omarmt een breed scala aan project types, die aangepast "
+"oftoegepast kunnen worden in diverse situaties en diciplines,  een reeks "
+"vanbenaderingen en historische gebruiken voor publieke deelname "
+"aanwetenschappelijk onderzoek en betrekt deelnemers in een reeks van "
+"activiteitengedurende de onderzoek periode. Voor aanwijzingen of jouw "
+"project alscitizen science aangemerkt kan worden, zie"
 
 #: .\src\projects\templates\new_project.html:97
 msgid "ECSA Characteristics of Citizen Science"
-msgstr ""
+msgstr "ECSA Characteristics of Citizen Science"
 
 #: .\src\projects\templates\new_project.html:99
 msgid ""
@@ -936,10 +983,13 @@ msgid ""
 "task(s) that participants undertake. Your project should engage meaningfully "
 "with the"
 msgstr ""
+"Beschijf in het onderstaande formulier de citizen science aspecten van jouw "
+"projecten de soort taken die deelnemers krijgen.Je project moet voldoen aan "
+"de"
 
 #: .\src\projects\templates\new_project.html:100
 msgid "ECSA 10 Principles of Citizen Science"
-msgstr ""
+msgstr "ECSA 10 Principes van Citizen Science"
 
 #: .\src\projects\templates\new_project.html:101
 msgid ""
@@ -948,15 +998,22 @@ msgid ""
 "can be used for the project profile (the logo, a thumbnail image "
 "representing the project, and a banner header representing the project)."
 msgstr ""
+"Dit formulier vraagrt de basis Project Informatie, Deelname Informatie, "
+"links naar Project Documentatie, Contact Details en project afbeeldingendie "
+"voor het project profiel gebruikt kunnen worden (het logo, een "
+"miniatuurafbeelding van het project en een koptekst en afbeelding "
+"betreffende het project)."
 
 #: .\src\projects\templates\new_project.html:102
 msgid ""
 "Upon saving this profile, your project will be submitted for moderation."
 msgstr ""
+"Bij het bewaren van dit profiel zal het project ter beoordeling verzonden "
+"worden"
 
 #: .\src\projects\templates\new_project.html:103
 msgid "The"
-msgstr ""
+msgstr "De"
 
 #: .\src\projects\templates\new_project.html:103
 msgid ""
@@ -964,11 +1021,14 @@ msgid ""
 "indeed be considered to be citizen science projects, and to prevent "
 "unintended uses of the platform."
 msgstr ""
+"is bedoeld om te verzekeren dat alle projecten die op dit platform gedeeld "
+"wordeninderdaad citizen science projecten zijn en om misbruik van het "
+"platform te voorkomen."
 
 #: .\src\projects\templates\new_project.html:112
 #: .\src\projects\templates\new_project.html:307
 msgid "Submit"
-msgstr ""
+msgstr "Verzenden"
 
 #: .\src\projects\templates\new_project.html:237
 msgid ""
@@ -976,34 +1036,36 @@ msgid ""
 "indicated, and otherwise indicate the address of the Coordinator or Leading "
 "Partner. (Enter address or click on the map)"
 msgstr ""
+"Geef de plaats waar het project plaats vind,anders het adres van de "
+"coordinator of partner(geef het adres of click op de kaart)"
 
 #: .\src\projects\templates\project.html:32
 msgid "Participation"
-msgstr ""
+msgstr "Deelname"
 
 #: .\src\projects\templates\project.html:38
 msgid "Description"
-msgstr ""
+msgstr "Omschrijving"
 
 #: .\src\projects\templates\project.html:56
 #: .\src\projects\templates\project.html:178
 msgid "Start:"
-msgstr ""
+msgstr "Start"
 
 #: .\src\projects\templates\project.html:57
 #: .\src\projects\templates\project.html:179
 msgid "End:"
-msgstr ""
+msgstr "Eind"
 
 #: .\src\projects\templates\project.html:60
 #: .\src\projects\templates\project.html:182
 msgid "Science Topic"
-msgstr ""
+msgstr "Wetenschap Onderwerp"
 
 #: .\src\projects\templates\project.html:74
 #: .\src\projects\templates\project.html:196
 msgid "Location"
-msgstr ""
+msgstr "Plaats"
 
 #: .\src\projects\templates\project.html:89
 msgid "(Host)"
@@ -1012,7 +1074,7 @@ msgstr ""
 #: .\src\projects\templates\project.html:92
 #: .\src\projects\templates\project.html:214
 msgid "(Main organisation)"
-msgstr ""
+msgstr "(Hoofd organisatie)"
 
 #: .\src\projects\templates\project.html:113
 #: .\src\resources\templates\resource.html:74
@@ -1020,60 +1082,60 @@ msgstr ""
 #: .\src\templates\resources_cards.html:54
 #: .\src\templates\resources_cards_horizontal.html:43
 msgid "review"
-msgstr ""
+msgstr "beoordeel"
 
 #: .\src\projects\templates\project.html:113
 #: .\src\resources\templates\resource.html:125
 msgid "Reviews"
-msgstr ""
+msgstr "Beoordelingen"
 
 #: .\src\projects\templates\project.html:118
 msgid "Go to Project"
-msgstr ""
+msgstr "Ga naar Project"
 
 #: .\src\projects\templates\project.html:126
 #: .\src\projects\templates\project_review.html:18
 #: .\src\resources\templates\resource.html:121
 #: .\src\resources\templates\resource_review.html:18
 msgid "Review"
-msgstr ""
+msgstr "Beoordelen"
 
 #: .\src\projects\templates\project.html:130
 msgid "Following"
-msgstr ""
+msgstr "Gevolgde"
 
 #: .\src\projects\templates\project.html:133
 msgid "Follow"
-msgstr ""
+msgstr "Volgen"
 
 #: .\src\projects\templates\project.html:156
 msgid "How to participate:"
-msgstr ""
+msgstr "Hoe deel te nemen"
 
 #: .\src\projects\templates\project.html:159
 msgid "Needed equipment:"
-msgstr ""
+msgstr "Benodigde apparatuur"
 
 #: .\src\projects\templates\project.html:161
 msgid "Participation task"
-msgstr ""
+msgstr "Taak van deelname"
 
 #: .\src\projects\templates\project_review.html:19
 #: .\src\resources\templates\resource_review.html:19
 msgid "Rate and comment"
-msgstr ""
+msgstr "Beoordeel"
 
 #: .\src\resources\forms.py:19
 msgid "Insert here the title or name of the resource"
-msgstr ""
+msgstr "Voeg hier de titel of naam van de hulpbron in"
 
 #: .\src\resources\forms.py:22
 msgid ""
 "URL to where the document is hosted by the publisher,         or in a "
 "permanent repository such as Zenodo, OSF, the RIO Journal, or similar"
 msgstr ""
-"URL waar het document wordt gehost door een publisher of staat in "
-"eenpermanente repository zoals Zenodo, OSF, de RIO Journal, etc"
+"URL waar het document wordt gehost door een publisher of staat in een "
+"permanente repository zoals Zenodo, OSF, de RIO Journal, etc"
 
 #: .\src\resources\forms.py:26
 msgid "Please briefly describe the resource (ideally in 500 words or less)"
@@ -1107,8 +1169,8 @@ msgid ""
 "Please provide the Digital Object Signifier that is unique to your "
 "resource,        generated by the Publisher, Zenodo..."
 msgstr ""
-"Geef de DOI (Digital Object Identifier) van de hulpbronzoals aangemaakt door "
-"de uitgever, Zenodo..."
+"Geef de DOI (Digital Object Identifier) van de hulpbron zoals aangemaakt "
+"door de uitgever, Zenodo..."
 
 #: .\src\resources\forms.py:45 .\src\resources\templates\resource.html:108
 msgid "Resource DOI"
@@ -1121,8 +1183,8 @@ msgid ""
 "not known, name the project within the resource was created."
 msgstr ""
 "Auteur(s) van de hulpbron. Geef <i>EersteInitiaal Achternaam</i> en sluit af "
-"met een kommaom één of meerdere auteurs in te voeren. Indien onbekend, noem "
-"je hetproject waarbinnen de hulpbron is ontwikkeld"
+"met een komma om één of meerdere auteurs in te voeren. Indien onbekend, noem "
+"je het project waarbinnen de hulpbron is ontwikkeld"
 
 #: .\src\resources\forms.py:51
 msgid "Authors"
@@ -1270,7 +1332,7 @@ msgid ""
 "right of the platform menu)."
 msgstr ""
 "Je kunt altijd nog wijzigingen en updates  aanbrengen door naar Toegevoegde "
-"Hulpbronnen te gaan in je Persoonlijke Account (zierechtsbovenaan het "
+"Hulpbronnen te gaan in je Persoonlijke Profiel (zie rechtsbovenaan het "
 "platform menu)."
 
 #: .\src\resources\templates\new_resource.html:79
@@ -1333,7 +1395,7 @@ msgstr "Het moderatie proces"
 #: .\src\resources\templates\new_resource.html:98
 #: .\src\resources\templates\new_resource.html:101
 msgid "here."
-msgstr "op deze pagina."
+msgstr "hier."
 
 #: .\src\resources\templates\new_resource.html:100
 msgid ""
@@ -1388,11 +1450,11 @@ msgstr "Thema"
 #: .\src\templates\resources_cards.html:54
 #: .\src\templates\resources_cards_horizontal.html:43
 msgid "reviews"
-msgstr "reviews"
+msgstr "beoordelingen"
 
 #: .\src\resources\templates\resource.html:79
 msgid "Go to Training"
-msgstr ""
+msgstr "Ga naar Training"
 
 #: .\src\resources\templates\resource.html:82
 #: .\src\resources\templates\resource.html:111
@@ -1439,14 +1501,14 @@ msgstr "Voeg toe aan bibliotheek"
 
 #: .\src\resources\templates\resource.html:210
 msgid "Edit"
-msgstr ""
+msgstr "Bewerken"
 
 #: .\src\templates\_footer.html:12
 msgid ""
 "You are in the alpha version of the EU-Citizen.Science platform. Please "
 "provide your feedback in the official"
 msgstr ""
-"Je bent in de alpha versie van het EU-Citizen.Science platform. Geef svp "
+"Je bent in de alpha versie van het EU-Citizen.Science platform. Geef s.v.p. "
 "feedback in de officiele "
 
 #: .\src\templates\_footer.html:13
@@ -1455,7 +1517,7 @@ msgstr "GitHub repository"
 
 #: .\src\templates\_footer.html:14
 msgid "here to subscribe to our newsletter"
-msgstr "hier om je in te schrijven voor onze nieuwsbrief"
+msgstr "hier voor inschrijven voor onze nieuwsbrief"
 
 #: .\src\templates\_footer.html:56
 msgid ""
@@ -1463,8 +1525,8 @@ msgid ""
 "2020 Framework Programme for Research and Innovation under grant agreement "
 "No. 824580"
 msgstr ""
-"EU-Citizen.Science wordt gefinancierd door het European Union´s Horizon 2020 "
-"Framework Programme for Research and Innovation onder grant agreement No. "
+"EU-Citizen.Science wordt gefinancierd door het Horizon 2020 Programmavoor "
+"Onderzoek en Innovatie van de Europese Unie met subsidieovereenkomstNr. "
 "824580"
 
 #: .\src\templates\_footer.html:66
@@ -1487,7 +1549,7 @@ msgstr "Afdruk"
 
 #: .\src\templates\_footer.html:78
 msgid "Deliverables"
-msgstr "Deliverables"
+msgstr "Resultaten"
 
 #: .\src\templates\_footer.html:94 .\src\templates\faq.html:14
 msgid "FAQ"
@@ -1553,7 +1615,7 @@ msgstr "Over"
 
 #: .\src\templates\about.html:19
 msgid "Watch our teaser, in 12 different languages!"
-msgstr ""
+msgstr "Kijk naar onze teaser in 12 talen!"
 
 #: .\src\templates\about.html:44
 msgid "The Platform"
@@ -1576,10 +1638,10 @@ msgid ""
 "citizens participating in research across the full range of scientific "
 "enquiry."
 msgstr ""
-"De visie van het platform is om als een kennis hub te fungeren om zo citizen "
-"science te mainstreamen en de impact van citizen science te vergroten bij "
-"burgers die deelnemen aan onderzoek in alle fasen van wetenschappelijk "
-"onderzoek."
+"De visie van het platform is om als een kennis centrum te fungeren om zo "
+"citizen science te mainstreamen en de impact van citizen science te "
+"vergroten bij burgers die deelnemen aan onderzoek in alle fasen van "
+"wetenschappelijk onderzoek."
 
 #: .\src\templates\about.html:49
 msgid ""
@@ -1647,7 +1709,7 @@ msgid ""
 msgstr ""
 "Mis je iets? Je kunt je eigen profielen voor hulpbronnen, projecten, "
 "training toevoegen via de +TOEVOEGEN button in het menu. Heb je een "
-"suggestie voor ons? Deel het svp in het community feedback forum of in het"
+"suggestie voor ons? Deel het s.v.p. in het community feedback forum of in het"
 
 #: .\src\templates\about.html:63
 msgid "contact"
@@ -1802,7 +1864,7 @@ msgstr "Consortium partners"
 
 #: .\src\templates\about.html:216
 msgid "Third party partners"
-msgstr "Third party partners"
+msgstr "Partners, derde partijen"
 
 #: .\src\templates\about.html:257
 msgid "Citizen Science"
@@ -2058,7 +2120,7 @@ msgstr "Submitted resources"
 #: .\src\templates\base2.html:66 .\src\templates\base_forum.html:78
 #: .\src\templates\base_r2.html:166
 msgid "Resources library"
-msgstr "Bibliotheek"
+msgstr "Hulpbronnen"
 
 #: .\src\templates\base3.html:52
 msgid "PROFILE"
@@ -2095,7 +2157,7 @@ msgstr "AANMELDEN"
 
 #: .\src\templates\criteria.html:10
 msgid "Quality criteria"
-msgstr "Kwaliteitscriteria"
+msgstr "Kwaliteits criteria"
 
 #: .\src\templates\curated.html:27
 msgid ""
@@ -2115,7 +2177,7 @@ msgstr ""
 
 #: .\src\templates\faq.html:20
 msgid "Frequently Asked Questions"
-msgstr "Frequently Asked Questions"
+msgstr "Veel voorkomende vragen FAQ"
 
 #: .\src\templates\home.html:31
 msgid ""
@@ -2123,12 +2185,14 @@ msgid ""
 "tools, and training"
 msgstr ""
 "Welkom op dit platform voor het delen van Citizen Science projecten, "
-"hulpbronnen, tools, en trainings"
+"hulpbronnen, hulpmiddelen en trainingen"
 
 #: .\src\templates\home.html:41
 msgid ""
 "Search for citizen science resources, projects, tools, training, and more...."
 msgstr ""
+"Zoek citizen science hulpbronnen, projecten, hulpmiddelen, trainingen en "
+"meer..."
 
 #: .\src\templates\home.html:66
 msgid "in Projects"
@@ -2194,15 +2258,15 @@ msgstr "Maak een profiel voor je organisatie"
 
 #: .\src\templates\modalinfo.html:23
 msgid "Event"
-msgstr ""
+msgstr "Activiteit"
 
 #: .\src\templates\modalinfo.html:24
 msgid "Create an Event"
-msgstr ""
+msgstr "Maak een Activiteit"
 
 #: .\src\templates\moderation.html:10
 msgid "The moderation process"
-msgstr "Het moderatie proces"
+msgstr "Het beoordelings proces"
 
 #: .\src\templates\projects_cards.html:20
 #: .\src\templates\resources_cards.html:15
@@ -2218,7 +2282,7 @@ msgstr "NIET GEACCEPTEERD"
 #: .\src\templates\resources_cards_horizontal.html:20
 #: .\src\templates\resources_cards_short.html:17
 msgid "NOT YET MODERATED"
-msgstr "NOG NIET GEMODEREERD"
+msgstr "NOG NIET BEOORDEELD"
 
 #: .\src\templates\projects_cards.html:24
 #: .\src\templates\projects_cards_featured.html:20
@@ -2228,7 +2292,7 @@ msgstr "NOG NIET GEMODEREERD"
 #: .\src\templates\resources_cards_horizontal.html:21
 #: .\src\templates\resources_cards_short.html:18
 msgid "MODERATED"
-msgstr "GEMODEREERD"
+msgstr "BEOORDEELD"
 
 #: .\src\templates\projects_cards.html:34
 msgid "Featured project"
@@ -2240,12 +2304,13 @@ msgstr "Aanbevolen projecten"
 #: .\src\templates\resources_cards_horizontal.html:45
 #: .\src\templates\resources_cards_short.html:30
 msgid "Read more"
-msgstr "Read more"
+msgstr "Lees meer"
 
 #: .\src\templates\registration\logged_out.html:9
 msgid "Thanks for spending some quality time with the Web site today."
 msgstr ""
-"Bedankt dat je wat quality time op deze website hebt willen doorbrengen."
+"Bedankt dat je vandaag wat quality time op deze website hebt willen "
+"doorbrengen."
 
 #: .\src\templates\registration\logged_out.html:11
 msgid "Log in again"
@@ -2289,23 +2354,23 @@ msgid ""
 "Please enter your old password, for security's sake, and then enter your new "
 "password twice so we can verify you typed it in correctly."
 msgstr ""
-"Voer je oude paswoord en dan het nieuwe paswoord 2x zodat we kunnen checken "
-"of het overeenkomt."
+"Voer je oude wachtwoord in en dan het nieuwe wachtwoord 2x zodat we "
+"kunnencontroleren of het overeenkomt."
 
 #: .\src\templates\registration\password_change_form.html:63
 #: .\src\templates\registration\password_reset_confirm.html:42
 msgid "Change my password"
-msgstr "Wijzig paswoord"
+msgstr "Wijzig wachtwoord"
 
 #: .\src\templates\registration\password_reset_complete.html:7
 #: .\src\templates\registration\password_reset_complete.html:11
 #: .\src\templates\registration\password_reset_complete.html:12
 msgid "Password reset complete"
-msgstr "Paswoord gewijzigd"
+msgstr "Wachtwoord gewijzigd"
 
 #: .\src\templates\registration\password_reset_complete.html:16
 msgid "Your password has been set.  You may go ahead and log in now."
-msgstr "Je paswoord is gewijzigd.  Je kunt nu inloggen."
+msgstr "Je wachtwoord is gewijzigd.  Je kunt nu inloggen."
 
 #: .\src\templates\registration\password_reset_confirm.html:7
 msgid "Password reset confirmation"
@@ -2318,27 +2383,27 @@ msgstr "Bevestiging aanpassen wachtwoord"
 #: .\src\templates\registration\password_reset_form.html:11
 #: .\src\templates\registration\password_reset_form.html:12
 msgid "Password reset"
-msgstr "Password reset"
+msgstr "Wachtwoord reset"
 
 #: .\src\templates\registration\password_reset_confirm.html:20
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
 msgstr ""
-"Voer svp je paswoord tweemaal in zodat wij kunnen controleren of je het "
+"Voer svp je wachtwoord tweemaal in zodat wij kunnen controleren of je het "
 "correct hebt ingevoerd."
 
 #: .\src\templates\registration\password_reset_confirm.html:25
 msgid "New password:"
-msgstr "Nieuw paswoord:"
+msgstr "Nieuw wachtwoord:"
 
 #: .\src\templates\registration\password_reset_confirm.html:34
 msgid "Confirm password:"
-msgstr "Bevestig paswoord:"
+msgstr "Bevestig wachtwoord:"
 
 #: .\src\templates\registration\password_reset_confirm.html:48
 msgid "Password reset unsuccessful"
-msgstr "Wijzigen paswoord niet gelukt"
+msgstr "Wijzigen wachtwoord niet gelukt"
 
 #: .\src\templates\registration\password_reset_confirm.html:50
 msgid ""
@@ -2346,28 +2411,28 @@ msgid ""
 "used.  Please request a new password reset."
 msgstr ""
 "De reset link is niet geldig. Mogelijk is hij verlopen. Vraag svp een nieuwe "
-"paswoord reset aan."
+"wachtwoord reset aan."
 
 #: .\src\templates\registration\password_reset_done.html:11
 #: .\src\templates\registration\password_reset_done.html:12
 msgid "Password reset successful"
-msgstr "Reset paswoord geslaagd"
+msgstr "Wachtwoord reset geslaagd"
 
 #: .\src\templates\registration\password_reset_done.html:16
 msgid ""
 "We've emailed you instructions for setting your password to the email "
 "address you submitted. You should be receiving it shortly."
 msgstr ""
-"We hebben je een mail met instructies gestuurd om je paswoord in te stellen. "
-"Je zou dit binnenkort moeten ontvangen."
+"We hebben je een mail met instructies gestuurd om je wachtwoord in te "
+"stellen. Je zou dit binnenkort moeten ontvangen."
 
 #: .\src\templates\registration\password_reset_form.html:16
 msgid ""
 "Forgotten your password? Enter your email address below, and we'll email "
 "instructions for setting a new one."
 msgstr ""
-"Paswoord vergeten? Voer hieronder je e-mail adres in en we sturen je "
-"instructies om een nieuw paswoord in te stellen."
+"Wachtwoord vergeten? Voer hieronder je e-mail adres in en we sturen je "
+"instructies om een nieuw wachtwoord in te stellen."
 
 #: .\src\templates\registration\password_reset_form.html:21
 msgid "Email address:"
@@ -2375,7 +2440,7 @@ msgstr "E-mail adres:"
 
 #: .\src\templates\registration\password_reset_form.html:30
 msgid "Reset my password"
-msgstr "Reset my password"
+msgstr "Reset mijn wachtwoord"
 
 #: .\src\templates\resources_cards.html:32
 msgid "Featured"
