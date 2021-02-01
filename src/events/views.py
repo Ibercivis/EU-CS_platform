@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
@@ -9,14 +10,15 @@ from .forms import EventForm
 
 def events(request):
     user = request.user
-    events = Event.objects.get_queryset().order_by('-featured','start_date')
+    events = Event.objects.get_queryset().filter(start_date__gte=datetime.now()).order_by('-featured','start_date')
+    pastEvents = Event.objects.get_queryset().filter(start_date__lt=datetime.now()).order_by('-featured','start_date')
     approvedEvents = ApprovedEvents.objects.all().values_list('event_id',flat=True)
     unApprovedEvents = UnApprovedEvents.objects.all().values_list('event_id',flat=True)
 
     if not user.is_staff:
         events = events.exclude(id__in=unApprovedEvents)
 
-    return render(request, 'events.html', {'events': events, 'approvedEvents': approvedEvents,
+    return render(request, 'events.html', {'events': events, 'pastEvents': pastEvents, 'approvedEvents': approvedEvents,
     'unApprovedEvents': unApprovedEvents,'user':user})
 
 @login_required(login_url='/login')
