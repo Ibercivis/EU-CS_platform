@@ -66,6 +66,51 @@
     </div>
     <br/>
     {% endfor %}
+    
+    {% if pastEvents %}
+    <hr>
+    <h1>{% trans "Past events" %}</h1>
+    {% for pastEvent in pastEvents %}
+
+    <div class="row {% if pastEvent.featured %}event-highlighted{%endif%}">
+        <div class="col-sm-4 col-12 mt-4 mb-4">
+            <h3>{{pastEvent.title}}</h3> <h5>{% if pastEvent.place %}{{pastEvent.place}}, {%endif%}{{pastEvent.start_date | date:" M d, Y"}}
+                {% if pastEvent.hour %}{{pastEvent.hour | time:'H:i'}} {%endif%}
+            </h5>
+        </div>
+
+        <div class="col-sm-7 col-12 mt-4 mb-4">
+            {{pastEvent.description}}
+            <br/><br/>
+            {% if pastEvent.url %} <p>{% trans "More info" %}: <a href="{% if 'http' not in pastEvent.url %}//{%endif%}{{pastEvent.url}}" target="_blank">{{pastEvent.url}}</a></p>{% endif %}
+        </div>
+        <div class="col-sm-1 col-12 mt-4 mb-4">
+        {% if user.is_staff %}
+            {% if pastEvent.id in approvedEvents %}
+                <a onclick="setApprovedEvent({{pastEvent.id}}, false)"><i class="far fa-thumbs-down"></i></a>
+            {% elif pastEvent.id in unApprovedEvents %}
+                <a onclick="setApprovedEvent({{pastEvent.id}}, true)"><i class="far fa-thumbs-up"></i></a>
+            {% else %}
+                <a onclick="setApprovedEvent({{pastEvent.id}}, true)"><i class="far fa-thumbs-up"></i></a>
+                <a onclick="setApprovedEvent({{pastEvent.id}}, false)"><i class="far fa-thumbs-down"></i></a>
+            {% endif %}
+            <br/>
+            <span id="featured{{pastEvent.id}}">
+                {% if pastEvent.featured %}
+                <a class="btn btn-red float-left mt-4" onclick="setFeaturedEvent({{pastEvent.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
+                {% else %}
+                <a class="btn btn-red float-left mt-4" onclick="setFeaturedEvent({{pastEvent.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
+                {% endif %}
+            </span>
+            <a class="btn btn-red float-left mt-4" href="{% url 'editEvent' pastEvent.id %}" ><i class="fas fa-edit"></i></a>
+            <a class="btn btn-red float-left mt-4" href="{% url 'deleteEvent' pastEvent.id %}"><i class="fas fa-trash-alt"></i></a>
+        {% endif %}
+        </div>
+    </div>
+    <br/>
+    {% endfor %}
+    {% endif %}
+
     {% else %}
     <div class="col-12">
         <img class="img-fluid img-zoom col-12 mt-5" src="{% static 'site/img/undraw_empty_xct9.svg' %}">
