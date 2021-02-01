@@ -9,7 +9,7 @@
 <div class="jumbotron jumbotron-fluid jumbotron-blue mb-0">
     <div class="container-fluid">
         <div class="container">
-          <h1 class="display-4 text-white pt-4 pb-4">{% trans "Upcoming events" %}</h1>
+          <h1 class="display-4 text-white pt-4 pb-4">{% trans "Events" %}</h1>
         </div>
     </div>
 </div>
@@ -26,7 +26,54 @@
         {% endif %}
     </div>
 
+    {% if ongoingEvents %}
+    
+    <h1>{% trans "On going events" %}</h1>
+    {% for ongoingEvent in ongoingEvents %}
+
+    <div class="row {% if ongoingEvent.featured %}event-highlighted{%endif%}">
+        <div class="col-sm-4 col-12 mt-4 mb-4">
+            <h3>{{ongoingEvent.title}}</h3> <h5>{% if ongoingEvent.place %}{{ongoingEvent.place}}, {%endif%}{{ongoingEvent.start_date | date:" M d, Y"}}
+                {% if ongoingEvent.hour %}{{ongoingEvent.hour | time:'H:i'}} {%endif%}
+            </h5>
+        </div>
+
+        <div class="col-sm-7 col-12 mt-4 mb-4">
+            {{ongoingEvent.description}}
+            <br/><br/>
+            {% if ongoingEvent.url %} <p>{% trans "More info" %}: <a href="{% if 'http' not in ongoingEvent.url %}//{%endif%}{{ongoingEvent.url}}" target="_blank">{{ongoingEvent.url}}</a></p>{% endif %}
+        </div>
+        <div class="col-sm-1 col-12 mt-4 mb-4">
+        {% if user.is_staff %}
+            {% if ongoingEvent.id in approvedEvents %}
+                <a onclick="setApprovedEvent({{ongoingEvent.id}}, false)"><i class="far fa-thumbs-down"></i></a>
+            {% elif ongoingEvent.id in unApprovedEvents %}
+                <a onclick="setApprovedEvent({{ongoingEvent.id}}, true)"><i class="far fa-thumbs-up"></i></a>
+            {% else %}
+                <a onclick="setApprovedEvent({{ongoingEvent.id}}, true)"><i class="far fa-thumbs-up"></i></a>
+                <a onclick="setApprovedEvent({{ongoingEvent.id}}, false)"><i class="far fa-thumbs-down"></i></a>
+            {% endif %}
+            <br/>
+            <span id="featured{{ongoingEvent.id}}">
+                {% if ongoingEvent.featured %}
+                <a class="btn btn-red float-left mt-4" onclick="setFeaturedEvent({{ongoingEvent.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
+                {% else %}
+                <a class="btn btn-red float-left mt-4" onclick="setFeaturedEvent({{ongoingEvent.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
+                {% endif %}
+            </span>
+            <a class="btn btn-red float-left mt-4" href="{% url 'editEvent' ongoingEvent.id %}" ><i class="fas fa-edit"></i></a>
+            <a class="btn btn-red float-left mt-4" href="{% url 'deleteEvent' ongoingEvent.id %}"><i class="fas fa-trash-alt"></i></a>
+        {% endif %}
+        </div>
+    </div>
+    <br/>
+    {% endfor %}
+    {% endif %}
+
+
     {% if events %}
+    <hr>
+    <h1>{% trans "Upcoming events" %}</h1>
     {% for event in events %}
 
     <div class="row {% if event.featured %}event-highlighted{%endif%}">

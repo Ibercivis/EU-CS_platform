@@ -1,6 +1,5 @@
 {% load i18n %}
 {% load staticfiles %}
-{% load i18n %}
 {% load l10n %}
 {% load countries %}
 {% get_countries as countries %}
@@ -52,8 +51,7 @@
 		</div>
 		{% if request.get_full_path != "/organisations" %}
 		<div class="col-lg-6 text-right mb-3">
-			<a class="text-decoration-none text-muted mb-4" href="/organisations"><i class="fas fa-times"></i> {% trans "Clear
-				current search query and filters" %}</a>
+			<a class="text-decoration-none text-muted mb-4" href="/organisations"><i class="fas fa-times"></i> {% trans "Clear current search query and filters" %}</a>
 			</div>
 			{% endif %}
 		</form>
