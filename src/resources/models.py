@@ -71,6 +71,7 @@ class Resource(models.Model):
     learningResourceType = models.ForeignKey(LearningResourceType, on_delete=models.CASCADE,null=True, blank=True)
     timeRequired =  models.FloatField(null=True, blank=True)
     conditionsOfAccess = models.CharField(max_length=300, null=True, blank=True)
+    own = models.BooleanField(null=True, blank=True)
 
     def __str__(self):
         return self.name
