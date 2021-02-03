@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-13 14:54+0100\n"
+"POT-Creation-Date: 2021-02-03 11:45+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -150,20 +150,33 @@ msgstr "Muuda sündmust"
 msgid "Event info"
 msgstr "Sündmuse info"
 
-#: .\src\events\templates\events.html:12
-msgid "Upcoming events"
-msgstr "Eelolevad sündmused"
+#: .\src\events\templates\events.html:12 .\src\templates\about.html:58
+msgid "Events"
+msgstr "Sündmused"
 
 #: .\src\events\templates\events.html:24 .\src\templates\base_forum.html:89
-#: .\src\templates\base_r2.html:179
+#: .\src\templates\base_r2.html:180
 msgid "ADD"
 msgstr "LISA"
 
-#: .\src\events\templates\events.html:42
+#: .\src\events\templates\events.html:31
+msgid "On going events"
+msgstr ""
+
+#: .\src\events\templates\events.html:44 .\src\events\templates\events.html:89
+#: .\src\events\templates\events.html:132
 msgid "More info"
 msgstr "Rohkem infot"
 
-#: .\src\events\templates\events.html:72
+#: .\src\events\templates\events.html:76
+msgid "Upcoming events"
+msgstr "Eelolevad sündmused"
+
+#: .\src\events\templates\events.html:119
+msgid "Past events"
+msgstr ""
+
+#: .\src\events\templates\events.html:164
 #: .\src\organisations\templates\organisations.html:26
 #: .\src\projects\templates\projects.html:27
 #: .\src\resources\templates\resources.html:27
@@ -187,7 +200,7 @@ msgid "Please briefly describe the organisation (ideally in 500 words or less)"
 msgstr "Palun kirjelda lühidalt organisatsiooni (soovitavalt kuni 500 sõna)"
 
 #: .\src\organisations\forms.py:16
-#: .\src\organisations\templates\finder_organisations.html:19
+#: .\src\organisations\templates\finder_organisations.html:18
 msgid "Type"
 msgstr "Tüüp"
 
@@ -296,12 +309,12 @@ msgstr "Muuda organisatsiooni profiili"
 msgid "Save"
 msgstr "Salvesta"
 
-#: .\src\organisations\templates\finder_organisations.html:29
+#: .\src\organisations\templates\finder_organisations.html:28
 #: .\src\projects\templates\finder_projects.html:54
 msgid "Country"
 msgstr "Riik"
 
-#: .\src\organisations\templates\finder_organisations.html:45
+#: .\src\organisations\templates\finder_organisations.html:44
 #: .\src\projects\templates\finder_projects.html:82
 #: .\src\resources\templates\finder_resources.html:69
 #: .\src\templates\home.html:66 .\src\templates\home.html:76
@@ -309,11 +322,16 @@ msgstr "Riik"
 msgid "result"
 msgstr "tulemus"
 
-#: .\src\organisations\templates\finder_organisations.html:45
+#: .\src\organisations\templates\finder_organisations.html:44
 #: .\src\projects\templates\finder_projects.html:82
 #: .\src\resources\templates\finder_resources.html:69
 msgid "found"
 msgstr "leitud"
+
+#: .\src\organisations\templates\finder_organisations.html:54
+#: .\src\projects\templates\finder_projects.html:93
+msgid "Clear current search query and filters"
+msgstr ""
 
 #: .\src\organisations\templates\new_organisation.html:64
 msgid "New Organisation Profile"
@@ -462,8 +480,8 @@ msgid "Geographical location"
 msgstr "Geograafiline asukoht"
 
 #: .\src\profiles\templates\profiles\followed_projects.html:27
-#: .\src\templates\base2.html:65 .\src\templates\base_forum.html:76
-#: .\src\templates\base_r2.html:164
+#: .\src\templates\base2.html:65 .\src\templates\base_forum.html:77
+#: .\src\templates\base_r2.html:165
 msgid "Followed projects"
 msgstr "Järgnevad projektid"
 
@@ -816,10 +834,6 @@ msgstr "Ei ole veel modereeritud"
 #: .\src\templates\_subnavbar.html:8
 msgid "All"
 msgstr "Kõik"
-
-#: .\src\projects\templates\finder_projects.html:93
-msgid "Clear current search query and filters"
-msgstr ""
 
 #: .\src\projects\templates\modal_projects.html:8
 #: .\src\resources\templates\modal_resources.html:8
@@ -1525,6 +1539,11 @@ msgstr "SÜNDMUSED"
 
 #: .\src\templates\_navbar.html:6 .\src\templates\base_forum.html:63
 #: .\src\templates\base_r2.html:150
+msgid "MOOCS"
+msgstr ""
+
+#: .\src\templates\_navbar.html:7 .\src\templates\base_forum.html:64
+#: .\src\templates\base_r2.html:151
 msgid "ABOUT"
 msgstr "MEIST"
 
@@ -1608,10 +1627,6 @@ msgstr ""
 #: .\src\templates\about.html:58
 msgid "an"
 msgstr ""
-
-#: .\src\templates\about.html:58
-msgid "Events"
-msgstr "Sündmused"
 
 #: .\src\templates\about.html:58
 msgid "calendar"
@@ -1984,8 +1999,8 @@ msgstr ""
 "keskkonnale."
 
 #: .\src\templates\base.html:74 .\src\templates\base2.html:68
-#: .\src\templates\base_forms.html:51 .\src\templates\base_forum.html:79
-#: .\src\templates\base_r2.html:168
+#: .\src\templates\base_forms.html:51 .\src\templates\base_forum.html:80
+#: .\src\templates\base_r2.html:169
 msgid "Admin"
 msgstr "Admin"
 
@@ -1994,7 +2009,7 @@ msgid "Profile"
 msgstr "Profiil"
 
 #: .\src\templates\base.html:85 .\src\templates\base2.html:70
-#: .\src\templates\base_forum.html:80 .\src\templates\base_r2.html:170
+#: .\src\templates\base_forum.html:82 .\src\templates\base_r2.html:171
 msgid "Logout"
 msgstr "Logi välja"
 
@@ -2007,37 +2022,37 @@ msgid "Connect with us on"
 msgstr "Võta meiega ühendust"
 
 #: .\src\templates\base2.html:56 .\src\templates\base3.html:49
-#: .\src\templates\base_forum.html:65 .\src\templates\base_r2.html:152
+#: .\src\templates\base_forum.html:66 .\src\templates\base_r2.html:153
 msgid "LOGIN"
 msgstr "LOGI SISSE"
 
 #: .\src\templates\base2.html:57 .\src\templates\base3.html:50
-#: .\src\templates\base_forum.html:66
+#: .\src\templates\base_forum.html:67
 msgid "SIGN UP"
 msgstr "REGISTREERU"
 
-#: .\src\templates\base2.html:61 .\src\templates\base_forum.html:72
-#: .\src\templates\base_r2.html:160
+#: .\src\templates\base2.html:61 .\src\templates\base_forum.html:73
+#: .\src\templates\base_r2.html:161
 msgid "My Profile"
 msgstr "Minu profiil"
 
-#: .\src\templates\base2.html:62 .\src\templates\base_forum.html:73
-#: .\src\templates\base_r2.html:161
+#: .\src\templates\base2.html:62 .\src\templates\base_forum.html:74
+#: .\src\templates\base_r2.html:162
 msgid "My organisations"
 msgstr "Minu organisatsioonid"
 
-#: .\src\templates\base2.html:63 .\src\templates\base_forum.html:74
-#: .\src\templates\base_r2.html:162
+#: .\src\templates\base2.html:63 .\src\templates\base_forum.html:75
+#: .\src\templates\base_r2.html:163
 msgid "Submitted projects"
 msgstr "Registreeritud projektid"
 
-#: .\src\templates\base2.html:64 .\src\templates\base_forum.html:75
-#: .\src\templates\base_r2.html:163
+#: .\src\templates\base2.html:64 .\src\templates\base_forum.html:76
+#: .\src\templates\base_r2.html:164
 msgid "Submitted resources"
 msgstr "Registreeritud materjalid"
 
-#: .\src\templates\base2.html:66 .\src\templates\base_forum.html:77
-#: .\src\templates\base_r2.html:165
+#: .\src\templates\base2.html:66 .\src\templates\base_forum.html:78
+#: .\src\templates\base_r2.html:166
 msgid "Resources library"
 msgstr "Materjalide kogu"
 
@@ -2065,11 +2080,12 @@ msgstr "profiil"
 msgid "logout"
 msgstr "logi välja"
 
-#: .\src\templates\base_forum.html:62 .\src\templates\base_r2.html:149
+#: .\src\templates\base_forum.html:62 .\src\templates\base_forum.html:148
+#: .\src\templates\base_r2.html:149 .\src\templates\base_r2.html:244
 msgid "FORUM"
 msgstr "FOORUM"
 
-#: .\src\templates\base_r2.html:153
+#: .\src\templates\base_r2.html:154
 msgid "SIGNUP"
 msgstr "REGISTREERI"
 
