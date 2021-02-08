@@ -53,7 +53,7 @@ python manage.py runserver
 ```
 python manage.py runcrons
 python manage.py runcrons --force
-And for do this automatically:
+And to do this automatically:
 python manage.py crontab add
 ```
 
