@@ -132,7 +132,7 @@
             <span data-value="4" data-text="Very Good"></span>
             <span data-value="5" data-text="Excellent"></span>
           </span><br>
-          {{review.submit_date}}
+          {{review.submit_date}} - {{review.user.name}}
           <p>{{review.comment}}</p>
           {% endfor %}
           {% endif %}
