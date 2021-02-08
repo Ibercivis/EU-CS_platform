@@ -39,6 +39,15 @@
   {% block extra_css %}
   {% endblock extra_css %}
 </head>
+
+{% block splash %}
+<div class="jumbotron jumbotron-fluid jumbotron-blue mb-0">
+  <div class="container">
+    <h1 class="display-4 text-white pt-4 pb-4">Forum</h1>
+  </div>
+</div>
+{% endblock splash %}
+
 <body>
   <header>
     <!--Navbar-->
@@ -92,12 +101,11 @@
     </nav>
     <!--/.Navbar-->
   </header>
+
   <main class="flex-fill">
     {% include "modalinfo.html" %}
 
     <div class="container mt-4">
-
-
 
       {% block js %}
       {% endblock js %}
