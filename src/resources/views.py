@@ -461,14 +461,22 @@ def setTraining(request):
     response = {}
     id = request.POST.get("resource_id")
     status = request.POST.get("status")
-    print(status)
     resource = get_object_or_404(Resource, id=id)
     resource.isTrainingResource = status
     resource.save()
 
     return JsonResponse(response,safe=False)
 
+@staff_member_required()
+def setOwnTraining(request):
+    response = {}
+    id = request.POST.get("resource_id")
+    status = request.POST.get("status")
+    resource = get_object_or_404(Resource, id=id)
+    resource.own = status
+    resource.save()
 
+    return JsonResponse(response,safe=False)
 
 def allowUserResource(request):
     response = {}

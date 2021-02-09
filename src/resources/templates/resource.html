@@ -199,10 +199,16 @@
       {% if isTrainingResource %}
       <a  class="text-secondary" onclick="setTraining({{resource.id}}, 'False')"><i class="fas fa-book"></i></a>
       <a><i class="fas fa-graduation-cap"></i></a>
+        {% if resource.own %}
+          <a class="btn btn-green" onclick="setOwnTraining({{resource.id}}, 'False')"></i> {% trans "Own training" %}</a>
+        {% else %}
+          <a class="btn btn-outline-secondary" onclick="setOwnTraining({{resource.id}}, 'True')"></i> {% trans "Mark as own training" %}</a>
+        {% endif %}
       {% else %}
       <a><i class="fas fa-book"></i></a>
-      <a class="text-secondary" onclick="setTraining({{resource.id}}, 'True')"><i class="fas fa-graduation-cap"></i></a>
-      {% endif %}
+      <a class="" onclick="setTraining({{resource.id}}, 'True')"><i class="fas fa-graduation-cap"></i></a>
+      {% endif %}  
+      
 
       {% endif %}
       {% if resource.creator == user or user.is_staff or user.id in cooperators %}
@@ -310,6 +316,22 @@
     );
   }
 
+  function setOwnTraining(idResource, status){
+    var request = $.ajax(
+    {
+      type: "POST",
+      url: "{% url 'setOwnTraining' %}",
+      data: {
+        "resource_id": idResource,
+        "status": status,
+        csrfmiddlewaretoken: '{{ csrf_token }}'
+      },
+      success: function (response) {
+        window.location.reload(false);
+      }
+    }
+    );
+  }
 
   function setFeatured(idResource, featured){
     var htmlId = "featured" + idResource;

@@ -25,6 +25,7 @@ urlpatterns = [
     path('training_resource/<int:pk>', views.training_resource, name='training_resource'),
     path('editTrainingResource/<int:pk>', views.editTrainingResource, name='editTrainingResource'),
     path('setTraining', views.setTraining, name='setTraining'),
+    path('setOwnTraining', views.setOwnTraining, name='setOwnTraining'),
     path('getResourceKeywordsSelector/', views.getResourceKeywordsSelector, name='getResourceKeywordsSelector'),
     path('getResourceAuthorsSelector/', views.getResourceAuthorsSelector, name='getResourceAuthorsSelector'),
 
