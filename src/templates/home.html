@@ -61,6 +61,16 @@
 	<div class="row">
 
 		<div class="col-12 mb-2">
+			<h3>{% trans "Training" %}</h3>
+			{{ countertresources }} {% trans "result" %}{% if counterresources != 1 %}s{% endif %} {% trans "in Training" %}
+			{% if countertresources > 6 %}, click <a href="/training_resources">{% trans "here" %}</a> {% trans "to see all of them" %}{% endif %}
+		</div>
+		{% include "resources_cards.html" with resources=tresources %}
+		<div class="col-12 mb-2">
+			<hr>
+		</div>
+
+		<div class="col-12 mb-2">
 			<h3>{% trans "Projects" %}</h3>
 			{{ counterprojects }} {% trans "result" %}{% if counterprojects != 1 %}s{% endif %} {% trans "in Projects" %}
 			{% if counterprojects > 6 %}, click <a href="/projects">{% trans "here" %}</a> {% trans "to see all of them" %} {% endif %}
@@ -76,16 +86,6 @@
 			{% if counterresources > 6 %}, click <a href="/resources">{% trans "here" %}</a> {% trans "to see all of them" %}{% endif %}
 		</div>
 		{% include "resources_cards.html" %}
-		<div class="col-12 mb-2">
-			<hr>
-		</div>
-
-		<div class="col-12 mb-2">
-			<h3>{% trans "Training" %}</h3>
-			{{ countertresources }} {% trans "result" %}{% if counterresources != 1 %}s{% endif %} {% trans "in Training" %}
-			{% if countertresources > 6 %}, click <a href="/training_resources">{% trans "here" %}</a> {% trans "to see all of them" %}{% endif %}
-		</div>
-		{% include "resources_cards.html" with resources=tresources %}
 		<div class="col-12 mb-2">
 			<hr>
 		</div>
