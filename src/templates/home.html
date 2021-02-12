@@ -18,8 +18,17 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
 
 {% if request.get_full_path == "/" %}
+
 <div class="jumbotron jumbotron-fluid jumbotron-blue mb-0" style="padding-top: 1.5rem;">
 	<div class="container">
+
+		<div class="display-5 text-white">
+			<br/><br/>
+			<p>The static part of the platform has recently been translated into 11 languages.</p>
+			<p>{% trans "Do you want to help with translation?" %}<a class="linkwhite" href="/translations"> {% trans " Please click here" %}</a></p>
+
+		</div>
+
 		<div class="d-md-none">
 			<h3 class="display-5 text-white"><br>EU-CITIZEN.SCIENCE</h3>
 

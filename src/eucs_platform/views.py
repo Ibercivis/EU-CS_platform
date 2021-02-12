@@ -135,6 +135,8 @@ def moderation(request):
 def criteria(request):
     return render(request, 'criteria.html')
 
+def translations(request):
+    return render(request, 'translations.html')
 
 def home_autocomplete(request):
     if request.GET.get('q'):
