@@ -1,0 +1,82 @@
+{% extends "base_r2.html" %}
+{% load i18n %}
+{% load staticfiles %}
+
+{% block title %}{{ block.super }}Translations{% endblock %}
+
+{% block splash %}
+<div class="jumbotron jumbotron-fluid jumbotron-blue">
+	<div class="container">
+		<h1 class="display-4 pt-4 pb-4 text-white">{% trans "Translations" %}</h1>
+	</div>
+</div>
+{% endblock splash %}
+
+{% block navbar-left %}
+{% include "_navbar.html" %}
+{% endblock %}
+
+
+{% block list_of_items %}
+<div class="container">
+  <div class="row mt-5">
+    <h3>Can you help us to translate this platform?</h3>
+    <div class="col-sm-12 col-12 mt-4 mb-4">
+
+      
+  
+      <p>Have you spotted an error in the translation? The EU-Citizen.Science platform is built by the community for the community. We would be very thankful if you could help us correct these errors.</p>
+      <p>How to do it: Please send us an email to vval@bifi.es containing 1) the language in which there is an error, 2) the URL of the page where you found the error, and 3) what it says now and what it should say instead. It would be great if you could add where in the page is the error to help us find it faster: at the top of the page, below the image, in the header, etc.</p>
+        
+
+      <p>All translations can be found in this <a href="https://github.com/Ibercivis/EU-CS_platform/tree/master/src/locale/"> folder</a>:  </p>
+     
+      <img title="translations folder" target="_blank"
+      class="img-fluid mb-3" src="{% static 'site/img/locale_folder.png' %}">
+
+      <p>Inside the folder are all the languages that we translate. The translations must be done in the django.po file.</p> Here is the list of languages pointing to the translation file.
+      <br/>
+      
+      <ul>
+        <li><a href="https://github.com/Ibercivis/EU-CS_platform/blob/master/src/locale/de/LC_MESSAGES/django.po" target="_blank">De - german</a></li>
+        <li><a href="https://github.com/Ibercivis/EU-CS_platform/blob/master/src/locale/el/LC_MESSAGES/django.po" target="_blank">El - greek</a></li>
+        <li><a href="https://github.com/Ibercivis/EU-CS_platform/blob/master/src/locale/es/LC_MESSAGES/django.po" target="_blank">Es - spanish</a></li>
+        <li><a href="https://github.com/Ibercivis/EU-CS_platform/blob/master/src/locale/et/LC_MESSAGES/django.po" target="_blank">Et - estonian</a></li>
+        <li><a href="https://github.com/Ibercivis/EU-CS_platform/blob/master/src/locale/fr/LC_MESSAGES/django.po" target="_blank">Fr - french</a></li>
+        <li><a href="https://github.com/Ibercivis/EU-CS_platform/blob/master/src/locale/hu/LC_MESSAGES/django.po" target="_blank">Hu - hungarian</a></li>
+        <li><a href="https://github.com/Ibercivis/EU-CS_platform/blob/master/src/locale/it/LC_MESSAGES/django.po" target="_blank">It - italian</a></li>
+        <li><a href="https://github.com/Ibercivis/EU-CS_platform/blob/master/src/locale/lt/LC_MESSAGES/django.po" target="_blank">Lt - lituanian</a></li>
+        <li><a href="https://github.com/Ibercivis/EU-CS_platform/blob/master/src/locale/nl/LC_MESSAGES/django.po" target="_blank">Nl - dutch</a></li>
+        <li><a href="https://github.com/Ibercivis/EU-CS_platform/blob/master/src/locale/pt/LC_MESSAGES/django.po" target="_blank">Pt - portuguese</a></li>
+        <li><a href="https://github.com/Ibercivis/EU-CS_platform/blob/master/src/locale/sv/LC_MESSAGES/django.po" target="_blank">Sv - swedish</a></li>
+      </ul>
+
+      <h4>Instructions</h4>
+      <p>Many text fragments have already been translated, you can check them to see if they are correct and if not, change them.</p>
+      <p>To correctly make a translation you have to translate the msgid into msgstr. That is, msgid is the part in English
+         that you have to translate, you shouldn't change it since it identifies the text string that we want to translate. 
+         And in msgstr you have to enter the translation of the msgid.</p>
+      <p>In the next example, we have to translate 'Can participate at home'. We fill msgstr with the translation.</p>
+      <img title="translations example" target="_blank"
+      class="img-fluid mb-3" src="{% static 'site/img/locale_es_example.png' %}">
+      <img title="translations example" target="_blank"
+      class="img-fluid mb-3" src="{% static 'site/img/locale_es_example2.png' %}">
+
+      <p>In translations where there are several lines, it must be respected that each line begins and ends with quotation marks</p>
+      <img title="some lines image" target="_blank"
+      class="img-fluid mb-3" src="{% static 'site/img/some_lines.png' %}">
+
+      <p>In some cases, a strange symbol can appear, these symbols must be left as they are for it to work correctly</p>
+
+      <img title="python format translations image" target="_blank"
+      class="img-fluid mb-3" src="{% static 'site/img/python_format_translations.png' %}">
+
+
+      <p>Once you have finished translating, you can commit on github if you have permission or send us the file by email <br/>
+        and we will take care of updating the platform.<br/>
+      Thank so much!</p>
+
+    </div>
+  </div>
+</div>
+{% endblock list_of_items %}
