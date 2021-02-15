@@ -1,3 +1,13 @@
 from django.contrib import admin
+from .models import Organisation, OrganisationType
 
-# Register your models here.
+
+class OrganisationAdmin(admin.ModelAdmin):
+    list_filter = ('orgType',)
+    ordering = ('-name',)
+
+
+
+    
+admin.site.register(OrganisationType)
+admin.site.register(Organisation, OrganisationAdmin)
