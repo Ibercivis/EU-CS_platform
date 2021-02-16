@@ -67,7 +67,7 @@ class TrainingResourceSerializer(serializers.ModelSerializer):
         model = Resource
         fields = ['id', 'name', 'url', 'abstract' , 'image1', 'image2','authors', 'audience', 'dateUploaded', 'keywords',
                 'category', 'license', 'publisher', 'datePublished', 'theme', 'inLanguage', 'resourceDOI', 'featured', 'educationLevel',
-                'learningResourceType', 'timeRequired', 'conditionsOfAccess']
+                'learningResourceType', 'timeRequired', 'conditionsOfAccess', 'own']
 
 class ResourceSerializerCreateUpdate(serializers.ModelSerializer):
     category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), many=False)
@@ -221,7 +221,7 @@ class TrainingResourceSerializerCreateUpdate(serializers.ModelSerializer):
         model = Resource
         fields = ['id', 'name', 'url', 'abstract' , 'image1', 'image2','authors', 'audience', 'keywords',
                 'category', 'license', 'publisher', 'datePublished', 'theme', 'inLanguage', 'resourceDOI', 'featured', 'educationLevel',
-                'learningResourceType', 'timeRequired', 'conditionsOfAccess']
+                'learningResourceType', 'timeRequired', 'conditionsOfAccess', 'own']
 
     def validate(self, data):
         if not self.partial:
