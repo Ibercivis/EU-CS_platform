@@ -5,6 +5,7 @@ from PIL import Image
 from projects.models import Project, Topic, Status, Keyword, FundingBody, OriginDatabase, CustomField, ParticipationTask, GeographicExtend
 from projects.forms import getCountryCode
 from projects.views import saveImageWithPath
+from organisations.models import Organisation
 
 class TopicSerializer(serializers.ModelSerializer):
     class Meta:
@@ -46,6 +47,11 @@ class GeographicExtendSerializer(serializers.ModelSerializer):
         model = GeographicExtend
         fields = '__all__'
 
+class OrganisationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Organisation
+        fields = '__all__'
+
 
 class ProjectSerializerCreateUpdate(serializers.ModelSerializer):
     topic = serializers.PrimaryKeyRelatedField(queryset=Topic.objects.all(), many=True)
@@ -57,10 +63,13 @@ class ProjectSerializerCreateUpdate(serializers.ModelSerializer):
     originDatabase = serializers.CharField(required=False)
     keywords = serializers.CharField(required=False)
     customField = serializers.JSONField(required=False)
+    mainOrganisation = serializers.PrimaryKeyRelatedField(queryset=Organisation.objects.all(), required=False)
+    organisation = serializers.PrimaryKeyRelatedField(queryset=Organisation.objects.all(), many=True, required=False)
 
     class Meta:
         model = Project
         fields = ['id', 'name', 'aim', 'description', 'keywords', 'status', 'topic', 'start_date', 'end_date', 'url',
+        'mainOrganisation', 'organisation',
          'latitude', 'longitude', 'country', 'author', 'author_email', 'image1', 'imageCredit1','image2', 'imageCredit2',
          'image3', 'imageCredit3','host', 'howToParticipate', 'doingAtHome', 'equipment', 'fundingBody', 'fundingProgram',
          'originDatabase','originURL', 'originUID', 'customField']
@@ -139,10 +148,13 @@ class ProjectSerializerCreateUpdate(serializers.ModelSerializer):
         keywordsSent = False
         fundingBodySent = False
         originDatabaseSent = False
+        mainOrganisationSent = False
+        organisationSent = False
         customFieldSent = False
         image1Sent = False
         image2Sent = False
         image3Sent = False
+        
         if 'keywords' in requestData:
             keywords = ""
             if requestData.get('keywords'):
@@ -162,6 +174,19 @@ class ProjectSerializerCreateUpdate(serializers.ModelSerializer):
                 originDatabaseSent = True
             else:
                 instance.originDatabase  = None
+
+        if 'mainOrganisation' in requestData:
+            if requestData.get('mainOrganisation'):
+                mainOrganisation = validated_data.pop('mainOrganisation')
+                mainOrganisationSent = True
+            else:
+                instance.mainOrganisation  = None
+
+        if 'organisation' in requestData:
+            organisation = ""
+            if requestData.get('organisation'):
+                organisation = validated_data.pop('organisation')
+            organisationSent = True
 
         if 'customField' in requestData:
             cFields = ""
@@ -202,6 +227,12 @@ class ProjectSerializerCreateUpdate(serializers.ModelSerializer):
         if(originDatabaseSent):
             originDatabase, exist = OriginDatabase.objects.get_or_create(originDatabase=originDatabase)
             instance.originDatabase = originDatabase
+        
+        if(mainOrganisationSent):
+            instance.mainOrganisation = mainOrganisation
+
+        if(organisationSent):
+            instance.organisation.set(organisation)
 
         #CustomField
         if(customFieldSent):
@@ -255,10 +286,13 @@ class ProjectSerializer(serializers.ModelSerializer):
     country = CountryField(required=False)
     start_date = serializers.DateTimeField(format="%Y-%m-%d", required=False)
     end_date = serializers.DateTimeField(format="%Y-%m-%d", required=False)
+    mainOrganisation = OrganisationSerializer(many=False, required=False)
+    organisation = OrganisationSerializer(many=True, required=False)
 
     class Meta:
         model = Project
         fields = ['id', 'name', 'aim', 'description', 'keywords', 'status', 'topic', 'start_date', 'end_date', 'url',
+         'mainOrganisation', 'organisation',
          'latitude', 'longitude', 'country', 'author', 'author_email', 'image1', 'imageCredit1','image2', 'imageCredit2',
          'image3', 'imageCredit3','host', 'howToParticipate', 'doingAtHome', 'equipment', 'fundingBody', 'fundingProgram',
          'originDatabase','originURL', 'originUID', 'featured', 'customField', 'dateCreated', 'origin']
