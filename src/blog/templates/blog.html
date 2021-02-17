@@ -16,30 +16,45 @@
 
 {% block list_of_items %}
 <div class="container">
-	<div class="row">
-		<div class="col-12">
-			<div class="card-columns">
-				{% for post in post_list %}
-					<div class="card shadow">
-						<a href="{{ post.get_absolute_url }}">
-							<img class="card-img-top" src="/media/{{post.image}}" alt="Card image">
-						</a>
-						<div class="card-body">
-							<a href="{{ post.get_absolute_url }}">
-								<h5 class="card-title">{{ post.title }}</h5>
-							</a>
-							<p class="card-text text-muted h6">{% if post.author.name != "Empty user" %}
-								{{ post.author.name }} {% endif %} <br /> {{ post.created_on}} </p>
-							<p class="card-text">{{post.excerpt | safe }}<br /><br />
-								<a href="{{ post.get_absolute_url }}">{% trans "Read More" %} >></a></p>
-						</div>
-					</div>
-					<br />
-				{% endfor %}
+
+	{% for post in post_list %}
+
+	<div class="card">
+		<div class="row">
+
+			<div class="col-md-8">
+				<div class="card-body">
+					<a href="{{ post.get_absolute_url }}">
+						<h5 class="card-title">{{ post.title }}</h5>
+					</a>
+					<p class="card-text text-muted h6">{% if post.author.name != "Empty user" %}
+						{{ post.author.name }} {% endif %} <br /> {{ post.created_on}} </p>
+					<p class="card-text">{{post.excerpt | safe }}<br /><br />
+						<a href="{{ post.get_absolute_url }}">{% trans "Read More" %} >></a>
+					</p>
+				</div>
 			</div>
+
+
+			<div class="col-md-4">
+				<a href="{{ post.get_absolute_url }}">
+					<img class="card-img-top" src="/media/{{post.image}}" alt="Card image">
+				</a>
+			</div>
+
 		</div>
 	</div>
+
+	<br />
+
+	{% endfor %}
+
+	<div class="col-lg-12">
+		{% include "blog_paginator.html" %}
+	</div>
 </div>
+
+
 {%endblock%}
 
 {% block scripts %}
