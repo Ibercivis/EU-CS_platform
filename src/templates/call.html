@@ -1,0 +1,108 @@
+{% extends "base_r2.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ block.super }} :: Privacy{% endblock %}
+{% block splash %}
+<div class="jumbotron jumbotron-fluid jumbotron-default">
+	<div class="container">
+		<h1 class="display-4 pt-4 pb-4 text-white">{% trans "Privacy" %}</h1>
+	</div>
+</div>
+{% endblock splash %}
+
+{% block navbar-left %}
+{% include "_navbar.html" %}
+{% endblock %}
+
+<div class="jumbotron jumbotron-fluid">
+	<div class="container">
+		<h1 class="display-5"><br>{% trans "Privacy" %}</h1>
+		<p class="lead text-light"></p>
+	</div>
+</div>
+{% block list_of_items %}
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4 col-12 mt-4 mb-4">
+			<h3>EU-Citizen.Science Call</h3>
+		</div>
+		<div class="col-sm-8 col-12 mt-4 mb-4">
+			The EU-Citizen.Science Call will fund the <b>development, implementation and testing of 10 training modules</b> 
+			on the topic of citizen science. These modules will be uploaded to the Moodle integration of the EU-Citizen.Science platform. 
+			Please refer to section 3 “Scope of the Call” in the Guide for Applicants to read the themes and the suggested topics of the training modules.
+			<br/><br/>
+			Training modules are self-directed, 1 or 2 hours units that a learner can study at her own pace and receive a badge and a 
+			certificate upon completion. The system is based on the education content management system Moodle (see here). 
+			We are estimating the effort of designing and developing a training unit at about 7-10 working days.<br/><br/>
+
+			Module designers are expected to:
+			<ul>
+				<li>develop the module content using the guidelines of the EU-Citizen.Science platform (see link below);</li>
+
+				<li>create a template for the module on the EU-Citizen.Science platform using Moodle, and upload all the content;</li>
+
+				<li>undertake user-testing of the module and implement changes where necessary with at least five members of the intended audience.</li>
+			</ul>
+
+			All guidance, templates etc. to help with the design of module content and uploading it to Moodle will be provided 
+			upon successful award of the grant. The preliminary module development guidelines document (here) and content template (here) 
+			are available for download.<br/><br/>
+
+			Please refer to section 7 “Requirements” of the Guide for Applicants to see all the requirements for a training module. Some of these requirements are: 
+			<ul>
+
+				<li>Each module should contain 5-8 sections, which must include the standard “Welcome and introduction”, “Conclusion and self-assessment”, 
+					“Further information and learning” and “Sources and acknowledgements”.</li>
+
+				<li>Modules can be prepared in any European language, but the application needs to be in English.</li>
+
+				<li>Each section of the module must end with a short activity or quiz to test student understanding of the section content. This is formative assessment, which allows the student to assess their progression and their understanding of key concepts.</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="container-fluid bg-white">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mt-4 mb-4">
+				<h3>Submission & evaluation process</h3>
+			</div>
+			<div class="col-sm-8 col-12 mt-4 mb-4">
+				The call will award 10 projects a maximum of 1.500 € each per project. Only one grant can be awarded per individual/organisation. Therefore, we ask each individual/organisation to submit a maximum of one application.</br/><br/>
+				Applicants can submit their applications (consisting of the completed Application Form, signed Declaration of Honour and a CV) as a single pdf per email to eucitsci.cg@gmail.com before the call deadline. Training modules can be prepared in any European language, but the application should be in English.<br/><br/>
+				The Application Form (here) and the Declaration of Honour (here) are available for download.<br/><br/>
+The evaluation process and selection criteria are detailed in sections 6 and 10 in the Guide for Applicants. Please, carefully read them before submitting your application. A decision of successful applications will be made no later than 24th May. Complete training modules (i.e. uploaded to Moodle and user-tested) are due for submission by the end of July 2021.
+
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mt-4 mb-4">
+				<h3>Further information</h3>
+			</div>
+			<div class="col-sm-8 col-12 mt-4 mb-4">
+				There will be two ‘Information for applicants’ sessions on the 10th and 15th of March 2021 from 11am - 12pm (CET) starting with a short introduction 
+				to the EU-Citizen.Science project and training module design followed by a Q&A session. You can register for one of these sessions via this Google form.
+				A recording of one of the sessions will be made available to applicants unable to attend any of the sessions in the dedicated page on the EU-Citizen.Science platform.<br/><br/>
+				<b>Contact person:</b> Nadia Dewhurst-Richman eucitsci.cg (at) gmail.com
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid bg-white">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4 col-12 mt-4 mb-4">
+					<h3>Acknowledgement</h3>
+				</div>
+				<div class="col-sm-8 col-12 mt-4 mb-4">
+						We have used the documents produced by the ACTION project for their open call as a basis to develop the Guide for Applicants including both its annexes and thank the ACTION project for sharing these useful documents with us. ACTION has received funding from the European Union’s Horizon 2020 Framework Programme for Research and Innovation under grant agreement No. 824603
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+	{% endblock list_of_items %}

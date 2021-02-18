@@ -132,11 +132,15 @@ def subscribe(request):
 
 def moderation(request):
     return render(request, 'moderation.html')
+
 def criteria(request):
     return render(request, 'criteria.html')
 
 def translations(request):
     return render(request, 'translations.html')
+
+def call(request):
+    return render(request, 'call.html')
 
 def home_autocomplete(request):
     if request.GET.get('q'):
