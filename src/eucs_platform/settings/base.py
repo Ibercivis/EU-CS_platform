@@ -57,6 +57,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 # Machina
                 'machina.core.context_processors.metadata',
+                #own
+                'eucs_platform.context_processors.global_settings',
 
             ]
         },
@@ -181,6 +183,21 @@ DATABASES = {
 # https://docs.djangoproject.com/en/dev/topics/i18n/
 
 LANGUAGE_CODE = "en"
+
+TRANSLATED_LANGUAGES = (
+    ('nl', 'Dutch'),
+    ('en', 'English'),
+    ('et', 'Estonian'),
+    ('fr', 'Français'),
+    ('de', 'German'),
+    ('el', 'Greek'),    
+    ('hu', 'Hungarian'),
+    ('it', 'Italian'),
+    ('lt', 'Lituanian'),
+    ('pt', 'Portuguese'),
+    ('es', 'Spanish'),    
+    ('sv', 'Swedish'),
+)
 
 LANGUAGE_CODES = [
     'fr',
