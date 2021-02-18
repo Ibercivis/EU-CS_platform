@@ -18,6 +18,16 @@
 {% block list_of_items %}
 {% include "modal_resources.html" %}
 <div class="container">
+{% for message in messages %}
+  <div class="container-fluid p-0">
+    <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      {{ message }}
+    </div>
+  </div>
+{% endfor %}
   <div class="row">
     {% include "resources_cards.html" %}
   </div>

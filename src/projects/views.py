@@ -5,8 +5,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import get_user_model
 from django.utils import formats
+from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q, Avg
+from django.utils.translation import ugettext_lazy as _
 from datetime import datetime
 from PIL import Image
 from itertools import chain
@@ -33,6 +35,7 @@ def new_project(request):
         if form.is_valid():
             images = setImages(request, form)
             form.save(request, images, [],mainOrganisationFixed)
+            messages.success(request, _('Project added correctly'))
             return redirect('/projects')
         else:
             print(form.errors)
