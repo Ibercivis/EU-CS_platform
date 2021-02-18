@@ -96,6 +96,27 @@
           </ul>
           <button data-toggle="modal" data-target="#modalinfo" class="btn btn-green mysubmit redbackground ml-2"
           type="submit"><i class="fas fa-plus-circle"></i>&nbsp;&nbsp;{% trans "ADD" %}</button>
+
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false" href="#"><i class="fas fa-globe"></i></a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <form action="/i18n/setlang/" method="post" style="display: inline;" name="languageForm">
+                  {% csrf_token %}
+                  <div style="display: inline;">          
+                    <input id="language" name="language" type="hidden" value="en">
+                    
+                    {% for lang in TRANSLATED_LANGUAGES %}
+                    <a class="dropdown-item" style="cursor: pointer;"
+                          onclick="javascript:document.getElementById('language').value='{{ lang.0 }}';languageForm.submit()">{{ lang.1 }}</a>  
+                    {% endfor %}          
+                  </div>
+                  </form>
+              </div>
+            </li>
+          </ul>        
+
         </div>
       </div>
     </nav>
