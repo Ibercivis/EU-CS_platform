@@ -7,8 +7,8 @@
 {% load cookielaw_tags %}
 {% load countries %}
 {% load active_link_tags %}
-
 {% get_countries as countries %}
+
 <head>
   {% block head %}
   <meta charset="UTF-8">
@@ -38,120 +38,26 @@
         <a class="navbar-brand" href="/">
           <img src="{% static 'site/img/icon.png' %}" width="30" height="30" alt=""/>
         </a>
-
-
-        <!--div class="ribbon ribbon-top-left">
-        <span>
-        <a style="text-decoration:none;color:white"
-        href="https://eu-citizen.science/blog/2020/04/03/welcome-alpha-release-eu-citizenscience-platform/">ALPHA-2</a>
-      </span>
-    </div-->
-
-    {% if isSearchPage and request.get_full_path != '/' %}
-    <form class="mx-auto my-auto d-sm-none" id="searchTopMobile" action="
-    {% if 'all' in request.get_full_path %}
-    /all
-    {% elif 'training_resources' in request.get_full_path %}
-    /training_resources
-    {% elif 'resources' in request.get_full_path %}
-    /resources
-    {% elif 'organisations' in request.get_full_path %}
-    /organisations
-    {% else %}
-    /projects
-    {% endif %}"
-    >
-
-    <div class="input-group pr-2">
-      <div class="input-group-prepend">
-        <div class="input-group-text inhead clickable "><i class="fas fa-search"></i></div>
-      </div>
-      <input  type="text" id="keywordsMobile" name="keywords"  autocomplete="off"
-      value="{{filters.keywords}}" class="basicAutoCompleteMobile form-control inhead"
-      placeholder="Search..."
-      {% if 'all' in request.get_full_path %}
-      data-url="../home_autocomplete/">
-      {% elif 'training_resources' in request.get_full_path %}
-      data-url="../tresources_autocomplete/">
-      {% elif 'resources' in request.get_full_path %}
-      data-url="../resources_autocomplete">
-
-      {% elif 'organisations' in request.get_full_path %}
-      data-url="../organisations_autocomplete">
-      {% else %}
-      data-url="../text_autocomplete/">
-      {% endif %}
-
-    </div>
-  </form>
-  {% endif %}
-
-
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
   aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
   <span class="navbar-toggler-icon"></span></button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    {% if isSearchPage  and request.get_full_path != '/' %}
-    <form class="mx-auto my-auto  w-50 d-none d-sm-block" id="searchTop" action="
-    {% if 'all' in request.get_full_path %}
-    /all
-    {% elif 'training_resources' in request.get_full_path %}
-    /training_resources
-    {% elif 'resources' in request.get_full_path %}
-    /resources
-    {% elif 'organisations' in request.get_full_path %}
-    /organisations
-    {% else %}
-    /projects
-    {% endif %}"
-    >
-
-
-    <div class="input-group pr-2">
-      <div class="input-group-prepend">
-        <div class="input-group-text inhead clickable "><i class="fas fa-search"></i></div>
-      </div>
-      <input  type="text" id="keywords" name="keywords"  autocomplete="off"
-      value="{{filters.keywords}}" class="basicAutoComplete form-control inhead"
-      placeholder="Search..."
-      {% if 'all' in request.get_full_path %}
-      data-url="../home_autocomplete/">
-      {% elif 'training_resources' in request.get_full_path %}
-      data-url="../tresources_autocomplete/">
-      {% elif 'resources' in request.get_full_path %}
-      data-url="../resources_autocomplete">
-
-      {% elif 'organisations' in request.get_full_path %}
-      data-url="../organisations_autocomplete">
-      {% else %}
-      data-url="../text_autocomplete/">
-      {% endif %}
-
-      <div class="input-group-append">
-        <div class="input-group-text inhead clickable" id="backsign"></div>
-      </div>
-    </div>
-
-
-  </form>
-  {% else %}
-  <div class="navbar-brand">EU-CITIZEN.SCIENCE</div>
-  {% endif%}
-
-
-
-  <ul class="navbar-nav ml-auto">
+  <ul class="navbar-nav">
     {% if isSearchPage == None %}
-    <li class="nav-item"><a class="nav-link main" href="{% url 'all' %}">{% trans "SEARCH" %}</a></li>
+    <li class="nav-item"><a class="nav-link main" href="{% url 'all' %}">{% trans "Buscar" %}</a></li>
     {% endif %}
-    <li class="nav-item"><a class="nav-link main {% active_link  'blog' %}" href="{% url 'blog' %}">{% trans "BLOG" %}</a></li>
-    <li class="nav-item"><a class="nav-link main {% active_link  'events' %}" href="{% url 'events' %}">{% trans "EVENTS" %}</a></li>    
-    <li class="nav-item"><span id="forumHeader"><a class="nav-link main" href="/forum">{% trans "FORUM" %}</a></span></li>
-    <li class="nav-item"><a class="nav-link main" href="https://moodle.eu-citizen.science/">{% trans "MOOCS" %}</a></li>
-    <li class="nav-item"><a class="nav-link main" href="/about">{% trans "ABOUT" %}</a></li>
+    <li class="nav-item"><a class="nav-link main" href="/about">{% trans "About" %}</a></li>
+    <li class="nav-item"><a class="nav-link main {% active_link  'blog' %}" href="{% url 'blog' %}">{% trans "Blog" %}</a></li>
+    <li class="nav-item"><a class="nav-link main {% active_link  'events' %}" href="{% url 'events' %}">{% trans "Events" %}</a></li>    
+    <li class="nav-item"><span id="forumHeader"><a class="nav-link main" href="/forum">{% trans "Forum" %}</a></span></li>
+    <li class="nav-item"><a class="nav-link main" href="https://moodle.eu-citizen.science/">{% trans "Moocs" %}</a></li>
+    <li class="nav-item"><a class="nav-link main {% active_link  'call' %}" href="{% url 'call' %}">{% trans "OpenCall" %}</a></li>    
+
+  </ul>
+  <ul class="navbar-nav ml-auto">
     {% if not user.is_authenticated %}
-    <li class="nav-item"><a class="nav-link main" href="{% url 'accounts:login' %}">{% trans "LOGIN" %}</a></li>
-    <li class="nav-item"><a class="nav-link main" href="{% url 'accounts:signup' %}">{% trans "SIGNUP" %}</a></li>
+    <li class="nav-item"><a class="nav-link main" href="{% url 'accounts:login' %}">{% trans "Login" %}</a></li>
+    <li class="nav-item"><a class="nav-link main" href="{% url 'accounts:signup' %}">{% trans "Signup" %}</a></li>
 
     {% else %}
     <li class="nav-item dropdown">
@@ -173,13 +79,6 @@
       </div>
     </li>
     {% endif %}
-  </ul>
-
-  <button data-toggle="modal" data-target="#modalinfo"
-  class="btn btn-green mysubmit greenbackground ml-2 d-none d-sm-block"
-  type="submit"><i class="fas fa-plus-circle"></i>&nbsp;&nbsp;{% trans "ADD" %}</button>
-  
-  <ul class="navbar-nav">
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false" href="#"><i class="fas fa-globe"></i></a>
@@ -198,8 +97,11 @@
       </div>
     </li>
   </ul>
-
+  <button data-toggle="modal" data-target="#modalinfo"
+  class="btn btn-green mysubmit greenbackground ml-2 d-none d-sm-block"
+  type="submit"><i class="fas fa-plus-circle"></i>&nbsp;&nbsp;{% trans "Add" %}</button>
 </div>
+      </div>
 </div>
 </nav>
 <!--/.Navbar-->
@@ -212,14 +114,12 @@
   {% endblock splash %}
   {% if isSearchPage %}
   <div class="fluid-container whitebackground">
-    <div class="container">
       {% include "_subnavbar.html"  %}
-    </div>
   </div>
   {% endif %}
 
   <div class="container">
-    <div class="row mt-4">
+    <div class="row mt-2">
       <div class="col-12">
         {% block page_header %}
         {% endblock page_header %}
