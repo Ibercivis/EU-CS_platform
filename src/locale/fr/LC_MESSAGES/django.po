@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-03 11:45+0100\n"
+"POT-Creation-Date: 2021-02-18 10:07+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -95,7 +95,7 @@ msgstr "Mot de passe réinitialisé sur %(site_name)s "
 msgid "Welcome to EU-Citizen.Science."
 msgstr "Bienvenue sur EU-Citizen.Science."
 
-#: .\src\blog\templates\blog.html:34
+#: .\src\blog\templates\blog.html:33
 msgid "Read More"
 msgstr "En savoirLire plus"
 
@@ -155,7 +155,7 @@ msgstr "Détails de l’événement"
 msgid "Events"
 msgstr ""
 
-#: .\src\events\templates\events.html:24 .\src\templates\base_forum.html:89
+#: .\src\events\templates\events.html:24 .\src\templates\base_forum.html:98
 #: .\src\templates\base_r2.html:180
 msgid "ADD"
 msgstr "AJOUTER"
@@ -178,9 +178,9 @@ msgid "Past events"
 msgstr ""
 
 #: .\src\events\templates\events.html:164
-#: .\src\organisations\templates\organisations.html:26
-#: .\src\projects\templates\projects.html:27
-#: .\src\resources\templates\resources.html:27
+#: .\src\organisations\templates\organisations.html:36
+#: .\src\projects\templates\projects.html:37
+#: .\src\resources\templates\resources.html:37
 msgid "Sorry, nothing found"
 msgstr "Désolé, aucun résultat trouvé"
 
@@ -322,8 +322,8 @@ msgstr "Pays"
 #: .\src\organisations\templates\finder_organisations.html:44
 #: .\src\projects\templates\finder_projects.html:82
 #: .\src\resources\templates\finder_resources.html:69
-#: .\src\templates\home.html:66 .\src\templates\home.html:76
-#: .\src\templates\home.html:86 .\src\templates\home.html:96
+#: .\src\templates\home.html:74 .\src\templates\home.html:84
+#: .\src\templates\home.html:94 .\src\templates\home.html:104
 msgid "result"
 msgstr "résultat"
 
@@ -421,13 +421,13 @@ msgstr "Site de l’Aller à l’organisation"
 
 #: .\src\organisations\templates\organisation.html:59
 #: .\src\templates\_subnavbar.html:12 .\src\templates\about.html:55
-#: .\src\templates\home.html:65
+#: .\src\templates\home.html:83
 msgid "Projects"
 msgstr "Projets"
 
 #: .\src\organisations\templates\organisation.html:65
 #: .\src\templates\_subnavbar.html:16 .\src\templates\about.html:54
-#: .\src\templates\home.html:75
+#: .\src\templates\home.html:93
 msgid "Resources"
 msgstr "Ressources"
 
@@ -448,6 +448,10 @@ msgstr "Modifier l’organisation"
 #: .\src\templates\modalinfo.html:20
 msgid "Organisation"
 msgstr "Organisation"
+
+#: .\src\organisations\views.py:44
+msgid "Organisation added correctly"
+msgstr ""
 
 #: .\src\profiles\forms.py:48
 msgid ""
@@ -489,7 +493,7 @@ msgid "Geographical location"
 msgstr "Position géographique"
 
 #: .\src\profiles\templates\profiles\followed_projects.html:27
-#: .\src\templates\base2.html:65 .\src\templates\base_forum.html:77
+#: .\src\templates\base2.html:65 .\src\templates\base_forum.html:86
 #: .\src\templates\base_r2.html:165
 msgid "Followed projects"
 msgstr "Projets suivis"
@@ -1091,6 +1095,10 @@ msgstr ""
 msgid "Rate and comment"
 msgstr "Evaluer et commenter"
 
+#: .\src\projects\views.py:38
+msgid "Project added correctly"
+msgstr ""
+
 #: .\src\resources\forms.py:19
 msgid "Insert here the title or name of the resource"
 msgstr "Saisir ici le titre ouet le nom de la ressource"
@@ -1487,9 +1495,25 @@ msgstr "Dans ma bibliothèque"
 msgid "Add to library"
 msgstr "Ajouter à la bibliothèque"
 
-#: .\src\resources\templates\resource.html:210
+#: .\src\resources\templates\resource.html:203
+msgid "Own training"
+msgstr ""
+
+#: .\src\resources\templates\resource.html:205
+msgid "Mark as own training"
+msgstr ""
+
+#: .\src\resources\templates\resource.html:216
 msgid "Edit"
 msgstr "Modifier"
+
+#: .\src\resources\views.py:118
+msgid "Training resource added correctly"
+msgstr ""
+
+#: .\src\resources\views.py:120
+msgid "Resource added correctly"
+msgstr ""
 
 #: .\src\templates\_footer.html:12
 msgid ""
@@ -1559,37 +1583,37 @@ msgstr "Développement"
 msgid "API"
 msgstr "API"
 
-#: .\src\templates\_navbar.html:3 .\src\templates\base_forum.html:58
+#: .\src\templates\_navbar.html:3 .\src\templates\base_forum.html:67
 #: .\src\templates\base_r2.html:145
 msgid "SEARCH"
 msgstr "RECHERCHE"
 
-#: .\src\templates\_navbar.html:4 .\src\templates\base_forum.html:60
+#: .\src\templates\_navbar.html:4 .\src\templates\base_forum.html:69
 #: .\src\templates\base_r2.html:147
 msgid "BLOG"
 msgstr "BLOG"
 
-#: .\src\templates\_navbar.html:5 .\src\templates\base_forum.html:61
+#: .\src\templates\_navbar.html:5 .\src\templates\base_forum.html:70
 #: .\src\templates\base_r2.html:148
 msgid "EVENTS"
 msgstr "EVENEMENTS"
 
-#: .\src\templates\_navbar.html:6 .\src\templates\base_forum.html:63
+#: .\src\templates\_navbar.html:6 .\src\templates\base_forum.html:72
 #: .\src\templates\base_r2.html:150
 msgid "MOOCS"
 msgstr ""
 
-#: .\src\templates\_navbar.html:7 .\src\templates\base_forum.html:64
+#: .\src\templates\_navbar.html:7 .\src\templates\base_forum.html:73
 #: .\src\templates\base_r2.html:151
 msgid "ABOUT"
 msgstr "A PROPOS DE"
 
-#: .\src\templates\_subnavbar.html:20 .\src\templates\home.html:85
+#: .\src\templates\_subnavbar.html:20 .\src\templates\home.html:73
 #: .\src\templates\modalinfo.html:18 .\src\templates\resources_cards.html:33
 msgid "Training"
 msgstr "Formation"
 
-#: .\src\templates\_subnavbar.html:24 .\src\templates\home.html:95
+#: .\src\templates\_subnavbar.html:24 .\src\templates\home.html:103
 msgid "Organisations"
 msgstr "Organisations"
 
@@ -2068,7 +2092,7 @@ msgstr ""
 "leurs ’attributions et à l'impactàl’impact environnemental de toute activité."
 
 #: .\src\templates\base.html:74 .\src\templates\base2.html:68
-#: .\src\templates\base_forms.html:51 .\src\templates\base_forum.html:80
+#: .\src\templates\base_forms.html:51 .\src\templates\base_forum.html:89
 #: .\src\templates\base_r2.html:169
 msgid "Admin"
 msgstr "Administrateur"
@@ -2078,7 +2102,7 @@ msgid "Profile"
 msgstr "Profil"
 
 #: .\src\templates\base.html:85 .\src\templates\base2.html:70
-#: .\src\templates\base_forum.html:82 .\src\templates\base_r2.html:171
+#: .\src\templates\base_forum.html:91 .\src\templates\base_r2.html:171
 msgid "Logout"
 msgstr "Se déconnecter"
 
@@ -2091,36 +2115,36 @@ msgid "Connect with us on"
 msgstr "Connectez-vous sur"
 
 #: .\src\templates\base2.html:56 .\src\templates\base3.html:49
-#: .\src\templates\base_forum.html:66 .\src\templates\base_r2.html:153
+#: .\src\templates\base_forum.html:75 .\src\templates\base_r2.html:153
 msgid "LOGIN"
 msgstr "SE CONNECTER"
 
 #: .\src\templates\base2.html:57 .\src\templates\base3.html:50
-#: .\src\templates\base_forum.html:67
+#: .\src\templates\base_forum.html:76
 msgid "SIGN UP"
 msgstr "S’INSCRIRE"
 
-#: .\src\templates\base2.html:61 .\src\templates\base_forum.html:73
+#: .\src\templates\base2.html:61 .\src\templates\base_forum.html:82
 #: .\src\templates\base_r2.html:161
 msgid "My Profile"
 msgstr "Mon Profil"
 
-#: .\src\templates\base2.html:62 .\src\templates\base_forum.html:74
+#: .\src\templates\base2.html:62 .\src\templates\base_forum.html:83
 #: .\src\templates\base_r2.html:162
 msgid "My organisations"
 msgstr "Mes organisations"
 
-#: .\src\templates\base2.html:63 .\src\templates\base_forum.html:75
+#: .\src\templates\base2.html:63 .\src\templates\base_forum.html:84
 #: .\src\templates\base_r2.html:163
 msgid "Submitted projects"
 msgstr "Projets soumis"
 
-#: .\src\templates\base2.html:64 .\src\templates\base_forum.html:76
+#: .\src\templates\base2.html:64 .\src\templates\base_forum.html:85
 #: .\src\templates\base_r2.html:164
 msgid "Submitted resources"
 msgstr "Ressources soumises"
 
-#: .\src\templates\base2.html:66 .\src\templates\base_forum.html:78
+#: .\src\templates\base2.html:66 .\src\templates\base_forum.html:87
 #: .\src\templates\base_r2.html:166
 msgid "Resources library"
 msgstr "Bibliothèque de ressources"
@@ -2149,7 +2173,7 @@ msgstr "profil"
 msgid "logout"
 msgstr "se déconnecter"
 
-#: .\src\templates\base_forum.html:62 .\src\templates\base_forum.html:148
+#: .\src\templates\base_forum.html:71 .\src\templates\base_forum.html:156
 #: .\src\templates\base_r2.html:149 .\src\templates\base_r2.html:244
 msgid "FORUM"
 msgstr "FORUM"
@@ -2182,7 +2206,15 @@ msgstr ""
 msgid "Frequently Asked Questions"
 msgstr "Foire Aux Questions"
 
-#: .\src\templates\home.html:31
+#: .\src\templates\home.html:28
+msgid "Do you want to help with translation?"
+msgstr ""
+
+#: .\src\templates\home.html:28
+msgid " Please click here"
+msgstr ""
+
+#: .\src\templates\home.html:39
 msgid ""
 "Welcome to the platform for sharing Citizen Science projects, resources, "
 "tools, and training"
@@ -2190,34 +2222,34 @@ msgstr ""
 "Bienvenue sur la plateforme de partage des projetsct, ressources, outils et "
 "formations en sciences participatives."
 
-#: .\src\templates\home.html:41
+#: .\src\templates\home.html:49
 msgid ""
 "Search for citizen science resources, projects, tools, training, and more...."
 msgstr ""
 
-#: .\src\templates\home.html:66
-msgid "in Projects"
-msgstr "dans Projets"
-
-#: .\src\templates\home.html:67 .\src\templates\home.html:77
-#: .\src\templates\home.html:87 .\src\templates\home.html:97
-msgid "here"
-msgstr "ici"
-
-#: .\src\templates\home.html:67 .\src\templates\home.html:77
-#: .\src\templates\home.html:87 .\src\templates\home.html:97
-msgid "to see all of them"
-msgstr "pour les voir tous"
-
-#: .\src\templates\home.html:76
-msgid "in Resources"
-msgstr "dans Ressources"
-
-#: .\src\templates\home.html:86
+#: .\src\templates\home.html:74
 msgid "in Training"
 msgstr "dans Formations"
 
-#: .\src\templates\home.html:96
+#: .\src\templates\home.html:75 .\src\templates\home.html:85
+#: .\src\templates\home.html:95 .\src\templates\home.html:105
+msgid "here"
+msgstr "ici"
+
+#: .\src\templates\home.html:75 .\src\templates\home.html:85
+#: .\src\templates\home.html:95 .\src\templates\home.html:105
+msgid "to see all of them"
+msgstr "pour les voir tous"
+
+#: .\src\templates\home.html:84
+msgid "in Projects"
+msgstr "dans Projets"
+
+#: .\src\templates\home.html:94
+msgid "in Resources"
+msgstr "dans Ressources"
+
+#: .\src\templates\home.html:104
 msgid "in Organisations"
 msgstr "dans Organisations"
 
@@ -2457,6 +2489,10 @@ msgstr "Exposé"
 #: .\src\templates\resources_cards.html:55
 msgid "Last updated"
 msgstr "Dernière mise à jour"
+
+#: .\src\templates\translations.html:10
+msgid "Translations"
+msgstr ""
 
 #~ msgid "Teaser video"
 #~ msgstr "Vidéo d'appelintroduction 'Teaser'"

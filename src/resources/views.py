@@ -9,8 +9,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.conf import settings
 from django.db.models import Q, Avg
+from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.utils import formats
+from django.utils.translation import ugettext_lazy as _
 from itertools import chain
 from authors.models import Author
 from PIL import Image
@@ -111,9 +113,11 @@ def new_resource(request, isTrainingResource=False):
             image2_path = saveImage(request, form, 'image2','2')
             images.append(image1_path)
             images.append(image2_path)
-            form.save(request, images)
+            form.save(request, images)            
             if(isTrainingResource):
+                messages.success(request, _('Training resource added correctly'))
                 return redirect('/training_resources')
+            messages.success(request, _('Resource added correctly'))
             return redirect('/resources')
 
     return render(request, 'new_resource.html', {'form': form, 'settings': settings, 'isTrainingResource': isTrainingResource})

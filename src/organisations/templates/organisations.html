@@ -17,6 +17,16 @@
 {% block list_of_items %}
 
 <div class="container">
+	{% for message in messages %}
+	<div class="container-fluid p-0">
+		<div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		{{ message }}
+		</div>
+	</div>
+	{% endfor %}
 	<div class="row .projects">
     {% if organisations %}
         {% include "organisations_cards.html" %}

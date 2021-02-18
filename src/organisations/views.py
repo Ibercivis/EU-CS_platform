@@ -3,9 +3,11 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from PIL import Image
 from django.core.paginator import Paginator
+from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.utils import formats
 from django.db.models import Q
+from django.utils.translation import ugettext_lazy as _
 from datetime import datetime
 from .forms import OrganisationForm, OrganisationPermissionForm
 from .models import Organisation, OrganisationType, OrganisationPermission
@@ -39,6 +41,7 @@ def new_organisation(request):
                 image_path = "media/images/" + _datetime + '_' + str(random_num) + '_' + photo.name
                 resized_image.save(image_path)
             form.save(request, '/' + image_path)
+            messages.success(request, _('Organisation added correctly'))
             return redirect('../organisations', {})
         else:
             print(form.errors)
