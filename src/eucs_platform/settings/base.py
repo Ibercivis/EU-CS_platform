@@ -57,6 +57,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 # Machina
                 'machina.core.context_processors.metadata',
+                #own
+                'eucs_platform.context_processors.global_settings',
 
             ]
         },
@@ -182,6 +184,21 @@ DATABASES = {
 
 LANGUAGE_CODE = "en"
 
+TRANSLATED_LANGUAGES = (
+    ('nl', 'Dutch'),
+    ('en', 'English'),
+    ('et', 'Estonian'),
+    ('fr', 'Français'),
+    ('de', 'German'),
+    ('el', 'Greek'),    
+    ('hu', 'Hungarian'),
+    ('it', 'Italian'),
+    ('lt', 'Lituanian'),
+    ('pt', 'Portuguese'),
+    ('es', 'Spanish'),    
+    ('sv', 'Swedish'),
+)
+
 LANGUAGE_CODES = [
     'fr',
     'en',
@@ -254,8 +271,13 @@ CRISPY_TEMPLATE_PACK = "bootstrap3"
 # For Bootstrap 3, change error alert to 'danger'
 from django.contrib import messages
 
-MESSAGE_TAGS = {messages.ERROR: "danger"}
-
+MESSAGE_TAGS = {
+        messages.DEBUG: 'alert-secondary',
+        messages.INFO: 'alert-info',
+        messages.SUCCESS: 'alert-success',
+        messages.WARNING: 'alert-warning',
+        messages.ERROR: 'alert-danger',
+ }
 # Authentication Settings
 AUTH_USER_MODEL = "authtools.User"
 LOGIN_REDIRECT_URL = reverse_lazy("home")
