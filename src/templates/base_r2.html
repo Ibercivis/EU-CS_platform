@@ -55,6 +55,7 @@
 
   </ul>
   <ul class="navbar-nav ml-auto">
+
     {% if not user.is_authenticated %}
     <li class="nav-item"><a class="nav-link main" href="{% url 'accounts:login' %}">{% trans "Login" %}</a></li>
     <li class="nav-item"><a class="nav-link main" href="{% url 'accounts:signup' %}">{% trans "Signup" %}</a></li>
@@ -96,6 +97,19 @@
           </form>
       </div>
     </li>
+	  <li class="nav-item"><a class="fb-ic nav-link main" href="https://www.facebook.com/EUCitSciProject/" target="_blank" rel="noreferrer">
+              <i class="fab fa-facebook-f white-text"> </i>
+		  </a></li>
+            <!-- Twitter -->
+	    <li class="nav-item"><a class="tw-ic nav-link main" href="https://twitter.com/eucitsciproject" target="_blank" rel="noreferrer">
+              <i class="fab fa-twitter white-text"> </i>
+		    </a></li>
+        <!--Instagram-->
+	<li class="nav-item"><a class="ins-ic nav-link main" href="https://www.instagram.com/eucitsciproject/?hl=es" target="_blank" rel="noreferrer">
+          <i class="fab fa-instagram white-text"> </i>
+		</a></li>
+
+
   </ul>
   <button data-toggle="modal" data-target="#modalinfo"
   class="btn btn-green mysubmit greenbackground ml-2 d-none d-sm-block"

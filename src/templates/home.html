@@ -19,20 +19,20 @@
 
 {% if request.get_full_path == "/" %}
 
-<div class="jumbotron jumbotron-fluid jumbotron-white mb-0" style="padding-top: 1.5rem;">
+<div class="jumbotron jumbotron-fluid jumbotron-blue mb-0" style="padding-top: 1.5rem;">
 	<div class="container">
 
 		<div class="d-md-none">
-			<h3 class="display-5 text-secondary"><br>EU-CITIZEN.SCIENCE</h3>
+			<h3 class="display-5 text-white"><br>EU-CITIZEN.SCIENCE</h3>
 
 		</div>
 		<div class="d-none d-md-block">
-			<h2 class="display-5 text-secondary"><br>EU-CITIZEN.SCIENCE</h2>
+			<h2 class="display-5 text-white"><br>EU-CITIZEN.SCIENCE</h2>
 
-			<!--h5 class="mb-4 mt-4 text-secondary font-weight-light"> {% trans "Welcome to the platform for sharing Citizen Science projects, resources, tools, and training" %}</h5-->
+			<h5 class="mb-4 mt-4 text-light font-weight-light"> {% trans "Welcome to the platform for sharing Citizen Science projects, resources, tools, and training" %}</h5>
 		</div>
 		<form id="finder" action="/all" >
-			<div class="form-row mt-4">
+			<div class="form-row">
 				<div class="input-group">
 					<div class="input-group-prepend clickable">
 						<div class="input-group-text inhead clickable" id="mysearch"> <i class="fas fa-search"></i></div>
@@ -52,16 +52,22 @@
 	</div>
 </div>
 {% endif %}
-{% endblock splash %}
-{% block list_of_items %}
-		<div class="display-5 text-dark">
-			<br/><br/>
-			<p>The static part of the platform has recently been translated into 11 languages.</p>
-			<p>{% trans "Do you want to help with translation?" %}<a class="linkwhite" href="/translations"> {% trans " Please click here" %}</a></p>
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+			The static part of the platform has recently been translated into 11 languages.
+			{% trans "Do you want to help with translation?" %}<a class="" href="/translations">&nbsp;{% trans " Please click here" %}</a>
+				</div>
+			</div>
 
 		</div>
 
+{% endblock splash %}
 
+{% block page_header %}
+{% include "finder_all.html" %}
+{% endblock page_header %}
+{% block list_of_items %}
 
 
 <div class="container">
