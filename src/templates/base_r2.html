@@ -81,7 +81,7 @@
     {% endif %}
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown"
-      aria-haspopup="true" aria-expanded="false" href="#"><i class="fas fa-globe"></i></a>
+      aria-haspopup="true" aria-expanded="false" href="#">{%get_current_language as LANGUAGE_CODE %}{{LANGUAGE_CODE}}</a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
         <form action="/i18n/setlang/" method="post" style="display: inline;" name="languageForm">
           {% csrf_token %}
