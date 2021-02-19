@@ -20,8 +20,12 @@
 	{% for post in post_list %}
 
 	<div class="card">
-		<div class="row">
-
+		<div class="row no-gutters">
+			<div class="col-md-4">
+				<a href="{{ post.get_absolute_url }}">
+					<img class="card-img"  src="/media/{{post.image}}" alt="Card image">
+				</a>
+			</div>
 			<div class="col-md-8">
 				<div class="card-body">
 					<a href="{{ post.get_absolute_url }}">
@@ -35,12 +39,6 @@
 				</div>
 			</div>
 
-
-			<div class="col-md-4">
-				<a href="{{ post.get_absolute_url }}">
-					<img class="card-img-top" src="/media/{{post.image}}" alt="Card image">
-				</a>
-			</div>
 
 		</div>
 	</div>
