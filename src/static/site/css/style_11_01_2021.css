@@ -28,10 +28,6 @@ main.nomargintop {
 .bg-primary {
 	background-color: #203863 !important;
 }
-.jumbotron-default{
-	background-color: #203863;
-	color: #fff;
-}
 .jumbotron-main{
 	background-image: url('../img/cancitizensc.webp');
 	background-image: image-set( url('../img/cancitizensc.jpg') ); /* Safari */
@@ -42,16 +38,21 @@ main.nomargintop {
 	background-position: center;
 }
 
-.jumbotron-white{
-
-	background-color: #fff !important;
-	background-blend-mode: overlay;
-	background-size: cover;
-	background-position: center;
-}
 .jumbotron-blue{
 
 	background-color: #203863 !important;
+	background-blend-mode: overlay;
+	background-size: cover;
+}
+.jumbotron-red{
+
+	background-color: #e28683 !important;
+	background-blend-mode: overlay;
+	background-size: cover;
+}
+.jumbotron-green{
+
+	background-color: #a4b494 !important;
 	background-blend-mode: overlay;
 	background-size: cover;
 }
@@ -411,7 +412,7 @@ dt {
 .mysubmit{
 	min-width: 100px;
 	height: 44px;
-	background-color: #a6d49f;
+	background-color: #a4b494;
 	border: 0px !important;
 	transition: background-color 0.25s;
 }
