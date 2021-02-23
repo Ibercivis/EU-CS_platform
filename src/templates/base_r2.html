@@ -33,7 +33,7 @@
 <body>
   <header>
     <!--Navbar-->
-    <nav class="navbar navbar-expand-md navbar-dark navbar-front text-white text-weight-bold fixed-top b-0 pt-0 pb-0">
+    <nav class="navbar navbar-expand-xl navbar-dark navbar-front text-white text-weight-bold fixed-top b-0 pt-0 pb-0">
       <div class="container">
         <a class="navbar-brand" href="/">
           <img src="{% static 'site/img/icon.png' %}" width="30" height="30" alt=""/> eu-citizen.science
@@ -43,13 +43,13 @@
   <span class="navbar-toggler-icon"></span></button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
   <ul class="navbar-nav">
-    <li class="nav-item"><a class="nav-link main {% active_link 'all || projects || resources || training_resources || organisations'%}" href="{% url 'all' %}">{% trans "Buscar" %}</a></li>
+    <li class="nav-item"><a class="nav-link main {% active_link 'all || projects || resources || training_resources || organisations'%}" href="{% url 'all' %}">{% trans "Search" %}</a></li>
     <li class="nav-item"><a class="nav-link main {% active_link 'about' %}" href="{% url 'about' %}">{% trans "About" %}</a></li>
     <li class="nav-item"><a class="nav-link main {% active_link  'blog' %}" href="{% url 'blog' %}">{% trans "Blog" %}</a></li>
     <li class="nav-item"><a class="nav-link main {% active_link  'events' %}" href="{% url 'events' %}">{% trans "Events" %}</a></li>    
     <li class="nav-item"><span id="forumHeader"><a class="nav-link main" {% active_link  'forum' %} href="/forum">{% trans "Forum" %}</a></span></li>
     <li class="nav-item"><a class="nav-link main" href="https://moodle.eu-citizen.science/" target="_blank">{% trans "Moocs" %}</a></li>
-    <li class="nav-item"><a class="nav-link main {% active_link  'call' %}" href="{% url 'call' %}">{% trans "OpenCall" %}</a></li>    
+    <!--li class="nav-item"><a class="nav-link main {% active_link  'call' %}" href="{% url 'call' %}">{% trans "OpenCall" %}</a></li-->    
 
   </ul>
   <ul class="navbar-nav ml-auto">

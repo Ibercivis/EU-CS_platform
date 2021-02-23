@@ -5,9 +5,9 @@
 {% block title %}{{ block.super }}Translations{% endblock %}
 
 {% block splash %}
-<div class="jumbotron jumbotron-fluid jumbotron-blue">
+<div class="jumbotron jumbotron-fluid">
 	<div class="container">
-		<h1 class="display-4 pt-4 pb-4 text-white">{% trans "Translations" %}</h1>
+		<h1 class="display-5 pt-2 pb-4 text-secondary">{% trans "Translations" %}</h1>
 	</div>
 </div>
 {% endblock splash %}
@@ -56,15 +56,15 @@
 			<h3>How to edit <i>po</i> files</h3>
 		</div>
 		<div class="col-sm-8 col-12 mt-4 mb-4">
-			<p>There are two ways to edit po files</p>
+			<p>There are two ways to edit po files:</p>
 			<ul>
 				<li><b>Option #1 - You have a Github account: </b>In this particular case maybe you have enought experience to send us translation improvements through GitHub. If not, the easy way is to use the GitHub online editor:
 					<ul>
-						<li>(1) Go to your desired language to translate using previous links</li>
-						<li>(2) Edit the file online by clicking in the pencil icon
+						<li>(1) Go to your desired language to translate using the links to <i>po</i> files provided above</li>
+						<li>(2) Edit the file online by clicking on the pencil icon
 							<img title="translations example" 
 							     class="img-fluid mb-3" src="{% static 'site/img/edit_github.png' %}">
-							Take a look to the next section to understand <i>django.po</i> structure
+							Take a look at the next section to understand <i>django.po</i> structure
 						</li>
 
 						<li>(3) Click on <i>Commit changes</i> button once you have finished editing      <img title="translations example" 
@@ -76,11 +76,11 @@
 				</li>
 				<li><b>Option #2 - You do not have (and you do not want to have) a GitHub account: </b>In this case, the objective is to download your desired django.po file, edit it (using your favourite file editor, and send it back to us by email to vval (at) bifi.es
 					<ul>
-					<li>(1) Go to your desired language to translate using previous links</li>
-					<li>(2) Right click on <i>Raw</i> to download the file in raw format to your computer. Advice: save it using <i>txt</i> extension</li> 
+						<li>(1) Go to your desired language to translate using the links to <i>po</i> files provided above</li>
+						<li>(2) Right click on <i>Raw</i> to download the file in raw format to your computer: First, right click on <i>Raw</i>. Second, select <i>Save link as...</i>.
+							Third, when saving add <i>txt</i> extension to the filename.</li> 
 							<img title="translations example" 
 							     class="img-fluid mb-3" src="{% static 'site/img/raw_github.png' %}">
-							Take a look to the next section to understand <i>django.po</i> structure
 						</li>
 						<li>(3) Edit the file using your favourite text editor. Take a look to the next section to undestand <i>django.po</i> structure</li>
 						<li>(4) Send it back to us by email to vval (at) bifi.es</li>
@@ -114,7 +114,7 @@
 				...<br/>
 
 			</code>
-			<p>So, as you can imagine, all that you need to do is to provide a translation of the message that follows <i>msgid</i> inside <i>msgtr</i>. For example, in the above example, <i>Log in</i> is translated into <i>Iniciar sesión</i> in spanish.</p>
+			<p>So, as you can imagine, all that you need to do is to provide a translation of the message that follows <i>msgid</i> inside <i>msgtr</i>. For example, in the above example, <i>Log in</i> is translated into <i>Iniciar sesión</i> in Spanish.</p>
 
 
 
@@ -141,7 +141,7 @@
 
 			<p>Remember, once you have finished translating, you can commit on github if you have permission or send us the file by email
 			and we will take care of updating the platform.</p>
-			<p>Thank so much!</p>
+			<p>Thank you so much!</p>
 
 		</div>
 
