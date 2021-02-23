@@ -2,12 +2,15 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from PIL import Image
+from django.conf import settings
+from django.core.mail import EmailMessage
 from django.core.paginator import Paginator
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.utils import formats
 from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
+from django.template.loader import render_to_string
 from datetime import datetime
 from .forms import OrganisationForm, OrganisationPermissionForm
 from .models import Organisation, OrganisationType, OrganisationPermission
@@ -42,6 +45,11 @@ def new_organisation(request):
                 resized_image.save(image_path)
             form.save(request, '/' + image_path)
             messages.success(request, _('Organisation added correctly'))
+            subject = 'New organisation submitted'            
+            message = render_to_string('emails/new_organisation.html', {})
+            email = EmailMessage(subject, message, to=[settings.EMAIL_RECIPIENT_LIST, request.user.email])
+            email.content_subtype = "html"
+            email.send()
             return redirect('../organisations', {})
         else:
             print(form.errors)
