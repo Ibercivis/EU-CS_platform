@@ -4,11 +4,14 @@ from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import get_user_model
+from django.conf import settings
+from django.core.mail import EmailMessage
 from django.utils import formats
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q, Avg
 from django.utils.translation import ugettext_lazy as _
+from django.template.loader import render_to_string
 from datetime import datetime
 from PIL import Image
 from itertools import chain
@@ -36,6 +39,13 @@ def new_project(request):
             images = setImages(request, form)
             form.save(request, images, [],mainOrganisationFixed)
             messages.success(request, _('Project added correctly'))
+
+            subject = 'New project submitted'            
+            message = render_to_string('emails/new_project.html', {})
+            email = EmailMessage(subject, message, to=[settings.EMAIL_RECIPIENT_LIST, user.email])
+            email.content_subtype = "html"
+            email.send()
+
             return redirect('/projects')
         else:
             print(form.errors)
@@ -112,10 +122,20 @@ def projects(request):
     'counter': counter, 'isSearchPage': True })
 
 
-def project(request, pk):
+def project(request, pk):  
     user = request.user
     project = get_object_or_404(Project, id=pk)
     users = getOtherUsers(project.creator)
+
+    previous_page = request.META['HTTP_REFERER']
+    if 'review' in previous_page:
+        #sendEmail
+        subject = 'Your project has received a review'            
+        message = render_to_string('emails/project_review.html', {})
+        email = EmailMessage(subject, message, to=[settings.EMAIL_RECIPIENT_LIST, project.creator.email])
+        email.content_subtype = "html"
+        email.send()
+
     cooperators = getCooperatorsEmail(pk)
     unApprovedProjects = UnApprovedProjects.objects.all().values_list('project_id',flat=True)
     if (project.id in unApprovedProjects or project.hidden) and ( user.is_anonymous or (user != project.creator and not user.is_staff and not user.id in getCooperators(pk))):
@@ -368,7 +388,14 @@ def setProjectApproved(id, approved):
     aProject = get_object_or_404(Project, id=id)
     if approved == True:
         #Insert
-        ApprovedProjects.objects.get_or_create(project=aProject)
+        ApprovedProjects.objects.get_or_create(project=aProject)        
+        #sendEmail
+        subject = 'Your project has been approved'            
+        message = render_to_string('emails/approved_project.html', {})
+        email = EmailMessage(subject, message, to=[settings.EMAIL_RECIPIENT_LIST, aProject.creator.email])
+        email.content_subtype = "html"
+        email.send()
+
         #Delete UnApprovedProjects
         try:
             obj = UnApprovedProjects.objects.get(project_id=id)
@@ -428,6 +455,12 @@ def followProject(projectId, userId, follow):
     if follow == True:
         #Insert
         followedProject = FollowedProjects.objects.get_or_create(project=fProject, user=fUser)
+        #sendEmail
+        subject = 'Your project has been followed'            
+        message = render_to_string('emails/followed_project.html', {})
+        email = EmailMessage(subject, message, to=[settings.EMAIL_RECIPIENT_LIST, fProject.creator.email])
+        email.content_subtype = "html"
+        email.send()
     else:
         #Delete
         try:
