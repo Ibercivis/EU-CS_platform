@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-18 10:08+0100\n"
+"POT-Creation-Date: 2021-02-24 09:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -94,7 +94,7 @@ msgstr "Új jelszó igénylése %(site_name)s"
 msgid "Welcome to EU-Citizen.Science."
 msgstr "Üdvözlünk az EU-Citizen.Science oldalán"
 
-#: .\src\blog\templates\blog.html:33
+#: .\src\blog\templates\blog.html:37
 msgid "Read More"
 msgstr "Olvass tovább!"
 
@@ -150,12 +150,12 @@ msgstr "Esemény szerkesztése"
 msgid "Event info"
 msgstr "Eseményinformáció"
 
-#: .\src\events\templates\events.html:12 .\src\templates\about.html:58
+#: .\src\events\templates\events.html:12 .\src\templates\about.html:60
+#: .\src\templates\base_forum.html:67 .\src\templates\base_r2.html:49
 msgid "Events"
 msgstr "Esemény"
 
-#: .\src\events\templates\events.html:24 .\src\templates\base_forum.html:98
-#: .\src\templates\base_r2.html:180
+#: .\src\events\templates\events.html:24
 msgid "ADD"
 msgstr "Hozzáad"
 
@@ -317,8 +317,8 @@ msgstr "Ország"
 #: .\src\organisations\templates\finder_organisations.html:44
 #: .\src\projects\templates\finder_projects.html:82
 #: .\src\resources\templates\finder_resources.html:69
-#: .\src\templates\home.html:74 .\src\templates\home.html:84
-#: .\src\templates\home.html:94 .\src\templates\home.html:104
+#: .\src\templates\home.html:71 .\src\templates\home.html:81
+#: .\src\templates\home.html:91 .\src\templates\home.html:101
 msgid "result"
 msgstr "eredmény"
 
@@ -409,14 +409,14 @@ msgid "Go to Organisation"
 msgstr "A szervezethez"
 
 #: .\src\organisations\templates\organisation.html:59
-#: .\src\templates\_subnavbar.html:12 .\src\templates\about.html:55
-#: .\src\templates\home.html:83
+#: .\src\templates\_subnavbar.html:58 .\src\templates\about.html:57
+#: .\src\templates\home.html:80
 msgid "Projects"
 msgstr "Projektek"
 
 #: .\src\organisations\templates\organisation.html:65
-#: .\src\templates\_subnavbar.html:16 .\src\templates\about.html:54
-#: .\src\templates\home.html:93
+#: .\src\templates\_subnavbar.html:62 .\src\templates\about.html:56
+#: .\src\templates\home.html:90
 msgid "Resources"
 msgstr "Források"
 
@@ -438,7 +438,7 @@ msgstr "Szervezet szerkesztése"
 msgid "Organisation"
 msgstr "Szervezet"
 
-#: .\src\organisations\views.py:44
+#: .\src\organisations\views.py:47
 msgid "Organisation added correctly"
 msgstr ""
 
@@ -482,8 +482,8 @@ msgid "Geographical location"
 msgstr "Földrajzi hely"
 
 #: .\src\profiles\templates\profiles\followed_projects.html:27
-#: .\src\templates\base2.html:65 .\src\templates\base_forum.html:86
-#: .\src\templates\base_r2.html:165
+#: .\src\templates\base2.html:65 .\src\templates\base_forum.html:88
+#: .\src\templates\base_r2.html:70
 msgid "Followed projects"
 msgstr "Követett projektek"
 
@@ -833,7 +833,7 @@ msgstr "Még nem moderált"
 
 #: .\src\projects\templates\finder_projects.html:76
 #: .\src\resources\templates\finder_resources.html:63
-#: .\src\templates\_subnavbar.html:8
+#: .\src\templates\_subnavbar.html:54
 msgid "All"
 msgstr "Összes"
 
@@ -844,6 +844,7 @@ msgstr "Információ"
 
 #: .\src\projects\templates\modal_projects.html:14
 #: .\src\resources\templates\modal_resources.html:14
+#: .\src\templates\base_forum.html:64 .\src\templates\base_r2.html:46
 msgid "Search"
 msgstr "Keresés"
 
@@ -1079,7 +1080,7 @@ msgstr ""
 msgid "Rate and comment"
 msgstr "Értékelés és hozzászólás"
 
-#: .\src\projects\views.py:38
+#: .\src\projects\views.py:41
 msgid "Project added correctly"
 msgstr ""
 
@@ -1451,11 +1452,11 @@ msgstr ""
 msgid "Edit"
 msgstr "Szerkeszt"
 
-#: .\src\resources\views.py:118
+#: .\src\resources\views.py:122
 msgid "Training resource added correctly"
 msgstr ""
 
-#: .\src\resources\views.py:120
+#: .\src\resources\views.py:130
 msgid "Resource added correctly"
 msgstr ""
 
@@ -1527,45 +1528,45 @@ msgstr "Fejlesztés"
 msgid "API"
 msgstr "API"
 
-#: .\src\templates\_navbar.html:3 .\src\templates\base_forum.html:67
-#: .\src\templates\base_r2.html:145
+#: .\src\templates\_navbar.html:3
 msgid "SEARCH"
 msgstr "KERESÉS"
 
-#: .\src\templates\_navbar.html:4 .\src\templates\base_forum.html:69
-#: .\src\templates\base_r2.html:147
+#: .\src\templates\_navbar.html:4
 msgid "BLOG"
 msgstr "BLOG"
 
-#: .\src\templates\_navbar.html:5 .\src\templates\base_forum.html:70
-#: .\src\templates\base_r2.html:148
+#: .\src\templates\_navbar.html:5
 msgid "EVENTS"
 msgstr "ESEMÉNYEK"
 
-#: .\src\templates\_navbar.html:6 .\src\templates\base_forum.html:72
-#: .\src\templates\base_r2.html:150
+#: .\src\templates\_navbar.html:6
 msgid "MOOCS"
 msgstr ""
 
-#: .\src\templates\_navbar.html:7 .\src\templates\base_forum.html:73
-#: .\src\templates\base_r2.html:151
+#: .\src\templates\_navbar.html:7
+msgid "CALL"
+msgstr ""
+
+#: .\src\templates\_navbar.html:8
 msgid "ABOUT"
 msgstr "RÓLUNK"
 
-#: .\src\templates\_subnavbar.html:20 .\src\templates\home.html:73
+#: .\src\templates\_subnavbar.html:66 .\src\templates\home.html:70
 #: .\src\templates\modalinfo.html:18 .\src\templates\resources_cards.html:33
 msgid "Training"
 msgstr "Képzés"
 
-#: .\src\templates\_subnavbar.html:24 .\src\templates\home.html:103
+#: .\src\templates\_subnavbar.html:70 .\src\templates\home.html:100
 msgid "Organisations"
 msgstr "Szervezetek"
 
-#: .\src\templates\_subnavbar.html:29
+#: .\src\templates\_subnavbar.html:75
 msgid "Our Gold Star Selection"
 msgstr "Aranycsillag válogatás"
 
 #: .\src\templates\about.html:4 .\src\templates\about.html:8
+#: .\src\templates\base_forum.html:65 .\src\templates\base_r2.html:47
 msgid "About"
 msgstr "Rólunk"
 
@@ -1573,11 +1574,11 @@ msgstr "Rólunk"
 msgid "Watch our teaser, in 12 different languages!"
 msgstr ""
 
-#: .\src\templates\about.html:44
+#: .\src\templates\about.html:46
 msgid "The Platform"
 msgstr "A platform"
 
-#: .\src\templates\about.html:47
+#: .\src\templates\about.html:49
 msgid ""
 "EU-Citizen.Science is an online platform for sharing knowledge, tools, "
 "training and resources for citizen science – by the community, for the "
@@ -1586,7 +1587,7 @@ msgstr ""
 "Az EU-Citizen.Science egy online platform, ahol a civil tudományos közösség "
 "tudást, eszközöket, képzési anyagokat és forrásokat oszt meg."
 
-#: .\src\templates\about.html:48
+#: .\src\templates\about.html:50
 msgid ""
 "The vision for the platform is to serve as a Knowledge Hub, in aid of the "
 "mainstreaming of citizen science, and build on the growing impact of "
@@ -1594,7 +1595,7 @@ msgid ""
 "enquiry."
 msgstr "A platform a civil tudomány tudásmegosztó hálózataként működik."
 
-#: .\src\templates\about.html:49
+#: .\src\templates\about.html:51
 msgid ""
 "We accomplish this by supporting the sharing of knowledge, know-how, and "
 "experience between anyone doing or wanting to do citizen science."
@@ -1602,46 +1603,46 @@ msgstr ""
 "Támogatjuk a civil tudományban jártas és az érdeklődők közötti "
 "tudásmegosztását és tapasztalatcseréjét."
 
-#: .\src\templates\about.html:52
+#: .\src\templates\about.html:54
 msgid "On this platform you will find"
 msgstr "Ezen a platformon"
 
-#: .\src\templates\about.html:54
+#: .\src\templates\about.html:56
 msgid "that are useful for citizen science practitioners"
 msgstr "hasznos forrásokat találsz a civil tudományról,"
 
-#: .\src\templates\about.html:55
+#: .\src\templates\about.html:57
 msgid "that are engaging the public in research via citizen science activities"
 msgstr "hasznos projekteket, amelyek a laikusokat kutatásokba vonja be. "
 
-#: .\src\templates\about.html:56
+#: .\src\templates\about.html:58
 msgid "Training resources and materials citizen science as a practice"
 msgstr "Képzési anyagokat"
 
-#: .\src\templates\about.html:57
+#: .\src\templates\about.html:59
 msgid ""
 "Organisations that are involved in citizen science projects and research"
 msgstr "Civil tudományos projektekben és kutatásokban aktív szervezeteket"
 
-#: .\src\templates\about.html:58
+#: .\src\templates\about.html:60
 msgid "an"
 msgstr "egy"
 
-#: .\src\templates\about.html:58
+#: .\src\templates\about.html:60
 msgid "calendar"
 msgstr "naptárat"
 
-#: .\src\templates\about.html:58
+#: .\src\templates\about.html:60
 msgid "and"
 msgstr "és"
 
-#: .\src\templates\about.html:59
+#: .\src\templates\about.html:61
 msgid ""
 "Community Forums for questions, conversations, and collaboration with the "
 "rest of the community."
 msgstr "együttműködésre és vitára alkalmas közösségi fórumokat"
 
-#: .\src\templates\about.html:63
+#: .\src\templates\about.html:65
 msgid ""
 "Spotted something missing? You can add your own profiles for Resources, "
 "Projects, and Training via the +ADD button in the top menu. Have a "
@@ -1652,19 +1653,19 @@ msgstr ""
 "projektekhez és képzési anyagokhoz az +HOZZÁAD gombbal. Javaslatod van? Oszd "
 "meg velünk a visszajelzésre alkalmas közösségi fórumon vagy a."
 
-#: .\src\templates\about.html:63
+#: .\src\templates\about.html:65
 msgid "contact"
 msgstr "kapcsolat"
 
-#: .\src\templates\about.html:63
+#: .\src\templates\about.html:65
 msgid "section"
 msgstr "résznél"
 
-#: .\src\templates\about.html:72
+#: .\src\templates\about.html:74
 msgid "The Project"
 msgstr "A projekt"
 
-#: .\src\templates\about.html:76
+#: .\src\templates\about.html:78
 msgid ""
 "The EU-Citizen.Science project has been funded by the European Commission "
 "Horizon 2020 programme, in the Science with and for Society programme of "
@@ -1679,11 +1680,11 @@ msgstr ""
 "az állampolgárok, szakemberek, kutatók és politikai döntéshozók számára a "
 "civil tudománnyal kapcsolatos tudás referenciapontja legyen. "
 
-#: .\src\templates\about.html:81
+#: .\src\templates\about.html:83
 msgid "Our Vision"
 msgstr "Szeretnénk,"
 
-#: .\src\templates\about.html:82
+#: .\src\templates\about.html:84
 msgid ""
 "is that Citizen Science becomes an appreciated and widely established means "
 "for the democratization of science in Europe"
@@ -1691,11 +1692,11 @@ msgstr ""
 "hogy a civil tudomány a tudomány demokratizálása érdekében elismert és "
 "széles körben elterjedjen."
 
-#: .\src\templates\about.html:89
+#: .\src\templates\about.html:91
 msgid "Our Core Mission"
 msgstr "Célunk,"
 
-#: .\src\templates\about.html:90
+#: .\src\templates\about.html:92
 msgid ""
 "is to become the European reference point for CS through cross-network "
 "knowledge sharing for citizen science participants, practitioners, "
@@ -1704,11 +1705,11 @@ msgstr ""
 "hogy a platform Európai szinten az állampolgárok, szakemberek, kutatók és "
 "politikai döntéshozók számára a civil tudomány referenciapontja legyen."
 
-#: .\src\templates\about.html:97
+#: .\src\templates\about.html:99
 msgid "Objective 1: Establish"
 msgstr "1. Célkitűzés:"
 
-#: .\src\templates\about.html:98
+#: .\src\templates\about.html:100
 msgid ""
 "EU-Citizen.Science as the knowledge and community hub for high-quality CS "
 "exchange and learning in Europe"
@@ -1716,11 +1717,11 @@ msgstr ""
 "az Eu-Citizen.Science platformot Európai szinten a civil tudomány kiváló, "
 "közösségi tanulásra és eszmecserére alkalmas tudásközpontjává tenni."
 
-#: .\src\templates\about.html:105
+#: .\src\templates\about.html:107
 msgid "Objective 2: Consolidate"
 msgstr "2. Célkitűzés:"
 
-#: .\src\templates\about.html:106
+#: .\src\templates\about.html:108
 msgid ""
 "the CS knowledge base and celebrate outstanding practices and state of the "
 "art in CS in Europe"
@@ -1728,37 +1729,37 @@ msgstr ""
 "a civil tudomány bázisának megerősítése és a civil tudomány kiemelkedő "
 "gyakorlatainak és legkorszerűbb megoldásainak nevesítése"
 
-#: .\src\templates\about.html:113
+#: .\src\templates\about.html:115
 msgid "Objective 3: Empower"
 msgstr "3. Célkitűzés: "
 
-#: .\src\templates\about.html:114
+#: .\src\templates\about.html:116
 msgid ""
 "diverse stakeholders to become citizen scientists, start CS initiatives, and "
 "implement CS approaches professionally"
 msgstr ""
 
-#: .\src\templates\about.html:121
+#: .\src\templates\about.html:123
 msgid "Objective 4: Explore"
 msgstr ""
 
-#: .\src\templates\about.html:122
+#: .\src\templates\about.html:124
 msgid ""
 "new pathways for participatory governance, by strengthening links between CS "
 "and policy making"
 msgstr ""
 
-#: .\src\templates\about.html:129
+#: .\src\templates\about.html:131
 msgid "Objective 5: Advance"
 msgstr ""
 
-#: .\src\templates\about.html:130
+#: .\src\templates\about.html:132
 msgid ""
 "CS into the mainstream of public engagement, science communication and "
 "education"
 msgstr ""
 
-#: .\src\templates\about.html:137
+#: .\src\templates\about.html:139
 msgid ""
 "In keeping with our mission, we aim to engage equally with CS participants, "
 "practitioners, researchers, policy makers and society as a whole throughout "
@@ -1768,11 +1769,11 @@ msgid ""
 "Platform."
 msgstr ""
 
-#: .\src\templates\about.html:147
+#: .\src\templates\about.html:149
 msgid "The Team"
 msgstr ""
 
-#: .\src\templates\about.html:150
+#: .\src\templates\about.html:152
 msgid ""
 "The EU-Citizen.Science consortium consists of 14 partners and 9 third "
 "parties from across 14 European member states, as well as other project "
@@ -1781,19 +1782,19 @@ msgid ""
 "local authorities, community service organisations and museums."
 msgstr ""
 
-#: .\src\templates\about.html:159
+#: .\src\templates\about.html:161
 msgid "Consortium partners"
 msgstr ""
 
-#: .\src\templates\about.html:216
+#: .\src\templates\about.html:218
 msgid "Third party partners"
 msgstr ""
 
-#: .\src\templates\about.html:257
+#: .\src\templates\about.html:259
 msgid "Citizen Science"
 msgstr ""
 
-#: .\src\templates\about.html:260
+#: .\src\templates\about.html:262
 msgid ""
 "Citizen science actively involves the public in scientific research that "
 "generates new knowledge or understanding, and thus has the potential to "
@@ -1804,7 +1805,7 @@ msgid ""
 "and EU levels."
 msgstr ""
 
-#: .\src\templates\about.html:261
+#: .\src\templates\about.html:263
 msgid ""
 "Citizen science is a flexible concept which can be adapted and applied "
 "within diverse situations and disciplines. In order to set out some of the "
@@ -1812,31 +1813,31 @@ msgid ""
 "citizen science, the following"
 msgstr ""
 
-#: .\src\templates\about.html:261
+#: .\src\templates\about.html:263
 msgid "10 Principles of Citizen Science"
 msgstr ""
 
-#: .\src\templates\about.html:261
+#: .\src\templates\about.html:263
 msgid ""
 "were developed by the ‘Sharing best practice and building capacity’ working "
 "group of the"
 msgstr ""
 
-#: .\src\templates\about.html:261
+#: .\src\templates\about.html:263
 msgid "European Citizen Science Association"
 msgstr ""
 
-#: .\src\templates\about.html:261
+#: .\src\templates\about.html:263
 msgid ""
 "led by the Natural History Museum London with input from many members of the "
 "Association."
 msgstr ""
 
-#: .\src\templates\about.html:269
+#: .\src\templates\about.html:271
 msgid "Ten principles of citizen science"
 msgstr ""
 
-#: .\src\templates\about.html:273
+#: .\src\templates\about.html:275
 msgid ""
 "Citizen science projects actively involve citizens in scientific endeavour "
 "that generates new knowledge or understanding. Citizens may act as "
@@ -1844,23 +1845,23 @@ msgid ""
 "in the project."
 msgstr ""
 
-#: .\src\templates\about.html:274
+#: .\src\templates\about.html:276
 msgid "Citizen science projects have a genuine science outcome."
 msgstr ""
 
-#: .\src\templates\about.html:274
+#: .\src\templates\about.html:276
 msgid ""
 "For example, answering a research question or informing conservation action, "
 "management decisions or environmental policy."
 msgstr ""
 
-#: .\src\templates\about.html:275
+#: .\src\templates\about.html:277
 msgid ""
 "Both the professional scientists and the citizen scientists benefit from "
 "taking part."
 msgstr ""
 
-#: .\src\templates\about.html:275
+#: .\src\templates\about.html:277
 msgid ""
 "Benefits may include the publication of research outputs, learning "
 "opportunities, personal enjoyment, social benefits, satisfaction through "
@@ -1868,64 +1869,64 @@ msgid ""
 "international issues, and through that, the potential to influence policy."
 msgstr ""
 
-#: .\src\templates\about.html:276
+#: .\src\templates\about.html:278
 msgid ""
 "Citizen scientists may, if they wish, participate in multiple stages of the "
 "scientific process."
 msgstr ""
 
-#: .\src\templates\about.html:276
+#: .\src\templates\about.html:278
 msgid ""
 "This may include developing the research question, designing the method, "
 "gathering and analysing data, and communicating the results."
 msgstr ""
 
-#: .\src\templates\about.html:277
+#: .\src\templates\about.html:279
 msgid "Citizen scientists receive feedback from the project."
 msgstr ""
 
-#: .\src\templates\about.html:277
+#: .\src\templates\about.html:279
 msgid ""
 "For example, how their data are being used and what the research, policy or "
 "societal outcomes are."
 msgstr ""
 
-#: .\src\templates\about.html:278
+#: .\src\templates\about.html:280
 msgid ""
 "Citizen science is considered a research approach like any other, with "
 "limitations and biases that should be considered and controlled for."
 msgstr ""
 
-#: .\src\templates\about.html:278
+#: .\src\templates\about.html:280
 msgid ""
 "However unlike traditional research approaches, citizen science provides "
 "opportunity for greater public engagement and democratisation of science."
 msgstr ""
 
-#: .\src\templates\about.html:279
+#: .\src\templates\about.html:281
 msgid ""
 "Citizen science project data and meta-data are made publicly available and "
 "where possible, results are published in an open access format."
 msgstr ""
 
-#: .\src\templates\about.html:279
+#: .\src\templates\about.html:281
 msgid ""
 "Data sharing may occur during or after the project, unless there are "
 "security or privacy concerns that prevent this."
 msgstr ""
 
-#: .\src\templates\about.html:280
+#: .\src\templates\about.html:282
 msgid ""
 "Citizen scientists are acknowledged in project results and publications."
 msgstr ""
 
-#: .\src\templates\about.html:281
+#: .\src\templates\about.html:283
 msgid ""
 "Citizen science programmes are evaluated for their scientific output, data "
 "quality, participant experience and wider societal or policy impact."
 msgstr ""
 
-#: .\src\templates\about.html:282
+#: .\src\templates\about.html:284
 msgid ""
 "The leaders of citizen science projects take into consideration legal and "
 "ethical issues surrounding copyright, intellectual property, data sharing "
@@ -1934,8 +1935,8 @@ msgid ""
 msgstr ""
 
 #: .\src\templates\base.html:74 .\src\templates\base2.html:68
-#: .\src\templates\base_forms.html:51 .\src\templates\base_forum.html:89
-#: .\src\templates\base_r2.html:169
+#: .\src\templates\base_forms.html:51 .\src\templates\base_forum.html:92
+#: .\src\templates\base_r2.html:74
 msgid "Admin"
 msgstr ""
 
@@ -1944,7 +1945,7 @@ msgid "Profile"
 msgstr ""
 
 #: .\src\templates\base.html:85 .\src\templates\base2.html:70
-#: .\src\templates\base_forum.html:91 .\src\templates\base_r2.html:171
+#: .\src\templates\base_forum.html:94 .\src\templates\base_r2.html:76
 msgid "Logout"
 msgstr ""
 
@@ -1957,37 +1958,35 @@ msgid "Connect with us on"
 msgstr ""
 
 #: .\src\templates\base2.html:56 .\src\templates\base3.html:49
-#: .\src\templates\base_forum.html:75 .\src\templates\base_r2.html:153
 msgid "LOGIN"
 msgstr ""
 
 #: .\src\templates\base2.html:57 .\src\templates\base3.html:50
-#: .\src\templates\base_forum.html:76
 msgid "SIGN UP"
 msgstr ""
 
-#: .\src\templates\base2.html:61 .\src\templates\base_forum.html:82
-#: .\src\templates\base_r2.html:161
+#: .\src\templates\base2.html:61 .\src\templates\base_forum.html:84
+#: .\src\templates\base_r2.html:66
 msgid "My Profile"
 msgstr ""
 
-#: .\src\templates\base2.html:62 .\src\templates\base_forum.html:83
-#: .\src\templates\base_r2.html:162
+#: .\src\templates\base2.html:62 .\src\templates\base_forum.html:85
+#: .\src\templates\base_r2.html:67
 msgid "My organisations"
 msgstr ""
 
-#: .\src\templates\base2.html:63 .\src\templates\base_forum.html:84
-#: .\src\templates\base_r2.html:163
+#: .\src\templates\base2.html:63 .\src\templates\base_forum.html:86
+#: .\src\templates\base_r2.html:68
 msgid "Submitted projects"
 msgstr ""
 
-#: .\src\templates\base2.html:64 .\src\templates\base_forum.html:85
-#: .\src\templates\base_r2.html:164
+#: .\src\templates\base2.html:64 .\src\templates\base_forum.html:87
+#: .\src\templates\base_r2.html:69
 msgid "Submitted resources"
 msgstr ""
 
-#: .\src\templates\base2.html:66 .\src\templates\base_forum.html:87
-#: .\src\templates\base_r2.html:166
+#: .\src\templates\base2.html:66 .\src\templates\base_forum.html:89
+#: .\src\templates\base_r2.html:71
 msgid "Resources library"
 msgstr ""
 
@@ -2003,7 +2002,8 @@ msgstr ""
 msgid "ADMIN"
 msgstr ""
 
-#: .\src\templates\base_forms.html:43
+#: .\src\templates\base_forms.html:43 .\src\templates\base_forum.html:76
+#: .\src\templates\base_r2.html:58
 msgid "Login"
 msgstr ""
 
@@ -2015,13 +2015,36 @@ msgstr ""
 msgid "logout"
 msgstr ""
 
-#: .\src\templates\base_forum.html:71 .\src\templates\base_forum.html:156
-#: .\src\templates\base_r2.html:149 .\src\templates\base_r2.html:244
+#: .\src\templates\base_forum.html:66 .\src\templates\base_r2.html:48
+msgid "Blog"
+msgstr ""
+
+#: .\src\templates\base_forum.html:68 .\src\templates\base_r2.html:50
+msgid "Forum"
+msgstr ""
+
+#: .\src\templates\base_forum.html:69 .\src\templates\base_r2.html:51
+msgid "Moocs"
+msgstr ""
+
+#: .\src\templates\base_forum.html:70 .\src\templates\base_r2.html:52
+msgid "OpenCall"
+msgstr ""
+
+#: .\src\templates\base_forum.html:77 .\src\templates\base_r2.html:59
+msgid "Signup"
+msgstr ""
+
+#: .\src\templates\base_forum.html:132 .\src\templates\base_r2.html:114
+msgid "Add"
+msgstr ""
+
+#: .\src\templates\base_forum.html:192 .\src\templates\base_r2.html:177
 msgid "FORUM"
 msgstr ""
 
-#: .\src\templates\base_r2.html:154
-msgid "SIGNUP"
+#: .\src\templates\call.html:10
+msgid "EU-Citizen.Science call"
 msgstr ""
 
 #: .\src\templates\criteria.html:10
@@ -2037,55 +2060,56 @@ msgstr ""
 #: .\src\templates\curated.html:28
 msgid ""
 "to help you get started with designing and launching your own citizen "
-"science project, categorised across the project lifecycle."
+"science project or simply learn about citizen science, categorised across "
+"the project lifecycle."
 msgstr ""
 
 #: .\src\templates\faq.html:20
 msgid "Frequently Asked Questions"
 msgstr ""
 
-#: .\src\templates\home.html:28
-msgid "Do you want to help with translation?"
-msgstr ""
-
-#: .\src\templates\home.html:28
-msgid " Please click here"
-msgstr ""
-
-#: .\src\templates\home.html:39
+#: .\src\templates\home.html:25
 msgid ""
 "Welcome to the platform for sharing Citizen Science projects, resources, "
 "tools, and training"
 msgstr ""
 
-#: .\src\templates\home.html:49
+#: .\src\templates\home.html:34
 msgid ""
 "Search for citizen science resources, projects, tools, training, and more...."
 msgstr ""
 
-#: .\src\templates\home.html:74
+#: .\src\templates\home.html:50
+msgid "Do you want to help with translation?"
+msgstr ""
+
+#: .\src\templates\home.html:50
+msgid " Please click here"
+msgstr ""
+
+#: .\src\templates\home.html:71
 msgid "in Training"
 msgstr ""
 
-#: .\src\templates\home.html:75 .\src\templates\home.html:85
-#: .\src\templates\home.html:95 .\src\templates\home.html:105
+#: .\src\templates\home.html:72 .\src\templates\home.html:82
+#: .\src\templates\home.html:92 .\src\templates\home.html:102
 msgid "here"
 msgstr ""
 
-#: .\src\templates\home.html:75 .\src\templates\home.html:85
-#: .\src\templates\home.html:95 .\src\templates\home.html:105
+#: .\src\templates\home.html:72 .\src\templates\home.html:82
+#: .\src\templates\home.html:92 .\src\templates\home.html:102
 msgid "to see all of them"
 msgstr ""
 
-#: .\src\templates\home.html:84
+#: .\src\templates\home.html:81
 msgid "in Projects"
 msgstr ""
 
-#: .\src\templates\home.html:94
+#: .\src\templates\home.html:91
 msgid "in Resources"
 msgstr ""
 
-#: .\src\templates\home.html:104
+#: .\src\templates\home.html:101
 msgid "in Organisations"
 msgstr ""
 

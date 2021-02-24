@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-18 10:07+0100\n"
+"POT-Creation-Date: 2021-02-24 09:34+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -95,7 +95,7 @@ msgstr " Επαναφορά κωδικού πρόσβασης στο %(site_name
 msgid "Welcome to EU-Citizen.Science."
 msgstr "Καλώς ορίσατε στο EU-Citizen.Science"
 
-#: .\src\blog\templates\blog.html:33
+#: .\src\blog\templates\blog.html:37
 msgid "Read More"
 msgstr "Διαβάστε περισσότερα"
 
@@ -151,12 +151,12 @@ msgstr "Επεξεργασία εκδήλωσης"
 msgid "Event info"
 msgstr "Πληροφορίες εκδήλωσης"
 
-#: .\src\events\templates\events.html:12 .\src\templates\about.html:58
+#: .\src\events\templates\events.html:12 .\src\templates\about.html:60
+#: .\src\templates\base_forum.html:67 .\src\templates\base_r2.html:49
 msgid "Events"
 msgstr "Εκδηλώσεις"
 
-#: .\src\events\templates\events.html:24 .\src\templates\base_forum.html:98
-#: .\src\templates\base_r2.html:180
+#: .\src\events\templates\events.html:24
 msgid "ADD"
 msgstr "ΠΡΟΣΘΗΚΗ"
 
@@ -323,8 +323,8 @@ msgstr "Χώρα"
 #: .\src\organisations\templates\finder_organisations.html:44
 #: .\src\projects\templates\finder_projects.html:82
 #: .\src\resources\templates\finder_resources.html:69
-#: .\src\templates\home.html:74 .\src\templates\home.html:84
-#: .\src\templates\home.html:94 .\src\templates\home.html:104
+#: .\src\templates\home.html:71 .\src\templates\home.html:81
+#: .\src\templates\home.html:91 .\src\templates\home.html:101
 msgid "result"
 msgstr "αποτέλεσμα"
 
@@ -420,14 +420,14 @@ msgid "Go to Organisation"
 msgstr "Πηγαίνετε στον Οργανισμό"
 
 #: .\src\organisations\templates\organisation.html:59
-#: .\src\templates\_subnavbar.html:12 .\src\templates\about.html:55
-#: .\src\templates\home.html:83
+#: .\src\templates\_subnavbar.html:58 .\src\templates\about.html:57
+#: .\src\templates\home.html:80
 msgid "Projects"
 msgstr "Έργα"
 
 #: .\src\organisations\templates\organisation.html:65
-#: .\src\templates\_subnavbar.html:16 .\src\templates\about.html:54
-#: .\src\templates\home.html:93
+#: .\src\templates\_subnavbar.html:62 .\src\templates\about.html:56
+#: .\src\templates\home.html:90
 msgid "Resources"
 msgstr "Πόροι"
 
@@ -449,7 +449,7 @@ msgstr "Επεξεργασία Οργανισμού"
 msgid "Organisation"
 msgstr "Οργανισμός"
 
-#: .\src\organisations\views.py:44
+#: .\src\organisations\views.py:47
 msgid "Organisation added correctly"
 msgstr ""
 
@@ -493,8 +493,8 @@ msgid "Geographical location"
 msgstr "Γεωγραφική τοποθεσία"
 
 #: .\src\profiles\templates\profiles\followed_projects.html:27
-#: .\src\templates\base2.html:65 .\src\templates\base_forum.html:86
-#: .\src\templates\base_r2.html:165
+#: .\src\templates\base2.html:65 .\src\templates\base_forum.html:88
+#: .\src\templates\base_r2.html:70
 msgid "Followed projects"
 msgstr "Έργα που ακολουθούνται"
 
@@ -844,7 +844,7 @@ msgstr "Όχι ακόμη ρυθμισμένο"
 
 #: .\src\projects\templates\finder_projects.html:76
 #: .\src\resources\templates\finder_resources.html:63
-#: .\src\templates\_subnavbar.html:8
+#: .\src\templates\_subnavbar.html:54
 msgid "All"
 msgstr "Όλα"
 
@@ -855,6 +855,7 @@ msgstr "Πληροφορίες"
 
 #: .\src\projects\templates\modal_projects.html:14
 #: .\src\resources\templates\modal_resources.html:14
+#: .\src\templates\base_forum.html:64 .\src\templates\base_r2.html:46
 msgid "Search"
 msgstr "Αναζήτηση"
 
@@ -1090,7 +1091,7 @@ msgstr ""
 msgid "Rate and comment"
 msgstr "Αξιολογήστε και σχολιάστε"
 
-#: .\src\projects\views.py:38
+#: .\src\projects\views.py:41
 msgid "Project added correctly"
 msgstr ""
 
@@ -1479,11 +1480,11 @@ msgstr ""
 msgid "Edit"
 msgstr "Επεξεργασία"
 
-#: .\src\resources\views.py:118
+#: .\src\resources\views.py:122
 msgid "Training resource added correctly"
 msgstr ""
 
-#: .\src\resources\views.py:120
+#: .\src\resources\views.py:130
 msgid "Resource added correctly"
 msgstr ""
 
@@ -1555,45 +1556,45 @@ msgstr "Εξέλιξη"
 msgid "API"
 msgstr "API"
 
-#: .\src\templates\_navbar.html:3 .\src\templates\base_forum.html:67
-#: .\src\templates\base_r2.html:145
+#: .\src\templates\_navbar.html:3
 msgid "SEARCH"
 msgstr "ΑΝΑΖΗΤΗΣΗ"
 
-#: .\src\templates\_navbar.html:4 .\src\templates\base_forum.html:69
-#: .\src\templates\base_r2.html:147
+#: .\src\templates\_navbar.html:4
 msgid "BLOG"
 msgstr "ΙΣΤΟΛΟΓΙΟ"
 
-#: .\src\templates\_navbar.html:5 .\src\templates\base_forum.html:70
-#: .\src\templates\base_r2.html:148
+#: .\src\templates\_navbar.html:5
 msgid "EVENTS"
 msgstr "ΕΚΔΗΛΩΣΕΙΣ"
 
-#: .\src\templates\_navbar.html:6 .\src\templates\base_forum.html:72
-#: .\src\templates\base_r2.html:150
+#: .\src\templates\_navbar.html:6
 msgid "MOOCS"
 msgstr ""
 
-#: .\src\templates\_navbar.html:7 .\src\templates\base_forum.html:73
-#: .\src\templates\base_r2.html:151
+#: .\src\templates\_navbar.html:7
+msgid "CALL"
+msgstr ""
+
+#: .\src\templates\_navbar.html:8
 msgid "ABOUT"
 msgstr "ΣΧΕΤΙΚΑ"
 
-#: .\src\templates\_subnavbar.html:20 .\src\templates\home.html:73
+#: .\src\templates\_subnavbar.html:66 .\src\templates\home.html:70
 #: .\src\templates\modalinfo.html:18 .\src\templates\resources_cards.html:33
 msgid "Training"
 msgstr "Εκπαίδευση"
 
-#: .\src\templates\_subnavbar.html:24 .\src\templates\home.html:103
+#: .\src\templates\_subnavbar.html:70 .\src\templates\home.html:100
 msgid "Organisations"
 msgstr "Οργανισμοί"
 
-#: .\src\templates\_subnavbar.html:29
+#: .\src\templates\_subnavbar.html:75
 msgid "Our Gold Star Selection"
 msgstr "Η Χρύση Επιλογή Μας"
 
 #: .\src\templates\about.html:4 .\src\templates\about.html:8
+#: .\src\templates\base_forum.html:65 .\src\templates\base_r2.html:47
 msgid "About"
 msgstr "Σχετικά"
 
@@ -1601,11 +1602,11 @@ msgstr "Σχετικά"
 msgid "Watch our teaser, in 12 different languages!"
 msgstr ""
 
-#: .\src\templates\about.html:44
+#: .\src\templates\about.html:46
 msgid "The Platform"
 msgstr "Η Πλατφόρμα"
 
-#: .\src\templates\about.html:47
+#: .\src\templates\about.html:49
 msgid ""
 "EU-Citizen.Science is an online platform for sharing knowledge, tools, "
 "training and resources for citizen science – by the community, for the "
@@ -1615,7 +1616,7 @@ msgstr ""
 "γνώσεων, εργαλείων, εκπαίδευσης και πόρων για την επιστήμη των πολιτών - από "
 "την κοινότητα, για την κοινότητα."
 
-#: .\src\templates\about.html:48
+#: .\src\templates\about.html:50
 msgid ""
 "The vision for the platform is to serve as a Knowledge Hub, in aid of the "
 "mainstreaming of citizen science, and build on the growing impact of "
@@ -1627,7 +1628,7 @@ msgstr ""
 "αυξανόμενο αντίκτυπο των πολιτών που συμμετέχουν στην έρευνα σε όλο το φάσμα "
 "της επιστημονικής έρευνας."
 
-#: .\src\templates\about.html:49
+#: .\src\templates\about.html:51
 msgid ""
 "We accomplish this by supporting the sharing of knowledge, know-how, and "
 "experience between anyone doing or wanting to do citizen science."
@@ -1636,41 +1637,41 @@ msgstr ""
 "εμπειρίας μεταξύ όσων πραγματοποιούν ή θέλουν να πραγματοποιήσουν έργα "
 "επιστήμης των πολιτών."
 
-#: .\src\templates\about.html:52
+#: .\src\templates\about.html:54
 msgid "On this platform you will find"
 msgstr "Σε αυτήν την πλατφόρμα θα βρείς"
 
-#: .\src\templates\about.html:54
+#: .\src\templates\about.html:56
 msgid "that are useful for citizen science practitioners"
 msgstr "που είναι χρήσιμα για όσους πραγματοποιούν έργα επιστήμης των πολιτών"
 
-#: .\src\templates\about.html:55
+#: .\src\templates\about.html:57
 msgid "that are engaging the public in research via citizen science activities"
 msgstr ""
 "που εμπλέκουν το κοινό στην έρευνα μέσω δραστηριοτήτων επιστήμης των πολιτών"
 
-#: .\src\templates\about.html:56
+#: .\src\templates\about.html:58
 msgid "Training resources and materials citizen science as a practice"
 msgstr "Εκπαιδευτικοί πόροι και υλικό επιστήμης των πολιτών ως πρακτική"
 
-#: .\src\templates\about.html:57
+#: .\src\templates\about.html:59
 msgid ""
 "Organisations that are involved in citizen science projects and research"
 msgstr "Οργανισμοί που εμπλέκονται σε έργα και έρευνα επιστήμης των πολιτών"
 
-#: .\src\templates\about.html:58
+#: .\src\templates\about.html:60
 msgid "an"
 msgstr "ένας, μια, ένα"
 
-#: .\src\templates\about.html:58
+#: .\src\templates\about.html:60
 msgid "calendar"
 msgstr "ημερολόγιο"
 
-#: .\src\templates\about.html:58
+#: .\src\templates\about.html:60
 msgid "and"
 msgstr "και"
 
-#: .\src\templates\about.html:59
+#: .\src\templates\about.html:61
 msgid ""
 "Community Forums for questions, conversations, and collaboration with the "
 "rest of the community."
@@ -1678,7 +1679,7 @@ msgstr ""
 "Φόρουμ κοινότητας για ερωτήσεις, συνομιλίες και συνεργασία με την υπόλοιπη "
 "κοινότητα"
 
-#: .\src\templates\about.html:63
+#: .\src\templates\about.html:65
 msgid ""
 "Spotted something missing? You can add your own profiles for Resources, "
 "Projects, and Training via the +ADD button in the top menu. Have a "
@@ -1690,19 +1691,19 @@ msgstr ""
 "Έχετε μια πρόταση για εμάς; Μοιραστείτε τις σκέψεις σας στο φόρουμ σχολίων "
 "κοινότητας ή στο"
 
-#: .\src\templates\about.html:63
+#: .\src\templates\about.html:65
 msgid "contact"
 msgstr "επικοινωνία"
 
-#: .\src\templates\about.html:63
+#: .\src\templates\about.html:65
 msgid "section"
 msgstr "τμήμα"
 
-#: .\src\templates\about.html:72
+#: .\src\templates\about.html:74
 msgid "The Project"
 msgstr "Το Έργο"
 
-#: .\src\templates\about.html:76
+#: .\src\templates\about.html:78
 msgid ""
 "The EU-Citizen.Science project has been funded by the European Commission "
 "Horizon 2020 programme, in the Science with and for Society programme of "
@@ -1719,11 +1720,11 @@ msgstr ""
 "τους επαγγελματίες, τους ερευνητές, τους υπεύθυνους χάραξης πολιτικής και "
 "την κοινωνία σε όλη την Ευρώπη"
 
-#: .\src\templates\about.html:81
+#: .\src\templates\about.html:83
 msgid "Our Vision"
 msgstr "Το Όραμα Μας"
 
-#: .\src\templates\about.html:82
+#: .\src\templates\about.html:84
 msgid ""
 "is that Citizen Science becomes an appreciated and widely established means "
 "for the democratization of science in Europe"
@@ -1731,11 +1732,11 @@ msgstr ""
 "είναι ότι η Επιστήμη των Πολιτών γίνεται ένα εκτιμώμενο και ευρέως "
 "διαδεδομένο μέσο για τον εκδημοκρατισμό της επιστήμης στην Ευρώπη"
 
-#: .\src\templates\about.html:89
+#: .\src\templates\about.html:91
 msgid "Our Core Mission"
 msgstr "Η Βασική Αποστολή Μας"
 
-#: .\src\templates\about.html:90
+#: .\src\templates\about.html:92
 msgid ""
 "is to become the European reference point for CS through cross-network "
 "knowledge sharing for citizen science participants, practitioners, "
@@ -1746,11 +1747,11 @@ msgstr ""
 "των πολιτών, τους επαγγελματίες, τους ερευνητές, τους υπεύθυνους χάραξης "
 "πολιτικής και την κοινωνία σε όλη την Ευρώπη"
 
-#: .\src\templates\about.html:97
+#: .\src\templates\about.html:99
 msgid "Objective 1: Establish"
 msgstr "Στόχος 1: Καθιέρωση"
 
-#: .\src\templates\about.html:98
+#: .\src\templates\about.html:100
 msgid ""
 "EU-Citizen.Science as the knowledge and community hub for high-quality CS "
 "exchange and learning in Europe"
@@ -1758,11 +1759,11 @@ msgstr ""
 "Η πλατφόρμα EU-Citizen.Science ως κέντρο γνώσης και κοινότητας για ανταλλαγή "
 "και μάθηση της Επιστήμης των Πολιτών υψηλής ποιότητας στην Ευρώπη"
 
-#: .\src\templates\about.html:105
+#: .\src\templates\about.html:107
 msgid "Objective 2: Consolidate"
 msgstr "Στόχος 2: Εδραίωση"
 
-#: .\src\templates\about.html:106
+#: .\src\templates\about.html:108
 msgid ""
 "the CS knowledge base and celebrate outstanding practices and state of the "
 "art in CS in Europe"
@@ -1771,11 +1772,11 @@ msgstr ""
 "πρακτικών και την τελευταία λέξη της τεχνολογίας στην Επιστήμη των Πολιτών "
 "στην Ευρώπη "
 
-#: .\src\templates\about.html:113
+#: .\src\templates\about.html:115
 msgid "Objective 3: Empower"
 msgstr "Στόχος 3: Ενδυνάμωση"
 
-#: .\src\templates\about.html:114
+#: .\src\templates\about.html:116
 msgid ""
 "diverse stakeholders to become citizen scientists, start CS initiatives, and "
 "implement CS approaches professionally"
@@ -1784,11 +1785,11 @@ msgstr ""
 "πρωτοβουλίες επιστήμης των πολιτών και να εφαρμόσουν επαγγελματικές "
 "προσεγγίσεις επιστήμης των πολιτών"
 
-#: .\src\templates\about.html:121
+#: .\src\templates\about.html:123
 msgid "Objective 4: Explore"
 msgstr "Στόχος 4: Εξερεύνηση"
 
-#: .\src\templates\about.html:122
+#: .\src\templates\about.html:124
 msgid ""
 "new pathways for participatory governance, by strengthening links between CS "
 "and policy making"
@@ -1796,11 +1797,11 @@ msgstr ""
 "νέοι δρόμοι συμμετοχικής διακυβέρνησης, ενισχύοντας τους δεσμούς μεταξύ της "
 "επιστήμης των πολιτών και της χάραξης πολιτικής"
 
-#: .\src\templates\about.html:129
+#: .\src\templates\about.html:131
 msgid "Objective 5: Advance"
 msgstr "Στόχος 5: Εξέλιξη"
 
-#: .\src\templates\about.html:130
+#: .\src\templates\about.html:132
 msgid ""
 "CS into the mainstream of public engagement, science communication and "
 "education"
@@ -1808,7 +1809,7 @@ msgstr ""
 "Η Επιστήμη των Πολιτών στο κύριο ρεύμα της δημόσιας δέσμευσης, της "
 "επιστημονικής επικοινωνίας και της εκπαίδευσης"
 
-#: .\src\templates\about.html:137
+#: .\src\templates\about.html:139
 msgid ""
 "In keeping with our mission, we aim to engage equally with CS participants, "
 "practitioners, researchers, policy makers and society as a whole throughout "
@@ -1825,11 +1826,11 @@ msgstr ""
 "ανάγκες και τις απαιτήσεις τους και πώς μπορούμε να οικοδομήσουμε μια "
 "κοινότητα αφοσιωμένων χρηστών της πλατφόρμας"
 
-#: .\src\templates\about.html:147
+#: .\src\templates\about.html:149
 msgid "The Team"
 msgstr "Η Ομάδα"
 
-#: .\src\templates\about.html:150
+#: .\src\templates\about.html:152
 msgid ""
 "The EU-Citizen.Science consortium consists of 14 partners and 9 third "
 "parties from across 14 European member states, as well as other project "
@@ -1843,19 +1844,19 @@ msgstr ""
 "επιστήμη των πολιτών, συμπεριλαμβανομένων πανεπιστημίων, μη κυβερνητικών "
 "οργανώσεων, τοπικών αρχών, κοινοτικών οργανώσεων και μουσείων"
 
-#: .\src\templates\about.html:159
+#: .\src\templates\about.html:161
 msgid "Consortium partners"
 msgstr "Συνεργάτες κοινοπραξίας"
 
-#: .\src\templates\about.html:216
+#: .\src\templates\about.html:218
 msgid "Third party partners"
 msgstr "Συνεργάτες Τρίτα μέλη"
 
-#: .\src\templates\about.html:257
+#: .\src\templates\about.html:259
 msgid "Citizen Science"
 msgstr "Η Επιστήμη των Πολιτών"
 
-#: .\src\templates\about.html:260
+#: .\src\templates\about.html:262
 msgid ""
 "Citizen science actively involves the public in scientific research that "
 "generates new knowledge or understanding, and thus has the potential to "
@@ -1873,7 +1874,7 @@ msgstr ""
 "καινοτομία και την ανάπτυξη τεκμηριωμένης πολιτικής, σε τοπικό, εθνικό και "
 "κοινοτικό επίπεδο."
 
-#: .\src\templates\about.html:261
+#: .\src\templates\about.html:263
 msgid ""
 "Citizen science is a flexible concept which can be adapted and applied "
 "within diverse situations and disciplines. In order to set out some of the "
@@ -1885,11 +1886,11 @@ msgstr ""
 "καθορίσουμε μερικές από τις βασικές αρχές που εμείς ως κοινότητα πιστεύουμε "
 "ότι αποτελούν την ορθή πρακτική της επιστήμης των πολιτών, τα ακόλουθα"
 
-#: .\src\templates\about.html:261
+#: .\src\templates\about.html:263
 msgid "10 Principles of Citizen Science"
 msgstr "Οι 10 Αρχές της Επιστήμης των Πολιτών"
 
-#: .\src\templates\about.html:261
+#: .\src\templates\about.html:263
 msgid ""
 "were developed by the ‘Sharing best practice and building capacity’ working "
 "group of the"
@@ -1897,11 +1898,11 @@ msgstr ""
 "αναπτύχθηκαν από την ομάδα εργασίας «Κοινή χρήση βέλτιστων πρακτικών και "
 "ανάπτυξης ικανοτήτων» "
 
-#: .\src\templates\about.html:261
+#: .\src\templates\about.html:263
 msgid "European Citizen Science Association"
 msgstr "Ευρωπαϊκή Ένωση της Επιστήμης των Πολιτών"
 
-#: .\src\templates\about.html:261
+#: .\src\templates\about.html:263
 msgid ""
 "led by the Natural History Museum London with input from many members of the "
 "Association."
@@ -1909,11 +1910,11 @@ msgstr ""
 "με επικεφαλής το Μουσείο Φυσικής Ιστορίας του Λονδίνου με συμβολή πολλών "
 "μελών του Συλλόγου."
 
-#: .\src\templates\about.html:269
+#: .\src\templates\about.html:271
 msgid "Ten principles of citizen science"
 msgstr "Οι 10 αρχές της επιστήμης των πολιτών"
 
-#: .\src\templates\about.html:273
+#: .\src\templates\about.html:275
 msgid ""
 "Citizen science projects actively involve citizens in scientific endeavour "
 "that generates new knowledge or understanding. Citizens may act as "
@@ -1925,12 +1926,12 @@ msgstr ""
 "ενεργούν ως συνεισφέροντες, συνεργάτες ή ηγέτες του έργου και να έχουν "
 "σημαντικό ρόλο στο έργο."
 
-#: .\src\templates\about.html:274
+#: .\src\templates\about.html:276
 msgid "Citizen science projects have a genuine science outcome."
 msgstr ""
 "Τα έργα επιστήμης των πολιτών έχουν ένα πραγματικό επιστημονικό αποτέλεσμα."
 
-#: .\src\templates\about.html:274
+#: .\src\templates\about.html:276
 msgid ""
 "For example, answering a research question or informing conservation action, "
 "management decisions or environmental policy."
@@ -1939,7 +1940,7 @@ msgstr ""
 "με τη δράση διατήρησης, τις αποφάσεις διαχείρισης ή την περιβαλλοντική "
 "πολιτική."
 
-#: .\src\templates\about.html:275
+#: .\src\templates\about.html:277
 msgid ""
 "Both the professional scientists and the citizen scientists benefit from "
 "taking part."
@@ -1947,7 +1948,7 @@ msgstr ""
 "Τόσο οι επαγγελματίες επιστήμονες όσο και οι πολίτες επιστήμονες "
 "επωφελούνται από τη συμμετοχή."
 
-#: .\src\templates\about.html:275
+#: .\src\templates\about.html:277
 msgid ""
 "Benefits may include the publication of research outputs, learning "
 "opportunities, personal enjoyment, social benefits, satisfaction through "
@@ -1960,7 +1961,7 @@ msgstr ""
 "εθνικά και διεθνή ζητήματα, και μέσω αυτού, τη δυνατότητα να επηρεάσει την "
 "πολιτική"
 
-#: .\src\templates\about.html:276
+#: .\src\templates\about.html:278
 msgid ""
 "Citizen scientists may, if they wish, participate in multiple stages of the "
 "scientific process."
@@ -1968,7 +1969,7 @@ msgstr ""
 "Οι επιστήμονες πολιτών μπορούν, εάν το επιθυμούν, να συμμετάσχουν σε "
 "πολλαπλά στάδια της επιστημονικής διαδικασίας."
 
-#: .\src\templates\about.html:276
+#: .\src\templates\about.html:278
 msgid ""
 "This may include developing the research question, designing the method, "
 "gathering and analysing data, and communicating the results."
@@ -1977,11 +1978,11 @@ msgstr ""
 "σχεδιασμό της μεθόδου, τη συλλογή και ανάλυση δεδομένων και την κοινοποίηση "
 "των αποτελεσμάτων"
 
-#: .\src\templates\about.html:277
+#: .\src\templates\about.html:279
 msgid "Citizen scientists receive feedback from the project."
 msgstr "Οι Πολίτες επιστήμονες λαμβάνουν ανατροφοδότηση από το έργο."
 
-#: .\src\templates\about.html:277
+#: .\src\templates\about.html:279
 msgid ""
 "For example, how their data are being used and what the research, policy or "
 "societal outcomes are."
@@ -1989,7 +1990,7 @@ msgstr ""
 "Για παράδειγμα, πώς χρησιμοποιούνται τα δεδομένα τους και ποια είναι τα "
 "αποτελέσματα της έρευνας, της πολιτικής ή της κοινωνίας."
 
-#: .\src\templates\about.html:278
+#: .\src\templates\about.html:280
 msgid ""
 "Citizen science is considered a research approach like any other, with "
 "limitations and biases that should be considered and controlled for."
@@ -1998,7 +1999,7 @@ msgstr ""
 "με περιορισμούς και προκαταλήψεις που πρέπει να λαμβάνονται υπόψη και να "
 "ελέγχονται."
 
-#: .\src\templates\about.html:278
+#: .\src\templates\about.html:280
 msgid ""
 "However unlike traditional research approaches, citizen science provides "
 "opportunity for greater public engagement and democratisation of science."
@@ -2007,7 +2008,7 @@ msgstr ""
 "των πολιτών παρέχει την ευκαιρία για μεγαλύτερη δημόσια δέσμευση και "
 "εκδημοκρατισμό της επιστήμης."
 
-#: .\src\templates\about.html:279
+#: .\src\templates\about.html:281
 msgid ""
 "Citizen science project data and meta-data are made publicly available and "
 "where possible, results are published in an open access format."
@@ -2016,7 +2017,7 @@ msgstr ""
 "κοινό και, όπου είναι δυνατόν, τα αποτελέσματα δημοσιεύονται σε μορφή "
 "ανοικτής πρόσβασης."
 
-#: .\src\templates\about.html:279
+#: .\src\templates\about.html:281
 msgid ""
 "Data sharing may occur during or after the project, unless there are "
 "security or privacy concerns that prevent this."
@@ -2025,14 +2026,14 @@ msgstr ""
 "έργο, εκτός εάν υπάρχουν ανησυχίες σχετικά με την ασφάλεια ή το απόρρητο που "
 "το αποτρέπουν."
 
-#: .\src\templates\about.html:280
+#: .\src\templates\about.html:282
 msgid ""
 "Citizen scientists are acknowledged in project results and publications."
 msgstr ""
 "Οι πολίτες επιστήμονες αναγνωρίζονται στα αποτελέσματα και τις δημοσιεύσεις "
 "του έργου."
 
-#: .\src\templates\about.html:281
+#: .\src\templates\about.html:283
 msgid ""
 "Citizen science programmes are evaluated for their scientific output, data "
 "quality, participant experience and wider societal or policy impact."
@@ -2041,7 +2042,7 @@ msgstr ""
 "τους αποτελέσματα, την ποιότητα των δεδομένων, την εμπειρία των "
 "συμμετεχόντων και τον ευρύτερο κοινωνικό ή πολιτικό αντίκτυπο."
 
-#: .\src\templates\about.html:282
+#: .\src\templates\about.html:284
 msgid ""
 "The leaders of citizen science projects take into consideration legal and "
 "ethical issues surrounding copyright, intellectual property, data sharing "
@@ -2054,8 +2055,8 @@ msgstr ""
 "περιβαλλοντικές επιπτώσεις οποιωνδήποτε δραστηριοτήτων."
 
 #: .\src\templates\base.html:74 .\src\templates\base2.html:68
-#: .\src\templates\base_forms.html:51 .\src\templates\base_forum.html:89
-#: .\src\templates\base_r2.html:169
+#: .\src\templates\base_forms.html:51 .\src\templates\base_forum.html:92
+#: .\src\templates\base_r2.html:74
 msgid "Admin"
 msgstr "Υπευθύνος"
 
@@ -2064,7 +2065,7 @@ msgid "Profile"
 msgstr "Προφίλ"
 
 #: .\src\templates\base.html:85 .\src\templates\base2.html:70
-#: .\src\templates\base_forum.html:91 .\src\templates\base_r2.html:171
+#: .\src\templates\base_forum.html:94 .\src\templates\base_r2.html:76
 msgid "Logout"
 msgstr "Αποσύνδεση"
 
@@ -2077,37 +2078,35 @@ msgid "Connect with us on"
 msgstr "Συνδεθείτε με εμάς στο"
 
 #: .\src\templates\base2.html:56 .\src\templates\base3.html:49
-#: .\src\templates\base_forum.html:75 .\src\templates\base_r2.html:153
 msgid "LOGIN"
 msgstr "ΕΙΣΟΔΟΣ"
 
 #: .\src\templates\base2.html:57 .\src\templates\base3.html:50
-#: .\src\templates\base_forum.html:76
 msgid "SIGN UP"
 msgstr "ΕΓΓΡΑΦΗ"
 
-#: .\src\templates\base2.html:61 .\src\templates\base_forum.html:82
-#: .\src\templates\base_r2.html:161
+#: .\src\templates\base2.html:61 .\src\templates\base_forum.html:84
+#: .\src\templates\base_r2.html:66
 msgid "My Profile"
 msgstr "Το προφίλ μου"
 
-#: .\src\templates\base2.html:62 .\src\templates\base_forum.html:83
-#: .\src\templates\base_r2.html:162
+#: .\src\templates\base2.html:62 .\src\templates\base_forum.html:85
+#: .\src\templates\base_r2.html:67
 msgid "My organisations"
 msgstr "Οι οργανισμοί μου"
 
-#: .\src\templates\base2.html:63 .\src\templates\base_forum.html:84
-#: .\src\templates\base_r2.html:163
+#: .\src\templates\base2.html:63 .\src\templates\base_forum.html:86
+#: .\src\templates\base_r2.html:68
 msgid "Submitted projects"
 msgstr "Καταχωρημένα έργα"
 
-#: .\src\templates\base2.html:64 .\src\templates\base_forum.html:85
-#: .\src\templates\base_r2.html:164
+#: .\src\templates\base2.html:64 .\src\templates\base_forum.html:87
+#: .\src\templates\base_r2.html:69
 msgid "Submitted resources"
 msgstr "Καταχωρημένοι πόροι"
 
-#: .\src\templates\base2.html:66 .\src\templates\base_forum.html:87
-#: .\src\templates\base_r2.html:166
+#: .\src\templates\base2.html:66 .\src\templates\base_forum.html:89
+#: .\src\templates\base_r2.html:71
 msgid "Resources library"
 msgstr "Βιβλιοθήκη πόρων"
 
@@ -2123,7 +2122,8 @@ msgstr "ΑΠΟΣΥΝΔΕΣΗ"
 msgid "ADMIN"
 msgstr "ΔΙΑΧΕΙΡΙΣΤΗΣ"
 
-#: .\src\templates\base_forms.html:43
+#: .\src\templates\base_forms.html:43 .\src\templates\base_forum.html:76
+#: .\src\templates\base_r2.html:58
 msgid "Login"
 msgstr "Είσοδος"
 
@@ -2135,14 +2135,37 @@ msgstr "προφίλ"
 msgid "logout"
 msgstr "αποσύνδεση"
 
-#: .\src\templates\base_forum.html:71 .\src\templates\base_forum.html:156
-#: .\src\templates\base_r2.html:149 .\src\templates\base_r2.html:244
+#: .\src\templates\base_forum.html:66 .\src\templates\base_r2.html:48
+msgid "Blog"
+msgstr ""
+
+#: .\src\templates\base_forum.html:68 .\src\templates\base_r2.html:50
+msgid "Forum"
+msgstr ""
+
+#: .\src\templates\base_forum.html:69 .\src\templates\base_r2.html:51
+msgid "Moocs"
+msgstr ""
+
+#: .\src\templates\base_forum.html:70 .\src\templates\base_r2.html:52
+msgid "OpenCall"
+msgstr ""
+
+#: .\src\templates\base_forum.html:77 .\src\templates\base_r2.html:59
+msgid "Signup"
+msgstr "Εγγραφή"
+
+#: .\src\templates\base_forum.html:132 .\src\templates\base_r2.html:114
+msgid "Add"
+msgstr ""
+
+#: .\src\templates\base_forum.html:192 .\src\templates\base_r2.html:177
 msgid "FORUM"
 msgstr "ΦΟΡΟΥΜ"
 
-#: .\src\templates\base_r2.html:154
-msgid "SIGNUP"
-msgstr "ΕΓΓΡΑΦΗ"
+#: .\src\templates\call.html:10
+msgid "EU-Citizen.Science call"
+msgstr ""
 
 #: .\src\templates\criteria.html:10
 msgid "Quality criteria"
@@ -2159,25 +2182,15 @@ msgstr ""
 #: .\src\templates\curated.html:28
 msgid ""
 "to help you get started with designing and launching your own citizen "
-"science project, categorised across the project lifecycle."
+"science project or simply learn about citizen science, categorised across "
+"the project lifecycle."
 msgstr ""
-"για να σας βοηθήσουμε να ξεκινήσετε με το σχεδιασμό και την έναρξη του δικού "
-"σας έργου επιστήμης των πολιτών, κατηγοριοποιημένο σε ολόκληρο τον κύκλο "
-"ζωής του έργου."
 
 #: .\src\templates\faq.html:20
 msgid "Frequently Asked Questions"
 msgstr "Συχνές Ερωτήσεις"
 
-#: .\src\templates\home.html:28
-msgid "Do you want to help with translation?"
-msgstr ""
-
-#: .\src\templates\home.html:28
-msgid " Please click here"
-msgstr ""
-
-#: .\src\templates\home.html:39
+#: .\src\templates\home.html:25
 msgid ""
 "Welcome to the platform for sharing Citizen Science projects, resources, "
 "tools, and training"
@@ -2185,34 +2198,42 @@ msgstr ""
 "Καλώς ορίσατε στην πλατφόρμα για κοινή χρήση έργων, πόρων, εργαλείων και "
 "εκπαίδευσης της Επιστήμης των Πολιτών"
 
-#: .\src\templates\home.html:49
+#: .\src\templates\home.html:34
 msgid ""
 "Search for citizen science resources, projects, tools, training, and more...."
 msgstr ""
 
-#: .\src\templates\home.html:74
+#: .\src\templates\home.html:50
+msgid "Do you want to help with translation?"
+msgstr ""
+
+#: .\src\templates\home.html:50
+msgid " Please click here"
+msgstr ""
+
+#: .\src\templates\home.html:71
 msgid "in Training"
 msgstr "στην Εκπαίδευση"
 
-#: .\src\templates\home.html:75 .\src\templates\home.html:85
-#: .\src\templates\home.html:95 .\src\templates\home.html:105
+#: .\src\templates\home.html:72 .\src\templates\home.html:82
+#: .\src\templates\home.html:92 .\src\templates\home.html:102
 msgid "here"
 msgstr "εδώ"
 
-#: .\src\templates\home.html:75 .\src\templates\home.html:85
-#: .\src\templates\home.html:95 .\src\templates\home.html:105
+#: .\src\templates\home.html:72 .\src\templates\home.html:82
+#: .\src\templates\home.html:92 .\src\templates\home.html:102
 msgid "to see all of them"
 msgstr "για να τα δείτε όλα"
 
-#: .\src\templates\home.html:84
+#: .\src\templates\home.html:81
 msgid "in Projects"
 msgstr "στα Προτζεκτ"
 
-#: .\src\templates\home.html:94
+#: .\src\templates\home.html:91
 msgid "in Resources"
 msgstr "στους Πόρους"
 
-#: .\src\templates\home.html:104
+#: .\src\templates\home.html:101
 msgid "in Organisations"
 msgstr "στους Οργανισμούς"
 
@@ -2453,6 +2474,9 @@ msgstr "Τελευταία ενημέρωση"
 #: .\src\templates\translations.html:10
 msgid "Translations"
 msgstr ""
+
+#~ msgid "SIGNUP"
+#~ msgstr "ΕΓΓΡΑΦΗ"
 
 #~ msgid "Teaser video"
 #~ msgstr "Βίντεο teaser"
