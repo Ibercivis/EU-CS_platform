@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-18 10:07+0100\n"
+"POT-Creation-Date: 2021-02-24 09:34+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -94,7 +94,7 @@ msgstr "Salasõna lähtestamine %(site_name)s"
 msgid "Welcome to EU-Citizen.Science."
 msgstr "Tere tulemast lehele EU-Citizen.Science."
 
-#: .\src\blog\templates\blog.html:33
+#: .\src\blog\templates\blog.html:37
 msgid "Read More"
 msgstr ""
 
@@ -150,12 +150,12 @@ msgstr "Muuda sündmust"
 msgid "Event info"
 msgstr "Sündmuse info"
 
-#: .\src\events\templates\events.html:12 .\src\templates\about.html:58
+#: .\src\events\templates\events.html:12 .\src\templates\about.html:60
+#: .\src\templates\base_forum.html:67 .\src\templates\base_r2.html:49
 msgid "Events"
 msgstr "Sündmused"
 
-#: .\src\events\templates\events.html:24 .\src\templates\base_forum.html:98
-#: .\src\templates\base_r2.html:180
+#: .\src\events\templates\events.html:24
 msgid "ADD"
 msgstr "LISA"
 
@@ -317,8 +317,8 @@ msgstr "Riik"
 #: .\src\organisations\templates\finder_organisations.html:44
 #: .\src\projects\templates\finder_projects.html:82
 #: .\src\resources\templates\finder_resources.html:69
-#: .\src\templates\home.html:74 .\src\templates\home.html:84
-#: .\src\templates\home.html:94 .\src\templates\home.html:104
+#: .\src\templates\home.html:71 .\src\templates\home.html:81
+#: .\src\templates\home.html:91 .\src\templates\home.html:101
 msgid "result"
 msgstr "tulemus"
 
@@ -411,14 +411,14 @@ msgid "Go to Organisation"
 msgstr "Mine organisatsiooni juurde"
 
 #: .\src\organisations\templates\organisation.html:59
-#: .\src\templates\_subnavbar.html:12 .\src\templates\about.html:55
-#: .\src\templates\home.html:83
+#: .\src\templates\_subnavbar.html:58 .\src\templates\about.html:57
+#: .\src\templates\home.html:80
 msgid "Projects"
 msgstr "Projektid"
 
 #: .\src\organisations\templates\organisation.html:65
-#: .\src\templates\_subnavbar.html:16 .\src\templates\about.html:54
-#: .\src\templates\home.html:93
+#: .\src\templates\_subnavbar.html:62 .\src\templates\about.html:56
+#: .\src\templates\home.html:90
 msgid "Resources"
 msgstr "Materjalid"
 
@@ -440,7 +440,7 @@ msgstr "Muuda organisatsiooni"
 msgid "Organisation"
 msgstr "Organisatsioon"
 
-#: .\src\organisations\views.py:44
+#: .\src\organisations\views.py:47
 msgid "Organisation added correctly"
 msgstr ""
 
@@ -484,8 +484,8 @@ msgid "Geographical location"
 msgstr "Geograafiline asukoht"
 
 #: .\src\profiles\templates\profiles\followed_projects.html:27
-#: .\src\templates\base2.html:65 .\src\templates\base_forum.html:86
-#: .\src\templates\base_r2.html:165
+#: .\src\templates\base2.html:65 .\src\templates\base_forum.html:88
+#: .\src\templates\base_r2.html:70
 msgid "Followed projects"
 msgstr "Järgnevad projektid"
 
@@ -835,7 +835,7 @@ msgstr "Ei ole veel modereeritud"
 
 #: .\src\projects\templates\finder_projects.html:76
 #: .\src\resources\templates\finder_resources.html:63
-#: .\src\templates\_subnavbar.html:8
+#: .\src\templates\_subnavbar.html:54
 msgid "All"
 msgstr "Kõik"
 
@@ -846,6 +846,7 @@ msgstr "Info"
 
 #: .\src\projects\templates\modal_projects.html:14
 #: .\src\resources\templates\modal_resources.html:14
+#: .\src\templates\base_forum.html:64 .\src\templates\base_r2.html:46
 msgid "Search"
 msgstr "Otsi"
 
@@ -1086,7 +1087,7 @@ msgstr ""
 msgid "Rate and comment"
 msgstr "Hinda ja kommenteeri"
 
-#: .\src\projects\views.py:38
+#: .\src\projects\views.py:41
 msgid "Project added correctly"
 msgstr ""
 
@@ -1470,11 +1471,11 @@ msgstr ""
 msgid "Edit"
 msgstr "Muuda"
 
-#: .\src\resources\views.py:118
+#: .\src\resources\views.py:122
 msgid "Training resource added correctly"
 msgstr ""
 
-#: .\src\resources\views.py:120
+#: .\src\resources\views.py:130
 msgid "Resource added correctly"
 msgstr ""
 
@@ -1546,45 +1547,45 @@ msgstr "Arendaminet"
 msgid "API"
 msgstr "API"
 
-#: .\src\templates\_navbar.html:3 .\src\templates\base_forum.html:67
-#: .\src\templates\base_r2.html:145
+#: .\src\templates\_navbar.html:3
 msgid "SEARCH"
 msgstr "OTSING"
 
-#: .\src\templates\_navbar.html:4 .\src\templates\base_forum.html:69
-#: .\src\templates\base_r2.html:147
+#: .\src\templates\_navbar.html:4
 msgid "BLOG"
 msgstr "BLOGI"
 
-#: .\src\templates\_navbar.html:5 .\src\templates\base_forum.html:70
-#: .\src\templates\base_r2.html:148
+#: .\src\templates\_navbar.html:5
 msgid "EVENTS"
 msgstr "SÜNDMUSED"
 
-#: .\src\templates\_navbar.html:6 .\src\templates\base_forum.html:72
-#: .\src\templates\base_r2.html:150
+#: .\src\templates\_navbar.html:6
 msgid "MOOCS"
 msgstr ""
 
-#: .\src\templates\_navbar.html:7 .\src\templates\base_forum.html:73
-#: .\src\templates\base_r2.html:151
+#: .\src\templates\_navbar.html:7
+msgid "CALL"
+msgstr ""
+
+#: .\src\templates\_navbar.html:8
 msgid "ABOUT"
 msgstr "MEIST"
 
-#: .\src\templates\_subnavbar.html:20 .\src\templates\home.html:73
+#: .\src\templates\_subnavbar.html:66 .\src\templates\home.html:70
 #: .\src\templates\modalinfo.html:18 .\src\templates\resources_cards.html:33
 msgid "Training"
 msgstr "Koolitsed"
 
-#: .\src\templates\_subnavbar.html:24 .\src\templates\home.html:103
+#: .\src\templates\_subnavbar.html:70 .\src\templates\home.html:100
 msgid "Organisations"
 msgstr "Organisatsioonid"
 
-#: .\src\templates\_subnavbar.html:29
+#: .\src\templates\_subnavbar.html:75
 msgid "Our Gold Star Selection"
 msgstr "Meie Kuldmärgi valik"
 
 #: .\src\templates\about.html:4 .\src\templates\about.html:8
+#: .\src\templates\base_forum.html:65 .\src\templates\base_r2.html:47
 msgid "About"
 msgstr "Meist"
 
@@ -1592,11 +1593,11 @@ msgstr "Meist"
 msgid "Watch our teaser, in 12 different languages!"
 msgstr "Tiiser"
 
-#: .\src\templates\about.html:44
+#: .\src\templates\about.html:46
 msgid "The Platform"
 msgstr "Platvorm"
 
-#: .\src\templates\about.html:47
+#: .\src\templates\about.html:49
 msgid ""
 "EU-Citizen.Science is an online platform for sharing knowledge, tools, "
 "training and resources for citizen science – by the community, for the "
@@ -1606,7 +1607,7 @@ msgstr ""
 "vahendite, koolituste ning harrastusteaduse materjalide jagamiseks – "
 "kogukonnalt, kogukonnale."
 
-#: .\src\templates\about.html:48
+#: .\src\templates\about.html:50
 msgid ""
 "The vision for the platform is to serve as a Knowledge Hub, in aid of the "
 "mainstreaming of citizen science, and build on the growing impact of "
@@ -1617,7 +1618,7 @@ msgstr ""
 "harrastusteaduse levimisele ning tugevdada ühiskonna mõju teaduste laiale "
 "spektrile"
 
-#: .\src\templates\about.html:49
+#: .\src\templates\about.html:51
 msgid ""
 "We accomplish this by supporting the sharing of knowledge, know-how, and "
 "experience between anyone doing or wanting to do citizen science."
@@ -1626,47 +1627,47 @@ msgstr ""
 "vahetamist kõigi vahel, kes harrastusteaduses tegutsevad või tahavad "
 "tegutseda"
 
-#: .\src\templates\about.html:52
+#: .\src\templates\about.html:54
 msgid "On this platform you will find"
 msgstr "Sellel platvormil leiad"
 
-#: .\src\templates\about.html:54
+#: .\src\templates\about.html:56
 msgid "that are useful for citizen science practitioners"
 msgstr "mis on kasulikud harrastusteaduse edendajatele"
 
-#: .\src\templates\about.html:55
+#: .\src\templates\about.html:57
 msgid "that are engaging the public in research via citizen science activities"
 msgstr ""
 "mis kutsuvad avalikkust osalema teaduses läbi harrastusteaduse tegevuste"
 
-#: .\src\templates\about.html:56
+#: .\src\templates\about.html:58
 msgid "Training resources and materials citizen science as a practice"
 msgstr "Koolitusmaterjalid ja muud ressursid praktilisele harrastusteadusele"
 
-#: .\src\templates\about.html:57
+#: .\src\templates\about.html:59
 msgid ""
 "Organisations that are involved in citizen science projects and research"
 msgstr ""
 
-#: .\src\templates\about.html:58
+#: .\src\templates\about.html:60
 msgid "an"
 msgstr ""
 
-#: .\src\templates\about.html:58
+#: .\src\templates\about.html:60
 msgid "calendar"
 msgstr "kalender"
 
-#: .\src\templates\about.html:58
+#: .\src\templates\about.html:60
 msgid "and"
 msgstr "ja"
 
-#: .\src\templates\about.html:59
+#: .\src\templates\about.html:61
 msgid ""
 "Community Forums for questions, conversations, and collaboration with the "
 "rest of the community."
 msgstr "Foorumid küsimust, vestluste ja kaastöö jaoks ülejäänud kogukonnaga."
 
-#: .\src\templates\about.html:63
+#: .\src\templates\about.html:65
 msgid ""
 "Spotted something missing? You can add your own profiles for Resources, "
 "Projects, and Training via the +ADD button in the top menu. Have a "
@@ -1677,19 +1678,19 @@ msgstr ""
 "koolituste profiile +LISA nupu abil ülamenüüst. Kas Teil on ettepanekuid? "
 "Saate jagada oma mõtteid kogukondlikus tagasisidefoorumis või siin:"
 
-#: .\src\templates\about.html:63
+#: .\src\templates\about.html:65
 msgid "contact"
 msgstr "kontakt"
 
-#: .\src\templates\about.html:63
+#: .\src\templates\about.html:65
 msgid "section"
 msgstr "ala"
 
-#: .\src\templates\about.html:72
+#: .\src\templates\about.html:74
 msgid "The Project"
 msgstr "Projekt"
 
-#: .\src\templates\about.html:76
+#: .\src\templates\about.html:78
 msgid ""
 "The EU-Citizen.Science project has been funded by the European Commission "
 "Horizon 2020 programme, in the Science with and for Society programme of "
@@ -1705,11 +1706,11 @@ msgstr ""
 "harrastusteaduse edendajatele, teadlastele, poliitikuile ja kogu ühiskonnale "
 "terves Euroopas"
 
-#: .\src\templates\about.html:81
+#: .\src\templates\about.html:83
 msgid "Our Vision"
 msgstr "Meie visioon"
 
-#: .\src\templates\about.html:82
+#: .\src\templates\about.html:84
 msgid ""
 "is that Citizen Science becomes an appreciated and widely established means "
 "for the democratization of science in Europe"
@@ -1717,11 +1718,11 @@ msgstr ""
 "näeb harrastusteaduses tunnustatud ja laialt rakendatud meedet teaduse "
 "demokratiseerimiseks Euroopas"
 
-#: .\src\templates\about.html:89
+#: .\src\templates\about.html:91
 msgid "Our Core Mission"
 msgstr "Meie süvamissiooniks"
 
-#: .\src\templates\about.html:90
+#: .\src\templates\about.html:92
 msgid ""
 "is to become the European reference point for CS through cross-network "
 "knowledge sharing for citizen science participants, practitioners, "
@@ -1731,11 +1732,11 @@ msgstr ""
 "nii harrastusteadlastele, harrastusteaduse edendajatele, teadlastele, "
 "poliitikuile kui kogu ühiskonnale terves Euroopas"
 
-#: .\src\templates\about.html:97
+#: .\src\templates\about.html:99
 msgid "Objective 1: Establish"
 msgstr "Eesmärk 1: Luua"
 
-#: .\src\templates\about.html:98
+#: .\src\templates\about.html:100
 msgid ""
 "EU-Citizen.Science as the knowledge and community hub for high-quality CS "
 "exchange and learning in Europe"
@@ -1743,11 +1744,11 @@ msgstr ""
 "EU-Citizen.Science kui kogukondlik teadmiste ja kogemuste vahetamise "
 "sõlmpunkt mis vahendab kõrgetasemelist harrastusteadust Euroopas."
 
-#: .\src\templates\about.html:105
+#: .\src\templates\about.html:107
 msgid "Objective 2: Consolidate"
 msgstr "Eesmärk 2: Tugevdada"
 
-#: .\src\templates\about.html:106
+#: .\src\templates\about.html:108
 msgid ""
 "the CS knowledge base and celebrate outstanding practices and state of the "
 "art in CS in Europe"
@@ -1755,11 +1756,11 @@ msgstr ""
 "harrastusteaduste teadmisbaasi ning demonstreerida Euroopa parimaid "
 "praktikaid harrastusteaduses."
 
-#: .\src\templates\about.html:113
+#: .\src\templates\about.html:115
 msgid "Objective 3: Empower"
 msgstr "Ülesanne 3: Võimestada"
 
-#: .\src\templates\about.html:114
+#: .\src\templates\about.html:116
 msgid ""
 "diverse stakeholders to become citizen scientists, start CS initiatives, and "
 "implement CS approaches professionally"
@@ -1767,11 +1768,11 @@ msgstr ""
 "huvigruppe nende harrastusteaduse pürgimustes ja anda "
 "võimalusharrastusteaduse metoodika professionaalseks elluviimiseks."
 
-#: .\src\templates\about.html:121
+#: .\src\templates\about.html:123
 msgid "Objective 4: Explore"
 msgstr "Eesmärk 4: Avastada"
 
-#: .\src\templates\about.html:122
+#: .\src\templates\about.html:124
 msgid ""
 "new pathways for participatory governance, by strengthening links between CS "
 "and policy making"
@@ -1779,11 +1780,11 @@ msgstr ""
 "uus võimalusi osalevaks valitsemiseks, tugevdades seoseidharrastusteaduse ja "
 "poliitiliste otsuste vahel."
 
-#: .\src\templates\about.html:129
+#: .\src\templates\about.html:131
 msgid "Objective 5: Advance"
 msgstr "Eesmärk 5: Edendada"
 
-#: .\src\templates\about.html:130
+#: .\src\templates\about.html:132
 msgid ""
 "CS into the mainstream of public engagement, science communication and "
 "education"
@@ -1791,7 +1792,7 @@ msgstr ""
 "harrastusteadust, et sellest saaks avalikkuse kaasamise, "
 "teaduskommunikatsiooni ja hariduse põhivahend"
 
-#: .\src\templates\about.html:137
+#: .\src\templates\about.html:139
 msgid ""
 "In keeping with our mission, we aim to engage equally with CS participants, "
 "practitioners, researchers, policy makers and society as a whole throughout "
@@ -1806,11 +1807,11 @@ msgstr ""
 "õppidaoma sihtrühmasid, nende vajadusi ja nõudeid ja seda, kuidas kujundada "
 "platvormi kasutavat aktiivset kogukonda."
 
-#: .\src\templates\about.html:147
+#: .\src\templates\about.html:149
 msgid "The Team"
 msgstr "Meeskond"
 
-#: .\src\templates\about.html:150
+#: .\src\templates\about.html:152
 msgid ""
 "The EU-Citizen.Science consortium consists of 14 partners and 9 third "
 "parties from across 14 European member states, as well as other project "
@@ -1824,19 +1825,19 @@ msgstr ""
 "harrastusteadusega, sealhulgas ülikoolid, mittetulundusühingud, kohalikud "
 "omavalitsused, ühiskondlikud organisatsioonid ja muuseumid."
 
-#: .\src\templates\about.html:159
+#: .\src\templates\about.html:161
 msgid "Consortium partners"
 msgstr "Konsortsiumi partnerid"
 
-#: .\src\templates\about.html:216
+#: .\src\templates\about.html:218
 msgid "Third party partners"
 msgstr "Kolmandad osapooled"
 
-#: .\src\templates\about.html:257
+#: .\src\templates\about.html:259
 msgid "Citizen Science"
 msgstr "Harrastusteadus"
 
-#: .\src\templates\about.html:260
+#: .\src\templates\about.html:262
 msgid ""
 "Citizen science actively involves the public in scientific research that "
 "generates new knowledge or understanding, and thus has the potential to "
@@ -1853,7 +1854,7 @@ msgstr ""
 "innovatsioonist ja teaduspõhistest poliitikast nii kohalikul, rahvuslikul "
 "kui EL tasandil."
 
-#: .\src\templates\about.html:261
+#: .\src\templates\about.html:263
 msgid ""
 "Citizen science is a flexible concept which can be adapted and applied "
 "within diverse situations and disciplines. In order to set out some of the "
@@ -1864,21 +1865,21 @@ msgstr ""
 "erinevates valdkondades ja olukordades. Et luua ühine arusaam "
 "harrastusteaduse põhimõistetes ja -printsiipides, loodi järgnevad "
 
-#: .\src\templates\about.html:261
+#: .\src\templates\about.html:263
 msgid "10 Principles of Citizen Science"
 msgstr "Harrastusteaduse 10 põhimõtet"
 
-#: .\src\templates\about.html:261
+#: .\src\templates\about.html:263
 msgid ""
 "were developed by the ‘Sharing best practice and building capacity’ working "
 "group of the"
 msgstr "Parimate praktikate ja jõudluse arendamise töörühma poolt"
 
-#: .\src\templates\about.html:261
+#: .\src\templates\about.html:263
 msgid "European Citizen Science Association"
 msgstr "Euroopa Harrastusteaduse Assotsiatsioonis"
 
-#: .\src\templates\about.html:261
+#: .\src\templates\about.html:263
 msgid ""
 "led by the Natural History Museum London with input from many members of the "
 "Association."
@@ -1886,11 +1887,11 @@ msgstr ""
 "Seda protsessi juhtis Londoni Loodusmuusem, saades sisendit "
 "teisteltassotsiatsiooni liikmetelt."
 
-#: .\src\templates\about.html:269
+#: .\src\templates\about.html:271
 msgid "Ten principles of citizen science"
 msgstr "Harrastusteaduse kümme põhimõtet"
 
-#: .\src\templates\about.html:273
+#: .\src\templates\about.html:275
 msgid ""
 "Citizen science projects actively involve citizens in scientific endeavour "
 "that generates new knowledge or understanding. Citizens may act as "
@@ -1902,11 +1903,11 @@ msgstr ""
 "teadushuviline, kes soovib jagada oma tähelepanekuid või teha kaastööd muul "
 "viisil, näiteks olla abiks projekti juhtimisel."
 
-#: .\src\templates\about.html:274
+#: .\src\templates\about.html:276
 msgid "Citizen science projects have a genuine science outcome."
 msgstr "Harrastusteaduse projektidel on otsene teaduslik väljund."
 
-#: .\src\templates\about.html:274
+#: .\src\templates\about.html:276
 msgid ""
 "For example, answering a research question or informing conservation action, "
 "management decisions or environmental policy."
@@ -1915,13 +1916,13 @@ msgstr ""
 "looduskaitseliste ja maakorralduslike tegevuste ning keskkonnapoliitika "
 "planeerimiseks."
 
-#: .\src\templates\about.html:275
+#: .\src\templates\about.html:277
 msgid ""
 "Both the professional scientists and the citizen scientists benefit from "
 "taking part."
 msgstr "Osalemisest on kasu nii tipp-teadlastel kui ka harrastajatel."
 
-#: .\src\templates\about.html:275
+#: .\src\templates\about.html:277
 msgid ""
 "Benefits may include the publication of research outputs, learning "
 "opportunities, personal enjoyment, social benefits, satisfaction through "
@@ -1934,7 +1935,7 @@ msgstr ""
 "rahvusliku või rahvusvahelise tähtsusega probleemküsimustes, mõjutades "
 "seeläbi ka poliitikate kujunemist."
 
-#: .\src\templates\about.html:276
+#: .\src\templates\about.html:278
 msgid ""
 "Citizen scientists may, if they wish, participate in multiple stages of the "
 "scientific process."
@@ -1942,7 +1943,7 @@ msgstr ""
 "Harrastajad võivad soovi korral osaleda teadusliku uurimistöö mitmes "
 "erinevas järgus."
 
-#: .\src\templates\about.html:276
+#: .\src\templates\about.html:278
 msgid ""
 "This may include developing the research question, designing the method, "
 "gathering and analysing data, and communicating the results."
@@ -1950,11 +1951,11 @@ msgstr ""
 "See võib seisneda uurimisküsimuse täpsustamises, meetodi väljakujundamises, "
 "andmete kogumises ja analüüsimises, tulemuste sõnastamises."
 
-#: .\src\templates\about.html:277
+#: .\src\templates\about.html:279
 msgid "Citizen scientists receive feedback from the project."
 msgstr "Harrastajad saavad oma tegevustele tagasiside."
 
-#: .\src\templates\about.html:277
+#: .\src\templates\about.html:279
 msgid ""
 "For example, how their data are being used and what the research, policy or "
 "societal outcomes are."
@@ -1962,7 +1963,7 @@ msgstr ""
 "Näiteks, kuidas on kasutatud nende kogutud andmeid ja millised olid "
 "uurimistulemused ning töö ühiskondlikud ja poliitilised väljundid."
 
-#: .\src\templates\about.html:278
+#: .\src\templates\about.html:280
 msgid ""
 "Citizen science is considered a research approach like any other, with "
 "limitations and biases that should be considered and controlled for."
@@ -1970,7 +1971,7 @@ msgstr ""
 "Harrastusteadus on üks teadustöö viise. Sellel on oma piirangud ja eeldused, "
 "mida tuleks arvesse võtta ning tähele panna."
 
-#: .\src\templates\about.html:278
+#: .\src\templates\about.html:280
 msgid ""
 "However unlike traditional research approaches, citizen science provides "
 "opportunity for greater public engagement and democratisation of science."
@@ -1978,7 +1979,7 @@ msgstr ""
 "Siiski võimaldab harrastusteadus erinevalt traditsioonilistest "
 "teadusmeetoditest enam kaasata avalikkust ja muuta teadust demokraatlikumaks."
 
-#: .\src\templates\about.html:279
+#: .\src\templates\about.html:281
 msgid ""
 "Citizen science project data and meta-data are made publicly available and "
 "where possible, results are published in an open access format."
@@ -1986,7 +1987,7 @@ msgstr ""
 "Harrastusteaduse projektide andmed ja meta-andmed tehakse kõigile "
 "kättesaadavaks ning tulemused avaldatakse avatud juurdepääsuga väljaannetes."
 
-#: .\src\templates\about.html:279
+#: .\src\templates\about.html:281
 msgid ""
 "Data sharing may occur during or after the project, unless there are "
 "security or privacy concerns that prevent this."
@@ -1994,14 +1995,14 @@ msgstr ""
 "Andmeid võib jagada projekti ajal või pärast projekti lõppu juhul, kui ei "
 "ole vajalik kaitsta kellegi julgeolekut või privaatsust"
 
-#: .\src\templates\about.html:280
+#: .\src\templates\about.html:282
 msgid ""
 "Citizen scientists are acknowledged in project results and publications."
 msgstr ""
 "Harrastusteadlaste osalusele viidatakse projekti tulemustes ja "
 "publikatsioonides."
 
-#: .\src\templates\about.html:281
+#: .\src\templates\about.html:283
 msgid ""
 "Citizen science programmes are evaluated for their scientific output, data "
 "quality, participant experience and wider societal or policy impact."
@@ -2010,7 +2011,7 @@ msgstr ""
 "andmete adekvaatsust, osalejate kogemust ning laiemat ühiskondlikku ja "
 "poliitilist mõju."
 
-#: .\src\templates\about.html:282
+#: .\src\templates\about.html:284
 msgid ""
 "The leaders of citizen science projects take into consideration legal and "
 "ethical issues surrounding copyright, intellectual property, data sharing "
@@ -2023,8 +2024,8 @@ msgstr ""
 "keskkonnale."
 
 #: .\src\templates\base.html:74 .\src\templates\base2.html:68
-#: .\src\templates\base_forms.html:51 .\src\templates\base_forum.html:89
-#: .\src\templates\base_r2.html:169
+#: .\src\templates\base_forms.html:51 .\src\templates\base_forum.html:92
+#: .\src\templates\base_r2.html:74
 msgid "Admin"
 msgstr "Admin"
 
@@ -2033,7 +2034,7 @@ msgid "Profile"
 msgstr "Profiil"
 
 #: .\src\templates\base.html:85 .\src\templates\base2.html:70
-#: .\src\templates\base_forum.html:91 .\src\templates\base_r2.html:171
+#: .\src\templates\base_forum.html:94 .\src\templates\base_r2.html:76
 msgid "Logout"
 msgstr "Logi välja"
 
@@ -2046,37 +2047,35 @@ msgid "Connect with us on"
 msgstr "Võta meiega ühendust"
 
 #: .\src\templates\base2.html:56 .\src\templates\base3.html:49
-#: .\src\templates\base_forum.html:75 .\src\templates\base_r2.html:153
 msgid "LOGIN"
 msgstr "LOGI SISSE"
 
 #: .\src\templates\base2.html:57 .\src\templates\base3.html:50
-#: .\src\templates\base_forum.html:76
 msgid "SIGN UP"
 msgstr "REGISTREERU"
 
-#: .\src\templates\base2.html:61 .\src\templates\base_forum.html:82
-#: .\src\templates\base_r2.html:161
+#: .\src\templates\base2.html:61 .\src\templates\base_forum.html:84
+#: .\src\templates\base_r2.html:66
 msgid "My Profile"
 msgstr "Minu profiil"
 
-#: .\src\templates\base2.html:62 .\src\templates\base_forum.html:83
-#: .\src\templates\base_r2.html:162
+#: .\src\templates\base2.html:62 .\src\templates\base_forum.html:85
+#: .\src\templates\base_r2.html:67
 msgid "My organisations"
 msgstr "Minu organisatsioonid"
 
-#: .\src\templates\base2.html:63 .\src\templates\base_forum.html:84
-#: .\src\templates\base_r2.html:163
+#: .\src\templates\base2.html:63 .\src\templates\base_forum.html:86
+#: .\src\templates\base_r2.html:68
 msgid "Submitted projects"
 msgstr "Registreeritud projektid"
 
-#: .\src\templates\base2.html:64 .\src\templates\base_forum.html:85
-#: .\src\templates\base_r2.html:164
+#: .\src\templates\base2.html:64 .\src\templates\base_forum.html:87
+#: .\src\templates\base_r2.html:69
 msgid "Submitted resources"
 msgstr "Registreeritud materjalid"
 
-#: .\src\templates\base2.html:66 .\src\templates\base_forum.html:87
-#: .\src\templates\base_r2.html:166
+#: .\src\templates\base2.html:66 .\src\templates\base_forum.html:89
+#: .\src\templates\base_r2.html:71
 msgid "Resources library"
 msgstr "Materjalide kogu"
 
@@ -2092,7 +2091,8 @@ msgstr "LOGI VÄLJA"
 msgid "ADMIN"
 msgstr "ADMIN"
 
-#: .\src\templates\base_forms.html:43
+#: .\src\templates\base_forms.html:43 .\src\templates\base_forum.html:76
+#: .\src\templates\base_r2.html:58
 msgid "Login"
 msgstr "Logi sisse"
 
@@ -2104,14 +2104,37 @@ msgstr "profiil"
 msgid "logout"
 msgstr "logi välja"
 
-#: .\src\templates\base_forum.html:71 .\src\templates\base_forum.html:156
-#: .\src\templates\base_r2.html:149 .\src\templates\base_r2.html:244
+#: .\src\templates\base_forum.html:66 .\src\templates\base_r2.html:48
+msgid "Blog"
+msgstr ""
+
+#: .\src\templates\base_forum.html:68 .\src\templates\base_r2.html:50
+msgid "Forum"
+msgstr ""
+
+#: .\src\templates\base_forum.html:69 .\src\templates\base_r2.html:51
+msgid "Moocs"
+msgstr ""
+
+#: .\src\templates\base_forum.html:70 .\src\templates\base_r2.html:52
+msgid "OpenCall"
+msgstr ""
+
+#: .\src\templates\base_forum.html:77 .\src\templates\base_r2.html:59
+msgid "Signup"
+msgstr ""
+
+#: .\src\templates\base_forum.html:132 .\src\templates\base_r2.html:114
+msgid "Add"
+msgstr ""
+
+#: .\src\templates\base_forum.html:192 .\src\templates\base_r2.html:177
 msgid "FORUM"
 msgstr "FOORUM"
 
-#: .\src\templates\base_r2.html:154
-msgid "SIGNUP"
-msgstr "REGISTREERI"
+#: .\src\templates\call.html:10
+msgid "EU-Citizen.Science call"
+msgstr "Harrastusteadus"
 
 #: .\src\templates\criteria.html:10
 msgid "Quality criteria"
@@ -2128,22 +2151,15 @@ msgstr ""
 #: .\src\templates\curated.html:28
 msgid ""
 "to help you get started with designing and launching your own citizen "
-"science project, categorised across the project lifecycle."
+"science project or simply learn about citizen science, categorised across "
+"the project lifecycle."
 msgstr ""
 
 #: .\src\templates\faq.html:20
 msgid "Frequently Asked Questions"
 msgstr "Korduma kippuvad küsimused"
 
-#: .\src\templates\home.html:28
-msgid "Do you want to help with translation?"
-msgstr ""
-
-#: .\src\templates\home.html:28
-msgid " Please click here"
-msgstr ""
-
-#: .\src\templates\home.html:39
+#: .\src\templates\home.html:25
 msgid ""
 "Welcome to the platform for sharing Citizen Science projects, resources, "
 "tools, and training"
@@ -2151,34 +2167,42 @@ msgstr ""
 "Tere tulemast platvormile, mis aitab jagada harrastusteaduse projekte, "
 "materjale,töövahendeid ja koolitusi."
 
-#: .\src\templates\home.html:49
+#: .\src\templates\home.html:34
 msgid ""
 "Search for citizen science resources, projects, tools, training, and more...."
 msgstr ""
 
-#: .\src\templates\home.html:74
+#: .\src\templates\home.html:50
+msgid "Do you want to help with translation?"
+msgstr ""
+
+#: .\src\templates\home.html:50
+msgid " Please click here"
+msgstr ""
+
+#: .\src\templates\home.html:71
 msgid "in Training"
 msgstr "koolituste all"
 
-#: .\src\templates\home.html:75 .\src\templates\home.html:85
-#: .\src\templates\home.html:95 .\src\templates\home.html:105
+#: .\src\templates\home.html:72 .\src\templates\home.html:82
+#: .\src\templates\home.html:92 .\src\templates\home.html:102
 msgid "here"
 msgstr "siin"
 
-#: .\src\templates\home.html:75 .\src\templates\home.html:85
-#: .\src\templates\home.html:95 .\src\templates\home.html:105
+#: .\src\templates\home.html:72 .\src\templates\home.html:82
+#: .\src\templates\home.html:92 .\src\templates\home.html:102
 msgid "to see all of them"
 msgstr "et neid kõiki näha"
 
-#: .\src\templates\home.html:84
+#: .\src\templates\home.html:81
 msgid "in Projects"
 msgstr "projektide all"
 
-#: .\src\templates\home.html:94
+#: .\src\templates\home.html:91
 msgid "in Resources"
 msgstr "materjalide all"
 
-#: .\src\templates\home.html:104
+#: .\src\templates\home.html:101
 msgid "in Organisations"
 msgstr "organisatsioonide all"
 
@@ -2410,3 +2434,6 @@ msgstr "Viimati muudetud"
 #: .\src\templates\translations.html:10
 msgid "Translations"
 msgstr ""
+
+#~ msgid "SIGNUP"
+#~ msgstr "REGISTREERI"
