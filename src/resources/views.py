@@ -45,7 +45,7 @@ def resources(request, isTrainingResource=False):
     languagesWithContent = Resource.objects.all().values_list('inLanguage',flat=True).distinct()
     themes = Theme.objects.all()
     categories = Category.objects.all()
-    filters = {'keywords': '', 'language': ''}
+    filters = {'keywords': '', 'resource_language': ''}
 
     if request.GET.get('keywords'):
         resources = resources.filter( Q(name__icontains = request.GET['keywords'])  |
@@ -343,9 +343,8 @@ def preFilteredResources(request):
 
 def applyFilters(request, resources):
     approvedResources = ApprovedResources.objects.all().values_list('resource_id',flat=True)
-
-    if request.GET.get('language'):
-        resources = resources.filter(inLanguage = request.GET['language'])
+    if request.GET.get('resource_language'):
+        resources = resources.filter(inLanguage = request.GET['resource_language'])
     if request.GET.get('license'):
         resources = resources.filter(license__icontains = request.GET['license'])
     if request.GET.get('theme'):
@@ -365,8 +364,8 @@ def applyFilters(request, resources):
     return resources
 
 def setFilters(request, filters):
-    if request.GET.get('language'):
-        filters['language'] = request.GET['language']
+    if request.GET.get('resource_language'):
+        filters['resource_language'] = request.GET['resource_language']
     if request.GET.get('license'):
         filters['license'] = request.GET['license']
     if request.GET.get('theme'):
