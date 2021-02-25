@@ -1,0 +1,9 @@
+
+{% load thumbnail %}
+{% if profile.user %}
+    <img class="avatar" src="{% thumbnail profile.user.profile.picture|default:'default_profile.png' 140x140 crop %}" alt="{{ profile.user.username }}" />
+{% elif show_placeholder %}
+    <span class="avatar empty">
+      <i class="far fa-user fa-4x" ></i>
+    </span>
+{% endif %}
