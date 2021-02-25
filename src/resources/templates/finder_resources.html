@@ -31,13 +31,13 @@ have been marked as 'Moderated'. Read more about our <a href="/faq">moderation p
 				<div class="input-group-prepend">
 					<div class="input-group-text"><i class="fas fa-filter"></i></div>
 				</div>
-				<select id="language" name="language" class="custom-select form-control">
+				<select id="resource_language" name="resource_language" class="custom-select form-control">
 					<option value="">{% trans "All languages" %}<option>
 						{% for language in languages %}
 						{% for lwc in languagesWithContent %}
 						{% if language.code == lwc %}
 						<option value="{{ language.code }}"
-						{% if language.code ==  filters.language %} selected {% endif %}>
+						{% if language.code ==  filters.resource_language %} selected {% endif %}>
 						{{ language.name }}
 					</option>
 					{% endif %}

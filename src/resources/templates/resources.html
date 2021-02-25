@@ -138,21 +138,17 @@ src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bo
   });
 
   $(function () {
-    $('#language').on('change', function () {
-      var language = $(this).val();
+    $('#resource_language').on('change', function () {
       $('#searchResources').submit();
     });
   });
   $(function () {
     $('#theme').on('change', function () {
-      var topic = $(this).val();
-      console.log(topic);
       $('#searchResources').submit();
     });
   });
   $(function () {
     $('#category').on('change', function () {
-      var topic = $(this).val();
       $('#searchResources').submit();
     });
   });
@@ -163,13 +159,11 @@ src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bo
 
   $(function () {
     $('#approvedCheck').on('change', function () {
-      var approvedCheck = $(this).val();
       $('#searchResources').submit();
     });
   });
   $(function () {
     $('#orderby').on('change', function () {
-      var orderby = $(this).val();
       $('#searchResources').submit();
     });
   });
