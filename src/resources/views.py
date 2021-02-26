@@ -263,7 +263,8 @@ def resources_autocomplete(request, isTrainingResource=False):
         return HttpResponse("No cookies")
 
 def getRscNamesKeywords(text):
-    rsc_names = Resource.objects.filter(~Q(hidden=True)).filter(name__icontains=text).values_list('name',flat=True).distinct()
+    approvedResources = ApprovedResources.objects.all().values_list('resource_id',flat=True)
+    rsc_names = Resource.objects.filter(~Q(hidden=True)).filter(id__in=approvedResources).filter(name__icontains=text).values_list('name',flat=True).distinct()
     keywords = Keyword.objects.filter(keyword__icontains=text).values_list('keyword',flat=True).distinct()
     report = chain(rsc_names, keywords)
     return report
