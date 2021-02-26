@@ -323,7 +323,7 @@ def getCooperatorsEmail(projectID):
     return cooperators
 
 def getNamesKeywords(text):
-    project_names = Project.objects.filter(name__icontains=text).filter(~Q(hidden=True)).values_list('name',flat=True).distinct()
+    project_names = Project.objects.filter(~Q(hidden=True)).filter(name__icontains=text).values_list('name',flat=True).distinct()
     keywords = Keyword.objects.filter(keyword__icontains=text).values_list('keyword',flat=True).distinct()
     report = chain(project_names, keywords)
     return report
