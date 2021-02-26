@@ -155,7 +155,7 @@ def home_autocomplete(request):
         return HttpResponse("No cookies")
 
 def getOrganisationNames(text):
-    organisations = Organisation.objects.filter(name__icontains=text).values_list('name',flat=True).distinct()
+    organisations = Organisation.objects.filter(name__icontains=text  & ~Q(hidden=True)).values_list('name',flat=True).distinct()
     return organisations
 
 
