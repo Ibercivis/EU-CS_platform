@@ -112,13 +112,14 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 <script
 src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
 <script>
-
+	
 
 	$('.basicAutoComplete').autoComplete(
 	{ minLength: 3 }
 	);
 	$('.basicAutoComplete').on('autocomplete.select', function (evt, item) {
 		$('#finder').submit();
+		$('#searchTop').submit();
 	});
 	$('.basicAutoCompleteMobile').autoComplete(
 	{ minLength: 3 }
