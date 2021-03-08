@@ -393,7 +393,9 @@ def setProjectApproved(id, approved):
         #sendEmail
         subject = 'Your project has been approved'            
         message = render_to_string('emails/approved_project.html', {})
-        email = EmailMessage(subject, message, to=[settings.EMAIL_RECIPIENT_LIST, aProject.creator.email])
+        to = settings.EMAIL_RECIPIENT_LIST
+        to.append(aProject.creator.email)
+        email = EmailMessage(subject, message, to=to)
         email.content_subtype = "html"
         email.send()
 

@@ -118,11 +118,14 @@ def new_resource(request, isTrainingResource=False):
             images.append(image2_path)
             isTrainingResource = request.POST.get('trainingResource')            
             form.save(request, images)
+
+            to = settings.EMAIL_RECIPIENT_LIST
+            to.append(request.user.email)
             if(isTrainingResource):
                 messages.success(request, _('Training resource added correctly'))
                 subject = 'New training resource submitted'            
                 message = render_to_string('emails/new_training_resource.html', {})
-                email = EmailMessage(subject, message, to=[settings.EMAIL_RECIPIENT_LIST, request.user.email])
+                email = EmailMessage(subject, message, to=to)
                 email.content_subtype = "html"
                 email.send()
                 return redirect('/training_resources')
@@ -130,7 +133,7 @@ def new_resource(request, isTrainingResource=False):
             messages.success(request, _('Resource added correctly'))            
             subject = 'New resource submitted'            
             message = render_to_string('emails/new_resource.html', {})
-            email = EmailMessage(subject, message, to=[settings.EMAIL_RECIPIENT_LIST, request.user.email])
+            email = EmailMessage(subject, message, to=to)
             email.content_subtype = "html"
             email.send()
             return redirect('/resources')
