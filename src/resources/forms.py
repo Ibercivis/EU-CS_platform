@@ -66,14 +66,17 @@ class ResourceForm(forms.ModelForm):
 
 
 
-    image1 = forms.ImageField(required=False, widget=forms.FileInput)
+    image1 = forms.ImageField(required=False, widget=forms.FileInput, label=_("Resource image for the thumbnail profile"),
+            help_text=_("This image will be resized to 600x400 pixels"))
     image_credit1 = forms.CharField(max_length=300, required=False, label=_("Image 1 credit"))
     x1 = forms.FloatField(widget=forms.HiddenInput(),required=False)
     y1 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     width1 = forms.FloatField(widget=forms.HiddenInput(),required=False)
     height1 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     withImage1 = forms.BooleanField(widget=forms.HiddenInput(), required=False, initial=False)
-    image2 = forms.ImageField(required=False, widget=forms.FileInput)
+
+    image2 = forms.ImageField(required=False, widget=forms.FileInput, label=_("Resource image for the profile heading"),
+            help_text=_("This image will be resized to 1100x400 pixels"))
     image_credit2 = forms.CharField(max_length=300, required=False, label=_("Image 2 credit"))
     x2 = forms.FloatField(widget=forms.HiddenInput(),required=False)
     y2 = forms.FloatField(widget=forms.HiddenInput(), required=False)
