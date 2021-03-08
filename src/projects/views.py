@@ -42,7 +42,9 @@ def new_project(request):
 
             subject = 'New project submitted'            
             message = render_to_string('emails/new_project.html', {})
-            email = EmailMessage(subject, message, to=[settings.EMAIL_RECIPIENT_LIST, user.email])
+            to = settings.EMAIL_RECIPIENT_LIST
+            to.append(user.email)
+            email = EmailMessage(subject, message, to=to)
             email.content_subtype = "html"
             email.send()
 
@@ -132,7 +134,9 @@ def project(request, pk):
         #sendEmail
         subject = 'Your project has received a review'            
         message = render_to_string('emails/project_review.html', {})
-        email = EmailMessage(subject, message, to=[settings.EMAIL_RECIPIENT_LIST, project.creator.email])
+        to = settings.EMAIL_RECIPIENT_LIST
+        to.append(project.creator.email)
+        email = EmailMessage(subject, message, to=to)
         email.content_subtype = "html"
         email.send()
 
@@ -461,7 +465,9 @@ def followProject(projectId, userId, follow):
         #sendEmail
         subject = 'Your project has been followed'            
         message = render_to_string('emails/followed_project.html', {})
-        email = EmailMessage(subject, message, to=[settings.EMAIL_RECIPIENT_LIST, fProject.creator.email])
+        to = settings.EMAIL_RECIPIENT_LIST
+        to.append(fProject.creator.email)
+        email = EmailMessage(subject, message, to=to)
         email.content_subtype = "html"
         email.send()
     else:

@@ -151,16 +151,18 @@ def resource(request, pk):
     previous_page = request.META['HTTP_REFERER']
     if 'review' in previous_page:
         #sendEmail
+        to = settings.EMAIL_RECIPIENT_LIST
+        to.append(resource.creator.email)
         if resource.isTrainingResource:
             subject = 'Your training resource has received a review'            
             message = render_to_string('emails/training_resource_review.html', {})
-            email = EmailMessage(subject, message, to=[settings.EMAIL_RECIPIENT_LIST, resource.creator.email])
+            email = EmailMessage(subject, message, to=to)
             email.content_subtype = "html"
             email.send()
         else:            
             subject = 'Your resource has received a review'            
             message = render_to_string('emails/resource_review.html', {})
-            email = EmailMessage(subject, message, to=[settings.EMAIL_RECIPIENT_LIST, resource.creator.email])
+            email = EmailMessage(subject, message, to=to)
             email.content_subtype = "html"
             email.send()
 
@@ -428,16 +430,18 @@ def setResourceApproved(id, approved):
         #Insert
         ApprovedResources.objects.get_or_create(resource=aResource)
         #sendEmail
+        to = settings.EMAIL_RECIPIENT_LIST
+        to.append(aResource.creator.email)
         if aResource.isTrainingResource:
             subject = 'Your training resource has been approved'            
             message = render_to_string('emails/approved_training_resource.html', {})
-            email = EmailMessage(subject, message, to=[settings.EMAIL_RECIPIENT_LIST, aResource.creator.email])
+            email = EmailMessage(subject, message, to=to)
             email.content_subtype = "html"
             email.send()
         else:
             subject = 'Your resource has been approved'            
             message = render_to_string('emails/approved_resource.html', {})
-            email = EmailMessage(subject, message, to=[settings.EMAIL_RECIPIENT_LIST, aResource.creator.email])
+            email = EmailMessage(subject, message, to=to)
             email.content_subtype = "html"
             email.send()
         #Delete UnApprovedResources
@@ -473,16 +477,18 @@ def saveResource(resourceId, userId, save):
         #Insert
         savedResource = SavedResources.objects.get_or_create(resource=fResource, user=fUser)
         #sendEmail
+        to = settings.EMAIL_RECIPIENT_LIST
+        to.append(fResource.creator.email)
         if fResource.isTrainingResource:
             subject = 'Your training resource has been added to a library'            
             message = render_to_string('emails/library_training_resource.html', {})
-            email = EmailMessage(subject, message, to=[settings.EMAIL_RECIPIENT_LIST, fResource.creator.email])
+            email = EmailMessage(subject, message, to=to)
             email.content_subtype = "html"
             email.send()
         else:
             subject = 'Your resource has been added to a library'            
             message = render_to_string('emails/library_resource.html', {})
-            email = EmailMessage(subject, message, to=[settings.EMAIL_RECIPIENT_LIST, fResource.creator.email])
+            email = EmailMessage(subject, message, to=to)
             email.content_subtype = "html"
             email.send()
     else:
