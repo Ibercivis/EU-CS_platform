@@ -98,7 +98,7 @@
                   <a href="/faq" target="_blank">{% trans "The Moderation Process" %}</a> {% trans "here." %}<br><br>
 
                   {% trans "Quality factors that we consider include whether your resource is easy to access, is structured clearly, is easy to read (or hear or view) and understand. Read our" %}
-                   <a href="/faq" target="_blank">{% trans "Quality Guidelines" %}</a>  {% trans "here." %}<br><br>
+                  <a href="/faq" target="_blank">{% trans "Quality Guidelines" %}</a>  {% trans "here." %}<br><br>
 
                   {% trans "Please note that we strongly recommend that you first ensure that your resource is hosted in a permanent repository (such as on a website that will be maintained and can provide a permalink, or a repository such as a publisher, " %}
                   <a href="https://zenodo.org/" target="_blank">Zenodo<a> , <a href="https://osf.io/" target="_blank">OSF</a>
@@ -110,19 +110,16 @@
               <table class="table mb-0">
                 <form action="/new_resource" method="post" class="add-new-resource" enctype="multipart/form-data" autocomplete="off">
                   {% csrf_token %}
-                  <div>
-                    <button type="submit" class="btn btn-green float-right"><i class="fas fa-share-square"></i> {% trans "Save" %}</button>
-                    <br/><br/>
-                  </div>
                   <div class="form-row">
+                    <div class="col-12">
+                      <h3>{% trans "Main information" %}</h3>
+                    </div>
                     <div class="col-12">
                       {{ form.name|as_crispy_field }}
                     </div>
                     <div class="col-12">
                       {{ form.url|as_crispy_field }}
                     </div>
-                  </div>
-                  <div class="form-row">
                     <div class="col-12">
                       {{ form.abstract|as_crispy_field }}
                     </div>
@@ -132,9 +129,6 @@
                       <div id="id_sub_categories"></div><br/>
                       {{ form.audience|as_crispy_field }}
                     </div>
-                  </div>
-
-                  <div class="form-row">
                     <div class="col-12">
                       {{ form.keywords|as_crispy_field }}
                       {{form.choices|as_crispy_field}}
@@ -142,18 +136,10 @@
                     <div class="col-12">
                       {{ form.resource_DOI|as_crispy_field }}
                     </div>
-                  </div>
-
-                  <div class="form-row">
                     <div class="col-12">
                       {{ form.authors|as_crispy_field }}
                       {{ form.authorsCollection|as_crispy_field }}
                     </div>
-                    <div class="col-12">
-                    </div>
-                  </div>
-
-                  <div class="form-row">
                     <div class="col-12">
                       {{ form.license|as_crispy_field }}
                     </div>
@@ -178,55 +164,18 @@
                     {% endif %}
                     <p class="help-block">{% trans "Please indicate the (main) language that the resource is made available" %}</p>
                   </div>
-                </div>
-                <div class="form-row">
-                  <div class="col-sm-6 col-12">
-                    {{ form.image1|as_crispy_field }}
-                    {{ form.x1|as_crispy_field }}
-                    {{ form.y1|as_crispy_field }}
-                    {{ form.height1|as_crispy_field }}
-                    {{ form.width1|as_crispy_field }}
-                    {{ form.withImage1|as_crispy_field }}
-                    <a id="imgResult1" href="#"> <img id="imageResult1" src="" alt="" class="img-fluid img-zoom"></a>
-                  </div>
-                  <div class="col-sm-6 col-12">
-                    {{ form.image_credit1|as_crispy_field }}
-                  </div>
-                </div>
-
-                <div class="form-row">
-                  <div class="col-sm-6 col-12">
-                    {{ form.image2|as_crispy_field }}
-                    {{ form.x2|as_crispy_field }}
-                    {{ form.y2|as_crispy_field }}
-                    {{ form.height2|as_crispy_field }}
-                    {{ form.width2|as_crispy_field }}
-                    {{ form.withImage2|as_crispy_field }}
-                    <a id="imgResult2" href="#"> <img id="imageResult2" src="" alt="" class="img-fluid img-zoom"></a>
-                  </div>
-                  <div class="col-sm-6 col-12">
-                    {{ form.image_credit2|as_crispy_field }}
-                  </div>
-                </div>
-
-                <div class="form-row">
                   <div class="col-12">
                     {{ form.organisation|as_crispy_field }}
                   </div>
                   <div class="col-12">
 
                   </div>
-                </div>
-
-                <div class="form-row">
                   <div class="col-12">
                     {{ form.publisher|as_crispy_field }}
                   </div>
                   <div class="col-12">
                     {{ form.year_of_publication|as_crispy_field }}
                   </div>
-                </div>
-                <div class="row">
                   <div class="col-12">
                     {{ form.theme|as_crispy_field }}
                   </div>
@@ -235,16 +184,50 @@
                     {{ form.curatedList|as_crispy_field }}
                     {% endif %}
                   </div>
+                  {% if isTrainingResource %}
+                  <div class="col-12">
+                    <hr />
+                    <h3>{% trans "Fields related with training" %}</h3>
+                    <input type="hidden" id="trainingResource" name="trainingResource" value={{isTrainingResource}}/>
+                    {{ form.education_level|as_crispy_field }}
+                    {{ form.educationLevelSelected|as_crispy_field }}
+                    {{ form.learning_resource_type|as_crispy_field }}
+                    {{ form.learningResourceTypeSelected|as_crispy_field }}
+                    {{ form.time_required|as_crispy_field }}
+                    {{ form.conditions_of_access|as_crispy_field }}
+                    {% endif %}
+                  </div>
+
+                  <div class="col-12">
+                    <hr>
+                    <h3>{% trans "Profile images"%}</h3>
+                  </div>
+                  <div class="col-12">
+                    {{ form.image1|as_crispy_field }}
+                    {{ form.x1|as_crispy_field }}
+                    {{ form.y1|as_crispy_field }}
+                    {{ form.height1|as_crispy_field }}
+                    {{ form.width1|as_crispy_field }}
+                    {{ form.withImage1|as_crispy_field }}
+                    <a id="imgResult1" href="#"> <img id="imageResult1" src="" alt="" class="img-fluid img-zoom"></a>
+                    {{ form.image_credit1|as_crispy_field }}
+                  </div>
+                  <div class="col-12">
+                    <br/><br/>
+                    {{ form.image2|as_crispy_field }}
+                    {{ form.x2|as_crispy_field }}
+                    {{ form.y2|as_crispy_field }}
+                    {{ form.height2|as_crispy_field }}
+                    {{ form.width2|as_crispy_field }}
+                    {{ form.withImage2|as_crispy_field }}
+                    <a id="imgResult2" href="#"> <img id="imageResult2" src="" alt="" class="img-fluid img-zoom"></a>
+                  </div>
+                  <div class="col-12">
+                    {{ form.image_credit2|as_crispy_field }}
+                  </div>
                 </div>
-                {% if isTrainingResource %}
-                <input type="hidden" id="trainingResource" name="trainingResource" value={{isTrainingResource}}>
-                {{ form.education_level|as_crispy_field }}
-                {{ form.educationLevelSelected|as_crispy_field }}
-                {{ form.learning_resource_type|as_crispy_field }}
-                {{ form.learningResourceTypeSelected|as_crispy_field }}
-                {{ form.time_required|as_crispy_field }}
-                {{ form.conditions_of_access|as_crispy_field }}
-                {% endif %}
+
+
                 <button type="submit" class="btn btn-green mt-2"> <i class="fas fa-share-square"></i> {% trans "Save" %}</button>
               </form>
             </table>
@@ -411,7 +394,7 @@
           $("#id_learningResourceTypeSelected").val(learningResourceType);
           $("#id_learning_resource_type").empty();
         }
-        
+
       }
     });
 
