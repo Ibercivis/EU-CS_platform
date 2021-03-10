@@ -9,6 +9,8 @@ sudo apt install python3-venv
 sudo apt install python3-pip
 sudo apt install libpq-dev
 sudo apt install postgresql
+sudo apt install gettext
+sudo apt install gettext
 python3 -m venv venv
 source venv/bin/activate
 
