@@ -38,7 +38,7 @@ msgid ""
 "inbox (or spam) to activate your account"
 msgstr ""
 "Il tuo indirizzo e-mail è nel nostro database, ma non è stato "
-"ancoraconfermato. Cerca l'email di conferma nella tuacasella di posta "
+"ancora confermato. Cerca l'email di conferma nella tua casella di posta "
 "ricevuta (o nello spam) per attivare il tuo account"
 
 #: .\src\accounts\forms.py:79
@@ -127,19 +127,19 @@ msgstr "Grazie per il tuo messaggio"
 
 #: .\src\events\forms.py:8
 msgid "Title of the event"
-msgstr ""
+msgstr "Titolo dell'evento"
 
 #: .\src\events\forms.py:9
 msgid "A brief description of the event"
-msgstr ""
+msgstr "Breve descrizione dell'evento"
 
 #: .\src\events\forms.py:10
 msgid "Location of the Event"
-msgstr ""
+msgstr "Luogo dell'evento"
 
 #: .\src\events\forms.py:14
 msgid "Please provide a URL to an external web site for the event"
-msgstr ""
+msgstr "Fornisci un URL a un sito web esterno per l'evento"
 
 #: .\src\events\templates\editEvent.html:25
 msgid "Edit event"
@@ -161,7 +161,7 @@ msgstr "Aggiungi"
 
 #: .\src\events\templates\events.html:31
 msgid "On going events"
-msgstr ""
+msgstr "Eventi in corso"
 
 #: .\src\events\templates\events.html:44 .\src\events\templates\events.html:89
 #: .\src\events\templates\events.html:132
@@ -174,7 +174,7 @@ msgstr "Prossimi eventi"
 
 #: .\src\events\templates\events.html:119
 msgid "Past events"
-msgstr ""
+msgstr "Eventi passati"
 
 #: .\src\events\templates\events.html:164
 #: .\src\organisations\templates\organisations.html:36
@@ -198,7 +198,7 @@ msgstr "URL della tua organizzazione"
 #: .\src\organisations\forms.py:14
 msgid "Please briefly describe the organisation (ideally in 500 words or less)"
 msgstr ""
-"Descrivi brevemente la tua organizzazione (idealmente in meno di 500 parole)"
+"Descrivi brevemente la tua organizzazione (preferibilmente in meno di 500 parole)"
 
 #: .\src\organisations\forms.py:16
 #: .\src\organisations\templates\finder_organisations.html:18
@@ -260,7 +260,7 @@ msgstr "Chiudi"
 #: .\src\resources\templates\editResource.html:39
 #: .\src\resources\templates\new_resource.html:41
 msgid "zoom_in"
-msgstr "zooma per ingrandire"
+msgstr "Ingrandire"
 
 #: .\src\organisations\templates\edit_organisation.html:47
 #: .\src\organisations\templates\new_organisation.html:46
@@ -269,7 +269,7 @@ msgstr "zooma per ingrandire"
 #: .\src\resources\templates\editResource.html:42
 #: .\src\resources\templates\new_resource.html:44
 msgid "zoom_out"
-msgstr "zooma per rimpicciolire"
+msgstr "Rimpicciolire"
 
 #: .\src\organisations\templates\edit_organisation.html:50
 #: .\src\organisations\templates\new_organisation.html:49
@@ -332,7 +332,7 @@ msgstr "trovato"
 #: .\src\organisations\templates\finder_organisations.html:54
 #: .\src\projects\templates\finder_projects.html:93
 msgid "Clear current search query and filters"
-msgstr ""
+msgstr "Cancella la query di ricerca e i filtri correnti"
 
 #: .\src\organisations\templates\new_organisation.html:64
 msgid "New Organisation Profile"
@@ -353,10 +353,10 @@ msgid ""
 "involved in, and the Resource Profiles of the resources that were published "
 "by your organisation."
 msgstr ""
-"Questo può essere collegato ai profili personali delle persone nella "
-"tuaorganizzazione, i profili di progetto dei progetti in cui la tua "
-"organizzazione ècoinvolta ed i profili delle risorse che sono stati "
-"pubblicatidalla tua organizzazione"
+"Questo può essere collegato ai Profili Personali delle persone nella "
+"tua organizzazione, ai Profili di Progetto dei progetti in cui la tua "
+"organizzazione è coinvolta ed ai profili delle risorse che sono stati "
+"pubblicati dalla tua organizzazione"
 
 #: .\src\organisations\templates\new_organisation.html:68
 msgid ""
@@ -365,8 +365,8 @@ msgid ""
 "as possible."
 msgstr ""
 "Si prega di compilare tutte le informazioni obbligatorie nei campi "
-"sottostanti(indicati con un asterisco *) e quante più informazioni non "
-"obbligatoriepossibili."
+"sottostanti (indicati con un asterisco *) e quante più informazioni non "
+"obbligatorie possibili."
 
 #: .\src\organisations\templates\new_organisation.html:70
 msgid ""
@@ -374,6 +374,9 @@ msgid ""
 "moderation by one of the members of the EU-Citizen.Science consortium. This "
 "step is simply to check for ‘spam’ or inappropriate uses of the profile form."
 msgstr ""
+"Dopo aver salvato questo profilo, il tuo profilo organizzativo verrà inviato per"
+"moderazione da parte di uno dei membri del consorzio EU-Citizen.Science. Questo"
+"il passaggio consiste nel verificare la presenza di "spam" o utilizzi inappropriati del modulo del profilo"
 
 #: .\src\organisations\templates\organisation.html:21
 #: .\src\projects\templates\editProject.html:64
@@ -442,16 +445,17 @@ msgstr "Organizzazione"
 
 #: .\src\organisations\views.py:47
 msgid "Organisation added correctly"
-msgstr ""
+msgstr "Organizzazione aggiunta correttamente"
 
 #: .\src\profiles\forms.py:48
 msgid ""
 "Please write or select interest areas, separated by commas or pressing enter"
 msgstr ""
+"Si prega di scrivere o selezionare le aree di interesse, separate da virgole o premendo Invio"
 
 #: .\src\profiles\models.py:23
 msgid "Profile picture"
-msgstr ""
+msgstr "Immagine profilo"
 
 #: .\src\profiles\models.py:25
 #: .\src\profiles\templates\profiles\show_profile.html:43
@@ -464,7 +468,7 @@ msgstr "Biografia e background professionale"
 
 #: .\src\profiles\models.py:30
 msgid "Email verified"
-msgstr ""
+msgstr "Email verificata"
 
 #: .\src\profiles\models.py:31
 msgid ""
@@ -473,6 +477,10 @@ msgid ""
 "this profile with your professional information such as affiliations, "
 "grants, publications, peer review, and more.)"
 msgstr ""
+"ORCID (Se ti sei registrato sulla piattaforma ORCID per ricercatori e hai"
+"un identificatore digitale persistente (il tuo ID ORCID) puoi aggiungerlo qui per collegare"
+"questo profilo con le tue informazioni professionali come affiliazioni,"
+"sovvenzioni, pubblicazioni, peer review e altro)."
 
 #: .\src\profiles\templates\profiles\edit_profile.html:31
 msgid "Edit profile"
@@ -507,7 +515,7 @@ msgstr "La mia biblioteca"
 
 #: .\src\profiles\templates\profiles\show_profile.html:30
 msgid "Delete Profile"
-msgstr ""
+msgstr "Elimina profilo"
 
 #: .\src\profiles\templates\profiles\show_profile.html:31
 msgid "Edit Profile"
@@ -539,13 +547,15 @@ msgstr "Aree di Interesse"
 
 #: .\src\projects\forms.py:21
 msgid "Short name or title of the project"
-msgstr ""
+msgstr "Short name o titolo del progetto"
 
 #: .\src\projects\forms.py:24
 msgid ""
 "Please enter 2-3 keywords (comma separated) or pressing enter to further "
 "describe your project and assist search on the platform"
 msgstr ""
+"Inserisci 2-3 parole chiave (separate da virgola) o premi Invio per proseguire"
+"descrivi il tuo progetto e assisti alla ricerca sulla piattaforma"
 
 #: .\src\projects\forms.py:24 .\src\projects\templates\project.html:67
 #: .\src\projects\templates\project.html:189
@@ -556,7 +566,7 @@ msgstr "Parole chiave"
 
 #: .\src\projects\forms.py:27
 msgid "Primary aim, goal or objective of the project. Max 2000 characters"
-msgstr ""
+msgstr "Scopo primario, obiettivo o finalità del progetto. Max 2000 caratteri"
 
 #: .\src\projects\forms.py:30
 msgid ""
@@ -564,54 +574,57 @@ msgid ""
 "href=\"https://zenodo.org/communities/citscicharacteristics\">ECSA "
 "Characteristics of Citizen Science</a> for guidance"
 msgstr ""
+"Descrivi gli aspetti della scienza dei cittadini del progetto - vedi <a "
+"href=\"https://zenodo.org/communities/citscicharacteristics\">ECSA "
+"Characteristics of Citizen Science</a> come guida "
 
 #: .\src\projects\forms.py:34
 msgid "The project topic(s) or field(s) of science, multiple selection"
-msgstr ""
+msgstr "Argomento(i) del progetto o ambito(i) scientifico(i), scelta multipla"
 
 #: .\src\projects\forms.py:35 .\src\projects\templates\finder_projects.html:61
 msgid "Topic"
-msgstr ""
+msgstr "Argomento"
 
 #: .\src\projects\forms.py:38
 msgid "Please select the task(s) undertaken by participants"
-msgstr ""
+msgstr "Selezionare le attività svolte dai partecipanti"
 
 #: .\src\projects\forms.py:39
 msgid "Participation Task"
-msgstr ""
+msgstr "Attività di partecipazione"
 
 #: .\src\projects\forms.py:43
 msgid "Activity Status"
-msgstr ""
+msgstr "Stato dell'attività"
 
 #: .\src\projects\forms.py:44
 msgid "Select one"
-msgstr ""
+msgstr "Selezionare uno"
 
 #: .\src\projects\forms.py:47
 msgid "Closest approximate start date of the project"
-msgstr ""
+msgstr "Data approssimativa di inizio del progetto"
 
 #: .\src\projects\forms.py:50
 msgid "Approximate end date of the project"
-msgstr ""
+msgstr "Data approssimativa di fine del progetto"
 
 #: .\src\projects\forms.py:53
 msgid "Please provide a URL to an external web site for the project"
-msgstr ""
+msgstr "Si prega di fornire un URL a un sito web esterno per il progetto"
 
 #: .\src\projects\forms.py:57
 msgid "Please indicate the spatial scale of the projec"
-msgstr ""
+msgstr "Si prega di indicare la scala spaziale del progetto"
 
 #: .\src\projects\forms.py:58
 msgid "Geographic Extend"
-msgstr ""
+msgstr "Estensione geografica"
 
 #: .\src\projects\forms.py:61
 msgid "Project locality"
-msgstr ""
+msgstr "Località del progetto"
 
 #: .\src\projects\forms.py:62
 msgid ""
@@ -619,16 +632,21 @@ msgid ""
 "participant activities take place,         E.g. in your backyard, parks in "
 "London, rivers in Europe, online globally, etc."
 msgstr ""
+"Descrivi la località del progetto, specificando dove si svolgono le principali"
+"attività dei partecipanti,         Es. nel tuo cortile, nei parchi di"
+"Londra, sui fiumi europei, online a livello globale, etc."
 
 #: .\src\projects\forms.py:67
 msgid ""
 "Organisation coordinating the project. If not listed, please add it <a href="
 "\"/new_organisation\">here</a>         before submitting the project"
 msgstr ""
+"Organizzazione che coordina il progetto. Se non è elencato, per favore aggiungilo <a href="
+"\"/new_organisation\">here</a>         prima di inviare il progetto"
 
 #: .\src\projects\forms.py:69
 msgid "Lead Organisation / Coordinator"
-msgstr ""
+msgstr "Organizzazione capofila / Coordinatore"
 
 #: .\src\projects\forms.py:72
 msgid ""
@@ -651,51 +669,51 @@ msgstr "E-mail del contact point"
 
 #: .\src\projects\forms.py:89
 msgid "Please provide the email for the contact person or contact point"
-msgstr ""
+msgstr "Si prega di fornire l'email per il contact person o il contact point"
 
 #: .\src\projects\forms.py:92
 msgid "Project image for the thumbnail profile"
-msgstr ""
+msgstr "Immagine del progetto per il profilo in miniatura"
 
 #: .\src\projects\forms.py:93
 msgid "Will be resized to 600x400 pixels"
-msgstr ""
+msgstr "Verrà ridimensionato a 600x400 pixel"
 
 #: .\src\projects\forms.py:99 .\src\projects\forms.py:113
 msgid "provide image credit, if applicable"
-msgstr ""
+msgstr "fornire il credito dell'immagine, se applicabile"
 
 #: .\src\projects\forms.py:100
 msgid "Project Logo"
-msgstr ""
+msgstr "Logo del progetto"
 
 #: .\src\projects\forms.py:101
 msgid "Will be resized to 600x400 pixels)"
-msgstr ""
+msgstr "Verrà ridimensionato a 600x400 pixel)"
 
 #: .\src\projects\forms.py:107
 msgid "provide Logo credit, if applicable"
-msgstr ""
+msgstr "fornire il credito del logo, se applicabile"
 
 #: .\src\projects\forms.py:108
 msgid "Project image for the profile heading"
-msgstr ""
+msgstr "Immagine del progetto per l'intestazione del profilo"
 
 #: .\src\projects\forms.py:109
 msgid "Will be resized to 1100x400 pixels"
-msgstr ""
+msgstr "Verrà ridimensionato a 1100x400 pixel"
 
 #: .\src\projects\forms.py:124
 msgid "Please describe how people can get involved in the project"
-msgstr ""
+msgstr "Descrivi come le persone possono essere coinvolte nel progetto"
 
 #: .\src\projects\forms.py:125
 msgid "Can participate at home"
-msgstr ""
+msgstr "Si può partecipare a casa"
 
 #: .\src\projects\forms.py:128
 msgid "Describe any required or suggested equipment to be used in the project"
-msgstr ""
+msgstr "Descrivere qualsiasi attrezzatura richiesta o suggerita da utilizzare nel progetto"
 
 #: .\src\projects\forms.py:131
 msgid ""
@@ -703,22 +721,30 @@ msgid ""
 "Commission).         Select them from the list or add your own ended by "
 "comma or pressing enter"
 msgstr ""
+"Si prega di inserire le agenzie di finanziamento del progetto (ad es. Commissione "
+"Europea).         Selezionale dall'elenco o aggiungile a tua discrezione terminando con "
+"virgola o premendo invio"
+
 
 #: .\src\projects\forms.py:132
 msgid ""
 "Funding body (Put a comma after each name or pressing enter to add a new "
 "funding body)"
 msgstr ""
+"Ente finanziatore (metti una virgola dopo ogni nome o premi Invio per aggiungerne "
+"uno nuovo "
 
 #: .\src\projects\forms.py:136
 msgid "Indication of the programme that funds or funded a project"
-msgstr ""
+msgstr "Indicazione del programma che finanzia o ha finanziato un progetto"
 
 #: .\src\projects\forms.py:139
 msgid ""
 "Do you know the name of the database where the project first appeared?, add "
 "it here ended by comma or pressing enter."
 msgstr ""
+""Conosci il nome del database in cui è apparso per la prima volta il progetto ?, aggiungilo "
+"qui terminando con virgola o premendo invio"
 
 #: .\src\projects\forms.py:144
 msgid ""
