@@ -4,19 +4,22 @@
 
 EU-CS_platform is a web platform for Citizen Science. It is built with [Python][0] using the [Django Web Framework][1].
 
+## Requirements
+sudo apt install python3-venv
+sudo apt install python3-pip
+sudo apt install libpq-dev
+sudo apt install postgresql
+python3 -m venv venv
+source venv/bin/activate
+
+## Configure postgres
+create database eucitizenscience
+create user eucitizenscience with password 'XXXXXXXXXXXXXX';
+grant all on eucitizenscience.* to eucitizenscience
+grant all on  database eucitizenscience to eucitizenscience;
 
 ## Installation
 First of all, install Python v3 <br/>
-
-Once you have python in your SO, download or clone this repository and launch next commands.<br/>
-```
-python -m pip install --upgrade pip
-```
-```
-pip install -U django
-```
-
-Configure a Database. IE a PostgreSQL DB and configure database section in \src\eucs_platform\settings\base.py with the correct data.
 
 In source directory: <br/>
     ```
