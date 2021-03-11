@@ -2,13 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-24 09:35+0100\n"
+"POT-Creation-Date: 2021-02-03 11:48+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,8 +37,8 @@ msgid ""
 "confirmed your address. Please search for the confirmation email in your "
 "inbox (or spam) to activate your account"
 msgstr ""
-"Din e-postadress är registrerad i vår databas, men du har ännu intebekräftat "
-"din address. Kika i din inbox efter vårt bekräftelsemeddelandesom du ska "
+"Din e-postadress är registrerad i vår databas, men du har ännu inte bekräftat "
+"din adress. Kika i din inbox efter vårt bekräftelsemeddelande som du ska "
 "använda för att aktivera kontot (obs att det kan ha hamnat i skräpposten)."
 
 #: .\src\accounts\forms.py:79
@@ -78,7 +78,7 @@ msgstr "Ange e-postadress"
 
 #: .\src\accounts\forms.py:106
 msgid "Reset Password"
-msgstr ""
+msgstr "Återställ lösenord"
 
 #: .\src\accounts\templates\accounts\acc_active_email.html:4
 msgid "Activate your EU-Citizen.Science account."
@@ -94,7 +94,7 @@ msgstr "Återställ lösenord på %(site_name)s"
 msgid "Welcome to EU-Citizen.Science."
 msgstr "Välkommen till EU-Citizen.Science."
 
-#: .\src\blog\templates\blog.html:37
+#: .\src\blog\templates\blog.html:34
 msgid "Read More"
 msgstr "Läs mer"
 
@@ -115,7 +115,7 @@ msgstr "Skicka"
 
 #: .\src\contact\templates\submitter_contact.html:10
 msgid "Submitter Contact"
-msgstr "Uppgiftslämnare"
+msgstr "Uppgiftslämnare/Kontaktperson"
 
 #: .\src\contact\templates\submitter_contact.html:30
 msgid "This email will be sent to submitter of"
@@ -127,19 +127,19 @@ msgstr "Tack för ditt meddelande"
 
 #: .\src\events\forms.py:8
 msgid "Title of the event"
-msgstr ""
+msgstr "Evenemangets namn"
 
 #: .\src\events\forms.py:9
 msgid "A brief description of the event"
-msgstr ""
+msgstr "En kort beskrivning av evenemanget"
 
 #: .\src\events\forms.py:10
 msgid "Location of the Event"
-msgstr ""
+msgstr "Evenemangets plats"
 
 #: .\src\events\forms.py:14
 msgid "Please provide a URL to an external web site for the event"
-msgstr ""
+msgstr "Skriv in webbadress (URL) till evenemangets externa hemsida"
 
 #: .\src\events\templates\editEvent.html:25
 msgid "Edit event"
@@ -150,18 +150,18 @@ msgstr "Ändra evenemang"
 msgid "Event info"
 msgstr "Info om evenemang"
 
-#: .\src\events\templates\events.html:12 .\src\templates\about.html:60
-#: .\src\templates\base_forum.html:67 .\src\templates\base_r2.html:49
+#: .\src\events\templates\events.html:12 .\src\templates\about.html:58
 msgid "Events"
-msgstr "kalendarium"
+msgstr "Kalendarium"
 
-#: .\src\events\templates\events.html:24
+#: .\src\events\templates\events.html:24 .\src\templates\base_forum.html:89
+#: .\src\templates\base_r2.html:180
 msgid "ADD"
 msgstr "Lägg till"
 
 #: .\src\events\templates\events.html:31
 msgid "On going events"
-msgstr ""
+msgstr "Pågående evenemang"
 
 #: .\src\events\templates\events.html:44 .\src\events\templates\events.html:89
 #: .\src\events\templates\events.html:132
@@ -174,12 +174,12 @@ msgstr "Kommande evenemang"
 
 #: .\src\events\templates\events.html:119
 msgid "Past events"
-msgstr ""
+msgstr "Tidigare evenemang"
 
 #: .\src\events\templates\events.html:164
-#: .\src\organisations\templates\organisations.html:36
-#: .\src\projects\templates\projects.html:37
-#: .\src\resources\templates\resources.html:37
+#: .\src\organisations\templates\organisations.html:26
+#: .\src\projects\templates\projects.html:27
+#: .\src\resources\templates\resources.html:27
 msgid "Sorry, nothing found"
 msgstr "Tyvärr, inga sökträffar"
 
@@ -317,8 +317,8 @@ msgstr "Land"
 #: .\src\organisations\templates\finder_organisations.html:44
 #: .\src\projects\templates\finder_projects.html:82
 #: .\src\resources\templates\finder_resources.html:69
-#: .\src\templates\home.html:71 .\src\templates\home.html:81
-#: .\src\templates\home.html:91 .\src\templates\home.html:101
+#: .\src\templates\home.html:66 .\src\templates\home.html:76
+#: .\src\templates\home.html:86 .\src\templates\home.html:96
 msgid "result"
 msgstr "resultat"
 
@@ -331,7 +331,7 @@ msgstr "hittat"
 #: .\src\organisations\templates\finder_organisations.html:54
 #: .\src\projects\templates\finder_projects.html:93
 msgid "Clear current search query and filters"
-msgstr ""
+msgstr "Rensa sökinställningarna"
 
 #: .\src\organisations\templates\new_organisation.html:64
 msgid "New Organisation Profile"
@@ -363,8 +363,8 @@ msgid ""
 "as possible."
 msgstr ""
 "Fyll i all obligatorisk information i fälten nedan (markerade med "
-"asterisk*), och gärna så mycket av den icke-obligatoriska informationen som "
-"möjligt."
+"asterisk*), och gärna så mycket av den icke-obligatoriska informationen "
+"som möjligt."
 
 #: .\src\organisations\templates\new_organisation.html:70
 msgid ""
@@ -372,6 +372,9 @@ msgid ""
 "moderation by one of the members of the EU-Citizen.Science consortium. This "
 "step is simply to check for ‘spam’ or inappropriate uses of the profile form."
 msgstr ""
+"När du har sparat din organisations profil skickas den in för granskning"
+"av en medlem i EU-Citizen.Science. Detta för att säkerställa"
+"att det inte är skräppost eller att formuläret används otillbörligt."
 
 #: .\src\organisations\templates\organisation.html:21
 #: .\src\projects\templates\editProject.html:64
@@ -409,14 +412,14 @@ msgid "Go to Organisation"
 msgstr "Gå till organisation"
 
 #: .\src\organisations\templates\organisation.html:59
-#: .\src\templates\_subnavbar.html:58 .\src\templates\about.html:57
-#: .\src\templates\home.html:80
+#: .\src\templates\_subnavbar.html:12 .\src\templates\about.html:55
+#: .\src\templates\home.html:65
 msgid "Projects"
 msgstr "Projekt"
 
 #: .\src\organisations\templates\organisation.html:65
-#: .\src\templates\_subnavbar.html:62 .\src\templates\about.html:56
-#: .\src\templates\home.html:90
+#: .\src\templates\_subnavbar.html:16 .\src\templates\about.html:54
+#: .\src\templates\home.html:75
 msgid "Resources"
 msgstr "Resurser"
 
@@ -438,18 +441,15 @@ msgstr "Redigera organisation"
 msgid "Organisation"
 msgstr "Organisation"
 
-#: .\src\organisations\views.py:47
-msgid "Organisation added correctly"
-msgstr ""
-
 #: .\src\profiles\forms.py:48
 msgid ""
 "Please write or select interest areas, separated by commas or pressing enter"
 msgstr ""
+"Skriv eller välj intresseområden, separera med kommatecken eller ENTER-tryck"
 
 #: .\src\profiles\models.py:23
 msgid "Profile picture"
-msgstr ""
+msgstr "Profilbild"
 
 #: .\src\profiles\models.py:25
 #: .\src\profiles\templates\profiles\show_profile.html:43
@@ -462,7 +462,7 @@ msgstr "Om mig"
 
 #: .\src\profiles\models.py:30
 msgid "Email verified"
-msgstr ""
+msgstr "Din email är bekräftad"
 
 #: .\src\profiles\models.py:31
 msgid ""
@@ -471,6 +471,10 @@ msgid ""
 "this profile with your professional information such as affiliations, "
 "grants, publications, peer review, and more.)"
 msgstr ""
+"ORCID (Om du är registrerad på ORCIDs forskarplattform och kan"
+"identifiera dig via ORCID iD kan du lägga till det här för att"
+"länka profilen med information om samarbetspartner,"
+"stipendier, publikationer etc.)"
 
 #: .\src\profiles\templates\profiles\edit_profile.html:31
 msgid "Edit profile"
@@ -482,8 +486,8 @@ msgid "Geographical location"
 msgstr "Geografisk plats"
 
 #: .\src\profiles\templates\profiles\followed_projects.html:27
-#: .\src\templates\base2.html:65 .\src\templates\base_forum.html:88
-#: .\src\templates\base_r2.html:70
+#: .\src\templates\base2.html:65 .\src\templates\base_forum.html:77
+#: .\src\templates\base_r2.html:165
 msgid "Followed projects"
 msgstr "Projekt som jag följer"
 
@@ -505,7 +509,7 @@ msgstr "Mitt bibliotek"
 
 #: .\src\profiles\templates\profiles\show_profile.html:30
 msgid "Delete Profile"
-msgstr ""
+msgstr "Raderad profil"
 
 #: .\src\profiles\templates\profiles\show_profile.html:31
 msgid "Edit Profile"
@@ -537,13 +541,16 @@ msgstr "Intresseområden"
 
 #: .\src\projects\forms.py:21
 msgid "Short name or title of the project"
-msgstr ""
+msgstr "Projekts namn"
 
 #: .\src\projects\forms.py:24
 msgid ""
 "Please enter 2-3 keywords (comma separated) or pressing enter to further "
 "describe your project and assist search on the platform"
 msgstr ""
+"Skriv in 2-3 ord (separerade med komma) eller tryck ENTER för att "
+"beskriva ditt projekt och förbättra sökningen på plattformen"
+
 
 #: .\src\projects\forms.py:24 .\src\projects\templates\project.html:67
 #: .\src\projects\templates\project.html:189
@@ -554,7 +561,7 @@ msgstr "Nyckelord"
 
 #: .\src\projects\forms.py:27
 msgid "Primary aim, goal or objective of the project. Max 2000 characters"
-msgstr ""
+msgstr "Beskriv huvudsyftet med projektet. Max 2000 tecken"
 
 #: .\src\projects\forms.py:30
 msgid ""
@@ -562,54 +569,57 @@ msgid ""
 "href=\"https://zenodo.org/communities/citscicharacteristics\">ECSA "
 "Characteristics of Citizen Science</a> for guidance"
 msgstr ""
+"Beskriv hur projektet är kopplat till medborgarforskning. Titta på <a "
+"href=\"https://zenodo.org/communities/citscicharacteristics\">ECSA "
+"Characteristics of Citizen Science</a> för vägledning"
 
 #: .\src\projects\forms.py:34
 msgid "The project topic(s) or field(s) of science, multiple selection"
-msgstr ""
+msgstr "Projektets ämne(n) eller forskningsområde(n), det går välja flera svar"
 
 #: .\src\projects\forms.py:35 .\src\projects\templates\finder_projects.html:61
 msgid "Topic"
-msgstr ""
+msgstr "Ämne"
 
 #: .\src\projects\forms.py:38
 msgid "Please select the task(s) undertaken by participants"
-msgstr ""
+msgstr "Välj de uppgifter som deltagarna genomför"
 
 #: .\src\projects\forms.py:39
 msgid "Participation Task"
-msgstr ""
+msgstr "Deltagarnas uppgift"
 
 #: .\src\projects\forms.py:43
 msgid "Activity Status"
-msgstr ""
+msgstr "Aktivitetsstatus"
 
 #: .\src\projects\forms.py:44
 msgid "Select one"
-msgstr ""
+msgstr "Välj en"
 
 #: .\src\projects\forms.py:47
 msgid "Closest approximate start date of the project"
-msgstr ""
+msgstr "Beräknat startdatum för projektet"
 
 #: .\src\projects\forms.py:50
 msgid "Approximate end date of the project"
-msgstr ""
+msgstr "Beräknat slutdatum för projektet"
 
 #: .\src\projects\forms.py:53
 msgid "Please provide a URL to an external web site for the project"
-msgstr ""
+msgstr "Fyll i webadressen (URL) till projektets hemsida"
 
 #: .\src\projects\forms.py:57
-msgid "Please indicate the spatial scale of the projec"
-msgstr ""
+msgid "Please indicate the spatial scale of the project"
+msgstr "Uppskatta projektets omfattning"
 
 #: .\src\projects\forms.py:58
 msgid "Geographic Extend"
-msgstr ""
+msgstr "Geografisk utbredning"
 
 #: .\src\projects\forms.py:61
 msgid "Project locality"
-msgstr ""
+msgstr "Projektets plats(er)"
 
 #: .\src\projects\forms.py:62
 msgid ""
@@ -617,16 +627,21 @@ msgid ""
 "participant activities take place,         E.g. in your backyard, parks in "
 "London, rivers in Europe, online globally, etc."
 msgstr ""
+"Beskriv projektets plats, utifrån var de huvudsakliga"
+"deltagaraktiviteterna genomförs,         som tex på din bakgård, i  "
+"Londons parker, Europas floder eller online över hela världen etc."
 
 #: .\src\projects\forms.py:67
 msgid ""
 "Organisation coordinating the project. If not listed, please add it <a href="
 "\"/new_organisation\">here</a>         before submitting the project"
 msgstr ""
+"Organisationen som koordinerar projektet. Finns den inte med? Lägg till <a href="
+"\"/new_organisation\">here</a>         innan du skickar in projektet"
 
 #: .\src\projects\forms.py:69
 msgid "Lead Organisation / Coordinator"
-msgstr ""
+msgstr "Huvudorganisation/koordinator"
 
 #: .\src\projects\forms.py:72
 msgid ""
@@ -634,66 +649,69 @@ msgid ""
 "it         <a href=\"/new_organisation\">here</a> before submitting the "
 "project"
 msgstr ""
+"Övriga organisationer i projektet. Finns de inte med? Lägg till "
+"här        <a href=\"/new_organisation\">here</a> innan du skickar in"
+"projektet"
 
 #: .\src\projects\forms.py:74
 msgid "Other Organisations"
-msgstr ""
+msgstr "Övriga organisationer"
 
 #: .\src\projects\forms.py:85
 msgid "Please name the contact person or contact point for the Project"
-msgstr ""
+msgstr "Fyll i kontaktperson eller kontaktsida för projektet"
 
 #: .\src\projects\forms.py:85
 msgid "Public Contact Point"
-msgstr ""
+msgstr "Offentlig kontaktsida"
 
 #: .\src\projects\forms.py:89
 msgid "Please provide the email for the contact person or contact point"
-msgstr ""
+msgstr "Fyll i mejladress till kontaktperson"
 
 #: .\src\projects\forms.py:92
 msgid "Project image for the thumbnail profile"
-msgstr ""
+msgstr "Projektbild till profilbild"
 
 #: .\src\projects\forms.py:93
 msgid "Will be resized to 600x400 pixels"
-msgstr ""
+msgstr "Skalas om till 600x400 pixlar"
 
 #: .\src\projects\forms.py:99 .\src\projects\forms.py:113
 msgid "provide image credit, if applicable"
-msgstr ""
+msgstr "ange fotograf, om möjligt"
 
 #: .\src\projects\forms.py:100
 msgid "Project Logo"
-msgstr ""
+msgstr "Projektets logotyp"
 
 #: .\src\projects\forms.py:101
 msgid "Will be resized to 600x400 pixels)"
-msgstr ""
+msgstr "Skalas om till 600x400 pixlar"
 
 #: .\src\projects\forms.py:107
 msgid "provide Logo credit, if applicable"
-msgstr ""
+msgstr "ange upphovsperson, om möjligt"
 
 #: .\src\projects\forms.py:108
 msgid "Project image for the profile heading"
-msgstr ""
+msgstr "Projektbild till projektets sidhuvud"
 
 #: .\src\projects\forms.py:109
 msgid "Will be resized to 1100x400 pixels"
-msgstr ""
+msgstr "Skalas om till 1100x400 pixlar"
 
 #: .\src\projects\forms.py:124
 msgid "Please describe how people can get involved in the project"
-msgstr ""
+msgstr "Beskriv hur man gör för att vara med i projektet"
 
 #: .\src\projects\forms.py:125
 msgid "Can participate at home"
-msgstr ""
+msgstr "Går att delta i hemifrån"
 
 #: .\src\projects\forms.py:128
 msgid "Describe any required or suggested equipment to be used in the project"
-msgstr ""
+msgstr "Beskriv utrustning som är nödvändig eller bra att använda i projektet"
 
 #: .\src\projects\forms.py:131
 msgid ""
@@ -701,93 +719,105 @@ msgid ""
 "Commission).         Select them from the list or add your own ended by "
 "comma or pressing enter"
 msgstr ""
+"Fyll i projektets finansiärer ( t ex Europeiska "
+"kommissionen).         Välj i listan eller lägg till en ny, avsluta med "
+"komma eller ENTER"
 
 #: .\src\projects\forms.py:132
 msgid ""
 "Funding body (Put a comma after each name or pressing enter to add a new "
 "funding body)"
 msgstr ""
+"Finansiärer ( Sätt ett kommatecken efter varje nytt namn eller tryck ENTER "
+"för att lägga till ny)"
+
 
 #: .\src\projects\forms.py:136
 msgid "Indication of the programme that funds or funded a project"
-msgstr ""
+msgstr "Ange program som finansierar/finansierat ett projekt"
 
 #: .\src\projects\forms.py:139
 msgid ""
 "Do you know the name of the database where the project first appeared?, add "
 "it here ended by comma or pressing enter."
 msgstr ""
+"Om du vet namnet på databasen där projektet först dök upp, lägg till "
+"det här. Avsluta med kommatecken eller ENTER."
 
 #: .\src\projects\forms.py:144
 msgid ""
 "Do you know the Unique identificator of the project in the previous "
 "database?, add it here."
 msgstr ""
+"Om du känner till projektets Unique identificator i tidigare "
+"databaser,lägg till det här."
 
 #: .\src\projects\forms.py:145
 msgid "Origin UID"
-msgstr ""
+msgstr "Ursprunglig UID (Unique identificator)"
 
 #: .\src\projects\forms.py:148
 msgid "Do you know the origin URL in the previous database?, add it here"
-msgstr ""
+msgstr "Känner du till webbadressen (URL) som användes i tidigare databas? Lägg till här"
 
 #: .\src\projects\forms.py:148
 msgid "Origin URL"
-msgstr ""
+msgstr "Ursprunglig URL"
 
 #: .\src\projects\templates\editProject.html:68
 msgid "You are going to delete this project, this procedure is irreversible."
-msgstr ""
+msgstr "Du kommer nu att radera det projektet. Åtgärden går inte att ångra."
 
 #: .\src\projects\templates\editProject.html:87
 msgid "Edit project"
-msgstr ""
+msgstr "Redigera projektet"
 
 #: .\src\projects\templates\editProject.html:119
 #: .\src\projects\templates\new_project.html:116
 msgid "Project info"
-msgstr ""
+msgstr "Projektinformation"
 
 #: .\src\projects\templates\editProject.html:173
 #: .\src\projects\templates\new_project.html:173
 msgid "Contact details"
-msgstr ""
+msgstr "Kontaktuppgifter"
 
 #: .\src\projects\templates\editProject.html:189
 #: .\src\projects\templates\new_project.html:188
 msgid "Project profile images"
-msgstr ""
+msgstr "Profilbilder till projektet"
 
 #: .\src\projects\templates\editProject.html:251
 #: .\src\projects\templates\new_project.html:236
 msgid "Geography"
-msgstr ""
+msgstr "Geografi"
 
 #: .\src\projects\templates\editProject.html:252
 msgid ""
 "Main location where the project takes place (Enter address or click on the "
 "map)"
 msgstr ""
+"Huvudsaklig plats där projektet genomförs (Skriv adress eller klicka på "
+"kartan)"
 
 #: .\src\projects\templates\editProject.html:269
 #: .\src\projects\templates\new_project.html:261
 msgid "Supplementary information for Citizen Science"
-msgstr ""
+msgstr "Extra information"
 
 #: .\src\projects\templates\editProject.html:285
 #: .\src\projects\templates\new_project.html:276
 msgid "Funding"
-msgstr ""
+msgstr "Finansiering"
 
 #: .\src\projects\templates\editProject.html:298
 #: .\src\projects\templates\new_project.html:289
 msgid "Origin information"
-msgstr ""
+msgstr "Ursprungsinformation"
 
 #: .\src\projects\templates\editProject.html:316
 msgid "Custom fields"
-msgstr ""
+msgstr "Anpassade fält"
 
 #: .\src\projects\templates\finder_projects.html:33
 #: .\src\resources\templates\finder_resources.html:22
@@ -797,7 +827,7 @@ msgstr "Sortera efter senast uppdaterad"
 #: .\src\projects\templates\finder_projects.html:34
 #: .\src\resources\templates\finder_resources.html:23
 msgid "Sort by featured"
-msgstr ""
+msgstr "Sortera efter utvalda"
 
 #: .\src\projects\templates\finder_projects.html:35
 #: .\src\resources\templates\finder_resources.html:24
@@ -807,19 +837,19 @@ msgstr "Sortera efter betyg"
 #: .\src\projects\templates\finder_projects.html:46
 #: .\src\projects\templates\project.html:53
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: .\src\projects\templates\finder_projects.html:69
 msgid "Doable at home"
-msgstr ""
+msgstr "Går att göra hemifrån"
 
 #: .\src\projects\templates\finder_projects.html:70
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: .\src\projects\templates\finder_projects.html:71
 msgid "No"
-msgstr ""
+msgstr "Nej"
 
 #: .\src\projects\templates\finder_projects.html:74
 #: .\src\resources\templates\finder_resources.html:61
@@ -833,7 +863,7 @@ msgstr "Ej ännu modererad"
 
 #: .\src\projects\templates\finder_projects.html:76
 #: .\src\resources\templates\finder_resources.html:63
-#: .\src\templates\_subnavbar.html:54
+#: .\src\templates\_subnavbar.html:8
 msgid "All"
 msgstr "Alla"
 
@@ -844,7 +874,6 @@ msgstr "Info"
 
 #: .\src\projects\templates\modal_projects.html:14
 #: .\src\resources\templates\modal_resources.html:14
-#: .\src\templates\base_forum.html:64 .\src\templates\base_r2.html:46
 msgid "Search"
 msgstr "Sök"
 
@@ -852,6 +881,7 @@ msgstr "Sök"
 msgid ""
 "projects by title or keywords by typing text directly into the the search bar"
 msgstr ""
+"sortera projekten efter titel eller nyckelord genom att skriva direkt i sökfältet"
 
 #: .\src\projects\templates\modal_projects.html:15
 #: .\src\resources\templates\modal_resources.html:15
@@ -860,7 +890,7 @@ msgstr "Sortera"
 
 #: .\src\projects\templates\modal_projects.html:15
 msgid "projects by date or by rating"
-msgstr ""
+msgstr "projekt sorterade på datum eller betyg"
 
 #: .\src\projects\templates\modal_projects.html:16
 #: .\src\resources\templates\modal_resources.html:16
@@ -869,7 +899,7 @@ msgstr "Filtrera"
 
 #: .\src\projects\templates\modal_projects.html:16
 msgid "search results by project status, country, or topic"
-msgstr ""
+msgstr "sökresultat sorterade på projektstatus, land eller ämne"
 
 #: .\src\projects\templates\modal_projects.html:18
 msgid ""
@@ -877,6 +907,9 @@ msgid ""
 "as 'Moderated'.Only these will show in your search results unless you filter "
 "for 'not yet moderated' or 'All'."
 msgstr ""
+"Inskickade projekt som har modererats är märkta "
+"'Modererade'. Enbart dessa syns i sökresultaten om du inte filtrerar på "
+"'Ej modererade ännu' eller 'Alla'."
 
 #: .\src\projects\templates\modal_projects.html:20
 #: .\src\resources\templates\modal_resources.html:20
@@ -891,7 +924,7 @@ msgstr "modererings-process"
 
 #: .\src\projects\templates\new_project.html:65
 msgid "Project is going to saved"
-msgstr ""
+msgstr "Projektet sparas"
 
 #: .\src\projects\templates\new_project.html:73
 #: .\src\resources\templates\new_resource.html:68
@@ -905,6 +938,9 @@ msgid ""
 "projects shared on the platform can indeed be considered citizen science "
 "projects."
 msgstr ""
+"Tack för att du har skickat in din projektprofil. Den har nu skickats till EU-"
+"Citizen.Science team, som kommer att kontrollera projektet för att säkerställa att "
+"projekt som delas på plattformen verkligen är medborgarforskningsprojekt"
 
 #: .\src\projects\templates\new_project.html:75
 msgid ""
@@ -912,6 +948,9 @@ msgid ""
 "will see that your project changes from 'not yet moderated' to 'moderated' "
 "on the platform."
 msgstr ""
+"Vi kontaktar dig om vi har några frågor. Annars kommer du att "
+"se projektet ändra status från 'ej modererad ännu' till 'modererad' "
+"på plattformen."
 
 #: .\src\projects\templates\new_project.html:76
 msgid ""
@@ -919,10 +958,13 @@ msgid ""
 "going to the Submitted projects section in your Personal Area (see the top-"
 "right of the platform menu)."
 msgstr ""
+"Du kan uppdatera eller ändra projektets profil när som helst, genom "
+"att gå till avdelningen 'Inskickade projekt' på dina sidor, som finns "
+"längst upp till höger på huvudmenyn."
 
 #: .\src\projects\templates\new_project.html:94
 msgid "New project"
-msgstr ""
+msgstr "Nytt projekt"
 
 #: .\src\projects\templates\new_project.html:95
 msgid ""
@@ -931,6 +973,10 @@ msgid ""
 "below (indicated with an asterisk*), and as much of the non-mandatory "
 "information as possible."
 msgstr ""
+"Tack för att du delar ditt medborgarforskningsprojekt på EU-Citizen.Sciences "
+"plattform. Fyll i all obligatorisk information i fälten nedan (markerade "
+" med asterisk*), och så mycket icke-obligatorisk information som "
+"möjligt."
 
 #: .\src\projects\templates\new_project.html:96
 msgid ""
@@ -941,10 +987,16 @@ msgid ""
 "research lifecycle. For guidance on whether your project can be considered "
 "to be citizen science, please refer to the"
 msgstr ""
+"Medborgarforskning inkluderar ett brett spektrum av projekt, som kan anpassas "
+"och användas inom olika situationer och forskningsgrenar, och som representerar många "
+"olika tillvägagångssätt och metoder för allmänhetens delaktighet i vetenskaplig "
+"forskning och involverar deltagare i en rad aktiviteter över hela forskningens "
+"livscykel. För vägledning om ditt projekt kan anses vara "
+"medborgarforskning, vänligen ta del av"
 
 #: .\src\projects\templates\new_project.html:97
 msgid "ECSA Characteristics of Citizen Science"
-msgstr ""
+msgstr "ECSA Characteristics of Citizen Science"
 
 #: .\src\projects\templates\new_project.html:99
 msgid ""
@@ -953,10 +1005,14 @@ msgid ""
 "task(s) that participants undertake. Your project should engage meaningfully "
 "with the"
 msgstr ""
+"I formuläret nedan, bredvid övrig information, vill vi att du beskriver "
+"på vilket sätt ditt projekt innehåller medborgarforskning, och vilken "
+"sorts uppgift(er) deltagarna deltar i. Ditt projekt ska på ett meningsfullt "
+"sätt följa"
 
 #: .\src\projects\templates\new_project.html:100
 msgid "ECSA 10 Principles of Citizen Science"
-msgstr ""
+msgstr "ECSAs tio principer för medborgarforskning"
 
 #: .\src\projects\templates\new_project.html:101
 msgid ""
@@ -965,15 +1021,20 @@ msgid ""
 "can be used for the project profile (the logo, a thumbnail image "
 "representing the project, and a banner header representing the project)."
 msgstr ""
+"Fyll i information om projektet, deltagarinformation, länkar till "
+"dokumentation, kontaktuppgifter och bifoga projektbilder som kan användas "
+"till projektets profil (logotyp samt foto för 1: en liten projektbild och "
+"2: som kan användas till sidhuvud för projektet). "
 
 #: .\src\projects\templates\new_project.html:102
 msgid ""
 "Upon saving this profile, your project will be submitted for moderation."
 msgstr ""
+"När du sparat profilen, kommer den att skickas in för granskning."
 
 #: .\src\projects\templates\new_project.html:103
 msgid "The"
-msgstr ""
+msgstr "Detta"
 
 #: .\src\projects\templates\new_project.html:103
 msgid ""
@@ -981,11 +1042,14 @@ msgid ""
 "indeed be considered to be citizen science projects, and to prevent "
 "unintended uses of the platform."
 msgstr ""
+"för att säkerställa att alla projekt på plattformen verkligen "
+"uppfyller kriterierna för medborgarforskning, och för att förhindra "
+"att plattformen används i annat syfte. "
 
 #: .\src\projects\templates\new_project.html:112
 #: .\src\projects\templates\new_project.html:307
 msgid "Submit"
-msgstr ""
+msgstr "Skicka"
 
 #: .\src\projects\templates\new_project.html:237
 msgid ""
@@ -993,43 +1057,46 @@ msgid ""
 "indicated, and otherwise indicate the address of the Coordinator or Leading "
 "Partner. (Enter address or click on the map)"
 msgstr ""
+"Om möjligt, skriv platsen där projektet kommer att utföras. Fyll annars "
+"i adress till koordinator eller huvudpartner. "
+"(Skriv in eller klicka på kartan)"
 
 #: .\src\projects\templates\project.html:32
 msgid "Participation"
-msgstr ""
+msgstr "Deltagande"
 
 #: .\src\projects\templates\project.html:38
 msgid "Description"
-msgstr ""
+msgstr "Beskrivning"
 
 #: .\src\projects\templates\project.html:56
 #: .\src\projects\templates\project.html:178
 msgid "Start:"
-msgstr ""
+msgstr "Start:"
 
 #: .\src\projects\templates\project.html:57
 #: .\src\projects\templates\project.html:179
 msgid "End:"
-msgstr ""
+msgstr "Slut"
 
 #: .\src\projects\templates\project.html:60
 #: .\src\projects\templates\project.html:182
 msgid "Science Topic"
-msgstr ""
+msgstr "Ämne"
 
 #: .\src\projects\templates\project.html:74
 #: .\src\projects\templates\project.html:196
 msgid "Location"
-msgstr ""
+msgstr "Plats"
 
 #: .\src\projects\templates\project.html:89
 msgid "(Host)"
-msgstr ""
+msgstr "(Värd)"
 
 #: .\src\projects\templates\project.html:92
 #: .\src\projects\templates\project.html:214
 msgid "(Main organisation)"
-msgstr ""
+msgstr "(Huvudorganisaton)"
 
 #: .\src\projects\templates\project.html:113
 #: .\src\resources\templates\resource.html:74
@@ -1037,7 +1104,7 @@ msgstr ""
 #: .\src\templates\resources_cards.html:54
 #: .\src\templates\resources_cards_horizontal.html:43
 msgid "review"
-msgstr ""
+msgstr "omdöme"
 
 #: .\src\projects\templates\project.html:113
 #: .\src\resources\templates\resource.html:125
@@ -1046,7 +1113,7 @@ msgstr "Omdömen"
 
 #: .\src\projects\templates\project.html:118
 msgid "Go to Project"
-msgstr ""
+msgstr "Gå till projektet"
 
 #: .\src\projects\templates\project.html:126
 #: .\src\projects\templates\project_review.html:18
@@ -1057,15 +1124,15 @@ msgstr "Lämna ett omdöme"
 
 #: .\src\projects\templates\project.html:130
 msgid "Following"
-msgstr ""
+msgstr "Följer"
 
 #: .\src\projects\templates\project.html:133
 msgid "Follow"
-msgstr ""
+msgstr "Följ"
 
 #: .\src\projects\templates\project.html:156
 msgid "How to participate:"
-msgstr ""
+msgstr "Så deltar du:"
 
 #: .\src\projects\templates\project.html:159
 msgid "Needed equipment:"
@@ -1073,16 +1140,12 @@ msgstr ""
 
 #: .\src\projects\templates\project.html:161
 msgid "Participation task"
-msgstr ""
+msgstr "Utrustning som krävs:"
 
 #: .\src\projects\templates\project_review.html:19
 #: .\src\resources\templates\resource_review.html:19
 msgid "Rate and comment"
 msgstr "Sätt betyg och kommentera"
-
-#: .\src\projects\views.py:41
-msgid "Project added correctly"
-msgstr ""
 
 #: .\src\resources\forms.py:19
 msgid "Insert here the title or name of the resource"
@@ -1117,6 +1180,8 @@ msgid ""
 "Please write or select keywords to describe the resource, separated by "
 "commas or pressing enter"
 msgstr ""
+"Skriv eller välj nyckelord för att beskriva resursen, avgränsade med "
+"kommatecken eller ENTER-tryck"
 
 #: .\src\resources\forms.py:40
 msgid "The thematic content of the resource (select as many as apply)"
@@ -1127,6 +1192,8 @@ msgid ""
 "Please provide the Digital Object Signifier that is unique to your "
 "resource,        generated by the Publisher, Zenodo..."
 msgstr ""
+"Ange 'Digital Object Signifier', som är unik för din "
+"resurs,         och genereras av 'the Publisher, Zenodo...' "
 
 #: .\src\resources\forms.py:45 .\src\resources\templates\resource.html:108
 msgid "Resource DOI"
@@ -1138,6 +1205,9 @@ msgid ""
 "a comma or pressing enter to add an author,        or multiple authors. If "
 "not known, name the project within the resource was created."
 msgstr ""
+"Lägg till författare: Skriv <i>Första initialen Efternamn</i> , avsluta med "
+"kommatecken. För att lägga till fler författare, tryck ENTER. Om "
+"författaren är okänd, uppge istället projektnamn."
 
 #: .\src\resources\forms.py:51
 msgid "Authors"
@@ -1157,6 +1227,9 @@ msgid ""
 "comma or pressing enter).         If not listed, please add them <a href=\"/"
 "new_organisation\">here</a > before submitting"
 msgstr ""
+"Organisationer som bidragit till resursen. (Ange flera genom att separera "
+"dem med kommatecken eller ENTER.) Om de inte finns, lägg till dem <a href=\"/"
+"new_organisation\">here</a > innan du skickar in formuläret."
 
 #: .\src\resources\forms.py:59 .\src\resources\templates\resource.html:102
 msgid "Organisation(s)"
@@ -1191,7 +1264,7 @@ msgstr "Utbildningsnivå"
 
 #: .\src\resources\forms.py:89
 msgid "Insert education level needed, end using comma or pressing enter"
-msgstr ""
+msgstr "Uppge vilken utbildningsnivå som krävs, avsluta med komma eller ENTER"
 
 #: .\src\resources\forms.py:93
 msgid "Learning resource type"
@@ -1203,12 +1276,11 @@ msgstr "Hjälptext här"
 
 #: .\src\resources\forms.py:96
 msgid "Aproximate hours required to finish the training"
-msgstr ""
+msgstr "Beräknat antal timmar för bli färdig med träningen"
 
 #: .\src\resources\templates\editResource.html:63
 msgid "You are going to delete this resource, this procedure is irreversible."
-msgstr ""
-"Du håller på att ta bort den här resursen. Åtgärden går inte att ångra."
+msgstr "Du håller på att ta bort den här resursen. Åtgärden går inte att ångra."
 
 #: .\src\resources\templates\editResource.html:81
 msgid "Edit resource"
@@ -1230,7 +1302,7 @@ msgstr "Alla typer av resurser"
 msgid ""
 "resources by title or keywords by typing text directly into the the search "
 "bar"
-msgstr "resurser genom att skriva in titel eller nyckelord i sökfältet"
+msgstr "sök resurser genom att skriva in titel eller nyckelord i sökfältet"
 
 #: .\src\resources\templates\modal_resources.html:15
 msgid "resources by date or by rating"
@@ -1248,7 +1320,7 @@ msgid ""
 msgstr ""
 "Inskickade resurser som har genomgått moderering är markerade som "
 "'modererade'. Endast modererade resurser kommer att visas i dina sökresultat "
-"om du inte väljer att filtrera som 'ej ännu modererade' eller 'alla'."
+"om du inte väljer att filtrera som 'ej modererade ännu' eller 'alla'."
 
 #: .\src\resources\templates\new_resource.html:60
 msgid "Resource is going to saved"
@@ -1275,7 +1347,7 @@ msgid ""
 msgstr ""
 "Vi kommer att höra av oss om vi har några frågor, och annars kommer du att "
 "få en notis när resursen är modererad och publicerad på portalen. Under "
-"tiden kommer resursen att finnas synlig på portalen,men med markeringen att "
+"tiden kommer resursen att finnas synlig på portalen, men med markeringen att "
 "den ännu inte är modererad."
 
 #: .\src\resources\templates\new_resource.html:74
@@ -1298,11 +1370,11 @@ msgstr "Ny"
 
 #: .\src\resources\templates\new_resource.html:92
 msgid "training"
-msgstr "resurs"
+msgstr "för träning"
 
 #: .\src\resources\templates\new_resource.html:92
 msgid "resource"
-msgstr "för träning"
+msgstr "resurs"
 
 #: .\src\resources\templates\new_resource.html:93
 msgid ""
@@ -1325,7 +1397,7 @@ msgstr ""
 "Resurser kan vara dokument som exempelvis riktlinjer, rapporter, "
 "policydokument, och protokoll; verktyg i form av mjukvara eller hårdvara, "
 "samt andra format som videoklipp eller poddar. Läs gärna vårt blogginlägg "
-"Types of Resources för mer info."
+"'Types of Resources' för mer info."
 
 #: .\src\resources\templates\new_resource.html:97
 msgid ""
@@ -1452,25 +1524,9 @@ msgstr "I mitt bibliotek"
 msgid "Add to library"
 msgstr "Lägg till i bibliotek"
 
-#: .\src\resources\templates\resource.html:203
-msgid "Own training"
-msgstr ""
-
-#: .\src\resources\templates\resource.html:205
-msgid "Mark as own training"
-msgstr ""
-
-#: .\src\resources\templates\resource.html:216
+#: .\src\resources\templates\resource.html:210
 msgid "Edit"
 msgstr "Redigera"
-
-#: .\src\resources\views.py:122
-msgid "Training resource added correctly"
-msgstr ""
-
-#: .\src\resources\views.py:130
-msgid "Resource added correctly"
-msgstr ""
 
 #: .\src\templates\_footer.html:12
 msgid ""
@@ -1539,45 +1595,45 @@ msgstr "Utveckling"
 msgid "API"
 msgstr "API"
 
-#: .\src\templates\_navbar.html:3
+#: .\src\templates\_navbar.html:3 .\src\templates\base_forum.html:58
+#: .\src\templates\base_r2.html:145
 msgid "SEARCH"
 msgstr "SÖK"
 
-#: .\src\templates\_navbar.html:4
+#: .\src\templates\_navbar.html:4 .\src\templates\base_forum.html:60
+#: .\src\templates\base_r2.html:147
 msgid "BLOG"
 msgstr "BLOGG"
 
-#: .\src\templates\_navbar.html:5
+#: .\src\templates\_navbar.html:5 .\src\templates\base_forum.html:61
+#: .\src\templates\base_r2.html:148
 msgid "EVENTS"
 msgstr "EVENEMANG"
 
-#: .\src\templates\_navbar.html:6
+#: .\src\templates\_navbar.html:6 .\src\templates\base_forum.html:63
+#: .\src\templates\base_r2.html:150
 msgid "MOOCS"
 msgstr ""
 
-#: .\src\templates\_navbar.html:7
-msgid "CALL"
-msgstr ""
-
-#: .\src\templates\_navbar.html:8
+#: .\src\templates\_navbar.html:7 .\src\templates\base_forum.html:64
+#: .\src\templates\base_r2.html:151
 msgid "ABOUT"
 msgstr "OM"
 
-#: .\src\templates\_subnavbar.html:66 .\src\templates\home.html:70
+#: .\src\templates\_subnavbar.html:20 .\src\templates\home.html:85
 #: .\src\templates\modalinfo.html:18 .\src\templates\resources_cards.html:33
 msgid "Training"
 msgstr "Träning"
 
-#: .\src\templates\_subnavbar.html:70 .\src\templates\home.html:100
+#: .\src\templates\_subnavbar.html:24 .\src\templates\home.html:95
 msgid "Organisations"
 msgstr "Organisationer"
 
-#: .\src\templates\_subnavbar.html:75
+#: .\src\templates\_subnavbar.html:29
 msgid "Our Gold Star Selection"
 msgstr "Vår stjärn-selektion"
 
 #: .\src\templates\about.html:4 .\src\templates\about.html:8
-#: .\src\templates\base_forum.html:65 .\src\templates\base_r2.html:47
 msgid "About"
 msgstr "Om"
 
@@ -1585,11 +1641,11 @@ msgstr "Om"
 msgid "Watch our teaser, in 12 different languages!"
 msgstr ""
 
-#: .\src\templates\about.html:46
+#: .\src\templates\about.html:44
 msgid "The Platform"
 msgstr "Portalen"
 
-#: .\src\templates\about.html:49
+#: .\src\templates\about.html:47
 msgid ""
 "EU-Citizen.Science is an online platform for sharing knowledge, tools, "
 "training and resources for citizen science – by the community, for the "
@@ -1598,7 +1654,7 @@ msgstr ""
 "EU-Citizen.Science är en portal för att dela kunskap, verktyg, och andra "
 "resurser för medborgarforskning."
 
-#: .\src\templates\about.html:50
+#: .\src\templates\about.html:48
 msgid ""
 "The vision for the platform is to serve as a Knowledge Hub, in aid of the "
 "mainstreaming of citizen science, and build on the growing impact of "
@@ -1609,7 +1665,7 @@ msgstr ""
 "göra medborgarforskning ännu mer känt och använt bland olika aktörer i "
 "samhället."
 
-#: .\src\templates\about.html:51
+#: .\src\templates\about.html:49
 msgid ""
 "We accomplish this by supporting the sharing of knowledge, know-how, and "
 "experience between anyone doing or wanting to do citizen science."
@@ -1617,46 +1673,47 @@ msgstr ""
 "Alla kan bidra genom att via portalen dela med sig av kunskaper och "
 "erfarenheter med andra som vill lära sig mer om medborgarforskning."
 
-#: .\src\templates\about.html:54
+#: .\src\templates\about.html:52
 msgid "On this platform you will find"
 msgstr "På portalen hittar du"
 
-#: .\src\templates\about.html:56
+#: .\src\templates\about.html:54
 msgid "that are useful for citizen science practitioners"
 msgstr "som är användbara för personer som arbetar med medborgarforskning"
 
-#: .\src\templates\about.html:57
+#: .\src\templates\about.html:55
 msgid "that are engaging the public in research via citizen science activities"
 msgstr "som engagerar allmänheten i forskning"
 
-#: .\src\templates\about.html:58
+#: .\src\templates\about.html:56
 msgid "Training resources and materials citizen science as a practice"
 msgstr "Resurser för att utöva medborgarforskning i praktiken"
 
-#: .\src\templates\about.html:59
+#: .\src\templates\about.html:57
 msgid ""
 "Organisations that are involved in citizen science projects and research"
-msgstr "Organisationer som är involverade i medborgarforskning."
+msgstr ""
+"Organisationer som är involverade i medborgarforskning."
 
-#: .\src\templates\about.html:60
+#: .\src\templates\about.html:58
 msgid "an"
 msgstr "ett"
 
-#: .\src\templates\about.html:60
+#: .\src\templates\about.html:58
 msgid "calendar"
 msgstr "för evenemang"
 
-#: .\src\templates\about.html:60
+#: .\src\templates\about.html:58
 msgid "and"
 msgstr "och"
 
-#: .\src\templates\about.html:61
+#: .\src\templates\about.html:59
 msgid ""
 "Community Forums for questions, conversations, and collaboration with the "
 "rest of the community."
 msgstr "forum för frågor, diskussion och samarbete med andra användare."
 
-#: .\src\templates\about.html:65
+#: .\src\templates\about.html:63
 msgid ""
 "Spotted something missing? You can add your own profiles for Resources, "
 "Projects, and Training via the +ADD button in the top menu. Have a "
@@ -1667,19 +1724,19 @@ msgstr ""
 "träningsmaterial med Lägg till-knappen i sidans toppmeny. Om du har några "
 "förslag eller synpunkter får du gärna dela dem i forumet, eller via"
 
-#: .\src\templates\about.html:65
+#: .\src\templates\about.html:63
 msgid "contact"
 msgstr "kontaktsidorna"
 
-#: .\src\templates\about.html:65
+#: .\src\templates\about.html:63
 msgid "section"
-msgstr ""
+msgstr "avdelning"
 
-#: .\src\templates\about.html:74
+#: .\src\templates\about.html:72
 msgid "The Project"
 msgstr "Projektet"
 
-#: .\src\templates\about.html:78
+#: .\src\templates\about.html:76
 msgid ""
 "The EU-Citizen.Science project has been funded by the European Commission "
 "Horizon 2020 programme, in the Science with and for Society programme of "
@@ -1693,11 +1750,11 @@ msgstr ""
 "Society (SwafS). Vi har ett ambitiöst uppdrag – att bli referenspunkten för "
 "medborgarforskning i Europa."
 
-#: .\src\templates\about.html:83
+#: .\src\templates\about.html:81
 msgid "Our Vision"
 msgstr "Vår vision"
 
-#: .\src\templates\about.html:84
+#: .\src\templates\about.html:82
 msgid ""
 "is that Citizen Science becomes an appreciated and widely established means "
 "for the democratization of science in Europe"
@@ -1705,33 +1762,34 @@ msgstr ""
 "är att medborgarforskning ska bli en uppskattad och etablerad metod för att "
 "samskapa vetenskaplig kunskap i Europa."
 
-#: .\src\templates\about.html:91
+#: .\src\templates\about.html:89
 msgid "Our Core Mission"
 msgstr "Vårt kärnuppdrag"
 
-#: .\src\templates\about.html:92
+#: .\src\templates\about.html:90
 msgid ""
 "is to become the European reference point for CS through cross-network "
 "knowledge sharing for citizen science participants, practitioners, "
 "researchers, policy makers and society across Europe"
-msgstr "är att bli att bli referenspunkten för medborgarforskning i Europa"
+msgstr ""
+"är att bli att bli referenspunkten för medborgarforskning i Europa"
 
-#: .\src\templates\about.html:99
+#: .\src\templates\about.html:97
 msgid "Objective 1: Establish"
 msgstr "Mål 1: Etablera"
 
-#: .\src\templates\about.html:100
+#: .\src\templates\about.html:98
 msgid ""
 "EU-Citizen.Science as the knowledge and community hub for high-quality CS "
 "exchange and learning in Europe"
 msgstr ""
 "EU-Citizen.Science som navet för högkvalitativ medborgarforskning i Europa"
 
-#: .\src\templates\about.html:107
+#: .\src\templates\about.html:105
 msgid "Objective 2: Consolidate"
 msgstr "Mål 2: Sammanföra"
 
-#: .\src\templates\about.html:108
+#: .\src\templates\about.html:106
 msgid ""
 "the CS knowledge base and celebrate outstanding practices and state of the "
 "art in CS in Europe"
@@ -1739,11 +1797,11 @@ msgstr ""
 "den breda kunskapen om medborgarforskning som finns i Europa, och "
 "uppmärksamma ledande, inspirerande exempel på området"
 
-#: .\src\templates\about.html:115
+#: .\src\templates\about.html:113
 msgid "Objective 3: Empower"
 msgstr "Mål 3: Stärka"
 
-#: .\src\templates\about.html:116
+#: .\src\templates\about.html:114
 msgid ""
 "diverse stakeholders to become citizen scientists, start CS initiatives, and "
 "implement CS approaches professionally"
@@ -1751,11 +1809,11 @@ msgstr ""
 "individer i olika delar av samhället till att bli medborgarforskare, starta "
 "egna projekt och använda sig av medborgarforskning i sina yrken"
 
-#: .\src\templates\about.html:123
+#: .\src\templates\about.html:121
 msgid "Objective 4: Explore"
 msgstr "Mål 4: Utforska"
 
-#: .\src\templates\about.html:124
+#: .\src\templates\about.html:122
 msgid ""
 "new pathways for participatory governance, by strengthening links between CS "
 "and policy making"
@@ -1763,11 +1821,11 @@ msgstr ""
 "nya vägar till delaktighet i samhällets styrning, genom att stärka banden "
 "mellan medborgarforskning och beslutsfattande"
 
-#: .\src\templates\about.html:131
+#: .\src\templates\about.html:129
 msgid "Objective 5: Advance"
 msgstr "Mål 5: Lyfta"
 
-#: .\src\templates\about.html:132
+#: .\src\templates\about.html:130
 msgid ""
 "CS into the mainstream of public engagement, science communication and "
 "education"
@@ -1775,7 +1833,7 @@ msgstr ""
 "medborgarforskning till att bli en självklar del av samverkan, "
 "forskningskommunikation och utbildning"
 
-#: .\src\templates\about.html:139
+#: .\src\templates\about.html:137
 msgid ""
 "In keeping with our mission, we aim to engage equally with CS participants, "
 "practitioners, researchers, policy makers and society as a whole throughout "
@@ -1791,11 +1849,11 @@ msgstr ""
 "och hur vi tillsammans kan bygga en engagerad gemenskap bland portalens "
 "användare."
 
-#: .\src\templates\about.html:149
+#: .\src\templates\about.html:147
 msgid "The Team"
 msgstr "Projektgruppen"
 
-#: .\src\templates\about.html:152
+#: .\src\templates\about.html:150
 msgid ""
 "The EU-Citizen.Science consortium consists of 14 partners and 9 third "
 "parties from across 14 European member states, as well as other project "
@@ -1808,19 +1866,19 @@ msgstr ""
 "representerar tillsammans en mängd olika aktörer inom medborgarforskning, "
 "såsom lärosäten, ideella organisationer och myndigheter."
 
-#: .\src\templates\about.html:161
+#: .\src\templates\about.html:159
 msgid "Consortium partners"
 msgstr "Projektpartners"
 
-#: .\src\templates\about.html:218
+#: .\src\templates\about.html:216
 msgid "Third party partners"
 msgstr "Fristående partners"
 
-#: .\src\templates\about.html:259
+#: .\src\templates\about.html:257
 msgid "Citizen Science"
 msgstr "Medborgarforskning"
 
-#: .\src\templates\about.html:262
+#: .\src\templates\about.html:260
 msgid ""
 "Citizen science actively involves the public in scientific research that "
 "generates new knowledge or understanding, and thus has the potential to "
@@ -1838,7 +1896,7 @@ msgstr ""
 "forskning, innovation och utveckling av evidensbaserat beslutsfattande, på "
 "lokal, nationell och europeisk nivå."
 
-#: .\src\templates\about.html:263
+#: .\src\templates\about.html:261
 msgid ""
 "Citizen science is a flexible concept which can be adapted and applied "
 "within diverse situations and disciplines. In order to set out some of the "
@@ -1850,22 +1908,22 @@ msgstr ""
 "av de grundläggande villkoren för bra medborgarforskning, utvecklades "
 "följande"
 
-#: .\src\templates\about.html:263
+#: .\src\templates\about.html:261
 msgid "10 Principles of Citizen Science"
 msgstr "tio principer för medborgarforskning"
 
-#: .\src\templates\about.html:263
+#: .\src\templates\about.html:261
 msgid ""
 "were developed by the ‘Sharing best practice and building capacity’ working "
 "group of the"
 msgstr ""
 "av arbetsgruppen 'Sharing best practice and building capacity' inom den "
 
-#: .\src\templates\about.html:263
+#: .\src\templates\about.html:261
 msgid "European Citizen Science Association"
 msgstr "europeiska föreningen för medborgarforskning (ECSA)"
 
-#: .\src\templates\about.html:263
+#: .\src\templates\about.html:261
 msgid ""
 "led by the Natural History Museum London with input from many members of the "
 "Association."
@@ -1873,11 +1931,11 @@ msgstr ""
 "under ledning av Londons naturhistoriska museum, och med bidrag från många "
 "av föreningens medlemmar."
 
-#: .\src\templates\about.html:271
+#: .\src\templates\about.html:269
 msgid "Ten principles of citizen science"
 msgstr "Tio principer för medborgarforskning"
 
-#: .\src\templates\about.html:275
+#: .\src\templates\about.html:273
 msgid ""
 "Citizen science projects actively involve citizens in scientific endeavour "
 "that generates new knowledge or understanding. Citizens may act as "
@@ -1889,11 +1947,11 @@ msgstr ""
 "agera som bidragsgivare, samarbetspartners eller som projektledare och fylla "
 "en betydelsefull roll i projektet."
 
-#: .\src\templates\about.html:276
+#: .\src\templates\about.html:274
 msgid "Citizen science projects have a genuine science outcome."
 msgstr "Medborgarforskningsprojekt genererar vetenskapliga resultat. "
 
-#: .\src\templates\about.html:276
+#: .\src\templates\about.html:274
 msgid ""
 "For example, answering a research question or informing conservation action, "
 "management decisions or environmental policy."
@@ -1901,7 +1959,7 @@ msgstr ""
 "Resultaten kan till exempel bestå i att besvara en forskningsfråga, ge "
 "underlag för miljövårdande åtgärder eller miljöpolicy."
 
-#: .\src\templates\about.html:277
+#: .\src\templates\about.html:275
 msgid ""
 "Both the professional scientists and the citizen scientists benefit from "
 "taking part."
@@ -1909,7 +1967,7 @@ msgstr ""
 "Medborgarforskningsprojekt ger nytta både för de professionella forskarna "
 "och för medborgarforskarna."
 
-#: .\src\templates\about.html:277
+#: .\src\templates\about.html:275
 msgid ""
 "Benefits may include the publication of research outputs, learning "
 "opportunities, personal enjoyment, social benefits, satisfaction through "
@@ -1921,7 +1979,7 @@ msgstr ""
 "för att angripa lokala, nationella och internationella frågor, och "
 "härigenom, en möjlighet att påverka politiska beslut."
 
-#: .\src\templates\about.html:278
+#: .\src\templates\about.html:276
 msgid ""
 "Citizen scientists may, if they wish, participate in multiple stages of the "
 "scientific process."
@@ -1929,7 +1987,7 @@ msgstr ""
 "Medborgarforskare kan, om de vill, medverka i flera delar av den "
 "vetenskapliga processen i projektet."
 
-#: .\src\templates\about.html:278
+#: .\src\templates\about.html:276
 msgid ""
 "This may include developing the research question, designing the method, "
 "gathering and analysing data, and communicating the results."
@@ -1937,11 +1995,11 @@ msgstr ""
 "Detta kan innebära att utveckla forskningsfrågan, utforma metoden, samla in "
 "och analysera data och att kommunicera resultaten."
 
-#: .\src\templates\about.html:279
+#: .\src\templates\about.html:277
 msgid "Citizen scientists receive feedback from the project."
 msgstr "Medborgarforskare får återkoppling från projektet."
 
-#: .\src\templates\about.html:279
+#: .\src\templates\about.html:277
 msgid ""
 "For example, how their data are being used and what the research, policy or "
 "societal outcomes are."
@@ -1949,7 +2007,7 @@ msgstr ""
 "till exempel om hur insamlad data används och vilka vetenskapliga, politiska "
 "eller samhälleliga resultat de leder till."
 
-#: .\src\templates\about.html:280
+#: .\src\templates\about.html:278
 msgid ""
 "Citizen science is considered a research approach like any other, with "
 "limitations and biases that should be considered and controlled for."
@@ -1957,7 +2015,7 @@ msgstr ""
 "Medborgarforskning ses som en forskningsmetod bland många andra, med "
 "begränsningar och bias som bör beaktas och kontrolleras."
 
-#: .\src\templates\about.html:280
+#: .\src\templates\about.html:278
 msgid ""
 "However unlike traditional research approaches, citizen science provides "
 "opportunity for greater public engagement and democratisation of science."
@@ -1966,7 +2024,7 @@ msgstr ""
 "medborgarforskning möjligheter till större engagemang hos allmänheten och en "
 "demokratisering av vetenskapen."
 
-#: .\src\templates\about.html:281
+#: .\src\templates\about.html:279
 msgid ""
 "Citizen science project data and meta-data are made publicly available and "
 "where possible, results are published in an open access format."
@@ -1974,7 +2032,7 @@ msgstr ""
 "Data och metadata från medborgarforskningsprojekt görs allmänt tillgängliga "
 "och resultaten publiceras (när så är möjligt) i ett open access-format."
 
-#: .\src\templates\about.html:281
+#: .\src\templates\about.html:279
 msgid ""
 "Data sharing may occur during or after the project, unless there are "
 "security or privacy concerns that prevent this."
@@ -1982,14 +2040,14 @@ msgstr ""
 "Datadelning kan göras under eller efter projektet, såvida det inte finns "
 "säkerhets- eller integritetsskäl som förhindrar detta."
 
-#: .\src\templates\about.html:282
+#: .\src\templates\about.html:280
 msgid ""
 "Citizen scientists are acknowledged in project results and publications."
 msgstr ""
 "Deltagarnas bidrag i medborgarforskningsprojekt ska uppmärksammas i "
 "projektets resultat och i publikationer."
 
-#: .\src\templates\about.html:283
+#: .\src\templates\about.html:281
 msgid ""
 "Citizen science programmes are evaluated for their scientific output, data "
 "quality, participant experience and wider societal or policy impact."
@@ -1998,7 +2056,7 @@ msgstr ""
 "resultat, datakvalitet, deltagarnas erfarenheter och bredare samhälleliga "
 "eller politiska effekter."
 
-#: .\src\templates\about.html:284
+#: .\src\templates\about.html:282
 msgid ""
 "The leaders of citizen science projects take into consideration legal and "
 "ethical issues surrounding copyright, intellectual property, data sharing "
@@ -2011,8 +2069,8 @@ msgstr ""
 "miljöpåverkan av aktiviteter inom projektets ramar."
 
 #: .\src\templates\base.html:74 .\src\templates\base2.html:68
-#: .\src\templates\base_forms.html:51 .\src\templates\base_forum.html:92
-#: .\src\templates\base_r2.html:74
+#: .\src\templates\base_forms.html:51 .\src\templates\base_forum.html:80
+#: .\src\templates\base_r2.html:169
 msgid "Admin"
 msgstr "Admin"
 
@@ -2021,7 +2079,7 @@ msgid "Profile"
 msgstr "Profil"
 
 #: .\src\templates\base.html:85 .\src\templates\base2.html:70
-#: .\src\templates\base_forum.html:94 .\src\templates\base_r2.html:76
+#: .\src\templates\base_forum.html:82 .\src\templates\base_r2.html:171
 msgid "Logout"
 msgstr "Logga ut"
 
@@ -2034,35 +2092,37 @@ msgid "Connect with us on"
 msgstr "Följ oss på"
 
 #: .\src\templates\base2.html:56 .\src\templates\base3.html:49
+#: .\src\templates\base_forum.html:66 .\src\templates\base_r2.html:153
 msgid "LOGIN"
 msgstr "LOGGA IN"
 
 #: .\src\templates\base2.html:57 .\src\templates\base3.html:50
+#: .\src\templates\base_forum.html:67
 msgid "SIGN UP"
 msgstr "SKAPA KONTO"
 
-#: .\src\templates\base2.html:61 .\src\templates\base_forum.html:84
-#: .\src\templates\base_r2.html:66
+#: .\src\templates\base2.html:61 .\src\templates\base_forum.html:73
+#: .\src\templates\base_r2.html:161
 msgid "My Profile"
 msgstr "Min profil"
 
-#: .\src\templates\base2.html:62 .\src\templates\base_forum.html:85
-#: .\src\templates\base_r2.html:67
+#: .\src\templates\base2.html:62 .\src\templates\base_forum.html:74
+#: .\src\templates\base_r2.html:162
 msgid "My organisations"
 msgstr "Mina organisationer"
 
-#: .\src\templates\base2.html:63 .\src\templates\base_forum.html:86
-#: .\src\templates\base_r2.html:68
+#: .\src\templates\base2.html:63 .\src\templates\base_forum.html:75
+#: .\src\templates\base_r2.html:163
 msgid "Submitted projects"
 msgstr "Inskickade projekt"
 
-#: .\src\templates\base2.html:64 .\src\templates\base_forum.html:87
-#: .\src\templates\base_r2.html:69
+#: .\src\templates\base2.html:64 .\src\templates\base_forum.html:76
+#: .\src\templates\base_r2.html:164
 msgid "Submitted resources"
 msgstr "Inskickade resurser"
 
-#: .\src\templates\base2.html:66 .\src\templates\base_forum.html:89
-#: .\src\templates\base_r2.html:71
+#: .\src\templates\base2.html:66 .\src\templates\base_forum.html:78
+#: .\src\templates\base_r2.html:166
 msgid "Resources library"
 msgstr "Resursbibliotek"
 
@@ -2078,8 +2138,7 @@ msgstr "LOGGA UT"
 msgid "ADMIN"
 msgstr "ADMIN"
 
-#: .\src\templates\base_forms.html:43 .\src\templates\base_forum.html:76
-#: .\src\templates\base_r2.html:58
+#: .\src\templates\base_forms.html:43
 msgid "Login"
 msgstr "Logga in"
 
@@ -2091,37 +2150,14 @@ msgstr "profil"
 msgid "logout"
 msgstr "logga ut"
 
-#: .\src\templates\base_forum.html:66 .\src\templates\base_r2.html:48
-msgid "Blog"
-msgstr ""
-
-#: .\src\templates\base_forum.html:68 .\src\templates\base_r2.html:50
-msgid "Forum"
-msgstr ""
-
-#: .\src\templates\base_forum.html:69 .\src\templates\base_r2.html:51
-msgid "Moocs"
-msgstr ""
-
-#: .\src\templates\base_forum.html:70 .\src\templates\base_r2.html:52
-msgid "OpenCall"
-msgstr ""
-
-#: .\src\templates\base_forum.html:77 .\src\templates\base_r2.html:59
-msgid "Signup"
-msgstr "Skapa konto"
-
-#: .\src\templates\base_forum.html:132 .\src\templates\base_r2.html:114
-msgid "Add"
-msgstr ""
-
-#: .\src\templates\base_forum.html:192 .\src\templates\base_r2.html:177
+#: .\src\templates\base_forum.html:62 .\src\templates\base_forum.html:148
+#: .\src\templates\base_r2.html:149 .\src\templates\base_r2.html:244
 msgid "FORUM"
 msgstr "FORUM"
 
-#: .\src\templates\call.html:10
-msgid "EU-Citizen.Science call"
-msgstr ""
+#: .\src\templates\base_r2.html:154
+msgid "SIGNUP"
+msgstr "SKAPA KONTO"
 
 #: .\src\templates\criteria.html:10
 msgid "Quality criteria"
@@ -2138,16 +2174,15 @@ msgstr ""
 #: .\src\templates\curated.html:28
 msgid ""
 "to help you get started with designing and launching your own citizen "
-"science project or simply learn about citizen science, categorised across "
-"the project lifecycle."
+"science project, categorised across the project lifecycle."
 msgstr ""
-
+"för att hjälpa dig att komma igång med ditt eget medborgarforskningsprojekt."
 
 #: .\src\templates\faq.html:20
 msgid "Frequently Asked Questions"
 msgstr "Vanliga frågor och svar"
 
-#: .\src\templates\home.html:25
+#: .\src\templates\home.html:31
 msgid ""
 "Welcome to the platform for sharing Citizen Science projects, resources, "
 "tools, and training"
@@ -2155,49 +2190,42 @@ msgstr ""
 "Välkommen till portalen för allt som har med medborgarforskning att göra.Här "
 "kan du dela och ta del av projekt, resurser, verktyg och träningsmaterial."
 
-#: .\src\templates\home.html:34
+#: .\src\templates\home.html:41
 msgid ""
 "Search for citizen science resources, projects, tools, training, and more...."
 msgstr ""
 
-#: .\src\templates\home.html:50
-msgid "Do you want to help with translation?"
-msgstr ""
-
-#: .\src\templates\home.html:50
-msgid " Please click here"
-msgstr ""
-
-#: .\src\templates\home.html:71
-msgid "in Training"
-msgstr "bland träningsmaterial"
-
-#: .\src\templates\home.html:72 .\src\templates\home.html:82
-#: .\src\templates\home.html:92 .\src\templates\home.html:102
-msgid "here"
-msgstr "här"
-
-#: .\src\templates\home.html:72 .\src\templates\home.html:82
-#: .\src\templates\home.html:92 .\src\templates\home.html:102
-msgid "to see all of them"
-msgstr "för att se samtliga profiler"
-
-#: .\src\templates\home.html:81
+#: .\src\templates\home.html:66
 msgid "in Projects"
 msgstr "bland projekt"
 
-#: .\src\templates\home.html:91
+#: .\src\templates\home.html:67 .\src\templates\home.html:77
+#: .\src\templates\home.html:87 .\src\templates\home.html:97
+msgid "here"
+msgstr "här"
+
+#: .\src\templates\home.html:67 .\src\templates\home.html:77
+#: .\src\templates\home.html:87 .\src\templates\home.html:97
+msgid "to see all of them"
+msgstr "för att se samtliga profiler"
+
+#: .\src\templates\home.html:76
 msgid "in Resources"
 msgstr "bland resurser"
 
-#: .\src\templates\home.html:101
+#: .\src\templates\home.html:86
+msgid "in Training"
+msgstr "bland träningsmaterial"
+
+#: .\src\templates\home.html:96
 msgid "in Organisations"
 msgstr "bland organisationer"
 
 #: .\src\templates\modalinfo.html:8
 msgid ""
 "Select the form for the content profile you would like to add to the platform"
-msgstr "Välj formulär för profilen som du vill lägga till på portalen"
+msgstr ""
+"Välj formulär för profilen som du vill lägga till på portalen"
 
 #: .\src\templates\modalinfo.html:14 .\src\templates\projects_cards.html:34
 msgid "Project"
@@ -2228,11 +2256,11 @@ msgstr "Skapa en profil för din organisation"
 
 #: .\src\templates\modalinfo.html:23
 msgid "Event"
-msgstr ""
+msgstr "Evenemang"
 
 #: .\src\templates\modalinfo.html:24
 msgid "Create an Event"
-msgstr ""
+msgstr "Skapa ett evenemang"
 
 #: .\src\templates\moderation.html:10
 msgid "The moderation process"
@@ -2389,7 +2417,7 @@ msgid ""
 "We've emailed you instructions for setting your password to the email "
 "address you submitted. You should be receiving it shortly."
 msgstr ""
-"Vi har nu mailat instruktioner för hur du återställer lösenordet. Du bör "
+"Vi har nu mejlat instruktioner för hur du återställer lösenordet. Du bör "
 "inom kort få meddelandet till den e-postadress som du angav."
 
 #: .\src\templates\registration\password_reset_form.html:16
@@ -2415,13 +2443,6 @@ msgstr "Uppmärksammat"
 #: .\src\templates\resources_cards.html:55
 msgid "Last updated"
 msgstr "Senast uppdaterad"
-
-#: .\src\templates\translations.html:10
-msgid "Translations"
-msgstr ""
-
-#~ msgid "SIGNUP"
-#~ msgstr "SKAPA KONTO"
 
 #~ msgid "omdöme"
 #~ msgstr "lämna ett omdöme"

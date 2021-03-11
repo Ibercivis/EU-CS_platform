@@ -17,7 +17,7 @@ from PIL import Image
 from itertools import chain
 from reviews.models import Review
 from .forms import ProjectForm, CustomFieldFormset, ProjectPermissionForm
-from .models import Project, Topic,ParticipationTask, Status, Keyword, ApprovedProjects, \
+from .models import Project, Topic, ParticipationTask, Status, Keyword, ApprovedProjects, \
  FollowedProjects, FundingBody, CustomField, ProjectPermission, OriginDatabase, GeographicExtend, UnApprovedProjects
 from organisations.models import Organisation
 import csv
@@ -37,10 +37,10 @@ def new_project(request):
         form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
             images = setImages(request, form)
-            form.save(request, images, [],mainOrganisationFixed)
+            form.save(request, images, [], mainOrganisationFixed)
             messages.success(request, _('Project added correctly'))
 
-            subject = 'New project submitted'            
+            subject = 'New project submitted'          
             message = render_to_string('emails/new_project.html', {})
             to = settings.EMAIL_RECIPIENT_LIST
             to.append(user.email)

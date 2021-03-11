@@ -9,8 +9,10 @@ from organisations.models import Organisation
 
 class InterestArea(models.Model):
     interestArea = models.TextField()
-    def __str__(self):        
+
+    def __str__(self):
         return f'{self.interestArea}'
+
 
 class BaseProfile(models.Model):
     user = models.OneToOneField(
