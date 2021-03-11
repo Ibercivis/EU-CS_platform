@@ -23,14 +23,15 @@
         {% endif %}
         {% endfor %}
       </div>
-
     </a>
 
     <div class="card-body">
       <h6 class="card-title">
         <div class="col-12 {%if rsc.isTrainingResource %} colorblue {% else %} colorgreen {% endif %} pl-0 mb-3">
           <i class="fas fa-book"></i>{% if rsc.featured %} {% trans "Featured" %} {% endif %}
+	  {% if rsc.own %}EU-citizen.science{% endif %}
           {%if rsc.isTrainingResource %} {% trans "Training" %} {% else %} {% trans "Resource" %} {% endif %}
+
         </div>
         <a class="card-link"
         href="{% if isTrainingResource %}/training_resource/{{rsc.id}}{% else %}/resource/{{rsc.id}}{% endif %}"
