@@ -293,6 +293,6 @@ class ProjectSerializer(serializers.ModelSerializer):
         model = Project
         fields = ['id', 'name', 'aim', 'description', 'keywords', 'status', 'topic', 'start_date', 'end_date', 'url',
          'mainOrganisation', 'organisation',
-         'latitude', 'longitude', 'country', 'author', 'author_email', 'image1', 'imageCredit1','image2', 'imageCredit2',
+         'latitude', 'longitude', 'country', 'image1', 'imageCredit1','image2', 'imageCredit2',
          'image3', 'imageCredit3','host', 'howToParticipate', 'doingAtHome', 'equipment', 'fundingBody', 'fundingProgram',
          'originDatabase','originURL', 'originUID', 'featured', 'customField', 'dateCreated', 'origin']
