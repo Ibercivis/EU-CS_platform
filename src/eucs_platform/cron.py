@@ -31,6 +31,7 @@ class ExpiredUsersCronJob(CronJobBase):
                     print("Not yet")
 
 class NewForumResponseCronJob(CronJobBase):
+    print("running messages cron")
     RUN_EVERY_MINS = 1
 
     schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
@@ -38,8 +39,11 @@ class NewForumResponseCronJob(CronJobBase):
 
     def do(self):
         this_hour = timezone.now()
-        one_hour_before = this_hour + timedelta(hours=-1)
+        one_hour_before = this_hour + timedelta(minutes=-2)
         topics = Topic.objects.get_queryset().filter(status=0).filter(updated__range=(one_hour_before, this_hour))
+        print(topics)
+        print(this_hour)
+        print(one_hour_before)
         for topic in topics:            
             owner = topic.poster_id
             user = User.objects.get(pk=owner)
@@ -56,6 +60,7 @@ class NewForumResponseCronJob(CronJobBase):
             )
             email.content_subtype = "html"
             email.send()
+            print("email sent to"+str(to_email))
 
 
             users = User.objects.get_queryset().filter(~Q(pk=owner))

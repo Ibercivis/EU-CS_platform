@@ -45,7 +45,7 @@ def new_organisation(request):
                 resized_image.save(image_path)
             form.save(request, '/' + image_path)
             messages.success(request, _('Organisation added correctly'))
-            subject = 'New organisation submitted'            
+            subject = 'New organisation submitted'
             message = render_to_string('emails/new_organisation.html', {})
             email = EmailMessage(subject, message, to=[settings.EMAIL_RECIPIENT_LIST, request.user.email])
             email.content_subtype = "html"
@@ -54,7 +54,7 @@ def new_organisation(request):
         else:
             print(form.errors)
 
-    return render(request, 'new_organisation.html', {'form': form, 'user':user})
+    return render(request, 'new_organisation.html', {'form': form, 'user': user})
 
 
 
