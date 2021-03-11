@@ -324,6 +324,8 @@ EMAIL_RECIPIENT_LIST = [
     "Claudia.FaboCartas@mfn.berlin"
 ]
 
+HOST =  env("HOST")
+
 SITE_ID = 1
 REVIEW_PUBLISH_UNMODERATED = True
 

@@ -8,7 +8,7 @@
 Hi {{ user.name }},
 Thank you for signing up to become a member of the EU-Citizen.Science community. Please verify that this email address is correct, and that you entered it when signing up to join the community.
 
-Please click on the link to confirm your registration in <a href="https://eu-citizen.science{% url 'accounts:activate' uidb64=uid token=token %}">EU-CITIZEN.SCIENCE</a>.<br/>
+Please click on the link to confirm your registration in <a href="{{domain}}{% url 'accounts:activate' uidb64=uid token=token %}">EU-CITIZEN.SCIENCE</a>.<br/>
 
 If you did not register to join the EU-Citizen.Science community, please ignore this email or reply to let us know.
 

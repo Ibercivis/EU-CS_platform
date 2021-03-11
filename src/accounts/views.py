@@ -65,17 +65,17 @@ class SignUpView(
         profile = get_object_or_404(Profile, user_id=user.id)
         profile.orcid = orcid
         profile.save()
-        current_site = get_current_site(self.request)
+        #current_site = get_current_site(self.request)
         mail_subject = 'Activate your EU-Citizen.Science account.'
         message = render_to_string('accounts/acc_active_email.html', {
             'user': user,
-            'domain': current_site.domain,
+            'domain': settings.HOST,
             'uid':urlsafe_base64_encode(force_bytes(user.pk)),
             'token':account_activation_token.make_token(user),
         })
         html_message = render_to_string('accounts/acc_active_email.html', {
             'user': user,
-            'domain': current_site.domain,
+            'domain': settings.HOST,
             'uid':urlsafe_base64_encode(force_bytes(user.pk)),
             'token':account_activation_token.make_token(user),
         })
@@ -177,6 +177,7 @@ class ActivationEmail(BaseEmailMessage):
         context["uid"] = utils.encode_uid(user.pk)
         context["token"] = account_activation_token.make_token(user)
         context["url"] = settings.ACTIVATION_URL.format(**context)
+        context["domain"] = settings.HOST
         return context
 
 
