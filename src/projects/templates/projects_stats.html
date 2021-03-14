@@ -1,0 +1,55 @@
+<html>
+	<body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-colorschemes"></script>
+<script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
+<canvas id="pPerCountryChart" width="400" height="400"></canvas>
+<canvas id="pPerTopicChart" width="400" height="400"></canvas>
+
+<script>
+var ctx = document.getElementById('pPerCountryChart').getContext('2d');
+var pPerCountryChar = new Chart(ctx, {
+    type: 'bar',
+    data: {
+	labels: [{% for ppc in pPerCountry %}"{{ppc.country}}", {% endfor%}],
+        datasets: [{
+            label: '# of projects by country',
+	    data: [{% for ppc in pPerCountry %} {{ppc.count}}, {% endfor %}],
+            borderWidth: 1
+        }]
+    },
+    options: {
+	plugins: {
+            colorschemes: {
+                scheme: 'brewer.Paired12'
+            }
+        }
+    }
+});
+
+var ctx2 = document.getElementById('pPerTopicChart').getContext('2d');
+var pPerTopicChar = new Chart(ctx2, {
+    type: 'pie',
+    data: {
+	labels: [{% for ppt in pPerTopic %} "{{ppt.topic__topic}}", {% endfor%}],
+        datasets: [{
+            label: '# of projects by topic',
+	    data: [{% for ppt in pPerTopic %} {{ppt.count}}, {% endfor %}],
+        }]
+    },
+    options: {
+	 plugins: {
+            colorschemes: {
+                scheme: 'tableau.HueCircle19'
+            },
+            labels: {
+		    render: 'label',
+		    position: 'outside'
+	    }
+        },
+	cutoutPercentage: 50
+    }
+});
+
+</script>
+	</body>

@@ -9,13 +9,14 @@ from django.core.mail import EmailMessage
 from django.utils import formats
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
-from django.db.models import Q, Avg
+from django.db.models import Q, Avg, Count
 from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
 from datetime import datetime
 from PIL import Image
 from itertools import chain
 from reviews.models import Review
+from django_countries import countries
 from .forms import ProjectForm, CustomFieldFormset, ProjectPermissionForm
 from .models import Project, Topic, ParticipationTask, Status, Keyword, ApprovedProjects, \
  FollowedProjects, FundingBody, CustomField, ProjectPermission, OriginDatabase, GeographicExtend, UnApprovedProjects
@@ -69,8 +70,8 @@ def projects(request):
     filters = {'keywords': '', 'topic': '', 'status': 0, 'country': '', 'host': '', 'approvedCheck': '', 'doingAtHome': ''}
 
     if request.GET.get('keywords'):
-        projects = projects.filter( Q(name__icontains = request.GET['keywords']) |
-                                    Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
+        projects = projects.filter(Q(name__icontains=request.GET['keywords']) |
+                                    Q(keywords__keyword__icontains=request.GET['keywords'])).distinct()
         filters['keywords'] = request.GET['keywords']
 
     projects = applyFilters(request, projects)
@@ -637,3 +638,15 @@ def getKeywordsSelector(request):
         response['keywords'] = '<select id="id_keywords" class="select form-control" disabled></select>'
 
     return JsonResponse(response)
+
+def projects_stats(request):
+    pPerCountry = Project.objects.values('country').annotate(count=Count('country')).order_by('-count')
+    for ppc in pPerCountry:
+        if ppc['country'] !='':
+            ppc['country']=(dict(countries)[ppc['country']])
+        else:
+            ppc['country']='No country defined'
+
+    pPerTopic = Project.objects.values('topic__topic').annotate(count=Count('topic')).order_by('-count')
+    print(pPerTopic)
+    return render(request, 'projects_stats.html',{'pPerCountry':pPerCountry,'pPerTopic':pPerTopic})
