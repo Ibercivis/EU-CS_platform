@@ -33,7 +33,7 @@ class SuccessPage(generic.TemplateView):
 
 
 def submitterContactView(request, group, pk):
-    referenceURL = "https://eu-citizen.science/" + group + '/' + str(pk)
+    referenceURL = settings.HOST + '/' + group + '/' + str(pk)
     if request.method == 'GET':
         form = SubmitterContactForm()
     else:

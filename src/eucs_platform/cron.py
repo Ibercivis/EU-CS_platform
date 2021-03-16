@@ -3,6 +3,7 @@ from django.core.mail import EmailMessage
 from django_cron import CronJobBase, Schedule
 from django.contrib.auth import get_user_model
 from django.utils import timezone
+from django.conf import settings
 from django.shortcuts import get_object_or_404
 from datetime import datetime, timedelta
 from machina.apps.forum_conversation.models import Topic, Post
@@ -53,7 +54,7 @@ class NewForumResponseCronJob(CronJobBase):
             slug = '' + topic.slug + '-' + str(topic.id)
             forum = get_object_or_404(Forum, id=topic.forum_id)
             forum_slug = forum.slug + '-' + str(forum.id)
-            message = render_to_string('forum_emails/forum_answer.html', {'topic': topic, 'slug': slug, 'forum': forum_slug})
+            message = render_to_string('forum_emails/forum_answer.html', {'topic': topic, 'slug': slug, 'forum': forum_slug, "domain": settings.HOST})
             to_email = user.email
             email = EmailMessage(
                         mail_subject, message, to=[to_email]
@@ -76,7 +77,7 @@ class NewForumResponseCronJob(CronJobBase):
                             slug = '' + topic.slug + '-' + str(topic.id)
                             forum = get_object_or_404(Forum, id=topic.forum_id)
                             forum_slug = forum.slug + '-' + str(forum.id)
-                            message = render_to_string('forum_emails/forum_subscription_new_message.html', {'topic': topic, 'slug': slug, 'forum': forum_slug})
+                            message = render_to_string('forum_emails/forum_subscription_new_message.html', {'topic': topic, 'slug': slug, 'forum': forum_slug, "domain": settings.HOST})
                             to_email = user.email
                             email = EmailMessage(
                                         mail_subject, message, to=[to_email]

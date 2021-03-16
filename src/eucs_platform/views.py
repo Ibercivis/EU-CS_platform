@@ -10,6 +10,7 @@ from projects.views import getNamesKeywords
 from resources.views import getRscNamesKeywords
 from resources.models import Resource, ResourceGroup, ResourcesGrouped, ApprovedResources, SavedResources, Theme, Category
 from organisations.models import Organisation
+from django.conf import settings
 from blog.models import Post
 import random
 import json
@@ -176,7 +177,7 @@ def getTopicsResponded(request):
         forum = get_object_or_404(Forum, id=topic.forum_id)
         forum_slug = forum.slug + '-' + str(forum.id)
         topicshtml += '<p class="alert alert-info" role="alert">There is a response in a topic that you follow' \
-        ' <a href="https://eu-citizen.science/forum/forum/' + forum_slug + '/topic/'+ slug + '">%s</a></p>' % (
+        ' <a href="' + settings.HOST + '/forum/forum/' + forum_slug + '/topic/'+ slug + '">%s</a></p>' % (
                         topic.subject
                     )
 

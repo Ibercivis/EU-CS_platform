@@ -2,9 +2,9 @@
 
 
 {% block html_body  %}
-<p>We are pleased to let you know that <a href="https://eu-citizen.science/users/me/">your project profile</a> has received a review from a fellow community member. </p>
+<p>We are pleased to let you know that your project <a href="{{domain}}/project/{{id}}">{{name}}</a> has received a review from a fellow community member. </p>
 
-<p>You can read this review by going to your project profile in the Submitted projects <a href="https://eu-citizen.science/users/me/projects"> section in your Personal Area </a> (see the top-right of the platform menu).</p>
+<p>You can read this review by going to your project profile in the Submitted projects <a href="{{domain}}/users/me/projects"> section in your Personal Area </a> (see the top-right of the platform menu).</p>
 
 <p>You can also respond to this review on your project profile by using the review form yourself.</p>
 {% endblock html_body %}

@@ -2,7 +2,7 @@
 
 
 {% block html_body  %}
-<p>We are pleased to let you know that your resource profile has now been moderated and approved. It is now visible in platform search results, and is marked as moderated.</p>
+<p>We are pleased to let you know that your resource <a href="{{domain}}/resource/{{id}}">{{name}}</a> has now been moderated and approved. It is now visible in platform search results, and is marked as moderated.</p>
 
-<p>You can make updates or changes to this resource profile at any time, by going to the Submitted resources <a href="https://eu-citizen.science/users/me/resources"> section in your Personal Area </a> (see the top-right of the platform menu).</p>
+<p>You can make updates or changes to this resource profile at any time, by going to the Submitted resources <a href="{{domain}}/users/me/resources"> section in your Personal Area </a> (see the top-right of the platform menu).</p>
 {% endblock html_body %}
