@@ -1,9 +1,5 @@
 {% load i18n %}
 
-{% block subject %}
-{% blocktrans %}Welcome to EU-Citizen.Science.{% endblocktrans %}
-{% endblock %}
-
 {% block html_body %}
 {% autoescape off %}
 Hi {{ user.name }},
@@ -17,13 +13,13 @@ Hi {{ user.name }},
     <p>Welcome to the EU-Citizen.Science community! We are really pleased that you have joined us here.</p>
 
     <p>In this alpha release of the platform you can browse and search for
-        <a href="https://eu-citizen.science/{% url 'resources' %}">Resources</a> that are useful for planning
+        <a href="{{domain}}{% url 'resources' %}">Resources</a> that are useful for planning
         and running citizen science projects, and can explore a wide range of citizen science
-        <a href="https://eu-citizen.science/{% url 'projects' %}">Projects</a> to learn from others experience
+        <a href="{{domain}}{% url 'projects' %}">Projects</a> to learn from others experience
         and know-how. </p>
 
     <p>By signing up, you are now able to follow projects and add resources to your library, which you can find in your
-        <a href="https://eu-citizen.science/{% url 'profiles:show_self' %}">Personal Area</a>.</p>
+        <a href="{{domain}}{% url 'profiles:show_self' %}">Personal Area</a>.</p>
 
     <p>The success of the platform relies on the contribution of all of our members, so please do share your own best
         practice citizen science resources, and profile the citizen science projects that you have been involved with -

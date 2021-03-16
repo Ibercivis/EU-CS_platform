@@ -65,7 +65,6 @@ class SignUpView(
         profile = get_object_or_404(Profile, user_id=user.id)
         profile.orcid = orcid
         profile.save()
-        #current_site = get_current_site(self.request)
         mail_subject = 'Activate your EU-Citizen.Science account.'
         message = render_to_string('accounts/acc_active_email.html', {
             'user': user,
@@ -108,7 +107,8 @@ class PasswordResetView(authviews.PasswordResetView):
     success_url = reverse_lazy("accounts:password-reset-done")
     subject_template_name = "accounts/emails/password-reset-subject.txt"
     email_template_name = "accounts/emails/password-reset-email.html"
-    extra_email_context = { 'PASSWORD_RESET_TIMEOUT_HOURS': settings.PASSWORD_RESET_TIMEOUT_DAYS * 24}
+    extra_email_context = { 'PASSWORD_RESET_TIMEOUT_HOURS': settings.PASSWORD_RESET_TIMEOUT_DAYS * 24,
+                            'domain': settings.HOST }
 
 class PasswordResetDoneView(authviews.PasswordResetDoneView):
     template_name = "accounts/password-reset-done.html"
@@ -144,6 +144,7 @@ def activate(request, uidb64, token):
         mail_subject = 'Welcome to EU-Citizen.Science.'
         message = render_to_string('accounts/welcome_email.html', {
             'user': user,
+            "domain": settings.HOST,
         })
         to_email = user.email
         email = EmailMessage(
@@ -165,6 +166,7 @@ class PasswordResetEmail(BaseEmailMessage):
         user = context.get("user")
         context["uid"] = utils.encode_uid(user.pk)
         context["token"] = default_token_generator.make_token(user)
+        context["domain"] = settings.HOST
         context["url"] = settings.PASSWORD_RESET_CONFIRM_URL.format(**context)
         return context
 

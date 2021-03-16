@@ -2,7 +2,7 @@
 
 
 {% block html_body  %}
-<p>We are pleased to let you know that your project profile has now been moderated and approved. It is now visible in platform search results, and is marked as moderated.</p>
+<p>We are pleased to let you know that your project <a href="{{domain}}/project/{{id}}">{{name}}</a> has now been moderated and approved. It is now visible in platform search results, and is marked as moderated.</p>
 
-<p>You can make updates or changes to this project profile at any time, by going to the Submitted projects <a href="https://eu-citizen.science/users/me/projects"> section in your Personal Area </a> (see the top-right of the platform menu).</p>
+<p>You can make updates or changes to this project profile at any time, by going to the Submitted projects <a href="{{domain}}/users/me/projects"> section in your Personal Area </a> (see the top-right of the platform menu).</p>
 {% endblock html_body %}

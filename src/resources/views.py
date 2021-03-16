@@ -11,7 +11,6 @@ from django.conf import settings
 from django.db.models import Q, Avg
 from django.contrib import messages
 from django.contrib.auth import get_user_model
-from django.conf import settings
 from django.core.mail import EmailMessage
 from django.utils import formats
 from django.utils.translation import ugettext_lazy as _
@@ -124,7 +123,7 @@ def new_resource(request, isTrainingResource=False):
             if(isTrainingResource):
                 messages.success(request, _('Training resource added correctly'))
                 subject = 'New training resource submitted'            
-                message = render_to_string('emails/new_training_resource.html', {})
+                message = render_to_string('emails/new_training_resource.html', {"domain": settings.HOST})
                 email = EmailMessage(subject, message, to=to)
                 email.content_subtype = "html"
                 email.send()
@@ -132,7 +131,7 @@ def new_resource(request, isTrainingResource=False):
                         
             messages.success(request, _('Resource added correctly'))            
             subject = 'New resource submitted'            
-            message = render_to_string('emails/new_resource.html', {})
+            message = render_to_string('emails/new_resource.html', {"domain": settings.HOST})
             email = EmailMessage(subject, message, to=to)
             email.content_subtype = "html"
             email.send()
@@ -155,13 +154,13 @@ def resource(request, pk):
         to.append(resource.creator.email)
         if resource.isTrainingResource:
             subject = 'Your training resource has received a review'            
-            message = render_to_string('emails/training_resource_review.html', {})
+            message = render_to_string('emails/training_resource_review.html', {"domain": settings.HOST, "name": resource.name , "id": pk})
             email = EmailMessage(subject, message, to=to)
             email.content_subtype = "html"
             email.send()
         else:            
             subject = 'Your resource has received a review'            
-            message = render_to_string('emails/resource_review.html', {})
+            message = render_to_string('emails/resource_review.html', {"domain": settings.HOST, "name": resource.name , "id": pk})
             email = EmailMessage(subject, message, to=to)
             email.content_subtype = "html"
             email.send()
@@ -434,13 +433,13 @@ def setResourceApproved(id, approved):
         to.append(aResource.creator.email)
         if aResource.isTrainingResource:
             subject = 'Your training resource has been approved'            
-            message = render_to_string('emails/approved_training_resource.html', {})
+            message = render_to_string('emails/approved_training_resource.html', {"domain": settings.HOST, "name": aResource.name , "id": id})
             email = EmailMessage(subject, message, to=to)
             email.content_subtype = "html"
             email.send()
         else:
             subject = 'Your resource has been approved'            
-            message = render_to_string('emails/approved_resource.html', {})
+            message = render_to_string('emails/approved_resource.html', {"domain": settings.HOST, "name": aResource.name , "id": id})
             email = EmailMessage(subject, message, to=to)
             email.content_subtype = "html"
             email.send()
@@ -481,13 +480,13 @@ def saveResource(resourceId, userId, save):
         to.append(fResource.creator.email)
         if fResource.isTrainingResource:
             subject = 'Your training resource has been added to a library'            
-            message = render_to_string('emails/library_training_resource.html', {})
+            message = render_to_string('emails/library_training_resource.html', {"domain": settings.HOST, "name": fResource.name , "id": resourceId})
             email = EmailMessage(subject, message, to=to)
             email.content_subtype = "html"
             email.send()
         else:
             subject = 'Your resource has been added to a library'            
-            message = render_to_string('emails/library_resource.html', {})
+            message = render_to_string('emails/library_resource.html', {"domain": settings.HOST, "name": fResource.name , "id": resourceId})
             email = EmailMessage(subject, message, to=to)
             email.content_subtype = "html"
             email.send()

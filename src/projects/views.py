@@ -42,7 +42,7 @@ def new_project(request):
             messages.success(request, _('Project added correctly'))
 
             subject = 'New project submitted'          
-            message = render_to_string('emails/new_project.html', {})
+            message = render_to_string('emails/new_project.html', {"domain": settings.HOST})
             to = settings.EMAIL_RECIPIENT_LIST
             to.append(user.email)
             email = EmailMessage(subject, message, to=to)
@@ -135,7 +135,7 @@ def project(request, pk):
     if previous_page and 'review' in previous_page:
         #sendEmail
         subject = 'Your project has received a review'            
-        message = render_to_string('emails/project_review.html', {})
+        message = render_to_string('emails/project_review.html', {"domain": settings.HOST, "name": project.name , "id": pk})
         to = settings.EMAIL_RECIPIENT_LIST
         to.append(project.creator.email)
         email = EmailMessage(subject, message, to=to)
@@ -398,7 +398,7 @@ def setProjectApproved(id, approved):
         ApprovedProjects.objects.get_or_create(project=aProject)        
         #sendEmail
         subject = 'Your project has been approved'            
-        message = render_to_string('emails/approved_project.html', {})
+        message = render_to_string('emails/approved_project.html', {"domain": settings.HOST, "name": aProject.name , "id": id})
         to = settings.EMAIL_RECIPIENT_LIST
         to.append(aProject.creator.email)
         email = EmailMessage(subject, message, to=to)
@@ -466,7 +466,7 @@ def followProject(projectId, userId, follow):
         followedProject = FollowedProjects.objects.get_or_create(project=fProject, user=fUser)
         #sendEmail
         subject = 'Your project has been followed'            
-        message = render_to_string('emails/followed_project.html', {})
+        message = render_to_string('emails/followed_project.html', {"domain": settings.HOST, "name": fProject.name , "id": projectId})
         to = settings.EMAIL_RECIPIENT_LIST
         to.append(fProject.creator.email)
         email = EmailMessage(subject, message, to=to)
