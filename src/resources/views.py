@@ -148,8 +148,8 @@ def resource(request, pk):
     isTrainingResource = resource.isTrainingResource
     user = request.user
 
-    previous_page = request.META['HTTP_REFERER']
-    if 'review' in previous_page:
+    previous_page = request.META.get('HTTP_REFERER')
+    if previous_page and 'review' in previous_page:
         #sendEmail
         to = settings.EMAIL_RECIPIENT_LIST
         to.append(resource.creator.email)

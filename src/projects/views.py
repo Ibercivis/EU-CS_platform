@@ -130,8 +130,9 @@ def project(request, pk):
     project = get_object_or_404(Project, id=pk)
     users = getOtherUsers(project.creator)
 
-    previous_page = request.META['HTTP_REFERER']
-    if 'review' in previous_page:
+    
+    previous_page = request.META.get('HTTP_REFERER')
+    if previous_page and 'review' in previous_page:
         #sendEmail
         subject = 'Your project has received a review'            
         message = render_to_string('emails/project_review.html', {})
