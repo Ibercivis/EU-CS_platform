@@ -324,6 +324,13 @@ EMAIL_RECIPIENT_LIST = [
     "Claudia.FaboCartas@mfn.berlin"
 ]
 
+EMAIL_CONTACT_RECIPIENT_LIST = [
+    "eucitsci@mfn.berlin",
+    "frasanz@bifi.es",
+    "Claudia.FaboCartas@mfn.berlin",
+    "Antonella.Radicchi@mfn.berlin"
+]
+
 HOST =  env("HOST")
 
 SITE_ID = 1
