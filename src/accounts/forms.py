@@ -73,12 +73,14 @@ class SignupForm(authtoolsforms.UserCreationForm):
         self.fields["orcid"] = forms.CharField(required=False)
         self.helper = FormHelper()
         self.fields["email"].widget.input_type = "email"  # ugly hack
+        self.fields["ecsa_individual_membership"] = forms.BooleanField(required=False)
         self.fields["captcha"] = ReCaptchaField()
         self.helper.layout = Layout(
             Field("email", placeholder=_("Enter Email"), autofocus=""),
             Field("name", placeholder=_("Enter Full Name")),
             Field("password1", placeholder=_("Enter Password")),
             Field("password2", placeholder=_("Re-enter Password")),
+            Field("ecsa_individual_membership"),
             Field("captcha"),
             StrictButton(_("Sign up"), css_class="btn-green", type="Submit"),
         )

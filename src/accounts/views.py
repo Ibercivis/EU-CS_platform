@@ -61,9 +61,10 @@ class SignUpView(
         user = form.save(commit=False)
         user.is_active = False
         user.save()
-        orcid = form.cleaned_data.get('orcid')
+        #orcid = form.cleaned_data.get('orcid')
+        ecsa_individual_membership = form.cleaned_data.get('ecsa_individual_membership')
         profile = get_object_or_404(Profile, user_id=user.id)
-        profile.orcid = orcid
+        #profile.orcid = orcid
         profile.save()
         mail_subject = 'Activate your EU-Citizen.Science account.'
         message = render_to_string('accounts/acc_active_email.html', {
@@ -81,6 +82,13 @@ class SignUpView(
 
         to_email = form.cleaned_data.get('email')
         send_mail(mail_subject, message, 'eu-citizen.science@ibercivis.es',[to_email], html_message=html_message)
+
+        if(ecsa_individual_membership):
+            subject = 'New ECSA member'          
+            message = render_to_string('accounts/emails/new_ecsa_individual_membership.html')
+            email = EmailMessage(subject, message, to=[to_email])
+            email.content_subtype = "html"
+            email.send()
 
         return render(self.request, 'accounts/confirm-email.html',{})
 
