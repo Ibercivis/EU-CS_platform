@@ -21,6 +21,7 @@ from .forms import ProjectForm, CustomFieldFormset, ProjectPermissionForm
 from .models import Project, Topic, ParticipationTask, Status, Keyword, ApprovedProjects, \
  FollowedProjects, FundingBody, CustomField, ProjectPermission, OriginDatabase, GeographicExtend, UnApprovedProjects
 from organisations.models import Organisation
+import copy
 import csv
 import json
 import random
@@ -43,7 +44,7 @@ def new_project(request):
 
             subject = 'New project submitted'          
             message = render_to_string('emails/new_project.html', {"domain": settings.HOST})
-            to = settings.EMAIL_RECIPIENT_LIST
+            to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
             to.append(user.email)
             email = EmailMessage(subject, message, to=to)
             email.content_subtype = "html"
@@ -136,7 +137,7 @@ def project(request, pk):
         #sendEmail
         subject = 'Your project has received a review'            
         message = render_to_string('emails/project_review.html', {"domain": settings.HOST, "name": project.name , "id": pk})
-        to = settings.EMAIL_RECIPIENT_LIST
+        to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
         to.append(project.creator.email)
         email = EmailMessage(subject, message, to=to)
         email.content_subtype = "html"
@@ -399,7 +400,7 @@ def setProjectApproved(id, approved):
         #sendEmail
         subject = 'Your project has been approved'            
         message = render_to_string('emails/approved_project.html', {"domain": settings.HOST, "name": aProject.name , "id": id})
-        to = settings.EMAIL_RECIPIENT_LIST
+        to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
         to.append(aProject.creator.email)
         email = EmailMessage(subject, message, to=to)
         email.content_subtype = "html"
@@ -467,7 +468,7 @@ def followProject(projectId, userId, follow):
         #sendEmail
         subject = 'Your project has been followed'            
         message = render_to_string('emails/followed_project.html', {"domain": settings.HOST, "name": fProject.name , "id": projectId})
-        to = settings.EMAIL_RECIPIENT_LIST
+        to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
         to.append(fProject.creator.email)
         email = EmailMessage(subject, message, to=to)
         email.content_subtype = "html"

@@ -17,6 +17,7 @@ from .models import Organisation, OrganisationType, OrganisationPermission
 from projects.models import Project
 from resources.models import Resource
 from profiles.models import Profile
+import copy
 import random
 
 User = get_user_model()
@@ -47,7 +48,9 @@ def new_organisation(request):
             messages.success(request, _('Organisation added correctly'))
             subject = 'New organisation submitted'
             message = render_to_string('emails/new_organisation.html', {})
-            email = EmailMessage(subject, message, to=[settings.EMAIL_RECIPIENT_LIST, request.user.email])
+            to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
+            to.append(request.user.email)
+            email = EmailMessage(subject, message, to=to)
             email.content_subtype = "html"
             email.send()
             return redirect('../organisations', {})

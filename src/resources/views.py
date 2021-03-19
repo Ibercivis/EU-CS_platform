@@ -23,6 +23,7 @@ from reviews.models import Review
 from .models import Resource, Keyword, Category, ApprovedResources, SavedResources, Theme, Category, ResourcesGrouped,\
      ResourcePermission, EducationLevel, LearningResourceType, UnApprovedResources
 from .forms import ResourceForm, ResourcePermissionForm
+import copy
 import csv
 import random
 
@@ -118,7 +119,7 @@ def new_resource(request, isTrainingResource=False):
             isTrainingResource = request.POST.get('trainingResource')            
             form.save(request, images)
 
-            to = settings.EMAIL_RECIPIENT_LIST
+            to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
             to.append(request.user.email)
             if(isTrainingResource):
                 messages.success(request, _('Training resource added correctly'))
@@ -150,7 +151,7 @@ def resource(request, pk):
     previous_page = request.META.get('HTTP_REFERER')
     if previous_page and 'review' in previous_page:
         #sendEmail
-        to = settings.EMAIL_RECIPIENT_LIST
+        to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
         to.append(resource.creator.email)
         if resource.isTrainingResource:
             subject = 'Your training resource has received a review'            
@@ -429,7 +430,7 @@ def setResourceApproved(id, approved):
         #Insert
         ApprovedResources.objects.get_or_create(resource=aResource)
         #sendEmail
-        to = settings.EMAIL_RECIPIENT_LIST
+        to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
         to.append(aResource.creator.email)
         if aResource.isTrainingResource:
             subject = 'Your training resource has been approved'            
@@ -476,7 +477,7 @@ def saveResource(resourceId, userId, save):
         #Insert
         savedResource = SavedResources.objects.get_or_create(resource=fResource, user=fUser)
         #sendEmail
-        to = settings.EMAIL_RECIPIENT_LIST
+        to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
         to.append(fResource.creator.email)
         if fResource.isTrainingResource:
             subject = 'Your training resource has been added to a library'            
