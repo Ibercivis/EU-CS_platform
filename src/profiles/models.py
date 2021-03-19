@@ -33,6 +33,13 @@ class BaseProfile(models.Model):
     orcid = models.CharField(_("ORCID (If you have registered on the ORCID platform for researchers and have a persistent digital identifier (your ORCID iD) you can add it here to link this profile with your professional information such as affiliations, grants, publications, peer review, and more.)"), max_length=50, blank=True, null=True)
     organisation = models.ManyToManyField(Organisation,blank=True)
 
+    # ECSA fields
+    ecsa_member = models.BooleanField(null=True, blank=True)
+    member_since = models.DateTimeField(null=True,blank=True)
+    payment_revision = models.BooleanField(null=True, blank=True)
+    former_member = models.BooleanField(null=True, blank=True)
+    invoice_id = models.IntegerField(null=True, blank=True)
+
     class Meta:
         abstract = True
 
