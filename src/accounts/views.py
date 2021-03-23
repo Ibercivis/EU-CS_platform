@@ -84,14 +84,49 @@ class SignUpView(
         send_mail(mail_subject, message, 'eu-citizen.science@ibercivis.es',[to_email], html_message=html_message)
 
         if(ecsa_individual_membership):
-            subject = 'New ECSA member'          
-            message = render_to_string('accounts/emails/new_ecsa_individual_membership.html')
-            email = EmailMessage(subject, message, to=[to_email])
-            email.content_subtype = "html"
-            email.send()
+            profile.ecsa_requested_join = True
+            profile.save()
+            newEcsaIndividualMembershipEmail(to_email)
 
         return render(self.request, 'accounts/confirm-email.html',{})
 
+
+def newEcsaIndividualMembership(request):
+    newEcsaIndividualMembershipEmail(request.user.email)
+    profile = get_object_or_404(Profile, user_id=request.user.id)
+    profile.ecsa_requested_join = True
+    profile.save()    
+    return redirect("profiles:show_self")
+
+def newEcsaIndividualMembershipEmail(email):
+    to_email = email
+    subject = 'New ECSA member'          
+    message = render_to_string('accounts/emails/new_ecsa_individual_membership.html')
+    email = EmailMessage(subject, message, to=[to_email])
+    email.content_subtype = "html"
+    email.send()
+
+
+def dropOutECSAmembership(request):
+    profile = get_object_or_404(Profile, user_id=request.user.id)    
+    profile.ecsa_requested_join = False
+    profile.ecsa_member = False
+    profile.save()
+    return redirect("profiles:show_self")
+
+def claimEcsaPaymentRevision(request):
+    profile = get_object_or_404(Profile, user_id=request.user.id)  
+    profile.ecsa_payment_revision = True
+    profile.save()
+    #send email
+    subject = 'ECSA membership payment revision'
+    from_email = request.user.email
+    message = "I want an ECSA membership payment revision"
+    try:
+        send_mail(subject, message, from_email, settings.EMAIL_CONTACT_RECIPIENT_LIST, html_message=message)
+    except BadHeaderError:
+        return HttpResponse('Invalid header found.')
+    return redirect("profiles:show_self")
 
 class PasswordChangeView(authviews.PasswordChangeView):
     form_class = forms.PasswordChangeForm

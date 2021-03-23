@@ -9,6 +9,9 @@ urlpatterns = [
     path("logout/", views.LogoutView.as_view(), name="logout"),
     path("signup/", views.SignUpView.as_view(), name="signup"),
     path("delete/", views.delete_user, name="delete"),
+    path("new_ecsa_individual_membership/", views.newEcsaIndividualMembership, name="new_ecsa_individual_membership"),
+    path("drop_out_ecsa_membership/", views.dropOutECSAmembership, name="drop_out_ecsa_membership"),
+    path("claim_ecsa_payment_revision/", views.claimEcsaPaymentRevision, name="claim_ecsa_payment_revision"),    
     path(
         "password-change/", views.PasswordChangeView.as_view(), name="password-change"
     ),

@@ -17,6 +17,28 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 
 
 {% block list_of_items %}
+
+<!-- Delete modal -->
+<div class="modal fade" id="confirm-dropout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h4 class="modal-title" id="myModalLabel">{% trans "Confirm delete" %}</h4>
+		  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		</div>
+		<div class="modal-body">
+		  <p>{% trans "You are going to drop out ECSA membership" %}</p>
+		  <p>{% trans "Are you sure?" %}</p>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+		  <a class="btn btn-red btn-dropout"><i class="fas fa-trash-alt"></i> {% trans "Drop out" %}</a>
+		</div>
+	  </div>
+	</div>
+  </div>
+
+
 <div class="container">
 	<div class="row mt-5">
 		<div class="container-fluid">
@@ -29,11 +51,23 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 							{% if editable %}
 							<a href="{% url 'accounts:delete' %}" class="btn btn-outline btn-red float-right ml-2 mt-5"><span class="fas fa-trash-alt"></span>&nbsp;{% trans "Delete Profile" %}</a>
 							<a href="{% url 'profiles:edit_self' %}" class="btn btn-outline btn-green float-right ml-2 mt-5"><i class="fas fa-edit"></i> {% trans "Edit Profile" %}</a>
-							{% endif %}
-						</div>
+							{% endif %}							
 					</div>
+					{% if show_user.profile.ecsa_member or show_user.profile.former_member %}					
+					<a data-href="{% url 'accounts:drop_out_ecsa_membership' %}" name='dropoutECSA' data-toggle="modal" data-target="#confirm-dropout"
+					 class="btn btn-outline btn-red float-right ml-2 mt-5"><i class="fas fa-users"></i> {% trans "Drop out ECSA membership" %}</a>
 
-					{% if ecsa_member or former_member %}
+					{% else %}					
+						{% if show_user.profile.ecsa_requested_join %}
+						<a href="{% url 'accounts:claim_ecsa_payment_revision' %}" class="btn btn-outline btn-info float-right ml-2 mt-5"><i class="fas fa-users"></i> {% trans "Claim for ECSA payment revision" %}</a>					
+						{% else %}
+						<a href="{% url 'accounts:new_ecsa_individual_membership' %}" class="btn btn-outline btn-info float-right ml-2 mt-5"><i class="fas fa-users"></i> {% trans "Apply ECSA membership" %}</a>
+						{% endif %}
+					{% endif %}
+				</div>
+					
+
+					{% if show_user.profile.ecsa_member or show_user.profile.former_member %}
 					<div class="card-header flex  flex-row-reverse">
 						<ul class="nav nav nav-tabs card-header-tabs mr-auto flex-row-reverse">
 						  <li class="nav-item">
@@ -117,6 +151,10 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 			map.setView([{{show_user.profile.latitude}}, {{show_user.profile.longitude}}], 12)
 			new L.marker([{{show_user.profile.latitude}},{{show_user.profile.longitude}}]).addTo(map);
 		}
+
+		$('#confirm-dropout').on('show.bs.modal', function(e) {
+			$(this).find('.btn-dropout').attr('href', $(e.relatedTarget).data('href'));
+		});
 
 	</script>
 	{% endblock scripts %}

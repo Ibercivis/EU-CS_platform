@@ -35,10 +35,11 @@ class BaseProfile(models.Model):
 
     # ECSA fields
     ecsa_member = models.BooleanField(null=True, blank=True)
-    member_since = models.DateTimeField(null=True,blank=True)
-    payment_revision = models.BooleanField(null=True, blank=True)
-    former_member = models.BooleanField(null=True, blank=True)
-    invoice_id = models.IntegerField(null=True, blank=True)
+    ecsa_requested_join = models.BooleanField(null=True, blank=True)
+    ecsa_member_since = models.DateTimeField(null=True,blank=True)
+    ecsa_payment_revision = models.BooleanField(null=True, blank=True)
+    ecsa_former_member = models.BooleanField(null=True, blank=True)
+    ecsa_invoice_id = models.IntegerField(null=True, blank=True)
 
     class Meta:
         abstract = True
