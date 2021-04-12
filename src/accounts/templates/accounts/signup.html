@@ -36,3 +36,60 @@
 </div>
 
 {% endblock list_of_items %}
+
+{% block scripts %}
+<script type="text/javascript">
+
+  $(document).ready(function () {
+    $("#div_id_ecsa_billing_email").hide();
+    $("#div_id_ecsa_reduced_fee").hide();
+    $("#div_id_street").hide();
+    $("#div_id_postal_code").hide();
+    $("#div_id_city").hide();
+    $("#div_id_country").hide();
+    $("#div_id_occupation").hide();
+    $("#id_street").prop('required',false);
+    $("#id_postal_code").prop('required',false);
+    $("#id_city").prop('required',false);
+    $("#id_country").prop('required',false);
+    $("#id_occupation").prop('required',false);
+
+    $('#div_id_ecsa_billing_email label, #div_id_street label, #div_id_postal_code label, #div_id_city label, #div_id_country label, #div_id_occupation label').append(
+        $("<span>", {"class": "required-indicator"}).text("*")
+    );
+
+    $("#id_ecsa_individual_membership").on('change', function(e){
+      if($("#id_ecsa_individual_membership")[0].checked){
+        $("#div_id_ecsa_billing_email").show();        
+        $("#div_id_ecsa_reduced_fee").show();        
+        $("#div_id_street").show();        
+        $("#div_id_postal_code").show();
+        $("#div_id_city").show();        
+        $("#div_id_country").show();
+        $("#div_id_occupation").show();
+        $("#id_ecsa_billing_email").prop('required',true);
+        $("#id_street").prop('required',true);
+        $("#id_postal_code").prop('required',true);
+        $("#id_city").prop('required',true);
+        $("#id_country").prop('required',true);
+        $("#id_occupation").prop('required',true);
+
+      }else{
+        $("#div_id_ecsa_billing_email").hide();
+        $("#div_id_ecsa_reduced_fee").hide();
+        $("#div_id_street").hide();
+        $("#div_id_postal_code").hide();
+        $("#div_id_city").hide();
+        $("#div_id_country").hide();
+        $("#div_id_occupation").hide();
+        $("#id_street").prop('required',false);
+        $("#id_postal_code").prop('required',false);
+        $("#id_city").prop('required',false);
+        $("#id_country").prop('required',false);
+        $("#id_occupation").prop('required',false);        
+      }
+    });
+  });
+
+</script>
+{% endblock %}

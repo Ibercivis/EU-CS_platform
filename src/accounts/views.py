@@ -86,23 +86,23 @@ class SignUpView(
         if(ecsa_individual_membership):
             profile.ecsa_requested_join = True
             profile.save()
-            newEcsaIndividualMembershipEmail(to_email)
+            newEcsaIndividualMembershipEmail(to_email, user.name)
 
         return render(self.request, 'accounts/confirm-email.html',{})
 
 
 def newEcsaIndividualMembership(request):
-    newEcsaIndividualMembershipEmail(request.user.email)
+    newEcsaIndividualMembershipEmail(request.user.email, request.user.name)
     profile = get_object_or_404(Profile, user_id=request.user.id)
     profile.ecsa_requested_join = True
     profile.save()    
     return redirect("profiles:show_self")
 
-def newEcsaIndividualMembershipEmail(email):
+def newEcsaIndividualMembershipEmail(email, name):
     to_email = email
-    subject = 'New ECSA member'          
-    message = render_to_string('accounts/emails/new_ecsa_individual_membership.html')
-    email = EmailMessage(subject, message, to=[to_email])
+    subject = 'Thank you! - Become a member of ECSA'          
+    message = render_to_string('accounts/emails/new_ecsa_individual_membership.html', { 'name': name, })
+    email = EmailMessage(subject, message, to=[to_email], )
     email.content_subtype = "html"
     email.send()
 

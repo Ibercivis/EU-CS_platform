@@ -1,8 +1,29 @@
 
 {% load i18n %}
+{% load staticfiles %}
 {% block subject %}
 {% endblock subject %}
 
 {% block html_body  %}
-Do you want a ECSA member?
+<p>Dear {{ name }} {{ name }},</p>
+<p>This email is to inform you that we have successfully received your request to become a member of ECSA. Thank you!</p>
+<p>We will process your request in the next couple of days and get back to you shortly.</p>
+<p>In the meantime, you can read the benefits that come with being an ECSA member:</p>
+<ul>
+    <li>share your news and events through our website and newsletter</li>
+    <li>access to members-only internal mailing list for information, job offers, grant application participation requests etc.</li>
+    <li>participate in and vote at our general assembly</li>
+    <li>the chance to be elected to our executive board</li>
+    <li>participating in ECSA working groups</li>
+    <li>contributing to ECSA documents, such as our policy papers and guidelines</li>
+    <li>invitations to join European citizen science projects</li>
+    <li>contributing to the development of open-access resources for the field, e.g. guides</li>
+    <li>carrying out joint European Citizen Science projects (planned)</li>
+</ul>
+<p>ECSA membership is valid for one calendar year, and we will send you an invoice at the start of each year.</p>
+<p>If you are eligible to pay the reduced membership fee because you are a student, unemployed or retired or because you are a member of CSA or ACSA, please send proof of this to ecsa-admin@mfn.berlin. If you are eligible to get both reductions remember to please send proof of both.</p>
+<p>We are excited that you have decided to join ECSA and look forward to working together.</p>
+<p>With kind regards,</p>
+<p>The ECSA HQ-Team</p>
+<img src="{% static 'site/img/ecsa_main_id.png' %}"/>
 {% endblock html_body %}

@@ -10,6 +10,7 @@ from authtools import forms as authtoolsforms
 from django.contrib.auth import forms as authforms
 from django.urls import reverse
 from captcha.fields import ReCaptchaField
+from organisations.models import OrganisationType
 
 User = get_user_model()
 
@@ -74,16 +75,33 @@ class SignupForm(authtoolsforms.UserCreationForm):
         self.helper = FormHelper()
         self.fields["email"].widget.input_type = "email"  # ugly hack
         self.fields["ecsa_individual_membership"] = forms.BooleanField(required=False)
-        self.fields["captcha"] = ReCaptchaField()
+        self.fields["lastname"] = forms.CharField()
+        self.fields["ecsa_billing_email"] = forms.EmailField(required=False)
+        self.fields["ecsa_reduced_fee"] = forms.BooleanField(required=False)
+        self.fields["street"] = forms.CharField(required=False)
+        self.fields["postal_code"] = forms.IntegerField(required=False)
+        self.fields["city"] = forms.CharField(required=False)
+        self.fields["country"] = forms.CharField(required=False)
+        self.fields["occupation"] = forms.ModelChoiceField(queryset=OrganisationType.objects.all(), required=False)
+       # self.fields["captcha"] = ReCaptchaField()
         self.helper.layout = Layout(
             Field("email", placeholder=_("Enter Email"), autofocus=""),
             Field("name", placeholder=_("Enter Full Name")),
+            Field("lastname", placeholder=_("Enter Last Name")),
             Field("password1", placeholder=_("Enter Password")),
             Field("password2", placeholder=_("Re-enter Password")),
             Field("ecsa_individual_membership"),
-            Field("captcha"),
+            Field("ecsa_billing_email", placeholder=_("Please provide the email to receive proof of payment here.")),
+            Field("ecsa_reduced_fee"),
+            Field("street", placeholder=_("Street address and number")),
+            Field("postal_code"),
+            Field("city"),
+            Field("country"),
+            Field("occupation"),
+     #       Field("captcha"),
             StrictButton(_("Sign up"), css_class="btn-green", type="Submit"),
         )
+
 
 
 class PasswordChangeForm(authforms.PasswordChangeForm):

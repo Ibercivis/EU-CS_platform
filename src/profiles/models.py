@@ -4,7 +4,7 @@ import uuid
 from django.db import models
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
-from organisations.models import Organisation
+from organisations.models import Organisation, OrganisationType
 
 
 class InterestArea(models.Model):
@@ -40,6 +40,17 @@ class BaseProfile(models.Model):
     ecsa_payment_revision = models.BooleanField(null=True, blank=True)
     ecsa_former_member = models.BooleanField(null=True, blank=True)
     ecsa_invoice_id = models.IntegerField(null=True, blank=True)
+
+    lastname = models.CharField(_("Last name"), max_length=50, blank=True, null=True)
+    ecsa_billing_email = models.EmailField(blank=True, null=True)
+    ecsa_reduced_fee = models.BooleanField(_("Reduced fee"), default=False)
+    street = models.CharField(_("Street"), max_length=50, blank=True, null=True)
+    postal_code = models.IntegerField(null=True, blank=True)
+    city = models.CharField(_("City"), max_length=50, blank=True, null=True)
+    country = models.CharField(_("Country"), max_length=50, blank=True, null=True)
+    occupation = models.ForeignKey(OrganisationType, null=True, blank=True, on_delete=models.CASCADE)
+
+
 
     class Meta:
         abstract = True
