@@ -39,7 +39,7 @@ class BaseProfile(models.Model):
     ecsa_member_since = models.DateTimeField(null=True,blank=True)
     ecsa_payment_revision = models.BooleanField(null=True, blank=True)
     ecsa_former_member = models.BooleanField(null=True, blank=True)
-    ecsa_invoice_id = models.IntegerField(null=True, blank=True)
+    ecsa_member_number = models.IntegerField(null=True, blank=True)
 
     lastname = models.CharField(_("Last name"), max_length=50, blank=True, null=True)
     ecsa_billing_email = models.EmailField(blank=True, null=True)

@@ -53,6 +53,7 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 							<a href="{% url 'profiles:edit_self' %}" class="btn btn-outline btn-green float-right ml-2 mt-5"><i class="fas fa-edit"></i> {% trans "Edit Profile" %}</a>
 							{% endif %}							
 					</div>
+
 					{% if show_user.profile.ecsa_member or show_user.profile.former_member %}					
 					<a data-href="{% url 'accounts:drop_out_ecsa_membership' %}" name='dropoutECSA' data-toggle="modal" data-target="#confirm-dropout"
 					 class="btn btn-outline btn-red float-right ml-2 mt-5"><i class="fas fa-users"></i> {% trans "Drop out ECSA membership" %}</a>
@@ -119,15 +120,15 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 						<div class="row p-3">
 							<div class="col-12 col-sm-6">
 								<p><b>{% trans "Member type" %}: </b>
-								{% if show_user.former_member %}
+								{% if show_user.profile.former_member %}
 									Former member
 								{% else %}
 									ECSA member
 								{% endif %}
 							</p>
-								<p><b>{% trans "Member since" %}: </b>{{ show_user.member_since }}</p>
-								<p><b>{% trans "Payment revision" %}: </b>{{ show_user.payment_revision }}</p>
-								<p><b>{% trans "Invoice id" %}: </b>{{ show_user.invoice_id }}</p>								
+								<p><b>{% trans "Member since" %}: </b>{{ show_user.profile.member_since }}</p>
+								<p><b>{% trans "Payment revision" %}: </b>{{ show_user.profile.payment_revision }}</p>
+								<p><b>{% trans "Member number" %}: </b>{{ show_user.profile.ecsa_member_number }}</p>								
 							</div>							
 						</div>
 
