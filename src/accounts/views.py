@@ -92,11 +92,18 @@ class SignUpView(
 
 
 def newEcsaIndividualMembership(request):
-    newEcsaIndividualMembershipEmail(request.user.email, request.user.name)
-    profile = get_object_or_404(Profile, user_id=request.user.id)
-    profile.ecsa_requested_join = True
-    profile.save()    
-    return redirect("profiles:show_self")
+    form = forms.NewEcsaIndividualMembershipForm()
+    if request.method == 'POST':
+        form = forms.NewEcsaIndividualMembershipForm(request.POST)
+        if form.is_valid():
+            newEcsaIndividualMembershipEmail(request.user.email, request.user.name)
+            profile = get_object_or_404(Profile, user_id=request.user.id)
+            profile.ecsa_requested_join = True
+            profile.save()
+
+        return redirect("profiles:show_self")
+
+    return render(request, 'accounts/new_ecsa_individual_membership.html', {'form': form})
 
 def newEcsaIndividualMembershipEmail(email, name):
     to_email = email

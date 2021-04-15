@@ -126,8 +126,8 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 									ECSA member
 								{% endif %}
 							</p>
-								<p><b>{% trans "Member since" %}: </b>{{ show_user.profile.member_since }}</p>
-								<p><b>{% trans "Payment revision" %}: </b>{{ show_user.profile.payment_revision }}</p>
+								<p><b>{% trans "Member since" %}: </b>{{ show_user.profile.ecsa_member_since | date:"d/m/Y" }}</p>
+								<p><b>{% trans "Payment revision" %}: </b>{{ show_user.profile.ecsa_payment_revision }}</p>
 								<p><b>{% trans "Member number" %}: </b>{{ show_user.profile.ecsa_member_number }}</p>								
 							</div>							
 						</div>

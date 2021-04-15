@@ -77,7 +77,8 @@ class SignupForm(authtoolsforms.UserCreationForm):
         self.fields["ecsa_individual_membership"] = forms.BooleanField(required=False)
         self.fields["lastname"] = forms.CharField()
         self.fields["ecsa_billing_email"] = forms.EmailField(required=False)
-        self.fields["ecsa_reduced_fee"] = forms.BooleanField(required=False)
+        self.fields["ecsa_reduced_fee"] = forms.BooleanField(required=False, label=_("Yes, I would like to pay the reduced fee."))
+        self.fields["ecsa_old_member_fee"] = forms.BooleanField(required=False, label=_("Yes, I am a member of CSA or ACSA and would like to get an additional 20% discount."))
         self.fields["street"] = forms.CharField(required=False)
         self.fields["postal_code"] = forms.IntegerField(required=False)
         self.fields["city"] = forms.CharField(required=False)
@@ -93,6 +94,7 @@ class SignupForm(authtoolsforms.UserCreationForm):
             Field("ecsa_individual_membership"),
             Field("ecsa_billing_email", placeholder=_("Please provide the email to receive proof of payment here.")),
             Field("ecsa_reduced_fee"),
+            Field("ecsa_old_member_fee"),
             Field("street", placeholder=_("Street address and number")),
             Field("postal_code"),
             Field("city"),
@@ -102,7 +104,16 @@ class SignupForm(authtoolsforms.UserCreationForm):
             StrictButton(_("Sign up"), css_class="btn-green", type="Submit"),
         )
 
-
+class NewEcsaIndividualMembershipForm(forms.Form):
+    ecsa_billing_email = forms.EmailField(help_text=_("Please provide the email to receive proof of payment here."))
+    ecsa_reduced_fee = forms.BooleanField(required=False, label=_("Yes, I would like to pay the reduced fee."))
+    ecsa_old_member_fee = forms.BooleanField(required=False, label=_("Yes, I am a member of CSA or ACSA and would like to get an additional 20% discount."))
+    street = forms.CharField(help_text=_("Street address and number"))
+    postal_code = forms.IntegerField()
+    city = forms.CharField()
+    country = forms.CharField()
+    occupation = forms.ModelChoiceField(queryset=OrganisationType.objects.all())
+    
 
 class PasswordChangeForm(authforms.PasswordChangeForm):
     def __init__(self, *args, **kwargs):
