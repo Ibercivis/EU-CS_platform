@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django_countries.fields import CountryField
+from django.utils.translation import ugettext_lazy as _
 
 class OrganisationType(models.Model):
     type = models.TextField()
@@ -22,6 +23,25 @@ class Organisation(models.Model):
     latitude = models.DecimalField(max_digits=9,decimal_places=6, null=True, blank=True)
     longitude = models.DecimalField(max_digits=9,decimal_places=6, null=True, blank=True)
     country = CountryField(null=True, blank=True)
+
+    #Ecsa fields    
+    street = models.CharField(_("Street"), max_length=50, blank=True, null=True)
+    postal_code = models.IntegerField(null=True, blank=True)
+    city = models.CharField(_("City"), max_length=50, blank=True, null=True)    
+    ecsa_billing_street = models.CharField(_("Street"), max_length=50, blank=True, null=True)
+    ecsa_billing_postal_code = models.IntegerField(null=True, blank=True)
+    ecsa_billing_city = models.CharField(_("City"), max_length=50, blank=True, null=True)
+    ecsa_billing_country = models.CharField(_("Country"), max_length=50, blank=True, null=True)
+    ecsa_billing_email = models.EmailField(blank=True, null=True)
+    #occupation = models.ForeignKey(OrganisationType, null=True, blank=True, on_delete=models.CASCADE)
+    #legal_status = 
+    #profit=
+    #has_vat_number =
+    vat_number = models.IntegerField(null=True, blank=True)
+    ecsa_reduced_fee = models.BooleanField(_("Reduced fee"), default=False)
+    ecsa_old_organisation_fee = models.BooleanField(_("Old organisation fee"), default=False)
+
+    
 
     def __str__(self):
         return f'{self.name}'

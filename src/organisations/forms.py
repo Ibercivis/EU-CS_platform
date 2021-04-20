@@ -61,6 +61,23 @@ class OrganisationForm(forms.Form):
         return 'success'
 
 
+class NewEcsaOrganisationMembershipForm(forms.Form):
+    street = forms.CharField(help_text=_("Street address and number"))
+    postal_code = forms.IntegerField()
+    city = forms.CharField()
+    ecsa_billing_street = forms.CharField(label=_("Billing street"))
+    ecsa_billing_postal_code = forms.IntegerField(label=_("Billing postal code"))
+    ecsa_billing_city = forms.CharField(label=_("Billing city"))
+    ecsa_billing_country = forms.CharField(label=_("Billing country"))
+    ecsa_billing_email = forms.EmailField(label=_("Billing email"))
+    #occupation = models.ForeignKey(OrganisationType, null=True, blank=True, on_delete=models.CASCADE)
+    #legal_status = 
+    #profit=
+    #has_vat_number =
+    vat_number = forms.IntegerField(required=False)
+    ecsa_reduced_fee = forms.BooleanField(required=False, label=_("Yes, I would like to pay the reduced fee."))
+    ecsa_old_organisation_fee = forms.BooleanField(required=False, label=_("Yes, I am a member of CSA or ACSA and would like to get an additional 20% discount."))
+
 class OrganisationPermissionForm(forms.Form):
     selectedUsers = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     usersCollection = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())

@@ -10,5 +10,8 @@ urlpatterns = [
     path('delete_organisation/<int:pk>', views.delete_organisation, name='delete_organisation'),
     path('organisations_autocomplete/', views.organisations_autocomplete, name='organisations_autocomplete'),
     path('allowUserOrganisation/', views.allowUserOrganisation, name='allowUserOrganisation'),
+    path("new_ecsa_organisation_membership/<int:pk>", views.newEcsaOrganisationMembership, name="new_ecsa_organisation_membership"),
+    #path("drop_out_ecsa_membership/", views.dropOutECSAmembership, name="drop_out_ecsa_membership"),
+    #path("claim_ecsa_payment_revision/", views.claimEcsaPaymentRevision, name="claim_ecsa_payment_revision"),  
     url(r'^api/', include('organisations.api.urls')),
 ]

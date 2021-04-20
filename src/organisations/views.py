@@ -12,7 +12,7 @@ from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
 from datetime import datetime
-from .forms import OrganisationForm, OrganisationPermissionForm
+from .forms import OrganisationForm, OrganisationPermissionForm, NewEcsaOrganisationMembershipForm
 from .models import Organisation, OrganisationType, OrganisationPermission
 from projects.models import Project
 from resources.models import Resource
@@ -124,6 +124,20 @@ def edit_organisation(request, pk):
             print(form.errors)
 
     return render(request, 'edit_organisation.html', {'form': form, 'organisation':organisation, 'user':user,})
+
+def newEcsaOrganisationMembership(request, pk):
+    form = NewEcsaOrganisationMembershipForm()
+    if request.method == 'POST':
+        form = NewEcsaOrganisationMembershipForm(request.POST)
+        if form.is_valid():
+            #newEcsaOrganisationMembershipEmail(request.user.email, request.user.name)
+            organisation = get_object_or_404(Organisation, id=pk)
+            organisation.ecsa_requested_join = True
+            organisation.save()
+            return redirect('/organisation/'+ str(pk))
+
+    return render(request, 'new_ecsa_organisation_membership.html/', {'form': form, 'organisationID': pk})
+
 
 def organisations(request):
     organisations = Organisation.objects.get_queryset().order_by('id')

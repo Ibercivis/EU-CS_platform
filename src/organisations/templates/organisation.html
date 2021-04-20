@@ -51,31 +51,62 @@
 						<div class="col-3 text-right">
 							<a target="_blank" href="{% if 'http' not in organisation.url %}//{%endif%}{{organisation.url}}"
 							class="colorpurple"><i class="fas fa-external-link-square-alt"></i> {% trans "Go to Organisation" %}</a>
+						</div>						
+					</div>
+					
+					{{ organisation.description }}
+					<br/>
+					<a href="{% url 'new_ecsa_organisation_membership' organisation.id %}" class="btn btn-outline btn-info"><i class="fas fa-users"></i> {% trans "Apply ECSA membership" %}</a>
+					
+					<br/><br/>
+					<div class="card-header flex  flex-row-reverse">
+						<ul class="nav nav nav-tabs card-header-tabs mr-auto flex-row-reverse">
+						  <li class="nav-item">
+							<a class="nav-link sub" id="parttab" href="#"
+							onClick="$('#one').hide(); $('#two').show()
+							$('#parttab').addClass('active')
+							$('#desctab').removeClass('active') ">{% trans "ECSA" %}</a>
+						  </li>
+						  <li class="nav-item">
+							<a class="nav-link sub active" id="desctab" href="#"
+							onClick="$('#two').hide(); $('#one').show();
+							$('#desctab').addClass('active')
+							$('#parttab').removeClass('active')">{% trans "Organisation" %}</a>
+						  </li>
+						</ul>
+					  </div>
+
+
+					<div class="card-text" id="one">
+
+						{% if associatedProjects.all %}
+						<h5 class="mt-3">{% trans "Projects" %}</h5>
+						{% for project in associatedProjects.all %}
+						<a class="badge badge-light pt-1" href="/project/{{project.id}}">{{project|upper}}</a>
+						{% endfor %}
+						{% endif %}
+						{% if associatedResources.all %}
+						<h5 class="mt-3">{% trans "Resources" %}</h5>
+						{% for resource in associatedResources.all %}
+						<a class="badge badge-light pt-1" href="/resource/{{resource.id}}">{{resource|upper}}</a>
+						{% endfor %}
+						{% endif %}
+						{% if members.all %}
+						<h5 class="mt-3">{% trans "Members" %}</h5>
+						{% for member in members.all %}
+						<a class="badge badge-light pt-1" href="/users/{{member.slug}}">{{member.user.name | upper}}</a>
+						{% endfor %}
+						{% endif %}
+						<div class="mt-4">
+							{% leaflet_map "map" callback="window.map_init_basic" %}
 						</div>
 					</div>
 
-					{{ organisation.description }}
-					{% if associatedProjects.all %}
-					<h5 class="mt-3">{% trans "Projects" %}</h5>
-					{% for project in associatedProjects.all %}
-					<a class="badge badge-light pt-1" href="/project/{{project.id}}">{{project|upper}}</a>
-					{% endfor %}
-					{% endif %}
-					{% if associatedResources.all %}
-					<h5 class="mt-3">{% trans "Resources" %}</h5>
-					{% for resource in associatedResources.all %}
-					<a class="badge badge-light pt-1" href="/resource/{{resource.id}}">{{resource|upper}}</a>
-					{% endfor %}
-					{% endif %}
-					{% if members.all %}
-					<h5 class="mt-3">{% trans "Members" %}</h5>
-					{% for member in members.all %}
-					<a class="badge badge-light pt-1" href="/users/{{member.slug}}">{{member.user.name | upper}}</a>
-					{% endfor %}
-					{% endif %}
-					<div class="mt-4">
-						{% leaflet_map "map" callback="window.map_init_basic" %}
+					<div class="card-text myhidden" id="two">
+						<p>In progress...</p>
 					</div>
+
+
 				</div>
 			</div>
 		</div><!-- end of card body -->

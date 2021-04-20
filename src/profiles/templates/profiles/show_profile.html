@@ -68,79 +68,79 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 				</div>
 					
 
-					{% if show_user.profile.ecsa_member or show_user.profile.former_member %}
-					<div class="card-header flex  flex-row-reverse">
-						<ul class="nav nav nav-tabs card-header-tabs mr-auto flex-row-reverse">
-						  <li class="nav-item">
-							<a class="nav-link sub" id="parttab" href="#"
-							onClick="$('#one').hide(); $('#two').show()
-							$('#parttab').addClass('active')
-							$('#desctab').removeClass('active') ">{% trans "ECSA" %}</a>
-						  </li>
-						  <li class="nav-item">
-							<a class="nav-link sub active" id="desctab" href="#"
-							onClick="$('#two').hide(); $('#one').show();
-							$('#desctab').addClass('active')
-							$('#parttab').removeClass('active')">{% trans "Profile" %}</a>
-						  </li>
-						</ul>
-					  </div>
-					  {% endif %}
-
-					<div class="card-text" id="one">
-						<div class="row p-3">
-							<div class="col-12 col-sm-6">
-								<p><b>{% trans "Email" %}: </b>{{ show_user.email|default:"missing"}}</p>
-								<p><b>{% trans "Joined" %}: </b>{{ show_user.date_joined }}</p>
-								<p><b>{% trans "Last seen" %}: </b>{{ show_user.last_login }}</p>
-							</div>
-							<div class="col-12 col-sm-6">
-								<p><strong>{% trans "Title" %}</strong>: {{ show_user.profile.title }} </p>
-								<p><strong>{% trans "Bio and disciplinary background" %}</strong>: {{ show_user.profile.bio }}</p>
-								<p><strong>{% trans "ORCID profile" %}</strong>: {% if show_user.profile.orcid %} <a href="https://orcid.org/{{ show_user.profile.orcid }}" target="_blank">{{ show_user.profile.orcid }}</a>{% endif %}</p>
-								<b>{% trans "Organisation" %}:</b>
-								{% for organisation in show_user.profile.organisation.all %} <a class="badge" href="/organisation/{{organisation.id}}">{{organisation}}</a>  {% endfor %}
-								<br/>
-							</div>
-							<div class="col-12 col-sm-6">
-								<p><strong>{% trans "Interest Areas" %}</strong>:
-									{% for area in show_user.profile.interestAreas.all %}
-									{{ area }}
-									{% endfor %}
-								</p>
-							</div>
-						</div>
-						<div >
-							<label><strong>{% trans "Geographical location" %}</strong></label>
-							{% leaflet_map "map" callback="window.map_init_basic" %}
-						</div>
+				{% if show_user.profile.ecsa_member or show_user.profile.former_member %}
+				<div class="card-header flex  flex-row-reverse">
+					<ul class="nav nav nav-tabs card-header-tabs mr-auto flex-row-reverse">
+						<li class="nav-item">
+						<a class="nav-link sub" id="parttab" href="#"
+						onClick="$('#one').hide(); $('#two').show()
+						$('#parttab').addClass('active')
+						$('#desctab').removeClass('active') ">{% trans "ECSA" %}</a>
+						</li>
+						<li class="nav-item">
+						<a class="nav-link sub active" id="desctab" href="#"
+						onClick="$('#two').hide(); $('#one').show();
+						$('#desctab').addClass('active')
+						$('#parttab').removeClass('active')">{% trans "Profile" %}</a>
+						</li>
+					</ul>
 					</div>
+					{% endif %}
 
-					<div class="card-text myhidden" id="two">
-						<div class="row p-3">
-							<div class="col-12 col-sm-6">
-								<p><b>{% trans "Member type" %}: </b>
-								{% if show_user.profile.former_member %}
-									Former member
-								{% else %}
-									ECSA member
-								{% endif %}
+				<div class="card-text" id="one">
+					<div class="row p-3">
+						<div class="col-12 col-sm-6">
+							<p><b>{% trans "Email" %}: </b>{{ show_user.email|default:"missing"}}</p>
+							<p><b>{% trans "Joined" %}: </b>{{ show_user.date_joined }}</p>
+							<p><b>{% trans "Last seen" %}: </b>{{ show_user.last_login }}</p>
+						</div>
+						<div class="col-12 col-sm-6">
+							<p><strong>{% trans "Title" %}</strong>: {{ show_user.profile.title }} </p>
+							<p><strong>{% trans "Bio and disciplinary background" %}</strong>: {{ show_user.profile.bio }}</p>
+							<p><strong>{% trans "ORCID profile" %}</strong>: {% if show_user.profile.orcid %} <a href="https://orcid.org/{{ show_user.profile.orcid }}" target="_blank">{{ show_user.profile.orcid }}</a>{% endif %}</p>
+							<b>{% trans "Organisation" %}:</b>
+							{% for organisation in show_user.profile.organisation.all %} <a class="badge" href="/organisation/{{organisation.id}}">{{organisation}}</a>  {% endfor %}
+							<br/>
+						</div>
+						<div class="col-12 col-sm-6">
+							<p><strong>{% trans "Interest Areas" %}</strong>:
+								{% for area in show_user.profile.interestAreas.all %}
+								{{ area }}
+								{% endfor %}
 							</p>
-								<p><b>{% trans "Member since" %}: </b>{{ show_user.profile.ecsa_member_since | date:"d/m/Y" }}</p>
-								<p><b>{% trans "Payment revision" %}: </b>{{ show_user.profile.ecsa_payment_revision }}</p>
-								<p><b>{% trans "Member number" %}: </b>{{ show_user.profile.ecsa_member_number }}</p>								
-							</div>							
 						</div>
-
 					</div>
+					<div >
+						<label><strong>{% trans "Geographical location" %}</strong></label>
+						{% leaflet_map "map" callback="window.map_init_basic" %}
+					</div>
+				</div>
 
+				<div class="card-text myhidden" id="two">
+					<div class="row p-3">
+						<div class="col-12 col-sm-6">
+							<p><b>{% trans "Member type" %}: </b>
+							{% if show_user.profile.former_member %}
+								Former member
+							{% else %}
+								ECSA member
+							{% endif %}
+						</p>
+							<p><b>{% trans "Member since" %}: </b>{{ show_user.profile.ecsa_member_since | date:"d/m/Y" }}</p>
+							<p><b>{% trans "Payment revision" %}: </b>{{ show_user.profile.ecsa_payment_revision }}</p>
+							<p><b>{% trans "Member number" %}: </b>{{ show_user.profile.ecsa_member_number }}</p>								
+						</div>							
+					</div>
 
 				</div>
+
+
 			</div>
 		</div>
 	</div>
-	{% endblock list_of_items%}
-	{% block scripts %}
+</div>
+{% endblock list_of_items%}
+{% block scripts %}
 
 
 	<script type="text/javascript">
