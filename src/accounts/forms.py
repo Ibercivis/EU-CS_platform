@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, get_user_model
 from django.utils.translation import ugettext_lazy as _
+from django.shortcuts import get_object_or_404
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, HTML, Field
@@ -11,6 +12,7 @@ from django.contrib.auth import forms as authforms
 from django.urls import reverse
 from captcha.fields import ReCaptchaField
 from organisations.models import OrganisationType
+from profiles.models import Profile
 
 User = get_user_model()
 
@@ -113,6 +115,37 @@ class NewEcsaIndividualMembershipForm(forms.Form):
     city = forms.CharField()
     country = forms.CharField()
     occupation = forms.ModelChoiceField(queryset=OrganisationType.objects.all())
+
+    def save(self, args, profileID):
+        street = self.data['street']
+        postal_code = self.data['postal_code']
+        city = self.data['city']
+        country = self.data['country']
+        ecsa_billing_email = self.data['ecsa_billing_email']
+
+        profile = get_object_or_404(Profile, user_id=profileID)
+        profile.street = street
+        profile.postal_code = postal_code
+        profile.city = city
+        profile.street = street
+        profile.postal_code = postal_code
+        profile.city = city
+        profile.country = country
+        profile.ecsa_billing_email = ecsa_billing_email
+
+        profile.ecsa_reduced_fee=False
+        if('ecsa_reduced_fee' in self.data and self.data['ecsa_reduced_fee'] == 'on'):
+            profile.ecsa_reduced_fee=True
+
+        profile.ecsa_old_member_fee=False
+        if('ecsa_old_member_fee' in self.data and self.data['ecsa_old_member_fee'] == 'on'):
+            profile.ecsa_old_member_fee=True
+
+        profile.occupation = get_object_or_404(OrganisationType, id=self.data['occupation'])
+        profile.ecsa_requested_join = True
+        
+        profile.save()
+        return 'success'
     
 
 class PasswordChangeForm(authforms.PasswordChangeForm):

@@ -24,7 +24,11 @@ class Organisation(models.Model):
     longitude = models.DecimalField(max_digits=9,decimal_places=6, null=True, blank=True)
     country = CountryField(null=True, blank=True)
 
-    #Ecsa fields    
+    #Ecsa fields
+    ecsa_member = models.BooleanField(null=True, blank=True)
+    ecsa_requested_join = models.BooleanField(null=True, blank=True)
+    ecsa_member_since = models.DateTimeField(null=True,blank=True)
+    ecsa_payment_revision = models.BooleanField(null=True, blank=True)
     street = models.CharField(_("Street"), max_length=50, blank=True, null=True)
     postal_code = models.IntegerField(null=True, blank=True)
     city = models.CharField(_("City"), max_length=50, blank=True, null=True)    

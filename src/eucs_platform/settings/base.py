@@ -309,8 +309,8 @@ SUMMERNOTE_CONFIG = {
     'disable_attachment': True,
 }
 
-#EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 DEFAULT_FROM_EMAIL = env("FROM_EMAIL")
 EMAIL_HOST = env("HOST_EMAIL")
 EMAIL_HOST_USER = env("FROM_EMAIL")
@@ -328,7 +328,7 @@ EMAIL_CONTACT_RECIPIENT_LIST = [
     "eucitsci@mfn.berlin",
     "frasanz@bifi.es",
     "Claudia.FaboCartas@mfn.berlin"#,
-#    "Antonella.Radicchi@mfn.berlin"
+    #"Antonella.Radicchi@mfn.berlin"
 ]
 
 HOST =  env("HOST")

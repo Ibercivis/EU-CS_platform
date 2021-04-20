@@ -97,9 +97,7 @@ def newEcsaIndividualMembership(request):
         form = forms.NewEcsaIndividualMembershipForm(request.POST)
         if form.is_valid():
             newEcsaIndividualMembershipEmail(request.user.email, request.user.name)
-            profile = get_object_or_404(Profile, user_id=request.user.id)
-            profile.ecsa_requested_join = True
-            profile.save()
+            form.save(request, request.user.id)
 
         return redirect("profiles:show_self")
 

@@ -78,6 +78,44 @@ class NewEcsaOrganisationMembershipForm(forms.Form):
     ecsa_reduced_fee = forms.BooleanField(required=False, label=_("Yes, I would like to pay the reduced fee."))
     ecsa_old_organisation_fee = forms.BooleanField(required=False, label=_("Yes, I am a member of CSA or ACSA and would like to get an additional 20% discount."))
 
+    def save(self, args, organisationID):
+        street = self.data['street']
+        postal_code = self.data['postal_code']
+        city = self.data['city']
+        ecsa_billing_street = self.data['ecsa_billing_street']
+        ecsa_billing_postal_code = self.data['ecsa_billing_postal_code']
+        ecsa_billing_city = self.data['ecsa_billing_city']
+        ecsa_billing_country = self.data['ecsa_billing_country']
+        ecsa_billing_email = self.data['ecsa_billing_email']
+        
+        #vat_number = self.data['vat_number']
+
+
+        organisation = get_object_or_404(Organisation, id=organisationID)
+        organisation.street = street
+        organisation.postal_code = postal_code
+        organisation.city = city
+        organisation.ecsa_billing_street = ecsa_billing_street
+        organisation.ecsa_billing_postal_code = ecsa_billing_postal_code
+        organisation.ecsa_billing_city = ecsa_billing_city
+        organisation.ecsa_billing_country = ecsa_billing_country
+        organisation.ecsa_billing_email = ecsa_billing_email
+
+        #organisation.vat_number = vat_number
+        organisation.ecsa_reduced_fee=False
+        if('ecsa_reduced_fee' in self.data and self.data['ecsa_reduced_fee'] == 'on'):
+            organisation.ecsa_reduced_fee=True
+
+        organisation.ecsa_old_organisation_fee=False
+        if('ecsa_old_organisation_fee' in self.data and self.data['ecsa_old_organisation_fee'] == 'on'):
+            organisation.ecsa_old_organisation_fee=True
+
+        organisation.ecsa_requested_join = True
+
+        organisation.save()
+        return 'success'
+
+
 class OrganisationPermissionForm(forms.Form):
     selectedUsers = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
     usersCollection = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())

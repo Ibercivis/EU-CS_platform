@@ -131,9 +131,8 @@ def newEcsaOrganisationMembership(request, pk):
         form = NewEcsaOrganisationMembershipForm(request.POST)
         if form.is_valid():
             #newEcsaOrganisationMembershipEmail(request.user.email, request.user.name)
-            organisation = get_object_or_404(Organisation, id=pk)
-            organisation.ecsa_requested_join = True
-            organisation.save()
+
+            form.save(request, pk)
             return redirect('/organisation/'+ str(pk))
 
     return render(request, 'new_ecsa_organisation_membership.html/', {'form': form, 'organisationID': pk})

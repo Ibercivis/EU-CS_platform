@@ -56,8 +56,17 @@
 					
 					{{ organisation.description }}
 					<br/>
-					<a href="{% url 'new_ecsa_organisation_membership' organisation.id %}" class="btn btn-outline btn-info"><i class="fas fa-users"></i> {% trans "Apply ECSA membership" %}</a>
-					
+					{% if organisation.ecsa_member %}					
+						<a data-href="{% url 'accounts:drop_out_ecsa_membership' %}" name='dropoutECSA' data-toggle="modal" data-target="#confirm-dropout"
+						class="btn btn-outline btn-red float-right ml-2 mt-5"><i class="fas fa-users"></i> {% trans "Drop out ECSA membership" %}</a>
+
+					{% else %}					
+						{% if organisation.ecsa_requested_join %}
+							<a href="{% url 'accounts:claim_ecsa_payment_revision' %}" class="btn btn-outline btn-info float-right ml-2 mt-5"><i class="fas fa-users"></i> {% trans "Claim for ECSA payment revision" %}</a>					
+						{% else %}
+							<a href="{% url 'new_ecsa_organisation_membership' organisation.id %}" class="btn btn-outline btn-info"><i class="fas fa-users"></i> {% trans "Apply ECSA membership" %}</a>
+						{% endif %}
+					{% endif %}
 					<br/><br/>
 					<div class="card-header flex  flex-row-reverse">
 						<ul class="nav nav nav-tabs card-header-tabs mr-auto flex-row-reverse">
