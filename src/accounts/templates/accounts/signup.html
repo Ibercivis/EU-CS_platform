@@ -55,6 +55,11 @@
     $("#id_country").prop('required',false);
     $("#id_occupation").prop('required',false);
 
+    $('#div_id_password2').append(
+      $("<br/><span>").text("Would you like to become a member of ECSA as an individual?")
+    );
+
+
     $('#div_id_ecsa_billing_email label, #div_id_street label, #div_id_postal_code label, #div_id_city label, #div_id_country label, #div_id_occupation label').append(
         $("<span>", {"class": "required-indicator"}).text("*")
     );

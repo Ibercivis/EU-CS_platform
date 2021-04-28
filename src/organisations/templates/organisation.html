@@ -84,7 +84,7 @@
 						{% if organisation.ecsa_requested_join %}
 							<a href="{% url 'claim_ecsa_organisation_payment_revision' organisation.id %}" class="btn btn-outline btn-info"><i class="fas fa-users"></i> {% trans "Claim for ECSA payment revision" %}</a>					
 						{% else %}
-							<a href="{% url 'new_ecsa_organisation_membership' organisation.id %}" class="btn btn-outline btn-info"><i class="fas fa-users"></i> {% trans "Apply ECSA membership" %}</a>
+							<a href="{% url 'new_ecsa_organisation_membership' organisation.id %}" class="btn btn-outline btn-info"><i class="fas fa-users"></i> {% trans "Sign up for ECSA membership" %}</a>
 						{% endif %}
 					{% endif %}
 					<br/><br/>

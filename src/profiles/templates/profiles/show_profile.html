@@ -62,7 +62,7 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 						{% if show_user.profile.ecsa_requested_join %}
 						<a href="{% url 'accounts:claim_ecsa_payment_revision' %}" class="btn btn-outline btn-info float-right ml-2 mt-5"><i class="fas fa-users"></i> {% trans "Claim for ECSA payment revision" %}</a>					
 						{% else %}
-						<a href="{% url 'accounts:new_ecsa_individual_membership' %}" class="btn btn-outline btn-info float-right ml-2 mt-5"><i class="fas fa-users"></i> {% trans "Apply ECSA membership" %}</a>
+						<a href="{% url 'accounts:new_ecsa_individual_membership' %}" class="btn btn-outline btn-info float-right ml-2 mt-5"><i class="fas fa-users"></i> {% trans Sign up for ECSA membership" %}</a>
 						{% endif %}
 					{% endif %}
 				</div>

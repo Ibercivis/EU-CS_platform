@@ -76,8 +76,9 @@ class SignupForm(authtoolsforms.UserCreationForm):
         self.fields["orcid"] = forms.CharField(required=False)
         self.helper = FormHelper()
         self.fields["email"].widget.input_type = "email"  # ugly hack
-        self.fields["ecsa_individual_membership"] = forms.BooleanField(required=False)
-        self.fields["lastname"] = forms.CharField()
+        self.fields["ecsa_individual_membership"] = forms.BooleanField(required=False, label=_("Yes, I would like to become a member of ECSA as an individual."))
+        self.fields["name"] = forms.CharField(label=_("First name"))
+        self.fields["lastname"] = forms.CharField(label=_("Last name"))
         self.fields["ecsa_billing_email"] = forms.EmailField(required=False)
         self.fields["ecsa_reduced_fee"] = forms.BooleanField(required=False, label=_("Yes, I would like to pay the reduced fee."))
         self.fields["ecsa_old_member_fee"] = forms.BooleanField(required=False, label=_("Yes, I am a member of CSA or ACSA and would like to get an additional 20% discount."))
@@ -89,10 +90,10 @@ class SignupForm(authtoolsforms.UserCreationForm):
        # self.fields["captcha"] = ReCaptchaField()
         self.helper.layout = Layout(
             Field("email", placeholder=_("Enter Email"), autofocus=""),
-            Field("name", placeholder=_("Enter Full Name")),
-            Field("lastname", placeholder=_("Enter Last Name")),
-            Field("password1", placeholder=_("Enter Password")),
-            Field("password2", placeholder=_("Re-enter Password")),
+            Field("name", placeholder=_("Enter first name")),
+            Field("lastname", placeholder=_("Enter last name")),
+            Field("password1", placeholder=_("Enter password")),
+            Field("password2", placeholder=_("Re-enter password")),
             Field("ecsa_individual_membership"),
             Field("ecsa_billing_email", placeholder=_("Please provide the email to receive proof of payment here.")),
             Field("ecsa_reduced_fee"),
