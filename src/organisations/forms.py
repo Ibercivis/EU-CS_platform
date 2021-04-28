@@ -2,7 +2,7 @@ from django import forms
 from django_select2.forms import Select2MultipleWidget
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
-from .models import Organisation, OrganisationType
+from .models import Organisation, OrganisationType, LEGAL_STATUS
 from projects.forms import getCountryCode
 
 class OrganisationForm(forms.Form):
@@ -71,8 +71,7 @@ class NewEcsaOrganisationMembershipForm(forms.Form):
     ecsa_billing_country = forms.CharField(label=_("Billing country"))
     ecsa_billing_email = forms.EmailField(label=_("Billing email"))
     #occupation = models.ForeignKey(OrganisationType, null=True, blank=True, on_delete=models.CASCADE)
-    #legal_status = 
-    #profit=
+    legal_status = forms.ChoiceField(choices=LEGAL_STATUS)    
     #has_vat_number =
     vat_number = forms.IntegerField(required=False)
     ecsa_reduced_fee = forms.BooleanField(required=False, label=_("Yes, I would like to pay the reduced fee."))

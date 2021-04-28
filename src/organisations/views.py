@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from PIL import Image
 from django.conf import settings
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage, send_mail
 from django.core.paginator import Paginator
 from django.contrib import messages
 from django.contrib.auth import get_user_model
@@ -13,7 +13,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
 from datetime import datetime
 from .forms import OrganisationForm, OrganisationPermissionForm, NewEcsaOrganisationMembershipForm
-from .models import Organisation, OrganisationType, OrganisationPermission
+from .models import Organisation, OrganisationType, OrganisationPermission, LEGAL_STATUS
 from projects.models import Project
 from resources.models import Resource
 from profiles.models import Profile
@@ -63,6 +63,7 @@ def new_organisation(request):
 
 def organisation(request, pk):
     organisation = get_object_or_404(Organisation, id=pk)
+    organisation.legal_status = LEGAL_STATUS[ organisation.legal_status][1]
     user = request.user
     cooperatorsPK = getCooperators(pk)
     if user != organisation.creator and not user.is_staff and not user.id in cooperatorsPK:
@@ -78,7 +79,7 @@ def organisation(request, pk):
     cooperators = getCooperatorsEmail(pk)
     permissionForm = OrganisationPermissionForm(initial={'usersCollection':users, 'selectedUsers': cooperators})
     return render(request, 'organisation.html', {'organisation':organisation, 'associatedProjects': associatedProjects,'cooperators': cooperatorsPK,
-    'associatedResources': associatedResources, 'members': members, 'permissionForm': permissionForm, 'editable': editable, 'isSearchPage': True})
+    'associatedResources': associatedResources, 'members': members, 'permissionForm': permissionForm, 'editable': editable, 'isSearchPage': True, 'LEGAL_STATUS':LEGAL_STATUS})
 
 
 def edit_organisation(request, pk):
@@ -130,13 +131,41 @@ def newEcsaOrganisationMembership(request, pk):
     if request.method == 'POST':
         form = NewEcsaOrganisationMembershipForm(request.POST)
         if form.is_valid():
-            #newEcsaOrganisationMembershipEmail(request.user.email, request.user.name)
-
+            newEcsaOrganisationMembershipEmail(request.user.email, request.user.name)
             form.save(request, pk)
             return redirect('/organisation/'+ str(pk))
 
     return render(request, 'new_ecsa_organisation_membership.html/', {'form': form, 'organisationID': pk})
 
+def newEcsaOrganisationMembershipEmail(email, name):
+    to_email = email
+    subject = 'Thank you! - Become a member of ECSA'          
+    message = render_to_string('accounts/emails/new_ecsa_individual_membership.html', { 'name': name, })
+    email = EmailMessage(subject, message, to=[to_email], )
+    email.content_subtype = "html"
+    email.send()
+
+
+def dropOutECSAmembership(request, pk):
+    organisation = get_object_or_404(Organisation, id=pk)    
+    organisation.ecsa_requested_join = False
+    organisation.ecsa_member = False
+    organisation.save()
+    return redirect("/users/me/organisations")
+
+def claimEcsaPaymentRevision(request, pk):
+    organisation = get_object_or_404(Organisation, id=pk)  
+    organisation.ecsa_payment_revision = True
+    organisation.save()
+    #send email
+    subject = 'ECSA membership payment revision'
+    from_email = organisation.contactPointEmail
+    message = "I want an ECSA membership payment revision"
+    try:
+        send_mail(subject, message, from_email, settings.EMAIL_CONTACT_RECIPIENT_LIST, html_message=message)
+    except BadHeaderError:
+        return HttpResponse('Invalid header found.')
+    return redirect("/users/me/organisations")
 
 def organisations(request):
     organisations = Organisation.objects.get_queryset().order_by('id')

@@ -68,7 +68,7 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 				</div>
 					
 
-				{% if show_user.profile.ecsa_member or show_user.profile.former_member %}
+				{% if show_user.profile.ecsa_member or show_user.profile.former_member or show_user.profile.ecsa_requested_join %}
 				<div class="card-header flex  flex-row-reverse">
 					<ul class="nav nav nav-tabs card-header-tabs mr-auto flex-row-reverse">
 						<li class="nav-item">
@@ -125,10 +125,18 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 							{% else %}
 								ECSA member
 							{% endif %}
-						</p>
+							</p>
 							<p><b>{% trans "Member since" %}: </b>{{ show_user.profile.ecsa_member_since | date:"d/m/Y" }}</p>
-							<p><b>{% trans "Payment revision" %}: </b>{{ show_user.profile.ecsa_payment_revision }}</p>
-							<p><b>{% trans "Member number" %}: </b>{{ show_user.profile.ecsa_member_number }}</p>								
+							<p><b>{% trans "Payment revision" %}: </b>{% if show_user.profile.ecsa_payment_revision %} Yes {% else %} No{% endif %}</p>
+							<p><b>{% trans "Member number" %}: </b>{{ show_user.profile.ecsa_member_number }}</p>							
+							<p><b>{% trans "Billing email" %}: </b>{{ show_user.profile.ecsa_billing_email }}</p>
+							<p><b>{% trans "Reduced fee" %}: </b>{{ show_user.profile.ecsa_reduced_fee }}</p>
+							<p><b>{% trans "Old member fee" %}: </b>{{ show_user.profile.ecsa_old_member_fee }}</p>
+							<p><b>{% trans "Street" %}: </b>{{ show_user.profile.street }}</p>
+							<p><b>{% trans "Postal code" %}: </b>{{ show_user.profile.postal_code }}</p>
+							<p><b>{% trans "City" %}: </b>{{ show_user.profile.city }}</p>
+							<p><b>{% trans "Country" %}: </b>{{ show_user.profile.country }}</p>
+							<p><b>{% trans "Occupation" %}: </b>{{ show_user.profile.occupation }}</p>
 						</div>							
 					</div>
 

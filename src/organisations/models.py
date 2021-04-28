@@ -3,6 +3,18 @@ from django.conf import settings
 from django_countries.fields import CountryField
 from django.utils.translation import ugettext_lazy as _
 
+
+LEGAL_STATUS = (
+    (0,"Profit"),
+    (1,"Non-profit")
+)
+"""
+ YES_NO = (
+    (0,"No"),
+    (1,"Yes")
+) 
+"""
+
 class OrganisationType(models.Model):
     type = models.TextField()
     def __str__(self):
@@ -38,9 +50,8 @@ class Organisation(models.Model):
     ecsa_billing_country = models.CharField(_("Country"), max_length=50, blank=True, null=True)
     ecsa_billing_email = models.EmailField(blank=True, null=True)
     #occupation = models.ForeignKey(OrganisationType, null=True, blank=True, on_delete=models.CASCADE)
-    #legal_status = 
-    #profit=
-    #has_vat_number =
+    legal_status = models.IntegerField(choices=LEGAL_STATUS)
+    has_vat_number = models.BooleanField(default=False)
     vat_number = models.IntegerField(null=True, blank=True)
     ecsa_reduced_fee = models.BooleanField(_("Reduced fee"), default=False)
     ecsa_old_organisation_fee = models.BooleanField(_("Old organisation fee"), default=False)
