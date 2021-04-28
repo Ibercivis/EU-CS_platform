@@ -343,7 +343,7 @@ msgid ""
 "Thank you for creating a profile for your organisation on the EU-Citizen."
 "Science Platform."
 msgstr ""
-"Grazie per aver creato un profilo della tua organizzazione sulla piattaforma "
+"Grazie per aver creato il profilo della tua organizzazione sulla piattaforma "
 "EU-Citizen.Science"
 
 #: .\src\organisations\templates\new_organisation.html:66
@@ -641,7 +641,7 @@ msgid ""
 "Organisation coordinating the project. If not listed, please add it <a href="
 "\"/new_organisation\">here</a>         before submitting the project"
 msgstr ""
-"Organizzazione che coordina il progetto. Se non è elencato, per favore aggiungilo <a href="
+"Organizzazione che coordina il progetto. Se non è elencata, per favore aggiungila <a href="
 "\"/new_organisation\">here</a>         prima di inviare il progetto"
 
 #: .\src\projects\forms.py:69
@@ -654,14 +654,16 @@ msgid ""
 "it         <a href=\"/new_organisation\">here</a> before submitting the "
 "project"
 msgstr ""
+"Organizzazione che coordina il progetto. Se non è elencata, per favore aggiungila <a href="
+"\"/new_organisation\">here</a>         prima di inviare il progetto"
 
 #: .\src\projects\forms.py:74
 msgid "Other Organisations"
-msgstr ""
+msgstr "Altre Organizzazioni"
 
 #: .\src\projects\forms.py:85
 msgid "Please name the contact person or contact point for the Project"
-msgstr ""
+msgstr "Si prega di fornire l'email per il contact person o il contact point"
 
 #: .\src\projects\forms.py:85
 msgid "Public Contact Point"
@@ -689,7 +691,7 @@ msgstr "Logo del progetto"
 
 #: .\src\projects\forms.py:101
 msgid "Will be resized to 600x400 pixels)"
-msgstr "Verrà ridimensionato a 600x400 pixel)"
+msgstr "Verrà ridimensionato a 600x400 pixel"
 
 #: .\src\projects\forms.py:107
 msgid "provide Logo credit, if applicable"
@@ -709,7 +711,7 @@ msgstr "Descrivi come le persone possono essere coinvolte nel progetto"
 
 #: .\src\projects\forms.py:125
 msgid "Can participate at home"
-msgstr "Si può partecipare a casa"
+msgstr "Si può partecipare da casa"
 
 #: .\src\projects\forms.py:128
 msgid "Describe any required or suggested equipment to be used in the project"
@@ -732,7 +734,7 @@ msgid ""
 "funding body)"
 msgstr ""
 "Ente finanziatore (metti una virgola dopo ogni nome o premi Invio per aggiungerne "
-"uno nuovo "
+"uno nuovo) "
 
 #: .\src\projects\forms.py:136
 msgid "Indication of the programme that funds or funded a project"
@@ -743,7 +745,7 @@ msgid ""
 "Do you know the name of the database where the project first appeared?, add "
 "it here ended by comma or pressing enter."
 msgstr ""
-"Conosci il nome del database in cui è apparso per la prima volta il progetto ?, aggiungilo "
+"Conosci il nome del database in cui è apparso per la prima volta il progetto ? Aggiungilo "
 "qui terminando con virgola o premendo invio"
 
 #: .\src\projects\forms.py:144
@@ -751,71 +753,74 @@ msgid ""
 "Do you know the Unique identificator of the project in the previous "
 "database?, add it here."
 msgstr ""
+"Conosci l'identificatore univoco del progetto nel precedente"
+"database? Aggiungilo qui."
 
 #: .\src\projects\forms.py:145
 msgid "Origin UID"
-msgstr ""
+msgstr "Origine UID"
 
 #: .\src\projects\forms.py:148
 msgid "Do you know the origin URL in the previous database?, add it here"
-msgstr ""
+msgstr "Conosci l'origine dell'URL nel precedente database? Aggiungilo qui."
 
 #: .\src\projects\forms.py:148
 msgid "Origin URL"
-msgstr ""
+msgstr "Origine URL"
 
 #: .\src\projects\templates\editProject.html:68
 msgid "You are going to delete this project, this procedure is irreversible."
-msgstr ""
+msgstr "Il progetto verrà eliminato, questa procedura è irreversibile"
 
 #: .\src\projects\templates\editProject.html:87
 msgid "Edit project"
-msgstr ""
+msgstr "Modifica il progetto"
 
 #: .\src\projects\templates\editProject.html:119
 #: .\src\projects\templates\new_project.html:116
 msgid "Project info"
-msgstr ""
+msgstr "Info sul progetto"
 
 #: .\src\projects\templates\editProject.html:173
 #: .\src\projects\templates\new_project.html:173
 msgid "Contact details"
-msgstr ""
+msgstr "Dettagli del contatto"
 
 #: .\src\projects\templates\editProject.html:189
 #: .\src\projects\templates\new_project.html:188
 msgid "Project profile images"
-msgstr ""
+msgstr "Immagine profilo del progetto"
 
 #: .\src\projects\templates\editProject.html:251
 #: .\src\projects\templates\new_project.html:236
 msgid "Geography"
-msgstr ""
+msgstr "Geografia"
 
 #: .\src\projects\templates\editProject.html:252
 msgid ""
 "Main location where the project takes place (Enter address or click on the "
 "map)"
-msgstr ""
+msgstr "Località principale dove si tiene il progetto (Inserisci l'indirizzo o clicca sulla"
+"mappa)"
 
 #: .\src\projects\templates\editProject.html:269
 #: .\src\projects\templates\new_project.html:261
 msgid "Supplementary information for Citizen Science"
-msgstr ""
+msgstr "Informazioni supplementari per Citizen Science"
 
 #: .\src\projects\templates\editProject.html:285
 #: .\src\projects\templates\new_project.html:276
 msgid "Funding"
-msgstr ""
+msgstr "Fondi"
 
 #: .\src\projects\templates\editProject.html:298
 #: .\src\projects\templates\new_project.html:289
 msgid "Origin information"
-msgstr ""
+msgstr "Informazioni sull'origine"
 
 #: .\src\projects\templates\editProject.html:316
 msgid "Custom fields"
-msgstr ""
+msgstr "Campi personalizzati"
 
 #: .\src\projects\templates\finder_projects.html:33
 #: .\src\resources\templates\finder_resources.html:22
@@ -825,7 +830,7 @@ msgstr "Ordina per Aggiornamento più recente"
 #: .\src\projects\templates\finder_projects.html:34
 #: .\src\resources\templates\finder_resources.html:23
 msgid "Sort by featured"
-msgstr ""
+msgstr "Ordina in base all'evidenza"
 
 #: .\src\projects\templates\finder_projects.html:35
 #: .\src\resources\templates\finder_resources.html:24
@@ -835,35 +840,35 @@ msgstr "Ordina per punteggio"
 #: .\src\projects\templates\finder_projects.html:46
 #: .\src\projects\templates\project.html:53
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: .\src\projects\templates\finder_projects.html:69
 msgid "Doable at home"
-msgstr ""
+msgstr "Fattibile da casa"
 
 #: .\src\projects\templates\finder_projects.html:70
 msgid "Yes"
-msgstr ""
+msgstr "Sì"
 
 #: .\src\projects\templates\finder_projects.html:71
 msgid "No"
-msgstr ""
+msgstr "No"
 
 #: .\src\projects\templates\finder_projects.html:74
 #: .\src\resources\templates\finder_resources.html:61
 msgid "Moderated"
-msgstr "Moderata"
+msgstr "Moderato"
 
 #: .\src\projects\templates\finder_projects.html:75
 #: .\src\resources\templates\finder_resources.html:62
 msgid "Not yet moderated"
-msgstr "Non ancora moderata"
+msgstr "Non ancora moderato"
 
 #: .\src\projects\templates\finder_projects.html:76
 #: .\src\resources\templates\finder_resources.html:63
 #: .\src\templates\_subnavbar.html:54
 msgid "All"
-msgstr "Tutte"
+msgstr "Tutti"
 
 #: .\src\projects\templates\modal_projects.html:8
 #: .\src\resources\templates\modal_resources.html:8
@@ -879,7 +884,8 @@ msgstr "Cerca"
 #: .\src\projects\templates\modal_projects.html:14
 msgid ""
 "projects by title or keywords by typing text directly into the the search bar"
-msgstr ""
+msgstr "" 
+"progetti per titolo o parola chiave digitando il testo direttamente nella barra di ricerca"
 
 #: .\src\projects\templates\modal_projects.html:15
 #: .\src\resources\templates\modal_resources.html:15
@@ -888,7 +894,7 @@ msgstr "Ordina"
 
 #: .\src\projects\templates\modal_projects.html:15
 msgid "projects by date or by rating"
-msgstr ""
+msgstr "progetti per data o punteggio"
 
 #: .\src\projects\templates\modal_projects.html:16
 #: .\src\resources\templates\modal_resources.html:16
@@ -897,7 +903,7 @@ msgstr "Filtro"
 
 #: .\src\projects\templates\modal_projects.html:16
 msgid "search results by project status, country, or topic"
-msgstr ""
+msgstr "cerca i risultati per progetto, paese o argomento"
 
 #: .\src\projects\templates\modal_projects.html:18
 msgid ""
@@ -905,11 +911,14 @@ msgid ""
 "as 'Moderated'.Only these will show in your search results unless you filter "
 "for 'not yet moderated' or 'All'."
 msgstr ""
+"I progetti inviati che sono stati sottoposti al processo di moderazione sono contrassegnati "
+"come 'Moderato'. Solo questi saranno mostrati nei tuoi risultati di ricerca a meno che tu filtri "
+"per 'Non ancora moderato' o 'Tutti'."
 
 #: .\src\projects\templates\modal_projects.html:20
 #: .\src\resources\templates\modal_resources.html:20
 msgid "Read more about our"
-msgstr "Leggi di più sul"
+msgstr "Leggi di più sul nostro"
 
 #: .\src\projects\templates\modal_projects.html:20
 #: .\src\projects\templates\new_project.html:103
@@ -919,7 +928,7 @@ msgstr "processo di moderazione"
 
 #: .\src\projects\templates\new_project.html:65
 msgid "Project is going to saved"
-msgstr ""
+msgstr "Il progetto sarà salvato"
 
 #: .\src\projects\templates\new_project.html:73
 #: .\src\resources\templates\new_resource.html:68
@@ -933,6 +942,10 @@ msgid ""
 "projects shared on the platform can indeed be considered citizen science "
 "projects."
 msgstr ""
+"Grazie per aver inviato il profilo del tuo progetto. Questo è stato inviato al "
+"team di moderazione di EU-Citizen.Science, che lo revisionerà per controllare che tutti "
+"i progetti condivisi sulla piattaforma siano inerenti agli argomenti "
+"trattati."
 
 #: .\src\projects\templates\new_project.html:75
 msgid ""
@@ -940,6 +953,9 @@ msgid ""
 "will see that your project changes from 'not yet moderated' to 'moderated' "
 "on the platform."
 msgstr ""
+"Ti contatteremo se avremo domande, altrimenti "
+"vedrai che il tuo progetto cambierà da 'Non ancora moderato' a 'Moderato' "
+"sulla piattaforma."
 
 #: .\src\projects\templates\new_project.html:76
 msgid ""
@@ -947,10 +963,13 @@ msgid ""
 "going to the Submitted projects section in your Personal Area (see the top-"
 "right of the platform menu)."
 msgstr ""
+"Puoi aggiornare o modificare questo progetto in qualsiasi momento, dalla "
+"sessione Progetti inviati nella tua Area Personale (vedi in alto "
+"a destra nel menù della piattaforma)."
 
 #: .\src\projects\templates\new_project.html:94
 msgid "New project"
-msgstr ""
+msgstr "Nuovo progetto"
 
 #: .\src\projects\templates\new_project.html:95
 msgid ""
