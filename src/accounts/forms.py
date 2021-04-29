@@ -118,36 +118,38 @@ class NewEcsaIndividualMembershipForm(forms.Form):
     occupation = forms.ModelChoiceField(queryset=OrganisationType.objects.all())
 
     def save(self, args, profileID):
-        street = self.data['street']
-        postal_code = self.data['postal_code']
-        city = self.data['city']
-        country = self.data['country']
-        ecsa_billing_email = self.data['ecsa_billing_email']
-
-        profile = get_object_or_404(Profile, user_id=profileID)
-        profile.street = street
-        profile.postal_code = postal_code
-        profile.city = city
-        profile.street = street
-        profile.postal_code = postal_code
-        profile.city = city
-        profile.country = country
-        profile.ecsa_billing_email = ecsa_billing_email
-
-        profile.ecsa_reduced_fee=False
-        if('ecsa_reduced_fee' in self.data and self.data['ecsa_reduced_fee'] == 'on'):
-            profile.ecsa_reduced_fee=True
-
-        profile.ecsa_old_member_fee=False
-        if('ecsa_old_member_fee' in self.data and self.data['ecsa_old_member_fee'] == 'on'):
-            profile.ecsa_old_member_fee=True
-
-        profile.occupation = get_object_or_404(OrganisationType, id=self.data['occupation'])
-        profile.ecsa_requested_join = True
-        
-        profile.save()
+        saveProfile(self, profileID)
         return 'success'
+
+def saveProfile(self, profileID):
+    street = self.data['street']
+    postal_code = self.data['postal_code']
+    city = self.data['city']
+    country = self.data['country']
+    ecsa_billing_email = self.data['ecsa_billing_email']
+
+    profile = get_object_or_404(Profile, user_id=profileID)
+    profile.street = street
+    profile.postal_code = postal_code
+    profile.city = city
+    profile.street = street
+    profile.postal_code = postal_code
+    profile.city = city
+    profile.country = country
+    profile.ecsa_billing_email = ecsa_billing_email
+
+    profile.ecsa_reduced_fee=False
+    if('ecsa_reduced_fee' in self.data and self.data['ecsa_reduced_fee'] == 'on'):
+        profile.ecsa_reduced_fee=True
+
+    profile.ecsa_old_member_fee=False
+    if('ecsa_old_member_fee' in self.data and self.data['ecsa_old_member_fee'] == 'on'):
+        profile.ecsa_old_member_fee=True
+
+    profile.occupation = get_object_or_404(OrganisationType, id=self.data['occupation'])
+    profile.ecsa_requested_join = True
     
+    profile.save()
 
 class PasswordChangeForm(authforms.PasswordChangeForm):
     def __init__(self, *args, **kwargs):
