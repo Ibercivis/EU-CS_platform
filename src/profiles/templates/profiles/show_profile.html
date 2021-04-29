@@ -2,11 +2,8 @@
 {% load i18n %}
 {% load staticfiles %}
 {% load thumbnail %}
-{% load leaflet_tags %}
 {% block head %}
 {{ block.super }}
-{% leaflet_js %}
-{% leaflet_css %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js"
 integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="anonymous"></script>
 {% endblock head %}
@@ -109,10 +106,6 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 							</p>
 						</div>
 					</div>
-					<div >
-						<label><strong>{% trans "Geographical location" %}</strong></label>
-						{% leaflet_map "map" callback="window.map_init_basic" %}
-					</div>
 				</div>
 
 				<div class="card-text myhidden" id="two">
@@ -151,15 +144,6 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 
 
 	<script type="text/javascript">
-		var map;
-		var marker_layer = new L.marker([50.5, 30.5]);
-
-		function map_init_basic (leafmap, options) {
-			map = leafmap;
-			map.setView([{{show_user.profile.latitude}}, {{show_user.profile.longitude}}], 12)
-			new L.marker([{{show_user.profile.latitude}},{{show_user.profile.longitude}}]).addTo(map);
-		}
-
 		$('#confirm-dropout').on('show.bs.modal', function(e) {
 			$(this).find('.btn-dropout').attr('href', $(e.relatedTarget).data('href'));
 		});
