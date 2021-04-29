@@ -31,7 +31,8 @@
 					<div class="card-text">
 						<form enctype="multipart/form-data" method="post">
 							{% csrf_token %}
-							{{ user_form.name|as_crispy_field }}							
+							{{ user_form.name|as_crispy_field }}						
+							{{ profile_form.lastname|as_crispy_field }}
 							{{ user_form.email|as_crispy_field }}
 
 							{{ profile_form.picture|as_crispy_field }}
@@ -44,6 +45,9 @@
 							{{ profile_form.latitude|as_crispy_field }}
 							{{ profile_form.longitude|as_crispy_field }}
 
+							{{ profile_form.city|as_crispy_field }}
+							{{ profile_form.country|as_crispy_field }}
+							{{ profile_form.postal_code|as_crispy_field }}
 							<br/><br/>
 							<button id="upload" type="submit" class="btn btn-green"><i class="fas fa-share-square"></i> {% trans "Save" %}</button>
 							<a class="btn btn-red float-right" href="{% url 'accounts:password-change' %}"><i class="fas fa-key"></i> {% trans "Change Password" %}</a>

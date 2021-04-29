@@ -39,6 +39,10 @@ class ProfileForm(forms.ModelForm):
             Field("choices"),
             Field("latitude"),
             Field("longitude"),
+            Field("lastname"),
+            Field("city"),
+            Field("country"),
+            Field("postal_code"),
             Submit("update", "Update", css_class="btn-green"),
         )
 
@@ -53,7 +57,7 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = models.Profile
         fields = ["picture", "title", "bio", "orcid", "interestAreas", "choices", "organisation",
-                "latitude", "longitude"]
+                "latitude", "longitude", "lastname", "city", "country", "postal_code"]
 
 
     def save(self, args):
