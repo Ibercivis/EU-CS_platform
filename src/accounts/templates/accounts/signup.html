@@ -63,6 +63,20 @@
     $('#div_id_ecsa_billing_email label, #div_id_street label, #div_id_postal_code label, #div_id_city label, #div_id_country label, #div_id_occupation label').append(
         $("<span>", {"class": "required-indicator"}).text("*")
     );
+    $('#div_id_ecsa_billing_email label').append('<br/><br/>')
+        .append('<input type="checkbox" id="use_same_billing_email" name="billing_email" value="same_billing_email">')
+        .append('<label for="use_same_billing_email">Use same user email as billing email</label></div>')
+        .append('<br/>');
+    
+    $('#use_same_billing_email').change(function () {
+      if( $('#use_same_billing_email').prop('checked') ) {
+        $("#id_ecsa_billing_email").hide();
+        $("#id_ecsa_billing_email").val($("#id_email").val())
+      }else{
+        $("#id_ecsa_billing_email").show(); 
+      }
+    });
+
     $('#div_id_ecsa_billing_email').append(
       $("<br/><span>").text("Please indicate if you are eligible to pay the reduced membership fee. The reduced fee can be selected if you are a student, unemployed or retired.")
     );
@@ -73,7 +87,7 @@
 
 
     $("#id_ecsa_individual_membership").on('change', function(e){
-      if($("#id_ecsa_individual_membership")[0].checked){
+      if($("#id_ecsa_individual_membership")[0].checked){   
         $("#div_id_ecsa_billing_email").show();        
         $("#div_id_ecsa_reduced_fee").show();     
         $("#div_id_ecsa_old_member_fee").show();
