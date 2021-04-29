@@ -5,7 +5,7 @@
 {% endblock subject %}
 
 {% block html_body  %}
-<p>Dear {{ name }} {{ name }},</p>
+<p>Dear {{ name }}{% if surname %} {{ surname }}{% endif %},</p>
 <p>This email is to inform you that we have successfully received your request to become a member of ECSA. Thank you!</p>
 <p>We will process your request in the next couple of days and get back to you shortly.</p>
 <p>In the meantime, you can read the benefits that come with being an ECSA member:</p>

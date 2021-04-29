@@ -61,7 +61,6 @@ class SignUpView(
         user = form.save(commit=False)
         user.is_active = False
         user.save()
-        #orcid = form.cleaned_data.get('orcid')
         ecsa_individual_membership = form.cleaned_data.get('ecsa_individual_membership')
         mail_subject = 'Activate your EU-Citizen.Science account.'
         message = render_to_string('accounts/acc_active_email.html', {
@@ -81,9 +80,8 @@ class SignUpView(
         send_mail(mail_subject, message, 'eu-citizen.science@ibercivis.es',[to_email], html_message=html_message)
 
         if(ecsa_individual_membership):
-            print(self.request)
             forms.saveProfile(form, user.id)
-            newEcsaIndividualMembershipEmail(to_email, user.name)
+            newEcsaIndividualMembershipEmail(to_email, user.name, user.profile.lastname)
 
         return render(self.request, 'accounts/confirm-email.html',{})
 
@@ -93,17 +91,17 @@ def newEcsaIndividualMembership(request):
     if request.method == 'POST':
         form = forms.NewEcsaIndividualMembershipForm(request.POST)
         if form.is_valid():
-            newEcsaIndividualMembershipEmail(request.user.email, request.user.name)
+            newEcsaIndividualMembershipEmail(request.user.email, request.user.name, request.user.profile.lastname)
             form.save(request, request.user.id)
 
         return redirect("profiles:show_self")
 
     return render(request, 'accounts/new_ecsa_individual_membership.html', {'form': form})
 
-def newEcsaIndividualMembershipEmail(email, name):
+def newEcsaIndividualMembershipEmail(email, name, surname):
     to_email = email
     subject = 'Thank you! - Become a member of ECSA'          
-    message = render_to_string('accounts/emails/new_ecsa_individual_membership.html', { 'name': name, })
+    message = render_to_string('accounts/emails/new_ecsa_individual_membership.html', { 'name': name, 'surname': surname})
     email = EmailMessage(subject, message, to=[to_email], )
     email.content_subtype = "html"
     email.send()
