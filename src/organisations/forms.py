@@ -2,7 +2,7 @@ from django import forms
 from django_select2.forms import Select2MultipleWidget
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
-from .models import Organisation, OrganisationType, LEGAL_STATUS
+from .models import Organisation, OrganisationType, LEGAL_STATUS, YES_NO
 from projects.forms import getCountryCode
 
 class OrganisationForm(forms.Form):
@@ -71,8 +71,8 @@ class NewEcsaOrganisationMembershipForm(forms.Form):
     ecsa_billing_country = forms.CharField(label=_("Billing country"))
     ecsa_billing_email = forms.EmailField(label=_("Billing email"))
     #occupation = models.ForeignKey(OrganisationType, null=True, blank=True, on_delete=models.CASCADE)
-    legal_status = forms.ChoiceField(choices=LEGAL_STATUS)    
-    #has_vat_number =
+    legal_status = forms.ChoiceField(choices=LEGAL_STATUS)
+    has_vat_number = forms.ChoiceField(choices=YES_NO)
     vat_number = forms.IntegerField(required=False)
     ecsa_reduced_fee = forms.BooleanField(required=False, label=_("Yes, I would like to pay the reduced fee."))
     ecsa_old_organisation_fee = forms.BooleanField(required=False, label=_("Yes, I am a member of CSA or ACSA and would like to get an additional 20% discount."))
@@ -87,8 +87,6 @@ class NewEcsaOrganisationMembershipForm(forms.Form):
         ecsa_billing_country = self.data['ecsa_billing_country']
         ecsa_billing_email = self.data['ecsa_billing_email']
         
-        #vat_number = self.data['vat_number']
-
 
         organisation = get_object_or_404(Organisation, id=organisationID)
         organisation.street = street
@@ -99,8 +97,12 @@ class NewEcsaOrganisationMembershipForm(forms.Form):
         organisation.ecsa_billing_city = ecsa_billing_city
         organisation.ecsa_billing_country = ecsa_billing_country
         organisation.ecsa_billing_email = ecsa_billing_email
-
-        #organisation.vat_number = vat_number
+        
+        if self.data['vat_number'] != '':
+            organisation.vat_number = self.data['vat_number']
+        else:
+            organisation.vat_number = None
+        
         organisation.ecsa_reduced_fee=False
         if('ecsa_reduced_fee' in self.data and self.data['ecsa_reduced_fee'] == 'on'):
             organisation.ecsa_reduced_fee=True

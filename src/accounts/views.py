@@ -81,7 +81,7 @@ class SignUpView(
 
         if(ecsa_individual_membership):
             forms.saveProfile(form, user.id)
-            newEcsaIndividualMembershipEmail(to_email, user.name, user.profile.lastname)
+            newEcsaIndividualMembershipEmail(to_email, user.name, form.cleaned_data.get('lastname'))
 
         return render(self.request, 'accounts/confirm-email.html',{})
 
@@ -100,9 +100,9 @@ def newEcsaIndividualMembership(request):
 
 def newEcsaIndividualMembershipEmail(email, name, surname):
     to_email = email
-    subject = 'Thank you! - Become a member of ECSA'          
+    subject = 'Thank you! - Become a member of ECSA'
     message = render_to_string('accounts/emails/new_ecsa_individual_membership.html', { 'name': name, 'surname': surname})
-    email = EmailMessage(subject, message, to=[to_email], )
+    email = EmailMessage(subject, message, to=[to_email], bcc=settings.EMAIL_ECSA_ADMIN)
     email.content_subtype = "html"
     email.send()
 

@@ -141,7 +141,7 @@ def newEcsaOrganisationMembershipEmail(email, name):
     to_email = email
     subject = 'Thank you! - Become a member of ECSA'          
     message = render_to_string('accounts/emails/new_ecsa_individual_membership.html', { 'name': name, })
-    email = EmailMessage(subject, message, to=[to_email], )
+    email = EmailMessage(subject, message, to=[to_email], bcc=settings.EMAIL_ECSA_ADMIN)
     email.content_subtype = "html"
     email.send()
 

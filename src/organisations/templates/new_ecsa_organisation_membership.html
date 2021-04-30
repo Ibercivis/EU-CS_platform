@@ -76,6 +76,15 @@
                                     </div>
                                 </div>
 
+                                <div class="form-row">
+                                    <div class="col-12 mb-3">
+                                    {{ form.has_vat_number|as_crispy_field }}
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                    {{ form.vat_number|as_crispy_field }}
+                                    </div>
+                                </div>
+
 
                                 <div class="form-row">
                                     <div class="col-12 mb-3">
@@ -102,3 +111,23 @@
     </div>
 </div>
 {% endblock list_of_items %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function () {
+        $("#div_id_vat_number").hide();
+
+        $('#id_has_vat_number').change(function () {
+            var value = $('#id_has_vat_number').val()
+            if(value == 0){
+                $("#div_id_vat_number").hide();
+            }else{
+                $("#div_id_vat_number").show();
+                $('#div_id_vat_number label').append(
+                    $("<span>", {"class": "required-indicator"}).text("*")
+                );
+            }
+        });
+    });
+</script>
+{% endblock scripts %}
