@@ -29,6 +29,9 @@ class ProjectForm(forms.Form):
 
     description = forms.CharField(widget=CKEditorWidget(config_name='frontpage'), help_text=_('Please describe the citizen science aspect(s) of the project - see the <a href="https://zenodo.org/communities/citscicharacteristics">ECSA Characteristics of Citizen Science</a> for guidance'),\
         max_length = 3000)
+    
+    description_citizen_science_aspects = forms.CharField(widget=CKEditorWidget(config_name='frontpage'), help_text=_('Please describe the citizen science aspect(s) of the project – for guidance see the <a href="https://zenodo.org/communities/citscicharacteristics">ECSA Characteristics of Citizen Science</a> as well as the <a href="https://osf.io/xpr2n/">ECSA 10 Principles of Citizen Science</a>. What you introduce in this text field will not appear on the platform; it is just for moderation purposes and for the administrators of the platform to see.'),\
+        max_length = 2000, label=_('Description of Citizen Science Aspects'))
 
     topic = forms.ModelMultipleChoiceField(queryset=Topic.objects.all(),\
         widget=Select2MultipleWidget(), help_text=_('The project topic(s) or field(s) of science, multiple selection'), \
@@ -231,7 +234,7 @@ class ProjectForm(forms.Form):
                          creator=args.user,
                          author = self.data['contact_person'], author_email = self.data['contact_person_email'],
                          latitude = latitude, longitude = longitude, country = country,
-                         aim = self.data['aim'], description = self.data['description'],
+                         aim = self.data['aim'], description = self.data['description'], description_citizen_science_aspects = self.data['description_citizen_science_aspects'],
                          status = status, imageCredit1 = self.data['image_credit1'],
                          imageCredit2 = self.data['image_credit2'], imageCredit3 = self.data['image_credit3'],
                          howToParticipate = self.data['how_to_participate'],equipment = self.data['equipment'],
@@ -249,6 +252,7 @@ class ProjectForm(forms.Form):
         project.country = country
         project.aim = self.data['aim']
         project.description = self.data['description']
+        project.description_citizen_science_aspects = self.data['description_citizen_science_aspects']
         project.status = status
         project.imageCredit1 = self.data['image_credit1']
         project.imageCredit2 = self.data['image_credit2']
