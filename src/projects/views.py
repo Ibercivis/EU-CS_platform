@@ -185,7 +185,7 @@ def editProject(request, pk):
 
     form = ProjectForm(initial={
         'project_name':project.name,'url': project.url,'start_date': start_datetime, 'projectlocality': project.projectlocality,
-        'end_date':end_datetime, 'aim': project.aim, 'description': project.description,
+        'end_date':end_datetime, 'aim': project.aim, 'description': project.description, 'description_citizen_science_aspects': project.description_citizen_science_aspects,
         'status': project.status, 'choices': choices, 'mainOrganisation': project.mainOrganisation,
         'organisation': project.organisation.all,
         'topic':project.topic.all, 'participationtask': project.participationtask.all, 'geographicextend': project.geographicextend.all,
