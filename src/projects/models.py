@@ -53,6 +53,7 @@ class Project(models.Model):
     name = models.CharField(max_length=200)
     aim = models.CharField(max_length=2000)
     description = models.CharField(max_length=3000)
+    description_citizen_science_aspects = models.CharField(max_length=2000)
     keywords = models.ManyToManyField(Keyword, blank=True)
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
     start_date = models.DateTimeField('Start date', null=True, blank=True)

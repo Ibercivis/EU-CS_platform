@@ -214,7 +214,7 @@ def editResource(request, pk):
         'withImage1': (True, False)[resource.image1 == ""],'withImage2': (True, False)[resource.image2 == ""],
         'url': resource.url,'license': resource.license, 'choices': choices, 'theme': resource.theme.all,'organisation': resource.organisation.all,
         'audience' : resource.audience.all, 'publisher': resource.publisher, 'year_of_publication': resource.datePublished,
-        'authors': resource.authors.all, 'authorsCollection': authorsCollection,
+        'authors': resource.authors.all, 'authorsCollection': authorsCollection, 'description_citizen_science_aspects': resource.description_citizen_science_aspects,
         'image_credit1': resource.imageCredit1,'image_credit2': resource.imageCredit2,
         'category': getCategory(resource.category), 'categorySelected': resource.category.id,
         'education_level': educationLevel, 'educationLevelSelected': resource.educationLevel,
