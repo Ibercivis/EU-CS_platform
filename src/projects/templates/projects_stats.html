@@ -1,82 +1,108 @@
 <html>
 	<body>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-colorschemes"></script>
-<script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<div id="regions_div" style="width: 900px; height: 500px;"></div>
-<div id="donutchart" style="width: 900px; height: 800px;"></div>
-<canvas id="pPerCountryChart" width="400" height="400"></canvas>
-<canvas id="pPerTopicChart" width="400" height="400"></canvas>
 
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-colorschemes"></script>
+		<script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		<div id="regions_div" style="width: 900px; height: 500px;"></div>
+		<div id="donutchart" style="width: 900px; height: 800px;"></div>
+		<div id="donutchart2" style="width: 900px; height: 800px;"></div>
+		<div id="calendar_basic" style="width: 1000px; height: 800px;"></div>
 
-<script>
-  google.charts.load('current', {
-        'packages':['geochart'],
-        // Note: you will need to get a mapsApiKey for your project.
-        // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
-        'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
-      });
-      google.charts.setOnLoadCallback(drawRegionsMap);
+		<script>
+			google.charts.load('current', {
+				'packages':['geochart'],
+				// Note: you will need to get a mapsApiKey for your project.
+				// See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+				'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+			});
+google.charts.setOnLoadCallback(drawRegionsMap);
 
-      function drawRegionsMap() {
-        var data = google.visualization.arrayToDataTable([
-          ['Country', 'Popularity']
-				{% for ppc in pPerCountry %}
-								,['{{ppc.country}}', {{ppc.count}}]
-					{% endfor %}
-        ]);
+function drawRegionsMap() {
+	var data = google.visualization.arrayToDataTable([
+		['Country', '# of projects']
+		{% for ppc in pPerCountry %}
+		,['{{ppc.country}}', {{ppc.count}}]
+		{% endfor %}
+	]);
 
-        var options = {};
+	var options = {};
 
-        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+	var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
 
-        chart.draw(data, options);
-      }
+	chart.draw(data, options);
+}
 google.charts.load("current", {packages:["corechart"]});
+/* Donut project per country */
+google.charts.setOnLoadCallback(drawChartPieCountry);
+google.charts.setOnLoadCallback(drawChartPieTopic);
+function drawChartPieCountry() {
+	var data = google.visualization.arrayToDataTable([
+		['Country', '# of projects']
+		{% for ppc in pPerCountry %}
+		,['{{ppc.country}}', {{ppc.count}}]
+		{% endfor %}
+	]);
+
+	var options = {
+		title: '# of projects per country',
+		pieSliceText: 'label',
+		sliceVisibilityThreshold: .014,
+		pieHole: 0.4,
+	};
+	var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+	chart.draw(data, options);
+} 
+/* Donut project per topic */
+function drawChartPieTopic() {
+	var data = google.visualization.arrayToDataTable([
+		['Topic', '# of projects']
+		{% for ppt in pPerTopic %}
+		,[htmlDecode('{{ppt.topic__topic}}'), {{ppt.count}}]
+		{% endfor %}
+	]);
+
+	var options = {
+		title: '# of projects per topic',
+		pieSliceText: 'label',
+		sliceVisibilityThreshold: .014,
+		pieHole: 0.4,
+	};
+	var chart = new google.visualization.PieChart(document.getElementById('donutchart2'));
+	chart.draw(data, options);
+} 
+   function htmlEncode(value) {
+        return $('<textarea/>').text(value).html();
+      }
+     function htmlDecode(value) {
+        return $("<textarea/>").html(value).text();
+      }
+		</script>
+		<script type="text/javascript">
+      google.charts.load("current", {packages:["calendar"]});
       google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day']
-				{% for ppc in pPerCountry %}
-								,['{{ppc.country}}', {{ppc.count}}]
+
+   function drawChart() {
+       var dataTable = new google.visualization.DataTable();
+       dataTable.addColumn({ type: 'date', id: 'Date' });
+       dataTable.addColumn({ type: 'number', id: 'Won/Loss' });
+       dataTable.addRows([
+					{% for ppd in pPerDay %}
+							 [ new Date({{ppd.day |date:"Y,m,d"}}), {{ppd.count}}],
 					{% endfor %}
+          [ new Date(2020, 9, 30), 0 ]
         ]);
 
-        var options = {
-          title: 'My Daily Activities',
-				  pieSliceText: 'label',
-					sliceVisibilityThreshold: .014,
-          pieHole: 0.4,
-        };
+       var chart = new google.visualization.Calendar(document.getElementById('calendar_basic'));
 
-        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
-        chart.draw(data, options);
-      } 
+       var options = {
+         title: "Red Sox Attendance",
+         height: 500,
+       };
 
-var ctx2 = document.getElementById('pPerTopicChart').getContext('2d');
-var pPerTopicChar = new Chart(ctx2, {
-    type: 'pie',
-    data: {
-	labels: [{% for ppt in pPerTopic %} "{{ppt.topic__topic}}", {% endfor%}],
-        datasets: [{
-            label: '# of projects by topic',
-	    data: [{% for ppt in pPerTopic %} {{ppt.count}}, {% endfor %}],
-        }]
-    },
-    options: {
-	 plugins: {
-            colorschemes: {
-                scheme: 'tableau.HueCircle19'
-            },
-            labels: {
-		    render: 'label',
-		    position: 'outside'
-	    }
-        },
-	cutoutPercentage: 50
-    }
-});
-
-</script>
+       chart.draw(dataTable, options);
+   }
+    </script>
 	</body>
