@@ -370,17 +370,17 @@
             return $.trim($(this).text());
           }).get().join(',');
           if(option_all){
-            $("#id_choices").val(option_all);
-            $("#id_keywords").empty();
+            $("#id_choices").val(option_all);            
           }
+          $("#id_keywords").empty();
 
           authors = $("#id_authors option:selected").map(function () {
             return $.trim($(this).text());
           }).get().join(',');
           if(authors){
-            $("#id_authorsCollection").val(authors);
-            $("#id_authors").empty();
+            $("#id_authorsCollection").val(authors);            
           }
+          $("#id_authors").empty();
 
           var category = $("#id_category").val();
           $("#id_categorySelected").val(category);
@@ -393,17 +393,17 @@
             return $.trim($(this).text());
           }).get().join(',');
           if(educationLevel){
-            $("#id_educationLevelSelected").val(educationLevel);
-            $("#id_education_level").empty();
+            $("#id_educationLevelSelected").val(educationLevel);            
           }
+          $("#id_education_level").empty();
 
           var learningResourceType = $("#id_learning_resource_type option:selected").map(function () {
             return $.trim($(this).text());
           }).get().join(',');
           if(learningResourceType){
-            $("#id_learningResourceTypeSelected").val(learningResourceType);
-            $("#id_learning_resource_type").empty();
+            $("#id_learningResourceTypeSelected").val(learningResourceType);            
           }
+          $("#id_learning_resource_type").empty();
         }
 
       }

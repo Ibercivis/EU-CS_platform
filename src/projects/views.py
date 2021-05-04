@@ -31,9 +31,7 @@ User = get_user_model()
 @login_required(login_url='/login')
 def new_project(request):
     user = request.user
-    choices = list(Keyword.objects.all().values_list('keyword',flat=True))
-    choices = ", ".join(choices)
-    form = ProjectForm(initial={'choices': choices})
+    form = ProjectForm()
     if request.method == 'POST':
         mainOrganisationFixed = request.POST.get('mainOrganisation', False)
         form = ProjectForm(request.POST, request.FILES)
