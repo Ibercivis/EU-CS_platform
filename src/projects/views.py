@@ -42,7 +42,7 @@ def new_project(request):
             form.save(request, images, [], mainOrganisationFixed)
             messages.success(request, _('Project added correctly'))
 
-            subject = 'New project submitted'          
+            subject = 'New project submitted' 
             message = render_to_string('emails/new_project.html', {"domain": settings.HOST})
             to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
             to.append(user.email)
@@ -54,13 +54,13 @@ def new_project(request):
         else:
             print(form.errors)
 
-    return render(request, 'new_project.html', {'form': form, 'user':user})
+    return render(request, 'new_project.html', {'form': form, 'user': user})
 
 
 def projects(request):
     projects = Project.objects.get_queryset()
-    approvedProjects = ApprovedProjects.objects.all().values_list('project_id',flat=True)
-    unApprovedProjects = UnApprovedProjects.objects.all().values_list('project_id',flat=True)
+    approvedProjects = ApprovedProjects.objects.all().values_list('project_id', flat=True)
+    unApprovedProjects = UnApprovedProjects.objects.all().values_list('project_id', flat=True)
     user = request.user
     followedProjects = None
     followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id',flat=True)
@@ -641,14 +641,14 @@ def getKeywordsSelector(request):
 
     return JsonResponse(response)
 
+
 def projects_stats(request):
     pPerCountry = Project.objects.values('country').annotate(count=Count('country')).order_by('-count')
     for ppc in pPerCountry:
-        if ppc['country'] !='':
-            ppc['country']=(dict(countries)[ppc['country']])
+        if ppc['country'] != '':
+            ppc['country'] = (dict(countries)[ppc['country']])
         else:
-            ppc['country']='No country defined'
+            ppc['country'] = ' No country defined'
 
     pPerTopic = Project.objects.values('topic__topic').annotate(count=Count('topic')).order_by('-count')
-    print(pPerTopic)
-    return render(request, 'projects_stats.html',{'pPerCountry':pPerCountry,'pPerTopic':pPerTopic})
+    return render(request, 'projects_stats.html', {'pPerCountry': pPerCountry,'pPerTopic':pPerTopic})
