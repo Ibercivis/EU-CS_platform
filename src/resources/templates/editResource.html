@@ -81,7 +81,7 @@
               <h2 clas="float-left">{% trans "Edit resource" %}</h2>
             </div>
             <div class="col-6">
-              <button type="submit" onclick="$('form').submit()" class="btn btn-green"><i class="fas fa-share-square"></i> {% trans "Save" %}</button>
+              <button type="submit" onclick="$('#id_submit').click()" class="btn btn-green"><i class="fas fa-share-square"></i> {% trans "Save" %}</button>
               <button type="submit" class="btn btn-red float-right" data-href="{% if isTrainingResource %} {% url 'deleteResource' resource.id  1 %} {% else %} {% url 'deleteResource' resource.id  0 %} {% endif %}"
                 data-toggle="modal" data-target="#confirm-delete" name='deleteResource'>
                 <span class="fas fa-trash-alt"></span> {% trans "Delete" %}
@@ -125,6 +125,9 @@
               <div class="form-row">
                 <div class="col-12">
                   {{ form.abstract|as_crispy_field }}
+                </div>
+                <div class="col-12">
+                  {{ form.description_citizen_science_aspects|as_crispy_field }}
                 </div>
                 <div class="col-12">
                   {{ form.category|as_crispy_field }}
@@ -253,7 +256,7 @@
                 {{ form.time_required|as_crispy_field }}
                 {{ form.conditions_of_access|as_crispy_field }}
               {% endif %}
-              <button type="submit" class="btn btn-green mb-5"><i class="fas fa-share-square"></i> {% trans "Save" %}</button>
+              <button type="submit" id="id_submit" class="btn btn-green mb-5"><i class="fas fa-share-square"></i> {% trans "Save" %}</button>
             </form>
           </table>
         </div>

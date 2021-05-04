@@ -134,6 +134,12 @@
                       {{ form.description|as_crispy_field }}
                     </div>
                   </div>
+                  
+                  <div  class="form-row">
+                    <div class="col-12 mb-3">
+                      {{ form.description_citizen_science_aspects|as_crispy_field }}
+                    </div>
+                  </div>
 
                   <div class="form-row">
                     <div class="col-12 mb-3">
@@ -476,21 +482,27 @@
           }else{
             var option_all = $("#id_keywords option:selected").map(function () {
               return $.trim($(this).text());
-            }).get().join(',');          
-            $("#id_choices").val(option_all);
-            $("#id_keywords").empty();
+            }).get().join(',');
+            if(option_all){
+              $("#id_choices").val(option_all);
+              $("#id_keywords").empty();  
+            }            
 
             var fundingBody = $("#id_funding_body option:selected").map(function () {
               return $.trim($(this).text());
             }).get().join(',');
-            $("#id_fundingBodySelected").val(fundingBody);
-            $("#id_funding_body").empty();
+            if(fundingBody){
+              $("#id_fundingBodySelected").val(fundingBody);
+              $("#id_funding_body").empty();
+            }
 
             var originDatabase = $("#id_origin_database option:selected").map(function () {
               return $.trim($(this).text());
             }).get().join(',');
-            $("#id_originDatabaseSelected").val(originDatabase);
-            $("#id_origin_database").empty();
+            if(originDatabase){
+              $("#id_originDatabaseSelected").val(originDatabase);
+              $("#id_origin_database").empty();
+            }
           }
         }
       });
