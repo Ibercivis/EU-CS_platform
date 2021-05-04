@@ -9,7 +9,7 @@ from django.core.mail import EmailMessage
 from django.utils import formats
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
-from django.db.models import Q, Avg, Count
+from django.db.models import Q, Avg, Count, Sum
 from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
 from datetime import datetime
@@ -80,7 +80,6 @@ def projects(request):
 
     projects = projects.filter(~Q(hidden=True))
 
-
     if not user.is_staff:
         projects = projects.exclude(id__in=unApprovedProjects)
 
@@ -110,11 +109,10 @@ def projects(request):
             else:
                 projects = list(projectsVoted) + list(projects)
 
-        filters['orderby']=request.GET['orderby']
+        filters['orderby'] = request.GET['orderby']
     else:
-        projects=projects.order_by('-dateUpdated')
+        projects = projects.order_by('-dateUpdated')
 
-    
     counter = len(projects)
 
     paginator = Paginator(projects, 12)
@@ -507,10 +505,12 @@ def allowUser(request):
 
     return JsonResponse(response, safe=False)
 
+
 def project_review(request, pk):
     return render(request, 'project_review.html', {'projectID': pk})
 
-### Download all projects in a CSV file
+
+# Download all projects in a CSV file
 def downloadProjects(request):
     projects = Project.objects.get_queryset()
 
@@ -521,16 +521,17 @@ def downloadProjects(request):
     response['Content-Disposition'] = 'attachment; filename="projects.csv"'
     return response
 
+
 def get_headers():
     return ['id', 'name', 'aim', 'description', 'keywords','status', 'start_date', 'end_date', 'topic', 'url', 'country',
      'host', 'howToParticipate', 'doingAtHome', 'equipment', 'fundingBody', 'fundingProgram', 'originDatabase', 'originURL', 'originUID']
+
 
 def get_data(item):
     keywordsList = list(item.keywords.all().values_list('keyword', flat=True))
     topicList = list(item.topic.all().values_list('topic', flat=True))
     participationtaskList = list(item.participationtask.all().values_list('participationtask', flat=True))
     geographicextendList = list(item.geographicextend.all().values_list('geographicextend', flat=True))
-
 
     return {
         'id': item.id,
@@ -542,8 +543,8 @@ def get_data(item):
         'start_date': item.start_date,
         'end_date': item.end_date,
         'topic': topicList,
-        'participationtask' : participationtaskList,
-        'geographicextend' : geographicextendList,
+        'participationtask': participationtaskList,
+        'geographicextend': geographicextendList,
         'url': item.url,
         'projectlocality': item.projectlocality,
         'country': item.country,
@@ -620,10 +621,10 @@ def getKeywordsSelector(request):
     if keywords:
         for keyword in keywords:
             found = False
-            if(keywordsSelected):                
+            if(keywordsSelected):
                 for key in keywordsSelected:
                     if(str(keyword[1]) == key):
-                        found=True
+                        found = True
                         options += '<option value = "%s" selected>%s</option>' % (
                             keyword[0],
                             keyword[1]
@@ -649,6 +650,7 @@ def projects_stats(request):
             ppc['country'] = (dict(countries)[ppc['country']])
         else:
             ppc['country'] = ' No country defined'
-
+    time_zone = 'Australia/ACT'
+    pPerDay = Project.objects.extra({'day': 'date("dateCreated")'}).values('day').annotate(count=Count('id'))
     pPerTopic = Project.objects.values('topic__topic').annotate(count=Count('topic')).order_by('-count')
-    return render(request, 'projects_stats.html', {'pPerCountry': pPerCountry,'pPerTopic':pPerTopic})
+    return render(request, 'projects_stats.html', {'pPerCountry': pPerCountry,'pPerTopic':pPerTopic,'pPerDay':pPerDay})
