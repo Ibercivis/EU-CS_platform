@@ -15,9 +15,25 @@ User = get_user_model()
 
 class UserProfileInline(admin.StackedInline):
     model = Profile
+    
+    
+
+    fieldsets = (
+    (None, {
+        'fields':('lastname','picture','title', 'bio','interestAreas','latitude','longitude', 'email_verified', 'orcid','organisation', 'occupation'),
+    }),
+    ('Address', {
+        'fields': ('street','postal_code', 'city', 'country'),
+    }),
+    ('ECSA membership', {
+        #'classes': ('collapse',),
+        'fields': ('ecsa_member','ecsa_requested_join','ecsa_member_since','ecsa_payment_revision','ecsa_member_number','ecsa_billing_email','ecsa_reduced_fee','ecsa_old_member_fee'),
+    }),
+    )
 
 
 class NewUserAdmin(NamedUserAdmin):
+    change_form_template = "profiles/change_form_test.html"
     inlines = [UserProfileInline]
     list_display = (
         "is_active",
@@ -27,8 +43,7 @@ class NewUserAdmin(NamedUserAdmin):
         "is_superuser",
         "is_staff",
     )
-    list_filter = ["is_active", "profile__ecsa_member", "profile__ecsa_requested_join", "is_superuser"]
-
+    list_filter = ["is_active", "profile__ecsa_member", "profile__ecsa_requested_join", "is_superuser"]    
 
     # 'View on site' didn't work since the original User model needs to
     # have get_absolute_url defined. So showing on the list display
