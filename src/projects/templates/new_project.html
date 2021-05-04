@@ -482,27 +482,27 @@
           }else{
             var option_all = $("#id_keywords option:selected").map(function () {
               return $.trim($(this).text());
-            }).get().join(',');
+            }).get().join(',');         
             if(option_all){
-              $("#id_choices").val(option_all);
-              $("#id_keywords").empty();  
-            }            
+              $("#id_choices").val(option_all);              
+            }
+            $("#id_keywords").empty();
 
             var fundingBody = $("#id_funding_body option:selected").map(function () {
               return $.trim($(this).text());
             }).get().join(',');
             if(fundingBody){
-              $("#id_fundingBodySelected").val(fundingBody);
-              $("#id_funding_body").empty();
+              $("#id_fundingBodySelected").val(fundingBody);              
             }
+            $("#id_funding_body").empty();
 
             var originDatabase = $("#id_origin_database option:selected").map(function () {
               return $.trim($(this).text());
             }).get().join(',');
             if(originDatabase){
-              $("#id_originDatabaseSelected").val(originDatabase);
-              $("#id_origin_database").empty();
+              $("#id_originDatabaseSelected").val(originDatabase);              
             }
+            $("#id_origin_database").empty();
           }
         }
       });

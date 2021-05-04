@@ -76,7 +76,7 @@ class ProjectForm(forms.Form):
         <a href="/new_organisation">here</a> before submitting the project'),\
         required=False,label=_("Other Organisations"))
 
-    choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
+    choices = forms.CharField(widget=forms.HiddenInput(),required=False)
 
     #Contact Information
     host = forms.CharField(max_length=100, \
