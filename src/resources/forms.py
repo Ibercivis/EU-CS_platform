@@ -25,6 +25,9 @@ class ResourceForm(forms.ModelForm):
     abstract = forms.CharField(widget=CKEditorWidget(config_name='frontpage'),\
         help_text=_('Please briefly describe the resource (ideally in 500 words or less)'), max_length = 3000)
 
+    description_citizen_science_aspects = forms.CharField(widget=CKEditorWidget(config_name='frontpage'), help_text=_('Please describe the link between citizen science and the resource you are uploading – for guidance see the <a href="https://zenodo.org/communities/citscicharacteristics">ECSA Characteristics of Citizen Science</a> as well as the <a href="https://osf.io/xpr2n/">ECSA 10 Principles of Citizen Science</a>. What you introduce in this text field will not appear on the platform; it is just for moderation purposes and for the administrators of the platform to see.'),\
+        max_length = 2000, label=_('Description of Citizen Science Aspects'))
+
     category = forms.ModelChoiceField(queryset=Category.objects.filter(parent__isnull=True),\
         help_text=_('Select one of the proposed categories'))
     choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
@@ -101,7 +104,7 @@ class ResourceForm(forms.ModelForm):
 
     class Meta:
         model = Resource
-        fields = ["name", "abstract", "url", "audience", "theme","keywords", "license", "publisher", "curatedList",
+        fields = ["name", "abstract", "description_citizen_science_aspects","url", "audience", "theme","keywords", "license", "publisher", "curatedList",
          "category", "authors", "image1", "x1", "y1", "width1", "height1", "resource_DOI", "year_of_publication", 'image_credit1', 'image_credit2']
 
     def save(self, args, images):
@@ -116,6 +119,7 @@ class ResourceForm(forms.ModelForm):
                 rsc.hidden = False
             rsc.name = self.data['name']
             rsc.abstract = self.data['abstract']
+            rsc.description_citizen_science_aspects = self.data['description_citizen_science_aspects']
             rsc.url = self.data['url']
             rsc.license = self.data['license']
             rsc.publisher = self.data['publisher']

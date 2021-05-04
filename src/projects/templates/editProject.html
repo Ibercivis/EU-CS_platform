@@ -87,7 +87,7 @@
               <h2 class="float-left">{% trans "Edit project" %}</h2>
             </div>
             <div class="col-6">
-              <button type="submit" onclick="$('form').submit()" class="btn btn-green"><i class="fas fa-share-square"></i> {% trans "Save" %}</button>
+              <button type="submit" onclick="$('#id_submit').click()" class="btn btn-green"><i class="fas fa-share-square"></i> {% trans "Save" %}</button>
               <button type="submit" class="btn btn-red float-right" data-href="{% url 'deleteProject' project.id %}"
               data-toggle="modal" data-target="#confirm-delete" name='deleteProject'><i class="fas fa-trash-alt"></i> {% trans "Delete" %}
             </button>
@@ -135,6 +135,12 @@
               </div>
               <div class="col-12 mb-3">
                 {{ form.aim|as_crispy_field }}
+              </div>
+            </div>
+
+            <div  class="form-row">
+              <div class="col-12 mb-3">
+                {{ form.description_citizen_science_aspects|as_crispy_field }}
               </div>
             </div>
 
@@ -330,7 +336,7 @@
           </div>
           <hr/>
           {% endfor %}
-          <button type="submit" class="btn btn-green mb-5"><i class="fas fa-share-square"></i> {% trans "Save" %}</button>
+          <button type="submit" id="id_submit" class="btn btn-green mb-5"><i class="fas fa-share-square"></i> {% trans "Save" %}</button>
         </form>
       </table>
     </div>

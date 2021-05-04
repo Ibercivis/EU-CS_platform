@@ -57,6 +57,7 @@ class Resource(models.Model):
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     authors = models.ManyToManyField(Author)
     abstract = models.CharField(max_length=3000)
+    description_citizen_science_aspects = models.CharField(max_length=2000)
     audience = models.ManyToManyField(Audience)
     dateUploaded = models.DateTimeField('Date Uploaded')
     dateLastModification = models.DateTimeField('Last modification', blank=True, default=timezone.now)
