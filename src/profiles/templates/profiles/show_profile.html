@@ -111,11 +111,11 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 				<div class="card-text myhidden" id="two">
 					<div class="row p-3">
 						<div class="col-12 col-sm-6">
-							<p><b>{% trans "Member type" %}: </b>
+							<!-- <p><b>{% trans "Member type" %}: </b> -->
 							{% if show_user.profile.former_member %}
 								Former member
 							{% else %}
-								ECSA member
+								Paid
 							{% endif %}
 							</p>
 							<p><b>{% trans "Member since" %}: </b>{{ show_user.profile.ecsa_member_since | date:"d/m/Y" }}</p>

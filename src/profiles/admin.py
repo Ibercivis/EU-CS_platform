@@ -61,12 +61,13 @@ class NewUserAdmin(NamedUserAdmin):
             ecsa_member = user_old.profile.ecsa_member
             ecsa_member_number = user_old.profile.ecsa_member_number
             if(not ecsa_member_number and ecsa_member_number != obj.profile.ecsa_member_number):
-                to_email = obj.email
+                to_email = 'vval@bifi.es'
                 subject = 'Welcome to ECSA!'
                 message = render_to_string('accounts/emails/ecsa_member_accepted.html', { 'name': obj.name,
                  'ecsa_member_number': obj.profile.ecsa_member_number})
                 email = EmailMessage(subject, message, to=[to_email], )
                 email.content_subtype = "html"
+                email.attach("tst","../../static/site/files/EU-Cit.Sci_Guide_for_Applicants.pdf")
                 email.send()
             if(not ecsa_member and ecsa_member != obj.profile.ecsa_member):
                 to_email = obj.email
