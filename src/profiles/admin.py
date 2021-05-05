@@ -15,9 +15,6 @@ User = get_user_model()
 
 class UserProfileInline(admin.StackedInline):
     model = Profile
-    
-    
-
     fieldsets = (
     (None, {
         'fields':('lastname','picture','title', 'bio','interestAreas','latitude','longitude', 'email_verified', 'orcid','organisation', 'occupation'),
@@ -27,9 +24,11 @@ class UserProfileInline(admin.StackedInline):
     }),
     ('ECSA membership', {
         #'classes': ('collapse',),
-        'fields': ('ecsa_member','ecsa_requested_join','ecsa_member_since','ecsa_payment_revision','ecsa_member_number','ecsa_billing_email','ecsa_reduced_fee','ecsa_old_member_fee'),
+        'fields': ('ecsa_requested_join','ecsa_payment_revision','ecsa_billing_email','ecsa_reduced_fee','ecsa_old_member_fee','ecsa_member','ecsa_member_since','ecsa_member_number','admin_send_welcome_email'),
     }),
     )
+    readonly_fields = ('admin_send_welcome_email', )
+
 
 
 class NewUserAdmin(NamedUserAdmin):
@@ -60,9 +59,10 @@ class NewUserAdmin(NamedUserAdmin):
             user_old = get_object_or_404(User, id=id)
             requested_join = user_old.profile.ecsa_requested_join
             ecsa_member = user_old.profile.ecsa_member
-            if(not requested_join and requested_join != obj.profile.ecsa_requested_join):
+            ecsa_member_number = user_old.profile.ecsa_member_number
+            if(not ecsa_member_number and ecsa_member_number != obj.profile.ecsa_member_number):
                 to_email = obj.email
-                subject = 'Welcome to ECSA!'          
+                subject = 'Welcome to ECSA!'
                 message = render_to_string('accounts/emails/ecsa_member_accepted.html', { 'name': obj.name,
                  'ecsa_member_number': obj.profile.ecsa_member_number})
                 email = EmailMessage(subject, message, to=[to_email], )
@@ -70,7 +70,7 @@ class NewUserAdmin(NamedUserAdmin):
                 email.send()
             if(not ecsa_member and ecsa_member != obj.profile.ecsa_member):
                 to_email = obj.email
-                subject = 'Confirmation of payment'          
+                subject = 'Confirmation of payment'
                 message = render_to_string('accounts/emails/ecsa_payment_confirmation.html', { 'name': obj.name})
                 email = EmailMessage(subject, message, to=[to_email], )
                 email.content_subtype = "html"

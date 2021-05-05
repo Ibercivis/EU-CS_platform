@@ -5,6 +5,7 @@ from django.db import models
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from organisations.models import Organisation, OrganisationType
+from django.utils.html import format_html
 
 
 class InterestArea(models.Model):
@@ -51,6 +52,11 @@ class BaseProfile(models.Model):
     country = models.CharField(_("Country"), max_length=50, blank=True, null=True)
     occupation = models.ForeignKey(OrganisationType, null=True, blank=True, on_delete=models.CASCADE)
 
+    def admin_send_welcome_email(self): 
+        return format_html(u'<a href="#" onclick="return false;" class="button" '
+                           u'id="id_admin_send_welcome_email">Send welcome email</a>')
+    admin_send_welcome_email.allow_tags = True
+    admin_send_welcome_email.short_description = "Welcome email"
 
 
     class Meta:

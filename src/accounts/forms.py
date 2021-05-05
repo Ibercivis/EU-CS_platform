@@ -127,7 +127,7 @@ def saveProfile(self, profileID):
     city = self.data['city']
     country = self.data['country']
     ecsa_billing_email = self.data['ecsa_billing_email']
-    lastname = self.data['lastname']
+    
 
     profile = get_object_or_404(Profile, user_id=profileID)
     profile.street = street
@@ -138,7 +138,8 @@ def saveProfile(self, profileID):
     profile.city = city
     profile.country = country
     profile.ecsa_billing_email = ecsa_billing_email
-    profile.lastname = lastname
+    if('lastname' in self.data and self.data['lastname']):
+        profile.lastname = lastname
 
     profile.ecsa_reduced_fee=False
     if('ecsa_reduced_fee' in self.data and self.data['ecsa_reduced_fee'] == 'on'):
