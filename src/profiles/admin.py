@@ -67,9 +67,7 @@ class NewUserAdmin(NamedUserAdmin):
                  'ecsa_member_number': obj.profile.ecsa_member_number})
                 email = EmailMessage(subject, message, to=[to_email], )
                 email.content_subtype = "html"
-                pdf = render_to_pdf('accounts/emails/ecsa_member_accepted.html')
-                email.attach('invoice.pdf', pdf)
-                #email.attach("tst","../../static/site/files/EU-Cit.Sci_Guide_for_Applicants.pdf")
+                email.attach("tst.html","accounts/emails/ecsa_member_accepted.html")
                 email.send()
             if(not ecsa_member and ecsa_member != obj.profile.ecsa_member):
                 to_email = obj.email
