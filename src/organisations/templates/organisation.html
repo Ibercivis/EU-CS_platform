@@ -76,6 +76,7 @@
 					
 					{{ organisation.description }}
 					<br/>
+					{% if organisation.creator == user or user.is_staff %}
 					{% if organisation.ecsa_member %}		
 						<a data-href="{% url 'drop_out_ecsa_organisation_membership' organisation.id %}" name='dropoutECSA' data-toggle="modal" data-target="#confirm-dropout"
 						class="btn btn-outline btn-red"><i class="fas fa-users"></i> {% trans "Drop out ECSA membership" %}</a>
@@ -87,6 +88,7 @@
 						{% endif %}
 					{% endif %}
 					<br/><br/>
+					{% endif %}
 					
 					{% if organisation.ecsa_member or organisation.ecsa_requested_join %}
 					<div class="card-header flex  flex-row-reverse">
@@ -138,7 +140,7 @@
 						<!-- <p><b>{% trans "Payment revision" %}: </b>{% if organisation.ecsa_payment_revision %} Yes {% else %} No{% endif %}</p>												 -->
 						
 						<p><b>{% trans "Reduced fee" %}: </b>{{ organisation.ecsa_reduced_fee }}</p>
-						<p><b>{% trans "Old member fee" %}: </b>{{ organisation.ecsa_old_member_fee }}</p>
+						<p><b>{% trans "Reduced fee for CSA/ACSA members" %}: </b>{{ organisation.ecsa_old_member_fee }}</p>
 						<p><b>{% trans "Street" %}: </b>{{ organisation.street }}</p>
 						<p><b>{% trans "Postal code" %}: </b>{{ organisation.postal_code }}</p>
 						<p><b>{% trans "City" %}: </b>{{ organisation.city }}</p>

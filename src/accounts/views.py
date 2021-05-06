@@ -79,8 +79,9 @@ class SignUpView(
         to_email = form.cleaned_data.get('email')
         send_mail(mail_subject, message, 'eu-citizen.science@ibercivis.es',[to_email], html_message=html_message)
 
+        forms.saveProfile(form, user.id, ecsa_individual_membership)
         if(ecsa_individual_membership):
-            forms.saveProfile(form, user.id)
+            #forms.saveProfile(form, user.id)
             newEcsaIndividualMembershipEmail(to_email, user.name, form.cleaned_data.get('lastname'))
 
         return render(self.request, 'accounts/confirm-email.html',{})

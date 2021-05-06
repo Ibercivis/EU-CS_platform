@@ -45,7 +45,7 @@ class BaseProfile(models.Model):
     lastname = models.CharField(_("Last name"), max_length=50, blank=True, null=True)
     ecsa_billing_email = models.EmailField(blank=True, null=True)
     ecsa_reduced_fee = models.BooleanField(_("Reduced fee"), default=False)
-    ecsa_old_member_fee = models.BooleanField(_("Old member fee"), default=False)
+    ecsa_old_member_fee = models.BooleanField(_("Reduced fee for CSA/ACSA members"), default=False)
     street = models.CharField(_("Street"), max_length=50, blank=True, null=True)
     postal_code = models.IntegerField(null=True, blank=True)
     city = models.CharField(_("City"), max_length=50, blank=True, null=True)

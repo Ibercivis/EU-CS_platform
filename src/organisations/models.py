@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 LEGAL_STATUS = (
-    (0,"Profit"),
+    (0,"For-profit"),
     (1,"Non-profit")
 )
 
@@ -35,6 +35,8 @@ class Organisation(models.Model):
     latitude = models.DecimalField(max_digits=9,decimal_places=6, null=True, blank=True)
     longitude = models.DecimalField(max_digits=9,decimal_places=6, null=True, blank=True)
     country = CountryField(null=True, blank=True)
+
+    origin_name = models.CharField(max_length=200,null=True, blank=True)
 
     #Ecsa fields
     ecsa_member = models.BooleanField(null=True, blank=True)

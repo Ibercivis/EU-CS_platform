@@ -44,7 +44,7 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 					<div class="card-title">
 						<h1>
 							<img title="profile picture" class="img-fluid rounded-circle" src="{% thumbnail show_user.profile.picture|default:'default_profile.png' 140x140 crop %}">
-							{{ show_user.get_full_name }}
+							{{ show_user.get_full_name }} {% if show_user.profile.lastname %}{{show_user.profile.lastname}} {% endif %}
 							{% if editable %}
 							<a href="{% url 'accounts:delete' %}" class="btn btn-outline btn-red float-right ml-2 mt-5"><span class="fas fa-trash-alt"></span>&nbsp;{% trans "Delete Profile" %}</a>
 							<a href="{% url 'profiles:edit_self' %}" class="btn btn-outline btn-green float-right ml-2 mt-5"><i class="fas fa-edit"></i> {% trans "Edit Profile" %}</a>
@@ -114,7 +114,7 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 							<!-- <p><b>{% trans "Member type" %}: </b> -->
 							{% if show_user.profile.former_member %}
 								Former member
-							{% else %}
+							{% elif show_user.profile.ecsa_member %}
 								Paid
 							{% endif %}
 							</p>
@@ -123,7 +123,7 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 							<p><b>{% trans "Member number" %}: </b>{{ show_user.profile.ecsa_member_number }}</p>							
 							<p><b>{% trans "Billing email" %}: </b>{{ show_user.profile.ecsa_billing_email }}</p>
 							<p><b>{% trans "Reduced fee" %}: </b>{{ show_user.profile.ecsa_reduced_fee }}</p>
-							<p><b>{% trans "Old member fee" %}: </b>{{ show_user.profile.ecsa_old_member_fee }}</p>
+							<p><b>{% trans "Reduced fee for CSA/ACSA members" %}: </b>{{ show_user.profile.ecsa_old_member_fee }}</p>
 							<p><b>{% trans "Street" %}: </b>{{ show_user.profile.street }}</p>
 							<p><b>{% trans "Postal code" %}: </b>{{ show_user.profile.postal_code }}</p>
 							<p><b>{% trans "City" %}: </b>{{ show_user.profile.city }}</p>

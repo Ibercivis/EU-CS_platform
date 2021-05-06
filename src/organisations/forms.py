@@ -62,6 +62,7 @@ class OrganisationForm(forms.Form):
 
 
 class NewEcsaOrganisationMembershipForm(forms.Form):
+    origin_name = forms.CharField(label=_("Organization name in the language of origin"), required=False)
     street = forms.CharField(help_text=_("Street address and number"))
     postal_code = forms.IntegerField()
     city = forms.CharField()
@@ -72,12 +73,13 @@ class NewEcsaOrganisationMembershipForm(forms.Form):
     ecsa_billing_email = forms.EmailField(label=_("Billing email"))
     #occupation = models.ForeignKey(OrganisationType, null=True, blank=True, on_delete=models.CASCADE)
     legal_status = forms.ChoiceField(choices=LEGAL_STATUS)
-    has_vat_number = forms.ChoiceField(choices=YES_NO)
+    has_vat_number = forms.ChoiceField(choices=YES_NO, label=_("Does your organisation have a VAT number?"))
     vat_number = forms.IntegerField(required=False)
     ecsa_reduced_fee = forms.BooleanField(required=False, label=_("Yes, I would like to pay the reduced fee."))
     ecsa_old_organisation_fee = forms.BooleanField(required=False, label=_("Yes, I am a member of CSA or ACSA and would like to get an additional 20% discount."))
 
     def save(self, args, organisationID):
+        origin_name = self.data['origin_name']
         street = self.data['street']
         postal_code = self.data['postal_code']
         city = self.data['city']
@@ -89,6 +91,7 @@ class NewEcsaOrganisationMembershipForm(forms.Form):
         
 
         organisation = get_object_or_404(Organisation, id=organisationID)
+        organisation.origin_name = origin_name
         organisation.street = street
         organisation.postal_code = postal_code
         organisation.city = city

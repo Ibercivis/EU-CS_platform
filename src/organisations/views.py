@@ -131,7 +131,8 @@ def newEcsaOrganisationMembership(request, pk):
     if request.method == 'POST':
         form = NewEcsaOrganisationMembershipForm(request.POST)
         if form.is_valid():
-            newEcsaOrganisationMembershipEmail(request.user.email, request.user.name)
+            email = form.cleaned_data.get('ecsa_billing_email')
+            newEcsaOrganisationMembershipEmail(email, request.user.name)
             form.save(request, pk)
             return redirect('/organisation/'+ str(pk))
 

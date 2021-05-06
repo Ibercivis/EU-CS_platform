@@ -118,39 +118,42 @@ class NewEcsaIndividualMembershipForm(forms.Form):
     occupation = forms.ModelChoiceField(queryset=OrganisationType.objects.all())
 
     def save(self, args, profileID):
-        saveProfile(self, profileID)
+        saveProfile(self, profileID, True)
         return 'success'
 
-def saveProfile(self, profileID):
-    street = self.data['street']
-    postal_code = self.data['postal_code']
-    city = self.data['city']
-    country = self.data['country']
-    ecsa_billing_email = self.data['ecsa_billing_email']
+def saveProfile(self, profileID, ecsa_individual_membership):
     
-
     profile = get_object_or_404(Profile, user_id=profileID)
-    profile.street = street
-    profile.postal_code = postal_code
-    profile.city = city
-    profile.street = street
-    profile.postal_code = postal_code
-    profile.city = city
-    profile.country = country
-    profile.ecsa_billing_email = ecsa_billing_email
+    if(ecsa_individual_membership):
+        street = self.data['street']
+        postal_code = self.data['postal_code']
+        city = self.data['city']
+        country = self.data['country']
+        ecsa_billing_email = self.data['ecsa_billing_email']
+        profile.street = street
+        profile.postal_code = postal_code
+        profile.city = city
+        profile.street = street
+        profile.postal_code = postal_code
+        profile.city = city
+        profile.country = country
+        profile.ecsa_billing_email = ecsa_billing_email
+        profile.ecsa_reduced_fee=False
+        if('ecsa_reduced_fee' in self.data and self.data['ecsa_reduced_fee'] == 'on'):
+            profile.ecsa_reduced_fee=True
+
+        profile.ecsa_old_member_fee=False
+        if('ecsa_old_member_fee' in self.data and self.data['ecsa_old_member_fee'] == 'on'):
+            profile.ecsa_old_member_fee=True
+
+        if('occupation' in self.data and self.data['occupation']):
+            profile.occupation = get_object_or_404(OrganisationType, id=self.data['occupation'])
+        
+        profile.ecsa_requested_join = True
+
     if('lastname' in self.data and self.data['lastname']):
-        profile.lastname = lastname
-
-    profile.ecsa_reduced_fee=False
-    if('ecsa_reduced_fee' in self.data and self.data['ecsa_reduced_fee'] == 'on'):
-        profile.ecsa_reduced_fee=True
-
-    profile.ecsa_old_member_fee=False
-    if('ecsa_old_member_fee' in self.data and self.data['ecsa_old_member_fee'] == 'on'):
-        profile.ecsa_old_member_fee=True
-
-    profile.occupation = get_object_or_404(OrganisationType, id=self.data['occupation'])
-    profile.ecsa_requested_join = True
+            profile.lastname = self.data['lastname']
+           
     
     profile.save()
 
