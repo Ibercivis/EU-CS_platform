@@ -60,7 +60,7 @@ class NewUserAdmin(NamedUserAdmin):
             requested_join = user_old.profile.ecsa_requested_join
             ecsa_member = user_old.profile.ecsa_member
             ecsa_member_number = user_old.profile.ecsa_member_number
-            if(not ecsa_member_number and ecsa_member_number != obj.profile.ecsa_member_number):
+            if(ecsa_member_number != obj.profile.ecsa_member_number):
                 to_email = obj.email
                 subject = 'Welcome to ECSA!'
                 message = render_to_string('accounts/emails/ecsa_member_accepted.html', { 'name': obj.name,

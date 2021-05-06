@@ -53,8 +53,7 @@ class BaseProfile(models.Model):
     occupation = models.ForeignKey(OrganisationType, null=True, blank=True, on_delete=models.CASCADE)
 
     def admin_send_welcome_email(self): 
-        return format_html(u'<a href="#" onclick="return false;" class="button" '
-                           u'id="id_admin_send_welcome_email">Send welcome email</a>')
+        return format_html('<input type="submit" value="Send welcome email" name="_continue">')
     admin_send_welcome_email.allow_tags = True
     admin_send_welcome_email.short_description = "Welcome email"
 
