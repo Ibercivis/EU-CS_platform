@@ -32,7 +32,6 @@ class UserProfileInline(admin.StackedInline):
 
 
 class NewUserAdmin(NamedUserAdmin):
-    change_form_template = "profiles/change_form_test.html"
     inlines = [UserProfileInline]
     list_display = (
         "is_active",
