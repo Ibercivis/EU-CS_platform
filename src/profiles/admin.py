@@ -41,7 +41,7 @@ class NewUserAdmin(NamedUserAdmin):
         "is_superuser",
         "is_staff",
     )
-    list_filter = ["is_active", "profile__ecsa_member", "profile__ecsa_requested_join", "is_superuser"]    
+    list_filter = ["is_active", "profile__ecsa_member", "profile__ecsa_requested_join", "is_superuser"]
 
     # 'View on site' didn't work since the original User model needs to
     # have get_absolute_url defined. So showing on the list display
@@ -76,8 +76,6 @@ class NewUserAdmin(NamedUserAdmin):
                 email.content_subtype = "html"
                 email.send()
         
-
-
         user = super(NewUserAdmin, self).save_model(request, obj, form, change)
 
 

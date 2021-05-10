@@ -2,7 +2,7 @@ from django.db import models
 from django.conf import settings
 from django_countries.fields import CountryField
 from django.utils.translation import ugettext_lazy as _
-
+from django.utils.html import format_html
 
 LEGAL_STATUS = (
     (0,"For-profit"),
@@ -42,6 +42,7 @@ class Organisation(models.Model):
     ecsa_member = models.BooleanField(null=True, blank=True)
     ecsa_requested_join = models.BooleanField(null=True, blank=True)
     ecsa_member_since = models.DateTimeField(null=True,blank=True)
+    ecsa_member_number = models.IntegerField(null=True, blank=True)
     ecsa_payment_revision = models.BooleanField(null=True, blank=True)
     street = models.CharField(_("Street"), max_length=50, blank=True, null=True)
     postal_code = models.IntegerField(null=True, blank=True)
@@ -58,7 +59,10 @@ class Organisation(models.Model):
     ecsa_reduced_fee = models.BooleanField(_("Reduced fee"), default=False)
     ecsa_old_organisation_fee = models.BooleanField(_("Old organisation fee"), default=False)
 
-    
+    def admin_send_welcome_email(self): 
+        return format_html('<input type="submit" value="Send welcome email" name="_continue">')
+    admin_send_welcome_email.allow_tags = True
+    admin_send_welcome_email.short_description = "Welcome email"
 
     def __str__(self):
         return f'{self.name}'
