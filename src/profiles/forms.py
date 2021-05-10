@@ -53,6 +53,7 @@ class ProfileForm(forms.ModelForm):
     latitude = forms.DecimalField(widget=forms.HiddenInput(),max_digits=9,decimal_places=6,required=False)
     longitude = forms.DecimalField(widget=forms.HiddenInput(),max_digits=9,decimal_places=6,required=False)
     organisation = forms.ModelMultipleChoiceField(queryset=Organisation.objects.all(), widget=Select2MultipleWidget(attrs={'data-placeholder':'Related organisations'}), required=False,label="Organisation (Multiple selection)")
+    lastname = forms.CharField(label=_("Last name"))
 
     class Meta:
         model = models.Profile
