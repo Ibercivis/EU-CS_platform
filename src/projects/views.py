@@ -9,7 +9,7 @@ from django.core.mail import EmailMessage
 from django.utils import formats
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
-from django.db.models import Q, Avg, Count
+from django.db.models import Q, Avg, Count, Sum
 from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
 from datetime import datetime
@@ -31,9 +31,7 @@ User = get_user_model()
 @login_required(login_url='/login')
 def new_project(request):
     user = request.user
-    choices = list(Keyword.objects.all().values_list('keyword',flat=True))
-    choices = ", ".join(choices)
-    form = ProjectForm(initial={'choices': choices})
+    form = ProjectForm()
     if request.method == 'POST':
         mainOrganisationFixed = request.POST.get('mainOrganisation', False)
         form = ProjectForm(request.POST, request.FILES)
@@ -42,7 +40,7 @@ def new_project(request):
             form.save(request, images, [], mainOrganisationFixed)
             messages.success(request, _('Project added correctly'))
 
-            subject = 'New project submitted'          
+            subject = 'New project submitted' 
             message = render_to_string('emails/new_project.html', {"domain": settings.HOST})
             to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
             to.append(user.email)
@@ -54,13 +52,13 @@ def new_project(request):
         else:
             print(form.errors)
 
-    return render(request, 'new_project.html', {'form': form, 'user':user})
+    return render(request, 'new_project.html', {'form': form, 'user': user})
 
 
 def projects(request):
     projects = Project.objects.get_queryset()
-    approvedProjects = ApprovedProjects.objects.all().values_list('project_id',flat=True)
-    unApprovedProjects = UnApprovedProjects.objects.all().values_list('project_id',flat=True)
+    approvedProjects = ApprovedProjects.objects.all().values_list('project_id', flat=True)
+    unApprovedProjects = UnApprovedProjects.objects.all().values_list('project_id', flat=True)
     user = request.user
     followedProjects = None
     followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id',flat=True)
@@ -79,7 +77,6 @@ def projects(request):
     filters = setFilters(request, filters)
 
     projects = projects.filter(~Q(hidden=True))
-
 
     if not user.is_staff:
         projects = projects.exclude(id__in=unApprovedProjects)
@@ -110,11 +107,10 @@ def projects(request):
             else:
                 projects = list(projectsVoted) + list(projects)
 
-        filters['orderby']=request.GET['orderby']
+        filters['orderby'] = request.GET['orderby']
     else:
-        projects=projects.order_by('-dateUpdated')
+        projects = projects.order_by('-dateUpdated')
 
-    
     counter = len(projects)
 
     paginator = Paginator(projects, 12)
@@ -507,10 +503,12 @@ def allowUser(request):
 
     return JsonResponse(response, safe=False)
 
+
 def project_review(request, pk):
     return render(request, 'project_review.html', {'projectID': pk})
 
-### Download all projects in a CSV file
+
+# Download all projects in a CSV file
 def downloadProjects(request):
     projects = Project.objects.get_queryset()
 
@@ -521,16 +519,17 @@ def downloadProjects(request):
     response['Content-Disposition'] = 'attachment; filename="projects.csv"'
     return response
 
+
 def get_headers():
     return ['id', 'name', 'aim', 'description', 'keywords','status', 'start_date', 'end_date', 'topic', 'url', 'country',
      'host', 'howToParticipate', 'doingAtHome', 'equipment', 'fundingBody', 'fundingProgram', 'originDatabase', 'originURL', 'originUID']
+
 
 def get_data(item):
     keywordsList = list(item.keywords.all().values_list('keyword', flat=True))
     topicList = list(item.topic.all().values_list('topic', flat=True))
     participationtaskList = list(item.participationtask.all().values_list('participationtask', flat=True))
     geographicextendList = list(item.geographicextend.all().values_list('geographicextend', flat=True))
-
 
     return {
         'id': item.id,
@@ -542,8 +541,8 @@ def get_data(item):
         'start_date': item.start_date,
         'end_date': item.end_date,
         'topic': topicList,
-        'participationtask' : participationtaskList,
-        'geographicextend' : geographicextendList,
+        'participationtask': participationtaskList,
+        'geographicextend': geographicextendList,
         'url': item.url,
         'projectlocality': item.projectlocality,
         'country': item.country,
@@ -565,7 +564,6 @@ class Buffer(object):
 def iter_items(items, pseudo_buffer):
     writer = csv.DictWriter(pseudo_buffer, fieldnames=get_headers())
     yield ','.join(get_headers()) + '\r\n'
-
 
     for item in items:
         yield writer.writerow(get_data(item))
@@ -620,10 +618,10 @@ def getKeywordsSelector(request):
     if keywords:
         for keyword in keywords:
             found = False
-            if(keywordsSelected):                
+            if(keywordsSelected):
                 for key in keywordsSelected:
                     if(str(keyword[1]) == key):
-                        found=True
+                        found = True
                         options += '<option value = "%s" selected>%s</option>' % (
                             keyword[0],
                             keyword[1]
@@ -641,14 +639,15 @@ def getKeywordsSelector(request):
 
     return JsonResponse(response)
 
+
 def projects_stats(request):
     pPerCountry = Project.objects.values('country').annotate(count=Count('country')).order_by('-count')
     for ppc in pPerCountry:
-        if ppc['country'] !='':
-            ppc['country']=(dict(countries)[ppc['country']])
+        if ppc['country'] != '':
+            ppc['country'] = (dict(countries)[ppc['country']])
         else:
-            ppc['country']='No country defined'
-
+            ppc['country'] = ' No country defined'
+    time_zone = 'Australia/ACT'
+    pPerDay = Project.objects.extra({'day': 'date("dateCreated")'}).values('day').annotate(count=Count('id'))
     pPerTopic = Project.objects.values('topic__topic').annotate(count=Count('topic')).order_by('-count')
-    print(pPerTopic)
-    return render(request, 'projects_stats.html',{'pPerCountry':pPerCountry,'pPerTopic':pPerTopic})
+    return render(request, 'projects_stats.html', {'pPerCountry': pPerCountry,'pPerTopic':pPerTopic,'pPerDay':pPerDay})

@@ -102,12 +102,8 @@ def new_training_resource(request):
     return new_resource(request, True)
 
 @login_required(login_url='/login')
-def new_resource(request, isTrainingResource=False):
-    choices = list(Keyword.objects.all().values_list('keyword',flat=True))
-    choices = ", ".join(choices)
-    authorsCollection = list(Author.objects.all().values_list('author',flat=True))
-    authorsCollection = ", ".join(authorsCollection)
-    form = ResourceForm(initial={'choices': choices, 'authorsCollection': authorsCollection})
+def new_resource(request, isTrainingResource=False):   
+    form = ResourceForm()
     if request.method == 'POST':
         form = ResourceForm(request.POST, request.FILES)
         if form.is_valid():
