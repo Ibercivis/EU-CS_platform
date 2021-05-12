@@ -4,6 +4,11 @@ from django.core.mail import EmailMessage
 from django.shortcuts import get_object_or_404
 from django.template.loader import render_to_string
 
+from weasyprint import HTML
+from weasyprint.fonts import FontConfiguration
+
+from datetime import date
+
 class OrganisationAdmin(admin.ModelAdmin):
     ordering = ('-name',)
     list_display = (
@@ -44,7 +49,17 @@ class OrganisationAdmin(admin.ModelAdmin):
                     'ecsa_member_number': obj.ecsa_member_number})
                 email = EmailMessage(subject, message, to=[to_email], )
                 email.content_subtype = "html"
-                #email.attach("tst","../../static/site/files/EU-Cit.Sci_Guide_for_Applicants.pdf")
+                
+                #PDF Attachment
+                year = date.today().year
+                current_date = date.today()
+                pdf_content =  render_to_string('accounts/pdf/ecsa_member_accepted.html', { 'ecsa_member_number': obj.ecsa_member_number,
+                 'year': year, 'current_date': current_date , 'name': obj.name, 'street': obj.street, 'postal_code': obj.postal_code, 
+                 'city': obj.city, 'country': obj.country, 'ecsa_billing_email': obj.ecsa_billing_email, 'reduced_fee': obj.ecsa_reduced_fee,
+                 'ecsa_old_member_fee': obj.ecsa_old_organisation_fee, 'vat_number': obj.vat_number, 'legal_status': obj.legal_status })
+                HTML(string=pdf_content, base_url=request.build_absolute_uri()).write_pdf('/tmp/membership_contribution.pdf')                
+                email.attach_file('/tmp/membership_contribution.pdf')
+
                 email.send()
             if(not ecsa_member and ecsa_member != obj.ecsa_member):
                 to_email = obj.ecsa_billing_email

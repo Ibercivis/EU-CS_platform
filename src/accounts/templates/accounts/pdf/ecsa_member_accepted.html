@@ -1,0 +1,103 @@
+
+{% load i18n %}
+{% load staticfiles %}
+{% load static %}
+<!doctype html>
+<html lang="es">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>ECSA membership</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <style>
+        @page {
+            size: "A4";
+            margin: 1.0cm 1.5cm 3.5cm 1.5cm;
+        }
+        body {
+            width: 100% !important;
+            height: 100%;
+            background: #fff;
+            color: black;
+            font-size: 100%;
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+            -webkit-text-size-adjust: none; 
+        }
+        
+    </style>
+</head>
+<body>
+<main class="container">
+    {% block content %}
+    <br/><br/><br/><br/>
+    
+    <div class="text-center">
+        <img src="{% static 'site/img/ecsa_main_id.png' %}" alt="image"/>
+        <h1>Membership Contribution {{year}}</h1>
+        <br/>
+        <em>c/o Museum für Naturkunde Leibniz‐Institut für Evolutions‐ und Biodiversitätsforschung an 
+            der Humboldt‐Universität zu Berlin
+            Invalidenstraße 43 ∙ 10115 Berlin ∙ Germany</em>
+            <p>Tel. +49 30 2093 8776 • E‐mail: ecsa‐admin@mfn.berlin • <a href="ecsa.citizen‐science.net">ecsa.citizen‐science.net</a></p>
+    </div>
+    <br/><br/>
+    <table class="table" style="  border-collapse: separate;">
+        <tr>
+            <td><b>Contribution number</b> <br/>
+                {{ecsa_member_number}}</td>
+            <td><b>Membership period </b><br/>
+                1 January – 31 December {{year}}</td>
+            <td><b>Date </b><br/>
+                {{current_date}}</td>
+        </tr>
+        
+        <tr>
+            <td>
+                <p>{{name}} {{lastname}}</p>
+                <p>{{street}}</p>
+                <p>{{postal_code}} {{city}}</p>
+                <p>{{country}}</p>
+                <p>{{ecsa_billing_email}}</p>
+                {%if vat_number%}<p>{{vat_number}}</p>{%endif%}
+            </td>
+            <td>
+                <p>Account holder: ECSA e.V.</p>
+                <p><b>Reference line: {{ecsa_member_number}}</b></p>
+                <p>Bank: GLS</p>
+                <p>IBAN: DE42430609671231546400</p>
+                <p>Swift/BIC: GENODEM1GLS</p>
+            </td>
+            
+        </tr>
+        <tr>
+            <td colspan="3">                
+                {% if legal_status and legal_status == 1 %}
+                <p>NON-FOR-PROFIT ORGANIZATION MEMBERSHIP</p>
+                {% elif legal_status and legal_status == 0 %}
+                <p>FOR-PROFIT ORGANIZATION MEMBERSHIP</p>
+                {% else %}
+                <p>INDIVIDUAL MEMBERSHIP</p>
+                {% endif %}
+                 
+                <p class="text-right">Total amount [amount]€</p>
+                {% if reduced_fee %}<p>Reduced fee</p>{% endif %}
+                {% if ecsa_old_member_fee %}<p>Discount for being a CSA/ACSA member</p>{%endif%}                     
+            </td>            
+            
+        </tr>
+    </table>
+    <div class="text-center">
+        <p>You may also pay conveniently by <a href="https://www.paypal.com/paypalme/ECSAeV">PayPal</a> (<a href="https://www.paypal.com/paypalme/ECSAeV">paypal.me/ECSAeV</a>).</p>
+
+            <p><u>Please provide the reference line as indicated</u>.</p>
+            <p>Please transfer the amount within 14 days.</p>
+        <h2>Thank you for your support!</h2>
+        <p>New contact details? Send an email to ecsa‐admin@mfn.berlin</p>
+    </div>
+    {% endblock %}
+</main>
+</body>
+</html>
+

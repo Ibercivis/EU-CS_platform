@@ -9,6 +9,12 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse
 from django.utils.html import format_html
 from django.contrib.auth.admin import UserAdmin
+from django.http import HttpResponse
+
+from weasyprint import HTML
+from weasyprint.fonts import FontConfiguration
+
+from datetime import date
 
 User = get_user_model()
 
@@ -66,7 +72,17 @@ class NewUserAdmin(NamedUserAdmin):
                  'ecsa_member_number': obj.profile.ecsa_member_number})
                 email = EmailMessage(subject, message, to=[to_email], )
                 email.content_subtype = "html"
-                #email.attach("tst","../../static/site/files/EU-Cit.Sci_Guide_for_Applicants.pdf")
+
+                #PDF Attachment
+                year = date.today().year
+                current_date = date.today()
+                pdf_content =  render_to_string('accounts/pdf/ecsa_member_accepted.html', { 'ecsa_member_number': obj.profile.ecsa_member_number,
+                 'year': year, 'current_date': current_date , 'name': obj.name, 'lastname': obj.profile.lastname, 'street': obj.profile.street, 
+                 'postal_code': obj.profile.postal_code, 'city': obj.profile.city, 'country': obj.profile.country, 'ecsa_billing_email': obj.profile.ecsa_billing_email,
+                 'reduced_fee': obj.profile.ecsa_reduced_fee, 'ecsa_old_member_fee': obj.profile.ecsa_old_member_fee })
+                HTML(string=pdf_content, base_url=request.build_absolute_uri()).write_pdf('/tmp/membership_contribution.pdf')                
+                email.attach_file('/tmp/membership_contribution.pdf')
+                
                 email.send()
             if(not ecsa_member and ecsa_member != obj.profile.ecsa_member):
                 to_email = obj.email

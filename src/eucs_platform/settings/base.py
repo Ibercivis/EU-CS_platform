@@ -145,6 +145,7 @@ INSTALLED_APPS = (
     'django_crontab',
     'ckeditor',
     'ckeditor_uploader',
+    'weasyprint',
 )
 
 MIDDLEWARE = [
@@ -309,8 +310,8 @@ SUMMERNOTE_CONFIG = {
     'disable_attachment': True,
 }
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 DEFAULT_FROM_EMAIL = env("FROM_EMAIL")
 EMAIL_HOST = env("HOST_EMAIL")
 EMAIL_HOST_USER = env("FROM_EMAIL")
