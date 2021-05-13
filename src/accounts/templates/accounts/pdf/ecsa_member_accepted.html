@@ -29,10 +29,11 @@
     </style>
 </head>
 <body>
+<img src="{% static 'site/img/ECSA_colourful_line.png' %}" alt="image" style="margin: 0;
+padding: 0;position: absolute;top: 0px;"/>
 <main class="container">
     {% block content %}
     <br/><br/><br/><br/>
-    
     <div class="text-center">
         <img src="{% static 'site/img/ecsa_main_id.png' %}" alt="image"/>
         <h1>Membership Contribution {{year}}</h1>
@@ -72,16 +73,16 @@
             
         </tr>
         <tr>
-            <td colspan="3">                
-                {% if legal_status and legal_status == 1 %}
+            <td colspan="3">
+                {% if legal_status == 1 %}
                 <p>NON-FOR-PROFIT ORGANIZATION MEMBERSHIP</p>
-                {% elif legal_status and legal_status == 0 %}
+                {% elif legal_status == 0 %}
                 <p>FOR-PROFIT ORGANIZATION MEMBERSHIP</p>
                 {% else %}
                 <p>INDIVIDUAL MEMBERSHIP</p>
                 {% endif %}
                  
-                <p class="text-right">Total amount [amount]€</p>
+                <p class="text-right">Total amount {{amount}} €</p>
                 {% if reduced_fee %}<p>Reduced fee</p>{% endif %}
                 {% if ecsa_old_member_fee %}<p>Discount for being a CSA/ACSA member</p>{%endif%}                     
             </td>            
@@ -93,11 +94,14 @@
 
             <p><u>Please provide the reference line as indicated</u>.</p>
             <p>Please transfer the amount within 14 days.</p>
-        <h2>Thank you for your support!</h2>
-        <p>New contact details? Send an email to ecsa‐admin@mfn.berlin</p>
+        <h2>Thank you for your support!</h2>        
     </div>
+    
     {% endblock %}
 </main>
+<br/><br/><br/><br/><br/><br/><br/>
+<img src="{% static 'site/img/ECSA_colourful_line.png' %}" alt="image"/>
+
 </body>
 </html>
 

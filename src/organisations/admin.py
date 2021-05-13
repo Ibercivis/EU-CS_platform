@@ -8,6 +8,7 @@ from weasyprint import HTML
 from weasyprint.fonts import FontConfiguration
 
 from datetime import date
+from ecsa.models import Ecsa_fee
 
 class OrganisationAdmin(admin.ModelAdmin):
     ordering = ('-name',)
@@ -43,7 +44,8 @@ class OrganisationAdmin(admin.ModelAdmin):
             ecsa_member = organisation_old.ecsa_member
             ecsa_member_number = organisation_old.ecsa_member_number
             if(ecsa_member_number != obj.ecsa_member_number):
-                to_email = obj.ecsa_billing_email
+               # to_email = obj.ecsa_billing_email
+                to_email = "vval@bifi.es"
                 subject = 'Welcome to ECSA!'
                 message = render_to_string('accounts/emails/ecsa_member_accepted.html', { 'name': obj.name,
                     'ecsa_member_number': obj.ecsa_member_number})
@@ -51,14 +53,34 @@ class OrganisationAdmin(admin.ModelAdmin):
                 email.content_subtype = "html"
                 
                 #PDF Attachment
+                fee_id = (1, 2)[obj.legal_status == 1]
+                try:
+                    fee_amount = Ecsa_fee.objects.get(id=fee_id).amount                
+                except Ecsa_fee.DoesNotExist:
+                    fee_amount = 200
+
+                if(obj.ecsa_old_organisation_fee):
+                    try:
+                        discount = Ecsa_fee.objects.get(id=5).amount
+                        fee_amount = fee_amount - int(fee_amount * discount / 100)
+                    except Ecsa_fee.DoesNotExist:
+                        print("Ecsa fee discount not exist")
+
+                if(obj.ecsa_reduced_fee):
+                    try:
+                        discount = Ecsa_fee.objects.get(id=4).amount
+                        fee_amount = fee_amount - int(fee_amount * discount / 100)
+                    except Ecsa_fee.DoesNotExist:
+                        print("Ecsa fee discount not exist")
                 year = date.today().year
                 current_date = date.today()
                 pdf_content =  render_to_string('accounts/pdf/ecsa_member_accepted.html', { 'ecsa_member_number': obj.ecsa_member_number,
                  'year': year, 'current_date': current_date , 'name': obj.name, 'street': obj.street, 'postal_code': obj.postal_code, 
                  'city': obj.city, 'country': obj.country, 'ecsa_billing_email': obj.ecsa_billing_email, 'reduced_fee': obj.ecsa_reduced_fee,
-                 'ecsa_old_member_fee': obj.ecsa_old_organisation_fee, 'vat_number': obj.vat_number, 'legal_status': obj.legal_status })
+                 'ecsa_old_member_fee': obj.ecsa_old_organisation_fee, 'vat_number': obj.vat_number, 'legal_status': obj.legal_status, 'amount':fee_amount })
                 HTML(string=pdf_content, base_url=request.build_absolute_uri()).write_pdf('/tmp/membership_contribution.pdf')                
                 email.attach_file('/tmp/membership_contribution.pdf')
+                
 
                 email.send()
             if(not ecsa_member and ecsa_member != obj.ecsa_member):

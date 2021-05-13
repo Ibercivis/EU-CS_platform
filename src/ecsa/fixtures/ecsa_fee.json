@@ -1,0 +1,42 @@
+[
+    {
+        "pk": 1,
+        "model": "ecsa.ecsa_fee",
+        "fields": {
+            "membership": "For-profit organisation" ,
+            "amount": 200
+        }
+    },
+    {
+        "pk": 2,
+        "model": "ecsa.ecsa_fee",
+        "fields": {
+            "membership": "Non-for-profit organisation" ,
+            "amount": 100
+        }
+    },
+    {
+        "pk": 3,
+        "model": "ecsa.ecsa_fee",
+        "fields": {
+            "membership": "Individual" ,
+            "amount": 50 
+        }
+    },
+    {
+        "pk": 4,
+        "model": "ecsa.ecsa_fee",
+        "fields": {
+            "membership": "Reduced fee discount percentage" ,
+            "amount": 50
+        }
+    },
+    {
+        "pk": 5,
+        "model": "ecsa.ecsa_fee",
+        "fields": {
+            "membership": "CSA/ACSA discount percentage" ,
+            "amount": 20
+        }
+    }
+]
