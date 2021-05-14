@@ -44,8 +44,7 @@ class OrganisationAdmin(admin.ModelAdmin):
             ecsa_member = organisation_old.ecsa_member
             ecsa_member_number = organisation_old.ecsa_member_number
             if(obj.ecsa_member_number and ecsa_member_number != obj.ecsa_member_number):
-               # to_email = obj.ecsa_billing_email
-                to_email = "vval@bifi.es"
+                to_email = obj.ecsa_billing_email
                 subject = 'Welcome to ECSA!'
                 message = render_to_string('accounts/emails/ecsa_member_accepted.html', { 'name': obj.name,
                     'ecsa_member_number': obj.ecsa_member_number})
