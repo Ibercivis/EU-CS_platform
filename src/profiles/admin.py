@@ -67,7 +67,7 @@ class NewUserAdmin(NamedUserAdmin):
             requested_join = user_old.profile.ecsa_requested_join
             ecsa_member = user_old.profile.ecsa_member
             ecsa_member_number = user_old.profile.ecsa_member_number
-            if(obj.ecsa_member_number and ecsa_member_number != obj.profile.ecsa_member_number):
+            if(obj.profile.ecsa_member_number and ecsa_member_number != obj.profile.ecsa_member_number):
                # to_email = obj.email
                 to_email = "vval@bifi.es"
                 subject = 'Welcome to ECSA!'
