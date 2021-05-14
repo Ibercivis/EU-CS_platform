@@ -63,7 +63,7 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 					{% endif %}
 				</div>
 					
-
+				{%if editable %}
 				{% if show_user.profile.ecsa_member or show_user.profile.former_member or show_user.profile.ecsa_requested_join %}
 				<div class="card-header flex  flex-row-reverse">
 					<ul class="nav nav nav-tabs card-header-tabs mr-auto flex-row-reverse">
@@ -81,6 +81,7 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 						</li>
 					</ul>
 					</div>
+					{% endif %}
 					{% endif %}
 
 				<div class="card-text" id="one">

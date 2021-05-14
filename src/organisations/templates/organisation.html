@@ -77,11 +77,11 @@
 					{{ organisation.description }}
 					<br/>
 					{% if organisation.creator == user or user.is_staff %}
-					{% if organisation.ecsa_member %}		
+					{% if organisation.ecsa_member %}
 						<a data-href="{% url 'drop_out_ecsa_organisation_membership' organisation.id %}" name='dropoutECSA' data-toggle="modal" data-target="#confirm-dropout"
 						class="btn btn-outline btn-red"><i class="fas fa-users"></i> {% trans "Drop out ECSA membership" %}</a>
 
-					{% else %}						
+					{% else %}				
 							<!-- <a href="{% url 'claim_ecsa_organisation_payment_revision' organisation.id %}" class="btn btn-outline btn-info"><i class="fas fa-users"></i> {% trans "Claim for ECSA payment revision" %}</a>					 -->
 						{% if not organisation.ecsa_requested_join %}
 							<a href="{% url 'new_ecsa_organisation_membership' organisation.id %}" class="btn btn-outline btn-info"><i class="fas fa-users"></i> {% trans "Sign up for ECSA membership" %}</a>
@@ -90,23 +90,25 @@
 					<br/><br/>
 					{% endif %}
 					
-					{% if organisation.ecsa_member or organisation.ecsa_requested_join %}
-					<div class="card-header flex  flex-row-reverse">
-						<ul class="nav nav nav-tabs card-header-tabs mr-auto flex-row-reverse">
-						  <li class="nav-item">
-							<a class="nav-link sub" id="parttab" href="#"
-							onClick="$('#one').hide(); $('#two').show()
-							$('#parttab').addClass('active')
-							$('#desctab').removeClass('active') ">{% trans "ECSA" %}</a>
-						  </li>
-						  <li class="nav-item">
-							<a class="nav-link sub active" id="desctab" href="#"
-							onClick="$('#two').hide(); $('#one').show();
-							$('#desctab').addClass('active')
-							$('#parttab').removeClass('active')">{% trans "Organisation" %}</a>
-						  </li>
-						</ul>
-					  </div>
+					{% if organisation.creator == user or user.is_staff %}
+						{% if organisation.ecsa_member or organisation.ecsa_requested_join %}
+						<div class="card-header flex  flex-row-reverse">
+							<ul class="nav nav nav-tabs card-header-tabs mr-auto flex-row-reverse">
+							<li class="nav-item">
+								<a class="nav-link sub" id="parttab" href="#"
+								onClick="$('#one').hide(); $('#two').show()
+								$('#parttab').addClass('active')
+								$('#desctab').removeClass('active') ">{% trans "ECSA" %}</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link sub active" id="desctab" href="#"
+								onClick="$('#two').hide(); $('#one').show();
+								$('#desctab').addClass('active')
+								$('#parttab').removeClass('active')">{% trans "Organisation" %}</a>
+							</li>
+							</ul>
+						</div>
+						{% endif %}
 					  {% endif %}
 
 					<div class="card-text" id="one">
