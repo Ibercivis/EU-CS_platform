@@ -72,11 +72,11 @@ class NewEcsaOrganisationMembershipForm(forms.Form):
     ecsa_billing_country = forms.CharField(label=_("Billing country"))
     ecsa_billing_email = forms.EmailField(label=_("Billing email"))
     #occupation = models.ForeignKey(OrganisationType, null=True, blank=True, on_delete=models.CASCADE)
-    legal_status = forms.ChoiceField(choices=LEGAL_STATUS)
+    legal_status = forms.ChoiceField(choices=LEGAL_STATUS, required=False)
     has_vat_number = forms.ChoiceField(choices=YES_NO, label=_("Does your organisation have a VAT number?"))
     vat_number = forms.IntegerField(required=False)
-    ecsa_reduced_fee = forms.BooleanField(required=False, label=_("Yes, I would like to pay the reduced fee."))
-    ecsa_old_organisation_fee = forms.BooleanField(required=False, label=_("Yes, I am a member of CSA or ACSA and would like to get an additional 20% discount."))
+    ecsa_reduced_fee = forms.BooleanField(required=False, label=_("Reduced membership (your organisation has less than five full-time employees)"))
+    ecsa_old_organisation_fee = forms.BooleanField(required=False, label=_("20% discount as CSA/ACSA member"))
 
     def save(self, args, organisationID):
         origin_name = self.data['origin_name']

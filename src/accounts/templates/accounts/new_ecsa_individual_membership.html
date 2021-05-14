@@ -29,16 +29,14 @@
                                     {{ form.ecsa_billing_email|as_crispy_field }}
                                     </div>
                                     <div class="col-12 mb-3">
-                                        <p>Please indicate if you are eligible to pay the reduced membership fee. The reduced fee can be selected if you are a student, unemployed or retired.</p>
-                                    {{ form.ecsa_reduced_fee|as_crispy_field }}
-                                    </div>
+                                        <p>I am eligible for:</p>
+                                        {{ form.ecsa_reduced_fee|as_crispy_field }}
+                                        {{ form.ecsa_old_member_fee|as_crispy_field }}
+                                    </div>                                    
                                 </div>
 
                                 <div class="form-row">
-                                    <div class="col-12 mb-3">
-                                        <p>If you are already a member from CSA or ACSA you get an additional 20% discount on the membership fee.</p>
-                                    {{ form.ecsa_old_member_fee|as_crispy_field }}
-                                    </div>
+
                                     <div class="col-12 mb-3">
                                     {{ form.street|as_crispy_field }}
                                     </div>

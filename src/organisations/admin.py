@@ -29,7 +29,7 @@ class OrganisationAdmin(admin.ModelAdmin):
     }),
     ('ECSA membership', {
         #'classes': ('collapse',),
-        'fields': ('ecsa_requested_join','ecsa_payment_revision','ecsa_billing_email', 'ecsa_billing_street', 'ecsa_billing_postal_code',
+        'fields': ('ecsa_requested_join','ecsa_billing_email', 'ecsa_billing_street', 'ecsa_billing_postal_code',
         'ecsa_billing_city', 'ecsa_billing_country', 'ecsa_reduced_fee','ecsa_old_organisation_fee','legal_status', 'vat_number',
         'ecsa_member','ecsa_member_since','ecsa_member_number','admin_send_welcome_email'),
     }),
@@ -43,7 +43,7 @@ class OrganisationAdmin(admin.ModelAdmin):
             requested_join = organisation_old.ecsa_requested_join
             ecsa_member = organisation_old.ecsa_member
             ecsa_member_number = organisation_old.ecsa_member_number
-            if(ecsa_member_number != obj.ecsa_member_number):
+            if(obj.ecsa_member_number and ecsa_member_number != obj.ecsa_member_number):
                # to_email = obj.ecsa_billing_email
                 to_email = "vval@bifi.es"
                 subject = 'Welcome to ECSA!'

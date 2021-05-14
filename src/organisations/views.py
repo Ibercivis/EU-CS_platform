@@ -63,7 +63,8 @@ def new_organisation(request):
 
 def organisation(request, pk):
     organisation = get_object_or_404(Organisation, id=pk)
-    organisation.legal_status = LEGAL_STATUS[ organisation.legal_status][1]
+    if(organisation.legal_status != None):
+        organisation.legal_status = LEGAL_STATUS[ organisation.legal_status][1]
     user = request.user
     cooperatorsPK = getCooperators(pk)
     if user != organisation.creator and not user.is_staff and not user.id in cooperatorsPK:

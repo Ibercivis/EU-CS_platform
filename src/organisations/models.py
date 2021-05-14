@@ -53,7 +53,7 @@ class Organisation(models.Model):
     ecsa_billing_country = models.CharField(_("Country"), max_length=50, blank=True, null=True)
     ecsa_billing_email = models.EmailField(blank=True, null=True)
     #occupation = models.ForeignKey(OrganisationType, null=True, blank=True, on_delete=models.CASCADE)
-    legal_status = models.IntegerField(choices=LEGAL_STATUS)
+    legal_status = models.IntegerField(choices=LEGAL_STATUS, null=True, blank=True)
     #has_vat_number = models.BooleanField(default=False)
     vat_number = models.IntegerField(null=True, blank=True)
     ecsa_reduced_fee = models.BooleanField(_("Reduced fee"), default=False)

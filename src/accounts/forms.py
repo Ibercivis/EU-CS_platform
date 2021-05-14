@@ -80,8 +80,8 @@ class SignupForm(authtoolsforms.UserCreationForm):
         self.fields["name"] = forms.CharField(label=_("First name"))
         self.fields["lastname"] = forms.CharField(label=_("Last name"))
         self.fields["ecsa_billing_email"] = forms.EmailField(required=False)
-        self.fields["ecsa_reduced_fee"] = forms.BooleanField(required=False, label=_("Yes, I would like to pay the reduced fee."))
-        self.fields["ecsa_old_member_fee"] = forms.BooleanField(required=False, label=_("Yes, I am a member of CSA or ACSA and would like to get an additional 20% discount."))
+        self.fields["ecsa_reduced_fee"] = forms.BooleanField(required=False, label=_("Reduced membership (retired, unemployed or student)"))
+        self.fields["ecsa_old_member_fee"] = forms.BooleanField(required=False, label=_("20% discount as CSA/ACSA member"))
         self.fields["street"] = forms.CharField(required=False)
         self.fields["postal_code"] = forms.IntegerField(required=False)
         self.fields["city"] = forms.CharField(required=False)
@@ -109,8 +109,8 @@ class SignupForm(authtoolsforms.UserCreationForm):
 
 class NewEcsaIndividualMembershipForm(forms.Form):
     ecsa_billing_email = forms.EmailField(help_text=_("Please provide the email to receive proof of payment here."))
-    ecsa_reduced_fee = forms.BooleanField(required=False, label=_("Yes, I would like to pay the reduced fee."))
-    ecsa_old_member_fee = forms.BooleanField(required=False, label=_("Yes, I am a member of CSA or ACSA and would like to get an additional 20% discount."))
+    ecsa_reduced_fee = forms.BooleanField(required=False, label=_("Reduced membership (retired, unemployed or student)"))
+    ecsa_old_member_fee = forms.BooleanField(required=False, label=_("20% discount as CSA/ACSA member"))
     street = forms.CharField(help_text=_("Street address and number"))
     postal_code = forms.IntegerField()
     city = forms.CharField()

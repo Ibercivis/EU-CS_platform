@@ -61,7 +61,7 @@ padding: 0;position: absolute;top: 0px;"/>
                 <p>{{postal_code}} {{city}}</p>
                 <p>{{country}}</p>
                 <p>{{ecsa_billing_email}}</p>
-                {%if vat_number%}<p>{{vat_number}}</p>{%endif%}
+                {%if vat_number%}<p>VAT: {{vat_number}}</p>{%endif%}
             </td>
             <td>
                 <p>Account holder: ECSA e.V.</p>
@@ -82,7 +82,7 @@ padding: 0;position: absolute;top: 0px;"/>
                 <p>INDIVIDUAL MEMBERSHIP</p>
                 {% endif %}
                  
-                <p class="text-right">Total amount {{amount}} €</p>
+                <p class="text-right"><b>Total amount {{amount}} €</b></p>
                 {% if reduced_fee %}<p>Reduced fee</p>{% endif %}
                 {% if ecsa_old_member_fee %}<p>Discount for being a CSA/ACSA member</p>{%endif%}                     
             </td>            

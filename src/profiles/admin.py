@@ -32,7 +32,7 @@ class UserProfileInline(admin.StackedInline):
     }),
     ('ECSA membership', {
         #'classes': ('collapse',),
-        'fields': ('ecsa_requested_join','ecsa_payment_revision','ecsa_billing_email','ecsa_reduced_fee','ecsa_old_member_fee','ecsa_member','ecsa_member_since','ecsa_member_number','admin_send_welcome_email'),
+        'fields': ('ecsa_requested_join','ecsa_billing_email','ecsa_reduced_fee','ecsa_old_member_fee','ecsa_member','ecsa_member_since','ecsa_member_number','admin_send_welcome_email'),
     }),
     )
     readonly_fields = ('admin_send_welcome_email', )
@@ -67,7 +67,7 @@ class NewUserAdmin(NamedUserAdmin):
             requested_join = user_old.profile.ecsa_requested_join
             ecsa_member = user_old.profile.ecsa_member
             ecsa_member_number = user_old.profile.ecsa_member_number
-            if(ecsa_member_number != obj.profile.ecsa_member_number):
+            if(obj.ecsa_member_number and ecsa_member_number != obj.profile.ecsa_member_number):
                # to_email = obj.email
                 to_email = "vval@bifi.es"
                 subject = 'Welcome to ECSA!'
