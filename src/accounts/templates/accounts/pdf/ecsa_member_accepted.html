@@ -56,7 +56,7 @@ padding: 0;position: absolute;top: 0px;"/>
         
         <tr>
             <td>
-                <p>{{name}} {{lastname}}</p>
+                <p>{{name}} {%if lastname %}{{lastname}}{%endif%}</p>
                 <p>{{street}}</p>
                 <p>{{postal_code}} {{city}}</p>
                 <p>{{country}}</p>
