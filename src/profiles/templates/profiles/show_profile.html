@@ -71,17 +71,11 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 							<a href="{% url 'profiles:edit_self' %}" class="btn btn-outline btn-green float-right ml-2 mt-5"><i class="fas fa-edit"></i> {% trans "Edit Profile" %}</a>
 							{% endif %}							
 					</div>
-
-					{% if show_user.profile.ecsa_member or show_user.profile.former_member %}					
-					<a data-href="{% url 'accounts:drop_out_ecsa_membership' %}" name='dropoutECSA' data-toggle="modal" data-target="#confirm-dropout"
-					 class="btn btn-outline btn-red float-right ml-2 mt-5"><i class="fas fa-users"></i> {% trans "Drop out ECSA membership" %}</a>
-
-					{% else %}
-						<!-- <a href="{% url 'accounts:claim_ecsa_payment_revision' %}" class="btn btn-outline btn-info float-right ml-2 mt-5"><i class="fas fa-users"></i> {% trans "Claim for ECSA payment revision" %}</a>					 -->
-						{% if not show_user.profile.ecsa_requested_join %}
-							<a href="{% url 'accounts:new_ecsa_individual_membership' %}" class="btn btn-outline btn-info float-right ml-2 mt-5"><i class="fas fa-users"></i> {% trans "Sign up for ECSA membership" %}</a>
-						{% endif %}
+				
+					{% if not show_user.profile.ecsa_requested_join %}
+						<a href="{% url 'accounts:new_ecsa_individual_membership' %}" class="btn btn-outline btn-info float-right ml-2 mt-5"><i class="fas fa-users"></i> {% trans "Sign up for ECSA membership" %}</a>
 					{% endif %}
+					
 				</div>
 					
 				{%if editable %}
@@ -92,7 +86,7 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 						<a class="nav-link sub" id="parttab" href="#"
 						onClick="$('#one').hide(); $('#two').show()
 						$('#parttab').addClass('active')
-						$('#desctab').removeClass('active') ">{% trans "ECSA" %}</a>
+						$('#desctab').removeClass('active') ">{% trans "ECSA membership" %}</a>
 						</li>
 						<li class="nav-item">
 						<a class="nav-link sub active" id="desctab" href="#"
@@ -140,17 +134,24 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 								Paid
 							{% endif %}
 							</p>
-							<p><b>{% trans "Member since" %}: </b>{{ show_user.profile.ecsa_member_since | date:"d/m/Y" }}</p>
-							<p><b>{% trans "Payment revision" %}: </b>{% if show_user.profile.ecsa_payment_revision %} Yes {% else %} No{% endif %}</p>
-							<p><b>{% trans "Member number" %}: </b>{{ show_user.profile.ecsa_member_number }}</p>							
-							<p><b>{% trans "Billing email" %}: </b>{{ show_user.profile.ecsa_billing_email }}</p>
-							<p><b>{% trans "Reduced fee" %}: </b>{{ show_user.profile.ecsa_reduced_fee }}</p>
-							<p><b>{% trans "20% discount for CSA/ACSA members" %}: </b>{{ show_user.profile.ecsa_old_member_fee }}</p>
+								<p><b>{% trans "Member since" %}: </b>{{ show_user.profile.ecsa_member_since | date:"d/m/Y" }}</p>
+								<p><b>{% trans "Payment revision" %}: </b>{% if show_user.profile.ecsa_payment_revision %} Yes {% else %} No{% endif %}</p>
+								<p><b>{% trans "Member number" %}: </b>{{ show_user.profile.ecsa_member_number }}</p>							
+								<p><b>{% trans "Billing email" %}: </b>{{ show_user.profile.ecsa_billing_email }}</p>
+								<p><b>{% trans "Reduced fee" %}: </b>{{ show_user.profile.ecsa_reduced_fee }}</p>
+								<p><b>{% trans "20% discount for CSA/ACSA members" %}: </b>{{ show_user.profile.ecsa_old_member_fee }}</p>
+						</div>
+						<div class="col-12 col-sm-6">
 							<p><b>{% trans "Street" %}: </b>{{ show_user.profile.street }}</p>
 							<p><b>{% trans "Postal code" %}: </b>{{ show_user.profile.postal_code }}</p>
 							<p><b>{% trans "City" %}: </b>{{ show_user.profile.city }}</p>
 							<p><b>{% trans "Country" %}: </b>{{ show_user.profile.country }}</p>
 							<p><b>{% trans "Occupation" %}: </b>{{ show_user.profile.occupation }}</p>
+							{% if show_user.profile.ecsa_member or show_user.profile.former_member %}					
+								<a data-href="{% url 'accounts:drop_out_ecsa_membership' %}" name='dropoutECSA' data-toggle="modal" data-target="#confirm-dropout"
+								class="btn btn-outline btn-red float-right ml-2 mt-5"><i class="fas fa-users"></i> {% trans "Drop out ECSA membership" %}</a>
+							{% endif %}
+							<a href="{% url 'accounts:editEcsaIndividualMembership' %}" class="btn btn-outline btn-green float-right ml-2 mt-5"><i class="fas fa-edit"></i> {% trans "Edit" %}</a>
 						</div>							
 					</div>
 

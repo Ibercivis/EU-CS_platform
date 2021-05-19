@@ -1,0 +1,137 @@
+{% extends "base_r2.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% block head %}
+{{block.super }}
+{{ form.media.css }}
+
+
+{% endblock head %}
+
+{% block title %}{{ block.super }} :: Edit Ecsa individual membership{% endblock %}
+
+
+{% block list_of_items %}
+<div class="container">
+    <div class="row">
+        <div class="container mt-5">
+            <div class="row d-flex justify-content-center">
+                <div class="col-sm-10 col-12">
+                    <div class="card mt-5 mb-5 shadow">
+                        <div class="card-text pr-5 pl-5 pb-5">
+                            <br/>
+                            <form action="{% url 'editEcsaOrganisationMembership' organisationID %}" method="post" autocomplete="off">
+                                {% csrf_token %}
+
+                                <div class="form-row">
+                                    <div class="col-12 mb-3">
+                                    {{ form.origin_name|as_crispy_field }}
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-12 mb-3">
+                                    {{ form.street|as_crispy_field }}
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                    {{ form.postal_code|as_crispy_field }}
+                                    </div>
+                                </div>
+                                
+
+                                <div class="form-row">
+                                    <div class="col-12 mb-3">
+                                    {{ form.city|as_crispy_field }}
+                                    </div>
+                                </div>
+
+                                <p>Billing information</p>
+                                <p>Please provide your billing address here. It will be used internally for ECSA membership administration. All the information you enter below will only be visible to ECSA administrators.</p>
+                                <div class="form-row">
+                                    <div class="col-12 mb-3">
+                                    {{ form.ecsa_billing_street|as_crispy_field }}
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                    {{ form.ecsa_billing_postal_code|as_crispy_field }}
+                                    </div>
+                                </div>
+
+
+                                <div class="form-row">
+                                    <div class="col-12 mb-3">
+                                    {{ form.ecsa_billing_city|as_crispy_field }}
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                    {{ form.ecsa_billing_country|as_crispy_field }}
+                                    </div>
+                                </div>
+
+
+                                
+                                <div class="form-row">
+                                    <div class="col-12 mb-3">
+                                    {{ form.ecsa_billing_email|as_crispy_field }}
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-12 mb-3">
+                                    {{ form.legal_status|as_crispy_field }}
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-12 mb-3">
+                                    {{ form.has_vat_number|as_crispy_field }}
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                    {{ form.vat_number|as_crispy_field }}
+                                    </div>
+                                </div>
+
+
+                                <div class="form-row">
+                                    <div class="col-12 mb-3">
+                                        <p>I am eligible for:</p>
+                                        {{ form.ecsa_reduced_fee|as_crispy_field }}
+                                        {{ form.ecsa_old_organisation_fee|as_crispy_field }}
+                                    </div>                                    
+                                </div>
+
+                              
+
+                                <button type="submit" class="btn btn-green"><i class="fas fa-share-square"></i> {% trans "Submit" %}</button>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock list_of_items %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function () {        
+        if($('#id_has_vat_number').val() == 0){
+            $("#div_id_vat_number").hide();
+        } 
+        
+        $('#id_has_vat_number').change(function () {
+            var value = $('#id_has_vat_number').val()
+            if(value == 0){
+                $("#div_id_vat_number").hide();
+            }else{
+                $("#div_id_vat_number").show();
+                $('#div_id_vat_number label').append(
+                    $("<span>", {"class": "required-indicator"}).text("*")
+                );
+            }
+        });
+    });
+</script>
+{% endblock scripts %}

@@ -77,16 +77,12 @@
 					{{ organisation.description }}
 					<br/>
 					{% if organisation.creator == user or user.is_staff %}
-					{% if organisation.ecsa_member %}
-						<a data-href="{% url 'drop_out_ecsa_organisation_membership' organisation.id %}" name='dropoutECSA' data-toggle="modal" data-target="#confirm-dropout"
-						class="btn btn-outline btn-red"><i class="fas fa-users"></i> {% trans "Drop out ECSA membership" %}</a>
-
-					{% else %}				
-							<!-- <a href="{% url 'claim_ecsa_organisation_payment_revision' organisation.id %}" class="btn btn-outline btn-info"><i class="fas fa-users"></i> {% trans "Claim for ECSA payment revision" %}</a>					 -->
+				
+			
 						{% if not organisation.ecsa_requested_join %}
 							<a href="{% url 'new_ecsa_organisation_membership' organisation.id %}" class="btn btn-outline btn-info"><i class="fas fa-users"></i> {% trans "Sign up for ECSA membership" %}</a>
 						{% endif %}
-					{% endif %}
+					
 					<br/><br/>
 					{% endif %}
 					
@@ -98,7 +94,7 @@
 								<a class="nav-link sub" id="parttab" href="#"
 								onClick="$('#one').hide(); $('#two').show()
 								$('#parttab').addClass('active')
-								$('#desctab').removeClass('active') ">{% trans "ECSA" %}</a>
+								$('#desctab').removeClass('active') ">{% trans "ECSA membership" %}</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link sub active" id="desctab" href="#"
@@ -137,17 +133,21 @@
 					</div>
 
 					<div class="card-text myhidden" id="two">
-
+						<div class="row p-3">
+						<div class="col-12 col-sm-6">
 						<p><b>{% trans "Member since" %}: </b>{{ organisation.ecsa_member_since | date:"d/m/Y" }}</p>
 						<!-- <p><b>{% trans "Payment revision" %}: </b>{% if organisation.ecsa_payment_revision %} Yes {% else %} No{% endif %}</p>												 -->
 						
 						<p><b>{% trans "Reduced fee" %}: </b>{{ organisation.ecsa_reduced_fee }}</p>
-						<p><b>{% trans "20% discount for CSA/ACSA members" %}: </b>{{ organisation.ecsa_old_member_fee }}</p>
+						<p><b>{% trans "20% discount for CSA/ACSA members" %}: </b>{{ organisation.ecsa_old_organisation_fee }}</p>
 						<p><b>{% trans "Street" %}: </b>{{ organisation.street }}</p>
 						<p><b>{% trans "Postal code" %}: </b>{{ organisation.postal_code }}</p>
 						<p><b>{% trans "City" %}: </b>{{ organisation.city }}</p>
-						
-
+						<p><b>{% trans "Occupation" %}: </b>{{ organisation.orgType }}</p>
+						<p><b>{% trans "Legal status" %}: </b>{{ organisation.legal_status }}</p>
+						<p><b>{% trans "VAT" %}: </b>{{ organisation.vat_number }}</p>
+						</div>
+						<div class="col-12 col-sm-6">
 						<p><b>Billing information</b></p>
 						<p><b>{% trans "Billing email" %}: </b>{{ organisation.ecsa_billing_email }}</p>
 						<p><b>{% trans "Street" %}: </b>{{ organisation.ecsa_billing_street }}</p>
@@ -155,9 +155,17 @@
 						<p><b>{% trans "City" %}: </b>{{ organisation.ecsa_billing_city }}</p>
 						<p><b>{% trans "Country" %}: </b>{{ organisation.ecsa_billing_country }}</p>
 
-						<p><b>{% trans "Occupation" %}: </b>{{ organisation.orgType }}</p>
-						<p><b>{% trans "Legal status" %}: </b>{{ organisation.legal_status }}</p>
+						
 						{% if organisation.has_vat_number %} <p><b>{% trans "Vat number" %}: </b> organisation.vat_number</p>{% endif %}
+						</div>
+					</div>
+						{% if organisation.ecsa_member %}
+							<a data-href="{% url 'drop_out_ecsa_organisation_membership' organisation.id %}" name='dropoutECSA' data-toggle="modal" data-target="#confirm-dropout"
+							class="btn btn-outline btn-red float-right ml-2 mt-5"><i class="fas fa-users"></i> {% trans "Drop out ECSA membership" %}</a>
+						{% endif %}
+						<a href="{% url 'editEcsaOrganisationMembership' organisation.id %}" class="btn btn-outline btn-green float-right ml-2 mt-5">
+							<i class="fas fa-edit"></i> {% trans "Edit" %}
+						</a>
 					</div>
 
 

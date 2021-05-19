@@ -107,6 +107,22 @@ def newEcsaIndividualMembershipEmail(email, name, surname):
     email.content_subtype = "html"
     email.send()
 
+def editEcsaIndividualMembership(request):
+    user = get_object_or_404(User, id=request.user.id)
+    form = forms.NewEcsaIndividualMembershipForm(initial={
+        'ecsa_billing_email':user.profile.ecsa_billing_email, 'ecsa_reduced_fee': user.profile.ecsa_reduced_fee, 'ecsa_old_member_fee': user.profile.ecsa_old_member_fee,
+        'street': user.profile.street, 'postal_code': user.profile.postal_code, 'city': user.profile.city, 'country' : user.profile.country, 'occupation' : user.profile.occupation
+    })
+
+    if request.method == 'POST':
+        form = forms.NewEcsaIndividualMembershipForm(request.POST, request.FILES)     
+        if form.is_valid():
+            form.save(request, request.user.id)
+            return redirect('profiles:show_self')
+        else:
+            print(form.errors)
+    return render(request, 'accounts/editEcsaIndividualMembership.html', {'form': form, 'user':user, })
+
 
 def dropOutECSAmembership(request):
     profile = get_object_or_404(Profile, user_id=request.user.id)    

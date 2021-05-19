@@ -1,0 +1,76 @@
+{% extends "base_r2.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% block head %}
+{{block.super }}
+{{ form.media.css }}
+
+
+{% endblock head %}
+
+{% block title %}{{ block.super }} :: Edit Ecsa individual membership{% endblock %}
+
+
+{% block list_of_items %}
+<div class="container">
+    <div class="row">
+        <div class="container mt-5">
+            <div class="row d-flex justify-content-center">
+                <div class="col-sm-10 col-12">
+                    <div class="card mt-5 mb-5 shadow">
+                        <div class="card-text pr-5 pl-5 pb-5">
+                            <br/>
+                            <form action="/editEcsaIndividualMembership/" method="post" autocomplete="off">
+                                {% csrf_token %}
+
+                                <div class="form-row">
+                                    <div class="col-12 mb-3">
+                                    {{ form.ecsa_billing_email|as_crispy_field }}
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <p>I am eligible for:</p>
+                                        {{ form.ecsa_reduced_fee|as_crispy_field }}
+                                        {{ form.ecsa_old_member_fee|as_crispy_field }}
+                                    </div>                                    
+                                </div>
+
+                                <div class="form-row">
+
+                                    <div class="col-12 mb-3">
+                                    {{ form.street|as_crispy_field }}
+                                    </div>
+                                </div>
+
+
+                                <div class="form-row">
+                                    <div class="col-12 mb-3">
+                                    {{ form.postal_code|as_crispy_field }}
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                    {{ form.city|as_crispy_field }}
+                                    </div>
+                                </div>
+
+
+                                <div class="form-row">
+                                    <div class="col-12 mb-3">
+                                    {{ form.country|as_crispy_field }}
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                    {{ form.occupation|as_crispy_field }}
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-green"><i class="fas fa-share-square"></i> {% trans "Submit" %}</button>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock list_of_items %}

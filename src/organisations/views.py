@@ -147,6 +147,24 @@ def newEcsaOrganisationMembershipEmail(email, name):
     email.content_subtype = "html"
     email.send()
 
+def editEcsaOrganisationMembership(request, pk):
+    organisation = get_object_or_404(Organisation, id=pk)
+    form = NewEcsaOrganisationMembershipForm(initial={
+        'origin_name':organisation.origin_name, 'street': organisation.street, 'postal_code': organisation.postal_code, 'city': organisation.city,
+        'ecsa_billing_street': organisation.ecsa_billing_street, 'ecsa_billing_postal_code': organisation.ecsa_billing_postal_code, 'ecsa_billing_city': organisation.ecsa_billing_city,
+        'ecsa_billing_country': organisation.ecsa_billing_country, 'ecsa_billing_email': organisation.ecsa_billing_email,
+        'legal_status': organisation.legal_status, 'vat_number': organisation.vat_number, 'has_vat_number': (1, 0)[organisation.vat_number == None],
+        'ecsa_reduced_fee': organisation.ecsa_reduced_fee, 'ecsa_old_organisation_fee': organisation.ecsa_old_organisation_fee
+    })
+
+    if request.method == 'POST':
+        form = NewEcsaOrganisationMembershipForm(request.POST)     
+        if form.is_valid():
+            form.save(request, pk)
+            return redirect('/organisation/'+ str(pk))
+        else:
+            print(form.errors)
+    return render(request, 'editEcsaOrganisationMembership.html', {'form': form, 'organisation': organisation, 'organisationID': pk})
 
 def dropOutECSAmembership(request, pk):
     organisation = get_object_or_404(Organisation, id=pk)    
