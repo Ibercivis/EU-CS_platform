@@ -41,16 +41,16 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 	<div class="modal-dialog">
 	  <div class="modal-content">
 		<div class="modal-header">
-		  <h4 class="modal-title" id="myModalLabel">{% trans "Confirm delete" %}</h4>
+		  <h4 class="modal-title" id="myModalLabel">{% trans "Confirm membership cancellation" %}</h4>
 		  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 		</div>
 		<div class="modal-body">
-		  <p>{% trans "You are going to drop out ECSA membership" %}</p>
-		  <p>{% trans "Are you sure?" %}</p>
+		  <p>{% trans "We’re sorry to see you go!" %}</p>
+		  <p>{% trans "Please confirm that you no longer wish to be a member of ECSA." %}</p>
 		</div>
 		<div class="modal-footer">
 		  <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
-		  <a class="btn btn-red btn-dropout"><i class="fas fa-trash-alt"></i> {% trans "Drop out" %}</a>
+		  <a class="btn btn-red btn-dropout"><i class="fas fa-trash-alt"></i> {% trans " Cancel membership" %}</a>
 		</div>
 	  </div>
 	</div>
@@ -133,11 +133,10 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 								Paid
 							{% endif %}
 							</p>
-								<p><b>{% trans "Member since" %}: </b>{{ show_user.profile.ecsa_member_since | date:"d/m/Y" }}</p>
-								<p><b>{% trans "Payment revision" %}: </b>{% if show_user.profile.ecsa_payment_revision %} Yes {% else %} No{% endif %}</p>
+								<p><b>{% trans "Member since" %}: </b>{{ show_user.profile.ecsa_member_since | date:"d/m/Y" }}</p>								
 								<p><b>{% trans "Member number" %}: </b>{{ show_user.profile.ecsa_member_number }}</p>							
-								<p><b>{% trans "Reduced fee" %}: </b>{{ show_user.profile.ecsa_reduced_fee }}</p>
-								<p><b>{% trans "20% discount for CSA/ACSA members" %}: </b>{{ show_user.profile.ecsa_old_member_fee }}</p>
+								<p><b>{% trans "Reduced fee" %}: </b>{%if show_user.profile.ecsa_reduced_fee %} Yes {% else %} No{% endif %}</p>
+								<p><b>{% trans "20% discount for CSA/ACSA members" %}: </b>{%if show_user.profile.ecsa_old_member_fee %} Yes {% else %} No{% endif %}</p>
 						</div>
 						<div class="col-12 col-sm-6">
 							<p><b>{% trans "Street" %}: </b>{{ show_user.profile.street }}</p>
@@ -147,7 +146,7 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 							<p><b>{% trans "Occupation" %}: </b>{{ show_user.profile.occupation }}</p>
 							{% if show_user.profile.ecsa_member or show_user.profile.former_member %}					
 								<a data-href="{% url 'accounts:drop_out_ecsa_membership' %}" name='dropoutECSA' data-toggle="modal" data-target="#confirm-dropout"
-								class="btn btn-outline btn-red float-right ml-2 mt-5"><i class="fas fa-users"></i> {% trans "Drop out ECSA membership" %}</a>
+								class="btn btn-outline btn-red float-right ml-2 mt-5"><i class="fas fa-users"></i> {% trans "Cancel ECSA membership" %}</a>
 							{% endif %}
 							<a href="{% url 'accounts:editEcsaIndividualMembership' %}" class="btn btn-outline btn-green float-right ml-2 mt-5"><i class="fas fa-edit"></i> {% trans "Edit" %}</a>
 						</div>							

@@ -37,16 +37,16 @@
 	<div class="modal-dialog">
 	  <div class="modal-content">
 		<div class="modal-header">
-		  <h4 class="modal-title" id="myModalLabel">{% trans "Confirm delete" %}</h4>
+		  <h4 class="modal-title" id="myModalLabel">{% trans "Confirm membership cancellation" %}</h4>
 		  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 		</div>
 		<div class="modal-body">
-		  <p>{% trans "You are going to drop out ECSA membership" %}</p>
-		  <p>{% trans "Are you sure?" %}</p>
+		  <p>{% trans "We’re sorry to see you go!" %}</p>
+		  <p>{% trans "Please confirm that you no longer wish to be a member of ECSA." %}</p>
 		</div>
 		<div class="modal-footer">
 		  <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
-		  <a class="btn btn-red btn-dropout"><i class="fas fa-trash-alt"></i> {% trans "Drop out" %}</a>
+		  <a class="btn btn-red btn-dropout"><i class="fas fa-trash-alt"></i> {% trans " Cancel membership" %}</a>
 		</div>
 	  </div>
 	</div>
@@ -60,8 +60,8 @@
 				<div class="col-sm-3 col-12">
 					<img title="organisation logo" target="_blank"
 					class="img-fluid mb-3" src="{{ organisation.logo|default:'/media/default_profile.png' }}">
-					<div><strong>Contact Point</strong>: {{ organisation.contactPoint }} </div>
-					<div class="mb-5"><strong>{% trans "Contact Point Email" %}</strong>: {{ organisation.contactPointEmail }}</div>
+					<div><strong>Contact person</strong>: {{ organisation.contactPoint }} </div>
+					<div class="mb-5"><strong>{% trans "Contact email" %}</strong>: {{ organisation.contactPointEmail }}</div>
 				</div>
 				<div class="col-sm-9 col-12">
 					<div class="row">
@@ -80,7 +80,7 @@
 				
 			
 						{% if not organisation.ecsa_requested_join %}
-							<a href="{% url 'new_ecsa_organisation_membership' organisation.id %}" class="btn btn-outline btn-info"><i class="fas fa-users"></i> {% trans "Sign up for ECSA membership" %}</a>
+							<a href="{% url 'new_ecsa_organisation_membership' organisation.id %}" class="btn btn-outline btn-info"><i class="fas fa-users"></i> {% trans "Become ECSA member" %}</a>
 						{% endif %}
 					
 					<br/><br/>
@@ -136,10 +136,10 @@
 						<div class="row p-3">
 						<div class="col-12 col-sm-6">
 						<p><b>{% trans "Member since" %}: </b>{{ organisation.ecsa_member_since | date:"d/m/Y" }}</p>
-						<!-- <p><b>{% trans "Payment revision" %}: </b>{% if organisation.ecsa_payment_revision %} Yes {% else %} No{% endif %}</p>												 -->
+						<p><b>{% trans "Member number" %}: </b>{{ organisation.ecsa_member_number }}</p>
 						
-						<p><b>{% trans "Reduced fee" %}: </b>{{ organisation.ecsa_reduced_fee }}</p>
-						<p><b>{% trans "20% discount for CSA/ACSA members" %}: </b>{{ organisation.ecsa_old_organisation_fee }}</p>
+						<p><b>{% trans "Reduced fee" %}: </b>{%if show_user.profile.ecsa_reduced_fee %} Yes {% else %} No{% endif %}</p>
+						<p><b>{% trans "20% discount for CSA/ACSA members" %}: </b>{% if organisation.ecsa_old_organisation_fee %}Yes {% else %} No{% endif %}</p>
 						<p><b>{% trans "Street" %}: </b>{{ organisation.street }}</p>
 						<p><b>{% trans "Postal code" %}: </b>{{ organisation.postal_code }}</p>
 						<p><b>{% trans "City" %}: </b>{{ organisation.city }}</p>
@@ -161,7 +161,7 @@
 					</div>
 						{% if organisation.ecsa_member %}
 							<a data-href="{% url 'drop_out_ecsa_organisation_membership' organisation.id %}" name='dropoutECSA' data-toggle="modal" data-target="#confirm-dropout"
-							class="btn btn-outline btn-red float-right ml-2 mt-5"><i class="fas fa-users"></i> {% trans "Drop out ECSA membership" %}</a>
+							class="btn btn-outline btn-red float-right ml-2 mt-5"><i class="fas fa-users"></i> {% trans "Cancel ECSA membership" %}</a>
 						{% endif %}
 						<a href="{% url 'editEcsaOrganisationMembership' organisation.id %}" class="btn btn-outline btn-green float-right ml-2 mt-5">
 							<i class="fas fa-edit"></i> {% trans "Edit" %}
