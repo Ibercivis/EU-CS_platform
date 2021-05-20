@@ -49,7 +49,7 @@ class ProfileForm(forms.ModelForm):
     CHOICES = ()
     choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=CHOICES)
     interestAreas = forms.MultipleChoiceField(choices=CHOICES, widget=Select2MultipleWidget,
-                        required=False, label="Interest Areas",help_text=_('Please write or select interest areas, separated by commas or pressing enter'))
+                        required=False, label="Interest areas",help_text=_('Please write or select interest areas, separated by commas or pressing enter.'))
     latitude = forms.DecimalField(widget=forms.HiddenInput(),max_digits=9,decimal_places=6,required=False)
     longitude = forms.DecimalField(widget=forms.HiddenInput(),max_digits=9,decimal_places=6,required=False)
     organisation = forms.ModelMultipleChoiceField(queryset=Organisation.objects.all(), widget=Select2MultipleWidget(attrs={'data-placeholder':'Related organisations'}), required=False,label="Organisation (Multiple selection)")

@@ -41,7 +41,6 @@
 <script type="text/javascript">
 
   $(document).ready(function () {
-    $("#div_id_ecsa_billing_email").hide();
     $("#div_id_ecsa_reduced_fee").hide();
     $("#div_id_ecsa_old_member_fee").hide();
     $("#div_id_street").hide();
@@ -60,31 +59,16 @@
     );
 
 
-    $('#div_id_ecsa_billing_email label, #div_id_street label, #div_id_postal_code label, #div_id_city label, #div_id_country label, #div_id_occupation label').append(
+    $('#div_id_street label, #div_id_postal_code label, #div_id_city label, #div_id_country label, #div_id_occupation label').append(
         $("<span>", {"class": "required-indicator"}).text("*")
-    );
-    $('#div_id_ecsa_billing_email label').append('<br/><br/>')
-        .append('<input type="checkbox" id="use_same_billing_email" name="billing_email" value="same_billing_email">')
-        .append('<label for="use_same_billing_email">Use same user email as billing email</label></div>')
-        .append('<br/>');
-    
-    $('#use_same_billing_email').change(function () {
-      if( $('#use_same_billing_email').prop('checked') ) {
-        $("#id_ecsa_billing_email").hide();
-        $("#id_ecsa_billing_email").val($("#id_email").val())
-      }else{
-        $("#id_ecsa_billing_email").show(); 
-      }
-    });
-
-    $('#div_id_ecsa_billing_email').append(
-      $("<br/><span>").text("I am eligible for:")
     );
 
 
     $("#id_ecsa_individual_membership").on('change', function(e){
-      if($("#id_ecsa_individual_membership")[0].checked){   
-        $("#div_id_ecsa_billing_email").show();        
+      if($("#id_ecsa_individual_membership")[0].checked){         
+        $('#div_id_ecsa_individual_membership').append(
+          $("<br/><span>").text("I am eligible for:")
+        );
         $("#div_id_ecsa_reduced_fee").show();     
         $("#div_id_ecsa_old_member_fee").show();
         $("#div_id_street").show();        
@@ -92,15 +76,14 @@
         $("#div_id_city").show();        
         $("#div_id_country").show();
         $("#div_id_occupation").show();
-        $("#id_ecsa_billing_email").prop('required',true);
         $("#id_street").prop('required',true);
         $("#id_postal_code").prop('required',true);
         $("#id_city").prop('required',true);
         $("#id_country").prop('required',true);
         $("#id_occupation").prop('required',true);
-
       }else{
-        $("#div_id_ecsa_billing_email").hide();
+        $('#div_id_ecsa_individual_membership br').remove();
+        $('#div_id_ecsa_individual_membership span').remove();
         $("#div_id_ecsa_reduced_fee").hide();
         $("#div_id_ecsa_old_member_fee").hide();
         $("#div_id_street").hide();

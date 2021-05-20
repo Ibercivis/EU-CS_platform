@@ -79,7 +79,6 @@ class SignupForm(authtoolsforms.UserCreationForm):
         self.fields["ecsa_individual_membership"] = forms.BooleanField(required=False, label=_("Yes, I would like to become a member of ECSA as an individual."))
         self.fields["name"] = forms.CharField(label=_("First name"))
         self.fields["lastname"] = forms.CharField(label=_("Last name"))
-        self.fields["ecsa_billing_email"] = forms.EmailField(required=False)
         self.fields["ecsa_reduced_fee"] = forms.BooleanField(required=False, label=_("Reduced membership (retired, unemployed or student)"))
         self.fields["ecsa_old_member_fee"] = forms.BooleanField(required=False, label=_("20% discount as CSA/ACSA member"))
         self.fields["street"] = forms.CharField(required=False)
@@ -95,7 +94,6 @@ class SignupForm(authtoolsforms.UserCreationForm):
             Field("password1", placeholder=_("Enter password")),
             Field("password2", placeholder=_("Re-enter password")),
             Field("ecsa_individual_membership"),
-            Field("ecsa_billing_email", placeholder=_("Please provide the email to receive proof of payment here.")),
             Field("ecsa_reduced_fee"),
             Field("ecsa_old_member_fee"),
             Field("street", placeholder=_("Street address and number")),
@@ -108,7 +106,6 @@ class SignupForm(authtoolsforms.UserCreationForm):
         )
 
 class NewEcsaIndividualMembershipForm(forms.Form):
-    ecsa_billing_email = forms.EmailField(help_text=_("Please provide the email to receive proof of payment here."))
     ecsa_reduced_fee = forms.BooleanField(required=False, label=_("Reduced membership (retired, unemployed or student)"))
     ecsa_old_member_fee = forms.BooleanField(required=False, label=_("20% discount as CSA/ACSA member"))
     street = forms.CharField(help_text=_("Street address and number"))
@@ -129,7 +126,6 @@ def saveProfile(self, profileID, ecsa_individual_membership):
         postal_code = self.data['postal_code']
         city = self.data['city']
         country = self.data['country']
-        ecsa_billing_email = self.data['ecsa_billing_email']
         profile.street = street
         profile.postal_code = postal_code
         profile.city = city
@@ -137,7 +133,6 @@ def saveProfile(self, profileID, ecsa_individual_membership):
         profile.postal_code = postal_code
         profile.city = city
         profile.country = country
-        profile.ecsa_billing_email = ecsa_billing_email
         profile.ecsa_reduced_fee=False
         if('ecsa_reduced_fee' in self.data and self.data['ecsa_reduced_fee'] == 'on'):
             profile.ecsa_reduced_fee=True

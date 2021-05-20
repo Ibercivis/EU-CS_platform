@@ -62,7 +62,7 @@ class SignUpView(
         user.is_active = False
         user.save()
         ecsa_individual_membership = form.cleaned_data.get('ecsa_individual_membership')
-        mail_subject = 'Activate your EU-Citizen.Science account.'
+        mail_subject = 'Activate your EU-Citizen.Science account'
         message = render_to_string('accounts/acc_active_email.html', {
             'user': user,
             'domain': settings.HOST,
@@ -110,7 +110,7 @@ def newEcsaIndividualMembershipEmail(email, name, surname):
 def editEcsaIndividualMembership(request):
     user = get_object_or_404(User, id=request.user.id)
     form = forms.NewEcsaIndividualMembershipForm(initial={
-        'ecsa_billing_email':user.profile.ecsa_billing_email, 'ecsa_reduced_fee': user.profile.ecsa_reduced_fee, 'ecsa_old_member_fee': user.profile.ecsa_old_member_fee,
+        'ecsa_reduced_fee': user.profile.ecsa_reduced_fee, 'ecsa_old_member_fee': user.profile.ecsa_old_member_fee,
         'street': user.profile.street, 'postal_code': user.profile.postal_code, 'city': user.profile.city, 'country' : user.profile.country, 'occupation' : user.profile.occupation
     })
 
@@ -201,7 +201,7 @@ def activate(request, uidb64, token):
         user.is_active = True
         user.save()
         #Send email
-        mail_subject = 'Welcome to EU-Citizen.Science.'
+        mail_subject = 'Welcome to EU-Citizen.Science!'
         message = render_to_string('accounts/welcome_email.html', {
             'user': user,
             "domain": settings.HOST,

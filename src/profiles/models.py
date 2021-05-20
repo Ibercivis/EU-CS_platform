@@ -26,7 +26,7 @@ class BaseProfile(models.Model):
         _("Profile picture"), upload_to="profile_pics/%Y-%m-%d/", null=True, blank=True
     )
     title = models.CharField(_("Title"), max_length=200, blank=True, null=True)
-    bio = models.CharField(_("Short Bio and disciplinary background"), max_length=400, blank=True, null=True)
+    bio = models.CharField(_("Bio and disciplinary background"), max_length=400, blank=True, null=True)
     interestAreas = models.ManyToManyField(InterestArea, blank=True)
     latitude = models.DecimalField(max_digits=9,decimal_places=6, blank=True, null=True)
     longitude = models.DecimalField(max_digits=9,decimal_places=6, blank=True, null=True)
@@ -43,7 +43,6 @@ class BaseProfile(models.Model):
     ecsa_member_number = models.IntegerField(null=True, blank=True)
 
     lastname = models.CharField(_("Last name"), max_length=50, blank=True, null=True)
-    ecsa_billing_email = models.EmailField(blank=True, null=True)
     ecsa_reduced_fee = models.BooleanField(_("Reduced fee"), default=False)
     ecsa_old_member_fee = models.BooleanField(_("20% discount for CSA/ACSA members"), default=False)
     street = models.CharField(_("Street"), max_length=50, blank=True, null=True)

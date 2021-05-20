@@ -103,8 +103,7 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 					<div class="row p-3">
 						<div class="col-12 col-sm-6">
 							<p><b>{% trans "Email" %}: </b>{{ show_user.email|default:"missing"}}</p>
-							<p><b>{% trans "Joined" %}: </b>{{ show_user.date_joined }}</p>
-							<p><b>{% trans "Last seen" %}: </b>{{ show_user.last_login }}</p>
+							<p><b>{% trans "Joined" %}: </b>{{ show_user.date_joined | date:"d/m/Y"}}</p>							
 						</div>
 						<div class="col-12 col-sm-6">
 							<p><strong>{% trans "Title" %}</strong>: {{ show_user.profile.title }} </p>
@@ -115,7 +114,7 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 							<br/>
 						</div>
 						<div class="col-12 col-sm-6">
-							<p><strong>{% trans "Interest Areas" %}</strong>:
+							<p><strong>{% trans "Interest areas" %}</strong>:
 								{% for area in show_user.profile.interestAreas.all %}
 								{{ area }}
 								{% endfor %}
@@ -137,7 +136,6 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 								<p><b>{% trans "Member since" %}: </b>{{ show_user.profile.ecsa_member_since | date:"d/m/Y" }}</p>
 								<p><b>{% trans "Payment revision" %}: </b>{% if show_user.profile.ecsa_payment_revision %} Yes {% else %} No{% endif %}</p>
 								<p><b>{% trans "Member number" %}: </b>{{ show_user.profile.ecsa_member_number }}</p>							
-								<p><b>{% trans "Billing email" %}: </b>{{ show_user.profile.ecsa_billing_email }}</p>
 								<p><b>{% trans "Reduced fee" %}: </b>{{ show_user.profile.ecsa_reduced_fee }}</p>
 								<p><b>{% trans "20% discount for CSA/ACSA members" %}: </b>{{ show_user.profile.ecsa_old_member_fee }}</p>
 						</div>
