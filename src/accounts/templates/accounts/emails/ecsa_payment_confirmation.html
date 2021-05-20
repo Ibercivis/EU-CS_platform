@@ -5,7 +5,7 @@
 {% endblock subject %}
 
 {% block html_body  %}
-<p>Dear {{ name }} {{ name }},</p>
+<p>Dear {{ name }} {%if lastname %}{{ lastname }}{%endif%},</p>
 <p>Payment confirmation.</p>
 
 {% endblock html_body %}

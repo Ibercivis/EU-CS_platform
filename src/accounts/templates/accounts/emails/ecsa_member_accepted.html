@@ -5,7 +5,7 @@
 {% endblock subject %}
 
 {% block html_body  %}
-<p>Dear {{ name }} {{ name }},</p>
+<p>Dear {{ name }} {%if lastname %}{{ lastname }}{%endif%},</p>
 <p>We warmly welcome you to the ECSA community.</p>
 <p>Your ECSA member number is {{ecsa_member_number}}. </p>
 <p>We have also developed a membership badge (attached in this email) which you are encouraged to place on your website and link back to http://ecsa.citizen-science.net/, as well as in your presentations and materials.
