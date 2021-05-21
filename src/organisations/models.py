@@ -3,6 +3,7 @@ from django.conf import settings
 from django_countries.fields import CountryField
 from django.utils.translation import ugettext_lazy as _
 from django.utils.html import format_html
+from ecsa.models import Delegate
 
 LEGAL_STATUS = (
     (0,"For-profit"),
@@ -58,6 +59,10 @@ class Organisation(models.Model):
     vat_number = models.IntegerField(null=True, blank=True)
     ecsa_reduced_fee = models.BooleanField(_("Reduced fee"), default=False)
     ecsa_old_organisation_fee = models.BooleanField(_("Old organisation fee"), default=False)
+
+    mainDelegate = models.ForeignKey(Delegate, on_delete=models.SET_NULL, related_name='main_delegate', null=True, blank=True)
+    delegate1 = models.ForeignKey(Delegate, on_delete=models.SET_NULL, related_name='delegate1', null=True, blank=True)
+    delegate2 = models.ForeignKey(Delegate, on_delete=models.SET_NULL, related_name='delegate2', null=True, blank=True)
 
     def admin_send_welcome_email(self): 
         return format_html('<input type="submit" value="Send welcome email" name="_continue">')

@@ -32,7 +32,7 @@ class OrganisationAdmin(admin.ModelAdmin):
         #'classes': ('collapse',),
         'fields': ('ecsa_requested_join','ecsa_billing_email', 'ecsa_billing_street', 'ecsa_billing_postal_code',
         'ecsa_billing_city', 'ecsa_billing_country', 'ecsa_reduced_fee','ecsa_old_organisation_fee','legal_status', 'vat_number',
-        'ecsa_member','ecsa_member_since','ecsa_member_number','admin_send_welcome_email'),
+        'ecsa_member','ecsa_member_since','ecsa_member_number','admin_send_welcome_email', 'mainDelegate', 'delegate1', 'delegate2'),
     }),
     )
     readonly_fields = ('admin_send_welcome_email', )

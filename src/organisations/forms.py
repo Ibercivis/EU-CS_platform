@@ -4,6 +4,10 @@ from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 from .models import Organisation, OrganisationType, LEGAL_STATUS, YES_NO
 from projects.forms import getCountryCode
+from ecsa.models import Delegate
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 class OrganisationForm(forms.Form):
 
@@ -77,6 +81,13 @@ class NewEcsaOrganisationMembershipForm(forms.Form):
     vat_number = forms.IntegerField(required=False)
     ecsa_reduced_fee = forms.BooleanField(required=False, label=_("Reduced membership (your organisation has less than five full-time employees)"))
     ecsa_old_organisation_fee = forms.BooleanField(required=False, label=_("20% discount as CSA/ACSA member"))
+    #Delegates
+    main_delegate_name = forms.CharField()
+    main_delegate_email = forms.EmailField()
+    delegate1_name = forms.CharField(required=False)
+    delegate1_email = forms.EmailField(required=False)
+    delegate2_name = forms.CharField(required=False)
+    delegate2_email = forms.EmailField(required=False)
 
     def save(self, args, organisationID):
         origin_name = self.data['origin_name']
@@ -116,8 +127,39 @@ class NewEcsaOrganisationMembershipForm(forms.Form):
 
         organisation.ecsa_requested_join = True
 
+
+        main_delegate_name = self.data['main_delegate_name']
+        main_delegate_email = self.data['main_delegate_email']
+        if(main_delegate_name != '' and main_delegate_email != ''):
+            mainDelegate = self.get_or_create_delegate(main_delegate_email, main_delegate_name)                  
+            organisation.mainDelegate = mainDelegate
+
+        delegate1_name = self.data['delegate1_name']
+        delegate1_email = self.data['delegate1_email']
+        if(delegate1_name != '' and delegate1_email != ''):
+            delegate1 = self.get_or_create_delegate(delegate1_email, delegate1_name)                  
+            organisation.delegate1 = delegate1
+
+        delegate2_name = self.data['delegate2_name']
+        delegate2_email = self.data['delegate2_email']
+        if(delegate2_name != '' and delegate2_email != ''):
+            delegate2 = self.get_or_create_delegate(delegate2_email, delegate2_name)                  
+            organisation.delegate2 = delegate2
+
         organisation.save()
         return 'success'
+    
+    def get_or_create_delegate(self, delegate_email, delegate_name):
+        delegate, exist = Delegate.objects.get_or_create(email=delegate_email)
+        delegate.name = delegate_name
+        try:
+            user_temp = User.objects.get(email=delegate_email)
+        except:
+            user_temp = None
+        if(user_temp):
+            delegate.user = user_temp
+        delegate.save()
+        return delegate
 
 
 class OrganisationPermissionForm(forms.Form):
