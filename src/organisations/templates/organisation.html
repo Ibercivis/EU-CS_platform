@@ -86,7 +86,7 @@
 					<br/><br/>
 					{% endif %}
 					
-					{% if organisation.creator == user or user.is_staff %}
+					{% if organisation.creator == user or user.is_staff or isDelegate %}
 						{% if organisation.ecsa_member or organisation.ecsa_requested_join %}
 						<div class="card-header flex  flex-row-reverse">
 							<ul class="nav nav nav-tabs card-header-tabs mr-auto flex-row-reverse">
@@ -180,7 +180,7 @@
 				{{ permissionForm.usersCollection | as_crispy_field }}
 			</permissionForm>
 		{% endif %}
-		{% if editable %}
+		{% if editable or isDelegate %}
 		<div class="card-footer">
 			<a data-href="{% url 'delete_organisation' organisation.id %}" data-toggle="modal" data-target="#confirm-delete" 
 					class="btn btn-outline btn-red float-right ml-2 mt-2">

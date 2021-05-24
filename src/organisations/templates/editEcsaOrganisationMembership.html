@@ -99,7 +99,33 @@
                                     </div>                                    
                                 </div>
 
-                              
+                                <div class="form-row">
+                                    <div class="col-12 mb-3">
+                                    {{ form.main_delegate_name|as_crispy_field }}
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                    {{ form.main_delegate_email|as_crispy_field }}
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-12 mb-3">
+                                    {{ form.delegate1_name|as_crispy_field }}
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                    {{ form.delegate1_email|as_crispy_field }}
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-12 mb-3">
+                                    {{ form.delegate2_name|as_crispy_field }}
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                    {{ form.delegate2_email|as_crispy_field }}
+                                    </div>
+                                </div>
+
 
                                 <button type="submit" class="btn btn-green"><i class="fas fa-share-square"></i> {% trans "Submit" %}</button>
 

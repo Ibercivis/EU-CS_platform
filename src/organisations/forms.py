@@ -133,7 +133,8 @@ class NewEcsaOrganisationMembershipForm(forms.Form):
         if(main_delegate_name != '' and main_delegate_email != ''):
             mainDelegate = self.get_or_create_delegate(main_delegate_email, main_delegate_name)                  
             organisation.mainDelegate = mainDelegate
-
+            #send email
+            
         delegate1_name = self.data['delegate1_name']
         delegate1_email = self.data['delegate1_email']
         if(delegate1_name != '' and delegate1_email != ''):

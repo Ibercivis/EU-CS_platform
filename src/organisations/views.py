@@ -67,10 +67,17 @@ def organisation(request, pk):
         organisation.legal_status = LEGAL_STATUS[ organisation.legal_status][1]
     user = request.user
     cooperatorsPK = getCooperators(pk)
+    
     if user != organisation.creator and not user.is_staff and not user.id in cooperatorsPK:
         editable = False
     else:
         editable = True
+
+    isDelegate = False    
+    if organisation.ecsa_member and ((organisation.mainDelegate and organisation.mainDelegate.user == user) or 
+        (organisation.delegate1 and organisation.delegate1.user == user) or (organisation.delegate2 and organisation.delegate2.user == user)):
+        isDelegate = True
+
     mainProjects = Project.objects.all().filter(mainOrganisation__id=pk)
     associatedProjects = Project.objects.all().filter(organisation__id=pk)
     associatedProjects |=  mainProjects
@@ -80,14 +87,19 @@ def organisation(request, pk):
     cooperators = getCooperatorsEmail(pk)
     permissionForm = OrganisationPermissionForm(initial={'usersCollection':users, 'selectedUsers': cooperators})
     return render(request, 'organisation.html', {'organisation':organisation, 'associatedProjects': associatedProjects,'cooperators': cooperatorsPK,
-    'associatedResources': associatedResources, 'members': members, 'permissionForm': permissionForm, 'editable': editable, 'isSearchPage': True, 'LEGAL_STATUS':LEGAL_STATUS})
+    'associatedResources': associatedResources, 'members': members, 'permissionForm': permissionForm, 'editable': editable, 'isSearchPage': True,
+    'isDelegate':isDelegate, 'LEGAL_STATUS':LEGAL_STATUS})
 
 
 def edit_organisation(request, pk):
     organisation = get_object_or_404(Organisation, id=pk)
     user = request.user
     cooperatorsPK = getCooperators(pk)
-    if user != organisation.creator and not user.is_staff and not user.id in cooperatorsPK:
+    isDelegate = False    
+    if organisation.ecsa_member and ((organisation.mainDelegate and organisation.mainDelegate.user == user) or 
+        (organisation.delegate1 and organisation.delegate1.user == user) or (organisation.delegate2 and organisation.delegate2.user == user)):
+        isDelegate = True
+    if user != organisation.creator and not user.is_staff and not user.id in cooperatorsPK and not isDelegate:
         return redirect('../organisations', {})
 
     form = OrganisationForm(initial={
@@ -121,7 +133,7 @@ def edit_organisation(request, pk):
             else:
                 image_path = ''
             form.save(request, image_path)
-            return redirect('../organisations', {})
+            return redirect('/organisation/'+ str(pk))            
         else:
             print(form.errors)
 
@@ -149,12 +161,38 @@ def newEcsaOrganisationMembershipEmail(email, name):
 
 def editEcsaOrganisationMembership(request, pk):
     organisation = get_object_or_404(Organisation, id=pk)
+    user = request.user
+    isDelegate = False    
+    if organisation.ecsa_member and ((organisation.mainDelegate and organisation.mainDelegate.user == user) or 
+        (organisation.delegate1 and organisation.delegate1.user == user) or (organisation.delegate2 and organisation.delegate2.user == user)):
+        isDelegate = True
+    if not isDelegate:
+        return redirect('../organisations', {})
+
+    mainDelegate_name = ''
+    mainDelegate_email = ''
+    delegate1_name = ''
+    delegate1_email = ''
+    delegate2_name = ''
+    delegate2_email = ''
+    if(organisation.mainDelegate):
+        mainDelegate_name = organisation.mainDelegate.name
+        mainDelegate_email = organisation.mainDelegate.email
+    if(organisation.delegate1):
+        delegate1_name = organisation.delegate1.name
+        delegate1_email = organisation.delegate1.email
+    if(organisation.delegate2):
+        delegate2_name = organisation.delegate2.name
+        delegate2_email = organisation.delegate2.email
     form = NewEcsaOrganisationMembershipForm(initial={
         'origin_name':organisation.origin_name, 'street': organisation.street, 'postal_code': organisation.postal_code, 'city': organisation.city,
         'ecsa_billing_street': organisation.ecsa_billing_street, 'ecsa_billing_postal_code': organisation.ecsa_billing_postal_code, 'ecsa_billing_city': organisation.ecsa_billing_city,
         'ecsa_billing_country': organisation.ecsa_billing_country, 'ecsa_billing_email': organisation.ecsa_billing_email,
         'legal_status': organisation.legal_status, 'vat_number': organisation.vat_number, 'has_vat_number': (1, 0)[organisation.vat_number == None],
-        'ecsa_reduced_fee': organisation.ecsa_reduced_fee, 'ecsa_old_organisation_fee': organisation.ecsa_old_organisation_fee
+        'ecsa_reduced_fee': organisation.ecsa_reduced_fee, 'ecsa_old_organisation_fee': organisation.ecsa_old_organisation_fee,
+        'main_delegate_name': mainDelegate_name, 'main_delegate_email': mainDelegate_email,
+        'delegate1_name': delegate1_name, 'delegate1_email': delegate1_email,
+        'delegate2_name': delegate2_name, 'delegate2_email': delegate2_email
     })
 
     if request.method == 'POST':
