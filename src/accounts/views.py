@@ -23,6 +23,7 @@ from djoser import utils
 from django.contrib.auth.tokens import default_token_generator
 from .tokens import account_activation_token
 from . import forms
+from ecsa.models import Delegate
 
 User = get_user_model()
 
@@ -81,7 +82,6 @@ class SignUpView(
 
         forms.saveProfile(form, user.id, ecsa_individual_membership)
         if(ecsa_individual_membership):
-            #forms.saveProfile(form, user.id)
             newEcsaIndividualMembershipEmail(to_email, user.name, form.cleaned_data.get('lastname'))
 
         return render(self.request, 'accounts/confirm-email.html',{})
@@ -212,6 +212,15 @@ def activate(request, uidb64, token):
         )
         email.content_subtype = "html"
         email.send()
+
+        #Set delegates with this email
+        try:
+            delegate = get_object_or_404(Delegate, email=user.email)
+            delegate.user = user
+            delegate.save()
+        except Delegate.DoesNotExist:
+            print("There isn't delegate")
+
         auth.login(request, user)
         return render(request, 'accounts/confirmation-account.html',{})
     else:

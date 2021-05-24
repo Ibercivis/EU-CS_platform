@@ -163,7 +163,7 @@ def editEcsaOrganisationMembership(request, pk):
     organisation = get_object_or_404(Organisation, id=pk)
     user = request.user
     isDelegate = False    
-    if organisation.ecsa_member and ((organisation.mainDelegate and organisation.mainDelegate.user == user) or 
+    if organisation.ecsa_member and ((user == organisation.creator) or (organisation.mainDelegate and organisation.mainDelegate.user == user) or 
         (organisation.delegate1 and organisation.delegate1.user == user) or (organisation.delegate2 and organisation.delegate2.user == user)):
         isDelegate = True
     if not isDelegate:
