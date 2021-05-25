@@ -153,7 +153,7 @@ def newEcsaOrganisationMembership(request, pk):
 
 def newEcsaOrganisationMembershipEmail(email, name):
     to_email = email
-    subject = 'Thank you! - Become a member of ECSA'          
+    subject = 'Thank you! - Become a member of ECSA'
     message = render_to_string('accounts/emails/new_ecsa_individual_membership.html', { 'name': name, })
     email = EmailMessage(subject, message, to=[to_email], bcc=settings.EMAIL_ECSA_ADMIN)
     email.content_subtype = "html"
@@ -163,7 +163,7 @@ def editEcsaOrganisationMembership(request, pk):
     organisation = get_object_or_404(Organisation, id=pk)
     user = request.user
     isDelegate = False    
-    if organisation.ecsa_member and ((user == organisation.creator) or (organisation.mainDelegate and organisation.mainDelegate.user == user) or 
+    if ((user == organisation.creator) or (organisation.mainDelegate and organisation.mainDelegate.user == user) or 
         (organisation.delegate1 and organisation.delegate1.user == user) or (organisation.delegate2 and organisation.delegate2.user == user)):
         isDelegate = True
     if not isDelegate:

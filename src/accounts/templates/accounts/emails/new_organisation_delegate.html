@@ -1,0 +1,11 @@
+
+{% load i18n %}
+{% load staticfiles %}
+{% block subject %}
+{% endblock subject %}
+
+{% block html_body  %}
+<p>Dear {{ name }},</p>
+<p>This email is to inform you that you are now a delegate of {{organisation}} organisation.</p>
+<p>If you don't have an account yet, you can create one and participate in the platform.</p>
+{% endblock html_body %}
