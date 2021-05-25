@@ -48,6 +48,7 @@ urlpatterns = [
     path("criteria/", views.criteria, name="criteria"),
     path("translations/", views.translations, name="translations"),
     path("call/", views.call, name="call"),
+    path("policy_maker_event_2021/", views.policy_maker_event_2021, name="policy_maker_event_2021"),
     path("home_autocomplete/", views.home_autocomplete, name="home_autocomplete"),
     path("development/", views.development, name="development"),
     path("about/", views.AboutPage.as_view(), name="about"),

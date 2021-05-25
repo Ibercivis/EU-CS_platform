@@ -1,0 +1,155 @@
+{% extends "base_r2.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ block.super }} :: Citizen Science for Policy across Europe{% endblock %}
+{% block splash %}
+<div class="jumbotron jumbotron-fluid">
+	<div class="container">
+		<h1 class="display-5 pt-2 pb-4 text-secondary">{% trans "Citizen Sience for Policy across Europe" %}</h1>
+		<h3>22 June 2021 at 11-12:30 PM CET</h3>
+		<br/>
+	</div>
+</div>
+{% endblock splash %}
+
+{% block navbar-left %}
+{% include "_navbar.html" %}
+{% endblock %}
+
+{% block list_of_items %}
+<div class="container mt-5">
+	<div class="row">
+		<div class="col-sm-4 col-12 mb-4">
+		<h3>Mission</h3>
+		</div>
+		<div class="col-sm-8 col-12 mb-4">
+EU-Citizen.Science is inviting representatives from ministries across Europe and at the regional and local levels to engage in a discussion about citizen science and its benefits for policy making.
+The main aim of this event is to develop collaborations among policy makers with citizen science interests. This event will be held as a satellite event of the European Research and Innovation Days on 22 June 2021.
+		</div>
+	</div>
+</div>
+<div class="container-fluid bg-white">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mt-4 mb-4">
+				<h3>Objectives</h3>
+			</div>
+			<div class="col-sm-8 col-12 mt-4 mb-4">
+					<ul>
+									<li>Explore the current state of citizen science in Europe to enhance synergies across borders.</li>
+									<li>Open discussions by presenting good practices and success stories about citizen science operating at different levels, highlighting the barriers that affect the development of citizen science and providing solutions to overcome them to produce a powerful policy decision making tool.</li>
+									<li>Foster collaborations  among different countries to promote citizen science, establishing common paths.</li>
+
+
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4 col-12 mt-4 mb-4">
+      <h3>How to follow the event</h3>
+    </div>
+    <div class="col-sm-8 col-12 mt-4 mb-4">
+						The event will be broadcasted live on the <a href="https://www.youtube.com/channel/UC-KXyw1Qg6fLrdoQ5IrC_zg">ECSA Youtube channel</a>. Viewers will be able to participate by sending questions and remarks using the Youtube chat. Questions will be answered by ministries representatives. <b>Please, save the date!</b>
+    </div>
+  </div>
+</div>
+<div class="container-fluid bg-white">
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4 col-12 mt-4 mb-4">
+			<h3>Agenda</h3>
+		</div>
+		<div class="col-sm-8 col-12 mt-4 mb-4">
+						<p>The event will last 1.5 hour. It is made up of three  blocks, each dedicated to a citizen science topic. Each block begins with a presentation given by an invited speaker, followed by an open discussion  for sharing different experiences  from representatives of Ministries of European Member States and the participants in the event.</p>
+						<ul>
+										<li><b>11:00 - 11:05</b> Welcoming and introduction to the event by the EU-Citizen.Science Project coordinator and FECYT/Ibercivis (5’)</li>
+										<li><b>11:05 - 11:10</b> <i>Current state of citizen science across Europe</i> presented by Sven Schade,  Joint Research Center of the European Commission (5’)</li>
+										<li><b>11:10 - 11:30</b> Block 1: <i>Promoting citizen science through the launch of national plans for funding citizen science projects</i> introduced by Carmen Castresana, General Diretor of Research Planning from the Spanish Ministry of Science and innovation (5’), followed by a discussion (15’)</li>
+										<li><b>11:30 - 11:50</b> Block 2 : <i>Overcoming the barriers to citizen science</i> introduced by José Paulo Esperança, Vice-President of the Foundation for Science and Technology, Ministry of Science and Technology and Higher Education (5’), followed by a discussion (15’)</li>
+										<li><b>11:50 - 12:10</b> Block 3: <i>Science for the people, by the people –  policy instruments to anchor citizen science in research and society</i> introduced by Anne Overbeck, Policy Officer for Citizen Science, German Federal Ministry of Education and Research (BMBF) (5’), followed by a discussion (15’)</li>
+										<li><b>12:10 - 12.25</b> Final group discussion (15’)</li>
+										<li><b>12:25 - 12.30</b> Concluding remarks (5’)</li>
+						</ul>
+		</div>
+	</div>
+</div>
+</div>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mt-4 mb-4">
+				<h3>General Information</h3>
+			</div>
+			<div class="col-sm-8 col-12 mt-4 mb-4">
+							<p><b>Organizers</b></p>
+							<ul>
+								<li>The EU-Citizen:Science project and FECYT/Ibercivis with the support of the European Commission, the Spanish Ministry of Science and Innovation</li>
+								<li>The Portughese Ministry of Science and Technology and Higher Education</li>
+								<li>The German Federal Ministry of Education and Research</li>
+							</ul>
+							<p><b>Moderators</b></p>
+							<ul>
+											<li>EU-Citizen.Science Project Coordinator</li>
+											<li>FECYT</li>
+											<li>Ibercivis</li>
+											<li>Stickydot</li>
+							</ul>
+							<p><b>Organization Team</b></p>
+							<ul>
+											<li>Antonella Radicchi (MfN)</li>
+											<li>Silke Voigt-Heucke (MfN)</li>  
+											<li>Francisco Sanz (Ibercivis)</li>
+											<li>Daniel Lisbona (Ibercivis)</li> 
+											<li>Maite  Pelacho  (Ibercivis)</li>  
+											<li>Pablo Camacho (FECYT)</li> 
+											<li>Maria Inês Vicente (Município de Figueira de Castelo Rodrigo)</li>
+											<li>Lucie Steigleder (Ecsite)</li>
+											<li>Claudia Fabo Cartas (ECSA)</li>
+											<li>Andrea Troncoso (ECSA)</li>  
+							  </ul>
+								with the support of the EU-Citizen.Science Consortium.
+			</div>
+		</div>
+	</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4 col-12 mt-4 mb-4">
+			<h3></h3>
+		</div>
+		<div class="col-sm-8 col-12 mt-4 mb-4">
+		</div>
+	</div>
+</div>
+
+
+
+
+<div class="container-fluid bg-white">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mt-4 mb-4">
+				<h3></h3>
+			</div>
+			<div class="col-sm-8 col-12 mt-4 mb-4">
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4 col-12 mt-4 mb-4">
+			<h3></h3>
+		</div>
+		<div class="col-sm-8 col-12 mt-4 mb-4">
+		</div>
+	</div>
+</div>
+
+
+{% endblock list_of_items %}
