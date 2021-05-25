@@ -69,7 +69,6 @@ class NewUserAdmin(NamedUserAdmin):
             ecsa_member_number = user_old.profile.ecsa_member_number
             if(obj.profile.ecsa_member_number and ecsa_member_number != obj.profile.ecsa_member_number):
                 to_email = obj.email
-                to_email = "vval@bifi.es"
                 subject = 'Welcome to ECSA!'
                 message = render_to_string('accounts/emails/ecsa_member_accepted.html', { 'name': obj.name, 'lastname': obj.profile.lastname,
                  'ecsa_member_number': obj.profile.ecsa_member_number})
