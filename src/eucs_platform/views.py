@@ -140,22 +140,12 @@ def criteria(request):
 def translations(request):
     return render(request, 'translations.html')
 
-<<<<<<< HEAD
-
 def call(request):
     return render(request, 'call.html')
-
 
 def policy_maker_event_2021(request):
     return render(request, 'policy_maker_event_2021.html')
 
-
-
-=======
-def call(request):
-    return render(request, 'call.html')
-
->>>>>>> 0b2cd1dc1c24ebb820fc8405a19577475f0b0f64
 def home_autocomplete(request):
     if request.GET.get('q'):
         text = request.GET['q']
