@@ -231,6 +231,8 @@ def activate(request, uidb64, token):
             delegate.save()
         except Delegate.DoesNotExist:
             print("There isn't delegate")
+        except Exception:
+            print("exception")
 
         auth.login(request, user)
         return render(request, 'accounts/confirmation-account.html',{})

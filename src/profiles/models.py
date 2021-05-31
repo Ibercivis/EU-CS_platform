@@ -4,7 +4,7 @@ import uuid
 from django.db import models
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
-from organisations.models import Organisation, OrganisationType
+from organisations.models import Organisation
 from django.utils.html import format_html
 
 
@@ -13,6 +13,11 @@ class InterestArea(models.Model):
 
     def __str__(self):
         return f'{self.interestArea}'
+
+class Occupation(models.Model):
+    occupation = models.TextField()
+    def __str__(self):
+        return f'{self.occupation}'
 
 
 class BaseProfile(models.Model):
@@ -48,7 +53,7 @@ class BaseProfile(models.Model):
     postal_code = models.IntegerField(null=True, blank=True)
     city = models.CharField(_("City"), max_length=50, blank=True, null=True)
     country = models.CharField(_("Country"), max_length=50, blank=True, null=True)
-    occupation = models.ForeignKey(OrganisationType, null=True, blank=True, on_delete=models.CASCADE)
+    occupation = models.ForeignKey(Occupation, null=True, blank=True, on_delete=models.CASCADE)
 
     def admin_send_welcome_email(self): 
         return format_html('<input type="submit" value="Send welcome email" name="_continue">')

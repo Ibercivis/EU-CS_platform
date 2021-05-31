@@ -11,8 +11,7 @@ from authtools import forms as authtoolsforms
 from django.contrib.auth import forms as authforms
 from django.urls import reverse
 from captcha.fields import ReCaptchaField
-from organisations.models import OrganisationType
-from profiles.models import Profile
+from profiles.models import Profile, Occupation
 
 User = get_user_model()
 
@@ -85,7 +84,7 @@ class SignupForm(authtoolsforms.UserCreationForm):
         self.fields["postal_code"] = forms.IntegerField(required=False)
         self.fields["city"] = forms.CharField(required=False)
         self.fields["country"] = forms.CharField(required=False)
-        self.fields["occupation"] = forms.ModelChoiceField(queryset=OrganisationType.objects.all(), required=False)
+        self.fields["occupation"] = forms.ModelChoiceField(queryset=Occupation.objects.all(), required=False)
        # self.fields["captcha"] = ReCaptchaField()
         self.helper.layout = Layout(
             Field("email", placeholder=_("Enter Email"), autofocus=""),
@@ -112,7 +111,7 @@ class NewEcsaIndividualMembershipForm(forms.Form):
     postal_code = forms.IntegerField()
     city = forms.CharField()
     country = forms.CharField()
-    occupation = forms.ModelChoiceField(queryset=OrganisationType.objects.all())
+    occupation = forms.ModelChoiceField(queryset=Occupation.objects.all())
 
     def save(self, args, profileID):
         saveProfile(self, profileID, True)
@@ -142,7 +141,7 @@ def saveProfile(self, profileID, ecsa_individual_membership):
             profile.ecsa_old_member_fee=True
 
         if('occupation' in self.data and self.data['occupation']):
-            profile.occupation = get_object_or_404(OrganisationType, id=self.data['occupation'])
+            profile.occupation = get_object_or_404(Occupation, id=self.data['occupation'])
         
         profile.ecsa_requested_join = True
 
