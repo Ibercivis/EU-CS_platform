@@ -37,7 +37,7 @@
 						<div class="input-group-text inhead clickable" id="backsign"></div>
 					</div>
 				</div>
-			</div>			
+			</div>
 		</form>
 		<br>
 		<!--h4 class="mt-4 white">Join the community to share your favourite citizen science resources, profile your own citizen science projects, and more. </h4-->
@@ -64,6 +64,13 @@
 
 
 <div class="container">
+	<div class="row mt-4 mb-4">
+		<div class="col-12 d-flex" id="month_of_the_project" style="background-image: url('/media/month_of_the_project.webp'); background-position: bottom; background-size: cover; height: 500px">
+			<div class="mt-auto p-2"><h2>June is the <span class="red">#MonthOfTheProjects</span><br /><br />
+			<a class="btn btn-outline-primary mt-2 mb-4" href="blog/2021/05/31/june-monthoftheprojects-eu-citizenscience/"> Learn more here!</a>
+			</div>
+		</div>
+	</div>
 	<div class="row">
 
 		<div class="col-12 mb-2">
@@ -96,7 +103,7 @@
 			<hr>
 		</div>
 
-		
+
 		<div class="col-12 mb-2">
 			<h3>{% trans "Organisations" %}</h3>
 			{{ counterorganisations}} {% trans "result" %}{% if counterorganisations != 1 %}s{% endif %} {% trans "in Organisations" %}
@@ -113,7 +120,7 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 <script
 src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
 <script>
-	
+
 
 	$('.basicAutoComplete').autoComplete(
 	{ minLength: 3 }

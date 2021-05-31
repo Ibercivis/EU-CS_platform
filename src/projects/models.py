@@ -90,6 +90,9 @@ class Project(models.Model):
     originDatabase = models.ForeignKey(OriginDatabase, on_delete=models.CASCADE,null=True, blank=True)
     originURL = models.CharField(max_length=200, null=True, blank=True)
     originUID = models.CharField(max_length=200, null=True, blank=True)
+    #ParticipatingInaContest
+    participatingInaContest = models.BooleanField(null=True, default=False)
+
 
     hidden = models.BooleanField(null=True, blank=True)
 

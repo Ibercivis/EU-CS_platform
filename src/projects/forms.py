@@ -22,15 +22,15 @@ class ProjectForm(forms.Form):
     keywords = forms.MultipleChoiceField(choices=(), \
         widget=Select2MultipleWidget(), required=False, \
         help_text=_('Please enter 2-3 keywords (comma separated) or pressing enter to further describe your project and assist search on the platform'),label=_('Keywords'))
-    
+
     aim = forms.CharField(\
         widget=CKEditorWidget(config_name='frontpage'), help_text=_('Primary aim, goal or objective of the project. Max 2000 characters'),\
         max_length = 2000)
 
-    description = forms.CharField(widget=CKEditorWidget(config_name='frontpage'), help_text=_('Please describe the citizen science aspect(s) of the project - see the <a href="https://zenodo.org/communities/citscicharacteristics">ECSA Characteristics of Citizen Science</a> for guidance'),\
+    description = forms.CharField(widget=CKEditorWidget(config_name='frontpage'), help_text=_('Please provide a description of your project here.'),\
         max_length = 3000)
-    
-    description_citizen_science_aspects = forms.CharField(widget=CKEditorWidget(config_name='frontpage'), help_text=_('Please describe the citizen science aspect(s) of the project – for guidance see the <a href="https://zenodo.org/communities/citscicharacteristics">ECSA Characteristics of Citizen Science</a> as well as the <a href="https://osf.io/xpr2n/">ECSA 10 Principles of Citizen Science</a>. What you introduce in this text field will not appear on the platform; it is just for moderation purposes and for the administrators of the platform to see.'),\
+    description_citizen_science_aspects = forms.CharField(widget=CKEditorWidget(config_name='frontpage'), \
+    help_text=_('Please describe the citizen science aspect(s) of the project and the link of the project to citizen science using the <a href="https://zenodo.org/communities/citscicharacteristics">ECSA Characteristics of Citizen Science</a> and the <a href="https://osf.io/xpr2n/">ECSA 10 Principles of Citizen Science</a>. What you introduce in this text field will not appear on the platform; it is just for moderation purposes and for the administrators of the platform to see'),\
         max_length = 2000, label=_('Description of Citizen Science Aspects'))
 
     topic = forms.ModelMultipleChoiceField(queryset=Topic.objects.all(),\
@@ -117,12 +117,19 @@ class ProjectForm(forms.Form):
     withImage3 = forms.BooleanField(widget=forms.HiddenInput(), required=False, initial=False)
     image_credit3 = forms.CharField(max_length=300, required=False)
 
+
     #Geography
     latitude = forms.DecimalField(max_digits=9,decimal_places=6)
     longitude = forms.DecimalField(max_digits=9,decimal_places=6)
 
+
     #Personal and Organizational Affiliates
+
+    # Do you want to participate in a contest
+    participatingInaContest = forms.BooleanField(required=False,label=_("I want to participate in the #MonthOfTheProjects and agree to be contacted via email if the project I am submitting wins the contest. <a href='/blog/2021/05/31/june-monthoftheprojects-eu-citizenscience/'> Learn more here!</a>"))
+
     #Participation Information
+
     how_to_participate = forms.CharField(widget=CKEditorWidget(config_name='frontpage'),\
         help_text=_('Please describe how people can get involved in the project'), max_length = 2000)
     doingAtHome =  forms.BooleanField(required=False,label=_("Can participate at home"))
@@ -167,17 +174,24 @@ class ProjectForm(forms.Form):
             mainOrganisation = get_object_or_404(Organisation, id=mainOrganisationFixed)
         else:
             mainOrganisation = None
+
         doingAtHome=False
         if('doingAtHome' in self.data and self.data['doingAtHome'] == 'on'):
             doingAtHome=True
+
+        participatingInaContest=False
+        if('participatingInaContest' in self.data and self.data['participatingInaContest'] == 'on'):
+            participatingInaContest=True
+
+
 
         if(pk):
             project = get_object_or_404(Project, id=pk)
             if project.hidden:
                 project.hidden = False
-            self.updateFields(project, latitude, longitude, country, status, doingAtHome, mainOrganisation)
+            self.updateFields(project, latitude, longitude, country, status, doingAtHome, mainOrganisation, participatingInaContest)
         else:
-            project = self.createProject(latitude, longitude, country, status, doingAtHome, mainOrganisation, args)
+            project = self.createProject(latitude, longitude, country, status, doingAtHome, mainOrganisation, participatingInaContest, args)
 
         if start_dateData:
             project.start_date = start_dateData
@@ -229,7 +243,7 @@ class ProjectForm(forms.Form):
         return 'success'
 
 
-    def createProject(self, latitude, longitude, country, status, doingAtHome, mainOrganisation, args):
+    def createProject(self, latitude, longitude, country, status, doingAtHome, mainOrganisation, participatingInaContest, args):
          return Project(name = self.data['project_name'], url = self.data['url'], projectlocality = self.data['projectlocality'],
                          creator=args.user,
                          author = self.data['contact_person'], author_email = self.data['contact_person_email'],
@@ -239,7 +253,7 @@ class ProjectForm(forms.Form):
                          imageCredit2 = self.data['image_credit2'], imageCredit3 = self.data['image_credit3'],
                          howToParticipate = self.data['how_to_participate'],equipment = self.data['equipment'],
                          fundingProgram = self.data['funding_program'],originUID = self.data['originUID'],
-                         originURL = self.data['originURL'], doingAtHome=doingAtHome, mainOrganisation=mainOrganisation)
+                         originURL = self.data['originURL'], doingAtHome=doingAtHome, participatingInaContest = participatingInaContest, mainOrganisation=mainOrganisation)
 
     def updateFields(self, project, latitude, longitude, country, status, doingAtHome, mainOrganisation):
         project.name = self.data['project_name']
