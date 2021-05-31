@@ -6,15 +6,15 @@
 
 {% block html_body  %}
 Hi {{ user.name }},
-Thank you for signing up to become a member of the EU-Citizen.Science community. Please verify that this email address is correct, and that you entered it when signing up to join the community.
-
-Please click on the link to confirm your registration in <a href="{{domain}}{% url 'accounts:activate' uidb64=uid token=token %}">eu-citizen.science</a>.<br/>
+</br>
+Thank you for signing up to become a member of the EU-Citizen.Science community. 
+Please confirm your registration to EU-Citizen.Science and your email address by clicking on this <a href="{{domain}}{% url 'accounts:activate' uidb64=uid token=token %}">link</a>. <br/>
 
 If you did not register to join the EU-Citizen.Science community, please ignore this email or reply to let us know.
 
-<p>Thanks,</p>
+<p>Thanks, </p>
 
 <p>The EU-Citizen.Science team</p>
 
-<p>P.S. Your email will always remain private, and is used only to allow us to send you alerts such as this one, unless you explicitly opt into future features on the platform.</p>
+
 {% endblock html_body %}

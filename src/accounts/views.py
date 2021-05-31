@@ -5,6 +5,7 @@ from django.views import generic
 from django.contrib.auth import get_user_model
 from django.contrib import auth
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, get_object_or_404
 from django.conf import settings
 from django.core.mail import EmailMessage
@@ -23,7 +24,7 @@ from djoser import utils
 from django.contrib.auth.tokens import default_token_generator
 from .tokens import account_activation_token
 from . import forms
-from ecsa.models import Delegate
+from ecsa.models import Delegate, Ecsa_fee
 
 User = get_user_model()
 
@@ -63,7 +64,7 @@ class SignUpView(
         user.is_active = False
         user.save()
         ecsa_individual_membership = form.cleaned_data.get('ecsa_individual_membership')
-        mail_subject = 'Activate your EU-Citizen.Science account'
+        mail_subject = 'Confirm your EU-Citizen.Science account'
         message = render_to_string('accounts/acc_active_email.html', {
             'user': user,
             'domain': settings.HOST,
@@ -86,9 +87,13 @@ class SignUpView(
 
         return render(self.request, 'accounts/confirm-email.html',{})
 
-
+@login_required(login_url='/login')
 def newEcsaIndividualMembership(request):
     form = forms.NewEcsaIndividualMembershipForm()
+    try:
+        individual_contribution = Ecsa_fee.objects.get(id=3).amount
+    except Ecsa_fee.DoesNotExist:
+        individual_contribution = 50
     if request.method == 'POST':
         form = forms.NewEcsaIndividualMembershipForm(request.POST)
         if form.is_valid():
@@ -97,7 +102,7 @@ def newEcsaIndividualMembership(request):
 
         return redirect("profiles:show_self")
 
-    return render(request, 'accounts/new_ecsa_individual_membership.html', {'form': form})
+    return render(request, 'accounts/new_ecsa_individual_membership.html', {'form': form, 'individual_contribution': individual_contribution})
 
 def newEcsaIndividualMembershipEmail(email, name, surname):
     to_email = email
@@ -107,12 +112,18 @@ def newEcsaIndividualMembershipEmail(email, name, surname):
     email.content_subtype = "html"
     email.send()
 
+@login_required(login_url='/login')
 def editEcsaIndividualMembership(request):
     user = get_object_or_404(User, id=request.user.id)
     form = forms.NewEcsaIndividualMembershipForm(initial={
         'ecsa_reduced_fee': user.profile.ecsa_reduced_fee, 'ecsa_old_member_fee': user.profile.ecsa_old_member_fee,
         'street': user.profile.street, 'postal_code': user.profile.postal_code, 'city': user.profile.city, 'country' : user.profile.country, 'occupation' : user.profile.occupation
     })
+    try:
+        individual_contribution = Ecsa_fee.objects.get(id=3).amount
+    except Ecsa_fee.DoesNotExist:
+        individual_contribution = 50
+  
 
     if request.method == 'POST':
         form = forms.NewEcsaIndividualMembershipForm(request.POST, request.FILES)     
@@ -121,7 +132,7 @@ def editEcsaIndividualMembership(request):
             return redirect('profiles:show_self')
         else:
             print(form.errors)
-    return render(request, 'accounts/editEcsaIndividualMembership.html', {'form': form, 'user':user, })
+    return render(request, 'accounts/editEcsaIndividualMembership.html', {'form': form, 'user':user, 'individual_contribution': individual_contribution})
 
 
 def dropOutECSAmembership(request):

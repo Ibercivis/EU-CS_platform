@@ -25,7 +25,7 @@ class UserProfileInline(admin.StackedInline):
     model = Profile
     fieldsets = (
     (None, {
-        'fields':('lastname','picture','title', 'bio','interestAreas','latitude','longitude', 'email_verified', 'orcid','organisation', 'occupation'),
+        'fields':('lastname','picture','title', 'bio','interestAreas','latitude','longitude', 'orcid','organisation', 'occupation'),
     }),
     ('Address', {
         'fields': ('street','postal_code', 'city', 'country'),

@@ -21,11 +21,14 @@
                     <div class="card mt-5 mb-5 shadow">
                         <div class="card-text pr-5 pl-5 pb-5">
                             <br/>
+                            <p>You are logged in with this account: {{request.user.name}} {{request.user.profile.lastname}}; {{request.user.email}}</p>
+                            <br/>
                             <form action="/editEcsaIndividualMembership/" method="post" autocomplete="off">
                                 {% csrf_token %}
 
                                 <div class="form-row">
                                     <div class="col-12 mb-3">
+                                        <p>Contribution for individual membership: {{individual_contribution}} €</p>
                                         <p>I am eligible for:</p>
                                         {{ form.ecsa_reduced_fee|as_crispy_field }}
                                         {{ form.ecsa_old_member_fee|as_crispy_field }}

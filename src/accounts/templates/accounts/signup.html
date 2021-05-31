@@ -54,9 +54,11 @@
     $("#id_country").prop('required',false);
     $("#id_occupation").prop('required',false);
 
-    $('#div_id_password2').append(
-      $("<br/><span>").text("Would you like to become a member of ECSA as an individual?")
-    );
+    $('#div_id_ecsa_individual_membership').append(
+      $("<br/><span>").text("ECSA membership: benefits, type and contributions")      
+    ).append(
+      $("<br/><span>").text("Remember that you can become an ECSA member as an organisation as well.")
+    ).append($("<br/><p>"));
 
 
     $('#div_id_street label, #div_id_postal_code label, #div_id_city label, #div_id_country label, #div_id_occupation label').append(
@@ -67,7 +69,9 @@
     $("#id_ecsa_individual_membership").on('change', function(e){
       if($("#id_ecsa_individual_membership")[0].checked){         
         $('#div_id_ecsa_individual_membership').append(
-          $("<br/><span>").text("I am eligible for:")
+          $("<div><br/>").text("Contribution for individual membership: 50 €")
+        ).append(
+          $("<div><br/>").text("I am eligible for:")
         );
         $("#div_id_ecsa_reduced_fee").show();     
         $("#div_id_ecsa_old_member_fee").show();
@@ -82,8 +86,8 @@
         $("#id_country").prop('required',true);
         $("#id_occupation").prop('required',true);
       }else{
-        $('#div_id_ecsa_individual_membership br').remove();
-        $('#div_id_ecsa_individual_membership span').remove();
+        $('#div_id_ecsa_individual_membership div').remove();
+        $('#div_id_ecsa_individual_membership div').remove();
         $("#div_id_ecsa_reduced_fee").hide();
         $("#div_id_ecsa_old_member_fee").hide();
         $("#div_id_street").hide();

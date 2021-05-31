@@ -90,7 +90,7 @@ def organisation(request, pk):
     'associatedResources': associatedResources, 'members': members, 'permissionForm': permissionForm, 'editable': editable, 'isSearchPage': True,
     'isDelegate':isDelegate, 'LEGAL_STATUS':LEGAL_STATUS})
 
-
+@login_required(login_url='/login')
 def edit_organisation(request, pk):
     organisation = get_object_or_404(Organisation, id=pk)
     user = request.user
@@ -139,6 +139,7 @@ def edit_organisation(request, pk):
 
     return render(request, 'edit_organisation.html', {'form': form, 'organisation':organisation, 'user':user,})
 
+@login_required(login_url='/login')
 def newEcsaOrganisationMembership(request, pk):
     form = NewEcsaOrganisationMembershipForm()
     if request.method == 'POST':
@@ -159,6 +160,7 @@ def newEcsaOrganisationMembershipEmail(email, name):
     email.content_subtype = "html"
     email.send()
 
+@login_required(login_url='/login')
 def editEcsaOrganisationMembership(request, pk):
     organisation = get_object_or_404(Organisation, id=pk)
     user = request.user

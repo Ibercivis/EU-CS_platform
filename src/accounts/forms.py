@@ -76,10 +76,10 @@ class SignupForm(authtoolsforms.UserCreationForm):
         self.fields["orcid"] = forms.CharField(required=False)
         self.helper = FormHelper()
         self.fields["email"].widget.input_type = "email"  # ugly hack
-        self.fields["ecsa_individual_membership"] = forms.BooleanField(required=False, label=_("Yes, I would like to become a member of ECSA as an individual."))
+        self.fields["ecsa_individual_membership"] = forms.BooleanField(required=False, label=_("I want to become an ECSA member."))
         self.fields["name"] = forms.CharField(label=_("First name"))
         self.fields["lastname"] = forms.CharField(label=_("Last name"))
-        self.fields["ecsa_reduced_fee"] = forms.BooleanField(required=False, label=_("Reduced membership (retired, unemployed or student)"))
+        self.fields["ecsa_reduced_fee"] = forms.BooleanField(required=False, label=_("50% reduced membership (retired, unemployed or student)"))
         self.fields["ecsa_old_member_fee"] = forms.BooleanField(required=False, label=_("20% discount as CSA/ACSA member"))
         self.fields["street"] = forms.CharField(required=False)
         self.fields["postal_code"] = forms.IntegerField(required=False)

@@ -30,7 +30,6 @@ class BaseProfile(models.Model):
     interestAreas = models.ManyToManyField(InterestArea, blank=True)
     latitude = models.DecimalField(max_digits=9,decimal_places=6, blank=True, null=True)
     longitude = models.DecimalField(max_digits=9,decimal_places=6, blank=True, null=True)
-    email_verified = models.BooleanField(_("Email verified"), default=False)
     orcid = models.CharField(_("ORCID (If you have registered on the ORCID platform for researchers and have a persistent digital identifier (your ORCID iD) you can add it here to link this profile with your professional information such as affiliations, grants, publications, peer review, and more.)"), max_length=50, blank=True, null=True)
     organisation = models.ManyToManyField(Organisation,blank=True)
 
