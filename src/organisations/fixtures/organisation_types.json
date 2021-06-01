@@ -2,37 +2,55 @@
     {
         "model": "organisations.OrganisationType",
         "fields": {
-            "type": "Governmental"
+            "type": "Governmental body"
         }
     },
     {
         "model": "organisations.OrganisationType",
         "fields": {
-            "type":  "Non-governmental"
+            "type":  "NGO"
         }
     },
     {
         "model": "organisations.OrganisationType",
         "fields": {
-            "type": "Academic"
+            "type": "University"
         }
     },
     {
         "model": "organisations.OrganisationType",
         "fields": {
-            "type": "Private sector"
+            "type": "Private company"
         }
     },
     {
         "model": "organisations.OrganisationType",
         "fields": {
-            "type": "Community-led"
+            "type": "Community-led/network"
         }
     },
     {
         "model": "organisations.OrganisationType",
         "fields": {
-            "type": "Consortium"
+            "type": "Museum/Science Center/Aquarium/Zoo"
+        }
+    },
+    {
+        "model": "organisations.OrganisationType",
+        "fields": {
+            "type": "School"
+        }
+    },
+    {
+        "model": "organisations.OrganisationType",
+        "fields": {
+            "type": "Research institute"
+        }
+    },
+    {
+        "model": "organisations.OrganisationType",
+        "fields": {
+            "type": "Others"
         }
     }
 ]
