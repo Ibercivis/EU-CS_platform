@@ -68,7 +68,7 @@ class NewUserAdmin(NamedUserAdmin):
             ecsa_member = user_old.profile.ecsa_member
             ecsa_member_number = user_old.profile.ecsa_member_number
             if(obj.profile.ecsa_member_number and ecsa_member_number != obj.profile.ecsa_member_number):
-                to_email = obj.email
+                to_email = obj.email                
                 subject = 'Welcome to ECSA!'
                 message = render_to_string('accounts/emails/ecsa_member_accepted.html', { 'name': obj.name, 'lastname': obj.profile.lastname,
                  'ecsa_member_number': obj.profile.ecsa_member_number})
@@ -77,31 +77,42 @@ class NewUserAdmin(NamedUserAdmin):
 
                 #PDF Attachment
                 fee_id = 3
+                discount_ecsa_old_member_fee = 0
+                discount_ecsa_reduced_fee = 0
+                ecsa_old_member_fee = 0
+                ecsa_reduced_fee = 0
                 try:
-                    fee_amount = Ecsa_fee.objects.get(id=fee_id).amount
+                    base_amount = Ecsa_fee.objects.get(id=fee_id).amount
                 except Ecsa_fee.DoesNotExist:
-                    fee_amount = 200
+                    base_amount = 200
+                total_amount = base_amount
+                
+                if(obj.profile.ecsa_reduced_fee):
+                    try:
+                        discount_ecsa_reduced_fee = Ecsa_fee.objects.get(id=4).amount
+                        ecsa_reduced_fee = int(total_amount * discount_ecsa_reduced_fee / 100)
+                        total_amount = total_amount - ecsa_reduced_fee
+                    except Ecsa_fee.DoesNotExist:
+                        print("Ecsa fee discount not exist")
 
                 if(obj.profile.ecsa_old_member_fee):
                     try:
-                        discount = Ecsa_fee.objects.get(id=5).amount
-                        fee_amount = fee_amount - int(fee_amount * discount / 100)
+                        discount_ecsa_old_member_fee = Ecsa_fee.objects.get(id=5).amount
+                        ecsa_old_member_fee = int(total_amount * discount_ecsa_old_member_fee / 100)
+                        total_amount = total_amount - ecsa_old_member_fee
                     except Ecsa_fee.DoesNotExist:
                         print("Ecsa fee discount not exist")
 
-                if(obj.profile.ecsa_reduced_fee):
-                    try:
-                        discount = Ecsa_fee.objects.get(id=4).amount
-                        fee_amount = fee_amount - int(fee_amount * discount / 100)
-                    except Ecsa_fee.DoesNotExist:
-                        print("Ecsa fee discount not exist")
+                
                 year = date.today().year
                 current_date = date.today()
                 invoiceCounter = getEcsaInvoiceCounter()
                 pdf_content =  render_to_string('accounts/pdf/ecsa_member_accepted.html', { 'ecsa_member_number': obj.profile.ecsa_member_number,
                  'year': year, 'current_date': current_date , 'name': obj.name, 'lastname': obj.profile.lastname, 'street': obj.profile.street, 
                  'postal_code': obj.profile.postal_code, 'city': obj.profile.city, 'country': obj.profile.country, 'ecsa_billing_email': obj.email,
-                 'reduced_fee': obj.profile.ecsa_reduced_fee, 'ecsa_old_member_fee': obj.profile.ecsa_old_member_fee, 'amount': fee_amount, 'invoiceCounter': invoiceCounter  })
+                 'reduced_fee': obj.profile.ecsa_reduced_fee, 'ecsa_old_member_fee': obj.profile.ecsa_old_member_fee, 'amount': total_amount, 'invoiceCounter': invoiceCounter,
+                 'base_amount': base_amount, 'discount_ecsa_old_member_fee': discount_ecsa_old_member_fee, 'ecsa_old_member_fee': ecsa_old_member_fee,
+                 'discount_ecsa_reduced_fee': discount_ecsa_reduced_fee, 'ecsa_reduced_fee': ecsa_reduced_fee })
                 HTML(string=pdf_content, base_url=request.build_absolute_uri()).write_pdf('/tmp/membership_contribution.pdf')                
                 email.attach_file('/tmp/membership_contribution.pdf')
                 

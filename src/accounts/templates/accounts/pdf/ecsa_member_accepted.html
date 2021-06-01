@@ -25,6 +25,7 @@
             -webkit-font-smoothing: antialiased;
             -webkit-text-size-adjust: none; 
         }
+        .right { float:right }
         
     </style>
 </head>
@@ -74,17 +75,18 @@ padding: 0;position: absolute;top: 0px;"/>
         </tr>
         <tr>
             <td colspan="3">
+                <br/>
                 {% if legal_status == 1 %}
-                <p>NON-FOR-PROFIT ORGANIZATION MEMBERSHIP</p>
+                <span>NON-FOR-PROFIT ORGANIZATION MEMBERSHIP</span>
                 {% elif legal_status == 0 %}
-                <p>FOR-PROFIT ORGANIZATION MEMBERSHIP</p>
+                <span>FOR-PROFIT ORGANIZATION MEMBERSHIP</span>
                 {% else %}
-                <p>INDIVIDUAL MEMBERSHIP</p>
+                <span>INDIVIDUAL MEMBERSHIP</span>
                 {% endif %}
-                 
+                <span class="right">{{base_amount}} €</span>
+                {% if reduced_fee %} <br/><span>Reduced fee (-{{discount_ecsa_reduced_fee}} %)</span><span class="right">-{{ecsa_reduced_fee}} €</span>{% endif %}
+                {% if ecsa_old_member_fee %} <br/><span>Discount for being a CSA/ACSA member (-{{discount_ecsa_old_member_fee}}%)</span><span class="right">-{{ecsa_old_member_fee}} €</span>{%endif%}     
                 <p class="text-right"><b>Total amount {{amount}} €</b></p>
-                {% if reduced_fee %}<p>Reduced fee</p>{% endif %}
-                {% if ecsa_old_member_fee %}<p>Discount for being a CSA/ACSA member</p>{%endif%}                     
             </td>            
             
         </tr>
