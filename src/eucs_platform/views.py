@@ -143,6 +143,9 @@ def translations(request):
 def call(request):
     return render(request, 'call.html')
 
+def ecsa_membership(request):
+    return render(request, 'ecsa_membership.html')
+
 def home_autocomplete(request):
     if request.GET.get('q'):
         text = request.GET['q']

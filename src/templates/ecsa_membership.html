@@ -1,0 +1,26 @@
+{% extends "base_r2.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% block title %}{{ block.super }} :: {% trans "About" %}{% endblock %}
+{% block splash %}
+<div class="jumbotron jumbotron-fluid">
+	<div class="container">
+		<h1 class="display-5 pt-2 pb-4 text-secondary">{% trans "ECSA Membership" %}</h1>
+	</div>
+</div>
+{% endblock splash %}
+{% block navbar-left %}
+{% include "_navbar.html" %}
+{% endblock %}
+{% block list_of_items %}
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4 col-12 mt-4 mb-4">
+			<h3>{% trans "ECSA Membership" %}</h3>
+		</div>
+		<div class="col-sm-8 col-12 mt-4 mb-4">
+		</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
