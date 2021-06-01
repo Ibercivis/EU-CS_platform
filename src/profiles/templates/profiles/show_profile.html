@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load staticfiles %}
 {% load thumbnail %}
+{% load countries %}
 {% block head %}
 {{ block.super }}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js"
@@ -142,7 +143,7 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 							<p><b>{% trans "Street" %}: </b>{{ show_user.profile.street }}</p>
 							<p><b>{% trans "Postal code" %}: </b>{{ show_user.profile.postal_code }}</p>
 							<p><b>{% trans "City" %}: </b>{{ show_user.profile.city }}</p>
-							<p><b>{% trans "Country" %}: </b>{{ show_user.profile.country }}</p>
+							<p><b>{% trans "Country" %}: </b>{%if show_user.profile.country %}{% get_country show_user.profile.country as country %}{{ country.name }}{% endif %}</p>
 							<p><b>{% trans "Occupation" %}: </b>{{ show_user.profile.occupation }}</p>
 							{% if show_user.profile.ecsa_member or show_user.profile.former_member %}					
 								<a data-href="{% url 'accounts:drop_out_ecsa_membership' %}" name='dropoutECSA' data-toggle="modal" data-target="#confirm-dropout"

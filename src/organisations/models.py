@@ -51,7 +51,7 @@ class Organisation(models.Model):
     ecsa_billing_street = models.CharField(_("Street"), max_length=50, blank=True, null=True)
     ecsa_billing_postal_code = models.IntegerField(null=True, blank=True)
     ecsa_billing_city = models.CharField(_("City"), max_length=50, blank=True, null=True)
-    ecsa_billing_country = models.CharField(_("Country"), max_length=50, blank=True, null=True)
+    ecsa_billing_country = CountryField(null=True, blank=True)
     ecsa_billing_email = models.EmailField(blank=True, null=True)
     #occupation = models.ForeignKey(OrganisationType, null=True, blank=True, on_delete=models.CASCADE)
     legal_status = models.IntegerField(choices=LEGAL_STATUS, null=True, blank=True)

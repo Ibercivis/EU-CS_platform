@@ -4,6 +4,7 @@
 {% load crispy_forms_tags %}
 {% load leaflet_tags %}
 {% load thumbnail %}
+{% load countries %}
 {% block head %}
 {{ block.super }}
 {% leaflet_js %}
@@ -153,7 +154,7 @@
 						<p><b>{% trans "Street" %}: </b>{{ organisation.ecsa_billing_street }}</p>
 						<p><b>{% trans "Postal code" %}: </b>{{ organisation.ecsa_billing_postal_code }}</p>
 						<p><b>{% trans "City" %}: </b>{{ organisation.ecsa_billing_city }}</p>
-						<p><b>{% trans "Country" %}: </b>{{ organisation.ecsa_billing_country }}</p>
+						<p><b>{% trans "Country" %}: </b>{%if organisation.ecsa_billing_country %}{% get_country organisation.ecsa_billing_country as country %}{{ country.name }}{% endif %}</p>						
 
 						
 						{% if organisation.has_vat_number %} <p><b>{% trans "Vat number" %}: </b> organisation.vat_number</p>{% endif %}

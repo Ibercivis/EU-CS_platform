@@ -6,6 +6,7 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from organisations.models import Organisation
 from django.utils.html import format_html
+from django_countries.fields import CountryField
 
 
 class InterestArea(models.Model):
@@ -52,7 +53,8 @@ class BaseProfile(models.Model):
     street = models.CharField(_("Street"), max_length=50, blank=True, null=True)
     postal_code = models.IntegerField(null=True, blank=True)
     city = models.CharField(_("City"), max_length=50, blank=True, null=True)
-    country = models.CharField(_("Country"), max_length=50, blank=True, null=True)
+    #country = models.CharField(_("Country"), max_length=50, blank=True, null=True)
+    country = CountryField(null=True, blank=True)
     occupation = models.ForeignKey(Occupation, null=True, blank=True, on_delete=models.CASCADE)
 
     def admin_send_welcome_email(self): 

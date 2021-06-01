@@ -12,6 +12,7 @@ from django.contrib.auth import forms as authforms
 from django.urls import reverse
 from captcha.fields import ReCaptchaField
 from profiles.models import Profile, Occupation
+from django_countries.fields import CountryField
 
 User = get_user_model()
 
@@ -83,7 +84,7 @@ class SignupForm(authtoolsforms.UserCreationForm):
         self.fields["street"] = forms.CharField(required=False)
         self.fields["postal_code"] = forms.IntegerField(required=False)
         self.fields["city"] = forms.CharField(required=False)
-        self.fields["country"] = forms.CharField(required=False)
+        self.fields["country"] = CountryField(blank=True).formfield()
         self.fields["occupation"] = forms.ModelChoiceField(queryset=Occupation.objects.all(), required=False)
        # self.fields["captcha"] = ReCaptchaField()
         self.helper.layout = Layout(
@@ -110,7 +111,7 @@ class NewEcsaIndividualMembershipForm(forms.Form):
     street = forms.CharField(help_text=_("Street address and number"))
     postal_code = forms.IntegerField()
     city = forms.CharField()
-    country = forms.CharField()
+    country = CountryField(blank=True).formfield()
     occupation = forms.ModelChoiceField(queryset=Occupation.objects.all())
 
     def save(self, args, profileID):

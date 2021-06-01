@@ -168,7 +168,7 @@ def editEcsaOrganisationMembership(request, pk):
     if ((user == organisation.creator) or (organisation.mainDelegate and organisation.mainDelegate.user == user) or 
         (organisation.delegate1 and organisation.delegate1.user == user) or (organisation.delegate2 and organisation.delegate2.user == user)):
         isDelegate = True
-    if not isDelegate:
+    if not isDelegate and not user.is_staff:
         return redirect('../organisations', {})
 
     mainDelegate_name = ''
