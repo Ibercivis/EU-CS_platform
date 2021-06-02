@@ -67,6 +67,9 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 						<h1>
 							<img title="profile picture" class="img-fluid rounded-circle" src="{% thumbnail show_user.profile.picture|default:'default_profile.png' 140x140 crop %}">
 							{{ show_user.get_full_name }} {% if show_user.profile.lastname %}{{show_user.profile.lastname}} {% endif %}
+							{% if show_user.profile.ecsa_member %}
+							<img style=" margin-left: 50px;" src="{% static 'site/img/ecsa_main_Member.png' %}"/>
+							{% endif %}
 							{% if editable %}
 							<a data-href="{% url 'accounts:delete' %}" data-toggle="modal" data-target="#confirm-delete" class="btn btn-outline btn-red float-right ml-2 mt-5"><span class="fas fa-trash-alt"></span>&nbsp;{% trans "Delete Profile" %}</a>
 							<a href="{% url 'profiles:edit_self' %}" class="btn btn-outline btn-green float-right ml-2 mt-5"><i class="fas fa-edit"></i> {% trans "Edit Profile" %}</a>
