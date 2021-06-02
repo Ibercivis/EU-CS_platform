@@ -133,7 +133,10 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 							<p><strong>{% trans "Bio and disciplinary background" %}</strong>: {{ show_user.profile.bio }}</p>
 							<p><strong>{% trans "ORCID profile" %}</strong>: {% if show_user.profile.orcid %} <a href="https://orcid.org/{{ show_user.profile.orcid }}" target="_blank">{{ show_user.profile.orcid }}</a>{% endif %}</p>
 							<b>{% trans "Organisation" %}:</b>
-							{% for organisation in show_user.profile.organisation.all %} <a class="badge" href="/organisation/{{organisation.id}}">{{organisation}}</a>  {% endfor %}
+							{% for organisation in show_user.profile.organisation.all %} <a class="badge" href="/organisation/{{organisation.id}}">{{organisation}}</a>  {% endfor %}							
+							<p><b>{% trans "Postal code" %}: </b>{{ show_user.profile.postal_code }}</p>
+							<p><b>{% trans "City" %}: </b>{{ show_user.profile.city }}</p>
+							<p><b>{% trans "Country" %}: </b>{%if show_user.profile.country %}{% get_country show_user.profile.country as country %}{{ country.name }}{% endif %}</p>
 							<br/>
 						</div>
 						<div class="col-12 col-sm-6">
@@ -165,10 +168,10 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 								<p><b>{% trans "20% discount for CSA/ACSA members" %}: </b>{%if show_user.profile.ecsa_old_member_fee %} Yes {% else %} No{% endif %}</p>
 						</div>
 						<div class="col-12 col-sm-6 mt-2">
-							<p><b>{% trans "Street" %}: </b>{{ show_user.profile.street }}</p>
-							<p><b>{% trans "Postal code" %}: </b>{{ show_user.profile.postal_code }}</p>
-							<p><b>{% trans "City" %}: </b>{{ show_user.profile.city }}</p>
-							<p><b>{% trans "Country" %}: </b>{%if show_user.profile.country %}{% get_country show_user.profile.country as country %}{{ country.name }}{% endif %}</p>
+							<p><b>{% trans "Street" %}: </b>{{ show_user.profile.ecsa_street }}</p>
+							<p><b>{% trans "Postal code" %}: </b>{{ show_user.profile.ecsa_postal_code }}</p>
+							<p><b>{% trans "City" %}: </b>{{ show_user.profile.ecsa_city }}</p>
+							<p><b>{% trans "Country" %}: </b>{%if show_user.profile.ecsa_country %}{% get_country show_user.profile.ecsa_country as country %}{{ country.name }}{% endif %}</p>
 							<p><b>{% trans "Occupation" %}: </b>{{ show_user.profile.occupation }}</p>
 							{% if show_user.profile.ecsa_member or show_user.profile.former_member %}					
 								<a data-href="{% url 'accounts:drop_out_ecsa_membership' %}" name='dropoutECSA' data-toggle="modal" data-target="#confirm-dropout"

@@ -38,6 +38,9 @@ class BaseProfile(models.Model):
     longitude = models.DecimalField(max_digits=9,decimal_places=6, blank=True, null=True)
     orcid = models.CharField(_("ORCID (If you have registered on the ORCID platform for researchers and have a persistent digital identifier (your ORCID iD) you can add it here to link this profile with your professional information such as affiliations, grants, publications, peer review, and more.)"), max_length=50, blank=True, null=True)
     organisation = models.ManyToManyField(Organisation,blank=True)
+    postal_code = models.IntegerField(null=True, blank=True)
+    city = models.CharField(_("City"), max_length=50, blank=True, null=True)
+    country = CountryField(null=True, blank=True)
 
     # ECSA fields
     ecsa_member = models.BooleanField(null=True, blank=True)
@@ -50,11 +53,10 @@ class BaseProfile(models.Model):
     lastname = models.CharField(_("Last name"), max_length=50, blank=True, null=True)
     ecsa_reduced_fee = models.BooleanField(_("Reduced fee"), default=False)
     ecsa_old_member_fee = models.BooleanField(_("20% discount for CSA/ACSA members"), default=False)
-    street = models.CharField(_("Street"), max_length=50, blank=True, null=True)
-    postal_code = models.IntegerField(null=True, blank=True)
-    city = models.CharField(_("City"), max_length=50, blank=True, null=True)
-    #country = models.CharField(_("Country"), max_length=50, blank=True, null=True)
-    country = CountryField(null=True, blank=True)
+    ecsa_street = models.CharField(_("Street"), max_length=50, blank=True, null=True)
+    ecsa_postal_code = models.IntegerField(null=True, blank=True)
+    ecsa_city = models.CharField(_("City"), max_length=50, blank=True, null=True)    
+    ecsa_country = CountryField(null=True, blank=True)
     occupation = models.ForeignKey(Occupation, null=True, blank=True, on_delete=models.CASCADE)
 
     def admin_send_welcome_email(self): 

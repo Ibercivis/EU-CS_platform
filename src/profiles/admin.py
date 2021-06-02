@@ -28,7 +28,10 @@ class UserProfileInline(admin.StackedInline):
         'fields':('lastname','picture','title', 'bio','interestAreas','latitude','longitude', 'orcid','organisation', 'occupation'),
     }),
     ('Address', {
-        'fields': ('street','postal_code', 'city', 'country'),
+        'fields': ('postal_code', 'city', 'country'),
+    }),
+    ('Ecsa address', {
+        'fields': ('ecsa_street','ecsa_postal_code', 'ecsa_city', 'ecsa_country'),
     }),
     ('ECSA membership', {
         #'classes': ('collapse',),
@@ -108,8 +111,8 @@ class NewUserAdmin(NamedUserAdmin):
                 current_date = date.today()
                 invoiceCounter = getEcsaInvoiceCounter()
                 pdf_content =  render_to_string('accounts/pdf/ecsa_member_accepted.html', { 'ecsa_member_number': obj.profile.ecsa_member_number,
-                 'year': year, 'current_date': current_date , 'name': obj.name, 'lastname': obj.profile.lastname, 'street': obj.profile.street, 
-                 'postal_code': obj.profile.postal_code, 'city': obj.profile.city, 'country': obj.profile.country, 'ecsa_billing_email': obj.email,
+                 'year': year, 'current_date': current_date , 'name': obj.name, 'lastname': obj.profile.lastname, 'street': obj.profile.ecsa_street, 
+                 'postal_code': obj.profile.ecsa_postal_code, 'city': obj.profile.ecsa_city, 'country': obj.profile.ecsa_country, 'ecsa_billing_email': obj.email,
                  'reduced_fee': obj.profile.ecsa_reduced_fee, 'ecsa_old_member_fee': obj.profile.ecsa_old_member_fee, 'amount': total_amount, 'invoiceCounter': invoiceCounter,
                  'base_amount': base_amount, 'discount_ecsa_old_member_fee': discount_ecsa_old_member_fee, 'ecsa_old_member_fee': ecsa_old_member_fee,
                  'discount_ecsa_reduced_fee': discount_ecsa_reduced_fee, 'ecsa_reduced_fee': ecsa_reduced_fee })

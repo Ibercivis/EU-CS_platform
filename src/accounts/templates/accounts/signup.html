@@ -43,15 +43,15 @@
   $(document).ready(function () {
     $("#div_id_ecsa_reduced_fee").hide();
     $("#div_id_ecsa_old_member_fee").hide();
-    $("#div_id_street").hide();
-    $("#div_id_postal_code").hide();
-    $("#div_id_city").hide();
-    $("#div_id_country").hide();
+    $("#div_id_ecsa_street").hide();
+    $("#div_id_ecsa_postal_code").hide();
+    $("#div_id_ecsa_city").hide();
+    $("#div_id_ecsa_country").hide();
     $("#div_id_occupation").hide();
-    $("#id_street").prop('required',false);
-    $("#id_postal_code").prop('required',false);
-    $("#id_city").prop('required',false);
-    $("#id_country").prop('required',false);
+    $("#id_ecsa_street").prop('required',false);
+    $("#id_ecsa_postal_code").prop('required',false);
+    $("#id_ecsa_city").prop('required',false);
+    $("#id_ecsa_country").prop('required',false);
     $("#id_occupation").prop('required',false);
 
     $('#div_id_ecsa_individual_membership').append(
@@ -75,30 +75,30 @@
         );
         $("#div_id_ecsa_reduced_fee").show();     
         $("#div_id_ecsa_old_member_fee").show();
-        $("#div_id_street").show();        
-        $("#div_id_postal_code").show();
-        $("#div_id_city").show();        
-        $("#div_id_country").show();
+        $("#div_id_ecsa_street").show();        
+        $("#div_id_ecsa_postal_code").show();
+        $("#div_id_ecsa_city").show();        
+        $("#div_id_ecsa_country").show();
         $("#div_id_occupation").show();
-        $("#id_street").prop('required',true);
-        $("#id_postal_code").prop('required',true);
-        $("#id_city").prop('required',true);
-        $("#id_country").prop('required',true);
+        $("#id_ecsa_street").prop('required',true);
+        $("#id_ecsa_postal_code").prop('required',true);
+        $("#id_ecsa_city").prop('required',true);
+        $("#id_ecsa_country").prop('required',true);
         $("#id_occupation").prop('required',true);
       }else{
         $('#div_id_ecsa_individual_membership div').remove();
         $('#div_id_ecsa_individual_membership div').remove();
         $("#div_id_ecsa_reduced_fee").hide();
         $("#div_id_ecsa_old_member_fee").hide();
-        $("#div_id_street").hide();
-        $("#div_id_postal_code").hide();
-        $("#div_id_city").hide();
-        $("#div_id_country").hide();
+        $("#div_id_ecsa_street").hide();
+        $("#div_id_ecsa_postal_code").hide();
+        $("#div_id_ecsa_city").hide();
+        $("#div_id_ecsa_country").hide();
         $("#div_id_occupation").hide();
-        $("#id_street").prop('required',false);
-        $("#id_postal_code").prop('required',false);
-        $("#id_city").prop('required',false);
-        $("#id_country").prop('required',false);
+        $("#id_ecsa_street").prop('required',false);
+        $("#id_ecsa_postal_code").prop('required',false);
+        $("#id_ecsa_city").prop('required',false);
+        $("#id_ecsa_country").prop('required',false);
         $("#id_occupation").prop('required',false);        
       }
     });

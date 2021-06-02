@@ -117,7 +117,8 @@ def editEcsaIndividualMembership(request):
     user = get_object_or_404(User, id=request.user.id)
     form = forms.NewEcsaIndividualMembershipForm(initial={
         'ecsa_reduced_fee': user.profile.ecsa_reduced_fee, 'ecsa_old_member_fee': user.profile.ecsa_old_member_fee,
-        'street': user.profile.street, 'postal_code': user.profile.postal_code, 'city': user.profile.city, 'country' : user.profile.country, 'occupation' : user.profile.occupation
+        'ecsa_street': user.profile.ecsa_street, 'ecsa_postal_code': user.profile.ecsa_postal_code, 'ecsa_city': user.profile.ecsa_city,
+        'ecsa_country' : user.profile.ecsa_country, 'occupation' : user.profile.occupation
     })
     try:
         individual_contribution = Ecsa_fee.objects.get(id=3).amount
