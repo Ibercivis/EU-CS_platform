@@ -10,23 +10,36 @@ from . import models
 from projects.models import Project, FollowedProjects, ProjectPermission, ApprovedProjects, UnApprovedProjects
 from resources.models import Resource, SavedResources, ResourcePermission, ApprovedResources, UnApprovedResources
 from organisations.models import Organisation, OrganisationPermission
-
+from ecsa.models import Delegate
 
 class ShowProfile(LoginRequiredMixin, generic.TemplateView):
     template_name = "profiles/show_profile.html"
     http_method_names = ["get"]
-
+    
     def get(self, request, *args, **kwargs):
         slug = self.kwargs.get("slug")
+        
         if slug:
             profile = get_object_or_404(models.Profile, slug=slug)
             user = profile.user
         else:
             user = self.request.user
+        
+        try:
+            delegate = get_object_or_404(Delegate, user=user)
+            organisationsMainDelegate = Organisation.objects.all().filter(mainDelegate=delegate)
+            organisationsDelegate1 = Organisation.objects.all().filter(delegate1=delegate)
+            organisationsDelegate2 = Organisation.objects.all().filter(delegate2=delegate)
+            organisations = organisationsMainDelegate | organisationsDelegate1 | organisationsDelegate2
+            kwargs["organisations"] = organisations
+        except Exception:
+            print("It's not a delegate")
+
 
         if user == self.request.user:
             kwargs["editable"] = True
         kwargs["show_user"] = user
+
         return super().get(request, *args, **kwargs)
 
 

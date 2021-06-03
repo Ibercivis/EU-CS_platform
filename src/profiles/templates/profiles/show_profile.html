@@ -89,9 +89,9 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 						<li class="nav-item">
 						<a class="nav-link sub" id="ecsa_organizational_tab" href="#"
 						onClick="$('#ecsa_individual').hide(); 
-						$('#profile').hide;
+						$('#profile').hide();
 						$('#ecsa_individual').hide();
-						$('#ecsa_organizational').show()
+						$('#ecsa_organizational').show();
 						$('#ecsa_organizational_tab').addClass('active')
 						$('#ecsa_individual_tab').removeClass('active') 
 						$('#profile_tab').removeClass('active')
@@ -102,7 +102,7 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 						<a class="nav-link sub" id="ecsa_individual_tab" href="#"
 						onClick="$('#profile').hide(); 
 						$('#ecsa_organizational').hide();
-						$('#ecsa_individual').show()
+						$('#ecsa_individual').show();
 						$('#ecsa_individual_tab').addClass('active')
 						$('#ecsa_organizational_tab').removeClass('active') 
 						$('#profile_tab').removeClass('active')
@@ -183,6 +183,23 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 						</div>							
 					</div>
 				</div>
+
+
+				<div class="card-text myhidden" id="ecsa_organizational">
+					<div class="row p-3">
+						<div class="col-12">
+							{% if organisations %}
+							Delegate of these organizations:
+							<ul>
+							{% for organisation in organisations.all %}
+								<li><a class="badge badge-light pt-1" href="/organisation/{{organisation.id}}">{{organisation|upper}}</a></li>
+							{% endfor %}
+							</ul>
+							{%endif%}
+						</div>
+					</div>
+				</div>
+
 			</div>
 		</div>
 	</div>
