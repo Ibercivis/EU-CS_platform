@@ -149,12 +149,17 @@
 						<p><b>{% trans "VAT" %}: </b>{{ organisation.vat_number }}</p>
 						</div>
 						<div class="col-12 col-sm-6">
-						<p><b>Billing information</b></p>
+						<p><b><u>Billing information</u></b></p>
 						<p><b>{% trans "Billing email" %}: </b>{{ organisation.ecsa_billing_email }}</p>
 						<p><b>{% trans "Street" %}: </b>{{ organisation.ecsa_billing_street }}</p>
 						<p><b>{% trans "Postal code" %}: </b>{{ organisation.ecsa_billing_postal_code }}</p>
 						<p><b>{% trans "City" %}: </b>{{ organisation.ecsa_billing_city }}</p>
 						<p><b>{% trans "Country" %}: </b>{%if organisation.ecsa_billing_country %}{% get_country organisation.ecsa_billing_country as country %}{{ country.name }}{% endif %}</p>						
+						<p><b><u>Delegates</u></b></p>
+						<p><b>{% trans "Main delegate" %}: </b>{%if organisation.mainDelegate.user %}<a class="badge badge-light pt-1" href="/users/{{organisation.mainDelegate.user.profile.slug}}">{{organisation.mainDelegate.user.name | upper}} {{organisation.mainDelegate.user.profile.lastname | upper}}</a> {%else%}{{ organisation.mainDelegate }}{%endif%}</p>
+						<p><b>{% trans "Delegate 1" %}: </b>{%if organisation.delegate1 and organisation.delegate1.user %}<a class="badge badge-light pt-1" href="/users/{{organisation.delegate1.user.profile.slug}}">{{organisation.delegate1.user.name | upper}} {{organisation.delegate1.user.profile.lastname | upper}}</a> {%elif organisation.delegate1%}{{ organisation.delegate1 }}{%endif%}</p>
+						<p><b>{% trans "Delegate 2" %}: </b>{%if organisation.delegate2 and organisation.delegate2.user %}<a class="badge badge-light pt-1" href="/users/{{organisation.delegate2.user.profile.slug}}">{{organisation.delegate2.user.name | upper}} {{organisation.delegate2.user.profile.lastname | upper}}</a> {%elif organisation.delegate2%}{{ organisation.delegate2 }}{%endif%}</p>
+						
 
 						
 						{% if organisation.has_vat_number %} <p><b>{% trans "Vat number" %}: </b> organisation.vat_number</p>{% endif %}
