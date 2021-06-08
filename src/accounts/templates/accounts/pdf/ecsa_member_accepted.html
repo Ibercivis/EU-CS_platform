@@ -1,6 +1,7 @@
 
 {% load i18n %}
 {% load staticfiles %}
+{% load countries %}
 {% load static %}
 <!doctype html>
 <html lang="es">
@@ -26,6 +27,9 @@
             -webkit-text-size-adjust: none; 
         }
         .right { float:right }
+        td p {
+            line-height: 75%;
+        }
         
     </style>
 </head>
@@ -60,24 +64,24 @@ padding: 0;position: absolute;top: 0px;"/>
                 <p>{{name}} {%if lastname %}{{lastname}}{%endif%}</p>
                 <p>{{street}}</p>
                 <p>{{postal_code}} {{city}}</p>
-                <p>{{country}}</p>
+                <p>{%if country %}{% get_country country as countryobj %}{{ countryobj.name }}{% endif %}</p>
                 <p>{{ecsa_billing_email}}</p>
                 {%if vat_number%}<p>VAT: {{vat_number}}</p>{%endif%}
             </td>
             <td>
-                <p>Account holder: ECSA e.V.</p>
+                <p>Account holder: ECSA</p>
                 <p><b>Reference line: {{ecsa_member_number}}/{{year}}{{invoiceCounter}}</b></p>
                 <p>Bank: GLS</p>
                 <p>IBAN: DE42430609671231546400</p>
                 <p>Swift/BIC: GENODEM1GLS</p>
             </td>
-            
+            <td></td>
         </tr>
         <tr>
             <td colspan="3">
                 <br/>
                 {% if legal_status == 1 %}
-                <span>NON-FOR-PROFIT ORGANIZATION MEMBERSHIP</span>
+                <span>NOT-FOR-PROFIT ORGANIZATION MEMBERSHIP</span>
                 {% elif legal_status == 0 %}
                 <span>FOR-PROFIT ORGANIZATION MEMBERSHIP</span>
                 {% else %}
@@ -86,9 +90,13 @@ padding: 0;position: absolute;top: 0px;"/>
                 <span class="right">{{base_amount}} €</span>
                 {% if reduced_fee %} <br/><span>Reduced fee (-{{discount_ecsa_reduced_fee}} %)</span><span class="right">-{{ecsa_reduced_fee}} €</span>{% endif %}
                 {% if ecsa_old_member_fee %} <br/><span>Discount for being a CSA/ACSA member (-{{discount_ecsa_old_member_fee}}%)</span><span class="right">-{{ecsa_old_member_fee}} €</span>{%endif%}     
-                <p class="text-right"><b>Total amount {{amount}} €</b></p>
-            </td>            
-            
+                
+            </td>                        
+        </tr>
+        <tr>
+            <td colspan="3">
+                <h5 class="text-right"><b>Total amount {{amount}} €</b></h5>
+            </td>
         </tr>
     </table>
     <div class="text-center">
@@ -96,7 +104,7 @@ padding: 0;position: absolute;top: 0px;"/>
 
             <p><u>Please provide the reference line as indicated</u>.</p>
             <p>Please transfer the amount within 14 days.</p>
-        <h2>Thank you for your support!</h2>        
+        <h2>Thank you for supporting ECSA!</h2>        
     </div>
     
     {% endblock %}

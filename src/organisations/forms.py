@@ -81,8 +81,8 @@ class NewEcsaOrganisationMembershipForm(forms.Form):
     #occupation = models.ForeignKey(OrganisationType, null=True, blank=True, on_delete=models.CASCADE)
     legal_status = forms.ChoiceField(choices=LEGAL_STATUS, required=False)
     has_vat_number = forms.ChoiceField(choices=YES_NO, label=_("Does your organisation have a VAT number?"))
-    vat_number = forms.IntegerField(required=False)
-    ecsa_reduced_fee = forms.BooleanField(required=False, label=_("Reduced membership (your organisation has less than five full-time employees)"))
+    vat_number = forms.CharField(required=False)
+    ecsa_reduced_fee = forms.BooleanField(required=False, label=_("50% reduced membership (your organisation has less than five full-time employees)"))
     ecsa_old_organisation_fee = forms.BooleanField(required=False, label=_("20% discount as CSA/ACSA member"))
     #Delegates
     main_delegate_name = forms.CharField()

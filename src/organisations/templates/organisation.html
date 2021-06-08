@@ -88,7 +88,7 @@
 					{% endif %}
 					
 					{% if organisation.creator == user or user.is_staff or isDelegate %}
-						{% if organisation.ecsa_member or organisation.ecsa_requested_join %}
+						{% if organisation.paid or organisation.ecsa_requested_join %}
 						<div class="card-header flex  flex-row-reverse">
 							<ul class="nav nav nav-tabs card-header-tabs mr-auto flex-row-reverse">
 							<li class="nav-item">
@@ -165,7 +165,7 @@
 						{% if organisation.has_vat_number %} <p><b>{% trans "Vat number" %}: </b> organisation.vat_number</p>{% endif %}
 						</div>
 					</div>
-						{% if organisation.ecsa_member %}
+						{% if organisation.paid %}
 							<a data-href="{% url 'drop_out_ecsa_organisation_membership' organisation.id %}" name='dropoutECSA' data-toggle="modal" data-target="#confirm-dropout"
 							class="btn btn-outline btn-red float-right ml-2 mt-5"><i class="fas fa-users"></i> {% trans "Cancel ECSA membership" %}</a>
 						{% endif %}

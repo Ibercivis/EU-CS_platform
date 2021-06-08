@@ -61,7 +61,7 @@
     ).append($("<br/><p>"));
 
 
-    $('#div_id_street label, #div_id_postal_code label, #div_id_city label, #div_id_country label, #div_id_occupation label').append(
+    $('#div_id_street label, #div_id_postal_code label, #div_id_city label, #div_id_country label').append(
         $("<span>", {"class": "required-indicator"}).text("*")
     );
 
@@ -83,8 +83,7 @@
         $("#id_ecsa_street").prop('required',true);
         $("#id_ecsa_postal_code").prop('required',true);
         $("#id_ecsa_city").prop('required',true);
-        $("#id_ecsa_country").prop('required',true);
-        $("#id_occupation").prop('required',true);
+        $("#id_ecsa_country").prop('required',true);        
       }else{
         $('#div_id_ecsa_individual_membership div').remove();
         $('#div_id_ecsa_individual_membership div').remove();
@@ -98,8 +97,7 @@
         $("#id_ecsa_street").prop('required',false);
         $("#id_ecsa_postal_code").prop('required',false);
         $("#id_ecsa_city").prop('required',false);
-        $("#id_ecsa_country").prop('required',false);
-        $("#id_occupation").prop('required',false);        
+        $("#id_ecsa_country").prop('required',false);           
       }
     });
   });

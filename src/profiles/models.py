@@ -43,7 +43,7 @@ class BaseProfile(models.Model):
     country = CountryField(null=True, blank=True)
 
     # ECSA fields
-    ecsa_member = models.BooleanField(null=True, blank=True)
+    paid = models.BooleanField(null=True, blank=True)
     ecsa_requested_join = models.BooleanField(null=True, blank=True)
     ecsa_member_since = models.DateTimeField(null=True,blank=True)
     ecsa_payment_revision = models.BooleanField(null=True, blank=True)

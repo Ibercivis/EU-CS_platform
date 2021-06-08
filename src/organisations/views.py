@@ -74,7 +74,7 @@ def organisation(request, pk):
         editable = True
 
     isDelegate = False    
-    if organisation.ecsa_member and ((organisation.mainDelegate and organisation.mainDelegate.user == user) or 
+    if organisation.paid and ((organisation.mainDelegate and organisation.mainDelegate.user == user) or 
         (organisation.delegate1 and organisation.delegate1.user == user) or (organisation.delegate2 and organisation.delegate2.user == user)):
         isDelegate = True
 
@@ -96,7 +96,7 @@ def edit_organisation(request, pk):
     user = request.user
     cooperatorsPK = getCooperators(pk)
     isDelegate = False    
-    if organisation.ecsa_member and ((organisation.mainDelegate and organisation.mainDelegate.user == user) or 
+    if organisation.paid and ((organisation.mainDelegate and organisation.mainDelegate.user == user) or 
         (organisation.delegate1 and organisation.delegate1.user == user) or (organisation.delegate2 and organisation.delegate2.user == user)):
         isDelegate = True
     if user != organisation.creator and not user.is_staff and not user.id in cooperatorsPK and not isDelegate:
@@ -209,7 +209,7 @@ def editEcsaOrganisationMembership(request, pk):
 def dropOutECSAmembership(request, pk):
     organisation = get_object_or_404(Organisation, id=pk)    
     organisation.ecsa_requested_join = False
-    organisation.ecsa_member = False
+    organisation.paid = False
     organisation.save()
     return redirect("/users/me/organisations")
 

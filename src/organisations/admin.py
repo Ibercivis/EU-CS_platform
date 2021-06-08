@@ -17,9 +17,9 @@ class OrganisationAdmin(admin.ModelAdmin):
         "name",
         "orgType",
         "country",
-        "ecsa_member",
+        "paid",
     )
-    list_filter = ["orgType", "ecsa_member", "ecsa_requested_join"]
+    list_filter = ["orgType", "paid", "ecsa_requested_join"]
 
     fieldsets = (
     (None, {
@@ -32,7 +32,7 @@ class OrganisationAdmin(admin.ModelAdmin):
         #'classes': ('collapse',),
         'fields': ('ecsa_requested_join','ecsa_billing_email', 'ecsa_billing_street', 'ecsa_billing_postal_code',
         'ecsa_billing_city', 'ecsa_billing_country', 'ecsa_reduced_fee','ecsa_old_organisation_fee','legal_status', 'vat_number',
-        'ecsa_member','ecsa_member_since','ecsa_member_number','admin_send_welcome_email', 'mainDelegate', 'delegate1', 'delegate2'),
+        'paid','ecsa_member_since','ecsa_member_number','admin_send_welcome_email', 'mainDelegate', 'delegate1', 'delegate2'),
     }),
     )
     readonly_fields = ('admin_send_welcome_email', )
@@ -42,7 +42,7 @@ class OrganisationAdmin(admin.ModelAdmin):
             id = obj.id
             organisation_old = get_object_or_404(Organisation, id=id)
             requested_join = organisation_old.ecsa_requested_join
-            ecsa_member = organisation_old.ecsa_member
+            paid = organisation_old.paid
             ecsa_member_number = organisation_old.ecsa_member_number
             if(obj.ecsa_member_number and ecsa_member_number != obj.ecsa_member_number):
                 to_email = obj.ecsa_billing_email                
@@ -96,7 +96,7 @@ class OrganisationAdmin(admin.ModelAdmin):
                 
 
                 email.send()
-            if(not ecsa_member and ecsa_member != obj.ecsa_member):
+            if(not paid and paid != obj.paid):
                 to_email = obj.ecsa_billing_email
                 subject = 'Confirmation of payment'
                 message = render_to_string('accounts/emails/ecsa_payment_confirmation.html', { 'name': obj.name})

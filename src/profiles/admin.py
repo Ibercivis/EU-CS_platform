@@ -35,7 +35,7 @@ class UserProfileInline(admin.StackedInline):
     }),
     ('ECSA membership', {
         #'classes': ('collapse',),
-        'fields': ('ecsa_requested_join','ecsa_reduced_fee','ecsa_old_member_fee','ecsa_member','ecsa_member_since','ecsa_member_number','admin_send_welcome_email'),
+        'fields': ('ecsa_requested_join','ecsa_reduced_fee','ecsa_old_member_fee','paid','ecsa_member_since','ecsa_member_number','admin_send_welcome_email'),
     }),
     )
     readonly_fields = ('admin_send_welcome_email', )
@@ -52,7 +52,7 @@ class NewUserAdmin(NamedUserAdmin):
         "is_superuser",
         "is_staff",
     )
-    list_filter = ["is_active", "profile__ecsa_member", "profile__ecsa_requested_join", "is_superuser"]
+    list_filter = ["is_active", "profile__paid", "profile__ecsa_requested_join", "is_superuser"]
 
     # 'View on site' didn't work since the original User model needs to
     # have get_absolute_url defined. So showing on the list display
@@ -68,10 +68,10 @@ class NewUserAdmin(NamedUserAdmin):
             id = obj.id
             user_old = get_object_or_404(User, id=id)
             requested_join = user_old.profile.ecsa_requested_join
-            ecsa_member = user_old.profile.ecsa_member
+            paid = user_old.profile.paid
             ecsa_member_number = user_old.profile.ecsa_member_number
             if(obj.profile.ecsa_member_number and ecsa_member_number != obj.profile.ecsa_member_number):
-                to_email = obj.email
+                to_email = obj.email                
                 subject = 'Welcome to ECSA!'
                 message = render_to_string('accounts/emails/ecsa_member_accepted.html', { 'name': obj.name, 'lastname': obj.profile.lastname,
                  'ecsa_member_number': obj.profile.ecsa_member_number})
@@ -116,11 +116,12 @@ class NewUserAdmin(NamedUserAdmin):
                  'reduced_fee': obj.profile.ecsa_reduced_fee, 'ecsa_old_member_fee': obj.profile.ecsa_old_member_fee, 'amount': total_amount, 'invoiceCounter': invoiceCounter,
                  'base_amount': base_amount, 'discount_ecsa_old_member_fee': discount_ecsa_old_member_fee, 'ecsa_old_member_fee': ecsa_old_member_fee,
                  'discount_ecsa_reduced_fee': discount_ecsa_reduced_fee, 'ecsa_reduced_fee': ecsa_reduced_fee })
-                HTML(string=pdf_content, base_url=request.build_absolute_uri()).write_pdf('/tmp/membership_contribution.pdf')                
-                email.attach_file('/tmp/membership_contribution.pdf')
+                filename = '/tmp/membership_contribution'+ str(ecsa_member_number) + str(year) + str(invoiceCounter) +'.pdf'
+                HTML(string=pdf_content, base_url=request.build_absolute_uri()).write_pdf(filename)                
+                email.attach_file(filename)
                 
                 email.send()
-            if(not ecsa_member and ecsa_member != obj.profile.ecsa_member):
+            if(not paid and paid != obj.profile.paid):
                 to_email = obj.email
                 subject = 'Confirmation of payment'
                 message = render_to_string('accounts/emails/ecsa_payment_confirmation.html', { 'name': obj.name, 'lastname': obj.profile.lastname})

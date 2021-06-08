@@ -139,7 +139,7 @@ def editEcsaIndividualMembership(request):
 def dropOutECSAmembership(request):
     profile = get_object_or_404(Profile, user_id=request.user.id)    
     profile.ecsa_requested_join = False
-    profile.ecsa_member = False
+    profile.paid = False
     profile.save()
     return redirect("profiles:show_self")
 

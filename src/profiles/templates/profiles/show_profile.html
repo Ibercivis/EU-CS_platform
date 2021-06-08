@@ -67,7 +67,7 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 						<h1>
 							<img title="profile picture" class="img-fluid rounded-circle" src="{% thumbnail show_user.profile.picture|default:'default_profile.png' 140x140 crop %}">
 							{{ show_user.get_full_name }} {% if show_user.profile.lastname %}{{show_user.profile.lastname}} {% endif %}
-							{% if show_user.profile.ecsa_member %}
+							{% if show_user.profile.paid %}
 							<img style=" margin-left: 50px;" src="{% static 'site/img/ecsa_main_Member.png' %}"/>
 							{% endif %}
 							{% if editable %}
@@ -83,7 +83,7 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 				</div>
 					
 				{%if editable %}
-				{% if show_user.profile.ecsa_member or show_user.profile.former_member or show_user.profile.ecsa_requested_join %}
+				{% if show_user.profile.paid or show_user.profile.former_member or show_user.profile.ecsa_requested_join %}
 				<div class="card-header flex  flex-row-reverse">
 					<ul class="nav nav nav-tabs card-header-tabs mr-auto flex-row-reverse">
 						<li class="nav-item">
@@ -157,7 +157,7 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 						<div class="col-12">
 							{% if show_user.profile.former_member %}
 								Former member
-							{% elif show_user.profile.ecsa_member %}
+							{% elif show_user.profile.paid %}
 								{% trans "You are a full member...." %}	
 							{% elif show_user.profile.ecsa_requested_join %}
 								{% trans "You have requested to join...." %}
@@ -175,7 +175,7 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 							<p><b>{% trans "City" %}: </b>{{ show_user.profile.ecsa_city }}</p>
 							<p><b>{% trans "Country" %}: </b>{%if show_user.profile.ecsa_country %}{% get_country show_user.profile.ecsa_country as country %}{{ country.name }}{% endif %}</p>
 							<p><b>{% trans "Occupation" %}: </b>{{ show_user.profile.occupation }}</p>
-							{% if show_user.profile.ecsa_member or show_user.profile.former_member %}					
+							{% if show_user.profile.paid or show_user.profile.former_member %}					
 								<a data-href="{% url 'accounts:drop_out_ecsa_membership' %}" name='dropoutECSA' data-toggle="modal" data-target="#confirm-dropout"
 								class="btn btn-outline btn-red float-right ml-2 mt-5"><i class="fas fa-users"></i> {% trans "Cancel ECSA membership" %}</a>
 							{% endif %}

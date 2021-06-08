@@ -40,7 +40,7 @@ class Organisation(models.Model):
     origin_name = models.CharField(max_length=200,null=True, blank=True)
 
     #Ecsa fields
-    ecsa_member = models.BooleanField(null=True, blank=True)
+    paid = models.BooleanField(null=True, blank=True)
     ecsa_requested_join = models.BooleanField(null=True, blank=True)
     ecsa_member_since = models.DateTimeField(null=True,blank=True)
     ecsa_member_number = models.IntegerField(null=True, blank=True)
@@ -56,9 +56,9 @@ class Organisation(models.Model):
     #occupation = models.ForeignKey(OrganisationType, null=True, blank=True, on_delete=models.CASCADE)
     legal_status = models.IntegerField(choices=LEGAL_STATUS, null=True, blank=True)
     #has_vat_number = models.BooleanField(default=False)
-    vat_number = models.IntegerField(null=True, blank=True)
+    vat_number = models.CharField(max_length=50, null=True, blank=True)
     ecsa_reduced_fee = models.BooleanField(_("Reduced fee"), default=False)
-    ecsa_old_organisation_fee = models.BooleanField(_("Old organisation fee"), default=False)
+    ecsa_old_organisation_fee = models.BooleanField(_("20% discount for CSA/ACSA members"), default=False)
 
     mainDelegate = models.ForeignKey(Delegate, on_delete=models.SET_NULL, related_name='main_delegate', null=True, blank=True)
     delegate1 = models.ForeignKey(Delegate, on_delete=models.SET_NULL, related_name='delegate1', null=True, blank=True)

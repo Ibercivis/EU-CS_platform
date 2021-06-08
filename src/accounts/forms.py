@@ -106,13 +106,13 @@ class SignupForm(authtoolsforms.UserCreationForm):
         )
 
 class NewEcsaIndividualMembershipForm(forms.Form):
-    ecsa_reduced_fee = forms.BooleanField(required=False, label=_("Reduced membership (retired, unemployed or student)"))
+    ecsa_reduced_fee = forms.BooleanField(required=False, label=_("50% reduced membership (retired, unemployed or student)"))
     ecsa_old_member_fee = forms.BooleanField(required=False, label=_("20% discount as CSA/ACSA member"))
     ecsa_street = forms.CharField(help_text=_("Street address and number"), label=_("Street"))
     ecsa_postal_code = forms.IntegerField(label=_("Postal code"))
     ecsa_city = forms.CharField(label=_("City"))
     ecsa_country = CountryField(blank=True).formfield(label=_("Country"))
-    occupation = forms.ModelChoiceField(queryset=Occupation.objects.all())
+    occupation = forms.ModelChoiceField(queryset=Occupation.objects.all(), required=False)
 
     def save(self, args, profileID):
         saveProfile(self, profileID, True)

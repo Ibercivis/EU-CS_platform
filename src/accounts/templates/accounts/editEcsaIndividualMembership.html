@@ -38,6 +38,7 @@
                                 <div class="form-row">
 
                                     <div class="col-12 mb-3">
+                                        <p><b>ECSA Billing information</b></p>
                                     {{ form.ecsa_street|as_crispy_field }}
                                     </div>
                                 </div>
@@ -55,10 +56,11 @@
 
                                 <div class="form-row">
                                     <div class="col-12 mb-3">
-                                    {{ form.ecsa_country|as_crispy_field }}
+                                        {{ form.ecsa_country|as_crispy_field }}
                                     </div>
                                     <div class="col-12 mb-3">
-                                    {{ form.occupation|as_crispy_field }}
+                                        <p><b>Other information</b></p>
+                                        {{ form.occupation|as_crispy_field }}
                                     </div>
                                 </div>
 
