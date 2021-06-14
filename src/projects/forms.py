@@ -189,7 +189,7 @@ class ProjectForm(forms.Form):
             project = get_object_or_404(Project, id=pk)
             if project.hidden:
                 project.hidden = False
-            self.updateFields(project, latitude, longitude, country, status, doingAtHome, mainOrganisation, participatingInaContest)
+            self.updateFields(project, latitude, longitude, country, status, doingAtHome, mainOrganisation)
         else:
             project = self.createProject(latitude, longitude, country, status, doingAtHome, mainOrganisation, participatingInaContest, args)
 

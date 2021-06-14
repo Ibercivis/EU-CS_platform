@@ -166,21 +166,21 @@ class ProjectSerializerCreateUpdate(serializers.ModelSerializer):
                 fundingBody = validated_data.pop('fundingBody')
                 fundingBodySent = True
             else:
-                instance.fundingBody  = None
+                instance.fundingBody = None
             
         if 'originDatabase' in requestData:
             if requestData.get('originDatabase'):
                 originDatabase = validated_data.pop('originDatabase')
                 originDatabaseSent = True
             else:
-                instance.originDatabase  = None
+                instance.originDatabase = None
 
         if 'mainOrganisation' in requestData:
             if requestData.get('mainOrganisation'):
                 mainOrganisation = validated_data.pop('mainOrganisation')
                 mainOrganisationSent = True
             else:
-                instance.mainOrganisation  = None
+                instance.mainOrganisation = None
 
         if 'organisation' in requestData:
             organisation = ""
@@ -217,7 +217,7 @@ class ProjectSerializerCreateUpdate(serializers.ModelSerializer):
                 if(choice != ''):
                     keyword = Keyword.objects.get_or_create(keyword=choice)
             keywords = Keyword.objects.all()
-            keywords = keywords.filter(keyword__in = choices)
+            keywords = keywords.filter(keyword__in= choices)
             instance.keywords.set(keywords)
 
         if(fundingBodySent):
