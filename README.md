@@ -22,6 +22,9 @@ grant all on  database eucitizenscience to eucitizenscience;
 
 ## Installation
 First of all, install Python v3 <br/>
+python3-dev
+libpq-dev
+
 
 In source directory: <br/>
     ```
