@@ -83,7 +83,7 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 				</div>
 					
 				{%if editable %}
-				{% if show_user.profile.paid or show_user.profile.former_member or show_user.profile.ecsa_requested_join %}
+				
 				<div class="card-header flex  flex-row-reverse">
 					<ul class="nav nav nav-tabs card-header-tabs mr-auto flex-row-reverse">
 						<li class="nav-item">
@@ -122,7 +122,7 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 
 					</ul>
 					</div>
-					{% endif %}
+				
 					{% endif %}
 
 				<div class="card-text" id="profile">
@@ -161,6 +161,8 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 								{% trans "You are a full member...." %}	
 							{% elif show_user.profile.ecsa_requested_join %}
 								{% trans "You have requested to join...." %}
+							{% else %}
+								{% trans "Not yet a member" %}
 							{% endif %}
 						</div>
 						<div class="col-12 col-sm-6 mt-2">

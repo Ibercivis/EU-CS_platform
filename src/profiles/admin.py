@@ -116,7 +116,7 @@ class NewUserAdmin(NamedUserAdmin):
                  'reduced_fee': obj.profile.ecsa_reduced_fee, 'ecsa_old_member_fee': obj.profile.ecsa_old_member_fee, 'amount': total_amount, 'invoiceCounter': invoiceCounter,
                  'base_amount': base_amount, 'discount_ecsa_old_member_fee': discount_ecsa_old_member_fee, 'ecsa_old_member_fee': ecsa_old_member_fee,
                  'discount_ecsa_reduced_fee': discount_ecsa_reduced_fee, 'ecsa_reduced_fee': ecsa_reduced_fee })
-                filename = '/tmp/membership_contribution'+ str(ecsa_member_number) + str(year) + str(invoiceCounter) +'.pdf'
+                filename = '/tmp/membership_contribution'+ str(obj.profile.ecsa_member_number) + '_' + str(year) + str(invoiceCounter) +'.pdf'
                 HTML(string=pdf_content, base_url=request.build_absolute_uri()).write_pdf(filename)                
                 email.attach_file(filename)
                 
