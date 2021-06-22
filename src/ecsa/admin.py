@@ -1,5 +1,8 @@
 from django.contrib import admin
 from .models import Delegate, Ecsa_fee, InvoiceCounter
+from django.utils.html import mark_safe
+from organisations.models import Organisation
+from django.db.models import Q
 
 class Ecsa_feeAdmin(admin.ModelAdmin):
     model = Ecsa_fee
@@ -16,6 +19,16 @@ class InvoiceCounterAdmin(admin.ModelAdmin):
         "year",
     )
 
+class DelegateA(admin.ModelAdmin):    
+    list_display = ('name', 'email', 'user', 'organisation')
+    def organisation(self, obj):
+        to_return = '\n'.join('<p>{}</p>'.format(aux.name) for aux in Organisation.objects.all().filter(Q(mainDelegate=obj) | Q(delegate1=obj) | Q(delegate2=obj)))
+        return mark_safe(to_return)
+    
+
+
+
+
 admin.site.register(Ecsa_fee,Ecsa_feeAdmin)
 admin.site.register(InvoiceCounter,InvoiceCounterAdmin)
-admin.site.register(Delegate)
+admin.site.register(Delegate, DelegateA)
