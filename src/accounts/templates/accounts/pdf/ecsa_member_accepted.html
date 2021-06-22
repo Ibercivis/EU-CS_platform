@@ -14,6 +14,8 @@
         @page {
             size: "A4";
             margin: 1.0cm 1.5cm 3.5cm 1.5cm;
+            margin-top: 0;
+            margin-bottom: 0;
         }
         body {
             width: 100% !important;
@@ -30,6 +32,11 @@
         td p {
             line-height: 75%;
         }
+        footer{
+            position: absolute;
+            bottom: 0;
+        }
+        
         
     </style>
 </head>
@@ -110,7 +117,10 @@ padding: 0;position: absolute;top: 0px;"/>
     {% endblock %}
 </main>
 <br/><br/><br/><br/><br/><br/><br/>
-<img src="{% static 'site/img/ECSA_colourful_line.png' %}" alt="image"/>
+<footer>
+    <img src="{% static 'site/img/ECSA_colourful_line.png' %}" alt="image"/>
+</footer>
+
 
 </body>
 </html>
