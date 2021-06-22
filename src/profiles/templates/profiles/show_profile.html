@@ -70,11 +70,7 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 							{% if show_user.profile.paid %}
 							<img style=" margin-left: 50px;" src="{% static 'site/img/ecsa_main_Member.png' %}"/>
 							{% endif %}
-							{% if editable %}
-							<a data-href="{% url 'accounts:delete' %}" data-toggle="modal" data-target="#confirm-delete" class="btn btn-outline btn-red float-right ml-2 mt-5"><span class="fas fa-trash-alt"></span>&nbsp;{% trans "Delete Profile" %}</a>
-							<a href="{% url 'profiles:edit_self' %}" class="btn btn-outline btn-green float-right ml-2 mt-5"><i class="fas fa-edit"></i> {% trans "Edit Profile" %}</a>
-							{% endif %}							
-					</div>
+								</div>
 				
 					{% if editable and not show_user.profile.ecsa_requested_join %}
 						<a href="{% url 'accounts:new_ecsa_individual_membership' %}" class="btn btn-outline btn-info float-right ml-2 mt-5"><i class="fas fa-users"></i> {% trans "Sign up for Individual ECSA membership" %}</a>
@@ -129,26 +125,32 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 					<div class="row p-3">
 						<div class="col-12 col-sm-6">
 							<p><b>{% trans "Email" %}: </b>{{ show_user.email|default:"missing"}}</p>
+
 							<p><b>{% trans "Joined" %}: </b>{{ show_user.date_joined | date:"d/m/Y"}}</p>							
-						</div>
-						<div class="col-12 col-sm-6">
-							<p><strong>{% trans "Title" %}</strong>: {{ show_user.profile.title }} </p>
-							<p><strong>{% trans "Bio and disciplinary background" %}</strong>: {{ show_user.profile.bio }}</p>
-							<p><strong>{% trans "ORCID profile" %}</strong>: {% if show_user.profile.orcid %} <a href="https://orcid.org/{{ show_user.profile.orcid }}" target="_blank">{{ show_user.profile.orcid }}</a>{% endif %}</p>
-							<b>{% trans "Organisation" %}:</b>
-							{% for organisation in show_user.profile.organisation.all %} <a class="badge" href="/organisation/{{organisation.id}}">{{organisation}}</a>  {% endfor %}							
-							<p><b>{% trans "Postal code" %}: </b>{{ show_user.profile.postal_code }}</p>
-							<p><b>{% trans "City" %}: </b>{{ show_user.profile.city }}</p>
-							<p><b>{% trans "Country" %}: </b>{%if show_user.profile.country %}{% get_country show_user.profile.country as country %}{{ country.name }}{% endif %}</p>
-							<br/>
-						</div>
-						<div class="col-12 col-sm-6">
 							<p><strong>{% trans "Interest areas" %}</strong>:
 								{% for area in show_user.profile.interestAreas.all %}
 								{{ area }}
 								{% endfor %}
 							</p>
+
 						</div>
+						<div class="col-12 col-sm-6">
+							<p><strong>{% trans "Title" %}</strong>: {{ show_user.profile.title }} </p>
+							<p><strong>{% trans "Bio and disciplinary background" %}</strong>: {{ show_user.profile.bio }}</p>
+							<p><strong>{% trans "ORCID profile" %}</strong>: {% if show_user.profile.orcid %} <a href="https://orcid.org/{{ show_user.profile.orcid }}" target="_blank">{{ show_user.profile.orcid }}</a>{% endif %}</p>
+							<p><b>{% trans "Organisation" %}:</b>
+							{% for organisation in show_user.profile.organisation.all %} <a href="/organisation/{{organisation.id}}">{{organisation}}</a>  {% endfor %}							        </p>
+							<p><b>{% trans "City" %}: </b>{{ show_user.profile.city }}</p>
+							<p><b>{% trans "Country" %}: </b>{%if show_user.profile.country %}{% get_country show_user.profile.country as country %}{{ country.name }}{% endif %}</p>
+							<br/>
+						</div>
+				{% if editable %}
+						<div class="col-12 col-sm-6">
+							<a data-href="{% url 'accounts:delete' %}" data-toggle="modal" data-target="#confirm-delete" class="btn btn-outline btn-red float-right ml-2 mt-5"><span class="fas fa-trash-alt"></span>&nbsp;{% trans "Delete Profile" %}</a>
+							<a href="{% url 'profiles:edit_self' %}" class="btn btn-outline btn-green float-right ml-2 mt-5"><i class="fas fa-edit"></i> {% trans "Edit Profile" %}</a>
+							{% endif %}							
+						</div>
+
 					</div>
 				</div>
 
@@ -189,12 +191,12 @@ integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="ano
 					<div class="row p-3">
 						<div class="col-12">
 							{% if organisations %}
-							Delegate of these organizations:
-							<ul>
+							<div>You are a delegate of:</div>
 							{% for organisation in organisations.all %}
-								<li><a class="badge badge-light pt-1" href="/organisation/{{organisation.id}}">{{organisation|upper}}</a></li>
+							<div><a class="badge badge-light pt-1" href="/organisation/{{organisation.id}}">{{organisation|upper}}</a></div>
 							{% endfor %}
-							</ul>
+							{% else %}
+							You are currently not a delegate of any organisation.
 							{%endif%}
 						</div>
 					</div>
