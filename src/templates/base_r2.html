@@ -64,7 +64,7 @@
       aria-haspopup="true" aria-expanded="false" href="#"><i class="fas fa-user-edit"></i></a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
         <a class="dropdown-item" href="{% url 'profiles:show_self' %}">{% trans "My Profile" %}</a>
-	<a class="dropdown-item" href="{% url 'ecsa_membership' %}">{% trans "ECSA membership" %}</a>
+	      <a class="dropdown-item" href="{% url 'ecsa_membership' %}">{% trans "Join ECSA" %}</a>
         <a class="dropdown-item" href="{% url 'profiles:self_organisations' %}">{% trans "My organisations" %}</a>
         <a class="dropdown-item" href="{% url 'profiles:self_projects' %}">{% trans "Submitted projects" %}</a>
         <a class="dropdown-item" href="{% url 'profiles:self_resources' %}">{% trans "Submitted resources" %}</a>

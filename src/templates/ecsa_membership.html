@@ -16,10 +16,62 @@
 <div class="container">
 	<div class="row">
 		<div class="col-sm-4 col-12 mt-4 mb-4">
-			<h3>{% trans "ECSA Membership" %}</h3>
+			<h3>{% trans "ECSA members" %}</h3>
 		</div>
 		<div class="col-sm-8 col-12 mt-4 mb-4">
+			<p>Members are at the heart of ECSA. Among other roles, they participate in ECSA working groups and shape the association’s future at our general assemblies. They share a strong commitment to advancing citizen science, either by conducting citizen science projects or by supporting them through research, communication and funding.</p>
+			<p>ECSA has a diverse network of members, both organizations and individuals, from Europe and beyond. They represent research institutes, museums, students and universities, NGOs and CSOs, the private sector and citizen science groups, among others. They come from a range of different fields, including biology, environmental science, citizens’ groups, do-it-yourself approaches and social sciences, among many others.</p>
+			<p>We are always open to new members, from any country and subject area. All you need is an interest in citizen science!</p>
 		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-4 col-12 mt-4 mb-4">
+			<h3>{% trans "Membership is available for a yearly membership contribution (organizational or individual) and brings many benefits." %}</h3>
+		</div>
+		<div class="col-sm-8 col-12 mt-4 mb-4">
+			<p>For example, you can:</p>
+			<ul>
+				<li>share your news and events through our newsletter and the <a href="{% url 'events' %}">events</a> section on the platform</li>
+				<li>access to members-only email list, which provides early notices of jobs, funding opportunities, project requests, and webinars with a limited number of registrations, etc. and where you can exchange with other members</li>
+				<li>discounts on selected webinars, workshops and conferences</li>
+				<li>participate in and vote at our Annual General Meeting</li>
+				<li>stand as a candidate for our executive board</li>
+				<li>participate in ECSA working groups</li>
+				<li>contribute to and make use of ECSA’s open-access documents and publications, such as policy papers and guidelines</li>
+				<li>receive invitations to join European citizen science projects</li>
+				<li>ECSA member logo added to your profile</li>
+			</ul>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-4 col-12 mt-4 mb-4">
+			<h3>{% trans "Membership contributions" %}</h3>
+		</div>
+		<div class="col-sm-8 col-12 mt-4 mb-4">
+			<p>ECSA membership is valid for one calendar year, and we will send you an invoice at the start of each year.</p>
+			<p><b>Organizational membership:</b></p>
+			<p>Covers up to three representatives of the organization</p>
+			<p>For-profit organizations €200</p>
+			<p>For-profit organizations with fewer than five full-time employees €100</p>
+			<p>Not-for-profit organizations €100</p>
+			<p>Not-for-profit organizations with fewer than five full-time employees €50</p>
+			<p><a href="{% url 'new_organisation' %}">Apply for organizational membership</a></p>
+			
+			<br/>
+
+			<p><b>Individual membership:</b></p>
+			<p>Individual membership €50</p>
+			<p>Discounted individual membership (students, retired people, unemployed) €25</p>
+			<p><a href="{% url 'profiles:show_self' %}">Apply for individual membership</a></p>
+			
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-4 col-12 mt-4 mb-4">
+			<h3>{% trans "Payment methods" %}</h3>
+		</div>
+		<div class="col-sm-8 col-12 mt-4 mb-4">
+			<p>Bank transfer or PayPal</p>					
 		</div>
 	</div>
 </div>

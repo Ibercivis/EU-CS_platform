@@ -90,9 +90,10 @@ class OrganisationAdmin(admin.ModelAdmin):
                  'city': obj.city, 'country': obj.country, 'ecsa_billing_email': obj.ecsa_billing_email, 'reduced_fee': obj.ecsa_reduced_fee,
                  'ecsa_old_member_fee': obj.ecsa_old_organisation_fee, 'vat_number': obj.vat_number, 'legal_status': obj.legal_status, 'amount': total_amount, 'invoiceCounter': invoiceCounter,
                  'base_amount': base_amount, 'discount_ecsa_old_member_fee': discount_ecsa_old_member_fee, 'ecsa_old_member_fee': ecsa_old_member_fee,
-                 'discount_ecsa_reduced_fee': discount_ecsa_reduced_fee, 'ecsa_reduced_fee': ecsa_reduced_fee })
-                HTML(string=pdf_content, base_url=request.build_absolute_uri()).write_pdf('/tmp/membership_contribution.pdf')                
-                email.attach_file('/tmp/membership_contribution.pdf')
+                 'discount_ecsa_reduced_fee': discount_ecsa_reduced_fee, 'ecsa_reduced_fee': ecsa_reduced_fee })                         
+                filename = '/tmp/membership_contribution'+ str(obj.ecsa_member_number) + '_' + str(year) + str(invoiceCounter) +'.pdf'
+                HTML(string=pdf_content, base_url=request.build_absolute_uri()).write_pdf(filename)                
+                email.attach_file(filename)
                 
 
                 email.send()
