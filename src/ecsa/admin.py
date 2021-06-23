@@ -20,11 +20,13 @@ class InvoiceCounterAdmin(admin.ModelAdmin):
     )
 
 class DelegateA(admin.ModelAdmin):    
-    list_display = ('name', 'email', 'user', 'organisation')
-    def organisation(self, obj):
-        to_return = '\n'.join('<p>{}</p>'.format(aux.name) for aux in Organisation.objects.all().filter(Q(mainDelegate=obj) | Q(delegate1=obj) | Q(delegate2=obj)))
+    list_display = ('name', 'email', 'user', 'main_delegate_of', 'delegate_of')
+    def main_delegate_of(self, obj):
+        to_return = '\n'.join('<p>{}</p>'.format(aux.name) for aux in Organisation.objects.all().filter(mainDelegate=obj))
         return mark_safe(to_return)
-    
+    def delegate_of(self, obj):
+        to_return = '\n'.join('<p>{}</p>'.format(aux.name) for aux in Organisation.objects.all().filter(Q(delegate1=obj) | Q(delegate2=obj)))
+        return mark_safe(to_return) 
 
 
 
