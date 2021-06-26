@@ -121,6 +121,7 @@ INSTALLED_APPS = (
     'captcha',
     'active_link',
     'oauth2_provider',
+    'django.contrib.gis',
 
     # Machina dependencies:
     'mptt',
@@ -170,7 +171,8 @@ WSGI_APPLICATION = "eucs_platform.wsgi.application"
 
 DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            #'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'ENGINE' : 'django.contrib.gis.db.backends.postgis',
             'NAME': env("DATABASE_NAME"),
             'USER': env("DATABASE_USER"),
             'PASSWORD': env("DATABASE_PASSWORD"),

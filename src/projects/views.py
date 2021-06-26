@@ -1,17 +1,21 @@
 from django.http import HttpResponse, JsonResponse, StreamingHttpResponse
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.core.paginator import Paginator
+from django.core import serializers
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import get_user_model
 from django.conf import settings
 from django.core.mail import EmailMessage
+from django.core.serializers import serialize
 from django.utils import formats
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q, Avg, Count, Sum
 from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
+from django.db import connection
 from datetime import datetime
 from PIL import Image
 from itertools import chain
@@ -25,6 +29,7 @@ import copy
 import csv
 import json
 import random
+from rest_framework import status
 
 User = get_user_model()
 
@@ -33,6 +38,7 @@ def new_project(request):
     user = request.user
     form = ProjectForm()
     if request.method == 'POST':
+        print(request.POST)
         mainOrganisationFixed = request.POST.get('mainOrganisation', False)
         form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
@@ -54,6 +60,127 @@ def new_project(request):
 
     return render(request, 'new_project.html', {'form': form, 'user': user})
 
+def new_project2(request):
+    user = request.user
+    form = ProjectForm()
+    if request.method == 'POST':
+        print(request.POST)
+        mainOrganisationFixed = request.POST.get('mainOrganisation', False)
+        form = ProjectForm(request.POST, request.FILES)
+        if form.is_valid():
+            images = setImages(request, form)
+            form.save(request, images, [], mainOrganisationFixed)
+            messages.success(request, _('Project added correctly'))
+
+            subject = 'New project submitted' 
+            message = render_to_string('emails/new_project.html', {"domain": settings.HOST})
+            to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
+            to.append(user.email)
+            email = EmailMessage(subject, message, to=to)
+            email.content_subtype = "html"
+            email.send()
+
+            return redirect('/projects')
+        else:
+            print(form.errors)
+
+    return render(request, 'new_project.html', {'form': form, 'user': user})
+
+def updateProjectAjax(request):
+    print("in updateProjectAjax")
+    print(request.POST)
+    form = ProjectForm(request.POST, request.FILES)
+    if form.is_valid():
+        images = setImages(request, form)
+        form.save(request,images,[],'')
+        return JsonResponse({'aa':'aa'},status=status.HTTP_200_OK)
+    else:
+        return JsonResponse(form.errors, status=status.HTTP_200_OK)
+
+
+def editProject(request, pk):
+    project = get_object_or_404(Project, id=pk)
+    user = request.user
+    cooperators = getCooperators(pk)
+    if user != project.creator and not user.is_staff and not user.id in cooperators:
+        return redirect('../projects', {})
+
+    users = getOtherUsers(project.creator)
+    cooperators = getCooperatorsEmail(pk)
+    permissionForm = ProjectPermissionForm(initial={'usersCollection':users, 'selectedUsers': cooperators})
+
+    start_datetime = None
+    end_datetime = None
+
+    if project.start_date:
+        start_datetime = formats.date_format(project.start_date, 'Y-m-d')
+    if project.end_date:
+        end_datetime = formats.date_format(project.end_date, 'Y-m-d')
+
+    choices = ""
+
+    fundingBody = list(FundingBody.objects.all().values_list('body',flat=True))
+    fundingBody = ", ".join(fundingBody)
+
+    originDatabase = list(OriginDatabase.objects.all().values_list('originDatabase',flat=True))
+    originDatabase = ", ".join(originDatabase)
+
+    form = ProjectForm(initial={
+        'project_name':project.name,'url': project.url,'start_date': start_datetime, 'projectlocality': project.projectlocality,
+        'end_date':end_datetime, 'aim': project.aim, 'description': project.description, 'description_citizen_science_aspects': project.description_citizen_science_aspects,
+        'status': project.status, 'choices': choices, 'mainOrganisation': project.mainOrganisation,
+        'organisation': project.organisation.all,
+        'topic':project.topic.all, 
+        'participationtask': project.participationtask.all, 
+        'hasTag': project.hasTag.all,
+        'difficultyLevel': project.difficultyLevel,
+        'geographicextend': project.geographicextend.all,
+        'projectGeographicLocation': project.projectGeographicLocation,
+        'image1': project.image1, 'image_credit1': project.imageCredit1, 'withImage1': (True, False)[project.image1 == ""],
+        'image2': project.image2, 'image_credit2': project.imageCredit2, 'withImage2': (True, False)[project.image2 == ""],
+        'image3': project.image3, 'image_credit3': project.imageCredit3, 'withImage3': (True, False)[project.image3 == ""],
+        'how_to_participate': project.howToParticipate, 'equipment': project.equipment,
+        'contact_person': project.author, 'contact_person_email': project.author_email, 'host': project.host,
+        'funding_body': fundingBody, 'doingAtHome': project.doingAtHome, 'fundingBodySelected': project.fundingBody, 'fundingProgram': project.fundingProgram,
+        'originDatabase': originDatabase,'originDatabaseSelected': project.originDatabase,
+        'originUID' : project.originUID, 'originURL': project.originURL,
+    })
+
+
+    fields = list(project.customField.all().values())
+    data = [{'title': l['title'], 'paragraph': l['paragraph']}
+                    for l in fields]
+    cField_formset = CustomFieldFormset(initial=data)
+
+    if request.method == 'POST':
+        print(request.POST)
+        mainOrganisationFixed = request.POST.get('mainOrganisation', False)
+        form = ProjectForm(request.POST, request.FILES)
+        cField_formset = CustomFieldFormset(request.POST)
+        if form.is_valid() and cField_formset.is_valid():
+            new_cFields = []
+            for cField_form in cField_formset:
+                title = cField_form.cleaned_data.get('title')
+                paragraph = cField_form.cleaned_data.get('paragraph')
+                if title and paragraph:
+                    new_cFields.append(CustomField(title=title, paragraph=paragraph))
+            images = setImages(request, form)
+            form.save(request, images,[],mainOrganisationFixed)
+            return redirect('/project/'+ str(pk))
+        else:
+            print(form.errors)
+    return render(request, 'editProject.html', {
+        'form': form,
+        'project': project,
+        'user': user,
+        'cField_formset': cField_formset,
+        'permissionForm': permissionForm})
+
+
+
+
+
+
 
 def projects(request):
     projects = Project.objects.get_queryset()
@@ -62,11 +189,11 @@ def projects(request):
     user = request.user
     followedProjects = None
     followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id',flat=True)
-    countriesWithContent = Project.objects.all().values_list('country',flat=True).distinct()
+    countriesWithContent = None
 
     topics = Topic.objects.all()
     status = Status.objects.all()
-    filters = {'keywords': '', 'topic': '', 'status': 0, 'country': '', 'host': '', 'approvedCheck': '', 'doingAtHome': ''}
+    filters = {'keywords': '', 'topic': '', 'status': 0,  'host': '', 'approvedCheck': '', 'doingAtHome': ''}
 
     if request.GET.get('keywords'):
         projects = projects.filter(Q(name__icontains=request.GET['keywords']) |
@@ -123,10 +250,11 @@ def projects(request):
 
 
 def project(request, pk):  
+
     user = request.user
     project = get_object_or_404(Project, id=pk)
     users = getOtherUsers(project.creator)
-
+    form = ProjectForm( initial={'projectGeographicLocation': project.projectGeographicLocation})
     
     previous_page = request.META.get('HTTP_REFERER')
     if previous_page and 'review' in previous_page:
@@ -146,80 +274,16 @@ def project(request, pk):
     permissionForm = ProjectPermissionForm(initial={'usersCollection':users, 'selectedUsers': cooperators})
     followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id',flat=True)
     approvedProjects = ApprovedProjects.objects.all().values_list('project_id',flat=True)    
-    return render(request, 'project.html', {'project':project, 'followedProjects':followedProjects,
-    'approvedProjects':approvedProjects, 'unApprovedProjects': unApprovedProjects,'permissionForm': permissionForm, 'cooperators': getCooperators(pk),
-    'isSearchPage': True})
+    return render(request, 'project.html', {
+        'project':project, 
+        'followedProjects':followedProjects,
+        'approvedProjects':approvedProjects, 
+        'unApprovedProjects': unApprovedProjects,
+        'permissionForm': permissionForm, 
+        'cooperators': getCooperators(pk), 
+        'form':form,
+        'isSearchPage': True})
 
-
-def editProject(request, pk):
-    project = get_object_or_404(Project, id=pk)
-    user = request.user
-    cooperators = getCooperators(pk)
-    if user != project.creator and not user.is_staff and not user.id in cooperators:
-        return redirect('../projects', {})
-
-    users = getOtherUsers(project.creator)
-    cooperators = getCooperatorsEmail(pk)
-    permissionForm = ProjectPermissionForm(initial={'usersCollection':users, 'selectedUsers': cooperators})
-
-    start_datetime = None
-    end_datetime = None
-
-    if project.start_date:
-        start_datetime = formats.date_format(project.start_date, 'Y-m-d')
-    if project.end_date:
-        end_datetime = formats.date_format(project.end_date, 'Y-m-d')
-
-    choices = list(Keyword.objects.all().values_list('keyword',flat=True))
-    choices = ", ".join(choices)
-
-    fundingBody = list(FundingBody.objects.all().values_list('body',flat=True))
-    fundingBody = ", ".join(fundingBody)
-
-    originDatabase = list(OriginDatabase.objects.all().values_list('originDatabase',flat=True))
-    originDatabase = ", ".join(originDatabase)
-
-    form = ProjectForm(initial={
-        'project_name':project.name,'url': project.url,'start_date': start_datetime, 'projectlocality': project.projectlocality,
-        'end_date':end_datetime, 'aim': project.aim, 'description': project.description, 'description_citizen_science_aspects': project.description_citizen_science_aspects,
-        'status': project.status, 'choices': choices, 'mainOrganisation': project.mainOrganisation,
-        'organisation': project.organisation.all,
-        'topic':project.topic.all, 'participationtask': project.participationtask.all, 'geographicextend': project.geographicextend.all,
-        'latitude': project.latitude, 'longitude': project.longitude,
-        'image1': project.image1, 'image_credit1': project.imageCredit1, 'withImage1': (True, False)[project.image1 == ""],
-        'image2': project.image2, 'image_credit2': project.imageCredit2, 'withImage2': (True, False)[project.image2 == ""],
-        'image3': project.image3, 'image_credit3': project.imageCredit3, 'withImage3': (True, False)[project.image3 == ""],
-        'how_to_participate': project.howToParticipate, 'equipment': project.equipment,
-        'contact_person': project.author, 'contact_person_email': project.author_email, 'host': project.host,
-        'funding_body': fundingBody, 'doingAtHome': project.doingAtHome, 'fundingBodySelected': project.fundingBody, 'fundingProgram': project.fundingProgram,
-        'originDatabase': originDatabase,'originDatabaseSelected': project.originDatabase,
-        'originUID' : project.originUID, 'originURL': project.originURL,
-    })
-
-
-    fields = list(project.customField.all().values())
-    data = [{'title': l['title'], 'paragraph': l['paragraph']}
-                    for l in fields]
-    cField_formset = CustomFieldFormset(initial=data)
-
-    if request.method == 'POST':
-        mainOrganisationFixed = request.POST.get('mainOrganisation', False)
-        form = ProjectForm(request.POST, request.FILES)
-        cField_formset = CustomFieldFormset(request.POST)
-        if form.is_valid() and cField_formset.is_valid():
-            new_cFields = []
-            for cField_form in cField_formset:
-                title = cField_form.cleaned_data.get('title')
-                paragraph = cField_form.cleaned_data.get('paragraph')
-                if title and paragraph:
-                    new_cFields.append(CustomField(title=title, paragraph=paragraph))
-            images = setImages(request, form)
-            form.save(request, images,[],mainOrganisationFixed)
-            return redirect('/project/'+ str(pk))
-        else:
-            print(form.errors)
-    return render(request, 'editProject.html', {'form': form, 'project':project, 'user':user, 'cField_formset':cField_formset,
-                'permissionForm': permissionForm})
 
 
 
@@ -249,6 +313,7 @@ def text_autocomplete(request):
 
 
 def setImages(request, form):
+    print('setImages')
     images = []
     image1_path = saveImage(request, form, 'image1', '1')
     image2_path = saveImage(request, form, 'image2', '2')
@@ -256,6 +321,7 @@ def setImages(request, form):
     images.append(image1_path)
     images.append(image2_path)
     images.append(image3_path)
+    print(images)
     return images
 
 def saveImage(request, form, element, ref):
@@ -271,7 +337,7 @@ def saveImage(request, form, element, ref):
         image = Image.open(photo)        
         cropped_image = image.crop((x, y, w+x, h+y))
         if(ref == '3'):
-            finalSize = (1100, 400)
+            finalSize = (1320, 400)
         else:
             finalSize = (600, 400)
 
@@ -345,9 +411,6 @@ def applyFilters(request, projects):
     if request.GET.get('status') and int(request.GET.get('status')) > 0:
         projects = projects.filter(status = request.GET['status'])
 
-    if request.GET.get('country'):
-        projects = projects.filter(country = request.GET['country'])
-
     if request.GET.get('doingAtHome'):
         projects = projects.filter(doingAtHome = request.GET['doingAtHome'])
 
@@ -370,8 +433,6 @@ def setFilters(request, filters):
         filters['status'] =  int(request.GET['status'])
     if request.GET.get('doingAtHome'):
         filters['doingAtHome'] = int(request.GET['doingAtHome'])
-    if request.GET.get('country'):
-        filters['country'] = request.GET['country']
     if request.GET.get('approvedCheck'):
         filters['approvedCheck'] = request.GET['approvedCheck']
     return filters
@@ -521,7 +582,7 @@ def downloadProjects(request):
 
 
 def get_headers():
-    return ['id', 'name', 'aim', 'description', 'keywords','status', 'start_date', 'end_date', 'topic', 'url', 'country',
+    return ['id', 'name', 'aim', 'description', 'keywords','status', 'start_date', 'end_date', 'topic', 'url',
      'host', 'howToParticipate', 'doingAtHome', 'equipment', 'fundingBody', 'fundingProgram', 'originDatabase', 'originURL', 'originUID']
 
 
@@ -545,7 +606,6 @@ def get_data(item):
         'geographicextend': geographicextendList,
         'url': item.url,
         'projectlocality': item.projectlocality,
-        'country': item.country,
         'host': item.host,
         'howToParticipate': item.howToParticipate,
         'doingAtHome': item.doingAtHome,
@@ -603,6 +663,18 @@ def getOrganisations(request):
     return JsonResponse(response)
 
 
+def getKeywords(request):
+    project_id = request.GET.get("project_id")
+    with connection.cursor() as cursor:
+        query = 'select projects_keyword.id, projects_keyword.keyword, case when projects_keyword.id in (select keyword_id from projects_project_keywords where project_id = %s) then \'selected\'  else \'\' end from projects_keyword;' % (project_id)
+        cursor.execute(query)
+        keywords = cursor.fetchall()
+        keywords = json.dumps(keywords)
+
+    return JsonResponse(keywords, safe=False)
+
+
+
 def getKeywordsSelector(request):
     project_id = request.GET.get("project_id")
     keywordsSelected = []
@@ -641,13 +713,5 @@ def getKeywordsSelector(request):
 
 
 def projects_stats(request):
-    pPerCountry = Project.objects.values('country').annotate(count=Count('country')).order_by('-count')
-    for ppc in pPerCountry:
-        if ppc['country'] != '':
-            ppc['country'] = (dict(countries)[ppc['country']])
-        else:
-            ppc['country'] = ' No country defined'
-    time_zone = 'Australia/ACT'
-    pPerDay = Project.objects.extra({'day': 'date("dateCreated")'}).values('day').annotate(count=Count('id'))
-    pPerTopic = Project.objects.values('topic__topic').annotate(count=Count('topic')).order_by('-count')
-    return render(request, 'projects_stats.html', {'pPerCountry': pPerCountry,'pPerTopic':pPerTopic,'pPerDay':pPerDay})
+
+    return None

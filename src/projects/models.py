@@ -1,4 +1,5 @@
-from django.db import models
+#from django.db import models
+from django.contrib.gis.db import models
 from django.conf import settings
 from django_countries.fields import CountryField
 from organisations.models import Organisation
@@ -13,6 +14,16 @@ class Topic(models.Model):
     topic = models.TextField()
     def __str__(self):
         return f'{self.topic}'
+
+class HasTag(models.Model):
+    hasTag = models.TextField()
+    def __str__(self):
+        return f'{self.hasTag}'
+
+class DifficultyLevel(models.Model):
+    difficultyLevel = models.TextField()
+    def __str__(self):
+        return f'{self.difficultyLevel}'
 
 class ParticipationTask(models.Model):
     participationtask = models.TextField()
@@ -59,6 +70,8 @@ class Project(models.Model):
     start_date = models.DateTimeField('Start date', null=True, blank=True)
     end_date = models.DateTimeField('End date', null=True, blank=True)
     topic = models.ManyToManyField(Topic)
+    hasTag = models.ManyToManyField(HasTag)
+    difficultyLevel = models.ForeignKey(DifficultyLevel, default=None, blank=True, null=True, on_delete=models.CASCADE)
     participationtask = models.ManyToManyField(ParticipationTask)
     url = models.CharField(max_length=200,null=True, blank=True)
     geographicextend = models.ManyToManyField(GeographicExtend)
@@ -69,14 +82,13 @@ class Project(models.Model):
     #Images and communications
     image1 = models.ImageField(upload_to='images/', max_length=300, null=True, blank=True)
     imageCredit1 = models.CharField(max_length=300, null=True, blank=True)
-    image2 = models.ImageField(upload_to='images/', max_length=300,null=True, blank=True)
+    image2 = models.ImageField(upload_to='images/', max_length=300, null=True, blank=True)
     imageCredit2 = models.CharField(max_length=300, null=True, blank=True)
-    image3 = models.ImageField(upload_to='images/', max_length=300,null=True, blank=True)
+    image3 = models.ImageField(upload_to='images/', max_length=300, null=True, blank=True)
     imageCredit3 = models.CharField(max_length=300, null=True, blank=True)
+
     #Geography
-    latitude = models.DecimalField(max_digits=9,decimal_places=6)
-    longitude = models.DecimalField(max_digits=9,decimal_places=6)
-    country = CountryField()
+    projectGeographicLocation = models.MultiPolygonField(blank=True, null=True)
     #Personal and Organizational Affiliates
     host = models.CharField(max_length=200,null=True, blank=True)
     #Supplementary information for Citizen Science

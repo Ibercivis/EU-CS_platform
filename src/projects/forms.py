@@ -1,6 +1,6 @@
 from ckeditor.widgets import CKEditorWidget
-from django import forms
-from django.db import models
+from django.contrib.gis import forms
+from django.contrib.gis.db import models
 from django.core.files import File
 from django.forms import formset_factory
 from django.shortcuts import get_object_or_404
@@ -9,7 +9,7 @@ from django_summernote.widgets import SummernoteWidget
 from django.utils.translation import ugettext_lazy as _
 from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderServiceError
-from .models import Project, Topic, Status, Keyword, FundingBody, CustomField, OriginDatabase, ParticipationTask, GeographicExtend
+from .models import Project, Topic, Status, Keyword, FundingBody, CustomField, OriginDatabase, ParticipationTask, GeographicExtend, HasTag, DifficultyLevel
 from organisations.models import Organisation
 
 
@@ -17,11 +17,13 @@ geolocator = Nominatim(timeout=None)
 
 class ProjectForm(forms.Form):
     #Basic Project Information
-    project_name = forms.CharField(max_length=200, \
-        widget=forms.TextInput(),help_text=_('Short name or title of the project'))
-    keywords = forms.MultipleChoiceField(choices=(), \
-        widget=Select2MultipleWidget(), required=False, \
-        help_text=_('Please enter 2-3 keywords (comma separated) or pressing enter to further describe your project and assist search on the platform'),label=_('Keywords'))
+    project_name = forms.CharField(
+            max_length=200,
+            widget=forms.TextInput(),
+            help_text=_('Short name or title of the project'))
+    keywords = forms.MultipleChoiceField(choices=(),
+            widget=Select2MultipleWidget(), required=False,
+            help_text=_('Please enter 2-3 keywords (comma separated) or pressing enter to further describe your project and assist search on the platform'),label=_('Keywords'))
 
     aim = forms.CharField(\
         widget=CKEditorWidget(config_name='frontpage'), help_text=_('Primary aim, goal or objective of the project. Max 2000 characters'),\
@@ -41,7 +43,13 @@ class ProjectForm(forms.Form):
         widget=Select2MultipleWidget(), help_text=_('Please select the task(s) undertaken by participants'), \
         required=False,label=_("Participation Task"))
 
+    hasTag = forms.ModelMultipleChoiceField(queryset=HasTag.objects.all(),\
+        widget=Select2MultipleWidget(), help_text=_('More information about participation'), \
+        required=False,label=_("Tags"))
 
+    difficultyLevel = forms.ModelChoiceField(queryset=DifficultyLevel.objects.all(),\
+        widget=forms.Select(), help_text=_('How difficult is the project?'), \
+        required=True, label=_("Difficulty Level"))
 
     status = forms.ModelChoiceField(queryset=Status.objects.all(), label=_("Activity Status"),\
         widget=forms.Select(attrs={'class':'js-example-basic-single'}),help_text=_('Select one'))
@@ -57,13 +65,18 @@ class ProjectForm(forms.Form):
 
     geographicextend = forms.ModelMultipleChoiceField(queryset=GeographicExtend.objects.all(),\
         widget=Select2MultipleWidget(),
-        help_text=_('Please indicate the spatial scale of the projec'), \
+        help_text=_('Please indicate the spatial scale of the project'), \
         required=False,label=_("Geographic Extend"))
 
     projectlocality = forms.CharField(max_length=300, \
-        widget=forms.TextInput(), required=False, label= _("Project locality"),
+        widget=forms.TextInput(), required=False, label=_("Project locality"),
         help_text=_('Please describe the locality of the project, in terms of where the main participant activities take place, \
         E.g. in your backyard, parks in London, rivers in Europe, online globally, etc.'))
+    projectGeographicLocation = forms.MultiPolygonField(required=False,
+                                                        widget=forms.OSMWidget(attrs={}),
+                                                        label=_("Project geographic location"),
+                                                        )
+
 
     mainOrganisation = forms.ModelMultipleChoiceField(queryset=Organisation.objects.all(), \
         widget=Select2MultipleWidget(), \
@@ -108,19 +121,18 @@ class ProjectForm(forms.Form):
     height2 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     withImage2 = forms.BooleanField(widget=forms.HiddenInput(), required=False, initial=False)
     image_credit2 = forms.CharField(max_length=300, required=False, label=_("provide Logo credit, if applicable"))
-    image3 = forms.ImageField(required=False, label=_("Project image for the profile heading"),\
-        help_text=_('Will be resized to 1100x400 pixels'), widget=forms.FileInput)
-    x3 = forms.FloatField(widget=forms.HiddenInput(),required=False)
+    image3 = forms.ImageField(required=False, label=_(
+        "Project image for the profile heading"),
+        help_text=_('Will be resized to 1100x400 pixels'),
+        widget=forms.FileInput)
+    x3 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     y3 = forms.FloatField(widget=forms.HiddenInput(), required=False)
-    width3 = forms.FloatField(widget=forms.HiddenInput(),required=False)
+    width3 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     height3 = forms.FloatField(widget=forms.HiddenInput(), required=False, label=_("provide image credit, if applicable"))
     withImage3 = forms.BooleanField(widget=forms.HiddenInput(), required=False, initial=False)
     image_credit3 = forms.CharField(max_length=300, required=False)
 
-
-    #Geography
-    latitude = forms.DecimalField(max_digits=9,decimal_places=6)
-    longitude = forms.DecimalField(max_digits=9,decimal_places=6)
+    # Geography
 
 
     #Personal and Organizational Affiliates
@@ -144,6 +156,8 @@ class ProjectForm(forms.Form):
 
     funding_program = forms.CharField(max_length=500, widget=forms.TextInput(),\
         help_text=_('Indication of the programme that funds or funded a project'),required=False)
+
+   
     #Origin information
     origin_database =  forms.ModelMultipleChoiceField(queryset=OriginDatabase.objects.all(), widget=Select2MultipleWidget(),\
         help_text=_('Do you know the name of the database where the project first appeared?, add it here ended by comma or pressing enter.'),\
@@ -165,11 +179,12 @@ class ProjectForm(forms.Form):
         pk = self.data.get('projectID', '')
         start_dateData = self.data['start_date']
         end_dateData = self.data['end_date']
-        latitude = self.data['latitude']
-        longitude = self.data['longitude']
         projectlocality = self.data['projectlocality']
-        country = getCountryCode(latitude,longitude).upper()
+        projectGeographicLocation = self.data['projectGeographicLocation']
+        # country = getCountryCode(latitude,longitude).upper()
         status = get_object_or_404(Status, id=self.data['status'])
+        difficultyLevel = get_object_or_404(DifficultyLevel, id=self.data['difficultyLevel'])
+
         if(mainOrganisationFixed):
             mainOrganisation = get_object_or_404(Organisation, id=mainOrganisationFixed)
         else:
@@ -183,15 +198,13 @@ class ProjectForm(forms.Form):
         if('participatingInaContest' in self.data and self.data['participatingInaContest'] == 'on'):
             participatingInaContest=True
 
-
-
         if(pk):
             project = get_object_or_404(Project, id=pk)
             if project.hidden:
                 project.hidden = False
-            self.updateFields(project, latitude, longitude, country, status, doingAtHome, mainOrganisation)
+            self.updateFields(project, status, difficultyLevel, doingAtHome, mainOrganisation, projectGeographicLocation)
         else:
-            project = self.createProject(latitude, longitude, country, status, doingAtHome, mainOrganisation, participatingInaContest, args)
+            project = self.createProject( status, difficultyLevel, doingAtHome, mainOrganisation, projectGeographicLocation, participatingInaContest, args)
 
         if start_dateData:
             project.start_date = start_dateData
@@ -227,6 +240,7 @@ class ProjectForm(forms.Form):
         project.save()
         project.topic.set(self.data.getlist('topic'))
         project.participationtask.set(self.data.getlist('participationtask'))
+        project.hasTag.set(self.data.getlist('hasTag'))
         project.geographicextend.set(self.data.getlist('geographicextend'))
         project.organisation.set(self.data.getlist('organisation'))
 
@@ -243,31 +257,30 @@ class ProjectForm(forms.Form):
         return 'success'
 
 
-    def createProject(self, latitude, longitude, country, status, doingAtHome, mainOrganisation, participatingInaContest, args):
+    def createProject(self, status, difficultyLevel, doingAtHome, mainOrganisation, projectGeographicLocation, participatingInaContest, args):
          return Project(name = self.data['project_name'], url = self.data['url'], projectlocality = self.data['projectlocality'],
                          creator=args.user,
                          author = self.data['contact_person'], author_email = self.data['contact_person_email'],
-                         latitude = latitude, longitude = longitude, country = country,
                          aim = self.data['aim'], description = self.data['description'], description_citizen_science_aspects = self.data['description_citizen_science_aspects'],
-                         status = status, imageCredit1 = self.data['image_credit1'],
+                         status = status, 
+                         difficultyLevel = difficultyLevel,
+                         imageCredit1 = self.data['image_credit1'],
                          imageCredit2 = self.data['image_credit2'], imageCredit3 = self.data['image_credit3'],
                          howToParticipate = self.data['how_to_participate'],equipment = self.data['equipment'],
                          fundingProgram = self.data['funding_program'],originUID = self.data['originUID'],
-                         originURL = self.data['originURL'], doingAtHome=doingAtHome, participatingInaContest = participatingInaContest, mainOrganisation=mainOrganisation)
+                         originURL = self.data['originURL'], doingAtHome=doingAtHome, participatingInaContest = participatingInaContest, mainOrganisation=mainOrganisation, projectGeographicLocation = projectGeographicLocation)
 
-    def updateFields(self, project, latitude, longitude, country, status, doingAtHome, mainOrganisation):
+    def updateFields(self, project, status, difficultyLevel, doingAtHome, mainOrganisation, projectGeographicLocation):
         project.name = self.data['project_name']
         project.url = self.data['url']
         project.projectlocality = self.data['projectlocality']
         project.author = self.data['contact_person']
         project.author_email = self.data['contact_person_email']
-        project.latitude = latitude
-        project.longitude = longitude
-        project.country = country
         project.aim = self.data['aim']
         project.description = self.data['description']
         project.description_citizen_science_aspects = self.data['description_citizen_science_aspects']
         project.status = status
+        project.difficultyLevel = difficultyLevel
         project.imageCredit1 = self.data['image_credit1']
         project.imageCredit2 = self.data['image_credit2']
         project.imageCredit3 = self.data['image_credit3']
@@ -278,6 +291,7 @@ class ProjectForm(forms.Form):
         project.originUID = self.data['originUID']
         project.originURL = self.data['originURL']
         project.mainOrganisation = mainOrganisation
+        project.projectGeographicLocation = projectGeographicLocation
 
 
 def getCountryCode(latitude, longitude):

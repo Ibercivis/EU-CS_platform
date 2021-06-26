@@ -5,6 +5,8 @@ from . import views
 
 urlpatterns = [
     path('new_project', views.new_project, name='new_project'),
+    path('new_project2', views.new_project2, name='new_project2'),
+    path('updateProjectAjax', views.updateProjectAjax, name='updateProjectAjax'),
     path('projects', views.projects, name='projects'),
     path('projects_stats', views.projects_stats, name='projects_stats'),
     path('project/<int:pk>', views.project, name='project'),
@@ -22,4 +24,6 @@ urlpatterns = [
     path('downloadProjects', views.downloadProjects, name='downloadProjects'),
     path('getOrganisations', views.getOrganisations, name='getOrganisations'),
     path('getKeywordsSelector', views.getKeywordsSelector, name='getKeywordsSelector'),
+    path('getKeywords', views.getKeywords, name='getKeywords'),
+
 ]
