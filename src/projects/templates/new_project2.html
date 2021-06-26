@@ -357,7 +357,7 @@
         }
       });
      
-      getKeywordsSelector();
+      getKeywords();
 
       $("#div_id_funding_body div").on('change', function(){
         $("#id_funding_body").removeAttr('multiple');
@@ -418,6 +418,27 @@
         }
       });
 
+   function getKeywords() {
+        var project_id = $("#projectID").val();
+        var request = $.ajax(
+        {
+          type: "GET",
+          url: "{% url 'getKeywords' %}",
+          dataType: 'json',
+          data: {
+            "project_id": project_id
+          },
+          success: function (response) {
+              var json = $.parseJSON(response);
+              $.each(json, function(i,val){
+                  $('#id_keywords').append('<option value ="'+val[0]+'" '+val[2]+'>'+val[1]+'</option>')
+              })
+          }
+        });
+      }
+
+
+
       function getOrganisations() {
         var mainOrganisation = $("#id_mainOrganisation").val();
         var organisationsSelected = $("#id_organisation").val()
@@ -436,21 +457,8 @@
         }
         );
       }
+
       
-      function getKeywordsSelector() {        
-        var request = $.ajax(
-        {
-          type: "GET",
-          url: "{% url 'getKeywordsSelector' %}",
-          data: {
-            "project_id": 0
-          },
-          success: function (response) {
-            $("#id_keywords").html(response.keywords);
-          }
-        }
-        );
-      }
 
       $("form").submit(function (e) {
         var validationFailed = false;

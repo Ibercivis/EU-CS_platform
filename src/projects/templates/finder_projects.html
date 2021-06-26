@@ -50,13 +50,6 @@ Read more about our <a href="/faq">moderation process</a>.
 							</option>
 							{% endfor %}
 						</select>
-						<select id="country" name="country" class="custom-select form-control">
-							<option value="">{% trans "Country" %}<option>
-								{% for country in countries %}{% for cwc in countriesWithContent %}{% if country.code == cwc %}
-								<option {% if country.code ==  filters.country %}
-								selected {% endif %} value="{{ country.code }}">{{ country.name }}</option>
-								{% endif %}{% endfor %}{% endfor %}
-							</select>
 							<select id="topic" name="topic" class="custom-select form-control">
 								<option value="">{% trans "Topic" %}</option>
 								{% for topic in topics %}

@@ -91,13 +91,6 @@ src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bo
 		});
 	});
 
-	$(function () {
-		$('#country').on('change', function () {
-			var country = $(this).val();
-			$('#searchProjects').submit();
-		});
-	});
-
 	$("#host").blur(function () {
 		$('#searchProjects').submit();
 	});
