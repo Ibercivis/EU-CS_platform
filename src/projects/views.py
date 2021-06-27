@@ -95,7 +95,7 @@ def updateProjectAjax(request):
         form.save(request,images,[],'')
         return JsonResponse({'aa':'aa'},status=status.HTTP_200_OK)
     else:
-        return JsonResponse(form.errors, status=status.HTTP_200_OK)
+        return JsonResponse(form.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
 
 
 def editProject(request, pk):
