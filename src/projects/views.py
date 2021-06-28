@@ -73,8 +73,7 @@ def saveProjectAjax(request):
             result.append(keyword_id)
         else:
             result.append(k)
-    request.POST['keywords'] = result
-    print(request.POST)
+    request.POST.update({'keywords': result})
 
 
     form = ProjectForm(request.POST, request.FILES)
