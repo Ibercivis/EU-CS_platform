@@ -67,4 +67,4 @@ python manage.py crontab add
 [1]: https://www.djangoproject.com/
 
 ## List of emais
-[0]: 
+https://github.com/Ibercivis/EU-CS_platform/tree/ecsa/src/accounts/templates/accounts/emails
