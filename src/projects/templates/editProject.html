@@ -254,10 +254,6 @@
 <script>
     $(function () {
         getKeywords();
-        $('id_keywords').select2({
-            tags: true,
-            tokenSeparators: [',', ' '],
-        })
         $('input').on('focus', function(){
             if($(this).is('.error'))
                 $(this).removeClass('error');

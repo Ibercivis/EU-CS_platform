@@ -60,31 +60,35 @@ def new_project(request):
 
     return render(request, 'new_project.html', {'form': form, 'user': user})
 
-def new_project2(request):
-    user = request.user
-    form = ProjectForm()
-    if request.method == 'POST':
-        print(request.POST)
-        mainOrganisationFixed = request.POST.get('mainOrganisation', False)
-        form = ProjectForm(request.POST, request.FILES)
-        if form.is_valid():
-            images = setImages(request, form)
-            form.save(request, images, [], mainOrganisationFixed)
-            messages.success(request, _('Project added correctly'))
-
-            subject = 'New project submitted' 
-            message = render_to_string('emails/new_project.html', {"domain": settings.HOST})
-            to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
-            to.append(user.email)
-            email = EmailMessage(subject, message, to=to)
-            email.content_subtype = "html"
-            email.send()
-
-            return redirect('/projects')
+def saveProjectAjax(request):
+    print("in saveProjectAjax")
+    print(request.POST)
+    print(type(request.POST['keywords']))
+    request.POST = request.POST.copy()
+    result=[]
+    for k in request.POST.getlist('keywords'):
+        if not k.isdecimal():
+            keyword_created=Keyword.objects.get_or_create(keyword=k)
+            keyword_id = Keyword.objects.get(keyword=k).id
+            result.append(keyword_id)
         else:
-            print(form.errors)
+            result.append(k)
+    request.POST['keywords'] = result
+    print(request.POST)
 
-    return render(request, 'new_project.html', {'form': form, 'user': user})
+
+    form = ProjectForm(request.POST, request.FILES)
+    if form.is_valid():
+        images = setImages(request, form)
+        form.save(request,images,[],'')
+        return JsonResponse({'Created':'OK'},status=status.HTTP_200_OK)
+    else:
+        return JsonResponse(form.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+def insertNewKeywords(keywords):
+    for k in keywords:
+        Keyword.objects.get_or_create(keyword=k)
+        keyword = Keyword.objects.get(keyword=k).id
 
 def updateProjectAjax(request):
     print("in updateProjectAjax")
@@ -93,7 +97,7 @@ def updateProjectAjax(request):
     if form.is_valid():
         images = setImages(request, form)
         form.save(request,images,[],'')
-        return JsonResponse({'aa':'aa'},status=status.HTTP_200_OK)
+        return JsonResponse({'Updated':'OK'},status=status.HTTP_200_OK)
     else:
         return JsonResponse(form.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
 
@@ -117,7 +121,6 @@ def editProject(request, pk):
     if project.end_date:
         end_datetime = formats.date_format(project.end_date, 'Y-m-d')
 
-    choices = ""
 
     fundingBody = list(FundingBody.objects.all().values_list('body',flat=True))
     fundingBody = ", ".join(fundingBody)
@@ -128,7 +131,7 @@ def editProject(request, pk):
     form = ProjectForm(initial={
         'project_name':project.name,'url': project.url,'start_date': start_datetime, 'projectlocality': project.projectlocality,
         'end_date':end_datetime, 'aim': project.aim, 'description': project.description, 'description_citizen_science_aspects': project.description_citizen_science_aspects,
-        'status': project.status, 'choices': choices, 'mainOrganisation': project.mainOrganisation,
+        'status': project.status, 'mainOrganisation': project.mainOrganisation,
         'organisation': project.organisation.all,
         'topic':project.topic.all, 
         'participationtask': project.participationtask.all, 

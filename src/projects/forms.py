@@ -5,6 +5,7 @@ from django.core.files import File
 from django.forms import formset_factory
 from django.shortcuts import get_object_or_404
 from django_select2.forms import Select2MultipleWidget
+from django_select2 import forms as s2forms
 from django_summernote.widgets import SummernoteWidget
 from django.utils.translation import ugettext_lazy as _
 from geopy.geocoders import Nominatim
@@ -15,16 +16,13 @@ from organisations.models import Organisation
 
 geolocator = Nominatim(timeout=None)
 
+
 class ProjectForm(forms.Form):
-    #Basic Project Information
+    # Basic Project Information
     project_name = forms.CharField(
             max_length=200,
             widget=forms.TextInput(),
             help_text=_('Short name or title of the project'))
-    keywords = forms.MultipleChoiceField(choices=(),
-            widget=Select2MultipleWidget(), required=False,
-            help_text=_('Please enter 2-3 keywords (comma separated) or pressing enter to further describe your project and assist search on the platform'),label=_('Keywords'))
-
     aim = forms.CharField(\
         widget=CKEditorWidget(config_name='frontpage'), help_text=_('Primary aim, goal or objective of the project. Max 2000 characters'),\
         max_length = 2000)
@@ -47,9 +45,12 @@ class ProjectForm(forms.Form):
         widget=Select2MultipleWidget(), help_text=_('More information about participation'), \
         required=False,label=_("Tags"))
 
+    keywords = forms.ModelMultipleChoiceField(queryset=Keyword.objects.all(),
+                widget=s2forms.ModelSelect2TagWidget(search_fields=['keyword__icontains']), required=False, help_text=_('Please enter 2-3 keywords (comma separated) or pressing enter to further describe your project and assist search on the platform'),label=_('Keywords'))
+
     difficultyLevel = forms.ModelChoiceField(queryset=DifficultyLevel.objects.all(),\
         widget=forms.Select(), help_text=_('How difficult is the project?'), \
-        required=True, label=_("Difficulty Level"))
+        required=False, label=_("Difficulty Level"))
 
     status = forms.ModelChoiceField(queryset=Status.objects.all(), label=_("Activity Status"),\
         widget=forms.Select(attrs={'class':'js-example-basic-single'}),help_text=_('Select one'))
@@ -88,8 +89,6 @@ class ProjectForm(forms.Form):
         widget=Select2MultipleWidget(), help_text=_('Other Organisation participating in the project. If not listed, please add it \
         <a href="/new_organisation">here</a> before submitting the project'),\
         required=False,label=_("Other Organisations"))
-
-    choices = forms.CharField(widget=forms.HiddenInput(),required=False)
 
     #Contact Information
     host = forms.CharField(max_length=100, \
@@ -143,7 +142,7 @@ class ProjectForm(forms.Form):
     #Participation Information
 
     how_to_participate = forms.CharField(widget=CKEditorWidget(config_name='frontpage'),\
-        help_text=_('Please describe how people can get involved in the project'), max_length = 2000)
+        help_text=_('Please describe how people can get involved in the project'), max_length = 2000, required=False)
     doingAtHome =  forms.BooleanField(required=False,label=_("Can participate at home"))
 
     equipment = forms.CharField(widget=CKEditorWidget(config_name='frontpage'),\
@@ -183,7 +182,10 @@ class ProjectForm(forms.Form):
         projectGeographicLocation = self.data['projectGeographicLocation']
         # country = getCountryCode(latitude,longitude).upper()
         status = get_object_or_404(Status, id=self.data['status'])
-        difficultyLevel = get_object_or_404(DifficultyLevel, id=self.data['difficultyLevel'])
+        if (self.data['difficultyLevel']):
+            difficultyLevel = get_object_or_404(DifficultyLevel, id=self.data['difficultyLevel'])
+        else:
+            difficultyLevel = None
 
         if(mainOrganisationFixed):
             mainOrganisation = get_object_or_404(Organisation, id=mainOrganisationFixed)
@@ -228,30 +230,13 @@ class ProjectForm(forms.Form):
         if(images[2] != '/'):
             project.image3 = images[2]
 
-        if(cFields):
-            paragraphs = []
-            for cField in cFields:
-                paragraphs.append(cField.paragraph)
-                CustomField.objects.get_or_create(title=cField.title, paragraph=cField.paragraph)
-            cfields = CustomField.objects.all().filter(paragraph__in = paragraphs)
-            project = get_object_or_404(Project, id=pk)
-            project.customField.set(cfields)
-
         project.save()
         project.topic.set(self.data.getlist('topic'))
+        project.keywords.set(self.data.getlist('keywords'))
         project.participationtask.set(self.data.getlist('participationtask'))
         project.hasTag.set(self.data.getlist('hasTag'))
         project.geographicextend.set(self.data.getlist('geographicextend'))
         project.organisation.set(self.data.getlist('organisation'))
-
-        choices = self.data['choices']
-        choices = choices.split(',')
-        for choice in choices:
-            if(choice != ''):
-                keyword = Keyword.objects.get_or_create(keyword=choice)
-        keywords = Keyword.objects.all()
-        keywords = keywords.filter(keyword__in = choices)
-        project.keywords.set(keywords)
         project.save()
 
         return 'success'

@@ -5,15 +5,13 @@
 {% load leaflet_tags %}
 {% block head %}
 {{block.super }}
+<link rel="stylesheet" href="{% static 'site/css/forms.css' %}">
 {{ form.media.css }}
-{{ form.media }}
-<link rel="stylesheet" href="{% static 'site/css/leaflet-geosearch_style.css' %}">
-<link rel="stylesheet" href="{% static 'site/css/leaflet.css' %}">
-{% leaflet_js %}
-{% leaflet_css %}
+{{ form.media.js }}
+
 {% endblock head %}
 
-{% block title %}{{ block.super }} :: New projects{% endblock %}
+{% block title %}{{ block.super }} :: New project{% endblock %}
 
 {% block navbar-left %}
 {% include "_navbar.html" with active_link="projects" %}
@@ -21,507 +19,273 @@
 
 
 {% block list_of_items %}
-<div class="container">
-  <div class="row">
 
-    <!-- MODAL TO CROP THE IMAGE -->
-    <div class="modal fade modal-lg" id="modalCrop">
-      <div class="modal-dialog mdialog">
+<!-- MODAL TO CROP THE IMAGE -->
+<div class="modal fade" id="modalCrop">
+    <div class="modal-dialog mdialog">
         <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">{% trans "Crop the photo" %}</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span><span class="sr-only">{% trans "Close" %}</span>
-            </button>           
-          </div>
-          <div class="modal-body">
-            <h5>Make zoom until the image covers all the box</h5>
-            <div class="row">
-              <div class="col-11">
-                <img src="" id="image" class="img-fluid img-zoom" >
-              </div>
+            <div class="modal-header">
+                <h4 class="modal-title">{% trans "Crop the photo" %}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span><span class="sr-only">{% trans "Close" %}</span>
+                </button>
             </div>
-          </div>
-          <div class="modal-footer">
-            <div class="btn-group pull-left" role="group">
-              <button type="button" class="btn btn-default js-zoom-in">
-                <span><i class="material-icons" style="font-size: 18px;">{% trans "zoom_in" %}</i> </span>
-              </button>
-              <button type="button" class="btn btn-default js-zoom-out">
-                <span><i class="material-icons" style="font-size: 18px;">{% trans "zoom_out" %}</i></span>
-              </button>
-            </div>
-            <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
-            <button type="button" class="btn btn-primary js-crop-and-upload">{% trans "Crop and upload" %}</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SAVE MESSAGE MODAL -->
-    <div class="modal fade" id="savedModal">
-      <div class="modal-dialog mdialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">{% trans "Project is going to saved" %}</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span><span class="sr-only">{% trans "Close" %}</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-sm">
-                <p>{% trans "Thank you" %}</p>
-                <p>{% trans "Thank you for submitting your project profile. This has been sent to the EU-Citizen.Science moderation team, who will check it to ensure that all of the projects shared on the platform can indeed be considered citizen science projects." %}</p>
-                <p>{% trans "We will be in touch with you if we have any questions, and otherwise you will see that your project changes from 'not yet moderated' to 'moderated' on the platform." %}</p>
-                <p>{% trans "You can make updates or changes to this project profile at any time, by going to the Submitted projects section in your Personal Area (see the top-right of the platform menu)." %}</p>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary read-before-save">OK</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="container mt-5">
-      <div class="row d-flex justify-content-center">
-        <div class="col-sm-10 col-12">
-          <div class="card mt-5 mb-5 shadow">
-            <div class="card-title  p-5">
-              <div class="row">
-                <div class="col-12">
-                  <h2>{% trans "New project" %}</h2>
-                  {% trans "Thank you for sharing your citizen science project on the EU-Citizen.Science platform. Please fill in all of the mandatory information in the fields below (indicated with an asterisk*), and as much of the non-mandatory information as possible." %}<br><br>
-                  {% trans "Citizen science embraces a wide range of project types, that can be adapted and applied within diverse situations and disciplines, represent a range of approaches and historical practices for public participation in scientific research, and involve participants in a range of activities across the research lifecycle. For guidance on whether your project can be considered to be citizen science, please refer to the" %}
-                  <a href="https://zenodo.org/communities/citscicharacteristics">{% trans "ECSA Characteristics of Citizen Science" %}</a>.
-                  <br><br>
-                  {% trans "In the form below, along with other descriptive information, we require that you describe the citizen science aspects of your project, and the type of task(s) that participants undertake. Your project should engage meaningfully with the" %}
-                  <a href="https://osf.io/xpr2n/wiki/home/">{% trans "ECSA 10 Principles of Citizen Science" %}</a>.<br><br>
-                  {% trans "This form asks you for basic Project Information, Participation Information, links to any Project Documentation, Contact Details, and Project Images that can be used for the project profile (the logo, a thumbnail image representing the project, and a banner header representing the project)." %}<br><br>
-                  {% trans "Upon saving this profile, your project will be submitted for moderation." %}
-                  {% trans "The" %} <a href="https://eu-citizen.science/moderation/">{% trans "moderation process" %}</a> {% trans "is meant to ensure that all of the projects shared on the platform can indeed be considered to be citizen science projects, and to prevent unintended uses of the platform." %}
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-11">
+                        <img src="" id="image" class="img-fluid img-zoom">
+                    </div>
                 </div>
-              </div>
             </div>
-            <div class="card-text pr-5 pl-5 pb-5">
-              <table class="table mb-0">
-                <form action="/new_project" method="post" enctype="multipart/form-data" class="add-new-project" autocomplete="off">
-                  {% csrf_token %}
-                  <div>
-                    <button type="submit" class="btn btn-green float-right"><i class="fas fa-share-square"></i>{% trans "Submit" %}</button>
-                    <br/><br/>
-                  </div>
-                  <div>
-                    <h4>{% trans "Month of the projects" %}</h4>
-		     <div class="col-12 mb-3">
-                          {{ form.participatingInaContest|as_crispy_field }}
-                        </div>
-                  </div>
-		  <hr />
-                  <div>
-                    <h4>{% trans "Project info" %}</h4>
-                  </div>
+            <div class="modal-footer">
+                <div class="btn-group pull-left" role="group">
+                    <button type="button" class="btn btn-default js-zoom-in">
+                        <span><i class="material-icons" style="font-size: 18px;">{% trans "zoom_in" %}</i> </span>
+                    </button>
+                    <button type="button" class="btn btn-default js-zoom-out">
+                        <span><i class="material-icons" style="font-size: 18px;">{% trans "zoom_out" %}</i></span>
+                    </button>
+                </div>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+                <button type="button" class="btn btn-primary js-crop-and-upload">{% trans "Crop and upload" %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END MODAL TO CROP -->
 
-                  <div class="form-row">
-                    <div class="col-12 mb-3">
-                      {{ form.project_name|as_crispy_field }}
-                    </div>
-                    <div class="col-12 mb-3">
-                      {{ form.keywords|as_crispy_field }}
-                      {{form.choices |as_crispy_field}}
-                    </div>
-                  </div>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="float-left">{% trans "New project" %}</h2>
+        </div>
+        <div class="col-6">
+            <button type="submit" onclick="$('#id_submit').click()" class="btn btn-green"><i class="fas fa-share-square"></i> {% trans "Save" %}</button>
+        </div>
+    </div>
 
-                  <div class="form-row">
-                    <div class="col-12 mb-3">
-                      {{ form.aim|as_crispy_field }}
-                    </div>
-                    <div class="col-12 mb-3">
-                      {{ form.description|as_crispy_field }}
-                    </div>
-                  </div>
-                  
-                  <div  class="form-row">
-                    <div class="col-12 mb-3">
-                      {{ form.description_citizen_science_aspects|as_crispy_field }}
-                    </div>
-                  </div>
+    <form action="/editProject/{{project.id}}" id='form_project' class="edit-project" method="post" enctype="multipart/form-data">
+        <div class="row">
+            {% csrf_token %}
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-12">
+                        <img 
+                         class="card_img" 
+                         id="imageResult3" 
+                         src="{% if project.image3%} {{ project.image3 }} {%else %} {% static 'site/img/void_1100.png' %} {% endif %}" alt="Image not upload">
 
-                  <div class="form-row">
-                    <div class="col-12 mb-3">
-                      {{ form.topic|as_crispy_field }}
-                    </div>
-                    <div class="col-12 mb-3">
-                      {{ form.participationtask |as_crispy_field }}
-                    </div>
-   									<div class="col-12 mb-3">
-                      {{ form.hasTag |as_crispy_field }}
-                    </div>
-										<div class="col-12 mb-3">
-                      {{ form.difficultyLevel |as_crispy_field }}
-                    </div>
-                    <div class="col-12 mb-3">
-                      {{ form.status|as_crispy_field }}
-                    </div>
-                  </div>
-
-                  <div class="form-row">
-                    <div class="col-sm-6 col-12 mb-3 pr-5">
-                      {{ form.start_date|as_crispy_field }}
-                    </div>
-                    <div class="col-sm-6 col-12 mb-3">
-                      {{ form.end_date|as_crispy_field }}
-                    </div>
-                  </div>
-
-                  <div class="form-row">
-                    <div class="col-12 mb-3">
-                      {{ form.url|as_crispy_field }}
-                    </div>
-
-                    <div class="col-12 mb-3">
-                      {{ form.mainOrganisation|as_crispy_field }}
-                    </div>
-                    <div class="col-12 mb-3">
-                      {{ form.organisation|as_crispy_field }}
-                    </div>
-                  </div>
-
-                  <hr />
-                  <h4>{% trans "Contact details" %}</h4>
-                  <div id="contactinfoform">
-                    <div class="form-row">
-                      <!--div class="col-12">
-                      {{ form.host|as_crispy_field }}
-                    </div-->
-                    <div class="col-12 mb-3">
-                      {{ form.contact_person|as_crispy_field }}
-                    </div>
-                    <div class="col-12 mb-3">
-                      {{ form.contact_person_email|as_crispy_field }}
-                    </div>
-                  </div>
-
-                  <hr />
-                  <h4>{% trans "Project profile images" %}</h4>
-                  <div id="imagesform">
-                    <div class="form-row">
-                      <div class="col-sm-8 col-12 mb-3">
-                        {{ form.image1|as_crispy_field }}
-                        {{ form.x1|as_crispy_field }}
-                        {{ form.y1|as_crispy_field }}
-                        {{ form.height1|as_crispy_field }}
-                        {{ form.width1|as_crispy_field }}
-                        {{ form.withImage1|as_crispy_field }}
-                        <a id="imgResult1" href="#"> <img class="img-fluid img-zoom" id="imageResult1" src="" alt=""></a>
-                      </div>
-                      <div class="col-sm-4 col-12 mb-3">
-                        {{ form.image_credit1|as_crispy_field }}
-                      </div>
-                    </div>
-
-                    <div class="form-row">
-                      <div class="col-sm-8 col-12 mb-3">
-                        {{ form.image2|as_crispy_field }}
-                        {{ form.x2|as_crispy_field }}
-                        {{ form.y2|as_crispy_field }}
-                        {{ form.height2|as_crispy_field }}
-                        {{ form.width2|as_crispy_field }}
-                        {{ form.withImage2|as_crispy_field }}
-                        <a id="imgResult2" href="#"><img class="img-fluid img-zoom" id="imageResult2" src="" alt=""></a>
-                      </div>
-                      <div class="col-sm-4 col-12 mb-3">
-                        {{ form.image_credit2|as_crispy_field }}
-                      </div>
-                    </div>
-
-                    <div class="form-row">
-                      <div class="col-sm-8 col-12 mb-3">
+                        {{ form.withImage3|as_crispy_field }}
                         {{ form.image3|as_crispy_field }}
                         {{ form.x3|as_crispy_field }}
                         {{ form.y3|as_crispy_field }}
                         {{ form.height3|as_crispy_field }}
                         {{ form.width3|as_crispy_field }}
-                        {{ form.withImage3|as_crispy_field }}
-                        <a id="imgResult3" href="#"><img class="img-fluid img-zoom" id="imageResult3" src="" alt=""></a>
-                      </div>
-                      <div class="col-sm-4 col-12 mb-3">
                         {{ form.image_credit3|as_crispy_field }}
-                      </div>
                     </div>
-                  </div>
-                  <hr />
-                  <h4>{% trans "Geography" %}</h4>
-											<div class="form-row">
-															<div class="col-12">
- 																{{ form.projectGeographicLocation|as_crispy_field }}
-															</div>
-											</div>
-                    </div>
-                    <div class="form-row">
-                      <div class="col-12 mb-3">
-                        {{ form.geographicextend |as_crispy_field }}
-                      </div>
-                      <div class="col-12 mb-3">
-                        {{ form.projectlocality |as_crispy_field }}
-                      </div>
-                    </div>
-                    <hr />
+                </div>
+                <div class="row">
+                    <div class="col-2"></div>
+                    <div class="col-8">
+                        <h4>{% trans "Main information" %}</h4>
+                        <input type="hidden" id="projectID" name="projectID" value={{project.id}}>
+                        <div class="row">
+                            <div class="col-12">
 
-                    <h4>{% trans "Supplementary information for Citizen Science" %}</h4>
-                    <div id="informationform">
-                      <div class="form-row">
-                        <div class="col-12 mb-3">
-                          {{ form.how_to_participate|as_crispy_field }}
+                        <div id="errors"></div>
+                            </div>
                         </div>
-                        <div class="col-12 mb-3">
-                          {{ form.doingAtHome|as_crispy_field }}
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                {{ form.project_name|as_crispy_field }}
+                                {{ form.url|as_crispy_field }}
+                                {{ form.description|as_crispy_field }}
+                                {{ form.aim|as_crispy_field }}
+                                {{ form.description_citizen_science_aspects|as_crispy_field }}
+                                {{ form.status|as_crispy_field }}
+                                {{ form.start_date|as_crispy_field }}
+                                {{ form.end_date|as_crispy_field }}
+                            </div>
                         </div>
-                        <div class="col-12 mb-3">
-                          {{ form.equipment|as_crispy_field }}
+                        <h4 class="mt-5">{% trans "Useful information to classificate the project" %}</h4>
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                {{ form.topic|as_crispy_field }}
+                                {{ form.keywords|as_crispy_field }}
+                                {{ form.hasTag |as_crispy_field }}
+                            </div>
                         </div>
-                      </div>
+                        <h4 class="mt-5">{% trans "Participation information" %}</h4>
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                {{ form.participationtask |as_crispy_field }}
+                                {{ form.difficultyLevel |as_crispy_field }}
+                                {{ form.how_to_participate|as_crispy_field }}
+                                {{ form.equipment|as_crispy_field }}
+                            </div>
+                        </div>
+                        <h4 class="mt-5">{% trans "Project location" %}</h4>
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                {{ form.geographicextend |as_crispy_field }}
+                                {{ form.projectlocality |as_crispy_field }}
+                                {{ form.projectGeographicLocation|as_crispy_field }}
+                            </div>
+                        </div>
+                        <h4 class="mt-5">{% trans "Contact and hosts details" %}</h4>
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                {{ form.contact_person|as_crispy_field }}
+                                {{ form.contact_person_email|as_crispy_field }}
+                                {{ form.mainOrganisation|as_crispy_field }}
+                                {{ form.organisation|as_crispy_field }}
+                            </div>
+                        </div>
+                        <h4 class="mt-5">{% trans "Funding Information" %}</h4>
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                {{ form.funding_body|as_crispy_field }}
+                                {{ form.fundingBodySelected|as_crispy_field }}
+                                {{ form.funding_program|as_crispy_field }}
+                            </div>
+                        </div>
+                        <h4 class="mt-5">{% trans "Origin information" %}</h4>
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                {{ form.origin_database|as_crispy_field }}
+                                {{ form.originDatabaseSelected|as_crispy_field }}
+                                {{ form.originUID|as_crispy_field }}
+                                {{ form.originURL|as_crispy_field }}
+                            </div>
+                        </div>
+                        <h4 class="mt-5">{% trans "Project profile images" %}</h4>
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                <a id="imgResult1" href="#"> <img 
+                                                   class="img-fluid img-zoom" 
+                                                   id="imageResult1" 
+                                                   src="{% if project.image1 %} {{project.image1}} {% else %} {% static 'site/img/void_600.png' %} {% endif %}"> </a>
+
+                                {{ form.image1|as_crispy_field }}
+                                {{ form.x1|as_crispy_field }}
+                                {{ form.y1|as_crispy_field }}
+                                {{ form.height1|as_crispy_field }}
+                                {{ form.width1|as_crispy_field }}
+                                {{ form.withImage1|as_crispy_field }}
+                                {{ form.image_credit1|as_crispy_field }}
+                                 <a id="imgResult2" href="#"> <img 
+                                     class="img-fluid img-zoom" 
+                                     id="imageResult2" 
+                                     src="{% if project.image1 %} {{project.image1}} {% else %} {% static 'site/img/void_600.png' %} {% endif %}"> </a>
+
+                                {{ form.image2|as_crispy_field }}
+                                {{ form.x2|as_crispy_field }}
+                                {{ form.y2|as_crispy_field }}
+                                {{ form.height2|as_crispy_field }}
+                                {{ form.width2|as_crispy_field }}
+                                {{ form.withImage2|as_crispy_field }}
+                                {{ form.image_credit2|as_crispy_field }}
+                            </div>
+                        </div>
                     </div>
-                    <hr />
-                    <h4>{% trans "Funding" %}</h4>
-                    <div id="fundingform">
-                      <div class="form-row">
-                        <div class="col-12 mb-3">
-                          {{ form.funding_body|as_crispy_field }}
-                          {{ form.fundingBodySelected|as_crispy_field }}
-                        </div>
-                        <div class="col-12 mb-3">
-                          {{ form.funding_program|as_crispy_field }}
-                        </div>
-                      </div>
-                    </div>
-                    <hr />
-                    <h4>{% trans "Origin information" %}</h4>
-                    <div id="originform">
-                      <div class="form-row">
-                        <div class="col-12 mb-3">
-                          {{ form.origin_database|as_crispy_field }}
-                          {{ form.originDatabaseSelected|as_crispy_field }}
-                        </div>
-                        <div class="col-12 mb-3">
-                          {{ form.originUID|as_crispy_field }}
-                        </div>
-                      </div>
-                      <div class="form-row">
-                        <div class="col-12 mb-3">
-                          {{ form.originURL|as_crispy_field }}
-                        </div>
-                      </div>
-                    </div>
-                    <hr />
-                    <button type="submit" class="btn btn-green"><i class="fas fa-share-square"></i> {% trans "Submit" %}</button>
-                  </form>
-                </table>
-              </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+    </form>
+    <button  id="id_submit" class="btn btn-green mb-5"><i class="fas fa-share-square"></i> {% trans "Save" %}</button>
     </div>
-  </div>
-  {% endblock list_of_items %}
 
-  {% block scripts %}
-  <script src="{% static 'site/js/site.js' %}"></script>
-  <script src="{% static 'scripts/cropper.min.js' %}"></script>
-  <script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
-  <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
-  <script src="https://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"></script>
-  <script src="{% static 'site/js/leaflet-geosearch_2_7.min.js' %}"></script>
-  <script>
-    var readSavedConfirmation = false;
-    $(document).ready(function () {
-      $('.js-example-basic-single').select2();
+{% endblock list_of_items %}
 
-      $("#div_id_keywords div").on('keyup', function(e){
-        var key = $("#div_id_keywords .selection input").val();
-        if (key.indexOf(',') > -1) {
-          var word =key.slice(0, -1);
-          $("#div_id_keywords .selection input").val("");
-          if(word.length > 1){
-            $("#id_keywords").append("<option value='" + word +"' selected> " + word + " </option>");
-          }
-        }
-        if(e.which == 13) {
-          $("#div_id_keywords .selection input").val("");
-          if(key.length > 1){
-            $("#id_keywords").append("<option value='" + key +"' selected> " + key + " </option>");
-          }
-        }
-      });
-     
-      getKeywordsSelector();
-
-      $("#div_id_funding_body div").on('change', function(){
-        $("#id_funding_body").removeAttr('multiple');
-      });
-
-      $("#div_id_funding_body div").on('keyup', function(e){
-        var key = $("#div_id_funding_body .selection input").val();
-        if (key.indexOf(',') > -1) {
-          var word =key.slice(0, -1);
-          $("#div_id_funding_body .selection input").val("");
-          if(word.length > 1){
-            $("#id_funding_body").append("<option value='" + word +"' selected> " + word + " </option>");
-          }
-          $("#id_funding_body").removeAttr('multiple');
-        }
-        if(e.which == 13) {
-          $("#div_id_funding_body .selection input").val("");
-          if(key.length > 1){
-            $("#id_funding_body").append("<option value='" + key +"' selected> " + key + " </option>");
-          }
-          $("#id_funding_body").removeAttr('multiple');
-        }
-      });
-
-      $("#div_id_origin_database div").on('change', function(){
-        $("#id_origin_database").removeAttr('multiple');
-      });
-
-      $("#div_id_origin_database div").on('keyup', function(e){
-        var key = $("#div_id_origin_database .selection input").val();
-        if (key.indexOf(',') > -1) {
-          var word =key.slice(0, -1);
-          $("#div_id_origin_database .selection input").val("");
-          if(word.length > 1){
-            $("#id_origin_database").append("<option value='" + word +"' selected> " + word + " </option>");
-          }
-          $("#id_origin_database").removeAttr('multiple');
-        }
-        if(e.which == 13) {
-          $("#div_id_origin_database .selection input").val("");
-          if(key.length > 1){
-            $("#id_origin_database").append("<option value='" + key +"' selected> " + key + " </option>");
-          }
-          $("#id_origin_database").removeAttr('multiple');
-        }
-      });
-
-      getOrganisations();
-      $("#id_mainOrganisation").on('change', function(){
-        getOrganisations();
-        //$("#id_organisation").empty();
-      });
-
-      $("#div_id_mainOrganisation div").on('select2:open', function(){
-        console.log("open")
-        if($("#id_mainOrganisation").val().length > 0){
-          $("#id_mainOrganisation").removeAttr('multiple');
-        }
-      });
-
-      function getOrganisations() {
-        var mainOrganisation = $("#id_mainOrganisation").val();
-        var organisationsSelected = $("#id_organisation").val()
-        var request = $.ajax(
-        {
-          type: "GET",
-          url: "{% url 'getOrganisations' %}",
-          data: {
-            "mainOrganisation": mainOrganisation,
-            "organisationsSelected": organisationsSelected
-          },
-          success: function (response) {
-            $("#id_organisation").empty();
-            $("#id_organisation").html(response.organisations);
-          }
-        }
-        );
-      }
-      
-      function getKeywordsSelector() {        
-        var request = $.ajax(
-        {
-          type: "GET",
-          url: "{% url 'getKeywordsSelector' %}",
-          data: {
-            "project_id": 0
-          },
-          success: function (response) {
-            $("#id_keywords").html(response.keywords);
-          }
-        }
-        );
-      }
-
-      $("form").submit(function (e) {
-        var validationFailed = false;
-        if(!readSavedConfirmation){
-          $.each($("[required]"), function (index, value) {
-            var id = $(value).parent().parent().attr('id');
-            $("#" + id + " .errorMsg").remove();
-            if(!$(value).val()){
-              validationFailed = true;
-              $(value).parent().append("<span class='errorMsg'> <b>Required field (*)</b></span>");
-            }
-          });
-          var email = $("#id_contact_person_email").val();
-          if(email && !validateEmail(email)){
-            validationFailed = true;
-            $("#div_id_contact_person_email").append("<span class='errorMsg'> <b>Enter a valid email address.</b></span>");
-          }
-          //Check dates
-          var start_date = $("#id_start_date").val();
-          var end_date = $("#id_end_date").val();
-          if (start_date != '' && end_date != '' && end_date < start_date){
-            validationFailed = true;
-            $("#div_id_end_date").append("<span class='errorMsg'> <b>End date should be greater than start date.</b></span>");
-          }
+{% block scripts %}
+<script src="{% static 'site/js/site.js' %}"></script>
+<script src="{% static 'scripts/cropper.min.js' %}"></script>
+<script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
+<script>
+    $(function () {
+        $('input').on('focus', function(){
+            if($(this).is('.error'))
+                $(this).removeClass('error');
+        });
+        for(var instanceName in CKEDITOR.instances){
+            CKEDITOR.instances[instanceName].on('focus', function(e){
+                console.log($(this).attr('id'))
+                if($(this).is('.error'))
+                    $(this).removeClass('error');
+            })
         }
 
-        if (validationFailed) {
-          e.preventDefault();
-          $('html,body').animate({ scrollTop: $(".add-new-project").offset().top - 160 }, { duration: "slow" });
-          return false;
-        }else{
-          if(!readSavedConfirmation){
-            e.preventDefault();
-            $("#savedModal").modal("show");
-          }else{
-            var option_all = $("#id_keywords option:selected").map(function () {
-              return $.trim($(this).text());
-            }).get().join(',');         
-            if(option_all){
-              $("#id_choices").val(option_all);              
-            }
-            $("#id_keywords").empty();
-
+        $('#id_submit').click(function (e) {
+            $.ajaxSettings.traditional = true;
+            for(var instanceName in CKEDITOR.instances)
+                CKEDITOR.instances[instanceName].updateElement();
             var fundingBody = $("#id_funding_body option:selected").map(function () {
               return $.trim($(this).text());
             }).get().join(',');
             if(fundingBody){
               $("#id_fundingBodySelected").val(fundingBody);              
             }
-            $("#id_funding_body").empty();
-
             var originDatabase = $("#id_origin_database option:selected").map(function () {
               return $.trim($(this).text());
             }).get().join(',');
             if(originDatabase){
               $("#id_originDatabaseSelected").val(originDatabase);              
             }
-            $("#id_origin_database").empty();
-          }
-        }
-      });
 
+            $.ajax({
+                type: 'POST',
+                url: '/saveProjectAjax',
+                processData: false,
+                contentType: false,
+                data: new FormData(document.getElementById("form_project")),
+                success: function (response){
+                    console.log(response);
+                },
+                error: function (response){
+                    console.log(response);
+                    $.each(response.responseJSON, function(i,val){
+                        $('#id_'+i).addClass('error');
+                        $('#cke_id_'+i).addClass('error');
+                    })
+                }
+            });
+        });
     });
 
+   function getKeywords() {
+        var project_id = $("#projectID").val();
+        var request = $.ajax(
+        {
+          type: "GET",
+          url: "{% url 'getKeywords' %}",
+          dataType: 'json',
+          data: {
+            "project_id": project_id
+          },
+          success: function (response) {
+              var json = $.parseJSON(response);
+              $.each(json, function(i,val){
+                  $('#id_keywords').append('<option value ="'+val[0]+'" '+val[2]+'>'+val[1]+'</option>')
+              })
+          }
+        });
+      };
+</script>
+<script>
 
     $(function () {
       var imgSelected;
       /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
       $("#id_image1").change(function () {
         imgSelected = 1;
-        $('#imageResult1').attr('src', '');
         if (this.files && this.files[0]) {
           var reader = new FileReader();
           reader.onload = function (e) {
@@ -533,7 +297,6 @@
       });
       $("#id_image2").change(function () {
         imgSelected = 2;
-        $('#imageResult2').attr('src', '');
         if (this.files && this.files[0]) {
           var reader = new FileReader();
           reader.onload = function (e) {
@@ -545,7 +308,6 @@
       });
       $("#id_image3").change(function () {
         imgSelected = 3;
-        $('#imageResult3').attr('src', '');
         if (this.files && this.files[0]) {
           var reader = new FileReader();
           reader.onload = function (e) {
@@ -570,7 +332,7 @@
       var canvasData;
       $("#modalCrop").on("shown.bs.modal", function () {
         $image.cropper({
-          viewMode: 0,
+          viewMode: 1,
           aspectRatio: imgSelected == 3 ? 11/4 : 3/2,
           minCropBoxWidth: imgSelected == 3 ? 1100 : 600,
           minCropBoxHeight: 400,
@@ -618,6 +380,6 @@
       });
 
     });
-	</script>
-  {{ form.media.js }}
-  {% endblock scripts %}
+</script>
+
+{% endblock scripts %}
