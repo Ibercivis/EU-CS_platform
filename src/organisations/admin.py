@@ -88,10 +88,10 @@ class OrganisationAdmin(admin.ModelAdmin):
                 pdf_content =  render_to_string('accounts/pdf/ecsa_member_accepted.html', { 'ecsa_member_number': obj.ecsa_member_number,
                  'year': year, 'current_date': current_date , 'name': obj.name, 'street': obj.street, 'postal_code': obj.postal_code, 
                  'city': obj.city, 'country': obj.country, 'ecsa_billing_email': obj.ecsa_billing_email, 'reduced_fee': obj.ecsa_reduced_fee,
-                 'ecsa_old_member_fee': obj.ecsa_old_organisation_fee, 'vat_number': obj.vat_number, 'legal_status': obj.legal_status, 'amount': total_amount, 'invoiceCounter': invoiceCounter,
+                 'ecsa_old_member_fee': obj.ecsa_old_organisation_fee, 'vat_number': obj.vat_number, 'legal_status': obj.legal_status, 'amount': total_amount, 'invoiceCounter': str(invoiceCounter).zfill(4),
                  'base_amount': base_amount, 'discount_ecsa_old_member_fee': discount_ecsa_old_member_fee, 'ecsa_old_member_fee': ecsa_old_member_fee,
                  'discount_ecsa_reduced_fee': discount_ecsa_reduced_fee, 'ecsa_reduced_fee': ecsa_reduced_fee })                         
-                filename = '/tmp/membership_contribution'+ str(obj.ecsa_member_number) + '_' + str(year) + str(invoiceCounter) +'.pdf'
+                filename = '/tmp/membership contribution'+ ' ' + str(obj.ecsa_member_number) + '_' + str(year) + str(invoiceCounter).zfill(4) +'.pdf'
                 HTML(string=pdf_content, base_url=request.build_absolute_uri()).write_pdf(filename)                
                 email.attach_file(filename)
                 
