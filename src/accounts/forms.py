@@ -111,7 +111,7 @@ class NewEcsaIndividualMembershipForm(forms.Form):
     ecsa_street = forms.CharField(help_text=_("Street address and number"), label=_("Street"))
     ecsa_postal_code = forms.IntegerField(label=_("Postal code"))
     ecsa_city = forms.CharField(label=_("City"))
-    ecsa_country = CountryField(blank=True).formfield(label=_("Country"))
+    ecsa_country = CountryField().formfield(label=_("Country"))
     occupation = forms.ModelChoiceField(queryset=Occupation.objects.all(), required=False)
 
     def save(self, args, profileID):
