@@ -55,7 +55,9 @@
     $("#id_occupation").prop('required',false);
 
     $('#div_id_ecsa_individual_membership').append(
-      $("<br/><span>").text("ECSA membership: benefits, type and contributions")      
+      $("<br/><a target='_blank' href='/ecsa_membership/'>").text("ECSA membership:")
+      ).append(  
+      $("<span>").text(" benefits, type and contributions")      
     ).append(
       $("<br/><span>").text("Remember that you can become an ECSA member as an organisation as well.")
     ).append($("<br/><p>"));
