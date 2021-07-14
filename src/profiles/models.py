@@ -58,6 +58,7 @@ class BaseProfile(models.Model):
     ecsa_city = models.CharField(_("City"), max_length=50, blank=True, null=True)    
     ecsa_country = CountryField(null=True, blank=True)
     occupation = models.ForeignKey(Occupation, null=True, blank=True, on_delete=models.CASCADE)
+    ecsa_community_mailing_list = models.BooleanField( default=False)
 
     def admin_send_welcome_email(self): 
         return format_html('<input type="submit" value="Send welcome email" name="_continue">')

@@ -86,6 +86,7 @@ class SignupForm(authtoolsforms.UserCreationForm):
         self.fields["ecsa_city"] = forms.CharField(required=False, label=_("City"))
         self.fields["ecsa_country"] = CountryField(blank=True).formfield(label=_("Country"))
         self.fields["occupation"] = forms.ModelChoiceField(queryset=Occupation.objects.all(), required=False)
+        self.fields["ecsa_community_mailing_list"] = forms.BooleanField(required=False, label=_("I want to be added to the members-only ECSA community mailing list, which provides early notices of jobs, funding opportunities, project requests, and webinars with a limited number of registrations, etc. and where I can exchange with other members."))
        # self.fields["captcha"] = ReCaptchaField()
         self.helper.layout = Layout(
             Field("email", placeholder=_("Enter Email"), autofocus=""),
@@ -101,6 +102,7 @@ class SignupForm(authtoolsforms.UserCreationForm):
             Field("ecsa_city"),
             Field("ecsa_country"),
             Field("occupation"),
+            Field("ecsa_community_mailing_list"),
      #       Field("captcha"),
             StrictButton(_("Sign up"), css_class="btn-green", type="Submit"),
         )
@@ -113,6 +115,7 @@ class NewEcsaIndividualMembershipForm(forms.Form):
     ecsa_city = forms.CharField(label=_("City"))
     ecsa_country = CountryField().formfield(label=_("Country"))
     occupation = forms.ModelChoiceField(queryset=Occupation.objects.all(), required=False)
+    ecsa_community_mailing_list = forms.BooleanField(required=False, label=_("I want to be added to the members-only ECSA community mailing list, which provides early notices of jobs, funding opportunities, project requests, and webinars with a limited number of registrations, etc. and where I can exchange with other members."))
 
     def save(self, args, profileID):
         saveProfile(self, profileID, True)

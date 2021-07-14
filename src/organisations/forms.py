@@ -76,7 +76,7 @@ class NewEcsaOrganisationMembershipForm(forms.Form):
     ecsa_billing_street = forms.CharField(label=_("Billing street"))
     ecsa_billing_postal_code = forms.IntegerField(label=_("Billing postal code"))
     ecsa_billing_city = forms.CharField(label=_("Billing city"))
-    ecsa_billing_country = CountryField(blank=True).formfield()
+    ecsa_billing_country = CountryField().formfield(label=_("Billing country"))
     ecsa_billing_email = forms.EmailField(label=_("Billing email"))
     #occupation = models.ForeignKey(OrganisationType, null=True, blank=True, on_delete=models.CASCADE)
     legal_status = forms.ChoiceField(choices=LEGAL_STATUS, required=False)

@@ -35,7 +35,7 @@ class UserProfileInline(admin.StackedInline):
     }),
     ('ECSA membership', {
         #'classes': ('collapse',),
-        'fields': ('ecsa_requested_join','ecsa_reduced_fee','ecsa_old_member_fee','paid','ecsa_member_since','ecsa_member_number','admin_send_welcome_email'),
+        'fields': ('ecsa_requested_join','ecsa_reduced_fee','ecsa_old_member_fee','paid','ecsa_member_since','ecsa_community_mailing_list','ecsa_member_number','admin_send_welcome_email'),
     }),
     )
     readonly_fields = ('admin_send_welcome_email', )
