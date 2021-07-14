@@ -69,6 +69,7 @@ class NewUserAdmin(NamedUserAdmin):
             user_old = get_object_or_404(User, id=id)
             requested_join = user_old.profile.ecsa_requested_join
             paid = user_old.profile.paid
+            mailingListOld = user_old.profile.ecsa_community_mailing_list
             ecsa_member_number = user_old.profile.ecsa_member_number
             if(obj.profile.ecsa_member_number and ecsa_member_number != obj.profile.ecsa_member_number):
                 to_email = obj.email                
@@ -125,6 +126,26 @@ class NewUserAdmin(NamedUserAdmin):
                 to_email = obj.email
                 subject = 'Confirmation of payment'
                 message = render_to_string('accounts/emails/ecsa_payment_confirmation.html', { 'name': obj.name, 'lastname': obj.profile.lastname})
+                email = EmailMessage(subject, message, to=[to_email], )
+                email.content_subtype = "html"
+                email.send()
+            
+            #send email to add email in Ecsa mailing list
+            if(obj.profile.paid and obj.profile.ecsa_community_mailing_list and 
+                    ((paid != obj.profile.paid) or (mailingListOld !=obj.profile.ecsa_community_mailing_list) )):
+                to_email = "vval@bifi.es" #ecsa-all-request@listserv.dfn.de
+                subject = 'Add ECSA member to the community mailing list'
+                message = "" + obj.email
+                email = EmailMessage(subject, message, to=[to_email], )
+                email.content_subtype = "html"
+                email.send()
+            #send email to delete email in Ecsa mailing list
+            if(paid and mailingListOld and 
+                    ((paid != obj.profile.paid) or (mailingListOld !=obj.profile.ecsa_community_mailing_list) )):
+                obj.profile.ecsa_community_mailing_list = False
+                to_email = "vval@bifi.es" #ecsa-all-request@listserv.dfn.de
+                subject = 'Remove ECSA member from the community mailing list'
+                message = "" + obj.email
                 email = EmailMessage(subject, message, to=[to_email], )
                 email.content_subtype = "html"
                 email.send()

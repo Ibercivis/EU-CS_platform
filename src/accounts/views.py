@@ -115,6 +115,7 @@ def newEcsaIndividualMembershipEmail(email, name, surname):
 @login_required(login_url='/login')
 def editEcsaIndividualMembership(request):
     user = get_object_or_404(User, id=request.user.id)
+    mailingListOld = user.profile.ecsa_community_mailing_list
     form = forms.NewEcsaIndividualMembershipForm(initial={
         'ecsa_reduced_fee': user.profile.ecsa_reduced_fee, 'ecsa_old_member_fee': user.profile.ecsa_old_member_fee,
         'ecsa_street': user.profile.ecsa_street, 'ecsa_postal_code': user.profile.ecsa_postal_code, 'ecsa_city': user.profile.ecsa_city,
@@ -130,6 +131,22 @@ def editEcsaIndividualMembership(request):
         form = forms.NewEcsaIndividualMembershipForm(request.POST, request.FILES)     
         if form.is_valid():
             form.save(request, request.user.id)
+            if (user.profile.paid):
+                mailingList = form.cleaned_data.get('ecsa_community_mailing_list')
+                if(not mailingListOld and mailingList):
+                    to_email = "vval@bifi.es" #ecsa-all-request@listserv.dfn.de
+                    subject = 'Add ECSA member to the community mailing list'
+                    message = "" + user.email
+                    email = EmailMessage(subject, message, to=[to_email], )
+                    email.content_subtype = "html"
+                    email.send()
+                elif(mailingListOld and not mailingList):
+                    to_email = "vval@bifi.es" #ecsa-all-request@listserv.dfn.de
+                    subject = 'Remove ECSA member from the community mailing list'
+                    message = "" + user.email
+                    email = EmailMessage(subject, message, to=[to_email], )
+                    email.content_subtype = "html"
+                    email.send()
             return redirect('profiles:show_self')
         else:
             print(form.errors)

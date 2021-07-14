@@ -146,6 +146,11 @@ def saveProfile(self, profileID, ecsa_individual_membership):
         
         profile.ecsa_requested_join = True
 
+        profile.ecsa_community_mailing_list=False
+        if('ecsa_community_mailing_list' in self.data and self.data['ecsa_community_mailing_list'] == 'on'):
+            profile.ecsa_community_mailing_list=True
+
+
     if('lastname' in self.data and self.data['lastname']):
             profile.lastname = self.data['lastname']
            
