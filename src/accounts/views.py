@@ -158,6 +158,14 @@ def dropOutECSAmembership(request):
     profile.ecsa_requested_join = False
     profile.paid = False
     profile.save()
+    if(profile.ecsa_community_mailing_list):
+        profile.ecsa_community_mailing_list = False
+        to_email = "vval@bifi.es" #ecsa-all-request@listserv.dfn.de
+        subject = 'Remove ECSA member from the community mailing list'
+        message = "" + request.user.email
+        email = EmailMessage(subject, message, to=[to_email], )
+        email.content_subtype = "html"
+        email.send()
     return redirect("profiles:show_self")
 
 def claimEcsaPaymentRevision(request):
@@ -208,7 +216,16 @@ class PasswordResetConfirmView(authviews.PasswordResetConfirmAndLoginView):
 
 
 def delete_user(request):
-    try:
+    try:       
+        profile = get_object_or_404(Profile, user_id=request.user.id)    
+        if(profile.ecsa_community_mailing_list):
+            profile.ecsa_community_mailing_list = False
+            to_email = "vval@bifi.es" #ecsa-all-request@listserv.dfn.de
+            subject = 'Remove ECSA member from the community mailing list'
+            message = "" + request.user.email
+            email = EmailMessage(subject, message, to=[to_email], )
+            email.content_subtype = "html"
+            email.send()
         u = User.objects.get(id = request.user.id)
         u.delete()
         messages.success(request, "The user has been deleted.")
