@@ -6,6 +6,13 @@
 
 {% block html_body  %}
 <p>Dear {{ name }} {%if lastname %}{{ lastname }}{%endif%},</p>
-<p>Payment confirmation.</p>
+
+<p>We confirm that we have received your ECSA membership contribution of {{total_amount}} € for the year {{year}}</p>
+
+<p>We have developed a membership badge (attached to this email) which you are encouraged to place on your website and link back to <a href="http://ecsa.citizen-science.net/">http://ecsa.citizen-science.net/</a>, as well as in your presentations and materials.</p>
+
+<p>With kind regards,</p>
+
+<p>The ECSA HQ-Team</p>
 
 {% endblock html_body %}

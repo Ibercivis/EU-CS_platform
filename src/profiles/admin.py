@@ -71,6 +71,34 @@ class NewUserAdmin(NamedUserAdmin):
             paid = user_old.profile.paid
             mailingListOld = user_old.profile.ecsa_community_mailing_list
             ecsa_member_number = user_old.profile.ecsa_member_number
+            year = date.today().year
+            fee_id = 3
+            discount_ecsa_old_member_fee = 0
+            discount_ecsa_reduced_fee = 0
+            ecsa_old_member_fee = 0
+            ecsa_reduced_fee = 0
+            try:
+                base_amount = Ecsa_fee.objects.get(id=fee_id).amount
+            except Ecsa_fee.DoesNotExist:
+                base_amount = 200
+            total_amount = base_amount
+            
+            if(obj.profile.ecsa_reduced_fee):
+                try:
+                    discount_ecsa_reduced_fee = Ecsa_fee.objects.get(id=4).amount
+                    ecsa_reduced_fee = int(total_amount * discount_ecsa_reduced_fee / 100)
+                    total_amount = total_amount - ecsa_reduced_fee
+                except Ecsa_fee.DoesNotExist:
+                    print("Ecsa fee discount not exist")
+
+            if(obj.profile.ecsa_old_member_fee):
+                try:
+                    discount_ecsa_old_member_fee = Ecsa_fee.objects.get(id=5).amount
+                    ecsa_old_member_fee = int(total_amount * discount_ecsa_old_member_fee / 100)
+                    total_amount = total_amount - ecsa_old_member_fee
+                except Ecsa_fee.DoesNotExist:
+                    print("Ecsa fee discount not exist")
+
             if(obj.profile.ecsa_member_number and ecsa_member_number != obj.profile.ecsa_member_number):
                 to_email = obj.email                
                 subject = 'Welcome to ECSA!'
@@ -79,36 +107,7 @@ class NewUserAdmin(NamedUserAdmin):
                 email = EmailMessage(subject, message, to=[to_email], )
                 email.content_subtype = "html"
 
-                #PDF Attachment
-                fee_id = 3
-                discount_ecsa_old_member_fee = 0
-                discount_ecsa_reduced_fee = 0
-                ecsa_old_member_fee = 0
-                ecsa_reduced_fee = 0
-                try:
-                    base_amount = Ecsa_fee.objects.get(id=fee_id).amount
-                except Ecsa_fee.DoesNotExist:
-                    base_amount = 200
-                total_amount = base_amount
-                
-                if(obj.profile.ecsa_reduced_fee):
-                    try:
-                        discount_ecsa_reduced_fee = Ecsa_fee.objects.get(id=4).amount
-                        ecsa_reduced_fee = int(total_amount * discount_ecsa_reduced_fee / 100)
-                        total_amount = total_amount - ecsa_reduced_fee
-                    except Ecsa_fee.DoesNotExist:
-                        print("Ecsa fee discount not exist")
-
-                if(obj.profile.ecsa_old_member_fee):
-                    try:
-                        discount_ecsa_old_member_fee = Ecsa_fee.objects.get(id=5).amount
-                        ecsa_old_member_fee = int(total_amount * discount_ecsa_old_member_fee / 100)
-                        total_amount = total_amount - ecsa_old_member_fee
-                    except Ecsa_fee.DoesNotExist:
-                        print("Ecsa fee discount not exist")
-
-                
-                year = date.today().year
+                #PDF Attachment                        
                 current_date = date.today()
                 invoiceCounter = getEcsaInvoiceCounter()
                 pdf_content =  render_to_string('accounts/pdf/ecsa_member_accepted.html', { 'ecsa_member_number': obj.profile.ecsa_member_number,
@@ -124,10 +123,11 @@ class NewUserAdmin(NamedUserAdmin):
                 email.send()
             if(not paid and paid != obj.profile.paid):
                 to_email = obj.email
-                subject = 'Confirmation of payment'
-                message = render_to_string('accounts/emails/ecsa_payment_confirmation.html', { 'name': obj.name, 'lastname': obj.profile.lastname})
+                subject = 'ECSA membership: Confirmation of payment and member badge'
+                message = render_to_string('accounts/emails/ecsa_payment_confirmation.html', { 'name': obj.name, 'lastname': obj.profile.lastname, 'year': year,'total_amount': total_amount})
                 email = EmailMessage(subject, message, to=[to_email], )
                 email.content_subtype = "html"
+                email.attach_file('static/site/img/ecsa_main_Member.jpg')
                 email.send()
             
             #send email to add email in Ecsa mailing list
