@@ -2,7 +2,7 @@ body{
 	min-height: 100vh;
 }
 main {
-	font-family: "Lato", Lato, sans-serif !important;
+	font-family: Roboto, sans-serif !important;
 	font-weight: 350 !important;
 	color: #333;
 	min-height: 100vh;
@@ -312,7 +312,7 @@ dt {
 }
 .whitebackground{
 	background-color: #fff;
-	color: #333;
+	color: rgb(87,87,87);
 /*    background-color: rgba(255,255,255,0.95);
     box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.05), inset 0 -1px 0 rgba(0,0,0,0.15);*/
 
@@ -321,7 +321,7 @@ dt {
 	background-color: #dc3545;
 }
 .colorred{
-	color: #dc3545 !important;
+	color: #e18583 !important;
 	font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
 	font-size: 0.9em;
 	font-weight: 400;
@@ -361,6 +361,13 @@ dt {
 }
 .greenbackground{
 	background-color: #a6d49f;
+    border: 1px solid #a6d49f !important;
+    color: #333;
+}
+.greenbackground:hover{
+    background-color: #86b47f;
+    border: 1px solid #86b47f !important;
+    color: #333;
 }
 .greybackground{
 	padding-top: 1px;
@@ -518,4 +525,15 @@ sup {
 	background-color: #FF0000;
 	padding: 1px;
 	color: white;
+}
+
+.leftborder {
+    border-left : 3px solid #e18583;
+    padding-left: 10px;
+}
+.display-4 {
+    color: #e18583 !important;
+}
+.project-jumbotron {
+    height: 300px;
 }

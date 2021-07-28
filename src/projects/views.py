@@ -264,7 +264,10 @@ def project(request, pk):
     user = request.user
     project = get_object_or_404(Project, id=pk)
     users = getOtherUsers(project.creator)
-    form = ProjectForm( initial={'projectGeographicLocation': project.projectGeographicLocation})
+    if project.projectGeographicLocation:
+        form = ProjectForm(initial={'projectGeographicLocation': project.projectGeographicLocation})
+    else:
+        form = None
     
     previous_page = request.META.get('HTTP_REFERER')
     if previous_page and 'review' in previous_page:

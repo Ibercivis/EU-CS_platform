@@ -22,73 +22,54 @@
  #id_projectGeographicLocation_div_map { width: 100% !important; height: 100% !important; }
  #id_projectGeographicLocation_map { width: 100% !important; height: 100% !important; }
 </style>
+<div class="jumbotron jumbotron-fluid project-jumbotron" style="background: url('{{project.image3 | safe}}') no-repeat; background-size: cover;">
+  <div class="container-fluid">
+  </div>
+</div>
 <div class="container">
     <div class="text-center mt-5">
-        {% if project.image3 %}
-        <img class="card-img  {% if project.id not in approvedProjects %} nonmoderated {% endif %}" src="{{ project.image3 }}" >
-        {% else %}
-        <img class="card-img  {% if project.id not in approvedProjects %} nonmoderated {% endif %}" src='/static/site/img/project_default_header.png'>
-        {% endif %}
         <div class="text-left">
-            <div class="row pt-5">
+            <div class="row">
                 <div class="col-12">
-                    <h3 class="red">{{project.name}}</h3>
+                    <h1 class="display-4">{{project.name}}</h3>
                 </div>
                 <div class="col-xl-8 col-md-6 col-12">
-
-                    <div class="row">
-                        <div class="col-9">
-                            {% get_rating for project as avg_rating %}
-                            {% get_review_count for project as review_count %}
-                            <span class="gl-star-rating-stars s{{ avg_rating | stringformat:'d'}}0 readonly">
-                                <span data-value="1" data-text="Terrible"></span>
-                                <span data-value="2" data-text="Poor"></span>
-                                <span data-value="3" data-text="Average"></span>
-                                <span data-value="4" data-text="Very Good"></span>
-                                <span data-value="5" data-text="Excellent"></span>
-                            </span>
-                            {{ review_count }} {% if review_count == 1 %} {% trans "review" %} {% else %} {% trans "Reviews" %} {% endif %}
-
-                        </div>
-                        <div class="col-3 text-right">
-                            <a target="_blank" href="{% if 'http' not in project.url %}//{%endif%}{{project.url}}"
-                                               class="colorred"><i class="fas fa-external-link-square-alt"></i> {% trans "Go to Project" %}</a>
-                        </div>
-                    </div>
-                    
                     <p class="mt-3">{{project.description | safe}}</p>
-                    <h4 class="mt-4">{% trans "Aim" %}</h4>
+                    <h4 class="mt-4 leftborder">{% trans "Aim" %}</h4>
                     <p>{{project.aim | safe}}</p>
                     {% if project.howToParticipate %}
-                    <h4 class="mt-4">{% trans "How to participate" %} </h4>
+                    <h4 class="mt-4 leftborder">{% trans "How to participate" %} </h4>
                     <div>{{project.howToParticipate | safe}}</div>
                     {% endif %}
 
                     {% if project.equipment %}
-                    <h4 class="mt-4">{% trans "needed equipment" %}</h4>
+                    <h4 class="mt-4 leftborder">{% trans "Needed equipment" %}</h4>
                     <div>{{project.equipment |safe}}</div>
                     {% endif %}
 
-                    {% if project.projectlocality %}
-                    <h4 class="mt-4">{% trans "Project locality" %}</h4>
-                    <div>{{project.projectlocality |safe}}</div>
-                    {% endif %}
-
-
-                    {% if user.is_authenticated %}
-                    <div class="col-12">
-                        <a class="btn btn-outline-secondary float-right" href="/project_review/{{project.id}}">{% trans "Comment" %}</a>
-                        <div id="followed{{project.id}}" class="float-right mr-4">
-                            {% if project.id in followedProjects %}
-                            <button type="button" class="btn btn-outline-primary float-right"
-                                                  onclick="setFollowedProject({{project.id}},{{user.id}}, false)">{% trans "Following" %}</button>
-                            {% else %}
-                            <button type="button" class="btn btn-outline-secondary float-right"
-                                                  onclick="setFollowedProject({{project.id}},{{user.id}}, true)">&nbsp;&nbsp;{% trans "Follow" %}&nbsp;</button>
-                            {% endif %}
-                        </div>
+                    <div class="col-12" id="followed{{project.id}}">
+                        <a target="_blank" 
+                           href="{% if 'http' not in project.url %}//{%endif%}{{project.url}}"
+                           class="float-right btn greenbackground">
+                            <i class="fas fa-external-link-square-alt"></i> {% trans "Go to Project" %}
+                        </a>
+                        {% if user.is_authenticated %}
+                        <a class="btn btn-secondary float-right" href="/project_review/{{project.id}}">
+                            <i class="fas fa-comments"></i> {% trans "Comment" %}
+                        </a>
+                        {% if project.id in followedProjects %}
+                        <button class="btn greenbackground float-right" 
+                            onclick="setFollowedProject({{project.id}},{{user.id}}, false)">
+                            <i class="fas fa-project-diagram"></i> Followed
+                        </button>
+                        {% else %}
+                        <button href="#" class="btn btn-secondary float-right" 
+                            onclick="setFollowedProject({{project.id}},{{user.id}}, true)">
+                            <i class="fas fa-project-diagram"></i> No Followed
+                        </button>
+                        {% endif %}
+                        {% endif %}
                     </div>
-                    {% endif %}
                     {% if review_count > 0 %}
                     <h4 class="mt-5">Reviews</h4>
                     {% get_review_list for project as review_list %}
@@ -106,18 +87,18 @@
                     {% endif %}
                 </div>
                 <div class="col-xl-4 col-md-6 col-12">
-                    <h5>{% trans "Status" %}</h5>
+                    <div class="mt-3">{% trans "Status" %}</div>
                     <div class="small">
                         <a class="badge badge-light" href="#">{{ project.status}}</a>
                         {% if project.start_date %}
-                        <div>{% trans "Starts" %} {{ project.start_date | date:"d/m/Y"}}</div>
+                        <a class="badge badge-light" href="#">{% trans "From" %} {{ project.start_date | date:"d/m/Y"}}</a>
                         {% endif %}
                         {% if project.end_date %}
-                        <div>{% trans "Ends" %}&nbsp;&nbsp;{{ project.end_date | date:"d/m/Y"}}</div>
+                        <a class="badge badge-light" href="#">{% trans "Until" %} {{ project.end_date | date:"d/m/Y"}}</a>
                         {% endif %}
                     </div>
 
-                    <h5 class="mt-2">{% trans "Keywords" %}</h5>
+                    <div class="mt-3">{% trans "Keywords" %}</div>
                     <div>
                         {% for keyword in project.keywords.all %}
                         <a class="badge badge-light" href="/projects?keywords={{keyword|urlencode}}">{{keyword}}</a>
@@ -126,7 +107,7 @@
 
 
                     {% if project.topic.all %}
-                    <h5 class="mt-2">{% trans "Science Topic" %}</h5>
+                    <div class="mt-3">{% trans "Science Topic" %}</div>
                     <div>
                         {% for topic in project.topic.all %}
                         <a class="badge badge-light" href="/projects?keywords=&topic={{topic|urlencode}}">{{topic}}</a>
@@ -135,7 +116,7 @@
                     {% endif %}
 
                     {% if project.hasTag.all %}
-                    <h5 class="mt-2">{% trans "Tags" %}</h5>
+                    <div class="mt-3">{% trans "Tags" %}</div>
                     <div>
                         {% for tag in project.hasTag.all %}
                         <a class="badge badge-light" href="/projects?tags={{tags|urlencode}}">{{tag}}</a>
@@ -144,7 +125,7 @@
                     {% endif %}
 
                     {% if project.difficultyLevel%}
-                    <h5 class="mt-2">{% trans "Difficulty Level" %}</h5>
+                    <div class="mt-3">{% trans "Difficulty Level" %}</div>
                     <div>
                         <a class="badge badge-light" href="#">{{project.difficultyLevel}}</a>
                     </div>
@@ -152,7 +133,7 @@
 
 
                     {% if project.participationtask.all %}
-                    <h4 class="mt-2">{% trans "Participation task" %}</h4>
+                    <div class="mt-3">{% trans "Participation task" %}</div>
                     <div>
                         {% for participationtask in project.participationtask.all %}
                         <a class="badge badge-light" href="#">{{participationtask}}</a>
@@ -160,22 +141,25 @@
                     </div>
                     {% endif %}
 
-
                     {% if project.geographicextend.all or project.projectlocality %}
-                    <h5 class="mt-2">{% trans "Location" %}</h5>
+                    <div class="mt-3">{% trans "Location" %}</div>
                     <div>
                         {% for geographicextend in project.geographicextend.all %}
                         <a class="badge badge-light" href="">{{geographicextend}}</a>
                         {% endfor %}
                         {% if project.projectlocality%}
-                        <div class="small">{{ project.projectlocality}}</div>
+                        <a class="badge badge-light" href="#">{{ project.projectlocality}}</a>
                         {% endif %}
                     </div>
+                    {% endif %}
+                    {% if form %}
+                    <div class="mt-3">
                     {{ form.projectGeographicLocation|as_crispy_field }}
+                    </div>
                     {% endif %}
 
                     {% if project.mainOrganisation %}
-                    <h5 class="mt-2">{% trans "Coordinator" %}</h5>
+                    <div class="mt-3">{% trans "Coordinator" %}</div>
                     <div>
                         <a class="badge badge-light"
                            href="/organisation/{{project.mainOrganisation.id}}">{{ project.mainOrganisation }} </a>
@@ -183,7 +167,7 @@
                     {% endif %}
 
                     {% if project.organisation.all %}
-                    <div class="mt-2">{% trans "Other Organisations involved" %}</div>
+                    <div class="mt-3">{% trans "Other Organisations involved" %}</div>
                     <div>
                        {% for organisation in project.organisation.all %}
                        <a class="badge badge-light" href="/organisation/{{organisation.id}}">{{organisation}}</a>
@@ -192,14 +176,14 @@
                     {% endif %}
 
                     {% if project.fundingBody.all %}
-                    <div class="mt-2">{% trans "Funding Body" %}</div>
+                    <div class="mt-3">{% trans "Funding Body" %}</div>
                     <div>
                        {% for fb in project.fundingBody.all %}
                        <a class="badge badge-light" href="#">{{fb}}</a>
                        {% endfor %}
                     </div>
-
                     {% endif %}
+
 
                 </div>
             </div>
@@ -305,35 +289,6 @@
       );
     });
   });
-
-  var map;
-  var marker_layer = new L.marker([50.5, 30.5]);
-
-  function map_init_basic (leafmap, options) {
-    map = leafmap;
-    map.setView([{{project.latitude}}, {{project.longitude}}], 12)
-    new L.marker([{{project.latitude}},{{project.longitude}}]).addTo(map);
-  }
-
-  function setApproved(idProject, approved){
-    var request = $.ajax(
-    {
-      type: "POST",
-      url: "{% url 'setApproved' %}",
-      data: {
-        "project_id": idProject,
-        "approved": approved,
-        csrfmiddlewaretoken: '{{ csrf_token }}'
-      },
-      success: function (response) {
-        window.location.reload(false)
-        if(!approved){
-          window.location.href ="{% url 'submitter_contact' 'project' project.id %}"
-        }
-      }
-    }
-    );
-  }
 
   function setFeatured(idProject, featured){
     var htmlId = "featured" + idProject;
