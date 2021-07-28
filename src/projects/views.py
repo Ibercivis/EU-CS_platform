@@ -69,8 +69,8 @@ def saveProjectAjax(request):
     form = ProjectForm(request.POST, request.FILES)
     if form.is_valid():
         images = setImages(request, form)
-        form.save(request, images, [], '')
-        return JsonResponse({'Created': 'OK'}, status=status.HTTP_200_OK)
+        pr = form.save(request, images, [], '')
+        return JsonResponse({'Created': 'OK', 'Project': pr}, status=status.HTTP_200_OK)
     else:
         return JsonResponse(form.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
 

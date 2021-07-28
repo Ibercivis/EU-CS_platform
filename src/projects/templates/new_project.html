@@ -235,6 +235,8 @@
                 data: new FormData(document.getElementById("form_project")),
                 success: function (response){
                     console.log(response);
+                    window.location.href = '/project/'+response.Project+'?added=yes'
+		    
                 },
                 error: function (response){
                     console.log(response);

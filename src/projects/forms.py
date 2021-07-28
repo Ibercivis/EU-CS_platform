@@ -49,11 +49,11 @@ class ProjectForm(forms.Form):
                         'on the platform; it is just for moderation purposes and for the administrators of the'
                         'platform to see'),
             max_length=2000,
-            label=_('Description of Citizen Science Aspects'))
+            label=_('Description of citizen science aspects'))
 
     status = forms.ModelChoiceField(
            queryset=Status.objects.all(),
-           label=_("Activity Status"),
+           label=_("Activity status"),
            widget=forms.Select(attrs={'class': 'js-example-basic-single'}),
            help_text=_('Select one'))
 
@@ -96,14 +96,14 @@ class ProjectForm(forms.Form):
             widget=Select2MultipleWidget(),
             help_text=_('Please select the task(s) undertaken by participants'),
             required=False,
-            label=_("Participation Task"))
+            label=_("Participation task"))
 
     difficultyLevel = forms.ModelChoiceField(
             queryset=DifficultyLevel.objects.all(),
             widget=forms.Select(),
             help_text=_('How difficult is the project?'),
             required=False,
-            label=_("Difficulty Level"))
+            label=_("Difficulty level"))
 
     how_to_participate = forms.CharField(
             widget=CKEditorWidget(config_name='frontpage'),
@@ -123,7 +123,7 @@ class ProjectForm(forms.Form):
             widget=Select2MultipleWidget(),
             help_text=_('Please indicate the spatial scale of the project'),
             required=False,
-            label=_("Geographic Extend"))
+            label=_("Geographic extend"))
 
     projectlocality = forms.CharField(
             max_length=300,
@@ -145,13 +145,13 @@ class ProjectForm(forms.Form):
             widget=forms.TextInput(),
             help_text=_('Please name the contact person or contact point for the Project'),
             required=False,
-            label=_("Public Contact Point"))
+            label=_("Public contact point"))
 
     contact_person_email = forms.EmailField(
             required=False,
             widget=forms.TextInput(),
             help_text=_('Please provide the email for the contact person or contact point'),
-            label=_("Contact Point Email"))
+            label=_("Contact point email"))
 
     mainOrganisation = forms.ModelChoiceField(
             queryset=Organisation.objects.all(),
@@ -162,7 +162,7 @@ class ProjectForm(forms.Form):
                 'Organisation coordinating the project. If not listed, '
                 'please add it <a href="/new_organisation" target="_blank">here</a> '
                 'before submitting the project'),
-            label=_('Lead Organisation / Coordinator'),
+            label=_('Lead organisation / coordinator'),
             required=False)
 
     organisation = forms.ModelMultipleChoiceField(
@@ -195,7 +195,7 @@ class ProjectForm(forms.Form):
     # Images
     image1 = forms.ImageField(
             required=False,
-            label=_("Project image for the thumbnail profile"),
+            label=_("Image for the thumbnail profile"),
             help_text=_('Will be resized to 600x400 pixels'),
             widget=forms.FileInput)
 
@@ -207,11 +207,11 @@ class ProjectForm(forms.Form):
     image_credit1 = forms.CharField(
             max_length=300,
             required=False,
-            label=_("Provide image credit, if applicable"))
+            label=_("Thumbnail credit, if applicable"))
 
     image2 = forms.ImageField(
             required=False,
-            label=_("Project Logo"),
+            label=_("Project logo"),
             help_text=_('Will be resized to 600x400 pixels)'),
             widget=forms.FileInput)
     x2 = forms.FloatField(widget=forms.HiddenInput(), required=False)
@@ -222,11 +222,11 @@ class ProjectForm(forms.Form):
     image_credit2 = forms.CharField(
             max_length=300,
             required=False,
-            label=_("Provide logo credit, if applicable"))
+            label=_("Logo credit, if applicable"))
 
     image3 = forms.ImageField(
             required=False,
-            label=_("Project image for the profile heading"),
+            label=_("Image for the profile heading"),
             help_text=_('Will be resized to 1100x400 pixels'),
             widget=forms.FileInput)
     x3 = forms.FloatField(widget=forms.HiddenInput(), required=False)
@@ -237,7 +237,7 @@ class ProjectForm(forms.Form):
     image_credit3 = forms.CharField(
             max_length=300,
             required=False,
-            label=_("Provide heading image credit, if applicable"))
+            label=_("Heading image credit, if applicable"))
 
     # Others, some of them unused
     host = forms.CharField(
@@ -323,7 +323,7 @@ class ProjectForm(forms.Form):
         project.organisation.set(self.data.getlist('organisation'))
         project.save()
 
-        return 'success'
+        return project.id
 
     def createProject(
             self,

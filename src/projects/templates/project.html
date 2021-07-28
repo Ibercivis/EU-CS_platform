@@ -75,7 +75,7 @@
                     {% endif %}
 
 
-                                      {% if user.is_authenticated %}
+                    {% if user.is_authenticated %}
                     <div class="col-12">
                         <a class="btn btn-outline-secondary float-right" href="/project_review/{{project.id}}">{% trans "Comment" %}</a>
                         <div id="followed{{project.id}}" class="float-right mr-4">
@@ -108,32 +108,49 @@
                 <div class="col-xl-4 col-md-6 col-12">
                     <h5>{% trans "Status" %}</h5>
                     <div class="small">
-                        {{ project.status}}<br>
-                        {% trans "Start" %} {{ project.start_date | date:"d/m/Y"}}<br>
-                        {% trans "End" %}&nbsp;&nbsp;{{ project.end_date | date:"d/m/Y"}}
+                        <a class="badge badge-light" href="#">{{ project.status}}</a>
+                        {% if project.start_date %}
+                        <div>{% trans "Starts" %} {{ project.start_date | date:"d/m/Y"}}</div>
+                        {% endif %}
+                        {% if project.end_date %}
+                        <div>{% trans "Ends" %}&nbsp;&nbsp;{{ project.end_date | date:"d/m/Y"}}</div>
+                        {% endif %}
                     </div>
-                    <h5 class="mt-2">{% trans "Science Topic" %}</h5>
-                    <div>
-                        {% for topic in project.topic.all %}
-                        <a class="badge badge-light" href="/projects?keywords=&topic={{topic|urlencode}}">{{topic}}</a>
-                        {% endfor %}
-                    </div>
+
                     <h5 class="mt-2">{% trans "Keywords" %}</h5>
                     <div>
                         {% for keyword in project.keywords.all %}
                         <a class="badge badge-light" href="/projects?keywords={{keyword|urlencode}}">{{keyword}}</a>
                         {% endfor %}
                     </div>
+
+
+                    {% if project.topic.all %}
+                    <h5 class="mt-2">{% trans "Science Topic" %}</h5>
+                    <div>
+                        {% for topic in project.topic.all %}
+                        <a class="badge badge-light" href="/projects?keywords=&topic={{topic|urlencode}}">{{topic}}</a>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    {% if project.hasTag.all %}
                     <h5 class="mt-2">{% trans "Tags" %}</h5>
                     <div>
                         {% for tag in project.hasTag.all %}
                         <a class="badge badge-light" href="/projects?tags={{tags|urlencode}}">{{tag}}</a>
                         {% endfor %}
                     </div>
+                    {% endif %}
+
+                    {% if project.difficultyLevel%}
                     <h5 class="mt-2">{% trans "Difficulty Level" %}</h5>
                     <div>
-                        <a class="badge badge-light" href="/projects?tags={{project.difficultyLevel|urlencode}}">{{project.difficultyLevel}}</a>
+                        <a class="badge badge-light" href="#">{{project.difficultyLevel}}</a>
                     </div>
+                    {% endif %}
+
+
                     {% if project.participationtask.all %}
                     <h4 class="mt-2">{% trans "Participation task" %}</h4>
                     <div>
@@ -144,18 +161,18 @@
                     {% endif %}
 
 
-
+                    {% if project.geographicextend.all or project.projectlocality %}
                     <h5 class="mt-2">{% trans "Location" %}</h5>
                     <div>
                         {% for geographicextend in project.geographicextend.all %}
                         <a class="badge badge-light" href="">{{geographicextend}}</a>
                         {% endfor %}
-                        {% for country in countries %}
-                        {% if country.code == project.country %}
-                        <a class="badge badge-light" href="/projects?country={{country.code}}">{{ country.name | title }}</a>
+                        {% if project.projectlocality%}
+                        <div class="small">{{ project.projectlocality}}</div>
                         {% endif %}
-                        {% endfor %}
                     </div>
+                    {{ form.projectGeographicLocation|as_crispy_field }}
+                    {% endif %}
 
                     {% if project.mainOrganisation %}
                     <h5 class="mt-2">{% trans "Coordinator" %}</h5>
@@ -184,7 +201,6 @@
 
                     {% endif %}
 
-                    {{ form.projectGeographicLocation|as_crispy_field }}
                 </div>
             </div>
         </div>
