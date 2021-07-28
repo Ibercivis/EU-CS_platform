@@ -65,19 +65,17 @@
                     {% endif %}
 
                     {% if project.equipment %}
-                    <h4 class="mt-4">{% trans "Needed equipment" %}</h4>
+                    <h4 class="mt-4">{% trans "needed equipment" %}</h4>
                     <div>{{project.equipment |safe}}</div>
                     {% endif %}
 
-                    {% if project.participationtask.all %}
-                    <h4 class="mt-4">{% trans "Participation task" %}</h4>
-                    <div>
-                        {% for participationtask in project.participationtask.all %}
-                        <a class="badge badge-light" href="#">{{participationtask}}</a>
-                        {% endfor %}
-                    </div>
+                    {% if project.projectlocality %}
+                    <h4 class="mt-4">{% trans "Project locality" %}</h4>
+                    <div>{{project.projectlocality |safe}}</div>
                     {% endif %}
-                    {% if user.is_authenticated %}
+
+
+                                      {% if user.is_authenticated %}
                     <div class="col-12">
                         <a class="btn btn-outline-secondary float-right" href="/project_review/{{project.id}}">{% trans "Comment" %}</a>
                         <div id="followed{{project.id}}" class="float-right mr-4">
@@ -126,6 +124,27 @@
                         <a class="badge badge-light" href="/projects?keywords={{keyword|urlencode}}">{{keyword}}</a>
                         {% endfor %}
                     </div>
+                    <h5 class="mt-2">{% trans "Tags" %}</h5>
+                    <div>
+                        {% for tag in project.hasTag.all %}
+                        <a class="badge badge-light" href="/projects?tags={{tags|urlencode}}">{{tag}}</a>
+                        {% endfor %}
+                    </div>
+                    <h5 class="mt-2">{% trans "Difficulty Level" %}</h5>
+                    <div>
+                        <a class="badge badge-light" href="/projects?tags={{project.difficultyLevel|urlencode}}">{{project.difficultyLevel}}</a>
+                    </div>
+                    {% if project.participationtask.all %}
+                    <h4 class="mt-2">{% trans "Participation task" %}</h4>
+                    <div>
+                        {% for participationtask in project.participationtask.all %}
+                        <a class="badge badge-light" href="#">{{participationtask}}</a>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+
+
                     <h5 class="mt-2">{% trans "Location" %}</h5>
                     <div>
                         {% for geographicextend in project.geographicextend.all %}
@@ -136,18 +155,35 @@
                         <a class="badge badge-light" href="/projects?country={{country.code}}">{{ country.name | title }}</a>
                         {% endif %}
                         {% endfor %}
-                        <a class="badge badge-light" href="">{{project.projectlocality}}</a>
                     </div>
-                    <h5 class="mt-2">{% trans "Hosted by" %}</h5>
+
+                    {% if project.mainOrganisation %}
+                    <h5 class="mt-2">{% trans "Coordinator" %}</h5>
                     <div>
-                        {% if project.mainOrganisation %}
                         <a class="badge badge-light"
                            href="/organisation/{{project.mainOrganisation.id}}">{{ project.mainOrganisation }} </a>
-                       {% endif %}
+                    </div>
+                    {% endif %}
+
+                    {% if project.organisation.all %}
+                    <div class="mt-2">{% trans "Other Organisations involved" %}</div>
+                    <div>
                        {% for organisation in project.organisation.all %}
                        <a class="badge badge-light" href="/organisation/{{organisation.id}}">{{organisation}}</a>
                        {% endfor %}
                     </div>
+                    {% endif %}
+
+                    {% if project.fundingBody.all %}
+                    <div class="mt-2">{% trans "Funding Body" %}</div>
+                    <div>
+                       {% for fb in project.fundingBody.all %}
+                       <a class="badge badge-light" href="#">{{fb}}</a>
+                       {% endfor %}
+                    </div>
+
+                    {% endif %}
+
                     {{ form.projectGeographicLocation|as_crispy_field }}
                 </div>
             </div>

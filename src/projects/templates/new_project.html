@@ -55,15 +55,6 @@
 <!-- END MODAL TO CROP -->
 
 <div class="container mt-5">
-    <div class="row">
-        <div class="col-6">
-            <h2 class="float-left">{% trans "New project" %}</h2>
-        </div>
-        <div class="col-6">
-            <button type="submit" onclick="$('#id_submit').click()" class="btn btn-green"><i class="fas fa-share-square"></i> {% trans "Save" %}</button>
-        </div>
-    </div>
-
     <form action="/editProject/{{project.id}}" id='form_project' class="edit-project" method="post" enctype="multipart/form-data">
         <div class="row">
             {% csrf_token %}
@@ -81,7 +72,11 @@
                         {{ form.y3|as_crispy_field }}
                         {{ form.height3|as_crispy_field }}
                         {{ form.width3|as_crispy_field }}
-                        {{ form.image_credit3|as_crispy_field }}
+						<div class="row">
+							<div class="col-4">
+                        		{{ form.image_credit3|as_crispy_field }}
+							</div>
+						</div>
                     </div>
                 </div>
                 <div class="row">
@@ -104,16 +99,16 @@
                                 {{ form.aim|as_crispy_field }}
                                 {{ form.description_citizen_science_aspects|as_crispy_field }}
                                 {{ form.status|as_crispy_field }}
-                                {{ form.start_date|as_crispy_field }}
-                                {{ form.end_date|as_crispy_field }}
+                                {{ form.keywords|as_crispy_field }}
                             </div>
                         </div>
                         <h4 class="mt-5">{% trans "Useful information to classificate the project" %}</h4>
                         <div class="row">
                             <div class="col-1"></div>
                             <div class="col-11">
+        			{{ form.start_date|as_crispy_field }}
+                                {{ form.end_date|as_crispy_field }}
                                 {{ form.topic|as_crispy_field }}
-                                {{ form.keywords|as_crispy_field }}
                                 {{ form.hasTag |as_crispy_field }}
                             </div>
                         </div>
@@ -151,18 +146,7 @@
                             <div class="col-1"></div>
                             <div class="col-11">
                                 {{ form.funding_body|as_crispy_field }}
-                                {{ form.fundingBodySelected|as_crispy_field }}
                                 {{ form.funding_program|as_crispy_field }}
-                            </div>
-                        </div>
-                        <h4 class="mt-5">{% trans "Origin information" %}</h4>
-                        <div class="row">
-                            <div class="col-1"></div>
-                            <div class="col-11">
-                                {{ form.origin_database|as_crispy_field }}
-                                {{ form.originDatabaseSelected|as_crispy_field }}
-                                {{ form.originUID|as_crispy_field }}
-                                {{ form.originURL|as_crispy_field }}
                             </div>
                         </div>
                         <h4 class="mt-5">{% trans "Project profile images" %}</h4>
@@ -217,13 +201,16 @@
         });
         for(var instanceName in CKEDITOR.instances){
             CKEDITOR.instances[instanceName].on('focus', function(e){
-                console.log($(this).attr('id'))
-                if($(this).is('.error'))
-                    $(this).removeClass('error');
+                console.log($(this))
+		id='#cke_'+$(this).attr('name')
+		console.log(id)
+                if($(id).is('.error'))
+                    $(id).removeClass('error');
             })
         }
 
         $('#id_submit').click(function (e) {
+	    $('.myerror').remove()
             $.ajaxSettings.traditional = true;
             for(var instanceName in CKEDITOR.instances)
                 CKEDITOR.instances[instanceName].updateElement();
@@ -253,31 +240,13 @@
                     console.log(response);
                     $.each(response.responseJSON, function(i,val){
                         $('#id_'+i).addClass('error');
+			$('label[for=id_'+i+']').append('<div class="myerror alert alert-danger">'+val+'</div>')
                         $('#cke_id_'+i).addClass('error');
                     })
                 }
             });
         });
     });
-
-   function getKeywords() {
-        var project_id = $("#projectID").val();
-        var request = $.ajax(
-        {
-          type: "GET",
-          url: "{% url 'getKeywords' %}",
-          dataType: 'json',
-          data: {
-            "project_id": project_id
-          },
-          success: function (response) {
-              var json = $.parseJSON(response);
-              $.each(json, function(i,val){
-                  $('#id_keywords').append('<option value ="'+val[0]+'" '+val[2]+'>'+val[1]+'</option>')
-              })
-          }
-        });
-      };
 </script>
 <script>
 

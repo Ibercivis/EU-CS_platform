@@ -10,7 +10,7 @@ from django_summernote.widgets import SummernoteWidget
 from django.utils.translation import ugettext_lazy as _
 from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderServiceError
-from .models import Project, Topic, Status, Keyword, FundingBody, CustomField, OriginDatabase, ParticipationTask, GeographicExtend, HasTag, DifficultyLevel
+from .models import Project, Topic, Status, Keyword, FundingBody, CustomField, ParticipationTask, GeographicExtend, HasTag, DifficultyLevel
 from organisations.models import Organisation
 
 
@@ -18,162 +18,243 @@ geolocator = Nominatim(timeout=None)
 
 
 class ProjectForm(forms.Form):
-    # Basic Project Information
+
+    # Main information
     project_name = forms.CharField(
             max_length=200,
             widget=forms.TextInput(),
             help_text=_('Short name or title of the project'))
-    aim = forms.CharField(\
-        widget=CKEditorWidget(config_name='frontpage'), help_text=_('Primary aim, goal or objective of the project. Max 2000 characters'),\
-        max_length = 2000)
 
-    description = forms.CharField(widget=CKEditorWidget(config_name='frontpage'), help_text=_('Please provide a description of your project here.'),\
-        max_length = 3000)
-    description_citizen_science_aspects = forms.CharField(widget=CKEditorWidget(config_name='frontpage'), \
-    help_text=_('Please describe the citizen science aspect(s) of the project and the link of the project to citizen science using the <a href="https://zenodo.org/communities/citscicharacteristics">ECSA Characteristics of Citizen Science</a> and the <a href="https://osf.io/xpr2n/">ECSA 10 Principles of Citizen Science</a>. What you introduce in this text field will not appear on the platform; it is just for moderation purposes and for the administrators of the platform to see'),\
-        max_length = 2000, label=_('Description of Citizen Science Aspects'))
+    url = forms.URLField(
+            max_length=200,
+            widget=forms.TextInput(),
+            help_text=_('Please provide a URL to an external web site for the project'))
 
-    topic = forms.ModelMultipleChoiceField(queryset=Topic.objects.all(),\
-        widget=Select2MultipleWidget(), help_text=_('The project topic(s) or field(s) of science, multiple selection'), \
-        required=False,label=_("Topic"))
+    description = forms.CharField(
+            widget=CKEditorWidget(config_name='frontpage'),
+            help_text=_('Please provide a description of your project here.'),
+            max_length=3000)
 
-    participationtask = forms.ModelMultipleChoiceField(queryset=ParticipationTask.objects.all(),\
-        widget=Select2MultipleWidget(), help_text=_('Please select the task(s) undertaken by participants'), \
-        required=False,label=_("Participation Task"))
+    aim = forms.CharField(
+            widget=CKEditorWidget(config_name='frontpage'),
+            help_text=_('Primary aim, goal or objective of the project. Max 2000 characters'),
+            max_length=2000)
 
-    hasTag = forms.ModelMultipleChoiceField(queryset=HasTag.objects.all(),\
-        widget=Select2MultipleWidget(), help_text=_('More information about participation'), \
-        required=False,label=_("Tags"))
+    description_citizen_science_aspects = forms.CharField(
+            widget=CKEditorWidget(config_name='frontpage'),
+            help_text=_('Please describe the citizen science aspect(s) of the project and the link of the project to'
+                        'citizen science using the <a href="https://zenodo.org/communities/citscicharacteristics">ECSA'
+                        'Characteristics of Citizen Science</a> and the <a href="https://osf.io/xpr2n/">ECSA 10 '
+                        'Principles of Citizen Science</a>. What you introduce in this text field will not appear '
+                        'on the platform; it is just for moderation purposes and for the administrators of the'
+                        'platform to see'),
+            max_length=2000,
+            label=_('Description of Citizen Science Aspects'))
 
-    keywords = forms.ModelMultipleChoiceField(queryset=Keyword.objects.all(),
-                widget=s2forms.ModelSelect2TagWidget(search_fields=['keyword__icontains']), required=False, help_text=_('Please enter 2-3 keywords (comma separated) or pressing enter to further describe your project and assist search on the platform'),label=_('Keywords'))
+    status = forms.ModelChoiceField(
+           queryset=Status.objects.all(),
+           label=_("Activity Status"),
+           widget=forms.Select(attrs={'class': 'js-example-basic-single'}),
+           help_text=_('Select one'))
 
-    difficultyLevel = forms.ModelChoiceField(queryset=DifficultyLevel.objects.all(),\
-        widget=forms.Select(), help_text=_('How difficult is the project?'), \
-        required=False, label=_("Difficulty Level"))
+    keywords = forms.ModelMultipleChoiceField(
+            queryset=Keyword.objects.all(),
+            widget=s2forms.ModelSelect2TagWidget(search_fields=['keyword__icontains']),
+            required=True,
+            help_text=_('Please enter 2-3 keywords (comma separated) or pressing enter'
+                        'to further describe your project and assist search on the platform'),
+            label=_('Keywords'))
 
-    status = forms.ModelChoiceField(queryset=Status.objects.all(), label=_("Activity Status"),\
-        widget=forms.Select(attrs={'class':'js-example-basic-single'}),help_text=_('Select one'))
+    # Useful information to classificate the project
+    start_date = forms.DateField(
+             widget=forms.TextInput(attrs={'type': 'date'}),
+             required=False,
+             label=_("Closest approximate start date of the project"))
 
-    start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), \
-        required=False, label=_("Closest approximate start date of the project"))
+    end_date = forms.DateField(
+            widget=forms.TextInput(attrs={'type': 'date'}),
+            required=False,
+            label=_("Approximate end date of the project"))
 
-    end_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), \
-        required=False, label=_("Approximate end date of the project"))
+    topic = forms.ModelMultipleChoiceField(
+            queryset=Topic.objects.all(),
+            widget=Select2MultipleWidget(),
+            help_text=_('The project topic(s) or field(s) of science, multiple selection'),
+            required=False,
+            label=_("Topic"))
 
-    url = forms.CharField(max_length=200, \
-        widget=forms.TextInput(), help_text=_('Please provide a URL to an external web site for the project'))
+    hasTag = forms.ModelMultipleChoiceField(
+            queryset=HasTag.objects.all(),
+            widget=Select2MultipleWidget(),
+            help_text=_('More information about participation'),
+            required=False,
+            label=_("Tags"))
 
-    geographicextend = forms.ModelMultipleChoiceField(queryset=GeographicExtend.objects.all(),\
-        widget=Select2MultipleWidget(),
-        help_text=_('Please indicate the spatial scale of the project'), \
-        required=False,label=_("Geographic Extend"))
+    # Participation information
+    participationtask = forms.ModelMultipleChoiceField(
+            queryset=ParticipationTask.objects.all(),
+            widget=Select2MultipleWidget(),
+            help_text=_('Please select the task(s) undertaken by participants'),
+            required=False,
+            label=_("Participation Task"))
 
-    projectlocality = forms.CharField(max_length=300, \
-        widget=forms.TextInput(), required=False, label=_("Project locality"),
-        help_text=_('Please describe the locality of the project, in terms of where the main participant activities take place, \
-        E.g. in your backyard, parks in London, rivers in Europe, online globally, etc.'))
-    projectGeographicLocation = forms.MultiPolygonField(required=False,
-                                                        widget=forms.OSMWidget(attrs={}),
-                                                        label=_("Project geographic location"),
-                                                        )
+    difficultyLevel = forms.ModelChoiceField(
+            queryset=DifficultyLevel.objects.all(),
+            widget=forms.Select(),
+            help_text=_('How difficult is the project?'),
+            required=False,
+            label=_("Difficulty Level"))
 
+    how_to_participate = forms.CharField(
+            widget=CKEditorWidget(config_name='frontpage'),
+            help_text=_('Please describe how people can get involved in the project'),
+            max_length=2000,
+            required=False)
 
-    mainOrganisation = forms.ModelMultipleChoiceField(queryset=Organisation.objects.all(), \
-        widget=Select2MultipleWidget(), \
-        help_text=_('Organisation coordinating the project. If not listed, please add it <a href="/new_organisation">here</a> \
-        before submitting the project'), \
-        label=_('Lead Organisation / Coordinator'), required=False)
+    equipment = forms.CharField(
+            widget=CKEditorWidget(config_name='frontpage'),
+            help_text=_('Describe any required or suggested equipment to be used in the project'),
+            max_length=2000,
+            required=False)
 
-    organisation = forms.ModelMultipleChoiceField(queryset=Organisation.objects.all(), \
-        widget=Select2MultipleWidget(), help_text=_('Other Organisation participating in the project. If not listed, please add it \
-        <a href="/new_organisation">here</a> before submitting the project'),\
-        required=False,label=_("Other Organisations"))
+    # Project location
+    geographicextend = forms.ModelMultipleChoiceField(
+            queryset=GeographicExtend.objects.all(),
+            widget=Select2MultipleWidget(),
+            help_text=_('Please indicate the spatial scale of the project'),
+            required=False,
+            label=_("Geographic Extend"))
 
-    #Contact Information
-    host = forms.CharField(max_length=100, \
-    widget=forms.TextInput(attrs={'placeholder':'Enter the name of the institution hosting or coordinating the project'}),
-    required=False)
+    projectlocality = forms.CharField(
+            max_length=300,
+            widget=forms.TextInput(),
+            required=False,
+            label=_("Project locality"),
+            help_text=_('Please describe the locality of the project, in terms of where the main participant'
+                        'activities take place, E.g. in your backyard, parks in London, rivers in Europe, '
+                        'online globally, etc.'))
 
-    contact_person = forms.CharField(max_length=100, \
-        widget=forms.TextInput(), \
-        help_text=_('Please name the contact person or contact point for the Project'), required=False, label=_("Public Contact Point"))
+    projectGeographicLocation = forms.MultiPolygonField(
+            required=False,
+            widget=forms.OSMWidget(attrs={}),
+            label=_("Project geographic location"))
 
-    contact_person_email = forms.EmailField(required=False, \
-        widget=forms.TextInput(), \
-        help_text=_('Please provide the email for the contact person or contact point'), label=_("Contact Point Email"))
+    # Contact and hosts details
+    contact_person = forms.CharField(
+            max_length=100,
+            widget=forms.TextInput(),
+            help_text=_('Please name the contact person or contact point for the Project'),
+            required=False,
+            label=_("Public Contact Point"))
 
-    #Profile Images
-    image1 = forms.ImageField(required=False,label=_("Project image for the thumbnail profile"),\
-        help_text=_('Will be resized to 600x400 pixels'),widget=forms.FileInput)
-    x1 = forms.FloatField(widget=forms.HiddenInput(),required=False)
+    contact_person_email = forms.EmailField(
+            required=False,
+            widget=forms.TextInput(),
+            help_text=_('Please provide the email for the contact person or contact point'),
+            label=_("Contact Point Email"))
+
+    mainOrganisation = forms.ModelChoiceField(
+            queryset=Organisation.objects.all(),
+            widget=s2forms.ModelSelect2Widget(
+                model=Organisation,
+                search_fields=['name__icontains', ]),
+            help_text=_(
+                'Organisation coordinating the project. If not listed, '
+                'please add it <a href="/new_organisation" target="_blank">here</a> '
+                'before submitting the project'),
+            label=_('Lead Organisation / Coordinator'),
+            required=False)
+
+    organisation = forms.ModelMultipleChoiceField(
+            queryset=Organisation.objects.all(),
+            widget=s2forms.ModelSelect2MultipleWidget(
+                model=Organisation,
+                search_fields=['name__icontains']),
+            help_text=_(
+                'Other Organisation participating in the project.If not listed,'
+                'please add it <a href="/new_organisation" target="_blank">here</a> '
+                'before submitting the project'),
+            label=_("Other Organisations"),
+            required=False)
+
+    # Funding information
+    funding_body = forms.ModelMultipleChoiceField(
+            queryset=FundingBody.objects.all(),
+            widget=s2forms.Select2TagWidget(),
+            help_text=_('Please enter the funding agencies of the project (e.g. European Commission).'
+                        'Select them from the list or add your own ended by comma or pressing enter'),
+            required=False,
+            label=_("Funding body"))
+
+    funding_program = forms.CharField(
+            max_length=500,
+            widget=forms.TextInput(),
+            help_text=_('Indication of the programme that funds or funded a project'),
+            required=False)
+
+    # Images
+    image1 = forms.ImageField(
+            required=False,
+            label=_("Project image for the thumbnail profile"),
+            help_text=_('Will be resized to 600x400 pixels'),
+            widget=forms.FileInput)
+
+    x1 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     y1 = forms.FloatField(widget=forms.HiddenInput(), required=False)
-    width1 = forms.FloatField(widget=forms.HiddenInput(),required=False)
+    width1 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     height1 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     withImage1 = forms.BooleanField(widget=forms.HiddenInput(), required=False, initial=False)
-    image_credit1 = forms.CharField(max_length=300, required=False, label=_("provide image credit, if applicable"))
-    image2 = forms.ImageField(required=False, label=_("Project Logo"),\
-        help_text=_('Will be resized to 600x400 pixels)'),widget=forms.FileInput)
-    x2 = forms.FloatField(widget=forms.HiddenInput(),required=False)
+    image_credit1 = forms.CharField(
+            max_length=300,
+            required=False,
+            label=_("Provide image credit, if applicable"))
+
+    image2 = forms.ImageField(
+            required=False,
+            label=_("Project Logo"),
+            help_text=_('Will be resized to 600x400 pixels)'),
+            widget=forms.FileInput)
+    x2 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     y2 = forms.FloatField(widget=forms.HiddenInput(), required=False)
-    width2 = forms.FloatField(widget=forms.HiddenInput(),required=False)
+    width2 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     height2 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     withImage2 = forms.BooleanField(widget=forms.HiddenInput(), required=False, initial=False)
-    image_credit2 = forms.CharField(max_length=300, required=False, label=_("provide Logo credit, if applicable"))
-    image3 = forms.ImageField(required=False, label=_(
-        "Project image for the profile heading"),
-        help_text=_('Will be resized to 1100x400 pixels'),
-        widget=forms.FileInput)
+    image_credit2 = forms.CharField(
+            max_length=300,
+            required=False,
+            label=_("Provide logo credit, if applicable"))
+
+    image3 = forms.ImageField(
+            required=False,
+            label=_("Project image for the profile heading"),
+            help_text=_('Will be resized to 1100x400 pixels'),
+            widget=forms.FileInput)
     x3 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     y3 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     width3 = forms.FloatField(widget=forms.HiddenInput(), required=False)
-    height3 = forms.FloatField(widget=forms.HiddenInput(), required=False, label=_("provide image credit, if applicable"))
+    height3 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     withImage3 = forms.BooleanField(widget=forms.HiddenInput(), required=False, initial=False)
-    image_credit3 = forms.CharField(max_length=300, required=False)
+    image_credit3 = forms.CharField(
+            max_length=300,
+            required=False,
+            label=_("Provide heading image credit, if applicable"))
 
-    # Geography
-
-
-    #Personal and Organizational Affiliates
-
-    # Do you want to participate in a contest
-    participatingInaContest = forms.BooleanField(required=False,label=_("I want to participate in the #MonthOfTheProjects and agree to be contacted via email if the project I am submitting wins the contest. <a href='/blog/2021/05/31/june-monthoftheprojects-eu-citizenscience/'> Learn more here!</a>"))
-
-    #Participation Information
-
-    how_to_participate = forms.CharField(widget=CKEditorWidget(config_name='frontpage'),\
-        help_text=_('Please describe how people can get involved in the project'), max_length = 2000, required=False)
-    doingAtHome =  forms.BooleanField(required=False,label=_("Can participate at home"))
-
-    equipment = forms.CharField(widget=CKEditorWidget(config_name='frontpage'),\
-        help_text=_('Describe any required or suggested equipment to be used in the project'), max_length = 2000, required=False)
-    #Funding
-    funding_body =  forms.ModelMultipleChoiceField(queryset=FundingBody.objects.all(), widget=Select2MultipleWidget(),\
-        help_text=_('Please enter the funding agencies of the project (e.g. European Commission). \
-        Select them from the list or add your own ended by comma or pressing enter'), required=False, label=_("Funding body (Put a comma after each name or pressing enter to add a new funding body)"))
-    fundingBodySelected = forms.CharField(widget=forms.HiddenInput(), max_length=100, required=False)
-
-    funding_program = forms.CharField(max_length=500, widget=forms.TextInput(),\
-        help_text=_('Indication of the programme that funds or funded a project'),required=False)
-
-   
-    #Origin information
-    origin_database =  forms.ModelMultipleChoiceField(queryset=OriginDatabase.objects.all(), widget=Select2MultipleWidget(),\
-        help_text=_('Do you know the name of the database where the project first appeared?, add it here ended by comma or pressing enter.'),\
-        required=False)
-    originDatabaseSelected = forms.CharField(widget=forms.HiddenInput(), max_length=300, required=False)
-
-    originUID = forms.CharField(max_length=200, widget=forms.TextInput(),\
-        help_text=_('Do you know the Unique identificator of the project in the previous database?, add it here.'),required=False, \
-        label=_("Origin UID"))
-
-    originURL = forms.CharField(max_length=200, widget=forms.TextInput(),\
-        help_text=_('Do you know the origin URL in the previous database?, add it here'),required=False, label=_("Origin URL"))
-
-    #Custom fields
+    # Others, some of them unused
+    host = forms.CharField(
+            max_length=100,
+            widget=forms.TextInput(
+                attrs={'placeholder': 'Enter the name of the institution hosting or coordinating the project'}),
+            required=False)
+    participatingInaContest = forms.BooleanField(
+            required=False,
+            label=_('I want to participate in the #MonthOfTheProjects and agree to be contacted via email if the'
+                    'project I am submitting wins the contest.'
+                    '<a href="/blog/2021/05/31/june-monthoftheprojects-eu-citizenscience/"> Learn more here!</a>'))
+    # Custom fields
     title = forms.CharField(max_length=100, required=False)
     paragraph = forms.CharField(widget=SummernoteWidget(), required=False)
 
+    ''' Save function '''
     def save(self, args, images, cFields, mainOrganisationFixed):
         pk = self.data.get('projectID', '')
         start_dateData = self.data['start_date']
@@ -186,42 +267,44 @@ class ProjectForm(forms.Form):
             difficultyLevel = get_object_or_404(DifficultyLevel, id=self.data['difficultyLevel'])
         else:
             difficultyLevel = None
-
-        if(mainOrganisationFixed):
-            mainOrganisation = get_object_or_404(Organisation, id=mainOrganisationFixed)
+        if (self.data['mainOrganisation']):
+            mainOrganisation = get_object_or_404(Organisation, id=self.data['mainOrganisation'])
         else:
             mainOrganisation = None
 
-        doingAtHome=False
+        doingAtHome = False
         if('doingAtHome' in self.data and self.data['doingAtHome'] == 'on'):
-            doingAtHome=True
+            doingAtHome = True
 
-        participatingInaContest=False
+        participatingInaContest = False
         if('participatingInaContest' in self.data and self.data['participatingInaContest'] == 'on'):
-            participatingInaContest=True
+            participatingInaContest = True
 
         if(pk):
             project = get_object_or_404(Project, id=pk)
             if project.hidden:
                 project.hidden = False
-            self.updateFields(project, status, difficultyLevel, doingAtHome, mainOrganisation, projectGeographicLocation)
+            self.updateFields(
+                    project,
+                    status,
+                    difficultyLevel,
+                    doingAtHome,
+                    mainOrganisation,
+                    projectGeographicLocation)
         else:
-            project = self.createProject( status, difficultyLevel, doingAtHome, mainOrganisation, projectGeographicLocation, participatingInaContest, args)
+            project = self.createProject(
+                    status,
+                    difficultyLevel,
+                    doingAtHome,
+                    projectGeographicLocation,
+                    participatingInaContest,
+                    mainOrganisation,
+                    args)
 
         if start_dateData:
             project.start_date = start_dateData
         if end_dateData:
             project.end_date = end_dateData
-
-        fundingBodySelected = self.data['fundingBodySelected']
-        if(fundingBodySelected != ''):
-            body, exist = FundingBody.objects.get_or_create(body=fundingBodySelected)
-            project.fundingBody = body
-
-        originDatabaseSelected = self.data['originDatabaseSelected']
-        if(originDatabaseSelected != ''):
-            originDatabase, exist = OriginDatabase.objects.get_or_create(originDatabase=originDatabaseSelected)
-            project.originDatabase = originDatabase
 
         if(images[0] != '/'):
             project.image1 = images[0]
@@ -233,6 +316,7 @@ class ProjectForm(forms.Form):
         project.save()
         project.topic.set(self.data.getlist('topic'))
         project.keywords.set(self.data.getlist('keywords'))
+        project.fundingBody.set(self.data.getlist('funding_body'))
         project.participationtask.set(self.data.getlist('participationtask'))
         project.hasTag.set(self.data.getlist('hasTag'))
         project.geographicextend.set(self.data.getlist('geographicextend'))
@@ -241,19 +325,39 @@ class ProjectForm(forms.Form):
 
         return 'success'
 
-
-    def createProject(self, status, difficultyLevel, doingAtHome, mainOrganisation, projectGeographicLocation, participatingInaContest, args):
-         return Project(name = self.data['project_name'], url = self.data['url'], projectlocality = self.data['projectlocality'],
-                         creator=args.user,
-                         author = self.data['contact_person'], author_email = self.data['contact_person_email'],
-                         aim = self.data['aim'], description = self.data['description'], description_citizen_science_aspects = self.data['description_citizen_science_aspects'],
-                         status = status, 
-                         difficultyLevel = difficultyLevel,
-                         imageCredit1 = self.data['image_credit1'],
-                         imageCredit2 = self.data['image_credit2'], imageCredit3 = self.data['image_credit3'],
-                         howToParticipate = self.data['how_to_participate'],equipment = self.data['equipment'],
-                         fundingProgram = self.data['funding_program'],originUID = self.data['originUID'],
-                         originURL = self.data['originURL'], doingAtHome=doingAtHome, participatingInaContest = participatingInaContest, mainOrganisation=mainOrganisation, projectGeographicLocation = projectGeographicLocation)
+    def createProject(
+            self,
+            status,
+            difficultyLevel,
+            doingAtHome,
+            projectGeographicLocation,
+            participatingInaContest,
+            mainOrganisation,
+            args):
+        return Project(
+                creator=args.user,
+                name=self.data['project_name'],
+                url=self.data['url'],
+                description=self.data['description'],
+                description_citizen_science_aspects=self.data['description_citizen_science_aspects'],
+                aim=self.data['aim'],
+                projectlocality=self.data['projectlocality'],
+                mainOrganisation=mainOrganisation,
+                author=self.data['contact_person'],
+                author_email=self.data['contact_person_email'],
+                status=status,
+                difficultyLevel=difficultyLevel,
+                imageCredit1=self.data['image_credit1'],
+                imageCredit2=self.data['image_credit2'],
+                imageCredit3=self.data['image_credit3'],
+                howToParticipate=self.data['how_to_participate'],
+                equipment=self.data['equipment'],
+                fundingProgram=self.data['funding_program'],
+                #originUID=self.data['originUID'],
+                #originURL=self.data['originURL'],
+                #doingAtHome=doingAtHome,
+                participatingInaContest=participatingInaContest,
+                projectGeographicLocation=projectGeographicLocation)
 
     def updateFields(self, project, status, difficultyLevel, doingAtHome, mainOrganisation, projectGeographicLocation):
         project.name = self.data['project_name']

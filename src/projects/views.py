@@ -23,7 +23,7 @@ from reviews.models import Review
 from django_countries import countries
 from .forms import ProjectForm, CustomFieldFormset, ProjectPermissionForm
 from .models import Project, Topic, ParticipationTask, Status, Keyword, ApprovedProjects, \
- FollowedProjects, FundingBody, CustomField, ProjectPermission, OriginDatabase, GeographicExtend, UnApprovedProjects
+ FollowedProjects, FundingBody, CustomField, ProjectPermission, GeographicExtend, UnApprovedProjects
 from organisations.models import Organisation
 import copy
 import csv
@@ -32,6 +32,7 @@ import random
 from rest_framework import status
 
 User = get_user_model()
+
 
 @login_required(login_url='/login')
 def new_project(request):
@@ -46,7 +47,7 @@ def new_project(request):
             form.save(request, images, [], mainOrganisationFixed)
             messages.success(request, _('Project added correctly'))
 
-            subject = 'New project submitted' 
+            subject = 'New project submitted'
             message = render_to_string('emails/new_project.html', {"domain": settings.HOST})
             to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
             to.append(user.email)
@@ -60,34 +61,48 @@ def new_project(request):
 
     return render(request, 'new_project.html', {'form': form, 'user': user})
 
+
 def saveProjectAjax(request):
-    print("in saveProjectAjax")
-    print(request.POST)
-    print(type(request.POST['keywords']))
     request.POST = request.POST.copy()
-    result=[]
-    for k in request.POST.getlist('keywords'):
-        if not k.isdecimal():
-            keyword_created=Keyword.objects.get_or_create(keyword=k)
-            keyword_id = Keyword.objects.get(keyword=k).id
-            result.append(keyword_id)
-        else:
-            result.append(k)
-    request.POST.update({'keywords': result})
-
-
+    request.POST = updateKeywords(request.POST)
+    request.POST = updateFundingBody(request.POST)
     form = ProjectForm(request.POST, request.FILES)
     if form.is_valid():
         images = setImages(request, form)
-        form.save(request,images,[],'')
-        return JsonResponse({'Created':'OK'},status=status.HTTP_200_OK)
+        form.save(request, images, [], '')
+        return JsonResponse({'Created': 'OK'}, status=status.HTTP_200_OK)
     else:
         return JsonResponse(form.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
 
-def insertNewKeywords(keywords):
-    for k in keywords:
-        Keyword.objects.get_or_create(keyword=k)
-        keyword = Keyword.objects.get(keyword=k).id
+
+def updateKeywords(dictio):
+    keywords = dictio.pop('keywords', None)
+    if(keywords):
+        for k in keywords:
+            if not k.isdecimal():
+                # This is a new keyword
+                Keyword.objects.get_or_create(keyword=k)
+                keyword_id = Keyword.objects.get(keyword=k).id
+                dictio.update({'keywords': keyword_id})
+            else:
+                # This keyword is already in the database
+                dictio.update({'keywords': k})
+    return dictio
+
+
+def updateFundingBody(dictio):
+    fundingbodies = dictio.pop('funding_body', None)
+    if(fundingbodies):
+        for fb in fundingbodies:
+            if not fb.isdecimal():
+                # This is a new funding body
+                FundingBody.objects.get_or_create(body=fb)
+                fb_id = FundingBody.objects.get(body=fb).id
+                dictio.update({'funding_body': fb_id})
+            else:
+                # This funding body is already in the database
+                dictio.update({'funding_body': fb})
+    return dictio
 
 def updateProjectAjax(request):
     print("in updateProjectAjax")
@@ -119,13 +134,6 @@ def editProject(request, pk):
         start_datetime = formats.date_format(project.start_date, 'Y-m-d')
     if project.end_date:
         end_datetime = formats.date_format(project.end_date, 'Y-m-d')
-
-
-    fundingBody = list(FundingBody.objects.all().values_list('body',flat=True))
-    fundingBody = ", ".join(fundingBody)
-
-    originDatabase = list(OriginDatabase.objects.all().values_list('originDatabase',flat=True))
-    originDatabase = ", ".join(originDatabase)
 
     form = ProjectForm(initial={
         'project_name':project.name,'url': project.url,'start_date': start_datetime, 'projectlocality': project.projectlocality,
