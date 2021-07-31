@@ -323,6 +323,7 @@ EMAIL_USE_TLS = True
 EMAIL_RECIPIENT_LIST = [
     "eucitsci@mfn.berlin",
     "frasanz@bifi.es",
+    "francisco.sanz.g@gmail.com",
     "Claudia.FaboCartas@mfn.berlin"
 ]
 
@@ -333,7 +334,7 @@ EMAIL_CONTACT_RECIPIENT_LIST = [
     "Antonella.Radicchi@mfn.berlin"
 ]
 
-HOST =  env("HOST")
+HOST = env("HOST")
 
 SITE_ID = 1
 REVIEW_PUBLISH_UNMODERATED = True

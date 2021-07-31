@@ -7,7 +7,6 @@ urlpatterns = [
     path('newProject', views.newProject, name='newProject'),
     path('editProject/<int:pk>', views.editProject, name='editProject'),
     path('saveProjectAjax', views.saveProjectAjax, name='saveProjectAjax'),
-    path('updateProjectAjax', views.updateProjectAjax, name='updateProjectAjax'),
     path('projects', views.projects, name='projects'),
     path('projects_stats', views.projects_stats, name='projects_stats'),
     path('project/<int:pk>', views.project, name='project'),

@@ -22,10 +22,12 @@
  #id_projectGeographicLocation_div_map { width: 100% !important; height: 100% !important; }
  #id_projectGeographicLocation_map { width: 100% !important; height: 100% !important; }
 </style>
+{% if project.image3 %}
 <div class="jumbotron jumbotron-fluid project-jumbotron" style="background: url('{{project.image3 | safe}}') no-repeat; background-size: cover;">
   <div class="container-fluid">
   </div>
 </div>
+{% endif %}
 <div class="container">
     <div class="text-center mt-5">
         <div class="text-left">

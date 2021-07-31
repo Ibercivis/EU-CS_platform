@@ -46,8 +46,7 @@ class ProjectForm(forms.Form):
                         'citizen science using the <a href="https://zenodo.org/communities/citscicharacteristics">ECSA'
                         'Characteristics of Citizen Science</a> and the <a href="https://osf.io/xpr2n/">ECSA 10 '
                         'Principles of Citizen Science</a>. What you introduce in this text field will not appear '
-                        'on the platform; it is just for moderation purposes and for the administrators of the'
-                        'platform to see'),
+                        'on the platform; it is just for moderation purposes'),
             max_length=2000,
             label=_('Description of citizen science aspects'))
 
@@ -64,8 +63,7 @@ class ProjectForm(forms.Form):
                 attrs={
                     'data-token-separators': '[","]'}),
             required=True,
-            help_text=_('Please enter 2-3 keywords (comma separated) or pressing enter'
-                        'to further describe your project and assist search on the platform'),
+            help_text=_('Please enter 2-3 keywords <b>comma separated</b> or pressing enter'),
             label=_('Keywords'))
 
     # Useful information to classificate the project
@@ -89,7 +87,7 @@ class ProjectForm(forms.Form):
     hasTag = forms.ModelMultipleChoiceField(
             queryset=HasTag.objects.all(),
             widget=Select2MultipleWidget(),
-            help_text=_('More information about participation'),
+            help_text=_('More information about participation, multiple selection'),
             required=False,
             label=_("Tags"))
 
@@ -134,7 +132,7 @@ class ProjectForm(forms.Form):
             required=False,
             label=_("Project locality"),
             help_text=_('Please describe the locality of the project, in terms of where the main participant'
-                        'activities take place, E.g. in your backyard, parks in London, rivers in Europe, '
+                        'activities take place,<br/> E.g. in your backyard, parks in London, rivers in Europe, '
                         'online globally, etc.'))
 
     projectGeographicLocation = forms.MultiPolygonField(
@@ -186,8 +184,8 @@ class ProjectForm(forms.Form):
             widget=s2forms.Select2TagWidget(
                 attrs={'data-token-separators': '[","]'}
             ),
-            help_text=_('Please enter the funding agencies of the project (e.g. European Commission).'
-                        'Select them from the list or add your own ended by comma or pressing enter'),
+            help_text=_('Please enter the funding agencies of the project (e.g. European Commission)<br />'
+                        'Select them from the list or add your own <b>ended by comma or pressing enter</b>'),
             required=False,
             label=_("Funding body"))
 
@@ -358,9 +356,9 @@ class ProjectForm(forms.Form):
                 howToParticipate=self.data['how_to_participate'],
                 equipment=self.data['equipment'],
                 fundingProgram=self.data['funding_program'],
-                #originUID=self.data['originUID'],
-                #originURL=self.data['originURL'],
-                #doingAtHome=doingAtHome,
+                # originUID=self.data['originUID'],
+                # originURL=self.data['originURL'],
+                # doingAtHome=doingAtHome,
                 participatingInaContest=participatingInaContest,
                 projectGeographicLocation=projectGeographicLocation)
 
@@ -401,10 +399,14 @@ class CustomFieldForm(forms.Form):
     title = forms.CharField(max_length=100, required=False)
     paragraph = forms.CharField(widget=SummernoteWidget(), required=False)
 
-CustomFieldFormset = formset_factory(CustomFieldForm,extra=1)
+CustomFieldFormset = formset_factory(CustomFieldForm, extra=1)
 
 
 class ProjectPermissionForm(forms.Form):
-    selectedUsers = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
-    usersCollection = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
-    usersAllowed =   forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False, label=_("Give additional users permission to edit"))
+    selectedUsers = forms.CharField(widget=forms.HiddenInput(), required=False, initial=())
+    usersCollection = forms.CharField(widget=forms.HiddenInput(), required=False, initial=())
+    usersAllowed = forms.MultipleChoiceField(
+            choices=(),
+            widget=Select2MultipleWidget,
+            required=False,
+            label=_("Give additional users permission to edit"))

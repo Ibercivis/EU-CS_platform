@@ -19,8 +19,14 @@
 }
 	
 .select2-selection--multiple{
-    border-color: #ced4da;
+    border-color: #ced4da !important;
 }
+.select2-selection--single{
+    border-color: #ced4da !important;
+    height: 2.5em !important;
+    padding-top: 0.3em !important;
+}
+
 .select2-selection__choice{
     background-color: #f8f8f8 !important;
     border: 1px solid #d1d1d1 !important;

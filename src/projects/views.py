@@ -38,27 +38,6 @@ User = get_user_model()
 def newProject(request):
     user = request.user
     form = ProjectForm()
-    if request.method == 'POST':
-        print(request.POST)
-        mainOrganisationFixed = request.POST.get('mainOrganisation', False)
-        form = ProjectForm(request.POST, request.FILES)
-        if form.is_valid():
-            images = setImages(request, form)
-            form.save(request, images, [], mainOrganisationFixed)
-            messages.success(request, _('Project added correctly'))
-
-            subject = 'New project submitted'
-            message = render_to_string('emails/new_project.html', {"domain": settings.HOST})
-            to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
-            to.append(user.email)
-            email = EmailMessage(subject, message, to=to)
-            email.content_subtype = "html"
-            email.send()
-
-            return redirect('/projects')
-        else:
-            print(form.errors)
-
     return render(request, 'project_form.html', {'form': form, 'user': user})
 
 
@@ -71,10 +50,29 @@ def saveProjectAjax(request):
     if form.is_valid():
         images = setImages(request, form)
         pk = form.save(request, images, [], '')
+        # We have pk after save and not projectID (this means is a new project)
+        if (pk) and not request.POST.get('projectID').isnumeric():
+            sendProjectEmail(pk, request.user)
         return JsonResponse({'Created': 'OK', 'Project': pk}, status=status.HTTP_200_OK)
     else:
         return JsonResponse(form.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
 
+
+def sendProjectEmail(pk, user):
+    project = get_object_or_404(Project, id=pk)
+    subject = '[EU-CITIZEN.SCIENCE] Your project "%s" has been submitted' % project.name
+    print(subject)
+    message = render_to_string('emails/new_project.html', {
+        'username': user.name,
+        'domain': settings.HOST,
+        'projectname': project.name,
+        'projectid': pk})
+    to = [user.email]
+    bcc = copy.copy(settings.EMAIL_RECIPIENT_LIST)
+    email = EmailMessage(subject, message, to=to, bcc=bcc)
+    email.content_subtype = "html"
+    email.send()
+    print(message)
 
 def updateKeywords(dictio):
     keywords = dictio.pop('keywords', None)
@@ -104,18 +102,6 @@ def updateFundingBody(dictio):
                 # This funding body is already in the database
                 dictio.update({'funding_body': fb})
     return dictio
-
-
-def updateProjectAjax(request):
-    print("in updateProjectAjax")
-    print(request.POST)
-    form = ProjectForm(request.POST, request.FILES)
-    if form.is_valid():
-        images = setImages(request, form)
-        form.save(request, images, [], '')
-        return JsonResponse({'Updated': 'OK'}, status=status.HTTP_200_OK)
-    else:
-        return JsonResponse(form.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
 
 
 def editProject(request, pk):
@@ -201,7 +187,8 @@ def projects(request):
     filters = {'keywords': '', 'topic': '', 'status': 0,  'host': '', 'approvedCheck': '', 'doingAtHome': ''}
 
     if request.GET.get('keywords'):
-        projects = projects.filter(Q(name__icontains=request.GET['keywords']) |
+        projects = projects.filter(
+                Q(name__icontains=request.GET['keywords']) |
                 Q(keywords__keyword__icontains=request.GET['keywords'])).distinct()
         filters['keywords'] = request.GET['keywords']
 
@@ -218,13 +205,15 @@ def projects(request):
         orderBy = request.GET.get('orderby')
         if("featured" in orderBy):
             projectsTop = projects.filter(featured=True)
-            projectsTopIds = list(projectsTop.values_list('id',flat=True))
+            projectsTopIds = list(projectsTop.values_list('id', flat=True))
             projects = projects.exclude(id__in=projectsTopIds)
             projects = list(projectsTop) + list(projects)
         else:
             reviews = Review.objects.filter(content_type=ContentType.objects.get(model="project"))
-            reviews = reviews.values("object_pk",
-            "content_type").annotate(avg_rating=Avg('rating')).order_by(orderBy).values_list('object_pk',flat=True)
+            reviews = reviews.values(
+                    "object_pk",
+                    "content_type").annotate(
+                            avg_rating=Avg('rating')).order_by(orderBy).values_list('object_pk', flat=True)
             reviews = list(reviews)
             projectsVoted = []
             for r in reviews:
@@ -249,13 +238,20 @@ def projects(request):
     page = request.GET.get('page')
     projects = paginator.get_page(page)
 
-    return render(request, 'projects.html', {'projects': projects, 'topics': topics, 'countriesWithContent': countriesWithContent,
-    'status': status, 'filters': filters, 'approvedProjects': approvedProjects, 'unApprovedProjects': unApprovedProjects,'followedProjects': followedProjects,
-    'counter': counter, 'isSearchPage': True })
+    return render(request, 'projects.html', {
+        'projects': projects,
+        'topics': topics,
+        'countriesWithContent': countriesWithContent,
+        'status': status,
+        'filters': filters,
+        'approvedProjects': approvedProjects,
+        'unApprovedProjects': unApprovedProjects,
+        'followedProjects': followedProjects,
+        'counter': counter,
+        'isSearchPage': True})
 
 
-def project(request, pk):  
-
+def project(request, pk):
     user = request.user
     project = get_object_or_404(Project, id=pk)
     users = getOtherUsers(project.creator)
@@ -263,12 +259,13 @@ def project(request, pk):
         form = ProjectForm(initial={'projectGeographicLocation': project.projectGeographicLocation})
     else:
         form = None
-    
     previous_page = request.META.get('HTTP_REFERER')
     if previous_page and 'review' in previous_page:
-        #sendEmail
-        subject = 'Your project has received a review'            
-        message = render_to_string('emails/project_review.html', {"domain": settings.HOST, "name": project.name , "id": pk})
+        # sendEmail
+        subject = 'Your project has received a review'
+        message = render_to_string(
+                'emails/project_review.html',
+                {"domain": settings.HOST, "name": project.name, "id": pk})
         to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
         to.append(project.creator.email)
         email = EmailMessage(subject, message, to=to)
@@ -276,20 +273,20 @@ def project(request, pk):
         email.send()
 
     cooperators = getCooperatorsEmail(pk)
-    unApprovedProjects = UnApprovedProjects.objects.all().values_list('project_id',flat=True)
-    if (project.id in unApprovedProjects or project.hidden) and ( user.is_anonymous or (user != project.creator and not user.is_staff and not user.id in getCooperators(pk))):
+    unApprovedProjects = UnApprovedProjects.objects.all().values_list('project_id', flat=True)
+    if (project.id in unApprovedProjects or project.hidden) and (user.is_anonymous or (user != project.creator and not user.is_staff and not user.id in getCooperators(pk))):
         return redirect('../projects', {})
-    permissionForm = ProjectPermissionForm(initial={'usersCollection':users, 'selectedUsers': cooperators})
-    followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id',flat=True)
-    approvedProjects = ApprovedProjects.objects.all().values_list('project_id',flat=True)    
+    permissionForm = ProjectPermissionForm(initial={'usersCollection': users, 'selectedUsers': cooperators})
+    followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id', flat=True)
+    approvedProjects = ApprovedProjects.objects.all().values_list('project_id', flat=True)
     return render(request, 'project.html', {
-        'project':project, 
-        'followedProjects':followedProjects,
-        'approvedProjects':approvedProjects, 
+        'project': project,
+        'followedProjects': followedProjects,
+        'approvedProjects': approvedProjects,
         'unApprovedProjects': unApprovedProjects,
-        'permissionForm': permissionForm, 
-        'cooperators': getCooperators(pk), 
-        'form':form,
+        'permissionForm': permissionForm,
+        'cooperators': getCooperators(pk),
+        'form': form,
         'isSearchPage': True})
 
 
@@ -307,14 +304,14 @@ def text_autocomplete(request):
     projects = preFilteredProjects(request)
     if request.GET.get('q'):
         text = request.GET['q']
-        projectsName = projects.filter( Q(name__icontains = text) ).distinct()
-        projectsKey = projects.filter( Q(keywords__keyword__icontains = text) ).distinct()
-        project_names = projectsName.values_list('name',flat=True).distinct()
-        keywords = projectsKey.values_list('keywords__keyword',flat=False).distinct()
-        keywords = Keyword.objects.filter(keyword__in = keywords).values_list('keyword',flat=True).distinct()
+        projectsName = projects.filter(Q(name__icontains=text)).distinct()
+        projectsKey = projects.filter(Q(keywords__keyword__icontains=text)).distinct()
+        project_names = projectsName.values_list('name', flat=True).distinct()
+        keywords = projectsKey.values_list('keywords__keyword', flat=False).distinct()
+        keywords = Keyword.objects.filter(keyword__in=keywords).values_list('keyword', flat=True).distinct()
         report = chain(project_names, keywords)
-        json = list(report)
-        return JsonResponse(json, safe=False)
+        myjson = list(report)
+        return JsonResponse(myjson, safe=False)
     else:
         return HttpResponse("No cookies")
 
@@ -342,7 +339,7 @@ def saveImage(request, form, element, ref):
         w = form.cleaned_data.get('width' + ref)
         h = form.cleaned_data.get('height' + ref)
         photo = request.FILES[element]
-        image = Image.open(photo)        
+        image = Image.open(photo)
         cropped_image = image.crop((x, y, w+x, h+y))
         if(ref == '3'):
             finalSize = (1320, 400)
@@ -353,15 +350,14 @@ def saveImage(request, form, element, ref):
 
         if(cropped_image.width > image.width):
             size = (abs(int((finalSize[0]-(finalSize[0]/cropped_image.width*image.width))/2)), finalSize[1])
-            whitebackground = Image.new(mode='RGBA',size=size,color=(255,255,255,0))
+            whitebackground = Image.new(mode='RGBA', size=size, color=(255, 255, 255, 0))
             position = ((finalSize[0] - whitebackground.width), 0)
             resized_image.paste(whitebackground, position)
             position = (0, 0)
             resized_image.paste(whitebackground, position)
-        
         if(cropped_image.height > image.height):
             size = (finalSize[0], abs(int((finalSize[1]-(finalSize[1]/cropped_image.height*image.height))/2)))
-            whitebackground = Image.new(mode='RGBA',size=size,color=(255,255,255,0))
+            whitebackground = Image.new(mode='RGBA', size=size, color=(255, 255, 255, 0))
             position = (0, (finalSize[1] - whitebackground.height))
             resized_image.paste(whitebackground, position)
             position = (0, 0)
@@ -369,11 +365,12 @@ def saveImage(request, form, element, ref):
 
         image_path = saveImageWithPath(resized_image, photo.name)
     elif withImage:
-            image_path = '/'
+        image_path = '/'
     else:
         image_path = ''
 
-    return  image_path
+    return image_path
+
 
 def saveImageWithPath(image, photoName):
     _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
@@ -383,13 +380,16 @@ def saveImageWithPath(image, photoName):
     image_path = '/' + image_path
     return image_path
 
+
 def getOtherUsers(creator):
     users = list(User.objects.all().exclude(is_superuser=True).exclude(id=creator.id).values_list('name','email'))
     return users
 
+
 def getCooperators(projectID):
     users = list(ProjectPermission.objects.all().filter(project_id=projectID).values_list('user',flat=True))
     return users
+
 
 def getCooperatorsEmail(projectID):
     users = getCooperators(projectID)
@@ -399,6 +399,7 @@ def getCooperatorsEmail(projectID):
         cooperators += userObj.email + ", "
     return cooperators
 
+
 def getNamesKeywords(text):
     approvedProjects = ApprovedProjects.objects.all().values_list('project_id',flat=True)
     project_names = Project.objects.filter(~Q(hidden=True)).filter(id__in=approvedProjects).filter(name__icontains=text).values_list('name',flat=True).distinct()
@@ -406,9 +407,11 @@ def getNamesKeywords(text):
     report = chain(project_names, keywords)
     return report
 
+
 def preFilteredProjects(request):
     projects = Project.objects.get_queryset().order_by('id')
     return applyFilters(request, projects)
+
 
 def applyFilters(request, projects):
     approvedProjects = ApprovedProjects.objects.all().values_list('project_id',flat=True)
