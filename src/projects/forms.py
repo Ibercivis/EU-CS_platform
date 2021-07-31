@@ -59,7 +59,10 @@ class ProjectForm(forms.Form):
 
     keywords = forms.ModelMultipleChoiceField(
             queryset=Keyword.objects.all(),
-            widget=s2forms.ModelSelect2TagWidget(search_fields=['keyword__icontains']),
+            widget=s2forms.ModelSelect2TagWidget(
+                search_fields=['keyword__icontains'],
+                attrs={
+                    'data-token-separators': '[","]'}),
             required=True,
             help_text=_('Please enter 2-3 keywords (comma separated) or pressing enter'
                         'to further describe your project and assist search on the platform'),
@@ -180,7 +183,9 @@ class ProjectForm(forms.Form):
     # Funding information
     funding_body = forms.ModelMultipleChoiceField(
             queryset=FundingBody.objects.all(),
-            widget=s2forms.Select2TagWidget(),
+            widget=s2forms.Select2TagWidget(
+                attrs={'data-token-separators': '[","]'}
+            ),
             help_text=_('Please enter the funding agencies of the project (e.g. European Commission).'
                         'Select them from the list or add your own ended by comma or pressing enter'),
             required=False,
@@ -377,8 +382,6 @@ class ProjectForm(forms.Form):
         project.doingAtHome = doingAtHome
         project.equipment = self.data['equipment']
         project.fundingProgram = self.data['funding_program']
-        project.originUID = self.data['originUID']
-        project.originURL = self.data['originURL']
         project.mainOrganisation = mainOrganisation
         project.projectGeographicLocation = projectGeographicLocation
 

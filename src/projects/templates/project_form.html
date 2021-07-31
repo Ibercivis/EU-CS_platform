@@ -4,7 +4,6 @@
 {% load crispy_forms_tags %}
 {% load leaflet_tags %}
 {% block head %}
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 {{block.super }}
 <link rel="stylesheet" href="{% static 'site/css/forms.css' %}">
 {{ form.media.css }}
@@ -12,7 +11,7 @@
 
 {% endblock head %}
 
-{% block title %}{{ block.super }} :: Edit project{% endblock %}
+{% block title %}{{ block.super }} :: New project{% endblock %}
 
 {% block navbar-left %}
 {% include "_navbar.html" with active_link="projects" %}
@@ -55,57 +54,8 @@
 </div>
 <!-- END MODAL TO CROP -->
 
-<!-- Delete modal -->
-<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">{% trans "Confirm delete" %}</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>{% trans "You are going to delete this project, this procedure is irreversible." %}</p>
-                <p>{% trans "Do you want to proceed?" %}</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
-                <a class="btn btn-red btn-delete"><i class="fas fa-trash-alt"></i> {% trans "Delete" %}</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 <div class="container mt-5">
-    <div class="row">
-        <div class="col-6">
-            <h2 class="float-left">{% trans "Edit project" %}</h2>
-        </div>
-        <div class="col-6">
-            <button type="submit" onclick="$('#id_submit').click()" class="btn btn-green"><i class="fas fa-share-square"></i> {% trans "Save" %}</button>
-            <button type="submit" class="btn btn-red float-right" data-href="{% url 'deleteProject' project.id %}"
-                                                                  data-toggle="modal" data-target="#confirm-delete" name='deleteProject'><i class="fas fa-trash-alt"></i> {% trans "Delete" %}
-            </button>
-        </div>
-    </div>
-
-    {% if user.is_authenticated %}
-    {% if user.is_staff %}
-    <div class="row">
-        <div class="col-6"></div>
-        <div class="col-6">
-            <permissionForm>
-            {% csrf_token %}
-            {{ permissionForm.usersAllowed | as_crispy_field }}
-            {{ permissionForm.selectedUsers | as_crispy_field }}
-            {{ permissionForm.usersCollection | as_crispy_field }}
-            </permissionForm>
-        </div>
-    </div>
-    {% endif %}
-    {% endif %}
-
-    <form action="/editProject/{{project.id}}" id='form_project' class="edit-project" method="post" enctype="multipart/form-data">
+    <form action="#" id='form_project' class="edit-project" method="post" enctype="multipart/form-data">
         <div class="row">
             {% csrf_token %}
             <div class="col-12">
@@ -122,7 +72,11 @@
                         {{ form.y3|as_crispy_field }}
                         {{ form.height3|as_crispy_field }}
                         {{ form.width3|as_crispy_field }}
-                        {{ form.image_credit3|as_crispy_field }}
+                        <div class="row">
+                            <div class="col-4">
+                                {{ form.image_credit3|as_crispy_field }}
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -132,8 +86,7 @@
                         <input type="hidden" id="projectID" name="projectID" value={{project.id}}>
                         <div class="row">
                             <div class="col-12">
-
-                        <div id="errors"></div>
+                                <div id="errors"></div>
                             </div>
                         </div>
                         <div class="row">
@@ -145,18 +98,31 @@
                                 {{ form.aim|as_crispy_field }}
                                 {{ form.description_citizen_science_aspects|as_crispy_field }}
                                 {{ form.status|as_crispy_field }}
-                                {{ form.start_date|as_crispy_field }}
-                                {{ form.end_date|as_crispy_field }}
+                                {{ form.keywords|as_crispy_field }}
+                                <button class="btn btn-green submit continue">
+                                    <i class="fas fa-save"></i> {% trans "Save & continue editing" %}
+                                </button>
+                                <button class="btn btn-green submit">
+                                    <i class="fas fa-share-square"></i> {% trans "Save" %}
+                                </button>
+
                             </div>
                         </div>
                         <h4 class="mt-5">{% trans "Useful information to classificate the project" %}</h4>
                         <div class="row">
                             <div class="col-1"></div>
                             <div class="col-11">
+                                {{ form.start_date|as_crispy_field }}
+                                {{ form.end_date|as_crispy_field }}
                                 {{ form.topic|as_crispy_field }}
-                                {{ form.keywords|as_crispy_field }}
-                                {{ form.choices |as_crispy_field }}
                                 {{ form.hasTag |as_crispy_field }}
+                                <button class="btn btn-green submit continue">
+                                    <i class="fas fa-save"></i> {% trans "Save & continue editing" %}
+                                </button>
+                                <button class="btn btn-green submit">
+                                    <i class="fas fa-share-square"></i> {% trans "Save" %}
+                                </button>
+
                             </div>
                         </div>
                         <h4 class="mt-5">{% trans "Participation information" %}</h4>
@@ -167,6 +133,14 @@
                                 {{ form.difficultyLevel |as_crispy_field }}
                                 {{ form.how_to_participate|as_crispy_field }}
                                 {{ form.equipment|as_crispy_field }}
+                                <button class="btn btn-green submit continue">
+                                    <i class="fas fa-save"></i> {% trans "Save & continue editing" %}
+                                </button>
+                                <button class="btn btn-green submit">
+                                    <i class="fas fa-share-square"></i> {% trans "Save" %}
+                                </button>
+
+
                             </div>
                         </div>
                         <h4 class="mt-5">{% trans "Project location" %}</h4>
@@ -176,6 +150,14 @@
                                 {{ form.geographicextend |as_crispy_field }}
                                 {{ form.projectlocality |as_crispy_field }}
                                 {{ form.projectGeographicLocation|as_crispy_field }}
+                                <button class="btn btn-green submit continue">
+                                    <i class="fas fa-save"></i> {% trans "Save & continue editing" %}
+                                </button>
+                                <button class="btn btn-green submit">
+                                    <i class="fas fa-share-square"></i> {% trans "Save" %}
+                                </button>
+
+
                             </div>
                         </div>
                         <h4 class="mt-5">{% trans "Contact and hosts details" %}</h4>
@@ -186,6 +168,14 @@
                                 {{ form.contact_person_email|as_crispy_field }}
                                 {{ form.mainOrganisation|as_crispy_field }}
                                 {{ form.organisation|as_crispy_field }}
+                                <button class="btn btn-green submit continue">
+                                    <i class="fas fa-save"></i> {% trans "Save & continue editing" %}
+                                </button>
+                                <button class="btn btn-green submit">
+                                    <i class="fas fa-share-square"></i> {% trans "Save" %}
+                                </button>
+
+
                             </div>
                         </div>
                         <h4 class="mt-5">{% trans "Funding Information" %}</h4>
@@ -193,18 +183,15 @@
                             <div class="col-1"></div>
                             <div class="col-11">
                                 {{ form.funding_body|as_crispy_field }}
-                                {{ form.fundingBodySelected|as_crispy_field }}
                                 {{ form.funding_program|as_crispy_field }}
-                            </div>
-                        </div>
-                        <h4 class="mt-5">{% trans "Origin information" %}</h4>
-                        <div class="row">
-                            <div class="col-1"></div>
-                            <div class="col-11">
-                                {{ form.origin_database|as_crispy_field }}
-                                {{ form.originDatabaseSelected|as_crispy_field }}
-                                {{ form.originUID|as_crispy_field }}
-                                {{ form.originURL|as_crispy_field }}
+                                <button class="btn btn-green submit continue">
+                                    <i class="fas fa-save"></i> {% trans "Save & continue editing" %}
+                                </button>
+                                <button class="btn btn-green submit">
+                                    <i class="fas fa-share-square"></i> {% trans "Save" %}
+                                </button>
+
+
                             </div>
                         </div>
                         <h4 class="mt-5">{% trans "Project profile images" %}</h4>
@@ -223,10 +210,10 @@
                                 {{ form.width1|as_crispy_field }}
                                 {{ form.withImage1|as_crispy_field }}
                                 {{ form.image_credit1|as_crispy_field }}
-                                 <a id="imgResult2" href="#"> <img 
-                                     class="img-fluid img-zoom" 
-                                     id="imageResult2" 
-                                     src="{% if project.image1 %} {{project.image1}} {% else %} {% static 'site/img/void_600.png' %} {% endif %}"> </a>
+                                <a id="imgResult2" href="#"> <img 
+                                                   class="img-fluid img-zoom" 
+                                                   id="imageResult2" 
+                                                   src="{% if project.image1 %} {{project.image1}} {% else %} {% static 'site/img/void_600.png' %} {% endif %}"> </a>
 
                                 {{ form.image2|as_crispy_field }}
                                 {{ form.x2|as_crispy_field }}
@@ -235,6 +222,13 @@
                                 {{ form.width2|as_crispy_field }}
                                 {{ form.withImage2|as_crispy_field }}
                                 {{ form.image_credit2|as_crispy_field }}
+                                <button class="btn btn-green submit continue">
+                                    <i class="fas fa-save"></i> {% trans "Save & continue editing" %}
+                                </button>
+                                <button class="btn btn-green submit">
+                                    <i class="fas fa-share-square"></i> {% trans "Save" %}
+                                </button>
+                                <div class="mb-5"></div>
                             </div>
                         </div>
                     </div>
@@ -242,8 +236,7 @@
             </div>
         </div>
     </form>
-    <button  id="id_submit" class="btn btn-green mb-5"><i class="fas fa-share-square"></i> {% trans "Save" %}</button>
-    </div>
+</div>
 
 {% endblock list_of_items %}
 
@@ -253,28 +246,29 @@
 <script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
 <script>
     $(function () {
-        getKeywords();
         $('input').on('focus', function(){
             if($(this).is('.error'))
                 $(this).removeClass('error');
         });
         for(var instanceName in CKEDITOR.instances){
             CKEDITOR.instances[instanceName].on('focus', function(e){
-                console.log($(this).attr('id'))
-                if($(this).is('.error'))
-                    $(this).removeClass('error');
+		id='#cke_'+$(this).attr('name')
+                if($(id).is('.error'))
+                    $(id).removeClass('error');
             })
         }
 
-        $('#id_submit').click(function (e) {
+        $('.submit').click(function (e) {
+            e.preventDefault()
+            if($(this).hasClass('continue'))
+                var contin=true
+            else
+                var contin=false
+            console.log(contin)
+	        $('.myerror').remove()
             $.ajaxSettings.traditional = true;
             for(var instanceName in CKEDITOR.instances)
                 CKEDITOR.instances[instanceName].updateElement();
-            var selected_keywords = $("#id_keywords option:selected").map(function () {
-                return $.trim($(this).text());
-            }).get().join(',');         
-            $('#id_choices').val(selected_keywords);
-            $('#id_keywords').empty();
             var fundingBody = $("#id_funding_body option:selected").map(function () {
               return $.trim($(this).text());
             }).get().join(',');
@@ -290,42 +284,31 @@
 
             $.ajax({
                 type: 'POST',
-                url: '/updateProjectAjax',
+                url: '/saveProjectAjax',
                 processData: false,
                 contentType: false,
                 data: new FormData(document.getElementById("form_project")),
                 success: function (response){
-                    console.log(response);
+                    console.log(response.Project)
+                    console.log($(this))
+                    if(contin){
+                        $('#projectID').val(response.Project)
+                        console.log('continue')
+                    }
+                    else{
+                        window.location.href = '/project/'+response.Project+'?prev='+window.location.pathname
+                    }
                 },
                 error: function (response){
-                    console.log(response);
                     $.each(response.responseJSON, function(i,val){
                         $('#id_'+i).addClass('error');
+			            $('label[for=id_'+i+']').append('<div class="myerror alert alert-danger">'+val+'</div>')
                         $('#cke_id_'+i).addClass('error');
                     })
                 }
             });
         });
     });
-
-   function getKeywords() {
-        var project_id = $("#projectID").val();
-        var request = $.ajax(
-        {
-          type: "GET",
-          url: "{% url 'getKeywords' %}",
-          dataType: 'json',
-          data: {
-            "project_id": project_id
-          },
-          success: function (response) {
-              var json = $.parseJSON(response);
-              $.each(json, function(i,val){
-                  $('#id_keywords').append('<option value ="'+val[0]+'" '+val[2]+'>'+val[1]+'</option>')
-              })
-          }
-        });
-      };
 </script>
 <script>
 

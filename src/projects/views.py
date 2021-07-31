@@ -35,7 +35,7 @@ User = get_user_model()
 
 
 @login_required(login_url='/login')
-def new_project(request):
+def newProject(request):
     user = request.user
     form = ProjectForm()
     if request.method == 'POST':
@@ -59,18 +59,19 @@ def new_project(request):
         else:
             print(form.errors)
 
-    return render(request, 'new_project.html', {'form': form, 'user': user})
+    return render(request, 'project_form.html', {'form': form, 'user': user})
 
 
 def saveProjectAjax(request):
+    print(request.POST)
     request.POST = request.POST.copy()
     request.POST = updateKeywords(request.POST)
     request.POST = updateFundingBody(request.POST)
     form = ProjectForm(request.POST, request.FILES)
     if form.is_valid():
         images = setImages(request, form)
-        pr = form.save(request, images, [], '')
-        return JsonResponse({'Created': 'OK', 'Project': pr}, status=status.HTTP_200_OK)
+        pk = form.save(request, images, [], '')
+        return JsonResponse({'Created': 'OK', 'Project': pk}, status=status.HTTP_200_OK)
     else:
         return JsonResponse(form.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
 
@@ -104,14 +105,15 @@ def updateFundingBody(dictio):
                 dictio.update({'funding_body': fb})
     return dictio
 
+
 def updateProjectAjax(request):
     print("in updateProjectAjax")
     print(request.POST)
     form = ProjectForm(request.POST, request.FILES)
     if form.is_valid():
         images = setImages(request, form)
-        form.save(request,images,[],'')
-        return JsonResponse({'Updated':'OK'},status=status.HTTP_200_OK)
+        form.save(request, images, [], '')
+        return JsonResponse({'Updated': 'OK'}, status=status.HTTP_200_OK)
     else:
         return JsonResponse(form.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
 
@@ -125,7 +127,7 @@ def editProject(request, pk):
 
     users = getOtherUsers(project.creator)
     cooperators = getCooperatorsEmail(pk)
-    permissionForm = ProjectPermissionForm(initial={'usersCollection':users, 'selectedUsers': cooperators})
+    permissionForm = ProjectPermissionForm(initial={'usersCollection': users, 'selectedUsers': cooperators})
 
     start_datetime = None
     end_datetime = None
@@ -136,60 +138,52 @@ def editProject(request, pk):
         end_datetime = formats.date_format(project.end_date, 'Y-m-d')
 
     form = ProjectForm(initial={
-        'project_name':project.name,'url': project.url,'start_date': start_datetime, 'projectlocality': project.projectlocality,
-        'end_date':end_datetime, 'aim': project.aim, 'description': project.description, 'description_citizen_science_aspects': project.description_citizen_science_aspects,
-        'status': project.status, 'mainOrganisation': project.mainOrganisation,
+        'project_name': project.name,
+        'url': project.url,
+        'start_date': start_datetime,
+        'projectlocality': project.projectlocality,
+        'keywords': project.keywords.all,
+        'end_date': end_datetime,
+        'aim': project.aim,
+        'description': project.description,
+        'description_citizen_science_aspects': project.description_citizen_science_aspects,
+        'status': project.status,
+        'mainOrganisation': project.mainOrganisation,
         'organisation': project.organisation.all,
-        'topic':project.topic.all, 
-        'participationtask': project.participationtask.all, 
+        'topic': project.topic.all,
+        'participationtask': project.participationtask.all,
         'hasTag': project.hasTag.all,
         'difficultyLevel': project.difficultyLevel,
         'geographicextend': project.geographicextend.all,
         'projectGeographicLocation': project.projectGeographicLocation,
-        'image1': project.image1, 'image_credit1': project.imageCredit1, 'withImage1': (True, False)[project.image1 == ""],
-        'image2': project.image2, 'image_credit2': project.imageCredit2, 'withImage2': (True, False)[project.image2 == ""],
-        'image3': project.image3, 'image_credit3': project.imageCredit3, 'withImage3': (True, False)[project.image3 == ""],
-        'how_to_participate': project.howToParticipate, 'equipment': project.equipment,
-        'contact_person': project.author, 'contact_person_email': project.author_email, 'host': project.host,
-        'funding_body': fundingBody, 'doingAtHome': project.doingAtHome, 'fundingBodySelected': project.fundingBody, 'fundingProgram': project.fundingProgram,
-        'originDatabase': originDatabase,'originDatabaseSelected': project.originDatabase,
-        'originUID' : project.originUID, 'originURL': project.originURL,
+        'image1': project.image1,
+        'image_credit1': project.imageCredit1,
+        'withImage1': (True, False)[project.image1 == ""],
+        'image2': project.image2,
+        'image_credit2': project.imageCredit2,
+        'withImage2': (True, False)[project.image2 == ""],
+        'image3': project.image3,
+        'image_credit3': project.imageCredit3,
+        'withImage3': (True, False)[project.image3 == ""],
+        'how_to_participate': project.howToParticipate,
+        'equipment': project.equipment,
+        'contact_person': project.author,
+        'contact_person_email': project.author_email,
+        'host': project.host,
+        'funding_body': project.fundingBody.all,
+        'doingAtHome': project.doingAtHome,
+        'fundingBodySelected': project.fundingBody,
+        'fundingProgram': project.fundingProgram,
+        'originDatabase': project.originDatabase,
+        'originUID': project.originUID,
+        'originURL': project.originURL,
     })
 
-
-    fields = list(project.customField.all().values())
-    data = [{'title': l['title'], 'paragraph': l['paragraph']}
-                    for l in fields]
-    cField_formset = CustomFieldFormset(initial=data)
-
-    if request.method == 'POST':
-        print(request.POST)
-        mainOrganisationFixed = request.POST.get('mainOrganisation', False)
-        form = ProjectForm(request.POST, request.FILES)
-        cField_formset = CustomFieldFormset(request.POST)
-        if form.is_valid() and cField_formset.is_valid():
-            new_cFields = []
-            for cField_form in cField_formset:
-                title = cField_form.cleaned_data.get('title')
-                paragraph = cField_form.cleaned_data.get('paragraph')
-                if title and paragraph:
-                    new_cFields.append(CustomField(title=title, paragraph=paragraph))
-            images = setImages(request, form)
-            form.save(request, images,[],mainOrganisationFixed)
-            return redirect('/project/'+ str(pk))
-        else:
-            print(form.errors)
-    return render(request, 'editProject.html', {
+    return render(request, 'project_form.html', {
         'form': form,
         'project': project,
         'user': user,
-        'cField_formset': cField_formset,
         'permissionForm': permissionForm})
-
-
-
-
-
 
 
 def projects(request):
@@ -198,7 +192,8 @@ def projects(request):
     unApprovedProjects = UnApprovedProjects.objects.all().values_list('project_id', flat=True)
     user = request.user
     followedProjects = None
-    followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id',flat=True)
+    followedProjects = FollowedProjects.objects.all().filter(
+            user_id=user.id).values_list('project_id', flat=True)
     countriesWithContent = None
 
     topics = Topic.objects.all()
@@ -207,7 +202,7 @@ def projects(request):
 
     if request.GET.get('keywords'):
         projects = projects.filter(Q(name__icontains=request.GET['keywords']) |
-                                    Q(keywords__keyword__icontains=request.GET['keywords'])).distinct()
+                Q(keywords__keyword__icontains=request.GET['keywords'])).distinct()
         filters['keywords'] = request.GET['keywords']
 
     projects = applyFilters(request, projects)
@@ -298,8 +293,6 @@ def project(request, pk):
         'isSearchPage': True})
 
 
-
-
 def deleteProject(request, pk):
     obj = get_object_or_404(Project, id=pk)
     if request.user == obj.creator or request.user.is_staff or request.user.id in getCooperators(pk):
@@ -308,6 +301,7 @@ def deleteProject(request, pk):
         for r in reviews:
             r.delete()
     return redirect('projects')
+
 
 def text_autocomplete(request):
     projects = preFilteredProjects(request)
@@ -336,6 +330,7 @@ def setImages(request, form):
     images.append(image3_path)
     print(images)
     return images
+
 
 def saveImage(request, form, element, ref):
     image_path = ''
@@ -453,6 +448,7 @@ def setFilters(request, filters):
 def clearFilters(request):
     return redirect ('projects')
 
+
 @staff_member_required()
 def setApproved(request):
     response = {}
@@ -461,31 +457,32 @@ def setApproved(request):
     setProjectApproved(id, approved)
     return JsonResponse(response, safe=False)
 
+
 def setProjectApproved(id, approved):
-    approved= False if approved in ['False','false','0'] else True
+    approved = False if approved in ['False', 'false', '0'] else True
     aProject = get_object_or_404(Project, id=id)
-    if approved == True:
-        #Insert
-        ApprovedProjects.objects.get_or_create(project=aProject)        
-        #sendEmail
-        subject = 'Your project has been approved'            
-        message = render_to_string('emails/approved_project.html', {"domain": settings.HOST, "name": aProject.name , "id": id})
+    if approved is True:
+        # Insert
+        ApprovedProjects.objects.get_or_create(project=aProject)
+        # sendEmail
+        subject = 'Your project has been approved'
+        message = render_to_string('emails/approved_project.html', {"domain": settings.HOST,
+            "name": aProject.name, "id": id})
         to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
         to.append(aProject.creator.email)
         email = EmailMessage(subject, message, to=to)
         email.content_subtype = "html"
         email.send()
-
-        #Delete UnApprovedProjects
+        # Delete from UnApprovedProjects
         try:
             obj = UnApprovedProjects.objects.get(project_id=id)
             obj.delete()
         except UnApprovedProjects.DoesNotExist:
             print("Does not exist this unapproved project")
     else:
-        #Insert UnApprovedProjects
+        # Insert UnApprovedProjects
         UnApprovedProjects.objects.get_or_create(project=aProject)
-        #Delete
+        # Delete it from approved projects
         try:
             obj = ApprovedProjects.objects.get(project_id=id)
             obj.delete()
@@ -501,10 +498,12 @@ def setHidden(request):
     setProjectHidden(id, hidden)
     return JsonResponse(response, safe=False)
 
+
 def setProjectHidden(id, hidden):
     project = get_object_or_404(Project, id=id)
     project.hidden = False if hidden in ['False','false','0'] else True
     project.save()
+
 
 @staff_member_required()
 def setFeatured(request):
@@ -514,11 +513,13 @@ def setFeatured(request):
     setProjectFeatured(id, featured)
     return JsonResponse(response, safe=False)
 
+
 def setProjectFeatured(id, featured):
     project = get_object_or_404(Project, id=id)
     project.featured = featured
-    project.featured = False if featured in ['False','false','0'] else True
+    project.featured = False if featured in ['False', 'false', '0'] else True
     project.save()
+
 
 def setFollowedProject(request):
     response = {}
@@ -528,14 +529,15 @@ def setFollowedProject(request):
     followProject(projectId, userId, follow)
     return JsonResponse(response, safe=False)
 
+
 def followProject(projectId, userId, follow):
-    follow= False if follow in ['False','false','0'] else True
+    follow = False if follow in ['False', 'false', '0'] else True
     fProject = get_object_or_404(Project, id=projectId)
     fUser = get_object_or_404(User, id=userId)
-    if follow == True:
-        #Insert
+    if follow is True:
+        # Insert
         followedProject = FollowedProjects.objects.get_or_create(project=fProject, user=fUser)
-        #sendEmail
+        # sendEmail
         subject = 'Your project has been followed'            
         message = render_to_string('emails/followed_project.html', {"domain": settings.HOST, "name": fProject.name , "id": projectId})
         to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
@@ -544,9 +546,9 @@ def followProject(projectId, userId, follow):
         email.content_subtype = "html"
         email.send()
     else:
-        #Delete
+        # Delete
         try:
-            obj = FollowedProjects.objects.get(project_id=projectId,user_id=userId)
+            obj = FollowedProjects.objects.get(project_id=projectId, user_id=userId)
             obj.delete()
         except FollowedProjects.DoesNotExist:
             print("Does not exist this followed project")
@@ -562,13 +564,13 @@ def allowUser(request):
         #TODO return JsonResponse with error code
         return redirect('../projects', {})
 
-    #Delete all
+    # Delete all
     objs = ProjectPermission.objects.all().filter(project_id=projectId)
     if(objs):
         for obj in objs:
             obj.delete()
 
-    #Insert all
+    # Insert all
     users = users.split(',')
     for user in users:
         fUser = User.objects.filter(email=user)[:1].get()
@@ -595,7 +597,7 @@ def downloadProjects(request):
 
 
 def get_headers():
-    return ['id', 'name', 'aim', 'description', 'keywords','status', 'start_date', 'end_date', 'topic', 'url',
+    return ['id', 'name', 'aim', 'description', 'keywords', 'status', 'start_date', 'end_date', 'topic', 'url',
      'host', 'howToParticipate', 'doingAtHome', 'equipment', 'fundingBody', 'fundingProgram', 'originDatabase', 'originURL', 'originUID']
 
 
@@ -630,9 +632,11 @@ def get_data(item):
         'originUID': item.originUID,
     }
 
+
 class Buffer(object):
     def write(self, value):
         return value
+
 
 def iter_items(items, pseudo_buffer):
     writer = csv.DictWriter(pseudo_buffer, fieldnames=get_headers())
@@ -640,89 +644,6 @@ def iter_items(items, pseudo_buffer):
 
     for item in items:
         yield writer.writerow(get_data(item))
-
-def getOrganisations(request):
-    mainOrganisation = request.GET.getlist("mainOrganisation[]")
-    if(mainOrganisation):
-        mainOrganisation = mainOrganisation[0]
-    else:
-        mainOrganisation = request.GET.get("mainOrganisation")
-    organisationsSelected = request.GET.getlist("organisationsSelected[]")
-    organisationsSelected = list(organisationsSelected)
-    organisationsSelected = ", ".join(organisationsSelected)
-    options = '<select id="id_organisation" class="select form-control">'
-    response = {}
-    organisations = Organisation.objects.get_queryset()
-    organisations = organisations.values_list("id","name")
-    organisations = tuple(organisations)
-    if organisations:        
-        for organisation in organisations:
-            if(not mainOrganisation or int(organisation[0]) != int(mainOrganisation)):
-                if(str(organisation[0]) in organisationsSelected):
-                    options += '<option value = "%s" selected>%s</option>' % (
-                        organisation[0],
-                        organisation[1]
-                    )
-                else:
-                    options += '<option value = "%s">%s</option>' % (
-                        organisation[0],
-                        organisation[1]
-                    )
-        options += '</select>'
-        response['organisations'] = options
-    else:
-        response['organisations'] = '<select id="id_organisation" class="select form-control" disabled></select>'
-
-    return JsonResponse(response)
-
-
-def getKeywords(request):
-    project_id = request.GET.get("project_id")
-    with connection.cursor() as cursor:
-        query = 'select projects_keyword.id, projects_keyword.keyword, case when projects_keyword.id in (select keyword_id from projects_project_keywords where project_id = %s) then \'selected\'  else \'\' end from projects_keyword;' % (project_id)
-        cursor.execute(query)
-        keywords = cursor.fetchall()
-        keywords = json.dumps(keywords)
-
-    return JsonResponse(keywords, safe=False)
-
-
-
-def getKeywordsSelector(request):
-    project_id = request.GET.get("project_id")
-    keywordsSelected = []
-    if project_id != '0':
-        project = get_object_or_404(Project, id=project_id)
-        keywordsSelected = list(project.keywords.all().values_list('keyword', flat=True))
-    
-    options = '<select id="id_keywords" class="select form-control">'
-    response = {}
-    keywords = Keyword.objects.get_queryset()
-    keywords = keywords.values_list("id","keyword")
-    keywords = tuple(keywords)
-    if keywords:
-        for keyword in keywords:
-            found = False
-            if(keywordsSelected):
-                for key in keywordsSelected:
-                    if(str(keyword[1]) == key):
-                        found = True
-                        options += '<option value = "%s" selected>%s</option>' % (
-                            keyword[0],
-                            keyword[1]
-                        )
-                        break
-            if(not found or not keywordsSelected):
-                options += '<option value = "%s">%s</option>' % (
-                    keyword[0],
-                    keyword[1]
-                )
-        options += '</select>'
-        response['keywords'] = options
-    else:
-        response['keywords'] = '<select id="id_keywords" class="select form-control" disabled></select>'
-
-    return JsonResponse(response)
 
 
 def projects_stats(request):
