@@ -17,7 +17,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 STATICFILES_DIRS = [str(BASE_DIR / "static"), MACHINA_MAIN_STATIC_DIR]
 MEDIA_ROOT = str(BASE_DIR / "media")
 MEDIA_URL = "/media/"
-STATIC_ROOT= "/home/ubuntu/v0.5/static"
+STATIC_ROOT = "/home/ubuntu/v0.5/static"
 
 LOCALE_PATHS = [
     os.path.join(BASE_DIR, 'locale'),
@@ -57,7 +57,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 # Machina
                 'machina.core.context_processors.metadata',
-                #own
+                # Wwn
                 'eucs_platform.context_processors.global_settings',
 
             ]
@@ -101,6 +101,7 @@ INSTALLED_APPS = (
     "accounts",
     "projects",
     "resources",
+    "digest",
     "django_select2",
     "blog",
     "django_summernote",

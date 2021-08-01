@@ -49,6 +49,9 @@ class GeographicExtend(models.Model):
 class Keyword(models.Model):
     keyword = models.TextField()
 
+    class Meta:
+        ordering = ['-id']
+
     def __str__(self):
         return f'{self.keyword}'
 

@@ -74,6 +74,7 @@ def sendProjectEmail(pk, user):
     email.send()
     print(message)
 
+
 def updateKeywords(dictio):
     keywords = dictio.pop('keywords', None)
     if(keywords):
