@@ -1,12 +1,17 @@
-from django.contrib import admin
+from django.contrib import admin, messages
+from django.utils.html import mark_safe
+from django.core.mail import EmailMessage
+from django.utils.translation import ngettext
+
+from dateutil.relativedelta import relativedelta
+
 from .models import Digest
 from blog.models import Post
 from events.models import Event
 from projects.models import Project
 from resources.models import Resource
 from organisations.models import Organisation
-from dateutil.relativedelta import relativedelta
-from django.utils.html import mark_safe
+from .views import showDigest
 
 # Register your models here.
 
@@ -14,8 +19,10 @@ from django.utils.html import mark_safe
 class DigestAdmin(admin.ModelAdmin):
     model = Digest
 
-    class Media:
-        js = ("site/js/admin_digest.js",)
+    actions = ['send_test', 'send_digest']
+
+    def send_digest(self, request, queryset):
+        queryset.update(status='p')
 
     def save_model(self, request, obj, form, change):
         obj.creator = request.user
@@ -64,30 +71,29 @@ class DigestAdmin(admin.ModelAdmin):
                 'nProjects',
                 'nResources',
                 'nTrainings',
-                'temail',
-                'test',
-                'send',
                 'sent']
 
     def link(self, obj):
         link = '<a href="/showDigest/%s">%s</a>' % (obj.pk, obj.slug)
         return mark_safe(link)
 
-    def temail(self, obj):
-        field = '<input type="text"/>'
-        return mark_safe(field)
+    def send_test(self, request, queryset):
+        # TODO: send all test messages
+        item = queryset.first()
+        subject = '[TEST EU-Citizen.Science] Digest from %s to %s' % (item.dateOrg, item.dateEnd)
+        message = showDigest(request, item.id, mode='string')
+        to = [request.user.email]
+        email = EmailMessage(subject, message, to=to)
+        email.content_subtype = "html"
+        email.send()
+        nmessages = 1
 
-    def test(self, obj):
-        test_button = '<button class="button test">Test</button>'
-        return mark_safe(test_button)
-
-    def send(self, obj):
-        send_button = '<button class="button">Send</button>'
-        return mark_safe(send_button)
-
-    @staticmethod
-    def sendTest():
-        return 0
+        self.message_user(request, ngettext(
+            '%d test email was sent',
+            '%d test mails were sent',
+            nmessages,
+            ) % nmessages, messages.SUCCESS)
+    send_test.short_description = "Send test to your email address"
 
 
 admin.site.register(Digest, DigestAdmin)

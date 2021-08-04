@@ -1,4 +1,6 @@
+from django.conf import settings
 from django.shortcuts import render, get_object_or_404
+from django.template.loader import render_to_string
 from .models import Digest
 from blog.models import Post
 from events.models import Event
@@ -16,9 +18,9 @@ def showDigests(request):
     return render(request, 'show_digests.html')
 
 
-def showDigest(request, pk):
+def showDigest(request, pk, mode='page'):
     digest = get_object_or_404(Digest, id=pk)
-    info = {"digest": digest}
+    info = {"digest": digest, "domain": settings.HOST}
 
     if(digest.includePosts):
         posts = Post.objects.filter(
@@ -60,8 +62,7 @@ def showDigest(request, pk):
 
     print(info)
 
-    return render(request, 'show_digest.html', info)
-
-
-def sendTest(request):
-    return render(request, 'show_digest.html')
+    if mode == 'string':
+        return render_to_string('show_digest.html', info)
+    else:
+        return render(request, 'show_digest.html', info)
