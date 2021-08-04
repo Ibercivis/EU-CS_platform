@@ -77,6 +77,9 @@ class Resource(models.Model):
     featured = models.BooleanField(default=False)
     organisation = models.ManyToManyField(Organisation)
 
+    # Moderation
+    approved = models.BooleanField(default=False)
+
 #   Training resources fields
     isTrainingResource = models.BooleanField(null=True, blank=True)
     educationLevel = models.ForeignKey(EducationLevel, on_delete=models.CASCADE, null=True, blank=True)

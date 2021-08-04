@@ -1,6 +1,5 @@
 from django.contrib.gis.db import models
 from django.conf import settings
-from django_countries.fields import CountryField
 from organisations.models import Organisation
 
 
@@ -141,6 +140,9 @@ class Project(models.Model):
     originDatabase = models.ForeignKey(OriginDatabase, on_delete=models.CASCADE, null=True, blank=True)
     originURL = models.CharField(max_length=200, null=True, blank=True)
     originUID = models.CharField(max_length=200, null=True, blank=True)
+
+    # For moderation
+    approved = models.BooleanField(default=False)
 
     # Others (some of them not used)
     featured = models.BooleanField(default=False)
