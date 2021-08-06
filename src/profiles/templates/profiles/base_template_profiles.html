@@ -1,0 +1,59 @@
+{% extends "base_r2.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load thumbnail %}
+{% block head %}
+{{ block.super }}
+{% endblock head %}
+{% block title %}{{ block.super }} :: {{show_user.get_full_name}}{% endblock %}
+{% block navbar-left %}
+{% include "_navbar.html" %}
+{% endblock %}
+{% block list_of_items %}
+<div class="container mt-5">
+    <div class="row">
+    <div class="col-3">
+        <div class="mt-3 mb-3">
+        {{ show_user.get_full_name}}
+        {{ show_user.profile.surname}}
+        </div>
+
+        <ul class="list-group">
+            <li class="list-group-item active" aria-current="true">
+                Personal info
+            </li>
+            <li class="list-group-item">
+                ECSA Membership 
+            </li>
+            <li class="list-group-item">
+                Submitted events
+            </li>
+            <li class="list-group-item">
+                Submitted projects
+            </li>
+            <li class="list-group-item">
+                Submitted resources
+            </li>
+            <li class="list-group-item">
+                Submitted training
+            </li>
+            <li class="list-group-item">
+                Submitted organisations
+            </li>
+            <li class="list-group-item">
+                Privacy center
+            </li>
+            <li class="list-group-item">
+                Edit profile
+            </li>
+        </ul>
+    </div>
+    <div class="col-9 mt-5">
+    {% block profile_right %}
+    {% endblock profile_right %}
+    </div>
+</div>
+</div>
+{% endblock list_of_items %}
+{% block scripts %}
+{% endblock scripts %}

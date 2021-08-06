@@ -13,6 +13,7 @@ from captcha.fields import ReCaptchaField
 
 User = get_user_model()
 
+
 class LoginForm(AuthenticationForm):
     remember_me = forms.BooleanField(required=False, initial=False)
 
@@ -41,13 +42,15 @@ class LoginForm(AuthenticationForm):
             if self.user_cache is None:
                 try:
                     user_temp = User.objects.get(email=username)
-                except:
+                except User.DoesNotExist:
                     user_temp = None
 
                 if user_temp is not None:
                     if not user_temp.is_active:
                         raise forms.ValidationError(
-                            _("We see that your email address is in our database, but that you have not yet confirmed your address. Please search for the confirmation email in your inbox (or spam) to activate your account")
+                            _("We see that your email address is in our database, but that you have not yet"
+                              "confirmed your address. Please search for the confirmation email in your inbox"
+                              "(or spam) to activate your account")
                         )
                     else:
                         raise forms.ValidationError(
@@ -70,13 +73,12 @@ class SignupForm(authtoolsforms.UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["orcid"] = forms.CharField(required=False)
         self.helper = FormHelper()
         self.fields["email"].widget.input_type = "email"  # ugly hack
         self.fields["captcha"] = ReCaptchaField()
         self.helper.layout = Layout(
             Field("email", placeholder=_("Enter Email"), autofocus=""),
-            Field("name", placeholder=_("Enter Full Name")),
+            Field("name", placeholder=_("Enter name")),
             Field("password1", placeholder=_("Enter Password")),
             Field("password2", placeholder=_("Re-enter Password")),
             Field("captcha"),
@@ -105,6 +107,8 @@ class PasswordResetForm(authtoolsforms.FriendlyPasswordResetForm):
             Field("email", placeholder=_("Enter email"), autofocus=""),
             StrictButton(_("Reset Password"), css_class="btn-red", type="Submit"),
         )
+
+
 class SetPasswordForm(authforms.SetPasswordForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

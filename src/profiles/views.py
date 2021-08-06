@@ -39,13 +39,17 @@ class EditProfile(LoginRequiredMixin, generic.TemplateView):
         if "user_form" not in kwargs:
             kwargs["user_form"] = forms.UserForm(instance=user)
         if "profile_form" not in kwargs:
-            interestAreasList = list(user.profile.interestAreas.all().values_list('interestArea', flat=True))
-            interestAreasList = ", ".join(interestAreasList)
-            choices = interestAreasList
-            kwargs["profile_form"] = forms.ProfileForm(instance=user.profile, initial={'choices': choices})
+            kwargs["profile_form"] = forms.ProfileForm(
+                    instance=user.profile,
+                    initial={'interestAreas': user.profile.interestAreas.all()})
         return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
+        print(request.POST)
+        request.POST = request.POST.copy()
+        request.POST = updateInterestAreas(request.POST)
+        print(request.POST)
+
         user = self.request.user
         user_form = forms.UserForm(request.POST, instance=user)
         profile_form = forms.ProfileForm(
@@ -62,9 +66,9 @@ class EditProfile(LoginRequiredMixin, generic.TemplateView):
         # Both forms are fine. Time to save!
         user_form.save()
         profile_form.save(request)
-
         messages.success(request, "Profile details saved!")
         return redirect("profiles:show_self")
+
 
 def projects(request):
     user = request.user
@@ -72,9 +76,14 @@ def projects(request):
     projectsWithPermission = getProjectsWithPermission(user)
     projectsWithPermission = Project.objects.all().filter(id__in=projectsWithPermission)
     projects = chain(projectsCreated, projectsWithPermission)
-    approvedProjects = ApprovedProjects.objects.all().values_list('project_id',flat=True)
-    unApprovedProjects = UnApprovedProjects.objects.all().values_list('project_id',flat=True)
-    return render(request, 'profiles/my_projects.html', {'show_user': user, 'projects': projects, 'approvedProjects': approvedProjects, 'unApprovedProjects': unApprovedProjects})
+    approvedProjects = ApprovedProjects.objects.all().values_list('project_id', flat=True)
+    unApprovedProjects = UnApprovedProjects.objects.all().values_list('project_id', flat=True)
+    return render(request, 'profiles/my_projects.html', {
+        'show_user': user,
+        'projects': projects,
+        'approvedProjects': approvedProjects,
+        'unApprovedProjects': unApprovedProjects})
+
 
 def resources(request):
     user = request.user
@@ -82,31 +91,46 @@ def resources(request):
     resourcesWithPermission = getResourcesWithPermission(user)
     resourcesWithPermission = Resource.objects.all().filter(id__in=resourcesWithPermission)
     resources = chain(resourcesCreated, resourcesWithPermission)
-    approvedResources = ApprovedResources.objects.all().values_list('resource_id',flat=True)
-    unApprovedResources = UnApprovedResources.objects.all().values_list('resource_id',flat=True)
-    return render(request, 'profiles/my_resources.html', {'show_user': user, 'resources': resources, 'approvedResources': approvedResources, 'unApprovedResources': unApprovedResources})
+    approvedResources = ApprovedResources.objects.all().values_list('resource_id', flat=True)
+    unApprovedResources = UnApprovedResources.objects.all().values_list('resource_id', flat=True)
+    return render(request, 'profiles/my_resources.html', {
+        'show_user': user,
+        'resources': resources,
+        'approvedResources': approvedResources,
+        'unApprovedResources': unApprovedResources})
+
 
 def followedProjects(request):
     user = request.user
     followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id', flat=True)
     projects = Project.objects.filter(id__in=followedProjects)
     projects = projects.filter(~Q(hidden=True))
-    return render(request, 'profiles/followed_projects.html', {'show_user': user, 'projects': projects,'followedProjects': followedProjects })
+    return render(request, 'profiles/followed_projects.html', {
+        'show_user': user,
+        'projects': projects,
+        'followedProjects': followedProjects})
+
 
 def savedResources(request):
     user = request.user
     savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id', flat=True)
-    resources= Resource.objects.filter(id__in=savedResources)
+    resources = Resource.objects.filter(id__in=savedResources)
     resources = resources.filter(~Q(hidden=True))
-    return render(request, 'profiles/saved_resources.html', {'show_user': user, 'resources': resources, 'savedResources': savedResources })
+    return render(request, 'profiles/saved_resources.html', {
+        'show_user': user,
+        'resources': resources,
+        'savedResources': savedResources})
+
 
 def getProjectsWithPermission(user):
-    projects = list(ProjectPermission.objects.all().filter(user_id=user).values_list('project',flat=True))
+    projects = list(ProjectPermission.objects.all().filter(user_id=user).values_list('project', flat=True))
     return projects
 
+
 def getResourcesWithPermission(user):
-    resources = list(ResourcePermission.objects.all().filter(user_id=user).values_list('resource',flat=True))
+    resources = list(ResourcePermission.objects.all().filter(user_id=user).values_list('resource', flat=True))
     return resources
+
 
 def organisations(request):
     user = request.user
@@ -116,6 +140,23 @@ def organisations(request):
     organisations = chain(organisationsCreated, organisationsWithPermission)
     return render(request, 'profiles/my_organisations.html', {'show_user': user, 'organisations': organisations})
 
+
 def getOrganisationsWithPermission(user):
-    organisations = list(OrganisationPermission.objects.all().filter(user_id=user).values_list('organisation',flat=True))
+    organisations = list(
+            OrganisationPermission.objects.all().filter(user_id=user).values_list('organisation', flat=True))
     return organisations
+
+
+def updateInterestAreas(dictio):
+    interestAreas = dictio.pop('interestAreas', None)
+    if(interestAreas):
+        for ia in interestAreas:
+            if not ia.isdecimal():
+                # This is a new interestArea
+                models.InterestArea.objects.get_or_create(interestArea=ia)
+                interestArea_id = models.InterestArea.objects.get(interestArea=ia).id
+                dictio.update({'interestAreas': interestArea_id})
+            else:
+                # This keyword is already in the database
+                dictio.update({'interestAreas': ia})
+    return dictio
