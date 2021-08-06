@@ -82,7 +82,7 @@ class DigestAdmin(admin.ModelAdmin):
         item = queryset.first()
         subject = '[TEST EU-Citizen.Science] Digest from %s to %s' % (item.dateOrg, item.dateEnd)
         message = showDigest(request, item.id, mode='string')
-        to = [request.user.email]
+        to = [request.user.email , 'frasanz@icloud.com', 'frasanz@outlook.com']
         email = EmailMessage(subject, message, to=to)
         email.content_subtype = "html"
         email.send()
