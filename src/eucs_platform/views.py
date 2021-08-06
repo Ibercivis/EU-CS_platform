@@ -134,6 +134,9 @@ def subscribe(request):
 def moderation(request):
     return render(request, 'moderation.html')
 
+def policy_brief(request):
+    return render(request, 'policy_brief.html')
+
 def criteria(request):
     return render(request, 'criteria.html')
 
