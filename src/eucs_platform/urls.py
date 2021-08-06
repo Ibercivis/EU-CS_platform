@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from django.views.generic import RedirectView
 from django.urls import include, path, re_path
 from django.conf.urls import url
 from django.views.decorators.cache import never_cache
@@ -53,6 +52,7 @@ urlpatterns = [
     path("home_autocomplete/", views.home_autocomplete, name="home_autocomplete"),
     path("development/", views.development, name="development"),
     path("about/", views.AboutPage.as_view(), name="about"),
+    path("policy_brief/", views.policy_brief, name="policy_brief"),
     path("users/", include(profiles.urls)),
     path("admin/", admin.site.urls),
     path("select2/", include("django_select2.urls")),
