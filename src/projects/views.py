@@ -449,8 +449,9 @@ def setFilters(request, filters):
         filters['approvedCheck'] = request.GET['approvedCheck']
     return filters
 
+
 def clearFilters(request):
-    return redirect ('projects')
+    return redirect('projects')
 
 
 @staff_member_required()
@@ -470,8 +471,11 @@ def setProjectApproved(id, approved):
         ApprovedProjects.objects.get_or_create(project=aProject)
         # sendEmail
         subject = 'Your project has been approved'
-        message = render_to_string('emails/approved_project.html', {"domain": settings.HOST,
-            "name": aProject.name, "id": id})
+        message = render_to_string(
+                'emails/approved_project.html',
+                {
+                    "domain": settings.HOST,
+                    "name": aProject.name, "id": id})
         to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
         to.append(aProject.creator.email)
         email = EmailMessage(subject, message, to=to)

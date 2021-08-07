@@ -28,35 +28,20 @@
                 <h5>{{show_user.profile.country.name}}</h5>
                 {% endif %}
             </div>
-            <ul class="list-group">
-                <li class="list-group-item active" aria-current="true">
-                    Personal profile
-                </li>
-                <li class="list-group-item">
-                    ECSA Membership 
-                </li>
-                <li class="list-group-item">
-                    Submitted events
-                </li>
-                <li class="list-group-item">
-                    Submitted projects
-                </li>
-                <li class="list-group-item">
-                    Submitted resources
-                </li>
-                <li class="list-group-item">
-                    Submitted training
-                </li>
-                <li class="list-group-item">
-                    Submitted organisations
-                </li>
-                <li class="list-group-item">
-                    Privacy center
-                </li>
-                <li class="list-group-item">
-                    <a href="./edit">Edit profile</a>
-                </li>
-            </ul>
+            <div class="list-group">
+                <a href="/users/me/" class="list-group-item list-group-item-action {% if request.path == '/users/me/' %}active{% endif %}">
+                    <i class="fas fa-id-card"></i>
+                    Personal profile</a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="fas fa-users"></i>
+                    ECSA membership</a>
+                <a href="#" class="list-group-item list-group-item-action">Sumbitted projects</a>
+                <a href="#" class="list-group-item list-group-item-action">Submitted resources</a>
+                <a href="./privacy" class="list-group-item list-group-item-action {% if request.path == '/users/me/privacy' %}active{% endif %}">
+                    <i class="fas fa-user-secret"></i>
+                    Privacy center</a>
+                <a href="./edit" class="list-group-item list-group-item-action">Edit profile</a>
+            </div>
         </div>
         <div class="col-9 mt-5">
             {% block profile_right %}

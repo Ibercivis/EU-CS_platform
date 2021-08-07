@@ -53,12 +53,17 @@ class BaseProfile(models.Model):
         null=True)
     organisation = models.ManyToManyField(Organisation, blank=True)
     email_verified = models.BooleanField(_("Email verified"), default=False)
-    visibleProfile = models.BooleanField(default=True)
     country = CountryField(
             blank_label='(select country)',
             null=True,
             blank=True)
-    digest = models.BooleanField(default=True)
+    # Privacy and subscriptions
+    profileVisible = models.BooleanField(
+            default=True)
+    contentVisible = models.BooleanField(
+            default=True)
+    digest = models.BooleanField(
+            default=True)
 
     class Meta:
         abstract = True

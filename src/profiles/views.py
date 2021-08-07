@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
+from django.http import JsonResponse
 from itertools import chain
 from . import forms
 from . import models
@@ -70,6 +71,26 @@ class EditProfile(LoginRequiredMixin, generic.TemplateView):
         profile_form.save(request)
         messages.success(request, "Profile details saved!")
         return redirect("profiles:show_self")
+
+
+class PrivacyCenter(LoginRequiredMixin, generic.TemplateView):
+    template_name = "profiles/privacy_center.html"
+    http_method_names = ["get"]
+
+    def get(self, request, *args, **kwargs):
+
+        user = self.request.user
+        if "user_form" not in kwargs:
+            kwargs["user_form"] = forms.UserForm(instance=user)
+        if "profile_form" not in kwargs:
+            kwargs["profile_form"] = forms.ProfileForm(
+                    instance=user.profile,
+                    initial={
+                        'interestAreas': user.profile.interestAreas.all(),
+                        'country': user.profile.country})
+
+        kwargs["show_user"] = user
+        return super().get(request, *args, **kwargs)
 
 
 def projects(request):
@@ -147,6 +168,20 @@ def getOrganisationsWithPermission(user):
     organisations = list(
             OrganisationPermission.objects.all().filter(user_id=user).values_list('organisation', flat=True))
     return organisations
+
+
+def updatePrivacy(request):
+    user = request.user
+    if 'subscribedtoDigest' in request.POST:
+        user.profile.digest = (request.POST['subscribedtoDigest']).capitalize()
+    if 'profileVisible' in request.POST:
+        user.profile.profileVisible = (request.POST['profileVisible']).capitalize()
+    if 'contentVisible' in request.POST:
+        user.profile.contentVisible = (request.POST['contentVisible']).capitalize()
+
+    user.profile.save()
+    print(user.profile.digest)
+    return JsonResponse("0", safe=False)
 
 
 def updateInterestAreas(dictio):

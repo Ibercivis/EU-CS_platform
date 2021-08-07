@@ -1,0 +1,81 @@
+{% extends "./base_template_profiles.html" %}
+{% load i18n %}
+{% block profile_right %}
+<h4 class="col-12 leftborder">{% trans "Permissions" %}</h4>
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col-11">
+        <div class="custom-control custom-switch">
+            <input type="checkbox" 
+                   class="custom-control-input myradio" 
+                   id="profileVisible"
+                   {% if show_user.profile.profileVisible %}checked{% endif %}>
+
+            <label class="custom-control-label" for="profileVisible">Your profile is public and visible</label>
+        </div>
+        <div class="custom-control custom-switch">
+            <input type="checkbox" 
+                   class="custom-control-input myradio" 
+                   id="contentVisible"
+                   {% if show_user.profile.contentVisible %}checked{% endif %}>
+            <label class="custom-control-label" for="contentVisible">The list of content you uploaded is public and visible</label>
+        </div>
+        <div class="custom-control custom-switch">
+            <input type="checkbox" 
+                   class="custom-control-input myradio" 
+                   id="subscribedtoDigest"
+                   {% if show_user.profile.digest %}checked{% endif %}>
+            <label class="custom-control-label" for="subscribedtoDigest">Subscribed to monthly digest</label>
+        </div>
+
+    </div>
+</div>
+
+<h4 class="col-12 leftborder mt-4">{% trans "General information" %}</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Event</th>
+            <th>When</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <td>Profile created on</td>
+        <td>{{show_user.date_joined}}</td>
+        </tr>
+        <tr>
+        <td>Last seen on</td>
+        <td>{{show_user.last_login}}</td>
+        </tr>
+
+    </tbody>
+</table>
+{% endblock %}
+{% block scripts %}
+<script>
+    $(function() {
+        $('.myradio').change(function(){
+            console.log("changed digest")
+            console.log($('#subscribedtoDigest').is(':checked'))
+            $.ajax({
+                type: 'POST',
+                url: 'privacy/updatePrivacy',
+                data: {
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    subscribedtoDigest: $('#subscribedtoDigest').is(':checked'),
+                    profileVisible: $('#profileVisible').is(':checked'),
+                    contentVisible: $('#contentVisible').is(':checked'),
+                },
+                success: function(response){
+                    console.log(response)
+                },
+                error: function(error){
+                    console.log(error)
+                }
+
+            })
+        })
+    })
+</script>
+{% endblock scripts%}
