@@ -41,7 +41,9 @@ class EditProfile(LoginRequiredMixin, generic.TemplateView):
         if "profile_form" not in kwargs:
             kwargs["profile_form"] = forms.ProfileForm(
                     instance=user.profile,
-                    initial={'interestAreas': user.profile.interestAreas.all()})
+                    initial={
+                        'interestAreas': user.profile.interestAreas.all(),
+                        'country': user.profile.country})
         return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):

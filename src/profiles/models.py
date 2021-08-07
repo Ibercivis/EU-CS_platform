@@ -4,6 +4,7 @@ import uuid
 from django.db import models
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
+from django_countries.fields import CountryField
 from organisations.models import Organisation
 
 
@@ -53,6 +54,10 @@ class BaseProfile(models.Model):
     organisation = models.ManyToManyField(Organisation, blank=True)
     email_verified = models.BooleanField(_("Email verified"), default=False)
     visibleProfile = models.BooleanField(default=True)
+    country = CountryField(
+            blank_label='(select country)',
+            null=True,
+            blank=True)
     digest = models.BooleanField(default=True)
 
     class Meta:

@@ -8,6 +8,8 @@ from django.utils.translation import ugettext_lazy as _
 from django_select2 import forms as s2forms
 from organisations.models import Organisation
 from ckeditor.widgets import CKEditorWidget
+from django_countries.fields import CountryField
+
 
 User = get_user_model()
 
@@ -33,6 +35,7 @@ class ProfileForm(forms.ModelForm):
         self.helper.layout = Layout(
             Field("title"),
             Field("surname"),
+            Field("country"),
             Field("picture"),
             Field("bio"),
             Field("orcid"),
@@ -55,6 +58,9 @@ class ProfileForm(forms.ModelForm):
             required=False,
             label="Interest Areas",
             help_text=_('Please write or select interest areas, separated by commas or pressing enter'))
+    country = CountryField(
+            blank_label='(Select country)',
+            blank=True).formfield()
     organisation = forms.ModelMultipleChoiceField(
             queryset=Organisation.objects.all(),
             widget=s2forms.ModelSelect2MultipleWidget(
@@ -77,5 +83,6 @@ class ProfileForm(forms.ModelForm):
         pForm.user = args.user
         pForm.interestAreas.set(self.data.getlist('interestAreas'))
         pForm.organisation.set(self.data.getlist('organisation'))
+        pForm.country = self.data['country']
         pForm.save()
         return 'success'

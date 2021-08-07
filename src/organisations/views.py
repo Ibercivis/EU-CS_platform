@@ -44,7 +44,7 @@ def new_organisation(request):
                 random_num = random.randint(0, 1000)
                 image_path = "media/images/" + _datetime + '_' + str(random_num) + '_' + photo.name
                 resized_image.save(image_path)
-            form.save(request, '/' + image_path)
+            form.save(request, image_path)
             messages.success(request, _('Organisation added correctly'))
             subject = 'New organisation submitted'
             message = render_to_string('emails/new_organisation.html', {})

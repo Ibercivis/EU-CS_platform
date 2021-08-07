@@ -1,6 +1,27 @@
 {% extends "./base_template_profiles.html" %}
 {% load i18n %}
 {% block profile_right %}
-	<p><strong>{% trans "Bio and disciplinary background" %}</strong>: {{ show_user.profile.bio | safe }}</p>
+{% if show_user.profile.bio %}
+<h4 class="col-12 leftborder">{% trans "Bio and disciplinary background" %}</h4>
+{{ show_user.profile.bio | safe }}
+{% endif %}
+
+{% if show_user.profile.interestAreas %}
+<h4 class="col-12 leftborder mt-4">{% trans "Interest and expertise areas" %}</h4>
+{% for area in show_user.profile.interestAreas.all %}
+<span class="badge badge-light">{{ area }}</span>
+{% endfor %}
+{% endif %}
+
+{% if show_user.profile.organisation %}
+<h4 class="col-12 leftborder mt-4">{% trans "Organisations" %}</h4>
+<div class="row">
+    {% for organisation in show_user.profile.organisation.all %}
+    <div class="col-12 col-md-6">
+        {% include "./horizontal_card_organisation.html" %}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
 
 {% endblock profile_right %}

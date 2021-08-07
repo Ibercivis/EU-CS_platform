@@ -53,7 +53,7 @@ class OrganisationForm(forms.Form):
             organisation.logo = logo_path
 
 
-        country = getCountryCode(organisation.latitude,organisation.longitude).upper()
+        country = getCountryCode(organisation.latitude, organisation.longitude).upper()
         organisation.country = country
 
         organisation.save()

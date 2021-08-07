@@ -12,47 +12,57 @@
 {% block list_of_items %}
 <div class="container mt-5">
     <div class="row">
-    <div class="col-3">
-        <div class="mt-3 mb-3">
-        {{ show_user.get_full_name}}
-        {{ show_user.profile.surname}}
+        <div class="col-3">
+            <div class="mt-4 mb-3">
+                <div>
+                    <img title="profile picture" class="img-fluid rounded-circle" src="{% thumbnail show_user.profile.picture|default:'default_profile.png' 280x280 crop %}">
+                </div>	
+                <h3 class="mt-3">
+                    {% if show_user.profile.title %}
+                    {{ show_user.profile.title}}
+                    {% endif %}
+                    {{ show_user.get_full_name}}
+                    {{ show_user.profile.surname}}
+                </h3>
+                {% if show_user.profile.country %}
+                <h5>{{show_user.profile.country.name}}</h5>
+                {% endif %}
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item active" aria-current="true">
+                    Personal profile
+                </li>
+                <li class="list-group-item">
+                    ECSA Membership 
+                </li>
+                <li class="list-group-item">
+                    Submitted events
+                </li>
+                <li class="list-group-item">
+                    Submitted projects
+                </li>
+                <li class="list-group-item">
+                    Submitted resources
+                </li>
+                <li class="list-group-item">
+                    Submitted training
+                </li>
+                <li class="list-group-item">
+                    Submitted organisations
+                </li>
+                <li class="list-group-item">
+                    Privacy center
+                </li>
+                <li class="list-group-item">
+                    <a href="./edit">Edit profile</a>
+                </li>
+            </ul>
         </div>
-
-        <ul class="list-group">
-            <li class="list-group-item active" aria-current="true">
-                Personal info
-            </li>
-            <li class="list-group-item">
-                ECSA Membership 
-            </li>
-            <li class="list-group-item">
-                Submitted events
-            </li>
-            <li class="list-group-item">
-                Submitted projects
-            </li>
-            <li class="list-group-item">
-                Submitted resources
-            </li>
-            <li class="list-group-item">
-                Submitted training
-            </li>
-            <li class="list-group-item">
-                Submitted organisations
-            </li>
-            <li class="list-group-item">
-                Privacy center
-            </li>
-            <li class="list-group-item">
-                Edit profile
-            </li>
-        </ul>
+        <div class="col-9 mt-5">
+            {% block profile_right %}
+            {% endblock profile_right %}
+        </div>
     </div>
-    <div class="col-9 mt-5">
-    {% block profile_right %}
-    {% endblock profile_right %}
-    </div>
-</div>
 </div>
 {% endblock list_of_items %}
 {% block scripts %}
