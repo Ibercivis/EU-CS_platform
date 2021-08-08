@@ -1,0 +1,10 @@
+{% extends "horizontal_card.html" %}
+{% load thumbnail %}
+{% block img %}
+<a href="/resource/{{resource.id}}">
+<img title="project picture" class="img-fluid p-1" src="{% thumbnail resource.image1|default:'default_profile.png' 200x133 crop %}">
+</a>
+{% endblock img %}
+{% block title %}
+<a href="/resource/{{resource.id}}">{{ resource.name }}</a>
+{% endblock title %}

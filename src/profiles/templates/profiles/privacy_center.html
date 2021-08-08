@@ -1,7 +1,7 @@
 {% extends "./base_template_profiles.html" %}
 {% load i18n %}
 {% block profile_right %}
-<h4 class="col-12 leftborder">{% trans "Permissions" %}</h4>
+<h4 class="col-12 leftborder">{% trans "Permissions and password" %}</h4>
 <div class="row">
     <div class="col-1"></div>
     <div class="col-11">
@@ -27,6 +27,12 @@
                    {% if show_user.profile.digest %}checked{% endif %}>
             <label class="custom-control-label" for="subscribedtoDigest">Subscribed to monthly digest</label>
         </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <a class="btn btn-secondary mt-4 mb-4" href="{% url 'accounts:password-change' %}"><i class="fas fa-key"></i> {% trans "Change Password" %}</a>
 
     </div>
 </div>

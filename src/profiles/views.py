@@ -11,6 +11,7 @@ from . import models
 from projects.models import Project, FollowedProjects, ProjectPermission, ApprovedProjects, UnApprovedProjects
 from resources.models import Resource, SavedResources, ResourcePermission, ApprovedResources, UnApprovedResources
 from organisations.models import Organisation, OrganisationPermission
+from events.models import Event
 
 
 class ShowProfile(LoginRequiredMixin, generic.TemplateView):
@@ -45,6 +46,7 @@ class EditProfile(LoginRequiredMixin, generic.TemplateView):
                     initial={
                         'interestAreas': user.profile.interestAreas.all(),
                         'country': user.profile.country})
+        kwargs["show_user"] = user
         return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
@@ -90,6 +92,45 @@ class PrivacyCenter(LoginRequiredMixin, generic.TemplateView):
                         'country': user.profile.country})
 
         kwargs["show_user"] = user
+        return super().get(request, *args, **kwargs)
+
+
+class Submissions(generic.TemplateView):
+    template_name = "profiles/submissions.html"
+    http_method_names = ["get"]
+
+    def get(self, request, *args, **kwargs):
+        slug = self.kwargs.get("slug")
+        if slug:
+            profile = get_object_or_404(models.Profile, slug=slug)
+            user = profile.user
+        else:
+            user = self.request.user
+        projectsSubmitted = Project.objects.all().filter(creator=user)
+        resourcesSubmitted = Resource.objects.all().filter(creator=user).filter(isTrainingResource=False)
+        trainingsSubmitted = Resource.objects.all().filter(creator=user).filter(isTrainingResource=True)
+        organisationsSubmitted = Organisation.objects.all().filter(creator=user)
+        eventsSubmitted = Event.objects.all().filter(creator=user)
+        kwargs["show_user"] = user
+        kwargs["projects_submitted"] = projectsSubmitted
+        kwargs["resources_submitted"] = resourcesSubmitted
+        kwargs["training_submitted"] = trainingsSubmitted
+        kwargs["organisations_submitted"] = organisationsSubmitted
+        kwargs["event_submitted"] = eventsSubmitted
+        return super().get(request, *args, **kwargs)
+
+
+class Bookmarks(LoginRequiredMixin, generic.TemplateView):
+    template_name = "profiles/bookmarks.html"
+    http_method_names = ["get"]
+
+    def get(self, request, *args, **kwargs):
+        user = self.request.user
+        kwargs["show_user"] = user
+        followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id', flat=True)
+        projects = Project.objects.filter(id__in=followedProjects)
+        kwargs["projects_followed"] = projects
+
         return super().get(request, *args, **kwargs)
 
 

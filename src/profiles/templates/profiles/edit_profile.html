@@ -1,9 +1,8 @@
-{% extends "base_r2.html" %}
+{% extends "./base_template_profiles.html" %}
 {% load i18n %}
 {% load staticfiles %}
-{% load crispy_forms_tags %}
 {% load thumbnail %}
-{% load leaflet_tags %}
+{% load crispy_forms_tags %}
 {% block head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'site/css/forms.css' %}">
@@ -11,79 +10,59 @@
 {{ form.media.css }}
 {{ form.media.js }}
 {% endblock head %}
-
-{% block title %}{{ block.super }}Profile{% endblock %}
-
-{% block navbar-left %}
-{% include "_navbar.html" with active_link="" %}
-{% endblock %}
-{% block list_of_items %}
-<div class="container mt-5">
-    <div class="row mt-5">
-        <div class="container-fluid">
-            <div class="card mt-5 mb-5 shadow">
-                <div class="card-body">
-                    <div class="card-title">
-                        <h2>
-                            <img title="profile picture" class="img-fluid rounded-circle"
-                                                         src="{% thumbnail user.profile.picture|default:'default_profile.png' 140x140 crop %}">
-                            {% trans "Edit profile" %}: {{ user.get_full_name }}
-                        </h2>
+{% block profile_right %}
+<div class="container">
+    <div class="row">
+        <form enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-12">
+                    <h4 class="leftborder">{% trans "Personal information" %}</h4>
+                    <div class="row">
+                        <div class="col-1"></div>
+                        <div class="col-11">
+                            {{ profile_form.title|as_crispy_field }}
+                            {{ user_form.name|as_crispy_field }}							
+                            {{ profile_form.surname|as_crispy_field }}
+                            {{ user_form.email|as_crispy_field }}
+                            {{ profile_form.country|as_crispy_field }}
+                        </div>
                     </div>
-                    <div class="card-text">
-                        <form enctype="multipart/form-data" method="post">
-                            {% csrf_token %}
-                            <div class="row">
-                                <div class="col-2"></div>
-                                <div class="col-8">
-                                    <h4 class="leftborder">{% trans "Personal information" %}</h4>
-                                    <div class="row">
-                                        <div class="col-1"></div>
-                                        <div class="col-11">
-                                            {{ profile_form.title|as_crispy_field }}
-                                            {{ user_form.name|as_crispy_field }}							
-                                            {{ profile_form.surname|as_crispy_field }}
-                                            {{ user_form.email|as_crispy_field }}
-                                            {{ profile_form.country|as_crispy_field }}
-                                        </div>
-                                    </div>
-                                    <h4 class="leftborder mt-5">{% trans "Bio &amp; Interest Areas" %}</h4>
-                                    <div class="row">
-                                        <div class="col-1"></div>
-                                        <div class="col-11">
-                                            {{ profile_form.bio|as_crispy_field }}
-                                            {{ profile_form.interestAreas|as_crispy_field }}
-                                        </div>
-                                    </div>
-                                    <h4 class="leftborder mt-5">{% trans "Participation" %}</h4>
-                                    <div class="row">
-                                        <div class="col-1"></div>
-                                            {{ profile_form.organisation|as_crispy_field }}
-                                        <div class="col-11">
-                                        </div>
-                                    </div>
-                                    <h4 class="leftborder mt-5">{% trans "Pictures" %}</h4>
-                                    <div class="row">
-                                        <div class="col-1"></div>
-                                        <div class="col-11">
-                                            {{ profile_form.picture|as_crispy_field }}
-                                        </div>
-                                    </div>
-                                    <button id="upload" type="submit" class="btn btn-secondary mt-4"><i class="fas fa-share-square"></i> {% trans "Save" %}</button>
-                                    <a class="btn btn-secondary mt-4" href="{% url 'accounts:password-change' %}"><i class="fas fa-key"></i> {% trans "Change Password" %}</a>
-
-
-                                </div>
-                            </div>
+                    <h4 class="leftborder mt-5">{% trans "Bio &amp; Interest Areas" %}</h4>
+                    <div class="row">
+                        <div class="col-1"></div>
+                        <div class="col-11">
+                            {{ profile_form.bio|as_crispy_field }}
+                            {{ profile_form.interestAreas|as_crispy_field }}
+                        </div>
+                    </div>
+                    <h4 class="leftborder mt-5">{% trans "Participation" %}</h4>
+                    <div class="row">
+                        <div class="col-1"></div>
+                        {{ profile_form.organisation|as_crispy_field }}
+                        <div class="col-11">
+                        </div>
+                    </div>
+                    <h4 class="leftborder mt-5">{% trans "Picture" %}</h4>
+                    <div class="row">
+                        <div class="col-1"></div>
+                        <div class="col-11">
+                            {{ profile_form.picture|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-1"></div>
+                        <div class="col-11">
+                            <button id="upload" type="submit" class="btn btn-secondary mt-4 mb-4"><i class="fas fa-share-square"></i> {% trans "Save" %}</button>
+                       </div>
                     </div>
                 </div>
-                        </form>
             </div>
-        </div>
+        </form>
     </div>
 </div>
-</div>
-{% endblock list_of_items%}
+
+{% endblock profile_right %}
 
 {% block scripts %}
 {{ profile_form.media.js }}

@@ -1,15 +1,13 @@
 {% load i18n %}
 {% load staticfiles %}
+{% load thumbnail %}
 {% for organisation in organisations %}
 <div class="col-lg-4 col-sm-12 mb-4">
 	<div class="card h-100 shadow border-0">
         <a class="card-img-wrap "href="/organisation/{{organisation.id }}">
-            {% if organisation.logo %}
-            <img class="card-img-top img-fluid img-zoom lazyload " src="{{ organisation.logo }}" />
-            {% else %}
-            <img class="card-img-top img-fluid img-zoom lazyload " src="{% static 'site/img/project_default_card.webp' %}" />
-            {% endif %}
-
+            <img title="logo picture" 
+                class="card-img-top img-fluid img-zoom lazyload" 
+                src="{% thumbnail organisation.logo|default:'default_profile.png' 600x400 crop %}">
         </a>
         <div class="card-body">
             <h6 class="card-title">

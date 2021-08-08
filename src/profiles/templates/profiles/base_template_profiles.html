@@ -29,18 +29,29 @@
                 {% endif %}
             </div>
             <div class="list-group">
-                <a href="/users/me/" class="list-group-item list-group-item-action {% if request.path == '/users/me/' %}active{% endif %}">
+                <a href="/users/me/"
+                    class="list-group-item list-group-item-action {% if request.path == '/users/me/' %}active{% endif %}">
                     <i class="fas fa-id-card"></i>
                     Personal profile</a>
                 <a href="#" class="list-group-item list-group-item-action">
                     <i class="fas fa-users"></i>
                     ECSA membership</a>
-                <a href="#" class="list-group-item list-group-item-action">Sumbitted projects</a>
-                <a href="#" class="list-group-item list-group-item-action">Submitted resources</a>
-                <a href="./privacy" class="list-group-item list-group-item-action {% if request.path == '/users/me/privacy' %}active{% endif %}">
+                <a href="/users/me/submissions"
+                    class="list-group-item list-group-item-action {% if request.path == '/users/me/submissions' %}active{% endif %}">
+                    <i class="fas fa-binoculars"></i>
+                    Submissions</a>
+                <a href="/users/me/bookmarks"
+                    class="list-group-item list-group-item-action {% if request.path == '/users/me/bookmarks' %}active{% endif %}">
+                    <i class="fas fa-book"></i>
+                    Bookmarks</a>
+                <a href="/users/me/privacy"
+                    class="list-group-item list-group-item-action {% if request.path == '/users/me/privacy' %}active{% endif %}">
                     <i class="fas fa-user-secret"></i>
                     Privacy center</a>
-                <a href="./edit" class="list-group-item list-group-item-action">Edit profile</a>
+                <a href="/users/me/edit"
+                    class="list-group-item list-group-item-action {% if request.path == '/users/me/edit/' %}active{% endif %}">
+                    <i class="fas fa-edit"></i>
+                    Edit profile</a>
             </div>
         </div>
         <div class="col-9 mt-5">

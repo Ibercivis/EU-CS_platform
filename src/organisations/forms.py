@@ -49,8 +49,7 @@ class OrganisationForm(forms.Form):
                     longitude = self.data['longitude'], description = self.data['description'], orgType = orgType, contactPoint = self.data['contact_point'],
                     contactPointEmail = self.data['contact_point_email'])
 
-        if(logo_path != '/'):
-            organisation.logo = logo_path
+        organisation.logo = logo_path.strip('media\/')
 
 
         country = getCountryCode(organisation.latitude, organisation.longitude).upper()
