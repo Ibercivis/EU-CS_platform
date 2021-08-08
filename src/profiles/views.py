@@ -129,7 +129,13 @@ class Bookmarks(LoginRequiredMixin, generic.TemplateView):
         kwargs["show_user"] = user
         followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id', flat=True)
         projects = Project.objects.filter(id__in=followedProjects)
+        followedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id', flat=True)
+        resources = Resource.objects.filter(id__in=followedResources).filter(isTrainingResource=False)
+        training = Resource.objects.filter(id__in=followedResources).filter(isTrainingResource=True)
+
         kwargs["projects_followed"] = projects
+        kwargs["resources_followed"] = resources
+        kwargs["trainings_followed"] = training
 
         return super().get(request, *args, **kwargs)
 

@@ -1,15 +1,18 @@
 {% extends "base_r2.html" %}
 {% load i18n %}
 {% load staticfiles %}
+{% load thumbnail %}
 {% load leaflet_tags %}
 {% load crispy_forms_tags %}
 {% block head %}
 {{block.super }}
 <link rel="stylesheet" href="{% static 'site/css/leaflet-geosearch_style.css' %}">
 <link rel="stylesheet" href="{% static 'site/css/leaflet.css' %}">
+<link rel="stylesheet" href="{% static 'site/css/forms.css' %}">
 {% leaflet_js %}
 {% leaflet_css %}
 {{ form.media.css }}
+{{ form.media.js }}
 
 {% endblock head %}
 
@@ -55,89 +58,93 @@
   </div>
   <!-- END MODAL TO CROP -->
 
-    <div class="container mt-5">
-      <div class="row d-flex justify-content-center">
-        <div class="col-sm-10 col-12">
-          <div class="card mt-5 mb-5 shadow">
-            <div class="card-title  p-5">
-              <div class="row">
-                <div class="col-12">
-                    <h2>{% trans "Edit Organisation Profile" %}</h2>
-                </div>
+  <div class="container mt-5">
+      <form
+          {% if organisation.id %}
+          action="/edit_organisation/{{organisation.id}}"
+          {% else %}
+          action="/new_organisation"
+          {% endif %}
+          method="post"
+          enctype="multipart/form-data"
+          class="edit-organisation"
+          autocomplete="off">
+          {% csrf_token %}
+
+          <div class="row">
+              <div class="col-2"></div>
+              <div class="col-8">
+                  <h4 class="leftborder">{% trans "Main information" %}</h4>
+                  <div class="row">
+                      <div class="col-1"></div>
+                      <div class="col-11">
+                          <input type="hidden" id="organisationID" name="organisationID" value={{organisation.id}}>
+                          {{ form.name|as_crispy_field }}
+                          {{ form.url|as_crispy_field }}
+                          {{ form.description|as_crispy_field }}
+                          {{ form.orgType|as_crispy_field }}
+                      </div>
+                  </div>
               </div>
-            </div>
-            <div class="card-text pr-5 pl-5 pb-5">
-              <table class="table mb-0">
-                <form action="/edit_organisation/{{organisation.id}}" method="post" enctype="multipart/form-data" class="edit-organisation" autocomplete="off">
-                  {% csrf_token %}
-                  <div>
-                    <button type="submit" class="btn btn-green float-right"><i class="fas fa-share-square"></i> {% trans "Save" %}</button>
-                    <br/><br/>
-                  </div>
-
-                  <div class="form-row">
-                    <div class="col-12">
-                        <input type="hidden" id="organisationID" name="organisationID" value={{organisation.id}}>
-                      {{ form.name|as_crispy_field }}
-                    </div>
-                    <div class="col-12">
-                      {{ form.url|as_crispy_field }}
-                    </div>
-                  </div>
-
-                  <div class="form-row">
-                    <div class="col-12">
-                      {{ form.description|as_crispy_field }}
-                    </div>
-                    <div class="col-12">
-                      {{ form.orgType|as_crispy_field }}
-                    </div>
-                  </div>
-
-                  <div class="form-row">
-                    <div class="col-12">
-                      {{ form.logo|as_crispy_field }}
-                      {{ form.x|as_crispy_field }}
-                      {{ form.y|as_crispy_field }}
-                      {{ form.height|as_crispy_field }}
-                      {{ form.width|as_crispy_field }}
-                      {{ form.withLogo|as_crispy_field }}
-                      <a id="imgResult" href="#"> <img class="img-fluid img-zoom" id="imageResult" src="{{ organisation.logo }}" alt="Image not upload"></a>
-                      <div id="deleteLogo">
-                      {% if organisation.logo %}
-                        <a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>
-                      {% endif %}
+          </div>
+          <div class="row">
+              <div class="col-2"></div>
+              <div class="col-8">
+                  <h4 class="leftborder mt-5">{% trans  "Contact information" %}</h4>
+                  <div class="row">
+                      <div class="col-1"></div>
+                      <div class="col-11">
+                          {{ form.contact_point|as_crispy_field }}
+                          {{ form.contact_point_email|as_crispy_field }}
                       </div>
-                    </div>
-                    <div class="col-12">
-                      {{ form.contact_point|as_crispy_field }}
-                    </div>
                   </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-2"></div>
+              <div class="col-8">
+                  <h4 class="leftborder mt-5">{% trans "Organisation logo" %}</h4>
+                  <div class="row">
+                      <div class="col-1"></div>
+                      <div class="col-11">
+                          <a id="imgResult" href="#"> <img
+                                            class="img-fluid img-zoom"
+                                            id="imageResult"
+                                            src="{% thumbnail organisation.logo|default:'images/void_600.png' 600x400 crop%}"> </a>
 
-                  <div class="form-row">
-                    <div class="col-12">
-                      {{ form.contact_point_email|as_crispy_field }}
-                    </div>
-                    <div class="col-12">
-                      <div id="geographyform">
-                        {% leaflet_map "map" callback="window.map_init_basic" %}
-                        <div class="form-row">
-                          <div class="col-sm-6 col-12">
-                            {{ form.latitude|as_crispy_field }}
-                          </div>
-                          <div class="col-sm-6 col-12">
-                            {{ form.longitude|as_crispy_field }}
-                          </div>
-                        </div>
+                          {{ form.logo|as_crispy_field }}
+                          {{ form.x|as_crispy_field }}
+                          {{ form.y|as_crispy_field }}
+                          {{ form.height|as_crispy_field }}
+                          {{ form.width|as_crispy_field }}
                       </div>
-                    </div>
                   </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-2"></div>
+              <div class="col-8">
+                  <h4 class="leftborder mt-5">{% trans "Location" %}</h4>
+                  <div class="row">
+                      <div class="col-1"></div>
+                      <div class="col-11">
+                          {% leaflet_map "map" callback="window.map_init_basic" %}
+                          {{ form.latitude|as_crispy_field }}
+                          {{ form.longitude|as_crispy_field }}
+                      </div>
+                  </div>
+                  <div class="row mt-5 mb-5">
+                      <div class="col-11">
+                          <button type="submit" class="btn btn-secondary"><i class="fas fa-share-square"></i> {% trans "Save" %}</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+  </div>
+  </div>
 
 
-                  <hr />
-                  <button type="submit" class="btn btn-green"><i class="fas fa-share-square"></i> {% trans "Save" %}</button>
                 </form>
-              </table>
             </div>
           </div>
         </div>
@@ -156,12 +163,6 @@
 <script src="{% static 'site/js/leaflet-geosearch_2_7.min.js' %}"></script>
 <script>
   $(document).ready(function () {
-    $('#deleteLogo > a').click(function () {
-      $('#id_logo').val('');
-      $('#imageResult').attr('src', '');
-      $("#deleteLogo").empty();
-      $("#id_withLogo").val(false);
-    });
     $(function () {
       changed = false;
       /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */

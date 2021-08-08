@@ -1,4 +1,4 @@
-from django.db import models
+from django.contrib.gis.db import models
 from django.conf import settings
 from django_countries.fields import CountryField
 
@@ -15,13 +15,14 @@ class Organisation(models.Model):
     dateCreated = models.DateTimeField('Created date', auto_now=True)
     dateUpdated = models.DateTimeField('Updated date', auto_now=True)
     name = models.CharField(max_length=200)
-    url = models.CharField(max_length=200)
+    url = models.URLField(max_length=200)
     description = models.CharField(max_length=3000)
     orgType = models.ForeignKey(OrganisationType, on_delete=models.CASCADE)
     logo = models.ImageField(upload_to='images/', max_length=300, null=True, blank=True)
     contactPoint = models.CharField(max_length=100, null=True, blank=True)
-    contactPointEmail = models.CharField(max_length=100, null=True, blank=True)
+    contactPointEmail = models.EmailField(max_length=100, null=True, blank=True)
     latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
+    location = models.PointField(blank=True, null=True)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     country = CountryField(null=True, blank=True)
 

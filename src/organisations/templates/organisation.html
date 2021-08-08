@@ -39,7 +39,7 @@
 			<div class="row">
 				<div class="col-sm-3 col-12">
 					<img title="organisation logo" target="_blank"
-					class="img-fluid mb-3" src="{{ organisation.logo|default:'/media/default_profile.png' }}">
+					class="img-fluid mb-3" src="{{organisation.logo|default:'/media/default_profile.png' }}">
 					<div><strong>Contact Point</strong>: {{ organisation.contactPoint }} </div>
 					<div class="mb-5"><strong>{% trans "Contact Point Email" %}</strong>: {{ organisation.contactPointEmail }}</div>
 				</div>
@@ -54,7 +54,7 @@
 						</div>
 					</div>
 
-					{{ organisation.description }}
+					{{ organisation.description | safe }}
 					{% if associatedProjects.all %}
 					<h5 class="mt-3">{% trans "Projects" %}</h5>
 					{% for project in associatedProjects.all %}
@@ -79,14 +79,6 @@
 				</div>
 			</div>
 		</div><!-- end of card body -->
-		{% if user.is_staff or organisation.creator == user or user.id in cooperators %}
-			<permissionForm>
-				{% csrf_token %}
-				{{ permissionForm.usersAllowed | as_crispy_field }}
-				{{ permissionForm.selectedUsers | as_crispy_field }}
-				{{ permissionForm.usersCollection | as_crispy_field }}
-			</permissionForm>
-		{% endif %}
 		{% if editable %}
 		<div class="card-footer">
 			<a data-href="{% url 'delete_organisation' organisation.id %}" data-toggle="modal" data-target="#confirm-delete" 
@@ -106,59 +98,6 @@
 
 {% block scripts %}
 <script>
-
-	$(function () {
-		var users = $("#id_usersCollection").val();
-		var users = users.split(",");		
-		var selectedUsers = $("#id_selectedUsers").val().split(",");
-		var i = 0
-		var name = ''
-		var email = ''
-		for (user of users){			
-			if (i % 2 == 0){			
-				var init = user.indexOf('\'')
-				var end = user.indexOf('\'', init+1)
-				name = user.substring(init+1,end)
-			}else{
-				var init = user.indexOf('\'')
-				var end = user.indexOf('\'', init+1)
-				email = user.substring(init+1,end)
-				var found = false;
-				for(sel of selectedUsers){
-					if(sel.trim() == email.trim()){
-					found = true;
-					$("#id_usersAllowed").append("<option value='" + email +"' selected> " + name + " </option>");
-					}
-				}
-				if(!found){
-					$("#id_usersAllowed").append("<option value='" + email +"'> " + name + " </option>");
-				}
-			}
-			i++
-		}
-
-		$('#id_usersAllowed').on('change', function () {
-			users = $("#id_usersAllowed option:selected").map(function () {
-				return $.trim($(this).val());
-			}).get().join(',');
-			var idOrganisation = {{organisation.id}};
-			var request = $.ajax(
-			{
-				type: "POST",
-				url: "{% url 'allowUserOrganisation' %}",
-				data: {
-				"organisation_id": idOrganisation,
-				"users": users,
-				csrfmiddlewaretoken: '{{ csrf_token }}'
-				},
-				success: function (response) {
-
-				}
-			}
-		);
-		});
-	});
-
 	$('#confirm-delete').on('show.bs.modal', function(e) {
 		$(this).find('.btn-delete').attr('href', $(e.relatedTarget).data('href'));
 	});

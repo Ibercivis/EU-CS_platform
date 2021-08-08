@@ -22,6 +22,7 @@ import random
 
 User = get_user_model()
 
+
 @login_required(login_url='/login')
 def new_organisation(request):
     user = request.user
@@ -31,7 +32,7 @@ def new_organisation(request):
         form = OrganisationForm(request.POST, request.FILES)
         if form.is_valid():
             image_path = ''
-            if(request.FILES.get('logo', False)):
+            if(request.FILES.get('logo')):
                 x = form.cleaned_data.get('x')
                 y = form.cleaned_data.get('y')
                 w = form.cleaned_data.get('width')
@@ -44,7 +45,8 @@ def new_organisation(request):
                 random_num = random.randint(0, 1000)
                 image_path = "media/images/" + _datetime + '_' + str(random_num) + '_' + photo.name
                 resized_image.save(image_path)
-            form.save(request, image_path)
+                image_path_database = "images/" + _datetime + '_' + str(random_num) + '_' + photo.name
+            organisation = form.save(request, image_path_database)
             messages.success(request, _('Organisation added correctly'))
             subject = 'New organisation submitted'
             message = render_to_string('emails/new_organisation.html', {})
@@ -53,54 +55,70 @@ def new_organisation(request):
             email = EmailMessage(subject, message, to=to)
             email.content_subtype = "html"
             email.send()
-            return redirect('../organisations', {})
+            return redirect('/organisation/'+str(organisation.id), {})
         else:
             print(form.errors)
 
-    return render(request, 'new_organisation.html', {'form': form, 'user': user})
-
+    return render(
+            request,
+            'organisation_form.html',
+            {'form': form, 'user': user})
 
 
 def organisation(request, pk):
     organisation = get_object_or_404(Organisation, id=pk)
     user = request.user
     cooperatorsPK = getCooperators(pk)
-    if user != organisation.creator and not user.is_staff and not user.id in cooperatorsPK:
+    if user != organisation.creator and not user.is_staff and not (user.id in cooperatorsPK):
         editable = False
     else:
         editable = True
     mainProjects = Project.objects.all().filter(mainOrganisation__id=pk)
     associatedProjects = Project.objects.all().filter(organisation__id=pk)
-    associatedProjects |=  mainProjects
+    associatedProjects |= mainProjects
     associatedResources = Resource.objects.all().filter(organisation__id=pk)
     members = Profile.objects.all().filter(organisation__id=pk)
     users = getOtherUsers(organisation.creator, members)
     cooperators = getCooperatorsEmail(pk)
-    permissionForm = OrganisationPermissionForm(initial={'usersCollection':users, 'selectedUsers': cooperators})
-    return render(request, 'organisation.html', {'organisation':organisation, 'associatedProjects': associatedProjects,'cooperators': cooperatorsPK,
-    'associatedResources': associatedResources, 'members': members, 'permissionForm': permissionForm, 'editable': editable, 'isSearchPage': True})
+    permissionForm = OrganisationPermissionForm(
+            initial={'usersCollection': users, 'selectedUsers': cooperators})
+
+    return render(request, 'organisation.html', {
+        'organisation': organisation,
+        'associatedProjects': associatedProjects,
+        'cooperators': cooperatorsPK,
+        'associatedResources': associatedResources,
+        'members': members,
+        'permissionForm': permissionForm,
+        'editable': editable,
+        'isSearchPage': True})
 
 
 def edit_organisation(request, pk):
     organisation = get_object_or_404(Organisation, id=pk)
     user = request.user
     cooperatorsPK = getCooperators(pk)
-    if user != organisation.creator and not user.is_staff and not user.id in cooperatorsPK:
+    if user != organisation.creator and not user.is_staff and not (user.id in cooperatorsPK):
         return redirect('../organisations', {})
 
     form = OrganisationForm(initial={
-        'name':organisation.name,'url': organisation.url, 'description': organisation.description,
-        'orgType': organisation.orgType, 'logo': organisation.logo, 'withLogo': (True, False)[organisation.logo == ""],
-        'contact_point': organisation.contactPoint,'contact_point_email': organisation.contactPointEmail,
-        'latitude': organisation.latitude, 'longitude': organisation.longitude
+        'name': organisation.name,
+        'url': organisation.url,
+        'description': organisation.description,
+        'orgType': organisation.orgType,
+        'logo': organisation.logo,
+        'withLogo': (True, False)[organisation.logo == ""],
+        'contact_point': organisation.contactPoint,
+        'contact_point_email': organisation.contactPointEmail,
+        'latitude': organisation.latitude,
+        'longitude': organisation.longitude
     })
 
     if request.method == 'POST':
         form = OrganisationForm(request.POST, request.FILES)
         if form.is_valid():
             image_path = ''
-            withLogo = form.cleaned_data.get('withLogo')
-            if(request.FILES.get('logo', False)):
+            if(request.FILES.get('logo')):
                 x = form.cleaned_data.get('x')
                 y = form.cleaned_data.get('y')
                 w = form.cleaned_data.get('width')
@@ -113,31 +131,34 @@ def edit_organisation(request, pk):
                 random_num = random.randint(0, 1000)
                 image_path = "media/images/" + _datetime + '_' + str(random_num) + '_' + photo.name
                 resized_image.save(image_path)
-                image_path = '/' + image_path
-            elif withLogo:
-                    image_path = '/'
+                image_path_database = "images/" + _datetime + '_' + str(random_num) + '_' + photo.name
             else:
-                image_path = ''
-            form.save(request, image_path)
-            return redirect('../organisations', {})
+                image_path_database = ''
+            form.save(request, image_path_database)
+            return redirect('/organisation/'+str(organisation.id), {})
         else:
             print(form.errors)
 
-    return render(request, 'edit_organisation.html', {'form': form, 'organisation':organisation, 'user':user,})
+    return render(request, 'organisation_form.html', {
+        'form': form,
+        'organisation': organisation,
+        'user': user})
+
 
 def organisations(request):
     organisations = Organisation.objects.get_queryset().order_by('id')
-    countriesWithContent = Organisation.objects.all().values_list('country',flat=True).distinct()
+    countriesWithContent = Organisation.objects.all().values_list('country', flat=True).distinct()
     orgTypes = OrganisationType.objects.all()
     filters = {'keywords': '', 'orgType': '', 'country': ''}
     if request.GET.get('keywords'):
-        organisations = organisations.filter( Q(name__icontains = request.GET['keywords'])).distinct()
+        organisations = organisations.filter(
+                Q(name__icontains=request.GET['keywords'])).distinct()
         filters['keywords'] = request.GET['keywords']
     if request.GET.get('country'):
-        organisations = organisations.filter(country = request.GET['country'])
+        organisations = organisations.filter(country=request.GET['country'])
         filters['country'] = request.GET['country']
     if request.GET.get('orgType'):
-        organisations = organisations.filter(orgType = request.GET['orgType'])
+        organisations = organisations.filter(orgType=request.GET['orgType'])
         filters['orgType'] = request.GET['orgType']
 
     counter = len(organisations)
@@ -146,9 +167,15 @@ def organisations(request):
     page = request.GET.get('page')
     organisations = paginator.get_page(page)
 
-    return render(request, 'organisations.html', {'organisations': organisations, 'counter': counter,
-    'filters': filters, 'countriesWithContent': countriesWithContent, 'orgTypes': orgTypes,
-    'isSearchPage': True})
+    return render(request, 'organisations.html', {
+        'organisations': organisations,
+        'counter': counter,
+        'filters': filters,
+        'countriesWithContent':
+        countriesWithContent,
+        'orgTypes': orgTypes,
+        'isSearchPage': True})
+
 
 def delete_organisation(request, pk):
     organisation = get_object_or_404(Organisation, id=pk)
@@ -161,40 +188,49 @@ def delete_organisation(request, pk):
 
     return redirect('../organisations', {})
 
+
 def organisations_autocomplete(request):
     organisations = preFilteredOrganisations(request)
 
     if request.GET.get('q'):
         text = request.GET['q']
-        organisationsName = organisations.filter( Q(name__icontains = text) ).distinct()
-        project_names = organisationsName.values_list('name',flat=True).distinct()
+        organisationsName = organisations.filter(Q(name__icontains=text)).distinct()
+        project_names = organisationsName.values_list('name', flat=True).distinct()
         json = list(project_names)
         return JsonResponse(json, safe=False)
     else:
         return HttpResponse("No cookies")
 
+
 def preFilteredOrganisations(request):
     organisations = Organisation.objects.get_queryset().order_by('id')
     return applyFilters(request, organisations)
 
+
 def applyFilters(request, organisations):
     if request.GET.get('country'):
-        organisations = organisations.filter(country = request.GET['country'])
+        organisations = organisations.filter(country=request.GET['country'])
     if request.GET.get('orgType'):
-        organisations = organisations.filter(orgType = request.GET['orgType'])
+        organisations = organisations.filter(orgType=request.GET['orgType'])
     return organisations
+
 
 def getOtherUsers(creator, members):
     users = []
     for member in members:
         user = get_object_or_404(User, id=member.user_id)
         users.append(user.id)
-    users = list(User.objects.filter(id__in=users).exclude(is_superuser=True).exclude(id=creator.id).values_list('name','email'))
+    users = list(
+            User.objects.filter(id__in=users).exclude(
+                is_superuser=True).exclude(id=creator.id).values_list('name', 'email'))
     return users
 
+
 def getCooperators(organisationID):
-    users = list(OrganisationPermission.objects.all().filter(organisation_id=organisationID).values_list('user',flat=True))
+    users = list(
+            OrganisationPermission.objects.all().filter(organisation_id=organisationID).values_list('user', flat=True))
     return users
+
 
 def getCooperatorsEmail(organisationID):
     users = getCooperators(organisationID)
@@ -204,22 +240,23 @@ def getCooperatorsEmail(organisationID):
         cooperators += userObj.email + ", "
     return cooperators
 
+
 def allowUserOrganisation(request):
     response = {}
     organisationID = request.POST.get("organisation_id")
     users = request.POST.get("users")
     organisation = get_object_or_404(Organisation, id=organisationID)
     if request.user != organisation.creator and not request.user.is_staff:
-        #TODO return JsonResponse with error code
+        # TODO return JsonResponse with error code
         return redirect('../organisations', {})
 
-    #Delete all
+    # Delete all
     objs = OrganisationPermission.objects.all().filter(organisation_id=organisationID)
     if(objs):
         for obj in objs:
             obj.delete()
 
-    #Insert all
+    # Insert all
     users = users.split(',')
     for user in users:
         fUser = User.objects.filter(email=user)[:1].get()
@@ -228,10 +265,10 @@ def allowUserOrganisation(request):
 
     return JsonResponse(response, safe=False)
 
+
 def saveImageWithPath(image, photoName):
     _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
     random_num = random.randint(0, 1000)
-    image_path = "media/images/" + _datetime + '_' + str(random_num) + '_' + photoName
+    image_path = "images/" + _datetime + '_' + str(random_num) + '_' + photoName
     image.save(image_path)
-    image_path = '/' + image_path
     return image_path

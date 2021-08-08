@@ -1,6 +1,5 @@
 from ckeditor.widgets import CKEditorWidget
 from django.contrib.gis import forms
-from django.contrib.gis.db import models
 from django.core.files import File
 from django.forms import formset_factory
 from django.shortcuts import get_object_or_404

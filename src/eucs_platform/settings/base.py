@@ -329,17 +329,11 @@ AWS_SES_REGION_ENDPOINT = env('AWS_SES_REGION_ENDPOINT')
 
 
 EMAIL_RECIPIENT_LIST = [
-    "eucitsci@mfn.berlin",
-    "frasanz@bifi.es",
-    "francisco.sanz.g@gmail.com",
-    "Claudia.FaboCartas@mfn.berlin"
+    "frasanz@bifi.es"
 ]
 
 EMAIL_CONTACT_RECIPIENT_LIST = [
-    "eucitsci@mfn.berlin",
-    "frasanz@bifi.es",
-    "Claudia.FaboCartas@mfn.berlin",
-    "Antonella.Radicchi@mfn.berlin"
+    "frasanz@bifi.es"
 ]
 
 HOST = env("HOST")
