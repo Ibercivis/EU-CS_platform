@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from authors.models import Author
 from organisations.models import Organisation
+from projects.models import Project
 from django.utils import timezone
 
 
@@ -52,35 +53,50 @@ class LearningResourceType(models.Model):
 
 
 class Resource(models.Model):
+
+    creator = models.ForeignKey(
+            settings.AUTH_USER_MODEL,
+            on_delete=models.CASCADE)
+
+    # Main information
     name = models.CharField(max_length=200)
-    url = models.CharField(max_length=200)
-    creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    authors = models.ManyToManyField(Author)
+    url = models.URLField(max_length=200)
+    keywords = models.ManyToManyField(Keyword)
     abstract = models.CharField(max_length=3000)
     description_citizen_science_aspects = models.CharField(max_length=2000)
-    audience = models.ManyToManyField(Audience)
-    dateUploaded = models.DateTimeField('Date Uploaded')
-    dateLastModification = models.DateTimeField('Last modification', blank=True, default=timezone.now)
-    inLanguage = models.CharField(max_length=100)
-    keywords = models.ManyToManyField(Keyword)
+    authors = models.ManyToManyField(Author)
+
+    # To clasify
     category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.CASCADE)
+    audience = models.ManyToManyField(Audience)
+    inLanguage = models.CharField(max_length=100)
     license = models.CharField(max_length=300, null=True, blank=True)
     publisher = models.CharField(max_length=100, blank=True, null=True)
-    datePublished = models.IntegerField(null=True, blank=True)
     theme = models.ManyToManyField(Theme)
+    resourceDOI = models.CharField(max_length=100, null=True, blank=True)
+    hidden = models.BooleanField(null=True, blank=True)
+    featured = models.BooleanField(default=False)
+
+    # Linking
+    organisation = models.ManyToManyField(Organisation)
+    project = models.ManyToManyField(Project)
+
+    # Time
+    datePublished = models.IntegerField(null=True, blank=True)
+    dateUploaded = models.DateTimeField('Date Uploaded')
+    dateLastModification = models.DateTimeField('Last modification', blank=True, default=timezone.now)
+
+    # Pictures
     image1 = models.ImageField(upload_to='images/', max_length=300, null=True, blank=True)
     imageCredit1 = models.CharField(max_length=300, null=True, blank=True)
     image2 = models.ImageField(upload_to='images/', max_length=300, null=True, blank=True)
     imageCredit2 = models.CharField(max_length=300, null=True, blank=True)
-    resourceDOI = models.CharField(max_length=100, null=True, blank=True)
-    hidden = models.BooleanField(null=True, blank=True)
-    featured = models.BooleanField(default=False)
-    organisation = models.ManyToManyField(Organisation)
 
     # Moderation
+    reviewed = models.BooleanField(default=False)
     approved = models.BooleanField(default=False)
 
-#   Training resources fields
+    # Training resources fields
     isTrainingResource = models.BooleanField(null=True, blank=True)
     educationLevel = models.ForeignKey(EducationLevel, on_delete=models.CASCADE, null=True, blank=True)
     learningResourceType = models.ForeignKey(LearningResourceType, on_delete=models.CASCADE, null=True, blank=True)
