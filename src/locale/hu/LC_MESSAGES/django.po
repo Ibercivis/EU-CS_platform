@@ -20,16 +20,16 @@ msgstr ""
 
 #: .\src\accounts\forms.py:25 .\src\accounts\forms.py:78
 msgid "Enter Email"
-msgstr "Add meg az e-mail címed"
+msgstr "E-mail cím"
 
 #: .\src\accounts\forms.py:26 .\src\accounts\forms.py:80
 msgid "Enter Password"
-msgstr "Add meg a jelszavad"
+msgstr "Jelszó"
 
 #: .\src\accounts\forms.py:32 .\src\templates\base.html:69
 #: .\src\templates\registration\password_reset_complete.html:18
 msgid "Log in"
-msgstr ""
+msgstr "Bejelentkezés"
 
 #: .\src\accounts\forms.py:50
 msgid ""
@@ -37,35 +37,34 @@ msgid ""
 "confirmed your address. Please search for the confirmation email in your "
 "inbox (or spam) to activate your account"
 msgstr ""
-"Az e-mail címedet látjuk, de még nemigazoltad vissza a rendszerben. A fiókod "
-"aktiválásához szükséges megerősítő e-mailta beérkező (vagy spam) mappában "
-"találod."
+"Az e-mail címedet még nem igazoltad vissza a rendszerben."
+"A fiókod aktiválásához szükséges megerősítő e-mailt a beérkező (vagy spam) mappában találod."
 
 #: .\src\accounts\forms.py:79
 msgid "Enter Full Name"
-msgstr "Add meg a teljes neved"
+msgstr "Teljes név"
 
 #: .\src\accounts\forms.py:81
 msgid "Re-enter Password"
-msgstr "Add meg újra a jelszavad"
+msgstr "Jelszó újra"
 
 #: .\src\accounts\forms.py:83 .\src\templates\base.html:70
 #: .\src\templates\base_forms.html:44
 msgid "Sign up"
-msgstr ""
+msgstr "Regisztráció"
 
 #: .\src\accounts\forms.py:92
 msgid "Enter old password"
-msgstr "Add meg a régi jelszavad"
+msgstr "Régi jelszó"
 
 #: .\src\accounts\forms.py:93 .\src\accounts\forms.py:114
 #: .\src\templates\registration\password_reset_confirm.html:18
 msgid "Enter new password"
-msgstr "Add meg az új jelszavad"
+msgstr "Új jelszó"
 
 #: .\src\accounts\forms.py:94 .\src\accounts\forms.py:115
 msgid "Enter new password (again)"
-msgstr "Add meg az új jelszavad (újra)"
+msgstr "Új jelszó (újra)"
 
 #: .\src\accounts\forms.py:95 .\src\accounts\forms.py:116
 #: .\src\profiles\templates\profiles\edit_profile.html:53
@@ -74,11 +73,11 @@ msgstr "Jelszóváltoztatás"
 
 #: .\src\accounts\forms.py:105
 msgid "Enter email"
-msgstr "Add meg az e-mail címed"
+msgstr "E-mail cím"
 
 #: .\src\accounts\forms.py:106
 msgid "Reset Password"
-msgstr ""
+msgstr "Jelszó visszaállítása"
 
 #: .\src\accounts\templates\accounts\acc_active_email.html:4
 msgid "Activate your EU-Citizen.Science account."
@@ -96,7 +95,7 @@ msgstr "Üdvözlünk az EU-Citizen.Science oldalán"
 
 #: .\src\blog\templates\blog.html:37
 msgid "Read More"
-msgstr "Olvass tovább!"
+msgstr "Tudj meg többet!"
 
 #: .\src\contact\templates\contact.html:10
 #: .\src\contact\templates\contact.html:19
@@ -115,11 +114,11 @@ msgstr "Küldés"
 
 #: .\src\contact\templates\submitter_contact.html:10
 msgid "Submitter Contact"
-msgstr " Az adatszolgáltató elérhetősége"
+msgstr "Az adatszolgáltató elérhetősége"
 
 #: .\src\contact\templates\submitter_contact.html:30
 msgid "This email will be sent to submitter of"
-msgstr "Ezt az emailt küldjük az adatszolgáltatónak"
+msgstr "Ezt az emailt továbbítjuk az adatszolgáltatónak"
 
 #: .\src\contact\templates\success.html:26
 msgid "Thank you for your message."
@@ -127,19 +126,19 @@ msgstr "Köszönjük az üzeneted!"
 
 #: .\src\events\forms.py:8
 msgid "Title of the event"
-msgstr ""
+msgstr "Esemény címe"
 
 #: .\src\events\forms.py:9
 msgid "A brief description of the event"
-msgstr ""
+msgstr "Esemény rövid leírása"
 
 #: .\src\events\forms.py:10
 msgid "Location of the Event"
-msgstr ""
+msgstr "Esemény helyszíne"
 
 #: .\src\events\forms.py:14
 msgid "Please provide a URL to an external web site for the event"
-msgstr ""
+msgstr "Esemény URL-je"
 
 #: .\src\events\templates\editEvent.html:25
 msgid "Edit event"
@@ -161,12 +160,12 @@ msgstr "Hozzáad"
 
 #: .\src\events\templates\events.html:31
 msgid "On going events"
-msgstr ""
+msgstr "Aktuális események"
 
 #: .\src\events\templates\events.html:44 .\src\events\templates\events.html:89
 #: .\src\events\templates\events.html:132
 msgid "More info"
-msgstr "További információ"
+msgstr "További információk"
 
 #: .\src\events\templates\events.html:76
 msgid "Upcoming events"
@@ -174,14 +173,14 @@ msgstr "Közelgő események"
 
 #: .\src\events\templates\events.html:119
 msgid "Past events"
-msgstr ""
+msgstr "Elmúlt események"
 
 #: .\src\events\templates\events.html:164
 #: .\src\organisations\templates\organisations.html:36
 #: .\src\projects\templates\projects.html:37
 #: .\src\resources\templates\resources.html:37
 msgid "Sorry, nothing found"
-msgstr "Elnézést, nincs találat "
+msgstr "Nincs találat"
 
 #: .\src\events\templates\new_event.html:25
 msgid "New event"
@@ -189,15 +188,15 @@ msgstr "Új esemény"
 
 #: .\src\organisations\forms.py:10
 msgid "The name or the organisation"
-msgstr "Név vagy szervezet"
+msgstr "Szervezet neve"
 
 #: .\src\organisations\forms.py:12
 msgid "URL of the organisation"
-msgstr "A szervezet URL-je"
+msgstr "Szervezet URL-je"
 
 #: .\src\organisations\forms.py:14
 msgid "Please briefly describe the organisation (ideally in 500 words or less)"
-msgstr "Írj röviden a szervezetedről (legfeljebb 500 szóban)"
+msgstr "Rövid leírás a szervezetről (legfeljebb 500 szó)"
 
 #: .\src\organisations\forms.py:16
 #: .\src\organisations\templates\finder_organisations.html:18
@@ -206,7 +205,7 @@ msgstr "Típus"
 
 #: .\src\organisations\forms.py:18
 msgid "Please upload the logo of your organisation (.jpg or .png)"
-msgstr "Töltsd fel a szervezeted logóját (.jpg vagy .png formátumban)"
+msgstr "Töltsd fel a szervezet logóját (.jpg vagy .png formátumban)"
 
 #: .\src\organisations\forms.py:19
 msgid "Logo"
@@ -221,13 +220,13 @@ msgid ""
 "Please provide the email address of the contact person or contact point. "
 "Note you will need permission to do that"
 msgstr ""
-"Add meg a kapcsolattartó vagy a kapcsolattartó pont e-mail címét.Ehhez a "
-"kapcsolattartó engedélyére lesz szükséged."
+"Add meg a kapcsolattartó vagy a kapcsolattartó pont e-mail címét."
+".Ehhez a kapcsolattartó engedélyére lesz szükséged!"
 
 #: .\src\organisations\forms.py:67 .\src\projects\forms.py:286
 #: .\src\resources\forms.py:200
 msgid "Give additional users permission to edit"
-msgstr "Adj szerkesztői jogot a további felhasználóknak"
+msgstr "Szerkesztői jog átadása további felhasználóknak"
 
 #: .\src\organisations\templates\edit_organisation.html:28
 #: .\src\organisations\templates\new_organisation.html:27
@@ -236,7 +235,7 @@ msgstr "Adj szerkesztői jogot a további felhasználóknak"
 #: .\src\resources\templates\editResource.html:23
 #: .\src\resources\templates\new_resource.html:25
 msgid "Crop the photo"
-msgstr "Körbevág"
+msgstr "Körbevágás"
 
 #: .\src\organisations\templates\edit_organisation.html:30
 #: .\src\organisations\templates\new_organisation.html:29
@@ -250,7 +249,7 @@ msgstr "Körbevág"
 #: .\src\resources\templates\new_resource.html:62
 #: .\src\templates\modalinfo.html:10
 msgid "Close"
-msgstr "Bezár"
+msgstr "Bezárás"
 
 #: .\src\organisations\templates\edit_organisation.html:44
 #: .\src\organisations\templates\new_organisation.html:43
@@ -289,7 +288,7 @@ msgstr "Törlés"
 #: .\src\resources\templates\editResource.html:46
 #: .\src\resources\templates\new_resource.html:48
 msgid "Crop and upload"
-msgstr "Körbevág és feltölt"
+msgstr "Körbevágás és feltöltés"
 
 #: .\src\organisations\templates\edit_organisation.html:65
 msgid "Edit Organisation Profile"
@@ -331,7 +330,7 @@ msgstr "találat"
 #: .\src\organisations\templates\finder_organisations.html:54
 #: .\src\projects\templates\finder_projects.html:93
 msgid "Clear current search query and filters"
-msgstr ""
+msgstr "Keresések és szűrők törlése"
 
 #: .\src\organisations\templates\new_organisation.html:64
 msgid "New Organisation Profile"
@@ -342,8 +341,8 @@ msgid ""
 "Thank you for creating a profile for your organisation on the EU-Citizen."
 "Science Platform."
 msgstr ""
-"Köszönjük, hogy létrehoztad a szervezeted profilját az EU-Citizen-Science "
-"platformján."
+"Köszönjük, hogy létrehoztál egy szervezeti profilt az EU-Citizen-Science platformján."
+
 
 #: .\src\organisations\templates\new_organisation.html:66
 msgid ""
