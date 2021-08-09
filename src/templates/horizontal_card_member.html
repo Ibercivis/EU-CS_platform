@@ -1,0 +1,10 @@
+{% extends "horizontal_card.html" %}
+{% load thumbnail %}
+{% block img %}
+<a href="/users/{{member.slug}}">
+    <img title="project picture" class="img-fluid p-1 zoom" src="{% thumbnail member.picture|default:'default_profile.png' 200x133 crop %}">
+</a>
+{% endblock img %}
+{% block title %}
+<a href="/users/{{member.slug}}">{{ member.user.name }}</a>
+{% endblock title %}
