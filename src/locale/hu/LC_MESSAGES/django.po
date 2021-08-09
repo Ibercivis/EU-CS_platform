@@ -351,8 +351,7 @@ msgid ""
 "involved in, and the Resource Profiles of the resources that were published "
 "by your organisation."
 msgstr ""
-"A szervezeti profil összeköthető a szervezet tagjainak személyes profiljával,"
-"a szervezeted projektjeivelés a szervezeted által publikált forrásokkal."
+"A szervezeti profil összeköthető a szervezet tagjainak profiljával, a szervezet projektjeivel és a szervezet által publikált forrásokkal."
 
 #: .\src\organisations\templates\new_organisation.html:68
 msgid ""
@@ -360,8 +359,7 @@ msgid ""
 "(indicated with an asterisk*), and as much of the non-mandatory information "
 "as possible."
 msgstr ""
-"Add meg a kötelező adatokat az alábbi (csillaggal jelölt*) mezőkbenés töltsd "
-"ki a lehető legtöbb mezőt."
+"Add meg a kötelező adatokat a csillaggal (*) jelölt részeknél és töltsd ki a lehető legtöbb mezőt."
 
 #: .\src\organisations\templates\new_organisation.html:70
 msgid ""
@@ -369,9 +367,8 @@ msgid ""
 "moderation by one of the members of the EU-Citizen.Science consortium. This "
 "step is simply to check for ‘spam’ or inappropriate uses of the profile form."
 msgstr ""
-"Mentést követően a szervezeti profil beküldésre kerül, amitezt követően az "
-"EU-Citizen.Science konzorcium egyik tagja moderál.Ez a lépés a spamek és a "
-"helytelen adatlapok szűrésére szolgál."
+"Mentést követően a szervezeti profilt az EU-Citizen.Science konzorcium egyik tagja moderálja." 
+"Ez a lépés a spamek és a helytelen adatlapok kiszűrésére szolgál."
 
 #: .\src\organisations\templates\organisation.html:21
 #: .\src\projects\templates\editProject.html:64
@@ -382,7 +379,7 @@ msgstr "Törlés megerősítése"
 #: .\src\organisations\templates\organisation.html:25
 msgid ""
 "You are going to delete this organisation, this procedure is irreversible."
-msgstr "A szervezetet véglegesen töröljük."
+msgstr "A szervezet végleges törlése"
 
 #: .\src\organisations\templates\organisation.html:26
 #: .\src\projects\templates\editProject.html:69
@@ -439,16 +436,16 @@ msgstr "Szervezet"
 
 #: .\src\organisations\views.py:47
 msgid "Organisation added correctly"
-msgstr ""
+msgstr "Szervezet feltöltve"
 
 #: .\src\profiles\forms.py:48
 msgid ""
 "Please write or select interest areas, separated by commas or pressing enter"
-msgstr ""
+msgstr "Érdeklődési terület kiválasztása (vesszővel vagy enterrel elválasztva)"
 
 #: .\src\profiles\models.py:23
 msgid "Profile picture"
-msgstr ""
+msgstr "Profilkép"
 
 #: .\src\profiles\models.py:25
 #: .\src\profiles\templates\profiles\show_profile.html:43
@@ -457,11 +454,11 @@ msgstr "Cím"
 
 #: .\src\profiles\models.py:26
 msgid "Short Bio and disciplinary background"
-msgstr "Bio és szakmai háttér"
+msgstr "Rövid szakmai önéletrajz"
 
 #: .\src\profiles\models.py:30
 msgid "Email verified"
-msgstr ""
+msgstr "E-mail cím ellenőrizve"
 
 #: .\src\profiles\models.py:31
 msgid ""
@@ -469,7 +466,7 @@ msgid ""
 "a persistent digital identifier (your ORCID iD) you can add it here to link "
 "this profile with your professional information such as affiliations, "
 "grants, publications, peer review, and more.)"
-msgstr ""
+msgstr "ORCID ID, affiliáció, támogatások, publikációk stb."
 
 #: .\src\profiles\templates\profiles\edit_profile.html:31
 msgid "Edit profile"
@@ -504,7 +501,7 @@ msgstr "Könyvtáram"
 
 #: .\src\profiles\templates\profiles\show_profile.html:30
 msgid "Delete Profile"
-msgstr ""
+msgstr "Profil törlése"
 
 #: .\src\profiles\templates\profiles\show_profile.html:31
 msgid "Edit Profile"
@@ -524,7 +521,7 @@ msgstr "Utoljára megtekintett"
 
 #: .\src\profiles\templates\profiles\show_profile.html:44
 msgid "Bio and disciplinary background"
-msgstr "Bio és szakmai háttér"
+msgstr "Rövid szakmai önéletrajz"
 
 #: .\src\profiles\templates\profiles\show_profile.html:45
 msgid "ORCID profile"
@@ -536,257 +533,260 @@ msgstr "Érdeklődési terület"
 
 #: .\src\projects\forms.py:21
 msgid "Short name or title of the project"
-msgstr ""
+msgstr "Projekt neve"
 
 #: .\src\projects\forms.py:24
 msgid ""
 "Please enter 2-3 keywords (comma separated) or pressing enter to further "
 "describe your project and assist search on the platform"
-msgstr ""
+msgstr "2-3 kulcsszó (vesszővel vagy enterrel elválasztva)"
 
 #: .\src\projects\forms.py:24 .\src\projects\templates\project.html:67
 #: .\src\projects\templates\project.html:189
 #: .\src\resources\templates\resource.html:51
 #: .\src\resources\templates\resource.html:166
 msgid "Keywords"
-msgstr "Kulcsszó"
+msgstr "Kulcsszavak"
 
 #: .\src\projects\forms.py:27
 msgid "Primary aim, goal or objective of the project. Max 2000 characters"
-msgstr ""
+msgstr "Projekt célja (max. 2000 karakter)"
 
 #: .\src\projects\forms.py:30
 msgid ""
 "Please describe the citizen science aspect(s) of the project - see the <a "
 "href=\"https://zenodo.org/communities/citscicharacteristics\">ECSA "
 "Characteristics of Citizen Science</a> for guidance"
-msgstr ""
+msgstr "A projekt civil tudományos vonatkozásai - útmutató: <a "
+"href=\"https://zenodo.org/communities/citscicharacteristics\">ECSA "
+"Characteristics of Citizen Science</a> "
 
 #: .\src\projects\forms.py:34
 msgid "The project topic(s) or field(s) of science, multiple selection"
-msgstr ""
+msgstr "Téma, tudományterület (többszöri választás lehetséges)"
 
 #: .\src\projects\forms.py:35 .\src\projects\templates\finder_projects.html:61
 msgid "Topic"
-msgstr ""
+msgstr "Téma"
 
 #: .\src\projects\forms.py:38
 msgid "Please select the task(s) undertaken by participants"
-msgstr ""
+msgstr "Résztvevők feladatai"
 
 #: .\src\projects\forms.py:39
 msgid "Participation Task"
-msgstr ""
+msgstr "Feladatok"
 
 #: .\src\projects\forms.py:43
 msgid "Activity Status"
-msgstr ""
+msgstr "Tevékenység állapota"
 
 #: .\src\projects\forms.py:44
 msgid "Select one"
-msgstr ""
+msgstr "Válassz egyet!"
 
 #: .\src\projects\forms.py:47
 msgid "Closest approximate start date of the project"
-msgstr ""
+msgstr "A projekt kezdetének dátuma"
 
 #: .\src\projects\forms.py:50
 msgid "Approximate end date of the project"
-msgstr ""
+msgstr "A projekt befejezésének dátuma"
 
 #: .\src\projects\forms.py:53
 msgid "Please provide a URL to an external web site for the project"
-msgstr ""
+msgstr "A projekt URL-je"
 
 #: .\src\projects\forms.py:57
-msgid "Please indicate the spatial scale of the projec"
-msgstr ""
+msgid "Please indicate the spatial scale of the project"
+msgstr "A projekt térbeli kiterjedése"
 
 #: .\src\projects\forms.py:58
 msgid "Geographic Extend"
-msgstr ""
+msgstr "Földrajzi kiterjedés"
 
 #: .\src\projects\forms.py:61
 msgid "Project locality"
-msgstr ""
+msgstr "Projekt helyszíne"
 
 #: .\src\projects\forms.py:62
 msgid ""
 "Please describe the locality of the project, in terms of where the main "
 "participant activities take place,         E.g. in your backyard, parks in "
 "London, rivers in Europe, online globally, etc."
-msgstr ""
+msgstr "Tevékenységek helyszínei (pl: saját kertben, parkban, Budapesten, folyókon, online, stb.)" 
 
 #: .\src\projects\forms.py:67
 msgid ""
 "Organisation coordinating the project. If not listed, please add it <a href="
 "\"/new_organisation\">here</a>         before submitting the project"
-msgstr ""
+msgstr "Koordináló szervezet (Ha még nincs a szervezetek listáján, itt feltölthető: <a href="
+"\"/new_organisation\">here</a>)"
 
 #: .\src\projects\forms.py:69
 msgid "Lead Organisation / Coordinator"
-msgstr ""
+msgstr "Koordinátor"
 
 #: .\src\projects\forms.py:72
 msgid ""
 "Other Organisation participating in the project. If not listed, please add "
 "it         <a href=\"/new_organisation\">here</a> before submitting the "
 "project"
-msgstr ""
+msgstr "Partnerszervezet (Ha még nincs a szervezetek listáján, itt feltölthető: <a href=\"/new_organisation\">here</a>"
 
 #: .\src\projects\forms.py:74
 msgid "Other Organisations"
-msgstr ""
+msgstr "Egyéb szervezet"
 
 #: .\src\projects\forms.py:85
 msgid "Please name the contact person or contact point for the Project"
-msgstr ""
+msgstr "Kapcsolattartó"
 
 #: .\src\projects\forms.py:85
 msgid "Public Contact Point"
-msgstr ""
+msgstr "Kapcsolattartó pont"
 
 #: .\src\projects\forms.py:89
 msgid "Please provide the email for the contact person or contact point"
-msgstr ""
+msgstr "Kapcsolattartó e-mail címe"
 
 #: .\src\projects\forms.py:92
 msgid "Project image for the thumbnail profile"
-msgstr ""
+msgstr "Profilkép"
 
 #: .\src\projects\forms.py:93
 msgid "Will be resized to 600x400 pixels"
-msgstr ""
+msgstr "600x400 méretben kerül feltöltésre"
 
 #: .\src\projects\forms.py:99 .\src\projects\forms.py:113
 msgid "provide image credit, if applicable"
-msgstr ""
+msgstr "Kép szerzője"
 
 #: .\src\projects\forms.py:100
 msgid "Project Logo"
-msgstr ""
+msgstr "Projekt logó"
 
 #: .\src\projects\forms.py:101
 msgid "Will be resized to 600x400 pixels)"
-msgstr ""
+msgstr "600x400 méretben kerül feltöltésre"
 
 #: .\src\projects\forms.py:107
 msgid "provide Logo credit, if applicable"
-msgstr ""
+msgstr "Logó szerzője"
 
 #: .\src\projects\forms.py:108
 msgid "Project image for the profile heading"
-msgstr ""
+msgstr "Projekt borítókép"
 
 #: .\src\projects\forms.py:109
 msgid "Will be resized to 1100x400 pixels"
-msgstr ""
+msgstr "600x400 méretben kerül feltöltésre"
 
 #: .\src\projects\forms.py:124
 msgid "Please describe how people can get involved in the project"
-msgstr ""
+msgstr "Hogyan lehet a projekthez csatlakozni?"
 
 #: .\src\projects\forms.py:125
 msgid "Can participate at home"
-msgstr ""
+msgstr "Otthonról?"
 
 #: .\src\projects\forms.py:128
 msgid "Describe any required or suggested equipment to be used in the project"
-msgstr ""
+msgstr "Milyen eszközökre van szükség a projektben?"
 
 #: .\src\projects\forms.py:131
 msgid ""
 "Please enter the funding agencies of the project (e.g. European "
 "Commission).         Select them from the list or add your own ended by "
 "comma or pressing enter"
-msgstr ""
+msgstr "Támogató szervezet, pl: Európai Bizottság (vesszővel vagy enterrel elválasztva)"
 
 #: .\src\projects\forms.py:132
 msgid ""
 "Funding body (Put a comma after each name or pressing enter to add a new "
 "funding body)"
-msgstr ""
+msgstr "Finanszírozó szervezet (vesszővel vagy enterrel elválasztva)"
 
 #: .\src\projects\forms.py:136
 msgid "Indication of the programme that funds or funded a project"
-msgstr ""
+msgstr "Finanszírozó keretprogram"
 
 #: .\src\projects\forms.py:139
 msgid ""
 "Do you know the name of the database where the project first appeared?, add "
 "it here ended by comma or pressing enter."
-msgstr ""
+msgstr "Projekt eredeti forrása (vesszővel vagy enterrel elválasztva)"
 
 #: .\src\projects\forms.py:144
 msgid ""
 "Do you know the Unique identificator of the project in the previous "
 "database?, add it here."
-msgstr ""
+msgstr "Projekt egyedi azonosítója"
 
 #: .\src\projects\forms.py:145
 msgid "Origin UID"
-msgstr ""
+msgstr "Eredeti UID"
 
 #: .\src\projects\forms.py:148
 msgid "Do you know the origin URL in the previous database?, add it here"
-msgstr ""
+msgstr "Projekt eredeti forrásának URL-je"
 
 #: .\src\projects\forms.py:148
 msgid "Origin URL"
-msgstr ""
+msgstr "Eredeti URL"
 
 #: .\src\projects\templates\editProject.html:68
 msgid "You are going to delete this project, this procedure is irreversible."
-msgstr ""
+msgstr "Biztosan törli?"
 
 #: .\src\projects\templates\editProject.html:87
 msgid "Edit project"
-msgstr ""
+msgstr "Projekt szerkesztése"
 
 #: .\src\projects\templates\editProject.html:119
 #: .\src\projects\templates\new_project.html:116
 msgid "Project info"
-msgstr ""
+msgstr "Projektinformáció"
 
 #: .\src\projects\templates\editProject.html:173
 #: .\src\projects\templates\new_project.html:173
 msgid "Contact details"
-msgstr ""
+msgstr "Kapcsolat"
 
 #: .\src\projects\templates\editProject.html:189
 #: .\src\projects\templates\new_project.html:188
 msgid "Project profile images"
-msgstr ""
+msgstr "Projekt profilkép"
 
 #: .\src\projects\templates\editProject.html:251
 #: .\src\projects\templates\new_project.html:236
 msgid "Geography"
-msgstr ""
+msgstr "Földrajzi hely"
 
 #: .\src\projects\templates\editProject.html:252
 msgid ""
 "Main location where the project takes place (Enter address or click on the "
 "map)"
-msgstr ""
+msgstr "Projekt helyszíne (add meg a címet vagy jelöld be a térképen)"
 
 #: .\src\projects\templates\editProject.html:269
 #: .\src\projects\templates\new_project.html:261
 msgid "Supplementary information for Citizen Science"
-msgstr ""
+msgstr "Kiegészítő információk"
 
 #: .\src\projects\templates\editProject.html:285
 #: .\src\projects\templates\new_project.html:276
 msgid "Funding"
-msgstr ""
+msgstr "Finanszírozás"
 
 #: .\src\projects\templates\editProject.html:298
 #: .\src\projects\templates\new_project.html:289
 msgid "Origin information"
-msgstr ""
+msgstr "Eredeti információk"
 
 #: .\src\projects\templates\editProject.html:316
 msgid "Custom fields"
-msgstr ""
+msgstr "Egyéni mezők"
 
 #: .\src\projects\templates\finder_projects.html:33
 #: .\src\resources\templates\finder_resources.html:22
@@ -796,7 +796,7 @@ msgstr "Legfrissebb feltöltések szerint"
 #: .\src\projects\templates\finder_projects.html:34
 #: .\src\resources\templates\finder_resources.html:23
 msgid "Sort by featured"
-msgstr ""
+msgstr "Kiemelés szerint"
 
 #: .\src\projects\templates\finder_projects.html:35
 #: .\src\resources\templates\finder_resources.html:24
@@ -806,19 +806,19 @@ msgstr "Minősítés szerint"
 #: .\src\projects\templates\finder_projects.html:46
 #: .\src\projects\templates\project.html:53
 msgid "Status"
-msgstr ""
+msgstr "Állapot"
 
 #: .\src\projects\templates\finder_projects.html:69
 msgid "Doable at home"
-msgstr ""
+msgstr "Otthonról végezhető"
 
 #: .\src\projects\templates\finder_projects.html:70
 msgid "Yes"
-msgstr ""
+msgstr "Igen"
 
 #: .\src\projects\templates\finder_projects.html:71
 msgid "No"
-msgstr ""
+msgstr "Nem"
 
 #: .\src\projects\templates\finder_projects.html:74
 #: .\src\resources\templates\finder_resources.html:61
@@ -850,7 +850,7 @@ msgstr "Keresés"
 #: .\src\projects\templates\modal_projects.html:14
 msgid ""
 "projects by title or keywords by typing text directly into the the search bar"
-msgstr ""
+msgstr "Cím vagy kulcsszavak szerinti keresés"
 
 #: .\src\projects\templates\modal_projects.html:15
 #: .\src\resources\templates\modal_resources.html:15
@@ -859,7 +859,7 @@ msgstr "Rendezés"
 
 #: .\src\projects\templates\modal_projects.html:15
 msgid "projects by date or by rating"
-msgstr ""
+msgstr "Projektek dátum vagy értékelés szerinti keresése"
 
 #: .\src\projects\templates\modal_projects.html:16
 #: .\src\resources\templates\modal_resources.html:16
@@ -868,7 +868,7 @@ msgstr "Szűrő"
 
 #: .\src\projects\templates\modal_projects.html:16
 msgid "search results by project status, country, or topic"
-msgstr ""
+msgstr "Projekt státusz, ország vagy téma szerinti keresés"
 
 #: .\src\projects\templates\modal_projects.html:18
 msgid ""
