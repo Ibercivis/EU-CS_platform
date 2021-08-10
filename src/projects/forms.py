@@ -1,7 +1,5 @@
 from ckeditor.widgets import CKEditorWidget
 from django.contrib.gis import forms
-from django.core.files import File
-from django.forms import formset_factory
 from django.shortcuts import get_object_or_404
 from django_select2.forms import Select2MultipleWidget
 from django_select2 import forms as s2forms
@@ -9,7 +7,8 @@ from django_summernote.widgets import SummernoteWidget
 from django.utils.translation import ugettext_lazy as _
 from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderServiceError
-from .models import Project, Topic, Status, Keyword, FundingBody, CustomField, ParticipationTask, GeographicExtend, HasTag, DifficultyLevel
+from .models import Project, Topic, Status, Keyword, FundingBody
+from .models import ParticipationTask, GeographicExtend, HasTag, DifficultyLevel
 from organisations.models import Organisation
 
 
@@ -292,6 +291,7 @@ class ProjectForm(forms.Form):
                     difficultyLevel,
                     doingAtHome,
                     mainOrganisation,
+                    projectlocality,
                     projectGeographicLocation)
         else:
             project = self.createProject(
@@ -301,6 +301,7 @@ class ProjectForm(forms.Form):
                     projectGeographicLocation,
                     participatingInaContest,
                     mainOrganisation,
+                    projectlocality,
                     args)
 
         if start_dateData:
@@ -397,8 +398,6 @@ def getCountryCode(latitude, longitude):
 class CustomFieldForm(forms.Form):
     title = forms.CharField(max_length=100, required=False)
     paragraph = forms.CharField(widget=SummernoteWidget(), required=False)
-
-CustomFieldFormset = formset_factory(CustomFieldForm, extra=1)
 
 
 class ProjectPermissionForm(forms.Form):
