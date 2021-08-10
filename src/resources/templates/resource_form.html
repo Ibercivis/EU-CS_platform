@@ -1,14 +1,15 @@
 {% extends "base_r2.html" %}
+{% load i18n %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
-{% load i18n %}
 {% load l10n %}
 {% block head %}
 {{ block.super }}
+<link rel="stylesheet" href="{% static 'site/css/forms.css' %}">
 {{ form.media.css }}
 {% endblock head %}
-{% block title %}{{ block.super }} :: Edit resource{% endblock %}
 
+{% block title %}{{ block.super }} :: Edit resource{% endblock %}
 {% block navbar-left %}
 {% include "_navbar.html" with active_link="resources" %}
 {% endblock %}
@@ -49,98 +50,38 @@
   </div>
 </div>
 <!-- END MODAL TO CROP -->
-
 <div class="container mt-5">
-  <div class="row d-flex justify-content-center">
-    <div class="col-sm-10 col-12">
-      <div class="card mb-5 mt-5 shadow">
-        <div class="card-title p-5">
-          <div class="row">
-            <div class="col-6">
-              <h2 clas="float-left">{% trans "Edit resource" %}</h2>
-            </div>
-            <div class="col-6">
-              <button type="submit" onclick="$('#id_submit').click()" class="btn btn-green"><i class="fas fa-share-square"></i> {% trans "Save" %}</button>
-              <button type="submit" class="btn btn-red float-right" data-href="{% if isTrainingResource %} {% url 'deleteResource' resource.id  1 %} {% else %} {% url 'deleteResource' resource.id  0 %} {% endif %}"
-                data-toggle="modal" data-target="#confirm-delete" name='deleteResource'>
-                <span class="fas fa-trash-alt"></span> {% trans "Delete" %}
-              </button>
-            </div>
-          </div>
+    <form 
+     action="{% if isTrainingResource %}{% url 'editTrainingResource' resource.id %}{% else %}{% url 'editResource' resource.id %}{% endif %}" 
+     class="edit-resource" 
+     method="post" 
+     enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
 
-          <div class="row">
-            <div class="col-lg-6"></div>
-            <div class="col-lg-6">
-              {% if user.is_authenticated %}
-              {% if user.is_staff %}
-              <permissionForm>
-                {% csrf_token %}
-                {{ permissionForm.usersAllowed | as_crispy_field }}
-                {{ permissionForm.selectedUsers | as_crispy_field }}
-                {{ permissionForm.usersCollection | as_crispy_field }}
-              </permissionForm>
-              {% endif %}
-              {% endif %}
-            </div>
-          </div>
+                <h4 class="leftborder">{% trans "Main information" %}</h4>
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-11">
+                        {{ form.name|as_crispy_field }}
+                        {{ form.url|as_crispy_field }}
+                        {{ form.keywords|as_crispy_field }}
+                        {{ form.abstract|as_crispy_field }}
+                        {{ form.description_citizen_science_aspects|as_crispy_field }}
+                        {{ form.authors|as_crispy_field }}
 
-        </div>
+                    </div>
+                </div>
 
-        <div class="card-text pl-5 pr-5">
-          <table class="table mb-0">
-            <form action="{% if isTrainingResource %}{% url 'editTrainingResource' resource.id %}{% else %}{% url 'editResource' resource.id %}{% endif %}" class="edit-resource" method="post" enctype="multipart/form-data">
-              {% csrf_token %}
-
-              <div class="form-row">
-                <div class="col-12">
-                  <input type="hidden" id="resourceID" name="resourceID" value={{resource.id}}>
-                  {{ form.name|as_crispy_field }}
-                </div>
-                <div class="col-12">
-                  {{ form.url|as_crispy_field }}
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="col-12">
-                  {{ form.abstract|as_crispy_field }}
-                </div>
-                <div class="col-12">
-                  {{ form.description_citizen_science_aspects|as_crispy_field }}
-                </div>
-                <div class="col-12">
-                  {{ form.category|as_crispy_field }}
-                  {{ form.categorySelected|as_crispy_field }}
-                  <div id="id_sub_categories"></div><br/>
-                  {{ form.audience|as_crispy_field }}
-
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="col-12">
-                  {{form.keywords|as_crispy_field }}
-                  {{form.choices |as_crispy_field}}
-                </div>
-                <div class="col-12">
-                  {{ form.resource_DOI|as_crispy_field }}
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="col-12">
-                  {{ form.authors|as_crispy_field }}
-                  {{form.authorsCollection |as_crispy_field}}
-                </div>
-                <div class="col-12">
-
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="col-12">
-                  {{ form.license|as_crispy_field }}
-                </div>
-                <div class="col-12">
-                  {% get_language_info_list for LANGUAGES as languages %}
+                <h4 class="leftborder mt-5">{% trans "Information to help in the classification" %}</h4>
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-11">
+                        {{ form.category|as_crispy_field }}
+                        {{ form.audience|as_crispy_field }}
+            {% get_language_info_list for LANGUAGES as languages %}
                   {% if settings.USE_I18N and languages|length > 1 %}
                   <label for="language" class="control-label  requiredField">
                     Please indicate the (main) language that the resource is made available in<span class="asteriskField">*</span>
@@ -155,7 +96,57 @@
                     {% endfor %}
                   </select>
                   {% endif %}
+
+                    </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+        <div class="card-text pl-5 pr-5">
+          <table class="table mb-0">
+              <div class="form-row">
+                <div class="col-12">
+                  <input type="hidden" id="resourceID" name="resourceID" value={{resource.id}}>
+                        </div>
+                <div class="col-12">
                 </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col-12">
+                </div>
+                <div class="col-12">
+                      </div>
+                <div class="col-12">
+                  {{ form.categorySelected|as_crispy_field }}
+                  <div id="id_sub_categories"></div><br/>
+
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-12">
+                  {{form.choices |as_crispy_field}}
+                </div>
+                <div class="col-12">
+                  {{ form.resource_DOI|as_crispy_field }}
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-12">
+                </div>
+                <div class="col-12">
+
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col-12">
+                  {{ form.license|as_crispy_field }}
+                </div>
+                <div class="col-12">
+                      </div>
               </div>
 
               <div class="form-row">
@@ -303,51 +294,6 @@
             );
         });
 
-        getKeywordsSelector();
-        $("#id_keywords").attr('required', true);
-        $("#div_id_keywords label").append('<span class="asteriskField">*</span>');
-        $("#div_id_keywords div").on('keyup', function (e) {
-          var key = $("#div_id_keywords .selection input").val();
-          if (key.indexOf(',') > -1) {
-            var word = key.slice(0, -1);
-            $("#div_id_keywords .selection input").val("");
-            if(word.length > 1){
-              $("#id_keywords").append("<option value='" + word + "' selected> " + word + " </option>");
-            }
-          }
-          if(e.which == 13) {
-            $("#div_id_keywords .selection input").val("");
-            if(key.length > 1){
-              $("#id_keywords").append("<option value='" + key +"' selected> " + key + " </option>");
-            }
-          }
-        });
-
-        getAuthorsSelector();
-        $("#id_authors").attr('required', true);
-        $("#div_id_authors label").append('<span class="asteriskField">*</span>');
-        $("#div_id_authors div").on('keyup', function (e) {
-          var key = $("#div_id_authors .selection input").val();
-          if (key.indexOf(',') > -1) {
-            var word = key.slice(0, -1);
-            $("#div_id_authors .selection input").val("");
-            if(word.length > 1){
-              $("#id_authors").append("<option value='" + word + "' selected> " + word + " </option>");
-            }
-          }
-          if(e.which == 13) {
-            $("#div_id_authors .selection input").val("");
-            if(key.length > 1){
-              $("#id_authors").append("<option value='" + key +"' selected> " + key + " </option>");
-            }
-          }
-        });
-
-        $('#contactinfo').on('click', function () {
-          $('#contactinfoform').toggle();
-          $('html,body').animate({ scrollTop: $("#contactinfo").offset().top - 160 }, { duration: "slow" });
-        });
-
         getSubCategories();
         $("#id_category").on('change', getSubCategories);
 
@@ -453,37 +399,6 @@
             $('html,body').animate({ scrollTop: $(".edit-resource").offset().top - 160 }, { duration: "slow" });
             return false;
           } else {
-            var option_all = $("#id_keywords option:selected").map(function () {
-              return $.trim($(this).text());
-            }).get().join(',');
-            $("#id_choices").val(option_all);
-            $("#id_keywords").empty();
-
-            option_all = $("#id_authors option:selected").map(function () {
-              return $.trim($(this).text());
-            }).get().join(',');
-            $("#id_authorsCollection").val(option_all);
-            $("#id_authors").empty();
-
-            var category = $("#id_category").val();
-            $("#id_categorySelected").val(category);
-            var subcategory = $("#id_subcategory").val();
-            if (subcategory) {
-              $("#id_categorySelected").val(subcategory);
-            }
-
-            var educationLevel = $("#id_education_level option:selected").map(function () {
-              return $.trim($(this).text());
-            }).get().join(',');
-            $("#id_educationLevelSelected").val(educationLevel);
-            $("#id_education_level").empty();
-
-            var learningResourceType = $("#id_learning_resource_type option:selected").map(function () {
-              return $.trim($(this).text());
-            }).get().join(',');
-            $("#id_learningResourceTypeSelected").val(learningResourceType);
-            $("#id_learning_resource_type").empty();
-
           }
         });
       });
@@ -520,38 +435,6 @@
 
             }
           }
-        );
-      }
-
-      function getKeywordsSelector() {
-        var resource_id = $("#resourceID").val();    
-        var request = $.ajax(
-        {
-          type: "GET",
-          url: "{% url 'getResourceKeywordsSelector' %}",
-          data: {
-            "resource_id": resource_id
-          },
-          success: function (response) {
-            $("#id_keywords").html(response.keywords);
-          }
-        }
-        );
-      }
-
-      function getAuthorsSelector() {
-        var resource_id = $("#resourceID").val();    
-        var request = $.ajax(
-        {
-          type: "GET",
-          url: "{% url 'getResourceAuthorsSelector' %}",
-          data: {
-            "resource_id": resource_id
-          },
-          success: function (response) {
-            $("#id_authors").html(response.authors);
-          }
-        }
         );
       }
 

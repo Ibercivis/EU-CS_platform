@@ -4,8 +4,8 @@ from django.db import models
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
 from django_summernote.widgets import SummernoteWidget
-from django.forms import ModelForm
 from django_select2.forms import Select2MultipleWidget
+from django_select2 import forms as s2forms
 from .models import Resource, Keyword, Category, Audience, Theme, ResourceGroup, ResourcesGrouped, EducationLevel, LearningResourceType
 from authors.models import Author
 from PIL import Image
@@ -26,13 +26,16 @@ class ResourceForm(forms.Form):
             help_text=_(
                 'URL to where the document is hosted by the publisher,'
                 'or in a permanent repository such as Zenodo, OSF, the RIO Journal, or similar'))
-    keywords = forms.MultipleChoiceField(
-            choices=(),
-            widget=Select2MultipleWidget(),
+    keywords = forms.ModelMultipleChoiceField(
+            queryset=Keyword.objects.all(),
+            widget=s2forms.ModelSelect2TagWidget(
+                search_fields=['keyword__icontains'],
+                attrs={
+                    'data-token-separators': '[","]'}),
             help_text=_(
                 'Please write or select keywords to describe the resource,'
-                'separated by commas or pressing enter'),
-            required=False)
+                '<b>separated by commas or pressing enter</b>'),
+            required=True)
 
     abstract = forms.CharField(
             widget=CKEditorWidget(config_name='frontpage'),
@@ -51,15 +54,17 @@ class ResourceForm(forms.Form):
             max_length=2000,
             label=_('Description of Citizen Science Aspects'))
 
-    authors = forms.MultipleChoiceField(
-            choices=(),
-            widget=Select2MultipleWidget(),
+    authors = forms.ModelMultipleChoiceField(
+            queryset=Author.objects.all(),
+            widget=s2forms.ModelSelect2TagWidget(
+                search_fields=['author__icontains'],
+                attrs={
+                    'data-token-separators': '[","]'}),
             help_text=_(
                 'Author(s) of the resource. Enter <i>FirstInitial LastName</i> and close with a comma or'
                 ' pressing enter to add an author or multiple authors'),
             required=False,
             label=_("Authors"))
-    authorsCollection = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     # To clasify
     # TODO: Improve category

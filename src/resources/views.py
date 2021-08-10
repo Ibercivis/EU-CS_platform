@@ -151,7 +151,7 @@ def new_resource(request, isTrainingResource=False):
             email.send()
             return redirect('/resources')
 
-    return render(request, 'new_resource.html', {
+    return render(request, 'resource_form.html', {
         'form': form,
         'settings': settings,
         'isTrainingResource': isTrainingResource})
@@ -239,12 +239,6 @@ def editResource(request, pk):
         'usersCollection': users,
         'selectedUsers': cooperators})
 
-    choices = list(Keyword.objects.all().values_list('keyword', flat=True))
-    choices = ", ".join(choices)
-
-    authorsCollection = list(Author.objects.all().values_list('author', flat=True))
-    authorsCollection = ", ".join(authorsCollection)
-
     curatedGroups = list(ResourcesGrouped.objects.all().filter(resource_id=pk).values_list('group_id', flat=True))
 
     educationLevel = list(EducationLevel.objects.all().values_list('educationLevel', flat=True))
@@ -257,6 +251,7 @@ def editResource(request, pk):
     form = ResourceForm(initial={
         'name': resource.name,
         'abstract': resource.abstract,
+        'keywords': resource.keywords.all,
         'image1': resource.image1,
         'image2': resource.image2,
         'resource_DOI': resource.resourceDOI,
@@ -264,14 +259,12 @@ def editResource(request, pk):
         'withImage2': (True, False)[resource.image2 == ""],
         'url': resource.url,
         'license': resource.license,
-        'choices': choices,
         'theme': resource.theme.all,
         'organisation': resource.organisation.all,
         'audience': resource.audience.all,
         'publisher': resource.publisher,
         'year_of_publication': resource.datePublished,
         'authors': resource.authors.all,
-        'authorsCollection': authorsCollection,
         'description_citizen_science_aspects': resource.description_citizen_science_aspects,
         'image_credit1': resource.imageCredit1,
         'image_credit2': resource.imageCredit2,
@@ -298,7 +291,7 @@ def editResource(request, pk):
                 return redirect('/training_resource/' + str(pk))
             return redirect('/resource/' + str(pk))
 
-    return render(request, 'editResource.html', {
+    return render(request, 'resource_form.html', {
         'form': form,
         'resource': resource,
         'curatedGroups': curatedGroups,
