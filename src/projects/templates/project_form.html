@@ -286,7 +286,7 @@
             else
                 var contin=false
             console.log(contin)
-	    $('.myerror').remove()
+	        $('.myerror').remove()
             $.ajaxSettings.traditional = true;
             for(var instanceName in CKEDITOR.instances)
                 CKEDITOR.instances[instanceName].updateElement();
@@ -298,8 +298,6 @@
                 contentType: false,
                 data: new FormData(document.getElementById("form_project")),
                 success: function (response){
-                    console.log(response.Project)
-                    console.log($(this))
                     if(contin){
                         $('#projectID').val(response.Project)
                         console.log('continue')
@@ -311,6 +309,9 @@
                     }
                 },
                 error: function (response){
+                    if(response.status==500){
+                        alert('Unexpected error, please contact with the administrator')
+                    }
                     $.each(response.responseJSON, function(i,val){
                         $('#id_'+i).addClass('error')
   			            $('#id_'+i).parent().find('.select2-selection--multiple').addClass('error')
