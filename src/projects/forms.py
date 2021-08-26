@@ -336,6 +336,7 @@ class ProjectForm(forms.Form):
             projectGeographicLocation,
             participatingInaContest,
             mainOrganisation,
+            projectLocality,
             args):
         return Project(
                 creator=args.user,
@@ -362,7 +363,7 @@ class ProjectForm(forms.Form):
                 participatingInaContest=participatingInaContest,
                 projectGeographicLocation=projectGeographicLocation)
 
-    def updateFields(self, project, status, difficultyLevel, doingAtHome, mainOrganisation, projectGeographicLocation):
+    def updateFields(self, project, status, difficultyLevel, doingAtHome, mainOrganisation, projectLocality, projectGeographicLocation):
         project.name = self.data['project_name']
         project.url = self.data['url']
         project.projectlocality = self.data['projectlocality']
