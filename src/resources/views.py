@@ -113,12 +113,12 @@ def resources(request, isTrainingResource=False):
 
 
 @login_required(login_url='/login')
-def new_training_resource(request):
-    return new_resource(request, True)
+def newTrainingResource(request):
+    return newResource(request, True)
 
 
 @login_required(login_url='/login')
-def new_resource(request, isTrainingResource=False):
+def newResource(request, isTrainingResource=False):
     form = ResourceForm()
     if request.method == 'POST':
         form = ResourceForm(request.POST, request.FILES)
@@ -231,12 +231,6 @@ def editResource(request, pk):
             return redirect('/training_resources')
         return redirect('../resources', {})
 
-    users = getOtherUsers(resource.creator)
-    cooperators = getCooperatorsEmail(pk)
-    permissionForm = ResourcePermissionForm(initial={
-        'usersCollection': users,
-        'selectedUsers': cooperators})
-
     curatedGroups = list(ResourcesGrouped.objects.all().filter(resource_id=pk).values_list('group_id', flat=True))
 
     educationLevel = list(EducationLevel.objects.all().values_list('educationLevel', flat=True))
@@ -245,35 +239,39 @@ def editResource(request, pk):
     learningResourceType = list(LearningResourceType.objects.all().values_list('learningResourceType', flat=True))
     learningResourceType = ", ".join(learningResourceType)
 
-    # TODO: short this list, is needed with image?
+    # TODO: is needed with image?
     form = ResourceForm(initial={
+        # Main information, mandatory
         'name': resource.name,
-        'abstract': resource.abstract,
-        'keywords': resource.keywords.all,
-        'image1': resource.image1,
-        'image2': resource.image2,
-        'resource_DOI': resource.resourceDOI,
-        'withImage1': (True, False)[resource.image1 == ""],
-        'withImage2': (True, False)[resource.image2 == ""],
         'url': resource.url,
-        'license': resource.license,
-        'theme': resource.theme.all,
-        'organisation': resource.organisation.all,
-        'audience': resource.audience.all,
-        'publisher': resource.publisher,
-        'year_of_publication': resource.datePublished,
-        'authors': resource.authors.all,
+        'keywords': resource.keywords.all,
+        'abstract': resource.abstract,
         'description_citizen_science_aspects': resource.description_citizen_science_aspects,
-        'image_credit1': resource.imageCredit1,
-        'image_credit2': resource.imageCredit2,
         'category': getCategory(resource.category),
         'categorySelected': resource.category.id,
-        'education_level': educationLevel,
-        'educationLevelSelected': resource.educationLevel,
+        'audience': resource.audience.all,
+        'theme': resource.theme.all,
+        # Publish information
+        'authors': resource.authors.all,
+        'publisher': resource.publisher,
+        'year_of_publication': resource.datePublished,
+        'resource_DOI': resource.resourceDOI,
+        'license': resource.license,
+        # Training related fields
         'learning_resource_type': learningResourceType,
-        'learningResourceTypeSelected': resource.learningResourceType,
+        'education_level': educationLevel,
         'time_required': resource.timeRequired,
-        'conditions_of_access': resource.conditionsOfAccess
+        'conditions_of_access': resource.conditionsOfAccess,
+        # Links
+        'project': resource.project.all,
+        'organisation': resource.organisation.all,
+        # Images
+        'image_credit1': resource.imageCredit1,
+        'image_credit2': resource.imageCredit2,
+        'image1': resource.image1,
+        'image2': resource.image2,
+        'withImage1': (True, False)[resource.image1 == ""],
+        'withImage2': (True, False)[resource.image2 == ""],
     })
 
     if request.method == 'POST':
@@ -295,7 +293,6 @@ def editResource(request, pk):
         'curatedGroups': curatedGroups,
         'user': user,
         'settings': settings,
-        'permissionForm': permissionForm,
         'isTrainingResource': isTrainingResource})
 
 
@@ -308,7 +305,6 @@ def saveResourceAjax(request):
     if form.is_valid():
         images = setImages(request, form)
         pk = form.save(request, images)
-
         if pk and not request.POST.get('resourceID').isnumeric():
             sendResourceEmail(pk, request.user)
         return JsonResponse({'ResourceCreated': 'OK', 'Resource': pk}, status=status.HTTP_200_OK)

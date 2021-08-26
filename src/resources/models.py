@@ -58,33 +58,28 @@ class Resource(models.Model):
             settings.AUTH_USER_MODEL,
             on_delete=models.CASCADE)
 
-    # Main information
+    # Main information, mandatory
     name = models.CharField(max_length=200)
     url = models.URLField(max_length=200)
     keywords = models.ManyToManyField(Keyword)
     abstract = models.CharField(max_length=3000)
     description_citizen_science_aspects = models.CharField(max_length=2000)
-    authors = models.ManyToManyField(Author)
-
-    # To clasify
     category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.CASCADE)
     audience = models.ManyToManyField(Audience)
+    theme = models.ManyToManyField(Theme)
+
+    # Publish information
+    # TODO: Convert datePublished to Year
+    authors = models.ManyToManyField(Author)
+    publisher = models.CharField(max_length=100, blank=True, null=True)
+    datePublished = models.IntegerField(null=True, blank=True)
+    resourceDOI = models.CharField(max_length=100, null=True, blank=True)
     inLanguage = models.CharField(max_length=100)
     license = models.CharField(max_length=300, null=True, blank=True)
-    publisher = models.CharField(max_length=100, blank=True, null=True)
-    theme = models.ManyToManyField(Theme)
-    resourceDOI = models.CharField(max_length=100, null=True, blank=True)
-    hidden = models.BooleanField(null=True, blank=True)
-    featured = models.BooleanField(default=False)
 
-    # Linking
+    # Links
     organisation = models.ManyToManyField(Organisation)
     project = models.ManyToManyField(Project)
-
-    # Time
-    datePublished = models.IntegerField(null=True, blank=True)
-    dateUploaded = models.DateTimeField('Date Uploaded')
-    dateLastModification = models.DateTimeField('Last modification', blank=True, default=timezone.now)
 
     # Pictures
     image1 = models.ImageField(upload_to='images/', max_length=300, null=True, blank=True)
@@ -92,16 +87,24 @@ class Resource(models.Model):
     image2 = models.ImageField(upload_to='images/', max_length=300, null=True, blank=True)
     imageCredit2 = models.CharField(max_length=300, null=True, blank=True)
 
-    # Moderation
-    reviewed = models.BooleanField(default=False)
-    approved = models.BooleanField(default=False)
-
     # Training resources fields
     isTrainingResource = models.BooleanField(null=True, blank=True)
     educationLevel = models.ForeignKey(EducationLevel, on_delete=models.CASCADE, null=True, blank=True)
     learningResourceType = models.ForeignKey(LearningResourceType, on_delete=models.CASCADE, null=True, blank=True)
     timeRequired = models.FloatField(null=True, blank=True)
     conditionsOfAccess = models.CharField(max_length=300, null=True, blank=True)
+
+    # Time
+    dateUploaded = models.DateTimeField('Date Uploaded')
+    dateLastModification = models.DateTimeField('Last modification', blank=True, default=timezone.now)
+
+    # Moderation
+    reviewed = models.BooleanField(default=False)
+    approved = models.BooleanField(default=False)
+
+    # Other
+    hidden = models.BooleanField(null=True, blank=True)
+    featured = models.BooleanField(default=False)
     own = models.BooleanField(null=True, blank=True)
 
     def __str__(self):

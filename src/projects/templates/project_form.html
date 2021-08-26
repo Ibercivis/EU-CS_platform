@@ -260,20 +260,18 @@
             if($(this).is('.error'))
                 $(this).removeClass('error');
         });
-   	$('select').on('focus', function(){
+        $('select').on('focus', function(){
             if($(this).is('.error'))
                 $(this).removeClass('error');
         });
-   	$('.select2-selection--multiple').on('focus', function(){
+        $('.select2-selection--multiple').on('focus', function(){
             if($(this).is('.error'))
                 $(this).removeClass('error');
         });
-
- 
 
         for(var instanceName in CKEDITOR.instances){
             CKEDITOR.instances[instanceName].on('focus', function(e){
-		id='#cke_'+$(this).attr('name')
+                id='#cke_'+$(this).attr('name')
                 if($(id).is('.error'))
                     $(id).removeClass('error');
             })
@@ -281,12 +279,13 @@
 
         $('.submit').click(function (e) {
             e.preventDefault()
+
+            /* To check that we click on Save & continue  */
             if($(this).hasClass('continue'))
                 var contin=true
             else
                 var contin=false
-            console.log(contin)
-	        $('.myerror').remove()
+            $('.myerror').remove()
             $.ajaxSettings.traditional = true;
             for(var instanceName in CKEDITOR.instances)
                 CKEDITOR.instances[instanceName].updateElement();
@@ -302,7 +301,7 @@
                         $('#projectID').val(response.Project)
                         console.log('continue')
                         $('.savedInfo').html('<span class="alert alert-success fade show">'+
-                                             '<i class="fas fa-check"></i> Saved</span>').show().fadeOut(2500)
+                            '<i class="fas fa-check"></i> Saved</span>').show().fadeOut(2500)
                     }
                     else{
                         window.location.href = '/project/'+response.Project+'?prev='+window.location.pathname
@@ -314,13 +313,13 @@
                     }
                     $.each(response.responseJSON, function(i,val){
                         $('#id_'+i).addClass('error')
-  			            $('#id_'+i).parent().find('.select2-selection--multiple').addClass('error')
-			            $('label[for=id_'+i+']').append('<div class="myerror alert alert-danger">'+val+'</div>')
+                        $('#id_'+i).parent().find('.select2-selection--multiple').addClass('error')
+                        $('label[for=id_'+i+']').append('<div class="myerror alert alert-danger">'+val+'</div>')
                         $('#cke_id_'+i).addClass('error')
                     })
-		    $('html, body').animate({
-    			scrollTop: $('.myerror:visible:first').offset().top-100
-		    }, 1000);
+                    $('html, body').animate({
+                        scrollTop: $('.myerror:visible:first').offset().top-100
+                    }, 1000);
                 }
             });
         });

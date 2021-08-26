@@ -324,6 +324,8 @@ class ProjectForm(forms.Form):
         project.hasTag.set(self.data.getlist('hasTag'))
         project.geographicextend.set(self.data.getlist('geographicextend'))
         project.organisation.set(self.data.getlist('organisation'))
+
+        # TODO: I think not needed, check
         project.save()
 
         return project.id
@@ -363,7 +365,9 @@ class ProjectForm(forms.Form):
                 participatingInaContest=participatingInaContest,
                 projectGeographicLocation=projectGeographicLocation)
 
-    def updateFields(self, project, status, difficultyLevel, doingAtHome, mainOrganisation, projectLocality, projectGeographicLocation):
+    def updateFields(
+            self, project, status, difficultyLevel,
+            doingAtHome, mainOrganisation, projectLocality, projectGeographicLocation):
         project.name = self.data['project_name']
         project.url = self.data['url']
         project.projectlocality = self.data['projectlocality']
