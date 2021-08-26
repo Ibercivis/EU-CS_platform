@@ -1,15 +1,12 @@
 from ckeditor.widgets import CKEditorWidget
 from django import forms
-from django.db import models
-from django.utils import timezone
 from django.shortcuts import get_object_or_404
-from django_summernote.widgets import SummernoteWidget
 from django_select2.forms import Select2MultipleWidget
 from django_select2 import forms as s2forms
-from .models import Resource, Keyword, Category, Audience, Theme, ResourceGroup, ResourcesGrouped, EducationLevel, LearningResourceType
+from .models import Resource, Keyword, Category, Audience, Theme, ResourceGroup
+from .models import ResourcesGrouped, EducationLevel, LearningResourceType
 from authors.models import Author
-from PIL import Image
-from datetime import datetime, date
+from datetime import datetime
 from django.utils.translation import ugettext_lazy as _
 from organisations.models import Organisation
 
@@ -179,7 +176,6 @@ class ResourceForm(forms.Form):
     def save(self, args, images):
         pk = self.data.get('resourceID', '')
         publication_date = datetime.now()
-        resource = super(ResourceForm, self).save(commit=False)
         category = get_object_or_404(Category, id=self.data['categorySelected'])
 
         if pk:
@@ -199,6 +195,8 @@ class ResourceForm(forms.Form):
 
         resource.inLanguage = self.data['language']
         resource.resourceDOI = self.data['resource_DOI']
+        resource.authors.set(self.data.getlist('authors'))
+        resource.save()
         if self.data['year_of_publication'] != '':
             resource.datePublished = self.data['year_of_publication']
         else:
@@ -213,7 +211,7 @@ class ResourceForm(forms.Form):
         resource.imageCredit1 = self.data['image_credit1']
         resource.imageCredit2 = self.data['image_credit2']
 
-        #Training resource fields
+        # Training resource fields
         isTrainingResource = self.data.get('trainingResource', False)
         if(isTrainingResource):
             resource.isTrainingResource = True
@@ -223,12 +221,13 @@ class ResourceForm(forms.Form):
                 resource.educationLevel = educationLevel
             learningResourceTypeSelected = self.data['learningResourceTypeSelected']
             if(learningResourceTypeSelected != ''):
-                learning_resource_type, exist = LearningResourceType.objects.get_or_create(learningResourceType=learningResourceTypeSelected)
+                learning_resource_type, exist = LearningResourceType.objects.get_or_create(
+                        learningResourceType=learningResourceTypeSelected)
                 resource.learningResourceType = learning_resource_type
-            if(self.data['time_required']!=''):
+            if(self.data['time_required'] != ''):
                 resource.timeRequired = self.data['time_required']
             resource.conditionsOfAccess = self.data['conditions_of_access']
-        #End training resource fields
+        # End training resource fields
 
         resource.save()
 
@@ -245,32 +244,16 @@ class ResourceForm(forms.Form):
                     obj.delete()
             for clist in curatedList:
                 resourceGroup = get_object_or_404(ResourceGroup, id=clist)
-                ResourcesGrouped.objects.get_or_create(group=resourceGroup,resource=resource)
-
-        # Keywords
-        choices = self.data['choices']
-        choices = choices.split(',')
-        for choice in choices:
-            if(choice != ''):
-                keyword = Keyword.objects.get_or_create(keyword=choice)
-        keywords = Keyword.objects.all()
-        keywords = keywords.filter(keyword__in = choices)
-        resource.keywords.set(keywords)
-
-        # Authors
-        authors = self.data['authorsCollection']
-        authors = authors.split(',')
-        for author in authors:
-            if(author != ''):
-                Author.objects.get_or_create(author=author)
-        authorsCollection = Author.objects.all()
-        authors = authorsCollection.filter(author__in = authors)
-        resource.authors.set(authors)
+                ResourcesGrouped.objects.get_or_create(group=resourceGroup, resource=resource)
 
         return 'success'
 
 
 class ResourcePermissionForm(forms.Form):
-    selectedUsers = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
-    usersCollection = forms.CharField(widget=forms.HiddenInput(),required=False, initial=())
-    usersAllowed =   forms.MultipleChoiceField(choices=(), widget=Select2MultipleWidget, required=False, label=_("Give additional users permission to edit"))
+    selectedUsers = forms.CharField(widget=forms.HiddenInput(), required=False, initial=())
+    usersCollection = forms.CharField(widget=forms.HiddenInput(), required=False, initial=())
+    usersAllowed = forms.MultipleChoiceField(
+            choices=(),
+            widget=Select2MultipleWidget,
+            required=False,
+            label=_("Give additional users permission to edit"))

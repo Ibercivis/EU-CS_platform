@@ -8,6 +8,7 @@ urlpatterns = [
     path('clearfilters_resources', views.clearFilters, name='clearfilters_resources'),
     path('new_resource', views.new_resource, name='new_resource'),
     path('editResource/<int:pk>', views.editResource, name='editResource'),
+    path('saveResourceAjax', views.saveResourceAjax, name='saveResourceAjax'),
     path('deleteResource/<int:pk><int:isTrainingResource>', views.deleteResource, name='deleteResource'),
     path('resources_autocomplete/', views.resources_autocomplete, name='resources_autocomplete'),
     path('tresources_autocomplete/', views.tresources_autocomplete, name='tresources_autocomplete'),
@@ -28,6 +29,4 @@ urlpatterns = [
     path('setOwnTraining', views.setOwnTraining, name='setOwnTraining'),
     path('getResourceKeywordsSelector/', views.getResourceKeywordsSelector, name='getResourceKeywordsSelector'),
     path('getResourceAuthorsSelector/', views.getResourceAuthorsSelector, name='getResourceAuthorsSelector'),
-
-    
 ]

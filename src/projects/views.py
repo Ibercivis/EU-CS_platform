@@ -21,7 +21,7 @@ from PIL import Image
 from itertools import chain
 from reviews.models import Review
 from django_countries import countries
-from .forms import ProjectForm, CustomFieldFormset, ProjectPermissionForm
+from .forms import ProjectForm, ProjectPermissionForm
 from .models import Project, Topic, ParticipationTask, Status, Keyword, ApprovedProjects, \
  FollowedProjects, FundingBody, CustomField, ProjectPermission, GeographicExtend, UnApprovedProjects
 from organisations.models import Organisation

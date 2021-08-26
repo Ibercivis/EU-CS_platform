@@ -1,9 +1,6 @@
-from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, StreamingHttpResponse
+from django.http import HttpResponse, JsonResponse, StreamingHttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.core.paginator import Paginator
-from django.utils import timezone
-from django.core.files.storage import FileSystemStorage
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
@@ -20,12 +17,13 @@ from authors.models import Author
 from PIL import Image
 from datetime import datetime
 from reviews.models import Review
-from .models import Resource, Keyword, Category, ApprovedResources, SavedResources, Theme, Category, ResourcesGrouped,\
+from .models import Resource, Keyword, ApprovedResources, SavedResources, Theme, Category, ResourcesGrouped,\
      ResourcePermission, EducationLevel, LearningResourceType, UnApprovedResources
 from .forms import ResourceForm, ResourcePermissionForm
 import copy
 import csv
 import random
+from rest_framework import status
 
 User = get_user_model()
 
@@ -228,7 +226,7 @@ def editResource(request, pk):
     user = request.user
     cooperators = getCooperators(pk)
     # TODO: This better
-    if user != resource.creator and not user.is_staff and not user.id in cooperators:
+    if user != resource.creator and not user.is_staff and user.id not in cooperators:
         if(isTrainingResource):
             return redirect('/training_resources')
         return redirect('../resources', {})
@@ -299,6 +297,68 @@ def editResource(request, pk):
         'settings': settings,
         'permissionForm': permissionForm,
         'isTrainingResource': isTrainingResource})
+
+
+def saveResourceAjax(request):
+    print(request.POST)
+    request.POST = request.POST.copy()
+    request.POST = updateKeywords(request.POST)
+    request.POST = updateAuthors(request.POST)
+    form = ResourceForm(request.POST, request.FILES)
+    if form.is_valid():
+        images = setImages(request, form)
+        pk = form.save(request, images)
+
+        if pk and not request.POST.get('resourceID').isnumeric():
+            sendResourceEmail(pk, request.user)
+        return JsonResponse({'ResourceCreated': 'OK', 'Resource': pk}, status=status.HTTP_200_OK)
+    else:
+        return JsonResponse(form.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+
+def updateKeywords(dictio):
+    keywords = dictio.pop('keywords', None)
+    if(keywords):
+        for k in keywords:
+            if not k.isdecimal():
+                # This is a new keyword
+                Keyword.objects.get_or_create(keyword=k)
+                keyword_id = Keyword.objects.get(keyword=k).id
+                dictio.update({'keywords': keyword_id})
+            else:
+                # This keyword is already in the database
+                dictio.update({'keywords': k})
+    return dictio
+
+
+def updateAuthors(dictio):
+    authors = dictio.pop('authors', None)
+    if(authors):
+        for a in authors:
+            if not a.isdecimal():
+                # This is a new author
+                Author.objects.get_or_create(author=a)
+                author_id = Author.objects.get(author=a).id
+                dictio.update({'authors': author_id})
+            else:
+                # This author is already in the database
+                dictio.update({'author': a})
+    return dictio
+
+
+def setImages(request, form):
+    print('setImages')
+    images = []
+    image1_path = saveImage(request, form, 'image1', '1')
+    image2_path = saveImage(request, form, 'image2', '2')
+    images.append(image1_path)
+    images.append(image2_path)
+    print(images)
+    return images
+
+
+def sendResourceEmail(id, user):
+    return 0
 
 
 def deleteResource(request, pk, isTrainingResource):
@@ -558,7 +618,7 @@ def saveResource(resourceId, userId, save):
     fUser = get_object_or_404(User, id=userId)
     if save is True:
         # Insert
-        savedResource = SavedResources.objects.get_or_create(resource=fResource, user=fUser)
+        SavedResources.objects.get_or_create(resource=fResource, user=fUser)
         # sendEmail
         to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
         to.append(fResource.creator.email)
