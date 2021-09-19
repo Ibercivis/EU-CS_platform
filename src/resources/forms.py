@@ -172,20 +172,31 @@ class ResourceForm(forms.Form):
     # Training resources fields
     education_level = forms.ModelMultipleChoiceField(
             queryset=EducationLevel.objects.all(),
-            widget=Select2MultipleWidget(),
-            required=False,
+            widget=s2forms.ModelSelect2TagWidget(
+                search_fields=['educationLevel__icontains'],
+                ),
             label=_("Education level"),
-            help_text=_('Insert education level needed, end using comma or pressing enter'))
-    educationLevelSelected = forms.CharField(widget=forms.HiddenInput(), max_length=100, required=False)
+            help_text=_(
+                'Insert education level needed, end using comma or pressing enter. '
+                'Examples of educational levels include beginner, intermediate or advanced, '
+                'and formal sets of level indicators'),
+            required=False,
+            )
     learning_resource_type = forms.ModelMultipleChoiceField(
             queryset=LearningResourceType.objects.all(),
-            widget=Select2MultipleWidget(),
-            required=False,
+            widget=s2forms.ModelSelect2TagWidget(
+                search_fields=['learningResourceType__icontains'],
+                ),
             label=_("Learning resource type"),
-            help_text=_('Help text here'))
-    learningResourceTypeSelected = forms.CharField(widget=forms.HiddenInput(), max_length=100, required=False)
+            help_text=_(
+                'The predominant type or kind characterizing the learning resource. '
+                'For example, presentation, handout, etc.'),
+            required=False,
+            )
     time_required = forms.FloatField(required=False, help_text=_('Aproximate hours required to finish the training'))
-    conditions_of_access = forms.CharField(required=False, help_text=_('Help text here'))
+    conditions_of_access = forms.CharField(required=False, help_text=_(
+        'Please describe any conditions that affect the accessibility of the training material, '
+        'such as <i>requires registration</i>, <i>requires enrollment</i>, or <i>requires payment</i>'))
 
     ''' Save & update a Resource & Training Resource '''
     def save(self, args, images):
@@ -216,9 +227,9 @@ class ResourceForm(forms.Form):
         resource.category = category
 
         # Saving images
-        if(images[0] != '/'):
+        if(len(images[0]) > 6):
             resource.image1 = images[0]
-        if(images[1] != '/'):
+        if(len(images[1]) > 6):
             resource.image2 = images[1]
         resource.imageCredit1 = self.data['image_credit1']
         resource.imageCredit2 = self.data['image_credit2']
@@ -226,16 +237,9 @@ class ResourceForm(forms.Form):
         # Training resource fields
         isTrainingResource = self.data.get('trainingResource', False)
         if(isTrainingResource):
-            resource.isTrainingResource = True
-            educationLevelSelected = self.data['educationLevelSelected']
-            if(educationLevelSelected != ''):
-                educationLevel, exist = EducationLevel.objects.get_or_create(educationLevel=educationLevelSelected)
-                resource.educationLevel = educationLevel
-            learningResourceTypeSelected = self.data['learningResourceTypeSelected']
-            if(learningResourceTypeSelected != ''):
-                learning_resource_type, exist = LearningResourceType.objects.get_or_create(
-                        learningResourceType=learningResourceTypeSelected)
-                resource.learningResourceType = learning_resource_type
+            resource.educationLevel.set(self.data.getlist('education_level'))
+            print(self.data.getlist('learning_resource_type'))
+            resource.learningResourceType.set(self.data.getlist('learning_resource_type'))
             if(self.data['time_required'] != ''):
                 resource.timeRequired = self.data['time_required']
             resource.conditionsOfAccess = self.data['conditions_of_access']

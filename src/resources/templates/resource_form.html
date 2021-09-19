@@ -110,9 +110,7 @@
                     <div class="col-11">
                         <input type="hidden" id="trainingResource" name="trainingResource" value={{isTrainingResource}}>
                         {{ form.education_level|as_crispy_field }}
-                        {{ form.educationLevelSelected|as_crispy_field }}
                         {{ form.learning_resource_type|as_crispy_field }}
-                        {{ form.learningResourceTypeSelected|as_crispy_field }}
                         {{ form.time_required|as_crispy_field }}
                         {{ form.conditions_of_access|as_crispy_field }}
     {% include '_save_buttons.html' %}
@@ -149,7 +147,7 @@
                         {{ form.width1|as_crispy_field }}
                         {{ form.image_credit1|as_crispy_field }}
                     <a id="imgResult2" href="#">
-                        <img class="img-fluid img-zoom" id="imageResult1" 
+                        <img class="img-fluid img-zoom" id="imageResult2" 
                              {% if resource.image2 %}
                              src="/media/{{ resource.image2 }}"
                              {% else %} 
@@ -225,6 +223,8 @@
                         $('.savedInfo').html('<span class="alert alert-success fade show">'+
                             '<i class="fas fa-check"></i> Saved</span>').show().fadeOut(2500)
                     }
+                    else
+                        window.location.href = '/resource/'+response.Resource+'?prev='+window.location.pathname
                 },
                 error: function(response){
                     if(response.status==500){
@@ -308,7 +308,7 @@ $(function () {
     var canvasData;
     $("#modalCrop").on("shown.bs.modal", function () {
         $image.cropper({
-            viewMode: 0,
+            viewMode: 1,
             aspectRatio: imgSelected == 2 ? 11 / 4 : 3 / 2,
             minCropBoxWidth: imgSelected == 2 ? 1100 : 600,
             minCropBoxHeight: 400,
@@ -347,16 +347,8 @@ $(function () {
         $("#modalCrop").modal("hide");
         $('#imageResult' + imgSelected).attr('src', $image.cropper('getCroppedCanvas',
             { width: imgSelected == 2 ? 1100 : 600, height: 400 }).toDataURL());
-
-        $("#deleteImage" + imgSelected).html('<a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>  ');
-        $("#deleteImage" + imgSelected).click(function () {
-            $('#imageResult' + imgSelected).attr('src', '');
-            $('#id_image' + imgSelected).val('');
-            $("#deleteImage" + imgSelected).empty();
         });
     });
-
-});
 </script>
 {{ form.media.js }}
 {% endblock scripts %}

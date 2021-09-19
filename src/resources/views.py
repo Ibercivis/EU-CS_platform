@@ -17,8 +17,8 @@ from authors.models import Author
 from PIL import Image
 from datetime import datetime
 from reviews.models import Review
-from .models import Resource, Keyword, ApprovedResources, SavedResources, Theme, Category, ResourcesGrouped,\
-     ResourcePermission, EducationLevel, LearningResourceType, UnApprovedResources
+from .models import Resource, Keyword, ApprovedResources, SavedResources, BookmarkedResources, Theme, Category
+from .models import ResourcesGrouped, ResourcePermission, EducationLevel, LearningResourceType, UnApprovedResources
 from .forms import ResourceForm, ResourcePermissionForm
 import copy
 import csv
@@ -44,6 +44,8 @@ def resources(request, isTrainingResource=False):
     user = request.user
     savedResources = None
     savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id', flat=True)
+    bookmarkedResources = BookmarkedResources.objects.all().filter(
+            user_id=user.id).values_list('resource_id', flat=True)
     languagesWithContent = Resource.objects.all().values_list('inLanguage', flat=True).distinct()
     themes = Theme.objects.all()
     categories = Category.objects.all()
@@ -103,6 +105,7 @@ def resources(request, isTrainingResource=False):
         'unApprovedResources': unApprovedResources,
         'counter': counter,
         'savedResources': savedResources,
+        'bookmarkedResources': bookmarkedResources,
         'filters': filters,
         'settings': settings,
         'languagesWithContent': languagesWithContent,
@@ -201,13 +204,15 @@ def resource(request, pk):
         'usersCollection': users,
         'selectedUsers': cooperators})
     savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list(
-            'resource_id',
-            flat=True)
+            'resource_id', flat=True)
+    bookmarkedResource = BookmarkedResources.objects.all().filter(user_id=user.id, resource_id=pk).exists()
+
     # TODO: Only ask for the resource
     approvedResources = ApprovedResources.objects.all().values_list('resource_id', flat=True)
     return render(request, 'resource.html', {
         'resource': resource,
         'savedResources': savedResources,
+        'bookmarkedResource': bookmarkedResource,
         'approvedResources': approvedResources,
         'unApprovedResources': unApprovedResources,
         'cooperators': getCooperators(pk),
@@ -233,12 +238,6 @@ def editResource(request, pk):
 
     curatedGroups = list(ResourcesGrouped.objects.all().filter(resource_id=pk).values_list('group_id', flat=True))
 
-    educationLevel = list(EducationLevel.objects.all().values_list('educationLevel', flat=True))
-    educationLevel = ", ".join(educationLevel)
-
-    learningResourceType = list(LearningResourceType.objects.all().values_list('learningResourceType', flat=True))
-    learningResourceType = ", ".join(learningResourceType)
-
     # TODO: is needed with image?
     form = ResourceForm(initial={
         # Main information, mandatory
@@ -258,8 +257,8 @@ def editResource(request, pk):
         'resource_DOI': resource.resourceDOI,
         'license': resource.license,
         # Training related fields
-        'learning_resource_type': learningResourceType,
-        'education_level': educationLevel,
+        'education_level': resource.educationLevel.all,
+        'learning_resource_type': resource.learningResourceType.all,
         'time_required': resource.timeRequired,
         'conditions_of_access': resource.conditionsOfAccess,
         # Links
@@ -301,6 +300,8 @@ def saveResourceAjax(request):
     request.POST = request.POST.copy()
     request.POST = updateKeywords(request.POST)
     request.POST = updateAuthors(request.POST)
+    request.POST = updateEducationLevel(request.POST)
+    request.POST = updateLearningResourceType(request.POST)
     form = ResourceForm(request.POST, request.FILES)
     if form.is_valid():
         images = setImages(request, form)
@@ -339,6 +340,37 @@ def updateAuthors(dictio):
             else:
                 # This author is already in the database
                 dictio.update({'author': a})
+    return dictio
+
+
+def updateEducationLevel(dictio):
+    education_level = dictio.pop('education_level', None)
+    if(education_level):
+        for e in education_level:
+            if not e.isdecimal():
+                # This is a new education level
+                EducationLevel.objects.get_or_create(educationLevel=e)
+                educationLevel_id = EducationLevel.objects.get(educationLevel=e).id
+                dictio.update({'education_level': educationLevel_id})
+            else:
+                # This author is already in the database
+                dictio.update({'education_level': e})
+    return dictio
+
+
+def updateLearningResourceType(dictio):
+    learning_resource_type = dictio.pop('learning_resource_type', None)
+    if(learning_resource_type):
+        for le in learning_resource_type:
+            if not le.isdecimal():
+                # This is a new learning resource type
+                LearningResourceType.objects.get_or_create(learningResourceType=le)
+                learningResourceType_id = LearningResourceType.objects.get(learningResourceType=le).id
+                dictio.update({'learning_resource_type': learningResourceType_id})
+            else:
+                # This author is already in the database
+                dictio.update({'learning_resource_type': le})
+
     return dictio
 
 
@@ -467,9 +499,8 @@ def saveImage(request, form, element, ref):
 def saveImageWithPath(image, photoName):
     _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
     random_num = random.randint(0, 1000)
-    image_path = "media/images/" + _datetime + '_' + str(random_num) + '_' + photoName
-    image.save(image_path)
-    image_path = '/' + image_path
+    image_path = "images/" + _datetime + '_' + str(random_num) + '_' + photoName
+    image.save("media/"+image_path)
     return image_path
 
 
@@ -546,69 +577,68 @@ def getCategory(category):
         return category
 
 
-@staff_member_required()
-def setApprovedRsc(request):
+def bookmarkResource(request):
     response = {}
-    id = request.POST.get("resource_id")
-    approved = request.POST.get("approved")
-    setResourceApproved(id, approved)
-    return JsonResponse(response, safe=False)
-
-
-def setResourceApproved(id, approved):
-    approved = False if approved in ['False', 'false', '0'] else True
-    aResource = get_object_or_404(Resource, id=id)
-    if approved is True:
-        # Insert
-        ApprovedResources.objects.get_or_create(resource=aResource)
-        # sendEmail
-        to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
-        to.append(aResource.creator.email)
-        if aResource.isTrainingResource:
-            subject = 'Your training resource has been approved'
-            message = render_to_string('emails/approved_training_resource.html', {
-                "domain": settings.HOST,
-                "name": aResource.name,
-                "id": id})
-            email = EmailMessage(subject, message, to=to)
-            email.content_subtype = "html"
-            email.send()
-        else:
-            subject = 'Your resource has been approved'
-            message = render_to_string('emails/approved_resource.html', {
-                "domain": settings.HOST,
-                "name": aResource.name,
-                "id": id})
-            email = EmailMessage(subject, message, to=to)
-            email.content_subtype = "html"
-            email.send()
-        # Delete UnApprovedResources
-        try:
-            obj = UnApprovedResources.objects.get(resource_id=id)
-            obj.delete()
-        except UnApprovedResources.DoesNotExist:
-            print("Does not exist this unapproved resource")
+    resourceId = request.POST.get("resourceId")
+    fResource = get_object_or_404(Resource, id=resourceId)
+    user = request.user
+    bookmark = False if request.POST.get("bookmark") in ['false'] else True
+    if bookmark:
+        BookmarkedResources.objects.get_or_create(resource=fResource, user=user)
+        response = {"created": "OK", "resource": fResource.name}
     else:
-        # Insert UnApprovedResources
-        UnApprovedResources.objects.get_or_create(resource=aResource)
-        # Delete
         try:
-            obj = ApprovedResources.objects.get(resource_id=id)
+            obj = BookmarkedResources.objects.get(resource_id=resourceId, user_id=user.id)
             obj.delete()
-        except ApprovedResources.DoesNotExist:
-            print("Does not exist this approved resource")
+            response = {"success": "Bookmark deleted"}
+        except BookmarkedResources.DoesNotExist:
+            response = {"error": "Doen not exits"}
 
-
-def setSavedResource(request):
-    response = {}
-    resourceId = request.POST.get("resource_id")
-    userId = request.POST.get("user_id")
-    save = request.POST.get("save")
-    saveResource(resourceId, userId, save)
     return JsonResponse(response, safe=False)
 
 
-def saveResource(resourceId, userId, save):
+@staff_member_required()
+def approveResource(request):
+    resourceId = request.POST.get("resourceId")
+    resource = get_object_or_404(Resource, id=resourceId)
+    if request.POST.get("approved") in ['true']:
+        resource.approved = True
+    else:
+        resource.approved = False
+
+    resource.reviewed = True
+    resource.save()
+
+    return JsonResponse({"success": "Updated aproval"}, safe=False)
+
+
+@staff_member_required()
+def setFeaturedResource(request):
+    resourceId = request.POST.get("resourceId")
+    resource = get_object_or_404(Resource, id=resourceId)
+    if request.POST.get("featured") in ['true']:
+        resource.featured = True
+    else:
+        resource.featured = False
+    resource.save()
+
+    return JsonResponse({"success": "Updated featured resource"}, safe=False)
+
+
+@staff_member_required()
+def setTrainingResource(request):
+    resourceId = request.POST.get("resourceId")
+    resource = get_object_or_404(Resource, id=resourceId)
+    if request.POST.get("isTraining") in ['true']:
+        resource.isTrainingResource = True
+    else:
+        resource.isTrainingResource = False
+    resource.save()
+
+    return JsonResponse({"success": "Updated training resource"}, safe=False)
+
+
+def abookmarkResource(resourceId, userId, save):
     save = False if save in ['False', 'false', '0'] else True
     fResource = get_object_or_404(Resource, id=resourceId)
     fUser = get_object_or_404(User, id=userId)
@@ -657,22 +687,6 @@ def setHiddenResource(request):
 def setResourceHidden(id, hidden):
     resource = get_object_or_404(Resource, id=id)
     resource.hidden = False if hidden in ['False', 'false', '0'] else True
-    resource.save()
-
-
-@staff_member_required()
-def setFeaturedResource(request):
-    response = {}
-    id = request.POST.get("resource_id")
-    featured = request.POST.get("featured")
-    setResourceFeatured(id, featured)
-    return JsonResponse(response, safe=False)
-
-
-def setResourceFeatured(id, featured):
-    resource = get_object_or_404(Resource, id=id)
-    resource.featured = featured
-    resource.featured = False if featured in ['False', 'false', '0'] else True
     resource.save()
 
 
@@ -782,77 +796,3 @@ def iter_items(items, pseudo_buffer):
 
     for item in items:
         yield writer.writerow(get_data(item))
-
-
-def getResourceKeywordsSelector(request):
-    resource_id = request.GET.get("resource_id")
-    keywordsSelected = []
-    if resource_id != '0':
-        resource = get_object_or_404(Resource, id=resource_id)
-        keywordsSelected = list(resource.keywords.all().values_list('keyword', flat=True))
-
-    options = '<select id="id_keywords" class="select form-control">'
-    response = {}
-    keywords = Keyword.objects.get_queryset()
-    keywords = keywords.values_list("id", "keyword")
-    keywords = tuple(keywords)
-    if keywords:
-        for keyword in keywords:
-            found = False
-            if(keywordsSelected):
-                for key in keywordsSelected:
-                    if(str(keyword[1]) == key):
-                        found = True
-                        options += '<option value = "%s" selected>%s</option>' % (
-                            keyword[0],
-                            keyword[1]
-                        )
-                        break
-            if(not found or not keywordsSelected):
-                options += '<option value = "%s">%s</option>' % (
-                    keyword[0],
-                    keyword[1]
-                )
-        options += '</select>'
-        response['keywords'] = options
-    else:
-        response['keywords'] = '<select id="id_keywords" class="select form-control" disabled></select>'
-
-    return JsonResponse(response)
-
-
-def getResourceAuthorsSelector(request):
-    resource_id = request.GET.get("resource_id")
-    authorsSelected = []
-    if resource_id != '0':
-        resource = get_object_or_404(Resource, id=resource_id)
-        authorsSelected = list(resource.authors.all().values_list('author', flat=True))
-
-    options = '<select id="id_authors" class="select form-control">'
-    response = {}
-    authors = Author.objects.get_queryset()
-    authors = authors.values_list("id", "author")
-    authors = tuple(authors)
-    if authors:
-        for author in authors:
-            found = False
-            if(authorsSelected):
-                for key in authorsSelected:
-                    if(str(author[1]) == key):
-                        found = True
-                        options += '<option value = "%s" selected>%s</option>' % (
-                            author[0],
-                            author[1]
-                        )
-                        break
-            if(not found or not authorsSelected):
-                options += '<option value = "%s">%s</option>' % (
-                    author[0],
-                    author[1]
-                )
-        options += '</select>'
-        response['authors'] = options
-    else:
-        response['authors'] = '<select id="id_authors" class="select form-control" disabled></select>'
-
-    return JsonResponse(response)

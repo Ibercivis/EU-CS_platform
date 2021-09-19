@@ -8,7 +8,7 @@
 		<a class="card-img-wrap "href="/project/{{project.id }}">
 			{% if project.image1 %}
 			<img class="card-img-top img-fluid img-zoom lazyload {% if project.id not in approvedProjects %}
-			nonmoderated {% endif %}" src="{% thumbnail project.image1 600x400 crop %}" />
+                                  nonmoderated {% endif %}" src="/media/{{  project.image1  }}" />
 			{% else %}			
 			<picture>
 				<source srcset="{% static 'site/img/project_default_card.png' %}" type="image/png">
@@ -52,21 +52,6 @@
                 {% endfor %}
             <p class="mt-4">{{ project.description | safe| truncatewords_html:30 }}</p>
 			</div><!-- End of card-body -->
-			<!--div class="card-footer">
-				<div class=" small text-right">
-					{% get_rating for project as avg_rating %}
-					{% get_review_count for project as review_count %}
-					<span class="gl-star-rating-stars s{{ avg_rating | stringformat:'d'}}0 readonly">
-						<span class="align-middle" data-value="1" data-text="Terrible"></span>
-						<span  class="align-middle" data-value="2" data-text="Poor"></span>
-						<span  class="align-middle" data-value="3" data-text="Average"></span>
-						<span  class="align-middle" data-value="4" data-text="Very Good"></span>
-						<span  class="align-middle" data-value="5" data-text="Excellent"></span>
-					</span>
-					{{ review_count }} {% if review_count == 1 %} {% trans "review" %} {% else %} {% trans "reviews" %} {% endif %}
-					<div class="small text-right">Last updated: {{rsc.dateLastModification}}</div>
-				</div>
-			</div-->
 		</div><!-- end of card -->
 	</div><!-- end of col -->
 	{% endfor %}

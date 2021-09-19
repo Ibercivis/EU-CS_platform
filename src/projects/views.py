@@ -15,7 +15,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q, Avg, Count, Sum
 from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
-from django.db import connection
 from datetime import datetime
 from PIL import Image
 from itertools import chain
@@ -376,14 +375,13 @@ def saveImage(request, form, element, ref):
 def saveImageWithPath(image, photoName):
     _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
     random_num = random.randint(0, 1000)
-    image_path = "media/images/" + _datetime + '_' + str(random_num) + '_' + photoName
-    image.save(image_path)
-    image_path = '/' + image_path
+    image_path = "images/" + _datetime + '_' + str(random_num) + '_' + photoName
+    image.save("media/"+image_path)
     return image_path
 
 
 def getOtherUsers(creator):
-    users = list(User.objects.all().exclude(is_superuser=True).exclude(id=creator.id).values_list('name','email'))
+    users = list(User.objects.all().exclude(is_superuser=True).exclude(id=creator.id).values_list('name', 'email'))
     return users
 
 

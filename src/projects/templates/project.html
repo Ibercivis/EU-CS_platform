@@ -23,7 +23,7 @@
  #id_projectGeographicLocation_map { width: 100% !important; height: 100% !important; }
 </style>
 {% if project.image3 %}
-<div class="jumbotron jumbotron-fluid project-jumbotron" style="background: url('{{project.image3 | safe}}') no-repeat; background-size: cover;">
+<div class="jumbotron jumbotron-fluid project-jumbotron" style="background: url('/media/{{project.image3 | safe}}') no-repeat; background-size: cover;">
   <div class="container-fluid">
   </div>
 </div>
@@ -41,7 +41,6 @@
             <h4 class="mt-4 leftborder">{% trans "How to participate" %} </h4>
             <div>{{project.howToParticipate | safe}}</div>
             {% endif %}
-
             {% if project.equipment %}
             <h4 class="mt-4 leftborder">{% trans "Needed equipment" %}</h4>
             <div>{{project.equipment |safe}}</div>

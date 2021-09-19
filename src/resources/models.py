@@ -89,8 +89,8 @@ class Resource(models.Model):
 
     # Training resources fields
     isTrainingResource = models.BooleanField(null=True, blank=True)
-    educationLevel = models.ForeignKey(EducationLevel, on_delete=models.CASCADE, null=True, blank=True)
-    learningResourceType = models.ForeignKey(LearningResourceType, on_delete=models.CASCADE, null=True, blank=True)
+    educationLevel = models.ManyToManyField(EducationLevel)
+    learningResourceType = models.ManyToManyField(LearningResourceType)
     timeRequired = models.FloatField(null=True, blank=True)
     conditionsOfAccess = models.CharField(max_length=300, null=True, blank=True)
 
@@ -142,6 +142,17 @@ class UnApprovedResources(models.Model):
 
     def __str__(self):
         return f'{self.resource}'
+
+
+class BookmarkedResources(models.Model):
+    resource = models.ForeignKey(Resource, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = (('user', 'resource'),)
+
+    def __str__(self):
+        return f'{self.resource} - {self.user.name}'
 
 
 class SavedResources(models.Model):

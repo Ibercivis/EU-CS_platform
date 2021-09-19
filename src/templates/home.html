@@ -97,7 +97,6 @@
 			{{ counterprojects }} {% trans "result" %}{% if counterprojects != 1 %}s{% endif %} {% trans "in Projects" %}
 			{% if counterprojects > 6 %}, click <a href="/projects">{% trans "here" %}</a> {% trans "to see all of them" %} {% endif %}
 		</div>
-		{% include "projects_cards.html" %}
 		<div class="col-12 mb-2">
 			<hr>
 		</div>
@@ -107,7 +106,6 @@
 			{{ counterresources }} {% trans "result" %}{% if counterresources != 1 %}s{% endif %} {% trans "in Resources" %}
 			{% if counterresources > 6 %}, click <a href="/resources">{% trans "here" %}</a> {% trans "to see all of them" %}{% endif %}
 		</div>
-		{% include "resources_cards.html" %}
 		<div class="col-12 mb-2">
 			<hr>
 		</div>
@@ -117,7 +115,6 @@
 			{{ countertresources }} {% trans "result" %}{% if counterresources != 1 %}s{% endif %} {% trans "in Training" %}
 			{% if countertresources > 6 %}, click <a href="/training_resources">{% trans "here" %}</a> {% trans "to see all of them" %}{% endif %}
 		</div>
-		{% include "resources_cards.html" with resources=tresources %}
 		<div class="col-12 mb-2">
 			<hr>
 		</div>
@@ -128,7 +125,6 @@
 			{{ counterorganisations}} {% trans "result" %}{% if counterorganisations != 1 %}s{% endif %} {% trans "in Organisations" %}
 			{% if counterorganisations > 6 %}, click <a href="/organisations">{% trans "here" %}</a> {% trans "to see all of them" %}{% endif %}
 		</div>
-		{% include "organisations_cards.html" %}
 	</div>
 </div>
 {% endblock list_of_items %}
