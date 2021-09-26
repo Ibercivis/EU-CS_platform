@@ -400,6 +400,13 @@ def getCountryCode(latitude, longitude):
         return ''
 
 
+class ProjectTranslationForm(forms.Form):
+    translatedDescription = forms.CharField(
+            widget=CKEditorWidget(config_name='frontpage'),
+            help_text=_('Please provide a translated description of your project here.'),
+            max_length=3000)
+
+
 class CustomFieldForm(forms.Form):
     title = forms.CharField(max_length=100, required=False)
     paragraph = forms.CharField(widget=SummernoteWidget(), required=False)

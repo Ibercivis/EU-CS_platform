@@ -20,7 +20,7 @@ from PIL import Image
 from itertools import chain
 from reviews.models import Review
 from django_countries import countries
-from .forms import ProjectForm, ProjectPermissionForm
+from .forms import ProjectForm, ProjectPermissionForm, ProjectTranslationForm
 from .models import Project, Topic, ParticipationTask, Status, Keyword, ApprovedProjects, \
  FollowedProjects, FundingBody, CustomField, ProjectPermission, GeographicExtend, UnApprovedProjects
 from organisations.models import Organisation
@@ -104,6 +104,11 @@ def updateFundingBody(dictio):
     return dictio
 
 
+def getProjectTranslation(request, pk):
+    project = get_object_or_404(Project, id=pk)
+    
+
+
 def editProject(request, pk):
     project = get_object_or_404(Project, id=pk)
     user = request.user
@@ -170,6 +175,20 @@ def editProject(request, pk):
         'project': project,
         'user': user,
         'permissionForm': permissionForm})
+
+
+def translateProject(request, pk):
+    project = get_object_or_404(Project, id=pk)
+    user = request.user
+
+    form = ProjectTranslationForm(initial={
+        'translatedDescriptions': project.translatedDescriptions.all
+    })
+
+    return render(request, 'translation_form.html', {
+        'form': form,
+        'project': project,
+        'user': user})
 
 
 def projects(request):

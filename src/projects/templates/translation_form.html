@@ -1,0 +1,73 @@
+{% extends "base_r2.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% load leaflet_tags %}
+{% block head %}
+{{block.super }}
+<link rel="stylesheet" href="{% static 'site/css/forms.css' %}">
+{{ form.media.css }}
+{{ form.media.js }}
+
+{% endblock head %}
+
+{% block title %}{{ block.super }} :: New project{% endblock %}
+
+{% block navbar-left %}
+{% include "_navbar.html" with active_link="projects" %}
+{% endblock %}
+
+
+{% block list_of_items %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">{{project.name}}</div>
+        <div class="col-6 mt-3">
+            {{ project.description | safe}}
+        </div>
+        <div class="col-6 mt-3">
+            <label for="language" class="control-label  requiredField">
+                Please indicate the (main) language that the resource is made available in<span class="asteriskField">*</span>
+            </label>
+            {% get_language_info_list for LANGUAGES as langs %}
+            <select name="language" class="form-control mb-4" id="languageSelector">
+                {% for language in langs %}
+                <option value="{{ language.code }}">
+                {{ language.name }}
+                </option>
+                {% endfor %}
+            </select>
+
+            {% for translation in project.translatedDescriptions.all %}
+            {{form.translatedDescription | as_crispy_field}}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock list_of_items %}
+{% block scripts %}
+<script>
+    $(function() {
+        $('#languageSelector').change(function(){
+            console.log('changed');
+            $.ajax({
+                type: 'POST',
+                url: '/getProjectTranslation/',
+                data: {
+                    csrfmiddlewaretoken: '{{ csrfmiddlewaretoken }}',
+                    language: $('#languageSelector').val(),
+                    projectId: '{{project.id}}'
+                },
+                success: function(response){
+                    console.log(response)
+                },
+                error: function(response){
+                    console.log(response)
+                },
+            })
+        })
+    })
+</script>
+{% endblock scripts %}
+
+

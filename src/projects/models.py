@@ -74,6 +74,13 @@ class CustomField(models.Model):
     paragraph = models.TextField()
 
 
+# For translation
+
+class TranslatedDescription(models.Model):
+    translatedDescription = models.CharField(max_length=3000)
+    inLanguage = models.TextField(max_length=2)
+
+
 class Project(models.Model):
     creator = models.ForeignKey(
             settings.AUTH_USER_MODEL,
@@ -151,6 +158,9 @@ class Project(models.Model):
     participatingInaContest = models.BooleanField(null=True, default=False)
     hidden = models.BooleanField(null=True, blank=True)
     customField = models.ManyToManyField(CustomField, blank=True)
+
+    # For translation
+    translatedDescriptions = models.ManyToManyField(TranslatedDescription)
 
     def __str__(self):
         return f'{self.name}'
