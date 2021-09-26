@@ -104,9 +104,25 @@ def updateFundingBody(dictio):
     return dictio
 
 
-def getProjectTranslation(request, pk):
-    project = get_object_or_404(Project, id=pk)
-    
+def getProjectTranslation(request):
+    print(request.POST)
+    project = get_object_or_404(Project, id=request.POST['projectId'])
+    translation = project.translatedProject.filter(inLanguage=request.POST['language'])
+    if not translation:
+        return HttpResponse({}, status=status.HTTP_404_NOT_FOUND, content_type="application/json")
+    else:
+        translation_json = serializers.serialize('json', translation)
+        return HttpResponse(translation_json, status=status.HTTP_200_OK, content_type="application/json")
+
+
+def submitProjectTranslation(request):
+    print(request.POST)
+    form = ProjectTranslationForm(request.POST)
+    if form.is_valid():
+        form.save(request)
+        return JsonResponse({'UpdatedTranslation': 'OK', 'Project': 'a'}, status=status.HTTP_200_OK)
+    else:
+        return JsonResponse(form.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
 
 
 def editProject(request, pk):
@@ -181,9 +197,7 @@ def translateProject(request, pk):
     project = get_object_or_404(Project, id=pk)
     user = request.user
 
-    form = ProjectTranslationForm(initial={
-        'translatedDescriptions': project.translatedDescriptions.all
-    })
+    form = ProjectTranslationForm()
 
     return render(request, 'translation_form.html', {
         'form': form,

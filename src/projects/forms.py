@@ -8,7 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderServiceError
 from .models import Project, Topic, Status, Keyword, FundingBody
-from .models import ParticipationTask, GeographicExtend, HasTag, DifficultyLevel
+from .models import ParticipationTask, GeographicExtend, HasTag, DifficultyLevel, TranslatedProject
 from organisations.models import Organisation
 
 
@@ -400,11 +400,57 @@ def getCountryCode(latitude, longitude):
         return ''
 
 
+''' This is the form to translate projects '''
+
+
 class ProjectTranslationForm(forms.Form):
     translatedDescription = forms.CharField(
             widget=CKEditorWidget(config_name='frontpage'),
-            help_text=_('Please provide a translated description of your project here.'),
-            max_length=3000)
+            help_text=_('Please provide a <i>description</i> field translation.'),
+            max_length=3000,
+            label=_("Description"))
+
+    translatedAim = forms.CharField(
+            widget=CKEditorWidget(config_name='frontpage'),
+            help_text=_('Please provide an <i>aim</i> field translation.'),
+            max_length=2000,
+            label=_("Aim"),
+            required=False)
+
+    translatedHowToParticipate = forms.CharField(
+            widget=CKEditorWidget(config_name='frontpage'),
+            help_text=_('Please provide a <i>how to participate</i> field translation.'),
+            max_length=2000,
+            label=_("How to participate"),
+            required=False)
+
+    translatedEquipment = forms.CharField(
+            widget=CKEditorWidget(config_name='frontpage'),
+            help_text=_('Please provide a <i>translated equipment</i> field translation.'),
+            max_length=2000,
+            label=_("Needed equipment"),
+            required=False)
+
+    def save(self, args):
+        project = Project.objects.get(id=self.data.get('projectId'))
+        translation = project.translatedProject.filter(inLanguage=self.data.get('languageId')).first()
+        if translation:
+            TranslatedProject.objects.filter(id=translation.id).delete()
+        t1 = TranslatedProject(
+                inLanguage=self.data.get('languageId'),
+                translatedDescription=self.data.get('translatedDescription'),
+                translatedAim=self.data.get('translatedAim'),
+                translatedHowToParticipate=self.data.get('translatedHowToParticipate'),
+                translatedEquipment=self.data.get('translatedEquipment'),
+                creator=args.user,
+                )
+        t1.save()
+        project.translatedProject.add(t1)
+        project.save()
+
+        print(self.data.get('projectId'))
+        print(self.data.get('languageId'))
+        print(self.data.get('translatedDescription'))
 
 
 class CustomFieldForm(forms.Form):
