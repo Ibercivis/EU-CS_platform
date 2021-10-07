@@ -1,0 +1,62 @@
+{% extends "base_r2.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load thumbnail %}
+{% load leaflet_tags %}
+{% load crispy_forms_tags %}
+{% block head %}
+{{block.super }}
+<link rel="stylesheet" href="{% static 'site/css/forms.css' %}">
+{{ form.media.css }}
+{{ form.media.js }}
+{% endblock head %}
+
+{% block title %}{{ block.super }} :: Platform{% endblock %}
+
+
+{% block list_of_items %}
+<div class="container">
+    <div class="row">
+        <div class="container mt-5">
+            <form autocomplete="off">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-2 mt-5">
+                    </div>
+                    <div class="col-8 mt-5">
+                        <h4 class="leftborder">{% trans "Main information" %}</h4>
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                {{ form.name | as_crispy_field }}
+                                {{ form.url | as_crispy_field }}
+                                {{ form.description | as_crispy_field }}
+                            </div>
+                        </div>
+
+                        <h4 class="leftborder mt-4">{% trans "Contact information" %}</h4>
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                {{ form.contactPoint | as_crispy_field }}
+                                {{ form.contactPointEmail | as_crispy_field }}
+                                {{ form.organisation | as_crispy_field }}
+                            </div>
+                        </div>
+
+                        <h4 class="leftborder mt-4">{% trans "Network/project location" %}</h4>
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                {{ form.geographicExtend | as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock list_of_items %}
+
+

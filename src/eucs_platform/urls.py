@@ -16,6 +16,7 @@ import resources.urls
 import events.urls
 import contact.urls
 import digest.urls
+import platforms.urls
 import ckeditor_uploader.views
 from . import views
 
@@ -31,8 +32,8 @@ schema_view = get_schema_view(
 )
 
 # Personalized admin site settings like title and header
-admin.site.site_title = "Eucs_Platform Site Admin"
-admin.site.site_header = "Eucs_Platform Administration"
+admin.site.site_title = "EU-Citizen.Science Site Admin"
+admin.site.site_header = "EU-Citizen.Science Administration"
 
 
 urlpatterns = [
@@ -64,6 +65,7 @@ urlpatterns = [
     path('', include('blog.urls')),
     path("", include(events.urls)),
     path("", include(digest.urls)),
+    path("", include(platforms.urls)),
     path('summernote/', include('django_summernote.urls')),
     path('forum/', include(machina_urls)),
     path('getTopicsResponded', views.getTopicsResponded, name='getTopicsResponded'),

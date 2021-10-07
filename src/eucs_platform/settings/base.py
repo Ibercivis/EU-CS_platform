@@ -104,6 +104,7 @@ INSTALLED_APPS = (
     "projects",
     "resources",
     "digest",
+    "platforms",
     "django_select2",
     "blog",
     "django_summernote",
