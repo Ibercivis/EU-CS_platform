@@ -64,3 +64,34 @@ class PlatformForm(forms.Form):
             help_text=_('Please indicate the spatial scale of the network / platform'),
             choices=GEOGRAPHIC_EXTEND_CHOICES,
             required=False)
+
+    logo = forms.ImageField(
+            required=False,
+            label=_("Logo of your network or platform"),
+            help_text=_('Will be resized to 600x400 pixels'),
+            widget=forms.FileInput)
+
+    logoX = forms.FloatField(widget=forms.HiddenInput(), required=False)
+    logoY = forms.FloatField(widget=forms.HiddenInput(), required=False)
+    logoWidth = forms.FloatField(widget=forms.HiddenInput(), required=False)
+    logoHeight = forms.FloatField(widget=forms.HiddenInput(), required=False)
+    withLogo = forms.BooleanField(widget=forms.HiddenInput(), required=False, initial=False)
+    logoCredit = forms.CharField(
+            max_length=300,
+            required=False,
+            label=_("Logo credit, if applicable"))
+
+    profileImage = forms.ImageField(
+            required=False,
+            label=_("Network or platform profile image"),
+            help_text=_('Will be resized to 1100x400 pixels)'),
+            widget=forms.FileInput)
+    profileImageX = forms.FloatField(widget=forms.HiddenInput(), required=False)
+    profileImageY = forms.FloatField(widget=forms.HiddenInput(), required=False)
+    profileImageWidth = forms.FloatField(widget=forms.HiddenInput(), required=False)
+    profileImageHeight = forms.FloatField(widget=forms.HiddenInput(), required=False)
+    withProfileImage = forms.BooleanField(widget=forms.HiddenInput(), required=False, initial=False)
+    profileImageCredit = forms.CharField(
+            max_length=300,
+            required=False,
+            label=_("Profile Image credit, if applicable"))

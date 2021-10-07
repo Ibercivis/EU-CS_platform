@@ -44,11 +44,49 @@
                             </div>
                         </div>
 
-                        <h4 class="leftborder mt-4">{% trans "Network/project location" %}</h4>
+                        <h4 class="leftborder mt-4">{% trans "Network or platform location" %}</h4>
                         <div class="row">
                             <div class="col-1"></div>
                             <div class="col-11">
                                 {{ form.geographicExtend | as_crispy_field }}
+                            </div>
+                        </div>
+                    <h4 class="leftborder mt-4">{% trans "Network or platform images" %}</h4>
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                <a id="imgLogo" href="#">
+                                    <img class="img-fluid img-zoom" 
+                                         id="imageResult1" 
+                                         src="{% if platform.logo %} {{platform.logo}} 
+                                            {% else %} 
+                                            {% static 'site/img/void_600.png' %} {% endif %}">
+                                </a>
+
+                                {{ form.logo|as_crispy_field }}
+                                {{ form.logoX|as_crispy_field }}
+                                {{ form.logoY|as_crispy_field }}
+                                {{ form.logoHeight|as_crispy_field }}
+                                {{ form.logoWidth|as_crispy_field }}
+                                {{ form.withLogo|as_crispy_field }}
+                                {{ form.logoCredit|as_crispy_field }}
+                                <a id="imgProfileImage" href="#">
+                                    <img class="img-fluid img-zoom" 
+                                         id="imageResult1" 
+                                         src="{% if platform.profileImage %} {{platform.profileImage}} 
+                                            {% else %} 
+                                            {% static 'site/img/void_1100.png' %} {% endif %}">
+                                </a>
+
+                                {{ form.profileImage|as_crispy_field }}
+                                {{ form.profileImageX|as_crispy_field }}
+                                {{ form.profileImageY|as_crispy_field }}
+                                {{ form.profileImageHeight|as_crispy_field }}
+                                {{ form.profileImageWidth|as_crispy_field }}
+                                {{ form.withProfileImage|as_crispy_field }}
+                                {{ form.profileImageCredit|as_crispy_field }}
+
+
                             </div>
                         </div>
                     </div>
