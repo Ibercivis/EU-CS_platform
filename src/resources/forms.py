@@ -175,7 +175,7 @@ class ResourceForm(forms.Form):
             widget=s2forms.ModelSelect2TagWidget(
                 search_fields=['educationLevel__icontains'],
                 ),
-            label=_("Education level"),
+            label=_("Educational level"),
             help_text=_(
                 'Insert education level needed, end using comma or pressing enter. '
                 'Examples of educational levels include beginner, intermediate or advanced, '

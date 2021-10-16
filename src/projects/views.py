@@ -432,11 +432,16 @@ def getCooperatorsEmail(projectID):
     return cooperators
 
 
-def getNamesKeywords(text):
-    approvedProjects = ApprovedProjects.objects.all().values_list('project_id',flat=True)
-    project_names = Project.objects.filter(~Q(hidden=True)).filter(id__in=approvedProjects).filter(name__icontains=text).values_list('name',flat=True).distinct()
-    keywords = Keyword.objects.filter(keyword__icontains=text).values_list('keyword',flat=True).distinct()
-    report = chain(project_names, keywords)
+def getProjectsAutocomplete(text):
+    approvedProjects = ApprovedProjects.objects.all().values_list('project_id', flat=True)
+    projects = Project.objects.filter(~Q(hidden=True)).filter(
+            id__in=approvedProjects).filter(name__icontains=text).values_list('name', flat=True).distinct()
+    keywords = Keyword.objects.filter(keyword__icontains=text).values_list('keyword', flat=True).distinct()
+    report = []
+    for project in projects:
+        report.append({"type": "project", "text": project})
+    for keyword in keywords:
+        report.append({"type": "keyword", "text": keyword})
     return report
 
 

@@ -1,0 +1,26 @@
+{% load i18n %}
+{% load staticfiles %}
+{% load thumbnail %}
+{% for platform in platforms %}
+<div class="col-lg-4 col-sm-12 mb-4">
+    <div class="card h-100 shadow border-0">
+        <a class="card-img-wrap "href="/platform/{{platform.id }}">
+            <img title="logo picture" 
+                 class="card-img-top img-fluid img-zoom lazyload" 
+                 src="{% thumbnail platform.logo|default:'default_profile.png' 600x400 crop %}">
+        </a>
+        <div class="card-body">
+            <h6 class="card-title">
+                <div class="col-12  pl-0 mb-4 colorpurple">
+                    <i class="fas fa-university"></i> {% trans "Platform" %}
+                </div>
+                <a class="card-link mt-3" href="/platform/{{platform.id }}">{{ platform.name }}</a>
+            </h6>
+            <div class="card-text mt-3">
+                {{ organisation.orgType }}
+                <p class="mt-3">{{platform.description | safe | truncatechars:180 }}
+            </div>
+        </div><!-- End of card-body -->
+    </div><!-- end of card -->
+</div>
+{% endfor %}

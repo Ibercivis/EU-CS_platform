@@ -5,8 +5,8 @@ from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
 from django.db.models import Q
 from itertools import chain
-from projects.models import Project,ApprovedProjects, FollowedProjects
-from projects.views import getNamesKeywords
+from projects.models import Project, ApprovedProjects, FollowedProjects
+from projects.views import getProjectsAutocomplete
 from resources.views import getRscNamesKeywords
 from resources.models import Resource, ResourceGroup, ResourcesGrouped, ApprovedResources, SavedResources, Theme, Category
 from organisations.models import Organisation
@@ -149,11 +149,12 @@ def call(request):
 def policy_maker_event_2021(request):
     return render(request, 'policy_maker_event_2021.html')
 
+
 def home_autocomplete(request):
     if request.GET.get('q'):
         text = request.GET['q']
         resources = getRscNamesKeywords(text)
-        projects = getNamesKeywords(text)
+        projects = getProjectsAutocomplete(text)
         organisations = getOrganisationNames(text)
         report = chain(resources, projects, organisations)
         json = list(report)

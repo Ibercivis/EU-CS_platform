@@ -1,0 +1,14 @@
+{% extends "base_r2.html" %}
+{% load i18n %}
+{% load staticfiles %}
+
+{% block list_of_items %}
+<div class="container">
+    <div class="row">
+        {% if platforms %}
+        {% include "platform_cards.html" %}
+        {% endif %}
+    </div>
+</div>
+{% endblock list_of_items %}
+

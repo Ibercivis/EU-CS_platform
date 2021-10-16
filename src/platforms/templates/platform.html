@@ -1,0 +1,86 @@
+{% extends "base_r2.html" %}
+{% load i18n %}
+{% load staticfiles %}
+
+{% block head %}
+{{ block.super }}
+{% endblock head %}
+
+{% block title %}
+{{ block.super }} :: {{platform.name}}
+
+{% endblock title %}
+{% block navbar-left %}
+{% endblock %}
+
+
+{% block list_of_items %}
+{% include '_modal_zone.html' %}
+
+{% if platform.profileImage %}
+<div class="jumbotron jumbotron-fluid project-jumbotron" 
+     style="background: url('/media/{{platform.profileImage | safe}}') no-repeat; background-size: cover;">
+</div>
+{% endif %}
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-12">
+            <h1 class="display-4">{{platform.name}}</h1>
+            <input type='hidden' id='Id' value="{{platform.id}}" />
+        </div>
+
+        <div class="col-xl-8 col-md-6 col-12"><!-- Right column -->
+            <p class="mt-3">{{platform.description | safe }}</p>
+
+            {% if platform.organisation.all %}
+            <h4 class="mt-4 leftborder">{% trans "Organisations" %}</h4>
+            <div class="row">
+                {% for organisation in platform.organisation.all %}
+                <div class="col-12 col-md-6">
+                    {% include "horizontal_card_organisation.html" %}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <a href="{{platform.url}}" target="_blank" class="btn btn-primary mt-4">Go to platform / network</a>
+           
+            {% if platform.creator == user %}
+            <a href="/editPlatform/{{platform.id}}" class="btn btn-secondary mt-4">Edit</a>
+            <button type="button" id="deletePlatform" class="btn btn-danger mt-4 doModalAction">Delete</button>
+            {% endif %}
+        </div><!-- End-of right column -->
+
+        <div class="col-xl-4 col-md-6 col-12"><!-- Left column -->
+            {% if platform.logo %}
+            <img class="img-fluid img-zoom" src='/media/{{platform.logo | safe}}' />
+            {% endif %}
+
+            <div class="mt3">{% trans "Geographic extend" %}</div>
+            <a class="badge badge-light" href="#">{{platform.geographicExtend}}</a>
+            <div>
+                {% for country in platform.countries %}
+                <a class="badge badge-light" href="#">{{ country.name }}</a>
+                {% endfor %}
+            </div>
+            {% if platform.contactPoint %}
+            <div class="mt-3">{% trans "Contact point" %}</div>
+            <div class="small">
+                <a class="badge badge-light" href="#">{{ platform.contactPoint }}</a>
+            </div>
+            {% endif %}
+
+            {% if platform.contactPointEmail %}
+            <div class="mt-3">{% trans "Contact point email" %}</div>
+            <div class="small">
+                <a class="badge badge-light" href="#">{{ platform.contactPointEmail }}</a>
+            </div>
+            {% endif %}
+        </div><!-- End-of left column -->
+    </div>
+</div>
+{% endblock list_of_items %}
+
+
+
