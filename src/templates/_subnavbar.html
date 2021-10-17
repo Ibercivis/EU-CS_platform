@@ -1,6 +1,6 @@
 {% load i18n %}
 {% load active_link_tags %}
-{% if isSearchPage  and request.get_full_path != '/' %}
+{% if isSearchPage and request.get_full_path != '/' %}
 <div class="container mt-5" id="searchbar">
     <div class="row">
         <div class="col-12">
@@ -14,7 +14,7 @@
                            {% elif 'organisations' in request.get_full_path %}
                            action="/organisations"
                            {% elif 'platforms' in request.get_full_path %}
-                           action='/platforms'
+                           action= "platforms"
                            {% else %}
                            action="/projects"
                            {% endif %}>
@@ -27,19 +27,19 @@
                         autocomplete="off"
                         value="{{filters.keywords}}" 
                         class="basicAutoComplete form-control inhead"
-                        placeholder="Search..."
+                        placeholder="Search...a"
                         {% if 'all' in request.get_full_path %}
                         data-url="/home_autocomplete/"
                         {% elif 'training_resources' in request.get_full_path %}
-                        data-url="/training_autocomplete/"
+                        data-url="/trainingsAutocompleteSearch/"
                         {% elif 'resources' in request.get_full_path %}
-                        data-url="/resources_autocomplete/"
+                        data-url="/resourcesAutocompleteSearch/"
                         {% elif 'organisations' in request.get_full_path %}
-                        data-url="/organisations_autocomplete/"
+                        data-url="/organisationsAutocompleteSearch/"
                         {% elif 'platforms' in request.get_full_path %}
                         data-url="/platforms_autocomplete/"
                         {% else %}
-                        data-url="/text_autocomplete/">
+                        data-url="/projectAutocomplete/">
                         {% endif %}
                     <div class="input-group-append">
                         <div class="input-group-text inhead clickable" id="backsign"></div>

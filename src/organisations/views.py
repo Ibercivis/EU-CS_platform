@@ -189,17 +189,22 @@ def delete_organisation(request, pk):
     return redirect('../organisations', {})
 
 
-def organisations_autocomplete(request):
-    organisations = preFilteredOrganisations(request)
-
+def organisationsAutocompleteSearch(request):
     if request.GET.get('q'):
         text = request.GET['q']
-        organisationsName = organisations.filter(Q(name__icontains=text)).distinct()
-        project_names = organisationsName.values_list('name', flat=True).distinct()
-        json = list(project_names)
-        return JsonResponse(json, safe=False)
+        organisations = getOrganisationAutocomplete(text)
+        organisations = list(organisations)
+        return JsonResponse(organisations, safe=False)
     else:
         return HttpResponse("No cookies")
+
+
+def getOrganisationAutocomplete(text):
+    organisations = Organisation.objects.filter(name__icontains=text).values_list('id', 'name').distinct()
+    report = []
+    for organisation in organisations:
+        report.append({"type": "organisation", "id": organisation[0], "text": organisation[1]})
+    return report
 
 
 def preFilteredOrganisations(request):

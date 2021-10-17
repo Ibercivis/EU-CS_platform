@@ -12,6 +12,8 @@ from projects.models import Project, FollowedProjects, ProjectPermission, Approv
 from resources.models import Resource, SavedResources, ResourcePermission, ApprovedResources, UnApprovedResources
 from organisations.models import Organisation, OrganisationPermission
 from events.models import Event
+from django.db.models.functions import Concat
+from django.db.models import Value
 
 
 class ShowProfile(LoginRequiredMixin, generic.TemplateView):
@@ -244,3 +246,15 @@ def updateInterestAreas(dictio):
                 # This keyword is already in the database
                 dictio.update({'interestAreas': ia})
     return dictio
+
+
+def getProfilesAutocomplete(text):
+    print("Profiles")
+    profiles = models.Profile.objects.all().filter(
+            Q(surname__icontains=text) | Q(user__name__icontains=text)).annotate(
+                    fullname=Concat('user__name', Value(' '), 'surname')).values_list('user__id', 'fullname', 'slug')
+    report = []
+    print(profiles)
+    for profile in profiles:
+        report.append({"type": "profile", "id": profile[0], "text": profile[1], "slug": profile[2]})
+    return report

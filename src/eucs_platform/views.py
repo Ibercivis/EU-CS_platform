@@ -7,7 +7,10 @@ from django.db.models import Q
 from itertools import chain
 from projects.models import Project, ApprovedProjects, FollowedProjects
 from projects.views import getProjectsAutocomplete
-from resources.views import getRscNamesKeywords
+from resources.views import getResourcesAutocomplete
+from organisations.views import getOrganisationAutocomplete
+from platforms.views import getPlatformsAutocomplete
+from profiles.views import getProfilesAutocomplete
 from resources.models import Resource, ResourceGroup, ResourcesGrouped, ApprovedResources, SavedResources, Theme, Category
 from organisations.models import Organisation
 from django.conf import settings
@@ -153,18 +156,17 @@ def policy_maker_event_2021(request):
 def home_autocomplete(request):
     if request.GET.get('q'):
         text = request.GET['q']
-        resources = getRscNamesKeywords(text)
         projects = getProjectsAutocomplete(text)
-        organisations = getOrganisationNames(text)
-        report = chain(resources, projects, organisations)
-        json = list(report)
-        return JsonResponse(json, safe=False)
+        resources = getResourcesAutocomplete(text, False)
+        training = getResourcesAutocomplete(text, True)
+        organisations = getOrganisationAutocomplete(text)
+        platforms = getPlatformsAutocomplete(text)
+        profiles = getProfilesAutocomplete(text)
+        report = chain(resources, projects, training, organisations, platforms, profiles)
+        response = list(report)
+        return JsonResponse(response, safe=False)
     else:
         return HttpResponse("No cookies")
-
-def getOrganisationNames(text):
-    organisations = Organisation.objects.filter(name__icontains=text).values_list('name',flat=True).distinct()
-    return organisations
 
 
 def getTopicsResponded(request):

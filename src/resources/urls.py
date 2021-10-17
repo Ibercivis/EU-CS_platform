@@ -13,8 +13,14 @@ urlpatterns = [
     path('setFeaturedResource/', views.setFeaturedResource, name='setFeaturedResource'),
     path('setTrainingResource/', views.setTrainingResource, name='setTrainingResource'),
     path('deleteResource/<int:pk><int:isTrainingResource>', views.deleteResource, name='deleteResource'),
-    path('resources_autocomplete/', views.resources_autocomplete, name='resources_autocomplete'),
-    path('tresources_autocomplete/', views.tresources_autocomplete, name='tresources_autocomplete'),
+    path(
+        'resourcesAutocompleteSearch/',
+        views.resourcesAutocompleteSearch,
+        name='resourcesAutocompleteSearch'),
+    path(
+        'trainingsAutocompleteSearch/',
+        views.trainingsAutocompleteSearch,
+        name='trainingsAutocompleteSearch'),
     path('get_sub_category/', views.get_sub_category, name='get_sub_category'),
     path('bookmarkResource/', views.bookmarkResource, name='bookmarkResource'),
     path('setHiddenResource/', views.setHiddenResource, name='setHiddenResource'),

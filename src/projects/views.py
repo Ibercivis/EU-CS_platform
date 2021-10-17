@@ -419,7 +419,7 @@ def getOtherUsers(creator):
 
 
 def getCooperators(projectID):
-    users = list(ProjectPermission.objects.all().filter(project_id=projectID).values_list('user',flat=True))
+    users = list(ProjectPermission.objects.all().filter(project_id=projectID).values_list('user', flat=True))
     return users
 
 
@@ -435,13 +435,14 @@ def getCooperatorsEmail(projectID):
 def getProjectsAutocomplete(text):
     approvedProjects = ApprovedProjects.objects.all().values_list('project_id', flat=True)
     projects = Project.objects.filter(~Q(hidden=True)).filter(
-            id__in=approvedProjects).filter(name__icontains=text).values_list('name', flat=True).distinct()
+            id__in=approvedProjects).filter(name__icontains=text).values_list('id', 'name').distinct()
     keywords = Keyword.objects.filter(keyword__icontains=text).values_list('keyword', flat=True).distinct()
     report = []
     for project in projects:
-        report.append({"type": "project", "text": project})
+        report.append({"type": "project", "id": project[0], "text": project[1]})
     for keyword in keywords:
-        report.append({"type": "keyword", "text": keyword})
+        numberElements = Project.objects.filter(Q(keywords__keyword__icontains=keyword)).count()
+        report.append({"type": "keyword", "text": keyword, "numberElements": numberElements})
     return report
 
 
@@ -451,7 +452,7 @@ def preFilteredProjects(request):
 
 
 def applyFilters(request, projects):
-    approvedProjects = ApprovedProjects.objects.all().values_list('project_id',flat=True)
+    approvedProjects = ApprovedProjects.objects.all().values_list('project_id', flat=True)
 
     if request.GET.get('topic'):
         projects = projects.filter(topic__topic = request.GET['topic'])

@@ -31,19 +31,7 @@
 {% endblock list_of_items %}
 
 {% block scripts %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js"
-integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="anonymous"></script>
-<script
-src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
 <script>
-	$(document).ready(function() {
-		$( ".card" ).hover(
-		function() {
-			$(this).addClass('shadow-none').css('cursor', 'pointer');
-		}, function() {
-			$(this).removeClass('shadow-none');
-		});
-	});
     $('.basicAutoComplete').autoComplete(
 	{ minLength: 3 }
 	);
@@ -51,11 +39,6 @@ src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bo
 	$('.basicAutoComplete').on('autocomplete.select', function (evt, item) {
 		$('#searchOrganisations').submit();
 	});
-	$('.basicAutoCompleteMobile').autoComplete(
-	{ minLength: 3 }
-	);
-	$('.basicAutoCompleteMobile').on('autocomplete.select',
-	function (evt, item){$('#searchTopMobile').submit();});
 
 	$(function () {
 		$('#orgType').on('change', function () {

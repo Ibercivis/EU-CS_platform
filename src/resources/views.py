@@ -12,7 +12,6 @@ from django.core.mail import EmailMessage
 from django.utils import formats
 from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
-from itertools import chain
 from authors.models import Author
 from PIL import Image
 from datetime import datetime
@@ -401,34 +400,39 @@ def deleteResource(request, pk, isTrainingResource):
     return redirect('resources')
 
 
-def tresources_autocomplete(request):
-    return resources_autocomplete(request, True)
+def trainingsAutocompleteSearch(request):
+    return resourcesAutocompleteSearch(request, True)
 
 
-def resources_autocomplete(request, isTrainingResource=False):
-    resources = preFilteredResources(request)
+def resourcesAutocompleteSearch(request, isTrainingResource=False):
     if request.GET.get('q'):
         text = request.GET['q']
-        resourceNames = resources.filter(Q(name__icontain=text)).filter(
-                isTrainingResource=isTrainingResource).distinct()
-        resourceKeywords = resources.filter(Q(keywords__keyword__icontains=text)).filter(
-                isTrainingResource=isTrainingResource).distinct()
-        rsc_names = resourceNames.values_list('name', flat=True).distinct()
-        keywords = resourceKeywords.values_list('keywords__keyword', flat=False).distinct()
-        keywords = Keyword.objects.filter(keyword__in=keywords).values_list('keyword', flat=True).distinct()
-        report = chain(rsc_names, keywords)
-        json = list(report)
-        return JsonResponse(json, safe=False)
+        resources = getResourcesAutocomplete(text, isTrainingResource)
+        resources = list(resources)
+        return JsonResponse(resources, safe=False)
     else:
         return HttpResponse("No cookies")
 
 
-def getRscNamesKeywords(text):
+def getResourcesAutocomplete(text, isTrainingResource=False):
     approvedResources = ApprovedResources.objects.all().values_list('resource_id', flat=True)
-    rsc_names = Resource.objects.filter(~Q(hidden=True)).filter(
-            id__in=approvedResources).filter(name__icontains=text).values_list('name', flat=True).distinct()
-    keywords = Keyword.objects.filter(keyword__icontains=text).values_list('keyword', flat=True).distinct()
-    report = chain(rsc_names, keywords)
+    resources = Resource.objects.filter(~Q(hidden=True)).filter(
+            id__in=approvedResources).filter(
+                    isTrainingResource=isTrainingResource).filter(
+                            name__icontains=text).values_list('id', 'name').distinct()
+    keywords = Keyword.objects.filter(
+            keyword__icontains=text).values_list('keyword', flat=True).distinct()
+    report = []
+    for resource in resources:
+        if isTrainingResource:
+            report.append({"type": "training", "id": resource[0], "text": resource[1]})
+        else:
+            report.append({"type": "resource", "id": resource[0], "text": resource[1]})
+    for keyword in keywords:
+        numberElements = Resource.objects.filter(
+                Q(keywords__keyword__icontains=keyword)).filter(
+                        isTrainingResource=isTrainingResource).count()
+        report.append({"type": "keyword", "text": keyword, "numberElements": numberElements})
     return report
 
 

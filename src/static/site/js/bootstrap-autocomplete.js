@@ -613,6 +613,7 @@
 	                }
 	                var itemText;
 	                var itemHtml;
+                    var urlprefix;
                     var prefix;
 	                itemText = _this.showMatchedText(itemFormatted.text, _this.searchText);
 	                if (itemFormatted.html !== undefined) {
@@ -627,13 +628,39 @@
                     }else if(item.type==='project'){
                         console.log('project')
                         prefix='<i class="fas fa-binoculars"></i>'
-                    }else{
+                    }else if(item.type==='organisation'){
+                        prefix='<i class="fas fa-university"></i>'
+                    }else if(item.type==='resource'){
+                        console.log('resource')
+                        prefix='<i class="fas fa-book"></i>'
+                    }else if(item.type==='training'){
+                        console.log('training')
+                        prefix='<i class="fas fa-graduation-cap"></i>'
+                    }else if(item.type==='platform'){
+                        console.log('platform')
+                        prefix='<i class="fas fa-globe-europe"></i>'
+                    }else if(item.type==='profile'){
+                        console.log('profile')
+                        urlprefix='/user/'
+                        prefix='<i class="fas fa-user-friends"></i>'
+                    }
+                    else{
                         prefix=''
                     }
                     var li = $('<li class="p-1">');
-                    li.append($('<a class="text-decoration-none">').attr('href', '#').html(prefix+' '+itemHtml))
-	                    .data('item', item);
-	                liList.push(li);
+                    if(item.type==='keyword'){
+                        if(item.numberElements > 0){
+                            li.append($('<a class="text-decoration-none link-secondary">')
+                                .attr('href', urlprefix+item.id).html(prefix+' '+itemHtml+' ('+item.numberElements+')'))
+	                            .data('item', item);
+	                        liList.push(li);
+                        }
+                    }else{
+                        li.append($('<a class="text-decoration-none link-secondary">')
+                            .attr('href', urlprefix+item.id).html(prefix+' '+itemHtml))
+	                        .data('item', item);
+	                    liList.push(li);
+                    }
 	            });
 	        }
 	        else {
@@ -647,8 +674,22 @@
 	    };
 	    Dropdown.prototype.itemSelectedLaunchEvent = function (item) {
 	        // launch selected event
-	        // console.log('itemSelectedLaunchEvent', item);
-	        this._$el.trigger('autocomplete.select', item);
+	        console.log('itemSelectedLaunchEvent', item);
+            if(item.type==='keyword'){
+                this._$el.trigger('autocomplete.select', item);
+            }else if(item.type==='profile'){
+                window.location.href='/users/'+item.slug
+            }else if(item.type==='project'){
+                window.location.href='/project/'+item.id
+            }else if(item.type==='resource'){
+                window.location.href='/resource/'+item.id
+            }else if(item.type==='training'){
+                window.location.href='/resource/'+item.id
+            }else if(item.type==='organisation'){
+                window.location.href='/organisation/'+item.id
+            }else if(item.type==='platform'){
+                window.location.href='/platform/'+item.id
+            }
 	    };
 	    return Dropdown;
 	}());

@@ -91,6 +91,14 @@ def platforms(request):
     return render(request, 'platforms.html', {'platforms': platforms, 'isSearchPage': True})
 
 
+def getPlatformsAutocomplete(text):
+    platforms = Platform.objects.filter(name__icontains=text).values_list('id', 'name').distinct()
+    report = []
+    for platform in platforms:
+        report.append({"type": "platform", "id": platform[0], "text": platform[1]})
+    return report
+
+
 def setImages(request, form):
     images = {}
     for key, value in request.FILES.items():
