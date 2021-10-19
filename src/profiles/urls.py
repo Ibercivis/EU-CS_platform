@@ -8,6 +8,7 @@ urlpatterns = [
     path("me/privacy/updatePrivacy", views.updatePrivacy, name="updatePrivacy"),
     path("me/privacy", views.PrivacyCenter.as_view(), name="privacy_center"),
     path("me/submissions", views.Submissions.as_view(), name="submissions"),
+    path("<slug:slug>/submissions", views.Submissions.as_view(), name="submissions"),
     path("me/bookmarks", views.Bookmarks.as_view(), name="bookmarks"),
     path("<slug:slug>/", views.ShowProfile.as_view(), name="show"),
     path("me/projects", views.projects, name="self_projects"),

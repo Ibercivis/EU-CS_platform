@@ -49,6 +49,9 @@ class EditProfile(LoginRequiredMixin, generic.TemplateView):
                         'interestAreas': user.profile.interestAreas.all(),
                         'country': user.profile.country})
         kwargs["show_user"] = user
+        if user == self.request.user:
+            kwargs["editable"] = True
+
         return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
@@ -92,6 +95,8 @@ class PrivacyCenter(LoginRequiredMixin, generic.TemplateView):
                     initial={
                         'interestAreas': user.profile.interestAreas.all(),
                         'country': user.profile.country})
+        if user == self.request.user:
+            kwargs["editable"] = True
 
         kwargs["show_user"] = user
         return super().get(request, *args, **kwargs)
@@ -119,6 +124,8 @@ class Submissions(generic.TemplateView):
         kwargs["training_submitted"] = trainingsSubmitted
         kwargs["organisations_submitted"] = organisationsSubmitted
         kwargs["event_submitted"] = eventsSubmitted
+        if user == self.request.user:
+            kwargs["editable"] = True
         return super().get(request, *args, **kwargs)
 
 
@@ -134,7 +141,8 @@ class Bookmarks(LoginRequiredMixin, generic.TemplateView):
         followedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id', flat=True)
         resources = Resource.objects.filter(id__in=followedResources).filter(isTrainingResource=False)
         training = Resource.objects.filter(id__in=followedResources).filter(isTrainingResource=True)
-
+        if user == self.request.user:
+            kwargs["editable"] = True
         kwargs["projects_followed"] = projects
         kwargs["resources_followed"] = resources
         kwargs["trainings_followed"] = training

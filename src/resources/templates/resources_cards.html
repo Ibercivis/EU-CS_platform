@@ -1,0 +1,43 @@
+{% load staticfiles %}
+{% load i18n %}
+{% load l10n %}
+{% load thumbnail %}
+{% for resource in resources  %}
+<div class="col-lg-3 col-md-6 col-xs-12 mb-5">
+  <div class="card h-100 shadow border-0">
+      <img class="card-img" src="{% thumbnail resource.image1|default:'void_600.png' 600x400 crop %}" />
+        <div class="card-body">
+       <h5 class="card-title">{{ resource.name | truncatewords:12 }}</h5>
+        {% get_language_info_list for LANGUAGES as languages %}
+        {% for language in languages %}
+        {% if language.code == resource.inLanguage %}
+        <a class="badge rounded-pill bg-dark text-decoration-none" href="/resources?language={{resource.inLanguage}}">{{language.name}}</a>
+        {% endif %}
+        {% endfor %}
+        <a class="badge rounded-pill bg-info text-decoration-none" href="/resources?category={{resource.category.id}}">{{ resource.category }}</a>
+        {% for theme in resource.theme.all %}
+        <!-- TODO: Improve this or put in a template -->
+        {% if forloop.counter < 3 %}
+        <a class="badge rounded-pill bg-secondary text-decoration-none" href="/resources?theme={{theme.id}}">{{ theme }}</a>
+        {% elif forloop.counter < 4 %}
+        ...
+        {% endif %}
+        {% endfor %}
+        {% for keyword in resource.keywords.all %} 
+        {% if forloop.counter < 3 %}
+        <a class="badge rounded-pill bg-primary text-decoration-none" href="/resources?keywords={{keyword}}">{{keyword}}</a>
+        {% elif forloop.counter < 4 %}
+        ...
+        {% endif %}
+        {% endfor %}
+        <p class="mt-4">{{ resource.abstract | safe | truncatewords_html:30 }}</p>
+
+      </div><!-- end of card-body -->
+    </div><!-- end of card -->
+  </div>
+  {% endfor %}
+  {% if 'resources' in request.get_full_path %}
+  <div class="col-lg-12">
+    {% include "fr2.html" %}
+  </div>
+  {% endif %}

@@ -30,7 +30,7 @@
 		</div>
 	</div>
 	{% endfor %}
-	<div class="row .projects">
+	<div class="row">
 		{% include "projects_cards.html" %}
 	</div>
 	<div class="col-12">
@@ -45,12 +45,12 @@
 {% endblock list_of_items %}
 
 {% block scripts %}
+ <script>
 	$('.basicAutoComplete').autoComplete(
 	{ minLength: 3 }
 	);
 
 	$('.basicAutoComplete').on('autocomplete.select', function (evt, item) {
-        $('#finder').submit();
 		$('#searchTop').submit();
 	});
 

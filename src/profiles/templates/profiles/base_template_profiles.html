@@ -29,17 +29,32 @@
                 {% endif %}
             </div>
             <div class="list-group">
-                <a href="/users/me/"
+                {% if editable %}
+                    <a href="/users/me"
                     class="list-group-item list-group-item-action {% if request.path == '/users/me/' %}active{% endif %}">
                     <i class="fas fa-id-card"></i>
                     Personal profile</a>
-                <a href="#" class="list-group-item list-group-item-action">
+                {% else %}
+                <a href="/users/{{show_user.profile.slug}}"
+                   class="list-group-item list-group-item-action {% if request.path == '/users/{{show_user.profile.slug}}/' %}active{% endif %}">
+                    <i class="fas fa-id-card"></i>
+                    Personal profile</a>
+                {% endif %}
+                <!--a href="#" class="list-group-item list-group-item-action">
                     <i class="fas fa-users"></i>
-                    ECSA membership</a>
+                    ECSA membership</a-->
+                {% if editable %}
                 <a href="/users/me/submissions"
                     class="list-group-item list-group-item-action {% if request.path == '/users/me/submissions' %}active{% endif %}">
                     <i class="fas fa-binoculars"></i>
                     Submissions</a>
+                {% elif show_user.profile.contentVisible %}
+                <a href="/users/{{show_user.profile.slug}}/submissions"
+                    class="list-group-item list-group-item-action {% if request.path == '/users/me/submissions' %}active{% endif %}">
+                    <i class="fas fa-binoculars"></i>
+                    Submissions</a>
+                {% endif %}
+                {% if editable %}
                 <a href="/users/me/bookmarks"
                     class="list-group-item list-group-item-action {% if request.path == '/users/me/bookmarks' %}active{% endif %}">
                     <i class="fas fa-book"></i>
@@ -52,6 +67,7 @@
                     class="list-group-item list-group-item-action {% if request.path == '/users/me/edit/' %}active{% endif %}">
                     <i class="fas fa-edit"></i>
                     Edit profile</a>
+                {% endif %} 
             </div>
         </div>
         <div class="col-9 mt-5">

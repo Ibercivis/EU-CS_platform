@@ -333,21 +333,6 @@ def deleteProject(request, pk):
     return redirect('projects')
 
 
-def text_autocomplete(request):
-    projects = preFilteredProjects(request)
-    if request.GET.get('q'):
-        text = request.GET['q']
-        projectsName = projects.filter(Q(name__icontains=text)).distinct()
-        projectsKey = projects.filter(Q(keywords__keyword__icontains=text)).distinct()
-        project_names = projectsName.values_list('name', flat=True).distinct()
-        keywords = projectsKey.values_list('keywords__keyword', flat=False).distinct()
-        keywords = Keyword.objects.filter(keyword__in=keywords).values_list('keyword', flat=True).distinct()
-        report = chain(project_names, keywords)
-        myjson = list(report)
-        return JsonResponse(myjson, safe=False)
-    else:
-        return HttpResponse("No cookies")
-
 
 def setImages(request, form):
     print('setImages')
@@ -430,6 +415,16 @@ def getCooperatorsEmail(projectID):
         userObj = get_object_or_404(User, id=user)
         cooperators += userObj.email + ", "
     return cooperators
+
+
+def projectsAutocompleteSearch(request):
+    if request.GET.get('q'):
+        text = request.GET['q']
+        projects = getProjectsAutocomplete(text)
+        projects = list(projects)
+        return JsonResponse(projects, safe=False)
+    else:
+        return HttpResponse("No cookies")
 
 
 def getProjectsAutocomplete(text):

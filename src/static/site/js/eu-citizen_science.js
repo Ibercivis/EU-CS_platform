@@ -22,6 +22,10 @@ $(function() {
         console.log('redirect')
         window.location.href=$(this).val()
     })
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
 })
 
 function attatchDeletePlatform(){
