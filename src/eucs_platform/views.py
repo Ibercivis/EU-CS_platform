@@ -22,29 +22,26 @@ from machina.apps.forum_conversation.models import Topic, Post
 from machina.apps.forum_tracking.models import TopicReadTrack
 from machina.apps.forum_tracking.handler import TrackingHandler
 
+
 def home(request):
-    #Projects
+    # Projects
     user = request.user
-    projects = Project.objects.get_queryset().filter(~Q(hidden=True)).order_by('-featured','id')
-    approvedProjects = ApprovedProjects.objects.all().values_list('project_id',flat=True)
+    projects = Project.objects.get_queryset().filter(~Q(hidden=True)).order_by('-featured', 'id')
+    approvedProjects = ApprovedProjects.objects.all().values_list('project_id', flat=True)
     projects = projects.filter(id__in=approvedProjects)
-    followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id',flat=True)
 
     filters = {'keywords': ''}
 
-    if request.GET.get('keywords'):
-        projects = projects.filter( Q(name__icontains = request.GET['keywords']) |
-                                    Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
-        filters['keywords'] = request.GET['keywords']
+    # if request.GET.get('keywords'):
+    #    projects = projects.filter( Q(name__icontains = request.GET['keywords']) |
+    #                                Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
+    #    filters['keywords'] = request.GET['keywords']
     counterprojects = len(projects)
-    paginatorprojects = Paginator(projects, 6)
+    paginatorprojects = Paginator(projects, 4)
     page = request.GET.get('page')
     projects = paginatorprojects.get_page(page)
 
-
-
-
-    #Resources
+    # Resources
     resources = Resource.objects.get_queryset().filter(~Q(isTrainingResource=True)).filter(~Q(hidden=True)).order_by('-featured','id')
     approvedResources = ApprovedResources.objects.all().values_list('resource_id',flat=True)
     resources = resources.filter(id__in=approvedResources)
@@ -94,12 +91,17 @@ def home(request):
 
     total = countertresources + counterprojects + countertresources + counterorganisations
 
-
-    return render(request, 'home.html', {'projects':projects, 'counterprojects':counterprojects, \
-        'resources':resources, 'counterresources':counterresources,\
-        'filters': filters, \
-        'tresources':tresources, 'countertresources':countertresources,
-        'organisations': organisations, 'counterorganisations': counterorganisations, 'total': total, \
+    return render(request, 'home.html', {
+        'projects': projects,
+        'counterprojects': counterprojects,
+        'resources': resources,
+        'counterresources': counterresources,
+        'filters': filters,
+        'tresources': tresources,
+        'countertresources': countertresources,
+        'organisations': organisations,
+        'counterorganisations': counterorganisations,
+        'total': total,
         'isSearchPage': True})
 
 def all(request):
