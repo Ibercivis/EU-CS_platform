@@ -2,139 +2,173 @@
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% load i18n %}
-{% load leaflet_tags %}
 {% block head %}
 {{block.super }}
-{% leaflet_js %}
-{% leaflet_css %}
 <meta name="Description" content="Citizen Science in Europe, projects, resources, events">
 {% endblock %}
 {% block navbar-left %}
 {% include "_navbar_r2.html"  %}
 {% endblock %}
 {% block splash %}
-<!--script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
-<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css"-->
-
 {% if request.get_full_path == "/" %}
-
-<div class="jumbotron jumbotron-fluid jumbotron-blue mb-0" style="padding-top: 1.5rem;">
-	<div class="container">
-
-			<h5 class="mb-4 mt-5 text-white font-weight-light"> {% trans "Welcome to the platform for sharing Citizen Science projects, resources, tools, and training" %}</h5>
-		<form id="finder" action="/all" >
-			<div class="form-row">
-				<div class="input-group">
-					<div class="input-group-prepend clickable">
-						<div class="input-group-text inhead clickable" id="mysearch"> <i class="fas fa-search"></i></div>
-					</div>
-					<input type="text" id="keywords" name="keywords" autocomplete="off"
-					class="basicAutoComplete form-control form-control-lg inhead"
-					placeholder="{% trans 'Search for citizen science resources, projects, tools, training, and more....'%}"
-					data-url="/home_autocomplete/">
-					<div class="input-group-append">
-						<div class="input-group-text inhead clickable" id="backsign"></div>
-					</div>
-				</div>
-			</div>
-		</form>
-		<br>
-		<!--h4 class="mt-4 white">Join the community to share your favourite citizen science resources, profile your own citizen science projects, and more. </h4-->
-	</div>
+<div class="container-fluid" style="background: url('/static/site/img/ilustracion_3b.png') no-repeat fixed top right">
+    <div class="container" >
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <h1 class="mt-5">eu-citizen.science</h1>
+                <h3 class="fw-light mb-5">
+                    {% trans "Welcome to the platform for sharing citizen science projects, resources, tools, training and much more" %}
+                </h3>
+            </div>
+            <div class="row">
+                <div class="col-12 mt-5 pb-5">
+                    <form id="finder" action="/all" >
+                        <div class="form-row">
+                            <div class="input-group">
+                                <div class="input-group-text inhead clickable" id="mysearch">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                                <input type="text" 
+                                       id="keywords"
+                                       name="keywords" 
+                                       autocomplete="off" 
+                                       style="background: #ffffffaa"
+                                       class="basicAutoComplete form-control form-control-lg inhead opacity-25"
+                                       placeholder="{% trans 'Search...'%}"
+                                       data-url="/home_autocomplete/">
+                                <div class="input-group-text inhead clickable" id="backsign"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6 col-12 mt-5 pb-5">
+                    <h3 class="mb-5 mt-5"><div class="blue-color">Join the community</div> and participate</h3>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-		<!--div class="container">
-			<div class="row">
-				<div class="col-12">
-			The static part of the platform has recently been translated into 11 languages.
-			{% trans "Do you want to help with translation?" %}<a class="" href="/translations">&nbsp;{% trans " Please click here" %}</a>
-				</div>
-			</div>
-
-		</div-->
-
 {% endif %}
 {% endblock splash %}
-{% block page_header %}
-{% include "finder_all.html" %}
-{% endblock page_header %}
 {% block list_of_items %}
+<div class="container-fluid pb-5 blueb woodc" style="background: url('/static/site/img/ilustracion_2.png') no-repeat">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6">
+            </div>
+            <div class="col-12 col-md-6">
+                <h1 class="mt-5">About the platform</h1>
+                <h3 class="fw-light">Here is a more explicative text on this section one that can be on two or three lines more or less</h3>
+                <h3 class="p-5 m-5 float-end"></h3>
+                <h3 class="p-0 m-0 fw-light float-end">on this section one that can be one, </h3>
+                <h3 class="p-0 m-0 fw-light float-end">two or three lines more or less</h3>
+                <h3 class="p-0 m-0 fw-light float-end">sections of the content</h3> 
+                <h3 class="p-5 m-5 float-end"></h3>
+                <h3 class="pt-5 m-0 float-end">Do a difficult  action aaaaa</h3>
+                <h3 class="m-0 float-end"> and you will be happy for sure</h3>
+            </div>
+        </div>
+    </div>
+</div>
 
+<div class="container-fluid pt-5 pb-5" style="background: #FFF url('/static/site/img/What_u_will_find.png') fixed no-repeat right">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-12">
+                <h1 class="mt-5">What can you find here?</h1>
+                <h3 class="fw-light mb-5">Here is a more explicative text on this section two that can be one, two or three lines more or less
+                    with <a href="#">links,</a> to sections of the content</h3>
+            </div>
+            <div class="col-md-6 col-12">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-sm-6 col-12 mb-5 mt-5">
+                <div class="card h-100 shadow border-0">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ counterprojects }} projects</h3>
+                        This is the text explaining what can you find in projects
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-12 mb-5 mt-5">
+                <div class="card h-100 shadow border-0">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ counterresources }} resources</h3>
+                        This is the text explaining what can you find in projects
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-12 mb-5 mt-5">
+                <div class="card h-100 shadow border-0">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ countertresources }} training resources</h3>
+                        This is the text explaining what can you find in projects
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-12 mb-5">
+                <div class="card h-100 shadow border-0">
+                    <div class="card-body">
+                        <h3 class="card-title">{{counterorganisations}} organisations</h3>
+                        This is the text explaining what can you find in projects
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-12 mb-5">
+                <div class="card h-100 shadow border-0">
+                    <div class="card-body">
+                        <h3 class="card-title">Platforms</h3>
+                        This is the text explaining what can you find in projects
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-12 mb-5">
+                <div class="card h-100 shadow border-0">
+                    <div class="card-body">
+                        <h3 class="card-title">People</h3>
+                        This is the text explaining what can you find in projects
+                    </div>
+                </div>
+            </div>
 
-<div class="container">
-	<div class="row mt-4 mb-4">
-		<div class="col-12" style="background-image: url('/media/eventoo.webp'); background-position: center; background-size: cover; height: 500px">
-			<div class="row h-100">
-			<div class="col-6"></div>
-		
-			<div class="col-6 mt-auto">
-			<h5>EVENT</h5>
-			<h2>Citizen Science for Policy across Europe<br /></h2>
-			<h4 class="pb-4"> 22nd June 2021, from 11:00 to 12:30 CEST</h4>
-			<a class="btn btn-outline-primary m-5 float-right" href="policy_maker_event_2021"/>More information</a>
-			</div>
-			</div>
-		</div>
-	</div>
-	<!--div class="row mt-4 mb-4">
-		<div class="col-12 d-flex" id="month_of_the_project" style="background-image: url('/media/month_of_the_project.webp'); background-position: bottom; background-size: cover; height: 500px">
-			<div class="mt-auto p-2"><h2>June is the <span class="red">#MonthOfTheProjects</span><br /><br />
-			<a class="btn btn-outline-primary mt-2 mb-4" href="blog/2021/05/31/june-monthoftheprojects-eu-citizenscience/"> Learn more here!</a>
-			</div>
-		</div>
-	</div-->
+        </div>
+    </div>
+</div>
+<div class="container-fluid pt-5" style="background: #ABB79B url('/static/site/img/ilustracion_1.png') left no-repeat" >
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6">
+            </div>
+    <div class="col-12 col-md-6">
+        <h1 class="mt-5 text-black">What is citizen science?</h1>
+        <h3 class="fw-light mb-5 text-black">
+            Here is a more explicative text on this section two that can be one, two or three lines more or less
+            with <a href="#">links,</a> to sections of the content
+            Here is a more explicative text on this section two that can be one, two or three lines more or less
+            Here is a more explicative text on this section two that can be one, two or three lines more or less
+            Here is a more explicative text on this section two that can be one, two or three lines more or less
+            with <a href="#">links,</a> to sections of the content
 
+            with <a href="#">links,</a> to sections of the content
+            with <a href="#">links,</a> to sections of the content</h3>
 
-
-
-	<div class="row">
-
-
-		<div class="col-12 mb-2">
-			<h3>{% trans "Projects" %}</h3>
-			{{ counterprojects }} {% trans "result" %}{% if counterprojects != 1 %}s{% endif %} {% trans "in Projects" %}
-			{% if counterprojects > 6 %}, click <a href="/projects">{% trans "here" %}</a> {% trans "to see all of them" %} {% endif %}
-		</div>
-		<div class="col-12 mb-2">
-			<hr>
-		</div>
-
-		<div class="col-12 mb-2">
-			<h3>{% trans "Resources" %}</h3>
-			{{ counterresources }} {% trans "result" %}{% if counterresources != 1 %}s{% endif %} {% trans "in Resources" %}
-			{% if counterresources > 6 %}, click <a href="/resources">{% trans "here" %}</a> {% trans "to see all of them" %}{% endif %}
-		</div>
-		<div class="col-12 mb-2">
-			<hr>
-		</div>
-
-		<div class="col-12 mb-2">
-			<h3>{% trans "Training" %}</h3>
-			{{ countertresources }} {% trans "result" %}{% if counterresources != 1 %}s{% endif %} {% trans "in Training" %}
-			{% if countertresources > 6 %}, click <a href="/training_resources">{% trans "here" %}</a> {% trans "to see all of them" %}{% endif %}
-		</div>
-		<div class="col-12 mb-2">
-			<hr>
-		</div>
-
-
-		<div class="col-12 mb-2">
-			<h3>{% trans "Organisations" %}</h3>
-			{{ counterorganisations}} {% trans "result" %}{% if counterorganisations != 1 %}s{% endif %} {% trans "in Organisations" %}
-			{% if counterorganisations > 6 %}, click <a href="/organisations">{% trans "here" %}</a> {% trans "to see all of them" %}{% endif %}
-		</div>
-	</div>
+    </div>
+        </div>
+    </div>
 </div>
 {% endblock list_of_items %}
-
 {% block scripts %}
-<script>
-	$('.basicAutoComplete').autoComplete(
-	{ minLength: 3 }
-	);
-	$('.basicAutoComplete').on('autocomplete.select', function (evt, item) {
-		$('#finder').submit();
-		$('#searchTop').submit();
-	});
-</script>
+<script src="{% static 'site/js/bootstrap-autocomplete.js'%}"></script>
+    <script>
+    $('.basicAutoComplete').autoComplete(
+        { minLength: 3 }
+    );
+    $('.basicAutoComplete').on('autocomplete.select', function (evt, item) {
+        $('#finder').submit();
+        $('#searchTop').submit();
+    });
+    </script>
+
+
 {% endblock scripts %}

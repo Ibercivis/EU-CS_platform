@@ -2,36 +2,34 @@
 
 {% load crispy_forms_tags %}
 
-{% block title %}{{ block.super }}Sign Up{% endblock %}
-
-{% block form_heading %}Signing Up is Free{% endblock %}
+{% block title %}{{ block.super }} :: Sign Up{% endblock %}
 
 {% block list_of_items %}
-<div class="container mt-5">
-  <div class="row">
-    <div class="container d-flex justify-content-center">
-      <div class="col-lg-6 col-12">
-        <div class="card mb-4 mt-5 shadow">
-          <div class="card-header">
-            <h3 class="pt-3">Sign up</h3>
-          </div>
-          <div class="card-text p-3">
-            {% block form %}
-            {% crispy form %}
-            <div class="form-message">
-              <p>
-                <br/>
-                Already signed up? <a href="{% url 'accounts:login' %}">Log in</a>.
-              </p>
-              <br>
-              By clicking on Register, you accept our <a href="/terms"> Terms of Use</a>. Learn more about how we collect, use and share your information in the <a href="/privacy"> Privacy section</a>, as well as our use of cookies and similar technologies in our <a href="/privacy#coockies">Cookie Policy</a></p>
+<div class="container vh-100 d-flex mt-5">
+    <div class="container d-flex justify-content-center mt-5">
+        <div class="row">
+            <div class="container d-flex justify-content-center">
+                <div class="col-lg-4 col-12 mt-5">
+                    <div class="card shadow mt-5">
+                        <div class="card-text p-3 text-center"
+                             style="background: url('/static/site/img/ecsa-farbbalken_400x1000_transp.png') no-repeat left">
+                            <h1 class="mb-5">Sign up</h1>
+                            {% block form %}
+                            {% crispy form %}
+                            <div class="form-message">
+                                <p>
+                                <br/>
+                                Already signed up? <a href="{% url 'accounts:login' %}">Log in</a>.
+                                </p>
+                                <br>
+                                By clicking on Register, you accept our <a href="/terms"> Terms of Use</a>. Learn more about how we collect, use and share your information in the <a href="/privacy"> Privacy section</a>, as well as our use of cookies and similar technologies in our <a href="/privacy#coockies">Cookie Policy</a></p>
+                            </div>
+                            {% endblock form %}
+                        </div>
+                    </div>
+                </div>
             </div>
-            {% endblock form %}
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
-
 {% endblock list_of_items %}

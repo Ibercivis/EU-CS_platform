@@ -21,19 +21,16 @@ class LoginForm(AuthenticationForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.fields["username"].widget.input_type = "email"  # ugly hack
-        self.fields["username"].label = ""
-        self.fields["password"].label = ""
 
         self.helper.layout = Layout(
-            Field("username", label="", placeholder=_("Enter Email"), autofocus=""),
-            HTML('<div class="m-4"></div>'),
+            Field("username", placeholder=_("Enter Email"), autofocus=""),
             Field("password", placeholder=_("Enter Password")),
             HTML(
-                '<div class="mt-3 mb-4">Forgot Password? <a href="{}" class="pt-1 mb-5">Remember me</a></div>'.format(
+                'Forgot Password? <a href="{}">Remember me</a>'.format(
                     reverse("accounts:password-reset")
                 )
             ),
-            StrictButton(_("Log in"), css_class="btn btn-primary", type="Submit")
+            StrictButton(_("Log in"), css_class="btn btn-outline-primary", type="Submit")
 
         )
 
@@ -78,23 +75,14 @@ class SignupForm(authtoolsforms.UserCreationForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.fields["email"].widget.input_type = "email"  # ugly hack
-        self.fields["email"].label = ""
-        self.fields["name"].label = ""
-        self.fields["password1"].label = ""
-        self.fields["password2"].label = ""
         self.fields["captcha"] = ReCaptchaField()
-        self.fields["captcha"].label = ""
         self.helper.layout = Layout(
             Field("email", placeholder=_("Enter Email"), autofocus=""),
-            HTML('<div class="m-4"></div>'),
             Field("name", placeholder=_("Enter name")),
-            HTML('<div class="m-4"></div>'),
             Field("password1", placeholder=_("Enter Password")),
-            HTML('<div class="m-4"></div>'),
             Field("password2", placeholder=_("Re-enter Password")),
-            HTML('<div class="m-4"></div>'),
             Field("captcha"),
-            StrictButton(_("Sign up"), css_class="btn btn-primary mt-5", type="Submit"),
+            StrictButton(_("Sign up"), css_class="btn-green", type="Submit"),
         )
 
 
