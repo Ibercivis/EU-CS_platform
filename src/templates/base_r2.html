@@ -106,12 +106,13 @@
                         </li>
                     </ul>
 
-                        {% if not user.is_authenticated %}
-                        <a class="btn btn-outline-primary d-lg-inline-block my-2 my-md-0 ms-md-3" 
-                            href="{% url 'accounts:login' %}">{% trans "Login" %}</a>
-                        <a class="btn btn-outline-danger d-lg-inline-block my-2 my-md-0 ms-md-3" 
-                            href="{% url 'accounts:signup' %}">{% trans "Signup" %}</a>
-                        {% else %}
+                    {% if not user.is_authenticated %}
+                    <a class="btn btn-outline-primary d-lg-inline-block my-2 my-md-0 ms-md-3" 
+                       href="{% url 'accounts:login' %}">{% trans "Login" %}</a>
+                    <a class="btn btn-outline-danger d-lg-inline-block my-2 my-md-0 ms-md-3" 
+                       href="{% url 'accounts:signup' %}">{% trans "Signup" %}</a>
+                    {% else %}
+                    <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" 
                                id="dropdownRegistered"
@@ -133,16 +134,17 @@
                                 {% endif %}
                                 <li><a class="dropdown-item" href="{% url 'accounts:logout' %}">{% trans "Logout" %}</a></li>
                             </ul>
-                            <button data-toggle="modal" 
-                                    data-target="#modalinfo"
-                                    class="btn btn-green ml-2 d-none d-sm-block"
-                                    type="submit">
-                                <i class="fas fa-plus-circle"></i>&nbsp;&nbsp;{% trans "Add" %}
-                            </button>
 
                         </li>
-                        {% endif %}
                     </ul>
+                        <button data-toggle="modal" 
+                                data-target="#modalinfo"
+                                class="btn btn-outline-primary"
+                                type="submit">
+                            <i class="fas fa-plus-circle"></i>&nbsp;&nbsp;{% trans "New submission" %}
+                        </button>
+
+                        {% endif %}
                 </div>
             </div>
         </nav>
