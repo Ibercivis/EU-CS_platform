@@ -1,17 +1,138 @@
+:root {
+    --wood: #494a42;
+    --lightBlue: #6ccde7; 
+    --darkGreen: #8dbc41;
+    --palid: #abb79b;
+    --darkBlue: #24abe2;
+    --lightGreen: #d7e028;
+    --gray3: #333;
+    --gray7: #777;
+    --white: #fff;
+    --darkBlue2: #149bd2;
+    --black: #000;
+}
 h1, h3 {
     font-family: 'Lato', Arial, Helvetica, sans-serif;
     font-weight: 800 !important;
 }
-.blueb{
-    background-color: #6CCDE7 !important;
+h4, h5 {
+    font-family: 'Lato', Arial, Helvetica, sans-serif;
+    font-weight: 800 !important;
 }
-.wood-color{
-    color: #594A42 !important;
+a.card-title{
+    color: #594a42 !important;
 }
 
-.blue-color{
-    color: #6ccde7 !important;
+a.card-title:hover{
+    color: var(--lightBlue) !important;
+    transition: 0.3s;
 }
+
+.bg-dark{
+    color: #fff !important;
+}
+
+/* Backgrounds */
+.bg-my-darkBlue{
+    background-color: var(--darkBlue) !important;
+    color: #fff !important;
+}
+.bg-my-lightBlue{
+    background-color: var(--lightBlue) !important;
+    color: var(--black) !important;
+}
+.bg-my-lightGreen{
+    background-color: var(--lightGreen) !important;
+    color: var(--black) !important;
+}
+.bg-my-wood{
+    background-color: var(--wood) !important;
+    color: #fff !important;
+}
+.bg-my-darkGreen{
+    background-color: var(--darkGreen) ! important;
+    color: #fff !important;
+
+}
+/* Buttons */
+.btn-my-outline-darkBlue{
+    border: 1px solid var(--darkBlue) !important;
+    color: var(--darkBlue);
+}
+.btn-my-outline-darkBlue:hover{
+    background-color: var(--darkBlue);
+    color: var(--white);
+    transition: 0.3s;
+}
+.btn-my-darkBlue{
+    background-color: var(--darkBlue);
+    color: var(--white);
+}
+.btn-my-darkBlue:hover{
+    background-color: var(--darkBlue2);
+    color: var(--white);
+    transition: 0.3s;
+}
+.btn-my-palid{
+    background-color: var(--palid);
+    color: var(--black);
+}
+.btn-my-palid:hover{
+    background-color: var(--darkBlue2);
+    color: var(--white);
+    transition: 0.3s;
+}
+
+
+
+.btn-my-outline-darkGreen{
+    border: 1px solid var(--darkGreen) !important;
+    color: var(--darkGreen);
+}
+.btn-my-outline-darkGreen:hover{
+    background-color: var(--darkGreen);
+    color: var(--white);
+    transition: 0.3s;
+}
+
+
+
+
+/* Links */
 a{
     text-decoration: none;
+    color: var(--darkBlue);
+}
+.nav-link{
+    color: var(--gray5) !important;
+}
+.nav-link:hover{
+    color: var(--gray3) !important;
+}
+.dropdown-item{
+    color: var(--gray5) !important;
+}
+.dropdown-item:hover{
+    color: var(--gray3) !important;
+}
+
+
+
+/* Text-colors */
+.lightBlue-color{
+    color: var(--lightBlue) !important;
+}
+.darkGreen-color{
+    color: var(--darkGreen) !important;
+}
+.wood-color{
+    color: var(--wood) !important;
+}
+.gray7-color{
+    color: var(--gray7) !important;
+}
+
+/* Related with images */
+.profileImage{
+    height: 300px !important;
 }

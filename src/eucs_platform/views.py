@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
 from django.db.models import Q
 from itertools import chain
-from projects.models import Project, ApprovedProjects, FollowedProjects
+from projects.models import Project, ApprovedProjects
 from projects.views import getProjectsAutocomplete
 from resources.views import getResourcesAutocomplete
 from organisations.views import getOrganisationAutocomplete
@@ -13,6 +13,7 @@ from platforms.views import getPlatformsAutocomplete
 from profiles.views import getProfilesAutocomplete
 from resources.models import Resource, ResourceGroup, ResourcesGrouped, ApprovedResources, SavedResources, Theme, Category
 from organisations.models import Organisation
+from platforms.models import Platform
 from django.conf import settings
 from blog.models import Post
 import random
@@ -26,7 +27,7 @@ from machina.apps.forum_tracking.handler import TrackingHandler
 def home(request):
     # Projects
     user = request.user
-    projects = Project.objects.get_queryset().filter(~Q(hidden=True)).order_by('-featured', 'id')
+    projects = Project.objects.get_queryset().filter(~Q(hidden=True)).order_by('-dateCreated')
     approvedProjects = ApprovedProjects.objects.all().values_list('project_id', flat=True)
     projects = projects.filter(id__in=approvedProjects)
 
@@ -42,65 +43,77 @@ def home(request):
     projects = paginatorprojects.get_page(page)
 
     # Resources
-    resources = Resource.objects.get_queryset().filter(~Q(isTrainingResource=True)).filter(~Q(hidden=True)).order_by('-featured','id')
-    approvedResources = ApprovedResources.objects.all().values_list('resource_id',flat=True)
+    resources = Resource.objects.get_queryset().filter(
+            ~Q(isTrainingResource=True)).filter(~Q(hidden=True)).order_by('-dateUploaded')
+    approvedResources = ApprovedResources.objects.all().values_list('resource_id', flat=True)
     resources = resources.filter(id__in=approvedResources)
-    savedResources = None
-    savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True)
-    languagesWithContent = Resource.objects.all().values_list('inLanguage',flat=True).distinct()
-    themes = Theme.objects.all()
-    categories = Category.objects.all()
-    if request.GET.get('keywords'):
-        resources = resources.filter( Q(name__icontains = request.GET['keywords'])  |
-                                    Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
-        filters['keywords'] = request.GET['keywords']
+    # savedResources = None
+    # savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True)
+    # languagesWithContent = Resource.objects.all().values_list('inLanguage', flat=True).distinct()
+    # themes = Theme.objects.all()
+    # categories = Category.objects.all()
+    # if request.GET.get('keywords'):
+    #    resources = resources.filter( Q(name__icontains = request.GET['keywords'])  |
+    #                                Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
+    #    filters['keywords'] = request.GET['keywords']
     counterresources = len(resources)
-    paginatorresources = Paginator(resources, 6)
+    paginatorresources = Paginator(resources, 4)
     page = request.GET.get('page')
     resources = paginatorresources.get_page(page)
 
+    # Training Resources
+    trainingResources = Resource.objects.get_queryset().filter(isTrainingResource=True).order_by('-dateUploaded')
+    tapprovedResources = ApprovedResources.objects.all().values_list('resource_id', flat=True)
+    trainingResources = trainingResources.filter(id__in=tapprovedResources)
+    # tsavedResources = None
+    # tsavedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True)
+    # if request.GET.get('keywords'):
+    #     tresources = tresources.filter( Q(name__icontains = request.GET['keywords'])  |
+    #                                Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
+    #    filters['keywords'] = request.GET['keywords']
 
-    #Training Resources
-    tresources = Resource.objects.get_queryset().filter(isTrainingResource=True).order_by('id')
-    tapprovedResources = ApprovedResources.objects.all().values_list('resource_id',flat=True)
-    tresources = tresources.filter(id__in=tapprovedResources)
-    tsavedResources = None
-    tsavedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True)
-    if request.GET.get('keywords'):
-        tresources = tresources.filter( Q(name__icontains = request.GET['keywords'])  |
-                                    Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
-        filters['keywords'] = request.GET['keywords']
-
-    tresources = tresources.filter(~Q(hidden=True))
-    tresourcesTop = tresources.filter(featured=True)
-    tresourcesTopIds = list(tresourcesTop.values_list('id',flat=True))
-    tresources = tresources.exclude(id__in=tresourcesTopIds)
-    tresources = list(tresourcesTop) + list(tresources)
-    countertresources = len(tresources)
-    paginatortresources = Paginator(tresources, 6)
+    trainingResources = trainingResources.filter(~Q(hidden=True))
+    # tresourcesTop = tresources.filter(featured=True)
+    # tresourcesTopIds = list(tresourcesTop.values_list('id',flat=True))
+    # tresources = tresources.exclude(id__in=tresourcesTopIds)
+    # tresources = list(tresourcesTop) + list(tresources)
+    countertresources = len(trainingResources)
+    paginatorTrainingResources = Paginator(trainingResources, 4)
     page = request.GET.get('page')
-    tresources = paginatortresources.get_page(page)
+    trainingResources = paginatorTrainingResources.get_page(page)
 
-    organisations = Organisation.objects.all().order_by('-id')
+    # Organisations
+    # TODO: Put -dateCreated
+    organisations = Organisation.objects.all().order_by('id')
     if request.GET.get('keywords'):
-        organisations = organisations.filter( Q(name__icontains = request.GET['keywords']) ).distinct()
+        organisations = organisations.filter(Q(name__icontains=request.GET['keywords'])).distinct()
     counterorganisations = len(organisations)
-    paginatororganisation = Paginator(organisations,6)
+    paginatororganisation = Paginator(organisations, 4)
     page = request.GET.get('page')
     organisations = paginatororganisation.get_page(page)
+
+    # Platforms
+    platforms = Platform.objects.all().order_by('-dateCreated')
+    counterPlatforms = len(platforms)
+    paginatorPlatform = Paginator(platforms, 4)
+    page = request.GET.get('page')
+    platforms = paginatorPlatform.get_page(page)
 
     total = countertresources + counterprojects + countertresources + counterorganisations
 
     return render(request, 'home.html', {
+        'user': user,
         'projects': projects,
         'counterprojects': counterprojects,
         'resources': resources,
         'counterresources': counterresources,
         'filters': filters,
-        'tresources': tresources,
+        'trainingResources': trainingResources,
         'countertresources': countertresources,
         'organisations': organisations,
         'counterorganisations': counterorganisations,
+        'platforms': platforms,
+        'counterPlatforms': counterPlatforms,
         'total': total,
         'isSearchPage': True})
 

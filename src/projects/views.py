@@ -20,7 +20,7 @@ from PIL import Image
 from itertools import chain
 from reviews.models import Review
 from django_countries import countries
-from .forms import ProjectForm, ProjectPermissionForm, ProjectTranslationForm
+from .forms import ProjectForm, ProjectPermissionForm, ProjectTranslationForm, ProjectGeographicLocationForm
 from .models import Project, Topic, ParticipationTask, Status, Keyword, ApprovedProjects, \
  FollowedProjects, FundingBody, CustomField, ProjectPermission, GeographicExtend, UnApprovedProjects
 from organisations.models import Organisation
@@ -289,7 +289,7 @@ def project(request, pk):
     project = get_object_or_404(Project, id=pk)
     users = getOtherUsers(project.creator)
     if project.projectGeographicLocation:
-        form = ProjectForm(initial={'projectGeographicLocation': project.projectGeographicLocation})
+        form = ProjectGeographicLocationForm(initial={'projectGeographicLocation': project.projectGeographicLocation})
     else:
         form = None
     previous_page = request.META.get('HTTP_REFERER')
@@ -331,7 +331,6 @@ def deleteProject(request, pk):
         for r in reviews:
             r.delete()
     return redirect('projects')
-
 
 
 def setImages(request, form):
@@ -562,12 +561,16 @@ def setProjectFeatured(id, featured):
 
 
 def setFollowedProject(request):
-    response = {}
     projectId = request.POST.get("project_id")
     userId = request.POST.get("user_id")
     follow = request.POST.get("follow")
-    followProject(projectId, userId, follow)
-    return JsonResponse(response, safe=False)
+    result = followProject(projectId, userId, follow)
+    if result == 'unfollowed':
+        return JsonResponse({'id': projectId, 'followed': False})
+    elif result.project.id == int(projectId):
+        return JsonResponse({'id': projectId, 'followed': True})
+    else:
+        return JsonResponse({})
 
 
 def followProject(projectId, userId, follow):
@@ -578,18 +581,23 @@ def followProject(projectId, userId, follow):
         # Insert
         followedProject = FollowedProjects.objects.get_or_create(project=fProject, user=fUser)
         # sendEmail
-        subject = 'Your project has been followed'            
-        message = render_to_string('emails/followed_project.html', {"domain": settings.HOST, "name": fProject.name , "id": projectId})
+        subject = 'Your project has been followed'
+        message = render_to_string('emails/followed_project.html', {
+            "domain": settings.HOST,
+            "name": fProject.name,
+            "id": projectId})
         to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
         to.append(fProject.creator.email)
         email = EmailMessage(subject, message, to=to)
         email.content_subtype = "html"
         email.send()
+        return followedProject[0]
     else:
         # Delete
         try:
             obj = FollowedProjects.objects.get(project_id=projectId, user_id=userId)
             obj.delete()
+            return 'unfollowed'
         except FollowedProjects.DoesNotExist:
             print("Does not exist this followed project")
 

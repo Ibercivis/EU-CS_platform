@@ -193,7 +193,7 @@ class FollowedProjects(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.project} - {self.user.name}'
+        return f'{self.project.id}'
 
 
 class ProjectPermission(models.Model):

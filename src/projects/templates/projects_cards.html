@@ -5,35 +5,35 @@
 {% for project in projects %}
 <div class="col-lg-3 col-sm-6 col-12 mb-5">
     <div class="card h-100 shadow border-0">
-        <img class="card-img" src="{% thumbnail project.image1|default:'void_600.png' 600x400 crop %}" />
+        <a href="/project/{{project.id}}">
+            <img class="card-img" src="{% thumbnail project.image1|default:'void_600.png' 306x204 crop %}" />
+        </a>
         <div class="card-body">
-            <h5 class="card-title">{{project.name | truncatewords:12 }}</h5>
+            <h4 class="mt-2 mb-0">
+                <a href="/project/{{project.id}}" class="card-title">{{project.name | truncatewords:10 }}</a>
+            </h4>
+            <div class="small text-muted mb-2">{{ project.dateCreated}}</div>
             <!-- TODO: improve this loop -->
+            <a href="#" class="badge rounded-pill bg-dark">{{ project.mainOrganisation.country.name }}</a>
             {% for topic in project.topic.all %}
             {% if forloop.counter < 3 %}
-            <a class="badge rounded-pill bg-dark text-decoration-none" 
+            <a class="badge rounded-pill bg-my-darkBlue text-decoration-none" 
                href="/projects?keywords=&topic={{topic|urlencode}}">{{topic}}</a>
-            {% else %}
-            {% if forloop.counter == 3 %}
-            <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="left" title="Tooltip on leftia">
-            {% endif %}
-            {% if forlopp.counter >= 3 %}
-               <a class="badge rounded-pill bg-dark text-decoration-none"
-               href="/projects?keywords=&topic={{topic|urlencode}}">{{topic}}</a>
-            {% endif %}
+            {% elif forloop.counter < 4 %}
+            ...
             {% endif %}
             {% endfor %}
             </button>
             {% for keyword in project.keywords.all %} 
             {% if forloop.counter < 3 %}
-            <a class="badge rounded-pill bg-primary text-decoration-none"
+            <a class="badge rounded-pill bg-my-darkGreen text-decoration-none"
                href="/projects?keywords={{keyword|urlencode}}">{{keyword}}
             </a>
             {% elif forloop.counter < 4 %}
             ...
             {% endif %}
             {% endfor %}
-            <p class="mt-4">{{ project.description | safe| truncatewords_html:30 }}</p>
+            <p class="mt-3 gray7">{{ project.description | safe| truncatewords_html:30 }}</p>
         </div><!-- End of card-body -->
     </div><!-- end of card -->
 </div><!-- end of col -->

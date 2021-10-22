@@ -1,0 +1,23 @@
+{% load i18n %}
+{% load staticfiles %}
+{% load thumbnail %}
+{% for platform in platforms %}
+<div class="col-lg-3 col-sm-6 col-xs-12 mb-5">
+    <div class="card h-100 shadow border-0">
+        <a href="/platform/{{platform.id}}">
+            <img class="card-img-top" src="{% thumbnail platform.logo|default:'void_600.png' 306x204 crop %}">
+        </a>
+        <div class="card-body">
+            <h4 class="mt-2 mb-0">
+                <a href="/platform/{{platform.id }}" class="card-title">{{ platform.name }}</a>
+            </h4>
+            <div class="small text-muted mb-2">{{platform.dateCreated}}</div>
+                {% for country in platform.countries %}
+                <a class="badge rounded-pill bg-dark text-decoration-none">{{country.name}}</a>
+                {% endfor %}
+                <a class="badge rounded-pill bg-my-darkBlue text-decoration-none">{{platform.geographicExtend | title}}</a>
+                <p class="mt-4">{{platform.description | safe | truncatechars:180 }}
+        </div><!-- End of card-body -->
+    </div><!-- end of card -->
+</div>
+{% endfor %}

@@ -15,6 +15,14 @@ from organisations.models import Organisation
 geolocator = Nominatim(timeout=None)
 
 
+class ProjectGeographicLocationForm(forms.Form):
+
+    projectGeographicLocation = forms.MultiPolygonField(
+            required=False,
+            widget=forms.OSMWidget(attrs={}),
+            label=_(""))
+
+
 class ProjectForm(forms.Form):
 
     # Main information

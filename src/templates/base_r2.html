@@ -107,9 +107,9 @@
                     </ul>
 
                     {% if not user.is_authenticated %}
-                    <a class="btn btn-outline-primary d-lg-inline-block my-2 my-md-0 ms-md-3" 
+                    <a class="btn btn-my-outline-darkBlue d-lg-inline-block my-1 my-md-0 ms-md-2" 
                        href="{% url 'accounts:login' %}">{% trans "Login" %}</a>
-                    <a class="btn btn-outline-danger d-lg-inline-block my-2 my-md-0 ms-md-3" 
+                    <a class="btn btn-my-outline-darkGreen d-lg-inline-block my-1 my-md-0 ms-md-2" 
                        href="{% url 'accounts:signup' %}">{% trans "Signup" %}</a>
                     {% else %}
                     <ul class="navbar-nav ml-auto">
@@ -137,11 +137,11 @@
 
                         </li>
                     </ul>
-                        <button data-toggle="modal" 
-                                data-target="#modalinfo"
-                                class="btn btn-outline-primary"
+                        <button data-bs-toggle="modal" 
+                                data-bs-target="#modalsubmit"
+                                class="btn btn-my-outline-darkBlue"
                                 type="submit">
-                            <i class="fas fa-plus-circle"></i>&nbsp;&nbsp;{% trans "New submission" %}
+                            <i class="fas fa-paper-plane"></i>&nbsp;&nbsp;{% trans "New submission" %}
                         </button>
 
                         {% endif %}
@@ -151,7 +151,7 @@
         <!--/.Navbar-->
 
         <main class="flex-fill">
-            {% include "modalinfo.html" %}
+            {% include "_modalsubmit.html" %}
             {% block splash %}
             {% endblock splash %}
             <div class="container">

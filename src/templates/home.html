@@ -15,7 +15,7 @@
     <div class="container" >
         <div class="row">
             <div class="col-12 col-md-6">
-                <h1 class="mt-5">eu-citizen.science</h1>
+                <h1 class="mt-5">eu-citizen.<span class="darkGreen-color">science</span></h1>
                 <h3 class="fw-light mb-5">
                     {% trans "Welcome to the platform for sharing citizen science projects, resources, tools, training and much more" %}
                 </h3>
@@ -43,7 +43,9 @@
                 </div>
                 <div class="col-md-6 col-12 mt-5 pb-5">
                     {% if user.is_authenticated %}
-                    <h3 class="mb-5 mt-5">Go to your <div class="blue-color">personal area</div> and see your stats</h3>
+                    <h3 class="mb-5 mt-5">Go to your 
+                        <a class="lightBlue-color" href="/users/me">personal area</a><br/>
+                        and see your stats</h3>
                     {% else %}
                     <h3 class="mb-5 mt-5"><div class="blue-color">Join the community</div> and participate</h3>
                     {% endif %}
@@ -60,7 +62,11 @@
     {% include '_what_can_you_find_here.html' %}
     {% include '_what_is_citizen_science.html' %}
 {% else %}
-    {% include '_last_projects.html' %}
+    {% include '_latest_projects.html' %}
+    {% include '_latest_resources.html' %}
+    {% include '_latest_training_resources.html' %}
+    {% include '_latest_organisations.html' %}
+    {% include '_latest_platforms.html' %}
 {% endif %}
 {% endblock list_of_items %}
 {% block scripts %}

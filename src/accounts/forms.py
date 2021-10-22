@@ -33,7 +33,7 @@ class LoginForm(AuthenticationForm):
                     reverse("accounts:password-reset")
                 )
             ),
-            StrictButton(_("Log in"), css_class="btn btn-primary", type="Submit")
+            StrictButton(_("Log in"), css_class="btn btn-my-darkBlue", type="Submit")
 
         )
 
@@ -94,7 +94,7 @@ class SignupForm(authtoolsforms.UserCreationForm):
             Field("password2", placeholder=_("Re-enter Password")),
             HTML('<div class="m-4"></div>'),
             Field("captcha"),
-            StrictButton(_("Sign up"), css_class="btn btn-primary mt-5", type="Submit"),
+            StrictButton(_("Sign up"), css_class="btn btn-my-darkBlue mt-5", type="Submit"),
         )
 
 

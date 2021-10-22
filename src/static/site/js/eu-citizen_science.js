@@ -26,8 +26,6 @@ $(function() {
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl)
     })
-
-    /* Autocomplete search initiation */
 })
 
 function attatchDeletePlatform(){
@@ -51,5 +49,4 @@ function attatchDeletePlatform(){
             }
         })
     })
-
 }

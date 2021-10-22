@@ -18,31 +18,14 @@
 {% include "finder_projects.html" %}
 {% endblock page_header %}
 {% block list_of_items %}
+
 {% include "modal_projects.html" %}
 <div class="container">
-	{% for message in messages %}
-	<div class="container-fluid p-0">
-		<div class="alert {{ message.tags }} alert-dismissible" role="alert" >
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-		</button>
-		{{ message }}
-		</div>
-	</div>
-	{% endfor %}
-	<div class="row">
-		{% include "projects_cards.html" %}
-	</div>
-	<div class="col-12">
-	{% if counter == 0  %}
-	<img  class="img-fluid img-zoom col-12 mt-5" src="{% static 'site/img/undraw_empty_xct9.svg' %}">
-	<h5 class="mb-4">{% trans "Sorry, nothing found" %}</h5>
-	{% else %}
-	&nbsp;
-	{% endif %}
-	</div>
+    <div class="row">
+        {% include "projects_cards.html" %}
+    </div>
 </div>
-{% endblock list_of_items %}
+    {% endblock list_of_items %}
 
 {% block scripts %}
  <script>
@@ -90,6 +73,5 @@
 			$('#searchProjects').submit();
 		});
 	});
-
-</script>
+ </script>
 {% endblock scripts %}
