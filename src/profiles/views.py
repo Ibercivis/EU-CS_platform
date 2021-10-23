@@ -9,7 +9,7 @@ from itertools import chain
 from . import forms
 from . import models
 from projects.models import Project, FollowedProjects, ProjectPermission, ApprovedProjects, UnApprovedProjects
-from resources.models import Resource, SavedResources, ResourcePermission, ApprovedResources, UnApprovedResources
+from resources.models import Resource, BookmarkedResources, ResourcePermission, ApprovedResources, UnApprovedResources
 from organisations.models import Organisation, OrganisationPermission
 from events.models import Event
 from django.db.models.functions import Concat
@@ -138,9 +138,10 @@ class Bookmarks(LoginRequiredMixin, generic.TemplateView):
         kwargs["show_user"] = user
         followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id', flat=True)
         projects = Project.objects.filter(id__in=followedProjects)
-        followedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id', flat=True)
-        resources = Resource.objects.filter(id__in=followedResources).filter(isTrainingResource=False)
-        training = Resource.objects.filter(id__in=followedResources).filter(isTrainingResource=True)
+        bookmarkedResources = BookmarkedResources.objects.all().filter(
+                user_id=user.id).values_list('resource_id', flat=True)
+        resources = Resource.objects.filter(id__in=bookmarkedResources).filter(isTrainingResource=False)
+        training = Resource.objects.filter(id__in=bookmarkedResources).filter(isTrainingResource=True)
         if user == self.request.user:
             kwargs["editable"] = True
         kwargs["projects_followed"] = projects

@@ -310,11 +310,11 @@ def project(request, pk):
     if (project.id in unApprovedProjects or project.hidden) and (user.is_anonymous or (user != project.creator and not user.is_staff and not user.id in getCooperators(pk))):
         return redirect('../projects', {})
     permissionForm = ProjectPermissionForm(initial={'usersCollection': users, 'selectedUsers': cooperators})
-    followedProjects = FollowedProjects.objects.all().filter(user_id=user.id).values_list('project_id', flat=True)
+    followedProject = FollowedProjects.objects.all().filter(user_id=user.id, project_id=pk).exists()
     approvedProjects = ApprovedProjects.objects.all().values_list('project_id', flat=True)
     return render(request, 'project.html', {
         'project': project,
-        'followedProjects': followedProjects,
+        'followedProject': followedProject,
         'approvedProjects': approvedProjects,
         'unApprovedProjects': unApprovedProjects,
         'permissionForm': permissionForm,
@@ -553,6 +553,7 @@ def setFeatured(request):
     return JsonResponse(response, safe=False)
 
 
+@staff_member_required()
 def setProjectFeatured(id, featured):
     project = get_object_or_404(Project, id=id)
     project.featured = featured
@@ -561,14 +562,13 @@ def setProjectFeatured(id, featured):
 
 
 def setFollowedProject(request):
-    projectId = request.POST.get("project_id")
-    userId = request.POST.get("user_id")
-    follow = request.POST.get("follow")
-    result = followProject(projectId, userId, follow)
+    projectId = request.POST.get("projectId")
+    bookmark = request.POST.get("bookmark")
+    result = followProject(projectId, request.user.id, bookmark)
     if result == 'unfollowed':
-        return JsonResponse({'id': projectId, 'followed': False})
+        return JsonResponse({'id': projectId, 'bookmark': False})
     elif result.project.id == int(projectId):
-        return JsonResponse({'id': projectId, 'followed': True})
+        return JsonResponse({'id': projectId, 'bookmark': True})
     else:
         return JsonResponse({})
 
@@ -609,7 +609,7 @@ def allowUser(request):
     project = get_object_or_404(Project, id=projectId)
 
     if request.user != project.creator and not request.user.is_staff:
-        #TODO return JsonResponse with error code
+        # TODO return JsonResponse with error code
         return redirect('../projects', {})
 
     # Delete all

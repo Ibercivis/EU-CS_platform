@@ -14,32 +14,14 @@
 
 {% block list_of_items %}
 <!-- Delete modal -->
-<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">{% trans "Confirm delete" %}</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>{% trans "You are going to delete this organisation, this procedure is irreversible." %}</p>
-                <p>{% trans "Do you want to proceed?" %}</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
-                <a class="btn btn-red btn-delete"><i class="fas fa-trash-alt"></i> {% trans "Delete" %}</a>
-            </div>
-        </div>
-    </div>
-</div>
-
+{% include '_delete_modal.html' %}'
 <div class="container">
-    <div class="row mt-5">
+    <div class="row mt-3">
         <div class="col-12">
-            <h1 class="display-4">{{organisation.name}}</h1>
+            <h1 class="wood-color">{{organisation.name}}</h1>
         </div>
         <div class="col-xl-8 col-md-6 col-12">
-            <p class="mt-3">{{ organisation.description | safe}}</p>
+            <p class="mt-3 gray7-color">{{ organisation.description | safe}}</p>
 
             {% if associatedProjects.all %}
             <h4 class="mt-4 leftborder">{% trans "Projects" %}</h4>
@@ -63,8 +45,16 @@
             </div>
             {% endif %}
 
-            <!-- TODO: include training -->
-            <!-- TODO: include events -->
+            {% if associatedTrainingResources.all %}
+            <h4 class="mt-4 leftborder">{% trans "Training resources" %}</h4>
+            <div class="row">
+                {% for trainingResource in associatedTrainingResources.all %}
+                <div class="col-12 col-md-6">
+                    {% include "horizontal_card_resource.html" with resource=trainingResource %}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
 
             {% if members.all %}
             <h4 class="mt-4 leftborder">{% trans "Members" %}</h4>
@@ -76,9 +66,10 @@
                 {% endfor %}
             </div>
             {% endif %}
+
             <a target="_blank"
                href="{% if 'http' not in organisation.url %}//{%endif%}{{organisation.url}}"
-               class="btn btn-success mt-4 mr-2 mb-5">
+               class="btn btn-my-darkGreen mt-4 mr-2 mb-5">
                <i class="fas fa-external-link-square-alt"></i> {% trans "Go to Organisation" %}
             </a>
 
@@ -99,13 +90,12 @@
             {% endif %}
         </div>
         <div class="col-xl-4 col-md-6 col-12">
-            {% if organisation.logo %}
+
             {% if organisation.orgType %}
-            <div class="mt-3">{% trans "Organisation type" %}
-                <p><a class="badge badge-light" href="#">{{organisation.orgType}}</a></p>
-            </div>
+            <p><a class="badge bg-dark" href="/organisations?type={{organisation.orgType}}">{{organisation.orgType}} organisation</a></p>
             {% endif %}
 
+            {% if organisation.logo %}
             <img title="{{ organisation.name }} logo"
                  target="_blank"
                  class="img-fluid border mb-3"

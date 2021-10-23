@@ -4,6 +4,7 @@
 {% load crispy_forms_tags %}
 {% load leaflet_tags %}
 {% load reviews %}
+{% load my_tags %}
 {% block head %}
 {{block.super }}
 {{ form.media.css }}
@@ -28,7 +29,18 @@
             <h1 class="wood-color">{{project.name}}</h1>
         </div>
         <div class="col-xl-8 col-md-6 col-12">
+
+            {% for translation in project.translatedProject.all %}
+            {% if LANGUAGE_CODE == translation.inLanguage %}
+            {{translation.translatedDescription | safe }}
+            {% endif %}
+            {% endfor %}
+            {% if not translated %}
+            {% current_time project.dateCreated %}
             <p class="mt-3 gray7-color">{{project.description | safe}}</p>
+            {% endif %}
+
+
             <h4 class="mt-4 leftborder">{% trans "Aim" %}</h4>
             <p class="gray7-color">{{project.aim | safe}}</p>
 
@@ -129,33 +141,33 @@
             {% endif %}
         </div>
             <div class="row">
-                <div class="col-12 mt-4" id="followed{{project.id}}">
-                    {% if project.creator == user or user.is_staff or user.id in cooperators %}
-                    <a class="btn btn-danger" href="{% url 'editProject' project.id %}">
-                        <i class="fas fa-edit"></i> Edit 
-                    </a>
-                    {% endif %}
-
+                <div class="col-12 mt-4">
+                 
                     <a target="_blank" 
                        href="{% if 'http' not in project.url %}//{%endif%}{{project.url}}"
                        class="btn btn-my-darkBlue">
                         <i class="fas fa-external-link-square-alt"></i> {% trans "Go to Project" %}
                     </a>
+
+                    {% if project.creator == user or user.is_staff or user.id in cooperators %}
+                    <a class="btn btn-warning" href="{% url 'editProject' project.id %}">
+                        <i class="fas fa-edit"></i> Edit 
+                    </a>
+                    {% endif %}
+
                     {% if user.is_authenticated %}
-                    <!--a class="btn btn-secondary" href="/project_review/{{project.id}}">
-                        <i class="fas fa-comments"></i> {% trans "Comment" %}
-                    </a-->
-                    <button class="btn 
-                        {% if project.id in followedProjects %}
-                                    btn-my-darkBlue
+                    <button 
+                        {% if followedProject %}
+                            class="btn btn-my-darkBlue"
                                     {% else %}
-                                    btn-my-outline-darkBlue
+                            class="btn btn-my-outline-darkBlue"
                                     {% endif %}
-                                    " 
-                            onclick="setFollowedProject({{project.id}},{{user.id}})">
-                        <i class="fas fa-project-diagram"></i> Following
+                            id="buttonBookmarkProject" bookmarked="{{followedProject}}">
+                        <i class="far fa-bookmark"></i> Bookmark
                     </button>
                     {% endif %}
+
+
                 </div>
                 {% if user.is_staff %}
                 <div class="col-12 mt-4">
@@ -217,140 +229,140 @@
             console.log(geodjango_projectGeographicLocation)
         }
         let params = new URLSearchParams(window.location.search.slice(1));
-    if( params.has('prev') === true){
-        if(params.get('prev').indexOf('editProject')>0){
-            $('#message').html('<div class="alert alert-success alert-dismissible fade show" role="alert">'+
-                                'The project has been successfully edited'+
-                                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'+
-                                '<span aria-hidden="true">&times;</span> </button></div>')
-        }
-        else if(params.get('prev').indexOf('newProject')>0){
-            $('#message').html('<div class="alert alert-success alert-dismissible fade show" role="alert">'+
-                                'The project has been successfully added, we will moderate it shortly'+
-                                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'+
-                                '<span aria-hidden="true">&times;</span> </button></div>')
-        }
-
-    }
-    $('.clear_features').html('');
-    var users = $("#id_usersCollection").val();
-    if(users){
-      var users = users.split(",");
-      var selectedUsers = $("#id_selectedUsers").val().split(",");
-      var i = 0
-      var name = ''
-      var email = ''
-      for (user of users){			
-        if (i % 2 == 0){			
-          var init = user.indexOf('\'')
-          var end = user.indexOf('\'', init+1)
-          name = user.substring(init+1,end)
-        }else{
-          var init = user.indexOf('\'')
-          var end = user.indexOf('\'', init+1)
-          email = user.substring(init+1,end)
-          var found = false;
-          for(sel of selectedUsers){
-            if(sel.trim() == email.trim()){
-            found = true;
-            $("#id_usersAllowed").append("<option value='" + email +"' selected> " + name + " </option>");
+        if( params.has('prev') === true){
+            if(params.get('prev').indexOf('editProject')>0){
+                $('#message').html('<div class="alert alert-success alert-dismissible fade show" role="alert">'+
+                    'The project has been successfully edited'+
+                    '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'+
+                    '<span aria-hidden="true">&times;</span> </button></div>')
             }
-          }
-          if(!found){
-            $("#id_usersAllowed").append("<option value='" + email +"'> " + name + " </option>");
-          }
-        }
-        i++
-      }
-    }
-    
-
-    $('#id_usersAllowed').on('change', function () {
-      users = $("#id_usersAllowed option:selected").map(function () {
-        return $.trim($(this).val());
-      }).get().join(',');
-
-      var idProject = {{project.id}};
-      var request = $.ajax(
-      {
-        type: "POST",
-        url: "{% url 'allowUser' %}",
-        data: {
-          "project_id": idProject,
-          "users": users,
-          csrfmiddlewaretoken: '{{ csrf_token }}'
-        },
-        success: function (response) {
+            else if(params.get('prev').indexOf('newProject')>0){
+                $('#message').html('<div class="alert alert-success alert-dismissible fade show" role="alert">'+
+                    'The project has been successfully added, we will moderate it shortly'+
+                    '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'+
+                    '<span aria-hidden="true">&times;</span> </button></div>')
+            }
 
         }
-      }
-      );
+
+        $('.clear_features').html('');
+        var users = $("#id_usersCollection").val();
+        if(users){
+            var users = users.split(",");
+            var selectedUsers = $("#id_selectedUsers").val().split(",");
+            var i = 0
+            var name = ''
+            var email = ''
+            for (user of users){			
+                if (i % 2 == 0){			
+                    var init = user.indexOf('\'')
+                    var end = user.indexOf('\'', init+1)
+                    name = user.substring(init+1,end)
+                }else{
+                    var init = user.indexOf('\'')
+                    var end = user.indexOf('\'', init+1)
+                    email = user.substring(init+1,end)
+                    var found = false;
+                    for(sel of selectedUsers){
+                        if(sel.trim() == email.trim()){
+                            found = true;
+                            $("#id_usersAllowed").append("<option value='" + email +"' selected> " + name + " </option>");
+                        }
+                    }
+                    if(!found){
+                        $("#id_usersAllowed").append("<option value='" + email +"'> " + name + " </option>");
+                    }
+                }
+                i++
+            }
+        }
+
+        $("#buttonBookmarkProject").on("click", function(){
+            console.log('click')
+            var bookmark = ($('#buttonBookmarkProject').attr('bookmarked')=="False" ? "true" : "false")
+            console.log(bookmark)
+            $.ajax({
+                type: 'POST',
+                url: "/setFollowedProject/",
+                data: {
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    bookmark: bookmark,
+                    projectId: '{{project.id}}'
+                },
+                success: function(response){
+                    if(response.bookmark)
+                        $('#buttonBookmarkProject').attr('bookmarked','True')
+                    else
+                        $('#buttonBookmarkProject').attr('bookmarked','False')
+                    $('#buttonBookmarkProject').toggleClass('btn-my-darkBlue')
+                    $('#buttonBookmarkProject').toggleClass('btn-my-outline-darkBlue')
+                },
+                error: function(response){
+                }
+            })
+        })
+
+
+        $('#id_usersAllowed').on('change', function () {
+            users = $("#id_usersAllowed option:selected").map(function () {
+                return $.trim($(this).val());
+            }).get().join(',');
+
+            var idProject = {{project.id}};
+            var request = $.ajax(
+                {
+                    type: "POST",
+                    url: "{% url 'allowUser' %}",
+                    data: {
+                        "project_id": idProject,
+                        "users": users,
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
+                    success: function (response) {
+
+                    }
+                }
+            );
+        });
     });
-  });
 
-  function setFeatured(idProject, featured){
+function setFeatured(idProject, featured){
     var htmlId = "featured" + idProject;
     var request = $.ajax(
-    {
-      type: "POST",
-      url: "{% url 'setFeatured' %}",
-      data: {
-        "project_id": idProject,
-        "featured": featured,
-        csrfmiddlewaretoken: '{{ csrf_token }}'
-      },
-      success: function (response) {
-        window.location.reload(false);
-      }
-    }
-    );
-  }
-
-  function setApproved(idProject, approved){
-    var request = $.ajax(
-    {
-      type: "POST",
-      url: "{% url 'setApproved' %}",
-      data: {
-        "project_id": idProject,
-        "approved": approved,
-        csrfmiddlewaretoken: '{{ csrf_token }}'
-      },
-      success: function (response) {
-        window.location.reload(false)
-        if(!approved){
-          window.location.href ="{% url 'submitter_contact' 'project' project.id %}"
+        {
+            type: "POST",
+            url: "{% url 'setFeatured' %}",
+            data: {
+                "project_id": idProject,
+                "featured": featured,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            success: function (response) {
+                window.location.reload(false);
+            }
         }
-      }
-    }
     );
-  }
+}
 
-  function setFollowedProject(idProject, idUser){
-      var follow=false
-      if($(this).hasClass("btn-my-darkBlue"))
-          follow=true
-      console.log(follow)
-    $.ajax(
-    {
-      type: "POST",
-      url: "{% url 'setFollowedProject' %}",
-      data: {
-        "project_id": idProject,
-        "user_id": idUser,
-        "follow": follow,
-        csrfmiddlewaretoken: '{{ csrf_token }}'
-      },
-      success: function (response) {
-          console.log(response)
-          console.log(response.followed)
-          if(response.followed)
-              $('#followId').removeClass('btn-my-outline-darkBlue').addClass('btn-my-darkBlue');
-          else
-              $('#followId').addClass('btn-my-outline-darkBlue').removeClass('btn-my-darkBlue');
-      }
-    });
-  }
+function setApproved(idProject, approved){
+    var request = $.ajax(
+        {
+            type: "POST",
+            url: "{% url 'setApproved' %}",
+            data: {
+                "project_id": idProject,
+                "approved": approved,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            success: function (response) {
+                window.location.reload(false)
+                if(!approved){
+                    window.location.href ="{% url 'submitter_contact' 'project' project.id %}"
+                }
+            }
+        }
+    );
+}
 </script>
 {{ permissionForm.media.js }}
 {% endblock scripts %}

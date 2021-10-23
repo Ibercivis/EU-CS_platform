@@ -143,6 +143,8 @@ class UnApprovedResources(models.Model):
     def __str__(self):
         return f'{self.resource}'
 
+# TODO: Important! copy SavedResources table to Bookmarked resources
+
 
 class BookmarkedResources(models.Model):
     resource = models.ForeignKey(Resource, on_delete=models.CASCADE)

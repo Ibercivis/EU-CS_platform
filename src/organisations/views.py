@@ -76,7 +76,8 @@ def organisation(request, pk):
     mainProjects = Project.objects.all().filter(mainOrganisation__id=pk)
     associatedProjects = Project.objects.all().filter(organisation__id=pk)
     associatedProjects |= mainProjects
-    associatedResources = Resource.objects.all().filter(organisation__id=pk)
+    associatedResources = Resource.objects.all().filter(organisation__id=pk).filter(isTrainingResource=False)
+    associatedTrainingResources = Resource.objects.all().filter(organisation__id=pk).filter(isTrainingResource=True)
     members = Profile.objects.all().filter(organisation__id=pk)
     users = getOtherUsers(organisation.creator, members)
     cooperators = getCooperatorsEmail(pk)
@@ -88,6 +89,7 @@ def organisation(request, pk):
         'associatedProjects': associatedProjects,
         'cooperators': cooperatorsPK,
         'associatedResources': associatedResources,
+        'associatedTrainingResources': associatedTrainingResources,
         'members': members,
         'permissionForm': permissionForm,
         'editable': editable,

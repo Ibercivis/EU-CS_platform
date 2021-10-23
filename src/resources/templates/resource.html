@@ -71,30 +71,40 @@
 
             <!-- Buttons -->
             <div class="row">
-                <div class="col-12 mt-5">
-                    {% if resource.creator == user or user.is_staff or user.id in cooperators %}
-                    <a class="btn btn-warning" href="{% if isTrainingResource %}
-                                                      {% url 'editTrainingResource' resource.id %}{% else %}{% url 'editResource' resource.id %}{% endif %}"><i class="fas fa-edit"></i> {% trans "Edit" %}</a>
-                    {% endif %}
-
-                    <a target="_blank" class="btn btn-success" href="{% if 'http' not in resource.url %}//{%endif%}{{resource.url}}"
-                                                               class="colorblue"><i class="fas fa-external-link-square-alt"></i>
-                                                               {% if isTrainingResource %}
-                                                               {% trans "Go to Training" %}
-                                                               {% else %}
-                                                               {% trans "Go to Resource" %}
-                                                               {% endif %}
+                <div class="col-12 mt-4">
+                    <a target="_blank" 
+                       class="btn btn-my-darkBlue" 
+                       href="{% if 'http' not in resource.url %}//{%endif%}{{resource.url}}"
+                                                                   class="colorblue"><i class="fas fa-external-link-square-alt"></i>
+                                                                   {% if isTrainingResource %}
+                                                                   {% trans "Go to Training" %}
+                                                                   {% else %}
+                                                                   {% trans "Go to Resource" %}
+                                                                   {% endif %}
                     </a>
 
+                    {% if resource.creator == user or user.is_staff or user.id in cooperators %}
+                    <a class="btn btn-warning" 
+                      href="{% if isTrainingResource %}
+                            {% url 'editTrainingResource' resource.id %}
+                            {% else %}
+                            {% url 'editResource' resource.id %}{% endif %}">
+                        <i class="fas fa-edit"></i> {% trans "Edit" %}
+                    </a>
+                    {% endif %}
+               
                     {% if user.is_authenticated %}
-                    <a href="#" class="btn btn-secondary">{% trans "Comment" %}</a>
-                    <div class="custom-control custom-switch mt-3">
-                        <input type="checkbox"
-                               class="custom-control-input myradio"
-                               id="bookmarkResource"
-                               {% if bookmarkedResource %}checked{% endif %}>
-                        <label class="custom-control-label" for="bookmarkResource">Bookmark</label>
-                    </div>
+                    <button 
+                        {% if bookmarkedResource %}
+                        class="btn btn-my-darkBlue"
+                        {% else %}
+                        class="btn btn-my-outline-darkBlue"
+                        {% endif %}
+                        id="buttonBookmarkResource" bookmarked="{{bookmarkedResource}}">
+                        <i class="far fa-bookmark"></i> Bookmark
+                    </button>
+
+                    <!--a href="#" class="btn btn-secondary">{% trans "Comment" %}</a-->
                     {% endif %}
                 </div>
             </div>
@@ -212,24 +222,29 @@
             }
         }
 
-        $("#bookmarkResource").change(function(){
-            console.log('changed bookmark')
+        $("#buttonBookmarkResource").on("click", function(){
+            var bookmark = ($('#buttonBookmarkResource').attr('bookmarked')=="False" ? "true" : "false")
             $.ajax({
                 type: 'POST',
                 url: '/bookmarkResource/',
                 data: {
                     csrfmiddlewaretoken: '{{ csrf_token }}',
-                    bookmark: $('#bookmarkResource').is(':checked'),
+                    bookmark: bookmark,
                     resourceId: '{{resource.id}}'
                 },
                 success: function(response){
-                    console.log(response)
+                    if(response.success == 'Bookmark deleted')
+                        $('#buttonBookmarkResource').attr('bookmarked','False')
+                    else if(response.created == 'OK')
+                        $('#buttonBookmarkResource').attr('bookmarked','True')
+                    $('#buttonBookmarkResource').toggleClass('btn-my-darkBlue')
+                    $('#buttonBookmarkResource').toggleClass('btn-my-outline-darkBlue')
                 },
                 error: function(response){
-                    console.log(response)
                 }
             })
         })
+
 
         $("#approve").change(function(){
             console.log('change approve')

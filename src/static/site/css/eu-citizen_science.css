@@ -2,13 +2,14 @@
     --wood: #494a42;
     --lightBlue: #6ccde7; 
     --darkGreen: #8dbc41;
+    --darkGreen2: #7dac31;
     --palid: #abb79b;
     --darkBlue: #24abe2;
+    --darkBlue2: #149bd2;
     --lightGreen: #d7e028;
     --gray3: #333;
     --gray7: #777;
     --white: #fff;
-    --darkBlue2: #149bd2;
     --black: #000;
 }
 h1, h3 {
@@ -70,6 +71,15 @@ a.card-title:hover{
 }
 .btn-my-darkBlue:hover{
     background-color: var(--darkBlue2);
+    color: var(--white);
+    transition: 0.3s;
+}
+.btn-my-darkGreen{
+    background-color: var(--darkGreen);
+    color: var(--white);
+}
+.btn-my-darkGreen:hover{
+    background-color: var(--darkGreen2);
     color: var(--white);
     transition: 0.3s;
 }
