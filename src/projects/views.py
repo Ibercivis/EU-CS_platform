@@ -292,6 +292,10 @@ def project(request, pk):
         form = ProjectGeographicLocationForm(initial={'projectGeographicLocation': project.projectGeographicLocation})
     else:
         form = None
+
+    # Check if there is a translation
+    hasTranslation = project.translatedProject.filter(inLanguage=request.LANGUAGE_CODE).exists()
+
     previous_page = request.META.get('HTTP_REFERER')
     if previous_page and 'review' in previous_page:
         # sendEmail
@@ -314,6 +318,7 @@ def project(request, pk):
     approvedProjects = ApprovedProjects.objects.all().values_list('project_id', flat=True)
     return render(request, 'project.html', {
         'project': project,
+        'hasTranslation': hasTranslation,
         'followedProject': followedProject,
         'approvedProjects': approvedProjects,
         'unApprovedProjects': unApprovedProjects,
