@@ -56,6 +56,9 @@ def resources(request, isTrainingResource=False):
                 Q(keywords__keyword__icontains=request.GET['keywords'])).distinct()
         filters['keywords'] = request.GET['keywords']
 
+    if request.GET.get('language'):
+        resources = resources.filter(Q(inLanguage=request.GET['language']))
+
     resources = applyFilters(request, resources)
     filters = setFilters(request, filters)
     resources = resources.distinct()

@@ -120,7 +120,7 @@ def submitProjectTranslation(request):
     form = ProjectTranslationForm(request.POST)
     if form.is_valid():
         form.save(request)
-        return JsonResponse({'UpdatedTranslation': 'OK', 'Project': 'a'}, status=status.HTTP_200_OK)
+        return JsonResponse({'UpdatedTranslation': 'OK', 'Project': request.POST['projectId']}, status=status.HTTP_200_OK)
     else:
         return JsonResponse(form.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
 
@@ -295,7 +295,6 @@ def project(request, pk):
 
     # Check if there is a translation
     hasTranslation = project.translatedProject.filter(inLanguage=request.LANGUAGE_CODE).exists()
-
     previous_page = request.META.get('HTTP_REFERER')
     if previous_page and 'review' in previous_page:
         # sendEmail

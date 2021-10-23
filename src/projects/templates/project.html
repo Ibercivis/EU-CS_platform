@@ -33,24 +33,34 @@
             {% if hasTranslation %}
             {% for translation in project.translatedProject.all %}
             {% if translation.inLanguage == LANGUAGE_CODE %}
+            {% if translation.needsUpdate %}
+                <small>
+                {% trans "This translation was done before a project profile update." %}
+                {% trans "Plase help the community by improving it" %} 
+                <a href='/translateProject/{{project.id}}'>{% trans "here" %}</a> 
+                </small>
+            {% endif %}
             <p class="mt-3 gray7-color">{{translation.translatedDescription | safe}}</p>
-
             <h4 class="mt-4 leftborder">{% trans "Aim" %}</h4>
-            <p class="gray7-color">{{translation.aim | safe}}</p>
+            <p class="gray7-color">{{translation.translatedAim | safe}}</p>
 
             {% if project.howToParticipate %}
             <h4 class="mt-4 leftborder">{% trans "How to participate" %} </h4>
-            <p class="gray7-color">{{project.howToParticipate | safe}}</p>
+            <p class="gray7-color">{{translation.translatedHowToParticipate | safe}}</p>
             {% endif %}
 
             {% if project.equipment %}
             <h4 class="mt-4 leftborder">{% trans "Needed equipment" %}</h4>
-            <p class="gray7-color">{{project.equipment |safe}}</p>
+            <p class="gray7-color">{{project.translatedEquipment |safe}}</p>
             {% endif %}
             {% endif %}
             {% endfor %}
 
             {% else %}
+            {% if LANGUAGE_CODE != 'en' %}
+            <small>{% trans "This project profile is not available in your selected language," %}
+                plase help the community by translating it <a href='/translateProject/{{project.id}}'>here</a>.</small>
+            {% endif %}
             <p class="mt-3 gray7-color">{{project.description | safe}}</p>
             <h4 class="mt-4 leftborder">{% trans "Aim" %}</h4>
             <p class="gray7-color">{{project.aim | safe}}</p>
@@ -166,6 +176,10 @@
                         <i class="fas fa-edit"></i> Edit 
                     </a>
                     {% endif %}
+
+                    <a href="/translateProject/{{project.id}}" class="btn btn-my-darkBlue">
+                        <i class="fas fa-external-link-square-alt"></i> {% trans "Translate" %}
+                    </a>
 
                     {% if user.is_authenticated %}
                     <button 

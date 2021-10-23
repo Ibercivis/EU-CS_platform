@@ -396,6 +396,9 @@ class ProjectForm(forms.Form):
         project.mainOrganisation = mainOrganisation
         project.projectGeographicLocation = projectGeographicLocation
 
+        # If there are translations, need to improve them
+        project.translatedProject.all().update(needsUpdate=True)
+
 
 def getCountryCode(latitude, longitude):
     try:
@@ -423,7 +426,7 @@ class ProjectTranslationForm(forms.Form):
             help_text=_('Please provide an <i>aim</i> field translation.'),
             max_length=2000,
             label=_("Aim"),
-            required=False)
+            required=True)
 
     translatedHowToParticipate = forms.CharField(
             widget=CKEditorWidget(config_name='frontpage'),
@@ -450,15 +453,12 @@ class ProjectTranslationForm(forms.Form):
                 translatedAim=self.data.get('translatedAim'),
                 translatedHowToParticipate=self.data.get('translatedHowToParticipate'),
                 translatedEquipment=self.data.get('translatedEquipment'),
+                needsUpdate=False,
                 creator=args.user,
                 )
         t1.save()
         project.translatedProject.add(t1)
         project.save()
-
-        print(self.data.get('projectId'))
-        print(self.data.get('languageId'))
-        print(self.data.get('translatedDescription'))
 
 
 class CustomFieldForm(forms.Form):

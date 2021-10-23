@@ -85,13 +85,15 @@ class TranslatedProject(models.Model):
             settings.AUTH_USER_MODEL,
             on_delete=models.CASCADE)
     inLanguage = models.TextField(max_length=5)
+    dateCreated = models.DateTimeField('Created date', auto_now=True)
+    needsUpdate = models.BooleanField(default=False)
 
 
 class Project(models.Model):
     creator = models.ForeignKey(
             settings.AUTH_USER_MODEL,
             on_delete=models.CASCADE)
-    dateCreated = models.DateTimeField('Created date', auto_now=True)
+    dateCreated = models.DateTimeField('Created date', auto_now_add=True)
     dateUpdated = models.DateTimeField('Updated date', auto_now=True)
 
     # Main information
@@ -121,7 +123,7 @@ class Project(models.Model):
     equipment = models.CharField(max_length=2000, null=True, blank=True)
 
     # Project Location
-    geographicextend = models.ManyToManyField(GeographicExtend)
+    geographicextend = models.ManyToManyField(GeographicExtend, blank=True)
     projectlocality = models.CharField(max_length=300, null=True, blank=True)
     projectGeographicLocation = models.MultiPolygonField(blank=True, null=True)
 
