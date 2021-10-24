@@ -17,7 +17,7 @@
                 <div>
                     <img title="profile picture" class="img-fluid rounded-circle" src="{% thumbnail show_user.profile.picture|default:'default_profile.png' 280x280 crop %}">
                 </div>	
-                <h3 class="mt-3">
+                <h3 class="">
                     {% if show_user.profile.title %}
                     {{ show_user.profile.title}}
                     {% endif %}
@@ -70,7 +70,7 @@
                 {% endif %} 
             </div>
         </div>
-        <div class="col-9 mt-5">
+        <div class="col-9">
             {% block profile_right %}
             {% endblock profile_right %}
         </div>

@@ -121,7 +121,7 @@ class Submissions(generic.TemplateView):
         kwargs["show_user"] = user
         kwargs["projects_submitted"] = projectsSubmitted
         kwargs["resources_submitted"] = resourcesSubmitted
-        kwargs["training_submitted"] = trainingsSubmitted
+        kwargs["trainings_submitted"] = trainingsSubmitted
         kwargs["organisations_submitted"] = organisationsSubmitted
         kwargs["event_submitted"] = eventsSubmitted
         if user == self.request.user:

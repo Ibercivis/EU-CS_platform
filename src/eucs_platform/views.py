@@ -155,8 +155,14 @@ def moderation(request):
 def policy_brief(request):
     return render(request, 'policy_brief.html')
 
+
 def criteria(request):
     return render(request, 'criteria.html')
+
+
+def moderation_quality_criteria(request):
+    return render(request, 'moderation_quality_criteria.html')
+
 
 def translations(request):
     return render(request, 'translations.html')

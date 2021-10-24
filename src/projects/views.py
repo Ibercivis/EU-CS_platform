@@ -504,6 +504,9 @@ def setProjectApproved(id, approved):
     if approved is True:
         # Insert
         ApprovedProjects.objects.get_or_create(project=aProject)
+        aProject.approved = True
+        aProject.moderated = True
+        aProject.save()
         # sendEmail
         subject = 'Your project has been approved'
         message = render_to_string(
@@ -525,6 +528,10 @@ def setProjectApproved(id, approved):
     else:
         # Insert UnApprovedProjects
         UnApprovedProjects.objects.get_or_create(project=aProject)
+        aProject.approved = False
+        aProject.moderated = True
+        aProject.save()
+
         # Delete it from approved projects
         try:
             obj = ApprovedProjects.objects.get(project_id=id)

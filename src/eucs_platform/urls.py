@@ -47,6 +47,7 @@ urlpatterns = [
     path("subscribe/", views.subscribe, name="subscribe"),
     path("moderation/", views.moderation, name="moderation"),
     path("criteria/", views.criteria, name="criteria"),
+    path("moderation_quality_criteria", views.moderation_quality_criteria, name="moderation_quality_criteria"),
     path("translations/", views.translations, name="translations"),
     path("call/", views.call, name="call"),
     path("policy_maker_event_2021/", views.policy_maker_event_2021, name="policy_maker_event_2021"),

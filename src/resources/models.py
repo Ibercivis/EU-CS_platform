@@ -3,7 +3,6 @@ from django.conf import settings
 from authors.models import Author
 from organisations.models import Organisation
 from projects.models import Project
-from django.utils import timezone
 
 
 class Keyword(models.Model):
@@ -95,11 +94,13 @@ class Resource(models.Model):
     conditionsOfAccess = models.CharField(max_length=300, null=True, blank=True)
 
     # Time
+    # Legacy TODO: delete dateUploaded
     dateUploaded = models.DateTimeField('Date Uploaded')
-    dateLastModification = models.DateTimeField('Last modification', blank=True, default=timezone.now)
+    dateCreated = models.DateTimeField('Created date', auto_now_add=True)
+    dateUpdated = models.DateTimeField('Updated date', auto_now=True)
 
     # Moderation
-    reviewed = models.BooleanField(default=False)
+    moderated = models.BooleanField(default=False)
     approved = models.BooleanField(default=False)
 
     # Other

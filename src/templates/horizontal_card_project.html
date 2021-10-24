@@ -1,10 +1,19 @@
 {% extends "horizontal_card.html" %}
 {% load thumbnail %}
+{% load i18n %}
 {% block img %}
 <a href="/project/{{project.id}}">
     <img title="project picture" class="img-fluid p-1" src="{% thumbnail project.image1|default:'default_profile.png' 200x133 crop %}">
 </a>
 {% endblock img %}
 {% block title %}
-<a href="/project/{{project.id}}">{{ project.name }}</a>
+<a href="/project/{{project.id}}">{{ project.name | truncatechars:30}}</a>
+<div class="small text-muted">{{project.dateCreated}}</div>
+{% if not project.moderated %}
+<div class="small text-danger">{% trans "Not yet moderated" %}</div>
+{% else %}
+{% if not project.approved %}
+<div class="small text-danger">{% trans "Not approved" %}</div>
+{% endif %}
+{% endif %}
 {% endblock title %}

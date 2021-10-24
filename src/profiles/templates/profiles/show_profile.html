@@ -2,14 +2,14 @@
 {% load i18n %}
 {% block profile_right %}
 {% if show_user.profile.bio %}
-<h4 class="col-12 leftborder">{% trans "Bio and disciplinary background" %}</h4>
+<h3 class="col-12 leftborder">{% trans "Bio and <span class='lightBlue-color'>disciplinary background</span>" %}</h3>
 {{ show_user.profile.bio | safe }}
 {% endif %}
 
 {% if show_user.profile.interestAreas %}
 <h4 class="col-12 leftborder mt-4">{% trans "Interest and expertise areas" %}</h4>
 {% for area in show_user.profile.interestAreas.all %}
-<span class="badge badge-light">{{ area }}</span>
+<span class="badge bg-my-darkGreen">{{ area }}</span>
 {% endfor %}
 {% endif %}
 

@@ -612,8 +612,7 @@ def approveResource(request):
         resource.approved = True
     else:
         resource.approved = False
-
-    resource.reviewed = True
+    resource.moderated = True
     resource.save()
 
     return JsonResponse({"success": "Updated aproval"}, safe=False)

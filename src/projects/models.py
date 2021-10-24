@@ -157,6 +157,7 @@ class Project(models.Model):
     originUID = models.CharField(max_length=200, null=True, blank=True)
 
     # For moderation
+    moderated = models.BooleanField(default=False)
     approved = models.BooleanField(default=False)
 
     # Others (some of them not used)
