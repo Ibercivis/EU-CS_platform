@@ -3,6 +3,8 @@
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% load leaflet_tags %}
+{% load thumbnail %}
+
 {% block head %}
 {{block.super }}
 <link rel="stylesheet" href="{% static 'site/css/forms.css' %}">
@@ -19,70 +21,18 @@
 
 
 {% block list_of_items %}
-
-<!-- MODAL TO CROP THE IMAGE -->
-<div class="modal fade" id="modalCrop">
-    <div class="modal-dialog mdialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">{% trans "Crop the photo" %}</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span><span class="sr-only">{% trans "Close" %}</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-11">
-                        <img src="" id="image" class="img-fluid img-zoom">
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <div class="btn-group pull-left" role="group">
-                    <button type="button" class="btn btn-default js-zoom-in">
-                        <span><i class="material-icons" style="font-size: 18px;">{% trans "zoom_in" %}</i> </span>
-                    </button>
-                    <button type="button" class="btn btn-default js-zoom-out">
-                        <span><i class="material-icons" style="font-size: 18px;">{% trans "zoom_out" %}</i></span>
-                    </button>
-                </div>
-                <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
-                <button type="button" class="btn btn-primary js-crop-and-upload">{% trans "Crop and upload" %}</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- END MODAL TO CROP -->
+{% include '_crop_zone.html' %}
 
 <div class="container mt-5">
     <form action="#" id='form_project' class="edit-project" method="post" enctype="multipart/form-data">
         <div class="row">
             {% csrf_token %}
             <div class="col-12">
-                <div class="row">
-                    <div class="col-12">
-                        <img 
-                         class="card_img" 
-                         id="imageResult3" 
-                         src="{% if project.image3%} {{ project.image3 }} {%else %} {% static 'site/img/void_1100.png' %} {% endif %}" alt="Image not upload">
-
-                        {{ form.withImage3|as_crispy_field }}
-                        {{ form.image3|as_crispy_field }}
-                        {{ form.x3|as_crispy_field }}
-                        {{ form.y3|as_crispy_field }}
-                        {{ form.height3|as_crispy_field }}
-                        {{ form.width3|as_crispy_field }}
-                        <div class="row">
-                            <div class="col-4">
-                                {{ form.image_credit3|as_crispy_field }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {% include "_intro_form_project.html" %}
                 <div class="row">
                     <div class="col-2"></div>
                     <div class="col-8">
-                        <h4 class="leftborder">{% trans "Main information" %}</h4>
+                        <h3 class="leftborder">{% trans "Main information" %}</h3>
                         <input type="hidden" id="projectID" name="projectID" value={{project.id}}>
                         <div class="row">
                             <div class="col-12">
@@ -99,14 +49,7 @@
                                 {{ form.description_citizen_science_aspects|as_crispy_field }}
                                 {{ form.status|as_crispy_field }}
                                 {{ form.keywords|as_crispy_field }}
-                                <button class="btn btn-secondary submit">
-                                    <i class="fas fa-share-square"></i> {% trans "Save" %}
-                                </button>
-                                <button class="btn btn-secondary submit continue">
-                                    <i class="fas fa-save"></i> {% trans "Save & continue editing" %}
-                                </button>
-                                <span class="savedInfo">
-                                </span>
+                                {% include "_save_zone.html" %}
                             </div>
                         </div>
                         <h4 class="leftborder mt-5">{% trans "Useful information to classificate the project" %}</h4>
@@ -117,15 +60,7 @@
                                 {{ form.end_date|as_crispy_field }}
                                 {{ form.topic|as_crispy_field }}
                                 {{ form.hasTag |as_crispy_field }}
-                                <button class="btn btn-secondary submit">
-                                    <i class="fas fa-share-square"></i> {% trans "Save" %}
-                                </button>
-                                <button class="btn btn-secondary submit continue">
-                                    <i class="fas fa-save"></i> {% trans "Save & continue editing" %}
-                                </button>
-                                <span class="savedInfo">
-                                </span>
-
+                                {% include "_save_zone.html" %}
                             </div>
                         </div>
                         <h4 class="leftborder mt-5">{% trans "Participation information" %}</h4>
@@ -136,15 +71,7 @@
                                 {{ form.difficultyLevel |as_crispy_field }}
                                 {{ form.how_to_participate|as_crispy_field }}
                                 {{ form.equipment|as_crispy_field }}
-                                <button class="btn btn-secondary submit">
-                                    <i class="fas fa-share-square"></i> {% trans "Save" %}
-                                </button>
-                                <button class="btn btn-secondary submit continue">
-                                    <i class="fas fa-save"></i> {% trans "Save & continue editing" %}
-                                </button>
-                                <span class="savedInfo">
-                                </span>
-
+                                {% include "_save_zone.html" %}
                             </div>
                         </div>
                         <h4 class="leftborder mt-5">{% trans "Project location" %}</h4>
@@ -154,15 +81,7 @@
                                 {{ form.geographicextend |as_crispy_field }}
                                 {{ form.projectlocality |as_crispy_field }}
                                 {{ form.projectGeographicLocation|as_crispy_field }}
-                                <button class="btn btn-secondary submit">
-                                    <i class="fas fa-share-square"></i> {% trans "Save" %}
-                                </button>
-                                <button class="btn btn-secondary submit continue">
-                                    <i class="fas fa-save"></i> {% trans "Save & continue editing" %}
-                                </button>
-                                <span class="savedInfo">
-                                </span>
-
+                                {% include "_save_zone.html" %}
                             </div>
                         </div>
                         <h4 class="leftborder mt-5">{% trans "Contact and hosts details" %}</h4>
@@ -173,15 +92,7 @@
                                 {{ form.contact_person_email|as_crispy_field }}
                                 {{ form.mainOrganisation|as_crispy_field }}
                                 {{ form.organisation|as_crispy_field }}
-                                <button class="btn btn-secondary submit">
-                                    <i class="fas fa-share-square"></i> {% trans "Save" %}
-                                </button>
-                                <button class="btn btn-secondary submit continue">
-                                    <i class="fas fa-save"></i> {% trans "Save & continue editing" %}
-                                </button>
-                                <span class="savedInfo">
-                                </span>
-
+                                {% include "_save_zone.html" %}
                             </div>
                         </div>
                         <h4 class="leftborder mt-5">{% trans "Funding Information" %}</h4>
@@ -190,26 +101,16 @@
                             <div class="col-11">
                                 {{ form.funding_body|as_crispy_field }}
                                 {{ form.funding_program|as_crispy_field }}
-                                <button class="btn btn-secondary submit">
-                                    <i class="fas fa-share-square"></i> {% trans "Save" %}
-                                </button>
-                                <button class="btn btn-secondary submit continue">
-                                    <i class="fas fa-save"></i> {% trans "Save & continue editing" %}
-                                </button>
-                                <span class="savedInfo">
-                                </span>
-
+                                {% include "_save_zone.html" %}
                             </div>
                         </div>
                         <h4 class="leftborder mt-5">{% trans "Project profile images" %}</h4>
                         <div class="row">
                             <div class="col-1"></div>
                             <div class="col-11">
-                                <a id="imgResult1" href="#"> <img 
-                                                   class="img-fluid img-zoom" 
-                                                   id="imageResult1" 
-                                                   src="{% if project.image1 %} {{project.image1}} {% else %} {% static 'site/img/void_600.png' %} {% endif %}"> </a>
-
+                                <img class="img-fluid img-zoom" 
+                                id="imageResult1" 
+                                src="{% thumbnail project.image1|default:'void_600.png' 600x400 %}">
                                 {{ form.image1|as_crispy_field }}
                                 {{ form.x1|as_crispy_field }}
                                 {{ form.y1|as_crispy_field }}
@@ -217,11 +118,11 @@
                                 {{ form.width1|as_crispy_field }}
                                 {{ form.withImage1|as_crispy_field }}
                                 {{ form.image_credit1|as_crispy_field }}
-                                <a id="imgResult2" href="#"> <img 
-                                                   class="img-fluid img-zoom" 
-                                                   id="imageResult2" 
-                                                   src="{% if project.image1 %} {{project.image1}} {% else %} {% static 'site/img/void_600.png' %} {% endif %}"> </a>
+                                <div class="mb-5"></div>
 
+                                <img class="img-fluid img-zoom" 
+                                     id="imageResult2" 
+                                     src="{% thumbnail project.image2|default:'void_600.png' 600x400 %}">
                                 {{ form.image2|as_crispy_field }}
                                 {{ form.x2|as_crispy_field }}
                                 {{ form.y2|as_crispy_field }}
@@ -229,15 +130,20 @@
                                 {{ form.width2|as_crispy_field }}
                                 {{ form.withImage2|as_crispy_field }}
                                 {{ form.image_credit2|as_crispy_field }}
-                                <button class="btn btn-secondary submit">
-                                    <i class="fas fa-share-square"></i> {% trans "Save" %}
-                                </button>
-                                <button class="btn btn-secondary submit continue">
-                                    <i class="fas fa-save"></i> {% trans "Save & continue editing" %}
-                                </button>
-                                <span class="savedInfo">
-                                </span>
+                                <div class="mb-5"></div>
 
+                                <img class="img-fluid mt-3" 
+                                     id="imageResult3" 
+                                     src="{% thumbnail project.image3|default:'void_1100.png' 1100x400 %}" alt="Image not upload">
+                                {{ form.withImage3|as_crispy_field }}
+                                {{ form.image3|as_crispy_field }}
+                                {{ form.x3|as_crispy_field }}
+                                {{ form.y3|as_crispy_field }}
+                                {{ form.height3|as_crispy_field }}
+                                {{ form.width3|as_crispy_field }}
+                                {{ form.image_credit3|as_crispy_field }}
+                                <div class="mb-5"></div>
+                                {% include "_save_zone.html" %}
                                 <div class="mb-5"></div>
                             </div>
                         </div>
@@ -247,9 +153,7 @@
         </div>
     </form>
 </div>
-
 {% endblock list_of_items %}
-
 {% block scripts %}
 <script src="{% static 'site/js/site.js' %}"></script>
 <script src="{% static 'scripts/cropper.min.js' %}"></script>
@@ -314,7 +218,7 @@
                     $.each(response.responseJSON, function(i,val){
                         $('#id_'+i).addClass('error')
                         $('#id_'+i).parent().find('.select2-selection--multiple').addClass('error')
-                        $('label[for=id_'+i+']').append('<div class="myerror alert alert-danger">'+val+'</div>')
+                        $('#hint_id_'+i).append('<div class="myerror small text-danger">'+val+'</div>')
                         $('#cke_id_'+i).addClass('error')
                     })
                     $('html, body').animate({

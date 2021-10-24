@@ -17,71 +17,71 @@
 {% block list_of_items %}
 {% include '_crop_zone.html' %}
 {% include '_modal_zone.html' %}
-<div class="container">
-    <div class="row">
-        <div class="container mt-5">
-            <form autocomplete="off" id="Platform">
-                {% csrf_token %}
-                <input type="hidden" id="Id" name="Id" value="{{id}}">
-                <div class="row">
-                    <div class="col-2 mt-5">
+<div class="container mt-5">
+    <form autocomplete="off" id="Platform">
+        {% csrf_token %}
+        <div class="col-12">
+            {% include "_intro_form_platform.html" %}
+            <input type="hidden" id="Id" name="Id" value="{{id}}">
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-8 mt-5">
+                    <h3 class="leftborder">{% trans "Main information" %}</h4>
+                    <div class="row">
+                        <div class="col-1"></div>
+                        <div class="col-11">
+                            {{ form.name | as_crispy_field }}
+                            {{ form.url | as_crispy_field }}
+                            {{ form.description | as_crispy_field }}
+                            {{ form.geographicExtend | as_crispy_field }}
+                            {{ form.countries | as_crispy_field }}
+                            {{ form.platformLocality | as_crispy_field }}
+                            {% include '_save_zone.html' %}
+                        </div>
                     </div>
-                    <div class="col-8 mt-5">
-                        <h4 class="leftborder">{% trans "Main information" %}</h4>
-                        <div class="row">
-                            <div class="col-1"></div>
-                            <div class="col-11">
-                                {{ form.name | as_crispy_field }}
-                                {{ form.url | as_crispy_field }}
-                                {{ form.description | as_crispy_field }}
-                                {{ form.geographicExtend | as_crispy_field }}
-                                {{ form.countries | as_crispy_field }}
-                                {{ form.platformLocality | as_crispy_field }}
 
-                                {% include '_save_zone.html' %}
-                            </div>
+                    <h3 class="leftborder mt-4">{% trans "Contact information" %}</h4>
+                    <div class="row">
+                        <div class="col-1"></div>
+                        <div class="col-11">
+                            {{ form.contactPoint | as_crispy_field }}
+                            {{ form.contactPointEmail | as_crispy_field }}
+                            {{ form.organisation | as_crispy_field }}
+                            {% include '_save_zone.html' %}
                         </div>
+                    </div>
 
-                        <h4 class="leftborder mt-4">{% trans "Contact information" %}</h4>
-                        <div class="row">
-                            <div class="col-1"></div>
-                            <div class="col-11">
-                                {{ form.contactPoint | as_crispy_field }}
-                                {{ form.contactPointEmail | as_crispy_field }}
-                                {{ form.organisation | as_crispy_field }}
-                                {% include '_save_zone.html' %}
-                            </div>
-                        </div>
-
-                        <h4 class="leftborder mt-4">{% trans "Network or platform images" %}</h4>
-                        <div class="row">
-                            <div class="col-1"></div>
-                            <div class="col-11">
-                                {{ platform.logo.initial }}
-                                <img class="img-fluid img-zoom imageUpload" id="imageResultlogo"
-                                     src="{% thumbnail form.logo.initial|default:'void_600.png' 600x400 crop %}" />
-                                {{ form.logo|as_crispy_field }}
-                                {{ form.xlogo|as_crispy_field }}
-                                {{ form.ylogo|as_crispy_field }}
-                                {{ form.heightlogo|as_crispy_field }}
-                                {{ form.widthlogo|as_crispy_field }}
-                                {{ form.logoCredit|as_crispy_field }}
-                                <img class="img-fluid img-zoom imageUpload" id="imageResultprofileImage" 
-                                     src="{% thumbnail form.profileImage.initial|default:'void_1100.png' 1100x400 crop %}" />
-                                {{ form.profileImage|as_crispy_field }}
-                                {{ form.xprofileImage|as_crispy_field }}
-                                {{ form.yprofileImage|as_crispy_field }}
-                                {{ form.heightprofileImage|as_crispy_field }}
-                                {{ form.widthprofileImage|as_crispy_field }}
-                                {{ form.profileImageCredit|as_crispy_field }}
-                                {% include '_save_zone.html' %}
-                            </div>
+                    <h3 class="leftborder mt-4">{% trans "Network or platform images" %}</h4>
+                    <div class="row">
+                        <div class="col-1"></div>
+                        <div class="col-11">
+                            {{ platform.logo.initial }}
+                            <img class="img-fluid img-zoom imageUpload" id="imageResultlogo"
+                                                                        src="{% thumbnail form.logo.initial|default:'void_600.png' 600x400 crop %}" />
+                            {{ form.logo|as_crispy_field }}
+                            {{ form.xlogo|as_crispy_field }}
+                            {{ form.ylogo|as_crispy_field }}
+                            {{ form.heightlogo|as_crispy_field }}
+                            {{ form.widthlogo|as_crispy_field }}
+                            {{ form.logoCredit|as_crispy_field }}
+                            <div class="mb-5"></div>
+                            <img class="img-fluid img-zoom imageUpload" id="imageResultprofileImage" 
+                                                                        src="{% thumbnail form.profileImage.initial|default:'void_1100.png' 1100x400 crop %}" />
+                            {{ form.profileImage|as_crispy_field }}
+                            {{ form.xprofileImage|as_crispy_field }}
+                            {{ form.yprofileImage|as_crispy_field }}
+                            {{ form.heightprofileImage|as_crispy_field }}
+                            {{ form.widthprofileImage|as_crispy_field }}
+                            {{ form.profileImageCredit|as_crispy_field }}
+                            <div class="mb-5"></div>
+                            {% include '_save_zone.html' %}
+                            <div class="mb-5"></div>
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
-    </div>
+    </form>
 </div>
 {% endblock list_of_items %}
 {% block scripts %}

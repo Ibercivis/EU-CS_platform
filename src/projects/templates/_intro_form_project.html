@@ -1,0 +1,27 @@
+{% load i18n %}
+<div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+        {% if project.id %}
+        <h1>{% trans "Editing" %}<span class="lightBlue-color"> {{project.name}}</span></h1>
+        {% else %}
+        <h1>{% trans "New" %}<span class="lightBlue-color"> {% trans "project" %}</span></h1>
+        {% endif %}
+        
+        {% if not project.id %}
+        <div class="row">
+            <div class="col-12">
+                <div class="small mb-2"> {% trans "Thank you for sharing your citizen science project on the EU-Citizen.Science platform. Please fill in all of the mandatory information in the fields below (indicated with an asterisk*), and as much of the non-mandatory information as possible." %} </div>
+
+                <div class="small mb-2">{% trans "Citizen science embraces a wide range of project types that can be adapted and applied within diverse situations and disciplines, represent a range of approaches and historical practices for public participation in scientific research, and involve participants in a range of activities across the research lifecycle. For guidance on whether your project can be considered to be citizen science, please refer to the ECSA Characteristics of Citizen Science." %} </div>
+
+                <div class="small mb-2">{% trans "In the form below, along with other descriptive information, we require that you describe the citizen science aspects of your project and the type of task(s) that participants undertake. Your project should engage meaningfully with the ECSA 10 Principles of Citizen Science." %}  </div>
+
+                <div class="small mb-2">{% trans "Upon saving this profile, your project will be submitted for moderation. The moderation process is meant to ensure that all of the projects shared on the platform can be considered to be citizen science projects, and to prevent unintended uses of the platform." %}</div>
+
+                <div class="small mb-2">{% trans "We would like to point out that, as the author of this profile, you have to clear the image rights and copyrights of the content you are submitting. Please indicate the author or copyright holder of pictures. You may need to obtain express written permission from them." %}</div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>

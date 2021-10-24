@@ -127,7 +127,7 @@ $(function() {
                 $.each(response.responseJSON, function(i,val){
                     $('#id_'+i).addClass('error')
                     $('#id_'+i).parent().find('.select2-selection--multiple').addClass('error')
-                    $('label[for=id_'+i+']').append('<div class="myerror alert alert-danger">'+val+'</div>')
+                    $('#hint_id_'+i).append('<div class="myerror small text-danger">'+val+'</div>')
                     $('#cke_id_'+i).addClass('error')
                 })
                 $('html, body').animate({

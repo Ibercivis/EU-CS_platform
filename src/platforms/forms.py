@@ -43,7 +43,8 @@ class PlatformForm(forms.Form):
 
     countries = forms.MultipleChoiceField(
             widget=s2forms.Select2MultipleWidget,
-            choices=countries
+            choices=countries,
+            help_text=_('Please select the country(ies) related to the network / platform')
             )
     platformLocality = forms.CharField(
             label=_("Network / platform locality"),
