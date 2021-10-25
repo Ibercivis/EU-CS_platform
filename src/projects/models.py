@@ -32,10 +32,10 @@ class DifficultyLevel(models.Model):
 
 
 class ParticipationTask(models.Model):
-    participationtask = models.TextField()
+    participationTask = models.TextField()
 
     def __str__(self):
-        return f'{self.participationtask}'
+        return f'{self.participationTask}'
 
 
 class GeographicExtend(models.Model):
@@ -112,7 +112,7 @@ class Project(models.Model):
     end_date = models.DateTimeField('End date', null=True, blank=True)
 
     # Participation information
-    participationtask = models.ManyToManyField(ParticipationTask)
+    participationTask = models.ManyToManyField(ParticipationTask)
     difficultyLevel = models.ForeignKey(
             DifficultyLevel,
             default=None,

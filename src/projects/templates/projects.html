@@ -21,57 +21,55 @@
 
 {% include "modal_projects.html" %}
 <div class="container">
+    <div clas="row">
+        <div class="col-12">
+            <h1>project <span class="lightBlue-color">search</span></h1>
+        <div>
+        {% include "_subnavbar.html" %}
+        {% include "_finder_projects.html" %}
+    </div>
     <div class="row">
         {% include "projects_cards.html" %}
     </div>
 </div>
-    {% endblock list_of_items %}
+{% endblock list_of_items %}
 
 {% block scripts %}
- <script>
+<script src="{% static 'site/js/bootstrap-autocomplete.js'%}"></script>
+<script>
 	$('.basicAutoComplete').autoComplete(
 	{ minLength: 3 }
 	);
-
 	$('.basicAutoComplete').on('autocomplete.select', function (evt, item) {
 		$('#searchTop').submit();
 	});
-
-	$(function () {
-		$('#topic').on('change', function () {
-			var topic = $(this).val();
-			$('#searchProjects').submit();
-		});
-	});
-	$(function () {
-		$('#doingAtHome').on('change', function () {
-			var topic = $(this).val();
-			$('#searchProjects').submit();
-		});
-	});
-	$(function () {
-		$('#orderby').on('change', function () {
-			var orderby = $(this).val();
-			$('#searchProjects').submit();
-		});
-	});
-
 	$(function () {
 		$('.status-select').on('change', function () {
 			var status = $(this).val();
 			$('#searchProjects').submit();
 		});
-	});
+        $('#pill-topic').on('click', function() {
+            $('#topic').val('')
+            $('#searchProjects').submit();
+        });
+        $('#pill-status').on('click', function() {
+            $('#status').val('')
+            $('#searchProjects').submit();
+        });
+        $('#pill-hasTag').on('click', function() {
+            $('#hasTag').val('')
+            $('#searchProjects').submit();
+        });
 
-	$("#host").blur(function () {
-		$('#searchProjects').submit();
-	});
+        $('#pill-difficultyLevel').on('click', function() {
+            $('#difficultyLevel').val('')
+            $('#searchProjects').submit();
+        });
 
-	$(function () {
-		$('#approvedCheck').on('change', function () {
-			var approvedCheck = $(this).val();
-			$('#searchProjects').submit();
-		});
+        $('#pill-participationTask').on('click', function() {
+            $('#participationTask').val('')
+            $('#searchProjects').submit();
+        });
 	});
  </script>
 {% endblock scripts %}

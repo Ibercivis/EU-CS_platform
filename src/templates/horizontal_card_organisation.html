@@ -7,5 +7,5 @@
 {% endblock img %}
 {% block title %}
 <a href="/organisation/{{organisation.id}}">{{ organisation.name | truncatechars:30 }}</a>
-<div class="small text-muted">{{organisation.dateCreated}}</div>
+<div class="small text-muted">{{organisation.orgType}}</div>
 {% endblock title %}

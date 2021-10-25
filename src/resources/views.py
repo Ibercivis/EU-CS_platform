@@ -18,6 +18,7 @@ from datetime import datetime
 from reviews.models import Review
 from .models import Resource, Keyword, ApprovedResources, SavedResources, BookmarkedResources, Theme, Category
 from .models import ResourcesGrouped, ResourcePermission, EducationLevel, LearningResourceType, UnApprovedResources
+from .models import Audience
 from .forms import ResourceForm, ResourcePermissionForm
 import copy
 import csv
@@ -32,40 +33,30 @@ def training_resources(request):
 
 
 def resources(request, isTrainingResource=False):
-    if(isTrainingResource):
-        resources = Resource.objects.all().filter(
-                isTrainingResource=True).order_by('-dateLastModification')
-    else:
-        resources = Resource.objects.all().filter(
-                ~Q(isTrainingResource=True)).order_by('-dateLastModification')
-    approvedResources = ApprovedResources.objects.all().values_list('resource_id', flat=True)
-    unApprovedResources = UnApprovedResources.objects.all().values_list('resource_id', flat=True)
     user = request.user
-    savedResources = None
-    savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id', flat=True)
-    bookmarkedResources = BookmarkedResources.objects.all().filter(
-            user_id=user.id).values_list('resource_id', flat=True)
-    languagesWithContent = Resource.objects.all().values_list('inLanguage', flat=True).distinct()
+    if(isTrainingResource):
+        resources = Resource.objects.all().filter(isTrainingResource=True).order_by('-dateUpdated')
+        languagesWithContent = Resource.objects.all().filter(
+                isTrainingResource=True).values_list('inLanguage', flat=True).distinct()
+        endPoint = 'training_resources'
+    else:
+        resources = Resource.objects.all().filter(isTrainingResource=False).order_by('-dateUpdated')
+        languagesWithContent = Resource.objects.all().filter(
+                isTrainingResource=False).values_list('inLanguage', flat=True).distinct()
+        endPoint = 'resources'
+
     themes = Theme.objects.all()
     categories = Category.objects.all()
-    filters = {'keywords': '', 'resource_language': ''}
+    audiencies = Audience.objects.all()
 
-    if request.GET.get('keywords'):
-        resources = resources.filter(
-                Q(name__icontains=request.GET['keywords']) |
-                Q(keywords__keyword__icontains=request.GET['keywords'])).distinct()
-        filters['keywords'] = request.GET['keywords']
-
-    if request.GET.get('language'):
-        resources = resources.filter(Q(inLanguage=request.GET['language']))
-
+    filters = {'keywords': '', 'inLanguage': ''}
     resources = applyFilters(request, resources)
     filters = setFilters(request, filters)
     resources = resources.distinct()
     resources = resources.filter(~Q(hidden=True))
 
     if not user.is_staff:
-        resources = resources.exclude(id__in=unApprovedResources)
+        resources = resources.filter(approved=True)
 
     # Ordering
     if request.GET.get('orderby'):
@@ -90,30 +81,31 @@ def resources(request, isTrainingResource=False):
             resources = resources.exclude(id__in=reviews)
             resources = list(resourcesVoted) + list(resources)
         else:
-            resources = resources.order_by('-dateLastModification')
+            resources = resources.order_by('-dateUpdated')
         filters['orderby'] = request.GET['orderby']
     else:
-        resources = resources.order_by('-dateLastModification')
+        resources = resources.order_by('-dateUpdated')
 
     counter = len(resources)
-
-    paginator = Paginator(resources, 12)
+    paginator = Paginator(resources, 16)
     page = request.GET.get('page')
     resources = paginator.get_page(page)
 
     return render(request, 'resources.html', {
         'resources': resources,
-        'approvedResources': approvedResources,
-        'unApprovedResources': unApprovedResources,
+        # 'approvedResources': approvedResources,
+        # 'unApprovedResources': unApprovedResources,
         'counter': counter,
-        'savedResources': savedResources,
-        'bookmarkedResources': bookmarkedResources,
+        # 'savedResources': savedResources,
+        # 'bookmarkedResources': bookmarkedResources,
         'filters': filters,
         'settings': settings,
         'languagesWithContent': languagesWithContent,
         'themes': themes,
         'categories': categories,
+        'audiencies': audiencies,
         'isTrainingResource': isTrainingResource,
+        'endPoint': endPoint,
         'isSearchPage': True})
 
 
@@ -169,6 +161,11 @@ def resource(request, pk):
     isTrainingResource = resource.isTrainingResource
     user = request.user
 
+    if(isTrainingResource):
+        endPoint = '/training_resources'
+    else:
+        endPoint = '/resources'
+
     previous_page = request.META.get('HTTP_REFERER')
     if previous_page and 'review' in previous_page:
         # Send email
@@ -220,6 +217,7 @@ def resource(request, pk):
         'cooperators': getCooperators(pk),
         'permissionForm': permissionForm,
         'isTrainingResource': isTrainingResource,
+        'endPoint': endPoint,
         'isSearchPage': True})
 
 
@@ -518,14 +516,21 @@ def preFilteredResources(request):
 
 def applyFilters(request, resources):
     approvedResources = ApprovedResources.objects.all().values_list('resource_id', flat=True)
-    if request.GET.get('resource_language'):
-        resources = resources.filter(inLanguage=request.GET['resource_language'])
+
+    if request.GET.get('keywords'):
+        resources = resources.filter(
+                Q(name__icontains=request.GET['keywords']) |
+                Q(keywords__keyword__icontains=request.GET['keywords'])).distinct()
+    if request.GET.get('inLanguage'):
+        resources = resources.filter(inLanguage=request.GET['inLanguage'])
     if request.GET.get('license'):
         resources = resources.filter(license__icontains=request.GET['license'])
     if request.GET.get('theme'):
-        resources = resources.filter(theme=request.GET['theme'])
+        resources = resources.filter(theme__theme=request.GET['theme'])
     if request.GET.get('category'):
-        resources = resources.filter(category=request.GET['category'])
+        resources = resources.filter(category__text=request.GET['category'])
+    if request.GET.get('audience'):
+        resources = resources.filter(audience__audience=request.GET['audience'])
     if request.GET.get('approvedCheck'):
         if request.GET['approvedCheck'] == 'On':
             resources = resources.filter(id__in=approvedResources)
@@ -540,16 +545,21 @@ def applyFilters(request, resources):
 
 
 def setFilters(request, filters):
-    if request.GET.get('resource_language'):
-        filters['resource_language'] = request.GET['resource_language']
+    if request.GET.get('keywords'):
+        filters['keywords'] = request.GET['keywords']
+    if request.GET.get('inLanguage'):
+        filters['inLanguage'] = request.GET['inLanguage']
+    if request.GET.get('audience'):
+        filters['audience'] = request.GET['audience']
     if request.GET.get('license'):
         filters['license'] = request.GET['license']
     if request.GET.get('theme'):
-        filters['theme'] = int(request.GET['theme'])
+        filters['theme'] = request.GET['theme']
     if request.GET.get('category'):
-        filters['category'] = int(request.GET['category'])
+        filters['category'] = request.GET['category']
     if request.GET.get('approvedCheck'):
         filters['approvedCheck'] = request.GET['approvedCheck']
+    print(filters)
     return filters
 
 

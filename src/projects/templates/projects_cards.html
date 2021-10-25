@@ -6,10 +6,7 @@
 <div class="col-lg-3 col-sm-6 col-12 mb-5">
     <div class="card h-100 shadow border-0">
         <a href="/project/{{project.id}}">
-            <picture>
-                {% thumbnail project.image1|default:'void_600.png' 306x204 crop as thumb %}
-                <img class="img-fluid" src="{{ thumb.url }}" />
-            </picture>
+            <img class="img-fluid" src="{% thumbnail project.image1|default:'void_600.png' 400x600%}" />
         </a>
         <div class="card-body">
             <h4 class="mt-2 mb-0">
@@ -17,7 +14,11 @@
             </h4>
             <div class="small text-muted mb-2">{{ project.dateCreated}}</div>
             <!-- TODO: improve this loop -->
-            <a href="#" class="badge rounded-pill bg-dark">{{ project.mainOrganisation.country.name }}</a>
+            {% if project.mainOrganisation %}
+            <a href="/projects?country={{project.mainOrganisation.country}}" class="badge rounded-pill bg-dark">
+                {{ project.mainOrganisation.country.name }}
+            </a>
+            {% endif %}
             {% for topic in project.topic.all %}
             {% if forloop.counter < 3 %}
             <a class="badge rounded-pill bg-my-darkBlue text-decoration-none" 

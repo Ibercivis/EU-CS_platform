@@ -98,7 +98,7 @@ class ProjectForm(forms.Form):
             label=_("Tags"))
 
     # Participation information
-    participationtask = forms.ModelMultipleChoiceField(
+    participationTask = forms.ModelMultipleChoiceField(
             queryset=ParticipationTask.objects.all(),
             widget=Select2MultipleWidget(),
             help_text=_('Please select the task(s) undertaken by participants'),
@@ -328,7 +328,7 @@ class ProjectForm(forms.Form):
         project.topic.set(self.data.getlist('topic'))
         project.keywords.set(self.data.getlist('keywords'))
         project.fundingBody.set(self.data.getlist('funding_body'))
-        project.participationtask.set(self.data.getlist('participationtask'))
+        project.participationTask.set(self.data.getlist('participationTask'))
         project.hasTag.set(self.data.getlist('hasTag'))
         project.geographicextend.set(self.data.getlist('geographicextend'))
         project.organisation.set(self.data.getlist('organisation'))

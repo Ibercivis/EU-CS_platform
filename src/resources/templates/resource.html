@@ -145,27 +145,30 @@
             {% get_language_info_list for LANGUAGES as languages %}
             {% for language in languages %}
             {% if language.code == resource.inLanguage %}
-            <a class="badge bg-dark" href="/resources?language={{resource.inLanguage}}">{{language.name | title}}</a>
+            <a class="badge bg-dark" href="{{endPoint}}?inLanguage={{resource.inLanguage}}">{{language.name | title}}</a>
             {% endif %}
             {% endfor %}
 
             <h5 class="mt-3">{% trans "Keywords" %}</h5>
             {% for keyword in resource.keywords.all %}
-            <a class="badge bg-my-darkGreen" href="/resources?keywords={{keyword}}">{{keyword  | title}}</a>
+            <a class="badge bg-my-darkGreen" href="{{endPoint}}?keywords={{keyword}}">{{keyword  | title}}</a>
             {% endfor %}
 
             <h5 class="mt-3">{% trans "Theme" %}</h5>
             {% for theme in resource.theme.all %}
-            <a class="badge bg-my-darkBlue" href="/resources?theme={{theme.id}}">{{ theme | title }}</a>
+            <a class="badge bg-my-wood" href="{{endPoint}}?theme={{theme.theme}}">{{ theme | title }}</a>
             {% endfor %}
 
             <h5 class="mt-3">{% trans "Category" %}</h5>
             <a class="badge bg-my-lightBlue"
-               href="/resources?category={{resource.category.id}}">{{resource.category | title }}</a>
+               href="{{endPoint}}?category={{resource.category.text}}">{{resource.category | title }}</a>
 
+            <!-- TODO: This is not working, escape well -->
             <h5 class="mt-3">{% trans "Audience" %}</h5>
             {% for audience in resource.audience.all %}
-            <a class="badge bg-my-lightGreen">{{ audience | title}}</a>
+            <a class="badge bg-my-lightGreen"
+               href="{{endPoint}}?audience={% autoescape on %}{{audience}}{% endautoescape %}"> {{ audience | title}}
+            </a>
             {% endfor %}
 
             {% if resource.educationLevel.all %}
@@ -181,8 +184,6 @@
             <a class="badge bg-my-darkGreen">{{ learningResourceType | title }}</a>
             {% endfor %}
             {% endif %}
-
-
         </div>
     </div>
 </div>

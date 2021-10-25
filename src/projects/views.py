@@ -22,7 +22,7 @@ from reviews.models import Review
 from django_countries import countries
 from .forms import ProjectForm, ProjectPermissionForm, ProjectTranslationForm, ProjectGeographicLocationForm
 from .models import Project, Topic, ParticipationTask, Status, Keyword, ApprovedProjects, \
- FollowedProjects, FundingBody, CustomField, ProjectPermission, GeographicExtend, UnApprovedProjects
+ FollowedProjects, FundingBody, CustomField, ProjectPermission, GeographicExtend, UnApprovedProjects, HasTag, DifficultyLevel
 from organisations.models import Organisation
 import copy
 import csv
@@ -120,7 +120,8 @@ def submitProjectTranslation(request):
     form = ProjectTranslationForm(request.POST)
     if form.is_valid():
         form.save(request)
-        return JsonResponse({'UpdatedTranslation': 'OK', 'Project': request.POST['projectId']}, status=status.HTTP_200_OK)
+        return JsonResponse(
+                {'UpdatedTranslation': 'OK', 'Project': request.POST['projectId']}, status=status.HTTP_200_OK)
     else:
         return JsonResponse(form.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
 
@@ -158,7 +159,7 @@ def editProject(request, pk):
         'mainOrganisation': project.mainOrganisation,
         'organisation': project.organisation.all,
         'topic': project.topic.all,
-        'participationtask': project.participationtask.all,
+        'participationTask': project.participationTask.all,
         'hasTag': project.hasTag.all,
         'difficultyLevel': project.difficultyLevel,
         'geographicextend': project.geographicextend.all,
@@ -207,31 +208,27 @@ def translateProject(request, pk):
 
 def projects(request):
     projects = Project.objects.get_queryset()
-    approvedProjects = ApprovedProjects.objects.all().values_list('project_id', flat=True)
-    unApprovedProjects = UnApprovedProjects.objects.all().values_list('project_id', flat=True)
-    user = request.user
-    followedProjects = None
-    followedProjects = FollowedProjects.objects.all().filter(
-            user_id=user.id).values_list('project_id', flat=True)
-    countriesWithContent = None
-
     topics = Topic.objects.all()
     status = Status.objects.all()
-    filters = {'keywords': '', 'topic': '', 'status': 0,  'host': '', 'approvedCheck': '', 'doingAtHome': ''}
-
-    if request.GET.get('keywords'):
-        projects = projects.filter(
-                Q(name__icontains=request.GET['keywords']) |
-                Q(keywords__keyword__icontains=request.GET['keywords'])).distinct()
-        filters['keywords'] = request.GET['keywords']
+    hasTag = HasTag.objects.all()
+    difficultyLevel = DifficultyLevel.objects.all()
+    participationTask = ParticipationTask.objects.all()
+    countriesWithContent = 'ES'
+    # approvedProjects = ApprovedProjects.objects.all().values_list('project_id', flat=True)
+    # unApprovedProjects = UnApprovedProjects.objects.all().values_list('project_id', flat=True)
+    filters = {
+            'keywords': '',
+            'topic': '',
+            'status': 0,
+            'host': '',
+            'approvedCheck': '',
+            'doingAtHome': '',
+            'difficultyLevel': '',
+            'hasTag': ''}
 
     projects = applyFilters(request, projects)
     filters = setFilters(request, filters)
-
     projects = projects.filter(~Q(hidden=True))
-
-    if not user.is_staff:
-        projects = projects.exclude(id__in=unApprovedProjects)
 
     # Ordering
     if request.GET.get('orderby'):
@@ -267,7 +264,7 @@ def projects(request):
 
     counter = len(projects)
 
-    paginator = Paginator(projects, 12)
+    paginator = Paginator(projects, 16)
     page = request.GET.get('page')
     projects = paginator.get_page(page)
 
@@ -277,9 +274,11 @@ def projects(request):
         'countriesWithContent': countriesWithContent,
         'status': status,
         'filters': filters,
-        'approvedProjects': approvedProjects,
-        'unApprovedProjects': unApprovedProjects,
-        'followedProjects': followedProjects,
+        'hasTag': hasTag,
+        'difficultyLevel': difficultyLevel,
+        'participationTask': participationTask,
+        # 'approvedProjects': approvedProjects,
+        # 'unApprovedProjects': unApprovedProjects,
         'counter': counter,
         'isSearchPage': True})
 
@@ -431,9 +430,8 @@ def projectsAutocompleteSearch(request):
 
 
 def getProjectsAutocomplete(text):
-    approvedProjects = ApprovedProjects.objects.all().values_list('project_id', flat=True)
-    projects = Project.objects.filter(~Q(hidden=True)).filter(
-            id__in=approvedProjects).filter(name__icontains=text).values_list('id', 'name').distinct()
+    projects = Project.objects.filter(~Q(hidden=True)).filter(approved=True).filter(
+            name__icontains=text).values_list('id', 'name').distinct()
     keywords = Keyword.objects.filter(keyword__icontains=text).values_list('keyword', flat=True).distinct()
     report = []
     for project in projects:
@@ -450,38 +448,65 @@ def preFilteredProjects(request):
 
 
 def applyFilters(request, projects):
-    approvedProjects = ApprovedProjects.objects.all().values_list('project_id', flat=True)
+    # approvedProjects = ApprovedProjects.objects.all().values_list('project_id', flat=True)
+    if request.GET.get('keywords'):
+        projects = projects.filter(
+            Q(name__icontains=request.GET['keywords']) |
+            Q(keywords__keyword__icontains=request.GET['keywords'])).distinct()
 
     if request.GET.get('topic'):
-        projects = projects.filter(topic__topic = request.GET['topic'])
+        projects = projects.filter(topic__topic=request.GET['topic'])
 
-    if request.GET.get('status') and int(request.GET.get('status')) > 0:
-        projects = projects.filter(status = request.GET['status'])
+    if request.GET.get('status'):
+        projects = projects.filter(status__status=request.GET['status'])
 
     if request.GET.get('doingAtHome'):
-        projects = projects.filter(doingAtHome = request.GET['doingAtHome'])
+        projects = projects.filter(doingAtHome=request.GET['doingAtHome'])
 
-    if request.GET.get('approvedCheck'):
-        if request.GET['approvedCheck'] == 'On':
-            projects = projects.filter(id__in=approvedProjects)
-        if request.GET['approvedCheck'] == 'Off':
-            projects = projects.exclude(id__in=approvedProjects)
-        if request.GET['approvedCheck'] == 'All':
-            projects = projects
-    else:
-        projects = projects.filter(id__in=approvedProjects)
+    if request.GET.get('hasTag'):
+        projects = projects.filter(hasTag__hasTag=request.GET['hasTag'])
+
+    if request.GET.get('difficultyLevel'):
+        projects = projects.filter(difficultyLevel__difficultyLevel=request.GET['difficultyLevel'])
+
+    if request.GET.get('participationTask'):
+        projects = projects.filter(participationTask__participationTask=request.GET['participationTask'])
+
+    if request.GET.get('country'):
+        projects = projects.filter(mainOrganisation__country=request.GET['country'])
+
+    projects = projects.filter(approved=True)
+
+    # if request.GET.get('approvedeck'):
+    #    if request.GET['approvedCheck'] == 'On':
+    #        projects = projects.filter(id__in=approvedProjects)
+    #    if request.GET['approvedCheck'] == 'Off':
+    #        projects = projects.exclude(id__in=approvedProjects)
+    #    if request.GET['approvedCheck'] == 'All':
+    #        projects = projects
+    # else:
+    #    projects = projects.filter(id__in=approvedProjects)
 
     return projects
 
+
 def setFilters(request, filters):
+    if request.GET.get('keywords'):
+        filters['keywords'] = request.GET['keywords']
     if request.GET.get('topic'):
         filters['topic'] = request.GET['topic']
     if request.GET.get('status'):
-        filters['status'] =  int(request.GET['status'])
+        filters['status'] = request.GET['status']
     if request.GET.get('doingAtHome'):
         filters['doingAtHome'] = int(request.GET['doingAtHome'])
     if request.GET.get('approvedCheck'):
         filters['approvedCheck'] = request.GET['approvedCheck']
+    if request.GET.get('hasTag'):
+        filters['hasTag'] = request.GET['hasTag']
+    if request.GET.get('difficultyLevel'):
+        filters['difficultyLevel'] = request.GET['difficultyLevel']
+    if request.GET.get('participationTask'):
+        filters['participationTask'] = request.GET['participationTask']
     return filters
 
 
@@ -663,7 +688,7 @@ def get_headers():
 def get_data(item):
     keywordsList = list(item.keywords.all().values_list('keyword', flat=True))
     topicList = list(item.topic.all().values_list('topic', flat=True))
-    participationtaskList = list(item.participationtask.all().values_list('participationtask', flat=True))
+    participationTaskList = list(item.participationTask.all().values_list('participationTask', flat=True))
     geographicextendList = list(item.geographicextend.all().values_list('geographicextend', flat=True))
 
     return {
@@ -676,7 +701,7 @@ def get_data(item):
         'start_date': item.start_date,
         'end_date': item.end_date,
         'topic': topicList,
-        'participationtask': participationtaskList,
+        'participationTask': participationTaskList,
         'geographicextend': geographicextendList,
         'url': item.url,
         'projectlocality': item.projectlocality,

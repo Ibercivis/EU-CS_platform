@@ -213,7 +213,6 @@ class ResourceForm(forms.Form):
             resource.url = self.data['url']
             resource.license = self.data['license']
             resource.publisher = self.data['publisher']
-            resource.dateLastModification = datetime.now()
         else:
             resource = self.createResource(args)
 

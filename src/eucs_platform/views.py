@@ -198,7 +198,7 @@ def getTopicsResponded(request):
         suscribed_topics = request.user.topic_subscriptions.all()
         result = own_topics | suscribed_topics
         result = result.distinct()
-        topics = TrackingHandler.get_unread_topics(request, result, request.user)        
+        topics = TrackingHandler.get_unread_topics(request, result, request.user)
 
     topicshtml="</br>"
 

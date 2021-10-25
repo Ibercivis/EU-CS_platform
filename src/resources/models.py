@@ -33,7 +33,7 @@ class Category(models.Model):
     def __str__(self):
         res = str(self.text)
         if(self.parent):
-            res += ' - ' + str(self.parent)
+            res = str(self.parent) + ' : ' + res
         return res
 
 

@@ -7,30 +7,28 @@
 {% include "_navbar_r2.html" with active_link="organisations" %}
 {% endblock %}
 
-{% block splash %}
-
-{% endblock splash %}
-
 {% block page_header %}
 {% include "finder_organisations.html" %}
 {% endblock page_header %}
 {% block list_of_items %}
-
 <div class="container">
+    <div clas="row">
+        <div class="col-12">
+            <h1>organisation <span class="lightBlue-color">search</span></h1>
+        <div>
+        {% include "_subnavbar.html" %}
+        {% include "_finder_organisation.html" %}
+    </div>
 	<div class="row">
     {% if organisations %}
         {% include "organisations_cards.html" %}
-    {% else %}
-    <div class="col-12">
-        <img  class="img-fluid img-zoom col-12 mt-5" src="{% static 'site/img/undraw_empty_xct9.svg' %}">
-        <h5 class="mb-4">{% trans "Sorry, nothing found" %}</h5>
-    </div>
     {% endif %}
 	</div>
 </div>
 {% endblock list_of_items %}
 
 {% block scripts %}
+<script src="{% static 'site/js/bootstrap-autocomplete.js'%}"></script>
 <script>
     $('.basicAutoComplete').autoComplete(
 	{ minLength: 3 }
@@ -41,16 +39,18 @@
 	});
 
 	$(function () {
-		$('#orgType').on('change', function () {
-			var orgType = $(this).val();
+		$('.custom-select').on('change', function () {
 			$('#searchOrganisations').submit();
 		});
-	});
-    $(function () {
-		$('#country').on('change', function () {
-			var country = $(this).val();
-			$('#searchOrganisations').submit();
-		});
+        $('#pill-country').on('click', function() {
+            $('#country').val('')
+            $('#searchOrganisations').submit();
+        });
+        $('#pill-orgTypes').on('click', function() {
+            $('#orgTypes').val('')
+            $('#searchOrganisations').submit();
+        });
+
 	});
 </script>
 {% endblock scripts %}

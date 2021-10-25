@@ -5,84 +5,56 @@
 {% load l10n %}
 {% load reviews %}
 {% block title %}{{ block.super }} :: Resources{% endblock %}
-{% block navbar-left %}
-{% include "_navbar_r2.html" with active_link="resources" %}
-{% endblock %}
-{% block page_title %}
-{% endblock page_title %}
-{% block splash %}
-{% endblock splash %}
-{% block page_header %}
-{% include "finder_resources.html" %}
-{% endblock page_header %}
+
 {% block list_of_items %}
 {% include "modal_resources.html" %}
 <div class="container">
-{% for message in messages %}
-  <div class="container-fluid p-0">
-    <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      {{ message }}
+    <div class="row">
+        <div class="col-12">
+            {% if isTrainingResource %}
+            <h1>training resource <span class="lightBlue-color">search</span></h1>
+            {% else %}
+            <h1>resource <span class="lightBlue-color">search</span></h1>
+            {% endif %}
+            {% include "_subnavbar.html" %}
+            {% include "_finder_resources.html" %}
+        </div>
     </div>
-  </div>
-{% endfor %}
-  <div class="row">
-    {% include "resources_cards.html" %}
-  </div>
-  <div class="col-12">
-    {% if counter == 0  %}
-    <img  class="img-fluid img-zoom col-12 mt-5" src="{% static 'site/img/undraw_empty_xct9.svg' %}">
-    <h5 class="mb-4">{% trans "Sorry, nothing found" %}</h5>
-    {% else %}
-    &nbsp;
-    {% endif %}
-  </div>
-</div>
+    <div class="row">
+        {% include "resources_cards.html" %}
+    </div>
 </div>
 {% endblock list_of_items %}
 
 {% block scripts %}
-
+<script src="{% static 'site/js/bootstrap-autocomplete.js'%}"></script>
 <script>
-  $('.basicAutoComplete').autoComplete(
-  { minLength: 3 }
-  );
-
-  $('.basicAutoComplete').on('autocomplete.select', function (evt, item) {
-    $('#searchTop').submit();
-  });
-  $(function () {
-    $('#resource_language').on('change', function () {
-      $('#searchResources').submit();
+    $('.basicAutoComplete').autoComplete(
+        { minLength: 3 }
+    );
+    $('.basicAutoComplete').on('autocomplete.select', function (evt, item) {
+        $('#searchTop').submit();
     });
-  });
-  $(function () {
-    $('#theme').on('change', function () {
-      $('#searchResources').submit();
+    $(function () {
+        $('.custom-select').on('change', function () {
+            $('#searchResources').submit();
+        });
+        $('#pill-inLanguage').on('click', function() {
+            $('#inLanguage').val('')
+            $('#searchResources').submit()
+        });
+        $('#pill-theme').on('click', function() {
+            $('#theme').val('')
+            $('#searchResources').submit();
+        });
+        $('#pill-category').on('click', function() {
+            $('#category').val('')
+            $('#searchResources').submit();
+        });
+        $('#pill-audience').on('click', function() {
+            $('#audience').val('')
+            $('#searchResources').submit();
+        });
     });
-  });
-  $(function () {
-    $('#category').on('change', function () {
-      $('#searchResources').submit();
-    });
-  });
-
-  $("#license").blur(function () {
-    $('#searchResources').submit();
-  });
-
-  $(function () {
-    $('#approvedCheck').on('change', function () {
-      $('#searchResources').submit();
-    });
-  });
-  $(function () {
-    $('#orderby').on('change', function () {
-      $('#searchResources').submit();
-    });
-  });
-
 </script>
 {% endblock scripts %}

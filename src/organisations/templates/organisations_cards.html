@@ -12,8 +12,11 @@
                 <a href="/organisation/{{organisation.id }}" class="card-title">{{ organisation.name }}</a>
             </h5>
             <div class="small text-muted mb-2">{{organisation.dateCreated}}</div>
-                <a class="badge rounded-pill bg-dark text-decoration-none">{{organisation.country.name}}</a>
-                <a class="badge rounded-pill bg-my-darkBlue text-decoration-none">{{ organisation.orgType }}</a>
+            <a href="/organisations?country={{organisation.country.code}}" class="badge rounded-pill bg-dark text-decoration-none">
+                    {{organisation.country.name}}
+                </a>
+                <a href="/organisations?orgTypes={{organisation.orgType}}"
+                    class="badge rounded-pill bg-my-darkBlue text-decoration-none">{{ organisation.orgType }}</a>
                 <p class="mt-4">{{organisation.description | safe | truncatechars:180 }}
         </div><!-- End of card-body -->
     </div><!-- end of card -->

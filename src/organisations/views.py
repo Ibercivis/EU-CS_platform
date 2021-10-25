@@ -151,7 +151,7 @@ def organisations(request):
     organisations = Organisation.objects.get_queryset().order_by('id')
     countriesWithContent = Organisation.objects.all().values_list('country', flat=True).distinct()
     orgTypes = OrganisationType.objects.all()
-    filters = {'keywords': '', 'orgType': '', 'country': ''}
+    filters = {'keywords': '', 'orgTypes': '', 'country': ''}
     if request.GET.get('keywords'):
         organisations = organisations.filter(
                 Q(name__icontains=request.GET['keywords'])).distinct()
@@ -159,9 +159,9 @@ def organisations(request):
     if request.GET.get('country'):
         organisations = organisations.filter(country=request.GET['country'])
         filters['country'] = request.GET['country']
-    if request.GET.get('orgType'):
-        organisations = organisations.filter(orgType=request.GET['orgType'])
-        filters['orgType'] = request.GET['orgType']
+    if request.GET.get('orgTypes'):
+        organisations = organisations.filter(orgType__type=request.GET['orgTypes'])
+        filters['orgTypes'] = request.GET['orgTypes']
 
     counter = len(organisations)
 
@@ -173,8 +173,7 @@ def organisations(request):
         'organisations': organisations,
         'counter': counter,
         'filters': filters,
-        'countriesWithContent':
-        countriesWithContent,
+        'countriesWithContent': countriesWithContent,
         'orgTypes': orgTypes,
         'isSearchPage': True})
 

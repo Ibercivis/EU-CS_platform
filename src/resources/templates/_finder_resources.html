@@ -1,0 +1,120 @@
+{% load staticfiles %}
+{% load i18n %}
+{% load l10n %}
+{% get_language_info_list for LANGUAGES as languages %}
+<div class="row">
+    <form class=""
+          id="searchResources"
+          action="{% if isTrainingResource %} {% url 'training_resources' %} {% else %}{% url 'resources' %} {% endif %}">
+        <input type="hidden" name="keywords" value="{{filters.keywords}}" />
+        <div class="col-12">
+            <div class="input-group input-group-sm">
+                <div class="input-group-text"><i class="fas fa-sort-amount-down"></i></div>
+                <select id="orderby" name="orderby" class="custom-select form-control float-right">
+                    <option value="" {% if filters.orderby == "" %} selected {% endif %}>{% trans "Sort by Most Recent Updated" %}</option>
+                    <option value="-featured" {% if filters.orderby == "-featured" %} selected {% endif %}>{% trans "Sort by featured" %}</option>
+                    <option value="-avg_rating" {% if filters.orderby == "-avg_rating" %} selected {% endif %}>{% trans "Sort by rating" %}</option>
+                </select>
+                <div class="input-group-text"><i class="fas fa-filter"></i></div>
+                <select id="inLanguage" name="inLanguage" class="custom-select form-control">
+                    <option value="">{% trans "All languages" %}<option>
+                    {% for language in languages %}
+                    {% for lwc in languagesWithContent %}
+                    {% if language.code == lwc %}
+                    <option value="{{ language.code }}"
+                            {% if language.code ==  filters.inLanguage %} selected {% endif %}>
+                    {{ language.name }}
+                    </option>
+                    {% endif %}
+                    {% endfor %}
+                    {% endfor %}
+                </select>
+                <select id="theme" name="theme" class="custom-select form-control">
+                    <option value="">{% trans "All themes" %}</option>
+                    {% for theme in themes %}
+                    <option {% if theme.theme == filters.theme %} selected {% endif %} value="{{theme.theme}}">{{theme.theme}}</option>
+                    {% endfor %}
+                </select>
+                <select id="category" name="category" class="custom-select form-control">
+                    <option value="">{% trans "Category" %}</option>
+                    <option value=""></option>
+                    {% for category in categories %}
+                    <option {% if category.text == filters.category %} selected {% endif %} value="{{category.text}}">{{category}}</option>
+                    {% endfor %}
+                </select>
+
+                <select id="audience" name="audience" class="custom-select form-control">
+                    <option value="">{% trans "Audience" %}</option>
+                    <option value=""></option>
+                    {% for audience in audiencies %}
+                    <option {% if audience.audience == filters.audience %} selected {% endif %} value="{{audience.audience}}">
+                    {{audience.audience}}
+                    </option>
+                    {% endfor %}
+                </select>
+
+                {% if user.is_staff %}
+                <select id="approvedCheck" name="approvedCheck" class="custom-select form-control">
+                    <option value="On" {% if filters.approvedCheck == "On" %} selected {% endif %}>{% trans "Moderated" %}</option>
+                    <option value="Off" {% if filters.approvedCheck == "Off" %} selected {% endif %}>{% trans "Not yet moderated" %}</option>
+                    <option value="All" {% if filters.approvedCheck == "All" %} selected {% endif %}>{% trans "All" %}</option>
+                </select>
+                {% endif %}
+            </div>
+        </div>
+    </form>
+    <div class="col-12 mb-4">
+        {% if filters.keywords %}
+        <a href="#" class="badge rounded-pill bg-my-darkGreen search-filter">
+            <i class="fas fa-times"></i> {% trans "keyword:" %} {{filters.keywords}}
+        </a>
+        {% endif %}
+
+        {% if filters.inLanguage %}
+        <a href="#" class="badge rounded-pill bg-dark" id="pill-inLanguage">
+            <i class="fas fa-times"></i>
+            {% trans "language:" %}
+            {% for language in languages %}
+            {% if language.code ==  filters.inLanguage %} {{ language.name }}{% endif %}
+            {% endfor %}
+        </a>
+        {% endif %}
+
+        {% if filters.theme %}
+        <a href="#" class="badge rounded-pill bg-my-wood" id="pill-theme">
+            <i class="fas fa-times"></i>
+            {% trans "theme:" %} {{filters.theme}}
+        </a>
+        {% endif %}
+
+        {% if filters.category %}
+        <a href="#" class="badge rounded-pill bg-my-darkBlue" id="pill-category">
+            <i class="fas fa-times"></i>
+            {% trans "category:" %} {{filters.category}}
+        </a>
+        {% endif %}
+
+        {% if filters.audience %}
+        <a href="#" class="badge rounded-pill bg-my-lightGreen" id="pill-audience">
+            <i class="fas fa-times"></i>
+            {% trans "audience:" %} {{filters.audience}}
+        </a>
+        {% endif %}
+
+        {% if request.get_full_path != "/resources" %}
+        <a class="badge rounded-pill bg-danger"
+           href="{% if isTrainingResource %} {% url 'training_resources' %} {% else %}{% url 'resources' %} {% endif %}">
+            <i class="fas fa-times"></i> Clear current search query and filters
+        </a>
+        {% endif %}
+        <div>
+            {% if isTrainingResource %}
+            {{ counter }} {% if counter != 1 %} {% trans "training resources found" %} {% else %}{% trans "training resource found" %} {% endif %}
+
+            {% else %}
+            {{ counter }} {% if counter != 1 %} {% trans "resources found" %} {% else %}{% trans "resource found" %} {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+

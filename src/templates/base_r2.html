@@ -34,9 +34,8 @@
                 integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
                 crossorigin="anonymous">
         </script>
-        <script src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
-        <script src="{% static 'site/js/eu-citizen_science.js' %}"></script>
 
+        <script src="{% static 'site/js/eu-citizen_science.js' %}"></script>
         <!--link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"-->
          <!--link rel="stylesheet" href="{% static 'site/css/style_11_01_2021.css' %}"-->
         <link rel="stylesheet" href="{% static 'cookielaw/css/cookielaw.css' %}">
@@ -55,7 +54,7 @@
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                             <a class="nav-link main {% active_link 'all || projects || resources || training_resources || organisations'%}" 
-                               href="{% url 'all' %}">{% trans "Search" %}
+                               href="{% url 'projects' %}">{% trans "Search" %}
                             </a>
                         </li>
                         <li class="nav-item">
