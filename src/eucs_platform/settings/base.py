@@ -11,13 +11,18 @@ from django.urls import reverse_lazy
 from machina import MACHINA_MAIN_TEMPLATE_DIR, MACHINA_MAIN_STATIC_DIR
 from pathlib import Path
 import os
+# For Bootstrap 3, change error alert to 'danger'
+from django.contrib import messages
+# Use 12factor inspired environment variables or from a file
+import environ
 
 # Build paths inside the project like this: BASE_DIR / "directory"
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 STATICFILES_DIRS = [str(BASE_DIR / "static"), MACHINA_MAIN_STATIC_DIR]
 MEDIA_ROOT = str(BASE_DIR / "media")
 MEDIA_URL = "/media/"
-STATIC_ROOT= "/home/ubuntu/v0.5/static"
+STATIC_ROOT = "/home/ubuntu/v0.5/static"
+THUMBNAIL_DEBUG = True
 
 LOCALE_PATHS = [
     os.path.join(BASE_DIR, 'locale'),
@@ -57,16 +62,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 # Machina
                 'machina.core.context_processors.metadata',
-                #own
+                # Wwn
                 'eucs_platform.context_processors.global_settings',
 
             ]
         },
     }
 ]
-
-# Use 12factor inspired environment variables or from a file
-import environ
 
 env = environ.Env()
 
@@ -101,6 +103,8 @@ INSTALLED_APPS = (
     "accounts",
     "projects",
     "resources",
+    "digest",
+    "platforms",
     "django_select2",
     "blog",
     "django_summernote",
@@ -121,6 +125,7 @@ INSTALLED_APPS = (
     'captcha',
     'active_link',
     'oauth2_provider',
+    'django.contrib.gis',
 
     # Machina dependencies:
     'mptt',
@@ -157,7 +162,6 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     # Machina
     'machina.apps.forum_permission.middleware.ForumPermissionMiddleware',
-    
     'django.middleware.locale.LocaleMiddleware',
 ]
 
@@ -170,7 +174,8 @@ WSGI_APPLICATION = "eucs_platform.wsgi.application"
 
 DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'ENGINE': 'django.contrib.gis.db.backends.postgis',
             'NAME': env("DATABASE_NAME"),
             'USER': env("DATABASE_USER"),
             'PASSWORD': env("DATABASE_PASSWORD"),
@@ -190,12 +195,12 @@ TRANSLATED_LANGUAGES = (
     ('et', 'Estonian'),
     ('fr', 'Français'),
     ('de', 'German'),
-    ('el', 'Greek'),    
+    ('el', 'Greek'),
     ('hu', 'Hungarian'),
     ('it', 'Italian'),
     ('lt', 'Lituanian'),
     ('pt', 'Portuguese'),
-    ('es', 'Spanish'),    
+    ('es', 'Spanish'),
     ('sv', 'Swedish'),
 )
 
@@ -268,8 +273,6 @@ ALLOWED_HOSTS = ["*"]
 # Crispy Form Theme - Bootstrap 3
 CRISPY_TEMPLATE_PACK = "bootstrap3"
 
-# For Bootstrap 3, change error alert to 'danger'
-from django.contrib import messages
 
 MESSAGE_TAGS = {
         messages.DEBUG: 'alert-secondary',
@@ -292,8 +295,6 @@ LEAFLET_CONFIG = {
     'MIN_ZOOM': 2,
     'RESET_VIEW': False,
     'MAX_ZOOM': 18,
-    #'TILES': [('', 'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {'attribution': '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors', 'maxZoom': 20})]
-
 }
 
 SUMMERNOTE_THEME = 'bs4'
@@ -309,29 +310,34 @@ SUMMERNOTE_CONFIG = {
     'disable_attachment': True,
 }
 
-#EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = env("HOST_EMAIL")
+# EMAIL_HOST_USER = env("FROM_EMAIL")
+# EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+# EMAIL_PORT = '587'
+# EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django_ses.SESBackend'
 DEFAULT_FROM_EMAIL = env("FROM_EMAIL")
-EMAIL_HOST = env("HOST_EMAIL")
-EMAIL_HOST_USER = env("FROM_EMAIL")
-EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
-EMAIL_PORT = '587'
-EMAIL_USE_TLS = True
+# These are optional -- if they're set as environment variables they won't
+# need to be set here as well
+AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+
+# Additionally, if you are not using the default AWS region of us-east-1,
+# you need to specify a region, like so:
+AWS_SES_REGION_NAME = env('AWS_SES_REGION_NAME')
+AWS_SES_REGION_ENDPOINT = env('AWS_SES_REGION_ENDPOINT')
+
 
 EMAIL_RECIPIENT_LIST = [
-    "eucitsci@mfn.berlin",
-    "frasanz@bifi.es",
-    "Claudia.FaboCartas@mfn.berlin"
+    "frasanz@bifi.es"
 ]
 
 EMAIL_CONTACT_RECIPIENT_LIST = [
-    "eucitsci@mfn.berlin",
-    "frasanz@bifi.es",
-    "Claudia.FaboCartas@mfn.berlin",
-    "Antonella.Radicchi@mfn.berlin"
+    "frasanz@bifi.es"
 ]
 
-HOST =  env("HOST")
+HOST = env("HOST")
 
 SITE_ID = 1
 REVIEW_PUBLISH_UNMODERATED = True
@@ -357,19 +363,19 @@ DJOSER = {
     'SEND_ACTIVATION_EMAIL': True,
 }
 
-#OPENID
-#LOGIN_URL = '/accounts/login/'
+# OPENID
+# LOGIN_URL = '/accounts/login/'
 OIDC_SESSION_MANAGEMENT_ENABLE = True
 OIDC_USERINFO = 'eucs_platform.oidc_provider_settings.userinfo'
 
 
-#Swagger
+# Swagger
 LOGOUT_URL = 'rest_framework:logout'
 
 RECAPTCHA_PUBLIC_KEY = env("RECAPTCHA_PUBLIC_KEY")
 RECAPTCHA_PRIVATE_KEY = env("RECAPTCHA_PRIVATE_KEY")
 
-#Machina - search for forum conversations
+# Machina - search for forum conversations
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
@@ -401,7 +407,7 @@ MACHINA_PROFILE_AVATARS_ENABLED = False
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
-CKEDITOR_REQUIRE_STAFF=False
+CKEDITOR_REQUIRE_STAFF = False
 
 CKEDITOR_CONFIGS = {
     'default': {
@@ -414,7 +420,7 @@ CKEDITOR_CONFIGS = {
                        'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl',
                        'Language']},
             {'name': 'links', 'items': ['Link', 'Unlink', 'Anchor']},
-            {'name': 'insert','items': ['Image']},
+            {'name': 'insert', 'items': ['Image']},
             '/',
             {'name': 'styles', 'items': ['Styles', 'Format', 'FontSize']},
             {'name': 'colors', 'items': ['TextColor', 'BGColor']},
@@ -424,7 +430,8 @@ CKEDITOR_CONFIGS = {
         'toolbar': 'Custom',
         'toolbar_Custom': [
             ['Bold', 'Italic', 'Underline'],
-            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent',
+                '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
             ['Link', 'Unlink'],
             ['RemoveFormat']
         ]

@@ -1,0 +1,29 @@
+{% load i18n %}
+<div class="container">
+  <div class="row">
+    <div class="modal fade" id="modalsubmit">
+      <div class="modal-dialog mdialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">{% trans "What do you want to submit?" %}</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            </button>
+          </div>
+          <div class="modal-body">
+            <h4><a  href="/newProject" class="colorred"><i class="fas fa-binoculars"></i> {% trans "Project" %}</a></h4>
+            {% trans "Create a Citizen Science Project profile" %}<br/><hr>
+            <h4><a href="/newResource" class="colorgreen"><i class="fas fa-book"></i> {% trans "Resource" %}</a></h4>
+            {% trans "Create a profile for a Resource that is relevant for Citizen Science" %}<br/><hr>
+            <h4><a href="/newTrainingResource" class="colorlightblue"><i class="fas fa-graduation-cap"></i> {% trans "Training" %}</a></h4>
+            {% trans "Create a profile for Training and Education Material related to the practice of Citizen Science" %}<br/><hr>
+            <h4><a href="/new_organisation" class="colorpurple"><i class="fas fa-university"></i> {% trans "Organisation" %}</a></h4>
+            {% trans "Create a profile for your Organisation" %}<br/>
+            <hr>
+            <h4><a href="/new_event" class="colororange"><i class="fas fa-calendar-day"></i> {% trans "Event" %}</a></h4>
+            {% trans "Create an Event" %}<br/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

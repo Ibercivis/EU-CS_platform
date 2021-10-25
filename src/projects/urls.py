@@ -4,13 +4,17 @@ from . import views
 
 
 urlpatterns = [
-    path('new_project', views.new_project, name='new_project'),
+    path('newProject', views.newProject, name='newProject'),
+    path('editProject/<int:pk>', views.editProject, name='editProject'),
+    path('saveProjectAjax', views.saveProjectAjax, name='saveProjectAjax'),
     path('projects', views.projects, name='projects'),
     path('projects_stats', views.projects_stats, name='projects_stats'),
+    path('getProjectTranslation/', views.getProjectTranslation, name='getProjectTranslation'),
+    path('submitProjectTranslation/', views.submitProjectTranslation, name='submitProjectTransalation'),
     path('project/<int:pk>', views.project, name='project'),
-    path('editProject/<int:pk>', views.editProject, name='editProject'),
     path('deleteProject/<int:pk>', views.deleteProject, name='deleteProject'),
-    path('text_autocomplete/', views.text_autocomplete, name='text_autocomplete'),
+    path('translateProject/<int:pk>', views.translateProject, name='translateProject'),
+    path('projectsAutocompleteSearch/', views.projectsAutocompleteSearch, name='projectsAutocompleteSearch'),
     path('clearfilters/', views.clearFilters, name='clearfilters'),
     path('setApproved/', views.setApproved, name='setApproved'),
     path('setHidden/', views.setHidden, name='setHidden'),
@@ -20,6 +24,4 @@ urlpatterns = [
     path('project_review/<int:pk>', views.project_review, name='project_review'),
     url(r'^api/', include('projects.api.urls')),
     path('downloadProjects', views.downloadProjects, name='downloadProjects'),
-    path('getOrganisations', views.getOrganisations, name='getOrganisations'),
-    path('getKeywordsSelector', views.getKeywordsSelector, name='getKeywordsSelector'),
 ]

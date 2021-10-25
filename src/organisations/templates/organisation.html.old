@@ -1,0 +1,114 @@
+{% extends "base_r2.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% load leaflet_tags %}
+{% load thumbnail %}
+{% block head %}
+{{ block.super }}
+{% leaflet_js %}
+{% leaflet_css %}
+
+{% endblock head %}
+{% block title %}Organisation{% endblock %}
+
+{% block list_of_items %}
+<!-- Delete modal -->
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h4 class="modal-title" id="myModalLabel">{% trans "Confirm delete" %}</h4>
+		  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		</div>
+		<div class="modal-body">
+		  <p>{% trans "You are going to delete this organisation, this procedure is irreversible." %}</p>
+		  <p>{% trans "Do you want to proceed?" %}</p>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+		  <a class="btn btn-red btn-delete"><i class="fas fa-trash-alt"></i> {% trans "Delete" %}</a>
+		</div>
+	  </div>
+	</div>
+  </div>
+{{ permissionForm.media.css }}
+<div class="container">
+	<div class="card">
+		<div class="card-body">
+			<div class="row">
+				<div class="col-sm-3 col-12">
+					<img title="organisation logo" target="_blank"
+					class="img-fluid mb-3" src="{{organisation.logo|default:'/media/default_profile.png' }}">
+					<div><strong>Contact Point</strong>: {{ organisation.contactPoint }} </div>
+					<div class="mb-5"><strong>{% trans "Contact Point Email" %}</strong>: {{ organisation.contactPointEmail }}</div>
+				</div>
+				<div class="col-sm-9 col-12">
+					<div class="row">
+						<div class="col-9">
+							<h3>{{ organisation.name }}</h3>
+						</div>
+						<div class="col-3 text-right">
+							<a target="_blank" href="{% if 'http' not in organisation.url %}//{%endif%}{{organisation.url}}"
+							class="colorpurple"><i class="fas fa-external-link-square-alt"></i> {% trans "Go to Organisation" %}</a>
+						</div>
+					</div>
+
+					{{ organisation.description | safe }}
+					{% if associatedProjects.all %}
+					<h5 class="mt-3">{% trans "Projects" %}</h5>
+					{% for project in associatedProjects.all %}
+					<a class="badge badge-light pt-1" href="/project/{{project.id}}">{{project|upper}}</a>
+					{% endfor %}
+					{% endif %}
+					{% if associatedResources.all %}
+					<h5 class="mt-3">{% trans "Resources" %}</h5>
+					{% for resource in associatedResources.all %}
+					<a class="badge badge-light pt-1" href="/resource/{{resource.id}}">{{resource|upper}}</a>
+					{% endfor %}
+					{% endif %}
+					{% if members.all %}
+					<h5 class="mt-3">{% trans "Members" %}</h5>
+					{% for member in members.all %}
+					<a class="badge badge-light pt-1" href="/users/{{member.slug}}">{{member.user.name | upper}}</a>
+					{% endfor %}
+					{% endif %}
+					<div class="mt-4">
+						{% leaflet_map "map" callback="window.map_init_basic" %}
+					</div>
+				</div>
+			</div>
+		</div><!-- end of card body -->
+		{% if editable %}
+		<div class="card-footer">
+			<a data-href="{% url 'delete_organisation' organisation.id %}" data-toggle="modal" data-target="#confirm-delete" 
+					class="btn btn-outline btn-red float-right ml-2 mt-2">
+				<span class="fas fa-trash-alt"></span>&nbsp;{% trans "Delete Organisation" %}
+			</a>
+			<a href="{% url 'edit_organisation' organisation.id %}" class="btn btn-outline btn-green float-right ml-2 mt-2">
+				<i class="fas fa-edit"></i> {% trans "Edit Organisation" %}
+			</a>
+		</div>
+		{% endif %}
+
+	</div>
+</div>
+
+{% endblock list_of_items%}
+
+{% block scripts %}
+<script>
+	$('#confirm-delete').on('show.bs.modal', function(e) {
+		$(this).find('.btn-delete').attr('href', $(e.relatedTarget).data('href'));
+	});
+
+	var map;
+	var marker_layer = new L.marker([50.5, 30.5]);
+	function map_init_basic (leafmap, options) {
+		map = leafmap;
+		map.setView([{{organisation.latitude}}, {{organisation.longitude}}], 12)
+		new L.marker([{{organisation.latitude}},{{organisation.longitude}}]).addTo(map);
+	}
+</script>
+{{ permissionForm.media.js }}
+{% endblock scripts %}

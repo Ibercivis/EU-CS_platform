@@ -1,164 +1,69 @@
-{% extends "base_r2.html" %}
+{% extends "./base_template_profiles.html" %}
 {% load i18n %}
 {% load staticfiles %}
-{% load crispy_forms_tags %}
 {% load thumbnail %}
-{% load leaflet_tags %}
+{% load crispy_forms_tags %}
 {% block head %}
 {{ block.super }}
-<link rel="stylesheet" href="{% static 'site/css/leaflet-geosearch_style.css' %}">
-<link rel="stylesheet" href="{% static 'site/css/leaflet.css' %}">
+<link rel="stylesheet" href="{% static 'site/css/forms.css' %}">
 {{ profile_form.media.css }}
-{% leaflet_js %}
-{% leaflet_css %}
+{{ form.media.css }}
+{{ form.media.js }}
 {% endblock head %}
-
-{% block title %}{{ block.super }}Profile{% endblock %}
-
-{% block navbar-left %}
-{% include "_navbar.html" with active_link="" %}
-{% endblock %}
-{% block list_of_items %}
+{% block profile_right %}
 <div class="container">
-	<div class="row mt-5">
-		<div class="container-fluid">
-			<div class="card mt-5 mb-5 shadow">
-				<div class="card-body">
-					<div class="card-title">
-						<h2>
-							<img title="profile picture" class="img-fluid rounded-circle"
-							src="{% thumbnail user.profile.picture|default:'default_profile.png' 140x140 crop %}">
-							{% trans "Edit profile" %}: {{ user.get_full_name }}
-						</h2>
-					</div>
-					<div class="card-text">
-						<form enctype="multipart/form-data" method="post">
-							{% csrf_token %}
-							{{ user_form.name|as_crispy_field }}							
-							{{ user_form.email|as_crispy_field }}
+    <div class="row">
+        <form enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-12">
+                    <h4 class="leftborder">{% trans "Personal information" %}</h4>
+                    <div class="row">
+                        <div class="col-1"></div>
+                        <div class="col-11">
+                            {{ profile_form.title|as_crispy_field }}
+                            {{ user_form.name|as_crispy_field }}							
+                            {{ profile_form.surname|as_crispy_field }}
+                            {{ user_form.email|as_crispy_field }}
+                            {{ profile_form.country|as_crispy_field }}
+                        </div>
+                    </div>
+                    <h4 class="leftborder mt-5">{% trans "Bio &amp; Interest Areas" %}</h4>
+                    <div class="row">
+                        <div class="col-1"></div>
+                        <div class="col-11">
+                            {{ profile_form.bio|as_crispy_field }}
+                            {{ profile_form.interestAreas|as_crispy_field }}
+                        </div>
+                    </div>
+                    <h4 class="leftborder mt-5">{% trans "Participation" %}</h4>
+                    <div class="row">
+                        <div class="col-1"></div>
+                        {{ profile_form.organisation|as_crispy_field }}
+                        <div class="col-11">
+                        </div>
+                    </div>
+                    <h4 class="leftborder mt-5">{% trans "Picture" %}</h4>
+                    <div class="row">
+                        <div class="col-1"></div>
+                        <div class="col-11">
+                            {{ profile_form.picture|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-1"></div>
+                        <div class="col-11">
+                            <button id="upload" type="submit" class="btn btn-secondary mt-4 mb-4"><i class="fas fa-share-square"></i> {% trans "Save" %}</button>
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
-							{{ profile_form.picture|as_crispy_field }}
-							{{ profile_form.title|as_crispy_field }}
-							{{ profile_form.bio|as_crispy_field }}
-							{{ profile_form.orcid|as_crispy_field }}
-							{{ profile_form.organisation|as_crispy_field }}
-							{{ profile_form.interestAreas|as_crispy_field }}
-							{{ profile_form.choices|as_crispy_field }}
-							{{ profile_form.latitude|as_crispy_field }}
-							{{ profile_form.longitude|as_crispy_field }}
-							<label>{% trans "Geographical location" %}</label>
-							{% leaflet_map "map" callback="window.map_init_basic" %}
-							<br/><br/>
-							<button id="upload" type="submit" class="btn btn-green"><i class="fas fa-share-square"></i> {% trans "Save" %}</button>
-							<a class="btn btn-red float-right" href="{% url 'accounts:password-change' %}"><i class="fas fa-key"></i> {% trans "Change Password" %}</a>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	{% endblock list_of_items%}
+{% endblock profile_right %}
 
-	{% block scripts %}
-	<script src="{% static 'site/js/leaflet-geosearch_2_7.min.js' %}"></script>
-	<script>
-
-		$(document).ready(function () {
-			$('.js-example-basic-single').select2();
-			var choices = $("#id_choices").val();
-			var choices = choices.split(",");
-
-			for (choice of choices){
-				$("#id_interestAreas").append("<option value='" + choice +"' selected> " + choice + " </option>");
-			}
-
-			$("#div_id_interestAreas div").on('keyup', function(e){
-				var key = $("#div_id_interestAreas .selection input").val();
-				if (key.indexOf(',') > -1) {
-					var word =key.slice(0, -1);				
-					$("#div_id_interestAreas .selection input").val("");
-					if(word.length > 1){
-						$("#id_interestAreas").append("<option value='" + word +"' selected> " + word + " </option>");
-					}
-				}
-				if(e.which == 13) {
-					$("#div_id_interestAreas .selection input").val("");
-					if(key.length > 1){
-						$("#id_interestAreas").append("<option value='" + key +"' selected> " + key + " </option>");
-					}
-				}
-			});
-
-			$("#upload").on('click', function(){
-				var option_all = $("#id_interestAreas option:selected").map(function () {
-					return $.trim($(this).text());
-				}).get().join(',');
-				$("#id_choices").val(option_all);
-				$("#id_interestAreas").empty();
-			});
-
-		});
-	</script>
-
-	<script type="text/javascript">
-		var map;
-		var marker_layer = new L.marker([50.5, 30.5]);
-
-		function editMarker(e){
-			map.removeLayer(marker_layer);
-			marker_layer = new L.marker(e.latlng, {draggable:true});
-			marker_layer.on('drag', function (e) {
-				$("#id_latitude").val((e.latlng.lat).toFixed(6));
-				$("#id_longitude").val((e.latlng.lng).toFixed(6));
-			});
-			map.addLayer(marker_layer);
-			$("#id_latitude").val((e.latlng.lat).toFixed(6));
-			$("#id_longitude").val((e.latlng.lng).toFixed(6));
-		}
-
-		function searchedMarker(e){
-			map.removeLayer(marker_layer);
-			marker_layer = new L.marker([e.location.y,e.location.x], {draggable:true});
-			marker_layer.on('drag', function (e) {
-				$("#id_latitude").val((e.latlng.lat).toFixed(6));
-				$("#id_longitude").val((e.latlng.lng).toFixed(6));
-			});
-			map.addLayer(marker_layer);
-			$("#id_latitude").val(parseFloat(e.location.y).toFixed(6));
-			$("#id_longitude").val(parseFloat(e.location.x).toFixed(6));
-		}
-
-		function map_init_basic (leafmap) {
-			map = leafmap;
-			if($("#id_latitude").val() !== '')
-				map.setView([parseFloat($("#id_latitude").val()),parseFloat($("#id_longitude").val())], 12)
-			var obj = { latlng: {
-				lat: parseFloat($("#id_latitude").val()),
-				lng: parseFloat($("#id_longitude").val()) }
-			}
-			if($("#id_latitude").val())
-				editMarker(obj);
-			map.on('click', editMarker);
-
-			var GeoSearchControl = window.GeoSearch.GeoSearchControl;
-			var OpenStreetMapProvider = window.GeoSearch.OpenStreetMapProvider;
-			var provider = new OpenStreetMapProvider({});
-
-			//  Define search controls
-			var searchControl = new GeoSearchControl({
-				provider: provider,
-				style: 'bar',
-				showMarker: false,
-				autoClose: true,
-				keepResult: true,
-				//retainZoomLevel: true,
-			});
-
-			map.addControl(searchControl);
-			map.on('geosearch/showlocation', searchedMarker);
-		}
-
-	</script>
-
-	{{ profile_form.media.js }}
-	{% endblock scripts %}
+{% block scripts %}
+{{ profile_form.media.js }}
+{% endblock scripts %}

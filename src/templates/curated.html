@@ -4,84 +4,34 @@
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% block title %}{{ block.super }}:: Our Selection{% endblock %}
-{% block splash %}
-
-<!--div class="jumbotron jumbotron-fluid jumbotron-lists mb-0">
-	<div class="container">
-		<h1 class="display-4 pb-0 pt-0 text-white"><br>Our selection</h1>
-		<p class="lead text-light">A selection of Gold Star citizen science resources curated by the EU-Citizen.Science consortium</p>
-	</div>
-</div-->
-
-{% endblock splash %}
-{% block navbar-left %}
-{% include "_navbar_r2.html" with active_link="curated" %}
-{% endblock %}
-{% block page_title %}
-Curated Resources
-{% endblock page_title %}
 {% block list_of_items %}
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
+            <h1>{% trans "gold star <span class='lightBlue-color'> selection</span>" %}</div>
+        </div>
+        <div class="col-12 small">
 			<b>{% trans "The EU-Citizen.Science consortium has curated a selection of Gold Star citizen science resources" %}</b>
 			{% trans "to help you get started with designing and launching your own citizen science project or simply learn about citizen science, categorised across the project lifecycle." %}
+    {% include "_subnavbar.html" %}
 		</div>
 	</div>
 </div>
 {% for group in groups %}
 <div class="container">
-	<div class="row">
-		<div class="col-12">
+    <div class="row">
+        <div class="col-12">
+        </div>
+        <div class="col-lg-12 mt-5">
+            <h2>{{group.name}}</h2>
+        </div>
+    </div>
 
-		</div>
-		<div class="col-lg-12 mt-5">
-			<h2>{{group.name}}</h2>
-		</div>
-	</div>
-
+    <!-- TODO: Endpoint is not working here -->
 	<div class="row">
 		{% for rg in resourcesgrouped %}
 		{% if rg.group == group %}
-
-		<div class="col-lg-4 col-md-6 col-xs-12 mb-5">
-		  <div class="card h-100 shadow border-0">
-		    <a class="card-img-wrap" href="{% if isTrainingResource %}/training_resource/{{rg.resource.id}}{% else %}/resource/{{rg.resource.id}}{% endif %}">
-		      {% if rg.resource.image1 %}
-		      <img class="img-fluid img-zoom {% if rg.resource.id not in approvedResources %} nonmoderated {% endif %} " src="{{ rg.resource.image1 }}" />
-		      {% else %}
-		      <img class="img-fluid img-zoom {% if rg.resource.id not in approvedResources %} nonmoderated {% endif %}" src="{% static 'site/img/resource_default_card.png' %}" />
-		      {% endif %}
-		      <div class="upper">
-		        {% if rg.resource.hidden %}<a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT ACCEPTED</a><br/>
-		        {% else %} {% if rg.resource.id not in approvedResources %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">NOT YET MODERATED</a><br/>
-		        {% else %} {% if filters.approvedCheck == "All" %}  <a class="badge frontpage frontpage-green mb-2" href="/faq#moderation">MODERATED</a><br/>{% endif %}
-		        {% endif %}{% endif %}
-		        {% get_language_info_list for LANGUAGES as languages %}
-		        {% for language in languages %}
-		        {% if language.code == rg.resource.inLanguage %}
-		        <a class="badge badge-dark" href="/resources?language={{rg.resource.inLanguage}}">{{language.name | upper}}</a><br/>
-		        {% endif %}
-		        {% endfor %}
-		      </div>
-
-		    </a>
-
-		    <div class="card-body">
-		      <h6 class="card-title">
-		        <div class="col-12 {%if rg.resource.isTrainingResource %} colorblue {% else %} colorgreen {% endif %} pl-0 mb-3">
-		          <i class="fas fa-book"></i>{% if rg.resource.featured %} Featured {% endif %}
-		          {%if rg.resource.isTrainingResource %} Training {% else %} Resource {% endif %}
-		        </div>
-		        <a class="card-link"
-		        href="{% if isTrainingResource %}/training_resource/{{rg.resource.id}}{% else %}/resource/{{rg.resource.id}}{% endif %}"
-		        class="card-link">{{ rg.resource.name | truncatewords:12 }}</a></h6>
-		        <a class="badge badge-light pt-1" href="/resources?category={{rg.resource.category.id}}">{{ rg.resource.category | title }}</a><br>
-		        {% for theme in rg.resource.theme.all %}<a class="badge badge-light" href="/resources?theme={{theme.id}}">{{ theme | title}}</a> {% endfor %}<br>
-		        {% for keyword in rg.resource.keywords.all %} <a class="badge  badge-light" href="/resources?keywords={{keyword}}">{{keyword | title}}</a>  {% endfor %}
-		      </div><!-- end of card-body -->
-		    </div><!-- end of card -->
-		  </div>
+        {% include 'resource_card_one.html' with resource=rg.resource %}
 		{% endif %}
 		{% endfor %}
 	</div>
@@ -89,15 +39,3 @@ Curated Resources
 
 {% endfor %}
 {% endblock list_of_items %}
-{% block scripts %}
-<script>
-	$(document).ready(function() {
-		$( ".card" ).hover(
-		function() {
-			$(this).addClass('shadow-none').css('cursor', 'pointer');
-		}, function() {
-			$(this).removeClass('shadow-none');
-		});
-	});
-</script>
-{% endblock scripts %}

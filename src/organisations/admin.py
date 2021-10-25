@@ -7,7 +7,5 @@ class OrganisationAdmin(admin.ModelAdmin):
     ordering = ('-name',)
 
 
-
-    
 admin.site.register(OrganisationType)
 admin.site.register(Organisation, OrganisationAdmin)

@@ -6,6 +6,7 @@ from django_select2.forms import Select2MultipleWidget
 
 class ProjectFormA(forms.ModelForm):
     topic = forms.ModelMultipleChoiceField(queryset=Topic.objects.all(), widget=Select2MultipleWidget, required=False)
+
     class Meta:
         model = Project
         exclude = ('origin',)

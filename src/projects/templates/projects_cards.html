@@ -1,0 +1,49 @@
+{% load i18n %}
+{% load staticfiles %}
+{% load reviews %}
+{% load thumbnail %}
+{% for project in projects %}
+<div class="col-lg-3 col-sm-6 col-12 mb-5">
+    <div class="card h-100 shadow border-0">
+        <a href="/project/{{project.id}}">
+            <img class="img-fluid" src="{% thumbnail project.image1|default:'void_600.png' 400x600%}" />
+        </a>
+        <div class="card-body">
+            <h4 class="mt-2 mb-0">
+                <a href="/project/{{project.id}}" class="card-title">{{project.name | truncatewords:10 }}</a>
+            </h4>
+            <div class="small text-muted mb-2">{{ project.dateCreated}}</div>
+            <!-- TODO: improve this loop -->
+            {% if project.mainOrganisation %}
+            <a href="/projects?country={{project.mainOrganisation.country}}" class="badge rounded-pill bg-dark">
+                {{ project.mainOrganisation.country.name }}
+            </a>
+            {% endif %}
+            {% for topic in project.topic.all %}
+            {% if forloop.counter < 3 %}
+            <a class="badge rounded-pill bg-my-darkBlue text-decoration-none" 
+               href="/projects?keywords=&topic={{topic|urlencode}}">{{topic}}</a>
+            {% elif forloop.counter < 4 %}
+            ...
+            {% endif %}
+            {% endfor %}
+            </button>
+            {% for keyword in project.keywords.all %} 
+            {% if forloop.counter < 3 %}
+            <a class="badge rounded-pill bg-my-darkGreen text-decoration-none"
+               href="/projects?keywords={{keyword|urlencode}}">{{keyword}}
+            </a>
+            {% elif forloop.counter < 4 %}
+            ...
+            {% endif %}
+            {% endfor %}
+            <p class="mt-3 gray7">{{ project.description | safe| truncatewords_html:30 }}</p>
+        </div><!-- End of card-body -->
+    </div><!-- end of card -->
+</div><!-- end of col -->
+{% endfor %}
+{% if 'projects' in request.get_full_path %}
+<div class="col-lg-12">
+    {% include "paginator.html" %}
+</div>
+{% endif %}

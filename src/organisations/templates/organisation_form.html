@@ -1,0 +1,269 @@
+{% extends "base_r2.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load thumbnail %}
+{% load leaflet_tags %}
+{% load crispy_forms_tags %}
+{% block head %}
+{{block.super }}
+<link rel="stylesheet" href="{% static 'site/css/leaflet-geosearch_style.css' %}">
+<link rel="stylesheet" href="{% static 'site/css/leaflet.css' %}">
+<link rel="stylesheet" href="{% static 'site/css/forms.css' %}">
+{% leaflet_js %}
+{% leaflet_css %}
+{{ form.media.css }}
+{{ form.media.js }}
+
+{% endblock head %}
+
+{% block title %}{{ block.super }} :: Edit organisation{% endblock %}
+
+
+{% block list_of_items %}
+{% include '_crop_zone.html' %}
+<!-- END MODAL TO CROP -->
+
+<!-- TODO: This form like the others -->
+<div class="container mt-5">
+    <form
+        {% if organisation.id %}
+        action="/edit_organisation/{{organisation.id}}"
+        {% else %}
+        action="/new_organisation"
+        {% endif %}
+        method="post"
+        enctype="multipart/form-data"
+        class="edit-organisation"
+        autocomplete="off">
+        {% csrf_token %}
+
+        <div class="row">
+            <div class="col-12">
+                {% include "_intro_form_organisation.html" %}
+                <div class="row">
+                    <div class="col-2"></div>
+                    <div class="col-8">
+                        <h3 class="leftborder">{% trans "Main information" %}</h3>
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                <input type="hidden" id="organisationID" name="organisationID" value={{organisation.id}}>
+                                {{ form.name|as_crispy_field }}
+                                {{ form.url|as_crispy_field }}
+                                {{ form.description|as_crispy_field }}
+                                {{ form.orgType|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2"></div>
+                    <div class="col-8">
+                        <h3 class="leftborder mt-5">{% trans  "Contact information" %}</h3>
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                {{ form.contact_point|as_crispy_field }}
+                                {{ form.contact_point_email|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2"></div>
+                    <div class="col-8">
+                        <h3 class="leftborder mt-5">{% trans "Organisation logo" %}</h3>
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                <a id="imgResult" href="#"> <img
+                                                  class="img-fluid img-zoom"
+                                                  id="imageResult"
+                                                  src="{% thumbnail organisation.logo|default:'images/void_600.png' 600x400 crop%}"> </a>
+
+                                {{ form.logo|as_crispy_field }}
+                                {{ form.x|as_crispy_field }}
+                                {{ form.y|as_crispy_field }}
+                                {{ form.height|as_crispy_field }}
+                                {{ form.width|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2"></div>
+                    <div class="col-8">
+                        <h3 class="leftborder mt-5">{% trans "Location" %}</h3>
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                {% leaflet_map "map" callback="window.map_init_basic" %}
+                                {{ form.latitude|as_crispy_field }}
+                                {{ form.longitude|as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="row mt-5 mb-5">
+                            <div class="col-11">
+                                <button type="submit" class="btn btn-my-darkBlue"><i class="fas fa-share-square"></i> {% trans "Save" %}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock list_of_items %}
+
+{% block scripts %}
+<script src="{% static 'site/js/site.js' %}"></script>
+<script src="{% static 'scripts/cropper.min.js' %}"></script>
+<script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"></script>
+<script src="{% static 'site/js/leaflet-geosearch_2_7.min.js' %}"></script>
+<script>
+  $(document).ready(function () {
+    $(function () {
+      changed = false;
+      /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
+      $("#id_logo").change(function () {
+        $('#imageResult').attr('src', '');
+        if (this.files && this.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            changed = true;
+            $("#image").attr("src", e.target.result);
+            $("#modalCrop").modal("show");
+          }
+          reader.readAsDataURL(this.files[0]);
+        }
+      });
+
+
+      $("#imageResult").click(function () {
+        if(!changed)
+        $("#id_logo").click();
+        else{
+          $("#modalCrop").modal("show");
+        }
+      });
+
+      /* SCRIPTS TO HANDLE THE CROPPER BOX */
+      var $image = $("#image");
+      var cropBoxData;
+      var canvasData;
+      $("#modalCrop").on("shown.bs.modal", function () {
+        $image.cropper({
+          viewMode: 0,
+          aspectRatio: 3/2,
+          minCropBoxWidth: 600,
+          minCropBoxHeight: 400,
+          dragMode: 'move',
+          guides: false,
+          center: false,
+          highlight: false,
+          cropBoxResizable: false,
+          toggleDragModeOnDblclick: false,
+          ready: function () {
+            $image.cropper("setCanvasData", canvasData);
+            $image.cropper("setCropBoxData", cropBoxData);
+          }
+        });
+      }).on("hidden.bs.modal", function () {
+        cropBoxData = $image.cropper("getCropBoxData");
+        canvasData = $image.cropper("getCanvasData");
+        $image.cropper("destroy");
+      });
+
+      $(".js-zoom-in").click(function () {
+        $image.cropper("zoom", 0.1);
+      });
+
+      $(".js-zoom-out").click(function () {
+        $image.cropper("zoom", -0.1);
+      });
+
+      /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
+      $(".js-crop-and-upload").click(function () {
+        var cropData = $image.cropper("getData");
+        $("#id_x").val(cropData["x"]);
+        $("#id_y").val(cropData["y"]);
+        $("#id_height").val(cropData["height"]);
+        $("#id_width").val(cropData["width"]);
+        $("#modalCrop").modal("hide");
+        $('#imageResult').attr('src', $image.cropper('getCroppedCanvas',
+        {width: 600, height: 400}).toDataURL());
+
+        $("#deleteLogo").html('<a class="btn btn-red" ><i class="fas fa-trash-alt"></i> </a>  ');
+        $("#deleteLogo").click(function () {
+          $('#id_logo').val('');
+          $('#imageResult').attr('src', '');
+          $("#deleteLogo").empty();
+          $("#id_withLogo").val(false);
+        });
+
+      });
+
+    });
+  });
+</script>
+
+<script type="text/javascript">
+  var map;
+  var marker_layer = new L.marker([50.5, 30.5]);
+
+  function editMarker(e){
+    map.removeLayer(marker_layer);
+    marker_layer = new L.marker(e.latlng, {draggable:true});
+    marker_layer.on('drag', function (e) {
+      $("#id_latitude").val((e.latlng.lat).toFixed(6));
+      $("#id_longitude").val((e.latlng.lng).toFixed(6));
+    });
+    map.addLayer(marker_layer);
+    $("#id_latitude").val((e.latlng.lat).toFixed(6));
+    $("#id_longitude").val((e.latlng.lng).toFixed(6));
+  }
+
+  function searchedMarker(e){
+    map.removeLayer(marker_layer);
+    marker_layer = new L.marker([e.location.y,e.location.x], {draggable:true});
+    marker_layer.on('drag', function (e) {
+      $("#id_latitude").val((e.latlng.lat).toFixed(6));
+      $("#id_longitude").val((e.latlng.lng).toFixed(6));
+    });
+    map.addLayer(marker_layer);
+    $("#id_latitude").val(parseFloat(e.location.y).toFixed(6));
+    $("#id_longitude").val(parseFloat(e.location.x).toFixed(6));
+  }
+
+  function map_init_basic (leafmap, options) {
+    map = leafmap;
+    var obj = { latlng: {
+      lat: parseFloat($("#id_latitude").val()),
+      lng: parseFloat($("#id_longitude").val()) }
+    }
+    if($("#id_latitude").val())
+    editMarker(obj);
+    map.on('click', editMarker);
+
+    var GeoSearchControl = window.GeoSearch.GeoSearchControl;
+    var OpenStreetMapProvider = window.GeoSearch.OpenStreetMapProvider;
+    var provider = new OpenStreetMapProvider({});
+
+    //  Define search controls
+    var searchControl = new GeoSearchControl({
+      provider: provider,
+      style: 'bar',
+      showMarker: false,
+      autoClose: true,
+      keepResult: true,
+      //retainZoomLevel: true,
+    });
+
+    map.addControl(searchControl);
+    map.on('geosearch/showlocation', searchedMarker);
+  }
+</script>
+{{ form.media.js }}
+{% endblock scripts %}

@@ -1,0 +1,22 @@
+{% load i18n %}
+<div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+        {% if organisation.id %}
+        <h1>{% trans "Editing" %}<span class="lightBlue-color"> {{organisation.name}}</span></h1>
+        {% else %}
+        <h1>{% trans "New" %}<span class="lightBlue-color"> {% trans "organisation" %}</span></h1>
+        {% endif %}
+        {% if not organisation.id %}
+        <div class="row">
+            <div class="col-12">
+                <div class="small mb-2">{% trans "Thank you for creating a profile for your organisation on the EU-Citizen.Science platform. This can be linked with the personal profiles of the people in your organisation, the project profiles that your organisation is involved in, and the resource profiles or the training resources that were published by your organisation. Please fill in all of the mandatory information in the fields below (indicated with an asterisk*), and as much of the non-mandatory information as possible." %}</div>
+
+                <div class="small mb-2">{% trans "Upon saving this profile, your organisational profile will immediately show up on the platform but will be later moderated by one of the platform moderators. This step is simply to check for spam or inappropriate uses of the profile form." %}</div>
+
+                <div class="small mb-2">{% trans "We would like to point out that, as the author of this profile, you have to clear the image rights and copyrights of the content you are submitting. Please indicate the author or copyright holder of pictures. You may need to obtain express written permission from them." %}</div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>

@@ -11,7 +11,7 @@ from rest_framework.status import (HTTP_200_OK, HTTP_201_CREATED, HTTP_204_NO_CO
 from rest_framework.views import APIView
 from resources.api.serializers import ResourceSerializer, AudienceSerializer, ThemeSerializer, CategorySerializer, ResourceSerializerCreateUpdate,EducationLevelSerializer, LearningResourceTypeSerializer, TrainingResourceSerializer, TrainingResourceSerializerCreateUpdate
 from resources.models import Resource, ApprovedResources, Audience, Theme, Category, EducationLevel, LearningResourceType
-from resources.views import getCooperators, setResourceApproved, setResourceHidden, setResourceFeatured, saveResource
+from resources.views import getCooperators, setResourceHidden, bookmarkResource
 from reviews.models import Review
 
 class AdminPermissionsClass(BasePermission):
@@ -257,12 +257,12 @@ class TrainingResourceDetail(APIView):
             return Response({"This user can't delete this resource"}, status=HTTP_400_BAD_REQUEST)
 
 
-@api_view(['PUT'])
-@permission_classes([AdminPermissionsClass])
-def approved_resource(request, pk):
-    approved = request.data.get('value')
-    setResourceApproved(pk, approved)
-    return Response(status=HTTP_204_NO_CONTENT)
+# @api_view(['PUT'])
+# @permission_classes([AdminPermissionsClass])
+# def approved_resource(request, pk):
+#    approved = request.data.get('value')
+#    setResourceApproved(pk, approved)
+#    return Response(status=HTTP_204_NO_CONTENT)
 
 @api_view(['PUT'])
 @permission_classes([AdminPermissionsClass])
@@ -271,17 +271,18 @@ def hidden_resource(request, pk):
     setResourceHidden(pk, hidden)
     return Response(status=HTTP_204_NO_CONTENT)
 
-@api_view(['PUT'])
-@permission_classes([AdminPermissionsClass])
-def set_featured_resource(request, pk):
-    featured = request.data.get('value')
-    setResourceFeatured(pk, featured)
-    return Response(status=HTTP_204_NO_CONTENT)
 
-@api_view(['PUT'])
-@permission_classes([IsAuthenticated])
-def save_resource(request, pk):
-    userId = request.user.id
-    save = request.data.get('value')
-    saveResource(pk, userId, save)
-    return Response(status=HTTP_204_NO_CONTENT)
+# @api_view(['PUT'])
+# @permission_classes([AdminPermissionsClass])
+# def set_featured_resource(request, pk):
+#    featured = request.data.get('value')
+#    setResourceFeatured(pk, featured)
+#    return Response(status=HTTP_204_NO_CONTENT)
+
+# @api_view(['PUT'])
+# @permission_classes([IsAuthenticated])
+# def save_resource(request, pk):
+#    userId = request.user.id
+#    save = request.data.get('value')
+#    Resource(pk, userId, save)
+#    return Response(status=HTTP_204_NO_CONTENT)

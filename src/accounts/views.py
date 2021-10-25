@@ -57,6 +57,7 @@ class SignUpView(
     form_valid_message = "You're signed up!"
 
     def form_valid(self, form):
+        print("form_valid")
         super().form_valid(form)
         user = form.save(commit=False)
         user.is_active = False
@@ -69,20 +70,20 @@ class SignUpView(
         message = render_to_string('accounts/acc_active_email.html', {
             'user': user,
             'domain': settings.HOST,
-            'uid':urlsafe_base64_encode(force_bytes(user.pk)),
-            'token':account_activation_token.make_token(user),
+            'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+            'token': account_activation_token.make_token(user),
         })
         html_message = render_to_string('accounts/acc_active_email.html', {
             'user': user,
             'domain': settings.HOST,
-            'uid':urlsafe_base64_encode(force_bytes(user.pk)),
-            'token':account_activation_token.make_token(user),
+            'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+            'token': account_activation_token.make_token(user),
         })
 
         to_email = form.cleaned_data.get('email')
-        send_mail(mail_subject, message, 'eu-citizen.science@ibercivis.es',[to_email], html_message=html_message)
+        send_mail(mail_subject, message, 'eu-citizen.science@ibercivis.es', [to_email], html_message=html_message)
 
-        return render(self.request, 'accounts/confirm-email.html',{})
+        return render(self.request, 'accounts/confirm-email.html', {})
 
 
 class PasswordChangeView(authviews.PasswordChangeView):
@@ -140,7 +141,7 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
-        #Send email
+        # Send email
         mail_subject = 'Welcome to EU-Citizen.Science.'
         message = render_to_string('accounts/welcome_email.html', {
             'user': user,
@@ -153,7 +154,7 @@ def activate(request, uidb64, token):
         email.content_subtype = "html"
         email.send()
         auth.login(request, user)
-        return render(request, 'accounts/confirmation-account.html',{})
+        return render(request, 'accounts/confirmation-account.html', {})
     else:
         return HttpResponse('Activation link is invalid!')
 
@@ -169,6 +170,7 @@ class PasswordResetEmail(BaseEmailMessage):
         context["domain"] = settings.HOST
         context["url"] = settings.PASSWORD_RESET_CONFIRM_URL.format(**context)
         return context
+
 
 class ActivationEmail(BaseEmailMessage):
     template_name = "accounts/acc_active_email.html"

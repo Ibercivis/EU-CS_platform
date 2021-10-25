@@ -13,6 +13,7 @@ from captcha.fields import ReCaptchaField
 
 User = get_user_model()
 
+
 class LoginForm(AuthenticationForm):
     remember_me = forms.BooleanField(required=False, initial=False)
 
@@ -20,16 +21,19 @@ class LoginForm(AuthenticationForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.fields["username"].widget.input_type = "email"  # ugly hack
+        self.fields["username"].label = ""
+        self.fields["password"].label = ""
 
         self.helper.layout = Layout(
-            Field("username", placeholder=_("Enter Email"), autofocus=""),
+            Field("username", label="", placeholder=_("Enter Email"), autofocus=""),
+            HTML('<div class="m-4"></div>'),
             Field("password", placeholder=_("Enter Password")),
             HTML(
-                'Forgot Password? <a href="{}">Remember me</a><br><br>'.format(
+                '<div class="mt-3 mb-4">Forgot Password? <a href="{}" class="pt-1 mb-5">Remember me</a></div>'.format(
                     reverse("accounts:password-reset")
                 )
             ),
-            StrictButton(_("Log in"), css_class="btn-green", type="Submit")
+            StrictButton(_("Log in"), css_class="btn btn-my-darkBlue", type="Submit")
 
         )
 
@@ -41,13 +45,15 @@ class LoginForm(AuthenticationForm):
             if self.user_cache is None:
                 try:
                     user_temp = User.objects.get(email=username)
-                except:
+                except User.DoesNotExist:
                     user_temp = None
 
                 if user_temp is not None:
                     if not user_temp.is_active:
                         raise forms.ValidationError(
-                            _("We see that your email address is in our database, but that you have not yet confirmed your address. Please search for the confirmation email in your inbox (or spam) to activate your account")
+                            _("We see that your email address is in our database, but that you have not yet"
+                              "confirmed your address. Please search for the confirmation email in your inbox"
+                              "(or spam) to activate your account")
                         )
                     else:
                         raise forms.ValidationError(
@@ -70,17 +76,25 @@ class SignupForm(authtoolsforms.UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["orcid"] = forms.CharField(required=False)
         self.helper = FormHelper()
         self.fields["email"].widget.input_type = "email"  # ugly hack
+        self.fields["email"].label = ""
+        self.fields["name"].label = ""
+        self.fields["password1"].label = ""
+        self.fields["password2"].label = ""
         self.fields["captcha"] = ReCaptchaField()
+        self.fields["captcha"].label = ""
         self.helper.layout = Layout(
             Field("email", placeholder=_("Enter Email"), autofocus=""),
-            Field("name", placeholder=_("Enter Full Name")),
+            HTML('<div class="m-4"></div>'),
+            Field("name", placeholder=_("Enter name")),
+            HTML('<div class="m-4"></div>'),
             Field("password1", placeholder=_("Enter Password")),
+            HTML('<div class="m-4"></div>'),
             Field("password2", placeholder=_("Re-enter Password")),
+            HTML('<div class="m-4"></div>'),
             Field("captcha"),
-            StrictButton(_("Sign up"), css_class="btn-green", type="Submit"),
+            StrictButton(_("Sign up"), css_class="btn btn-my-darkBlue mt-5", type="Submit"),
         )
 
 
@@ -105,6 +119,8 @@ class PasswordResetForm(authtoolsforms.FriendlyPasswordResetForm):
             Field("email", placeholder=_("Enter email"), autofocus=""),
             StrictButton(_("Reset Password"), css_class="btn-red", type="Submit"),
         )
+
+
 class SetPasswordForm(authforms.SetPasswordForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

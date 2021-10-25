@@ -1,0 +1,64 @@
+{% extends "./base_template_profiles.html" %}
+{% load i18n %}
+{% block profile_right %}
+
+{% if projects_submitted.all %}
+<h3 class="col-12 leftborder">{% trans "Submitted <span class='lightBlue-color'>projects</span>" %}</h3>
+<div class="row">
+    {% for project in projects_submitted.all %}
+    <div class="col-12 col-md-6">
+        {% include "horizontal_card_project.html" %}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+
+{% if resources_submitted.all %}
+<h3 class="col-12 leftborder mt-5">{% trans "Submitted resources" %}</h3>
+<div class="row">
+    {% for resource in resources_submitted.all %}
+    <div class="col-12 col-md-6">
+        {% include "horizontal_card_resource.html" %}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if trainings_submitted.all %}
+<h3 class="col-12 leftborder mt-5">{% trans "Submitted training" %}</h3>
+<div class="row">
+    {% for resource in trainings_submitted.all %}
+    <div class="col-12 col-md-6">
+        {% include "horizontal_card_resource.html" %}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+
+{% if organisations_submitted.all %}
+<h3 class="col-12 leftborder mt-5">{% trans "Submitted organisations" %}</h3>
+<div class="row">
+    {% for organisation in organisations_submitted.all %}
+    <div class="col-12 col-md-6">
+        {% include "horizontal_card_organisation.html" %}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if event_submitted.all %}
+<h3 class="col-12 leftborder mt-5">{% trans "Submitted events" %}</h3>
+<div class="row">
+    {% for event in event_submitted.all %}
+    <div class="col-12 col-md-6">
+        {% include "horizontal_card_event.html" %}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% endblock %}
+{% block scripts %}
+{% endblock scripts%}

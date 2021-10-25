@@ -7,53 +7,29 @@
 {% include "_navbar_r2.html" with active_link="organisations" %}
 {% endblock %}
 
-{% block splash %}
-
-{% endblock splash %}
-
 {% block page_header %}
 {% include "finder_organisations.html" %}
 {% endblock page_header %}
 {% block list_of_items %}
-
 <div class="container">
-	{% for message in messages %}
-	<div class="container-fluid p-0">
-		<div class="alert {{ message.tags }} alert-dismissible" role="alert" >
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-		</button>
-		{{ message }}
-		</div>
-	</div>
-	{% endfor %}
-	<div class="row .projects">
+    <div clas="row">
+        <div class="col-12">
+            <h1>{% trans "organisation <span class='lightBlue-color'>search</span>" %}</h1>
+        <div>
+        {% include "_subnavbar.html" %}
+        {% include "_finder_organisation.html" %}
+    </div>
+	<div class="row">
     {% if organisations %}
         {% include "organisations_cards.html" %}
-    {% else %}
-    <div class="col-12">
-        <img  class="img-fluid img-zoom col-12 mt-5" src="{% static 'site/img/undraw_empty_xct9.svg' %}">
-        <h5 class="mb-4">{% trans "Sorry, nothing found" %}</h5>
-    </div>
     {% endif %}
 	</div>
 </div>
 {% endblock list_of_items %}
 
 {% block scripts %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js"
-integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="anonymous"></script>
-<script
-src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
+<script src="{% static 'site/js/bootstrap-autocomplete.js'%}"></script>
 <script>
-	$(document).ready(function() {
-		$( ".card" ).hover(
-		function() {
-			$(this).addClass('shadow-none').css('cursor', 'pointer');
-		}, function() {
-			$(this).removeClass('shadow-none');
-		});
-	});
     $('.basicAutoComplete').autoComplete(
 	{ minLength: 3 }
 	);
@@ -61,23 +37,20 @@ src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bo
 	$('.basicAutoComplete').on('autocomplete.select', function (evt, item) {
 		$('#searchOrganisations').submit();
 	});
-	$('.basicAutoCompleteMobile').autoComplete(
-	{ minLength: 3 }
-	);
-	$('.basicAutoCompleteMobile').on('autocomplete.select',
-	function (evt, item){$('#searchTopMobile').submit();});
 
 	$(function () {
-		$('#orgType').on('change', function () {
-			var orgType = $(this).val();
+		$('.custom-select').on('change', function () {
 			$('#searchOrganisations').submit();
 		});
-	});
-    $(function () {
-		$('#country').on('change', function () {
-			var country = $(this).val();
-			$('#searchOrganisations').submit();
-		});
+        $('#pill-country').on('click', function() {
+            $('#country').val('')
+            $('#searchOrganisations').submit();
+        });
+        $('#pill-orgTypes').on('click', function() {
+            $('#orgTypes').val('')
+            $('#searchOrganisations').submit();
+        });
+
 	});
 </script>
 {% endblock scripts %}

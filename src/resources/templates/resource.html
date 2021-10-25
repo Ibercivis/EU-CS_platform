@@ -5,220 +5,187 @@
 {% load l10n %}
 {% load reviews %}
 {% block title %}{{ block.super }} :: {{resource.name}}{% endblock %}
-{% block navbar-left %}
-{% include "_navbar_r2.html" with active_link="resources" %}
-{% endblock %}
 {% block list_of_items %}
-{{ permissionForm.media.css }}
-<div class="container">
-  <div class="card text-center">
-    {% if resource.image2 %}
-    <img class="img-fluid img-responsive img-zoom {% if resource.id not in approvedResources %} nonmoderated {% endif %}"
-    src="{{ resource.image2 }}" >
-    {% else %}
-    <img class="img-fluid img-responsive img-zoom {% if resource.id not in approvedResources %} nonmoderated {% endif %}"
-    src='/static/site/img/resource_default_header.png'>
-    {% endif %}
-
-    <div class="card-block text-left p-4">
-      <div class="row">
-        <div class="col-xl-3 col-md-6 col-12 d-none d-md-block" id="profileright">
-          <div class="card mb-4 border border-0">
-            <div class="card-body">
-              <b>{% trans "Language" %}</b>
-              <div>
-                {% get_language_info_list for LANGUAGES as languages %}
-                {% for language in languages %}
-                {% if language.code == resource.inLanguage %}
-                <a class="badge badge-light" href="/resources?language={{resource.inLanguage}}">{{language.name | upper}}</a>
-                {% endif %}
-                {% endfor %}
-              </div>
-              <hr/>
-              <b class="text-dark">{% trans "Category" %}</b>
-              <div>
-                <a class="badge badge-light"
-                href="/resources?category={{resource.category.id}}">{{resource.category | upper }}</a>
-              </div>
-              <hr/>
-              <b>{% trans "Theme" %}</b>
-              <div>
-                {% for theme in resource.theme.all %}
-                <a class="badge badge-light" href="/resources?theme={{theme.id}}">{{ theme | upper }}</a>
-                {% endfor %}
-              </div>
-              <hr />
-              <b>{% trans "Keywords" %}</b>
-              <div>
-                {% for keyword in resource.keywords.all %}
-                <a class="badge badge-light" href="/resources?keywords={{keyword}}">{{keyword  | upper}}</a>
-                {% endfor %}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-9 col-md-6 col-12" id="one">
-
-          <div class="row">
-            <div class="col-9">
-              <h5>{{resource.name}}</h5>
-              {% get_rating for resource as avg_rating %}
-              {% get_review_count for resource as review_count %}
-              <span class="gl-star-rating-stars s{{ avg_rating | stringformat:'d'}}0 readonly">
-                <span data-value="1" data-text="Terrible"></span>
-                <span data-value="2" data-text="Poor"></span>
-                <span data-value="3" data-text="Average"></span>
-                <span data-value="4" data-text="Very Good"></span>
-                <span data-value="5" data-text="Excellent"></span>
-              </span>
-              {{ review_count }} {% if review_count == 1 %} {% trans "review" %} {% else %} {% trans "reviews" %} {% endif %}
-            </div>
-            <div class="col-3 text-right">
-              {%if isTrainingResource %}
-              <a target="_blank" href="{% if 'http' not in resource.url %}//{%endif%}{{resource.url}}"
-              class="colorblue"><i class="fas fa-external-link-square-alt"></i> {% trans "Go to Training" %}</a>
-              {% else %}
-              <a target="_blank" href="{% if 'http' not in resource.url %}//{%endif%}{{resource.url}}"
-              class="colorgreen"><i class="fas fa-external-link-square-alt"></i> {% trans "Go to Resource" %}</a>
-              {% endif %}
-            </div>
-          </div>
-
-
-
-          <br><br>{{ resource.abstract | safe }}
-          {% if isTrainingResource %}
-          <div>
-            <b>{% trans "Education level" %}: </b>{{ resource.educationLevel }}<br>
-            <b>{% trans "Learning Resource Type" %}: </b>{{ resource.learningResourceType }}<br>
-            <b>{% trans "Time required" %}: </b> {{ resource.timeRequired }}<br>
-            <b>{% trans "Conditions of access" %}: </b> {{ resource.conditionsOfAccess }}<br>
-          </div>
-          {% endif %}
-          <div>
-            <b>{% trans "License" %}: </b>{{ resource.license }}<br>
-            <b>{% trans "Audience" %}: </b>{% for audience in resource.audience.all %}{{ audience }} {% endfor %}<br>
-            <b>{% trans "Publisher" %}: </b> {{ resource.publisher }}<br>
-            <b>{% trans "Organisation(s)" %}:</b>
-            {% for organisation in resource.organisation.all %}
-            <a class="badge" href="/organisation/{{organisation.id}}">{{organisation}}</a>
-            {% endfor %}
-            <br/>
-            <b>{% trans "Year of publication" %}: </b> {{ resource.datePublished }}<br>
-            <b>{% trans "Resource DOI" %}: </b> {{ resource.resourceDOI }}<br>
-          </div>
-          <a class="btn btn-outline-secondary float-right ml-2 mt-2"
-          href="{% if 'http' not in resource.url %}//{%endif%}{{resource.url}}" target="_blank">{% trans "Go to Resource" %}</a>
-          {% if user.is_authenticated %}
-          <div id="saved{{resource.id}}">
-            {% if resource.id in savedResources %}
-            <button type="button" class="btn btn-outline-primary float-right mt-2" onclick="setSavedResource({{resource.id}},{{user.id}}, false)">{% trans "In my library" %}</button>
-            {% else %}
-            <button type="button" class="btn btn-outline-secondary float-right mt-2" onclick="setSavedResource({{resource.id}},{{user.id}}, true)">{% trans "Add to library" %}</button>
-            {% endif %}
-          </div>
-
-          <a  class="btn btn-outline-secondary float-right mr-2 mt-2" href="/resource_review/{{resource.id}}">{% trans "Review" %}</a>
-
-          {% endif %}
-          {% if review_count > 0 %}
-          <br><b>{% trans "Reviews" %}</b><br>
-          {% get_review_list for resource as review_list %}
-          {% for review in review_list %}
-          <span class="gl-star-rating-stars s{{ review.rating | stringformat:'d'}}0 readonly">
-            <span data-value="1" data-text="Terrible"></span>
-            <span data-value="2" data-text="Poor"></span>
-            <span data-value="3" data-text="Average"></span>
-            <span data-value="4" data-text="Very Good"></span>
-            <span data-value="5" data-text="Excellent"></span>
-          </span><br>
-          {{review.submit_date}} - {{review.user.name}}
-          <p>{{review.comment}}</p>
-          {% endfor %}
-          {% endif %}
-        </div>
-        <div class="d-md-none">
-          <div class="card mb-4 border border-0">
-            <div class="card-body">
-              <b>{% trans "Language" %}</b>
-              <div>
-                {% get_language_info_list for LANGUAGES as languages %}
-                {% for language in languages %}
-                {% if language.code == resource.inLanguage %}
-                <a class="badge badge-light" href="/resources?language={{resource.inLanguage}}">{{language.name | upper}}</a>
-                {% endif %}
-                {% endfor %}
-              </div>
-              <hr/>
-              <b class="text-dark">{% trans "Category" %}</b>
-              <div>
-                <a class="badge badge-light"
-                href="/resources?category={{resource.category.id}}">{{resource.category | upper }}</a>
-              </div>
-              <hr/>
-              <b>{% trans "Theme" %}</b>
-              <div>
-                {% for theme in resource.theme.all %}
-                <a class="badge badge-light" href="/resources?theme={{theme.id}}">{{ theme | upper }}</a>
-                {% endfor %}
-              </div>
-              <hr />
-              <b>{% trans "Keywords" %}</b>
-              <div>
-                {% for keyword in resource.keywords.all %}
-                <a class="badge badge-light" href="/resources?keywords={{keyword}}">{{keyword  | upper}}</a>
-                {% endfor %}
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
+{% if resource.image2 %}
+<div class="container-fluid profileImage" style="background: url('/media/{{resource.image2| safe}}') no-repeat; background-size: cover;"> 
+    <div class="container-fluid">
     </div>
-    <div class="card-footer text-left">
-      {% if user.is_staff %}
-      <permissionForm>
-        {% csrf_token %}
-        {{ permissionForm.usersAllowed | as_crispy_field }}
-        {{ permissionForm.selectedUsers | as_crispy_field }}
-        {{ permissionForm.usersCollection | as_crispy_field }}
-      </permissionForm>
-      {% if resource.id in approvedResources %}
-      <a onclick="setApprovedRsc({{resource.id}}, false)"><i class="far fa-thumbs-down"></i></a>
-      {% elif resource.id in unApprovedResources %}
-        <a onclick="setApprovedRsc({{resource.id}}, true)"><i class="far fa-thumbs-up"></i></a>
-      {% else %}
-        <a onclick="setApprovedRsc({{resource.id}}, true)"><i class="far fa-thumbs-up"></i></a>
-        <a onclick="setApprovedRsc({{resource.id}}, false)"><i class="far fa-thumbs-down"></i></a>
-      {% endif %}
-      {% if resource.featured %}
-      <a  onclick="setFeatured({{resource.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
-      {% else %}
-      <a  onclick="setFeatured({{resource.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
-      {% endif %}
-      {% if isTrainingResource %}
-      <a  class="text-secondary" onclick="setTraining({{resource.id}}, 'False')"><i class="fas fa-book"></i></a>
-      <a><i class="fas fa-graduation-cap"></i></a>
-        {% if resource.own %}
-          <a class="btn btn-green" onclick="setOwnTraining({{resource.id}}, 'False')"></i> {% trans "Own training" %}</a>
-        {% else %}
-          <a class="btn btn-outline-secondary" onclick="setOwnTraining({{resource.id}}, 'True')"></i> {% trans "Mark as own training" %}</a>
-        {% endif %}
-      {% else %}
-      <a><i class="fas fa-book"></i></a>
-      <a class="" onclick="setTraining({{resource.id}}, 'True')"><i class="fas fa-graduation-cap"></i></a>
-      {% endif %}  
-      
+</div>
+{% endif %}
 
-      {% endif %}
-      {% if resource.creator == user or user.is_staff or user.id in cooperators %}
-      <a class="btn btn-red float-right" href="{% if isTrainingResource %}
-      {% url 'editTrainingResource' resource.id %}{% else %}{% url 'editResource' resource.id %}{% endif %}"><i class="fas fa-edit"></i> {% trans "Edit" %}</a>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-12">
+            <h1 class="wood-color">{{resource.name}}</h1>
+            <div class="small"><i>{% trans "Created" %} {{resource.dateCreated}}</i></div>
+            <div class="small"><i>{% trans "Updated" %} {{resource.dateUpdated}}</i></div>
+        </div>
+        <div class="col-xl-8 col-md-6 col-12">
+            <p class="mt-3">{{ resource.abstract | safe }}</p>
+            <h4 class="mt-4 leftborder">{% trans "Publish information" %}</h4>
+            <table class="table table-borderless">
+                {% if resource.authors.all %}
+                <tr>
+                    <td><b>Authors</b></td>
+                    <td>{% for author in resource.authors.all %}{{ author }}; {% endfor %}</td>
+                </tr>
+                {% endif %}
+                {% if resource.publisher %}
+                <tr><td><b>Publisher</b></td><td>{{resource.publisher}}</td></tr>
+                {% endif %}
+                {% if resource.datePublished %}
+                <tr><td><b>Year of publication: </b></td><td>{{resource.datePublished}}</td></tr>
+                {% endif %}
+                {% if resource.license %}
+                <tr><td><b>License: </b></td><td>{{resource.license}}</td></tr>
+                {% endif %}
+                {% if resource.resourceDOI %}
+                <tr><td><b>DOI: </b></td><td>{{resource.resourceDOI}}</td></tr>
+                {% endif %}
+            </table>
+            {% if resource.organisation.all %}
+            <h4 class="mt-4 leftborder">{% trans "Links with projects and/or organisations" %}</h4>
+            <div class="row">
+                {% for organisation in resource.organisation.all %}
+                <div class="col-12 col-md-6">
+                    {% include "horizontal_card_organisation.html" %}
+                </div>
+            </div>
+            <div class="row">
+                {% for project in resource.project.all %}
+                <div class="col-12 col-md-6">
+                    {% include "horizontal_card_project.html" %}
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% if isTrainingResource %}
+            <h4 class="mt-4 leftborder">{% trans "Training information" %}</h4>
+            {% if resource.timeRequired %}
+            <b>{% trans "Time required" %}: </b> {{ resource.timeRequired }} hours<br>
+            {% endif %}
+            {% if resource.conditionsOfAccess %}
+            <b>{% trans "Conditions of access" %}: </b> {{ resource.conditionsOfAccess }}<br>
+            {% endif %}
 
-      {% endif %}
+            {% endif %}
 
-    </div><!-- End of card footer -->
-  </div>
+            <!-- Buttons -->
+            <div class="row">
+                <div class="col-12 mt-4">
+                    <a target="_blank" 
+                       class="btn btn-my-darkBlue" 
+                       href="{% if 'http' not in resource.url %}//{%endif%}{{resource.url}}"
+                                                                   class="colorblue"><i class="fas fa-external-link-square-alt"></i>
+                                                                   {% if isTrainingResource %}
+                                                                   {% trans "Go to Training" %}
+                                                                   {% else %}
+                                                                   {% trans "Go to Resource" %}
+                                                                   {% endif %}
+                    </a>
+
+                    {% if resource.creator == user or user.is_staff or user.id in cooperators %}
+                    <a class="btn btn-warning" 
+                      href="{% if isTrainingResource %}
+                            {% url 'editTrainingResource' resource.id %}
+                            {% else %}
+                            {% url 'editResource' resource.id %}{% endif %}">
+                        <i class="fas fa-edit"></i> {% trans "Edit" %}
+                    </a>
+                    {% endif %}
+               
+                    {% if user.is_authenticated %}
+                    <button 
+                        {% if bookmarkedResource %}
+                        class="btn btn-my-darkBlue"
+                        {% else %}
+                        class="btn btn-my-outline-darkBlue"
+                        {% endif %}
+                        id="buttonBookmarkResource" bookmarked="{{bookmarkedResource}}">
+                        <i class="far fa-bookmark"></i> Bookmark
+                    </button>
+
+                    <!--a href="#" class="btn btn-secondary">{% trans "Comment" %}</a-->
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Admin area -->
+            {% if user.is_staff %}
+            <h4 class="mt-4 leftborder">{% trans "Admin area" %}</h4>
+            <div class="custom-control custom-switch mt-3">
+                <input type="checkbox" 
+                       class="custom-control-input myradio" 
+                       id="approve"
+                       {% if resource.approved %} checked {% endif %} >
+                       <label class="custom-control-label" for="approve">{% trans "Approve" %}</label>
+            </div>
+            <div class="custom-control custom-switch mt-3">
+                <input type="checkbox" 
+                       class="custom-control-input myradio" 
+                       id="featured"
+                       {% if resource.featured %} checked {% endif %}>
+                <label class="custom-control-label" for="featured">{% trans "Set featured" %}</label>
+            </div>
+            <div class="custom-control custom-switch mt-3">
+                <input type="checkbox" 
+                       class="custom-control-input myradio" 
+                       id="isTraining"
+                       {% if resource.isTrainingResource %} checked {% endif %} >
+                       <label class="custom-control-label" for="isTraining">{% trans "Is training" %}</label>
+            </div>
+            <a href="#" class="btn btn-secondary mt-3">{% trans "Contact submitter" %}</a>
+            {% endif %}
+
+        </div>
+        <div class="col-xl-4 col-md-6 col-12">
+
+            <h5 class="mt-3">{% trans "Language" %}</h5>
+            {% get_language_info_list for LANGUAGES as languages %}
+            {% for language in languages %}
+            {% if language.code == resource.inLanguage %}
+            <a class="badge bg-dark" href="{{endPoint}}?inLanguage={{resource.inLanguage}}">{{language.name | title}}</a>
+            {% endif %}
+            {% endfor %}
+
+            <h5 class="mt-3">{% trans "Keywords" %}</h5>
+            {% for keyword in resource.keywords.all %}
+            <a class="badge bg-my-darkGreen" href="{{endPoint}}?keywords={{keyword}}">{{keyword  | title}}</a>
+            {% endfor %}
+
+            <h5 class="mt-3">{% trans "Theme" %}</h5>
+            {% for theme in resource.theme.all %}
+            <a class="badge bg-my-wood" href="{{endPoint}}?theme={{theme.theme}}">{{ theme | title }}</a>
+            {% endfor %}
+
+            <h5 class="mt-3">{% trans "Category" %}</h5>
+            <a class="badge bg-my-lightBlue"
+               href="{{endPoint}}?category={{resource.category.text}}">{{resource.category | title }}</a>
+
+            <!-- TODO: This is not working, escape well -->
+            <h5 class="mt-3">{% trans "Audience" %}</h5>
+            {% for audience in resource.audience.all %}
+            <a class="badge bg-my-lightGreen"
+               href="{{endPoint}}?audience={% autoescape on %}{{audience}}{% endautoescape %}"> {{ audience | title}}
+            </a>
+            {% endfor %}
+
+            {% if resource.educationLevel.all %}
+            <h5 class="mt-3">{% trans "Education level" %}</h5>
+            {% for educationLevel in resource.educationLevel.all %}
+            <a class="badge bg-my-wood">{{ educationLevel | title }}</a>
+            {% endfor %}
+            {% endif %}
+
+            {% if resource.learningResourceType.all %}
+            <h5 class="mt-3">{% trans "Learning Resource Type" %}</h5>
+            {% for learningResourceType in resource.learningResourceType.all %}
+            <a class="badge bg-my-darkGreen">{{ learningResourceType | title }}</a>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
 </div>
 
 
@@ -226,149 +193,121 @@
 
 {% block scripts %}
 <script>
-  $(function () {
-    var users = $("#id_usersCollection").val();
-    if(users){
-      var users = users.split(",");
-      var selectedUsers = $("#id_selectedUsers").val().split(",");
-      var i = 0
-      var name = ''
-      var email = ''
-      for (user of users){			
-        if (i % 2 == 0){			
-          var init = user.indexOf('\'')
-          var end = user.indexOf('\'', init+1)
-          name = user.substring(init+1,end)
-        }else{
-          var init = user.indexOf('\'')
-          var end = user.indexOf('\'', init+1)
-          email = user.substring(init+1,end)
-          var found = false;
-          for(sel of selectedUsers){
-            if(sel.trim() == email.trim()){
-            found = true;
-            $("#id_usersAllowed").append("<option value='" + email +"' selected> " + name + " </option>");
+    $(function () {
+        var users = $("#id_usersCollection").val();
+        if(users){
+            var users = users.split(",");
+            var selectedUsers = $("#id_selectedUsers").val().split(",");
+            var i = 0
+            var name = ''
+            var email = ''
+            for (user of users){			
+                if (i % 2 == 0){			
+                    var init = user.indexOf('\'')
+                    var end = user.indexOf('\'', init+1)
+                    name = user.substring(init+1,end)
+                }else{
+                    var init = user.indexOf('\'')
+                    var end = user.indexOf('\'', init+1)
+                    email = user.substring(init+1,end)
+                    var found = false;
+                    for(sel of selectedUsers){
+                        if(sel.trim() == email.trim()){
+                            found = true;
+                            $("#id_usersAllowed").append("<option value='" + email +"' selected> " + name + " </option>");
+                        }
+                    }
+                    if(!found){
+                        $("#id_usersAllowed").append("<option value='" + email +"'> " + name + " </option>");
+                    }
+                }
+                i++
             }
-          }
-          if(!found){
-            $("#id_usersAllowed").append("<option value='" + email +"'> " + name + " </option>");
-          }
         }
-        i++
-      }
-    }
-    
 
-    $('#id_usersAllowed').on('change', function () {
-      users = $("#id_usersAllowed option:selected").map(function () {
-        return $.trim($(this).val());
-      }).get().join(',');
-      var idResource = {{ resource.id }};
-      var request = $.ajax(
-      {
-        type: "POST",
-        url: "{% url 'allowUserResource' %}",
-        data: {
-          "resource_id": idResource,
-          "users": users,
-          csrfmiddlewaretoken: '{{ csrf_token }}'
-        },
-        success: function (response) {
-        }
-      }
-      );
+        $("#buttonBookmarkResource").on("click", function(){
+            var bookmark = ($('#buttonBookmarkResource').attr('bookmarked')=="False" ? "true" : "false")
+            $.ajax({
+                type: 'POST',
+                url: '/bookmarkResource/',
+                data: {
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    bookmark: bookmark,
+                    resourceId: '{{resource.id}}'
+                },
+                success: function(response){
+                    if(response.success == 'Bookmark deleted')
+                        $('#buttonBookmarkResource').attr('bookmarked','False')
+                    else if(response.created == 'OK')
+                        $('#buttonBookmarkResource').attr('bookmarked','True')
+                    $('#buttonBookmarkResource').toggleClass('btn-my-darkBlue')
+                    $('#buttonBookmarkResource').toggleClass('btn-my-outline-darkBlue')
+                },
+                error: function(response){
+                }
+            })
+        })
+
+
+        $("#approve").change(function(){
+            console.log('change approve')
+            $.ajax({
+                type: 'POST',
+                url: '/approveResource/',
+                data: {
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    approved: $('#approve').is(':checked'),
+                    resourceId: '{{resource.id}}'
+                },
+                success: function(response){
+                    console.log(response)
+                },
+                error: function(response){
+                    console.log(response)
+                }
+            })
+        })
+
+        $("#featured").change(function(){
+            console.log('setFeatured')
+            $.ajax({
+                type: 'POST',
+                url: '/setFeaturedResource/',
+                data: {
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    featured: $('#featured').is(':checked'),
+                    resourceId: '{{resource.id}}'
+                },
+                success: function(response){
+                    console.log(response)
+                },
+                error: function(response){
+                    console.log(response)
+                }
+            })
+        })
+        $("#isTraining").change(function(){
+            console.log('isTraining')
+            $.ajax({
+                type: 'POST',
+                url: '/setTrainingResource/',
+                data: {
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    isTraining: $('#isTraining').is(':checked'),
+                    resourceId: '{{resource.id}}'
+                },
+                success: function(response){
+                    console.log(response)
+                },
+                error: function(response){
+                    console.log(response)
+                }
+            })
+        })
+
+
     });
-  });
 
-  function setApprovedRsc(idResource, approved){
-    var request = $.ajax(
-    {
-      type: "POST",
-      url: "{% url 'setApprovedRsc' %}",
-      data: {
-        "resource_id": idResource,
-        "approved": approved,
-        csrfmiddlewaretoken: '{{ csrf_token }}'
-      },
-      success: function (response) {
-        window.location.reload(false);
-        if(!approved){
-          window.location.href ="{% url 'submitter_contact' 'resource' resource.id %}"
-        }
-      }
-    }
-    );
-  }
-  function setTraining(idResource, status){
-    var request = $.ajax(
-    {
-      type: "POST",
-      url: "{% url 'setTraining' %}",
-      data: {
-        "resource_id": idResource,
-        "status": status,
-        csrfmiddlewaretoken: '{{ csrf_token }}'
-      },
-      success: function (response) {
-        window.location.reload(false);
-      }
-    }
-    );
-  }
-
-  function setOwnTraining(idResource, status){
-    var request = $.ajax(
-    {
-      type: "POST",
-      url: "{% url 'setOwnTraining' %}",
-      data: {
-        "resource_id": idResource,
-        "status": status,
-        csrfmiddlewaretoken: '{{ csrf_token }}'
-      },
-      success: function (response) {
-        window.location.reload(false);
-      }
-    }
-    );
-  }
-
-  function setFeatured(idResource, featured){
-    var htmlId = "featured" + idResource;
-    var request = $.ajax(
-    {
-      type: "POST",
-      url: "{% url 'setFeaturedResource' %}",
-      data: {
-        "resource_id": idResource,
-        "featured": featured,
-        csrfmiddlewaretoken: '{{ csrf_token }}'
-      },
-      success: function (response) {
-        window.location.reload(false);
-      }
-    }
-    );
-  }
-
-  function setSavedResource(idResource, idUser, save){
-    var htmlId = "saved" + idResource;
-    var request = $.ajax(
-    {
-      type: "POST",
-      url: "{% url 'setSavedResource' %}",
-      data: {
-        "resource_id": idResource,
-        "user_id": idUser,
-        "save": save,
-        csrfmiddlewaretoken: '{{ csrf_token }}'
-      },
-      success: function (response) {
-        $("#"+htmlId).load(" #"+htmlId);
-      }
-    }
-    );
-  }
 </script>
 {{ permissionForm.media.js }}
 {% endblock scripts %}

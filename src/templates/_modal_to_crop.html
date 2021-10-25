@@ -1,0 +1,32 @@
+{% load i18n %}
+<div class="modal fade" id="modalCrop">
+    <div class="modal-dialog mdialog">
+        <div class="modal-content">     
+            <div class="modal-header">      
+                <h4 class="modal-title">{% trans "Crop the photo" %}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span><span class="sr-only">{% trans "Close" %}</span>
+                </button>      
+            </div>             
+            <div class="modal-body">        
+                <div class="row">               
+                    <div class="col-11">            
+                        <img src="" id="image" class="img-fluid img-zoom">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">      
+                <div class="btn-group pull-left" role="group">
+                    <button type="button" class="btn btn-default js-zoom-in">
+                        <span><i class="material-icons" style="font-size: 18px;">{% trans "zoom_in" %}</i> </span>
+                    </button>  
+                    <button type="button" class="btn btn-default js-zoom-out">
+                        <span><i class="material-icons" style="font-size: 18px;">{% trans "zoom_out" %}</i></span>
+                    </button>  
+                </div>         
+                <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+                <button type="button" class="btn btn-primary js-crop-and-upload">{% trans "Crop and upload" %}</button>
+            </div>             
+        </div>                 
+    </div>                     
+</div>

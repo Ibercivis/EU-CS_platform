@@ -2,32 +2,27 @@
 
 {% load crispy_forms_tags %}
 
-{% block title %}{{ block.super }}Log In{% endblock %}
-
-{% block form_heading %}Please Log In{% endblock %}
+{% block title %}{{ block.super }} :: Log In{% endblock %}
 
 {% block list_of_items %}
-<div class="container mt-5">
-  <div class="row">
-    <div class="container d-flex justify-content-center">
-      <div class="col-lg-6 col-12">
-        <div class="card mb-4 mt-5 shadow">
-          <div class="card-header pt-2">
-            <h3 class="pt-3">Log in</h3>
-          </div>
-          <div class="card-text p-3">
-            {% block form %}
-            {% crispy form %}
-            <div class="form-message">
-              <p class="mt-1">
-                Don't have an account? <a href="{% url 'accounts:signup' %}">Sign up</a>.
-              </p>
+<div class="container vh-100 d-flex mt-5">
+    <div class="container d-flex justify-content-center mt-5">
+        <div class="col-lg-4 col-12 mt-5">
+            <div class="card shadow mt-5" 
+                style="background: url('/static/site/img/ecsa-farbbalken_400x400_transp.png') no-repeat left">
+                <div class="card-text p-3 text-center">
+                    <h1 class="mb-5">Log in</h1>
+                    {% block form %}
+                    {% crispy form %}
+                    <div class="form-message">
+                        <p class="mt-3">
+                        Don't have an account? <a href="{% url 'accounts:signup' %}">Sign up</a>
+                        </p>
+                    </div>
+                    {% endblock form %}
+                </div>
             </div>
-            {% endblock form %}
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 {% endblock list_of_items %}

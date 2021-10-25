@@ -1,0 +1,327 @@
+{% extends "base_r2.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% load l10n %}
+{% load thumbnail %}
+{% block head %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'site/css/forms.css' %}">
+{{ form.media.css }}
+{% endblock head %}
+
+{% block title %}{{ block.super }} :: Edit resource{% endblock %}
+{% block navbar-left %}
+{% include "_navbar.html" with active_link="resources" %}
+{% endblock %}
+
+{% block list_of_items %}
+
+<!-- MODAL TO CROP THE IMAGE -->
+{% include '_crop_zone.html' %}
+<!-- END MODAL TO CROP -->
+<div class="container mt-5">
+    <form action="#" class="edit-resource" id="form_resource" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-12">
+                {% if isTrainingResource %}
+                {% include "_intro_form_training_resource.html" %}
+                {% else %}
+                {% include "_intro_form_resource.html" %}
+                {% endif %}
+                <div class="row">
+                    <div class="col-2"></div>
+                    <div class="col-8">
+                        <h3 class="leftborder">{% trans "Main information" %}</h3>
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                <input type="hidden" id="resourceID" name="resourceID" value={{resource.id}}>
+                                {{ form.name|as_crispy_field }}
+                                {{ form.url|as_crispy_field }}
+                                {{ form.keywords|as_crispy_field }}
+                                {{ form.abstract|as_crispy_field }}
+                                {{ form.description_citizen_science_aspects|as_crispy_field }}
+                                {{ form.category|as_crispy_field }}
+                                {{ form.categorySelected|as_crispy_field }}
+                                <div id="id_sub_categories" class="mb-3"></div>
+                                {{ form.audience|as_crispy_field }}
+                                {{ form.theme|as_crispy_field }}
+                                {% include '_save_zone.html' %}
+                            </div>
+                        </div>
+                        <h3 class="leftborder mt-5">{% trans "Publish information" %}</h3>
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                {{ form.authors|as_crispy_field }}
+                                {{ form.publisher|as_crispy_field }}
+                                {{ form.year_of_publication|as_crispy_field }}
+                                {{ form.license|as_crispy_field }}
+                                {{ form.resource_DOI|as_crispy_field }}
+                                {% get_language_info_list for LANGUAGES as languages %}
+                                {% if settings.USE_I18N and languages|length > 1 %}
+                                <label for="language" class="control-label  requiredField">
+                                    Please indicate the (main) language that the resource is made available in<span class="asteriskField">*</span>
+                                </label>
+                                <select name="language" class="form-control mb-4">
+                                    {% for language in languages|dictsort:"name" %}
+                                    {% if language.code in settings.LANGUAGE_CODES %}
+                                    <option value="{{ language.code }}" {% if language.code == resource.inLanguage %}selected {% endif %}>
+                                    {{ language.name }}
+                                    </option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+                                {% endif %}
+                                {% include '_save_zone.html' %}
+                            </div>
+                        </div>
+
+                        {% if isTrainingResource %}
+                        <h3 class="leftborder mt-5">{% trans "Training resource fields" %}</h3>
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                <input type="hidden" id="trainingResource" name="trainingResource" value={{isTrainingResource}}>
+                                {{ form.education_level|as_crispy_field }}
+                                {{ form.learning_resource_type|as_crispy_field }}
+                                {{ form.time_required|as_crispy_field }}
+                                {{ form.conditions_of_access|as_crispy_field }}
+                                {% include '_save_zone.html' %}
+
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <h3 class="leftborder mt-5">{% trans "Links with projects and organisations" %}</h3>
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                {{ form.project|as_crispy_field }}
+                                {{ form.organisation|as_crispy_field }}
+                                {% include '_save_zone.html' %}
+                            </div>
+                        </div>
+
+                        <h3 class="leftborder mt-5">{% trans "Resource profile images" %}</h3>
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                <img class="img-fluid img-zoom" 
+                                     id="imageResult1" 
+                                     src="{% thumbnail resource.image1|default:'void_600.png' 600x400 %}">
+                                {{ form.image1|as_crispy_field }}
+                                {{ form.x1|as_crispy_field }}
+                                {{ form.y1|as_crispy_field }}
+                                {{ form.height1|as_crispy_field }}
+                                {{ form.width1|as_crispy_field }}
+                                {{ form.image_credit1|as_crispy_field }}
+                                <div class="mb-5"></div>
+                                <img class="img-fluid img-zoom" 
+                                     id="imageResult2" 
+                                     src="{% thumbnail resource.image2|default:'void_1100.png' 1100x400 %}">
+                                {{ form.image2|as_crispy_field }}
+                                {{ form.x2|as_crispy_field }}
+                                {{ form.y2|as_crispy_field }}
+                                {{ form.height2|as_crispy_field }}
+                                {{ form.width2|as_crispy_field }}
+                                {{ form.image_credit2|as_crispy_field }}
+                                <div class="mb-5"></div>
+                                {% include '_save_zone.html' %}
+                                <div class="mb-5"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock list_of_items %}
+
+{% block scripts %}
+<script src="{% static 'site/js/site.js' %}"></script>
+<script src="{% static 'scripts/cropper.min.js' %}"></script>
+<script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
+<script>
+    $(function () {
+        getSubCategories();
+        $("#id_category").on('change', getSubCategories);
+
+        $('input').on('focus', function(){
+            if($(this).is('.error'))
+                $(this).removeClass('error');
+        });
+        $('select').on('focus', function(){
+            if($(this).is('.error'))
+                $(this).removeClass('error');
+        });
+        $('.select2-selection--multiple').on('focus', function(){
+            if($(this).is('.error'))
+                $(this).removeClass('error');
+        });
+
+        for(var instanceName in CKEDITOR.instances){
+            CKEDITOR.instances[instanceName].on('focus', function(e){
+                id='#cke_'+$(this).attr('name')
+                if($(id).is('.error'))
+                    $(id).removeClass('error');
+            })
+        }
+
+        /* Submit the form */
+        $('.submit').click(function(e){
+            e.preventDefault()
+            $('.myerror').remove()
+
+            // To check that save & continue was clicked
+            var contin = ($(this).hasClass('continue')) ? true : false;
+
+            for(var instanceName in CKEDITOR.instances)
+                CKEDITOR.instances[instanceName].updateElement();
+
+            $.ajax({
+                type: 'POST',
+                url: '/saveResourceAjax',
+                processData: false,
+                contentType: false, // TODO: Check this
+                data: new FormData(document.getElementById("form_resource")),
+                success: function(response){
+                    console.log(response)
+                    if(contin){
+                        $('#resourceID').val(response.Resource)
+                        console.log('continue')
+                        $('.savedInfo').html('<span class="alert alert-success fade show">'+
+                            '<i class="fas fa-check"></i> Saved</span>').show().fadeOut(2500)
+                    }
+                    else
+                        window.location.href = '/resource/'+response.Resource+'?prev='+window.location.pathname
+                },
+                error: function(response){
+                    if(response.status==500){
+                        alert('Unexpected error, please contact with the administrator')
+                    }
+                    $.each(response.responseJSON, function(i,val){
+                        $('#id_'+i).addClass('error')
+                        $('#id_'+i).parent().find('.select2-selection--multiple').addClass('error')
+                        $('#hint_id_'+i).append('<div class="myerror small text-danger">'+val+'</div>')
+                        $('#cke_id_'+i).addClass('error')
+                    })
+                    $('html, body').animate({
+                        scrollTop: $('.myerror:visible:first').offset().top-100
+                    }, 1000);
+                }
+            })
+        }); /* End of submit */
+
+    });
+
+$('#confirm-delete').on('show.bs.modal', function (e) {
+    $(this).find('.btn-delete').attr('href', $(e.relatedTarget).data('href'));
+});
+
+function getSubCategories() {
+    var category = $("#id_category").val();
+    var request = $.ajax(
+        {
+            type: "GET",
+            url: "{% url 'get_sub_category' %}",
+            data: {
+                "category": category
+            },
+            success: function (response) {
+                $("#id_sub_categories").html(response.sub_categories);
+                if ($("#id_category").val() != $("#id_categorySelected").val()) {
+                    $("#id_subcategory").val($("#id_categorySelected").val());
+                }
+
+            }
+        }
+    );
+}
+
+$(function () {
+    var imgSelected;
+    /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
+    $("#id_image1").change(function () {
+        imgSelected = 1;
+        $('#imageResult1').attr('src', '');
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $("#image").attr("src", e.target.result);
+                $("#modalCrop").modal("show");
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+    $("#id_image2").change(function () {
+        imgSelected = 2;
+        $('#imageResult2').attr('src', '');
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $("#image").attr("src", e.target.result);
+                $("#modalCrop").modal("show");
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+    $("#imageResult1").click(function () {
+        $("#modalCrop").modal("show");
+    });
+    $("#imageResult2").click(function () {
+        $("#modalCrop").modal("show");
+    });
+    /* SCRIPTS TO HANDLE THE CROPPER BOX */
+    var $image = $("#image");
+    var cropBoxData;
+    var canvasData;
+    $("#modalCrop").on("shown.bs.modal", function () {
+        $image.cropper({
+            viewMode: 1,
+            aspectRatio: imgSelected == 2 ? 11 / 4 : 3 / 2,
+            minCropBoxWidth: imgSelected == 2 ? 1100 : 600,
+            minCropBoxHeight: 400,
+            dragMode: 'move',
+            guides: false,
+            center: false,
+            highlight: false,
+            cropBoxResizable: false,
+            toggleDragModeOnDblclick: false,
+            ready: function () {
+                $image.cropper("setCanvasData", canvasData);
+                $image.cropper("setCropBoxData", cropBoxData);
+            }
+        });
+    }).on("hidden.bs.modal", function () {
+        cropBoxData = $image.cropper("getCropBoxData");
+        canvasData = $image.cropper("getCanvasData");
+        $image.cropper("destroy");
+    });
+
+    $(".js-zoom-in").click(function () {
+        $image.cropper("zoom", 0.1);
+    });
+
+    $(".js-zoom-out").click(function () {
+        $image.cropper("zoom", -0.1);
+    });
+
+    /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
+    $(".js-crop-and-upload").click(function () {
+        var cropData = $image.cropper("getData");
+        $("#id_x" + imgSelected).val(cropData["x"]);
+        $("#id_y" + imgSelected).val(cropData["y"]);
+        $("#id_height" + imgSelected).val(cropData["height"]);
+        $("#id_width" + imgSelected).val(cropData["width"]);
+        $("#modalCrop").modal("hide");
+        $('#imageResult' + imgSelected).attr('src', $image.cropper('getCroppedCanvas',
+            { width: imgSelected == 2 ? 1100 : 600, height: 400 }).toDataURL());
+        });
+    });
+</script>
+{{ form.media.js }}
+{% endblock scripts %}

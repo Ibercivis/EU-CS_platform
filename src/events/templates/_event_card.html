@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-sm-4 col-12 mt-4 mb-4">
+        <h3>{{event.title}}</h3> 
+        <span><i>
+                {% if event.place %}{{event.place}}, {%endif%}
+                {{event.start_date | date:" M d, Y"}}
+                {% if event.hour %}{{event.hour | time:'H:i'}} {% endif %}
+            </i></span>
+    </div>
+    <div class="col-sm-7 col-12 mt-4 mb-4">
+        {{ event.description}}
+        {% if event.url %} 
+        <div class="mt-3 mb-5">
+            <a class="btn btn-my-darkBlue" href="{% if 'http' not in event.url %}//{%endif%}{{event.url}}" target="_blank">
+                Go to event page
+            </a>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-sm-1 col-12 mt-4 mb-4">
+        {% if user.is_staff %}
+        {% if event.id in approvedEvents %}
+        <a onclick="setApprovedEvent({{event.id}}, false)"><i class="far fa-thumbs-down"></i></a>
+        {% elif event.id in unApprovedEvents %}
+        <a onclick="setApprovedEvent({{event.id}}, true)"><i class="far fa-thumbs-up"></i></a>
+        {% else %}
+        <a onclick="setApprovedEvent({{event.id}}, true)"><i class="far fa-thumbs-up"></i></a>
+        <a onclick="setApprovedEvent({{event.id}}, false)"><i class="far fa-thumbs-down"></i></a>
+        {% endif %}
+        <br/>
+        <span id="featured{{event.id}}">
+            {% if event.featured %}
+            <a class="btn btn-red float-left mt-4" onclick="setFeaturedEvent({{event.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
+            {% else %}
+            <a class="btn btn-red float-left mt-4" onclick="setFeaturedEvent({{event.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
+            {% endif %}
+        </span>
+        <a class="btn btn-red float-left mt-4" href="{% url 'editEvent' event.id %}" ><i class="fas fa-edit"></i></a>
+        <a class="btn btn-red float-left mt-4" href="{% url 'deleteEvent' event.id %}"><i class="fas fa-trash-alt"></i></a>
+        {% endif %}
+    </div>
+</div>

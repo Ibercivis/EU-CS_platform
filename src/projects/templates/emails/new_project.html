@@ -2,9 +2,17 @@
 
 
 {% block html_body  %}
-<p>Thank you for submitting  your project profile. This has been sent to the EU-Citizen.Science moderation team, who will check it to ensure that all of the projects shared on the platform can indeed be considered citizen science projects.</p>
+<p>Dear {{username}}:</p>
+
+<p>Thank you for submitting the project <a href='{{domain}}/project/{{projectid}}'>{{projectname}}</a>. 
+
+This has been sent to the EU-Citizen.Science moderation team, who will check it to ensure that all of the projects shared on the platform can indeed be considered citizen science projects.</p>
 
 <p>We will be in touch with you if we have any questions, and otherwise you will receive an alert that your project has been moderated and published to the platform. Your project profile will be visible to the public in the meantime, but will be marked as unmoderated. </p>
 
-<p>You can make updates or changes to this project profile at any time, by going to the Submitted projects <a href="{{domain}}/users/me/projects"> section in your Personal Area </a> (see the top-right of the platform menu).</p>
+<p>You can make updates or changes to this project profile at any time by going to your submitted projects <a href="{{domain}}/users/me/projects">section in your Personal Area</a>.</p>
+
+<p>The EU-CITIZEN.SCIENCE Team</p>
+
+<small>Please, do not respond to this email</small>
 {% endblock html_body %}

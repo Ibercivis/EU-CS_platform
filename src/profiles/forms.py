@@ -1,13 +1,15 @@
 from __future__ import unicode_literals
 from django import forms
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Div, Submit, HTML, Button, Row, Field
-from crispy_forms.bootstrap import AppendedText, PrependedText, FormActions
+from crispy_forms.layout import Layout, Submit, Field
 from django.contrib.auth import get_user_model
 from . import models
 from django.utils.translation import ugettext_lazy as _
-from django_select2.forms import Select2MultipleWidget
+from django_select2 import forms as s2forms
 from organisations.models import Organisation
+from ckeditor.widgets import CKEditorWidget
+from django_countries.fields import CountryField
+
 
 User = get_user_model()
 
@@ -31,43 +33,56 @@ class ProfileForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_tag = False
         self.helper.layout = Layout(
-            Field("picture"),
             Field("title"),
+            Field("surname"),
+            Field("country"),
+            Field("picture"),
             Field("bio"),
             Field("orcid"),
             Field("interestAreas"),
-            Field("choices"),
             Field("latitude"),
             Field("longitude"),
             Submit("update", "Update", css_class="btn-green"),
         )
 
-    CHOICES = ()
-    choices = forms.CharField(widget=forms.HiddenInput(),required=False, initial=CHOICES)
-    interestAreas = forms.MultipleChoiceField(choices=CHOICES, widget=Select2MultipleWidget,
-                        required=False, label="Interest Areas",help_text=_('Please write or select interest areas, separated by commas or pressing enter'))
-    latitude = forms.DecimalField(widget=forms.HiddenInput(),max_digits=9,decimal_places=6,required=False)
-    longitude = forms.DecimalField(widget=forms.HiddenInput(),max_digits=9,decimal_places=6,required=False)
-    organisation = forms.ModelMultipleChoiceField(queryset=Organisation.objects.all(), widget=Select2MultipleWidget(attrs={'data-placeholder':'Related organisations'}), required=False,label="Organisation (Multiple selection)")
+    bio = forms.CharField(
+            widget=CKEditorWidget(config_name='frontpage'),
+            max_length=2000,
+            required=False)
+    interestAreas = forms.ModelMultipleChoiceField(
+            queryset=models.InterestArea.objects.all(),
+            widget=s2forms.ModelSelect2TagWidget(
+                search_fields=['interestArea__icontains'],
+                attrs={
+                    'data-token-separators': '[","]'}),
+            required=False,
+            label="Interest Areas",
+            help_text=_('Please write or select interest areas, separated by commas or pressing enter'))
+    country = CountryField(
+            blank_label='(Select country)',
+            blank=True).formfield()
+    organisation = forms.ModelMultipleChoiceField(
+            queryset=Organisation.objects.all(),
+            widget=s2forms.ModelSelect2MultipleWidget(
+                model=Organisation,
+                search_fields=['name__icontains']),
+            help_text=_(
+                'Other Organisation participating in the project.If not listed,'
+                'please add it <a href="/new_organisation" target="_blank">here</a> '
+                'before submitting the project'),
+            label=_("Other Organisations"),
+            required=False)
 
     class Meta:
         model = models.Profile
-        fields = ["picture", "title", "bio", "orcid", "interestAreas", "choices", "organisation",
-                "latitude", "longitude"]
-
+        fields = ["picture", "title", "surname", "bio", "orcid", "interestAreas", "organisation"]
 
     def save(self, args):
+        print(self.data)
         pForm = super(ProfileForm, self).save(commit=False)
         pForm.user = args.user
-        pForm.save()
-
-        choices = self.data['choices']
-        choices = choices.split(',')
-        for choice in choices:
-            if(choice != ''):
-                models.InterestArea.objects.get_or_create(interestArea=choice)
-        areas = models.InterestArea.objects.all()
-        areas = areas.filter(interestArea__in = choices)
-        pForm.interestAreas.set(areas)
+        pForm.interestAreas.set(self.data.getlist('interestAreas'))
         pForm.organisation.set(self.data.getlist('organisation'))
+        pForm.country = self.data['country']
+        pForm.save()
         return 'success'
