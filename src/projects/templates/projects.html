@@ -3,7 +3,9 @@
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% load leaflet_tags %}
-{% block title %}{{ block.super }} :: Projects{% endblock %}
+{% block title %}
+{{ block.super }} :: Projects
+{% endblock %}
 {% block navbar-left %}
 {% include "_navbar_r2.html" with active_link="projects" %}
 {% endblock %}
@@ -16,98 +18,58 @@
 {% include "finder_projects.html" %}
 {% endblock page_header %}
 {% block list_of_items %}
+
 {% include "modal_projects.html" %}
 <div class="container">
-	{% for message in messages %}
-	<div class="container-fluid p-0">
-		<div class="alert {{ message.tags }} alert-dismissible" role="alert" >
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-		</button>
-		{{ message }}
-		</div>
-	</div>
-	{% endfor %}
-	<div class="row .projects">
-		{% include "projects_cards.html" %}
-	</div>
-	<div class="col-12">
-	{% if counter == 0  %}
-	<img  class="img-fluid img-zoom col-12 mt-5" src="{% static 'site/img/undraw_empty_xct9.svg' %}">
-	<h5 class="mb-4">{% trans "Sorry, nothing found" %}</h5>
-	{% else %}
-	&nbsp;
-	{% endif %}
-	</div>
+    <div clas="row">
+        <div class="col-12">
+            <h1>project <span class="lightBlue-color">search</span></h1>
+        <div>
+        {% include "_subnavbar.html" %}
+        {% include "_finder_projects.html" %}
+    </div>
+    <div class="row">
+        {% include "projects_cards.html" %}
+    </div>
 </div>
 {% endblock list_of_items %}
 
 {% block scripts %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js"
-integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="anonymous"></script>
-<script
-src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
+<script src="{% static 'site/js/bootstrap-autocomplete.js'%}"></script>
 <script>
-
-
 	$('.basicAutoComplete').autoComplete(
 	{ minLength: 3 }
 	);
-
 	$('.basicAutoComplete').on('autocomplete.select', function (evt, item) {
 		$('#searchTop').submit();
 	});
-	$('.basicAutoCompleteMobile').autoComplete(
-	{ minLength: 3 }
-	);
-
-	$('.basicAutoCompleteMobile').on('autocomplete.select', function (evt, item) {
-		$('#searchTopMobile').submit();
-	});
-
-	$(function () {
-		$('#topic').on('change', function () {
-			var topic = $(this).val();
-			$('#searchProjects').submit();
-		});
-	});
-	$(function () {
-		$('#doingAtHome').on('change', function () {
-			var topic = $(this).val();
-			$('#searchProjects').submit();
-		});
-	});
-	$(function () {
-		$('#orderby').on('change', function () {
-			var orderby = $(this).val();
-			$('#searchProjects').submit();
-		});
-	});
-
 	$(function () {
 		$('.status-select').on('change', function () {
 			var status = $(this).val();
 			$('#searchProjects').submit();
 		});
-	});
+        $('#pill-topic').on('click', function() {
+            $('#topic').val('')
+            $('#searchProjects').submit();
+        });
+        $('#pill-status').on('click', function() {
+            $('#status').val('')
+            $('#searchProjects').submit();
+        });
+        $('#pill-hasTag').on('click', function() {
+            $('#hasTag').val('')
+            $('#searchProjects').submit();
+        });
 
-	$(function () {
-		$('#country').on('change', function () {
-			var country = $(this).val();
-			$('#searchProjects').submit();
-		});
-	});
+        $('#pill-difficultyLevel').on('click', function() {
+            $('#difficultyLevel').val('')
+            $('#searchProjects').submit();
+        });
 
-	$("#host").blur(function () {
-		$('#searchProjects').submit();
+        $('#pill-participationTask').on('click', function() {
+            $('#participationTask').val('')
+            $('#searchProjects').submit();
+        });
 	});
-
-	$(function () {
-		$('#approvedCheck').on('change', function () {
-			var approvedCheck = $(this).val();
-			$('#searchProjects').submit();
-		});
-	});
-
-</script>
+ </script>
 {% endblock scripts %}

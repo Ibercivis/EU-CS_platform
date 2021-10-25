@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from django.views.generic import RedirectView
 from django.urls import include, path, re_path
 from django.conf.urls import url
 from django.views.decorators.cache import never_cache
@@ -16,6 +15,8 @@ import projects.urls
 import resources.urls
 import events.urls
 import contact.urls
+import digest.urls
+import platforms.urls
 import ckeditor_uploader.views
 from . import views
 
@@ -31,8 +32,8 @@ schema_view = get_schema_view(
 )
 
 # Personalized admin site settings like title and header
-admin.site.site_title = "Eucs_Platform Site Admin"
-admin.site.site_header = "Eucs_Platform Administration"
+admin.site.site_title = "EU-Citizen.Science Site Admin"
+admin.site.site_header = "EU-Citizen.Science Administration"
 
 
 urlpatterns = [
@@ -46,6 +47,7 @@ urlpatterns = [
     path("subscribe/", views.subscribe, name="subscribe"),
     path("moderation/", views.moderation, name="moderation"),
     path("criteria/", views.criteria, name="criteria"),
+    path("moderation_quality_criteria", views.moderation_quality_criteria, name="moderation_quality_criteria"),
     path("translations/", views.translations, name="translations"),
     path("call/", views.call, name="call"),
     path("policy_maker_event_2021/", views.policy_maker_event_2021, name="policy_maker_event_2021"),
@@ -56,6 +58,7 @@ urlpatterns = [
     path("policy_brief/", views.policy_brief, name="policy_brief"),
     path("users/", include(profiles.urls)),
     path("admin/", admin.site.urls),
+    path("select2/", include("django_select2.urls")),
     path("", include(contact.urls)),
     path("", include(accounts.urls)),
     path("", include(organisations.urls)),
@@ -63,13 +66,14 @@ urlpatterns = [
     path("", include(resources.urls)),
     path('', include('blog.urls')),
     path("", include(events.urls)),
+    path("", include(digest.urls)),
+    path("", include(platforms.urls)),
     path('summernote/', include('django_summernote.urls')),
     path('forum/', include(machina_urls)),
     path('getTopicsResponded', views.getTopicsResponded, name='getTopicsResponded'),
     path('getForumResponsesNumber', views.getForumResponsesNumber, name='getForumResponsesNumber'),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^reviews/', include('reviews.urls')),
-    url(r'^citizen-science-resources-related-to-the-covid19-pandemic/', RedirectView.as_view(url='blog/2020/03/31/citizen-science-resources-related-covid19-pandemic/')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/auth/', include('djoser.urls')),
     url(r'^api/auth/', include('djoser.urls.authtoken')),
@@ -78,7 +82,7 @@ urlpatterns = [
     url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     url(r'^openid/', include('oidc_provider.urls', namespace='oidc_provider')),
     re_path(r"^upload/", ckeditor_uploader.views.upload, name="ckeditor_upload"),
-    re_path(r"^browse/", never_cache(ckeditor_uploader.views.browse),name="ckeditor_browse",),
+    re_path(r"^browse/", never_cache(ckeditor_uploader.views.browse), name="ckeditor_browse",),
     path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
 ]
 

@@ -1,0 +1,27 @@
+{% load i18n %}
+<div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+        {% if resource.id %}
+        <h1>{% trans "Editing" %}<span class="lightBlue-color"> {{resource.name}}</span></h1>
+        {% else %}
+        <h1>{% trans "New" %}<span class="lightBlue-color"> {% trans "training resource" %}</span></h1>
+        {% endif %}
+
+        {% if not resource.id %}
+        <div class="row">
+            <div class="col-12">
+                <div class="small mb-2">{% trans "Thank you for submitting a new citizen science training resource or educational material to be shared on the EU-Citizen.Science platform. Please fill in all of the mandatory information in the fields below (indicated with an asterisk*), and as much of the non-mandatory information as possible." %}</div>
+
+                <div class="small mb-2">{% trans "Training resources and educational material is material that is designed or can be used explicitly for the goals of teaching or training a person on the practice of citizen science e.g. how to design and implement a volunteer-based activity, how to control data quality, the ethical and legal requirements of working with volunteers and managing their data. These can include massive open online courses (MOOCs), workshops, webinars, gamified training, and quizzes." %}</div>
+
+                <div class="small mb-2">{% trans "Upon saving this profile, your resource will be submitted for moderation. The moderation process is meant to ensure that all of the resources shared on the platform are useful for citizen science projects and practitioners, and are of good quality. Read more about the moderation process. As quality factors we consider whether your resource is easy to access, is structured clearly, is easy to read (or hear or view) and understand. Read our quality criteria." %}</div>
+
+                <div class="small mb-2">{% trans "Please note that we strongly recommend that you first ensure that your resource is hosted in a permanent repository (such as on a website that will be maintained and can provide a permalink, or a repository such as a publisher, Zenodo , OSF or the RIO Journal)." %}</div>
+
+                <div class="small mb-2">{% trans "We would like to point out that, as the author of this profile, you have to clear the image rights and copyrights of the content you are submitting. Please indicate the author or copyright holder of pictures. You may need to obtain express written permission from them." %}</div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>

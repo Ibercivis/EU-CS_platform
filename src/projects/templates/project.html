@@ -1,4 +1,5 @@
 {% extends "base_r2.html" %}
+{% load project_tags %}
 {% load i18n %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
@@ -6,384 +7,390 @@
 {% load reviews %}
 {% block head %}
 {{block.super }}
+{{ form.media.css }}
+{{ form.media }}
 {% leaflet_js %}
 {% leaflet_css %}
-<link href="/static/reviews/css/star-rating.css" type="text/css" media="all" rel="stylesheet">
 {% endblock head %}
 {% block title %}{{ block.super }} :: {{project.name}}{% endblock %}
-{% block navbar-left %}
-{% include "_navbar_r2.html" with active_link="projects" %}
-{% endblock %}
 {% block list_of_items %}
 {{ permissionForm.media.css }}
-<div class="container">
-  <div class="card text-center">
-    {% if project.image3 %}
-    <img class="card-img  {% if project.id not in approvedProjects %} nonmoderated {% endif %}" src="{{ project.image3 }}" >
-    {% else %}
-    <img class="card-img  {% if project.id not in approvedProjects %} nonmoderated {% endif %}" src='/static/site/img/project_default_header.png'>
-    {% endif %}
-    <div class="card-header flex  flex-row-reverse">
-      <ul class="nav nav nav-tabs card-header-tabs mr-auto flex-row-reverse">
-        <li class="nav-item">
-          <a class="nav-link sub" id="parttab" href="#"
-          onClick="$('#one').hide(); $('#two').show()
-          $('#parttab').addClass('active')
-          $('#desctab').removeClass('active') ">{% trans "Participation" %}</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link sub active" id="desctab" href="#"
-          onClick="$('#two').hide(); $('#one').show();
-          $('#desctab').addClass('active')
-          $('#parttab').removeClass('active')">{% trans "Description" %}</a>
-        </li>
-      </ul>
-    </div>
-    <div class="card-block text-left p-4">
-      <div class="row">
-        <div class="col-xl-3 col-md-6 col-12 d-none d-md-block" id="profileleft">
-          {% if project.image2 %}
-          <img class="card-img  {% if project.id not in approvedProjects %} nonmoderated {% endif %}" src="{{ project.image2 }}" >
-          {% else %}
-          <!--img class="card-img
-          {% if project.id not in approvedProjects %} nonmoderated {% endif %}" src='/static/site/img/project_default_card.webp'-->
-          {% endif %}
-
-          <hr/>
-          <b>{% trans "Status" %}</b>
-          <div class="small">
-            {{ project.status}}<br>
-            {% trans "Start:" %} {{ project.start_date | date:"d/m/Y"}}<br>
-            {% trans "End:" %}&nbsp;&nbsp;{{ project.end_date | date:"d/m/Y"}}
-          </div>
-          <hr>
-          <div><b>{% trans "Science Topic" %}</b></div>
-          <div>
-            {% for topic in project.topic.all %}
-            <a class="badge badge-light" href="/projects?keywords=&topic={{topic|urlencode}}">{{topic}}</a>
-            {% endfor %}
-          </div>
-          <hr>
-          <b>{% trans "Keywords" %}</b>
-          <div>
-            {% for keyword in project.keywords.all %}
-            <a class="badge badge-light" href="/projects?keywords={{keyword|urlencode}}">{{keyword}}</a>
-            {% endfor %}
-          </div>
-          <hr>
-          <b>{% trans "Location" %}</b>
-          <div>
-            {% for geographicextend in project.geographicextend.all %}
-            <a class="badge badge-light" href="">{{geographicextend}}</a>
-            {% endfor %}
-            {% for country in countries %}
-            {% if country.code == project.country %}
-            <a class="badge badge-light" href="/projects?country={{country.code}}">{{ country.name | title }}</a>
-            {% endif %}
-            {% endfor %}
-            <a class="badge badge-light" href="">{{project.projectlocality}}</a>
-          </div>
-          <hr>
-          <b>{% trans "Contact" %}</b>
-          <div>
-            <a class="badge badge-light">{{project.host | truncatechars:20 }}</a> {% trans "(Host)" %}
-            {% if project.mainOrganisation %}
-            <a class="badge badge-light"
-            href="/organisation/{{project.mainOrganisation.id}}">{{ project.mainOrganisation }} </a> {% trans "(Main organisation)" %}
-            {% endif %}
-            {% for organisation in project.organisation.all %}
-            <a class="badge badge-light" href="/organisation/{{organisation.id}}">{{organisation}}</a>
-            {% endfor %}
-
-          </div>
-        </div>
-        <div class="col-xl-9 col-md-6 col-12" id="one">
-          <div class="row">
-            <div class="col-9">
-              <h5>{{project.name}}</h5>
-              {% get_rating for project as avg_rating %}
-              {% get_review_count for project as review_count %}
-              <span class="gl-star-rating-stars s{{ avg_rating | stringformat:'d'}}0 readonly">
-                <span data-value="1" data-text="Terrible"></span>
-                <span data-value="2" data-text="Poor"></span>
-                <span data-value="3" data-text="Average"></span>
-                <span data-value="4" data-text="Very Good"></span>
-                <span data-value="5" data-text="Excellent"></span>
-              </span>
-              {{ review_count }} {% if review_count == 1 %} {% trans "review" %} {% else %} {% trans "Reviews" %} {% endif %}
-
-            </div>
-            <div class="col-3 text-right">
-              <a target="_blank" href="{% if 'http' not in project.url %}//{%endif%}{{project.url}}"
-              class="colorred"><i class="fas fa-external-link-square-alt"></i> {% trans "Go to Project" %}</a>
-            </div>
-          </div>
-
-          <p>{{project.aim | safe}}</p>
-          <p>{{project.description | safe}}</p>
-          {% if user.is_authenticated %}
-          <div class="col-12">
-            <a class="btn btn-outline-secondary float-right" href="/project_review/{{project.id}}">{% trans "Review" %}</a>
-            <div id="followed{{project.id}}" class="float-right mr-4">
-              {% if project.id in followedProjects %}
-              <button type="button" class="btn btn-outline-primary float-right"
-              onclick="setFollowedProject({{project.id}},{{user.id}}, false)">{% trans "Following" %}</button>
-              {% else %}
-              <button type="button" class="btn btn-outline-secondary float-right"
-              onclick="setFollowedProject({{project.id}},{{user.id}}, true)">&nbsp;&nbsp;{% trans "Follow" %}&nbsp;</button>
-              {% endif %}
-            </div>
-          </div>
-          {% endif %}
-          {% if review_count > 0 %}
-          <br><b>Reviews</b><br>
-          {% get_review_list for project as review_list %}
-          {% for review in review_list %}
-          <span class="gl-star-rating-stars s{{ review.rating | stringformat:'d'}}0 readonly">
-            <span data-value="1" data-text="Terrible"></span>
-            <span data-value="2" data-text="Poor"></span>
-            <span data-value="3" data-text="Average"></span>
-            <span data-value="4" data-text="Very Good"></span>
-            <span data-value="5" data-text="Excellent"></span>
-          </span><br>
-          {{review.submit_date}} - {{review.user.name}}
-          <p>{{review.comment}}</p>
-          {% endfor %}
-          {% endif %}
-        </div>
-        <div class="col-xl-9 col-md-6 col-12 myhidden" id="two">
-          <h5>{{project.name}}</h5>
-          <b>{% trans "How to participate:" %} </b>
-          <div>{{project.howToParticipate | safe}}</div>
-
-          <b>{% trans "Needed equipment:" %}</b>
-          <div>{{project.equipment |safe}}</div>
-          <b>{% trans "Participation task" %}</b>
-          <div>
-            {% for participationtask in project.participationtask.all %}
-            <a class="badge badge-light" href="#">{{participationtask}}</a>
-            {% endfor %}
-          </div>
-        </div>
-        <div class="d-md-none">
-          {% if project.image2 %}
-          <img class="card-img  {% if project.id not in approvedProjects %} nonmoderated {% endif %}" src="{{ project.image2 }}" >
-          {% else %}
-          <!--img class="card-img
-          {% if project.id not in approvedProjects %} nonmoderated {% endif %}" src='/static/site/img/project_default_card.webp'-->
-          {% endif %}
-          <br>
-          <div class="small">
-            {{ project.status}}<br>
-            {% trans "Start:" %} {{ project.start_date | date:"d/m/Y"}}<br>
-            {% trans "End:" %}&nbsp;&nbsp;{{ project.end_date | date:"d/m/Y"}}
-          </div>
-          <hr>
-          <div><b>{% trans "Science Topic" %}</b></div>
-          <div>
-            {% for topic in project.topic.all %}
-            <a class="badge badge-light" href="/projects?keywords=&topic={{topic|urlencode}}">{{topic}}</a>
-            {% endfor %}
-          </div>
-          <hr>
-          <b>{% trans "Keywords" %}</b>
-          <div>
-            {% for keyword in project.keywords.all %}
-            <a class="badge badge-light" href="/projects?keywords={{keyword|urlencode}}">{{keyword}}</a>
-            {% endfor %}
-          </div>
-          <hr>
-          <b>{% trans "Location" %}</b>
-          <div>
-            {% for geographicextend in project.geographicextend.all %}
-            <a class="badge badge-light" href="">{{geographicextend}}</a>
-            {% endfor %}
-            {% for country in countries %}
-            {% if country.code == project.country %}
-            <a class="badge badge-light" href="/projects?country={{country.code}}">{{ country.name | title }}</a>
-            {% endif %}
-            {% endfor %}
-            <a class="badge badge-light" href="">{{project.projectlocality}}</a>
-          </div>
-          <hr>
-          <b>{% trans "Contact" %}</b>
-          <div>
-            <a class="badge badge-light" href="">{{project.host | truncatechars:20}}</a>
-            {% if project.mainOrganisation %}
-            <a class="badge badge-light"
-            href="/organisation/{{project.mainOrganisation.id}}">{{ project.mainOrganisation }} </a> {% trans "(Main organisation)" %}
-            {% endif %}
-            {% for organisation in project.organisation.all %}
-            <a class="badge badge-light" href="/organisation/{{organisation.id}}">{{organisation}}</a>
-            {% endfor %}
-          </div>
-
-      <div class="col-12 mt-5"></div>
-        </div>
-
-      </div>
-    </div>
-    <div class="card-footer text-left">
-      {% if user.is_staff %}
-      <permissionForm>
-        {% csrf_token %}
-        {{ permissionForm.usersAllowed | as_crispy_field }}
-        {{ permissionForm.selectedUsers | as_crispy_field }}
-        {{ permissionForm.usersCollection | as_crispy_field }}
-      </permissionForm>
-      <a href="{% url 'submitter_contact' 'project' project.id %}">
-        <i class="far fa-envelope"></i>
-      </a>
-      {% if project.id in approvedProjects %}
-        <a onclick="setApproved({{project.id}}, false)"><i class="far fa-thumbs-down"></i></a>
-      {% elif project.id in unApprovedProjects %}
-        <a onclick="setApproved({{project.id}}, true)"><i class="far fa-thumbs-up"></i></a>
-      {% else %}
-        <a onclick="setApproved({{project.id}}, true)"><i class="far fa-thumbs-up"></i></a>
-        <a onclick="setApproved({{project.id}}, false)"><i class="far fa-thumbs-down"></i></a>
-      {% endif %}
-      {% if project.featured %}
-      <a  onclick="setFeatured({{project.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
-      {% else %}
-      <a  onclick="setFeatured({{project.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
-      {% endif %}
-      {% endif %}
-      {% if project.creator == user or user.is_staff or user.id in cooperators %}
-      <a class="btn btn-red float-right" href="{% url 'editProject' project.id %}"><i class="fas fa-edit"></i> Edit </a>
-      {% endif %}
-    </div><!-- End of card footer -->
-  </div>
+<style>
+ #id_projectGeographicLocation_div_map { width: 100% !important; height: 100% !important; }
+ #id_projectGeographicLocation_map { width: 100% !important; height: 100% !important; }
+</style>
+{% if project.image3 %}
+<div class="container-fluid profileImage" style="background: url('/media/{{project.image3}}') no-repeat; background-size: cover;">
 </div>
+{% endif %}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-12">
+            <h1 class="wood-color">{{project.name}}</h1>
+            <div class="small"><i>{% trans "Created" %} {{project.dateCreated}}</i></div>
+            <div class="small"><i>{% trans "Updated" %} {{project.dateUpdated}}</i></div>
+        </div>
+        <div class="col-xl-8 col-md-6 col-12">
+            <!-- TODO: I dont like this look -->
+            {% if hasTranslation %}
+            {% for translation in project.translatedProject.all %}
+            {% if translation.inLanguage == LANGUAGE_CODE %}
+            {% if translation.needsUpdate %}
+                <small>
+                {% trans "This translation was done before a project profile update." %}
+                {% trans "Plase help the community by improving it" %} 
+                <a href='/translateProject/{{project.id}}'>{% trans "here" %}</a> 
+                </small>
+            {% endif %}
+            <p class="mt-3 gray7-color">{{translation.translatedDescription | safe}}</p>
+            <h4 class="mt-4 leftborder">{% trans "Aim" %}</h4>
+            <p class="gray7-color">{{translation.translatedAim | safe}}</p>
+
+            {% if project.howToParticipate %}
+            <h4 class="mt-4 leftborder">{% trans "How to participate" %} </h4>
+            <p class="gray7-color">{{translation.translatedHowToParticipate | safe}}</p>
+            {% endif %}
+
+            {% if project.equipment %}
+            <h4 class="mt-4 leftborder">{% trans "Needed equipment" %}</h4>
+            <p class="gray7-color">{{project.translatedEquipment |safe}}</p>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+
+            {% else %}
+            {% if LANGUAGE_CODE != 'en' %}
+            <small>{% trans "This project profile is not available in your selected language," %}
+                plase help the community by translating it <a href='/translateProject/{{project.id}}'>here</a>.</small>
+            {% endif %}
+            <p class="mt-3 gray7-color">{{project.description | safe}}</p>
+            <h4 class="mt-4 leftborder">{% trans "Aim" %}</h4>
+            <p class="gray7-color">{{project.aim | safe}}</p>
+
+            {% if project.howToParticipate %}
+            <h4 class="mt-4 leftborder">{% trans "How to participate" %} </h4>
+            <p class="gray7-color">{{project.howToParticipate | safe}}</p>
+            {% endif %}
+
+            {% if project.equipment %}
+            <h4 class="mt-4 leftborder">{% trans "Needed equipment" %}</h4>
+            <p class="gray7-color">{{project.equipment |safe}}</p>
+            {% endif %}
+            {% endif %}
+
+            
+        </div>
+        <div class="col-xl-4 col-md-6 col-12">
+            <a class="badge bg-dark" href="/projects?status={{project.status.id}}">{{ project.status}}</a>
+                {% if project.start_date %}
+                {% trans "from" %} {{ project.start_date | date:"d/m/Y"}}
+                {% endif %}
+                {% if project.end_date %}
+                {% trans "until" %} {{ project.end_date | date:"d/m/Y"}}
+                {% endif %}
+            <h5 class="mt-3">{% trans "Keywords" %}</h5>
+            <div>
+                {% for keyword in project.keywords.all %}
+                <a class="badge bg-my-darkGreen" href="/projects?keywords={{keyword|urlencode}}">{{keyword | title}}</a>
+                {% endfor %}
+            </div>
+            {% if project.topic.all %}
+            <h5 class="mt-3">{% trans "Science Topics" %}</h5>
+            <div>
+                {% for topic in project.topic.all %}
+                <a class="badge bg-my-darkBlue" href="/projects?keywords=&topic={{topic|urlencode}}">{{topic}}</a>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% if project.hasTag.all %}
+            <h5 class="mt-3">{% trans "Tags" %}</h5>
+            <div>
+                {% for tag in project.hasTag.all %}
+                <a class="badge bg-my-lightBlue" href="/projects?hasTag={{tag|urlencode}}">{{tag}}</a>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% if project.difficultyLevel%}
+            <h5 class="mt-3">{% trans "Difficulty Level" %}</h5>
+            <div>
+                <a class="badge bg-my-lightGreen" 
+                    href="/projects?difficultyLevel={{project.difficultyLevel.id}}">{{project.difficultyLevel}}
+                </a>
+            </div>
+            {% endif %}
 
 
+            {% if project.participationTask.all %}
+            <h5 class="mt-3">{% trans "Participation tasks" %}</h5>
+            <div>
+                {% for participationTask in project.participationTask.all %}
+                <a class="badge bg-my-wood" href="/projects?participationTask={{participationTask}}">{{participationTask}}</a>
+                {% endfor %}
+            </div>
+            {% endif %}
 
+            {% if project.mainOrganisation %}
+            <h5 class="mt-3">{% trans "Coordinator" %}</h5>
+            <div>
+                {% include 'horizontal_card_organisation.html' with organisation=project.mainOrganisation %}
+            </div>
+            {% endif %}
+
+            {% if project.organisation.all %}
+            <h5 class="mt-3">{% trans "Other Organisations involved" %}</h5>
+            <div>
+                {% for organisation in project.organisation.all %}
+                {% include 'horizontal_card_organisation.html' %}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% if project.geographicextend.all or project.projectlocality %}
+            <h5 class="mt-3">{% trans "Location" %}</h5>
+            <div>
+                {% for geographicextend in project.geographicextend.all %}
+                <a class="badge bg-my-darkGreen" href="">{{geographicextend}}</a>
+                {% endfor %}
+                {% if project.projectlocality%}
+                <a class="badge badge-light" href="#">{{ project.projectlocality}}</a>
+                {% endif %}
+            </div>
+            {% endif %}
+            {% if form %}
+            <div class="mt-3">
+                {{ form.projectGeographicLocation|as_crispy_field }}
+            </div>
+            {% endif %}
+        </div>
+            <div class="row">
+                <div class="col-12 mt-4">
+                 
+                    <a target="_blank" 
+                       href="{% if 'http' not in project.url %}//{%endif%}{{project.url}}"
+                       class="btn btn-my-darkBlue">
+                        <i class="fas fa-external-link-square-alt"></i> {% trans "Go to Project" %}
+                    </a>
+
+                    {% if project.creator == user or user.is_staff or user.id in cooperators %}
+                    <a class="btn btn-warning" href="{% url 'editProject' project.id %}">
+                        <i class="fas fa-edit"></i> Edit 
+                    </a>
+                    {% endif %}
+
+                    <a href="/translateProject/{{project.id}}" class="btn btn-my-darkBlue">
+                        <i class="fas fa-external-link-square-alt"></i> {% trans "Translate" %}
+                    </a>
+
+                    {% if user.is_authenticated %}
+                    <button 
+                        {% if followedProject %}
+                            class="btn btn-my-darkBlue"
+                                    {% else %}
+                            class="btn btn-my-outline-darkBlue"
+                                    {% endif %}
+                            id="buttonBookmarkProject" bookmarked="{{followedProject}}">
+                        <i class="far fa-bookmark"></i> Bookmark
+                    </button>
+                    {% endif %}
+
+
+                </div>
+                {% if user.is_staff %}
+                <div class="col-12 mt-4">
+                    <h4 class="mt-4 leftborder">{% trans "Admin area" %}</h4>
+                    {% if project.id in approvedProjects %}
+                    <div class="mt-3">
+                        <a class="btn btn-green" onclick="setApproved({{project.id}}, false)">
+                            <i class="far fa-thumbs-up"> </i> Approved
+                        </a>
+                    </div>
+                    {% elif project.id in unApprovedProjects %}
+                    <div>
+                        <a class="btn btn-red" onclick="setApproved({{project.id}}, true)">
+                            <i class="far fa-thumbs-up"></i> Unapproved
+                        </a>
+                    </div>
+                    {% else %}<!-- This project is not yet moderated -->
+                    <div>This project is not yet moderated</div>
+                    <a class="btn btn-green" onclick="setApproved({{project.id}}, true)">
+                        <i class="far fa-thumbs-up"></i> Approve
+                    </a>
+                    <a class="btn btn-red" onclick="setApproved({{project.id}}, false)">
+                        <i class="far fa-thumbs-down"></i> Unapprove
+                    </a>
+                    {% endif %}
+                    {% if project.featured %}
+                    <div class="mt-3">
+                        <a  class="btn btn-green" onclick="setFeatured({{project.id}}, false)">
+                            <i class="fas fa-arrow-alt-circle-up"></i> Is featured
+                        </a>
+                    </div>
+                    {% else %}
+                    <div class="mt-3">
+                        <a  class="btn btn-secondary" onclick="setFeatured({{project.id}}, true)">
+                            <i class="far fa-arrow-alt-circle-up"></i> Is not featured</a>
+                        </a>
+                    </div>
+                    {% endif %}
+                    <div class="mt-3">
+                        <a class="btn btn-secondary"  href="{% url 'submitter_contact' 'project' project.id %}">
+                            <i class="far fa-envelope"></i> Contact project submitter
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        <div class="col-12 mt-5"></div>
+    </div>
+</div>
 
 {% endblock list_of_items %}
 
 {% block scripts %}
 <script type="text/javascript">
-
-  $(function () {
-    var users = $("#id_usersCollection").val();
-    if(users){
-      var users = users.split(",");
-      var selectedUsers = $("#id_selectedUsers").val().split(",");
-      var i = 0
-      var name = ''
-      var email = ''
-      for (user of users){			
-        if (i % 2 == 0){			
-          var init = user.indexOf('\'')
-          var end = user.indexOf('\'', init+1)
-          name = user.substring(init+1,end)
-        }else{
-          var init = user.indexOf('\'')
-          var end = user.indexOf('\'', init+1)
-          email = user.substring(init+1,end)
-          var found = false;
-          for(sel of selectedUsers){
-            if(sel.trim() == email.trim()){
-            found = true;
-            $("#id_usersAllowed").append("<option value='" + email +"' selected> " + name + " </option>");
+    $(function () {
+        if(typeof geodjango_projectGeographicLocation !== 'undefined'){
+            geodjango_projectGeographicLocation.map.removeInteraction(geodjango_projectGeographicLocation.interactions.draw);
+            geodjango_projectGeographicLocation.map.removeInteraction(geodjango_projectGeographicLocation.interactions.modify);
+            console.log(geodjango_projectGeographicLocation)
+        }
+        let params = new URLSearchParams(window.location.search.slice(1));
+        if( params.has('prev') === true){
+            if(params.get('prev').indexOf('editProject')>0){
+                $('#message').html('<div class="alert alert-success alert-dismissible fade show" role="alert">'+
+                    'The project has been successfully edited'+
+                    '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'+
+                    '<span aria-hidden="true">&times;</span> </button></div>')
             }
-          }
-          if(!found){
-            $("#id_usersAllowed").append("<option value='" + email +"'> " + name + " </option>");
-          }
-        }
-        i++
-      }
-    }
-    
-
-    $('#id_usersAllowed').on('change', function () {
-      users = $("#id_usersAllowed option:selected").map(function () {
-        return $.trim($(this).val());
-      }).get().join(',');
-
-      var idProject = {{project.id}};
-      var request = $.ajax(
-      {
-        type: "POST",
-        url: "{% url 'allowUser' %}",
-        data: {
-          "project_id": idProject,
-          "users": users,
-          csrfmiddlewaretoken: '{{ csrf_token }}'
-        },
-        success: function (response) {
+            else if(params.get('prev').indexOf('newProject')>0){
+                $('#message').html('<div class="alert alert-success alert-dismissible fade show" role="alert">'+
+                    'The project has been successfully added, we will moderate it shortly'+
+                    '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'+
+                    '<span aria-hidden="true">&times;</span> </button></div>')
+            }
 
         }
-      }
-      );
+
+        $('.clear_features').html('');
+        var users = $("#id_usersCollection").val();
+        if(users){
+            var users = users.split(",");
+            var selectedUsers = $("#id_selectedUsers").val().split(",");
+            var i = 0
+            var name = ''
+            var email = ''
+            for (user of users){			
+                if (i % 2 == 0){			
+                    var init = user.indexOf('\'')
+                    var end = user.indexOf('\'', init+1)
+                    name = user.substring(init+1,end)
+                }else{
+                    var init = user.indexOf('\'')
+                    var end = user.indexOf('\'', init+1)
+                    email = user.substring(init+1,end)
+                    var found = false;
+                    for(sel of selectedUsers){
+                        if(sel.trim() == email.trim()){
+                            found = true;
+                            $("#id_usersAllowed").append("<option value='" + email +"' selected> " + name + " </option>");
+                        }
+                    }
+                    if(!found){
+                        $("#id_usersAllowed").append("<option value='" + email +"'> " + name + " </option>");
+                    }
+                }
+                i++
+            }
+        }
+
+        $("#buttonBookmarkProject").on("click", function(){
+            console.log('click')
+            var bookmark = ($('#buttonBookmarkProject').attr('bookmarked')=="False" ? "true" : "false")
+            console.log(bookmark)
+            $.ajax({
+                type: 'POST',
+                url: "/setFollowedProject/",
+                data: {
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    bookmark: bookmark,
+                    projectId: '{{project.id}}'
+                },
+                success: function(response){
+                    if(response.bookmark)
+                        $('#buttonBookmarkProject').attr('bookmarked','True')
+                    else
+                        $('#buttonBookmarkProject').attr('bookmarked','False')
+                    $('#buttonBookmarkProject').toggleClass('btn-my-darkBlue')
+                    $('#buttonBookmarkProject').toggleClass('btn-my-outline-darkBlue')
+                },
+                error: function(response){
+                }
+            })
+        })
+
+
+        $('#id_usersAllowed').on('change', function () {
+            users = $("#id_usersAllowed option:selected").map(function () {
+                return $.trim($(this).val());
+            }).get().join(',');
+
+            var idProject = {{project.id}};
+            var request = $.ajax(
+                {
+                    type: "POST",
+                    url: "{% url 'allowUser' %}",
+                    data: {
+                        "project_id": idProject,
+                        "users": users,
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
+                    success: function (response) {
+
+                    }
+                }
+            );
+        });
     });
-  });
 
-  var map;
-  var marker_layer = new L.marker([50.5, 30.5]);
-
-  function map_init_basic (leafmap, options) {
-    map = leafmap;
-    map.setView([{{project.latitude}}, {{project.longitude}}], 12)
-    new L.marker([{{project.latitude}},{{project.longitude}}]).addTo(map);
-  }
-
-  function setApproved(idProject, approved){
-    var request = $.ajax(
-    {
-      type: "POST",
-      url: "{% url 'setApproved' %}",
-      data: {
-        "project_id": idProject,
-        "approved": approved,
-        csrfmiddlewaretoken: '{{ csrf_token }}'
-      },
-      success: function (response) {
-        window.location.reload(false)
-        if(!approved){
-          window.location.href ="{% url 'submitter_contact' 'project' project.id %}"
-        }
-      }
-    }
-    );
-  }
-
-  function setFeatured(idProject, featured){
+function setFeatured(idProject, featured){
     var htmlId = "featured" + idProject;
     var request = $.ajax(
-    {
-      type: "POST",
-      url: "{% url 'setFeatured' %}",
-      data: {
-        "project_id": idProject,
-        "featured": featured,
-        csrfmiddlewaretoken: '{{ csrf_token }}'
-      },
-      success: function (response) {
-        window.location.reload(false);
-      }
-    }
+        {
+            type: "POST",
+            url: "{% url 'setFeatured' %}",
+            data: {
+                "project_id": idProject,
+                "featured": featured,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            success: function (response) {
+                window.location.reload(false);
+            }
+        }
     );
-  }
+}
 
-  function setFollowedProject(idProject, idUser, follow){
-    var htmlId = "followed" + idProject;
+function setApproved(idProject, approved){
     var request = $.ajax(
-    {
-      type: "POST",
-      url: "{% url 'setFollowedProject' %}",
-      data: {
-        "project_id": idProject,
-        "user_id": idUser,
-        "follow": follow,
-        csrfmiddlewaretoken: '{{ csrf_token }}'
-      },
-      success: function (response) {
-        $("#"+htmlId).load(" #"+htmlId);
-      }
-    }
+        {
+            type: "POST",
+            url: "{% url 'setApproved' %}",
+            data: {
+                "project_id": idProject,
+                "approved": approved,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            success: function (response) {
+                window.location.reload(false)
+                if(!approved){
+                    window.location.href ="{% url 'submitter_contact' 'project' project.id %}"
+                }
+            }
+        }
     );
-  }
+}
 </script>
 {{ permissionForm.media.js }}
 {% endblock scripts %}

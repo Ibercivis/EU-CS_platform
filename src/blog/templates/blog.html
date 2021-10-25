@@ -1,70 +1,42 @@
 {% extends "base_r2.html" %}
 {% load i18n %}
+{% load thumbnail %}
 {% block title %}{{ block.super }} :: Blog {% endblock %}
-{% block navbar-left %}
-{% include "_navbar_r2.html" with active_link="blog" %}
-{% endblock %}
-
-{% block splash %}
-<div class="jumbotron jumbotron-fluid">
-	<div class="container">
-		<h1 class="display-5 text-secondary pt-2 pb-4">Blog</h1>
-	</div>
-</div>
-{% endblock splash %}
-
 
 {% block list_of_items %}
 <div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mt-5 mb-5">
+                eu-citizen.science <span class="lightBlue-color">blog</span>
+            </h1>
+        </div>
+        {% for post in post_list %}
+        <div class="col-md-6 col-12 mb-5">
+            <div class="card h-100 border-0">
+                <a href="{{ post.get_absolute_url }}">
+                    <img class="card-img-top"  src="{% thumbnail post.image|default:'void_600.png' 600x400 upscale  crop%}" alt="Card image">
+                </a>
+                <div class="card-body">
+                    <p class="small text-muted">
+                    {% if post.author.name != "Empty user" %}
+                    {{ post.author.name }},
+                    {% endif %} 
+                    {{ post.created_on}}
+                    </p>
 
-	{% for post in post_list %}
-
-	<div class="card">
-		<div class="row no-gutters">
-			<div class="col-md-4">
-				<a href="{{ post.get_absolute_url }}">
-					<img class="card-img"  src="/media/{{post.image}}" alt="Card image">
-				</a>
-			</div>
-			<div class="col-md-8">
-				<div class="card-body">
-					<a href="{{ post.get_absolute_url }}">
-						<h5 class="card-title">{{ post.title }}</h5>
-					</a>
-					<p class="card-text text-muted h6">{% if post.author.name != "Empty user" %}
-						{{ post.author.name }} {% endif %} <br /> {{ post.created_on}} </p>
-					<p class="card-text">{{post.excerpt | safe }}<br /><br />
-						<a href="{{ post.get_absolute_url }}">{% trans "Read More" %} >></a>
-					</p>
-				</div>
-			</div>
-
-
-		</div>
-	</div>
-
-	<br />
-
-	{% endfor %}
-
-	<div class="col-lg-12">
-		{% include "blog_paginator.html" %}
-	</div>
+                    <a href="{{ post.get_absolute_url }}" class="card-title">
+                        <h3 class="">{{ post.title }}</h3>
+                    </a>
+                    <p class="card-text gray7">{{post.excerpt | safe }} </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="col-lg-12">
+            {% include "blog_paginator.html" %}
+        </div>
+    </div>
 </div>
 
-
-{%endblock%}
-
-{% block scripts %}
-<script>
-	$(document).ready(function () {
-		$(".card").hover(
-			function () {
-				$(this).addClass('shadow-none').css('cursor', 'pointer');
-			}, function () {
-				$(this).removeClass('shadow-none');
-			}
-		);
-	});
-</script>
-{% endblock scripts %}
+{% endblock list_of_items %}

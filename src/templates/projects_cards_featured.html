@@ -19,11 +19,6 @@
 				{% if project.id not in approvedProjects %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">{% trans "NOT YET MODERATED" %}</a><br/>
 				{% else %} {% if filters.approvedCheck == "All" %}  <a class="badge frontpage frontpage-green mb-2" href="/faq#moderation">{% trans "MODERATED" %}</a><br/> {% endif %}
 				{% endif %}
-				{% for country in countries %}
-				{% if country.code == project.country %}
-				<a class="badge frontpage" href="projects?country={{country.code}}">{{ country.name | upper }}</a>
-				{% endif %}
-				{% endfor %}
 			</div>
 		</a>
 		<div class="card-body">

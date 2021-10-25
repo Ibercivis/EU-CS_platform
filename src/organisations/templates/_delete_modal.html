@@ -1,0 +1,21 @@
+{% load i18n %}
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">{% trans "Confirm delete" %}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>{% trans "You are going to delete this organisation, this procedure is irreversible." %}</p>
+                <p>{% trans "Do you want to proceed?" %}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+                <a class="btn btn-red btn-delete"><i class="fas fa-trash-alt"></i> {% trans "Delete" %}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+

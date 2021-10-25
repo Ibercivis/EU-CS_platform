@@ -1,0 +1,81 @@
+{% extends "base_r2.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load thumbnail %}
+{% block head %}
+{{ block.super }}
+{% endblock head %}
+{% block title %}{{ block.super }} :: {{show_user.get_full_name}}{% endblock %}
+{% block navbar-left %}
+{% include "_navbar.html" %}
+{% endblock %}
+{% block list_of_items %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-3">
+            <div class="mt-4 mb-3">
+                <div>
+                    <img title="profile picture" class="img-fluid rounded-circle" src="{% thumbnail show_user.profile.picture|default:'default_profile.png' 280x280 crop %}">
+                </div>	
+                <h3 class="">
+                    {% if show_user.profile.title %}
+                    {{ show_user.profile.title}}
+                    {% endif %}
+                    {{ show_user.get_full_name}}
+                    {{ show_user.profile.surname}}
+                </h3>
+                {% if show_user.profile.country %}
+                <h5>{{show_user.profile.country.name}}</h5>
+                {% endif %}
+            </div>
+            <div class="list-group">
+                {% if editable %}
+                    <a href="/users/me"
+                    class="list-group-item list-group-item-action {% if request.path == '/users/me/' %}active{% endif %}">
+                    <i class="fas fa-id-card"></i>
+                    Personal profile</a>
+                {% else %}
+                <a href="/users/{{show_user.profile.slug}}"
+                   class="list-group-item list-group-item-action {% if request.path == '/users/{{show_user.profile.slug}}/' %}active{% endif %}">
+                    <i class="fas fa-id-card"></i>
+                    Personal profile</a>
+                {% endif %}
+                <!--a href="#" class="list-group-item list-group-item-action">
+                    <i class="fas fa-users"></i>
+                    ECSA membership</a-->
+                {% if editable %}
+                <a href="/users/me/submissions"
+                    class="list-group-item list-group-item-action {% if request.path == '/users/me/submissions' %}active{% endif %}">
+                    <i class="fas fa-binoculars"></i>
+                    Submissions</a>
+                {% elif show_user.profile.contentVisible %}
+                <a href="/users/{{show_user.profile.slug}}/submissions"
+                    class="list-group-item list-group-item-action {% if request.path == '/users/me/submissions' %}active{% endif %}">
+                    <i class="fas fa-binoculars"></i>
+                    Submissions</a>
+                {% endif %}
+                {% if editable %}
+                <a href="/users/me/bookmarks"
+                    class="list-group-item list-group-item-action {% if request.path == '/users/me/bookmarks' %}active{% endif %}">
+                    <i class="fas fa-book"></i>
+                    Bookmarks</a>
+                <a href="/users/me/privacy"
+                    class="list-group-item list-group-item-action {% if request.path == '/users/me/privacy' %}active{% endif %}">
+                    <i class="fas fa-user-secret"></i>
+                    Privacy center</a>
+                <a href="/users/me/edit"
+                    class="list-group-item list-group-item-action {% if request.path == '/users/me/edit/' %}active{% endif %}">
+                    <i class="fas fa-edit"></i>
+                    Edit profile</a>
+                {% endif %} 
+            </div>
+        </div>
+        <div class="col-9">
+            {% block profile_right %}
+            {% endblock profile_right %}
+        </div>
+    </div>
+</div>
+{% endblock list_of_items %}
+{% block scripts %}
+{% endblock scripts %}
