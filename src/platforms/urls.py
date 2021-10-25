@@ -7,5 +7,6 @@ urlpatterns = [
     path('platform/<int:pk>', views.platform, name='platform'),
     path('platforms/', views.platforms, name='platforms'),
     path('editPlatform/<int:pk>', views.editPlatform, name='editPlatform'),
-    path('deletePlatformAjax/<int:pk>', views.deletePlatformAjax, name='deletePlatformAjax')
+    path('deletePlatformAjax/<int:pk>', views.deletePlatformAjax, name='deletePlatformAjax'),
+    path('platformsAutocompleteSearch/', views.platformsAutocompleteSearch, name='platformsAutocompleteSearch')
 ]

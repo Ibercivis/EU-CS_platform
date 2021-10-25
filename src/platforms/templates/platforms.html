@@ -5,10 +5,28 @@
 {% block list_of_items %}
 <div class="container">
     <div class="row">
-        {% if platforms %}
+        <div class="col-12">
+            <h1>{% trans "platform and network <span class='lightBlue-color'> search</span>" %}</h1>
+            {% include "_subnavbar.html" %}
+            <!-- TODO: Include filters -->
+        </div>
+    </div>
+    <div class="row">
         {% include "platforms_cards.html" %}
-        {% endif %}
     </div>
 </div>
 {% endblock list_of_items %}
+{% block scripts %}
+<script src="{% static 'site/js/bootstrap-autocomplete.js'%}"></script>
+<script>
+    $('.basicAutoComplete').autoComplete(
+	{ minLength: 3 }
+	);
+	$('.basicAutoComplete').on('autocomplete.select', function (evt, item) {
+		$('#searchOrganisations').submit();
+	});
+</script>
+{% endblock scripts %}
+
+
 

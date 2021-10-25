@@ -1,5 +1,4 @@
 from django.http import HttpResponse, JsonResponse, StreamingHttpResponse
-from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.core.paginator import Paginator
 from django.core import serializers

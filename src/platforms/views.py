@@ -1,6 +1,7 @@
 from django.shortcuts import render
+
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.utils import formats
 from django.shortcuts import get_object_or_404, redirect
 
@@ -89,6 +90,16 @@ def platform(request, pk):
 def platforms(request):
     platforms = Platform.objects.get_queryset()
     return render(request, 'platforms.html', {'platforms': platforms, 'isSearchPage': True})
+
+
+def platformsAutocompleteSearch(request):
+    if request.GET.get('q'):
+        text = request.GET['q']
+        platforms = getPlatformsAutocomplete(text)
+        platforms = list(platforms)
+        return JsonResponse(platforms, safe=False)
+    else:
+        return HttpResponse("No cookies")
 
 
 def getPlatformsAutocomplete(text):
