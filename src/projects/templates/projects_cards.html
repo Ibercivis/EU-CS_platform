@@ -8,7 +8,7 @@
         <a href="/project/{{project.id}}">
             <picture>
                 {% thumbnail project.image1|default:'void_600.png' 306x204 crop as thumb %}
-                <img src="{{ thumb.url }}" />
+                <img class="img-fluid" src="{{ thumb.url }}" />
             </picture>
         </a>
         <div class="card-body">

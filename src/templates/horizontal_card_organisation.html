@@ -6,5 +6,6 @@
 </a>
 {% endblock img %}
 {% block title %}
-<a href="/organisation/{{organisation.id}}">{{ organisation.name }}</a>
+<a href="/organisation/{{organisation.id}}">{{ organisation.name | truncatechars:30 }}</a>
+<div class="small text-muted">{{organisation.dateCreated}}</div>
 {% endblock title %}

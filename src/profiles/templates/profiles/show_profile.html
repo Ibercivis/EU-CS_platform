@@ -6,14 +6,14 @@
 {{ show_user.profile.bio | safe }}
 {% endif %}
 
-{% if show_user.profile.interestAreas %}
+{% if show_user.profile.interestAreas.all %}
 <h4 class="col-12 leftborder mt-4">{% trans "Interest and expertise areas" %}</h4>
 {% for area in show_user.profile.interestAreas.all %}
 <span class="badge bg-my-darkGreen">{{ area }}</span>
 {% endfor %}
 {% endif %}
 
-{% if show_user.profile.organisation %}
+{% if show_user.profile.organisations.all %}
 <h4 class="col-12 leftborder mt-4">{% trans "Organisations" %}</h4>
 <div class="row">
     {% for organisation in show_user.profile.organisation.all %}

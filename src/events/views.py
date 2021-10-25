@@ -16,7 +16,8 @@ def events(request):
     ongoingEvents = Event.objects.get_queryset().filter(
             start_date__lte=now,
             end_date__gte=now).order_by('-featured', 'start_date')
-    pastEvents = Event.objects.get_queryset().filter(end_date__lt=now).order_by('-featured', '-start_date')
+    pastEvents = Event.objects.get_queryset().order_by('-featured', '-start_date')
+    print(pastEvents)
     approvedEvents = ApprovedEvents.objects.all().values_list('event_id', flat=True)
     unApprovedEvents = UnApprovedEvents.objects.all().values_list('event_id', flat=True)
 
