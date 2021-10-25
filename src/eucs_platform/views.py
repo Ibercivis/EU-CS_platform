@@ -149,6 +149,9 @@ def call(request):
 def policy_maker_event_2021(request):
     return render(request, 'policy_maker_event_2021.html')
 
+def final_launch(request):
+    return render(request, 'final_launch.html')
+
 def home_autocomplete(request):
     if request.GET.get('q'):
         text = request.GET['q']
