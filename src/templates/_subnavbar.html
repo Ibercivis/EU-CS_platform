@@ -1,6 +1,5 @@
 {% load i18n %}
 {% load active_link_tags %}
-{% if isSearchPage and request.get_full_path != '/' %}
 <div class="row">
     <div class="col-12">
         <nav class="navbar navbar-light bg-white sub-nav-bar pb-0 pl-0">
@@ -46,7 +45,7 @@
         </nav>
     </div>
 </div>
-
+{% if isSearchPage and request.get_full_path != '/' %}
 <div class="row">
     <div class="col-12">
         <form id="searchTop"
@@ -92,4 +91,3 @@
     </div>
 </div>
 {% endif %}
-

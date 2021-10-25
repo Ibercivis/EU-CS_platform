@@ -11,7 +11,8 @@ from resources.views import getResourcesAutocomplete
 from organisations.views import getOrganisationAutocomplete
 from platforms.views import getPlatformsAutocomplete
 from profiles.views import getProfilesAutocomplete
-from resources.models import Resource, ResourceGroup, ResourcesGrouped, ApprovedResources, SavedResources, Theme, Category
+from resources.models import Resource, ResourceGroup, ResourcesGrouped
+from resources.models import ApprovedResources, SavedResources, Theme, Category
 from organisations.models import Organisation
 from platforms.models import Platform
 from django.conf import settings
@@ -117,40 +118,55 @@ def home(request):
         'total': total,
         'isSearchPage': True})
 
+
 def all(request):
     return home(request)
+
 
 class AboutPage(generic.TemplateView):
     template_name = "about.html"
 
+
 def curated(request):
     groups = ResourceGroup.objects.get_queryset().order_by('id')
     resourcesgrouped = ResourcesGrouped.objects.get_queryset().order_by('group')
-    return render(request, 'curated.html', {'groups': groups, 'resourcesgrouped': resourcesgrouped, 'isSearchPage': True})
+    return render(request, 'curated.html', {
+        'groups': groups,
+        'resourcesgrouped': resourcesgrouped,
+        'isSearchPage': False})
+
 
 def imprint(request):
     return render(request, 'imprint.html')
 
+
 def contact(request):
     return render(request, 'contact.html')
+
 
 def terms(request):
     return render(request, 'terms.html')
 
+
 def privacy(request):
     return render(request, 'privacy.html')
+
 
 def faq(request):
     return render(request, 'faq.html')
 
+
 def development(request):
     return render(request, 'development.html')
+
 
 def subscribe(request):
     return render(request, 'subscribe.html')
 
+
 def moderation(request):
     return render(request, 'moderation.html')
+
 
 def policy_brief(request):
     return render(request, 'policy_brief.html')
@@ -167,8 +183,10 @@ def moderation_quality_criteria(request):
 def translations(request):
     return render(request, 'translations.html')
 
+
 def call(request):
     return render(request, 'call.html')
+
 
 def policy_maker_event_2021(request):
     return render(request, 'policy_maker_event_2021.html')
@@ -200,7 +218,7 @@ def getTopicsResponded(request):
         result = result.distinct()
         topics = TrackingHandler.get_unread_topics(request, result, request.user)
 
-    topicshtml="</br>"
+    topicshtml = "</br>"
 
     for topic in topics:
         slug = '' + topic.slug + '-' + str(topic.id)
@@ -223,7 +241,7 @@ def getForumResponsesNumber(request):
         suscribed_topics = request.user.topic_subscriptions.all()
         result = own_topics | suscribed_topics
         result = result.distinct()
-        result = TrackingHandler.get_unread_topics(request, result, request.user)        
+        result = TrackingHandler.get_unread_topics(request, result, request.user)
         forumresponses = len(result)
 
     response['forumresponses'] = forumresponses
