@@ -87,7 +87,7 @@ class Resource(models.Model):
     imageCredit2 = models.CharField(max_length=300, null=True, blank=True)
 
     # Training resources fields
-    isTrainingResource = models.BooleanField(null=True, blank=True)
+    isTrainingResource = models.BooleanField(null=True, blank=True, default=False)
     educationLevel = models.ManyToManyField(EducationLevel)
     learningResourceType = models.ManyToManyField(LearningResourceType)
     timeRequired = models.FloatField(null=True, blank=True)

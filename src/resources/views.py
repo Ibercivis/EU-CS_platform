@@ -40,10 +40,11 @@ def resources(request, isTrainingResource=False):
                 isTrainingResource=True).values_list('inLanguage', flat=True).distinct()
         endPoint = 'training_resources'
     else:
-        resources = Resource.objects.all().filter(isTrainingResource=False).order_by('-dateUpdated')
+        resources = Resource.objects.all().filter(~Q(isTrainingResource=False)).order_by('-dateUpdated')
         languagesWithContent = Resource.objects.all().filter(
-                isTrainingResource=False).values_list('inLanguage', flat=True).distinct()
+                ~Q(isTrainingResource=True)).values_list('inLanguage', flat=True).distinct()
         endPoint = 'resources'
+    print(resources.query)
 
     themes = Theme.objects.all()
     categories = Category.objects.all()
@@ -417,10 +418,12 @@ def resourcesAutocompleteSearch(request, isTrainingResource=False):
 
 def getResourcesAutocomplete(text, isTrainingResource=False):
     approvedResources = ApprovedResources.objects.all().values_list('resource_id', flat=True)
-    resources = Resource.objects.filter(~Q(hidden=True)).filter(
-            id__in=approvedResources).filter(
-                    isTrainingResource=isTrainingResource).filter(
-                            name__icontains=text).values_list('id', 'name').distinct()
+    resources = Resource.objects.filter(~Q(hidden=True)).filter(id__in=approvedResources).filter(name__icontains=text)
+    if(isTrainingResource):
+        resources = resources.filter(isTrainingResource=True)
+    else:
+        resources = resources.filter(~Q(isTrainingResource=True))
+    resources = resources.values_list('id', 'name').distinct()
     keywords = Keyword.objects.filter(
             keyword__icontains=text).values_list('keyword', flat=True).distinct()
     report = []
@@ -430,9 +433,15 @@ def getResourcesAutocomplete(text, isTrainingResource=False):
         else:
             report.append({"type": "resource", "id": resource[0], "text": resource[1]})
     for keyword in keywords:
-        numberElements = Resource.objects.filter(
+        if(isTrainingResource):
+            numberElements = Resource.objects.filter(
                 Q(keywords__keyword__icontains=keyword)).filter(
-                        isTrainingResource=isTrainingResource).count()
+                        isTrainingResource=True).count()
+        else:
+            numberElements = Resource.objects.filter(
+                Q(keywords__keyword__icontains=keyword)).filter(
+                        ~Q(isTrainingResource=True)).count()
+
         report.append({"type": "keyword", "text": keyword, "numberElements": numberElements})
     return report
 
