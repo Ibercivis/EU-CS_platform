@@ -3,13 +3,7 @@
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% block title %}{{ block.super }} :: Organisations{% endblock %}
-{% block navbar-left %}
-{% include "_navbar_r2.html" with active_link="organisations" %}
-{% endblock %}
 
-{% block page_header %}
-{% include "finder_organisations.html" %}
-{% endblock page_header %}
 {% block list_of_items %}
 <div class="container">
     <div clas="row">

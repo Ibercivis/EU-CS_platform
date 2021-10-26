@@ -8,10 +8,9 @@
         <img  class="card-img-top" src="{% thumbnail organisation.logo|default:'void_600.png' 306x204 crop %}">
         </a>
         <div class="card-body">
-            <h5 class="mt-2 mb-0">
+            <h5 class="mt-2 mb-3">
                 <a href="/organisation/{{organisation.id }}" class="card-title">{{ organisation.name }}</a>
             </h5>
-            <div class="small text-muted mb-2">{{organisation.dateCreated}}</div>
             <a href="/organisations?country={{organisation.country.code}}" class="badge rounded-pill bg-dark text-decoration-none">
                     {{organisation.country.name}}
                 </a>

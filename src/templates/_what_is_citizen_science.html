@@ -1,15 +1,19 @@
-<div class="container-fluid pt-5" style="background: #ABB79B url('/static/site/img/ilustracion_1.png') left no-repeat" >
+{% load i18n %}
+<div class="container-fluid pt-5" style="background: #ABB79B url('/static/site/img/solution.png') left no-repeat" >
     <div class="container">
         <div class="row">
             <div class="col-12 col-md-6">
             </div>
         <div class="col-12 col-md-6">
-            <h1 class="mt-5 text-black">What is citizen science?</h1>
+            <h1 class="mt-5 text-black">
+                {% trans "what is <span class='text-white'>citizen science?</span>" %}
+            </h1>
             <h3 class="fw-light mb-5">
-                Citizen science actively involves the public in scientific research that generates new knowledge or understanding, and thus has the potential to bring together science, policy makers, and society as a whole in an impactful way. Citizen scientists can participate in many stages of the scientific process, from data collection and volunteer mapping, through data interpretation and analysis, to publication and dissemination of results.
+                <div class="mb-2">{% trans "Citizen science actively involves the public in scientific research that generates new knowledge or understanding, and thus has the potential to bring together science, policy makers, and society as a whole in an impactful way. " %}</div>
+                <div>{% trans "Citizen scientists can participate in many stages of the scientific process, from data collection and volunteer mapping, through data interpretation and analysis, to publication and dissemination of results." %}</div>
             </h3>
             <h3 class="fw-light mb-5">
-Learn more about it with the ECSA 10 Principles of Citizen Science and the ECSA Characteristics of Citizen Science!
+                {% trans "Learn more about it with the ECSA 10 Principles of Citizen Science and the ECSA Characteristics of Citizen Science!" %}
             </h3>
         </div>
     </div>

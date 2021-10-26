@@ -20,7 +20,7 @@ class ProjectGeographicLocationForm(forms.Form):
     projectGeographicLocation = forms.MultiPolygonField(
             required=False,
             widget=forms.OSMWidget(attrs={}),
-            label=_(""))
+            label=(' '))
 
 
 class ProjectForm(forms.Form):

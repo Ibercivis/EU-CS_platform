@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+from django.http import HttpResponse
 from django.views import generic
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
@@ -8,12 +9,14 @@ from django.http import JsonResponse
 from itertools import chain
 from . import forms
 from . import models
+from .models import Profile
 from projects.models import Project, FollowedProjects, ProjectPermission, ApprovedProjects, UnApprovedProjects
 from resources.models import Resource, BookmarkedResources, ResourcePermission, ApprovedResources, UnApprovedResources
 from organisations.models import Organisation, OrganisationPermission
 from events.models import Event
 from django.db.models.functions import Concat
 from django.db.models import Value
+from django.core.paginator import Paginator
 
 
 class ShowProfile(LoginRequiredMixin, generic.TemplateView):
@@ -25,12 +28,16 @@ class ShowProfile(LoginRequiredMixin, generic.TemplateView):
         if slug:
             profile = get_object_or_404(models.Profile, slug=slug)
             user = profile.user
+            if user.profile.profileVisible is True:
+                kwargs["show_user"] = user
+
         else:
             user = self.request.user
+            kwargs["show_user"] = user
 
         if user == self.request.user:
             kwargs["editable"] = True
-        kwargs["show_user"] = user
+
         return super().get(request, *args, **kwargs)
 
 
@@ -151,6 +158,33 @@ class Bookmarks(LoginRequiredMixin, generic.TemplateView):
         return super().get(request, *args, **kwargs)
 
 
+class UsersSearch(generic.TemplateView):
+    template_name = "profiles/usersSearch.html"
+    http_method_names = ["get"]
+
+    def get(self, request, *args, **kwargs):
+        users = Profile.objects.all().filter(profileVisible=True)
+        filters = {}
+        # TODO: Add surname (needs to be added algo in the autocomplete search
+        if request.GET.get('keywords'):
+            users = users.filter(
+                Q(user__name__icontains=request.GET['keywords']) |
+                Q(interestAreas__interestArea__icontains=request.GET['keywords'])).distinct()
+            filters['keywords'] = request.GET['keywords']
+
+        counter = len(users)
+
+        paginator = Paginator(users, 42)
+        page = request.GET.get('page')
+        users = paginator.get_page(page)
+
+        kwargs["users"] = users
+        kwargs["isSearchPage"] = True
+        kwargs["counter"] = counter
+        kwargs["filters"] = filters
+        return super().get(request, *args, **kwargs)
+
+
 def projects(request):
     user = request.user
     projectsCreated = Project.objects.all().filter(creator=user)
@@ -190,17 +224,6 @@ def followedProjects(request):
         'show_user': user,
         'projects': projects,
         'followedProjects': followedProjects})
-
-
-def savedResources(request):
-    user = request.user
-    savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id', flat=True)
-    resources = Resource.objects.filter(id__in=savedResources)
-    resources = resources.filter(~Q(hidden=True))
-    return render(request, 'profiles/saved_resources.html', {
-        'show_user': user,
-        'resources': resources,
-        'savedResources': savedResources})
 
 
 def getProjectsWithPermission(user):
@@ -257,13 +280,29 @@ def updateInterestAreas(dictio):
     return dictio
 
 
+def usersAutocompleteSearch(request):
+    if request.GET.get('q'):
+        text = request.GET['q']
+        users = getProfilesAutocomplete(text)
+        users = list(users)
+        return JsonResponse(users, safe=False)
+    else:
+        return HttpResponse("No cookies")
+
+
 def getProfilesAutocomplete(text):
     print("Profiles")
     profiles = models.Profile.objects.all().filter(
-            Q(surname__icontains=text) | Q(user__name__icontains=text)).annotate(
+            Q(surname__icontains=text) | Q(user__name__icontains=text)).filter(profileVisible=True).annotate(
                     fullname=Concat('user__name', Value(' '), 'surname')).values_list('user__id', 'fullname', 'slug')
+    interestAreas = models.InterestArea.objects.filter(
+            interestArea__icontains=text).values_list('interestArea', flat=True).distinct()
     report = []
     print(profiles)
     for profile in profiles:
         report.append({"type": "profile", "id": profile[0], "text": profile[1], "slug": profile[2]})
+    for interestArea in interestAreas:
+        numberElements = models.Profile.objects.filter(
+                profileVisible=True).filter(Q(interestAreas__interestArea__icontains=interestArea)).count()
+        report.append({"type": "profileInterestArea", "text": interestArea, "numberElements": numberElements})
     return report

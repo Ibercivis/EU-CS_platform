@@ -15,6 +15,7 @@ from resources.models import Resource, ResourceGroup, ResourcesGrouped
 from resources.models import ApprovedResources, SavedResources, Theme, Category
 from organisations.models import Organisation
 from platforms.models import Platform
+from profiles.models import Profile
 from django.conf import settings
 from blog.models import Post
 import random
@@ -27,6 +28,7 @@ from machina.apps.forum_tracking.handler import TrackingHandler
 
 def home(request):
     # Projects
+    # TODO: Clean this, we dont need lot of things
     user = request.user
     projects = Project.objects.get_queryset().filter(~Q(hidden=True)).order_by('-dateCreated')
     approvedProjects = ApprovedProjects.objects.all().values_list('project_id', flat=True)
@@ -100,6 +102,9 @@ def home(request):
     page = request.GET.get('page')
     platforms = paginatorPlatform.get_page(page)
 
+    # Users
+    counterUsers = Profile.objects.count()
+
     total = countertresources + counterprojects + countertresources + counterorganisations
 
     return render(request, 'home.html', {
@@ -115,6 +120,7 @@ def home(request):
         'counterorganisations': counterorganisations,
         'platforms': platforms,
         'counterPlatforms': counterPlatforms,
+        'counterUsers': counterUsers,
         'total': total,
         'isSearchPage': True})
 

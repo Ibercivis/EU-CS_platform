@@ -11,7 +11,7 @@
 {% endblock %}
 {% block splash %}
 {% if request.get_full_path == "/" %}
-<div class="container-fluid" style="background: url('/static/site/img/ilustracion_3b.png') no-repeat fixed top right">
+<div class="container-fluid" style="background: url('/static/site/img/ilustracion_diversity.png') no-repeat fixed top right">
     <div class="container" >
         <div class="row">
             <div class="col-12 col-md-6">
@@ -20,12 +20,14 @@
                     {% trans "Welcome to the platform for sharing citizen science projects, resources, tools, training and much more" %}
                 </h3>
             </div>
+
+            {% include "_subnavbar.html" %}
             <div class="row">
-                <div class="col-12 mt-5 pb-5">
+                <div class="col-12 pb-5">
                     <form id="finder" action="/all" >
                         <div class="form-row">
-                            <div class="input-group">
-                                <div class="input-group-text inhead clickable" id="mysearch">
+                            <div class="input-group border-0">
+                                <div class="input-group-text inhead clickable border-top-0 bg-white border-end-0" id="mysearch">
                                     <i class="fas fa-search"></i>
                                 </div>
                                 <input type="text" 
@@ -33,10 +35,10 @@
                                        name="keywords" 
                                        autocomplete="off" 
                                        style="background: #ffffffaa"
-                                       class="basicAutoComplete form-control form-control-lg inhead opacity-25"
+                                       class="basicAutoComplete form-control rounded-bottom opacity-25 border-top-0 border-start-0 border-end-0"
                                        placeholder="{% trans 'Search...'%}"
                                        data-url="/home_autocomplete/">
-                                <div class="input-group-text inhead clickable" id="backsign"></div>
+                                <div class="input-group-text inhead clickable border-top-0 border-start-0 bg-white" id="backsign"></div>
                             </div>
                         </div>
                     </form>
@@ -47,7 +49,7 @@
                         <a class="lightBlue-color" href="/users/me">personal area</a><br/>
                         and see your stats</h3>
                     {% else %}
-                    <h3 class="mb-5 mt-5"><div class="blue-color">Join the community</div> and participate</h3>
+                    <h3 class="mb-5 mt-5">{% trans "<a href='signup'>join the community</a> <div>and participate</div>" %}</h3>
                     {% endif %}
                 </div>
             </div>

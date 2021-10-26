@@ -1,0 +1,18 @@
+{% load i18n %}
+{% load staticfiles %}
+{% load l10n %}
+{% load countries %}
+{% get_countries as countries %}
+
+<div class="row">
+    <form class="form-inline float-lg-right" id="searchOrganisations" action="{% url 'organisations' %}">
+        <input type="hidden" name="keywords" value="{{filters.keywords}}">
+        <div class="col-lg-6 col-6 mb-3 text">
+            {{ counter }} {% if counter != 1 %}{% trans "users found" %} {% else %} {% trans "user found" %} {% endif %}
+        {% if request.get_full_path != "/users/" %}
+            <a class="badge rounded-pill bg-warning" href="/users">
+                <i class="fas fa-times"></i> {% trans "Clear current search query and filters" %}
+            </a>
+        {% endif %}
+    </form>
+</div>

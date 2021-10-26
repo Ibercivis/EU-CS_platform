@@ -1,0 +1,22 @@
+{% extends "base_r2.html" %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% block head %}
+{{block.super }}
+{% endblock %}
+{% block js %}
+{% endblock js %}
+
+{% block list_of_items %}
+
+<div class="container">
+    {% block body %}
+    {# The forum content will go in this 'body' block #}
+    {% endblock body %}
+</div>
+{% endblock list_of_items %}
+
+{% block extra_js %}
+{% endblock extra_js %}
+

@@ -2,42 +2,48 @@
 {% load active_link_tags %}
 <div class="row">
     <div class="col-12">
-        <nav class="navbar navbar-light bg-white sub-nav-bar pb-0 pl-0">
+        <nav class="navbar navbar-light bg-white sub-nav-bar pb-0 pl-0 border-top border-end border-start rounded-top">
             <ul class="nav">
                 <li class="nav-item text-start">
-                    <a class="nav-link ps-0 pt- pr-4 {% active_link 'projects' %}"
+                    <a class="nav-link ps-4  {% active_link 'projects' %}"
                        href="{% url 'projects' %}{% if request.GET.keywords %}?keywords={{request.GET.keywords}}{%endif%}">
                         <i class="fas fa-binoculars"></i> {% trans "Projects" %}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link ps-0 pr-4 {% active_link 'resources' %}"
+                    <a class="nav-link ps-4  {% active_link 'resources' %}"
                        href="{% url 'resources' %}{% if request.GET.keywords %}?keywords={{request.GET.keywords}}{%endif%}">
                         <i class="fas fa-book"></i> {% trans "Resources" %}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link ps-0 pr-4 {% active_link 'training_resources' %}"
+                    <a class="nav-link ps-4  {% active_link 'training_resources' %}"
                        href="{% url 'training_resources' %}{% if request.GET.keywords %}?keywords={{request.GET.keywords}}{%endif%}">
                         <i class="fas fa-graduation-cap"></i> {% trans "Training" %}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link ps-0 pr-5 {% active_link 'organisations' %}"
+                    <a class="nav-link ps-4  {% active_link 'organisations' %}"
                        href="{% url 'organisations'%}{% if request.GET.keywords %}?keywords={{request.GET.keywords}}{%endif%}">
                         <i class="fas fa-university"></i> {% trans "Organisations" %}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link ps-0 pr-5 {% active_link 'platforms' %}"
+                    <a class="nav-link ps-4  {% active_link 'platforms' %}"
                        href="{% url 'platforms'%}{% if request.GET.keywords %}?keywords={{request.GET.keywords}}{%endif%}">
                         <i class="fas fa-globe-europe"></i> {% trans "Platforms" %}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link ps-4  {% active_link 'users' %}"
+                       href="/users/{% if request.GET.keywords %}?keywords={{request.GET.keywords}}{%endif%}">
+                        <i class="fas fa-user-friends"></i> {% trans "Users" %}
                     </a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right {% active_link 'curated'%}">
                 <li class="nav-item">
-                    <a class="nav-link {% active_link 'curated' %}" href="{% url 'curated' %}">
+                    <a class="nav-link ps-4 pe-4 {% active_link 'curated' %}" href="{% url 'curated' %}">
                         <i class="fas fa-star"></i> {% trans "Our Gold Star Selection" %}
                     </a>
                 </li>
@@ -59,17 +65,21 @@
               action="/organisations"
               {% elif 'platforms' in request.get_full_path %}
               action= "platforms"
+              {% elif 'users' in request.get_full_path %}
+              action= "users"
               {% else %}
               action="/projects"
               {% endif %}>
             <div class="input-group mb-3">
-                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                <span class="input-group-text bg-white border-end-0 border-top-0">
+                    <i class="fas fa-search"></i>
+                </span>
                 <input type="text" 
                        id="keywords" 
                        name="keywords"  
                        autocomplete="off" 
                        value="{{filters.keywords}}" 
-                       class="basicAutoComplete form-control" 
+                       class="basicAutoComplete form-control border-start-0 border-end-0 border-top-0" 
                        placeholder="Search..." 
                        {% if 'all' in request.get_full_path %}
                        data-url="/home_autocomplete/"
@@ -81,11 +91,13 @@
                        data-url="/organisationsAutocompleteSearch/"
                        {% elif 'platforms' in request.get_full_path %}
                        data-url="/platformsAutocompleteSearch/"
+                       {% elif 'users' in request.get_full_path %}
+                       data-url="/users/me/usersAutocompleteSearch"
                        {% else %}
                        data-url="/projectsAutocompleteSearch/"
                        {% endif %}
                        >
-                       <div class="input-group-text clickable" id="backsign"></div>
+                       <div class="input-group-text clickable border-start-0 border-top-0 bg-white" id="backsign"></div>
             </div>
         </form>
     </div>

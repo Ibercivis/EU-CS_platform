@@ -5,7 +5,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.conf import settings
-from django.db.models import Q, Avg
+from django.db.models import Q
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.core.mail import EmailMessage
@@ -67,20 +67,6 @@ def resources(request, isTrainingResource=False):
             resourcesTopIds = list(resourcesTop.values_list('id', flat=True))
             resources = resources.exclude(id__in=resourcesTopIds)
             resources = list(resourcesTop) + list(resources)
-        elif("avg" in orderBy):
-            reviews = Review.objects.filter(content_type=ContentType.objects.get(model="resource"))
-            reviews = reviews.values(
-                    "object_pk",
-                    "content_type").annotate(avg_rating=Avg('rating')).order_by(orderBy).values_list(
-                            'object_pk', flat=True)
-            reviews = list(reviews)
-            resourcesVoted = []
-            for r in reviews:
-                rsc = Resource.objects.get(pk=r)
-                if rsc in resources:
-                    resourcesVoted.append(rsc)
-            resources = resources.exclude(id__in=reviews)
-            resources = list(resourcesVoted) + list(resources)
         else:
             resources = resources.order_by('-dateUpdated')
         filters['orderby'] = request.GET['orderby']
@@ -437,12 +423,12 @@ def getResourcesAutocomplete(text, isTrainingResource=False):
             numberElements = Resource.objects.filter(
                 Q(keywords__keyword__icontains=keyword)).filter(
                         isTrainingResource=True).count()
+            report.append({"type": "trainingKeyword", "text": keyword, "numberElements": numberElements})
         else:
             numberElements = Resource.objects.filter(
                 Q(keywords__keyword__icontains=keyword)).filter(
                         ~Q(isTrainingResource=True)).count()
-
-        report.append({"type": "keyword", "text": keyword, "numberElements": numberElements})
+            report.append({"type": "resourceKeyword", "text": keyword, "numberElements": numberElements})
     return report
 
 

@@ -385,7 +385,7 @@ HAYSTACK_CONNECTIONS = {
 
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
-MACHINA_BASE_TEMPLATE_NAME = 'base_forum.html'
+MACHINA_BASE_TEMPLATE_NAME = 'base_forum_new.html'
 MACHINA_FORUM_NAME = 'Community Forums'
 MACHINA_USER_DISPLAY_NAME_METHOD = 'get_full_name'
 

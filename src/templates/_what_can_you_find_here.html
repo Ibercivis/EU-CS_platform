@@ -1,14 +1,19 @@
+{% load i18n %}
 <div class="container-fluid pt-5 pb-5" style="background: #FFF url('/static/site/img/What_u_will_find.png') fixed no-repeat right">
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1>What can you find here?</h1>
+                <h1>{% trans "what can you find here?" %}</h1>
             </div>
             <div class="col-md-5 col-12 mb-3 mt-3">
                 <div class="card h-100 shadow border-0">
                     <div class="card-body">
-                        <h3 class="card-title">{{ counterprojects }} projects</h3>
-                        that are engaging the public in research via citizen science activities
+                        <h3 class="card-title">{{ counterprojects }} 
+                            <a href="/projects">
+                                {% trans "projects" %}
+                            </a>
+                        </h3>
+                        {% trans "that are engaging the public in research via citizen science activities" %}
                     </div>
                 </div>
             </div>
@@ -17,8 +22,12 @@
             <div class="col-md-5 col-12 mb-3 mt-3">
                 <div class="card h-100 shadow border-0">
                     <div class="card-body">
-                        <h3 class="card-title">{{ counterresources }} resources</h3>
-                        useful for planning and running citizen science projects
+                        <h3 class="card-title">{{ counterresources }}
+                            <a href="/resources">
+                                {% trans "resources" %}
+                            </a>
+                        </h3>
+                        {% trans "useful for planning and running citizen science projects" %}
                     </div>
                 </div>
             </div>
@@ -27,8 +36,12 @@
             <div class="col-md-5 col-12 mb-3 mt-3">
                 <div class="card h-100 shadow border-0">
                     <div class="card-body">
-                        <h3 class="card-title">{{ countertresources }} training resources</h3>
-                        about the practice of citizen science
+                        <h3 class="card-title">{{ countertresources }}
+                            <a href="/training_resources">
+                                {% trans "training resources" %}
+                            </a>
+                        </h3>
+                        {% trans "about the practice of citizen science" %}
                     </div>
                 </div>
             </div>
@@ -37,8 +50,11 @@
             <div class="col-md-5 col-12 mb-3 mt-3">
                 <div class="card h-100 shadow border-0">
                     <div class="card-body">
-                        <h3 class="card-title">{{counterorganisations}} organisations</h3>
-                        involved in citizen science projects and research
+                        <h3 class="card-title">{{counterorganisations}}
+                            <a href="/organisations">
+                                {% trans "organisations" %}
+                            </a></h3>
+                        {% trans "involved in citizen science projects and research" %}
                     </div>
                 </div>
             </div>
@@ -47,8 +63,11 @@
             <div class="col-md-5 col-12 mb-3 mt-3">
                 <div class="card h-100 shadow border-0">
                     <div class="card-body">
-                        <h3 class="card-title">Platforms</h3>
-                        to get an overview of further developments in citizen science
+                        <h3 class="card-title">{{counterPlatforms}}
+                            <a href="/platforms">
+                                {% trans "platforms" %}
+                            </a></h3>
+                        {% trans "to get an overview of further developments in citizen science" %}
                     </div>
                 </div>
             </div>
@@ -57,15 +76,21 @@
             <div class="col-md-5 col-12 mb-3 mt-3">
                 <div class="card h-100 shadow border-0">
                     <div class="card-body">
-                        <h3 class="card-title">Users</h3>
-                        with whom you can connect
+                        <h3 class="card-title">{{counterUsers}}
+                            <a href="/users">
+                                {% trans "users" %}
+                            </a>
+                        </h3>
+                        {% trans "with whom you can connect" %}
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <h3 class="m-0 float-end mt-5">Check out our events calendar, blog and forum!</h3>
+                <h3 class="m-0 float-end mt-5">
+                    {% trans " Check out our <a href='/events'>events</a> calendar, <a href='/blog'>blog</a> and <a href='/forum'>forum!</a>" %}
+                </h3>
             </div>
         </div>
     </div>

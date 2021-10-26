@@ -625,7 +625,13 @@
                     if(item.type==='keyword'){
                         console.log('keyword')
                         prefix='<i class="fas fa-key"></i>';
-                    }else if(item.type==='project'){
+                    }else if(item.type==='projectKeyword'){
+                        prefix='<i class="fas fa-key"></i> <i class="fas fa-binoculars"></i>'
+                    }else if(item.type==='resourceKeyword'){
+                        prefix='<i class="fas fa-key"></i> <i class="fas fa-book"></i>'
+                    }else if(item.type==='trainingKeyword'){
+                        prefix='<i class="fas fa-key"></i> <i class="fas fa-graduation-cap"></i>'
+                    } else if(item.type==='project'){
                         console.log('project')
                         prefix='<i class="fas fa-binoculars"></i>'
                     }else if(item.type==='organisation'){
@@ -643,12 +649,14 @@
                         console.log('profile')
                         urlprefix='/user/'
                         prefix='<i class="fas fa-user-friends"></i>'
-                    }
-                    else{
+                    }else if(item.type==='profileInterestArea'){
+                        console.log('prddofile')
+                        prefix='<i class="fas fa-key"></i> <i class="fas fa-user-friends"></i>'
+                    }else{
                         prefix=''
                     }
                     var li = $('<li class="p-1">');
-                    if(item.type==='keyword'){
+                    if(item.type==='projectKeyword' | item.type==='profileInterestArea'){
                         if(item.numberElements > 0){
                             li.append($('<a class="text-decoration-none link-secondary">')
                                 .attr('href', urlprefix+item.id).html(prefix+' '+itemHtml+' ('+item.numberElements+')'))
@@ -679,8 +687,16 @@
                 this._$el.trigger('autocomplete.select', item);
             }else if(item.type==='profile'){
                 window.location.href='/users/'+item.slug
+            }else if(item.type==='profileInterestArea'){
+                window.location.href='/users?keywords='+item.text
             }else if(item.type==='project'){
                 window.location.href='/project/'+item.id
+            }else if(item.type==='projectKeyword'){
+                window.location.href='/projects?keywords='+item.text
+            }else if(item.type==='resourceKeyword'){
+                window.location.href='/resources?keywords='+item.text
+            }else if(item.type==='trainingKeyword'){
+                window.location.href='/training_resources?keywords='+item.text
             }else if(item.type==='resource'){
                 window.location.href='/resource/'+item.id
             }else if(item.type==='training'){

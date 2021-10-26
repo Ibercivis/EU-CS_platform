@@ -8,10 +8,9 @@
             <img class="card-img-top" src="{% thumbnail platform.logo|default:'void_600.png' 306x204 crop %}">
         </a>
         <div class="card-body">
-            <h4 class="mt-2 mb-0">
+            <h4 class="mt-2 mb-3">
                 <a href="/platform/{{platform.id }}" class="card-title">{{ platform.name }}</a>
             </h4>
-            <div class="small text-muted mb-2">{{platform.dateCreated}}</div>
                 {% for country in platform.countries %}
                 <a class="badge rounded-pill bg-dark text-decoration-none">{{country.name}}</a>
                 {% endfor %}

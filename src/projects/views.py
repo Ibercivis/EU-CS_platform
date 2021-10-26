@@ -27,6 +27,7 @@ import copy
 import csv
 import json
 import random
+import pytz
 from rest_framework import status
 
 User = get_user_model()
@@ -223,11 +224,13 @@ def projects(request):
             'approvedCheck': '',
             'doingAtHome': '',
             'difficultyLevel': '',
+            'featured': '',
             'hasTag': ''}
 
     projects = applyFilters(request, projects)
     filters = setFilters(request, filters)
     projects = projects.filter(~Q(hidden=True))
+    print(filters)
 
     # Ordering
     if request.GET.get('orderby'):
@@ -237,27 +240,6 @@ def projects(request):
             projectsTopIds = list(projectsTop.values_list('id', flat=True))
             projects = projects.exclude(id__in=projectsTopIds)
             projects = list(projectsTop) + list(projects)
-        else:
-            reviews = Review.objects.filter(content_type=ContentType.objects.get(model="project"))
-            reviews = reviews.values(
-                    "object_pk",
-                    "content_type").annotate(
-                            avg_rating=Avg('rating')).order_by(orderBy).values_list('object_pk', flat=True)
-            reviews = list(reviews)
-            projectsVoted = []
-            for r in reviews:
-                proj = Project.objects.all().filter(id=r).first()
-                if(proj):
-                    if projects.filter(id=proj.id).exists():
-                        projectsVoted.append(proj)
-
-            projects = projects.exclude(id__in=reviews)
-            if(orderBy == "avg_rating"):
-                projects = list(projects) + list(projectsVoted)
-            else:
-                projects = list(projectsVoted) + list(projects)
-
-        filters['orderby'] = request.GET['orderby']
     else:
         projects = projects.order_by('-dateUpdated')
 
@@ -293,18 +275,13 @@ def project(request, pk):
 
     # Check if there is a translation
     hasTranslation = project.translatedProject.filter(inLanguage=request.LANGUAGE_CODE).exists()
-    previous_page = request.META.get('HTTP_REFERER')
-    if previous_page and 'review' in previous_page:
-        # sendEmail
-        subject = 'Your project has received a review'
-        message = render_to_string(
-                'emails/project_review.html',
-                {"domain": settings.HOST, "name": project.name, "id": pk})
-        to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
-        to.append(project.creator.email)
-        email = EmailMessage(subject, message, to=to)
-        email.content_subtype = "html"
-        email.send()
+
+    # Check status
+    utc = pytz.UTC
+    if(project.end_date < utc.localize(datetime.now())):
+        status = "Completed"
+    else:
+        status = project.status
 
     cooperators = getCooperatorsEmail(pk)
     unApprovedProjects = UnApprovedProjects.objects.all().values_list('project_id', flat=True)
@@ -322,6 +299,7 @@ def project(request, pk):
         'permissionForm': permissionForm,
         'cooperators': getCooperators(pk),
         'form': form,
+        'status': status,
         'isSearchPage': True})
 
 
@@ -437,7 +415,7 @@ def getProjectsAutocomplete(text):
         report.append({"type": "project", "id": project[0], "text": project[1]})
     for keyword in keywords:
         numberElements = Project.objects.filter(Q(keywords__keyword__icontains=keyword)).count()
-        report.append({"type": "keyword", "text": keyword, "numberElements": numberElements})
+        report.append({"type": "projectKeyword", "text": keyword, "numberElements": numberElements})
     return report
 
 
@@ -506,6 +484,8 @@ def setFilters(request, filters):
         filters['difficultyLevel'] = request.GET['difficultyLevel']
     if request.GET.get('participationTask'):
         filters['participationTask'] = request.GET['participationTask']
+    if request.GET.get('orderby'):
+        filters['orderby'] = request.GET['orderby']
     return filters
 
 

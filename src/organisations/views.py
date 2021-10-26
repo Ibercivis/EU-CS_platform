@@ -78,7 +78,7 @@ def organisation(request, pk):
     associatedProjects |= mainProjects
     associatedResources = Resource.objects.all().filter(organisation__id=pk).filter(isTrainingResource=False)
     associatedTrainingResources = Resource.objects.all().filter(organisation__id=pk).filter(isTrainingResource=True)
-    members = Profile.objects.all().filter(organisation__id=pk)
+    members = Profile.objects.all().filter(profileVisible=True).filter(organisation__id=pk)
     users = getOtherUsers(organisation.creator, members)
     cooperators = getCooperatorsEmail(pk)
     permissionForm = OrganisationPermissionForm(
@@ -164,6 +164,14 @@ def organisations(request):
         filters['orgTypes'] = request.GET['orgTypes']
 
     counter = len(organisations)
+
+    # Ordering
+    if request.GET.get('orderby'):
+        if(request.GET.get('orderby') == 'country'):
+            organisations = organisations.order_by('country')
+        else:
+            organisations = organisations.order_by('-dateUpdated')
+        filters['orderby'] = request.GET['orderby']
 
     paginator = Paginator(organisations, 12)
     page = request.GET.get('page')

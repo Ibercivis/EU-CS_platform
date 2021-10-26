@@ -8,10 +8,9 @@
         <div class="col-12">
             <div class="input-group input-group-sm">
                 <div class="input-group-text"><i class="fas fa-sort-amount-down"></i></div>
-                <select id="orderby" name="orderby" class="custom-select form-control float-right">
+                <select id="orderby" name="orderby" class="custom-select status-select form-control">
                     <option value="" {% if filters.orderby == "" %} selected {% endif %}>{% trans "Most Recent Updated" %}</option>
-                    <option value="-featured" {% if filters.orderby == "-featured" %} selected {% endif %}>{% trans "Featured" %}</option>
-                    <option value="-avg_rating" {% if filters.orderby == "-avg_rating" %} selected {% endif %}>{% trans "Sort by rating" %}</option>
+                    <option value="featured" {% if filters.orderby == "featured" %} selected {% endif %}>{% trans "Featured" %}</option>
                 </select>
                 <div class="input-group-text"><i class="fas fa-filter"></i></div>
 
@@ -25,7 +24,7 @@
                 </select>
 
                 <select id="hasTag" name="hasTag" class="custom-select status-select form-control">
-                    <option value="">{% trans "Has tag" %}<option>
+                    <option value="">{% trans "Tag" %}<option>
                     {% for h in hasTag %}
                     <option {% if h.hasTag ==  filters.hasTag %} selected {% endif %} value="{{h.hasTag}}">
                     {{h.hasTag|capfirst}}
