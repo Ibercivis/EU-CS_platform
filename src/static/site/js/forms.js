@@ -104,6 +104,7 @@ $(function() {
         var form_id = $(this).parents('form:first').attr('id')
         var url = '/save'+form_id+'Ajax/'
         console.log('submit')
+        console.log(contin)
         $.ajax({
             type: 'POST',
             url: url,
@@ -113,11 +114,11 @@ $(function() {
             success: function(response){
                 if(contin){
                     $('#Id').val(response.Id)
-                    console.log('continue')
                     $('.savedInfo').html('<span class="alert alert-success fade show">'+
                             '<i class="fas fa-check"></i> Saved</span>').show().fadeOut(2500)
 
                 }else{
+                        window.location.href = '/platform/'+response.Id+'?prev='+window.location.pathname
                 }
             },
             error: function (response){

@@ -39,7 +39,7 @@ function attatchDeletePlatform(){
             success: function(response){
                 $('#myModalTitle').html('The platform was deleted')
                 $('#myModalBody').html('You can close this window')
-                $('#myModalFooter').html('<button type="button" class="btn btn-secondary redirect" value="platforms" data-dismiss="modal" >Close</button>')
+                $('#myModalFooter').html('<button type="button" class="btn btn-secondary redirect" value="/platforms" data-dismiss="modal" >Close</button>')
 
             },
             error: function(response){
