@@ -3,13 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: projects/forms.py:23
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-26 23:56+0000\n"
+"POT-Creation-Date: 2021-10-27 00:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -270,17 +269,13 @@ msgstr ""
 
 #: organisations/templates/_finder_organisation.html:62
 #: templates/_what_can_you_find_here.html:55
-#, fuzzy
-#| msgid "Organisations"
 msgid "organisations"
-msgstr "Organizaciones"
+msgstr "organizaciones"
 
 #: organisations/templates/_finder_organisation.html:64
 #: organisations/templates/_intro_form_organisation.html:8
-#, fuzzy
-#| msgid "Organisation"
 msgid "organisation"
-msgstr "Organización"
+msgstr "organización"
 
 #: organisations/templates/_finder_organisation.html:66
 #: organisations/templates/finder_organisations.html:44
@@ -292,15 +287,13 @@ msgstr "encontradas"
 #: profiles/templates/profiles/_finder_users.html:14
 #: projects/templates/_finder_projects.html:111
 msgid "Clear current search query and filters"
-msgstr ""
+msgstr "Borra la búsqueda actual"
 
 #: organisations/templates/_intro_form_organisation.html:6
 #: platforms/templates/_intro_form_platform.html:6
 #: projects/templates/_intro_form_project.html:6
 #: resources/templates/_intro_form_resource.html:6
 #: resources/templates/_intro_form_training_resource.html:6
-#, fuzzy
-#| msgid "Edit"
 msgid "Editing"
 msgstr "Editar"
 
@@ -1850,7 +1843,7 @@ msgstr ""
 
 #: templates/_about_section.html:8
 msgid "<a href='/about' class='text-white'>about</a> the platform"
-msgstr ""
+msgstr "<a href='/about' class='text-white'>acerca de</a> la  plataforma"
 
 #: templates/_about_section.html:10 templates/about.html:57
 msgid ""
@@ -1863,26 +1856,21 @@ msgstr ""
 "para la comunidad"
 
 #: templates/_about_section.html:13
-#, fuzzy
-#| msgid ""
-#| "The vision for the platform is to serve as a Knowledge Hub, in aid of the "
-#| "mainstreaming of citizen science, and build on the growing impact of "
-#| "citizens participating in research across the full range of scientific "
-#| "enquiry."
 msgid ""
 "The vision for the platform is to serve as a Knowledge Hub and to become the "
 "European reference point for citizen science in aid of its mainstreaming."
 msgstr ""
-"La visión de la plataforma es servir como un Punto de Conocimiento que ayude "
-"a popularizar la ciencia ciudadana y catalice el creciente impacto que está "
-"teniendola participación de la sociedad en la mayoría de ámbitos de la "
-"investigación científica."
+"La visión de la plataforma es servir como un Punto de Conocimiento y "
+"convertirse en referencia europea para la ciencia ciudadana y su "
+"popularización."
 
 #: templates/_about_section.html:17
 msgid ""
 "Learn more in the <a href='/about' class='text-dark'>about page</a><br /> "
 "and the <a href='/faq' class='text-white'>FAQ!</a>"
 msgstr ""
+"Más información en <a href='/about' class='text-dark'>acerca de</a><br /> y "
+"<a href='/faq' class='text-white'>preguntas</a> frecuentes"
 
 #: templates/_crop_zone.html:6 templates/_modal_to_crop.html:6
 msgid "Crop the photo"
@@ -2054,10 +2042,8 @@ msgid "Save & continue editing"
 msgstr ""
 
 #: templates/_subnavbar.html:34
-#, fuzzy
-#| msgid "The Platform"
 msgid "Platforms"
-msgstr "La Plataforma"
+msgstr "Plataformas"
 
 #: templates/_subnavbar.html:40
 msgid "Users"
@@ -2069,91 +2055,67 @@ msgstr "Nuestros destacados"
 
 #: templates/_what_can_you_find_here.html:6
 msgid "what can you find here?"
-msgstr ""
+msgstr "¿Qué puedes encontrar aquí?"
 
 #: templates/_what_can_you_find_here.html:13
-#, fuzzy
-#| msgid "Projects"
 msgid "projects"
-msgstr "Proyectos"
+msgstr "proyectos"
 
 #: templates/_what_can_you_find_here.html:16 templates/about.html:63
 msgid "that are engaging the public in research via citizen science activities"
 msgstr ""
-"que están implicado al público en investigación vía actividades de ciencia "
-"ciudadana"
+"que están involucrando al público en la investigación a través de "
+"actividades de ciencia ciudadana"
 
 #: templates/_what_can_you_find_here.html:27
-#, fuzzy
-#| msgid "resource"
 msgid "resources"
-msgstr "recurso"
+msgstr "recursos"
 
 #: templates/_what_can_you_find_here.html:30
-#, fuzzy
-#| msgid "that are useful for citizen science practitioners"
 msgid "useful for planning and running citizen science projects"
-msgstr "que son útiles para profesionales de la ciencia ciudadana"
+msgstr "útiles para planificar y llevar a cabo proyectos de ciencia ciudadana"
 
 #: templates/_what_can_you_find_here.html:41
-#, fuzzy
-#| msgid "in Resources"
 msgid "training resources"
-msgstr "en Recursos"
+msgstr "recursos de formación"
 
 #: templates/_what_can_you_find_here.html:44
-#, fuzzy
-#| msgid "Ten principles of citizen science"
 msgid "about the practice of citizen science"
-msgstr "Diez principios de la ciencia ciudadana"
+msgstr "sobre la práctica de la ciencia ciudadana"
 
 #: templates/_what_can_you_find_here.html:57
-#, fuzzy
-#| msgid ""
-#| "Organisations that are involved in citizen science projects and research"
 msgid "involved in citizen science projects and research"
-msgstr ""
-"Organizaciones que están implicadas en proyectos e investigan sobre ciencia "
-"ciudadana"
+msgstr "implicadas en proyectos de ciencia ciudadana e investigación"
 
 #: templates/_what_can_you_find_here.html:68
-#, fuzzy
-#| msgid "The Platform"
 msgid "platforms"
-msgstr "La Plataforma"
+msgstr "plataformas"
 
 #: templates/_what_can_you_find_here.html:70
 msgid "to get an overview of further developments in citizen science"
-msgstr ""
+msgstr "para tener una perspectiva de la evolución de la ciencia ciudadana"
 
 #: templates/_what_can_you_find_here.html:81
 msgid "users"
-msgstr ""
+msgstr "usuarios y usuarias"
 
 #: templates/_what_can_you_find_here.html:84
 msgid "with whom you can connect"
-msgstr ""
+msgstr "con quienes puedes conectar"
 
 #: templates/_what_can_you_find_here.html:92
 msgid ""
 " Check out our <a href='/events'>events</a> calendar, <a href='/blog'>blog</"
 "a> and <a href='/forum'>forum!</a>"
 msgstr ""
+" Mira nuestro <a href='/events'>calendario</a> de eventos, <a href='/"
+"blog'>blog</a> y <a href='/forum'>foro!</a>"
 
 #: templates/_what_is_citizen_science.html:9
 msgid "what is <span class='text-white'>citizen science?</span>"
-msgstr ""
+msgstr "¿qué es la <span class='text-white'>ciencia ciudadana?</span>"
 
 #: templates/_what_is_citizen_science.html:12
-#, fuzzy
-#| msgid ""
-#| "Citizen science actively involves the public in scientific research that "
-#| "generates new knowledge or understanding, and thus has the potential to "
-#| "bring together science, policy makers, and society as a whole in an "
-#| "impactful way. As a core dimension of Open Science, it opens up the "
-#| "opportunity for all members of society to take an active role in "
-#| "research, innovation and the development of evidence-based policy, at "
-#| "local, national and EU levels."
 msgid ""
 "Citizen science actively involves the public in scientific research that "
 "generates new knowledge or understanding, and thus has the potential to "
@@ -2161,13 +2123,9 @@ msgid ""
 "impactful way. "
 msgstr ""
 "La ciencia ciudadana involucra activamente al público que se dedica a la "
-"investigación científica ygenera nuevo conocimiento o comprensión, que a su "
-"vez tiene el potencial de implicar a agentes científicos, políticos y a la "
-"sociedad en general demanera efectiva. Como pilar principal de la Ciencia "
-"Abierta (Open Science), da a todos los miembros de la sociedad la "
-"oportunidad de formar parte activa de la investigación, innovación y el "
-"desarrollo de medidas basadas en la evidencia a nivel local, nacional "
-"yeuropeo."
+"investigación científica y genera nuevo conocimiento o comprensión, que a su "
+"vez tiene el potencial de implicar de manera efectiva a agentes científicos, "
+"políticos y a la sociedad en su conjunto."
 
 #: templates/_what_is_citizen_science.html:13
 msgid ""
@@ -2175,16 +2133,20 @@ msgid ""
 "from data collection and volunteer mapping, through data interpretation and "
 "analysis, to publication and dissemination of results."
 msgstr ""
+"La ciudadanía científica puede participar en las múltiples fases del proceso "
+"científico: desde la recogida de datos y mapeos voluntarios, pasando por la "
+"interpretación y análisis de datos, hasta la publicación y diffusion de los "
+"resultados."
 
 #: templates/_what_is_citizen_science.html:16
 msgid ""
 "Learn more about it with the ECSA 10 Principles of Citizen Science and the "
 "ECSA Characteristics of Citizen Science!"
 msgstr ""
+"Conoce más sobre ella a través de ECSA y sus 10 Principios de la Ciencia "
+"Ciudadana y Características de Ciencia Ciudadana"
 
 #: templates/about.html:12
-#, fuzzy
-#| msgid "About"
 msgid "about"
 msgstr "Acerca de"
 
@@ -2935,26 +2897,20 @@ msgid ""
 msgstr ""
 
 #: templates/home.html:20
-#, fuzzy
-#| msgid ""
-#| "Welcome to the platform for sharing Citizen Science projects, resources, "
-#| "tools, and training"
 msgid ""
 "Welcome to the platform for sharing citizen science projects, resources, "
 "tools, training and much more"
 msgstr ""
-"Le damos la bienvenida a la plataforma para el intercambio de proyectos de "
-"Ciencia Ciudadana, recursos, recursos, herramientas y formación"
+"Bienvenido a la plataforma para el intercambio de proyectos de ciencia "
+"ciudadana, recursos, herramientas, formación y mucho más"
 
 #: templates/home.html:39
-#, fuzzy
-#| msgid "Search"
 msgid "Search..."
-msgstr "Buscar"
+msgstr "Buscar..."
 
 #: templates/home.html:52
 msgid "<a href='signup'>join the community</a> <div>and participate</div>"
-msgstr ""
+msgstr "<a href='signup'>únete a la comunidad</a> <div>y participa</div>"
 
 #: templates/horizontal_card_project.html:16
 #: templates/horizontal_card_resource.html:16
@@ -2970,10 +2926,8 @@ msgid "The Moderation Process"
 msgstr "el Proceso de Revisión"
 
 #: templates/moderation_quality_criteria.html:12
-#, fuzzy
-#| msgid "Moderation"
 msgid "moderation"
-msgstr "Revisión"
+msgstr "revisión"
 
 #: templates/moderation_quality_criteria.html:12
 msgid "and"
