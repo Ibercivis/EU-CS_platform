@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 STATICFILES_DIRS = [str(BASE_DIR / "static"), MACHINA_MAIN_STATIC_DIR]
 MEDIA_ROOT = str(BASE_DIR / "media")
 MEDIA_URL = "/media/"
-STATIC_ROOT = "/home/ubuntu/v0.5/static"
+STATIC_ROOT = "/home/ubuntu/eu-citizen.science/static"
 THUMBNAIL_DEBUG = True
 
 LOCALE_PATHS = [

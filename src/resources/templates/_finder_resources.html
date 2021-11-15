@@ -53,10 +53,10 @@
                 </select>
 
                 {% if user.is_staff %}
-                <select id="approvedCheck" name="approvedCheck" class="custom-select form-control">
-                    <option value="On" {% if filters.approvedCheck == "On" %} selected {% endif %}>{% trans "Moderated" %}</option>
-                    <option value="Off" {% if filters.approvedCheck == "Off" %} selected {% endif %}>{% trans "Not yet moderated" %}</option>
-                    <option value="All" {% if filters.approvedCheck == "All" %} selected {% endif %}>{% trans "All" %}</option>
+                <select id="approved" name="approved" class="custom-select form-control">
+                    <option value="approved" {% if filters.approved == "approved" %} selected {% endif %}>{% trans "Approved" %}</option>
+                    <option value="notApproved" {% if filters.approved == "notApproved" %} selected {% endif %}>{% trans "Not approved" %}</option>
+                    <option value="notYetModerated" {% if filters.approved == "notYetModerated" %} selected {% endif %}>{% trans "Not yet moderated" %}</option>
                 </select>
                 {% endif %}
             </div>

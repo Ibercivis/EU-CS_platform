@@ -19,16 +19,17 @@
             EU-Citizen.Science
             {% endblock title%}
         </title>
-        <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
               rel="stylesheet" 
               integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
               crossorigin="anonymous">
         <link href="{% static 'site/css/eu-citizen_science.css' %}" rel="stylesheet" />
 
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js" 
-                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" 
-                crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+	crossorigin="anonymous"></script>
+
         <script 
                 src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
                 integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
@@ -67,19 +68,33 @@
                             <a class="nav-link main {% active_link  'events' %}" href="{% url 'events' %}">{% trans "Events" %}</a>
                         </li>    
                         <li class="nav-item">
-                            <a class="nav-link main" href="https://moodle.eu-citizen.science/" target="_blank">{% trans "Moocs" %}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link main {% active_link  'final_launch' %}" href="{% url 'final_launch' %}">
-                                {% trans "Final Launch" %}
-                            </a>
-                        </li>    
-                    </ul>
+                            <a class="nav-link main" href="https://moodle.eu-citizen.science/" target="_blank" rel="noreferrer">
+				    {% trans "Moocs" %}
+			    </a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link main {% active_link  'forum' %}" href="/forum">
+					{% trans "Forum" %}
+				</a>
+			</li>    
 
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" 
-                               role="button" 
+			<li class="nav-item">
+				<a class="nav-link main {% active_link  'final_event' %}" href="{% url 'final_event' %}">
+					{% trans "Final Event" %}
+				</a>
+			</li>    
+			<li class="nav-item">
+				<a class="nav-link main {% active_link  'about' %}" href="/about">
+					{% trans "About" %}
+				</a>
+			</li>    
+
+		    </ul>
+
+		    <ul class="navbar-nav ml-auto">
+			    <li class="nav-item dropdown">
+				    <a class="nav-link dropdown-toggle" 
+	   role="button" 
                                data-bs-toggle="dropdown"
                                aria-haspopup="true" 
                                aria-expanded="false" href="#">
@@ -124,7 +139,7 @@
                                 <li><a class="dropdown-item" href="{% url 'profiles:show_self' %}">{% trans "My personal area" %}</a></li>
                                 <li><a class="dropdown-item" href="{% url 'profiles:submissions' %}">{% trans "My submissions" %}</a></li>
                                 <li><a class="dropdown-item" href="{% url 'profiles:bookmarks' %}">{% trans "My bookmarks" %}</a></li>
-                                <li><a class="dropdown-item" href="{% url 'profiles:privacyCenter' %}">{% trans "My bookmarks" %}</a></li>
+                                <li><a class="dropdown-item" href="{% url 'profiles:privacyCenter' %}">{% trans "My privacy center" %}</a></li>
 
                                 {% if user.is_staff %}
                                 <li><a class="dropdown-item" href="{% url 'admin:index' %}">{% trans "Admin" %}</a></li>

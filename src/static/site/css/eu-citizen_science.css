@@ -156,3 +156,6 @@ a{
     background: var(--lightBlue) !important;
     border: var(--lightBlue) !important;
 }
+.img-card{
+	aspect-ratio: attr(width) / attr(height);
+}

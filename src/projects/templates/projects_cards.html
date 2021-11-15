@@ -6,7 +6,8 @@
 <div class="col-lg-3 col-sm-6 col-12 mb-5">
     <div class="card h-100 shadow border-0">
         <a href="/project/{{project.id}}">
-            <img class="img-fluid" src="{% thumbnail project.image1|default:'void_600.png' 400x600%}" />
+            <img class="img-fluid img-card" src="{% thumbnail project.image1|default:'void_600.png' 612x408 crop %}" 
+				   alt="image for {{project.name}}" width="600" height="400"/>
         </a>
         <div class="card-body">
             <h4 class="mt-2 mb-0">

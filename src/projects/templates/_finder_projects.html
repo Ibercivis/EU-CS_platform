@@ -13,9 +13,16 @@
                     <option value="featured" {% if filters.orderby == "featured" %} selected {% endif %}>{% trans "Featured" %}</option>
                 </select>
                 <div class="input-group-text"><i class="fas fa-filter"></i></div>
+		<select id="country" name="country" class="custom-select status-select form-control">
+			<option value="">{% trans "Country" %}<option>
+			{% for country in countries %}{% for cwc in countriesWithContent %}{% if country.code == cwc %}
+			<option {% if country.code ==  filters.country %}
+	   selected {% endif %} value="{{ country.code }}">{{ country.name }}</option>
+			{% endif %}{% endfor %}{% endfor %}
+		</select>
 
-                <select id="status" name="status" class="custom-select status-select form-control">
-                    <option value="">{% trans "Status" %}<option>
+		<select id="status" name="status" class="custom-select status-select form-control">
+			<option value="">{% trans "Status" %}<option>
                     {% for s in status %}
                     <option {% if s.status ==  filters.status %} selected {% endif %} value="{{s.status}}">
                     {{s.status|capfirst}}
@@ -60,16 +67,23 @@
                 </select>
 
                 {% if user.is_staff %}
-                <select id="approvedCheck" name="approvedCheck" class="custom-select form-control">
-                    <option value="On" {% if filters.approvedCheck == "On" %} selected {% endif %}>{% trans "Moderated" %}</option>
-                    <option value="Off" {% if filters.approvedCheck == "Off" %} selected {% endif %}>{% trans "Not yet moderated" %}</option>
-                    <option value="All" {% if filters.approvedCheck == "All" %} selected {% endif %}>{% trans "All" %}</option>
+                <select id="approved" name="approved" class="custom-select status-select form-control">
+                    <option value="approved" {% if filters.approved == "approved" %} selected {% endif %}>{% trans "Approved" %}</option>
+                    <option value="notApproved" {% if filters.approved == "notApproved" %} selected {% endif %}>{% trans "Not Approved" %}</option>
+                    <option value="notYetModerated" {% if filters.approved == "notYetModerated" %} selected {% endif %}>{% trans "Not yet moderated" %}</option>
                 </select>
                 {% endif %}
             </div>
         </div>
         <div class="row">
             <div class="col-12 mb-4">
+  		{% if filters.country %}
+                <a class="badge rounded-pill bg-dark" id="pill-status">
+                    <i class="fas fa-times"></i>
+                    {% trans "country:" %} {{filters.country}}
+                </a>
+                {% endif %}
+
                 {% if filters.keywords %}
                 <a class="badge rounded-pill bg-my-darkGreen search-filter">
                     <i class="fas fa-times"></i> {% trans "keyword:" %} {{filters.keywords}}
@@ -111,7 +125,7 @@
                     <i class="fas fa-times"></i> {% trans "Clear current search query and filters" %}
                 </a>
                 {% endif %}
-                <div>
+                <div class="small">
                     {{ counter }}
                     {% if counter != 1 %}
                     {% trans "projects found" %}

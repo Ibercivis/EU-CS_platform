@@ -1,7 +1,7 @@
 from django.contrib.gis.db import models
 from django.conf import settings
 from organisations.models import Organisation
-
+from django_countries.fields import CountryField
 
 class Status(models.Model):
     status = models.TextField()
@@ -126,6 +126,8 @@ class Project(models.Model):
     geographicextend = models.ManyToManyField(GeographicExtend, blank=True)
     projectlocality = models.CharField(max_length=300, null=True, blank=True)
     projectGeographicLocation = models.MultiPolygonField(blank=True, null=True)
+    # Legacy
+    country = CountryField(null=True, blank=True)
 
     # Contact and host details
     author = models.CharField(max_length=100, null=True, blank=True)

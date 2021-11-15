@@ -6,7 +6,12 @@
 </a>
 {% endblock img %}
 {% block title %}
-<a href="/users/{{member.slug}}">{{member.surname}}, {{ member.user.name }}</a>
+<a href="/users/{{member.slug}}">
+	{% if member.surname %}
+	{{member.surname}}, 
+	{% endif %}
+	{{ member.user.name }}
+</a>
 <div>
 {% for area in member.interestAreas.all %}
 {% if forloop.counter < 2 %}

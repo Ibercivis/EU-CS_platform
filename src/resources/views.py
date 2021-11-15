@@ -40,11 +40,11 @@ def resources(request, isTrainingResource=False):
                 isTrainingResource=True).values_list('inLanguage', flat=True).distinct()
         endPoint = 'training_resources'
     else:
-        resources = Resource.objects.all().filter(~Q(isTrainingResource=False)).order_by('-dateUpdated')
+        resources = Resource.objects.all().filter(~Q(isTrainingResource=True)).order_by('-dateUpdated')
         languagesWithContent = Resource.objects.all().filter(
                 ~Q(isTrainingResource=True)).values_list('inLanguage', flat=True).distinct()
         endPoint = 'resources'
-    print(resources.query)
+    resources = resources.order_by('id')
 
     themes = Theme.objects.all()
     categories = Category.objects.all()
@@ -54,7 +54,7 @@ def resources(request, isTrainingResource=False):
     resources = applyFilters(request, resources)
     filters = setFilters(request, filters)
     resources = resources.distinct()
-    resources = resources.filter(~Q(hidden=True))
+    # resources = resources.filter(~Q(hidden=True))
 
     if not user.is_staff:
         resources = resources.filter(approved=True)
@@ -283,7 +283,6 @@ def editResource(request, pk):
 
 
 def saveResourceAjax(request):
-    print(request.POST)
     request.POST = request.POST.copy()
     request.POST = updateKeywords(request.POST)
     request.POST = updateAuthors(request.POST)
@@ -362,13 +361,11 @@ def updateLearningResourceType(dictio):
 
 
 def setImages(request, form):
-    print('setImages')
     images = []
     image1_path = saveImage(request, form, 'image1', '1')
     image2_path = saveImage(request, form, 'image2', '2')
     images.append(image1_path)
     images.append(image2_path)
-    print(images)
     return images
 
 
@@ -511,11 +508,11 @@ def preFilteredResources(request):
 
 def applyFilters(request, resources):
     approvedResources = ApprovedResources.objects.all().values_list('resource_id', flat=True)
-
     if request.GET.get('keywords'):
         resources = resources.filter(
                 Q(name__icontains=request.GET['keywords']) |
                 Q(keywords__keyword__icontains=request.GET['keywords'])).distinct()
+    print(resources)
     if request.GET.get('inLanguage'):
         resources = resources.filter(inLanguage=request.GET['inLanguage'])
     if request.GET.get('license'):
@@ -526,13 +523,13 @@ def applyFilters(request, resources):
         resources = resources.filter(category__text=request.GET['category'])
     if request.GET.get('audience'):
         resources = resources.filter(audience__audience=request.GET['audience'])
-    if request.GET.get('approvedCheck'):
-        if request.GET['approvedCheck'] == 'On':
-            resources = resources.filter(id__in=approvedResources)
-        if request.GET['approvedCheck'] == 'Off':
-            resources = resources.exclude(id__in=approvedResources)
-        if request.GET['approvedCheck'] == 'All':
-            resources = resources
+    if request.GET.get('approved'):
+        if request.GET['approved'] == 'approved':
+            resources = resources.filter(approved=True)
+        if request.GET['approved'] == 'notApproved':
+            resources = resources.filter(approved=False).filter(moderated=True)
+        if request.GET['approved'] == 'notYetModerated':
+            resources = resources.filter(moderated=False)
     else:
         resources = resources.filter(id__in=approvedResources)
 
@@ -552,8 +549,8 @@ def setFilters(request, filters):
         filters['theme'] = request.GET['theme']
     if request.GET.get('category'):
         filters['category'] = request.GET['category']
-    if request.GET.get('approvedCheck'):
-        filters['approvedCheck'] = request.GET['approvedCheck']
+    if request.GET.get('approved'):
+        filters['approved'] = request.GET['approved']
     print(filters)
     return filters
 

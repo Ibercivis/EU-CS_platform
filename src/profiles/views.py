@@ -120,7 +120,7 @@ class Submissions(generic.TemplateView):
             user = profile.user
         else:
             user = self.request.user
-        projectsSubmitted = Project.objects.all().filter(creator=user)
+        projectsSubmitted = Project.objects.all().filter(creator=user).order_by('-dateUpdated')
         resourcesSubmitted = Resource.objects.all().filter(creator=user).filter(isTrainingResource=False)
         trainingsSubmitted = Resource.objects.all().filter(creator=user).filter(isTrainingResource=True)
         organisationsSubmitted = Organisation.objects.all().filter(creator=user)

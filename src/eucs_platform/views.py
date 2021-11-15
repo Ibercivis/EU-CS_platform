@@ -47,7 +47,7 @@ def home(request):
 
     # Resources
     resources = Resource.objects.get_queryset().filter(
-            ~Q(isTrainingResource=True)).filter(~Q(hidden=True)).order_by('-dateUploaded')
+            ~Q(isTrainingResource=True)).order_by('-dateUploaded')
     approvedResources = ApprovedResources.objects.all().values_list('resource_id', flat=True)
     resources = resources.filter(id__in=approvedResources)
     # savedResources = None
@@ -201,6 +201,8 @@ def policy_maker_event_2021(request):
 def final_launch(request):
     return render(request, 'final_launch.html')
 
+def final_event(request):
+    return render(request, 'final_event.html')
 
 def home_autocomplete(request):
     if request.GET.get('q'):

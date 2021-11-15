@@ -22,7 +22,9 @@
                     {{ show_user.profile.title}}
                     {% endif %}
                     {{ show_user.get_full_name}}
+		    {% if show_user.profile.suername %}
                     {{ show_user.profile.surname}}
+		    {% endif %}
                 </h3>
                 {% if show_user.profile.country %}
                 <h5>{{show_user.profile.country.name}}</h5>

@@ -52,6 +52,7 @@ urlpatterns = [
     path("call/", views.call, name="call"),
     path("policy_maker_event_2021/", views.policy_maker_event_2021, name="policy_maker_event_2021"),
     path("final_launch/", views.final_launch, name="final_launch"),
+    path("final_event/", views.final_event, name="final_event"),
     path("home_autocomplete/", views.home_autocomplete, name="home_autocomplete"),
     path("development/", views.development, name="development"),
     path("about/", views.AboutPage.as_view(), name="about"),

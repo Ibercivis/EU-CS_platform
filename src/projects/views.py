@@ -19,6 +19,7 @@ from PIL import Image
 from itertools import chain
 from reviews.models import Review
 from django_countries import countries
+from itertools import chain
 from .forms import ProjectForm, ProjectPermissionForm, ProjectTranslationForm, ProjectGeographicLocationForm
 from .models import Project, Topic, ParticipationTask, Status, Keyword, ApprovedProjects, \
  FollowedProjects, FundingBody, CustomField, ProjectPermission, GeographicExtend, UnApprovedProjects, HasTag, DifficultyLevel
@@ -213,24 +214,28 @@ def projects(request):
     hasTag = HasTag.objects.all()
     difficultyLevel = DifficultyLevel.objects.all()
     participationTask = ParticipationTask.objects.all()
-    countriesWithContent = 'ES'
-    # approvedProjects = ApprovedProjects.objects.all().values_list('project_id', flat=True)
-    # unApprovedProjects = UnApprovedProjects.objects.all().values_list('project_id', flat=True)
+
+    countriesWithContent1 = projects.values_list('mainOrganisation__country', flat=True).distinct()
+    countriesWithContent2 = projects.values_list('organisation__country', flat=True).distinct()
+    countriesWithContent3 = projects.values_list('country', flat=True).distinct()
+    countriesWithContent = set(chain(countriesWithContent1, countriesWithContent2, countriesWithContent3))
+
+    # I think this is not needded
     filters = {
             'keywords': '',
             'topic': '',
             'status': 0,
             'host': '',
-            'approvedCheck': '',
+            'approved': '',
             'doingAtHome': '',
             'difficultyLevel': '',
             'featured': '',
             'hasTag': ''}
 
     projects = applyFilters(request, projects)
+    projects = projects.distinct()
     filters = setFilters(request, filters)
     projects = projects.filter(~Q(hidden=True))
-    print(filters)
 
     # Ordering
     if request.GET.get('orderby'):
@@ -258,8 +263,6 @@ def projects(request):
         'hasTag': hasTag,
         'difficultyLevel': difficultyLevel,
         'participationTask': participationTask,
-        # 'approvedProjects': approvedProjects,
-        # 'unApprovedProjects': unApprovedProjects,
         'counter': counter,
         'isSearchPage': True})
 
@@ -278,8 +281,11 @@ def project(request, pk):
 
     # Check status
     utc = pytz.UTC
-    if(project.end_date < utc.localize(datetime.now())):
-        status = "Completed"
+    if(project.end_date):
+        if(project.end_date < utc.localize(datetime.now())):
+            status = "Completed"
+        else:
+            status = project.status
     else:
         status = project.status
 
@@ -450,19 +456,19 @@ def applyFilters(request, projects):
         projects = projects.filter(participationTask__participationTask=request.GET['participationTask'])
 
     if request.GET.get('country'):
-        projects = projects.filter(mainOrganisation__country=request.GET['country'])
+        projects = projects.filter(
+                Q(mainOrganisation__country=request.GET['country']) | Q(country=request.GET['country']) | Q(organisation__country=request.GET['country']))
 
-    projects = projects.filter(approved=True)
-
-    # if request.GET.get('approvedeck'):
-    #    if request.GET['approvedCheck'] == 'On':
-    #        projects = projects.filter(id__in=approvedProjects)
-    #    if request.GET['approvedCheck'] == 'Off':
-    #        projects = projects.exclude(id__in=approvedProjects)
-    #    if request.GET['approvedCheck'] == 'All':
-    #        projects = projects
-    # else:
-    #    projects = projects.filter(id__in=approvedProjects)
+    # Approved filters
+    if request.GET.get('approved'):
+        if request.GET['approved'] == 'approved':
+            projects = projects.filter(approved=True)
+        elif request.GET['approved'] == 'notApproved':
+            projects = projects.filter(approved=False).filter(moderated=True)
+        elif request.GET['approved'] == 'notYetModerated':
+            projects = projects.filter(moderated=False)
+    else:
+        projects = projects.filter(approved=True)
 
     return projects
 
@@ -476,8 +482,8 @@ def setFilters(request, filters):
         filters['status'] = request.GET['status']
     if request.GET.get('doingAtHome'):
         filters['doingAtHome'] = int(request.GET['doingAtHome'])
-    if request.GET.get('approvedCheck'):
-        filters['approvedCheck'] = request.GET['approvedCheck']
+    if request.GET.get('approved'):
+        filters['approved'] = request.GET['approved']
     if request.GET.get('hasTag'):
         filters['hasTag'] = request.GET['hasTag']
     if request.GET.get('difficultyLevel'):
@@ -486,6 +492,8 @@ def setFilters(request, filters):
         filters['participationTask'] = request.GET['participationTask']
     if request.GET.get('orderby'):
         filters['orderby'] = request.GET['orderby']
+    if request.GET.get('country'):
+        filters['country'] = request.GET['country']
     return filters
 
 
