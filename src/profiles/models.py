@@ -59,7 +59,7 @@ class BaseProfile(models.Model):
             blank=True)
     # Privacy and subscriptions
     profileVisible = models.BooleanField(
-            default=True)
+            default=False)
     contentVisible = models.BooleanField(
             default=True)
     digest = models.BooleanField(

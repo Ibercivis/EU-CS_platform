@@ -41,6 +41,7 @@ def newProject(request):
     return render(request, 'project_form.html', {'form': form, 'user': user})
 
 
+@login_required
 def saveProjectAjax(request):
     print(request.POST)
     request.POST = request.POST.copy()

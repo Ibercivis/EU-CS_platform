@@ -163,7 +163,7 @@ class UsersSearch(generic.TemplateView):
     http_method_names = ["get"]
 
     def get(self, request, *args, **kwargs):
-        users = Profile.objects.all().filter(profileVisible=True)
+        users = Profile.objects.all().filter(profileVisible=True).filter(user__is_active=True).order_by('-user__last_login')
         filters = {}
         # TODO: Add surname (needs to be added algo in the autocomplete search
         if request.GET.get('keywords'):
@@ -291,14 +291,12 @@ def usersAutocompleteSearch(request):
 
 
 def getProfilesAutocomplete(text):
-    print("Profiles")
     profiles = models.Profile.objects.all().filter(
             Q(surname__icontains=text) | Q(user__name__icontains=text)).filter(profileVisible=True).annotate(
                     fullname=Concat('user__name', Value(' '), 'surname')).values_list('user__id', 'fullname', 'slug')
     interestAreas = models.InterestArea.objects.filter(
             interestArea__icontains=text).values_list('interestArea', flat=True).distinct()
     report = []
-    print(profiles)
     for profile in profiles:
         report.append({"type": "profile", "id": profile[0], "text": profile[1], "slug": profile[2]})
     for interestArea in interestAreas:

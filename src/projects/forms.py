@@ -270,7 +270,6 @@ class ProjectForm(forms.Form):
         end_dateData = self.data['end_date']
         projectlocality = self.data['projectlocality']
         projectGeographicLocation = self.data['projectGeographicLocation']
-        # country = getCountryCode(latitude,longitude).upper()
         status = get_object_or_404(Status, id=self.data['status'])
         if (self.data['difficultyLevel']):
             difficultyLevel = get_object_or_404(DifficultyLevel, id=self.data['difficultyLevel'])
@@ -333,7 +332,6 @@ class ProjectForm(forms.Form):
         project.geographicextend.set(self.data.getlist('geographicextend'))
         project.organisation.set(self.data.getlist('organisation'))
 
-        # TODO: I think not needed, check
         project.save()
 
         return project.id
