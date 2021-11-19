@@ -77,10 +77,10 @@ class CustomField(models.Model):
 # For translation
 
 class TranslatedProject(models.Model):
-    translatedDescription = models.CharField(max_length=3000)
-    translatedAim = models.CharField(max_length=2000)
-    translatedHowToParticipate = models.CharField(max_length=2000)
-    translatedEquipment = models.CharField(max_length=2000)
+    translatedDescription = models.CharField(max_length=10000)
+    translatedAim = models.CharField(max_length=10000)
+    translatedHowToParticipate = models.CharField(max_length=10000)
+    translatedEquipment = models.CharField(max_length=10000)
     creator = models.ForeignKey(
             settings.AUTH_USER_MODEL,
             on_delete=models.CASCADE)
@@ -172,6 +172,9 @@ class Project(models.Model):
 
     # For translation
     translatedProject = models.ManyToManyField(TranslatedProject)
+
+    # For editPermission
+    editors = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='project_editors')
 
     def __str__(self):
         return f'{self.name}'

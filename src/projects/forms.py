@@ -416,27 +416,27 @@ class ProjectTranslationForm(forms.Form):
     translatedDescription = forms.CharField(
             widget=CKEditorWidget(config_name='frontpage'),
             help_text=_('Please provide a <i>description</i> field translation.'),
-            max_length=3000,
+            max_length=10000,
             label=_("Description"))
 
     translatedAim = forms.CharField(
             widget=CKEditorWidget(config_name='frontpage'),
             help_text=_('Please provide an <i>aim</i> field translation.'),
-            max_length=2000,
+            max_length=10000,
             label=_("Aim"),
             required=True)
 
     translatedHowToParticipate = forms.CharField(
             widget=CKEditorWidget(config_name='frontpage'),
             help_text=_('Please provide a <i>how to participate</i> field translation.'),
-            max_length=2000,
+            max_length=10000,
             label=_("How to participate"),
             required=False)
 
     translatedEquipment = forms.CharField(
             widget=CKEditorWidget(config_name='frontpage'),
             help_text=_('Please provide a <i>translated equipment</i> field translation.'),
-            max_length=2000,
+            max_length=10000,
             label=_("Needed equipment"),
             required=False)
 
