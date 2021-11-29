@@ -11,11 +11,11 @@ class OrganisationForm(forms.Form):
 
     name = forms.CharField(
             max_length=200,
-            help_text=_('The name or the organisation'),
+            help_text=_('Please write the name or the organisation.'),
             widget=forms.TextInput())
     url = forms.URLField(
             max_length=200,
-            help_text=_('URL of the organisation'),
+            help_text=_('Please provide the URL to the website of the organisation'),
             widget=forms.TextInput())
     description = forms.CharField(
             help_text=_('Please briefly describe the organisation (max 3000 characters)'),
@@ -24,11 +24,11 @@ class OrganisationForm(forms.Form):
     orgType = forms.ModelChoiceField(
             queryset=OrganisationType.objects.all(),
             label=_("Type"),
-            help_text='Select One',
+            help_text=_('Please select one.'),
             widget=forms.Select(attrs={'class': 'js-example-basic-single'}))
     logo = forms.ImageField(
             required=False,
-            help_text=_('Please upload the logo of your organisation (.jpg or .png)'),
+            help_text=_('Please upload the logo of your organisation (.jpg or .png).'),
             widget=forms.FileInput)
     x = forms.FloatField(widget=forms.HiddenInput(), required=False)
     y = forms.FloatField(widget=forms.HiddenInput(), required=False)
@@ -36,13 +36,14 @@ class OrganisationForm(forms.Form):
     height = forms.FloatField(widget=forms.HiddenInput(), required=False)
     contact_point = forms.CharField(
             max_length=100,
-            help_text=_('Please name the contact person or contact point for the organisation'),
+            help_text=_('Please name the contact person or contact point for the organisation.'),
+            label=_('Public contact point'),
             widget=forms.TextInput())
     contact_point_email = forms.EmailField(
             max_length=100,
             help_text=_(
-                'Please provide the email address of the contact person or'
-                'contact point. Note you will need permission to do that'),
+                'Please provide the email address of the contact person or '
+                'contact point. Note you will need permission to do that.'),
             widget=forms.TextInput())
     latitude = forms.DecimalField(max_digits=9, decimal_places=6, widget=forms.HiddenInput())
     longitude = forms.DecimalField(max_digits=9, decimal_places=6, widget=forms.HiddenInput())

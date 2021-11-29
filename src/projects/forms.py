@@ -29,16 +29,16 @@ class ProjectForm(forms.Form):
     project_name = forms.CharField(
             max_length=200,
             widget=forms.TextInput(),
-            help_text=_('Short name or title of the project'))
+            help_text=_('Please write the name of the project'))
 
     url = forms.URLField(
             max_length=200,
             widget=forms.TextInput(),
-            help_text=_('Please provide a URL to an external web site for the project'))
+            help_text=_('Please provide the URL to an external web site of the project'))
 
     description = forms.CharField(
             widget=CKEditorWidget(config_name='frontpage'),
-            help_text=_('Please provide a description of your project here.'),
+            help_text=_('Please provide a description of your project here (max 3000 characters).'),
             max_length=3000)
 
     aim = forms.CharField(
@@ -48,11 +48,12 @@ class ProjectForm(forms.Form):
 
     description_citizen_science_aspects = forms.CharField(
             widget=CKEditorWidget(config_name='frontpage'),
-            help_text=_('Please describe the citizen science aspect(s) of the project and the link of the project to'
-                        'citizen science using the <a href="https://zenodo.org/communities/citscicharacteristics">ECSA'
+            help_text=_('Please describe the citizen science aspect(s) of the project and the link of the project toSA'
+                        'citizen science using the '
+                        '<a href="https://zenodo.org/cohttps://zenodo.org/record/5127534#.YV8J0dpBxPa">ECSA 10 '
                         'Characteristics of Citizen Science</a> and the <a href="https://osf.io/xpr2n/">ECSA 10 '
                         'Principles of Citizen Science</a>. What you introduce in this text field will not appear '
-                        'on the platform; it is just for moderation purposes'),
+                        'on the platform; it is just for moderation purposes (max 2000 characters)'),
             max_length=2000,
             label=_('Description of citizen science aspects'))
 
@@ -60,7 +61,7 @@ class ProjectForm(forms.Form):
            queryset=Status.objects.all(),
            label=_("Activity status"),
            widget=forms.Select(attrs={'class': 'js-example-basic-single'}),
-           help_text=_('Select one'))
+           help_text=_('Please, select the status of your project.'))
 
     keywords = forms.ModelMultipleChoiceField(
             queryset=Keyword.objects.all(),
@@ -69,10 +70,10 @@ class ProjectForm(forms.Form):
                 attrs={
                     'data-token-separators': '[","]'}),
             required=True,
-            help_text=_('Please enter 2-3 keywords <b>comma separated</b> or pressing enter'),
+            help_text=_('Please enter 2-3 keywords separated by commas or by pressing enter.'),
             label=_('Keywords'))
 
-    # Useful information to classificate the project
+    # Useful information to classify the project
     start_date = forms.DateField(
              widget=forms.TextInput(attrs={'type': 'date'}),
              required=False,
@@ -86,14 +87,14 @@ class ProjectForm(forms.Form):
     topic = forms.ModelMultipleChoiceField(
             queryset=Topic.objects.all(),
             widget=Select2MultipleWidget(),
-            help_text=_('The project topic(s) or field(s) of science, multiple selection'),
+            help_text=_('Please select the project topic(s) or field(s) of science.'),
             required=False,
             label=_("Topic"))
 
     hasTag = forms.ModelMultipleChoiceField(
             queryset=HasTag.objects.all(),
             widget=Select2MultipleWidget(),
-            help_text=_('More information about participation, multiple selection'),
+            help_text=_('Please select the tags that apply to your project.'),
             required=False,
             label=_("Tags"))
 
@@ -101,26 +102,28 @@ class ProjectForm(forms.Form):
     participationTask = forms.ModelMultipleChoiceField(
             queryset=ParticipationTask.objects.all(),
             widget=Select2MultipleWidget(),
-            help_text=_('Please select the task(s) undertaken by participants'),
+            help_text=_('Please select the task(s) undertaken by participants.'),
             required=False,
             label=_("Participation task"))
 
     difficultyLevel = forms.ModelChoiceField(
             queryset=DifficultyLevel.objects.all(),
             widget=forms.Select(),
-            help_text=_('How difficult is the project?'),
+            help_text=_('Please select the difficulty level.'),
             required=False,
             label=_("Difficulty level"))
 
     how_to_participate = forms.CharField(
             widget=CKEditorWidget(config_name='frontpage'),
-            help_text=_('Please describe how people can get involved in the project'),
+            help_text=_('Please describe how people can get involved in the project (max 2000 characters).'),
             max_length=2000,
             required=False)
 
     equipment = forms.CharField(
             widget=CKEditorWidget(config_name='frontpage'),
-            help_text=_('Describe any required or suggested equipment to be used in the project'),
+            help_text=_(
+                'Please indicate any required or suggested equipment '
+                'to be used in the project (max 2000 characters)'),
             max_length=2000,
             required=False)
 
@@ -138,7 +141,7 @@ class ProjectForm(forms.Form):
             required=False,
             label=_("Project locality"),
             help_text=_('Please describe the locality of the project, in terms of where the main participant'
-                        'activities take place,<br/> E.g. in your backyard, parks in London, rivers in Europe, '
+                        'activities take place. E.g. in your backyard, parks in London, rivers in Europe, '
                         'online globally, etc.'))
 
     projectGeographicLocation = forms.MultiPolygonField(
@@ -150,14 +153,14 @@ class ProjectForm(forms.Form):
     contact_person = forms.CharField(
             max_length=100,
             widget=forms.TextInput(),
-            help_text=_('Please name the contact person or contact point for the Project'),
+            help_text=_('Please name the contact person or contact point of the project.'),
             required=False,
             label=_("Public contact point"))
 
     contact_person_email = forms.EmailField(
             required=False,
             widget=forms.TextInput(),
-            help_text=_('Please provide the email for the contact person or contact point'),
+            help_text=_('Please provide the email address of the contact person or contact point.'),
             label=_("Contact point email"))
 
     mainOrganisation = forms.ModelChoiceField(
@@ -166,7 +169,7 @@ class ProjectForm(forms.Form):
                 model=Organisation,
                 search_fields=['name__icontains', ]),
             help_text=_(
-                'Organisation coordinating the project. If not listed, '
+                'Please select the organisation coordinating the project. If not listed, '
                 'please add it <a href="/new_organisation" target="_blank">here</a> '
                 'before submitting the project'),
             label=_('Lead organisation / coordinator'),
@@ -178,7 +181,7 @@ class ProjectForm(forms.Form):
                 model=Organisation,
                 search_fields=['name__icontains']),
             help_text=_(
-                'Other Organisation participating in the project.If not listed,'
+                'Please select other organisation(s) participating in the project. If not listed,'
                 'please add it <a href="/new_organisation" target="_blank">here</a> '
                 'before submitting the project'),
             label=_("Other Organisations"),
@@ -191,21 +194,22 @@ class ProjectForm(forms.Form):
                 attrs={'data-token-separators': '[","]'}
             ),
             help_text=_('Please enter the funding agencies of the project (e.g. European Commission)<br />'
-                        'Select them from the list or add your own <b>ended by comma or pressing enter</b>'),
+                        'Select them from the list or add your own <b>ended by comma or pressing enter</b>.'),
             required=False,
             label=_("Funding body"))
 
     funding_program = forms.CharField(
             max_length=500,
             widget=forms.TextInput(),
-            help_text=_('Indication of the programme that funds or funded a project'),
+            label=_("Funding programme"),
+            help_text=_('Please indicate the name of the programme that funds or funded the project.'),
             required=False)
 
     # Images
     image1 = forms.ImageField(
             required=False,
             label=_("Image for the thumbnail profile"),
-            help_text=_('Will be resized to 600x400 pixels'),
+            help_text=_('It will be resized to 600x400 pixels'),
             widget=forms.FileInput)
 
     x1 = forms.FloatField(widget=forms.HiddenInput(), required=False)
@@ -221,7 +225,7 @@ class ProjectForm(forms.Form):
     image2 = forms.ImageField(
             required=False,
             label=_("Project logo"),
-            help_text=_('Will be resized to 600x400 pixels)'),
+            help_text=_('It will be resized to 600x400 pixels)'),
             widget=forms.FileInput)
     x2 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     y2 = forms.FloatField(widget=forms.HiddenInput(), required=False)
@@ -236,7 +240,7 @@ class ProjectForm(forms.Form):
     image3 = forms.ImageField(
             required=False,
             label=_("Image for the profile heading"),
-            help_text=_('Will be resized to 1100x400 pixels'),
+            help_text=_('It will be resized to 1100x400 pixels'),
             widget=forms.FileInput)
     x3 = forms.FloatField(widget=forms.HiddenInput(), required=False)
     y3 = forms.FloatField(widget=forms.HiddenInput(), required=False)

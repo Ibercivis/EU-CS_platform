@@ -23,40 +23,40 @@ class PlatformForm(forms.Form):
 
     name = forms.CharField(
             max_length=200,
-            help_text=_('The name of the network or plarform'),
+            help_text=_('Please write the name of the network or plarform.'),
             widget=forms.TextInput())
 
     url = forms.URLField(
             max_length=200,
-            help_text=_('URL of the network or platform'),
+            help_text=_('Please provide the URL of the network or platform.'),
             widget=forms.TextInput())
 
     description = forms.CharField(
             max_length=3000,
-            help_text=_('Please briefly describe the network or platform (max 3000 characters)'),
+            help_text=_('Please briefly describe the network or platform (max 3000 characters).'),
             widget=CKEditorWidget(config_name='frontpage'))
 
     geographicExtend = forms.ChoiceField(
             label=_('Geographic extend'),
-            help_text=_('Please indicate the spatial scale of the network / platform'),
+            help_text=_('Please indicate the spatial scale of the network or platform.'),
             choices=GEOGRAPHIC_EXTEND_CHOICES)
 
     countries = forms.MultipleChoiceField(
             widget=s2forms.Select2MultipleWidget,
             choices=countries,
-            help_text=_('Please select the country(ies) related to the network / platform')
+            help_text=_('Please select the country(ies) related to the network or platform.')
             )
     platformLocality = forms.CharField(
             label=_("Network / platform locality"),
             max_length=300,
             widget=forms.TextInput(),
             required=False,
-            help_text=_('Please describe the locality of the network/platgorm, e.g. City of Lisbon.'))
+            help_text=_('Please describe the locality of the network or platform. For example City of Lisbon.'))
 
     contactPoint = forms.CharField(
-            label=_('Contact point'),
+            label=_('Public contact point'),
             max_length=100,
-            help_text=_('Please name the contact person or contact point for the organisation'),
+            help_text=_('Please name the contact person or contact point for the network or platform.'),
             widget=forms.TextInput(),
             required=False)
 
@@ -72,9 +72,9 @@ class PlatformForm(forms.Form):
     organisation = forms.ModelMultipleChoiceField(
             label=_("Organisation(s)"),
             help_text=_(
-                'Organisation(s) contributing the resource (multiple selection separated by comma '
-                'or presseing enter. If not listed, please add <a href="/new_organisation" '
-                'target=_blank">here</a> before submitting'),
+                'Please selecet the organisation(s) coordinating the platform. '
+                'If not listed, please add <a href="/new_organisation" '
+                'target=_blank">here</a> before submitting the network or platform.'),
             queryset=Organisation.objects.all(),
             widget=s2forms.ModelSelect2MultipleWidget(
                 model=Organisation,
@@ -84,7 +84,7 @@ class PlatformForm(forms.Form):
     logo = forms.ImageField(
             required=False,
             label=_("Logo of your network or platform"),
-            help_text=_('Will be resized to 600x400 pixels'),
+            help_text=_('This image will be resized to 600x400 pixels'),
             widget=forms.FileInput)
     xlogo = forms.FloatField(widget=forms.HiddenInput(), required=False)
     ylogo = forms.FloatField(widget=forms.HiddenInput(), required=False)
@@ -98,7 +98,7 @@ class PlatformForm(forms.Form):
     profileImage = forms.ImageField(
             required=False,
             label=_("Network or platform profile image"),
-            help_text=_('Will be resized to 1100x400 pixels)'),
+            help_text=_('This image will be resized to 1100x400 pixels)'),
             widget=forms.FileInput)
     xprofileImage = forms.FloatField(widget=forms.HiddenInput(), required=False)
     yprofileImage = forms.FloatField(widget=forms.HiddenInput(), required=False)

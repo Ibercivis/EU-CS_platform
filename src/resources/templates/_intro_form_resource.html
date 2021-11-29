@@ -15,9 +15,21 @@
 
                 <div class="small mb-2">{% trans "Resources can include documents such as guidelines, reports, policy briefs, and protocols; tools such as software or hardware; and other file formats such as videos or podcasts." %}</div>
 
-                <div class="small mb-2">{% trans "Upon saving this profile, your resource will be submitted for moderation. The moderation process is meant to ensure that all of the resources shared on the platform are useful for citizen science projects and practitioners, and are of good quality. Read more about the moderation process. As quality factors we consider whether your resource is easy to access, is structured clearly, is easy to read (or hear or view) and understand. Read our quality criteria." %}</div>
+                <div class="small mb-2">{% trans "Upon saving this profile, your resource will be submitted for moderation. The moderation process is meant to ensure that all of the resources shared on the platform are useful for citizen science projects and practitioners, and are of good quality." %}
+                    <a href="https://eu-citizen.science/moderation/">
+                        {% trans "Read more about the moderation process." %}
+                    </a> 
+                    {% trans "As quality factors we consider whether your resource is easy to access, is structured clearly, is easy to read (or hear or view) and understand." %}
+                    <a href="https://eu-citizen.science/criteria/" target="_blank">
+                        {% trans "Read our quality criteria."%}
+                    </a>
+                </div>
 
-                <div class="small mb-2">{% trans "Please note that we strongly recommend that you first ensure that your resource is hosted in a permanent repository (such as on a website that will be maintained and can provide a permalink, or a repository such as a publisher, Zenodo , OSF or the RIO Journal)." %}</div>
+                <div class="small mb-2">{% trans "Please note that we strongly recommend that you first ensure that your resource is hosted in a permanent repository, such as on a website that will be maintained and can provide a permalink, or a repository such as a publisher like" %}
+                    <a href="https://zenodo.org/" target="_blank">{% trans "Zenodo" %}</a>, 
+                    <a href="https://osf.io/" target="_blank">{% trans "OSF" %}</a>,
+                    <a href="https://riojournal.com/" target="_blank">{% trans "the RIO Journal" %}</a>
+                    ...</div>
 
                 <div class="small mb-2">{% trans "We would like to point out that, as the author of this profile, you have to clear the image rights and copyrights of the content you are submitting. Please indicate the author or copyright holder of pictures. You may need to obtain express written permission from them." %}</div>
             </div>

@@ -4,8 +4,11 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from .models import Event
 
+
 class EventForm(forms.Form):
-    title = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder':_('Title of the event')}))
+    title = forms.CharField(
+            max_length=200,
+            widget=forms.TextInput(attrs={'placeholder':_('Title of the event')}))
     description = forms.CharField(widget=forms.Textarea(attrs={'placeholder':_('A brief description of the event')}), max_length = 3000)
     place = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder':_('Location of the Event')}),required=False)
     start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}))
