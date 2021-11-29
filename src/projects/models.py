@@ -3,6 +3,7 @@ from django.conf import settings
 from organisations.models import Organisation
 from django_countries.fields import CountryField
 
+
 class Status(models.Model):
     status = models.TextField()
 

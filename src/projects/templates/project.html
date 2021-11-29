@@ -33,7 +33,7 @@
         <div class="col-xl-8 col-md-6 col-12">
             <!-- TODO: I dont like this look -->
             {% if hasTranslation %}
-            {% for translation in project.translatedProject.all %}
+            {% for translation in project.translatedProject.all|dictsort:"id"  %}
             {% if translation.inLanguage == LANGUAGE_CODE %}
             {% if translation.needsUpdate %}
                 <small>
@@ -173,7 +173,7 @@
                         <i class="fas fa-external-link-square-alt"></i> {% trans "Go to Project" %}
                     </a>
 
-                    {% if project.creator == user or user.is_staff or user.id in cooperators %}
+                    {% if hasPermissionToEdit %}
                     <a class="btn btn-warning" href="{% url 'editProject' project.id %}">
                         <i class="fas fa-edit"></i> Edit 
                     </a>

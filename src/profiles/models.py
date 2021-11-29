@@ -57,6 +57,7 @@ class BaseProfile(models.Model):
             blank_label='(select country)',
             null=True,
             blank=True)
+
     # Privacy and subscriptions
     profileVisible = models.BooleanField(
             default=False)
@@ -64,6 +65,9 @@ class BaseProfile(models.Model):
             default=True)
     digest = models.BooleanField(
             default=True)
+
+    # Permission to manage projects from a country
+    manageProjectsFromCountry = CountryField(null=True, blank=True)
 
     class Meta:
         abstract = True

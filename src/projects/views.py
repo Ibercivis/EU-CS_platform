@@ -130,9 +130,14 @@ def submitProjectTranslation(request):
 
 def editProject(request, pk):
     project = get_object_or_404(Project, id=pk)
+    countriesWithContent1 = Project.objects.filter(id=pk).values_list('mainOrganisation__country', flat=True).distinct()
+    countriesWithContent2 = Project.objects.filter(id=pk).values_list(
+        'organisation__country', flat=True).distinct()
+    countriesWithContent3 = Project.objects.filter(id=pk).values_list('country', flat=True)
+    countriesWithContent = set(chain(countriesWithContent1, countriesWithContent2, countriesWithContent3))
     user = request.user
     cooperators = getCooperators(pk)
-    if user != project.creator and not user.is_staff and not user.id in cooperators:
+    if user != project.creator and not user.is_staff and not user.id in cooperators and  user.profile.manageProjectsFromCountry not in countriesWithContent:
         return redirect('../projects', {})
 
     users = getOtherUsers(project.creator)
@@ -272,10 +277,25 @@ def project(request, pk):
     user = request.user
     project = get_object_or_404(Project, id=pk)
     users = getOtherUsers(project.creator)
+    cooperators = getCooperators(pk)
+
+    # TODO: Put in a function. in the end remove 
+    countriesWithContent1 = Project.objects.filter(id=pk).values_list('mainOrganisation__country', flat=True).distinct()
+    countriesWithContent2 = Project.objects.filter(id=pk).values_list(
+        'organisation__country', flat=True).distinct()
+    countriesWithContent3 = Project.objects.filter(id=pk).values_list('country', flat=True)
+    countriesWithContent = set(chain(countriesWithContent1, countriesWithContent2, countriesWithContent3))
+
     if project.projectGeographicLocation:
         form = ProjectGeographicLocationForm(initial={'projectGeographicLocation': project.projectGeographicLocation})
     else:
         form = None
+
+    # Check project permission to edit
+    if user != project.creator and not user.is_staff and not user.id in cooperators and  user.profile.manageProjectsFromCountry not in countriesWithContent:
+        hasPermissionToEdit = False
+    else:
+        hasPermissionToEdit = True
 
     # Check if there is a translation
     hasTranslation = project.translatedProject.filter(inLanguage=request.LANGUAGE_CODE).exists()
@@ -305,6 +325,7 @@ def project(request, pk):
         'unApprovedProjects': unApprovedProjects,
         'permissionForm': permissionForm,
         'cooperators': getCooperators(pk),
+        'hasPermissionToEdit': hasPermissionToEdit,
         'form': form,
         'status': status,
         'isSearchPage': True})
