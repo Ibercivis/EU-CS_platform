@@ -11,14 +11,14 @@ class OrganisationForm(forms.Form):
 
     name = forms.CharField(
             max_length=200,
-            help_text=_('Please write the name or the organisation.'),
+            help_text=_('Please write the name of the organisation.'),
             widget=forms.TextInput())
     url = forms.URLField(
             max_length=200,
-            help_text=_('Please provide the URL to the website of the organisation'),
+            help_text=_('Please provide the URL to the website of the organisation.'),
             widget=forms.TextInput())
     description = forms.CharField(
-            help_text=_('Please briefly describe the organisation (max 3000 characters)'),
+            help_text=_('Please briefly describe the organisation (max 3000 characters).'),
             widget=CKEditorWidget(config_name='frontpage'),
             max_length=3000)
     orgType = forms.ModelChoiceField(

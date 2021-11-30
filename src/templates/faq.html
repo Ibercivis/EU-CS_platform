@@ -63,7 +63,7 @@
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col-11">
-                    <div class="small mb-2">{% trans "A range of additional features become available to you when you sign-up to be a member of the community. You will be able to share your own projects and resources with the community, profile your organisation and link that profile with the projects you are involved in, and leave feedback or information about your own experience using the materials on the platform. When viewing a project profile, you can follow it, or when viewing a resource profile you can bookmark it to find them quickly again from your Personal Area. You will also be able to join the discussions in the Forum." %}</div>
+                    <div class="small mb-2">{% trans "A range of additional features become available to you when you sign-up to be a member of the community. You will be able to share your own projects and resources with the community, profile your organisation and link that profile with the projects you are involved in, and leave feedback or information about your own experience using the materials on the platform. When viewing a project profile, you can follow it, or when viewing a resource profile you can bookmark it to find them quickly again from your <a href='/users/me'>Personal Area</a>. You will also be able to join the discussions in the Forum." %}</div>
                 </div>
             </div><!-- End of template section -->
 
@@ -145,7 +145,7 @@
 
             <div class="row">
                 <div class="col-12">
-                    <h3>{% trans "How does moderation work?" %}</h3>
+                    <h3 id='moderation'>{% trans "How does moderation work?" %}</h3>
                 </div>
             </div>
             <div class="row">
@@ -159,7 +159,7 @@
 
             <div class="row">
                 <div class="col-12">
-                    <h3>{% trans "What are the quality criteria for resources?" %}</h3>
+                    <h3 id='#quality'>{% trans "What are the quality criteria for resources?" %}</h3>
                 </div>
             </div>
             <div class="row">
@@ -212,9 +212,25 @@
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col-11">
-                    <div class="small mb-2">{% trans "The <a href='/users/me/'>Personal Area</a> is where you can edit any of the content profiles that you have submitted (as a logged-in member of the platform), in order to keep those profiles up to date. There you will also find the list of projects that you have ‘followed’, and the resources that you have bookmarked so that you can find them quickly again from your Personal Area. Please also share more information about yourself in the Profile area with other members of the community." %}</div>
+                    <div class="small mb-2">{% trans "The <a href='/users/me/'>Personal Area</a> is where you can edit any of the content profiles that you have submitted (as a logged-in member of the platform), in order to keep those profiles up to date. There you will also find the list of projects that you have ‘followed’, and the resources that you have bookmarked so that you can find them quickly again from your Personal Area. Please also share more information about yourself in the Personal area with other members of the community." %}</div>
                 </div>
             </div><!-- End of template section -->
+
+
+
+
+            <div class="row">
+                <div class="col-12">
+                    <h3>{% trans "What does it mean to bookmark a project or resource?" %}</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-11">
+                    <div class="small mb-2">{% trans "When you are logged in, you will see a ‘bookmark’ button at the bottom of project and (training) resource profiles. This allows you to add the profiles that you are interested in to a list that can be found in your Personal Area under <a href='/users/me/bookmarks'><i>My bookmarks</i></a>, allowing you to find this content again easily." %}
+                </div>
+            </div><!-- End of template section -->
+
 
 
             <div class="row">

@@ -29,12 +29,12 @@ class ProjectForm(forms.Form):
     project_name = forms.CharField(
             max_length=200,
             widget=forms.TextInput(),
-            help_text=_('Please write the name of the project'))
+            help_text=_('Please write the name of the project.'))
 
     url = forms.URLField(
             max_length=200,
             widget=forms.TextInput(),
-            help_text=_('Please provide the URL to an external web site of the project'))
+            help_text=_('Please provide the URL to an external website of the project.'))
 
     description = forms.CharField(
             widget=CKEditorWidget(config_name='frontpage'),
@@ -43,7 +43,7 @@ class ProjectForm(forms.Form):
 
     aim = forms.CharField(
             widget=CKEditorWidget(config_name='frontpage'),
-            help_text=_('Primary aim, goal or objective of the project. Max 2000 characters'),
+            help_text=_('Please indicae the primary aim, goal or objective of the project (max 2000 characters).'),
             max_length=2000)
 
     description_citizen_science_aspects = forms.CharField(
@@ -53,7 +53,7 @@ class ProjectForm(forms.Form):
                         '<a href="https://zenodo.org/cohttps://zenodo.org/record/5127534#.YV8J0dpBxPa">ECSA 10 '
                         'Characteristics of Citizen Science</a> and the <a href="https://osf.io/xpr2n/">ECSA 10 '
                         'Principles of Citizen Science</a>. What you introduce in this text field will not appear '
-                        'on the platform; it is just for moderation purposes (max 2000 characters)'),
+                        'on the platform; it is just for moderation purposes (max 2000 characters).'),
             max_length=2000,
             label=_('Description of citizen science aspects'))
 
@@ -70,7 +70,7 @@ class ProjectForm(forms.Form):
                 attrs={
                     'data-token-separators': '[","]'}),
             required=True,
-            help_text=_('Please enter 2-3 keywords separated by commas or by pressing enter.'),
+            help_text=_('Please select or enter 2-3 keywords separated by commas or by pressing enter.'),
             label=_('Keywords'))
 
     # Useful information to classify the project
@@ -123,7 +123,7 @@ class ProjectForm(forms.Form):
             widget=CKEditorWidget(config_name='frontpage'),
             help_text=_(
                 'Please indicate any required or suggested equipment '
-                'to be used in the project (max 2000 characters)'),
+                'to be used in the project (max 2000 characters).'),
             max_length=2000,
             required=False)
 
@@ -140,7 +140,7 @@ class ProjectForm(forms.Form):
             widget=forms.TextInput(),
             required=False,
             label=_("Project locality"),
-            help_text=_('Please describe the locality of the project, in terms of where the main participant'
+            help_text=_('Please describe the locality of the project, in terms of where the main participant '
                         'activities take place. E.g. in your backyard, parks in London, rivers in Europe, '
                         'online globally, etc.'))
 

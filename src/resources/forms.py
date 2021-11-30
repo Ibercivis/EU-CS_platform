@@ -17,13 +17,14 @@ class ResourceForm(forms.Form):
     name = forms.CharField(
             max_length=200,
             widget=forms.TextInput(),
-            help_text=_('Please write the title or name of the resource'))
+            help_text=_('Please write the title or name of the resource.'))
 
     url = forms.URLField(
             widget=forms.TextInput(),
+            label=_('URL'),
             help_text=_(
                 'Please provide the URL to where the document is hosted by the publisher, '
-                'or in a permanent repository such as Zenodo, OSF, the RIO Journal, or similar'))
+                'or in a permanent repository such as Zenodo, OSF, the RIO Journal, or similar.'))
     keywords = forms.ModelMultipleChoiceField(
             queryset=Keyword.objects.all(),
             widget=s2forms.ModelSelect2TagWidget(
@@ -31,8 +32,8 @@ class ResourceForm(forms.Form):
                 attrs={
                     'data-token-separators': '[","]'}),
             help_text=_(
-                'Please select the keywords that describe the resource or add new ones,'
-                '<b>separated by commas or by pressing enter</b>'),
+                'Please select the keywords that describe the resource or add new ones '
+                '<b>separated by commas or by pressing enter</b>.'),
             required=True)
 
     abstract = forms.CharField(
@@ -44,11 +45,11 @@ class ResourceForm(forms.Form):
             widget=CKEditorWidget(config_name='frontpage'),
             help_text=_(
                 'Please describe the link between citizen science and the resource you are uploading '
-                '– for guidance see the <a href="https://zenodo.org/communities/citscicharacteristics">'
+                '– for guidance see the <a href="https://zenodo.org/communities/citscicharacteristics"> '
                 'ECSA Characteristics of Citizen Science</a> as well as the'
-                '<a href="https://zenodo.org/record/5127534#.YV8J0dpBxPa">'
-                'ECSA 10 Principles of Citizen Science</a>. What you introduce in this text field will not'
-                'appear on the platform; it is just for moderation purposes and for the administrators of'
+                '<a href="https://zenodo.org/record/5127534#.YV8J0dpBxPa"> '
+                'ECSA 10 Principles of Citizen Science</a>. What you introduce in this text field will not '
+                'appear on the platform; it is just for moderation purposes and for the administrators of '
                 'the platform to see (max 2000 characters).'),
             max_length=2000,
             label=_('Description of Citizen Science Aspects'))
@@ -62,7 +63,7 @@ class ResourceForm(forms.Form):
             help_text=_(
                 'Please name the author(s) of the resource. Enter <i>FirstInitial LastName</i> '
                 'and close with a comma or '
-                'press enter to add an author or multiple authors'),
+                'press enter to add an author or multiple authors.'),
             required=False,
             label=_("Authors"))
 
@@ -79,7 +80,7 @@ class ResourceForm(forms.Form):
             widget=Select2MultipleWidget(),
             help_text=_(
                 'Please select the audience(s) for which the resource is intended. '
-                'Multiple options can be selected'))
+                'Multiple options can be selected.'))
 
     theme = forms.ModelMultipleChoiceField(
             queryset=Theme.objects.all(),
@@ -181,7 +182,7 @@ class ResourceForm(forms.Form):
             help_text=_(
                 'Please add the education level needed, end using comma or pressing enter. '
                 'Examples of educational levels include beginner, intermediate or advanced, '
-                'and formal sets of level indicators'),
+                'and formal sets of level indicators.'),
             required=False,
             )
     learning_resource_type = forms.ModelMultipleChoiceField(
