@@ -32,23 +32,15 @@ msgid "Log in"
 msgstr "Bejelentkezés"
 
 #: accounts/forms.py:54
-#, fuzzy
-#| msgid ""
-#| "We see that your email address is in our database, but that you have not "
-#| "yet confirmed your address. Please search for the confirmation email in "
-#| "your inbox (or spam) to activate your account"
 msgid ""
 "We see that your email address is in our database, but that you have not "
 "yetconfirmed your address. Please search for the confirmation email in your "
 "inbox(or spam) to activate your account"
 msgstr ""
-"Az e-mail címedet még nem igazoltad vissza a rendszerben.A fiókod "
-"aktiválásához szükséges megerősítő e-mailt a beérkező (vagy spam) mappában "
-"találod."
+"Az e-mail címedet még nem igazoltad vissza a rendszerben."
+" A fiókod aktiválásához szükséges megerősítő e-mailt a beérkező (vagy spam) mappában találod."
 
 #: accounts/forms.py:90
-#, fuzzy
-#| msgid "Enter Full Name"
 msgid "Enter name"
 msgstr "Teljes név"
 
@@ -92,10 +84,8 @@ msgstr "Aktiváld az EU-Citizen.Science profilodat"
 
 #: accounts/templates/accounts/emails/password-reset-email.html:3
 #: accounts/templates/accounts/emails/password-reset-subject.txt:1
-#, fuzzy, python-format
-#| msgid "Password reset on %(site_name)s"
 msgid "Password reset on %(domain)s"
-msgstr "Új jelszó igénylése %(site_name)s"
+msgstr "Új jelszó igénylése %(domain)"
 
 #: contact/templates/contact.html:10 contact/templates/contact.html:19
 #: contact/templates/contact.html:28
@@ -125,8 +115,8 @@ msgstr "Köszönjük az üzeneted!"
 #, python-format
 msgid "%d test email was sent"
 msgid_plural "%d test mails were sent"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] ""%d a teszt üzenetet elküldtük"
+msgstr[1] "%d a teszt üzeneteket elküldtük"
 
 #: events/forms.py:11
 msgid "Title of the event"
@@ -145,21 +135,15 @@ msgid "Please provide a URL to an external web site for the event"
 msgstr "Esemény URL-je"
 
 #: events/templates/_intro_new_event.html:3
-#, fuzzy
-#| msgid ""
-#| "Upon saving this profile, your organisational profile will be submitted "
-#| "for moderation by one of the members of the EU-Citizen.Science "
-#| "consortium. This step is simply to check for ‘spam’ or inappropriate uses "
-#| "of the profile form."
 msgid ""
 "Thank you for submitting an event to the EU-Citizen.Science platform. Upon "
 "clicking on “Add”, the event will immediately show up on the platform but "
 "will be later moderated by one of the platform moderators. This step is "
 "simply to check for spam or inappropriate uses of the platform."
 msgstr ""
-"Mentést követően a szervezeti profilt az EU-Citizen.Science konzorcium egyik "
-"tagja moderálja.Ez a lépés a spamek és a helytelen adatlapok kiszűrésére "
-"szolgál."
+"Köszönjük, hogy eseményt küldtél be az EU-Citizen.Science platformra." 
+"A Hozzáadás gombra kattintva az esemény azonnal megjelenik a platformon, de később a platform egyik moderátora fogja moderálni."
+"Ez a lépés csupán a platform spam vagy nem megfelelő használatának ellenőrzésére szolgál."
 
 #: events/templates/editEvent.html:25
 msgid "Edit event"
@@ -171,38 +155,31 @@ msgstr "Eseményinformáció"
 
 #: events/templates/events.html:11
 msgid "On going <span class='lightBlue-color'>events</span>"
-msgstr ""
+msgstr "Folyamatban lévő <span class='lightBlue-color'>események</span>"
 
 #: events/templates/events.html:24
 msgid "Upcoming <span class='lightBlue-color'>events</span>"
-msgstr ""
+msgstr "Közelgő <span class='lightBlue-color'>események</span>"
 
 #: events/templates/events.html:36
 msgid "Past <span class='lightBlue-color'>events</span>"
-msgstr ""
+msgstr "Korábbi <span class='lightBlue-color'>események</span>"
 
 #: events/templates/new_event.html:25
 msgid "New event"
 msgstr "Új esemény"
 
 #: organisations/forms.py:14
-#, fuzzy
-#| msgid "The name or the organisation"
 msgid "Please write the name of the organisation."
-msgstr "Szervezet neve"
+msgstr "Add meg a szervezet nevét"
 
 #: organisations/forms.py:18
-#, fuzzy
-#| msgid "Please provide a URL to an external web site for the event"
 msgid "Please provide the URL to the website of the organisation."
-msgstr "Esemény URL-je"
+msgstr "A szervezeti weboldal URL-je"
 
 #: organisations/forms.py:21
-#, fuzzy
-#| msgid ""
-#| "Please briefly describe the organisation (ideally in 500 words or less)"
 msgid "Please briefly describe the organisation (max 3000 characters)."
-msgstr "Rövid leírás a szervezetről (legfeljebb 500 szó)"
+msgstr "Rövid leírás a szervezetről (legfeljebb 3000 karakter)"
 
 #: organisations/forms.py:26
 #: organisations/templates/_finder_organisation.html:29
@@ -217,34 +194,24 @@ msgid "Please select one."
 msgstr "Válassz egyet!"
 
 #: organisations/forms.py:31
-#, fuzzy
-#| msgid "Please upload the logo of your organisation (.jpg or .png)"
 msgid "Please upload the logo of your organisation (.jpg or .png)."
 msgstr "Töltsd fel a szervezet logóját (.jpg vagy .png formátumban)"
 
 #: organisations/forms.py:39
-#, fuzzy
-#| msgid "Please name the contact person or contact point for the organisation"
 msgid "Please name the contact person or contact point for the organisation."
 msgstr "Nevezd meg a szervezet kapcsolattartóját"
 
 #: organisations/forms.py:40 platforms/forms.py:58 projects/forms.py:158
-#, fuzzy
-#| msgid "Public Contact Point"
 msgid "Public contact point"
 msgstr "Kapcsolattartó pont"
 
 #: organisations/forms.py:45 platforms/forms.py:68
-#, fuzzy
-#| msgid ""
-#| "Please provide the email address of the contact person or contact point. "
-#| "Note you will need permission to do that"
 msgid ""
-"Please provide the email address of the contact person or contact point. "
+"Please provide the email address of the contact person or contact point."
 "Note you will need permission to do that."
 msgstr ""
-"Add meg a kapcsolattartó vagy a kapcsolattartó pont e-mail címét..Ehhez a "
-"kapcsolattartó engedélyére lesz szükséged!"
+"Add meg a kapcsolattartó vagy a kapcsolattartó pont e-mail címét."
+"Ehhez a kapcsolattartó engedélyére lesz szükséged!"
 
 #: organisations/forms.py:92 projects/forms.py:478 resources/forms.py:290
 msgid "Give additional users permission to edit"
@@ -303,7 +270,7 @@ msgstr "Ország"
 
 #: organisations/templates/_finder_organisation.html:57
 msgid "type:"
-msgstr ""
+msgstr "típus:"
 
 #: organisations/templates/_finder_organisation.html:62
 #: templates/_what_can_you_find_here.html:55
@@ -336,10 +303,8 @@ msgstr "Keresések és szűrők törlése"
 #: projects/templates/_intro_form_project.html:6
 #: resources/templates/_intro_form_resource.html:6
 #: resources/templates/_intro_form_training_resource.html:6
-#, fuzzy
-#| msgid "Edit"
 msgid "Editing"
-msgstr "Szerkeszt"
+msgstr "Szerkesztés"
 
 #: organisations/templates/_intro_form_organisation.html:8
 #: platforms/templates/_intro_form_platform.html:8
@@ -350,12 +315,6 @@ msgid "New"
 msgstr "Új"
 
 #: organisations/templates/_intro_form_organisation.html:13
-#, fuzzy
-#| msgid ""
-#| "Thank you for proposing a new citizen science resource to be shared on "
-#| "the EU-Citizen.Science Platform. Please fill in all of the mandatory "
-#| "information in the fields below (indicated with an asterisk*), and as "
-#| "much of the non-mandatory information as possible."
 msgid ""
 "Thank you for creating a profile for your organisation on the EU-Citizen."
 "Science platform. This can be linked with the personal profiles of the "
@@ -365,26 +324,19 @@ msgid ""
 "information in the fields below (indicated with an asterisk*), and as much "
 "of the non-mandatory information as possible."
 msgstr ""
-"Köszönjük, hogy új forrást javasoltál az EU-Citizen.Science platformján!Add "
-"meg a kötelező adatokat az alábbi (csillaggal jelölt*) mezőkbenés töltsd ki "
-"a lehető legtöbb mezőt."
+"Köszönjük, hogy létrehoztad a szervezet profilját az EU-Citizen.science platfromon."
+"Ez összekapcsolható a személyes adatlapoddal, a projektprofilokkal, amelyekben a szervezeted részt vesz, valamint az erőforrásprofilokkal vagy a szervezet által közzétett képzési forrásokkal."
+"Kérjük, töltsd ki az alábbi mezőkben az összes kötelező információt (csillaggal* jelölve), és a nem kötelező információk közül a lehető legtöbbet."
 
 #: organisations/templates/_intro_form_organisation.html:15
-#, fuzzy
-#| msgid ""
-#| "Upon saving this profile, your organisational profile will be submitted "
-#| "for moderation by one of the members of the EU-Citizen.Science "
-#| "consortium. This step is simply to check for ‘spam’ or inappropriate uses "
-#| "of the profile form."
 msgid ""
 "Upon saving this profile, your organisational profile will immediately show "
 "up on the platform but will be later moderated by one of the platform "
 "moderators. This step is simply to check for spam or inappropriate uses of "
 "the profile form."
 msgstr ""
-"Mentést követően a szervezeti profilt az EU-Citizen.Science konzorcium egyik "
-"tagja moderálja.Ez a lépés a spamek és a helytelen adatlapok kiszűrésére "
-"szolgál."
+"A profil mentésekor a szervezet profilja azonnal megjelenik a platformon, de később a platform egyik moderátora fogja moderálni."
+"Ez a lépés csupán a spam vagy a profil űrlap nem megfelelő használatának ellenőrzésére szolgál."
 
 #: organisations/templates/_intro_form_organisation.html:17
 #: platforms/templates/_intro_form_platform.html:17
@@ -397,6 +349,8 @@ msgid ""
 "Please indicate the author or copyright holder of pictures. You may need to "
 "obtain express written permission from them."
 msgstr ""
+"Szeretnénk felhívni a figyelmet arra, hogy a profil szerzőjeként tisztáznia kell az által beküldött tartalom képi és szerzői jogait."
+"Kérjük, tüntesd fel a képek szerzőjét vagy szerzői jogtulajdonosát. Lehet, hogy ehhez írásbeli engedélyt kell kérned tőlük."
 
 #: organisations/templates/finder_organisations.html:44
 msgid "result"
@@ -413,10 +367,8 @@ msgid "Resources"
 msgstr "Források"
 
 #: organisations/templates/organisation.html:49 templates/about.html:70
-#, fuzzy
-#| msgid "Learning resource type"
 msgid "Training resources"
-msgstr "Oktatási anyag típusa"
+msgstr "Oktatási anyagok"
 
 #: organisations/templates/organisation.html:60
 msgid "Members"
@@ -428,38 +380,32 @@ msgstr "A szervezethez"
 
 #: organisations/templates/organisation.html:78
 msgid "Edit Organisation"
-msgstr "Szervezet szerkesztése"
+msgstr "A szervezet szerkesztése"
 
 #: organisations/templates/organisation.html:86
 msgid "Delete Organisation"
-msgstr "Szervezet törlése"
+msgstr "A szervezet törlése"
 
 #: organisations/templates/organisation_form.html:46
 #: platforms/templates/platform_form.html:29
 #: projects/templates/project_form.html:35
 #: resources/templates/resource_form.html:36
-#, fuzzy
-#| msgid "Origin information"
 msgid "Main information"
-msgstr "Eredeti információk"
+msgstr "Fő információk"
 
 #: organisations/templates/organisation_form.html:62
 #: platforms/templates/platform_form.html:43
-#, fuzzy
-#| msgid "Origin information"
 msgid "Contact information"
-msgstr "Eredeti információk"
+msgstr "Kapcsolat"
 
 #: organisations/templates/organisation_form.html:75
-#, fuzzy
-#| msgid "Organisation"
 msgid "Organisation logo"
-msgstr "Szervezet"
+msgstr "A szervezet logója"
 
 #: organisations/templates/organisation_form.html:96
 #: projects/templates/project.html:151
 msgid "Location"
-msgstr ""
+msgstr "Helyszín"
 
 #: organisations/templates/organisation_form.html:107
 #: profiles/templates/profiles/edit_profile.html:56 templates/_save_zone.html:3
@@ -468,75 +414,57 @@ msgstr "Mentés"
 
 #: organisations/templates/organisations.html:11
 msgid "organisation <span class='lightBlue-color'>search</span>"
-msgstr ""
+msgstr "szervezet <span class='lightBlue-color'>search</span>"
 
 #: organisations/views.py:50
 msgid "Organisation added correctly"
-msgstr "Szervezet feltöltve"
+msgstr "Szervezet helyesen hozzáadva"
 
 #: platforms/forms.py:26
-#, fuzzy
-#| msgid "The name or the organisation"
 msgid "Please write the name of the network or platform."
-msgstr "Szervezet neve"
+msgstr "A hálózat/platform neve"
 
 #: platforms/forms.py:31 resources/forms.py:24
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: platforms/forms.py:32
-#, fuzzy
-#| msgid "URL of the organisation"
 msgid "Please provide the URL of the network or platform."
-msgstr "Szervezet URL-je"
+msgstr "A hálózat/platform URL-je"
 
 #: platforms/forms.py:37
 #, fuzzy
-#| msgid ""
-#| "Please briefly describe the organisation (ideally in 500 words or less)"
 msgid "Please briefly describe the network or platform (max 3000 characters)."
-msgstr "Rövid leírás a szervezetről (legfeljebb 500 szó)"
+msgstr "Rövid leírás a szervezetről (legfeljebb 3000 karakter)"
 
 #: platforms/forms.py:41
-#, fuzzy
-#| msgid "Geographic Extend"
 msgid "Geographic extent"
 msgstr "Földrajzi kiterjedés"
 
 #: platforms/forms.py:42
-#, fuzzy
-#| msgid "Please indicate the spatial scale of the project"
 msgid "Please indicate the spatial scale of the network or platform."
-msgstr "A projekt térbeli kiterjedése"
+msgstr "A hálózat/platform térbeli kiterjedése"
 
 #: platforms/forms.py:48
-#, fuzzy
-#| msgid "Please indicate the spatial scale of the project"
 msgid "Please select the country(ies) related to the network or platform."
-msgstr "A projekt térbeli kiterjedése"
+msgstr "A hálózathoz/platformhoz kapcsolódó ország(ok)"
 
 #: platforms/forms.py:51
 msgid "Network / platform locality"
-msgstr ""
+msgstr "A hálózat/platform helyszíne"
 
 #: platforms/forms.py:55
-#, fuzzy
-#| msgid "Please indicate the spatial scale of the project"
 msgid ""
 "Please describe the locality of the network or platform. For example: City "
 "of Lisbon."
-msgstr "A projekt térbeli kiterjedése"
+msgstr "A hálózat/platform helye. Például: Lisszabon városa."
 
 #: platforms/forms.py:60
-#, fuzzy
-#| msgid "Please name the contact person or contact point for the Project"
 msgid ""
 "Please name the contact person or contact point for the network or platform."
 msgstr "Kapcsolattartó"
 
 #: platforms/forms.py:65 projects/forms.py:164
-#, fuzzy
-#| msgid "Contact Point Email"
 msgid "Contact point email"
 msgstr "Kapcsolattartó pont e-mail címe"
 
@@ -545,39 +473,29 @@ msgid "Organisation(s)"
 msgstr "Szervezet/Szervezetek"
 
 #: platforms/forms.py:76
-#, fuzzy
-#| msgid ""
-#| "Organisation coordinating the project. If not listed, please add it <a "
-#| "href=\"/new_organisation\">here</a>         before submitting the project"
 msgid ""
 "Please select the organisation(s) coordinating the platform. If not listed, "
 "please add <a href=\"/new_organisation\" target=_blank\">here</a> before "
 "submitting the network or platform."
 msgstr ""
-"Koordináló szervezet (Ha még nincs a szervezetek listáján, itt feltölthető: "
-"<a href=\"/new_organisation\">here</a>)"
+"A hálózatot/platformot koordináló szervezet(ek)."
+"Ha nem szerepel a listán, kérjük, add meg a <a href=\"/new_organisation\" target=_blank\">itt</a> a hálózat/a platform beküldése előtt."
 
 #: platforms/forms.py:87
 msgid "Logo of your network or platform"
-msgstr ""
+msgstr "A hálózat/platform logója"
 
 #: platforms/forms.py:88
-#, fuzzy
-#| msgid "Will be resized to 600x400 pixels"
 msgid "This image will be resized to 600x400 pixels."
 msgstr "600x400 méretben kerül feltöltésre"
 
 #: platforms/forms.py:97 projects/forms.py:238
-#, fuzzy
-#| msgid "provide Logo credit, if applicable"
 msgid "Logo credit, if applicable"
-msgstr "Logó szerzője"
+msgstr "A logó szerzője"
 
 #: platforms/forms.py:101
-#, fuzzy
-#| msgid "Project profile images"
 msgid "Network or platform profile image"
-msgstr "Projekt profilkép"
+msgstr "A hálózat/platform profilkép"
 
 #: platforms/forms.py:102
 #, fuzzy
@@ -592,45 +510,28 @@ msgid "Profile image credit, if applicable."
 msgstr "Kép szerzője"
 
 #: platforms/templates/_intro_form_platform.html:8
-#, fuzzy
-#| msgid "The Platform"
 msgid "platform"
-msgstr "A platform"
+msgstr "platform"
 
 #: platforms/templates/_intro_form_platform.html:13
-#, fuzzy
-#| msgid ""
-#| "Thank you for sharing your citizen science project on the EU-Citizen."
-#| "Science platform. Please fill in all of the mandatory information in the "
-#| "fields below (indicated with an asterisk*), and as much of the non-"
-#| "mandatory information as possible."
 msgid ""
 "Thank you for creating a profile for your platform or network on the EU-"
 "Citizen.Science platform. Please fill in all of the mandatory information in "
 "the fields below (indicated with an asterisk*), and as much of the non-"
 "mandatory information as possible."
 msgstr ""
-"Köszönjük, hogy megosztottad az EU-Citizen.Science platfromon a civil "
-"tudományos projektedet! Kérjük, hogy add meg az összes kötelező információt "
-"a (csillaggal* jelzett) mezőkben, valamint a nem kötelező adatok közül a "
-"lehető legtöbbet."
+"Köszönjük, hogy létrehoztad a hálózat/platform profilját az EU Citizen.Science platformon."
+"Kérjük, töltsd ki az alábbi mezőkben található összes kötelező információt (csillaggal* jelölve), valamint a nem kötelező információk közül a lehető legtöbbet."
 
 #: platforms/templates/_intro_form_platform.html:15
-#, fuzzy
-#| msgid ""
-#| "Upon saving this profile, your organisational profile will be submitted "
-#| "for moderation by one of the members of the EU-Citizen.Science "
-#| "consortium. This step is simply to check for ‘spam’ or inappropriate uses "
-#| "of the profile form."
 msgid ""
 "Upon saving this profile, your platform or network profile will immediately "
 "show up on the platform but will be later moderated by one of the platform "
 "moderators. This step is simply to check for spam or inappropriate uses of "
 "the profile form."
 msgstr ""
-"Mentést követően a szervezeti profilt az EU-Citizen.Science konzorcium egyik "
-"tagja moderálja.Ez a lépés a spamek és a helytelen adatlapok kiszűrésére "
-"szolgál."
+"Mentést követően a szervezeti profilt az EU-Citizen.Science konzorcium egyik tagja moderálja."
+"Ez a lépés a spamek és a helytelen adatlapok kiszűrésére szolgál."
 
 #: platforms/templates/platform.html:37
 #: profiles/templates/profiles/show_profile.html:17
@@ -639,24 +540,20 @@ msgid "Organisations"
 msgstr "Szervezetek"
 
 #: platforms/templates/platform.html:66 projects/forms.py:136
-#, fuzzy
-#| msgid "Geographic Extend"
 msgid "Geographic extend"
 msgstr "Földrajzi kiterjedés"
 
 #: platforms/templates/platform.html:71
-#, fuzzy
-#| msgid "Country"
 msgid "Countries"
-msgstr "Ország"
+msgstr "Országok"
 
 #: platforms/templates/platform_form.html:54
 msgid "Network or platform images"
-msgstr ""
+msgstr "Hálózat/platform képek"
 
 #: platforms/templates/platforms.html:9
 msgid "platform and network <span class='lightBlue-color'> search</span>"
-msgstr ""
+msgstr "hálózat/platform <span class='lightBlue-color'> keresés</span>"
 
 #: profiles/forms.py:60
 msgid ""
@@ -664,18 +561,12 @@ msgid ""
 msgstr "Érdeklődési terület kiválasztása (vesszővel vagy enterrel elválasztva)"
 
 #: profiles/forms.py:70
-#, fuzzy
-#| msgid ""
-#| "Other Organisation participating in the project. If not listed, please "
-#| "add it         <a href=\"/new_organisation\">here</a> before submitting "
-#| "the project"
 msgid ""
 "Other Organisation participating in the project.If not listed,please add it "
 "<a href=\"/new_organisation\" target=\"_blank\">here</a> before submitting "
 "the project"
 msgstr ""
-"Partnerszervezet (Ha még nincs a szervezetek listáján, itt feltölthető: <a "
-"href=\"/new_organisation\">here</a>"
+"Egyéb, a projektben részt vevő szervezet. Ha nem szerepel a listán, kérjük, add meg <a href=\"/new_organisation\" target=\"_blank\">itt</a> a beküldés előtt."
 
 #: profiles/forms.py:73 projects/forms.py:187
 msgid "Other Organisations"
@@ -683,7 +574,7 @@ msgstr "Egyéb szervezet"
 
 #: profiles/models.py:23
 msgid "Surname"
-msgstr ""
+msgstr "Vezetéknév"
 
 #: profiles/models.py:34
 msgid "Profile picture"
@@ -698,12 +589,6 @@ msgid "Short Bio and disciplinary background"
 msgstr "Rövid szakmai önéletrajz"
 
 #: profiles/models.py:47
-#, fuzzy
-#| msgid ""
-#| "ORCID (If you have registered on the ORCID platform for researchers and "
-#| "have a persistent digital identifier (your ORCID iD) you can add it here "
-#| "to link this profile with your professional information such as "
-#| "affiliations, grants, publications, peer review, and more.)"
 msgid ""
 "ORCID (If you have registered on the ORCID platform for researchers and "
 "havea persistent digital identifier (your ORCID iD) you can add it here to "
@@ -716,142 +601,103 @@ msgid "Email verified"
 msgstr "E-mail cím ellenőrizve"
 
 #: profiles/templates/profiles/_finder_users.html:11
-#, fuzzy
-#| msgid "found"
 msgid "users found"
-msgstr "találat"
+msgstr "felhasználók találták"
 
 #: profiles/templates/profiles/_finder_users.html:11
-#, fuzzy
-#| msgid "found"
 msgid "user found"
-msgstr "találat"
+msgstr "felhasználók találták"
 
 #: profiles/templates/profiles/bookmarks.html:6
-#, fuzzy
-#| msgid "Project info"
 msgid "Projects in bookmarks"
 msgstr "Projektinformáció"
 
 #: profiles/templates/profiles/bookmarks.html:17
 #: profiles/templates/profiles/submissions.html:41
 msgid "Submitted organisations"
-msgstr "Feltöltött szervezetek"
+msgstr "Projektek a könyvjelzőkben"
 
 #: profiles/templates/profiles/bookmarks.html:29
-#, fuzzy
-#| msgid "Resource is going to saved"
 msgid "Resources in bookmarks"
-msgstr "A forrás mentésre kerül"
+msgstr "Források a könyvjelzőkben"
 
 #: profiles/templates/profiles/bookmarks.html:40
 msgid "Training in bookmarks"
-msgstr ""
+msgstr "Képzések a könyvjelzőkben"
 
 #: profiles/templates/profiles/bookmarks.html:51
 #: profiles/templates/profiles/submissions.html:52
-#, fuzzy
-#| msgid "Submitted organisations"
 msgid "Submitted events"
-msgstr "Feltöltött szervezetek"
+msgstr "Feltöltött események"
 
 #: profiles/templates/profiles/edit_profile.html:20
-#, fuzzy
-#| msgid "Origin information"
 msgid "Personal information"
-msgstr "Eredeti információk"
+msgstr "Személyes információk"
 
 #: profiles/templates/profiles/edit_profile.html:31
-#, fuzzy
-#| msgid "Interest Areas"
 msgid "Bio &amp; Interest Areas"
-msgstr "Érdeklődési terület"
+msgstr "Életrajz &amp; érdeklődési terület"
 
 #: profiles/templates/profiles/edit_profile.html:39
 msgid "Participation"
-msgstr ""
+msgstr "Részvétel"
 
 #: profiles/templates/profiles/edit_profile.html:46
-#, fuzzy
-#| msgid "Profile picture"
 msgid "Picture"
-msgstr "Profilkép"
+msgstr "Kép"
 
-#: profiles/templates/profiles/privacy_center.html:4
-#, fuzzy
-#| msgid "Enter old password"
+#: profiles/templates/profiles/privacy_center.html:
 msgid "Permissions and password"
-msgstr "Régi jelszó"
+msgstr "Jogosultságok és jelszó"
 
 #: profiles/templates/profiles/privacy_center.html:40
-#, fuzzy
-#| msgid "Origin information"
 msgid "General information"
-msgstr "Eredeti információk"
+msgstr "Általános információk"
 
 #: profiles/templates/profiles/show_profile.html:5
-#, fuzzy
-#| msgid "Bio and disciplinary background"
 msgid "Bio and <span class='lightBlue-color'>disciplinary background</span>"
-msgstr "Rövid szakmai önéletrajz"
+msgstr "Életrajz és <span class='lightBlue-color'>diszciplináris háttér</span>"
 
 #: profiles/templates/profiles/show_profile.html:10
-#, fuzzy
-#| msgid "Interest Areas"
 msgid "Interest and expertise areas"
-msgstr "Érdeklődési terület"
+msgstr "Érdeklődési és szakterületek"
 
 #: profiles/templates/profiles/submissions.html:6
 msgid "Submitted <span class='lightBlue-color'>projects</span>"
-msgstr ""
+msgstr "Beküldött <span class='lightBlue-color'>projektek</span>"
 
 #: profiles/templates/profiles/submissions.html:18 templates/base2.html:64
 msgid "Submitted resources"
-msgstr ""
+msgstr "Feltöltött források"
 
 #: profiles/templates/profiles/submissions.html:29
-#, fuzzy
-#| msgid "Submitted organisations"
 msgid "Submitted training"
-msgstr "Feltöltött szervezetek"
+msgstr "Feltöltött képzések"
 
 #: profiles/templates/profiles/usersSearch.html:11
 msgid "user <span class='lightBlue-color'>search</span>"
-msgstr ""
+msgstr "felhasználó <span class='lightBlue-color'>search</span>"
 
 #: projects/forms.py:32
-#, fuzzy
-#| msgid "Please indicate the spatial scale of the project"
 msgid "Please write the name of the project."
-msgstr "A projekt térbeli kiterjedése"
+msgstr "A projekt neve"
 
 #: projects/forms.py:37
-#, fuzzy
-#| msgid "Please provide a URL to an external web site for the project"
 msgid "Please provide the URL to an external website of the project."
-msgstr "A projekt URL-je"
+msgstr "A projekt weboldalának URL-je"
 
 #: projects/forms.py:41
-#, fuzzy
-#| msgid "Please provide a URL to an external web site for the project"
 msgid ""
 "Please provide a description of your project here (max 3000 characters)."
-msgstr "A projekt URL-je"
+msgstr "A projekt leírása (max. 3000 karakter)"
 
 #: projects/forms.py:46
-#, fuzzy
-#| msgid "Primary aim, goal or objective of the project. Max 2000 characters"
 msgid ""
 "Please indicae the primary aim, goal or objective of the project (max 2000 "
 "characters)."
-msgstr "Projekt célja (max. 2000 karakter)"
+msgstr "A projekt elsődleges célja, célkitűzése (max. 2000 karakter)"
 
 #: projects/forms.py:51
-#, fuzzy
-#| msgid ""
-#| "Please describe the citizen science aspect(s) of the project - see the <a "
-#| "href=\"https://zenodo.org/communities/citscicharacteristics\">ECSA "
-#| "Characteristics of Citizen Science</a> for guidance"
 msgid ""
 "Please describe the citizen science aspect(s) of the project and the link of "
 "the project toSAcitizen science using the <a href=\"https://zenodo.org/"
@@ -861,34 +707,28 @@ msgid ""
 "will not appear on the platform; it is just for moderation purposes (max "
 "2000 characters)."
 msgstr ""
-"A projekt civil tudományos vonatkozásai - útmutató: <a href=\"https://zenodo."
-"org/communities/citscicharacteristics\">ECSA Characteristics of Citizen "
-"Science</a> "
+"A projekt civil tudományos aspektusa a következő dokumentum használatával <a href=\"https://zenodo.org/"
+"cohttps://zenodo.org/record/5127534#.YV8J0dpBxPa\">ECSA 10 Characteristics "
+"of Citizen Science</a> and the <a href=\"https://osf.io/xpr2n/\">ECSA 10 "
+"Principles of Citizen Science</a>."
+"Amit ebbe a szövegmezőbe írsz, az nem jelenik meg a platformon; ez csak moderációs célokat szolgál (max. 2000 karakter)."
 
 #: projects/forms.py:58
 msgid "Description of citizen science aspects"
-msgstr ""
+msgstr "A polgári tudomány szempontjainak leírása"
 
 #: projects/forms.py:62
-#, fuzzy
-#| msgid "Activity Status"
 msgid "Activity status"
 msgstr "Tevékenység állapota"
 
 #: projects/forms.py:64
-#, fuzzy
-#| msgid "Please indicate the spatial scale of the project"
 msgid "Please, select the status of your project."
-msgstr "A projekt térbeli kiterjedése"
+msgstr "A projekt státusza"
 
 #: projects/forms.py:73
-#, fuzzy
-#| msgid ""
-#| "Please write or select interest areas, separated by commas or pressing "
-#| "enter"
 msgid ""
 "Please select or enter 2-3 keywords separated by commas or by pressing enter."
-msgstr "Érdeklődési terület kiválasztása (vesszővel vagy enterrel elválasztva)"
+msgstr "2-3 kulcsszó (vesszővel vagy enterrel elválasztva)"
 
 #: projects/forms.py:74 projects/templates/project.html:91
 #: resources/templates/resource.html:152
@@ -901,27 +741,23 @@ msgstr "A projekt kezdetének dátuma"
 
 #: projects/forms.py:85
 msgid "Approximate end date of the project"
-msgstr "A projekt befejezésének dátuma"
+msgstr "A projekt zárásának dátuma"
 
 #: projects/forms.py:90
-#, fuzzy
-#| msgid "The project topic(s) or field(s) of science, multiple selection"
 msgid "Please select the project topic(s) or field(s) of science."
-msgstr "Téma, tudományterület (többszöri választás lehetséges)"
+msgstr "Téma, tudományterület"
 
 #: projects/forms.py:92 projects/templates/_finder_projects.html:52
 msgid "Topic"
 msgstr "Téma"
 
 #: projects/forms.py:97
-#, fuzzy
-#| msgid "Please indicate the spatial scale of the project"
 msgid "Please select the tags that apply to your project."
-msgstr "A projekt térbeli kiterjedése"
+msgstr "Add hozzá a projektre vonatkozó címkéket."
 
 #: projects/forms.py:99 projects/templates/project.html:107
 msgid "Tags"
-msgstr ""
+msgstr "Címkék"
 
 #: projects/forms.py:105
 #, fuzzy
@@ -931,32 +767,27 @@ msgstr "Résztvevők feladatai"
 
 #: projects/forms.py:107
 msgid "Participation task"
-msgstr ""
+msgstr "Feladat"
 
 #: projects/forms.py:112
 msgid "Please select the difficulty level."
-msgstr ""
+msgstr "Nehézségi szint"
 
 #: projects/forms.py:114
 msgid "Difficulty level"
-msgstr ""
+msgstr "Nehézségi szint"
 
 #: projects/forms.py:118
-#, fuzzy
-#| msgid "Please describe how people can get involved in the project"
 msgid ""
 "Please describe how people can get involved in the project (max 2000 "
 "characters)."
-msgstr "Hogyan lehet a projekthez csatlakozni?"
+msgstr "Hogyan vehet részt valaki a projektben? (max. 2000 karakter)"
 
 #: projects/forms.py:125
-#, fuzzy
-#| msgid ""
-#| "Describe any required or suggested equipment to be used in the project"
 msgid ""
 "Please indicate any required or suggested equipment to be used in the "
 "project (max 2000 characters)."
-msgstr "Milyen eszközökre van szükség a projektben?"
+msgstr "A projekthez szükséges vagy javasolt felszerelések (max. 2000 karakter)"
 
 #: projects/forms.py:134
 msgid "Please indicate the spatial scale of the project"
@@ -968,120 +799,79 @@ msgstr "Projekt helyszíne"
 
 #: projects/forms.py:143
 #, fuzzy
-#| msgid ""
-#| "Please describe the locality of the project, in terms of where the main "
-#| "participant activities take place,         E.g. in your backyard, parks "
-#| "in London, rivers in Europe, online globally, etc."
 msgid ""
 "Please describe the locality of the project, in terms of where the main "
 "participant activities take place. E.g. in your backyard, parks in London, "
 "rivers in Europe, online globally, etc."
 msgstr ""
-"Tevékenységek helyszínei (pl: saját kertben, parkban, Budapesten, folyókon, "
-"online, stb.)"
+"A projekt helyszíne, a résztvevők fő tevékenységeinek helyszíne"
+"Pl: a hátsó kertje, budapesti park, európai folyók, online stb."
 
 #: projects/forms.py:150
-#, fuzzy
-#| msgid "Geographical location"
 msgid "Project geographic location"
-msgstr "Földrajzi hely"
+msgstr "A projekt helyszíne"
 
 #: projects/forms.py:156
-#, fuzzy
-#| msgid "Please name the contact person or contact point for the Project"
 msgid "Please name the contact person or contact point of the project."
 msgstr "Kapcsolattartó"
 
 #: projects/forms.py:163
-#, fuzzy
-#| msgid "Please provide the email for the contact person or contact point"
 msgid ""
 "Please provide the email address of the contact person or contact point."
 msgstr "Kapcsolattartó e-mail címe"
 
 #: projects/forms.py:172
-#, fuzzy
-#| msgid ""
-#| "Organisation coordinating the project. If not listed, please add it <a "
-#| "href=\"/new_organisation\">here</a>         before submitting the project"
 msgid ""
 "Please select the organisation coordinating the project. If not listed, "
 "please add it <a href=\"/new_organisation\" target=\"_blank\">here</a> "
 "before submitting the project"
 msgstr ""
-"Koordináló szervezet (Ha még nincs a szervezetek listáján, itt feltölthető: "
-"<a href=\"/new_organisation\">here</a>)"
+"A projektet koordináló szervezetet. Ha nem szerepel a listán, kérjük, add hozzá <a href=\"/new_organisation\" target=\"_blank\">itt</a> a beküldése előtt."
 
 #: projects/forms.py:175
-#, fuzzy
-#| msgid "Lead Organisation / Coordinator"
 msgid "Lead organisation / coordinator"
 msgstr "Koordinátor"
 
 #: projects/forms.py:184
-#, fuzzy
-#| msgid ""
-#| "Other Organisation participating in the project. If not listed, please "
-#| "add it         <a href=\"/new_organisation\">here</a> before submitting "
-#| "the project"
 msgid ""
 "Please select other organisation(s) participating in the project. If not "
 "listed,please add it <a href=\"/new_organisation\" target=\"_blank\">here</"
 "a> before submitting the project"
 msgstr ""
-"Partnerszervezet (Ha még nincs a szervezetek listáján, itt feltölthető: <a "
-"href=\"/new_organisation\">here</a>"
+"A projektben részt vevő egyéb szervezet(ek). Ha nem szerepel a listán, kérjük, add hozzá <a href=\"/new_organisation\" target=\"_blank\">itt</a> beküldés előtt."
 
 #: projects/forms.py:196
-#, fuzzy
-#| msgid ""
-#| "Please enter the funding agencies of the project (e.g. European "
-#| "Commission).         Select them from the list or add your own ended by "
-#| "comma or pressing enter"
 msgid ""
 "Please enter the funding agencies of the project (e.g. European "
 "Commission)<br />Select them from the list or add your own <b>ended by comma "
 "or pressing enter</b>."
 msgstr ""
-"Támogató szervezet, pl: Európai Bizottság (vesszővel vagy enterrel "
-"elválasztva)"
+"Támogató szervezet, Pl: Európai Bizottság (vesszővel vagy enterrel elválasztva)"
 
 #: projects/forms.py:199
-#, fuzzy
-#| msgid "Funding"
 msgid "Funding body"
-msgstr "Finanszírozás"
+msgstr "Támogató szervezet"
 
-#: projects/forms.py:204
-#, fuzzy
-#| msgid "Funding"
+#: projects/forms.py:20
 msgid "Funding programme"
-msgstr "Finanszírozás"
+msgstr "Támogatási program"
 
 #: projects/forms.py:205
-#, fuzzy
-#| msgid "Indication of the programme that funds or funded a project"
 msgid ""
 "Please indicate the name of the programme that funds or funded the project."
 msgstr "Finanszírozó keretprogram"
 
 #: projects/forms.py:211
-#, fuzzy
-#| msgid "Project image for the thumbnail profile"
 msgid "Image for the thumbnail profile"
 msgstr "Profilkép"
 
 #: projects/forms.py:212
-#, fuzzy
-#| msgid "Will be resized to 600x400 pixels"
 msgid "It will be resized to 600x400 pixels"
 msgstr "600x400 méretben kerül feltöltésre"
 
 #: projects/forms.py:223
-#, fuzzy
-#| msgid "provide image credit, if applicable"
 msgid "Thumbnail credit, if applicable"
-msgstr "Kép szerzője"
+msgstr "A kép szerzője"
 
 #: projects/forms.py:227
 #, fuzzy
@@ -1096,22 +886,16 @@ msgid "It will be resized to 600x400 pixels)"
 msgstr "600x400 méretben kerül feltöltésre"
 
 #: projects/forms.py:242
-#, fuzzy
-#| msgid "Project image for the profile heading"
 msgid "Image for the profile heading"
-msgstr "Projekt borítókép"
+msgstr "Borítókép"
 
 #: projects/forms.py:243
-#, fuzzy
-#| msgid "Will be resized to 1100x400 pixels"
 msgid "It will be resized to 1100x400 pixels"
 msgstr "600x400 méretben kerül feltöltésre"
 
 #: projects/forms.py:253
-#, fuzzy
-#| msgid "provide image credit, if applicable"
 msgid "Heading image credit, if applicable"
-msgstr "Kép szerzője"
+msgstr "A kép szerzője"
 
 #: projects/forms.py:263
 msgid ""
@@ -1120,43 +904,45 @@ msgid ""
 "blog/2021/05/31/june-monthoftheprojects-eu-citizenscience/\"> Learn more "
 "here!</a>"
 msgstr ""
+"Szeretnék részt venni a #MonthOfTheProjects versenyben és beleegyezem, hogy e-mailben értesítést kapok, ha az általam beküldött projekt megnyeri a versenyt.<a href=\"/"
+"blog/2021/05/31/june-monthoftheprojects-eu-citizenscience/\"> További információ itt!</a>"
 
 #: projects/forms.py:422
 msgid "Please provide a <i>description</i> field translation."
-msgstr ""
+msgstr "Add meg a <i>description</i> mező fordítását!"
 
 #: projects/forms.py:424 projects/templates/translation_form.html:48
 msgid "Description"
-msgstr ""
+msgstr "Leírás"
 
 #: projects/forms.py:428
 msgid "Please provide an <i>aim</i> field translation."
-msgstr ""
+msgstr "Add meg a <i>aim</i> mező fordítását!"
 
 #: projects/forms.py:430 projects/templates/project.html:46
 #: projects/templates/project.html:67
 #: projects/templates/translation_form.html:55
 msgid "Aim"
-msgstr ""
+msgstr "Cél"
 
 #: projects/forms.py:435
 msgid "Please provide a <i>how to participate</i> field translation."
-msgstr ""
+msgstr "Add meg a <i>how to participate</i> mező fordítását!"
 
 #: projects/forms.py:437 projects/templates/project.html:50
 #: projects/templates/project.html:71
 #: projects/templates/translation_form.html:62
 msgid "How to participate"
-msgstr ""
+msgstr "Részvétel"
 
 #: projects/forms.py:442
 msgid "Please provide a <i>translated equipment</i> field translation."
-msgstr ""
+msgstr "Add meg a <i>translated equipment</i> mező fordítását!"
 
 #: projects/forms.py:444 projects/templates/project.html:55
 #: projects/templates/project.html:76
 msgid "Needed equipment"
-msgstr ""
+msgstr "Szükséges felszerelés"
 
 #: projects/templates/_finder_projects.html:13
 msgid "Featured"
@@ -1168,12 +954,12 @@ msgstr "Állapot"
 
 #: projects/templates/_finder_projects.html:34
 msgid "Tag"
-msgstr ""
+msgstr "Címke"
 
 #: projects/templates/_finder_projects.html:43
 #: projects/templates/project.html:116
 msgid "Difficulty Level"
-msgstr ""
+msgstr "Nehézségi szint"1
 
 #: projects/templates/_finder_projects.html:61
 msgid "Participation Task"
@@ -1182,11 +968,11 @@ msgstr "Feladatok"
 #: projects/templates/_finder_projects.html:71
 #: resources/templates/_finder_resources.html:57
 msgid "Approved"
-msgstr ""
+msgstr "Jóváhagyva"
 
 #: projects/templates/_finder_projects.html:72
 msgid "Not Approved"
-msgstr ""
+msgstr "Nem engedélyezett"
 
 #: projects/templates/_finder_projects.html:73
 #: resources/templates/_finder_resources.html:59
@@ -1196,30 +982,24 @@ msgid "Not yet moderated"
 msgstr "Még nem moderált"
 
 #: projects/templates/_finder_projects.html:95
-#, fuzzy
-#| msgid "Topic"
 msgid "topic:"
-msgstr "Téma"
+msgstr "téma"
 
 #: projects/templates/_finder_projects.html:101
-#, fuzzy
-#| msgid "Status"
 msgid "status:"
-msgstr "Állapot"
+msgstr "állapot"
 
 #: projects/templates/_finder_projects.html:107
 msgid "has tag:"
-msgstr ""
+msgstr "has tag:"
 
 #: projects/templates/_finder_projects.html:113
 msgid "difficulty level:"
-msgstr ""
+msgstr "nehézségi fok:"
 
 #: projects/templates/_finder_projects.html:119
-#, fuzzy
-#| msgid "Participation Task"
 msgid "participation task:"
-msgstr "Feladatok"
+msgstr "feladatok:"
 
 #: projects/templates/_finder_projects.html:131
 #, fuzzy
