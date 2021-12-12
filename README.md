@@ -19,13 +19,19 @@ source venv/bin/activate
 ```
 
 ## Configure postgres
+
 create database eucitizenscience
+
 create user eucitizenscience with password 'XXXXXXXXXXXXXX';
+
 grant all on eucitizenscience.* to eucitizenscience
+
 grant all on  database eucitizenscience to eucitizenscience;
 
 ## Installation
-First of all, install Python v3 <br/>
+
+First of all, install Python v3
+
 python3-dev
 libpq-dev
 
