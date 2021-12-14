@@ -34,6 +34,7 @@ class ProjectForm(forms.Form):
     url = forms.URLField(
             max_length=200,
             widget=forms.TextInput(),
+            label=_('URL'),
             help_text=_('Please provide the URL to an external website of the project.'))
 
     description = forms.CharField(

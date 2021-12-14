@@ -29,6 +29,7 @@ def new_organisation(request):
 
     form = OrganisationForm()
     if request.method == 'POST':
+        image_path_database = ''
         form = OrganisationForm(request.POST, request.FILES)
         if form.is_valid():
             image_path = ''
@@ -76,6 +77,7 @@ def organisation(request, pk):
     mainProjects = Project.objects.all().filter(mainOrganisation__id=pk)
     associatedProjects = Project.objects.all().filter(organisation__id=pk)
     associatedProjects |= mainProjects
+    associatedProjects = associatedProjects.distinct()
     associatedResources = Resource.objects.all().filter(organisation__id=pk).filter(isTrainingResource=False)
     associatedTrainingResources = Resource.objects.all().filter(organisation__id=pk).filter(isTrainingResource=True)
     members = Profile.objects.all().filter(profileVisible=True).filter(organisation__id=pk)

@@ -15,6 +15,7 @@ class OrganisationForm(forms.Form):
             widget=forms.TextInput())
     url = forms.URLField(
             max_length=200,
+            label=_('URL'),
             help_text=_('Please provide the URL to the website of the organisation.'),
             widget=forms.TextInput())
     description = forms.CharField(

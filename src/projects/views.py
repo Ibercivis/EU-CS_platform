@@ -291,11 +291,14 @@ def project(request, pk):
     else:
         form = None
 
-    # Check project permission to edit
-    if user != project.creator and not user.is_staff and not user.id in cooperators and  user.profile.manageProjectsFromCountry not in countriesWithContent:
-        hasPermissionToEdit = False
+    # Check project permission to edit: TODO: Improve
+    if hasattr(user, 'profile'):
+        if user != project.creator and not user.is_staff and not user.id in cooperators and  user.profile.manageProjectsFromCountry not in countriesWithContent:
+            hasPermissionToEdit = False
+        else:
+            hasPermissionToEdit = True
     else:
-        hasPermissionToEdit = True
+        hasPermissionToEdit = False
 
     # Check if there is a translation
     hasTranslation = project.translatedProject.filter(inLanguage=request.LANGUAGE_CODE).exists()
@@ -479,7 +482,7 @@ def applyFilters(request, projects):
 
     if request.GET.get('country'):
         projects = projects.filter(
-                Q(mainOrganisation__country=request.GET['country']) | Q(country=request.GET['country']) | Q(organisation__country=request.GET['country']))
+                Q(mainOrganisation__country=request.GET['country']) | Q(country=request.GET['country']) | Q(organisation__country=request.GET['country'])).distinct()
 
     # Approved filters
     if request.GET.get('approved'):

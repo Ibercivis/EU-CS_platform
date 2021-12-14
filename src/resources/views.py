@@ -507,7 +507,6 @@ def preFilteredResources(request):
 
 
 def applyFilters(request, resources):
-    approvedResources = ApprovedResources.objects.all().values_list('resource_id', flat=True)
     if request.GET.get('keywords'):
         resources = resources.filter(
                 Q(name__icontains=request.GET['keywords']) |
@@ -531,7 +530,7 @@ def applyFilters(request, resources):
         if request.GET['approved'] == 'notYetModerated':
             resources = resources.filter(moderated=False)
     else:
-        resources = resources.filter(id__in=approvedResources)
+        resources = resources.filter(approved=True)
 
     return resources
 

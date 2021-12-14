@@ -14,7 +14,7 @@ class EventForm(forms.Form):
     start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}))
     end_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}))
     hour = forms.TimeField(widget=forms.TextInput(attrs={'type': 'time'}), required=False)   
-    url = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'placeholder':_('Please provide a URL to an external web site for the event')}),required=False)
+    url = forms.CharField(max_length=200, label=_('URL'),widget=forms.TextInput(attrs={'placeholder':_('Please provide a URL to an external web site for the event')}),required=False)
     
     def save(self, args):
         pk = self.data.get('eventID', '')

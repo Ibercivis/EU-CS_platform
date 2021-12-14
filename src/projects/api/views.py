@@ -86,8 +86,13 @@ class ProjectList(APIView):
             projects = projects.filter(status=status)
 
         country = request.query_params.get('country', None)
-        if country is not None:
-            projects = projects.filter(country=country)
+        #if country is not None:
+        #    projects = projects.filter(country=country)
+        if request.GET.get('country'):
+            projects = projects.filter(
+                Q(mainOrganisation__country=request.GET['country']) | Q(country=request.GET['country']) | Q(organisation__country=request.GET['country'])).distinct()
+
+
 
         doingAtHome = request.query_params.get('doingAtHome', None)
         if doingAtHome is not None:
