@@ -16,7 +16,7 @@
                 </a>
                 <a href="/organisations?orgTypes={{organisation.orgType}}"
                     class="badge rounded-pill bg-my-darkBlue text-decoration-none">{{ organisation.orgType }}</a>
-                <p class="mt-4">{{organisation.description | safe | truncatechars:180 }}
+                <p class="mt-4">{{organisation.description | safe | striptags | truncatechars:180 }}
         </div><!-- End of card-body -->
     </div><!-- end of card -->
 </div>

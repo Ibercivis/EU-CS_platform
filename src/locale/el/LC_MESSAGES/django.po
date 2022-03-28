@@ -3,24 +3,24 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-11-30 08:47+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2021-12-17 20:16+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: accounts/forms.py:28 accounts/forms.py:88
 msgid "Enter Email"
-msgstr "Εισάγετε ηλεκτρονική διεύθυνση ταχυδρομείου (Email)"
+msgstr "Εισάγετε διεύθυνση ηλεκτρονικού ταχυδρομείου (email)"
 
 #: accounts/forms.py:30 accounts/forms.py:92
 msgid "Enter Password"
@@ -32,26 +32,19 @@ msgid "Log in"
 msgstr "Είσοδος"
 
 #: accounts/forms.py:54
-#, fuzzy
-#| msgid ""
-#| "We see that your email address is in our database, but that you have not "
-#| "yet confirmed your address. Please search for the confirmation email in "
-#| "your inbox (or spam) to activate your account"
 msgid ""
 "We see that your email address is in our database, but that you have not "
 "yetconfirmed your address. Please search for the confirmation email in your "
 "inbox(or spam) to activate your account"
 msgstr ""
 "Φαίνεται ότι η ηλεκτρονική σας διεύθυνση βρίσκεται στη βάση δεδομένων μας, "
-"παρόλα αυτά δεν έχετε επιβεβαιώσει ακόμη τη διεύθυνση σας. Παρακαλώ "
-"αναζητήστε το email επιβεβαίωσης στα εισερχόμενα (ή τα ανεπιθύμητα) μηνύματα "
-"σας για να ενεργοποιήσετε τον λογαριασμό σας "
+"παρόλα αυτά δεν την έχετε επιβεβαιώσει ακόμη. Παρακαλούμε αναζητήστε το "
+"email επιβεβαίωσης στα εισερχόμενα (ή τα ανεπιθύμητα) μηνύματα σας για να "
+"ενεργοποιήσετε το λογαριασμό σας"
 
 #: accounts/forms.py:90
-#, fuzzy
-#| msgid "Enter Full Name"
 msgid "Enter name"
-msgstr "Εισάγετε ονοματεπώνυμο"
+msgstr "Εισάγετε όνομα"
 
 #: accounts/forms.py:94
 msgid "Re-enter Password"
@@ -81,22 +74,21 @@ msgstr "Αλλαγή κωδικού πρόσβασης"
 
 #: accounts/forms.py:119
 msgid "Enter email"
-msgstr "Εισάγετε ηλεκτρονική διεύθυνση ταχυδρομείου (Email)"
+msgstr "Εισάγετε διεύθυνση ηλεκτρονικού ταχυδρομείου (email)"
 
 #: accounts/forms.py:120
 msgid "Reset Password"
-msgstr ""
+msgstr "Επαναφορά κωδικού πρόσβασης"
 
 #: accounts/templates/accounts/acc_active_email.html:4
 msgid "Activate your EU-Citizen.Science account."
-msgstr "Ενεργοποιήστε το EU-CItizen.Science  λογαριασμό σας"
+msgstr "Ενεργοποιήστε τον EU-CItizen.Science λογαριασμό σας."
 
 #: accounts/templates/accounts/emails/password-reset-email.html:3
 #: accounts/templates/accounts/emails/password-reset-subject.txt:1
-#, fuzzy, python-format
-#| msgid "Password reset on %(site_name)s"
+#, python-format
 msgid "Password reset on %(domain)s"
-msgstr " Επαναφορά κωδικού πρόσβασης στο %(site_name)s "
+msgstr "Επαναφορά κωδικού πρόσβασης στο %(domain)s"
 
 #: contact/templates/contact.html:10 contact/templates/contact.html:19
 #: contact/templates/contact.html:28
@@ -112,61 +104,58 @@ msgstr "Αποστολή"
 
 #: contact/templates/submitter_contact.html:10
 msgid "Submitter Contact"
-msgstr "Επικοινωνία υποβάλλων"
+msgstr "Επικοινωνία υποβάλλοντος"
 
 #: contact/templates/submitter_contact.html:30
 msgid "This email will be sent to submitter of"
-msgstr "Αυτό το μήνυμα ηλεκτρονικού ταχυδρομείου θα σταλθεί στον υποβολέα του "
+msgstr "Αυτό το μήνυμα ηλεκτρονικού ταχυδρομείου θα σταλεί στον υποβάλλοντα"
 
 #: contact/templates/success.html:26
 msgid "Thank you for your message."
-msgstr "Σας ευχαριστούμε για το μήνυμα σας"
+msgstr "Σας ευχαριστούμε για το μήνυμα σας."
 
 #: digest/admin.py:92
 #, python-format
 msgid "%d test email was sent"
 msgid_plural "%d test mails were sent"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d το email ελέγχου στάλθηκε"
+msgstr[1] "%d τα email ελέγχου στάλθηκαν"
 
 #: events/forms.py:11
 msgid "Title of the event"
-msgstr ""
+msgstr "Τίτλος εκδήλωσης"
 
 #: events/forms.py:12
 msgid "A brief description of the event"
-msgstr ""
+msgstr "Σύντομη περιγραφή εκδήλωσης"
 
 #: events/forms.py:13
 msgid "Location of the Event"
-msgstr ""
+msgstr "Τοποθεσία εκδήλωσης"
 
 #: events/forms.py:17 organisations/forms.py:18 platforms/forms.py:31
 #: projects/forms.py:37 resources/forms.py:24
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: events/forms.py:17
 msgid "Please provide a URL to an external web site for the event"
 msgstr ""
+"Παρακαλώ εισάγετε μια διεύθυνση URL ενός εξωτερικού ιστοτόπου για την "
+"εκδήλωση"
 
 #: events/templates/_intro_new_event.html:3
-#, fuzzy
-#| msgid ""
-#| "Upon saving this profile, your organisational profile will be submitted "
-#| "for moderation by one of the members of the EU-Citizen.Science "
-#| "consortium. This step is simply to check for ‘spam’ or inappropriate uses "
-#| "of the profile form."
 msgid ""
 "Thank you for submitting an event to the EU-Citizen.Science platform. Upon "
 "clicking on “Add”, the event will immediately show up on the platform but "
 "will be later moderated by one of the platform moderators. This step is "
 "simply to check for spam or inappropriate uses of the platform."
 msgstr ""
-"Με την αποθήκευση αυτού του προφίλ, το προφίλ οργανισμού σας θα υποβληθεί "
-"για έλεγχο από ένα από τα μέλη της κοινοπραξίας EU-Citizen.Science. Αυτό το "
-"βήμα είναι απλώς να ελέγξετε για 'ανεπιθύμητα' ή ακατάλληλες χρήσεις της "
-"φόρμας προφίλ."
+"Σας ευχαριστούμε για την καταχώρηση εκδήλωσης στην πλατφόρμα  EU-Citizen."
+"Science. Με την αποθήκευσή της (επιλογή \"προσθέστε\"), η εκδήλωση θα "
+"εμφανιστεί άμεσα στην πλατφόρμα αλλά αργότερα θα υποβληθεί για έλεγχο από "
+"ένα από τα μέλη της κοινοπραξίας EU-Citizen.Science. Αυτό το βήμα αφορά "
+"απλώς τον έλεγχο για spam ή ακατάλληλες χρήσεις της πλατφόρμας."
 
 #: events/templates/editEvent.html:25
 msgid "Edit event"
@@ -178,42 +167,32 @@ msgstr "Πληροφορίες εκδήλωσης"
 
 #: events/templates/events.html:11
 msgid "On going <span class='lightBlue-color'>events</span>"
-msgstr ""
+msgstr "Τρέχουσες<span class='lightBlue-color'>εκδηλώσεις</span>"
 
 #: events/templates/events.html:24
 msgid "Upcoming <span class='lightBlue-color'>events</span>"
-msgstr ""
+msgstr "Προσεχείς <span class='lightBlue-color'>εκδηλώσεις</span>"
 
 #: events/templates/events.html:36
 msgid "Past <span class='lightBlue-color'>events</span>"
-msgstr ""
+msgstr "Προηγούμενες <span class='lightBlue-color'>εκδηλώσεις</span>"
 
 #: events/templates/new_event.html:25
 msgid "New event"
 msgstr "Νέα εκδήλωση"
 
 #: organisations/forms.py:14
-#, fuzzy
-#| msgid "The name or the organisation"
 msgid "Please write the name of the organisation."
-msgstr "Το όνομα ή ο οργανισμός"
+msgstr "Παρακαλούμε εισάγετε το όνομα του οργανισμού."
 
 #: organisations/forms.py:19
-#, fuzzy
-#| msgid "Please name the contact person or contact point for the organisation"
 msgid "Please provide the URL to the website of the organisation."
-msgstr ""
-"Παρακαλούμε αναφέρετε τον υπεύθυνο επικοινωνίας ή το σημείο επικοινωνίας για "
-"τον οργανισμό"
+msgstr "Παρακαλούμε εισάγετε το URL του ιστοτόπου του οργανισμού."
 
 #: organisations/forms.py:22
-#, fuzzy
-#| msgid ""
-#| "Please briefly describe the organisation (ideally in 500 words or less)"
 msgid "Please briefly describe the organisation (max 3000 characters)."
 msgstr ""
-"Παρακαλούμε περιγράψτε εν συντομία τον οργανισμό (ιδανικά σε 500 λέξεις ή "
-"λιγότερες)"
+"Παρακαλούμε περιγράψτε εν συντομία τον οργανισμό (μέγιστο 300 χαρακτήρες)."
 
 #: organisations/forms.py:27
 #: organisations/templates/_finder_organisation.html:29
@@ -223,37 +202,29 @@ msgstr "Πληκτρολογήστε"
 
 #: organisations/forms.py:28
 msgid "Please select one."
-msgstr ""
+msgstr "Παρακαλούμε επιλέξτε μια."
 
 #: organisations/forms.py:32
-#, fuzzy
-#| msgid "Please upload the logo of your organisation (.jpg or .png)"
 msgid "Please upload the logo of your organisation (.jpg or .png)."
-msgstr "Παρακαλούμε μεταφορτώστε το λογότυπο του οργανισμού σας (.jpg ή png)"
+msgstr "Παρακαλούμε μεταφορτώστε το λογότυπο του οργανισμού σας (.jpg ή png)."
 
 #: organisations/forms.py:40
-#, fuzzy
-#| msgid "Please name the contact person or contact point for the organisation"
 msgid "Please name the contact person or contact point for the organisation."
 msgstr ""
-"Παρακαλούμε αναφέρετε τον υπεύθυνο επικοινωνίας ή το σημείο επικοινωνίας για "
-"τον οργανισμό"
+"Παρακαλούμε να αναφέρετε τον υπεύθυνο επικοινωνίας ή το σημείο επικοινωνίας "
+"για τον οργανισμό."
 
 #: organisations/forms.py:41 platforms/forms.py:58 projects/forms.py:159
 msgid "Public contact point"
-msgstr ""
+msgstr "Επαφή επικοινωνίας"
 
 #: organisations/forms.py:46 platforms/forms.py:68
-#, fuzzy
-#| msgid ""
-#| "Please provide the email address of the contact person or contact point. "
-#| "Note you will need permission to do that"
 msgid ""
 "Please provide the email address of the contact person or contact point. "
 "Note you will need permission to do that."
 msgstr ""
 "Παρακαλούμε καταχωρίστε τη διεύθυνση ηλεκτρονικού ταχυδρομείου του υπεύθυνου "
-"επικοινωνίας ή του σημείου επαφής.Σημειώστε ότι θα χρειαστείτε άδεια για να "
+"επικοινωνίας ή του σημείου επαφής. Σημειώστε ότι θα χρειαστείτε άδεια για να "
 "το κάνετε αυτό."
 
 #: organisations/forms.py:93 projects/forms.py:479 resources/forms.py:290
@@ -286,10 +257,8 @@ msgstr "Διαγραφή"
 
 #: organisations/templates/_finder_organisation.html:11
 #: projects/templates/_finder_projects.html:12
-#, fuzzy
-#| msgid "Sort by Most Recent Updated"
 msgid "Most Recent Updated"
-msgstr "Ταξινόμηση βάσει τα πιο πρόσφατα ενημερωμένα"
+msgstr "Πιο πρόσφατα ενημερωμένα"
 
 #: organisations/templates/_finder_organisation.html:12
 #: organisations/templates/_finder_organisation.html:17
@@ -301,35 +270,27 @@ msgstr "Χώρα"
 #: organisations/templates/_finder_organisation.html:41
 #: projects/templates/_finder_projects.html:89
 #: resources/templates/_finder_resources.html:68
-#, fuzzy
-#| msgid "Keywords"
 msgid "keyword:"
-msgstr "Λέξεις-κλειδιά"
+msgstr "λέξεις-κλειδιά:"
 
 #: organisations/templates/_finder_organisation.html:49
 #: projects/templates/_finder_projects.html:83
-#, fuzzy
-#| msgid "Country"
 msgid "country:"
-msgstr "Χώρα"
+msgstr "χώρα:"
 
 #: organisations/templates/_finder_organisation.html:57
 msgid "type:"
-msgstr ""
+msgstr "είδος:"
 
 #: organisations/templates/_finder_organisation.html:62
 #: templates/_what_can_you_find_here.html:55
-#, fuzzy
-#| msgid "Organisations"
 msgid "organisations"
-msgstr "Οργανισμοί"
+msgstr "οργανισμοί"
 
 #: organisations/templates/_finder_organisation.html:64
 #: organisations/templates/_intro_form_organisation.html:8
-#, fuzzy
-#| msgid "Organisation"
 msgid "organisation"
-msgstr "Οργανισμός"
+msgstr "οργανισμός"
 
 #: organisations/templates/_finder_organisation.html:66
 #: organisations/templates/finder_organisations.html:44
@@ -341,15 +302,13 @@ msgstr "βρέθηκαν"
 #: profiles/templates/profiles/_finder_users.html:14
 #: projects/templates/_finder_projects.html:125
 msgid "Clear current search query and filters"
-msgstr ""
+msgstr "Διαγραφή τρέχουσας αναζήτησης και φίλτρων"
 
 #: organisations/templates/_intro_form_organisation.html:6
 #: platforms/templates/_intro_form_platform.html:6
 #: projects/templates/_intro_form_project.html:6
 #: resources/templates/_intro_form_resource.html:6
 #: resources/templates/_intro_form_training_resource.html:6
-#, fuzzy
-#| msgid "Edit"
 msgid "Editing"
 msgstr "Επεξεργασία"
 
@@ -362,12 +321,6 @@ msgid "New"
 msgstr "Καινούριο"
 
 #: organisations/templates/_intro_form_organisation.html:13
-#, fuzzy
-#| msgid ""
-#| "Thank you for proposing a new citizen science resource to be shared on "
-#| "the EU-Citizen.Science Platform. Please fill in all of the mandatory "
-#| "information in the fields below (indicated with an asterisk*), and as "
-#| "much of the non-mandatory information as possible."
 msgid ""
 "Thank you for creating a profile for your organisation on the EU-Citizen."
 "Science platform. This can be linked with the personal profiles of the "
@@ -377,18 +330,15 @@ msgid ""
 "information in the fields below (indicated with an asterisk*), and as much "
 "of the non-mandatory information as possible."
 msgstr ""
-"Σας ευχαριστούμε που προτείνετε έναν νέο πόρο επιστήμης των πολιτών για "
-"κοινοποίηση στην πλατφόρμα EU-Citizen.Science. Συμπληρώστε όλες τις "
+"Σας ευχαριστούμε που δημιουργήσατε ένα προφίλ για τον οργανισμό σας στην "
+"πλατφόρμα EU-Citizen.Science. Αυτό μπορεί να συνδεθεί με τα προσωπικά προφίλ "
+"των ανθρώπων στον οργανισμό σας, τα προφίλ των έργων στα οποία εμπλέκεται ο "
+"οργανισμό σας, και τα προφίλ των πόρων ή των εκπαιδευτικών πόρων που "
+"δημοσιεύθηκαν από τον οργανισμό σας.  Παρακαλούμε συμπληρώστε όλες τις "
 "υποχρεωτικές πληροφορίες στα παρακάτω πεδία (επισημαίνονται με αστερίσκο *) "
 "και όσο το δυνατόν περισσότερες από τις μη υποχρεωτικές πληροφορίες."
 
 #: organisations/templates/_intro_form_organisation.html:15
-#, fuzzy
-#| msgid ""
-#| "Upon saving this profile, your organisational profile will be submitted "
-#| "for moderation by one of the members of the EU-Citizen.Science "
-#| "consortium. This step is simply to check for ‘spam’ or inappropriate uses "
-#| "of the profile form."
 msgid ""
 "Upon saving this profile, your organisational profile will immediately show "
 "up on the platform but will be later moderated by one of the platform "
@@ -397,8 +347,7 @@ msgid ""
 msgstr ""
 "Με την αποθήκευση αυτού του προφίλ, το προφίλ οργανισμού σας θα υποβληθεί "
 "για έλεγχο από ένα από τα μέλη της κοινοπραξίας EU-Citizen.Science. Αυτό το "
-"βήμα είναι απλώς να ελέγξετε για 'ανεπιθύμητα' ή ακατάλληλες χρήσεις της "
-"φόρμας προφίλ."
+"βήμα αφορά απλώς τον έλεγχο για spam ή ακατάλληλες χρήσεις της πλατφόρμας."
 
 #: organisations/templates/_intro_form_organisation.html:17
 #: platforms/templates/_intro_form_platform.html:17
@@ -411,6 +360,11 @@ msgid ""
 "Please indicate the author or copyright holder of pictures. You may need to "
 "obtain express written permission from them."
 msgstr ""
+"Θα θέλαμε να επισημάνουμε ότι, ως ο συγγραφέας του προφίλ, μπορείτε να "
+"διαγράψετε τα δικαιώματα εικόνας και τα πνευματικά δικαιώματα του "
+"περιεχομένου που υποβάλλετε. Παρακαλούμε υποδείξτε τον συγγραφέα ή τον "
+"κάτοχο των πνευματικών δικαιωμάτων των εικόνων. Ίσως χρειαστεί να αποκτήσετε "
+"γραπτή άδεια για αυτές."
 
 #: organisations/templates/finder_organisations.html:44
 msgid "result"
@@ -427,10 +381,8 @@ msgid "Resources"
 msgstr "Πόροι"
 
 #: organisations/templates/organisation.html:49 templates/about.html:70
-#, fuzzy
-#| msgid "in Resources"
 msgid "Training resources"
-msgstr "στους Πόρους"
+msgstr "Εκπαιδευτικοί Πόροι"
 
 #: organisations/templates/organisation.html:60
 msgid "Members"
@@ -452,28 +404,22 @@ msgstr "Διαγραφή Οργανισμού"
 #: platforms/templates/platform_form.html:29
 #: projects/templates/project_form.html:35
 #: resources/templates/resource_form.html:36
-#, fuzzy
-#| msgid "Moderation"
 msgid "Main information"
-msgstr "Προσαρμογή"
+msgstr "Κύριες Πληροφορίες"
 
 #: organisations/templates/organisation_form.html:62
 #: platforms/templates/platform_form.html:43
-#, fuzzy
-#| msgid "Contact Point Email"
 msgid "Contact information"
-msgstr "Διεύθυνση ηλεκτρονικού ταχυδρομείου (email) σημείου επαφής"
+msgstr "Πληροφορίες επαφής"
 
 #: organisations/templates/organisation_form.html:75
-#, fuzzy
-#| msgid "Organisation"
 msgid "Organisation logo"
-msgstr "Οργανισμός"
+msgstr "Λογότυπο οργανισμού"
 
 #: organisations/templates/organisation_form.html:96
 #: projects/templates/project.html:151
 msgid "Location"
-msgstr ""
+msgstr "Τοποθεσία"
 
 #: organisations/templates/organisation_form.html:107
 #: profiles/templates/profiles/edit_profile.html:56 templates/_save_zone.html:3
@@ -482,73 +428,60 @@ msgstr "Αποθήκευση"
 
 #: organisations/templates/organisations.html:11
 msgid "organisation <span class='lightBlue-color'>search</span>"
-msgstr ""
+msgstr "αναζήτηση <span class='lightBlue-color'>οργανισμού</span>"
 
 #: organisations/views.py:50
 msgid "Organisation added correctly"
-msgstr ""
+msgstr "Ο οργανισμός προστέθηκε σωστά"
 
 #: platforms/forms.py:26
-#, fuzzy
-#| msgid "The name or the organisation"
 msgid "Please write the name of the network or platform."
-msgstr "Το όνομα ή ο οργανισμός"
+msgstr "Παρακαλούμε εισάγεται το όνομα του δικτύου ή της πλατφόρμας."
 
 #: platforms/forms.py:32
-#, fuzzy
-#| msgid "URL of the organisation"
 msgid "Please provide the URL of the network or platform."
-msgstr "Το URL του οργανισμού"
+msgstr "Παρακαλούμε εισάγεται το URL του δικτύου ή της πλατφόρμας."
 
 #: platforms/forms.py:37
-#, fuzzy
-#| msgid ""
-#| "Please briefly describe the organisation (ideally in 500 words or less)"
 msgid "Please briefly describe the network or platform (max 3000 characters)."
 msgstr ""
-"Παρακαλούμε περιγράψτε εν συντομία τον οργανισμό (ιδανικά σε 500 λέξεις ή "
-"λιγότερες)"
+"Παρακαλούμε περιγράψτε εν συντομία το δίκτυο ή την πλατφόρμα (μέγιστο 300 "
+"χαρακτήρες)"
 
 #: platforms/forms.py:41
-#, fuzzy
-#| msgid "Geographical location"
 msgid "Geographic extent"
 msgstr "Γεωγραφική τοποθεσία"
 
 #: platforms/forms.py:42
-#, fuzzy
-#| msgid "The name or the organisation"
 msgid "Please indicate the spatial scale of the network or platform."
-msgstr "Το όνομα ή ο οργανισμός"
+msgstr "Παρακαλούμε υποδείξτε την χωρική κλίμακα του δικτύου ή της πλατφόρμας."
 
 #: platforms/forms.py:48
-#, fuzzy
-#| msgid "The name or the organisation"
 msgid "Please select the country(ies) related to the network or platform."
-msgstr "Το όνομα ή ο οργανισμός"
+msgstr ""
+"Παρακαλούμε επιλέξτε τη χώρα/τις χώρες που συνδέονται με το δίκτυο ή την "
+"πλατφόρμα."
 
 #: platforms/forms.py:51
 msgid "Network / platform locality"
-msgstr ""
+msgstr "Τοποθεσία δικτύου/πλατφόρμας"
 
 #: platforms/forms.py:55
 msgid ""
 "Please describe the locality of the network or platform. For example: City "
 "of Lisbon."
 msgstr ""
+"Παρακαλούμε περιγράψτε την τοποθεσία του δικτύου ή της πλατφόρμας. Για "
+"παράδειγμα: Πόλη της Λισσαβόνας."
 
 #: platforms/forms.py:60
-#, fuzzy
-#| msgid "Please name the contact person or contact point for the organisation"
 msgid ""
 "Please name the contact person or contact point for the network or platform."
 msgstr ""
-"Παρακαλούμε αναφέρετε τον υπεύθυνο επικοινωνίας ή το σημείο επικοινωνίας για "
-"τον οργανισμό"
+"Παρακαλούμε να αναφέρετε τον υπεύθυνο επικοινωνίας ή το σημείο επικοινωνίας "
+"για τον οργανισμό."
 
 #: platforms/forms.py:65 projects/forms.py:165
-#, fuzzy
-#| msgid "Contact Point Email"
 msgid "Contact point email"
 msgstr "Διεύθυνση ηλεκτρονικού ταχυδρομείου (email) σημείου επαφής"
 
@@ -562,72 +495,62 @@ msgid ""
 "please add <a href=\"/new_organisation\" target=_blank\">here</a> before "
 "submitting the network or platform."
 msgstr ""
+"Παρακαλούμε επιλέξτε τον(τους) οργανισμό(-ούς) που συντονίζουν την "
+"πλατφόρμα. Αν δεν είναι καταχωρημένοι, παρακαλώ προσθέστε <a> href=\"/"
+"new_organisation\" target=_blank\">here</a> πριν την καταχώρηση του δικτύου "
+"ή της πλατφόρμας."
 
 #: platforms/forms.py:87
 msgid "Logo of your network or platform"
-msgstr ""
+msgstr "Λογότυπο του δικτύου ή της πλατφόρμας"
 
 #: platforms/forms.py:88
 msgid "This image will be resized to 600x400 pixels."
-msgstr ""
+msgstr "Αυτή η εικόνα θα αλλάξει μέγεθος στα 600x400 εικονοστοιχεία."
 
 #: platforms/forms.py:97 projects/forms.py:239
 msgid "Logo credit, if applicable"
-msgstr ""
+msgstr "Που \"πιστώνεται\" το λογότυπο (αν υπάρχει)"
 
 #: platforms/forms.py:101
 msgid "Network or platform profile image"
-msgstr ""
+msgstr "Εικόνα προφίλ δικτύου ή πλατφόρμας"
 
 #: platforms/forms.py:102
 msgid "This image will be resized to 1100x400 pixels."
-msgstr ""
+msgstr "Αυτή η εικόνα θα αλλάξει μέγεθος στα 1100x400 εικονοστοιχεία."
 
 #: platforms/forms.py:111
 msgid "Profile image credit, if applicable."
-msgstr ""
+msgstr "Που \"πιστώνεται\" η εικόνα προφίλ, αν υπάρχει."
 
 #: platforms/templates/_intro_form_platform.html:8
-#, fuzzy
-#| msgid "The Platform"
 msgid "platform"
-msgstr "Η Πλατφόρμα"
+msgstr "πλατφόρμα"
 
 #: platforms/templates/_intro_form_platform.html:13
-#, fuzzy
-#| msgid ""
-#| "Thank you for proposing a new citizen science resource to be shared on "
-#| "the EU-Citizen.Science Platform. Please fill in all of the mandatory "
-#| "information in the fields below (indicated with an asterisk*), and as "
-#| "much of the non-mandatory information as possible."
 msgid ""
 "Thank you for creating a profile for your platform or network on the EU-"
 "Citizen.Science platform. Please fill in all of the mandatory information in "
 "the fields below (indicated with an asterisk*), and as much of the non-"
 "mandatory information as possible."
 msgstr ""
-"Σας ευχαριστούμε που προτείνετε έναν νέο πόρο επιστήμης των πολιτών για "
-"κοινοποίηση στην πλατφόρμα EU-Citizen.Science. Συμπληρώστε όλες τις "
-"υποχρεωτικές πληροφορίες στα παρακάτω πεδία (επισημαίνονται με αστερίσκο *) "
-"και όσο το δυνατόν περισσότερες από τις μη υποχρεωτικές πληροφορίες."
+"Σας ευχαριστούμε που δημιουργήσατε ένα καινούριο προφίλ για την πλατφόρμα ή "
+"το δίκτυό σας στο EU-Citizen.Science. Συμπληρώστε όλες τις υποχρεωτικές "
+"πληροφορίες στα παρακάτω πεδία (επισημαίνονται με αστερίσκο *) και όσο το "
+"δυνατόν περισσότερες από τις μη υποχρεωτικές πληροφορίες."
 
 #: platforms/templates/_intro_form_platform.html:15
-#, fuzzy
-#| msgid ""
-#| "Upon saving this profile, your organisational profile will be submitted "
-#| "for moderation by one of the members of the EU-Citizen.Science "
-#| "consortium. This step is simply to check for ‘spam’ or inappropriate uses "
-#| "of the profile form."
 msgid ""
 "Upon saving this profile, your platform or network profile will immediately "
 "show up on the platform but will be later moderated by one of the platform "
 "moderators. This step is simply to check for spam or inappropriate uses of "
 "the profile form."
 msgstr ""
-"Με την αποθήκευση αυτού του προφίλ, το προφίλ οργανισμού σας θα υποβληθεί "
-"για έλεγχο από ένα από τα μέλη της κοινοπραξίας EU-Citizen.Science. Αυτό το "
-"βήμα είναι απλώς να ελέγξετε για 'ανεπιθύμητα' ή ακατάλληλες χρήσεις της "
-"φόρμας προφίλ."
+"Με την αποθήκευση αυτού του προφίλ, το προφίλ της πλατφόρμας ή του δικτύου "
+"σας θα υποβληθεί για έλεγχο από ένα από τα μέλη της κοινοπραξίας EU-Citizen."
+"Science. Αυτό το βήμα αφορά απλώς τον έλεγχο για spam ή ακατάλληλες χρήσεις "
+"της πλατφόρμας."
 
 #: platforms/templates/platform.html:37
 #: profiles/templates/profiles/show_profile.html:17
@@ -636,29 +559,27 @@ msgid "Organisations"
 msgstr "Οργανισμοί"
 
 #: platforms/templates/platform.html:66 projects/forms.py:137
-#, fuzzy
-#| msgid "Geographical location"
 msgid "Geographic extend"
 msgstr "Γεωγραφική τοποθεσία"
 
 #: platforms/templates/platform.html:71
-#, fuzzy
-#| msgid "Country"
 msgid "Countries"
-msgstr "Χώρα"
+msgstr "Χώρες"
 
 #: platforms/templates/platform_form.html:54
 msgid "Network or platform images"
-msgstr ""
+msgstr "Εικόνες δικτύου ή πλατφόρμας"
 
 #: platforms/templates/platforms.html:9
 msgid "platform and network <span class='lightBlue-color'> search</span>"
-msgstr ""
+msgstr "αναζήτηση <span class='lightBlue-color'> πλατφόρμας και δικτύου</span>"
 
 #: profiles/forms.py:60
 msgid ""
 "Please write or select interest areas, separated by commas or pressing enter"
 msgstr ""
+"Παρακαλούμε γράψτε ή επιλέξτε περιοχές ενδιαφέροντος, διαχωρισμένες με κόμμα "
+"ή πατώντας enter"
 
 #: profiles/forms.py:70
 msgid ""
@@ -666,18 +587,21 @@ msgid ""
 "<a href=\"/new_organisation\" target=\"_blank\">here</a> before submitting "
 "the project"
 msgstr ""
+"Άλλοι οργανισμοί που συμμετέχουν στο έργο. Αν δεν είναι καταχωρημένοι, "
+"παρακαλούμε προσθέστε τους <a href=\"/new_organisation\" target=\"_blank"
+"\">εδώ</a> πριν την καταχώριση του έργου"
 
 #: profiles/forms.py:73 projects/forms.py:188
 msgid "Other Organisations"
-msgstr ""
+msgstr "Άλλοι οργανισμοί"
 
 #: profiles/models.py:23
 msgid "Surname"
-msgstr ""
+msgstr "Επίθετο"
 
 #: profiles/models.py:34
 msgid "Profile picture"
-msgstr ""
+msgstr "Εικόνα προφίλ"
 
 #: profiles/models.py:39
 msgid "Title"
@@ -685,7 +609,7 @@ msgstr "Τίτλος"
 
 #: profiles/models.py:41
 msgid "Short Bio and disciplinary background"
-msgstr "Βιογραφικό και πειθαρχικό υπόβαθρο"
+msgstr "Σύντομο βιογραφικό και υπόβαθρο"
 
 #: profiles/models.py:47
 msgid ""
@@ -694,26 +618,27 @@ msgid ""
 "link thisprofile with your professional information such as affiliations, "
 "grants, publications,peer review, and more.)"
 msgstr ""
+"ORCID (Εάν έχετε εγγραφεί στην πλατφόρμα ORCID για ερευνητές και έχετε "
+"μόνιμο ψηφιακό αναγνωριστικό (το ORCID ID σας), μπορείτε να το προσθέσετε "
+"εδώ για να συνδέσετε αυτό το προφίλ με τις επαγγελματικές σας πληροφορίες, "
+"όπως συνεργασίες, επιχορηγήσεις, δημοσιεύσεις, αξιολόγηση από ομότιμούς σας "
+"και άλλα)"
 
 #: profiles/models.py:55
 msgid "Email verified"
-msgstr ""
+msgstr "Επιβεβαιωμένο email"
 
 #: profiles/templates/profiles/_finder_users.html:11
-#, fuzzy
-#| msgid "found"
 msgid "users found"
-msgstr "βρέθηκαν"
+msgstr "βρέθηκαν χρήστες"
 
 #: profiles/templates/profiles/_finder_users.html:11
-#, fuzzy
-#| msgid "found"
 msgid "user found"
-msgstr "βρέθηκαν"
+msgstr "βρέθηκε χρήστης"
 
 #: profiles/templates/profiles/bookmarks.html:6
 msgid "Projects in bookmarks"
-msgstr ""
+msgstr "Έργα στους σελιδοδείκτες"
 
 #: profiles/templates/profiles/bookmarks.html:17
 #: profiles/templates/profiles/submissions.html:41
@@ -721,107 +646,88 @@ msgid "Submitted organisations"
 msgstr "Καταχωρημένοι οργανισμοί"
 
 #: profiles/templates/profiles/bookmarks.html:29
-#, fuzzy
-#| msgid "Resources library"
 msgid "Resources in bookmarks"
-msgstr "Βιβλιοθήκη πόρων"
+msgstr "Πόροι με σελιδοδείκτη"
 
 #: profiles/templates/profiles/bookmarks.html:40
 msgid "Training in bookmarks"
-msgstr ""
+msgstr "Εκπαιδευτικές πηγές στους σελιδοδείκτες"
 
 #: profiles/templates/profiles/bookmarks.html:51
 #: profiles/templates/profiles/submissions.html:52
-#, fuzzy
-#| msgid "Submitted projects"
 msgid "Submitted events"
-msgstr "Καταχωρημένα έργα"
+msgstr "Καταχωρημένες εκδηλώσεις"
 
 #: profiles/templates/profiles/edit_profile.html:20
 msgid "Personal information"
-msgstr ""
+msgstr "Προσωπικές πληροφορίες"
 
 #: profiles/templates/profiles/edit_profile.html:31
-#, fuzzy
-#| msgid "Interest Areas"
 msgid "Bio &amp; Interest Areas"
-msgstr "Περιοχές ενδιαφέροντος"
+msgstr "Βιο &amp; Περιοχές ενδιαφέροντος"
 
 #: profiles/templates/profiles/edit_profile.html:39
 msgid "Participation"
-msgstr ""
+msgstr "Συμμετοχή"
 
 #: profiles/templates/profiles/edit_profile.html:46
 msgid "Picture"
-msgstr ""
+msgstr "Εικόνα"
 
 #: profiles/templates/profiles/privacy_center.html:4
-#, fuzzy
-#| msgid "Enter old password"
 msgid "Permissions and password"
-msgstr "Εισάγετε τον προηγούμενο κωδικό πρόσβασης"
+msgstr "Άδειες και κωδικός πρόσβασης"
 
 #: profiles/templates/profiles/privacy_center.html:40
-#, fuzzy
-#| msgid "Geographical location"
 msgid "General information"
-msgstr "Γεωγραφική τοποθεσία"
+msgstr "Γενικές πληροφορίες"
 
 #: profiles/templates/profiles/show_profile.html:5
-#, fuzzy
-#| msgid "Bio and disciplinary background"
 msgid "Bio and <span class='lightBlue-color'>disciplinary background</span>"
-msgstr "Βιογραφικό και πειθαρχικό υπόβαθρο"
+msgstr "Βιογραφικό και <span class='lightBlue-color'>υπόβαθρο</span>"
 
 #: profiles/templates/profiles/show_profile.html:10
-#, fuzzy
-#| msgid "Interest Areas"
 msgid "Interest and expertise areas"
-msgstr "Περιοχές ενδιαφέροντος"
+msgstr "Περιοχές ενδιαφέροντος και ειδίκευσης"
 
 #: profiles/templates/profiles/submissions.html:6
 msgid "Submitted <span class='lightBlue-color'>projects</span>"
-msgstr ""
+msgstr "Καταχωρημένα <span class='lightBlue-color'>έργα</span>"
 
 #: profiles/templates/profiles/submissions.html:18 templates/base2.html:64
 msgid "Submitted resources"
 msgstr "Καταχωρημένοι πόροι"
 
 #: profiles/templates/profiles/submissions.html:29
-#, fuzzy
-#| msgid "Submitted organisations"
 msgid "Submitted training"
-msgstr "Καταχωρημένοι οργανισμοί"
+msgstr "Καταχωρημένοι εκπαιδευτικοί πόροι"
 
 #: profiles/templates/profiles/usersSearch.html:11
 msgid "user <span class='lightBlue-color'>search</span>"
-msgstr ""
+msgstr "αναζήτηση <span class='lightBlue-color'>χρήστη</span>"
 
 #: projects/forms.py:32
-#, fuzzy
-#| msgid "Insert here the title or name of the resource"
 msgid "Please write the name of the project."
-msgstr "Εισαγάγετε εδώ τον τίτλο ή το όνομα του πόρου"
+msgstr "Παρακαλούμε γράψτε το όνομα του έργου."
 
 #: projects/forms.py:38
 msgid "Please provide the URL to an external website of the project."
 msgstr ""
+"Παρακαλούμε καταχωρίστε τη διεύθυνση URL ενός εξωτερικού ιστοτόπου του έργου."
 
 #: projects/forms.py:42
-#, fuzzy
-#| msgid ""
-#| "Please briefly describe the organisation (ideally in 500 words or less)"
 msgid ""
 "Please provide a description of your project here (max 3000 characters)."
 msgstr ""
-"Παρακαλούμε περιγράψτε εν συντομία τον οργανισμό (ιδανικά σε 500 λέξεις ή "
-"λιγότερες)"
+"Παρακαλούμε περιγράψτε εν συντομία τον οργανισμό (μέγιστο 300 χαρακτήρες)."
 
 #: projects/forms.py:47
 msgid ""
 "Please indicae the primary aim, goal or objective of the project (max 2000 "
 "characters)."
 msgstr ""
+"Παρακαλούμε να αναφέρετε τον πρωταρχικό στόχο ή σκοπό του έργου (έως 2000 "
+"χαρακτήρες)."
 
 #: projects/forms.py:52
 msgid ""
@@ -833,25 +739,32 @@ msgid ""
 "will not appear on the platform; it is just for moderation purposes (max "
 "2000 characters)."
 msgstr ""
+"Παρακαλούμε περιγράψτε τις πτυχές της επιστήμης των πολιτών του έργου και τη "
+"σύνδεση του έργου με αυτή, χρησιμοποιώντας το <a href=\"https://zenodo.org/"
+"cohttps://zenodo.org/record/5127534#.YV8J0dpBxPa\" >ECSA - τα 10 "
+"χαρακτηριστικά της Επιστήμης των Πολιτών</a> και το <a href=\"https://osf.io/"
+"xpr2n/\">ECSA - οι 10 αρχές της Επιστήμης των Πολιτών</a>. Ό,τι εισάγετε σε "
+"αυτό το πεδίο κειμένου δεν θα εμφανίζεται στην πλατφόρμα, είναι μόνο για "
+"λόγους επανελέγχου (έως 2000 χαρακτήρες)."
 
 #: projects/forms.py:59
-#, fuzzy
-#| msgid "Ten principles of citizen science"
 msgid "Description of citizen science aspects"
-msgstr "Οι 10 αρχές της επιστήμης των πολιτών"
+msgstr "Περιγραφή των πτυχών της επιστήμης των πολιτών"
 
 #: projects/forms.py:63
 msgid "Activity status"
-msgstr ""
+msgstr "Κατάσταση δραστηριότητας"
 
 #: projects/forms.py:65
 msgid "Please, select the status of your project."
-msgstr ""
+msgstr "Παρακαλούμε επιλέξτε την κατάσταση του έργου σας."
 
 #: projects/forms.py:74
 msgid ""
 "Please select or enter 2-3 keywords separated by commas or by pressing enter."
 msgstr ""
+"Παρακαλούμε επιλέξτε ή εισαγάγετε 2-3 λέξεις-κλειδιά διαχωρισμένες με κόμμα "
+"ή πατώντας enter."
 
 #: projects/forms.py:75 projects/templates/project.html:91
 #: resources/templates/resource.html:152
@@ -860,68 +773,67 @@ msgstr "Λέξεις-κλειδιά"
 
 #: projects/forms.py:81
 msgid "Closest approximate start date of the project"
-msgstr ""
+msgstr "Πλησιέστερη κατά προσέγγιση ημερομηνία έναρξης του έργου"
 
 #: projects/forms.py:86
 msgid "Approximate end date of the project"
-msgstr ""
+msgstr "Πλησιέστερη κατά προσέγγιση ημερομηνία λήξης του έργου"
 
 #: projects/forms.py:91
 msgid "Please select the project topic(s) or field(s) of science."
-msgstr ""
+msgstr "Επιλέξτε το(τα) θέμα(τα) του έργου ή το(τα) πεδίο(α) της επιστήμης."
 
 #: projects/forms.py:93 projects/templates/_finder_projects.html:52
 msgid "Topic"
-msgstr ""
+msgstr "Θέμα"
 
 #: projects/forms.py:98
 msgid "Please select the tags that apply to your project."
-msgstr ""
+msgstr "Παρακαλούμε επιλέξτε τις ετικέτες που ισχύουν για το έργο σας."
 
 #: projects/forms.py:100 projects/templates/project.html:107
 msgid "Tags"
-msgstr ""
+msgstr "Ετικέτες"
 
 #: projects/forms.py:106
 msgid "Please select the task(s) undertaken by participants."
-msgstr ""
+msgstr "Παρακαλούμε επιλέξτε τα καθήκοντα που αναλαμβάνουν οι συμμετέχοντες."
 
 #: projects/forms.py:108
 msgid "Participation task"
-msgstr ""
+msgstr "Καθήκον συμμετοχής"
 
 #: projects/forms.py:113
 msgid "Please select the difficulty level."
-msgstr ""
+msgstr "Παρακαλούμε επιλέξτε το επίπεδο δυσκολίας."
 
 #: projects/forms.py:115
 msgid "Difficulty level"
-msgstr ""
+msgstr "Επίπεδο δυσκολίας"
 
 #: projects/forms.py:119
-#, fuzzy
-#| msgid ""
-#| "Please briefly describe the organisation (ideally in 500 words or less)"
 msgid ""
 "Please describe how people can get involved in the project (max 2000 "
 "characters)."
 msgstr ""
-"Παρακαλούμε περιγράψτε εν συντομία τον οργανισμό (ιδανικά σε 500 λέξεις ή "
-"λιγότερες)"
+"Παρακαλούμε περιγράψτε πώς μπορούν οι άνθρωποι να εμπλακούν στο έργο (έως "
+"2000 χαρακτήρες)."
 
 #: projects/forms.py:126
 msgid ""
 "Please indicate any required or suggested equipment to be used in the "
 "project (max 2000 characters)."
 msgstr ""
+"Παρακαλούμε να αναφέρετε τυχόν απαιτούμενο ή προτεινόμενο εξοπλισμό που θα "
+"χρησιμοποιηθεί στο έργο (έως 2000 χαρακτήρες)."
 
 #: projects/forms.py:135
 msgid "Please indicate the spatial scale of the project"
-msgstr ""
+msgstr "Παρακαλούμε να αναφέρετε τη χωρική κλίμακα του έργου"
 
 #: projects/forms.py:143
 msgid "Project locality"
-msgstr ""
+msgstr "Τοποθεσία-τόπος έργου"
 
 #: projects/forms.py:144
 msgid ""
@@ -929,32 +841,26 @@ msgid ""
 "participant activities take place. E.g. in your backyard, parks in London, "
 "rivers in Europe, online globally, etc."
 msgstr ""
+"Παρακαλούμε περιγράψτε την τοποθεσία-τόπο του έργου, ως προς το πού "
+"πραγματοποιούνται οι κύριες δραστηριότητες των συμμετεχόντων. Π.χ. στην αυλή "
+"σας, σε πάρκα στο Λονδίνο, σε ποτάμια της Ευρώπης, online παγκοσμίως κ.λπ."
 
 #: projects/forms.py:151
-#, fuzzy
-#| msgid "Geographical location"
 msgid "Project geographic location"
-msgstr "Γεωγραφική τοποθεσία"
+msgstr "Γεωγραφική τοποθεσία έργου"
 
 #: projects/forms.py:157
-#, fuzzy
-#| msgid "Please name the contact person or contact point for the organisation"
 msgid "Please name the contact person or contact point of the project."
 msgstr ""
-"Παρακαλούμε αναφέρετε τον υπεύθυνο επικοινωνίας ή το σημείο επικοινωνίας για "
-"τον οργανισμό"
+"Παρακαλούμε να αναφέρετε τον υπεύθυνο επικοινωνίας ή το σημείο επικοινωνίας "
+"για τον οργανισμό."
 
 #: projects/forms.py:164
-#, fuzzy
-#| msgid ""
-#| "Please provide the email address of the contact person or contact point. "
-#| "Note you will need permission to do that"
 msgid ""
 "Please provide the email address of the contact person or contact point."
 msgstr ""
-"Παρακαλούμε καταχωρίστε τη διεύθυνση ηλεκτρονικού ταχυδρομείου του υπεύθυνου "
-"επικοινωνίας ή του σημείου επαφής.Σημειώστε ότι θα χρειαστείτε άδεια για να "
-"το κάνετε αυτό."
+"Παρακαλούμε να καταχωρίστε τη διεύθυνση ηλεκτρονικού ταχυδρομείου του "
+"υπεύθυνου επικοινωνίας ή του σημείου επαφής."
 
 #: projects/forms.py:173
 msgid ""
@@ -962,10 +868,13 @@ msgid ""
 "please add it <a href=\"/new_organisation\" target=\"_blank\">here</a> "
 "before submitting the project"
 msgstr ""
+"Παρακαλούμε να επιλέξτε τον οργανισμό που συντονίζει το έργο. Εάν δεν "
+"συμπεριλαμβάνεται, προσθέστε τον <a href=\"/new_organisation\" target="
+"\"_blank\">εδώ</a> πριν υποβάλετε το έργο"
 
 #: projects/forms.py:176
 msgid "Lead organisation / coordinator"
-msgstr ""
+msgstr "Επικεφαλής οργάνωσης / συντονιστής"
 
 #: projects/forms.py:185
 msgid ""
@@ -973,6 +882,9 @@ msgid ""
 "listed,please add it <a href=\"/new_organisation\" target=\"_blank\">here</"
 "a> before submitting the project"
 msgstr ""
+"Παρακαλούμε να επιλέξτε άλλους οργανισμούς που συμμετέχουν στο έργο. Εάν δεν "
+"συμπεριλαμβάνονται, προσθέστε τους <a href=\"/new_organisation\" target="
+"\"_blank\">εδώ</a> πριν υποβάλετε το έργο"
 
 #: projects/forms.py:197
 msgid ""
@@ -980,53 +892,56 @@ msgid ""
 "Commission)<br />Select them from the list or add your own <b>ended by comma "
 "or pressing enter</b>."
 msgstr ""
+"Εισαγάγετε τους φορείς χρηματοδότησης του έργου (π.χ. Ευρωπαϊκή "
+"Επιτροπή)<br />Επιλέξτε τους από τη λίστα ή προσθέστε τους δικούς σας "
+"<b>ακολουθούμενους από κόμμα ή πατώντας enter</b>."
 
 #: projects/forms.py:200
 msgid "Funding body"
-msgstr ""
+msgstr "Φορέας χρηματοδότησης"
 
 #: projects/forms.py:205
 msgid "Funding programme"
-msgstr ""
+msgstr "Πρόγραμμα χρηματοδότησης"
 
 #: projects/forms.py:206
 msgid ""
 "Please indicate the name of the programme that funds or funded the project."
 msgstr ""
+"Παρακαλούμε να αναφέρετε το όνομα του προγράμματος που χρηματοδοτεί ή "
+"χρηματοδότησε το έργο."
 
 #: projects/forms.py:212
 msgid "Image for the thumbnail profile"
-msgstr ""
+msgstr "Εικόνα για το προφίλ μικρογραφίας"
 
 #: projects/forms.py:213
 msgid "It will be resized to 600x400 pixels"
-msgstr ""
+msgstr "Θα αλλάξει το μέγεθός σε 600x400 εικονοστοιχεία"
 
 #: projects/forms.py:224
 msgid "Thumbnail credit, if applicable"
-msgstr ""
+msgstr "Που \"πιστώνεται\" η μικρογραφία"
 
 #: projects/forms.py:228
-#, fuzzy
-#| msgid "Project"
 msgid "Project logo"
-msgstr "Έργο"
+msgstr "Λογότυπο έργου"
 
 #: projects/forms.py:229
 msgid "It will be resized to 600x400 pixels)"
-msgstr ""
+msgstr "Θα αλλάξει το μέγεθός σε 600x400 εικονοστοιχεία)"
 
 #: projects/forms.py:243
 msgid "Image for the profile heading"
-msgstr ""
+msgstr "Εικόνα για την επικεφαλίδα του προφίλ"
 
 #: projects/forms.py:244
 msgid "It will be resized to 1100x400 pixels"
-msgstr ""
+msgstr "Θα αλλάξει το μέγεθός σε 1100x400 εικονοστοιχεία"
 
 #: projects/forms.py:254
 msgid "Heading image credit, if applicable"
-msgstr ""
+msgstr "\"Πίστωση\" εικόνας επικεφαλίδας, εάν υπάρχει"
 
 #: projects/forms.py:264
 msgid ""
@@ -1035,43 +950,48 @@ msgid ""
 "blog/2021/05/31/june-monthoftheprojects-eu-citizenscience/\"> Learn more "
 "here!</a>"
 msgstr ""
+"Θέλω να συμμετάσχω στο #ΜήναΤωνΈργων και συμφωνώ να επικοινωνήσουν μαζί μου "
+"μέσω email εάν το έργο που υποβάλλω κερδίσει τον διαγωνισμό.<a href=\"/"
+"blog/2021/05/31/june-monthoftheprojects-eu-citizenscience/\"> Μάθετε "
+"περισσότερα εδώ!</a>"
 
 #: projects/forms.py:423
 msgid "Please provide a <i>description</i> field translation."
-msgstr ""
+msgstr "Παρακαλούμε καταχωρίστε μια μετάφραση πεδίου <i>περιγραφής</i>."
 
 #: projects/forms.py:425 projects/templates/translation_form.html:48
 msgid "Description"
-msgstr ""
+msgstr "Περιγραφή"
 
 #: projects/forms.py:429
 msgid "Please provide an <i>aim</i> field translation."
-msgstr ""
+msgstr "Παρακαλούμε καταχωρίστε ένα πεδίο μετάφρασης<i>στόχου</i>."
 
 #: projects/forms.py:431 projects/templates/project.html:46
 #: projects/templates/project.html:67
 #: projects/templates/translation_form.html:55
 msgid "Aim"
-msgstr ""
+msgstr "Σκοπός"
 
 #: projects/forms.py:436
 msgid "Please provide a <i>how to participate</i> field translation."
-msgstr ""
+msgstr "Παρακαλούμε καταχωρίστε ένα πεδίο μετάφρασης<i>τρόπου συμμετοχής</i>."
 
 #: projects/forms.py:438 projects/templates/project.html:50
 #: projects/templates/project.html:71
 #: projects/templates/translation_form.html:62
 msgid "How to participate"
-msgstr ""
+msgstr "Πώς να συμμετάσχετε"
 
 #: projects/forms.py:443
 msgid "Please provide a <i>translated equipment</i> field translation."
 msgstr ""
+"Παρακαλούμε καταχωρίστε ένα πεδίο μετάφρασης<i>μεταφρασμένου εξοπλισμού</i>."
 
 #: projects/forms.py:445 projects/templates/project.html:55
 #: projects/templates/project.html:76
 msgid "Needed equipment"
-msgstr ""
+msgstr "Απαραίτητος εξοπλισμός"
 
 #: projects/templates/_finder_projects.html:13
 msgid "Featured"
@@ -1079,29 +999,29 @@ msgstr "Προτεινόμενα"
 
 #: projects/templates/_finder_projects.html:25
 msgid "Status"
-msgstr ""
+msgstr "Κατάσταση"
 
 #: projects/templates/_finder_projects.html:34
 msgid "Tag"
-msgstr ""
+msgstr "Ετικέτα"
 
 #: projects/templates/_finder_projects.html:43
 #: projects/templates/project.html:116
 msgid "Difficulty Level"
-msgstr ""
+msgstr "Επίπεδο Δυσκολίας"
 
 #: projects/templates/_finder_projects.html:61
 msgid "Participation Task"
-msgstr ""
+msgstr "Καθήκον Συμμετοχής"
 
 #: projects/templates/_finder_projects.html:71
 #: resources/templates/_finder_resources.html:57
 msgid "Approved"
-msgstr ""
+msgstr "Εγκεκριμένο"
 
 #: projects/templates/_finder_projects.html:72
 msgid "Not Approved"
-msgstr ""
+msgstr "Μη Εγκεκριμένο"
 
 #: projects/templates/_finder_projects.html:73
 #: resources/templates/_finder_resources.html:59
@@ -1112,41 +1032,35 @@ msgstr "Όχι ακόμη ρυθμισμένο"
 
 #: projects/templates/_finder_projects.html:95
 msgid "topic:"
-msgstr ""
+msgstr "θέμα:"
 
 #: projects/templates/_finder_projects.html:101
 msgid "status:"
-msgstr ""
+msgstr "κατάσταση:"
 
 #: projects/templates/_finder_projects.html:107
 msgid "has tag:"
-msgstr ""
+msgstr "έχει ετικέτα:"
 
 #: projects/templates/_finder_projects.html:113
 msgid "difficulty level:"
-msgstr ""
+msgstr "επίπεδο δυσκολίας:"
 
 #: projects/templates/_finder_projects.html:119
 msgid "participation task:"
-msgstr ""
+msgstr "καθήκον συμμετοχής:"
 
 #: projects/templates/_finder_projects.html:131
-#, fuzzy
-#| msgid "Projects"
 msgid "projects found"
-msgstr "Έργα"
+msgstr "έργα που βρέθηκαν"
 
 #: projects/templates/_finder_projects.html:133
-#, fuzzy
-#| msgid "Project"
 msgid "project found"
-msgstr "Έργο"
+msgstr "έργο που βρέθηκε"
 
 #: projects/templates/_intro_form_project.html:8
-#, fuzzy
-#| msgid "Project"
 msgid "project"
-msgstr "Έργο"
+msgstr "έργο"
 
 #: projects/templates/_intro_form_project.html:14
 msgid ""
@@ -1155,6 +1069,11 @@ msgid ""
 "below (indicated with an asterisk*), and as much of the non-mandatory "
 "information as possible."
 msgstr ""
+"Σας ευχαριστούμε που μοιραστήκατε το έργο σας επιστήμης των πολιτών στην "
+"πλατφόρμα EU-Citizen.Science. Παρακαλούμε να συμπληρώσετε όλες τις "
+"υποχρεωτικές πληροφορίες στα παρακάτω πεδία (που υποδεικνύονται με "
+"αστερίσκο*) και όσο το δυνατόν περισσότερες από τις μη υποχρεωτικές "
+"πληροφορίες."
 
 #: projects/templates/_intro_form_project.html:16
 msgid ""
@@ -1165,12 +1084,18 @@ msgid ""
 "research lifecycle. For guidance on whether your project can be considered "
 "to be citizen science,"
 msgstr ""
+"Η επιστήμη των πολιτών περιλαμβάνει ένα ευρύ φάσμα τύπων έργων που μπορούν "
+"να προσαρμοστούν και να εφαρμοστούν σε διαφορετικές καταστάσεις και κλάδους, "
+"αντιπροσωπεύουν μια σειρά προσεγγίσεων και ιστορικών πρακτικών για τη "
+"συμμετοχή του κοινού στην επιστημονική έρευνα και εμπλέκουν συμμετέχοντες σε "
+"μια σειρά δραστηριοτήτων σε όλο τον κύκλο ζωής της έρευνας. Για καθοδήγηση "
+"σχετικά με το εάν το έργο σας μπορεί να θεωρηθεί ως επιστήμη των πολιτών,"
 
 #: projects/templates/_intro_form_project.html:18
-#, fuzzy
-#| msgid "ECSA 10 Principles of Citizen Science"
 msgid "please refer to the ECSA Characteristics of Citizen Science."
-msgstr "Οι 10 Αρχές της Επιστήμης των Πολιτών"
+msgstr ""
+"παρακαλούμε ανατρέξτε στα Χαρακτηριστικά της Επιστήμης των Πολιτών σύμφωνα "
+"με της ECSA."
 
 #: projects/templates/_intro_form_project.html:22
 msgid ""
@@ -1178,42 +1103,37 @@ msgid ""
 "you describe the citizen science aspects of your project and the type of "
 "task(s) that participants undertake."
 msgstr ""
+"Στην παρακάτω φόρμα, μαζί με άλλες πληροφορίες, ζητείται να περιγράψετε τις "
+"πτυχές της επιστήμης των πολιτών του έργου σας και τον τύπο των \"καθηκόντων"
+"\" που αναλαμβάνουν οι συμμετέχοντες."
 
 #: projects/templates/_intro_form_project.html:24
 msgid ""
 "Your project should engage meaningfully with the ECSA 10 Principles of "
 "Citizen Science."
 msgstr ""
+"Το έργο σας θα πρέπει να εμπλέκεται ουσιαστικά με τις 10 Αρχές της Επιστήμης "
+"των Πολιτών της ECSA."
 
 #: projects/templates/_intro_form_project.html:28
 msgid ""
 "Upon saving this profile, your project will be submitted for moderation."
 msgstr ""
+"Με την αποθήκευση αυτού του προφίλ, το έργο σας θα υποβληθεί προς έγκριση."
 
 #: projects/templates/_intro_form_project.html:30
-#, fuzzy
-#| msgid "The moderation process"
 msgid "Please, have a look to the moderation process,"
-msgstr "Η διαδικασία εποπτείας"
+msgstr "Παρακαλούμε, ελέγξτε τη διαδικασία έγκρισης,"
 
 #: projects/templates/_intro_form_project.html:32
-#, fuzzy
-#| msgid ""
-#| "Upon saving this profile, your resource will be submitted for moderation "
-#| "by one of the members of the EU-Citizen.Science consortium. The "
-#| "moderation process is meant to ensure that all of the resources shared on "
-#| "the platform are indeed useful for citizen science projects and "
-#| "practitioners, and are of good quality. Read more about "
 msgid ""
 "it is meant to ensure that all of the projects shared on the platform can be "
 "considered to be citizen science projects, and to prevent unintended uses of "
 "the platform."
 msgstr ""
-"Κατά την αποθήκευση αυτού του προφίλ, ο πόρος σας θα υποβληθεί για εποπτεία "
-"από ένα από τα μέλη της κοινοπραξίας EU-Citizen.Science. Η διαδικασία "
-"εποπτείας αποσκοπεί στο να διασφαλίσει ότι όλοι οι πόροι που μοιράζονται "
-"στην πλατφόρμα είναι πράγματι χρήσιμοι για τα έργα επιστήμης των πολιτών και "
-"τους επαγγελματίες, και είναι καλής ποιότητας. Διαβάστε περισσότερα για αυτό."
+"σκοπός είναι να διασφαλίσει ότι όλα τα έργα που κοινοποιούνται στην "
+"πλατφόρμα μπορούν να θεωρηθούν ως έργα επιστήμης των πολιτών και να "
+"αποτραπεί η ακούσια χρήση της πλατφόρμας."
 
 #: projects/templates/modal_projects.html:8
 #: resources/templates/modal_resources.html:8
@@ -1235,6 +1155,8 @@ msgstr "Αναζήτηση"
 msgid ""
 "projects by title or keywords by typing text directly into the the search bar"
 msgstr ""
+"έργα ανά τίτλο ή λέξεις-κλειδιά πληκτρολογώντας κείμενο απευθείας στη γραμμή "
+"αναζήτησης"
 
 #: projects/templates/modal_projects.html:15
 #: resources/templates/modal_resources.html:15
@@ -1243,7 +1165,7 @@ msgstr "Ταξινόμηση"
 
 #: projects/templates/modal_projects.html:15
 msgid "projects by date or by rating"
-msgstr ""
+msgstr "έργα κατά ημερομηνία ή κατά βαθμολογία"
 
 #: projects/templates/modal_projects.html:16
 #: resources/templates/modal_resources.html:16
@@ -1251,10 +1173,8 @@ msgid "Filter"
 msgstr "Φίλτρο"
 
 #: projects/templates/modal_projects.html:16
-#, fuzzy
-#| msgid "search results by language, theme or category"
 msgid "search results by project status, or topic"
-msgstr "αποτελέσματα αναζήτησης ανά γλώσσα, θέμα ή κατηγορία"
+msgstr "αποτελέσματα αναζήτησης ανά κατάσταση ή κατηγορία"
 
 #: projects/templates/modal_projects.html:18
 msgid ""
@@ -1262,36 +1182,36 @@ msgid ""
 "as 'Moderated'.Only these will show in your search results unless you filter "
 "for 'not yet moderated' or 'All'."
 msgstr ""
+"Τα έργα που έχουν υποβληθεί και έχουν περάσει από τη διαδικασία ελέγχου και "
+"έγκρισης  επισημαίνονται ως \"ελεγμένα\". Μόνο αυτά θα εμφανίζονται στα "
+"αποτελέσματα αναζήτησής σας, εκτός εάν φιλτράρετε για \"δεν έχει ακόμη "
+"ελεγχθεί\" ή \"Όλα\"."
 
 #: projects/templates/modal_projects.html:20
 #: resources/templates/modal_resources.html:20
 msgid "Read more about our"
-msgstr "Διαβάστε περισσότερα για το δικό μας"
+msgstr "Διαβάστε περισσότερα για τη δική μας"
 
 #: projects/templates/modal_projects.html:20
 #: resources/templates/modal_resources.html:20
 msgid "moderation process"
-msgstr "διαδικασία επεξεργασίας"
+msgstr "διαδικασία ελέγχου και έγκρισης"
 
 #: projects/templates/project.html:30 resources/templates/resource.html:20
-#, fuzzy
-#| msgid "Moderated"
 msgid "Created"
-msgstr "Ρυθμισμένο"
+msgstr "Δημιουργημένο"
 
 #: projects/templates/project.html:31 resources/templates/resource.html:21
-#, fuzzy
-#| msgid "Last updated"
 msgid "Updated"
-msgstr "Τελευταία ενημέρωση"
+msgstr "Ενημερωμένο"
 
 #: projects/templates/project.html:40
 msgid "This translation was done before a project profile update."
-msgstr ""
+msgstr "Αυτή η μετάφραση έγινε πριν από την ενημέρωση του προφίλ του έργου."
 
 #: projects/templates/project.html:41
 msgid "Plase help the community by improving it"
-msgstr ""
+msgstr "Παρακαλούμε βοηθήστε την κοινότητα βελτιώνοντάς την"
 
 #: projects/templates/project.html:42
 msgid "here"
@@ -1299,75 +1219,67 @@ msgstr "εδώ"
 
 #: projects/templates/project.html:63
 msgid "This project profile is not available in your selected language,"
-msgstr ""
+msgstr "Αυτό το προφίλ έργου δεν είναι διαθέσιμο στην επιλεγμένη γλώσσα,"
 
 #: projects/templates/project.html:86
 msgid "from"
-msgstr ""
+msgstr "από"
 
 #: projects/templates/project.html:89
 msgid "until"
-msgstr ""
+msgstr "μέχρι"
 
 #: projects/templates/project.html:98
 msgid "Science Topics"
-msgstr ""
+msgstr "Επιστημονικά Θέματα"
 
 #: projects/templates/project.html:126
 msgid "Participation tasks"
-msgstr ""
+msgstr "Καθήκοντα συμμετοχής"
 
 #: projects/templates/project.html:135
 msgid "Coordinator"
-msgstr ""
+msgstr "Συντονιστής"
 
 #: projects/templates/project.html:142
-#, fuzzy
-#| msgid "New Organisation Profile"
 msgid "Other Organisations involved"
-msgstr "Προφίλ Νέου Οργανισμού"
+msgstr "Άλλοι εμπλεκόμενοι Οργανισμοί"
 
 #: projects/templates/project.html:173
 msgid "Go to Project"
-msgstr ""
+msgstr "Μεταβείτε στο Έργο"
 
 #: projects/templates/project.html:183
 msgid "Translate"
-msgstr ""
+msgstr "Μετάφραση"
 
 #: projects/templates/project.html:202 resources/templates/resource.html:116
-#, fuzzy
-#| msgid "Admin"
 msgid "Admin area"
-msgstr "Υπευθύνος"
+msgstr "Περιοχή διαχειριστή"
 
 #: projects/templates/project_form.html:55
 msgid "Useful information to classify the project"
-msgstr ""
+msgstr "Χρήσιμες πληροφορίες για την ταξινόμηση του έργου"
 
 #: projects/templates/project_form.html:66
 msgid "Participation information"
-msgstr ""
+msgstr "Πληροφορίες συμμετοχής"
 
 #: projects/templates/project_form.html:77
-#, fuzzy
-#| msgid "Project"
 msgid "Project location"
-msgstr "Έργο"
+msgstr "Περιοχή έργου"
 
 #: projects/templates/project_form.html:87
-#, fuzzy
-#| msgid "Contact Point Email"
 msgid "Contact and hosts details"
-msgstr "Διεύθυνση ηλεκτρονικού ταχυδρομείου (email) σημείου επαφής"
+msgstr "Στοιχεία επικοινωνίας και υπευθύνου"
 
 #: projects/templates/project_form.html:98
 msgid "Funding Information"
-msgstr ""
+msgstr "Πληροφορίες Χρηματοδότησης"
 
 #: projects/templates/project_form.html:107
 msgid "Project profile images"
-msgstr ""
+msgstr "Εικόνες προφίλ έργου"
 
 #: projects/templates/project_review.html:18
 #: resources/templates/resource_review.html:18
@@ -1380,48 +1292,37 @@ msgid "Rate and comment"
 msgstr "Αξιολογήστε και σχολιάστε"
 
 #: projects/templates/translation_form.html:28
-#, fuzzy
-#| msgid ""
-#| "Please indicate the (main) language that the resource is made available"
 msgid "Please indicate the language you want to translate to"
-msgstr "Υποδείξτε την (κύρια) γλώσσα στην οποία ο πόρος διατίθεται"
+msgstr "Υποδείξτε τη γλώσσα στην οποία θέλετε να μεταφράσετε"
 
 #: projects/templates/translation_form.html:69
 msgid "Equipment"
-msgstr ""
+msgstr "Εξοπλισμός"
 
 #: resources/forms.py:20
-#, fuzzy
-#| msgid "Insert here the title or name of the resource"
 msgid "Please write the title or name of the resource."
-msgstr "Εισαγάγετε εδώ τον τίτλο ή το όνομα του πόρου"
+msgstr "Παρακαλούμε εισάγετε τον τίτλο ή το όνομα του πόρου."
 
 #: resources/forms.py:26
-#, fuzzy
-#| msgid ""
-#| "URL to where the document is hosted by the publisher,         or in a "
-#| "permanent repository such as Zenodo, OSF, the RIO Journal, or similar"
 msgid ""
 "Please provide the URL to where the document is hosted by the publisher, or "
 "in a permanent repository such as Zenodo, OSF, the RIO Journal, or similar."
 msgstr ""
-"Διεύθυνση URL όπου φιλοξενείται το έγγραφο από τον εκδότη ή μόνιμο "
-"αποθετήριο όπως το Zenodo, το OSF, το RIO Journal ή παρόμοια"
+"Παρακαλούμε καταχωρίστε την διεύθυνση URL όπου φιλοξενείται το έγγραφο από "
+"τον εκδότη ή μόνιμο αποθετήριο όπως το Zenodo, το OSF, το RIO Journal ή "
+"παρόμοια."
 
 #: resources/forms.py:35
 msgid ""
 "Please select the keywords that describe the resource or add new ones "
 "<b>separated by commas or by pressing enter</b>."
 msgstr ""
+"Παρακαλούμε επιλέξτε τις λέξεις-κλειδιά που περιγράφουν τον πόρο ή προσθέστε "
+"νέες <b>χωρισμένες με κόμμα ή πατώντας enter</b>."
 
 #: resources/forms.py:41
-#, fuzzy
-#| msgid ""
-#| "Please briefly describe the organisation (ideally in 500 words or less)"
 msgid "Please briefly describe the resource (max 3000 characters)."
-msgstr ""
-"Παρακαλούμε περιγράψτε εν συντομία τον οργανισμό (ιδανικά σε 500 λέξεις ή "
-"λιγότερες)"
+msgstr "Παρακαλούμε περιγράψτε εν συντομία τον πόρο (μέγιστο 3000 χαρακτήρες)."
 
 #: resources/forms.py:47
 msgid ""
@@ -1433,12 +1334,18 @@ msgid ""
 "will not appear on the platform; it is just for moderation purposes and for "
 "the administrators of the platform to see (max 2000 characters)."
 msgstr ""
+"Παρακαλούμε περιγράψτε τη σύνδεση μεταξύ της επιστήμης των πολιτών και του "
+"πόρου που ανεβάζετε – για καθοδήγηση, ανατρέξτε στο <a href=\"https://zenodo."
+"org/communities/citscicharacteristics\"> Χαρακτηριστικά της Επιστήμης των "
+"Πολιτών της ECSA</a> καθώς και στο< a href=\"https://zenodo.org/"
+"record/5127534#.YV8J0dpBxPa\"> Οι 10 Αρχές της Επιστήμης των Πολιτών της "
+"ECSA</a>. Ό,τι εισάγετε σε αυτό το πεδίο κειμένου δεν θα εμφανίζεται στην "
+"πλατφόρμα. είναι μόνο για λόγους ελέγχου και για να το δουν οι διαχειριστές "
+"της πλατφόρμας (μέγιστο 2000 χαρακτήρες)."
 
 #: resources/forms.py:55
-#, fuzzy
-#| msgid "European Citizen Science Association"
 msgid "Description of Citizen Science Aspects"
-msgstr "Ευρωπαϊκή Ένωση της Επιστήμης των Πολιτών"
+msgstr "Περιγραφή πτυχών της Επιστήμης των Πολιτών"
 
 #: resources/forms.py:64
 msgid ""
@@ -1446,64 +1353,56 @@ msgid ""
 "i> and close with a comma or press enter to add an author or multiple "
 "authors."
 msgstr ""
+"Παρακαλούμε ονομάστε τους δημιουργούς του πόρου. Εισαγάγετε <i>ΠρώτοΓράμμα "
+"Επίθετο</i> και καταχωρίστε με κόμμα ή πατήστε enter για να προσθέσετε έναν "
+"ή πολλούς συγγραφείς."
 
 #: resources/forms.py:68
 msgid "Authors"
 msgstr "Συγγραφείς"
 
 #: resources/forms.py:74
-#, fuzzy
-#| msgid "Select one of the proposed categories"
 msgid "Please select one of the proposed categories."
-msgstr "Επιλέξτε μία από τις προτεινόμενες κατηγορίες"
+msgstr "Παρακαλούμε επιλέξτε μία από τις προτεινόμενες κατηγορίες."
 
 #: resources/forms.py:82
-#, fuzzy
-#| msgid ""
-#| "Select the audience(s) for which the resource is intended. Multiple "
-#| "options can be selected"
 msgid ""
 "Please select the audience(s) for which the resource is intended. Multiple "
 "options can be selected."
 msgstr ""
-"Επιλέξτε το κοινό για τα οποία προορίζεται ο πόρος. Μπορείτε να επιλέξετε "
-"πολλές επιλογές"
+"Παρακαλούμε επιλέξτε το κοινό για τα οποία προορίζεται ο πόρος. Μπορείτε να "
+"επιλέξετε πολλές επιλογές."
 
 #: resources/forms.py:88
-#, fuzzy
-#| msgid "Insert here the title or name of the resource"
 msgid "Please select the thematic content of the resource."
-msgstr "Εισαγάγετε εδώ τον τίτλο ή το όνομα του πόρου"
+msgstr "Παρακαλούμε επιλέξτε το θεματικό περιεχόμενο του πόρου."
 
 #: resources/forms.py:94
 msgid ""
 "Please provide the <b>Digital Object Identifier</b> that is unique to your "
 "resource."
 msgstr ""
+"Παρακαλούμε καταχωρίστε το <b>Αναγνωριστικό Ψηφιακού Αντικειμένου</b> που "
+"είναι μοναδικό για τον πόρο σας."
 
 #: resources/forms.py:96
 msgid "Resource DOI"
 msgstr "DOI Πηγής"
 
 #: resources/forms.py:102
-#, fuzzy
-#| msgid ""
-#| "Enter the year (YYYY) that this version of the resource was published"
 msgid ""
 "Please enter the year (YYYY) when this version of the resource was published."
-msgstr "Εισαγάγετε το έτος (ΕΕΕΕ) που δημοσιεύτηκε αυτή η έκδοση του πόρου"
+msgstr ""
+"Παρακαλούμε εισαγάγετε το έτος (ΕΕΕΕ) που δημοσιεύτηκε αυτή η έκδοση του "
+"πόρου."
 
 #: resources/forms.py:107
-#, fuzzy
-#| msgid ""
-#| "Indicate the resource license, such as Creative Commons CC-BY.         "
-#| "Enter a URL link to the license if available."
 msgid ""
 "Please indicate the resource license, such as Creative Commons CC-BY. Enter "
 "a URL link to the license if available."
 msgstr ""
-"Υποδείξτε την άδεια πόρου, όπως το Creative Commons CC-BY. Εισαγάγετε έναν "
-"σύνδεσμο URL για την άδεια, εάν υπάρχει."
+"Παρακαλούμε υποδείξτε την άδεια πόρου, όπως το Creative Commons CC-BY. "
+"Εισαγάγετε έναν σύνδεσμο URL για την άδεια, εάν υπάρχει."
 
 #: resources/forms.py:118
 msgid ""
@@ -1511,6 +1410,9 @@ msgid ""
 "please add them <a href=\"/new_organisation\" target=\"_blank\">here</a > "
 "before submitting."
 msgstr ""
+"Παρακαλούμε επιλέξτε τον οργανισμό ή τους οργανισμούς που συνεισφέρουν στον "
+"πόρο. Εάν δεν περιλαμβάνονται στη λίστα, προσθέστε τους <a href=\"/"
+"new_organisation\" target=\"_blank\">εδώ</a > πριν τον υποβάλετε."
 
 #: resources/forms.py:130
 msgid ""
@@ -1518,50 +1420,47 @@ msgid ""
 "please add them <a href=\"/newProject\" target=\"_blank\">here</a > before "
 "submitting."
 msgstr ""
+"Επιλέξτε το έργο (τα έργα) από τα οποία δημιουργήθηκε ο πόρος. Εάν δεν "
+"περιλαμβάνονται στη λίστα, προσθέστε τα <a href=\"/newProject\" target="
+"\"_blank\">εδώ</a > πριν τα υποβάλετε."
 
 #: resources/forms.py:134
-#, fuzzy
-#| msgid "Projects"
 msgid "Project(s)"
-msgstr "Έργα"
+msgstr "Έργο(α)"
 
 #: resources/forms.py:139
-#, fuzzy
-#| msgid "Insert here the title or name of the resource"
 msgid "Please indicate the publisher of the resource"
-msgstr "Εισαγάγετε εδώ τον τίτλο ή το όνομα του πόρου"
+msgstr "Παρακαλούμε υποδείξτε τον εκδότη του πόρου"
 
 #: resources/forms.py:147
 msgid "Resource image for the thumbnail profile"
-msgstr ""
+msgstr "Εικόνα πόρου για το προφίλ μικρογραφίας"
 
 #: resources/forms.py:148
 msgid "This image will be resized to 600x400 pixels"
-msgstr ""
+msgstr "Το μέγεθος αυτής της εικόνας θα αλλάξει σε 600x400 εικονοστοιχεία"
 
 #: resources/forms.py:149
 msgid "Image 1 credit"
-msgstr "Πηγή Εικόνας 1"
+msgstr "Πίστωση Εικόνας 1"
 
 #: resources/forms.py:159
 msgid "Resource image for the profile heading"
-msgstr ""
+msgstr "Εικόνα πόρου για την επικεφαλίδα του προφίλ"
 
 #: resources/forms.py:160
 msgid "This image will be resized to 1100x400 pixels"
-msgstr ""
+msgstr "Το μέγεθος αυτής της εικόνας θα αλλάξει σε 1100x400 εικονοστοιχεία"
 
 #: resources/forms.py:161
 msgid "Image 2 credit"
-msgstr "Πηγή Εικόνας 2"
+msgstr "Πίστωση Εικόνας 2"
 
 #: resources/forms.py:173
 msgid "Curated lists"
 msgstr "Επιλεγμένες λίστες"
 
 #: resources/forms.py:181
-#, fuzzy
-#| msgid "Education level"
 msgid "Educational level"
 msgstr "Μορφωτικό επίπεδο"
 
@@ -1571,6 +1470,9 @@ msgid ""
 "Examples of educational levels include beginner, intermediate or advanced, "
 "and formal sets of level indicators."
 msgstr ""
+"Παρακαλούμε προσθέστε το απαιτούμενο επίπεδο εκπαίδευσης, ακολουθημένο από  "
+"κόμμα ή πατώντας enter. Παραδείγματα εκπαιδευτικών επιπέδων περιλαμβάνουν "
+"αρχάριους, μεσαίους ή προχωρημένους και επίσημους δείκτες επιπέδου."
 
 #: resources/forms.py:193
 msgid "Learning resource type"
@@ -1581,10 +1483,14 @@ msgid ""
 "Please indicate the predominant type or kind characterizing the learning "
 "resource. For example, presentation, handout, etc."
 msgstr ""
+"Σημειώστε τον κυρίαρχο τύπο ή είδος που χαρακτηρίζει τον πόρο μάθησης. Για "
+"παράδειγμα, παρουσίαση, φυλλάδιο κ.λπ."
 
 #: resources/forms.py:200
 msgid "Please write the approximate  hours required to finish the training."
 msgstr ""
+"Παρακαλούμε γράψτε τις κατά προσέγγιση ώρες που απαιτούνται για την "
+"ολοκλήρωση της εκπαίδευσης."
 
 #: resources/forms.py:202
 msgid ""
@@ -1592,14 +1498,17 @@ msgid ""
 "material, such as <i>requires registration</i>, <i>requires enrollment</i>, "
 "or <i>requires payment</i>."
 msgstr ""
+"Παρακαλούμε περιγράψτε τυχόν συνθήκες που επηρεάζουν την προσβασιμότητα του "
+"εκπαιδευτικού υλικού, όπως <i>απαιτείται προεγγραφή</i>, <i>απαιτείται "
+"εγγραφή</i> ή <i>απαιτεί πληρωμή</i>."
 
 #: resources/templates/_finder_resources.html:14
 msgid "Sort by Most Recent Updated"
-msgstr "Ταξινόμηση βάσει τα πιο πρόσφατα ενημερωμένα"
+msgstr "Ταξινόμηση κατά την πιο πρόσφατη ενημέρωση"
 
 #: resources/templates/_finder_resources.html:15
 msgid "Sort by featured"
-msgstr ""
+msgstr "Ταξινόμηση κατά επιλεγμένο"
 
 #: resources/templates/_finder_resources.html:19
 msgid "All languages"
@@ -1623,85 +1532,57 @@ msgstr "Κοινό"
 #: templates/horizontal_card_project.html:16
 #: templates/horizontal_card_resource.html:16
 msgid "Not approved"
-msgstr ""
+msgstr "Μη εγκεκριμένο"
 
 #: resources/templates/_finder_resources.html:75
-#, fuzzy
-#| msgid "Language"
 msgid "language:"
-msgstr "Γλώσσα"
+msgstr "γλώσσα:"
 
 #: resources/templates/_finder_resources.html:85
-#, fuzzy
-#| msgid "Theme"
 msgid "theme:"
-msgstr "Θέμα"
+msgstr "θέμα:"
 
 #: resources/templates/_finder_resources.html:92
-#, fuzzy
-#| msgid "Category"
 msgid "category:"
-msgstr "Κατηγορία"
+msgstr "κατηγορία:"
 
 #: resources/templates/_finder_resources.html:99
-#, fuzzy
-#| msgid "Audience"
 msgid "audience:"
-msgstr "Κοινό"
+msgstr "κοινό:"
 
 #: resources/templates/_finder_resources.html:111
-#, fuzzy
-#| msgid "Learning resource type"
 msgid "training resources found"
-msgstr "Τύπος εκπαιδευτικής πηγής"
+msgstr "εκπαιδευτικές πηγές που βρέθηκαν"
 
 #: resources/templates/_finder_resources.html:111
-#, fuzzy
-#| msgid "Learning resource type"
 msgid "training resource found"
-msgstr "Τύπος εκπαιδευτικής πηγής"
+msgstr "εκπαιδευτική πηγή που βρέθηκε"
 
 #: resources/templates/_finder_resources.html:114
-#, fuzzy
-#| msgid "resource"
 msgid "resources found"
-msgstr "πόρος"
+msgstr "πόροι που βρέθηκαν"
 
 #: resources/templates/_finder_resources.html:114
-#, fuzzy
-#| msgid "resource"
 msgid "resource found"
-msgstr "πόρος"
+msgstr "πόρος που βρέθηκε"
 
 #: resources/templates/_intro_form_resource.html:8
 msgid "resource"
 msgstr "πόρος"
 
 #: resources/templates/_intro_form_resource.html:14
-#, fuzzy
-#| msgid ""
-#| "Thank you for proposing a new citizen science resource to be shared on "
-#| "the EU-Citizen.Science Platform. Please fill in all of the mandatory "
-#| "information in the fields below (indicated with an asterisk*), and as "
-#| "much of the non-mandatory information as possible."
 msgid ""
 "Thank you for submitting a new citizen science resource to be shared on the "
 "EU-Citizen.Science platform. Please fill in all of the mandatory information "
 "in the fields below (indicated with an asterisk*), and as much of the non-"
 "mandatory information as possible."
 msgstr ""
-"Σας ευχαριστούμε που προτείνετε έναν νέο πόρο επιστήμης των πολιτών για "
-"κοινοποίηση στην πλατφόρμα EU-Citizen.Science. Συμπληρώστε όλες τις "
-"υποχρεωτικές πληροφορίες στα παρακάτω πεδία (επισημαίνονται με αστερίσκο *) "
-"και όσο το δυνατόν περισσότερες από τις μη υποχρεωτικές πληροφορίες."
+"Σας ευχαριστούμε που καταχωρίσατε έναν νέο πόρο επιστήμης των πολιτών για "
+"κοινοποίηση στην πλατφόρμα EU-Citizen.Science. Παρακαλούμε συμπληρώστε όλες "
+"τις υποχρεωτικές πληροφορίες στα παρακάτω πεδία (επισημαίνονται με αστερίσκο "
+"*) και όσο το δυνατόν περισσότερες από τις μη υποχρεωτικές πληροφορίες."
 
 #: resources/templates/_intro_form_resource.html:16
-#, fuzzy
-#| msgid ""
-#| "Resources can include documents such as guidelines, reports, policy "
-#| "briefs, and protocols; tools such as software or hardware, and other file "
-#| "formats such as videos or podcasts. Read our blog post on Types of "
-#| "Resources."
 msgid ""
 "Resources can include documents such as guidelines, reports, policy briefs, "
 "and protocols; tools such as software or hardware; and other file formats "
@@ -1709,18 +1590,10 @@ msgid ""
 msgstr ""
 "Οι πόροι μπορούν να περιλαμβάνουν έγγραφα όπως οδηγίες, εκθέσεις, σύντομες "
 "πολιτικές και πρωτόκολλα. εργαλεία όπως λογισμικό ή υλικό και άλλες μορφές "
-"αρχείων όπως βίντεο ή podcast. Διαβάστε την ανάρτηση ιστολογίου μας σχετικά "
-"με τους τύπους πόρων."
+"αρχείων όπως βίντεο ή podcast."
 
 #: resources/templates/_intro_form_resource.html:18
 #: resources/templates/_intro_form_training_resource.html:18
-#, fuzzy
-#| msgid ""
-#| "Upon saving this profile, your resource will be submitted for moderation "
-#| "by one of the members of the EU-Citizen.Science consortium. The "
-#| "moderation process is meant to ensure that all of the resources shared on "
-#| "the platform are indeed useful for citizen science projects and "
-#| "practitioners, and are of good quality. Read more about "
 msgid ""
 "Upon saving this profile, your resource will be submitted for moderation. "
 "The moderation process is meant to ensure that all of the resources shared "
@@ -1728,96 +1601,74 @@ msgid ""
 "and are of good quality."
 msgstr ""
 "Κατά την αποθήκευση αυτού του προφίλ, ο πόρος σας θα υποβληθεί για εποπτεία "
-"από ένα από τα μέλη της κοινοπραξίας EU-Citizen.Science. Η διαδικασία "
-"εποπτείας αποσκοπεί στο να διασφαλίσει ότι όλοι οι πόροι που μοιράζονται "
-"στην πλατφόρμα είναι πράγματι χρήσιμοι για τα έργα επιστήμης των πολιτών και "
-"τους επαγγελματίες, και είναι καλής ποιότητας. Διαβάστε περισσότερα για αυτό."
+"(έλεγχο και έγκριση). Η διαδικασία εποπτείας αποσκοπεί στο να διασφαλίσει "
+"ότι όλοι οι πόροι που μοιράζονται στην πλατφόρμα είναι πράγματι χρήσιμοι για "
+"τα έργα επιστήμης των πολιτών και τους επαγγελματίες, και είναι καλής "
+"ποιότητας."
 
 #: resources/templates/_intro_form_resource.html:20
 #: resources/templates/_intro_form_training_resource.html:20
-#, fuzzy
-#| msgid "The moderation process"
 msgid "Read more about the moderation process."
-msgstr "Η διαδικασία εποπτείας"
+msgstr "Διαβάστε περισσότερα για τη διαδικασία εποπτείας."
 
 #: resources/templates/_intro_form_resource.html:22
 #: resources/templates/_intro_form_training_resource.html:22
-#, fuzzy
-#| msgid ""
-#| "Quality factors that we consider include whether your resource is easy to "
-#| "access, is structured clearly, is easy to read (or hear or view) and "
-#| "understand. Read our"
 msgid ""
 "As quality factors we consider whether your resource is easy to access, is "
 "structured clearly, is easy to read (or hear or view) and understand."
 msgstr ""
 "Οι ποιοτικοί παράγοντες που εξετάζουμε περιλαμβάνουν εάν ο πόρος σας είναι "
-"εύκολα προσβάσιμος, είναι δομημένος με σαφήνεια, είναι ευανάγνωστος (ή "
-"ακούγεται  ή προβάλλεται σωστά) και κατανοητός. Διαβάστε  "
+"εύκολα προσβάσιμος, είναι δομημένος με σαφήνεια, είναι ευανάγνωστος και "
+"κατανοητός."
 
 #: resources/templates/_intro_form_resource.html:24
 #: resources/templates/_intro_form_training_resource.html:24
-#, fuzzy
-#| msgid "Quality criteria"
 msgid "Read our quality criteria."
-msgstr "Ποιοτικά κριτήρια"
+msgstr "Διαβάστε τα ποιοτικά κριτήρια μας."
 
 #: resources/templates/_intro_form_resource.html:28
 #: resources/templates/_intro_form_training_resource.html:28
-#, fuzzy
-#| msgid ""
-#| "Please note that we strongly recommend that you first ensure that your "
-#| "resource is hosted in a permanent repository (such as on a website that "
-#| "will be maintained and can provide a permalink, or a repository such as a "
-#| "publisher, "
 msgid ""
 "Please note that we strongly recommend that you first ensure that your "
 "resource is hosted in a permanent repository, such as on a website that will "
 "be maintained and can provide a permalink, or a repository such as a "
 "publisher like"
 msgstr ""
-"Λάβετε υπόψη ότι σας συνιστούμε να βεβαιωθείτε πρώτα ότι ο πόρος σας "
-"φιλοξενείται σε ένα μόνιμο αποθετήριο (όπως σε έναν ιστότοπο που θα "
-"διατηρείται και μπορεί να παρέχει μόνιμο σύνδεσμο ή αποθετήριο όπως εκδότη,"
+"Παρακαλούμε λάβετε υπόψη ότι συνιστούμε ανεπιφύλακτα να βεβαιωθείτε πρώτα "
+"ότι ο πόρος σας φιλοξενείται σε ένα μόνιμο αποθετήριο, όπως σε έναν ιστότοπο "
+"που θα διατηρηθεί και μπορεί να παρέχει έναν μόνιμο σύνδεσμο ή σε ένα χώρο "
+"αποθήκευσης όπως ένας εκδότης όπως"
 
 #: resources/templates/_intro_form_resource.html:29
 #: resources/templates/_intro_form_training_resource.html:29
 msgid "Zenodo"
-msgstr ""
+msgstr "Zenodo"
 
 #: resources/templates/_intro_form_resource.html:30
 #: resources/templates/_intro_form_training_resource.html:30
 msgid "OSF"
-msgstr ""
+msgstr "OSF"
 
 #: resources/templates/_intro_form_resource.html:31
 #: resources/templates/_intro_form_training_resource.html:31
 msgid "the RIO Journal"
-msgstr ""
+msgstr "το περιοδικό RIO"
 
 #: resources/templates/_intro_form_training_resource.html:8
-#, fuzzy
-#| msgid "Learning resource type"
 msgid "training resource"
-msgstr "Τύπος εκπαιδευτικής πηγής"
+msgstr "εκπαιδευτική πηγή"
 
 #: resources/templates/_intro_form_training_resource.html:14
-#, fuzzy
-#| msgid ""
-#| "Thank you for proposing a new citizen science resource to be shared on "
-#| "the EU-Citizen.Science Platform. Please fill in all of the mandatory "
-#| "information in the fields below (indicated with an asterisk*), and as "
-#| "much of the non-mandatory information as possible."
 msgid ""
 "Thank you for submitting a new citizen science training resource or "
 "educational material to be shared on the EU-Citizen.Science platform. Please "
 "fill in all of the mandatory information in the fields below (indicated with "
 "an asterisk*), and as much of the non-mandatory information as possible."
 msgstr ""
-"Σας ευχαριστούμε που προτείνετε έναν νέο πόρο επιστήμης των πολιτών για "
-"κοινοποίηση στην πλατφόρμα EU-Citizen.Science. Συμπληρώστε όλες τις "
-"υποχρεωτικές πληροφορίες στα παρακάτω πεδία (επισημαίνονται με αστερίσκο *) "
-"και όσο το δυνατόν περισσότερες από τις μη υποχρεωτικές πληροφορίες."
+"Σας ευχαριστούμε που καταχωρίσατε έναν νέο πόρο επιστήμης των πολιτών για "
+"κοινοποίηση στην πλατφόρμα EU-Citizen.Science. Παρακαλούμε συμπληρώστε όλες "
+"τις υποχρεωτικές πληροφορίες στα παρακάτω πεδία (επισημαίνονται με αστερίσκο "
+"*) και όσο το δυνατόν περισσότερες από τις μη υποχρεωτικές πληροφορίες."
 
 #: resources/templates/_intro_form_training_resource.html:16
 msgid ""
@@ -1829,18 +1680,27 @@ msgid ""
 "include massive open online courses (MOOCs), workshops, webinars, gamified "
 "training, and quizzes."
 msgstr ""
+"Οι εκπαιδευτικοί πόροι και το εκπαιδευτικό υλικό είναι υλικό που έχει "
+"σχεδιαστεί ή μπορεί να χρησιμοποιηθεί ρητά για τους στόχους της διδασκαλίας "
+"ή της εκπαίδευσης ενός ατόμου στην πρακτική της επιστήμης των πολιτών π.χ. "
+"πώς να σχεδιάσετε και να εφαρμόσετε μια δραστηριότητα που βασίζεται σε "
+"εθελοντές, πώς να ελέγχετε την ποιότητα των δεδομένων, τις ηθικές και "
+"νομικές απαιτήσεις της συνεργασίας με τους εθελοντές και της διαχείρισης των "
+"δεδομένων τους. Αυτά μπορεί να περιλαμβάνουν μαζικά ανοιχτά διαδικτυακά "
+"μαθήματα (MOOC), εργαστήρια, διαδικτυακά σεμινάρια, εκπαίδευση σε παιχνίδια "
+"και κουίζ."
 
 #: resources/templates/modal_resources.html:14
 msgid ""
 "resources by title or keywords by typing text directly into the the search "
 "bar"
 msgstr ""
-"Πόροι βάσει τίτλου ή λέξεων κλειδιών πληκτρολογημενων απευθείας στη μπάρα "
-"αναζήτησης "
+"πόροι βάσει τίτλου ή λέξεων κλειδιών πληκτρολογημενων απευθείας στη μπάρα "
+"αναζήτησης"
 
 #: resources/templates/modal_resources.html:15
 msgid "resources by date or by rating"
-msgstr "Πόροι βάσει ημερομηνίας ή αξιολόγησης"
+msgstr "πόροι βάσει ημερομηνίας ή αξιολόγησης"
 
 #: resources/templates/modal_resources.html:16
 msgid "search results by language, theme or category"
@@ -1855,20 +1715,20 @@ msgstr ""
 "Οι υποβληθέντες πόροι που έχουν περάσει από τη διαδικασία εποπτείας "
 "επισημαίνονται ως 'Υπό επεξεργασία'. Μόνο αυτά θα εμφανίζονται στα "
 "αποτελέσματα αναζήτησής σας, εκτός εάν φιλτράρετε για «δεν έχει ακόμη "
-"επεξεργαστεί» ή «Όλα»"
+"επεξεργαστεί» ή «Όλα»."
 
 #: resources/templates/resource.html:25
 #: resources/templates/resource_form.html:54
 msgid "Publish information"
-msgstr ""
+msgstr "Δημοσίευση πληροφοριών"
 
 #: resources/templates/resource.html:47
 msgid "Links with projects and/or organisations"
-msgstr ""
+msgstr "Σύνδεσμοι με έργα ή/και οργανισμούς"
 
 #: resources/templates/resource.html:64
 msgid "Training information"
-msgstr ""
+msgstr "Πληροφορίες εκπαίδευσης"
 
 #: resources/templates/resource.html:66
 msgid "Time required"
@@ -1892,27 +1752,23 @@ msgstr "Επεξεργασία"
 
 #: resources/templates/resource.html:109
 msgid "Comment"
-msgstr ""
+msgstr "Σχόλιο"
 
 #: resources/templates/resource.html:122
 msgid "Approve"
-msgstr ""
+msgstr "Έγκριση"
 
 #: resources/templates/resource.html:129
-#, fuzzy
-#| msgid "Featured"
 msgid "Set featured"
-msgstr "Προτεινόμενα"
+msgstr "Καθορισμός ροτεινόμενων"
 
 #: resources/templates/resource.html:136
-#, fuzzy
-#| msgid "training"
 msgid "Is training"
-msgstr "εκπαίδευση"
+msgstr "Εκπαιδεύει"
 
 #: resources/templates/resource.html:138
 msgid "Contact submitter"
-msgstr ""
+msgstr "Επικοινωνήστε με τον υποβάλλοντα"
 
 #: resources/templates/resource.html:144
 msgid "Language"
@@ -1931,34 +1787,28 @@ msgid "Learning Resource Type"
 msgstr "Τύπος εκπαιδευτικού πόρου"
 
 #: resources/templates/resource_form.html:83
-#, fuzzy
-#| msgid "Learning resource type"
 msgid "Training resource fields"
-msgstr "Τύπος εκπαιδευτικής πηγής"
+msgstr "Πεδία εκπαιδευτικής πηγής"
 
 #: resources/templates/resource_form.html:98
-#, fuzzy
-#| msgid "Submitted organisations"
 msgid "Links with projects and organisations"
-msgstr "Καταχωρημένοι οργανισμοί"
+msgstr "Σύνδεσμοι με έργα και οργανισμούς"
 
 #: resources/templates/resource_form.html:108
-#, fuzzy
-#| msgid "Resources library"
 msgid "Resource profile images"
-msgstr "Βιβλιοθήκη πόρων"
+msgstr "Εικόνες προφίλ πόρων"
 
 #: resources/views.py:121
 msgid "Training resource added correctly"
-msgstr ""
+msgstr "Ο εκπαιδευτικός πόρος προστέθηκε σωστά"
 
 #: resources/views.py:128
 msgid "Resource added correctly"
-msgstr ""
+msgstr "Ο πόρος προστέθηκε σωστά"
 
 #: templates/_about_section.html:8
 msgid "<a href='/about' class='text-white'>about</a> the platform"
-msgstr ""
+msgstr "<a href='/about' class='text-white'>σχετικά</a> με την πλατφόρμα"
 
 #: templates/_about_section.html:10 templates/about.html:57
 msgid ""
@@ -1971,26 +1821,21 @@ msgstr ""
 "την κοινότητα, για την κοινότητα."
 
 #: templates/_about_section.html:13
-#, fuzzy
-#| msgid ""
-#| "The vision for the platform is to serve as a Knowledge Hub, in aid of the "
-#| "mainstreaming of citizen science, and build on the growing impact of "
-#| "citizens participating in research across the full range of scientific "
-#| "enquiry."
 msgid ""
 "The vision for the platform is to serve as a Knowledge Hub and to become the "
 "European reference point for citizen science in aid of its mainstreaming."
 msgstr ""
-"Το όραμα για την πλατφόρμα είναι να χρησιμεύσει ως Κέντρο Γνώσης, για να "
-"βοηθήσει στην ενσωμάτωση της επιστήμης των πολιτών και να αξιοποιήσει τον "
-"αυξανόμενο αντίκτυπο των πολιτών που συμμετέχουν στην έρευνα σε όλο το φάσμα "
-"της επιστημονικής έρευνας."
+"Το όραμα για την πλατφόρμα είναι να λειτουργήσει ως Κόμβος Γνώσης και να "
+"γίνει το ευρωπαϊκό σημείο αναφοράς για την επιστήμη των πολιτών, βοηθώντας "
+"την ενσωμάτωσή της."
 
 #: templates/_about_section.html:17
 msgid ""
 "Learn more in the <a href='/about' class='text-dark'>about page</a><br /> "
 "and the <a href='/faq' class='text-white'>FAQ!</a>"
 msgstr ""
+"Μάθετε περισσότερα στη <a href='/about' class='text-dark'>σελίδα σχετικά με</"
+"a><br /> και στις <a href='/faq' class='text-white'>Συχνές ερωτήσεις! </a>"
 
 #: templates/_crop_zone.html:6 templates/_modal_to_crop.html:6
 msgid "Crop the photo"
@@ -2009,15 +1854,11 @@ msgid "Crop and upload"
 msgstr "Περικοπή και μεταφόρτωση"
 
 #: templates/_footer.html:10
-#, fuzzy
-#| msgid ""
-#| "You are in the alpha version of the EU-Citizen.Science platform. Please "
-#| "provide your feedback in the official"
 msgid ""
 "You are in the beta version of the eu-citizen.science platform. Please "
 "provide your feedback in the official"
 msgstr ""
-"Βρίσκεστε στην έκδοση alpha της πλατφόρμας EU-Citizen.Science. Δώστε τα "
+"Βρίσκεστε στην έκδοση beta της πλατφόρμας EU-Citizen.Science. Δώστε τα "
 "σχόλιά σας στον επίσημο φορέα"
 
 #: templates/_footer.html:12
@@ -2034,9 +1875,9 @@ msgid ""
 "2020 Framework Programme for Research and Innovation under grant agreement "
 "No. 824580"
 msgstr ""
-"Το EU-Citizen.Science έχει λάβει χρηματοδότηση από το πρόγραμμα πλαίσιο για "
+"Το EU-Citizen.Science έχει λάβει χρηματοδότηση από το πρόγραμμα-πλαίσιο για "
 "την έρευνα και την καινοτομία «Ορίζοντας 2020» της Ευρωπαϊκής Ένωσης βάσει "
-"της συμφωνίας επιχορήγησης αριθ. 824580 "
+"της συμφωνίας επιχορήγησης αριθ. 824580"
 
 #: templates/_footer.html:64
 msgid "Links"
@@ -2071,13 +1912,11 @@ msgstr "Συχνές ερωτήσεις"
 
 #: templates/_footer.html:98
 msgid "Final launch"
-msgstr ""
+msgstr "Τελική κυκλοφορία"
 
 #: templates/_footer.html:103
-#, fuzzy
-#| msgid "Quality criteria"
 msgid "Moderation & quality criteria"
-msgstr "Ποιοτικά κριτήρια"
+msgstr "Κριτήρια ελέγχου και ποιότητας"
 
 #: templates/_footer.html:106 templates/development.html:10
 msgid "Development"
@@ -2088,10 +1927,8 @@ msgid "API"
 msgstr "API"
 
 #: templates/_modalsubmit.html:6
-#, fuzzy
-#| msgid "Do you want to proceed?"
 msgid "What do you want to submit?"
-msgstr "Θέλετε να συνεχίσετε;"
+msgstr "Τι θέλετε να υποβάλετε;"
 
 #: templates/_modalsubmit.html:11
 msgid "Project"
@@ -2132,23 +1969,21 @@ msgstr "Δημιουργήστε ένα προφίλ για τον Οργανι�
 
 #: templates/_modalsubmit.html:20
 msgid "Event"
-msgstr ""
+msgstr "Εκδήλωση"
 
 #: templates/_modalsubmit.html:21
 msgid "Create an Event"
-msgstr ""
+msgstr "Δημιουργήστε μια Εκδήλωση"
 
 #: templates/_modalsubmit.html:23
-#, fuzzy
-#| msgid "The Platform"
 msgid "Platform"
 msgstr "Η Πλατφόρμα"
 
 #: templates/_modalsubmit.html:24
-#, fuzzy
-#| msgid "Create a profile for your Organisation"
 msgid "Create a profile for your citizen science platform or network"
-msgstr "Δημιουργήστε ένα προφίλ για τον Οργανισμό σας"
+msgstr ""
+"Δημιουργήστε ένα προφίλ για την πλατφόρμα ή το δίκτυο της επιστήμης των "
+"πολιτών σας"
 
 #: templates/_navbar.html:3
 msgid "SEARCH"
@@ -2164,11 +1999,11 @@ msgstr "ΕΚΔΗΛΩΣΕΙΣ"
 
 #: templates/_navbar.html:6
 msgid "MOOCS"
-msgstr ""
+msgstr "MOOCS"
 
 #: templates/_navbar.html:7
 msgid "CALL"
-msgstr ""
+msgstr "ΚΑΛΕΣΜΑ"
 
 #: templates/_navbar.html:8
 msgid "ABOUT"
@@ -2176,17 +2011,15 @@ msgstr "ΣΧΕΤΙΚΑ"
 
 #: templates/_save_zone.html:6
 msgid "Save & continue editing"
-msgstr ""
+msgstr "Αποθηκεύστε & συνεχίστε την επεξεργασία"
 
 #: templates/_subnavbar.html:34
-#, fuzzy
-#| msgid "The Platform"
 msgid "Platforms"
-msgstr "Η Πλατφόρμα"
+msgstr "Πλατφόρμες"
 
 #: templates/_subnavbar.html:40
 msgid "Users"
-msgstr ""
+msgstr "Χρήστες"
 
 #: templates/_subnavbar.html:47
 msgid "Our Gold Star Selection"
@@ -2194,13 +2027,11 @@ msgstr "Η Χρύση Επιλογή Μας"
 
 #: templates/_what_can_you_find_here.html:6
 msgid "what can you find here?"
-msgstr ""
+msgstr "τι μπορείς να βρεις εδώ;"
 
 #: templates/_what_can_you_find_here.html:13
-#, fuzzy
-#| msgid "Projects"
 msgid "projects"
-msgstr "Έργα"
+msgstr "έργα"
 
 #: templates/_what_can_you_find_here.html:16 templates/about.html:63
 msgid "that are engaging the public in research via citizen science activities"
@@ -2208,74 +2039,56 @@ msgstr ""
 "που εμπλέκουν το κοινό στην έρευνα μέσω δραστηριοτήτων επιστήμης των πολιτών"
 
 #: templates/_what_can_you_find_here.html:27
-#, fuzzy
-#| msgid "resource"
 msgid "resources"
-msgstr "πόρος"
+msgstr "πόροι"
 
 #: templates/_what_can_you_find_here.html:30
-#, fuzzy
-#| msgid "that are useful for citizen science practitioners"
 msgid "useful for planning and running citizen science projects"
-msgstr "που είναι χρήσιμα για όσους πραγματοποιούν έργα επιστήμης των πολιτών"
+msgstr "χρήσιμα για όσους σχεδιάζουν και τρέχουν έργα επιστήμης των πολιτών"
 
 #: templates/_what_can_you_find_here.html:41
-#, fuzzy
-#| msgid "in Resources"
 msgid "training resources"
-msgstr "στους Πόρους"
+msgstr "εκπαιδευτικοί πόροι"
 
 #: templates/_what_can_you_find_here.html:44
-#, fuzzy
-#| msgid "Ten principles of citizen science"
 msgid "about the practice of citizen science"
-msgstr "Οι 10 αρχές της επιστήμης των πολιτών"
+msgstr "σχετικά με την πρακτική της επιστήμης των πολιτών"
 
 #: templates/_what_can_you_find_here.html:57
-#, fuzzy
-#| msgid ""
-#| "Organisations that are involved in citizen science projects and research"
 msgid "involved in citizen science projects and research"
-msgstr "Οργανισμοί που εμπλέκονται σε έργα και έρευνα επιστήμης των πολιτών"
+msgstr "εμπλεκόμενοι σε έργα και έρευνα επιστήμης των πολιτών"
 
 #: templates/_what_can_you_find_here.html:68
-#, fuzzy
-#| msgid "The Platform"
 msgid "platforms"
-msgstr "Η Πλατφόρμα"
+msgstr "πλατφόρμες"
 
 #: templates/_what_can_you_find_here.html:70
 msgid "to get an overview of further developments in citizen science"
 msgstr ""
+"για να πάρετε μια επισκόπηση των περαιτέρω εξελίξεων στην επιστήμη των "
+"πολιτών"
 
 #: templates/_what_can_you_find_here.html:81
 msgid "users"
-msgstr ""
+msgstr "χρήστες"
 
 #: templates/_what_can_you_find_here.html:84
 msgid "with whom you can connect"
-msgstr ""
+msgstr "με τους οποίους μπορείτε να συνδεθείτε"
 
 #: templates/_what_can_you_find_here.html:92
 msgid ""
 " Check out our <a href='/events'>events</a> calendar, <a href='/blog'>blog</"
 "a> and <a href='/forum'>forum!</a>"
 msgstr ""
+" Δείτε το ημερολόγιο <a href='/events'>εκδηλώσεων</a>, το <a href='/"
+"blog'>ιστολόγιο</a> και το <a href='/forum'>φόρουμ!</a>"
 
 #: templates/_what_is_citizen_science.html:9
 msgid "what is <span class='text-white'>citizen science?</span>"
-msgstr ""
+msgstr "τι είναι η <span class='text-white'>επιστήμη των πολιτών;</span>"
 
 #: templates/_what_is_citizen_science.html:12
-#, fuzzy
-#| msgid ""
-#| "Citizen science actively involves the public in scientific research that "
-#| "generates new knowledge or understanding, and thus has the potential to "
-#| "bring together science, policy makers, and society as a whole in an "
-#| "impactful way. As a core dimension of Open Science, it opens up the "
-#| "opportunity for all members of society to take an active role in "
-#| "research, innovation and the development of evidence-based policy, at "
-#| "local, national and EU levels."
 msgid ""
 "Citizen science is any activity that involves the public in scientific "
 "research and thus has the potential to bring together science, policy "
@@ -2286,13 +2099,16 @@ msgid ""
 "dissemination of results. Citizen science is also an approach of scientific "
 "work that may be used as a part of a broader scientific activity."
 msgstr ""
-"Η επιστήμη των πολιτών εμπλέκει ενεργά το κοινό στην επιστημονική έρευνα που "
-"δημιουργεί νέες γνώσεις ή κατανόηση και έτσι έχει τη δυνατότητα να φέρει σε "
-"επαφή την επιστήμη, τους υπεύθυνους χάραξης πολιτικής και την κοινωνία στο "
-"σύνολό της. Ως βασική διάσταση της Ανοικτής Επιστήμης, ανοίγει την ευκαιρία "
-"για όλα τα μέλη της κοινωνίας να αναλάβουν ενεργό ρόλο στην έρευνα, την "
-"καινοτομία και την ανάπτυξη τεκμηριωμένης πολιτικής, σε τοπικό, εθνικό και "
-"κοινοτικό επίπεδο."
+"Η επιστήμη των πολιτών είναι κάθε δραστηριότητα που εμπλέκει το κοινό στην "
+"επιστημονική έρευνα και έχει έτσι τη δυνατότητα να φέρει σε επαφή την "
+"επιστήμη, τους φορείς χάραξης πολιτικής και την κοινωνία στο σύνολό της με "
+"τρόπο που να έχει αντίκτυπο. Μέσω της επιστήμης των πολιτών, όλοι οι "
+"άνθρωποι μπορούν να συμμετάσχουν σε πολλά στάδια της επιστημονικής "
+"διαδικασίας, από τον σχεδιασμό του ερευνητικού ερωτήματος, τη συλλογή "
+"δεδομένων και τη χαρτογράφηση εθελοντών, την ερμηνεία και την ανάλυση των "
+"δεδομένων, έως τη δημοσίευση και τη διάδοση των αποτελεσμάτων. Η επιστήμη "
+"των πολιτών είναι επίσης μια προσέγγιση επιστημονικής εργασίας που μπορεί να "
+"χρησιμοποιηθεί ως μέρος μιας ευρύτερης επιστημονικής δραστηριότητας."
 
 #: templates/_what_is_citizen_science.html:16
 msgid ""
@@ -2300,28 +2116,23 @@ msgid ""
 "Citizen Science</a> and the <a href='/resource/87'>ECSA Characteristics of "
 "Citizen Science!</a>"
 msgstr ""
+"Μάθετε περισσότερα σχετικά με αυτό με τις <a href='/resource/88'>10 Αρχές "
+"της Επιστήμης των Πολιτών της ECSA</a> και τα <a href='/"
+"resource/87'>Χαρακτηριστικά της Επιστήμης των Πολιτών της ECSA!</a>"
 
 #: templates/about.html:12
-#, fuzzy
-#| msgid "About"
 msgid "about"
-msgstr "Σχετικά"
+msgstr "σχετικά"
 
 #: templates/about.html:20
 msgid "Watch our teaser, in 12 different languages!"
-msgstr ""
+msgstr "Δείτε το teaser μας, σε 12 διαφορετικές γλώσσες!"
 
 #: templates/about.html:52
 msgid "The Platform"
 msgstr "Η Πλατφόρμα"
 
 #: templates/about.html:58
-#, fuzzy
-#| msgid ""
-#| "The vision for the platform is to serve as a Knowledge Hub, in aid of the "
-#| "mainstreaming of citizen science, and build on the growing impact of "
-#| "citizens participating in research across the full range of scientific "
-#| "enquiry."
 msgid ""
 "The vision for the platform is to serve as a Knowledge Hub, in aid of the "
 "mainstreaming of citizen science, and build on the growing impact of "
@@ -2329,108 +2140,74 @@ msgid ""
 "enquiry. We accomplish this by supporting the sharing of knowledge, know-"
 "how, and experience between anyone doing or wanting to do citizen science."
 msgstr ""
-"Το όραμα για την πλατφόρμα είναι να χρησιμεύσει ως Κέντρο Γνώσης, για να "
-"βοηθήσει στην ενσωμάτωση της επιστήμης των πολιτών και να αξιοποιήσει τον "
-"αυξανόμενο αντίκτυπο των πολιτών που συμμετέχουν στην έρευνα σε όλο το φάσμα "
-"της επιστημονικής έρευνας."
+"Το όραμα για την πλατφόρμα είναι να χρησιμεύσει ως κόμβος γνώσης, βοηθώντας "
+"την ενσωμάτωση της επιστήμης των πολιτών και αξιοποιώντας τον αυξανόμενο "
+"αντίκτυπο της συμμετοχής των πολιτών στην έρευνα σε όλο το φάσμα της "
+"επιστημονικής έρευνας. Το επιτυγχάνουμε αυτό υποστηρίζοντας την ανταλλαγή "
+"γνώσεων, τεχνογνωσίας και εμπειρίας μεταξύ όλων όσοι κάνουν ή θέλουν να "
+"κάνουν επιστήμη των πολιτών."
 
 #: templates/about.html:59
-#, fuzzy
-#| msgid "On this platform you will find"
 msgid "On this platform you will find:"
-msgstr "Σε αυτήν την πλατφόρμα θα βρείς"
+msgstr "Σε αυτήν την πλατφόρμα θα βρείτε:"
 
 #: templates/about.html:67
 msgid "that are useful for citizen science practitioners"
 msgstr "που είναι χρήσιμα για όσους πραγματοποιούν έργα επιστήμης των πολιτών"
 
 #: templates/about.html:71
-#, fuzzy
-#| msgid "Training resources and materials citizen science as a practice"
 msgid "and materials on citizen science as a practice"
-msgstr "Εκπαιδευτικοί πόροι και υλικό επιστήμης των πολιτών ως πρακτική"
+msgstr "και υλικό για την επιστήμη των πολιτών ως πρακτική"
 
 #: templates/about.html:74
-#, fuzzy
-#| msgid "Training"
 msgid "Training modules"
-msgstr "Εκπαίδευση"
+msgstr "Εκπαιδευτικές ενότητες"
 
 #: templates/about.html:75
 msgid "on citizen science in a wide range of themes"
-msgstr ""
+msgstr "για την επιστήμη των πολιτών σε ένα ευρύ φάσμα θεμάτων"
 
 #: templates/about.html:78
-#, fuzzy
-#| msgid ""
-#| "Organisations that are involved in citizen science projects and research"
 msgid "that are involved in citizen science projects and research"
-msgstr "Οργανισμοί που εμπλέκονται σε έργα και έρευνα επιστήμης των πολιτών"
+msgstr "που εμπλέκονται σε έργα και έρευνα επιστήμης των πολιτών"
 
 #: templates/about.html:80
-#, fuzzy
-#| msgid "calendar"
 msgid "Events calendar"
-msgstr "ημερολόγιο"
+msgstr "Ημερολόγιο γεγονότων"
 
 #: templates/about.html:81
 msgid "A blog"
-msgstr ""
+msgstr "Ενα blog"
 
 #: templates/about.html:82 templates/base_r2.html:77
 msgid "Forum"
-msgstr ""
+msgstr "Τόπος δημόσιας συζήτησης"
 
 #: templates/about.html:83
-#, fuzzy
-#| msgid ""
-#| "Community Forums for questions, conversations, and collaboration with the "
-#| "rest of the community."
 msgid ""
 "for questions, conversations, and collaboration with the rest of the "
 "community"
-msgstr ""
-"Φόρουμ κοινότητας για ερωτήσεις, συνομιλίες και συνεργασία με την υπόλοιπη "
-"κοινότητα"
+msgstr "για ερωτήσεις, συνομιλίες και συνεργασία με την υπόλοιπη κοινότητα"
 
 #: templates/about.html:87
-#, fuzzy
-#| msgid ""
-#| "Spotted something missing? You can add your own profiles for Resources, "
-#| "Projects, and Training via the +ADD button in the top menu. Have a "
-#| "suggestion for us? Please share your thoughts in our community feedback "
-#| "forum or in the"
 msgid ""
 "Spotted something missing? You can add your own profiles via the <i>New "
 "submission</i> button in the top menu. Have a suggestion for us? Please "
 "share your thoughts via the"
 msgstr ""
-"Εντοπίσατε κάτι που λείπει; Μπορείτε να προσθέσετε τα δικά σας προφίλ για "
-"πόρους, έργα και εκπαίδευση μέσω του κουμπιού + ΠΡΟΣΘΗΚΗ στο πάνω μενού. "
-"Έχετε μια πρόταση για εμάς; Μοιραστείτε τις σκέψεις σας στο φόρουμ σχολίων "
-"κοινότητας ή στο"
+"Εντοπίσατε κάτι που λείπει; Μπορείτε να προσθέσετε τα δικά σας προφίλ μέσω "
+"της επιλογής<i>Νέα υποβολή</i> στο επάνω μέρος του μενού. Έχετε κάποια "
+"πρόταση για εμάς; Μοιραστείτε τις σκέψεις σας μέσω του"
 
 #: templates/about.html:87
-#, fuzzy
-#| msgid "contact"
 msgid "contact form"
-msgstr "επικοινωνία"
+msgstr "φόρμα επικοινωνίας"
 
 #: templates/about.html:91
-#, fuzzy
-#| msgid "The Project"
 msgid "The project"
-msgstr "Το Έργο"
+msgstr "Το έργο"
 
 #: templates/about.html:96
-#, fuzzy
-#| msgid ""
-#| "The EU-Citizen.Science project has been funded by the European Commission "
-#| "Horizon 2020 programme, in the Science with and for Society programme of "
-#| "work (also known as SwafS).  Our mission is ambitious –to become the "
-#| "reference point for citizen science through cross-network knowledge "
-#| "sharing for citizen science participants, practitioners, researchers, "
-#| "policy makers and society across Europe"
 msgid ""
 "The EU-Citizen.Science project has been funded by the European Commission "
 "Horizon 2020 programme, in the Science with and for Society programme of "
@@ -2441,123 +2218,83 @@ msgid ""
 msgstr ""
 "Το έργο EU-Citizen.Science χρηματοδοτήθηκε από το πρόγραμμα « Ορίζοντας "
 "2020» της Ευρωπαϊκής Επιτροπής, στο πρόγραμμα εργασίας «Επιστήμη με και για "
-"την κοινωνία» (επίσης γνωστό ως SwafS). Η αποστολή μας είναι φιλόδοξη - να "
-"γίνει το σημείο αναφοράς για την επιστήμη των πολιτών μέσω ανταλλαγής "
+"την κοινωνία» (επίσης γνωστό ως SwafS). Η αποστολή του έργου είναι φιλόδοξη "
+"- να γίνει το σημείο αναφοράς για την επιστήμη των πολιτών μέσω ανταλλαγής "
 "γνώσεων μεταξύ δικτύων για τους συμμετέχοντες στην επιστήμη των πολιτών, "
 "τους επαγγελματίες, τους ερευνητές, τους υπεύθυνους χάραξης πολιτικής και "
-"την κοινωνία σε όλη την Ευρώπη"
+"την κοινωνία σε όλη την Ευρώπη."
 
 #: templates/about.html:98
-#, fuzzy
-#| msgid ""
-#| "is that Citizen Science becomes an appreciated and widely established "
-#| "means for the democratization of science in Europe"
 msgid ""
 "<b>Our Vision</b> is that Citizen Science becomes an appreciated and widely "
 "established means for the democratization of science in Europe"
 msgstr ""
-"είναι ότι η Επιστήμη των Πολιτών γίνεται ένα εκτιμώμενο και ευρέως "
-"διαδεδομένο μέσο για τον εκδημοκρατισμό της επιστήμης στην Ευρώπη"
+"<b>Το Όραμα Μας</b> είναι ότι η Επιστήμη των Πολιτών γίνεται ένα εκτιμώμενο "
+"και ευρέως διαδεδομένο μέσο για τον εκδημοκρατισμό της επιστήμης στην Ευρώπη"
 
 #: templates/about.html:99
-#, fuzzy
-#| msgid ""
-#| "is to become the European reference point for CS through cross-network "
-#| "knowledge sharing for citizen science participants, practitioners, "
-#| "researchers, policy makers and society across Europe"
 msgid ""
 "<b>Our Core Mission</b> is to become the European reference point for "
 "citizen science through cross-network knowledge sharing for citizen science "
 "participants, practitioners, researchers, policy makers and society across "
 "Europe."
 msgstr ""
-"είναι να γίνει το ευρωπαϊκό σημείο αναφοράς για την Επιστήμη των Πολιτών "
-"μέσω ανταλλαγής γνώσεων μεταξύ δικτύων για τους συμμετέχοντες στην επιστήμη "
-"των πολιτών, τους επαγγελματίες, τους ερευνητές, τους υπεύθυνους χάραξης "
-"πολιτικής και την κοινωνία σε όλη την Ευρώπη"
+"<b>Η Βασική Μας Αποστολή</b>είναι να γίνει το ευρωπαϊκό σημείο αναφοράς για "
+"την Επιστήμη των Πολιτών μέσω ανταλλαγής γνώσεων μεταξύ δικτύων για τους "
+"συμμετέχοντες στην επιστήμη των πολιτών, τους επαγγελματίες, τους ερευνητές, "
+"τους υπεύθυνους χάραξης πολιτικής και την κοινωνία σε όλη την Ευρώπη."
 
 #: templates/about.html:100
-#, fuzzy
-#| msgid "Objective 4: Explore"
 msgid "Our objectives are:"
-msgstr "Στόχος 4: Εξερεύνηση"
+msgstr "Οι στόχοι μας είναι:"
 
 #: templates/about.html:102
-#, fuzzy
-#| msgid ""
-#| "EU-Citizen.Science as the knowledge and community hub for high-quality CS "
-#| "exchange and learning in Europe"
 msgid ""
 "to establish EU-Citizen.Science as the knowledge and community hub for high-"
 "quality citizen science exchange and learning in Europe."
 msgstr ""
-"Η πλατφόρμα EU-Citizen.Science ως κέντρο γνώσης και κοινότητας για ανταλλαγή "
-"και μάθηση της Επιστήμης των Πολιτών υψηλής ποιότητας στην Ευρώπη"
+"να καθιερωθεί το EU-Citizen.Science ως ο κόμβος γνώσης και κοινότητας για "
+"ανταλλαγές και μάθηση υψηλής ποιότητας στον τομέα της επιστήμης των πολιτών "
+"στην Ευρώπη."
 
 #: templates/about.html:103
-#, fuzzy
-#| msgid ""
-#| "the CS knowledge base and celebrate outstanding practices and state of "
-#| "the art in CS in Europe"
 msgid ""
 "to consolidate the citizen science knowledge base and celebrate outstanding "
 "practices and state of the art in citizen science in Europe."
 msgstr ""
-"Η βασική γνώση Επιστήμης των Πολιτών και ο εορτασμός των εκπληκτικών "
-"πρακτικών και την τελευταία λέξη της τεχνολογίας στην Επιστήμη των Πολιτών "
-"στην Ευρώπη "
+"να εδραιωθεί η βασική γνώση της Επιστήμης των Πολιτών και να αναγνωριστούν "
+"οι εξαιρετικές πρακτικές και η πρόοδος της επιστήμης των πολιτών στην Ευρώπη."
 
 #: templates/about.html:104
-#, fuzzy
-#| msgid ""
-#| "diverse stakeholders to become citizen scientists, start CS initiatives, "
-#| "and implement CS approaches professionally"
 msgid ""
 "to empower diverse stakeholders to become citizen scientists, start citizen "
 "science initiatives, and implement citizen science approaches professionally."
 msgstr ""
-"ποικίλοι ενδιαφερόμενοι για να γίνουν πολίτες επιστήμονες, να ξεκινήσουν "
-"πρωτοβουλίες επιστήμης των πολιτών και να εφαρμόσουν επαγγελματικές "
-"προσεγγίσεις επιστήμης των πολιτών"
+"να ενισχυθούν οι ποικίλοι ενδιαφερόμενοι για να γίνουν πολίτες επιστήμονες, "
+"να ξεκινήσουν πρωτοβουλίες επιστήμης των πολιτών και να εφαρμόσουν "
+"επαγγελματικές προσεγγίσεις επιστήμης των πολιτών."
 
 #: templates/about.html:105
-#, fuzzy
-#| msgid ""
-#| "new pathways for participatory governance, by strengthening links between "
-#| "CS and policy making"
 msgid ""
 "to explore new pathways for participatory governance, by strengthening links "
 "between citizen science and policy making."
 msgstr ""
-"νέοι δρόμοι συμμετοχικής διακυβέρνησης, ενισχύοντας τους δεσμούς μεταξύ της "
-"επιστήμης των πολιτών και της χάραξης πολιτικής"
+"να εξερευνηθούν νέοι δρόμοι συμμετοχικής διακυβέρνησης, ενισχύοντας τους "
+"δεσμούς μεταξύ της επιστήμης των πολιτών και της χάραξης πολιτικής."
 
 #: templates/about.html:107
-#, fuzzy
-#| msgid ""
-#| "CS into the mainstream of public engagement, science communication and "
-#| "education"
 msgid ""
 "to advance citizen science into the mainstream of public engagement, science "
 "communication and education."
 msgstr ""
-"Η Επιστήμη των Πολιτών στο κύριο ρεύμα της δημόσιας δέσμευσης, της "
-"επιστημονικής επικοινωνίας και της εκπαίδευσης"
+"για την προώθηση της επιστήμης των πολιτών στο κύριο ρεύμα της δημόσιας "
+"δέσμευσης, της επιστημονικής επικοινωνίας και της εκπαίδευσης."
 
 #: templates/about.html:115
-#, fuzzy
-#| msgid "The Team"
 msgid "The team"
-msgstr "Η Ομάδα"
+msgstr "Η ομάδα"
 
 #: templates/about.html:120
-#, fuzzy
-#| msgid ""
-#| "The EU-Citizen.Science consortium consists of 14 partners and 9 third "
-#| "parties from across 14 European member states, as well as other project "
-#| "supporters. We represent a variety of stakeholders that are active in "
-#| "citizen science, including universities, non-governmental organisations, "
-#| "local authorities, community service organisations and museums."
 msgid ""
 " The EU-Citizen.Science consortium consists of 14 partners and 9 third "
 "parties from across 14 European countries. We represent a variety of "
@@ -2565,19 +2302,20 @@ msgid ""
 "governmental organisations, local authorities, community service "
 "organisations and museums."
 msgstr ""
-"Η κοινοπραξία EU-Citizen.Science αποτελείται από 14 εταίρους και 9 τρίτα "
-"μέρη από 14 ευρωπαϊκά κράτη μέλη, καθώς και άλλους υποστηρικτές του έργου. "
-"Εκπροσωπούμε μια ποικιλία ενδιαφερομένων που δραστηριοποιούνται στην "
-"επιστήμη των πολιτών, συμπεριλαμβανομένων πανεπιστημίων, μη κυβερνητικών "
-"οργανώσεων, τοπικών αρχών, κοινοτικών οργανώσεων και μουσείων"
+" Η κοινοπραξία EU-Citizen.Science αποτελείται από 14 βασικούς εταίρους και 9 "
+"συμπληρωματικούς (τρίτα μέρη), από 14 ευρωπαϊκά κράτη-μέλη, καθώς και άλλους "
+"υποστηρικτές του έργου. Εκπροσωπούμε μια ποικιλία ενδιαφερομένων που "
+"δραστηριοποιούνται στην επιστήμη των πολιτών, συμπεριλαμβανομένων "
+"πανεπιστημίων, μη κυβερνητικών οργανώσεων, τοπικών αρχών, κοινοτικών "
+"οργανώσεων και μουσείων."
 
 #: templates/about.html:126
 msgid "Consortium partners"
-msgstr "Συνεργάτες κοινοπραξίας"
+msgstr "Βασικοί συνεργάτες - εταίροι κοινοπραξίας"
 
 #: templates/about.html:188
 msgid "Third party partners"
-msgstr "Συνεργάτες Τρίτα μέλη"
+msgstr "Συμπληρωματικοί συνεργάτες -εταίροι (τρίτα μέλη) κοινοπραξίας"
 
 #: templates/base.html:74 templates/base2.html:68 templates/base_forms.html:51
 #: templates/base_r2.html:145
@@ -2654,7 +2392,7 @@ msgstr "αποσύνδεση"
 
 #: templates/base_r2.html:65
 msgid "Blog"
-msgstr ""
+msgstr "Blog"
 
 #: templates/base_r2.html:68
 msgid "Events"
@@ -2662,11 +2400,11 @@ msgstr "Εκδηλώσεις"
 
 #: templates/base_r2.html:72
 msgid "Moocs"
-msgstr ""
+msgstr "Moocs"
 
 #: templates/base_r2.html:83 templates/final_event.html:4
 msgid "Final Event"
-msgstr ""
+msgstr "Τελική Εκδήλωση"
 
 #: templates/base_r2.html:127
 msgid "Signup"
@@ -2674,35 +2412,31 @@ msgstr "Εγγραφή"
 
 #: templates/base_r2.html:139
 msgid "My personal area"
-msgstr ""
+msgstr "Η προσωπική μου περιοχή"
 
 #: templates/base_r2.html:140
-#, fuzzy
-#| msgid "My organisations"
 msgid "My submissions"
-msgstr "Οι οργανισμοί μου"
+msgstr "Οι καταχωρίσεις μου"
 
 #: templates/base_r2.html:141
 msgid "My bookmarks"
-msgstr ""
+msgstr "Οι σελιδοδείκτες"
 
 #: templates/base_r2.html:142
 msgid "My privacy center"
-msgstr ""
+msgstr "Το κέντρο απορρήτου μου"
 
 #: templates/base_r2.html:156
 msgid "New submission"
-msgstr ""
+msgstr "Νέα καταχώριση"
 
 #: templates/base_r2.html:214
 msgid "FORUM"
 msgstr "ΦΟΡΟΥΜ"
 
 #: templates/call.html:10
-#, fuzzy
-#| msgid "Activate your EU-Citizen.Science account."
 msgid "EU-Citizen.Science call (closed)"
-msgstr "Ενεργοποιήστε το EU-CItizen.Science  λογαριασμό σας"
+msgstr "Κάλεσμα EU-Citizen.Science (κλειστό)"
 
 #: templates/criteria.html:10 templates/moderation_quality_criteria.html:43
 msgid "Quality criteria"
@@ -2710,7 +2444,7 @@ msgstr "Ποιοτικά κριτήρια"
 
 #: templates/curated.html:11
 msgid "gold star <span class='lightBlue-color'> selection</span>"
-msgstr ""
+msgstr "επιλογή<span class='lightBlue-color'> χρυσό αστέρι </span>"
 
 #: templates/curated.html:14
 msgid ""
@@ -2726,27 +2460,20 @@ msgid ""
 "science project or simply learn about citizen science, categorised across "
 "the project lifecycle."
 msgstr ""
+"για να σας βοηθήσει να ξεκινήσετε να σχεδιάζετε και να ξεκινήσετε το δικό "
+"σας έργο επιστήμης των πολιτών ή απλώς να μάθετε για την επιστήμη των "
+"πολιτών, όπως αυτή \"κατηγοριοποιείται\" στα τμήματα του κύκλου ζωής του "
+"έργου."
 
 #: templates/faq.html:12
 msgid "frequently <span class='lightBlue-color'>asked questions</span>"
-msgstr ""
+msgstr "συχνές <span class='lightBlue-color'>ερωτήσεις</span>"
 
 #: templates/faq.html:21
-#, fuzzy
-#| msgid "Citizen Science"
 msgid "What is Citizen Science?"
-msgstr "Η Επιστήμη των Πολιτών"
+msgstr "Τι είναι Επιστήμη των Πολιτών;"
 
 #: templates/faq.html:27
-#, fuzzy
-#| msgid ""
-#| "Citizen science actively involves the public in scientific research that "
-#| "generates new knowledge or understanding, and thus has the potential to "
-#| "bring together science, policy makers, and society as a whole in an "
-#| "impactful way. As a core dimension of Open Science, it opens up the "
-#| "opportunity for all members of society to take an active role in "
-#| "research, innovation and the development of evidence-based policy, at "
-#| "local, national and EU levels."
 msgid ""
 "Citizen science actively involves the public in scientific research that "
 "generates new knowledge or understanding, and thus has the potential to "
@@ -2759,12 +2486,15 @@ msgid ""
 "interpretation and analysis, to publication and dissemination of results."
 msgstr ""
 "Η επιστήμη των πολιτών εμπλέκει ενεργά το κοινό στην επιστημονική έρευνα που "
-"δημιουργεί νέες γνώσεις ή κατανόηση και έτσι έχει τη δυνατότητα να φέρει σε "
-"επαφή την επιστήμη, τους υπεύθυνους χάραξης πολιτικής και την κοινωνία στο "
-"σύνολό της. Ως βασική διάσταση της Ανοικτής Επιστήμης, ανοίγει την ευκαιρία "
-"για όλα τα μέλη της κοινωνίας να αναλάβουν ενεργό ρόλο στην έρευνα, την "
-"καινοτομία και την ανάπτυξη τεκμηριωμένης πολιτικής, σε τοπικό, εθνικό και "
-"κοινοτικό επίπεδο."
+"δημιουργεί νέα γνώση ή κατανόηση, και έτσι έχει τη δυνατότητα να φέρει κοντά "
+"την επιστήμη, τους υπεύθυνους χάραξης πολιτικής και την κοινωνία στο σύνολό "
+"της με αποτελεσματικό τρόπο. Ως βασική διάσταση της Ανοιχτής Επιστήμης, "
+"δίνει την ευκαιρία σε όλα τα μέλη της κοινωνίας να αναλάβουν ενεργό ρόλο "
+"στην έρευνα, την καινοτομία και την ανάπτυξη τεκμηριωμένης πολιτικής, σε "
+"τοπικό, εθνικό και ευρωπαϊκό επίπεδο. Οι πολίτες επιστήμονες μπορούν να "
+"συμμετέχουν σε πολλά στάδια της επιστημονικής διαδικασίας, από τη συλλογή "
+"δεδομένων και την εθελοντική χαρτογράφηση, μέσω της ερμηνείας και ανάλυσης "
+"δεδομένων, έως τη δημοσίευση και τη διάδοση των αποτελεσμάτων."
 
 #: templates/faq.html:28
 msgid ""
@@ -2780,10 +2510,22 @@ msgid ""
 "10 Principles of Citizen Science</a>. They have been translated to 30 "
 "languages by the citizen science community!"
 msgstr ""
+"Η επιστήμη των πολιτών είναι μια ευέλικτη έννοια που μπορεί να προσαρμοστεί "
+"και να εφαρμοστεί σε διαφορετικές καταστάσεις και κλάδους και αντιπροσωπεύει "
+"μια σειρά προσεγγίσεων και ιστορικών πρακτικών για τη συμμετοχή του κοινού "
+"στην επιστημονική έρευνα. Ως αποτέλεσμα, υπάρχει ένα ευρύ φάσμα "
+"δραστηριοτήτων που μπορούν να εμπίπτουν στην ομπρέλα της επιστήμης των "
+"πολιτών, όπως φαίνεται στο <a target='_blank' href='https://zenodo.org/"
+"communities/citscicharacteristics/' >Χαρακτηριστικά της Επιστήμης των "
+"Πολιτών της ECSA </a>. Μια καλή πηγή καθοδήγησης όταν σχεδιάζετε μια "
+"επιστημονική πρωτοβουλία πολιτών είναι οι <a target='_blank' href='https://"
+"zenodo.org/record/5127534#.YV7PKt9CRhF'>10 Αρχές της Επιστήμης των Πολιτών "
+"της ECSA </a>. Έχουν μεταφραστεί σε 30 γλώσσες από την επιστημονική "
+"κοινότητα των πολιτών!"
 
 #: templates/faq.html:34
 msgid "Who is the EU-Citizen.Science Knowledge Hub for?"
-msgstr ""
+msgstr "Σε ποιον απευθύνεται το EU-Citizen.Science Knowledge Hub;"
 
 #: templates/faq.html:40
 msgid ""
@@ -2791,6 +2533,10 @@ msgid ""
 "for the platform is to encourage the democratization of science via the wide "
 "establishment and appreciation of citizen science approaches across Europe."
 msgstr ""
+"Η κοινότητά μας είναι ανοιχτή σε οποιονδήποτε ενδιαφέρεται για την επιστήμη "
+"των πολιτών - το όραμά μας για την πλατφόρμα είναι να ενθαρρύνουμε τον "
+"εκδημοκρατισμό της επιστήμης μέσω της ευρείας καθιέρωσης και εκτίμησης των "
+"προσεγγίσεων της επιστήμης των πολιτών σε όλη την Ευρώπη."
 
 #: templates/faq.html:42
 msgid ""
@@ -2802,16 +2548,18 @@ msgid ""
 "and society as a whole). It doesn’t matter if you have years of experience "
 "or are completely new to citizen science."
 msgstr ""
+"Ελπίζουμε να γίνουμε το κεντρικό σημείο αναφοράς για οποιονδήποτε δημιουργεί "
+"ή διευθύνει ένα έργο επιστήμης των πολιτών (επαγγελματίες, ερευνητές, "
+"εκπαιδευτικοί, κοινότητες και πολίτες), όποιος υποστηρίζει το οικοσύστημα "
+"έργων επιστήμης των πολιτών (διαμορφωτές πολιτικής και φορείς "
+"χρηματοδότησης) και οποιονδήποτε ενδιαφέρεται για τα αποτελέσματα και ο "
+"αντίκτυπος της επιστήμης των πολιτών (υπεύθυνοι λήψης αποφάσεων, Τύπος και "
+"κοινωνία συνολικά). Δεν έχει σημασία αν έχετε χρόνια εμπειρίας ή είστε "
+"εντελώς νέοι στην επιστήμη των πολιτών."
 
 #: templates/faq.html:48
-#, fuzzy
-#| msgid ""
-#| "Thank you for creating a profile for your organisation on the EU-Citizen."
-#| "Science Platform."
 msgid "What are the features of the EU-Citizen.Science platform?"
-msgstr ""
-"Σας ευχαριστούμε που δημιουργήσατε ένα προφίλ για τον οργανισμό σας στην "
-"πλατφόρμα EU-Citizen.Science."
+msgstr "Ποια είναι τα χαρακτηριστικά της πλατφόρμας EU-Citizen.Science;"
 
 #: templates/faq.html:54
 msgid ""
@@ -2829,10 +2577,25 @@ msgid ""
 "a> involved in citizen science projects and research, community forums for "
 "questions and conversations with the community."
 msgstr ""
+"Στην πλατφόρμα μπορείτε να περιηγηθείτε και να αναζητήσετε <a href='/"
+"resources'>πόρους</a> που είναι χρήσιμοι για τον σχεδιασμό και την εκτέλεση "
+"έργων επιστήμης των πολιτών, <a href='/training_resources'>εκπαιδευτικούς "
+"πόρους </a> και υλικό σχετικά με την πρακτική της επιστήμης των πολιτών "
+"και<a href='/projects'>έργα επιστήμης των πολιτών</a> για να μάθετε από την "
+"εμπειρία άλλων και να συνεργαστείτε. Υπάρχει μια σελίδα με <a "
+"target='_blank' href='https://moodle.eu-citizen.science/'>εκπαιδευτικές "
+"ενότητες ή MOOCS</a> σχετικά με την επιστήμη των πολιτών από την εισαγωγή "
+"στην επιστήμη των πολιτών μέχρι τον σχεδιασμό και τις μεθόδους έρευνας για "
+"τη δέσμευση, τον αντίκτυπο και την επικοινωνία. Υπάρχει επίσης ένα <a href='/"
+"events'>ημερολόγιο εκδηλώσεων</a> και ένα <a href='/blog'>ιστολόγιο</a>, "
+"προφίλ <a href='/organisations'>οργανισμών</ a> και <a href='/"
+"platforms'>πλατφόρμες</a> που εμπλέκονται σε έργα και έρευνα για την "
+"επιστήμη των πολιτών, σελίδες δημόσιας συζήτησης για ερωτήσεις και "
+"συνομιλίες με την κοινότητα."
 
 #: templates/faq.html:60
 msgid "Why should I sign-up to become a member of the community?"
-msgstr ""
+msgstr "Γιατί πρέπει να εγγραφώ για να γίνω μέλος της κοινότητας;"
 
 #: templates/faq.html:66
 msgid ""
@@ -2846,16 +2609,19 @@ msgid ""
 "href='/users/me'>Personal Area</a>. You will also be able to join the "
 "discussions in the Forum."
 msgstr ""
+"Μια σειρά από πρόσθετες λειτουργίες διατίθενται σε εσάς όταν εγγραφείτε για "
+"να γίνετε μέλος της κοινότητας. Θα μπορείτε να μοιράζεστε τα δικά σας έργα "
+"και πόρους με την κοινότητα, το προφίλ του οργανισμού σας και να συνδέσετε "
+"αυτό το προφίλ με τα έργα στα οποία συμμετέχετε και να αφήσετε σχόλια ή "
+"πληροφορίες σχετικά με τη δική σας εμπειρία χρησιμοποιώντας το υλικό στην "
+"πλατφόρμα. Κατά την προβολή ενός προφίλ έργου, μπορείτε να το ακολουθήσετε ή "
+"κατά την προβολή ενός προφίλ πόρων μπορείτε να το προσθέσετε σε σελιδοδείκτη "
+"για να το βρείτε γρήγορα ξανά από την <a href='/users/me'>Προσωπική περιοχή</"
+"a> σας. Θα μπορείτε επίσης να συμμετάσχετε στις συζητήσεις στο φόρουμ."
 
 #: templates/faq.html:72
-#, fuzzy
-#| msgid ""
-#| "Thank you for creating a profile for your organisation on the EU-Citizen."
-#| "Science Platform."
 msgid "Are the resources hosted on the EU-Citizen.Science platform?"
-msgstr ""
-"Σας ευχαριστούμε που δημιουργήσατε ένα προφίλ για τον οργανισμό σας στην "
-"πλατφόρμα EU-Citizen.Science."
+msgstr "Φιλοξενούνται πόροι στην πλατφόρμα EU-Citizen.Science;"
 
 #: templates/faq.html:78
 msgid ""
@@ -2868,10 +2634,20 @@ msgid ""
 "a> or the <a href='https://riojournal.com/' target='_blank'>RIO Journal</a>) "
 "to create permalinks and digital object identifiers (DOI) for all resources."
 msgstr ""
+"Όχι, δεν φιλοξενούμε έγγραφα, αρχεία ή λογισμικό στην πλατφόρμα μας. Όταν "
+"δημιουργείται ένα προφίλ για έναν πόρο, δείχνει τη θέση όπου είναι "
+"αποθηκευμένος ή δημοσιευμένος αυτός ο πόρος και τα προφίλ του έργου οδηγούν "
+"στον εξωτερικό ιστότοπο αυτού του έργου. Συνιστούμε ανεπιφύλακτα τη χρήση "
+"μόνιμων αποθετηρίων (όπως η σελίδα του εκδότη, <a href='https://zenodo.org/' "
+"target='_blank'>Zenodo</a>, <a href='https:// osf.io/' target='_blank'>OSF</"
+"a> ή το <a href='https://riojournal.com/' target='_blank'>RIO Journal</a>) "
+"για τη δημιουργία μόνιμων συνδέσμων και ψηφιακών αναγνωριστικά αντικειμένων "
+"(DOI) για όλους τους πόρους."
 
 #: templates/faq.html:84
 msgid "I can’t find the type of resource that I’m looking for, can you help?"
 msgstr ""
+"Δεν μπορώ να βρω τον τύπο του πόρου που αναζητώ, μπορείτε να βοηθήσετε;"
 
 #: templates/faq.html:90
 msgid ""
@@ -2881,10 +2657,15 @@ msgid ""
 "contact/'>contact form</a> and we will do our best to help you find it, or "
 "initiate the creation of it!"
 msgstr ""
+"Αν και υπάρχουν πολλοί πόροι στην πλατφόρμα, δεν φιλοξενούμε μια βάση "
+"δεδομένων με όλα τα πιθανά υπάρχοντα υλικά για την επιστήμη των πολιτών. "
+"Ίσως αυτό που ψάχνεις να μην υπάρχει ακόμα. Στείλτε μας ένα μήνυμα μέσω της "
+"<a href='/contact/'>φόρμας επικοινωνίας</a> και θα κάνουμε το καλύτερο "
+"δυνατό για να σας βοηθήσουμε να το βρείτε ή να ξεκινήσετε τη δημιουργία του!"
 
 #: templates/faq.html:96
 msgid "Can I add a project or resource of my own?"
-msgstr ""
+msgstr "Μπορώ να προσθέσω ένα δικό μου έργο ή πόρο;"
 
 #: templates/faq.html:102
 msgid ""
@@ -2894,6 +2675,12 @@ msgid ""
 "up</a> and <a href='/login'>log in</a> to the platform and then select the "
 "appropriate form via the +Add button in the top right-hand corner."
 msgstr ""
+"Ναι, ενθαρρύνουμε ενεργά όλα τα μέλη της κοινότητας να δημιουργήσουν ένα "
+"προφίλ για τους οργανισμούς τους, τα έργα επιστήμης των πολιτών και τους "
+"πόρους τους στην πλατφόρμα. Για να δημιουργήσετε ένα προφίλ, θα πρέπει πρώτα "
+"να <a href='/signup'>εγγραφείτε</a> και να <a href='/login'>συνδεθείτε</a> "
+"στην πλατφόρμα και στη συνέχεια να επιλέξετε την κατάλληλη φόρμα μέσω του "
+"κουμπιού +Προσθήκη στην επάνω δεξιά γωνία."
 
 #: templates/faq.html:103
 msgid ""
@@ -2904,10 +2691,17 @@ msgid ""
 "is citizen science?</a>). Please note that resources are not uploaded to the "
 "platform, rather they are linked to from within the profile that you create."
 msgstr ""
+"Λάβετε υπόψη ότι εποπτεύουμε όλες τις υποβολές (<a href='#moderation'>Ποια "
+"είναι η διαδικασία εποπτείας;</a>) για να διασφαλίσουμε ότι όλοι οι πόροι "
+"είναι καλής ποιότητας (<a href='#quality'>Ποια είναι τα κριτήρια ποιότητας;</"
+"a>), και ότι όλα τα έργα είναι όντως πρωτοβουλίες επιστήμης των πολιτών (<a "
+"href='#citsci'>Τι είναι η επιστήμη των πολιτών;</a>). Λάβετε υπόψη ότι οι "
+"πόροι δεν ανεβαίνουν στην πλατφόρμα, αλλά συνδέονται με μέσα από το προφίλ "
+"που δημιουργείτε."
 
 #: templates/faq.html:109
 msgid "What types of resources can I submit?"
-msgstr ""
+msgstr "Τι είδη πόρων μπορώ να υποβάλω;"
 
 #: templates/faq.html:115
 msgid ""
@@ -2924,10 +2718,23 @@ msgid ""
 "and easy to understand. For guidance, read our <a href='/"
 "moderation_quality_criteria'>quality criteria</a>."
 msgstr ""
+"Οι πόροι θα πρέπει να σχετίζονται με την επιστήμη των πολιτών και να είναι "
+"χρήσιμοι για την κατανόηση, τον σχεδιασμό, την εφαρμογή και την αξιολόγηση "
+"των πρακτικών της επιστήμης των πολιτών και της επιστήμης των πολιτών ή "
+"άλλως έχουν αξία για τους επαγγελματίες της επιστήμης των πολιτών. Οι πόροι "
+"μπορεί να περιλαμβάνουν έγγραφα όπως οδηγούς με οδηγίες, δημοσιεύσεις, "
+"εκθέσεις, συνοπτικές πληροφορίες πολιτικής και πρωτόκολλα, τεχνικά εργαλεία "
+"όπως λογισμικό ή υλικό,  άλλες μορφές αρχείων, όπως βίντεο, podcast και "
+"διαγράμματα. ακόμη και ιστοσελίδες ή ιστοτόπους. Παρακαλούμε σημειώστε ότι "
+"υπάρχει ξεχωριστό έντυπο για εκπαιδευτικούς πόρους και υλικό που αφορούν την "
+"πρακτική της επιστήμης των πολιτών. Όλοι οι πόροι πρέπει να πληρούν μια "
+"σειρά ποιοτικών κριτηρίων, όπως να είναι ξεκάθαρα δομημένοι, ευανάγνωστοι "
+"και κατανοητοί. Για καθοδήγηση, διαβάστε τα <a href='/"
+"moderation_quality_criteria'>κριτήρια ποιότητας</a>."
 
 #: templates/faq.html:121
 msgid "What types of projects can I submit?"
-msgstr ""
+msgstr "Τι είδους έργα μπορώ να υποβάλω;"
 
 #: templates/faq.html:127
 msgid ""
@@ -2944,10 +2751,24 @@ msgid ""
 "possible with the <a href='https://zenodo.org/record/5127534#.YV7PKt9CRhF' "
 "target='_blank'>ECSA 10 Principles of Citizen Science</a>."
 msgstr ""
+"Τα έργα που παρουσιάζονται πρέπει να περιλαμβάνουν συμμετέχοντες με τρόπο "
+"που να μπορούν να θεωρηθούν πραγματικά επιστήμη των πολιτών. Για καθοδήγηση, "
+"ανατρέξτε στα <a href='https://zenodo.org/communities/citscicharacteristics/?"
+"page=1&size=20' target='_blank'>Χαρακτηριστικά της Επιστήμης των Πολιτών της "
+"ECSA</a>. Τα έργα μπορεί να είναι βραχυπρόθεσμες ή μακροπρόθεσμες "
+"πρωτοβουλίες ή έργα χωρίς ημερομηνία λήξης. Τα έργα επιστήμης των πολιτών "
+"μπορούν να περιλαμβάνουν εθελοντές συμμετέχοντες (πολίτες επιστήμονες) σε "
+"πολλούς τομείς έρευνας και σε πολλά στάδια της ερευνητικής διαδικασίας - από "
+"τη συλλογή δεδομένων και τη χαρτογράφηση εθελοντών, μέχρι την ερμηνείας και "
+"ανάλυση δεδομένων, και τη δημοσίευση και τη διάδοση των αποτελεσμάτων. "
+"Επιπλέον, τα έργα με προφίλ στην πλατφόρμα θα πρέπει να εμπλέκονται όσο το "
+"δυνατόν περισσότερο με τις <a href='https://zenodo.org/record/5127534#."
+"YV7PKt9CRhF' target='_blank'>10 Αρχές της Επιστήμης των Πολιτών της ECSA</a "
+">."
 
 #: templates/faq.html:133
 msgid "How do I add a project or resource?"
-msgstr ""
+msgstr "Πώς μπορώ να προσθέσω ένα έργο ή έναν πόρο;"
 
 #: templates/faq.html:139
 msgid ""
@@ -2962,6 +2783,16 @@ msgid ""
 "Please note that resources are not uploaded to the platform, rather they are "
 "linked to from within the profile that you create."
 msgstr ""
+"Μόλις <a href='/signup'>εγγραφείτε</a> και <a href='/login'>συνδεθείτε</a>, "
+"αναζητήστε το κουμπί +Προσθήκη στην επάνω δεξιά γωνία της ιστοσελίδας. Εκεί "
+"μπορείτε να επιλέξετε τη φόρμα προφίλ που θέλετε να συμπληρώσετε. Συνιστούμε "
+"να δημιουργήσετε πρώτα ένα προφίλ για τον οργανισμό σας, ώστε να μπορεί να "
+"συνδεθεί με τα έργα και τους πόρους σας. Σε αυτή τη φόρμα θα σας ζητηθεί να "
+"καταχωρίσετε περιγραφικές πληροφορίες σε έναν αριθμό υποχρεωτικών και "
+"προαιρετικών πεδίων δεδομένων. Αυτές οι πληροφορίες θα χρησιμοποιηθούν για "
+"τη δημιουργία του δημόσιου προφίλ του έργου ή του πόρου στην πλατφόρμα μας. "
+"Παρακαλούμε λάβετε υπόψη ότι οι πόροι δεν ανεβαίνουν στην πλατφόρμα, αλλά "
+"συνδέονται με μέσα από το προφίλ που δημιουργείτε."
 
 #: templates/faq.html:141
 msgid ""
@@ -2973,10 +2804,17 @@ msgid ""
 "the profile will be marked as ‘Moderated’, and will be fully available on "
 "the platform."
 msgstr ""
+"Παρακαλούμε λάβετε υπόψη ότι θα σας ζητηθεί να περιγράψετε τις πτυχές της "
+"επιστήμης των πολιτών του έργου σας και τον τρόπο με τον οποίο ο πόρος σας "
+"σχετίζεται με την πρακτική της επιστήμης των πολιτών. Όταν αποθηκευτεί, το "
+"προφίλ θα υποβληθεί σε ένα μέλος της ομάδας EU-Citizen.Science για <a href='/"
+"moderation_quality_criteria'>εποπτεία</a>. Μόλις ολοκληρωθεί αυτή η "
+"διαδικασία, το προφίλ θα επισημανθεί ως «Εποπτευόμενο» και θα είναι πλήρως "
+"διαθέσιμο στην πλατφόρμα."
 
 #: templates/faq.html:148
 msgid "How does moderation work?"
-msgstr ""
+msgstr "Πώς λειτουργεί ο έλεγχος και η έγκριση;"
 
 #: templates/faq.html:154
 msgid ""
@@ -2992,6 +2830,18 @@ msgid ""
 "resource or project is in alignment with the <a href='https://zenodo.org/"
 "record/5127534#.YV7PKt9CRhF'>ECSA 10 Principles of Citizen Science</a>."
 msgstr ""
+"Όταν ένα προφίλ αποθηκευτεί, θα υποβληθεί για <a href='/"
+"moderation_quality_criteria'>εποπτεία</a> στον επόπτη της πλατφόρμας και θα "
+"επισημανθεί ως \"δεν έχει ακόμη εποπτευθεί\" στην πλατφόρμα. Το πρώτο "
+"κριτήριο που θα αναζητήσει ο συντονιστής είναι ότι έχετε περιγράψει τις "
+"πτυχές της επιστήμης των πολιτών του έργου σας ή περιγράψατε τον τρόπο με "
+"τον οποίο ο πόρος σας σχετίζεται με την επιστήμη των πολιτών. Οδηγίες για "
+"αυτό μπορείτε να βρείτε στο <a href='https://zenodo.org/communities/"
+"citscicharacteristics/?page=1&size=20'>Χαρακτηριστικά της Επιστήμης των "
+"Πολιτών της ECSA</a> που αναπτύχθηκε από την επιστημονική κοινότητα των "
+"πολιτών. Ο συντονιστής θα εξετάσει επίσης εάν ο πόρος ή το έργο σας είναι σε "
+"ευθυγράμμιση με τις <a href='https://zenodo.org/record/5127534#."
+"YV7PKt9CRhF'>10 Αρχές της Επιστήμης των Πολιτών της ECSA</a>."
 
 #: templates/faq.html:156
 msgid ""
@@ -3002,10 +2852,17 @@ msgid ""
 "society, etc.). You can read the full list of <a href='/"
 "moderation_quality_criteria'>quality criteria</a>."
 msgstr ""
+"Οι πόροι θα αξιολογηθούν περαιτέρω βάσει μιας σειράς συγκεκριμένων κριτηρίων "
+"για να διασφαλιστεί ότι είναι εύκολη η πρόσβαση, η εφαρμογή και η προσαρμογή "
+"τους, είναι καλά δομημένοι, σαφώς περιγραφόμενοι και γραμμένοι σε σαφή "
+"γλώσσα και ιδανικά βελτιώνουν ή υποστηρίζουν τον επιθυμητό αντίκτυπο της "
+"πρωτοβουλίας (π.χ. την επιστήμη , πολιτική ή κοινωνία, κ.λπ.). Μπορείτε να "
+"διαβάσετε την πλήρη λίστα των <a href='/"
+"moderation_quality_criteria'>κριτηρίων ποιότητας</a>."
 
 #: templates/faq.html:162
 msgid "What are the quality criteria for resources?"
-msgstr ""
+msgstr "Ποια είναι τα κριτήρια ποιότητας για τους πόρους;"
 
 #: templates/faq.html:168
 msgid ""
@@ -3022,10 +2879,25 @@ msgid ""
 "been evaluated for usefulness, applicability, and impact. You can read the "
 "full list of <a href='/moderation_quality_criteria'>quality criteria</a>."
 msgstr ""
+"Μετά την ολοκλήρωση όλων των υποχρεωτικών πεδίων μεταδεδομένων στο προφίλ "
+"και τη διασφάλιση ότι ο πόρος είναι σχετικός με τις πρωτοβουλίες επιστήμης "
+"των πολιτών, ο πόρος θα αξιολογηθεί με βάση ένα σύνολο συγκεκριμένων "
+"κριτηρίων που αναπτύχθηκαν για να διασφαλιστεί ότι όλοι οι πόροι που "
+"παρουσιάζονται στην πλατφόρμα είναι καλής ποιότητας. Θεωρούμε ότι οι πόροι "
+"επιστήμης των πολιτών καλής ποιότητας είναι αυτοί που χαρακτηρίζονται από "
+"ευκολία στην πρόσβαση, εφαρμογή και προσαρμογή, καλά δομημένο, ξεκάθαρα "
+"περιγραφόμενο και γραμμένο σε σαφή γλώσσα περιεχόμενα, και ιδανικά "
+"βελτιώνουν ή υποστηρίζουν τον επιθυμητό αντίκτυπο της πρωτοβουλίας (π.χ. την "
+"επιστήμη, την πολιτική ή την κοινωνία , κ.τ.λ.). Ενισχύεται επίσης η αξία "
+"και η ποιότητα του πόρου σας όταν μπορείτε να πείτε κάτι σχετικά με τον "
+"τρόπο με τον οποίο χρησιμοποιήθηκε και αναπτύχθηκε περαιτέρω στην πράξη και "
+"εάν έχει αξιολογηθεί ή όχι ως προς τη χρησιμότητα, τη δυνατότητα εφαρμογής "
+"και τον αντίκτυπο. Μπορείτε να διαβάσετε την πλήρη λίστα των <a href='/"
+"moderation_quality_criteria'>κριτηρίων ποιότητας</a>."
 
 #: templates/faq.html:173
 msgid "What are the quality criteria for projects?"
-msgstr ""
+msgstr "Ποια είναι τα κριτήρια ποιότητας για τα έργα;"
 
 #: templates/faq.html:179
 msgid ""
@@ -3040,10 +2912,21 @@ msgid ""
 "with the <a href='https://zenodo.org/record/5127534#.YV7PKt9CRhF'>ECSA 10 "
 "Principles of Citizen Science</a>."
 msgstr ""
+"Τα ίδια γενικά κριτήρια εφαρμόζονται τόσο στα έργα όσο και στους πόρους. "
+"Απαιτείται να παρέχετε περιγραφικές πληροφορίες σε ορισμένα πεδία δεδομένων "
+"στο προφίλ του έργου, μερικά από τα οποία είναι υποχρεωτικά, προτού "
+"υποβληθούν για έλεγχο και έγκριση. Ένα από αυτά τα υποχρεωτικά πεδία είναι η "
+"περιγραφή των πτυχών της επιστήμης των πολιτών του έργου. Οδηγίες για αυτό "
+"μπορείτε να βρείτε στο <a href='https://zenodo.org/communities/"
+"citscicharacteristics/?page=1&size=20'>Χαρακτηριστικά της Επιστήμης των "
+"Πολιτών της ECSA</a>. Ένα περαιτέρω προτεινόμενο γενικό κριτήριο για τα έργα "
+"είναι το να βρίσκονται σε συμφωνία με τις <a href='https://zenodo.org/"
+"record/5127534#.YV7PKt9CRhF'>10 Αρχές της Επιστήμης των Πολιτών της ECSA </"
+"a>."
 
 #: templates/faq.html:185
 msgid "Can I edit a profile after I have saved it?"
-msgstr ""
+msgstr "Μπορώ να επεξεργαστώ ένα προφίλ αφού το έχω αποθηκεύσει;"
 
 #: templates/faq.html:191
 msgid ""
@@ -3051,12 +2934,14 @@ msgid ""
 "organisations that you have shared, both before and after they have been "
 "moderated. You can find these profile edit pages in your Personal Area."
 msgstr ""
+"Ναι, μπορείτε να επεξεργαστείτε και να ενημερώσετε τα προφίλ των έργων, των "
+"πόρων και των οργανισμών που έχετε μοιραστεί, τόσο πριν όσο και μετά τον "
+"έλεγχο και αποδοχή τους . Μπορείτε να βρείτε αυτές τις σελίδες επεξεργασίας "
+"προφίλ στην Προσωπική σας Περιοχή."
 
 #: templates/faq.html:197
-#, fuzzy
-#| msgid "Our Gold Star Selection"
 msgid "What is the Our Gold Star Selection page?"
-msgstr "Η Χρύση Επιλογή Μας"
+msgstr "Τι είναι η σελίδα Η Χρυσή Επιλογή Μας;"
 
 #: templates/faq.html:203
 msgid ""
@@ -3068,10 +2953,18 @@ msgid ""
 "blog/2020/07/17/starter-set-of-resources-and-our-selection/'>How we selected "
 "the starter set of resources, and curated ‘Our Selection’</a>. "
 msgstr ""
+"Τα μέλη της κοινοπραξίας EU-Citizen.Science έχουν επιμεληθεί μια λίστα με "
+"πόρους «Χρυσής Επιλογής» μεταξύ εκείνων της ενότητας πόρων (εκπαίδευσης) που "
+"είναι ιδιαίτερα υψηλής ποιότητας ή αντιπροσωπεύουν βέλτιστες πρακτικές, για "
+"να διευκολύνουν νέους και έμπειρους οι επαγγελματίες να εστιάσουν στους πιο "
+"χρήσιμους πόρους. Διαβάστε περισσότερα σχετικά με την επιλογή μας στην "
+"ανάρτηση ιστολογίου «<a href='/blog/2020/07/17/starter-set-of-resources-and-"
+"our-selection/'>Πώς επιλέξαμε το αρχικό σύνολο πόρων και επιμεληθήκαμε το "
+"\"Η Επιλογή Μας\"</a>. "
 
 #: templates/faq.html:209
 msgid "What is the Personal Area?"
-msgstr ""
+msgstr "Τι είναι η προσωπική περιοχή;"
 
 #: templates/faq.html:215
 msgid ""
@@ -3083,10 +2976,18 @@ msgid ""
 "Personal Area. Please also share more information about yourself in the "
 "Personal area with other members of the community."
 msgstr ""
+"Η <a href='/users/me/'>Προσωπική περιοχή</a> είναι εκεί που μπορείτε να "
+"επεξεργαστείτε οποιοδήποτε από τα προφίλ περιεχομένου που έχετε υποβάλει (ως "
+"συνδεδεμένο μέλος της πλατφόρμας), προκειμένου να τα διατηρήσετε "
+"ενημερωμένα. Εκεί θα βρείτε επίσης τη λίστα με τα έργα που έχετε "
+"«ακολουθήσει» και τους πόρους που έχετε προσθέσει στους σελιδοδείκτες σας, "
+"ώστε να μπορείτε να τα βρείτε γρήγορα ξανά από την Προσωπική σας Περιοχή. "
+"Παρακαλούμε μοιραστείτε επίσης περισσότερες πληροφορίες για τον εαυτό σας με "
+"άλλα μέλη της κοινότητας, στην Προσωπική περιοχή. "
 
 #: templates/faq.html:224
 msgid "What does it mean to bookmark a project or resource?"
-msgstr ""
+msgstr "Τι σημαίνει η προσθήκη σελιδοδείκτη σε ένα έργο ή έναν πόρο;"
 
 #: templates/faq.html:230
 msgid ""
@@ -3096,6 +2997,12 @@ msgid ""
 "Personal Area under <a href='/users/me/bookmarks'><i>My bookmarks</i></a>, "
 "allowing you to find this content again easily."
 msgstr ""
+"Όταν συνδεθείτε, θα δείτε ένα κουμπί «σελιδοδείκτη» στο κάτω μέρος των "
+"προφίλ του έργου και των πόρων (εκπαίδευσης). Αυτό σας επιτρέπει να "
+"προσθέσετε τα προφίλ που σας ενδιαφέρουν σε μια λίστα που μπορείτε να βρείτε "
+"στην Προσωπική σας περιοχή στην ενότητα <a href='/users/me/bookmarks'><i>Οι "
+"σελιδοδείκτες μου</i></a> , επιτρέποντάς σας να βρείτε ξανά αυτό το "
+"περιεχόμενο εύκολα."
 
 #: templates/faq_old.html:20
 msgid "Frequently Asked Questions"
@@ -3106,28 +3013,25 @@ msgid ""
 "What’s new in citizen science training: from open science to public "
 "engagement"
 msgstr ""
+"Τι νέο υπάρχει στην εκπαίδευση σχετικά με την επιστήμη των πολιτών: από την "
+"ανοιχτή επιστήμη στην εμπλοκή του κοινού"
 
 #: templates/home.html:20
-#, fuzzy
-#| msgid ""
-#| "Welcome to the platform for sharing Citizen Science projects, resources, "
-#| "tools, and training"
 msgid ""
 "Welcome to the platform for sharing citizen science projects, resources, "
 "tools, training and much more"
 msgstr ""
 "Καλώς ορίσατε στην πλατφόρμα για κοινή χρήση έργων, πόρων, εργαλείων και "
-"εκπαίδευσης της Επιστήμης των Πολιτών"
+"εκπαίδευσης της επιστήμης των πολιτών"
 
 #: templates/home.html:39
-#, fuzzy
-#| msgid "Search"
 msgid "Search..."
-msgstr "Αναζήτηση"
+msgstr "Αναζήτηση..."
 
 #: templates/home.html:52
 msgid "<a href='signup'>join the community</a> <div>and participate</div>"
 msgstr ""
+"<a href='signup'>εγγραφείτε στην κοινότητα</a> <div>και συμμετάσχετε</div>"
 
 #: templates/moderation.html:10
 msgid "The moderation process"
@@ -3138,20 +3042,16 @@ msgid "The Moderation Process"
 msgstr "Η διαδικασία Εποπτείας"
 
 #: templates/moderation_quality_criteria.html:12
-#, fuzzy
-#| msgid "Moderation"
 msgid "moderation"
-msgstr "Προσαρμογή"
+msgstr "εποπτεία"
 
 #: templates/moderation_quality_criteria.html:12
 msgid "and"
 msgstr "και"
 
 #: templates/moderation_quality_criteria.html:12
-#, fuzzy
-#| msgid "Quality criteria"
 msgid "quality criteria"
-msgstr "Ποιοτικά κριτήρια"
+msgstr "κριτήρια ποιότητας"
 
 #: templates/moderation_quality_criteria.html:17
 msgid ""
@@ -3170,6 +3070,21 @@ msgid ""
 "href='https://zenodo.org/record/5041332#.YZNxBRwxlhF' target='_blank'>D3.3 "
 "<i>Review of Framework Implementation Defined in D3.1</i></a>."
 msgstr ""
+"Τα προφίλ του έργου και των πόρων (εκπαίδευσης) που μπορείτε να βρείτε στην "
+"πλατφόρμα έχουν υποβληθεί από την κοινότητα της επιστήμης των πολιτών ή την "
+"κοινοπραξία του έργου EU-Citizen.Science. Πριν από τη δημοσίευσή τους, "
+"υποβάλλονται σε διαδικασία εποπτείας και ελέγχου, όπου εφαρμόζονται τα "
+"κριτήρια ποιότητας που αναπτύχθηκαν στο πλαίσιο του έργου EU-Citizen."
+"Science. Παρακάτω μπορείτε να βρείτε μια περιγραφή της διαδικασίας και όλων "
+"των κριτηρίων. Η IIASA και άλλοι εταίροι στο έργο έχουν αναπτύξει αυτά τα "
+"κριτήρια και το πλαίσιο αξιολόγησης ως μέρος του WP3 «Περιεχόμενο - Πλαίσιο, "
+"Διασφάλιση Ποιότητας και Επιμέλεια» του έργου EU-Citizen.Science. Η εργασία "
+"που πραγματοποιήθηκε βρίσκεται στο <a href='https://zenodo.org/"
+"record/3716236#.YZNyLRwxlhE' target='_blank'>D3.1 <i>Αναφορά πλαισίου που "
+"περιγράφει κριτήρια και αιτιολογία για κοινή χρήση και επιλογή State of the "
+"art για την επιστήμη των πολιτών</i></a> και <a href='https://zenodo.org/"
+"record/5041332#.YZNxBRwxlhF' target='_blank'>D3.3 <i>Επισκόπηση του σε "
+"Εφαρμογή πλαισίου που ορίζεται στο D3.1</i></a>."
 
 #: templates/moderation_quality_criteria.html:34
 msgid ""
@@ -3184,6 +3099,19 @@ msgid ""
 "the projects profiled on the platform are indeed citizen science "
 "initiatives. This is why we have a moderation process for all submissions."
 msgstr ""
+"Ο φιλόδοξος στόχος μας είναι να γίνουμε <b>ο </b> τόπος για να μοιραζόμαστε "
+"χρήσιμους πόρους σχετικά με το σχεδιασμό, τη λειτουργία, την αξιολόγηση και "
+"τη συμμετοχή σε πρωτοβουλίες επιστήμης των πολιτών ή απλώς την εκμάθηση της "
+"επιστήμης των πολιτών, συμπεριλαμβανομένων εργαλείων και οδηγιών, βέλτιστων "
+"πρακτικών και εκπαιδευτικών ενοτήτων. Ελπίζουμε να καταστήσουμε την πρακτική "
+"καθοδήγηση σχετικά με την επιστήμη των πολιτών εντοπίσιμη και προσβάσιμη σε "
+"όλους και να δώσουμε τη δυνατότητα  στους πολίτες να ξεκινήσουν τις δικές "
+"τους δραστηριότητες όπου κι αν βρίσκονται. Είναι σημαντικό για εμάς, και την "
+"κοινότητα όσων εφαρμόζουν την επιστήμη των πολιτών, να έχουμε έναν τρόπο να "
+"διασφαλίσουμε ότι οι πόροι που παρουσιάζονται στην πλατφόρμα είναι καλής "
+"ποιότητας και ότι τα έργα που παρουσιάζονται στην πλατφόρμα είναι όντως "
+"πρωτοβουλίες επιστήμης των πολιτών. Αυτός είναι ο λόγος για τον οποίο έχουμε "
+"μια διαδικασία εποπτείας και ελέγχου για όλες τις υποβολές."
 
 #: templates/moderation_quality_criteria.html:36
 msgid ""
@@ -3197,6 +3125,15 @@ msgid ""
 "moderation process, it will be marked as ‘moderated’, and will be fully "
 "available in search results."
 msgstr ""
+"Όταν δημιουργείτε ένα προφίλ για έναν πόρο ή ένα έργο για κοινή χρήση στην "
+"πλατφόρμα, θα σας ζητηθεί να παρέχετε μια σειρά από περιγραφικές πληροφορίες "
+"σχετικά με αυτό και μόλις συμπληρωθούν όλα τα υποχρεωτικά πεδία δεδομένων, "
+"θα μπορείτε να υποβάλετε το προφίλ . Μετά την υποβολή, θα σταλεί για έλεγχο. "
+"Μέχρι να ελεγχθεί σύμφωνα με τα κριτήριά μας, θα επισημαίνεται ως \"δεν έχει "
+"ακόμη ελεγχθεί\" και δεν θα είναι αυτόματα ορατό στα αποτελέσματα "
+"αναζήτησης. Μόλις το προφίλ πόρου σας περάσει επιτυχώς από τη διαδικασία "
+"ελέγχου, θα επισημανθεί ως \"ελέγχθηκε\" και θα είναι πλήρως διαθέσιμο στα "
+"αποτελέσματα αναζήτησης."
 
 #: templates/moderation_quality_criteria.html:49
 msgid ""
@@ -3208,122 +3145,124 @@ msgid ""
 "further down on this page you can read about all the quality criteria in "
 "more detail."
 msgstr ""
+"Έχουμε αναπτύξει ένα σύνολο ολοκληρωμένων κριτηρίων ως τρόπο να "
+"διασφαλίσουμε ότι τα έργα και οι πόροι που μπορείτε να βρείτε σε αυτήν την "
+"πλατφόρμα είναι καλής ποιότητας. Τα γενικά κριτήρια μπορούν να εφαρμοστούν "
+"τόσο σε έργα όσο και σε πόρους. Για τους πόρους έχουν αναπτυχθεί "
+"συγκεκριμένα και υποστηρικτικά κριτήρια. Ο παρακάτω πίνακας παρέχει μια "
+"επισκόπηση όλων των πόρων, παρακάτω σε αυτή τη σελίδα μπορείτε να διαβάσετε "
+"για όλα τα κριτήρια ποιότητας με περισσότερες λεπτομέρειες."
 
 #: templates/moderation_quality_criteria.html:53
 msgid "Overarching Criteria (for projects and resources)"
-msgstr ""
+msgstr "Γενικά Κριτήρια (για έργα και πόρους)"
 
 #: templates/moderation_quality_criteria.html:54
-#, fuzzy
-#| msgid "Ten principles of citizen science"
 msgid "About citizen science or relevant to citizen science (required)"
-msgstr "Οι 10 αρχές της επιστήμης των πολιτών"
+msgstr ""
+"Αναφορικά με την επιστήμη των πολιτών ή σχετικά με την επιστήμη των πολιτών "
+"(απαιτείται)"
 
 #: templates/moderation_quality_criteria.html:57
 msgid "All mandatory metadata is provided (required)"
-msgstr ""
+msgstr "Παρέχονται όλα τα υποχρεωτικά μεταδεδομένα (απαιτείται)"
 
 #: templates/moderation_quality_criteria.html:60
 msgid ""
 "Engages with the <a target='_blank' href='https://zenodo.org/record/5127534#."
 "YV7PKt9CRhF'>ECSA 10 Principles of Citizen Science</a> (suggested)"
 msgstr ""
+"Ασχολείται με τις <a target='_blank' href='https://zenodo.org/"
+"record/5127534#.YV7PKt9CRhF'>10 Αρχές της Επιστήμης των Πολιτών της ECSA</a> "
+"(προτείνεται)"
 
 #: templates/moderation_quality_criteria.html:63
 msgid "Specific Criteria (for resources)"
-msgstr ""
+msgstr "Ειδικά κριτήρια (για πόρους)"
 
 #: templates/moderation_quality_criteria.html:64
-#, fuzzy
-#| msgid "Go to Resource"
 msgid "Access to the resource"
-msgstr "Πηγαινετε στους Πόρους"
+msgstr "Πρόσβαση στους Πόρους"
 
 #: templates/moderation_quality_criteria.html:67
 #: templates/moderation_quality_criteria.html:151
 msgid "Readability and Legibility"
-msgstr ""
+msgstr "Αναγνωσιμότητα"
 
 #: templates/moderation_quality_criteria.html:68
 msgid "Clear structure"
-msgstr ""
+msgstr "Ξεκάθαρη δομή"
 
 #: templates/moderation_quality_criteria.html:71
-#, fuzzy
-#| msgid "All languages"
 msgid "Clear language"
-msgstr "Όλες οι γλώσσες"
+msgstr "Ξεκάθαρη γλώσσα"
 
 #: templates/moderation_quality_criteria.html:74
 msgid "Basic formatting"
-msgstr ""
+msgstr "Βασική μορφοποίηση"
 
 #: templates/moderation_quality_criteria.html:77
-#, fuzzy
-#| msgid "Contact"
 msgid "Content"
-msgstr "Επικοινωνία"
+msgstr "Περιεχόμενο"
 
 #: templates/moderation_quality_criteria.html:80
 #: templates/moderation_quality_criteria.html:163
 msgid "Applicability"
-msgstr ""
+msgstr "Εφαρμοσιμότητα"
 
 #: templates/moderation_quality_criteria.html:81
 msgid "Easy to implement"
-msgstr ""
+msgstr "Εύκολο στην εφαρμογή"
 
 #: templates/moderation_quality_criteria.html:84
 msgid "Easy to adapt"
-msgstr ""
+msgstr "Εύκολο στην προσαρμογή"
 
 #: templates/moderation_quality_criteria.html:87
-#, fuzzy
-#| msgid "Project"
 msgid "Object"
-msgstr "Έργο"
+msgstr "Σκοπός"
 
 #: templates/moderation_quality_criteria.html:88
 msgid "Clearly audible (audio object)"
-msgstr ""
+msgstr "Ακούγεται καθαρά (ηχητικό αντικείμενο)"
 
 #: templates/moderation_quality_criteria.html:91
 msgid "Good quality (video or image)"
-msgstr ""
+msgstr "Καλής ποιότητας (βίντεο ή εικόνα)"
 
 #: templates/moderation_quality_criteria.html:94
 msgid "Supporting Criteria (for resources)"
-msgstr ""
+msgstr "Υποστηρικτικά Κριτήρια  (για πόρους)"
 
 #: templates/moderation_quality_criteria.html:95
 #: templates/moderation_quality_criteria.html:193
 msgid "Evaluation"
-msgstr ""
+msgstr "Αξιολόγηση"
 
 #: templates/moderation_quality_criteria.html:96
 msgid "Used in the context of a citizen science initiative"
-msgstr ""
+msgstr "Χρησιμοποιείται στο πλαίσιο μιας πρωτοβουλίας επιστήμης των πολιτών"
 
 #: templates/moderation_quality_criteria.html:99
 msgid ""
 "Evaluated in terms of the quality of the content, methods, or results of the "
 "method"
 msgstr ""
+"Αξιολογείται ως προς την ποιότητα του περιεχομένου, των μεθόδων ή των "
+"αποτελεσμάτων της μεθόδου"
 
 #: templates/moderation_quality_criteria.html:102
 #: templates/moderation_quality_criteria.html:199
 msgid "Impact"
-msgstr ""
+msgstr "Επίπτωση"
 
 #: templates/moderation_quality_criteria.html:115
 msgid "The overarching criteria for all resources"
-msgstr ""
+msgstr "Τα γενικά κριτήρια για όλους τους πόρους"
 
 #: templates/moderation_quality_criteria.html:121
-#, fuzzy
-#| msgid "10 Principles of Citizen Science"
 msgid " Required Criteria - Citizen Science"
-msgstr "Οι 10 Αρχές της Επιστήμης των Πολιτών"
+msgstr " Απαιτούμενα Κριτήρια- Επιστήμη των Πολιτών"
 
 #: templates/moderation_quality_criteria.html:122
 msgid ""
@@ -3331,6 +3270,9 @@ msgid ""
 "<b>resource is relevant to citizen science</b>, or that your <b>project is a "
 "citizen science initiative</b>."
 msgstr ""
+"Το πρώτο κριτήριο που θα αναζητήσει ο συντονιστής είναι αν ο <b>πόρος σας "
+"σχετίζεται με την επιστήμη των πολιτών</b> ή αν το <b>έργο σας είναι μια "
+"πρωτοβουλία επιστήμης των πολιτών</b>."
 
 #: templates/moderation_quality_criteria.html:124
 msgid ""
@@ -3344,6 +3286,16 @@ msgid ""
 "really does relate to citizen science. If the moderator has concerns they "
 "will contact you directly."
 msgstr ""
+"Αν και δεν υπάρχουν αυστηροί και γρήγοροι ορισμοί για το τι είναι και τι δεν "
+"είναι η επιστήμη των πολιτών (ούτε πρέπει να υπάρχουν - η επιστήμη των "
+"πολιτών θα πρέπει να παραμένει πάντα μια ευρεία και περιεκτική έννοια), "
+"στεφόμαστε στην πρόσφατη εργασία που διεξήχθη από την κοινότητα της "
+"επιστήμης των πολιτών σχετικά με <a target='_blank' href='https://zenodo.org/"
+"communities/citscicharacteristics/?page=1&size=20'>Τα Χαρακτηριστικά της "
+"Επιστήμης των Πολιτών της ECSA</a> ως οδηγό. Παρακαλούμε συμβουλευτείτε αυτά "
+"τα χαρακτηριστικά εφόσον δεν είστε βέβαιοι εάν ο πόρος ή το έργο που θέλετε "
+"να μοιραστείτε σχετίζεται πραγματικά με την επιστήμη των πολιτών. Εάν ο "
+"συντονιστής έχει προβληματισμούς, θα επικοινωνήσει απευθείας μαζί σας."
 
 #: templates/moderation_quality_criteria.html:126
 msgid ""
@@ -3352,12 +3304,14 @@ msgid ""
 "profiles provide sufficient information to enable users of the platform to "
 "see whether it is useful or relevant to them."
 msgstr ""
+"Ο συντονιστής θα ελέγξει επίσης εάν έχουν συμπληρωθεί όλα τα υποχρεωτικά "
+"πεδία στο προφίλ πόρων. Αυτό γίνεται για να διασφαλιστεί ότι όλα τα προφίλ "
+"έργων και πόρων παρέχουν επαρκείς πληροφορίες για να μπορούν οι χρήστες της "
+"πλατφόρμας να δουν εάν είναι χρήσιμα ή σχετικά με αυτούς."
 
 #: templates/moderation_quality_criteria.html:128
-#, fuzzy
-#| msgid "ECSA 10 Principles of Citizen Science"
 msgid "Suggested Criteria - the Principles of Citizen Science"
-msgstr "Οι 10 Αρχές της Επιστήμης των Πολιτών"
+msgstr "Προτεινόμενα Κριτήρια - Οι  Αρχές της Επιστήμης των Πολιτών"
 
 #: templates/moderation_quality_criteria.html:129
 msgid ""
@@ -3366,12 +3320,13 @@ msgid ""
 "record/5127534#.YV7PKt9CRhF' target='_blank'>ECSA 10 Principles of Citizen "
 "Science</a>."
 msgstr ""
+"Ο επόπτης του προφίλ που υποβάλατε θα εξετάσει επίσης εάν ο πόρος ή το έργο "
+"σας είναι σε συμφωνία με τις <a href='https://zenodo.org/record/5127534#."
+"YV7PKt9CRhF' target='_blank'>10 Αρχές της Επιστήμης των Πολιτών της ECSA</a>."
 
 #: templates/moderation_quality_criteria.html:135
-#, fuzzy
-#| msgid "Quality criteria"
 msgid "Specific criteria"
-msgstr "Ποιοτικά κριτήρια"
+msgstr "Συγκεκριμένα κριτήρια"
 
 #: templates/moderation_quality_criteria.html:141
 msgid ""
@@ -3381,6 +3336,12 @@ msgid ""
 "href='/blog/2020/04/30/how-we-developed-quality-criteria-resources/'>How we "
 "developed the quality criteria for resources’</a>."
 msgstr ""
+"Για τους πόρους που θα μοιραστούν στην πλατφόρμα, έχουμε αναπτύξει ένα "
+"συγκεκριμένο σύνολο περαιτέρω κριτηρίων, τα οποία θα αξιολογηθούν κατά τη "
+"διαδικασία εποπτείας. Μπορείτε να διαβάσετε περισσότερα σχετικά με το πώς τα "
+"αναπτύξαμε στην ανάρτηση ιστολογίου '<a href='/blog/2020/04/30/how-we-"
+"developed-quality-criteria-resources/'>Πώς αναπτύξαμε τα κριτήρια ποιότητας "
+"για τους πόρους </a>."
 
 #: templates/moderation_quality_criteria.html:143
 msgid ""
@@ -3392,16 +3353,26 @@ msgid ""
 "a 5-point scale, from strongly disagree (1 point) to strongly agree (5 "
 "points)."
 msgstr ""
+"Θεωρούμε ότι οι πόροι επιστήμης των πολιτών καλής ποιότητας είναι αυτοί που "
+"έχουν εύκολη πρόσβαση, εφαρμογή και προσαρμογή, καλά δομημένο, ξεκάθαρα "
+"περιγραφόμενο και γραμμένο σε σαφή γλώσσα περιεχόμενο και ιδανικά βελτιώνουν "
+"ή υποστηρίζουν τον επιθυμητό αντίκτυπο της πρωτοβουλίας (π.χ. την επιστήμη, "
+"την πολιτική ή κοινωνία, κλπ). Για το σκοπό αυτό έχουμε αναπτύξει μια σειρά "
+"κριτηρίων που θα αξιολογήσει ο συντονιστής σε μια κλίμακα 5 βαθμών, από "
+"Διαφωνώ έντονα (1 βαθμός) έως Συμφωνώ απόλυτα (5 βαθμοί)."
 
 #: templates/moderation_quality_criteria.html:146
 msgid "Easy access to the resource"
-msgstr ""
+msgstr "Εύκολη πρόσβαση στην πηγή"
 
 #: templates/moderation_quality_criteria.html:148
 msgid ""
 "The resource should be easy to access, i.e. it doesn’t require registration, "
 "and is not behind a paywall."
 msgstr ""
+"Ο πόρος πρέπει να είναι εύκολα προσβάσιμος, δηλαδή να μην απαιτεί εγγραφή "
+"και να μη βρίσκεται πίσω από περιορισμούς πρόσβασης στο περιεχόμενο "
+"(paywall)."
 
 #: templates/moderation_quality_criteria.html:153
 msgid ""
@@ -3411,6 +3382,11 @@ msgid ""
 "methodology documents should include an introduction, audience description, "
 "step by step methodology, and an example."
 msgstr ""
+"Ο πόρος πρέπει να είναι <b>σαφώς δομημένος</b> ανάλογα με τον τύπο του. Για "
+"παράδειγμα, μια επιστημονική εργασία ή έκθεση θα πρέπει να περιλαμβάνει μια "
+"εισαγωγή, μεθοδολογία, αποτελέσματα, συζήτηση ή/και συμπεράσματα και τα "
+"έγγραφα μεθοδολογίας θα πρέπει να περιλαμβάνουν εισαγωγή, περιγραφή κοινού, "
+"μεθοδολογία βήμα προς βήμα και ένα παράδειγμα."
 
 #: templates/moderation_quality_criteria.html:154
 msgid ""
@@ -3419,6 +3395,11 @@ msgid ""
 "unambiguous, and avoid the use of unusual words and jargon. Where technical "
 "terms are used, their meaning should be explained clearly."
 msgstr ""
+"Ο πόρος πρέπει να είναι <b>γραμμένος με ξεκάθαρη γλώσσα</b> που να είναι "
+"ευανάγνωστη και κατανοητή από το κοινό-στόχο και θα πρέπει να είναι "
+"συνοπτικός, ξεκάθαρος και να αποφεύγεται η χρήση ασυνήθιστων λέξεων και "
+"ορολογίας. Όπου χρησιμοποιούνται τεχνικοί όροι, η σημασία τους πρέπει να "
+"εξηγείται με σαφήνεια."
 
 #: templates/moderation_quality_criteria.html:155
 msgid ""
@@ -3426,10 +3407,14 @@ msgid ""
 "titles and paragraphs, correct grammar and spelling, a legible font of large "
 "enough size to read, and clearly marked references."
 msgstr ""
+"Ο πόρος θα πρέπει να δίνει προσοχή στη <b>βασική μορφοποίηση</b>, όπως "
+"σαφείς τίτλους και παραγράφους, σωστή γραμματική και ορθογραφία, μια "
+"ευανάγνωστη γραμματοσειρά αρκετά μεγάλου μεγέθους για ανάγνωση και σαφώς "
+"επισημασμένες αναφορές."
 
 #: templates/moderation_quality_criteria.html:158
 msgid "Clarity of Content"
-msgstr ""
+msgstr "Σαφήνεια Περιεχομένου"
 
 #: templates/moderation_quality_criteria.html:160
 msgid ""
@@ -3437,6 +3422,9 @@ msgid ""
 "is easy for readers to understand how to apply the resource in their own "
 "context."
 msgstr ""
+"Ο πόρος πρέπει να περιγράφει με σαφήνεια τους στόχους, τους σκοπούς και τις "
+"μεθόδους του, έτσι ώστε να είναι εύκολο για τους αναγνώστες να κατανοήσουν "
+"πώς να εφαρμόσουν τον πόρο στο δικό τους πλαίσιο."
 
 #: templates/moderation_quality_criteria.html:166
 msgid ""
@@ -3444,6 +3432,9 @@ msgid ""
 "of how it can be implemented, the contexts that it is useful for, and "
 "recommendations for further use or development."
 msgstr ""
+"Ο πόρος θα πρέπει να είναι <b>εύκολος στην εφαρμογή</b>, ιδανικά με "
+"περιγραφές για το πώς μπορεί να εφαρμοστεί, για τα περιβάλλοντα για τα οποία "
+"είναι χρήσιμος και με συστάσεις για περαιτέρω χρήση ή ανάπτυξη."
 
 #: templates/moderation_quality_criteria.html:167
 msgid ""
@@ -3452,22 +3443,31 @@ msgid ""
 "it could be useful, and with guidelines or recommendations for its "
 "adaptation to different cases."
 msgstr ""
+"Ο πόρος θα πρέπει να είναι <b>εύκολος στην προσαρμογή</b> σε διαφορετικές "
+"περιπτώσεις, ιδανικά με επεξήγηση τυχόν περιορισμών του πόρου και του "
+"πλαισίου στο οποίο θα μπορούσε να είναι χρήσιμος και με οδηγίες ή συστάσεις "
+"για την προσαρμογή του σε διαφορετικές περιπτώσεις."
 
 #: templates/moderation_quality_criteria.html:170
 msgid "Object Quality"
-msgstr ""
+msgstr "Ποιότητα Αντικειμένου"
 
 #: templates/moderation_quality_criteria.html:172
 msgid ""
 "If the resource is an audio object, it should be <b>clearly audible</b>, "
 "with no interruptions or background noise."
 msgstr ""
+"Εάν ο πόρος είναι ένα ηχητικό αντικείμενο, θα πρέπει να <b>μπορεί να "
+"ακουστεί ευκρινώς</b>, χωρίς διακοπές ή θορύβους υποβάθρου."
 
 #: templates/moderation_quality_criteria.html:173
 msgid ""
 "If the resource is a video, an image or illustration, the quality should be "
 "good enough to <b>see clearly, with a sharp focus</b>."
 msgstr ""
+"Εάν ο πόρος είναι ένα βίντεο, μια εικόνα ή μια απεικόνιση, η ποιότητα θα "
+"πρέπει να είναι αρκετά καλή ώστε να <b>βλέπεται καθαρά, και υπό συνθήκες "
+"εστίασης</b>."
 
 #: templates/moderation_quality_criteria.html:177
 #, python-format
@@ -3478,12 +3478,16 @@ msgid ""
 "possible points for that type of resource. That is the threshold for being "
 "listed on the platform as a good quality resource."
 msgstr ""
+"Η υψηλότερη δυνατή βαθμολογία είναι 40 βαθμοί, εάν ισχύουν όλα τα κριτήρια. "
+"Αλλά στις περισσότερες περιπτώσεις, θα ισχύει μόνο μια επιλογή από τα "
+"παραπάνω κριτήρια. Ο συντονιστής θα κοιτάξει να δει ότι ο πόρος σας "
+"υπερβαίνει το 50%% των συνολικών δυνατών πόντων για αυτόν τον τύπο πόρου. "
+"Αυτό είναι το όριο για να καταχωριστείτε στην πλατφόρμα ως πόρος καλής "
+"ποιότητας."
 
 #: templates/moderation_quality_criteria.html:184
-#, fuzzy
-#| msgid "Quality criteria"
 msgid "Supporting criteria"
-msgstr "Ποιοτικά κριτήρια"
+msgstr "Κριτήρια υποστήριξης"
 
 #: templates/moderation_quality_criteria.html:190
 msgid ""
@@ -3494,6 +3498,13 @@ msgid ""
 "there is evidence of the following criteria being met (but these are not "
 "part of the threshold calculation mentioned above):"
 msgstr ""
+"Ενισχύεται πραγματικά η αξία και η ποιότητα των πόρων σας όταν μπορείτε να "
+"πείτε κάτι σχετικά με τον τρόπο με τον οποίο χρησιμοποιήθηκαν και "
+"αναπτύχθηκαν περαιτέρω στην πράξη και εάν έχουν αξιολογηθεί ή όχι ως προς τη "
+"χρησιμότητα και τη δυνατότητα εφαρμογής τους στην πράξη. Ο συντονιστής θα το "
+"λάβει επίσης θετικά υπόψη εάν υπάρχουν ενδείξεις ότι πληρούνται τα ακόλουθα "
+"κριτήρια (αλλά αυτά δεν αποτελούν μέρος του υπολογισμού του ορίου που "
+"αναφέρεται παραπάνω):"
 
 #: templates/moderation_quality_criteria.html:195
 msgid ""
@@ -3501,6 +3512,9 @@ msgid ""
 "currently being used in a citizen science initiative, and the outcome of "
 "this has been shared."
 msgstr ""
+"Ο πόρος έχει <b>χρησιμοποιηθεί στο πλαίσιο της επιστήμης των πολιτών</b> ή "
+"χρησιμοποιείται επί του παρόντος σε μια πρωτοβουλία επιστήμης των πολιτών "
+"και το αποτέλεσμα έχει κοινοποιηθεί."
 
 #: templates/moderation_quality_criteria.html:196
 msgid ""
@@ -3508,26 +3522,31 @@ msgid ""
 "content, or the methods, or the results of the method, and the outcomes of "
 "these evaluations have been shared."
 msgstr ""
+"Ο πόρος έχει <b>αξιολογηθεί</b> όσον αφορά την ποιότητα του περιεχομένου ή "
+"τις μεθόδους ή τα αποτελέσματα της μεθόδου, και τα αποτελέσματα αυτών των "
+"αξιολογήσεων έχουν κοινοποιηθεί."
 
 #: templates/moderation_quality_criteria.html:201
 msgid ""
 "The resource refers to any <b>impact</b> that it could have (or has had) on "
 "science, policy, society, etc."
 msgstr ""
+"Ο πόρος αναφέρεται σε κάθε <b>επίπτωση</b> που θα μπορούσε να έχει (ή είχε) "
+"στην επιστήμη, την πολιτική, την κοινωνία κ.λπ."
 
 #: templates/moderation_quality_criteria.html:202
 msgid ""
 "The impact of the resource has been <b>measured</b> and is shared in the "
 "resource."
-msgstr ""
+msgstr "Η επιρροή της πηγής έχει <b>εκτιμηθεί</b> και διαμοιραστεί στην πηγή."
 
 #: templates/policy_brief.html:4 templates/policy_brief.html:8
 msgid "Policy Brief"
-msgstr ""
+msgstr "Σύντομη ενημέρωση πολιτικής"
 
 #: templates/policy_maker_event_2021.html:10
 msgid "Citizen Science for Policy across Europe"
-msgstr ""
+msgstr "Επιστήμη των πολιτών για Πολιτικές στην Ευρώπη"
 
 #: templates/projects_cards_featured.html:19
 #: templates/projects_cards_short.html:19
@@ -3555,7 +3574,8 @@ msgstr "Διαβάστε περισσότερα"
 
 #: templates/registration/logged_out.html:9
 msgid "Thanks for spending some quality time with the Web site today."
-msgstr "Ευχαριστούμε που αφιερώσατε λίγο ποιοτικό χρόνο με τον ιστότοπο σήμερα"
+msgstr ""
+"Ευχαριστούμε που αφιερώσατε λίγο ποιοτικό χρόνο με τον ιστότοπο σήμερα."
 
 #: templates/registration/logged_out.html:11
 msgid "Log in again"
@@ -3584,15 +3604,15 @@ msgstr "Ο κωδικός πρόσβασης έχει αλλάξει επιτυ�
 
 #: templates/registration/password_change_done.html:16
 msgid "Your password was changed."
-msgstr "Ο κωδικός πρόσβασης σας έχει αλλάξει"
+msgstr "Ο κωδικός πρόσβασής σας έχει αλλάξει."
 
 #: templates/registration/password_change_form.html:19
 msgid "Please correct the error below."
-msgstr "Παρακαλούμε διορθώστε το παρακάτω λάθος"
+msgstr "Παρακαλούμε διορθώστε το παρακάτω λάθος."
 
 #: templates/registration/password_change_form.html:19
 msgid "Please correct the errors below."
-msgstr "Παρακαλούμε διορθώστε τα παρακάτω λάθη"
+msgstr "Παρακαλούμε διορθώστε τα παρακάτω λάθη."
 
 #: templates/registration/password_change_form.html:23
 msgid ""
@@ -3600,8 +3620,8 @@ msgid ""
 "password twice so we can verify you typed it in correctly."
 msgstr ""
 "Παρακαλούμε εισάγετε τον παλιό σας κωδικό πρόσβασης, για λόγους ασφαλείας, "
-"και στη συνέχεια εισάγετε τον καινούριο κωδικό πρόσβασης εις διπλούν ώστε να "
-"μπορούμε να επιβεβαιώσουμε ότι τον πληκτρολογήσατε σωστά"
+"και στη συνέχεια εισάγετε τον καινούριο κωδικό πρόσβασης δύο φορές ώστε να "
+"μπορούμε να επιβεβαιώσουμε ότι τον πληκτρολογήσατε σωστά."
 
 #: templates/registration/password_change_form.html:63
 #: templates/registration/password_reset_confirm.html:42
@@ -3618,7 +3638,7 @@ msgstr "Ολοκλήρωση επαναφοράς κωδικού πρόσβασ�
 msgid "Your password has been set.  You may go ahead and log in now."
 msgstr ""
 "Ο κωδικός πρόσβασής σας έχει οριστεί. Μπορείτε να προχωρήσετε και να "
-"συνδεθείτε τώρα"
+"συνδεθείτε τώρα."
 
 #: templates/registration/password_reset_confirm.html:7
 msgid "Password reset confirmation"
@@ -3638,16 +3658,16 @@ msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
 msgstr ""
-"Παρακαλούμε εισάγετε το νέο κωδικό πρόσβασης εις διπλούν ώστε να μπορούμε να "
-"επιβεβαιώσουμε ότι τον πληκτρολογήσατε σωστά"
+"Παρακαλούμε εισάγετε το νέο κωδικό πρόσβασης δύο φορές ώστε να μπορούμε να "
+"επιβεβαιώσουμε ότι τον πληκτρολογήσατε σωστά."
 
 #: templates/registration/password_reset_confirm.html:25
 msgid "New password:"
-msgstr "Καινούργιος κωδικός πρόσβασης"
+msgstr "Νέος κωδικός πρόσβασης:"
 
 #: templates/registration/password_reset_confirm.html:34
 msgid "Confirm password:"
-msgstr "Επιβεβαίωση κωδικού πρόσβασης"
+msgstr "Επιβεβαίωση κωδικού πρόσβασης:"
 
 #: templates/registration/password_reset_confirm.html:48
 msgid "Password reset unsuccessful"
@@ -3659,39 +3679,38 @@ msgid ""
 "used.  Please request a new password reset."
 msgstr ""
 "Ο σύνδεσμος για την επαναφορά του κωδικού πρόσβασης δεν ήταν έγκυρος, "
-"πιθανώς επειδή έχει ήδη χρησιμοποιηθεί. Παρακαλούμε ζητήστε μια καινούρια "
-"επαναφορά κωδικού πρόσβασης"
+"πιθανώς επειδή έχει ήδη χρησιμοποιηθεί. Παρακαλούμε ζητήστε εκ νέου την "
+"επαναφορά του κωδικού πρόσβασης."
 
 #: templates/registration/password_reset_done.html:11
 #: templates/registration/password_reset_done.html:12
 msgid "Password reset successful"
-msgstr "Ο κωδικός πρόσβασης επαναφέρθηκε επιτυχώς"
+msgstr "Επιτυχής επαναφορά κωδικού πρόσβασης"
 
 #: templates/registration/password_reset_done.html:16
 msgid ""
 "We've emailed you instructions for setting your password to the email "
 "address you submitted. You should be receiving it shortly."
 msgstr ""
-"Σας στείλαμε τις οδηγίες για τον ορισμό του κωδικού πρόσβασης στην "
-"ηλεκτρονική διεύθυνση ταχυδρομείου που καταχωρίσατε. Θα πρέπει να το λάβετε "
-"οσονούπω"
+"Σας στείλαμε μέσω email οδηγίες για τον ορισμό του κωδικού πρόσβασης στη "
+"διεύθυνση ηλεκτρονικού ταχυδρομείου που καταχωρίσατε. Θα πρέπει να το λάβετε "
+"οσονούπω."
 
 #: templates/registration/password_reset_form.html:16
 msgid ""
 "Forgotten your password? Enter your email address below, and we'll email "
 "instructions for setting a new one."
 msgstr ""
-"Ξεχάσατε τον κωδικό πρόσβασης; Εισάγετε από κάτω την ηλεκτρονική διεύθυνση "
-"ταχυδρομείου, και θα σας στείλουμε ένα μήνυμα ηλεκτρονικού ταχυδρομείου 'με "
-"οδηγίες για να ορίσετε ένα νέο"
+"Ξεχάσατε τον κωδικό πρόσβασης; Εισάγετε to email σας, και θα σας στείλουμε "
+"ένα μήνυμα με οδηγίες για να ορίσετε έναν νέο κωδικό."
 
 #: templates/registration/password_reset_form.html:21
 msgid "Email address:"
-msgstr "Ηλεκτρονική διεύθυνση ταχυδρομείου (Email)"
+msgstr "Διεύθυνση ηλεκτρονικού ταχυδρομείου (Email)"
 
 #: templates/registration/password_reset_form.html:30
 msgid "Reset my password"
-msgstr "Επαναφορά του κωδικού πρόσβασης μου"
+msgstr "Επαναφορά του κωδικού πρόσβασής μου"
 
 #: templates/resources_cards_horizontal.html:19
 msgid "NOT ACCEPTED"
@@ -3699,11 +3718,11 @@ msgstr "ΜΗ ΑΠΟΔΕΚΤΟ"
 
 #: templates/resources_cards_horizontal.html:43
 msgid "review"
-msgstr "επιθεώρηση"
+msgstr "αναθεώρηση-κριτική"
 
 #: templates/resources_cards_horizontal.html:43
 msgid "reviews"
-msgstr "επιθεωρήσεις"
+msgstr "αναθεωρήσεις-κριτικές"
 
 #: templates/resources_cards_horizontal.html:96
 msgid "In my library"
@@ -3715,7 +3734,7 @@ msgstr "Προσθήκη στη βιβλιοθήκη"
 
 #: templates/translations.html:10
 msgid "Translations"
-msgstr ""
+msgstr "Μεταφράσεις"
 
 #~ msgid "URL of the organisation"
 #~ msgstr "Το URL του οργανισμού"

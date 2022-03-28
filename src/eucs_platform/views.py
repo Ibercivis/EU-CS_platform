@@ -46,10 +46,8 @@ def home(request):
     projects = paginatorprojects.get_page(page)
 
     # Resources
-    resources = Resource.objects.get_queryset().filter(
-            ~Q(isTrainingResource=True)).order_by('-dateUploaded')
-    approvedResources = ApprovedResources.objects.all().values_list('resource_id', flat=True)
-    resources = resources.filter(id__in=approvedResources)
+    resources = Resource.objects.all().filter(~Q(isTrainingResource=True)).order_by('-dateUpdated')
+    resources = resources.filter(approved=True)
     # savedResources = None
     # savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True)
     # languagesWithContent = Resource.objects.all().values_list('inLanguage', flat=True).distinct()
@@ -65,9 +63,8 @@ def home(request):
     resources = paginatorresources.get_page(page)
 
     # Training Resources
-    trainingResources = Resource.objects.get_queryset().filter(isTrainingResource=True).order_by('-dateUploaded')
-    tapprovedResources = ApprovedResources.objects.all().values_list('resource_id', flat=True)
-    trainingResources = trainingResources.filter(id__in=tapprovedResources)
+    trainingResources = Resource.objects.all().filter(isTrainingResource=True).order_by('-dateUpdated')
+    trainingResources = trainingResources.filter(approved=True)
     # tsavedResources = None
     # tsavedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True)
     # if request.GET.get('keywords'):
@@ -75,7 +72,6 @@ def home(request):
     #                                Q(keywords__keyword__icontains = request.GET['keywords']) ).distinct()
     #    filters['keywords'] = request.GET['keywords']
 
-    trainingResources = trainingResources.filter(~Q(hidden=True))
     # tresourcesTop = tresources.filter(featured=True)
     # tresourcesTopIds = list(tresourcesTop.values_list('id',flat=True))
     # tresources = tresources.exclude(id__in=tresourcesTopIds)
@@ -87,7 +83,7 @@ def home(request):
 
     # Organisations
     # TODO: Put -dateCreated
-    organisations = Organisation.objects.all().order_by('id')
+    organisations = Organisation.objects.all().order_by('dateCreated')
     if request.GET.get('keywords'):
         organisations = organisations.filter(Q(name__icontains=request.GET['keywords'])).distinct()
     counterorganisations = len(organisations)

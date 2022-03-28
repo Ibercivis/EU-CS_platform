@@ -17,8 +17,27 @@
         <div class="col-sm-2 col-12"></div>
         <div class="col-sm-8 col-11">
             <div class="col-12">
+                <h3>{% trans "Watch the final project video!" %}</h3>
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-11">
+                    <div class="row">
+                        <div class="col-12 col-sm-9">
+                            <div class="ratio ratio-16x9 mb-4">
+                                <iframe src="https://www.youtube.com/embed/PLqfOXK_TRg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        </div>
+        <div class="col-sm-2 col-12"></div>
+        <div class="col-sm-8 col-11">
+            <div class="col-12">
                 <h3>{% trans "Watch our teaser, in 12 different languages!" %}</h3>
-                <div class="mb-3 small">A brand new teaser is under preparation</div>
             </div>
             <div class="row">
                 <div class="col-1"></div>
@@ -26,7 +45,8 @@
                     <div class="row">
                         <div class="col-12 col-sm-9">
                             <div class="ratio ratio-16x9">
-                                <iframe id="teaserIframe"  src="https://www.youtube.com/embed/jBfgV8LkYl8" allowfullscreen></iframe>
+                                <iframe id="teaserIframe" src="https://www.youtube.com/embed/ps_kTQjQvU0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
                             </div>
                         </div>
                         <div class="col-12 col-sm-3">
@@ -48,6 +68,26 @@
                     </div>
                 </div>
             </div><!-- end row below watch -->
+
+             <div class="row">
+                <div class="col-12"><h3 class="mt-4">{% trans "Watch the video about the platform development and training modules!" %}</h3></div>
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-11">
+                    <div class="row">
+                        <div class="col-12 col-sm-9">
+                            <div class="ratio ratio-16x9">
+                    <iframe src="https://www.youtube.com/embed/OrC7qncpYTU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end of watch2 -->
+
+
+
+
             <div class="row">
                 <div class="col-12"><h3 class="mt-4">{% trans "The Platform" %}</h3></div>
             </div>
@@ -233,21 +273,21 @@
 	function loadTeaserVideo(){
 		var code = $("#id_teaser").val();
 		switch (code) {
-			case "NL": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/hPMN9LUo2x0"); break;
-			case "EN": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/jBfgV8LkYl8"); break;
-			case "ET": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/94wsDZDwU2A"); break;
-			case "FR": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/cTsiWL7kzjc"); break;
-			case "DE": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/E4Nl2qT3UVU"); break;
-			case "EL": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/sVAsKEzbOSg"); break;
-			case "HU": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/P4qvioSYLEk"); break;
-			case "IT": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/szQTUB4fzqs"); break;
-			case "LT": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/LPytoycYlio"); break;
-			case "PT": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/eJl0CyHVoF8"); break;
-			case "ES": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/6dF63l4sLRw"); break;
-			case "SV": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/h2qNh32QIfs"); break;
-			default: $("#teaserIframe").attr("src", "https://www.youtube.com/embed/jBfgV8LkYl8");
+			case "NL": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/u2k3OIKmIz4"); break;
+			case "EN": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/ps_kTQjQvU0"); break;
+			case "ET": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/aHZRm0mbdDs"); break;
+			case "FR": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/FTzpRfwuiWg"); break;
+			case "DE": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/D0TV3rS1AaA"); break;
+			case "EL": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/3yEdYsFsfDo"); break;
+			case "HU": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/-JQ5U5tvbY0"); break;
+			case "IT": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/oPWAV1_tRgk"); break;
+			case "LT": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/wK1bcx6rhbo"); break;
+			case "PT": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/jSrJGY_JB8k"); break;
+			case "ES": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/TrFJENcB8fE"); break;
+			case "SV": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/Tx-TqZlxyOo"); break;
+			default: $("#teaserIframe").attr("src", "https://www.youtube.com/embed/ps_kTQjQvU0");
 		}
 
 	}
 </script>
-{% endblock scripts %}
+https://youtu.be/u2k3OIKmIz4{% endblock scripts %}
