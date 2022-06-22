@@ -46,7 +46,7 @@ def home(request):
     projects = paginatorprojects.get_page(page)
 
     # Resources
-    resources = Resource.objects.all().filter(~Q(isTrainingResource=True)).order_by('-dateUpdated')
+    resources = Resource.objects.all().filter(~Q(isTrainingResource=True)).order_by('-dateCreated')
     resources = resources.filter(approved=True)
     # savedResources = None
     # savedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True)
@@ -63,7 +63,7 @@ def home(request):
     resources = paginatorresources.get_page(page)
 
     # Training Resources
-    trainingResources = Resource.objects.all().filter(isTrainingResource=True).order_by('-dateUpdated')
+    trainingResources = Resource.objects.all().filter(isTrainingResource=True).order_by('-dateCreated')
     trainingResources = trainingResources.filter(approved=True)
     # tsavedResources = None
     # tsavedResources = SavedResources.objects.all().filter(user_id=user.id).values_list('resource_id',flat=True)
@@ -83,7 +83,7 @@ def home(request):
 
     # Organisations
     # TODO: Put -dateCreated
-    organisations = Organisation.objects.all().order_by('dateCreated')
+    organisations = Organisation.objects.all().order_by('-dateCreated')
     if request.GET.get('keywords'):
         organisations = organisations.filter(Q(name__icontains=request.GET['keywords'])).distinct()
     counterorganisations = len(organisations)

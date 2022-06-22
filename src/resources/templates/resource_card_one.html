@@ -25,18 +25,18 @@
             </a>
             {% endif %}
             {% endfor %}
-            <a class="badge rounded-pill bg-my-darkBlue text-decoration-none" href="{{endPoint}}?category={{resource.category.text}}">{{ resource.category }}</a>
+            <a class="badge rounded-pill bg-my-darkBlue text-decoration-none" href="resources?category={{resource.category.text}}">{{ resource.category }}</a>
             {% for theme in resource.theme.all %}
             <!-- TODO: Improve this or put in a template -->
             {% if forloop.counter < 3 %}
-            <a class="badge rounded-pill bg-my-wood text-decoration-none" href="{{endPoint}}?theme={{theme}}">{{ theme }}</a>
+            <a class="badge rounded-pill bg-my-wood text-decoration-none" href="resources?theme={{theme}}">{{ theme }}</a>
             {% elif forloop.counter < 4 %}
             ...
             {% endif %}
             {% endfor %}
             {% for keyword in resource.keywords.all %} 
             {% if forloop.counter < 3 %}
-            <a class="badge rounded-pill bg-my-darkGreen text-decoration-none" href="{{endPoint}}?keywords={{keyword}}">{{keyword}}</a>
+            <a class="badge rounded-pill bg-my-darkGreen text-decoration-none" href="resources?keywords={{keyword}}">{{keyword}}</a>
             {% elif forloop.counter < 4 %}
             ...
             {% endif %}
