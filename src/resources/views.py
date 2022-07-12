@@ -286,6 +286,7 @@ def saveResourceAjax(request):
     request.POST = request.POST.copy()
     request.POST = updateKeywords(request.POST)
     request.POST = updateAuthors(request.POST)
+    print(request.POST)
     request.POST = updateEducationLevel(request.POST)
     request.POST = updateLearningResourceType(request.POST)
     form = ResourceForm(request.POST, request.FILES)
@@ -325,7 +326,7 @@ def updateAuthors(dictio):
                 dictio.update({'authors': author_id})
             else:
                 # This author is already in the database
-                dictio.update({'author': a})
+                dictio.update({'authors': a})
     return dictio
 
 

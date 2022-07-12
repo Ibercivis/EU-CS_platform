@@ -150,7 +150,7 @@ def edit_organisation(request, pk):
 
 
 def organisations(request):
-    organisations = Organisation.objects.get_queryset().order_by('id')
+    organisations = Organisation.objects.get_queryset().order_by('-dateCreated')
     countriesWithContent = Organisation.objects.all().values_list('country', flat=True).distinct()
     orgTypes = OrganisationType.objects.all()
     filters = {'keywords': '', 'orgTypes': '', 'country': ''}

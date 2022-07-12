@@ -26,12 +26,12 @@
             <table class="table table-borderless">
                 {% if resource.authors.all %}
                 <tr>
-                    <td><b>Authors</b></td>
+                    <td><b>Authors:</b></td>
                     <td>{% for author in resource.authors.all %}{{ author }}; {% endfor %}</td>
                 </tr>
                 {% endif %}
                 {% if resource.publisher %}
-                <tr><td><b>Publisher</b></td><td>{{resource.publisher}}</td></tr>
+                <tr><td><b>Publisher:</b></td><td>{{resource.publisher}}</td></tr>
                 {% endif %}
                 {% if resource.datePublished %}
                 <tr><td><b>Year of publication: </b></td><td>{{resource.datePublished}}</td></tr>
@@ -50,7 +50,12 @@
                 <div class="col-12 col-md-6">
                     {% include "horizontal_card_organisation.html" %}
                 </div>
+                {% endfor %}
             </div>
+            {% endif %}
+
+            {% if resource.project.all %}
+            {% if resource.organisation.all %}
             <div class="row">
                 {% for project in resource.project.all %}
                 <div class="col-12 col-md-6">
@@ -58,8 +63,20 @@
                 </div>
                 {% endfor %}
             </div>
-            {% endfor %}
+            
+            {% else %}
+            <h4 class="mt-4 leftborder">{% trans "Links with projects and/or organisations" %}</h4>
+            <div class="row">
+                {% for project in resource.project.all %}
+                <div class="col-12 col-md-6">
+                    {% include "horizontal_card_project.html" %}
+                </div>
+                {% endfor %}
+            </div>
+            
             {% endif %}
+            {% endif %}
+            
             {% if isTrainingResource %}
             <h4 class="mt-4 leftborder">{% trans "Training information" %}</h4>
             {% if resource.timeRequired %}

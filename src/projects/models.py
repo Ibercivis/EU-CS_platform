@@ -163,6 +163,7 @@ class Project(models.Model):
     moderated = models.BooleanField(default=False)
     approved = models.BooleanField(default=False)
 
+    # Links
     # Others (some of them not used)
     featured = models.BooleanField(default=False)
     host = models.CharField(max_length=200, null=True, blank=True)

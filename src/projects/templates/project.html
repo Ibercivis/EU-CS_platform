@@ -77,6 +77,10 @@
             <p class="gray7-color">{{project.equipment |safe}}</p>
             {% endif %}
             {% endif %}
+                Org
+            {% for resource in project.resource.all %}
+                {{resource}}
+            {% endfor %}
 
             
         </div>

@@ -255,6 +255,9 @@ class ResourceForm(forms.Form):
         resource.organisation.set(self.data.getlist('organisation'))
         resource.project.set(self.data.getlist('project'))
         resource.keywords.set(self.data.getlist('keywords'))
+        print(self.data.getlist('authors'))
+        print("----")
+        resource.authors.set(self.data.getlist('authors'))
         curatedList = self.data.getlist('curatedList')
 
         if args.user.is_staff:
