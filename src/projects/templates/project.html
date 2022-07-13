@@ -77,7 +77,24 @@
             <p class="gray7-color">{{project.equipment |safe}}</p>
             {% endif %}
             {% endif %}
-                Org
+               
+            {%if project.fundingBody.all %}
+            <h4 class="mt-4 leftborder">{% trans "About funding" %}</h4>
+            
+            
+                <p class="leftborder">{% trans "<b>Funding bodies: </b>" %} </p>
+                {% for fundingBody in project.fundingBody.all %}
+                
+                    <p class="leftborder">{{fundingBody |safe}}</p>
+                
+                {% endfor %}
+                <p class="leftborder">{% trans "<b>Funding program: </b>" %} {{project.fundingProgram |safe}}</p>
+            
+            
+            {% endif %}
+
+
+
             {% for resource in project.resource.all %}
                 {{resource}}
             {% endfor %}
@@ -141,7 +158,11 @@
                 {% include 'horizontal_card_organisation.html' with organisation=project.mainOrganisation %}
             </div>
             {% endif %}
-
+            {% if project.author_email %}
+            <div>
+                <a href="mailto:{{project.author_email}}">{% trans "Contact" %}</a>
+            </div>    
+            {% endif %}
             {% if project.organisation.all %}
             <h5 class="mt-3">{% trans "Other Organisations involved" %}</h5>
             <div>
