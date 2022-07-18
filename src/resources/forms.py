@@ -34,7 +34,8 @@ class ResourceForm(forms.Form):
             help_text=_(
                 'Please select the keywords that describe the resource or add new ones '
                 '<b>separated by commas or by pressing enter</b>.'),
-            required=True)
+            required=True,
+            label=_('Keywords'))
 
     abstract = forms.CharField(
             widget=CKEditorWidget(config_name='frontpage'),
