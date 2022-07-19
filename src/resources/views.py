@@ -370,8 +370,17 @@ def setImages(request, form):
     return images
 
 
-def sendResourceEmail(id, user):
-    return 0
+def sendResourceEmail(pk, user):
+    resource = get_object_or_404(Resource, id=pk)
+    subject = '[EU-CITIZEN.SCIENCE] Your resource "%s" has been submitted' % resource.name
+    print(subject)
+    message = render_to_string('emails/new_resource.html')
+    to = [user.email]
+    bcc = copy.copy(settings.EMAIL_RECIPIENT_LIST)
+    email = EmailMessage(subject, message, to=to, bcc=bcc)
+    email.content_subtype = "html"
+    email.send()
+    print(message)
 
 
 def deleteResource(request, pk, isTrainingResource):
