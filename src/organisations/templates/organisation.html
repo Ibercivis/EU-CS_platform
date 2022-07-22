@@ -79,12 +79,28 @@
             </a>
 
 
-            <a data-href="{% url 'delete_organisation' organisation.id %}" 
+            <!-- <a data-href="{% url 'delete_organisation' organisation.id %}" 
                data-toggle="modal" 
                data-target="#confirm-delete" 
                class="btn btn-danger mt-4 mb-5">
                 <span class="fas fa-trash-alt"></span>&nbsp;{% trans "Delete Organisation" %}
             </a>
+          {%  if user == organisation.creator or user.is_staff %}
+            <a
+  href="{% url 'delete_organisation' organisation.id %}"
+  class="btn btn-danger mt-4 mb-5"
+  data-toggle="modal"
+  data-target="#confirm-delete"
+  id="delete-item"
+>
+<span class="fas fa-trash-alt"></span>&nbsp;{% trans "Delete Organisation" %}
+</a> -->
+
+<button type="button" class="btn btn-danger mt-4 mb-5" data-bs-toggle="modal" data-bs-target="#confirm-delete">
+    <span class="fas fa-trash-alt"></span>&nbsp;{% trans "Delete Organisation" %}
+  </button>
+        {%endif%}
+
 
             {% if editable %}
             {% endif %}
@@ -115,7 +131,10 @@
 
 {% endblock list_of_items%}
 
+
 {% block scripts %}
+
+
 <script>
     $('#confirm-delete').on('show.bs.modal', function(e) {
         $(this).find('.btn-delete').attr('href', $(e.relatedTarget).data('href'));
@@ -125,8 +144,8 @@ var map;
 var marker_layer = new L.marker([50.5, 30.5]);
 function map_init_basic (leafmap, options) {
     map = leafmap;
-    map.setView([{{organisation.latitude}}, {{organisation.longitude}}], 4)
-    new L.marker([{{organisation.latitude}},{{organisation.longitude}}]).addTo(map);
+    map.setView(organisation.latitude, organisation.longitude, 4)
+    new L.marker(organisation.latitude,organisation.longitude).addTo(map);
 }
 </script>
 {{ permissionForm.media.js }}

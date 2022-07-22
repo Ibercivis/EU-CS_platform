@@ -288,3 +288,4 @@ def saveImageWithPath(image, photoName):
     image_path = "images/" + _datetime + '_' + str(random_num) + '_' + photoName
     image.save(image_path)
     return image_path
+
