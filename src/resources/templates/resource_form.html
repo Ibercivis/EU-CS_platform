@@ -2,12 +2,14 @@
 {% load i18n %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
+{% load leaflet_tags %}
 {% load l10n %}
 {% load thumbnail %}
 {% block head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'site/css/forms.css' %}">
 {{ form.media.css }}
+{{ form.media.js }}
 {% endblock head %}
 
 {% block title %}{{ block.super }} :: Edit resource{% endblock %}

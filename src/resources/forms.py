@@ -1,4 +1,5 @@
 from ckeditor.widgets import CKEditorWidget
+from django.core.validators import MinValueValidator
 from django import forms
 from django.shortcuts import get_object_or_404
 from django_select2.forms import Select2MultipleWidget
@@ -197,7 +198,7 @@ class ResourceForm(forms.Form):
                 'For example, presentation, handout, etc.'),
             required=False,
             )
-    time_required = forms.FloatField(required=False, help_text=_(
+    time_required = forms.FloatField(validators=[MinValueValidator(0)], min_value=0, required=False, help_text=_(
         'Please write the approximate  hours required to finish the training.'))
     conditions_of_access = forms.CharField(required=False, help_text=_(
         'Please describe any conditions that affect the accessibility of the training material, '
@@ -283,6 +284,12 @@ class ResourceForm(forms.Form):
                 publisher=self.data['publisher'],
                 dateUploaded=datetime.now())
 
+# class MinValueValidator(BaseValidator):
+#     message = _('Ensure this value is greater than or equal to %(limit_value)s.')
+#     code = 'min_value'
+
+#     def compare(self, a, b):
+#         return a < b  # super simple.
 
 class ResourcePermissionForm(forms.Form):
     selectedUsers = forms.CharField(widget=forms.HiddenInput(), required=False, initial=())
