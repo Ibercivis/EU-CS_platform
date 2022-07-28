@@ -11,7 +11,41 @@
             <h4 class="mt-2 mb-0">
                 <a href="/resource/{{resource.id}}" class="card-title">{{ resource.name | truncatewords:10 }}</a>
             </h4>
+                {% if resource.isTrainingResource == True %}
             {% if resource.featured %}
+            <div class="small text-muted mb-2">Featured</div>
+            {% else %}
+            <div class="small text-muteed mb-2">&nbsp;</div>
+            {% endif %}
+            {% get_language_info_list for LANGUAGES as languages %}
+            {% for language in languages %}
+            {% if language.code == resource.inLanguage %}
+            <a class="badge rounded-pill bg-dark text-decoration-none" 
+                href="/training_resources?inLanguage={{resource.inLanguage}}">
+                {{language.name}}
+            </a>
+            {% endif %}
+            {% endfor %}
+            <a class="badge rounded-pill bg-my-darkBlue text-decoration-none" href="training_resources?category={{resource.category.text}}">{{ resource.category }}</a>
+            {% for theme in resource.theme.all %}
+            <!-- TODO: Improve this or put in a template -->
+            {% if forloop.counter < 3 %}
+            <a class="badge rounded-pill bg-my-wood text-decoration-none" href="training_resources?theme={{theme}}">{{ theme }}</a>
+            {% elif forloop.counter < 4 %}
+            ...
+            {% endif %}
+            {% endfor %}
+            {% for keyword in resource.keywords.all %} 
+            {% if forloop.counter < 3 %}
+            <a class="badge rounded-pill bg-my-darkGreen text-decoration-none" href="training_resources?keywords={{keyword}}">{{keyword}}</a>
+            {% elif forloop.counter < 4 %}
+            ...
+            {% endif %}
+            {% endfor %}
+            
+                {% else %}
+
+                {% if resource.featured %}
             <div class="small text-muted mb-2">Featured</div>
             {% else %}
             <div class="small text-muteed mb-2">&nbsp;</div>
@@ -41,7 +75,11 @@
             ...
             {% endif %}
             {% endfor %}
+
+                {% endif %}
             <p class="mt-4">{{ resource.abstract | safe | truncatewords_html:30 }}</p>
+            
+                
         </div><!-- end of card-body -->
     </div><!-- end of card -->
 </div>
