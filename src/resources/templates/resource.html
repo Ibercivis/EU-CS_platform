@@ -103,13 +103,17 @@
                     </a>
 
                     {% if resource.creator == user or user.is_staff or user.id in cooperators %}
+                        {% if resource.isTrainingResource == True %}
                     <a class="btn btn-warning" 
-                      href="{% if isTrainingResource %}
-                            {% url 'editTrainingResource' resource.id %}
-                            {% else %}
-                            {% url 'editResource' resource.id %}{% endif %}">
+                      href="{% url 'editTrainingResource' resource.id %}">
                         <i class="fas fa-edit"></i> {% trans "Edit" %}
                     </a>
+                        {% else %} 
+                        <a class="btn btn-warning" 
+                        href="{% url 'editResource' resource.id %}">
+                          <i class="fas fa-edit"></i> {% trans "Edit" %}
+                      </a>
+                    {% endif %}
                     {% endif %}
                
                     {% if user.is_authenticated %}
