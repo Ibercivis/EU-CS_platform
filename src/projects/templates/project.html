@@ -171,7 +171,7 @@
             <h5 class="mt-3">{% trans "Location" %}</h5>
             <div>
                 {% for geographicextend in project.geographicextend.all %}
-                <a class="badge bg-my-darkGreen" href="">{{geographicextend}}</a>
+                <a class="badge bg-my-darkGreen" href="/projects?geographicextend={{geographicextend}}">{{geographicextend}}</a>
                 {% endfor %}
                 {% if project.projectlocality%}
                 <div>
