@@ -181,28 +181,36 @@
             {% endfor %}
 
             <h5 class="mt-3">{% trans "Category" %}</h5>
-            <a class="badge bg-my-lightBlue"
+            <a class="badge bg-my-lightBlue"  
                href="{{endPoint}}?category={{resource.category.text}}">{{resource.category | title }}</a>
+               <!-- <div id="id_sub_categories" class="mb-3"></div> -->
 
-            <!-- TODO: This is not working, escape well -->
+               
+            <a class="badge bg-my-lightBlue" id="id_sub_categories"
+            href="{{endPoint}}?categorySelected={{resource.category.id|urlencode}}">{{resource.category.id | title }}</a>
+             
+            
+               <!-- TODO: This is not working, escape well -->
             <h5 class="mt-3">{% trans "Audience" %}</h5>
             {% for audience in resource.audience.all %}
             <a class="badge bg-my-lightGreen"
-               href="{{endPoint}}?audience={% autoescape on %}{{audience}}{% endautoescape %}"> {{ audience | title}}
+               href="{{endPoint}}?audience={% autoescape on %}{{audience|urlencode}}{% endautoescape %}"> {{ audience | title}}
             </a>
             {% endfor %}
 
             {% if resource.educationLevel.all %}
             <h5 class="mt-3">{% trans "Education level" %}</h5>
             {% for educationLevel in resource.educationLevel.all %}
-            <a class="badge bg-my-wood">{{ educationLevel | title }}</a>
+            <a class="badge bg-my-wood"
+            href="{{endPoint}}?educationLevel={% autoescape on %}{{educationLevel|urlencode}}{% endautoescape %}">{{ educationLevel | title }}</a>
             {% endfor %}
             {% endif %}
 
             {% if resource.learningResourceType.all %}
             <h5 class="mt-3">{% trans "Learning Resource Type" %}</h5>
             {% for learningResourceType in resource.learningResourceType.all %}
-            <a class="badge bg-my-darkGreen">{{ learningResourceType | title }}</a>
+            <a class="badge bg-my-darkGreen"
+            href="{{endPoint}}?learningResourceType={% autoescape on %}{{learningResourceType|urlencode}}{% endautoescape %}">{{ learningResourceType | title }}</a>
             {% endfor %}
             {% endif %}
         </div>
@@ -215,6 +223,9 @@
 {% block scripts %}
 <script>
     $(function () {
+        getSubCategories();
+        $("#id_category").on('change', getSubCategories);
+
         var users = $("#id_usersCollection").val();
         if(users){
             var users = users.split(",");
@@ -328,6 +339,26 @@
 
 
     });
+
+    function getSubCategories(resource) {
+    var category = $("#id_category").val();
+    var request = $.ajax(
+        {
+            type: "GET",
+            url: "{% url 'get_sub_category' %}",
+            data: {
+                "category": category
+            },
+            success: function (response) {
+                $("#id_sub_categories").html(response.sub_categories);
+                if ($("#id_category").val() != $("#id_categorySelected").val()) {
+                    $("#id_subcategory").val($("#id_categorySelected").val());
+                }
+
+            }
+        }
+    );
+}
 
 </script>
 {{ permissionForm.media.js }}

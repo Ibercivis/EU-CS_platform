@@ -191,6 +191,7 @@
                 contentType: false, // TODO: Check this
                 data: new FormData(document.getElementById("form_resource")),
                 success: function(response){
+                    console.log(data)
                     console.log(response)
                     if(contin){
                         $('#resourceID').val(response.Resource)

@@ -249,6 +249,7 @@ class ResourceForm(forms.Form):
                 resource.timeRequired = self.data['time_required']
             resource.conditionsOfAccess = self.data['conditions_of_access']
         # End training resource fields
+        resource.isTrainingResource = isTrainingResource
         resource.save()
 
         # Set the fields that are lists
@@ -290,6 +291,7 @@ class ResourceForm(forms.Form):
 
 #     def compare(self, a, b):
 #         return a < b  # super simple.
+
 
 class ResourcePermissionForm(forms.Form):
     selectedUsers = forms.CharField(widget=forms.HiddenInput(), required=False, initial=())

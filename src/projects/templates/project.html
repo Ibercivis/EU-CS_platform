@@ -158,11 +158,6 @@
                 {% include 'horizontal_card_organisation.html' with organisation=project.mainOrganisation %}
             </div>
             {% endif %}
-            {% if project.author_email %}
-            <div>
-                <a href="mailto:{{project.author_email}}">{% trans "Contact" %}</a>
-            </div>    
-            {% endif %}
             {% if project.organisation.all %}
             <h5 class="mt-3">{% trans "Other Organisations involved" %}</h5>
             <div>
@@ -179,7 +174,12 @@
                 <a class="badge bg-my-darkGreen" href="">{{geographicextend}}</a>
                 {% endfor %}
                 {% if project.projectlocality%}
-                <a class="badge badge-light" href="#">{{ project.projectlocality}}</a>
+                <div>
+                    <p style="font-family: 'Nunito', sans-serif;
+                    color: black;
+                    font-size: 90%;
+                    margin-top: 6px;">{{ project.projectlocality}}</p>
+                </div>
                 {% endif %}
             </div>
             {% endif %}
@@ -188,6 +188,14 @@
                 {{ form.projectGeographicLocation|as_crispy_field }}
             </div>
             {% endif %}
+            <div>
+            {% if project.author_email %}
+            <h5 class="mt-3">{% trans "Contact" %}</h5>
+                <div>
+                <a class="badge bg-dark" href="mailto:{{project.author_email}}">{% trans "E-mail" %}</a>
+                </div>    
+            {% endif %}
+            </div>
         </div>
             <div class="row">
                 <div class="col-12 mt-4">
