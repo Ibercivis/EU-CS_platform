@@ -332,4 +332,20 @@
     });
 </script>
 
+<!-- ALERT IF BACK BUTTON IS PRESSED -->
+<script>
+  $(document).ready(function() {
+    
+    if (window.history && window.history.pushState) {
+
+window.history.pushState('forward', null, null);
+
+$(window).on('popstate', function() {
+  alert('If you leave before saving, your changes will be lost. Be careful!');
+});
+
+}
+    });
+</script>
+
 {% endblock scripts %}
