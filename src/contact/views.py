@@ -36,6 +36,15 @@ def submitterContactView(request, group, pk):
     referenceURL = settings.HOST + '/' + group + '/' + str(pk)
     if request.method == 'GET':
         form = SubmitterContactForm()
+        if (group =="project"):
+            project = get_object_or_404(Project, id=pk)
+            submitter = project.creator.name
+        elif(group =="resource"):
+            resource = get_object_or_404(Resource, id=pk)
+            submitter = resource.creator.name
+        else:
+            event = get_object_or_404(Event, id=pk)
+            submitter = event.creator.name
     else:
         form = SubmitterContactForm(request.POST)
         if form.is_valid():
@@ -55,4 +64,4 @@ def submitterContactView(request, group, pk):
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return redirect('success')
-    return render(request, "submitter_contact.html", {'form': form, 'referenceURL': referenceURL})
+    return render(request, "submitter_contact.html", {'form': form, 'referenceURL': referenceURL, 'submitter': submitter})

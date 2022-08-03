@@ -27,7 +27,7 @@
 			<div class="card mb-4 mt-5 shadow">
 				<div class="card-text p-3">
 					<h3>{% trans "Contact" %}</h3>
-					<p>{% trans "This email will be sent to submitter of" %} <a target="_blank" href="{{ referenceURL }}">{{ referenceURL }}</a></p>
+					<p>{% trans "This email will be sent to " %} {{ submitter}} {% trans "(submitter of" %} <a target="_blank" href="{{ referenceURL }}">{{ referenceURL }}</a>)</p>
 					<form method="post" autocomplete="off">
 						{% csrf_token %}
 						<div class="row">
