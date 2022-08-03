@@ -114,9 +114,21 @@
                     <p class="leftborder">{{fundingBody |safe}}</p>
                 
                 {% endfor %}
+                {% if project.fundingProgram %}
                 <p class="leftborder">{% trans "<b>Funding program: </b>" %} {{project.fundingProgram |safe}}</p>
+                {% endif %}
             
-            
+            {% endif %}
+
+            {% if project.imageCredit3 or project.imageCredit2 %}
+                <h4 class="mt-4 leftborder">{% trans "About branding" %}</h4>
+                {% if project.imageCredit3 %}
+                    <p class="leftborder">{% trans "<b>Profile image design by: </b>" %} {{project.imageCredit3|safe}} </p>
+                {% endif %}  
+                {% if project.imageCredit2 %}
+                    <p class="leftborder">{% trans "<b>Logo design by: </b>" %} {{project.imageCredit2|safe}} </p>
+                {% endif %}  
+
             {% endif %}
 
 
