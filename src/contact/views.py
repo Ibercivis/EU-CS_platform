@@ -34,6 +34,7 @@ class SuccessPage(generic.TemplateView):
 
 def submitterContactView(request, group, pk):
     referenceURL = settings.HOST + '/' + group + '/' + str(pk)
+    user = request.user
     if request.method == 'GET':
         form = SubmitterContactForm()
         if (group =="project"):
@@ -58,7 +59,8 @@ def submitterContactView(request, group, pk):
             else:
                 event = get_object_or_404(Event, id=pk)
                 to_email = event.creator.email
-            message = form.cleaned_data['message']
+            message = form.cleaned_data['message'] + '\n\n\n\nThe email address of the person who has contacted you is:  ' + user.email
+            
             try:
                 send_mail(subject, message, settings.EMAIL_HOST_USER, [to_email])
             except BadHeaderError:
