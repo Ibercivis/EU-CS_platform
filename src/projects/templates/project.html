@@ -19,6 +19,32 @@
  #id_projectGeographicLocation_div_map { width: 100% !important; height: 100% !important; }
  #id_projectGeographicLocation_map { width: 100% !important; height: 100% !important; }
 </style>
+{% if 'newProject' in request.get_full_path %}
+    <!-- TOAST para nuevos proyectos. TODO: optimizar. -->
+<div style="position: relative;">
+    <div class="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true" style="position: absolute; top: 10px; right: 10px; z-index:1;">
+        <div class="d-flex">
+          <div class="toast-body">
+            {% trans "Your project has been added successfully. <br> Thank you!" %}
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% if 'editProject' in request.get_full_path %}
+    <!-- TOAST para proyectos editados. TODO: optimizar. -->
+<div style="position: relative;">
+    <div class="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true" style="position: absolute; top: 10px; right: 10px; z-index:1;">
+        <div class="d-flex">
+          <div class="toast-body">
+            {% trans "Your project has been updated successfully." %}
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+{% endif %}
 {% if project.image3 %}
 <div class="container-fluid profileImage" style="background: url('/media/{{project.image3}}') no-repeat; background-size: cover;">
 </div>
@@ -279,10 +305,15 @@
     </div>
 </div>
 
+
 {% endblock list_of_items %}
 
 {% block scripts %}
 <script type="text/javascript">
+    $(function (){
+        $(".toast").toast("show")
+    })
+
     $(function () {
         if(typeof geodjango_projectGeographicLocation !== 'undefined'){
             geodjango_projectGeographicLocation.map.removeInteraction(geodjango_projectGeographicLocation.interactions.draw);
