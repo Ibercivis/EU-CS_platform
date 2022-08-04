@@ -27,9 +27,11 @@
             <h4 class="mt-4 leftborder">{% trans "Projects" %}</h4>
             <div class="row">
                 {% for project in associatedProjects.all %}
-                <div class="col-12 col-md-6">
-                    {% include "horizontal_card_project.html" %}
-                </div>
+                    {% if project.approved %}
+                    <div class="col-12 col-md-6">
+                        {% include "horizontal_card_project.html" %}
+                    </div>
+                    {% endif %}
                 {% endfor %}
             </div>
             {% endif %}
