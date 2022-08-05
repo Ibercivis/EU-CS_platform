@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-05 08:58+0000\n"
+"POT-Creation-Date: 2022-08-05 10:18+0000\n"
 "PO-Revision-Date: 2021-12-17 20:16+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -136,36 +136,61 @@ msgstr[1] "%d τα email ελέγχου στάλθηκαν"
 msgid "Please write the title of the event."
 msgstr "Παρακαλούμε εισάγετε τον τίτλο ή το όνομα του πόρου."
 
-#: events/forms.py:14
+#: events/forms.py:13 profiles/models.py:39
+msgid "Title"
+msgstr "Τίτλος"
+
+#: events/forms.py:15
 #, fuzzy
 #| msgid "A brief description of the event"
 msgid "Please add a brief description of the event."
 msgstr "Σύντομη περιγραφή εκδήλωσης"
 
-#: events/forms.py:16
+#: events/forms.py:16 projects/forms.py:425
+#: projects/templates/translation_form.html:48
+msgid "Description"
+msgstr "Περιγραφή"
+
+#: events/forms.py:18
 #, fuzzy
 #| msgid "Please indicate the publisher of the resource"
 msgid "Please indicate the location of the event."
 msgstr "Παρακαλούμε υποδείξτε τον εκδότη του πόρου"
 
 #: events/forms.py:19
+msgid "Place"
+msgstr ""
+
+#: events/forms.py:21
+msgid "Start date"
+msgstr ""
+
+#: events/forms.py:23
 #, fuzzy
 #| msgid "Please indicate the spatial scale of the project"
 msgid "Please indicate the start and end dates of the event."
 msgstr "Παρακαλούμε να αναφέρετε τη χωρική κλίμακα του έργου"
 
-#: events/forms.py:21
+#: events/forms.py:24
+msgid "End date"
+msgstr ""
+
+#: events/forms.py:26
 #, fuzzy
 #| msgid "Please indicate the spatial scale of the project"
 msgid "Please indicate the start time of the event."
 msgstr "Παρακαλούμε να αναφέρετε τη χωρική κλίμακα του έργου"
 
-#: events/forms.py:22 organisations/forms.py:18 platforms/forms.py:31
-#: projects/forms.py:37 resources/forms.py:25
+#: events/forms.py:27
+msgid "Hour"
+msgstr ""
+
+#: events/forms.py:28 events/forms.py:30 organisations/forms.py:18
+#: platforms/forms.py:31 projects/forms.py:37 resources/forms.py:25
 msgid "URL"
 msgstr "URL"
 
-#: events/forms.py:23
+#: events/forms.py:29
 #, fuzzy
 #| msgid "Please provide a URL to an external web site for the event"
 msgid "Please provide a URL to an external web site for the event."
@@ -469,7 +494,11 @@ msgstr "Λογότυπο οργανισμού"
 msgid "Location"
 msgstr "Τοποθεσία"
 
-#: organisations/templates/organisation_form.html:107
+#: organisations/templates/organisation_form.html:100
+msgid "This is a required parameter"
+msgstr ""
+
+#: organisations/templates/organisation_form.html:108
 #: profiles/templates/profiles/edit_profile.html:56 templates/_save_zone.html:3
 msgid "Save"
 msgstr "Αποθήκευση"
@@ -650,10 +679,6 @@ msgstr "Επίθετο"
 #: profiles/models.py:34
 msgid "Profile picture"
 msgstr "Εικόνα προφίλ"
-
-#: profiles/models.py:39
-msgid "Title"
-msgstr "Τίτλος"
 
 #: profiles/models.py:41
 msgid "Short Bio and disciplinary background"
@@ -1010,10 +1035,6 @@ msgstr ""
 #: projects/forms.py:423
 msgid "Please provide a <i>description</i> field translation."
 msgstr "Παρακαλούμε καταχωρίστε μια μετάφραση πεδίου <i>περιγραφής</i>."
-
-#: projects/forms.py:425 projects/templates/translation_form.html:48
-msgid "Description"
-msgstr "Περιγραφή"
 
 #: projects/forms.py:429
 msgid "Please provide an <i>aim</i> field translation."

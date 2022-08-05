@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-05 08:58+0000\n"
+"POT-Creation-Date: 2022-08-05 10:18+0000\n"
 "PO-Revision-Date: 2021-12-18 01:29+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -135,36 +135,63 @@ msgstr[1] "%d test e-mails zijn verstuurd"
 msgid "Please write the title of the event."
 msgstr "Vermeld de titel of de naam van de hulpmiddel."
 
-#: events/forms.py:14
+#: events/forms.py:13 profiles/models.py:39
+msgid "Title"
+msgstr "Titel"
+
+#: events/forms.py:15
 #, fuzzy
 #| msgid "A brief description of the event"
 msgid "Please add a brief description of the event."
 msgstr "Een korte beschrijving van het evenement"
 
-#: events/forms.py:16
+#: events/forms.py:16 projects/forms.py:425
+#: projects/templates/translation_form.html:48
+msgid "Description"
+msgstr "Omschrijving"
+
+#: events/forms.py:18
 #, fuzzy
 #| msgid "Please indicate the publisher of the resource"
 msgid "Please indicate the location of the event."
 msgstr "Vermeld de uitgever van het hulpmiddel"
 
 #: events/forms.py:19
+msgid "Place"
+msgstr ""
+
+#: events/forms.py:21
+#, fuzzy
+#| msgid "Start:"
+msgid "Start date"
+msgstr "Start"
+
+#: events/forms.py:23
 #, fuzzy
 #| msgid "Please indicate the spatial scale of the project"
 msgid "Please indicate the start and end dates of the event."
 msgstr "Vermeld de ruimtelijke schaal van het project"
 
-#: events/forms.py:21
+#: events/forms.py:24
+msgid "End date"
+msgstr ""
+
+#: events/forms.py:26
 #, fuzzy
 #| msgid "Please indicate the spatial scale of the project"
 msgid "Please indicate the start time of the event."
 msgstr "Vermeld de ruimtelijke schaal van het project"
 
-#: events/forms.py:22 organisations/forms.py:18 platforms/forms.py:31
-#: projects/forms.py:37 resources/forms.py:25
+#: events/forms.py:27
+msgid "Hour"
+msgstr ""
+
+#: events/forms.py:28 events/forms.py:30 organisations/forms.py:18
+#: platforms/forms.py:31 projects/forms.py:37 resources/forms.py:25
 msgid "URL"
 msgstr ""
 
-#: events/forms.py:23
+#: events/forms.py:29
 #, fuzzy
 #| msgid "Please provide a URL to an external web site for the event"
 msgid "Please provide a URL to an external web site for the event."
@@ -463,7 +490,11 @@ msgstr "Organisatie logo"
 msgid "Location"
 msgstr "Locatie"
 
-#: organisations/templates/organisation_form.html:107
+#: organisations/templates/organisation_form.html:100
+msgid "This is a required parameter"
+msgstr ""
+
+#: organisations/templates/organisation_form.html:108
 #: profiles/templates/profiles/edit_profile.html:56 templates/_save_zone.html:3
 msgid "Save"
 msgstr "Opslaan"
@@ -640,10 +671,6 @@ msgstr "Achternaam"
 #: profiles/models.py:34
 msgid "Profile picture"
 msgstr "Profiel foto"
-
-#: profiles/models.py:39
-msgid "Title"
-msgstr "Titel"
 
 #: profiles/models.py:41
 msgid "Short Bio and disciplinary background"
@@ -993,10 +1020,6 @@ msgstr ""
 #: projects/forms.py:423
 msgid "Please provide a <i>description</i> field translation."
 msgstr "Geef een <i>omschrijving</i> veld vertaling."
-
-#: projects/forms.py:425 projects/templates/translation_form.html:48
-msgid "Description"
-msgstr "Omschrijving"
 
 #: projects/forms.py:429
 msgid "Please provide an <i>aim</i> field translation."
@@ -4127,9 +4150,6 @@ msgstr "Vertalingen"
 #~ msgstr ""
 #~ "Geef de plaats waar het project plaats vind,anders het adres van de "
 #~ "coordinator of partner(geef het adres of click op de kaart)"
-
-#~ msgid "Start:"
-#~ msgstr "Start"
 
 #~ msgid "End:"
 #~ msgstr "Eind"

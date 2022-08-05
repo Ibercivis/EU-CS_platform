@@ -9,16 +9,22 @@ class EventForm(forms.Form):
     title = forms.CharField(
             max_length=200,
             widget=forms.TextInput(),
-            help_text=_('Please write the title of the event.'))
+            help_text=_('Please write the title of the event.'),
+            label=_('Title'))
     description = forms.CharField(widget=forms.Textarea(), max_length = 3000,
-            help_text=_('Please add a brief description of the event.'))
+            help_text=_('Please add a brief description of the event.'),
+            label=_('Description'))
     place = forms.CharField(max_length=200,widget=forms.TextInput(),required=False,
-            help_text=_('Please indicate the location of the event.'))
-    start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}))
+            help_text=_('Please indicate the location of the event.'),
+            label=_('Place'))
+    start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}),
+            label=_('Start date'))
     end_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}),
-            help_text=_('Please indicate the start and end dates of the event.'))
+            help_text=_('Please indicate the start and end dates of the event.'),
+            label=_('End date'))
     hour = forms.TimeField(widget=forms.TextInput(attrs={'type': 'time'}), required=False,
-            help_text=_('Please indicate the start time of the event.'))   
+            help_text=_('Please indicate the start time of the event.'),
+            label=_('Hour'))   
     url = forms.CharField(max_length=200, label=_('URL'),widget=forms.TextInput(),required=False,
             help_text=_('Please provide a URL to an external web site for the event.'))
     

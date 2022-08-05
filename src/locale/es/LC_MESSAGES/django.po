@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-05 08:58+0000\n"
+"POT-Creation-Date: 2022-08-05 10:18+0000\n"
 "PO-Revision-Date: 2021-12-17 14:12+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -130,45 +130,58 @@ msgstr[0] "%d correo de comprobación fue enviado"
 msgstr[1] "%d correos de comprobación fueron enviados"
 
 #: events/forms.py:12
-#, fuzzy
-#| msgid "Please write the title or name of the resource."
 msgid "Please write the title of the event."
-msgstr "Añade aquí el título o nombre del recurso."
+msgstr "Por favor, indica el título o nombre del evento."
 
-#: events/forms.py:14
-#, fuzzy
-#| msgid "A brief description of the event"
+#: events/forms.py:13 profiles/models.py:39
+msgid "Title"
+msgstr "Título"
+
+#: events/forms.py:15
 msgid "Please add a brief description of the event."
-msgstr "Breve descripción del evento"
+msgstr "Por favor, añade una breve descripción del evento."
 
-#: events/forms.py:16
-#, fuzzy
-#| msgid "Please indicate the publisher of the resource"
+#: events/forms.py:16 projects/forms.py:425
+#: projects/templates/translation_form.html:48
+msgid "Description"
+msgstr "Descripción"
+
+#: events/forms.py:18
 msgid "Please indicate the location of the event."
-msgstr "Por favor, añade aquí la fuente de publicación del recurso"
+msgstr "Por favor, indica la ubicación del evento."
 
 #: events/forms.py:19
-#, fuzzy
-#| msgid "Please indicate the spatial scale of the project"
-msgid "Please indicate the start and end dates of the event."
-msgstr "Por favor, indica el entorno donde se realizará el proyecto"
+msgid "Place"
+msgstr "Ubicación"
 
 #: events/forms.py:21
-#, fuzzy
-#| msgid "Please indicate the spatial scale of the project"
-msgid "Please indicate the start time of the event."
-msgstr "Por favor, indica el entorno donde se realizará el proyecto"
+msgid "Start date"
+msgstr "Fecha de inicio"
 
-#: events/forms.py:22 organisations/forms.py:18 platforms/forms.py:31
-#: projects/forms.py:37 resources/forms.py:25
+#: events/forms.py:23
+msgid "Please indicate the start and end dates of the event."
+msgstr "Por favor, indica los días de inicio y final del evento."
+
+#: events/forms.py:24
+msgid "End date"
+msgstr "Fecha de cierre"
+
+#: events/forms.py:26
+msgid "Please indicate the start time of the event."
+msgstr "Por favor, indica la hora de inicio del evento."
+
+#: events/forms.py:27
+msgid "Hour"
+msgstr "Hora"
+
+#: events/forms.py:28 events/forms.py:30 organisations/forms.py:18
+#: platforms/forms.py:31 projects/forms.py:37 resources/forms.py:25
 msgid "URL"
 msgstr "Enlace"
 
-#: events/forms.py:23
-#, fuzzy
-#| msgid "Please provide a URL to an external web site for the event"
+#: events/forms.py:29
 msgid "Please provide a URL to an external web site for the event."
-msgstr "Por favor, añade un enlace a la página web externa del evento"
+msgstr "Por favor, añade un enlace a la página web externa del evento."
 
 #: events/templates/_intro_new_event.html:6
 #: organisations/templates/_intro_form_organisation.html:8
@@ -458,7 +471,11 @@ msgstr "Logotipo de la organización"
 msgid "Location"
 msgstr "Localización"
 
-#: organisations/templates/organisation_form.html:107
+#: organisations/templates/organisation_form.html:100
+msgid "This is a required parameter"
+msgstr "Este parámetro es obligatorio"
+
+#: organisations/templates/organisation_form.html:108
 #: profiles/templates/profiles/edit_profile.html:56 templates/_save_zone.html:3
 msgid "Save"
 msgstr "Guardar"
@@ -633,10 +650,6 @@ msgstr "Apellido"
 #: profiles/models.py:34
 msgid "Profile picture"
 msgstr "Foto de perfil"
-
-#: profiles/models.py:39
-msgid "Title"
-msgstr "Título"
 
 #: profiles/models.py:41
 msgid "Short Bio and disciplinary background"
@@ -986,10 +999,6 @@ msgstr ""
 #: projects/forms.py:423
 msgid "Please provide a <i>description</i> field translation."
 msgstr "Por favor, añade traducción del campo de <i>descripción</i>."
-
-#: projects/forms.py:425 projects/templates/translation_form.html:48
-msgid "Description"
-msgstr "Descripción"
 
 #: projects/forms.py:429
 msgid "Please provide an <i>aim</i> field translation."
