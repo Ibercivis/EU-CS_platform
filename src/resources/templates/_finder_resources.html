@@ -101,10 +101,12 @@
         {% endif %}
 
         {% if request.get_full_path != "/resources" %}
-        <a class="badge rounded-pill bg-danger"
-           href="{% if isTrainingResource %} {% url 'training_resources' %} {% else %}{% url 'resources' %} {% endif %}">
-            <i class="fas fa-times"></i> Clear current search query and filters
-        </a>
+            {% if request.get_full_path != "/training_resources" %}
+                <a class="badge rounded-pill bg-danger"
+                href="{% if isTrainingResource %} {% url 'training_resources' %} {% else %}{% url 'resources' %} {% endif %}">
+                    <i class="fas fa-times"></i> {% trans "Clear current search query and filters" %}
+                </a>
+            {% endif %}
         {% endif %}
         <div>
             {% if isTrainingResource %}

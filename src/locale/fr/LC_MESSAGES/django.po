@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-30 08:47+0000\n"
+"POT-Creation-Date: 2022-08-05 08:58+0000\n"
 "PO-Revision-Date: 2022-02-11 12:44+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -93,7 +93,8 @@ msgstr "Mot de passe réinitialisé sur %(domain)s "
 #: contact/templates/contact.html:10 contact/templates/contact.html:19
 #: contact/templates/contact.html:28
 #: contact/templates/submitter_contact.html:20
-#: contact/templates/submitter_contact.html:29 templates/_footer.html:82
+#: contact/templates/submitter_contact.html:29
+#: projects/templates/project.html:231 templates/_footer.html:82
 msgid "Contact"
 msgstr "Contact"
 
@@ -107,8 +108,16 @@ msgid "Submitter Contact"
 msgstr "Contact de l’auteur-e"
 
 #: contact/templates/submitter_contact.html:30
-msgid "This email will be sent to submitter of"
+#, fuzzy
+#| msgid "This email will be sent to submitter of"
+msgid "This email will be sent to "
 msgstr "Cet e-mail sera envoyé à l’auteur-e de"
+
+#: contact/templates/submitter_contact.html:30
+#, fuzzy
+#| msgid "Submitter Contact"
+msgid "(submitter of"
+msgstr "Contact de l’auteur-e"
 
 #: contact/templates/success.html:26
 msgid "Thank you for your message."
@@ -121,29 +130,62 @@ msgid_plural "%d test mails were sent"
 msgstr[0] "%d email de test a été envoyé"
 msgstr[1] "%d emails de test a été envoyé"
 
-#: events/forms.py:11
-msgid "Title of the event"
-msgstr "Titre de l'événement"
-
 #: events/forms.py:12
-msgid "A brief description of the event"
+#, fuzzy
+#| msgid "Please write the title or name of the resource."
+msgid "Please write the title of the event."
+msgstr "Saisir ici le titre ou le nom de la resource."
+
+#: events/forms.py:14
+#, fuzzy
+#| msgid "A brief description of the event"
+msgid "Please add a brief description of the event."
 msgstr "Une brève description de l'événement"
 
-#: events/forms.py:13
-msgid "Location of the Event"
-msgstr "Lieu de l'événement"
+#: events/forms.py:16
+#, fuzzy
+#| msgid "Please indicate the publisher of the resource"
+msgid "Please indicate the location of the event."
+msgstr "Saisir ici l'éditeur-trice de la ressource"
 
-#: events/forms.py:17 organisations/forms.py:18 platforms/forms.py:31
-#: projects/forms.py:37 resources/forms.py:24
+#: events/forms.py:19
+#, fuzzy
+#| msgid "Please indicate the spatial scale of the project"
+msgid "Please indicate the start and end dates of the event."
+msgstr "Veuillez indiquer la situation géographique du projet"
+
+#: events/forms.py:21
+#, fuzzy
+#| msgid "Please indicate the spatial scale of the project"
+msgid "Please indicate the start time of the event."
+msgstr "Veuillez indiquer la situation géographique du projet"
+
+#: events/forms.py:22 organisations/forms.py:18 platforms/forms.py:31
+#: projects/forms.py:37 resources/forms.py:25
 msgid "URL"
 msgstr "URL"
 
-#: events/forms.py:17
-msgid "Please provide a URL to an external web site for the event"
+#: events/forms.py:23
+#, fuzzy
+#| msgid "Please provide a URL to an external web site for the event"
+msgid "Please provide a URL to an external web site for the event."
 msgstr ""
 "Veuillez fournir une URL vers un site internet externe pour l'événement"
 
-#: events/templates/_intro_new_event.html:3
+#: events/templates/_intro_new_event.html:6
+#: organisations/templates/_intro_form_organisation.html:8
+#: platforms/templates/_intro_form_platform.html:8
+#: projects/templates/_intro_form_project.html:8
+#: resources/templates/_intro_form_resource.html:8
+#: resources/templates/_intro_form_training_resource.html:8
+msgid "New"
+msgstr "Nouveau"
+
+#: events/templates/_intro_new_event.html:6 templates/_modalsubmit.html:20
+msgid "Event"
+msgstr "Evénement"
+
+#: events/templates/_intro_new_event.html:9
 msgid ""
 "Thank you for submitting an event to the EU-Citizen.Science platform. Upon "
 "clicking on “Add”, the event will immediately show up on the platform but "
@@ -160,7 +202,8 @@ msgstr ""
 msgid "Edit event"
 msgstr "Modifier l’événement"
 
-#: events/templates/editEvent.html:34 events/templates/new_event.html:36
+#: events/templates/editEvent.html:34 events/templates/new_event.html:35
+#: events/templates/new_event_old.html:45
 msgid "Event info"
 msgstr "Détails de l’événement"
 
@@ -176,7 +219,11 @@ msgstr "<span class='lightBlue-color'>Evénements</span> à venir"
 msgid "Past <span class='lightBlue-color'>events</span>"
 msgstr "<span class='lightBlue-color'>Evénements</span> passés"
 
-#: events/templates/new_event.html:25
+#: events/templates/new_event.html:64
+msgid "Add"
+msgstr ""
+
+#: events/templates/new_event_old.html:34
 msgid "New event"
 msgstr "Nouvel événement"
 
@@ -224,7 +271,7 @@ msgstr ""
 "Veuillez indiquer l’adresse e-mail de la personne de contact ou du point de "
 "contact, une fois qu'elle vous aura donné son autorisation."
 
-#: organisations/forms.py:93 projects/forms.py:479 resources/forms.py:290
+#: organisations/forms.py:93 projects/forms.py:479 resources/forms.py:303
 msgid "Give additional users permission to edit"
 msgstr "Donner l’autorisation de modifier à d'autres utilisateurs"
 
@@ -232,25 +279,31 @@ msgstr "Donner l’autorisation de modifier à d'autres utilisateurs"
 msgid "Confirm delete"
 msgstr "Confirmer la suppression"
 
-#: organisations/templates/_delete_modal.html:10
+#: organisations/templates/_delete_modal.html:12
 msgid ""
 "You are going to delete this organisation, this procedure is irreversible."
 msgstr ""
 "Vous êtes sur le point d'effacer cette organisation, cette action est "
 "irréversible."
 
-#: organisations/templates/_delete_modal.html:11
+#: organisations/templates/_delete_modal.html:13
 msgid "Do you want to proceed?"
 msgstr "Souhaitez-vous confirmer cette action ?"
 
-#: organisations/templates/_delete_modal.html:14 templates/_crop_zone.html:27
+#: organisations/templates/_delete_modal.html:16 templates/_crop_zone.html:27
 #: templates/_modal_to_crop.html:27
 msgid "Cancel"
 msgstr "Annuler"
 
-#: organisations/templates/_delete_modal.html:15
+#: organisations/templates/_delete_modal.html:17
 msgid "Delete"
 msgstr "Supprimer"
+
+#: organisations/templates/_delete_modal.html:23
+#, fuzzy
+#| msgid "Confirm delete"
+msgid "Confirm"
+msgstr "Confirmer la suppression"
 
 #: organisations/templates/_finder_organisation.html:11
 #: projects/templates/_finder_projects.html:12
@@ -298,6 +351,7 @@ msgstr "trouvé"
 #: organisations/templates/finder_organisations.html:54
 #: profiles/templates/profiles/_finder_users.html:14
 #: projects/templates/_finder_projects.html:125
+#: resources/templates/_finder_resources.html:107
 msgid "Clear current search query and filters"
 msgstr "Effacer la requête de recherche actuelle et les filtres"
 
@@ -308,14 +362,6 @@ msgstr "Effacer la requête de recherche actuelle et les filtres"
 #: resources/templates/_intro_form_training_resource.html:6
 msgid "Editing"
 msgstr "Modifier"
-
-#: organisations/templates/_intro_form_organisation.html:8
-#: platforms/templates/_intro_form_platform.html:8
-#: projects/templates/_intro_form_project.html:8
-#: resources/templates/_intro_form_resource.html:8
-#: resources/templates/_intro_form_training_resource.html:8
-msgid "New"
-msgstr "Nouveau"
 
 #: organisations/templates/_intro_form_organisation.html:13
 msgid ""
@@ -369,39 +415,41 @@ msgid "result"
 msgstr "résultat"
 
 #: organisations/templates/organisation.html:27 templates/_subnavbar.html:10
-#: templates/about.html:62
+#: templates/about.html:102
 msgid "Projects"
 msgstr "Projets"
 
-#: organisations/templates/organisation.html:38 templates/_subnavbar.html:16
-#: templates/about.html:66
+#: organisations/templates/organisation.html:40 templates/_subnavbar.html:16
+#: templates/about.html:106
 msgid "Resources"
 msgstr "Ressources"
 
-#: organisations/templates/organisation.html:49 templates/about.html:70
+#: organisations/templates/organisation.html:51 templates/about.html:110
 msgid "Training resources"
 msgstr "Documentation sur les formations "
 
-#: organisations/templates/organisation.html:60
+#: organisations/templates/organisation.html:62
 msgid "Members"
 msgstr "Membres"
 
-#: organisations/templates/organisation.html:73
+#: organisations/templates/organisation.html:75
 msgid "Go to Organisation"
 msgstr "Site de l’organisation"
 
-#: organisations/templates/organisation.html:78
+#: organisations/templates/organisation.html:80
 msgid "Edit Organisation"
 msgstr "Modifier l’organisation"
 
-#: organisations/templates/organisation.html:86
+#: organisations/templates/organisation.html:88
+#: organisations/templates/organisation.html:98
+#: organisations/templates/organisation.html:102
 msgid "Delete Organisation"
 msgstr "Supprimer l’organisation"
 
 #: organisations/templates/organisation_form.html:46
 #: platforms/templates/platform_form.html:29
 #: projects/templates/project_form.html:35
-#: resources/templates/resource_form.html:36
+#: resources/templates/resource_form.html:38
 msgid "Main information"
 msgstr "Information principale"
 
@@ -415,7 +463,7 @@ msgid "Organisation logo"
 msgstr "Logo de l'organisation"
 
 #: organisations/templates/organisation_form.html:96
-#: projects/templates/project.html:151
+#: projects/templates/project.html:209
 msgid "Location"
 msgstr "Lieu "
 
@@ -428,7 +476,7 @@ msgstr "Enregistrer"
 msgid "organisation <span class='lightBlue-color'>search</span>"
 msgstr "<span class='lightBlue-color'>recherche</span>organisation"
 
-#: organisations/views.py:50
+#: organisations/views.py:51
 msgid "Organisation added correctly"
 msgstr "Organisation ajoutée correctement"
 
@@ -480,7 +528,7 @@ msgstr ""
 msgid "Contact point email"
 msgstr "Adresse e-mail du point de contact"
 
-#: platforms/forms.py:74 resources/forms.py:122
+#: platforms/forms.py:74 resources/forms.py:124
 msgid "Organisation(s)"
 msgstr "Organisation(s)"
 
@@ -548,7 +596,7 @@ msgstr ""
 
 #: platforms/templates/platform.html:37
 #: profiles/templates/profiles/show_profile.html:17
-#: templates/_subnavbar.html:28 templates/about.html:77
+#: templates/_subnavbar.html:28 templates/about.html:117
 msgid "Organisations"
 msgstr "Organisations"
 
@@ -715,8 +763,12 @@ msgid ""
 msgstr "Décrivez brièvement votre projet ici  (maximum 3000 caractères)"
 
 #: projects/forms.py:47
+#, fuzzy
+#| msgid ""
+#| "Please indicae the primary aim, goal or objective of the project (max "
+#| "2000 characters)."
 msgid ""
-"Please indicae the primary aim, goal or objective of the project (max 2000 "
+"Please indicate the primary aim, goal or objective of the project (max 2000 "
 "characters)."
 msgstr ""
 "Veuillez indiquer l'objectif principal de votre projet (maximum 2000 "
@@ -759,8 +811,8 @@ msgstr ""
 "Veuillez écrire ou sélectionner 2 à 3 mots-clés séparés par des virgules ou "
 "en appuyant sur enter."
 
-#: projects/forms.py:75 projects/templates/project.html:91
-#: resources/templates/resource.html:152
+#: projects/forms.py:75 projects/templates/project.html:150
+#: resources/forms.py:39 resources/templates/resource.html:173
 msgid "Keywords"
 msgstr "Mots-clés"
 
@@ -784,7 +836,7 @@ msgstr "Sujet"
 msgid "Please select the tags that apply to your project."
 msgstr "Veuillez sélectionner les tags qui s'appliquent à votre projet."
 
-#: projects/forms.py:100 projects/templates/project.html:107
+#: projects/forms.py:100 projects/templates/project.html:166
 msgid "Tags"
 msgstr "Tags"
 
@@ -957,8 +1009,8 @@ msgstr "Description"
 msgid "Please provide an <i>aim</i> field translation."
 msgstr "Veuillez fournir un champ de traduction  <i>objectif</i>."
 
-#: projects/forms.py:431 projects/templates/project.html:46
-#: projects/templates/project.html:67
+#: projects/forms.py:431 projects/templates/project.html:72
+#: projects/templates/project.html:93
 #: projects/templates/translation_form.html:55
 msgid "Aim"
 msgstr "Objectif"
@@ -967,8 +1019,8 @@ msgstr "Objectif"
 msgid "Please provide a <i>how to participate</i> field translation."
 msgstr "Veuillez fournir un champ de traduction  <i>comment participer</i>."
 
-#: projects/forms.py:438 projects/templates/project.html:50
-#: projects/templates/project.html:71
+#: projects/forms.py:438 projects/templates/project.html:76
+#: projects/templates/project.html:97
 #: projects/templates/translation_form.html:62
 msgid "How to participate"
 msgstr "Comment participer"
@@ -977,8 +1029,8 @@ msgstr "Comment participer"
 msgid "Please provide a <i>translated equipment</i> field translation."
 msgstr "Veuillez fournir un champ de traduction  <i>équipement traduit</i>."
 
-#: projects/forms.py:445 projects/templates/project.html:55
-#: projects/templates/project.html:76
+#: projects/forms.py:445 projects/templates/project.html:81
+#: projects/templates/project.html:102
 msgid "Needed equipment"
 msgstr "Equipement requis"
 
@@ -995,7 +1047,7 @@ msgid "Tag"
 msgstr "Tag"
 
 #: projects/templates/_finder_projects.html:43
-#: projects/templates/project.html:116
+#: projects/templates/project.html:175
 msgid "Difficulty Level"
 msgstr "Niveau de difficulté"
 
@@ -1135,7 +1187,7 @@ msgid "Close"
 msgstr "Fermer"
 
 #: projects/templates/modal_projects.html:14
-#: resources/templates/modal_resources.html:14 templates/base_r2.html:61
+#: resources/templates/modal_resources.html:14 templates/base_r2.html:68
 msgid "Search"
 msgstr "Recherche"
 
@@ -1185,64 +1237,106 @@ msgstr "En savoir plus sur notre"
 msgid "moderation process"
 msgstr "procédure de validation"
 
-#: projects/templates/project.html:30 resources/templates/resource.html:20
+#: projects/templates/project.html:28
+msgid "Your project has been added successfully. <br> Thank you!"
+msgstr ""
+
+#: projects/templates/project.html:41
+msgid "Your project has been updated successfully."
+msgstr ""
+
+#: projects/templates/project.html:56 resources/templates/resource.html:20
 msgid "Created"
 msgstr "Créé(e)"
 
-#: projects/templates/project.html:31 resources/templates/resource.html:21
+#: projects/templates/project.html:57 resources/templates/resource.html:21
 msgid "Updated"
 msgstr "Mis(e) à jour"
 
-#: projects/templates/project.html:40
+#: projects/templates/project.html:66
 msgid "This translation was done before a project profile update."
 msgstr "Cette traduction a été faite avant la mise à jour du profil du projet."
 
-#: projects/templates/project.html:41
+#: projects/templates/project.html:67
 msgid "Plase help the community by improving it"
 msgstr "Veuillez aider la communauté en l'améliorant"
 
-#: projects/templates/project.html:42
+#: projects/templates/project.html:68
 msgid "here"
 msgstr "ici"
 
-#: projects/templates/project.html:63
+#: projects/templates/project.html:89
 msgid "This project profile is not available in your selected language,"
 msgstr ""
 "Le profil de ce projet n'est pas disponible dans la langue sélectionnée."
 
-#: projects/templates/project.html:86
+#: projects/templates/project.html:108
+msgid "About funding"
+msgstr ""
+
+#: projects/templates/project.html:111
+#, fuzzy
+#| msgid "Funding body"
+msgid "<b>Funding bodies: </b>"
+msgstr "Agence de financement"
+
+#: projects/templates/project.html:118
+#, fuzzy
+#| msgid "Funding programme"
+msgid "<b>Funding program: </b>"
+msgstr "Programme de financement"
+
+#: projects/templates/project.html:124
+msgid "About branding"
+msgstr ""
+
+#: projects/templates/project.html:126
+msgid "<b>Profile image design by: </b>"
+msgstr ""
+
+#: projects/templates/project.html:129
+msgid "<b>Logo design by: </b>"
+msgstr ""
+
+#: projects/templates/project.html:145
 msgid "from"
 msgstr "de"
 
-#: projects/templates/project.html:89
+#: projects/templates/project.html:148
 msgid "until"
 msgstr "jusqu'à"
 
-#: projects/templates/project.html:98
+#: projects/templates/project.html:157
 msgid "Science Topics"
 msgstr "Sujets en Science "
 
-#: projects/templates/project.html:126
+#: projects/templates/project.html:185
 msgid "Participation tasks"
 msgstr "Tâche"
 
-#: projects/templates/project.html:135
+#: projects/templates/project.html:194
 msgid "Coordinator"
 msgstr "Coordinateur-trice"
 
-#: projects/templates/project.html:142
+#: projects/templates/project.html:200
 msgid "Other Organisations involved"
 msgstr "Autres organisations impliquées"
 
-#: projects/templates/project.html:173
+#: projects/templates/project.html:233
+#, fuzzy
+#| msgid "Email"
+msgid "E-mail"
+msgstr "Adresse e-mail"
+
+#: projects/templates/project.html:244
 msgid "Go to Project"
 msgstr "Aller sur Projet"
 
-#: projects/templates/project.html:183
+#: projects/templates/project.html:254
 msgid "Translate"
 msgstr "Traduire"
 
-#: projects/templates/project.html:202 resources/templates/resource.html:116
+#: projects/templates/project.html:273 resources/templates/resource.html:137
 msgid "Admin area"
 msgstr "Zone Administrateur"
 
@@ -1280,6 +1374,12 @@ msgstr "Avis"
 msgid "Rate and comment"
 msgstr "Evaluer et commenter"
 
+#: projects/templates/projects.html:19
+#, fuzzy
+#| msgid "user <span class='lightBlue-color'>search</span>"
+msgid "project <span class='lightBlue-color'>search</span>"
+msgstr "<span class='lightBlue-color'>recherche</span>utilisateur"
+
 #: projects/templates/translation_form.html:28
 msgid "Please indicate the language you want to translate to"
 msgstr "Indiquer la langue vers laquelle vous souhaitez traduire "
@@ -1288,11 +1388,11 @@ msgstr "Indiquer la langue vers laquelle vous souhaitez traduire "
 msgid "Equipment"
 msgstr "Equipement"
 
-#: resources/forms.py:20
+#: resources/forms.py:21
 msgid "Please write the title or name of the resource."
 msgstr "Saisir ici le titre ou le nom de la resource."
 
-#: resources/forms.py:26
+#: resources/forms.py:27
 msgid ""
 "Please provide the URL to where the document is hosted by the publisher, or "
 "in a permanent repository such as Zenodo, OSF, the RIO Journal, or similar."
@@ -1300,7 +1400,7 @@ msgstr ""
 "URL où l'éditeur héberge le document, ou lien permanent vers le document "
 "(tel que Zenodo, OSF, le journal RIO ou assimilé)."
 
-#: resources/forms.py:35
+#: resources/forms.py:36
 msgid ""
 "Please select the keywords that describe the resource or add new ones "
 "<b>separated by commas or by pressing enter</b>."
@@ -1308,11 +1408,11 @@ msgstr ""
 "Veuillez sélectionner les mots-clés qui décrivent la resource ou ajoutez-en "
 "de nouveaux  <b>séparés par des virgules ou en cliquant sur enter</b>. "
 
-#: resources/forms.py:41
+#: resources/forms.py:43
 msgid "Please briefly describe the resource (max 3000 characters)."
 msgstr "Veuillez décrire brièvement la ressource (en 3000 caractères maximum)."
 
-#: resources/forms.py:47
+#: resources/forms.py:49
 msgid ""
 "Please describe the link between citizen science and the resource you are "
 "uploading – for guidance see the <a href=\"https://zenodo.org/communities/"
@@ -1331,11 +1431,11 @@ msgstr ""
 "forme, il ne sert qu'à l'évaluation et ne sera vu que par l'administrateur "
 "de la plate-forme (2000 caractères maximum)."
 
-#: resources/forms.py:55
+#: resources/forms.py:57
 msgid "Description of Citizen Science Aspects"
 msgstr "Description des aspects relatifs aux Sciences participatives"
 
-#: resources/forms.py:64
+#: resources/forms.py:66
 msgid ""
 "Please name the author(s) of the resource. Enter <i>FirstInitial LastName</"
 "i> and close with a comma or press enter to add an author or multiple "
@@ -1344,15 +1444,15 @@ msgstr ""
 "Auteur-e-s de la ressource. Saisir <i>FirstInitial LastName</i> et clore par "
 "une virgule pour ajouter un-e auteur-e, ou des auteur-e-s. "
 
-#: resources/forms.py:68
+#: resources/forms.py:70
 msgid "Authors"
 msgstr "Auteur-e-s"
 
-#: resources/forms.py:74
+#: resources/forms.py:76
 msgid "Please select one of the proposed categories."
 msgstr "Sélectionnez une des catégories proposées."
 
-#: resources/forms.py:82
+#: resources/forms.py:84
 msgid ""
 "Please select the audience(s) for which the resource is intended. Multiple "
 "options can be selected."
@@ -1360,11 +1460,11 @@ msgstr ""
 "Veuillez sélectionner le ou les public(s) cible(s)  auquel/auxquels la "
 "ressource est destinée. Plusieurs choix sont possibles."
 
-#: resources/forms.py:88
+#: resources/forms.py:90
 msgid "Please select the thematic content of the resource."
 msgstr "Veuillez sélectionner le contenu thématique de la resource."
 
-#: resources/forms.py:94
+#: resources/forms.py:96
 msgid ""
 "Please provide the <b>Digital Object Identifier</b> that is unique to your "
 "resource."
@@ -1372,16 +1472,16 @@ msgstr ""
 "Renseignez l'Identifiant d'Objet Digital <b> Digital Object Identifier</b> "
 "(DOI) unique qui est propre à votre resource."
 
-#: resources/forms.py:96
+#: resources/forms.py:98
 msgid "Resource DOI"
 msgstr "DOI de la ressource"
 
-#: resources/forms.py:102
+#: resources/forms.py:104
 msgid ""
 "Please enter the year (YYYY) when this version of the resource was published."
 msgstr "Saisir l’année (AAAA) de publication de cette version de la resource."
 
-#: resources/forms.py:107
+#: resources/forms.py:109
 msgid ""
 "Please indicate the resource license, such as Creative Commons CC-BY. Enter "
 "a URL link to the license if available."
@@ -1389,7 +1489,7 @@ msgstr ""
 "Indiquer la licence de la ressource, par exemple Creative Commons CC-BY. "
 "Saisir un lien URL vers la licence, le cas échéant."
 
-#: resources/forms.py:118
+#: resources/forms.py:120
 msgid ""
 "Please select the organisation(s) contributing the resource. If not listed, "
 "please add them <a href=\"/new_organisation\" target=\"_blank\">here</a > "
@@ -1399,7 +1499,7 @@ msgstr ""
 "resource. Si elle n'est pas déjà dans la liste, ajoutez-la <a href=\"/"
 "nouvelle_organisation\">ici</a > avant soumission."
 
-#: resources/forms.py:130
+#: resources/forms.py:132
 msgid ""
 "Please select the project(s) where the resource was created. If not listed, "
 "please add them <a href=\"/newProject\" target=\"_blank\">here</a > before "
@@ -1409,47 +1509,47 @@ msgstr ""
 "resource. S'il n'est pas déjà dans la liste, ajoutez-le <a href=\"/"
 "nouveauProject\" target=\"_blank\">ici</a > avant soumission."
 
-#: resources/forms.py:134
+#: resources/forms.py:136
 msgid "Project(s)"
 msgstr "Projet(s)"
 
-#: resources/forms.py:139
+#: resources/forms.py:141
 msgid "Please indicate the publisher of the resource"
 msgstr "Saisir ici l'éditeur-trice de la ressource"
 
-#: resources/forms.py:147
+#: resources/forms.py:149
 msgid "Resource image for the thumbnail profile"
 msgstr "Image ressource pour l'étiquette du profil"
 
-#: resources/forms.py:148
+#: resources/forms.py:150
 msgid "This image will be resized to 600x400 pixels"
 msgstr "L'image sera redimensionnée à 600x400 pixels"
 
-#: resources/forms.py:149
+#: resources/forms.py:151
 msgid "Image 1 credit"
 msgstr "Crédit Image 1"
 
-#: resources/forms.py:159
+#: resources/forms.py:161
 msgid "Resource image for the profile heading"
 msgstr "Image resource pour l'en-tête du profil"
 
-#: resources/forms.py:160
+#: resources/forms.py:162
 msgid "This image will be resized to 1100x400 pixels"
 msgstr "Cette image sera redimensionnée à 1100x400 pixels"
 
-#: resources/forms.py:161
+#: resources/forms.py:163
 msgid "Image 2 credit"
 msgstr "Crédit Image 2"
 
-#: resources/forms.py:173
+#: resources/forms.py:175
 msgid "Curated lists"
 msgstr "Listes gérées"
 
-#: resources/forms.py:181
+#: resources/forms.py:183
 msgid "Educational level"
 msgstr "Niveau d’éducation"
 
-#: resources/forms.py:183
+#: resources/forms.py:185
 msgid ""
 "Please add the education level needed, end using comma or pressing enter. "
 "Examples of educational levels include beginner, intermediate or advanced, "
@@ -1459,11 +1559,11 @@ msgstr ""
 "sur enter. Parmi les niveaux d'étude possibles il y a débutant, "
 "intermédiaire ou avancé et des indicateurs formels de niveaux. "
 
-#: resources/forms.py:193
+#: resources/forms.py:195
 msgid "Learning resource type"
 msgstr "Type de ressource d’apprentissage"
 
-#: resources/forms.py:195
+#: resources/forms.py:197
 msgid ""
 "Please indicate the predominant type or kind characterizing the learning "
 "resource. For example, presentation, handout, etc."
@@ -1472,11 +1572,11 @@ msgstr ""
 "d'apprentissage. Par exemple la façon dont elle se présente, son livret, "
 "etc... "
 
-#: resources/forms.py:200
+#: resources/forms.py:202
 msgid "Please write the approximate  hours required to finish the training."
 msgstr "Estimation du nombre d’heures requises pour terminer la formation."
 
-#: resources/forms.py:202
+#: resources/forms.py:204
 msgid ""
 "Please describe any conditions that affect the accessibility of the training "
 "material, such as <i>requires registration</i>, <i>requires enrollment</i>, "
@@ -1503,12 +1603,12 @@ msgid "All themes"
 msgstr "Tous les thèmes"
 
 #: resources/templates/_finder_resources.html:38
-#: resources/templates/resource.html:162
+#: resources/templates/resource.html:183
 msgid "Category"
 msgstr "Catégorie"
 
 #: resources/templates/_finder_resources.html:46
-#: resources/templates/resource.html:167
+#: resources/templates/resource.html:194
 msgid "Audience"
 msgstr "Public cible"
 
@@ -1534,19 +1634,19 @@ msgstr "catégorie"
 msgid "audience:"
 msgstr "public cible:"
 
-#: resources/templates/_finder_resources.html:111
+#: resources/templates/_finder_resources.html:113
 msgid "training resources found"
 msgstr "ressources d’apprentissage trouvées"
 
-#: resources/templates/_finder_resources.html:111
+#: resources/templates/_finder_resources.html:113
 msgid "training resource found"
 msgstr "ressource d’apprentissage trouvée"
 
-#: resources/templates/_finder_resources.html:114
+#: resources/templates/_finder_resources.html:116
 msgid "resources found"
 msgstr "ressources trouvées"
 
-#: resources/templates/_finder_resources.html:114
+#: resources/templates/_finder_resources.html:116
 msgid "resource found"
 msgstr "resource trouvée"
 
@@ -1701,85 +1801,97 @@ msgstr ""
 "‘En cours de révision par l’administrateur’’ ou ‘Tout’."
 
 #: resources/templates/resource.html:25
-#: resources/templates/resource_form.html:54
+#: resources/templates/resource_form.html:56
 msgid "Publish information"
 msgstr "Publier l'information"
 
-#: resources/templates/resource.html:47
+#: resources/templates/resource.html:47 resources/templates/resource.html:68
 msgid "Links with projects and/or organisations"
 msgstr "Les liens avec les  projets et/ou les organisations"
 
-#: resources/templates/resource.html:64
+#: resources/templates/resource.html:81
 msgid "Training information"
 msgstr "Les informations sur les formations"
 
-#: resources/templates/resource.html:66
+#: resources/templates/resource.html:83
 msgid "Time required"
 msgstr "Temps requis"
 
-#: resources/templates/resource.html:69
+#: resources/templates/resource.html:86
 msgid "Conditions of access"
 msgstr "Conditions d’accès"
 
-#: resources/templates/resource.html:82
+#: resources/templates/resource.html:99
 msgid "Go to Training"
 msgstr "Aller à la Formation"
 
-#: resources/templates/resource.html:84
+#: resources/templates/resource.html:101
 msgid "Go to Resource"
 msgstr "Aller à la Ressource"
 
-#: resources/templates/resource.html:94
+#: resources/templates/resource.html:109 resources/templates/resource.html:114
 msgid "Edit"
 msgstr "Modifier"
 
-#: resources/templates/resource.html:109
+#: resources/templates/resource.html:130
 msgid "Comment"
 msgstr "Commenter"
 
-#: resources/templates/resource.html:122
+#: resources/templates/resource.html:143
 msgid "Approve"
 msgstr "Approuver"
 
-#: resources/templates/resource.html:129
+#: resources/templates/resource.html:150
 msgid "Set featured"
 msgstr "Presenté"
 
-#: resources/templates/resource.html:136
+#: resources/templates/resource.html:157
 msgid "Is training"
 msgstr "En formation"
 
-#: resources/templates/resource.html:138
+#: resources/templates/resource.html:159
 msgid "Contact submitter"
 msgstr "Contacter l'éditeur "
 
-#: resources/templates/resource.html:144
+#: resources/templates/resource.html:165
 msgid "Language"
 msgstr "Langue"
 
-#: resources/templates/resource.html:157
+#: resources/templates/resource.html:178
 msgid "Theme"
 msgstr "Thème"
 
-#: resources/templates/resource.html:175
+#: resources/templates/resource.html:202
 msgid "Education level"
 msgstr "Niveau d'études"
 
-#: resources/templates/resource.html:182
+#: resources/templates/resource.html:210
 msgid "Learning Resource Type"
 msgstr "Type de Ressource d’Apprentissage"
 
-#: resources/templates/resource_form.html:83
+#: resources/templates/resource_form.html:85
 msgid "Training resource fields"
 msgstr "Champs de la ressource d’apprentissage"
 
-#: resources/templates/resource_form.html:98
+#: resources/templates/resource_form.html:100
 msgid "Links with projects and organisations"
 msgstr "Liens avec les projets et les organisations"
 
-#: resources/templates/resource_form.html:108
+#: resources/templates/resource_form.html:110
 msgid "Resource profile images"
 msgstr "Images des profils de la ressource"
+
+#: resources/templates/resources.html:15
+#, fuzzy
+#| msgid "organisation <span class='lightBlue-color'>search</span>"
+msgid "training resource <span class='lightBlue-color'>search</span>"
+msgstr "<span class='lightBlue-color'>recherche</span>organisation"
+
+#: resources/templates/resources.html:17
+#, fuzzy
+#| msgid "user <span class='lightBlue-color'>search</span>"
+msgid "resource <span class='lightBlue-color'>search</span>"
+msgstr "<span class='lightBlue-color'>recherche</span>utilisateur"
 
 #: resources/views.py:121
 msgid "Training resource added correctly"
@@ -1793,7 +1905,7 @@ msgstr "Ressource ajoutée correctement"
 msgid "<a href='/about' class='text-white'>about</a> the platform"
 msgstr "<a hef='/about' class='text-white'>A propos</a> de la plate-forme"
 
-#: templates/_about_section.html:10 templates/about.html:57
+#: templates/_about_section.html:10 templates/about.html:97
 msgid ""
 "EU-Citizen.Science is an online platform for sharing knowledge, tools, "
 "training and resources for citizen science – by the community, for the "
@@ -1866,7 +1978,7 @@ msgstr ""
 msgid "Links"
 msgstr "Liens"
 
-#: templates/_footer.html:67 templates/about.html:4 templates/base_r2.html:88
+#: templates/_footer.html:67 templates/about.html:4 templates/base_r2.html:99
 #: templates/faq.html:4 templates/moderation_quality_criteria.html:4
 msgid "About"
 msgstr "A propos de"
@@ -1889,7 +2001,8 @@ msgstr "Mentions légales"
 msgid "Deliverables"
 msgstr "Livrables"
 
-#: templates/_footer.html:95 templates/faq_old.html:14
+#: templates/_footer.html:95 templates/base_r2.html:93
+#: templates/faq_old.html:14
 msgid "FAQ"
 msgstr "FAQ"
 
@@ -1950,10 +2063,6 @@ msgstr "Organisation"
 #: templates/_modalsubmit.html:18
 msgid "Create a profile for your Organisation"
 msgstr "Créer un profile pour votre organisation"
-
-#: templates/_modalsubmit.html:20
-msgid "Event"
-msgstr "Evénement"
 
 #: templates/_modalsubmit.html:21
 msgid "Create an Event"
@@ -2017,7 +2126,7 @@ msgstr "Quels types d’informations pouvez-vous trouver?"
 msgid "projects"
 msgstr "des projets"
 
-#: templates/_what_can_you_find_here.html:16 templates/about.html:63
+#: templates/_what_can_you_find_here.html:16 templates/about.html:103
 msgid "that are engaging the public in research via citizen science activities"
 msgstr ""
 "qui impliquent le public dans la recherche via des activités en sciences "
@@ -2116,15 +2225,23 @@ msgid "about"
 msgstr "à propos de"
 
 #: templates/about.html:20
+msgid "Watch the final project video!"
+msgstr ""
+
+#: templates/about.html:40
 msgid "Watch our teaser, in 12 different languages!"
 msgstr ""
 "Allez voir notre teaser, il est disponible dans 12 langues différentes !"
 
-#: templates/about.html:52
+#: templates/about.html:73
+msgid "Watch the video about the platform development and training modules!"
+msgstr ""
+
+#: templates/about.html:92
 msgid "The Platform"
 msgstr "La Plate-forme"
 
-#: templates/about.html:58
+#: templates/about.html:98
 msgid ""
 "The vision for the platform is to serve as a Knowledge Hub, in aid of the "
 "mainstreaming of citizen science, and build on the growing impact of "
@@ -2139,45 +2256,45 @@ msgstr ""
 "connaissances, du savoir-faire, et de l'expérience des personnes qui "
 "pratiquent ou qui souhaitent pratiquer la science participative."
 
-#: templates/about.html:59
+#: templates/about.html:99
 msgid "On this platform you will find:"
 msgstr "Sur cette plateorme vous trouverez:"
 
-#: templates/about.html:67
+#: templates/about.html:107
 msgid "that are useful for citizen science practitioners"
 msgstr "qui sont utiles aux personnes actives dans les sciences participatives"
 
-#: templates/about.html:71
+#: templates/about.html:111
 msgid "and materials on citizen science as a practice"
 msgstr "et les ressources liées aux sciences participatives"
 
-#: templates/about.html:74
+#: templates/about.html:114
 msgid "Training modules"
 msgstr "Les modules de formation"
 
-#: templates/about.html:75
+#: templates/about.html:115
 msgid "on citizen science in a wide range of themes"
 msgstr "sur la science participative dans une vaste gamme de thèmes"
 
-#: templates/about.html:78
+#: templates/about.html:118
 msgid "that are involved in citizen science projects and research"
 msgstr ""
 "qui sont impliquées dans des projets de sciences participatives et dans la "
 "recherche"
 
-#: templates/about.html:80
+#: templates/about.html:120
 msgid "Events calendar"
 msgstr "Calendrier d’événements"
 
-#: templates/about.html:81
+#: templates/about.html:121
 msgid "A blog"
 msgstr "Un blog"
 
-#: templates/about.html:82 templates/base_r2.html:77
+#: templates/about.html:122 templates/base_r2.html:84
 msgid "Forum"
 msgstr "Le forum"
 
-#: templates/about.html:83
+#: templates/about.html:123
 msgid ""
 "for questions, conversations, and collaboration with the rest of the "
 "community"
@@ -2185,7 +2302,7 @@ msgstr ""
 "pour des questions, conversations et collaborations avec le reste de la "
 "communauté"
 
-#: templates/about.html:87
+#: templates/about.html:127
 msgid ""
 "Spotted something missing? You can add your own profiles via the <i>New "
 "submission</i> button in the top menu. Have a suggestion for us? Please "
@@ -2195,15 +2312,15 @@ msgstr ""
 "profils via en cliquant sur le bouton <i>Nouvelle soumission</i> dans le "
 "menu du haut. Vous avez une suggestion ? Partagez-la via "
 
-#: templates/about.html:87
+#: templates/about.html:127
 msgid "contact form"
 msgstr "Formulaire de contact"
 
-#: templates/about.html:91
+#: templates/about.html:131
 msgid "The project"
 msgstr "Le projet"
 
-#: templates/about.html:96
+#: templates/about.html:136
 msgid ""
 "The EU-Citizen.Science project has been funded by the European Commission "
 "Horizon 2020 programme, in the Science with and for Society programme of "
@@ -2220,7 +2337,7 @@ msgstr ""
 "l’ensemble de la société en Europe grâce au partage transversal des "
 "connaissances."
 
-#: templates/about.html:98
+#: templates/about.html:138
 msgid ""
 "<b>Our Vision</b> is that Citizen Science becomes an appreciated and widely "
 "established means for the democratization of science in Europe"
@@ -2228,7 +2345,7 @@ msgstr ""
 "<b>Notre Vision</b>est que la science participative devienne un moyen "
 "répandu et apprécié de démocratisation des sciences en Europe"
 
-#: templates/about.html:99
+#: templates/about.html:139
 msgid ""
 "<b>Our Core Mission</b> is to become the European reference point for "
 "citizen science through cross-network knowledge sharing for citizen science "
@@ -2240,11 +2357,11 @@ msgstr ""
 "décideurs politiques et l’ensemble de la société en Europe grâce au partage "
 "transversal des connaissances."
 
-#: templates/about.html:100
+#: templates/about.html:140
 msgid "Our objectives are:"
 msgstr "Nous avons pour objectifs de :"
 
-#: templates/about.html:102
+#: templates/about.html:142
 msgid ""
 "to establish EU-Citizen.Science as the knowledge and community hub for high-"
 "quality citizen science exchange and learning in Europe."
@@ -2253,7 +2370,7 @@ msgstr ""
 "pour un échange et un apprentissage de grande qualité en matière de science "
 "participative en Europe."
 
-#: templates/about.html:103
+#: templates/about.html:143
 msgid ""
 "to consolidate the citizen science knowledge base and celebrate outstanding "
 "practices and state of the art in citizen science in Europe."
@@ -2262,7 +2379,7 @@ msgstr ""
 "l’écho des pratiques remarquables et de l’avancement des sciences "
 "participatives en Europe."
 
-#: templates/about.html:104
+#: templates/about.html:144
 msgid ""
 "to empower diverse stakeholders to become citizen scientists, start citizen "
 "science initiatives, and implement citizen science approaches professionally."
@@ -2271,7 +2388,7 @@ msgstr ""
 "la science participative, lancent des initiatives et intègrent de manière "
 "professionnelle les pratiques en sciences participatives."
 
-#: templates/about.html:105
+#: templates/about.html:145
 msgid ""
 "to explore new pathways for participatory governance, by strengthening links "
 "between citizen science and policy making."
@@ -2280,7 +2397,7 @@ msgstr ""
 "renforçant les liens entre la science participative et les décideurs "
 "politiques."
 
-#: templates/about.html:107
+#: templates/about.html:147
 msgid ""
 "to advance citizen science into the mainstream of public engagement, science "
 "communication and education."
@@ -2288,11 +2405,11 @@ msgstr ""
 "en intégrant advantage  les sciences participatives dans l’engagement du "
 "public en science, dans la communication scientifique et l’éducation."
 
-#: templates/about.html:115
+#: templates/about.html:155
 msgid "The team"
 msgstr "L'équipe"
 
-#: templates/about.html:120
+#: templates/about.html:160
 msgid ""
 " The EU-Citizen.Science consortium consists of 14 partners and 9 third "
 "parties from across 14 European countries. We represent a variety of "
@@ -2307,16 +2424,16 @@ msgstr ""
 "organisations non gouvernementales, des autorités locales, des organisations "
 "de service communautaire et des musées."
 
-#: templates/about.html:126
+#: templates/about.html:166
 msgid "Consortium partners"
 msgstr "Partenaires du consortium"
 
-#: templates/about.html:188
+#: templates/about.html:228
 msgid "Third party partners"
 msgstr "Partenaires tierces-parties"
 
 #: templates/base.html:74 templates/base2.html:68 templates/base_forms.html:51
-#: templates/base_r2.html:145
+#: templates/base_r2.html:156
 msgid "Admin"
 msgstr "Administrateur"
 
@@ -2324,7 +2441,7 @@ msgstr "Administrateur"
 msgid "Profile"
 msgstr "Profil"
 
-#: templates/base.html:85 templates/base2.html:70 templates/base_r2.html:147
+#: templates/base.html:85 templates/base2.html:70 templates/base_r2.html:158
 msgid "Logout"
 msgstr "Se déconnecter"
 
@@ -2376,7 +2493,7 @@ msgstr "SE DECONNECTER"
 msgid "ADMIN"
 msgstr "ADMINISTRATEUR"
 
-#: templates/base_forms.html:43 templates/base_r2.html:125
+#: templates/base_forms.html:43 templates/base_r2.html:136
 msgid "Login"
 msgstr "Se connecter"
 
@@ -2388,47 +2505,47 @@ msgstr "profil"
 msgid "logout"
 msgstr "se déconnecter"
 
-#: templates/base_r2.html:65
+#: templates/base_r2.html:72
 msgid "Blog"
 msgstr "Blog"
 
-#: templates/base_r2.html:68
+#: templates/base_r2.html:75
 msgid "Events"
 msgstr "Evénements"
 
-#: templates/base_r2.html:72
+#: templates/base_r2.html:79
 msgid "Moocs"
 msgstr "Moocs"
 
-#: templates/base_r2.html:83 templates/final_event.html:4
+#: templates/base_r2.html:90 templates/final_event.html:4
 msgid "Final Event"
 msgstr "Evénement final"
 
-#: templates/base_r2.html:127
+#: templates/base_r2.html:138
 msgid "Signup"
 msgstr "S’inscrire"
 
-#: templates/base_r2.html:139
+#: templates/base_r2.html:150
 msgid "My personal area"
 msgstr "Mon espace personnel"
 
-#: templates/base_r2.html:140
+#: templates/base_r2.html:151
 msgid "My submissions"
 msgstr "Mes soumissions"
 
-#: templates/base_r2.html:141
+#: templates/base_r2.html:152
 msgid "My bookmarks"
 msgstr "Mes favoris"
 
-#: templates/base_r2.html:142
+#: templates/base_r2.html:153
 msgid "My privacy center"
 msgstr "Mon centre privé"
 
-#: templates/base_r2.html:156
+#: templates/base_r2.html:167
 msgid "New submission"
 msgstr "Nouvelle soumission"
 
-#: templates/base_r2.html:214
+#: templates/base_r2.html:225
 msgid "FORUM"
 msgstr "FORUM"
 
@@ -3741,6 +3858,12 @@ msgstr "Ajouter à la bibliothèque"
 msgid "Translations"
 msgstr "Traductions"
 
+#~ msgid "Title of the event"
+#~ msgstr "Titre de l'événement"
+
+#~ msgid "Location of the Event"
+#~ msgstr "Lieu de l'événement"
+
 #~ msgid "URL of the organisation"
 #~ msgstr "URL de l’organisation"
 
@@ -3923,9 +4046,6 @@ msgstr "Traductions"
 
 #~ msgid "Edit Profile"
 #~ msgstr "Modifier le profil"
-
-#~ msgid "Email"
-#~ msgstr "Adresse e-mail"
 
 #~ msgid "Joined"
 #~ msgstr "Joint"
