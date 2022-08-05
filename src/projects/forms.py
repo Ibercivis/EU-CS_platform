@@ -44,7 +44,7 @@ class ProjectForm(forms.Form):
 
     aim = forms.CharField(
             widget=CKEditorWidget(config_name='frontpage'),
-            help_text=_('Please indicae the primary aim, goal or objective of the project (max 2000 characters).'),
+            help_text=_('Please indicate the primary aim, goal or objective of the project (max 2000 characters).'),
             max_length=2000)
 
     description_citizen_science_aspects = forms.CharField(

@@ -74,6 +74,23 @@ a.card-title:hover{
     color: var(--white);
     transition: 0.3s;
 }
+
+.btn-my-darkBlue2{
+    background-color: var(--darkBlue);
+    color: var(--white);
+    margin: 1em auto;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+.btn-my-darkBlue2:hover{
+    background-color: var(--darkBlue2);
+    color: var(--white);
+    margin: 1em auto;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    transition: 0.3s;
+}
+
 .btn-my-darkGreen{
     background-color: var(--darkGreen);
     color: var(--white);

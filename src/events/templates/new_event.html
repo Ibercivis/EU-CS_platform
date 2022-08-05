@@ -2,8 +2,15 @@
 {% load i18n %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
+{% load leaflet_tags %}
+{% load thumbnail %}
+
 {% block head %}
 {{block.super }}
+<link rel="stylesheet" href="{% static 'site/css/forms.css' %}">
+{{ form.media.css }}
+{{ form.media.js }}
+
 {% endblock head %}
 
 {% block title %}{{ block.super }} :: Events{% endblock %}
@@ -12,78 +19,56 @@
 {% include "_navbar.html" with active_link="events" %}
 {% endblock %}
 
+
 {% block list_of_items %}
-<div class="container">
-    <div class="row">
-        <div class="container mt-5">
-            <div class="row d-flex justify-content-center">
-                <div class="col-sm-10 col-12">
-                    <div class="card mt-5 mb-5 shadow">
-                        <div class="card-title  p-5">
-                            <div class="row">
-                                <div class="col-12">
-                                    <h2>{% trans "New event" %}</h2>
-                                    {% include "_intro_new_event.html" %}
-                                </div>
+{% include '_crop_zone.html' %}
+
+<div class="container mt-5">
+     <form action="/new_event" class="edit-project" method="post" enctype="multipart/form-data"> 
+        <div class="row">
+            {% csrf_token %}
+            <div class="col-12">
+                {% include "_intro_new_event.html" %}
+                <div class="row">
+                    <div class="col-2"></div>
+                    <div class="col-8">
+                        <h3 class="leftborder">{% trans "Event info" %}</h3>
+                        <!-- <input type="hidden" id="projectID" name="projectID" value={{project.id}}> -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div id="errors"></div>
                             </div>
                         </div>
-                        <div class="card-text pr-5 pl-5 pb-5">
-                            <table class="table mb-0">
-                                <form action="/new_event" method="post" enctype="multipart/form-data"
-                                    class="add-new-event" autocomplete="off">
-                                    {% csrf_token %}
-                                    <div>
-                                        <h4>{% trans "Event info" %}</h4>
-                                    </div>
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                {{ form.title|as_crispy_field }}
+                                {{ form.description|as_crispy_field }}
+                                {{ form.place|as_crispy_field }}
+                                {{ form.start_date|as_crispy_field }}
+                                {{ form.end_date|as_crispy_field }}
+                                {{ form.hour|as_crispy_field }}
+                                {{ form.url|as_crispy_field }}
+                                
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-11">
 
-                                    <div class="form-row">
-                                        <div class="col-12">
-                                            {{ form.title|as_crispy_field }}
-                                        </div>
-                                        <div class="col-12">
-                                            {{ form.description|as_crispy_field }}
-                                        </div>
-                                    </div>
-
-                                    <div class="form-row">
-                                        <div class="col-12">
-                                            {{ form.place|as_crispy_field }}
-                                        </div>
-                                        <div class="col-12">
-                                            {{ form.start_date|as_crispy_field }}
-                                        </div>
-                                    </div>
-
-                                    <div class="form-row">
-                                        <div class="col-12">
-                                            {{ form.end_date|as_crispy_field }}
-                                        </div>
-                                        <div class="col-12">
-                                            {{ form.hour|as_crispy_field }}
-                                        </div>
-                                    </div>
-
-                                    <div class="form-row">
-                                        <div class="col-12">
-                                            {{ form.url|as_crispy_field }}
-                                        </div>
-                                        <div class="col-12">
-                                            
-                                        </div>
-                                    </div>
-                                    <hr />
-                                    <button type="submit" class="btn btn-green"><i class="fas fa-share-square"></i> Add</button>
-                                </form>
-                            </table>
+                                    <button type="submit" class="btn btn-my-darkBlue submit" style="
+                                    margin-left: 40%;
+                                    margin-top: 16px;
+                                    margin-bottom: 32px;
+                                    padding-left: 16px;
+                                    padding-right: 16px;"><i class="fas fa-share-square"></i> {% trans "Add" %} </button>
+                                
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>
-
-
 {% endblock list_of_items %}
-{% block scripts %}
-{% endblock scripts %}

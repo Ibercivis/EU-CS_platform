@@ -1,0 +1,96 @@
+{% extends "base_r2.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% load leaflet_tags %}
+{% load thumbnail %}
+
+{% block head %}
+{{block.super }}
+<link rel="stylesheet" href="{% static 'site/css/forms.css' %}">
+{{ form.media.css }}
+{{ form.media.js }}
+
+{% endblock head %}
+
+{% block title %}{{ block.super }} :: Events{% endblock %}
+
+{% block navbar-left %}
+{% include "_navbar.html" with active_link="events" %}
+{% endblock %}
+
+{% block list_of_items %}
+{% include '_crop_zone.html' %}
+
+<div class="container">
+    <div class="row">
+        <div class="container mt-5">
+            <div class="row d-flex justify-content-center">
+                <div class="col-sm-10 col-12">
+                    <div class="card mt-5 mb-5 shadow">
+                        <div class="card-title  p-5">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h2>{% trans "New event" %}</h2>
+                                    {% include "_intro_new_event.html" %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-text pr-5 pl-5 pb-5">
+                            <table class="table mb-0">
+                                <form action="/new_event" method="post" enctype="multipart/form-data"
+                                    class="add-new-event" autocomplete="off">
+                                    {% csrf_token %}
+                                    <div>
+                                        <h4 class="leftborder mt-5">{% trans "Event info" %}</h4>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-1"></div>
+                                        <div class="col-11">
+                                            {{ form.title|as_crispy_field }}
+                                            {{ form.description|as_crispy_field }}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col-12">
+                                            {{ form.place|as_crispy_field }}
+                                        </div>
+                                        <div class="col-12">
+                                            {{ form.start_date|as_crispy_field }}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col-12">
+                                            {{ form.end_date|as_crispy_field }}
+                                        </div>
+                                        <div class="col-12">
+                                            {{ form.hour|as_crispy_field }}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col-12">
+                                            {{ form.url|as_crispy_field }}
+                                        </div>
+                                        <div class="col-12">
+                                            
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <button type="submit" class="btn btn-green"><i class="fas fa-share-square"></i> Add</button>
+                                </form>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock list_of_items %}
+{% block scripts %}
+{% endblock scripts %}
