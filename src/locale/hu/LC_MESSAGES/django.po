@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-05 10:18+0000\n"
+"POT-Creation-Date: 2022-08-07 06:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -192,8 +192,8 @@ msgstr "A projekt térbeli kiterjedése"
 msgid "Hour"
 msgstr ""
 
-#: events/forms.py:28 events/forms.py:30 organisations/forms.py:18
-#: platforms/forms.py:31 projects/forms.py:37 resources/forms.py:25
+#: events/forms.py:28 organisations/forms.py:18 platforms/forms.py:31
+#: projects/forms.py:37 resources/forms.py:26
 msgid "URL"
 msgstr ""
 
@@ -323,7 +323,7 @@ msgstr ""
 "Add meg a kapcsolattartó vagy a kapcsolattartó pont e-mail címét..Ehhez a "
 "kapcsolattartó engedélyére lesz szükséged!"
 
-#: organisations/forms.py:93 projects/forms.py:479 resources/forms.py:303
+#: organisations/forms.py:93 projects/forms.py:479 resources/forms.py:312
 msgid "Give additional users permission to edit"
 msgstr "Szerkesztői jog átadása további felhasználóknak"
 
@@ -618,7 +618,7 @@ msgstr "Kapcsolattartó"
 msgid "Contact point email"
 msgstr "Kapcsolattartó pont e-mail címe"
 
-#: platforms/forms.py:74 resources/forms.py:124
+#: platforms/forms.py:74 resources/forms.py:130
 msgid "Organisation(s)"
 msgstr "Szervezet/Szervezetek"
 
@@ -965,7 +965,7 @@ msgid ""
 msgstr "Érdeklődési terület kiválasztása (vesszővel vagy enterrel elválasztva)"
 
 #: projects/forms.py:75 projects/templates/project.html:150
-#: resources/forms.py:39 resources/templates/resource.html:173
+#: resources/forms.py:40 resources/templates/resource.html:173
 msgid "Keywords"
 msgstr "Kulcsszavak"
 
@@ -1546,7 +1546,11 @@ msgstr "Eszközök"
 msgid "Please write the title or name of the resource."
 msgstr "Add meg a forrás címét vagy nevét"
 
-#: resources/forms.py:27
+#: resources/forms.py:22
+msgid "Name"
+msgstr ""
+
+#: resources/forms.py:28
 msgid ""
 "Please provide the URL to where the document is hosted by the publisher, or "
 "in a permanent repository such as Zenodo, OSF, the RIO Journal, or similar."
@@ -1554,17 +1558,21 @@ msgstr ""
 "Kérjük, add meg az URL-címet, ahol a dokumentumot a kiadó tárolja,az állandó "
 "adattárat, mint például Zenodo, OSF, RIO Journal stb."
 
-#: resources/forms.py:36
+#: resources/forms.py:37
 msgid ""
 "Please select the keywords that describe the resource or add new ones "
 "<b>separated by commas or by pressing enter</b>."
 msgstr "Kulcsszavak kiválasztása (vesszővel vagy enterrel elválasztva)"
 
-#: resources/forms.py:43
+#: resources/forms.py:44
 msgid "Please briefly describe the resource (max 3000 characters)."
 msgstr "Rövid leírás a forrásról (legfeljebb 3000 karakter)"
 
-#: resources/forms.py:49
+#: resources/forms.py:46
+msgid "Abstract"
+msgstr ""
+
+#: resources/forms.py:51
 msgid ""
 "Please describe the link between citizen science and the resource you are "
 "uploading – for guidance see the <a href=\"https://zenodo.org/communities/"
@@ -1583,11 +1591,11 @@ msgstr ""
 "moderálási célokra és a platform adminisztrátorai számára látható (max. 2000 "
 "karakter)."
 
-#: resources/forms.py:57
+#: resources/forms.py:59
 msgid "Description of Citizen Science Aspects"
 msgstr "A civil tudomány vonatkozásai"
 
-#: resources/forms.py:66
+#: resources/forms.py:68
 msgid ""
 "Please name the author(s) of the resource. Enter <i>FirstInitial LastName</"
 "i> and close with a comma or press enter to add an author or multiple "
@@ -1596,40 +1604,57 @@ msgstr ""
 "Kérjük, nevezze meg a forrás szerzőjét (szerzőit).Add meg a <i>FirstInitial "
 "LastName</i> bejegyzést (vesszővel vagy enterrel elválasztva)."
 
-#: resources/forms.py:70
+#: resources/forms.py:72
 msgid "Authors"
 msgstr "Szerzők"
 
-#: resources/forms.py:76
+#: resources/forms.py:78
 msgid "Please select one of the proposed categories."
 msgstr "Válassz a kategóriák közül!"
 
-#: resources/forms.py:84
+#: resources/forms.py:79 resources/templates/_finder_resources.html:38
+#: resources/templates/resource.html:183
+msgid "Category"
+msgstr "Kategória"
+
+#: resources/forms.py:87
 msgid ""
 "Please select the audience(s) for which the resource is intended. Multiple "
 "options can be selected."
 msgstr "Válaszd ki a célközönséget! Több opció is lehetséges."
 
-#: resources/forms.py:90
+#: resources/forms.py:89 resources/forms.py:202
+msgid "Learning resource type"
+msgstr "Oktatási anyag típusa"
+
+#: resources/forms.py:94
 msgid "Please select the thematic content of the resource."
 msgstr "A forrás tartalma"
 
-#: resources/forms.py:96
+#: resources/forms.py:95 resources/templates/resource.html:178
+msgid "Theme"
+msgstr "Téma"
+
+#: resources/forms.py:101
 msgid ""
 "Please provide the <b>Digital Object Identifier</b> that is unique to your "
 "resource."
 msgstr "A forrás azonosítóját <b>Digital Object Identifier</b>"
 
-#: resources/forms.py:98
+#: resources/forms.py:103
 msgid "Resource DOI"
 msgstr "Forrás DOI"
 
-#: resources/forms.py:104
+#: resources/forms.py:109
 msgid ""
 "Please enter the year (YYYY) when this version of the resource was published."
 msgstr "A forrás megjelenésének éve (YYYY) "
 
-#: resources/forms.py:109
+#: resources/forms.py:110
+msgid "Year of publication"
+msgstr "Megjelenés éve"
+
+#: resources/forms.py:115
 msgid ""
 "Please indicate the resource license, such as Creative Commons CC-BY. Enter "
 "a URL link to the license if available."
@@ -1637,7 +1662,7 @@ msgstr ""
 "Add meg a forrás licenszét! Például Creative Commons CC-BY. Add meg a "
 "licensz URL-jét."
 
-#: resources/forms.py:120
+#: resources/forms.py:126
 msgid ""
 "Please select the organisation(s) contributing the resource. If not listed, "
 "please add them <a href=\"/new_organisation\" target=\"_blank\">here</a > "
@@ -1646,7 +1671,7 @@ msgstr ""
 "A forráshoz hozzájáruló szervezet(ek)et.(Ha még nincs a szervezetek "
 "listáján, itt feltölthető:<a href=\"/new_organisation\">here</a>)"
 
-#: resources/forms.py:132
+#: resources/forms.py:138
 msgid ""
 "Please select the project(s) where the resource was created. If not listed, "
 "please add them <a href=\"/newProject\" target=\"_blank\">here</a > before "
@@ -1655,47 +1680,51 @@ msgstr ""
 "A forrást létrehozó projekt. (Ha még nincs a listán, itt feltölthető:<a href="
 "\"/new_organisation\">here</a>)"
 
-#: resources/forms.py:136
+#: resources/forms.py:142
 msgid "Project(s)"
 msgstr "Projektek"
 
-#: resources/forms.py:141
+#: resources/forms.py:147
 msgid "Please indicate the publisher of the resource"
 msgstr "A forrás kiadója"
 
 #: resources/forms.py:149
+msgid "Publisher"
+msgstr "Kiadó"
+
+#: resources/forms.py:156
 msgid "Resource image for the thumbnail profile"
 msgstr "Profilkép"
 
-#: resources/forms.py:150
+#: resources/forms.py:157
 msgid "This image will be resized to 600x400 pixels"
 msgstr "600x400 méretben kerül feltöltésre"
 
-#: resources/forms.py:151
+#: resources/forms.py:158
 msgid "Image 1 credit"
 msgstr "Kép 1 credit"
 
-#: resources/forms.py:161
+#: resources/forms.py:168
 msgid "Resource image for the profile heading"
 msgstr "Projekt borítókép"
 
-#: resources/forms.py:162
+#: resources/forms.py:169
 msgid "This image will be resized to 1100x400 pixels"
 msgstr "600x400 méretben kerül feltöltésre"
 
-#: resources/forms.py:163
+#: resources/forms.py:170
 msgid "Image 2 credit"
 msgstr "Kép 2 credit"
 
-#: resources/forms.py:175
+#: resources/forms.py:182
 msgid "Curated lists"
 msgstr "Összeállított listák"
 
-#: resources/forms.py:183
+#: resources/forms.py:190
 msgid "Educational level"
 msgstr "Képzettség"
 
-#: resources/forms.py:185
+#: resources/forms.py:192
 msgid ""
 "Please add the education level needed, end using comma or pressing enter. "
 "Examples of educational levels include beginner, intermediate or advanced, "
@@ -1705,11 +1734,7 @@ msgstr ""
 "szintekre példák a kezdő, középhaladó vagy haladó szintek, valamint egyéb "
 "formális szintjelzők."
 
-#: resources/forms.py:195
-msgid "Learning resource type"
-msgstr "Oktatási anyag típusa"
-
-#: resources/forms.py:197
+#: resources/forms.py:204
 #, fuzzy
 #| msgid ""
 #| "Please indicate the predominant type or kind characterizing the "
@@ -1719,11 +1744,15 @@ msgid ""
 "resource. For example, presentation, handout, etc."
 msgstr "Oktatási anyag típusa. (Például prezentáció, kézirat stb.)"
 
-#: resources/forms.py:202
+#: resources/forms.py:209
 msgid "Please write the approximate  hours required to finish the training."
 msgstr "A képzés befejezéséhez szükséges órák hozzávetőleges száma."
 
-#: resources/forms.py:204
+#: resources/forms.py:210 resources/templates/resource.html:83
+msgid "Time required"
+msgstr "Szükséges idő"
+
+#: resources/forms.py:212
 msgid ""
 "Please describe any conditions that affect the accessibility of the training "
 "material, such as <i>requires registration</i>, <i>requires enrollment</i>, "
@@ -1732,6 +1761,10 @@ msgstr ""
 "Adj meg minden olyan körülményt, amely befolyásolja a képzési anyag "
 "hozzáférhetőségét,mint pléldául: <i>regisztrációt igényel</i>, "
 "<i>beiratkozást igényel</i> vagy <i>fizetést igényel</i>."
+
+#: resources/forms.py:214 resources/templates/resource.html:86
+msgid "Conditions of access"
+msgstr "Hozzáférés feltétele"
 
 #: resources/templates/_finder_resources.html:14
 msgid "Sort by Most Recent Updated"
@@ -1748,11 +1781,6 @@ msgstr "Minden nyelv"
 #: resources/templates/_finder_resources.html:32
 msgid "All themes"
 msgstr "Minden téma"
-
-#: resources/templates/_finder_resources.html:38
-#: resources/templates/resource.html:183
-msgid "Category"
-msgstr "Kategória"
 
 #: resources/templates/_finder_resources.html:46
 #: resources/templates/resource.html:194
@@ -1958,14 +1986,6 @@ msgstr "Kapcsolatok a projektekhez és/vagy szervezetekhez"
 msgid "Training information"
 msgstr "Képzési információ"
 
-#: resources/templates/resource.html:83
-msgid "Time required"
-msgstr "Szükséges idő"
-
-#: resources/templates/resource.html:86
-msgid "Conditions of access"
-msgstr "Hozzáférés feltétele"
-
 #: resources/templates/resource.html:99
 msgid "Go to Training"
 msgstr "Irány a képzéshez!"
@@ -2002,10 +2022,6 @@ msgstr "Kapcsolatfelvétel a forrás feltöltőjével"
 msgid "Language"
 msgstr "Nyelv"
 
-#: resources/templates/resource.html:178
-msgid "Theme"
-msgstr "Téma"
-
 #: resources/templates/resource.html:202
 msgid "Education level"
 msgstr "Képzettség"
@@ -2013,6 +2029,13 @@ msgstr "Képzettség"
 #: resources/templates/resource.html:210
 msgid "Learning Resource Type"
 msgstr "Tanulási forrás típusa"
+
+#: resources/templates/resource_form.html:68
+#, fuzzy
+#| msgid "Please indicate the language you want to translate to"
+msgid ""
+"Please indicate the (main) language that the resource is made available in"
+msgstr "Kérjük, add meg a nyelvet, amelyre fordítani szeretnél"
 
 #: resources/templates/resource_form.html:85
 msgid "Training resource fields"
@@ -4248,12 +4271,6 @@ msgstr "Fordítás"
 
 #~ msgid "License"
 #~ msgstr "Licensz"
-
-#~ msgid "Publisher"
-#~ msgstr "Kiadó"
-
-#~ msgid "Year of publication"
-#~ msgstr "Megjelenés éve"
 
 #~ msgid ""
 #~ "We accomplish this by supporting the sharing of knowledge, know-how, and "

@@ -18,7 +18,8 @@ class ResourceForm(forms.Form):
     name = forms.CharField(
             max_length=200,
             widget=forms.TextInput(),
-            help_text=_('Please write the title or name of the resource.'))
+            help_text=_('Please write the title or name of the resource.'),
+            label=_("Name"))
 
     url = forms.URLField(
             widget=forms.TextInput(),
@@ -41,7 +42,8 @@ class ResourceForm(forms.Form):
     abstract = forms.CharField(
             widget=CKEditorWidget(config_name='frontpage'),
             help_text=_('Please briefly describe the resource (max 3000 characters).'),
-            max_length=3000)
+            max_length=3000,
+            label=_("Abstract"))
 
     description_citizen_science_aspects = forms.CharField(
             widget=CKEditorWidget(config_name='frontpage'),
@@ -73,7 +75,8 @@ class ResourceForm(forms.Form):
     # TODO: Improve category
     category = forms.ModelChoiceField(
             queryset=Category.objects.filter(parent__isnull=True),
-            help_text=_('Please select one of the proposed categories.'))
+            help_text=_('Please select one of the proposed categories.'),
+            label=_("Category"))
     choices = forms.CharField(widget=forms.HiddenInput(), required=False)
     categorySelected = forms.CharField(widget=forms.HiddenInput(), required=False)
 
@@ -82,12 +85,14 @@ class ResourceForm(forms.Form):
             widget=Select2MultipleWidget(),
             help_text=_(
                 'Please select the audience(s) for which the resource is intended. '
-                'Multiple options can be selected.'))
+                'Multiple options can be selected.'),
+            label=_("Learning resource type"))
 
     theme = forms.ModelMultipleChoiceField(
             queryset=Theme.objects.all(),
             widget=Select2MultipleWidget(),
-            help_text=_('Please select the thematic content of the resource.'))
+            help_text=_('Please select the thematic content of the resource.'),
+            label=_("Theme"))
 
     resource_DOI = forms.CharField(
             max_length=100,
@@ -101,7 +106,8 @@ class ResourceForm(forms.Form):
     year_of_publication = forms.IntegerField(
             required=False,
             widget=forms.TextInput(),
-            help_text=_('Please enter the year (YYYY) when this version of the resource was published.'))
+            help_text=_('Please enter the year (YYYY) when this version of the resource was published.'),
+            label=_("Year of publication"))
 
     license = forms.CharField(
             max_length=100,
@@ -139,7 +145,8 @@ class ResourceForm(forms.Form):
             max_length=100,
             widget=forms.TextInput(),
             help_text=_('Please indicate the publisher of the resource'),
-            required=False)
+            required=False,
+            label=_("Publisher"))
 
     # Images
 
@@ -199,10 +206,12 @@ class ResourceForm(forms.Form):
             required=False,
             )
     time_required = forms.FloatField(validators=[MinValueValidator(0)], min_value=0, required=False, help_text=_(
-        'Please write the approximate  hours required to finish the training.'))
+        'Please write the approximate  hours required to finish the training.'),
+            label=_("Time required"))
     conditions_of_access = forms.CharField(required=False, help_text=_(
         'Please describe any conditions that affect the accessibility of the training material, '
-        'such as <i>requires registration</i>, <i>requires enrollment</i>, or <i>requires payment</i>.'))
+        'such as <i>requires registration</i>, <i>requires enrollment</i>, or <i>requires payment</i>.'),
+            label=_("Conditions of access"))
 
     ''' Save & update a Resource & Training Resource '''
     def save(self, args, images):

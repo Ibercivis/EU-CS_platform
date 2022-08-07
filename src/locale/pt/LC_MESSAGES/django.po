@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-05 10:18+0000\n"
+"POT-Creation-Date: 2022-08-07 06:23+0000\n"
 "PO-Revision-Date: 2021-12-22 22:18+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -184,8 +184,8 @@ msgstr "Por favor indique a escala espacial do projeto"
 msgid "Hour"
 msgstr ""
 
-#: events/forms.py:28 events/forms.py:30 organisations/forms.py:18
-#: platforms/forms.py:31 projects/forms.py:37 resources/forms.py:25
+#: events/forms.py:28 organisations/forms.py:18 platforms/forms.py:31
+#: projects/forms.py:37 resources/forms.py:26
 msgid "URL"
 msgstr "URL"
 
@@ -294,7 +294,7 @@ msgstr ""
 "Por favor providencie o endereço eletrónico do responsável ou do ponto de "
 "contacto. Note que necessitará de permissão para o fazer."
 
-#: organisations/forms.py:93 projects/forms.py:479 resources/forms.py:303
+#: organisations/forms.py:93 projects/forms.py:479 resources/forms.py:312
 msgid "Give additional users permission to edit"
 msgstr "Dar permissão para que utilizadores adicionais possam editar"
 
@@ -549,7 +549,7 @@ msgstr "Por favor nomeie o responsável ou o ponto de contacto da plataforma."
 msgid "Contact point email"
 msgstr "Endereço eletrónico do responsável"
 
-#: platforms/forms.py:74 resources/forms.py:124
+#: platforms/forms.py:74 resources/forms.py:130
 msgid "Organisation(s)"
 msgstr "Organização(ões)"
 
@@ -829,7 +829,7 @@ msgstr ""
 "vírgulas ou clicando enter."
 
 #: projects/forms.py:75 projects/templates/project.html:150
-#: resources/forms.py:39 resources/templates/resource.html:173
+#: resources/forms.py:40 resources/templates/resource.html:173
 msgid "Keywords"
 msgstr "Palavras-chave"
 
@@ -1406,7 +1406,11 @@ msgstr "Equipamento"
 msgid "Please write the title or name of the resource."
 msgstr "Por favor escreva o título ou nome do recurso."
 
-#: resources/forms.py:27
+#: resources/forms.py:22
+msgid "Name"
+msgstr ""
+
+#: resources/forms.py:28
 msgid ""
 "Please provide the URL to where the document is hosted by the publisher, or "
 "in a permanent repository such as Zenodo, OSF, the RIO Journal, or similar."
@@ -1415,7 +1419,7 @@ msgstr ""
 "editor, ou num repositório permanente, como o Zenodo, OSF, o RIO Journal, ou "
 "similar."
 
-#: resources/forms.py:36
+#: resources/forms.py:37
 msgid ""
 "Please select the keywords that describe the resource or add new ones "
 "<b>separated by commas or by pressing enter</b>."
@@ -1423,12 +1427,16 @@ msgstr ""
 "Por favor selecione as palavras-chave que descrevem o recurso ou adicione "
 "novas<b>separando-as por vírgulas ou clicando enter</b>."
 
-#: resources/forms.py:43
+#: resources/forms.py:44
 msgid "Please briefly describe the resource (max 3000 characters)."
 msgstr ""
 "Por favor descreva resumidamente o recurso (máximo de 3000 caracteres)."
 
-#: resources/forms.py:49
+#: resources/forms.py:46
+msgid "Abstract"
+msgstr ""
+
+#: resources/forms.py:51
 msgid ""
 "Please describe the link between citizen science and the resource you are "
 "uploading – for guidance see the <a href=\"https://zenodo.org/communities/"
@@ -1446,11 +1454,11 @@ msgstr ""
 "funciona apenas para propósitos de moderação da plataforma e para que os "
 "administradores da plataforma o possam ver (máximo 2000 caracteres)."
 
-#: resources/forms.py:57
+#: resources/forms.py:59
 msgid "Description of Citizen Science Aspects"
 msgstr "Descrição dos aspetos de ciência cidadã"
 
-#: resources/forms.py:66
+#: resources/forms.py:68
 msgid ""
 "Please name the author(s) of the resource. Enter <i>FirstInitial LastName</"
 "i> and close with a comma or press enter to add an author or multiple "
@@ -1460,15 +1468,20 @@ msgstr ""
 "Nome e o Último Nome</i> separando-os com vírgulas ou clicando Enter para "
 "adicionar um autor ou múltiplos autores."
 
-#: resources/forms.py:70
+#: resources/forms.py:72
 msgid "Authors"
 msgstr "Autores"
 
-#: resources/forms.py:76
+#: resources/forms.py:78
 msgid "Please select one of the proposed categories."
 msgstr "Por favor selecione uma das categorias propostas."
 
-#: resources/forms.py:84
+#: resources/forms.py:79 resources/templates/_finder_resources.html:38
+#: resources/templates/resource.html:183
+msgid "Category"
+msgstr "Categoria"
+
+#: resources/forms.py:87
 msgid ""
 "Please select the audience(s) for which the resource is intended. Multiple "
 "options can be selected."
@@ -1476,11 +1489,19 @@ msgstr ""
 "Por favor selecione o(s) público(s)-alvo para o qual o recurso é "
 "intencionado. Múltiplas opções podem ser selecionadas."
 
-#: resources/forms.py:90
+#: resources/forms.py:89 resources/forms.py:202
+msgid "Learning resource type"
+msgstr "Tipo de recurso de aprendizagem"
+
+#: resources/forms.py:94
 msgid "Please select the thematic content of the resource."
 msgstr "Por favor selecione o conteúdo temático do recurso."
 
-#: resources/forms.py:96
+#: resources/forms.py:95 resources/templates/resource.html:178
+msgid "Theme"
+msgstr "Tema"
+
+#: resources/forms.py:101
 msgid ""
 "Please provide the <b>Digital Object Identifier</b> that is unique to your "
 "resource."
@@ -1488,17 +1509,21 @@ msgstr ""
 "Por favor providencie o <b>Identificador de Objeto Digital</b> único a este "
 "recurso."
 
-#: resources/forms.py:98
+#: resources/forms.py:103
 msgid "Resource DOI"
 msgstr "DOI do Recurso"
 
-#: resources/forms.py:104
+#: resources/forms.py:109
 msgid ""
 "Please enter the year (YYYY) when this version of the resource was published."
 msgstr ""
 "Por favor introduza o ano (AAAA) em que esta versão do recurso foi publicada."
 
-#: resources/forms.py:109
+#: resources/forms.py:110
+msgid "Year of publication"
+msgstr ""
+
+#: resources/forms.py:115
 msgid ""
 "Please indicate the resource license, such as Creative Commons CC-BY. Enter "
 "a URL link to the license if available."
@@ -1506,7 +1531,7 @@ msgstr ""
 "Por favor indique a licença do recurso, como a \"Creative Commons CC-BY\". "
 "Introduza o endereço URL para a licença, se disponível."
 
-#: resources/forms.py:120
+#: resources/forms.py:126
 msgid ""
 "Please select the organisation(s) contributing the resource. If not listed, "
 "please add them <a href=\"/new_organisation\" target=\"_blank\">here</a > "
@@ -1516,7 +1541,7 @@ msgstr ""
 "Se não estiver(em) listada(s) adicione-a(s) <a href=\"/new_organisation\" "
 "target=\"_blank\">aqui</a > antes de submeter o recurso."
 
-#: resources/forms.py:132
+#: resources/forms.py:138
 msgid ""
 "Please select the project(s) where the resource was created. If not listed, "
 "please add them <a href=\"/newProject\" target=\"_blank\">here</a > before "
@@ -1526,47 +1551,51 @@ msgstr ""
 "estiver(em) listado(s) adicione-o(s) <a href=\"/newProject\" target=\"_blank"
 "\">aqui</a > antes de submeter o recurso."
 
-#: resources/forms.py:136
+#: resources/forms.py:142
 msgid "Project(s)"
 msgstr "Projeto(s)"
 
-#: resources/forms.py:141
+#: resources/forms.py:147
 msgid "Please indicate the publisher of the resource"
 msgstr "Por favor indique a editora deste recurso"
 
 #: resources/forms.py:149
+msgid "Publisher"
+msgstr ""
+
+#: resources/forms.py:156
 msgid "Resource image for the thumbnail profile"
 msgstr "Imagem em miniatura para o perfil do recurso"
 
-#: resources/forms.py:150
+#: resources/forms.py:157
 msgid "This image will be resized to 600x400 pixels"
 msgstr "Esta imagem será reajustada para 600x400 pixéis"
 
-#: resources/forms.py:151
+#: resources/forms.py:158
 msgid "Image 1 credit"
 msgstr "Créditos da Imagem 1"
 
-#: resources/forms.py:161
+#: resources/forms.py:168
 msgid "Resource image for the profile heading"
 msgstr "Imagem de cabeçalho para o perfil do recurso"
 
-#: resources/forms.py:162
+#: resources/forms.py:169
 msgid "This image will be resized to 1100x400 pixels"
 msgstr "Esta imagem será reajustada para 1100x400 pixéis"
 
-#: resources/forms.py:163
+#: resources/forms.py:170
 msgid "Image 2 credit"
 msgstr "Créditos da Imagem 2"
 
-#: resources/forms.py:175
+#: resources/forms.py:182
 msgid "Curated lists"
 msgstr "Listas com curadoria"
 
-#: resources/forms.py:183
+#: resources/forms.py:190
 msgid "Educational level"
 msgstr "Nível de escolaridade"
 
-#: resources/forms.py:185
+#: resources/forms.py:192
 msgid ""
 "Please add the education level needed, end using comma or pressing enter. "
 "Examples of educational levels include beginner, intermediate or advanced, "
@@ -1576,11 +1605,7 @@ msgstr ""
 "vírgula ou clicando Enter. Exemplos de níveis de escolaridade incluem o "
 "iniciante, intermédio ou avançado."
 
-#: resources/forms.py:195
-msgid "Learning resource type"
-msgstr "Tipo de recurso de aprendizagem"
-
-#: resources/forms.py:197
+#: resources/forms.py:204
 msgid ""
 "Please indicate the predominant type or kind characterizing the learning "
 "resource. For example, presentation, handout, etc."
@@ -1588,13 +1613,17 @@ msgstr ""
 "Por favor indique a tipologia predominante que caracteriza o recurso de "
 "aprendizagem. Por exemplo, apresentação, folheto, etc."
 
-#: resources/forms.py:202
+#: resources/forms.py:209
 msgid "Please write the approximate  hours required to finish the training."
 msgstr ""
 "Por favor escreva o número aproximado de horas necessárias para concluir a "
 "formação."
 
-#: resources/forms.py:204
+#: resources/forms.py:210 resources/templates/resource.html:83
+msgid "Time required"
+msgstr "Tempo necessário"
+
+#: resources/forms.py:212
 msgid ""
 "Please describe any conditions that affect the accessibility of the training "
 "material, such as <i>requires registration</i>, <i>requires enrollment</i>, "
@@ -1603,6 +1632,10 @@ msgstr ""
 "Por favor descreva qualquer condição que possa afetar a acessibilidade ao "
 "material da formação, tais como <i>requer registo</i>, <i>requer inscrição</"
 "i>, ou <i>requer pagamento</i>."
+
+#: resources/forms.py:214 resources/templates/resource.html:86
+msgid "Conditions of access"
+msgstr "Condições de acesso"
 
 #: resources/templates/_finder_resources.html:14
 msgid "Sort by Most Recent Updated"
@@ -1619,11 +1652,6 @@ msgstr "Todas as línguas"
 #: resources/templates/_finder_resources.html:32
 msgid "All themes"
 msgstr "Todos os temas"
-
-#: resources/templates/_finder_resources.html:38
-#: resources/templates/resource.html:183
-msgid "Category"
-msgstr "Categoria"
 
 #: resources/templates/_finder_resources.html:46
 #: resources/templates/resource.html:194
@@ -1828,14 +1856,6 @@ msgstr "Ligações com projetos e/ou organizações"
 msgid "Training information"
 msgstr "Informação sobre a formação"
 
-#: resources/templates/resource.html:83
-msgid "Time required"
-msgstr "Tempo necessário"
-
-#: resources/templates/resource.html:86
-msgid "Conditions of access"
-msgstr "Condições de acesso"
-
 #: resources/templates/resource.html:99
 msgid "Go to Training"
 msgstr "Ir para Formação"
@@ -1872,10 +1892,6 @@ msgstr "Contactar responsável"
 msgid "Language"
 msgstr "Idioma"
 
-#: resources/templates/resource.html:178
-msgid "Theme"
-msgstr "Tema"
-
 #: resources/templates/resource.html:202
 msgid "Education level"
 msgstr "Nível de escolaridade"
@@ -1883,6 +1899,13 @@ msgstr "Nível de escolaridade"
 #: resources/templates/resource.html:210
 msgid "Learning Resource Type"
 msgstr "Tipologia de Recurso de Aprendizagem"
+
+#: resources/templates/resource_form.html:68
+#, fuzzy
+#| msgid "Please indicate the language you want to translate to"
+msgid ""
+"Please indicate the (main) language that the resource is made available in"
+msgstr "Por favor indique a língua para o qual quer traduzir"
 
 #: resources/templates/resource_form.html:85
 msgid "Training resource fields"
