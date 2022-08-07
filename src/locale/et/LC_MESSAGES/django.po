@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-07 06:50+0000\n"
+"POT-Creation-Date: 2022-08-07 07:30+0000\n"
 "PO-Revision-Date: 2021-12-09 16:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -145,7 +145,7 @@ msgstr "Tiitel"
 msgid "Please add a brief description of the event."
 msgstr "Ürituse lühikirjeldus"
 
-#: events/forms.py:16 projects/forms.py:425
+#: events/forms.py:16 organisations/forms.py:26 projects/forms.py:425
 #: projects/templates/translation_form.html:48
 msgid "Description"
 msgstr "Kirjeldus"
@@ -184,7 +184,7 @@ msgstr "Palun kirjelda projekti haaret"
 msgid "Hour"
 msgstr ""
 
-#: events/forms.py:28 organisations/forms.py:18 platforms/forms.py:31
+#: events/forms.py:28 organisations/forms.py:19 platforms/forms.py:31
 #: projects/forms.py:37 resources/forms.py:26
 msgid "URL"
 msgstr "URL"
@@ -253,37 +253,41 @@ msgstr "Uus üritus"
 msgid "Please write the name of the organisation."
 msgstr "Palun kirjuta organisatsiooni nimi."
 
-#: organisations/forms.py:19
+#: organisations/forms.py:16 resources/forms.py:22
+msgid "Name"
+msgstr ""
+
+#: organisations/forms.py:20
 msgid "Please provide the URL to the website of the organisation."
 msgstr "Palun sisesta organisatsiooni veebilehe URL."
 
-#: organisations/forms.py:22
+#: organisations/forms.py:23
 msgid "Please briefly describe the organisation (max 3000 characters)."
 msgstr "Palun kirjelda lühidalt organisatsiooni (kuni 3000 tähemärki)."
 
-#: organisations/forms.py:27
+#: organisations/forms.py:29
 #: organisations/templates/_finder_organisation.html:29
 #: organisations/templates/finder_organisations.html:18
 msgid "Type"
 msgstr "Tüüp"
 
-#: organisations/forms.py:28
+#: organisations/forms.py:30
 msgid "Please select one."
 msgstr "Palun vali üks."
 
-#: organisations/forms.py:32
+#: organisations/forms.py:34
 msgid "Please upload the logo of your organisation (.jpg or .png)."
 msgstr "Lae üles organisatsiooni logo (.jpg või .png)."
 
-#: organisations/forms.py:40
+#: organisations/forms.py:42
 msgid "Please name the contact person or contact point for the organisation."
 msgstr "Palun sisesta organisatsiooni kontaktisik või kontakt."
 
-#: organisations/forms.py:41 platforms/forms.py:58 projects/forms.py:159
+#: organisations/forms.py:43 platforms/forms.py:58 projects/forms.py:159
 msgid "Public contact point"
 msgstr "Avalik kontakt"
 
-#: organisations/forms.py:46 platforms/forms.py:68
+#: organisations/forms.py:48 platforms/forms.py:68
 msgid ""
 "Please provide the email address of the contact person or contact point. "
 "Note you will need permission to do that."
@@ -291,7 +295,11 @@ msgstr ""
 "Palun sisesta kontaktisiku või kontakti e-maili aadress. Selleks on vaja "
 "isiku või organisatsiooni luba."
 
-#: organisations/forms.py:93 projects/forms.py:479 resources/forms.py:312
+#: organisations/forms.py:51 platforms/forms.py:65 projects/forms.py:165
+msgid "Contact point email"
+msgstr "Avalik kontakt (e-mail)"
+
+#: organisations/forms.py:96 projects/forms.py:479 resources/forms.py:312
 msgid "Give additional users permission to edit"
 msgstr "Anna teistele kasutajatele muutmiseks luba"
 
@@ -538,10 +546,6 @@ msgstr "Palun kirjelda võrgustiku või platvormi asukohta. Näiteks: Tartu linn
 msgid ""
 "Please name the contact person or contact point for the network or platform."
 msgstr "Palun sisesta võrgustiku või platvormi kontaktisik või kontakt."
-
-#: platforms/forms.py:65 projects/forms.py:165
-msgid "Contact point email"
-msgstr "Avalik kontakt (e-mail)"
 
 #: platforms/forms.py:74 resources/forms.py:130
 msgid "Organisation(s)"
@@ -1383,10 +1387,6 @@ msgstr "Varustus"
 msgid "Please write the title or name of the resource."
 msgstr "Sisesta siia materjali pealkiri või nimetus."
 
-#: resources/forms.py:22
-msgid "Name"
-msgstr ""
-
 #: resources/forms.py:28
 msgid ""
 "Please provide the URL to where the document is hosted by the publisher, or "
@@ -2020,31 +2020,31 @@ msgstr "Arendamine"
 msgid "API"
 msgstr "API"
 
-#: templates/_latest_organisations.html:5
+#: templates/_latest_organisations.html:6
 #, fuzzy
 #| msgid "Past <span class='lightBlue-color'>events</span>"
 msgid "Latest <span class='lightBlue-color'>organisations</span>"
 msgstr "Toimunud <span class='lightBlue-color'>üritused</span>"
 
-#: templates/_latest_platforms.html:5
+#: templates/_latest_platforms.html:6
 #, fuzzy
 #| msgid "Past <span class='lightBlue-color'>events</span>"
 msgid "Latest <span class='lightBlue-color'>platforms or networks</span>"
 msgstr "Toimunud <span class='lightBlue-color'>üritused</span>"
 
-#: templates/_latest_projects.html:5
+#: templates/_latest_projects.html:6
 #, fuzzy
 #| msgid "Submitted <span class='lightBlue-color'>projects</span>"
 msgid "Latest <span class='lightBlue-color'>projects</span>"
 msgstr "Sisestatud <span class='lightBlue-color'>projektid</span>"
 
-#: templates/_latest_resources.html:5
+#: templates/_latest_resources.html:6
 #, fuzzy
 #| msgid "Past <span class='lightBlue-color'>events</span>"
 msgid "Latest <span class='lightBlue-color'>resources</span>"
 msgstr "Toimunud <span class='lightBlue-color'>üritused</span>"
 
-#: templates/_latest_training_resources.html:5
+#: templates/_latest_training_resources.html:6
 #, fuzzy
 #| msgid "Past <span class='lightBlue-color'>events</span>"
 msgid "Latest <span class='lightBlue-color'>training resources</span>"

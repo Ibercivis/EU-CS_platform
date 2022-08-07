@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-07 06:50+0000\n"
+"POT-Creation-Date: 2022-08-07 07:30+0000\n"
 "PO-Revision-Date: 2021-12-22 22:18+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -145,7 +145,7 @@ msgstr "Título"
 msgid "Please add a brief description of the event."
 msgstr "Uma breve descrição do evento"
 
-#: events/forms.py:16 projects/forms.py:425
+#: events/forms.py:16 organisations/forms.py:26 projects/forms.py:425
 #: projects/templates/translation_form.html:48
 msgid "Description"
 msgstr "Descrição"
@@ -184,7 +184,7 @@ msgstr "Por favor indique a escala espacial do projeto"
 msgid "Hour"
 msgstr ""
 
-#: events/forms.py:28 organisations/forms.py:18 platforms/forms.py:31
+#: events/forms.py:28 organisations/forms.py:19 platforms/forms.py:31
 #: projects/forms.py:37 resources/forms.py:26
 msgid "URL"
 msgstr "URL"
@@ -255,38 +255,42 @@ msgstr "Novo evento"
 msgid "Please write the name of the organisation."
 msgstr "Por favor escreva o nome da organização."
 
-#: organisations/forms.py:19
+#: organisations/forms.py:16 resources/forms.py:22
+msgid "Name"
+msgstr ""
+
+#: organisations/forms.py:20
 msgid "Please provide the URL to the website of the organisation."
 msgstr "Por favor providencie o endereço URL para o website da organização."
 
-#: organisations/forms.py:22
+#: organisations/forms.py:23
 msgid "Please briefly describe the organisation (max 3000 characters)."
 msgstr ""
 "Por favor descreva resumidamente a organização (máximo de 3000 caracteres)."
 
-#: organisations/forms.py:27
+#: organisations/forms.py:29
 #: organisations/templates/_finder_organisation.html:29
 #: organisations/templates/finder_organisations.html:18
 msgid "Type"
 msgstr "Escrever"
 
-#: organisations/forms.py:28
+#: organisations/forms.py:30
 msgid "Please select one."
 msgstr "Por favor selecione uma opção."
 
-#: organisations/forms.py:32
+#: organisations/forms.py:34
 msgid "Please upload the logo of your organisation (.jpg or .png)."
 msgstr "Por favor faça upload do logótipo da sua organização (.jpg ou .png)"
 
-#: organisations/forms.py:40
+#: organisations/forms.py:42
 msgid "Please name the contact person or contact point for the organisation."
 msgstr "Por favor nomeie o responsável ou o ponto de contacto da organização."
 
-#: organisations/forms.py:41 platforms/forms.py:58 projects/forms.py:159
+#: organisations/forms.py:43 platforms/forms.py:58 projects/forms.py:159
 msgid "Public contact point"
 msgstr "Ponto de contacto"
 
-#: organisations/forms.py:46 platforms/forms.py:68
+#: organisations/forms.py:48 platforms/forms.py:68
 msgid ""
 "Please provide the email address of the contact person or contact point. "
 "Note you will need permission to do that."
@@ -294,7 +298,11 @@ msgstr ""
 "Por favor providencie o endereço eletrónico do responsável ou do ponto de "
 "contacto. Note que necessitará de permissão para o fazer."
 
-#: organisations/forms.py:93 projects/forms.py:479 resources/forms.py:312
+#: organisations/forms.py:51 platforms/forms.py:65 projects/forms.py:165
+msgid "Contact point email"
+msgstr "Endereço eletrónico do responsável"
+
+#: organisations/forms.py:96 projects/forms.py:479 resources/forms.py:312
 msgid "Give additional users permission to edit"
 msgstr "Dar permissão para que utilizadores adicionais possam editar"
 
@@ -544,10 +552,6 @@ msgstr ""
 msgid ""
 "Please name the contact person or contact point for the network or platform."
 msgstr "Por favor nomeie o responsável ou o ponto de contacto da plataforma."
-
-#: platforms/forms.py:65 projects/forms.py:165
-msgid "Contact point email"
-msgstr "Endereço eletrónico do responsável"
 
 #: platforms/forms.py:74 resources/forms.py:130
 msgid "Organisation(s)"
@@ -1406,10 +1410,6 @@ msgstr "Equipamento"
 msgid "Please write the title or name of the resource."
 msgstr "Por favor escreva o título ou nome do recurso."
 
-#: resources/forms.py:22
-msgid "Name"
-msgstr ""
-
 #: resources/forms.py:28
 msgid ""
 "Please provide the URL to where the document is hosted by the publisher, or "
@@ -2060,31 +2060,31 @@ msgstr "Desenvolvimento"
 msgid "API"
 msgstr "Interface de Programação de Aplicações"
 
-#: templates/_latest_organisations.html:5
+#: templates/_latest_organisations.html:6
 #, fuzzy
 #| msgid "Past <span class='lightBlue-color'>events</span>"
 msgid "Latest <span class='lightBlue-color'>organisations</span>"
 msgstr "Eventos <span class='lightBlue-color'>passados</span>"
 
-#: templates/_latest_platforms.html:5
+#: templates/_latest_platforms.html:6
 #, fuzzy
 #| msgid "Past <span class='lightBlue-color'>events</span>"
 msgid "Latest <span class='lightBlue-color'>platforms or networks</span>"
 msgstr "Eventos <span class='lightBlue-color'>passados</span>"
 
-#: templates/_latest_projects.html:5
+#: templates/_latest_projects.html:6
 #, fuzzy
 #| msgid "Submitted <span class='lightBlue-color'>projects</span>"
 msgid "Latest <span class='lightBlue-color'>projects</span>"
 msgstr "Projetos <span class='lightBlue-color'>submetidos</span>"
 
-#: templates/_latest_resources.html:5
+#: templates/_latest_resources.html:6
 #, fuzzy
 #| msgid "Past <span class='lightBlue-color'>events</span>"
 msgid "Latest <span class='lightBlue-color'>resources</span>"
 msgstr "Eventos <span class='lightBlue-color'>passados</span>"
 
-#: templates/_latest_training_resources.html:5
+#: templates/_latest_training_resources.html:6
 #, fuzzy
 #| msgid "Past <span class='lightBlue-color'>events</span>"
 msgid "Latest <span class='lightBlue-color'>training resources</span>"

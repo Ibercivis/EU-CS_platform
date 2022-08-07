@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-07 06:50+0000\n"
+"POT-Creation-Date: 2022-08-07 07:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -153,7 +153,7 @@ msgstr "Cím"
 msgid "Please add a brief description of the event."
 msgstr "Esemény rövid leírása"
 
-#: events/forms.py:16 projects/forms.py:425
+#: events/forms.py:16 organisations/forms.py:26 projects/forms.py:425
 #: projects/templates/translation_form.html:48
 msgid "Description"
 msgstr "Leírás"
@@ -192,7 +192,7 @@ msgstr "A projekt térbeli kiterjedése"
 msgid "Hour"
 msgstr ""
 
-#: events/forms.py:28 organisations/forms.py:18 platforms/forms.py:31
+#: events/forms.py:28 organisations/forms.py:19 platforms/forms.py:31
 #: projects/forms.py:37 resources/forms.py:26
 msgid "URL"
 msgstr ""
@@ -268,50 +268,54 @@ msgstr "Új esemény"
 msgid "Please write the name of the organisation."
 msgstr "Szervezet neve"
 
-#: organisations/forms.py:19
+#: organisations/forms.py:16 resources/forms.py:22
+msgid "Name"
+msgstr ""
+
+#: organisations/forms.py:20
 #, fuzzy
 #| msgid "Please provide a URL to an external web site for the event"
 msgid "Please provide the URL to the website of the organisation."
 msgstr "Esemény URL-je"
 
-#: organisations/forms.py:22
+#: organisations/forms.py:23
 #, fuzzy
 #| msgid ""
 #| "Please briefly describe the organisation (ideally in 500 words or less)"
 msgid "Please briefly describe the organisation (max 3000 characters)."
 msgstr "Rövid leírás a szervezetről (legfeljebb 500 szó)"
 
-#: organisations/forms.py:27
+#: organisations/forms.py:29
 #: organisations/templates/_finder_organisation.html:29
 #: organisations/templates/finder_organisations.html:18
 msgid "Type"
 msgstr "Típus"
 
-#: organisations/forms.py:28
+#: organisations/forms.py:30
 #, fuzzy
 #| msgid "Select one"
 msgid "Please select one."
 msgstr "Válassz egyet!"
 
-#: organisations/forms.py:32
+#: organisations/forms.py:34
 #, fuzzy
 #| msgid "Please upload the logo of your organisation (.jpg or .png)"
 msgid "Please upload the logo of your organisation (.jpg or .png)."
 msgstr "Töltsd fel a szervezet logóját (.jpg vagy .png formátumban)"
 
-#: organisations/forms.py:40
+#: organisations/forms.py:42
 #, fuzzy
 #| msgid "Please name the contact person or contact point for the organisation"
 msgid "Please name the contact person or contact point for the organisation."
 msgstr "Nevezd meg a szervezet kapcsolattartóját"
 
-#: organisations/forms.py:41 platforms/forms.py:58 projects/forms.py:159
+#: organisations/forms.py:43 platforms/forms.py:58 projects/forms.py:159
 #, fuzzy
 #| msgid "Public Contact Point"
 msgid "Public contact point"
 msgstr "Kapcsolattartó pont"
 
-#: organisations/forms.py:46 platforms/forms.py:68
+#: organisations/forms.py:48 platforms/forms.py:68
 #, fuzzy
 #| msgid ""
 #| "Please provide the email address of the contact person or contact point. "
@@ -323,7 +327,13 @@ msgstr ""
 "Add meg a kapcsolattartó vagy a kapcsolattartó pont e-mail címét..Ehhez a "
 "kapcsolattartó engedélyére lesz szükséged!"
 
-#: organisations/forms.py:93 projects/forms.py:479 resources/forms.py:312
+#: organisations/forms.py:51 platforms/forms.py:65 projects/forms.py:165
+#, fuzzy
+#| msgid "Contact Point Email"
+msgid "Contact point email"
+msgstr "Kapcsolattartó pont e-mail címe"
+
+#: organisations/forms.py:96 projects/forms.py:479 resources/forms.py:312
 msgid "Give additional users permission to edit"
 msgstr "Szerkesztői jog átadása további felhasználóknak"
 
@@ -611,12 +621,6 @@ msgstr "A projekt térbeli kiterjedése"
 msgid ""
 "Please name the contact person or contact point for the network or platform."
 msgstr "Kapcsolattartó"
-
-#: platforms/forms.py:65 projects/forms.py:165
-#, fuzzy
-#| msgid "Contact Point Email"
-msgid "Contact point email"
-msgstr "Kapcsolattartó pont e-mail címe"
 
 #: platforms/forms.py:74 resources/forms.py:130
 msgid "Organisation(s)"
@@ -1546,10 +1550,6 @@ msgstr "Eszközök"
 msgid "Please write the title or name of the resource."
 msgstr "Add meg a forrás címét vagy nevét"
 
-#: resources/forms.py:22
-msgid "Name"
-msgstr ""
-
 #: resources/forms.py:28
 msgid ""
 "Please provide the URL to where the document is hosted by the publisher, or "
@@ -2187,31 +2187,31 @@ msgstr "Fejlesztés"
 msgid "API"
 msgstr "API"
 
-#: templates/_latest_organisations.html:5
+#: templates/_latest_organisations.html:6
 #, fuzzy
 #| msgid "gold star <span class='lightBlue-color'> selection</span>"
 msgid "Latest <span class='lightBlue-color'>organisations</span>"
 msgstr "aranycsillag <span class='lightBlue-color'> selection</span>"
 
-#: templates/_latest_platforms.html:5
+#: templates/_latest_platforms.html:6
 #, fuzzy
 #| msgid "gold star <span class='lightBlue-color'> selection</span>"
 msgid "Latest <span class='lightBlue-color'>platforms or networks</span>"
 msgstr "aranycsillag <span class='lightBlue-color'> selection</span>"
 
-#: templates/_latest_projects.html:5
+#: templates/_latest_projects.html:6
 #, fuzzy
 #| msgid "gold star <span class='lightBlue-color'> selection</span>"
 msgid "Latest <span class='lightBlue-color'>projects</span>"
 msgstr "aranycsillag <span class='lightBlue-color'> selection</span>"
 
-#: templates/_latest_resources.html:5
+#: templates/_latest_resources.html:6
 #, fuzzy
 #| msgid "gold star <span class='lightBlue-color'> selection</span>"
 msgid "Latest <span class='lightBlue-color'>resources</span>"
 msgstr "aranycsillag <span class='lightBlue-color'> selection</span>"
 
-#: templates/_latest_training_resources.html:5
+#: templates/_latest_training_resources.html:6
 #, fuzzy
 #| msgid "gold star <span class='lightBlue-color'> selection</span>"
 msgid "Latest <span class='lightBlue-color'>training resources</span>"

@@ -12,7 +12,8 @@ class OrganisationForm(forms.Form):
     name = forms.CharField(
             max_length=200,
             help_text=_('Please write the name of the organisation.'),
-            widget=forms.TextInput())
+            widget=forms.TextInput(),
+            label=_('Name'))
     url = forms.URLField(
             max_length=200,
             label=_('URL'),
@@ -21,7 +22,8 @@ class OrganisationForm(forms.Form):
     description = forms.CharField(
             help_text=_('Please briefly describe the organisation (max 3000 characters).'),
             widget=CKEditorWidget(config_name='frontpage'),
-            max_length=3000)
+            max_length=3000,
+            label=_('Description'))
     orgType = forms.ModelChoiceField(
             queryset=OrganisationType.objects.all(),
             label=_("Type"),
@@ -45,7 +47,8 @@ class OrganisationForm(forms.Form):
             help_text=_(
                 'Please provide the email address of the contact person or '
                 'contact point. Note you will need permission to do that.'),
-            widget=forms.TextInput())
+            widget=forms.TextInput(),
+            label=_('Contact point email'))
     latitude = forms.DecimalField(max_digits=9, decimal_places=6, widget=forms.HiddenInput())
     longitude = forms.DecimalField(max_digits=9, decimal_places=6, widget=forms.HiddenInput())
 
