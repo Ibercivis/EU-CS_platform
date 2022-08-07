@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-07 07:30+0000\n"
+"POT-Creation-Date: 2022-08-07 07:57+0000\n"
 "PO-Revision-Date: 2021-12-09 16:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -145,8 +145,8 @@ msgstr "Tiitel"
 msgid "Please add a brief description of the event."
 msgstr "Ürituse lühikirjeldus"
 
-#: events/forms.py:16 organisations/forms.py:26 projects/forms.py:425
-#: projects/templates/translation_form.html:48
+#: events/forms.py:16 organisations/forms.py:26 projects/forms.py:45
+#: projects/forms.py:430 projects/templates/translation_form.html:48
 msgid "Description"
 msgstr "Kirjeldus"
 
@@ -185,7 +185,7 @@ msgid "Hour"
 msgstr ""
 
 #: events/forms.py:28 organisations/forms.py:19 platforms/forms.py:31
-#: projects/forms.py:37 resources/forms.py:26
+#: projects/forms.py:38 resources/forms.py:26
 msgid "URL"
 msgstr "URL"
 
@@ -283,7 +283,7 @@ msgstr "Lae üles organisatsiooni logo (.jpg või .png)."
 msgid "Please name the contact person or contact point for the organisation."
 msgstr "Palun sisesta organisatsiooni kontaktisik või kontakt."
 
-#: organisations/forms.py:43 platforms/forms.py:58 projects/forms.py:159
+#: organisations/forms.py:43 platforms/forms.py:58 projects/forms.py:164
 msgid "Public contact point"
 msgstr "Avalik kontakt"
 
@@ -295,11 +295,11 @@ msgstr ""
 "Palun sisesta kontaktisiku või kontakti e-maili aadress. Selleks on vaja "
 "isiku või organisatsiooni luba."
 
-#: organisations/forms.py:51 platforms/forms.py:65 projects/forms.py:165
+#: organisations/forms.py:51 platforms/forms.py:65 projects/forms.py:170
 msgid "Contact point email"
 msgstr "Avalik kontakt (e-mail)"
 
-#: organisations/forms.py:96 projects/forms.py:479 resources/forms.py:312
+#: organisations/forms.py:96 projects/forms.py:484 resources/forms.py:312
 msgid "Give additional users permission to edit"
 msgstr "Anna teistele kasutajatele muutmiseks luba"
 
@@ -569,7 +569,7 @@ msgstr "Võrgustiku või platvormi logo"
 msgid "This image will be resized to 600x400 pixels."
 msgstr "Pilt muudetakse süsteemi poolt suurusesse 600x400 pikslit."
 
-#: platforms/forms.py:97 projects/forms.py:239
+#: platforms/forms.py:97 projects/forms.py:244
 msgid "Logo credit, if applicable"
 msgstr "Logo autor, kui vajalik"
 
@@ -617,7 +617,7 @@ msgstr ""
 msgid "Organisations"
 msgstr "Organisatsioonid"
 
-#: platforms/templates/platform.html:66 projects/forms.py:137
+#: platforms/templates/platform.html:66 projects/forms.py:142
 msgid "Geographic extend"
 msgstr "Geograafiline ulatus"
 
@@ -650,7 +650,7 @@ msgstr ""
 "lisa nad <a href=\"/new_organisation\" target=\"_blank\">siit</a> enne "
 "projekti salvestamist"
 
-#: profiles/forms.py:73 projects/forms.py:188
+#: profiles/forms.py:73 projects/forms.py:193
 msgid "Other Organisations"
 msgstr "Teised organisatsioonid"
 
@@ -763,16 +763,22 @@ msgstr "kasutaja <span class='lightBlue-color'>otsing</span>"
 msgid "Please write the name of the project."
 msgstr "Palun kirjuta projekti nimi."
 
-#: projects/forms.py:38
+#: projects/forms.py:33
+#, fuzzy
+#| msgid "Project"
+msgid "Project name"
+msgstr "Projekt"
+
+#: projects/forms.py:39
 msgid "Please provide the URL to an external website of the project."
 msgstr "Palun sisesta projekti välise veebilehe URL."
 
-#: projects/forms.py:42
+#: projects/forms.py:43
 msgid ""
 "Please provide a description of your project here (max 3000 characters)."
 msgstr "Palun kirjelda projekti (kuni 3000 tähemärki)"
 
-#: projects/forms.py:47
+#: projects/forms.py:49
 #, fuzzy
 #| msgid ""
 #| "Please indicae the primary aim, goal or objective of the project (max "
@@ -784,7 +790,13 @@ msgstr ""
 "Kirjelda oma projekti põhiline eesmärk või saavutatav tulemus (kuni 2000 "
 "tähemärki)"
 
-#: projects/forms.py:52
+#: projects/forms.py:51 projects/forms.py:436
+#: projects/templates/project.html:72 projects/templates/project.html:93
+#: projects/templates/translation_form.html:55
+msgid "Aim"
+msgstr "Eesmärk"
+
+#: projects/forms.py:55
 msgid ""
 "Please describe the citizen science aspect(s) of the project and the link of "
 "the project toSAcitizen science using the <a href=\"https://zenodo.org/"
@@ -802,71 +814,71 @@ msgstr ""
 "teksti ei kuvata platvormil, seda näevad ainult moderaatorid ja kasutatakse "
 "modereerimisotsustes (kuni 2000 tähemärki)."
 
-#: projects/forms.py:59
+#: projects/forms.py:62
 msgid "Description of citizen science aspects"
 msgstr "Harrastusteaduse erinevate aspektide kirjeldus"
 
-#: projects/forms.py:63
+#: projects/forms.py:66
 msgid "Activity status"
 msgstr "Aktiivsusstaatus"
 
-#: projects/forms.py:65
+#: projects/forms.py:68
 msgid "Please, select the status of your project."
 msgstr "Vali projekti staatus."
 
-#: projects/forms.py:74
+#: projects/forms.py:77
 msgid ""
 "Please select or enter 2-3 keywords separated by commas or by pressing enter."
 msgstr ""
 "Palun kirjuta või vali 2-3 märksõna. Eralda märksõnad komaga või sisesta "
 "Enter."
 
-#: projects/forms.py:75 projects/templates/project.html:150
+#: projects/forms.py:78 projects/templates/project.html:150
 #: resources/forms.py:40 resources/templates/resource.html:173
 msgid "Keywords"
 msgstr "Märksõnad"
 
-#: projects/forms.py:81
+#: projects/forms.py:84
 msgid "Closest approximate start date of the project"
 msgstr "Projekti ligikaudne algus"
 
-#: projects/forms.py:86
+#: projects/forms.py:89
 msgid "Approximate end date of the project"
 msgstr "Projekti ligikaudne lõpp"
 
-#: projects/forms.py:91
+#: projects/forms.py:94
 msgid "Please select the project topic(s) or field(s) of science."
 msgstr "Palun vali projekti teema(d) või teadusvaldkond."
 
-#: projects/forms.py:93 projects/templates/_finder_projects.html:52
+#: projects/forms.py:96 projects/templates/_finder_projects.html:52
 msgid "Topic"
 msgstr "Teema"
 
-#: projects/forms.py:98
+#: projects/forms.py:101
 msgid "Please select the tags that apply to your project."
 msgstr "Palun vali märksõnad, mis projekti kirjeldavad."
 
-#: projects/forms.py:100 projects/templates/project.html:166
+#: projects/forms.py:103 projects/templates/project.html:166
 msgid "Tags"
 msgstr "Märksõnad"
 
-#: projects/forms.py:106
+#: projects/forms.py:109
 msgid "Please select the task(s) undertaken by participants."
 msgstr "Palun vali ülesanded, mida (vabatahtlikud) osalejad täidavad."
 
-#: projects/forms.py:108
+#: projects/forms.py:111
 msgid "Participation task"
 msgstr "Vabatahtlike ülesanded"
 
-#: projects/forms.py:113
+#: projects/forms.py:116
 msgid "Please select the difficulty level."
 msgstr "Palun vali raskusaste."
 
-#: projects/forms.py:115
+#: projects/forms.py:118
 msgid "Difficulty level"
 msgstr "Raskusaste"
 
-#: projects/forms.py:119
+#: projects/forms.py:122
 msgid ""
 "Please describe how people can get involved in the project (max 2000 "
 "characters)."
@@ -874,7 +886,13 @@ msgstr ""
 "Palun kirjelda, kuidas inimesed saavad projektis kaasa lüüa (kuni 2000 "
 "tähemärki)"
 
-#: projects/forms.py:126
+#: projects/forms.py:125 projects/forms.py:443
+#: projects/templates/project.html:76 projects/templates/project.html:97
+#: projects/templates/translation_form.html:62
+msgid "How to participate"
+msgstr "Kuidas osaleda"
+
+#: projects/forms.py:130
 msgid ""
 "Please indicate any required or suggested equipment to be used in the "
 "project (max 2000 characters)."
@@ -882,15 +900,19 @@ msgstr ""
 "Palun ära märkida, kui projektis osalemiseks on vaja spetsiifilist varustust "
 "või seadmeid (kuni 2000 tähemärki)"
 
-#: projects/forms.py:135
+#: projects/forms.py:134 projects/templates/translation_form.html:69
+msgid "Equipment"
+msgstr "Varustus"
+
+#: projects/forms.py:140
 msgid "Please indicate the spatial scale of the project"
 msgstr "Palun kirjelda projekti haaret"
 
-#: projects/forms.py:143
+#: projects/forms.py:148
 msgid "Project locality"
 msgstr "Projekti asukoht"
 
-#: projects/forms.py:144
+#: projects/forms.py:149
 msgid ""
 "Please describe the locality of the project, in terms of where the main "
 "participant activities take place. E.g. in your backyard, parks in London, "
@@ -899,20 +921,20 @@ msgstr ""
 "Palun kirjelda projekti asukohta selle tegevuste mõistes. Näiteks - "
 "koduaiad, Tallinna pargid, Euroopa jõed, globaalselt veebis jne."
 
-#: projects/forms.py:151
+#: projects/forms.py:156
 msgid "Project geographic location"
 msgstr "Projekti geograafiline asukoht"
 
-#: projects/forms.py:157
+#: projects/forms.py:162
 msgid "Please name the contact person or contact point of the project."
 msgstr "Palun sisesta projekti kontaktisik või kontakt."
 
-#: projects/forms.py:164
+#: projects/forms.py:169
 msgid ""
 "Please provide the email address of the contact person or contact point."
 msgstr "Palun sisesta kontaktisiku või kontakti e-maili aadress."
 
-#: projects/forms.py:173
+#: projects/forms.py:178
 msgid ""
 "Please select the organisation coordinating the project. If not listed, "
 "please add it <a href=\"/new_organisation\" target=\"_blank\">here</a> "
@@ -922,11 +944,11 @@ msgstr ""
 "valikus pole, palun lisa<a href=\"/new_organisation\">siit</a > enne "
 "projekti kirje salvestamist"
 
-#: projects/forms.py:176
+#: projects/forms.py:181
 msgid "Lead organisation / coordinator"
 msgstr "Juhtorganisatsioon / koordinaator"
 
-#: projects/forms.py:185
+#: projects/forms.py:190
 msgid ""
 "Please select other organisation(s) participating in the project. If not "
 "listed,please add it <a href=\"/new_organisation\" target=\"_blank\">here</"
@@ -936,7 +958,7 @@ msgstr ""
 "valikus ei ole, palun sisesta <a href=\"/new_organisation\" target=\"_blank"
 "\">siin</a> enne projekti salvestamist"
 
-#: projects/forms.py:197
+#: projects/forms.py:202
 msgid ""
 "Please enter the funding agencies of the project (e.g. European "
 "Commission)<br />Select them from the list or add your own <b>ended by comma "
@@ -946,54 +968,54 @@ msgstr ""
 "nimekirjast või sisesta ise, <b>eraldades finantseerijad koma või \"enter\" "
 "vajutusega</b>."
 
-#: projects/forms.py:200
+#: projects/forms.py:205
 msgid "Funding body"
 msgstr "Rahastaja"
 
-#: projects/forms.py:205
+#: projects/forms.py:210
 msgid "Funding programme"
 msgstr "Rahastusmeede"
 
-#: projects/forms.py:206
+#: projects/forms.py:211
 msgid ""
 "Please indicate the name of the programme that funds or funded the project."
 msgstr ""
 "Palun sisesta rahastusmeede (rahastusprogramm), mis rahastab või rahastas "
 "projekti."
 
-#: projects/forms.py:212
+#: projects/forms.py:217
 msgid "Image for the thumbnail profile"
 msgstr "Profiili pilt või pisikuva"
 
-#: projects/forms.py:213
+#: projects/forms.py:218
 msgid "It will be resized to 600x400 pixels"
 msgstr "Pilt muudetakse süsteemi poolt suurusesse 600x400 pikslit"
 
-#: projects/forms.py:224
+#: projects/forms.py:229
 msgid "Thumbnail credit, if applicable"
 msgstr "Pisipildi autor, kui vajalik"
 
-#: projects/forms.py:228
+#: projects/forms.py:233
 msgid "Project logo"
 msgstr "Projekti logo"
 
-#: projects/forms.py:229
+#: projects/forms.py:234
 msgid "It will be resized to 600x400 pixels)"
 msgstr "Pilt muudetakse süsteemi poolt suurusesse 600x400 pikslit"
 
-#: projects/forms.py:243
+#: projects/forms.py:248
 msgid "Image for the profile heading"
 msgstr "Pilt profiili päisesse"
 
-#: projects/forms.py:244
+#: projects/forms.py:249
 msgid "It will be resized to 1100x400 pixels"
 msgstr "Pilt muudetakse süsteemi poolt suurusesse 1100x400 pikslit"
 
-#: projects/forms.py:254
+#: projects/forms.py:259
 msgid "Heading image credit, if applicable"
 msgstr "Päise pildi autor, kui vajalik"
 
-#: projects/forms.py:264
+#: projects/forms.py:269
 msgid ""
 "I want to participate in the #MonthOfTheProjects and agree to be contacted "
 "via email if theproject I am submitting wins the contest.<a href=\"/"
@@ -1005,35 +1027,23 @@ msgstr ""
 "href=\"/blog/2021/05/31/june-monthoftheprojects-eu-citizenscience/\"> Uuri "
 "siit!</a>"
 
-#: projects/forms.py:423
+#: projects/forms.py:428
 msgid "Please provide a <i>description</i> field translation."
 msgstr "Palun sisesta <i>kirjelduse</i> välja tõlge."
 
-#: projects/forms.py:429
+#: projects/forms.py:434
 msgid "Please provide an <i>aim</i> field translation."
 msgstr "Palun sisesta <i>eesmärgi</i> välja tõlge."
 
-#: projects/forms.py:431 projects/templates/project.html:72
-#: projects/templates/project.html:93
-#: projects/templates/translation_form.html:55
-msgid "Aim"
-msgstr "Eesmärk"
-
-#: projects/forms.py:436
+#: projects/forms.py:441
 msgid "Please provide a <i>how to participate</i> field translation."
 msgstr "Palun sisesta <i>kuidas osaleda</i> välja tõlge."
 
-#: projects/forms.py:438 projects/templates/project.html:76
-#: projects/templates/project.html:97
-#: projects/templates/translation_form.html:62
-msgid "How to participate"
-msgstr "Kuidas osaleda"
-
-#: projects/forms.py:443
+#: projects/forms.py:448
 msgid "Please provide a <i>translated equipment</i> field translation."
 msgstr "Palun sisesta <i>vajalikd vahendid</i> välja tõlge."
 
-#: projects/forms.py:445 projects/templates/project.html:81
+#: projects/forms.py:450 projects/templates/project.html:81
 #: projects/templates/project.html:102
 msgid "Needed equipment"
 msgstr "Vajalikud vahendid"
@@ -1378,10 +1388,6 @@ msgstr "kasutaja <span class='lightBlue-color'>otsing</span>"
 #: projects/templates/translation_form.html:28
 msgid "Please indicate the language you want to translate to"
 msgstr "Palun märkige keel, millesse soovite tõlkida"
-
-#: projects/templates/translation_form.html:69
-msgid "Equipment"
-msgstr "Varustus"
 
 #: resources/forms.py:21
 msgid "Please write the title or name of the resource."

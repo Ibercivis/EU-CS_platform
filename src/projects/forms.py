@@ -29,7 +29,8 @@ class ProjectForm(forms.Form):
     project_name = forms.CharField(
             max_length=200,
             widget=forms.TextInput(),
-            help_text=_('Please write the name of the project.'))
+            help_text=_('Please write the name of the project.'),
+            label=_('Project name'))
 
     url = forms.URLField(
             max_length=200,
@@ -40,12 +41,14 @@ class ProjectForm(forms.Form):
     description = forms.CharField(
             widget=CKEditorWidget(config_name='frontpage'),
             help_text=_('Please provide a description of your project here (max 3000 characters).'),
-            max_length=3000)
+            max_length=3000,
+            label=_('Description'))
 
     aim = forms.CharField(
             widget=CKEditorWidget(config_name='frontpage'),
             help_text=_('Please indicate the primary aim, goal or objective of the project (max 2000 characters).'),
-            max_length=2000)
+            max_length=2000,
+            label=_('Aim'))
 
     description_citizen_science_aspects = forms.CharField(
             widget=CKEditorWidget(config_name='frontpage'),
@@ -118,7 +121,8 @@ class ProjectForm(forms.Form):
             widget=CKEditorWidget(config_name='frontpage'),
             help_text=_('Please describe how people can get involved in the project (max 2000 characters).'),
             max_length=2000,
-            required=False)
+            required=False,
+            label=_('How to participate'))
 
     equipment = forms.CharField(
             widget=CKEditorWidget(config_name='frontpage'),
@@ -126,7 +130,8 @@ class ProjectForm(forms.Form):
                 'Please indicate any required or suggested equipment '
                 'to be used in the project (max 2000 characters).'),
             max_length=2000,
-            required=False)
+            required=False,
+            label=_('Equipment'))
 
     # Project location
     geographicextend = forms.ModelMultipleChoiceField(

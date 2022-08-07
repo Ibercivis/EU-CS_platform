@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-07 07:30+0000\n"
+"POT-Creation-Date: 2022-08-07 07:57+0000\n"
 "PO-Revision-Date: 2021-12-17 15:31+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -147,8 +147,8 @@ msgstr "Titel"
 msgid "Please add a brief description of the event."
 msgstr "Eine kurze Beschreibung der Veranstaltung"
 
-#: events/forms.py:16 organisations/forms.py:26 projects/forms.py:425
-#: projects/templates/translation_form.html:48
+#: events/forms.py:16 organisations/forms.py:26 projects/forms.py:45
+#: projects/forms.py:430 projects/templates/translation_form.html:48
 msgid "Description"
 msgstr "Beschreibung"
 
@@ -187,7 +187,7 @@ msgid "Hour"
 msgstr ""
 
 #: events/forms.py:28 organisations/forms.py:19 platforms/forms.py:31
-#: projects/forms.py:37 resources/forms.py:26
+#: projects/forms.py:38 resources/forms.py:26
 msgid "URL"
 msgstr "URL"
 
@@ -290,7 +290,7 @@ msgstr ""
 "Bitte geben Sie den Namen der Kontaktperson oder Kontaktstelle für Ihre "
 "Organisation an."
 
-#: organisations/forms.py:43 platforms/forms.py:58 projects/forms.py:159
+#: organisations/forms.py:43 platforms/forms.py:58 projects/forms.py:164
 msgid "Public contact point"
 msgstr "Öffentliche Kontaktstelle"
 
@@ -303,11 +303,11 @@ msgstr ""
 "Bitte beachten Sie, dass Sie dafür die Erlaubnis der jeweiligen "
 "Kontaktperson oder Kontaktstelle benötigen."
 
-#: organisations/forms.py:51 platforms/forms.py:65 projects/forms.py:165
+#: organisations/forms.py:51 platforms/forms.py:65 projects/forms.py:170
 msgid "Contact point email"
 msgstr "E-Mailadresse der Kontaktstelle"
 
-#: organisations/forms.py:96 projects/forms.py:479 resources/forms.py:312
+#: organisations/forms.py:96 projects/forms.py:484 resources/forms.py:312
 msgid "Give additional users permission to edit"
 msgstr "Erteilen Sie zusätzlichen Benutzer*innen die Erlaubnis zum Bearbeiten"
 
@@ -594,7 +594,7 @@ msgstr "Logo Ihres Netzwerks oder Ihrer Plattform. "
 msgid "This image will be resized to 600x400 pixels."
 msgstr "Dieses Bild wird auf 600x400 Pixel verkleinert."
 
-#: platforms/forms.py:97 projects/forms.py:239
+#: platforms/forms.py:97 projects/forms.py:244
 msgid "Logo credit, if applicable"
 msgstr "Logo-Rechte, falls erforderlich"
 
@@ -645,7 +645,7 @@ msgstr ""
 msgid "Organisations"
 msgstr "Organisationen"
 
-#: platforms/templates/platform.html:66 projects/forms.py:137
+#: platforms/templates/platform.html:66 projects/forms.py:142
 msgid "Geographic extend"
 msgstr "Geografische Ausdehnung"
 
@@ -678,7 +678,7 @@ msgstr ""
 "bitte <a href=\"/new_organisation\" target=\"_blank\">hier</a> vor der "
 "Einreichung des Projekts hinzufügen"
 
-#: profiles/forms.py:73 projects/forms.py:188
+#: profiles/forms.py:73 projects/forms.py:193
 msgid "Other Organisations"
 msgstr "Andere Organisationen"
 
@@ -794,18 +794,24 @@ msgstr "Nutzer*innen <span class='lightBlue-color'>Suche</span>"
 msgid "Please write the name of the project."
 msgstr "Bitte geben Sie den Namen des Projekts an."
 
-#: projects/forms.py:38
+#: projects/forms.py:33
+#, fuzzy
+#| msgid "Project"
+msgid "Project name"
+msgstr "Projekt"
+
+#: projects/forms.py:39
 msgid "Please provide the URL to an external website of the project."
 msgstr "Bitte geben Sie die URL zu einer externen Website des Projekts an."
 
-#: projects/forms.py:42
+#: projects/forms.py:43
 msgid ""
 "Please provide a description of your project here (max 3000 characters)."
 msgstr ""
 "Bitte geben Sie hier eine Beschreibung Ihres Projekts ein (max. 3000 "
 "Zeichen)."
 
-#: projects/forms.py:47
+#: projects/forms.py:49
 #, fuzzy
 #| msgid ""
 #| "Please indicae the primary aim, goal or objective of the project (max "
@@ -815,7 +821,13 @@ msgid ""
 "characters)."
 msgstr "Bitte geben Sie das Hauptziel des Projekts an (max. 2000 Zeichen)."
 
-#: projects/forms.py:52
+#: projects/forms.py:51 projects/forms.py:436
+#: projects/templates/project.html:72 projects/templates/project.html:93
+#: projects/templates/translation_form.html:55
+msgid "Aim"
+msgstr "Ziel"
+
+#: projects/forms.py:55
 msgid ""
 "Please describe the citizen science aspect(s) of the project and the link of "
 "the project toSAcitizen science using the <a href=\"https://zenodo.org/"
@@ -833,73 +845,73 @@ msgstr ""
 "eingeben, wird nicht auf der Plattform erscheinen; es dient nur zu "
 "Moderationszwecken (max. 2000 Zeichen)."
 
-#: projects/forms.py:59
+#: projects/forms.py:62
 msgid "Description of citizen science aspects"
 msgstr "Beschreibung der Citizen Science-Aspekte"
 
-#: projects/forms.py:63
+#: projects/forms.py:66
 msgid "Activity status"
 msgstr "Aktivitätsstatus"
 
-#: projects/forms.py:65
+#: projects/forms.py:68
 msgid "Please, select the status of your project."
 msgstr "Bitte wählen Sie den Status Ihres Projekts."
 
-#: projects/forms.py:74
+#: projects/forms.py:77
 msgid ""
 "Please select or enter 2-3 keywords separated by commas or by pressing enter."
 msgstr ""
 "Bitte wählen Sie 2-3 Stichwörter aus oder geben Sie diese durch Kommas "
 "getrennt oder durch Drücken der Eingabetaste ein."
 
-#: projects/forms.py:75 projects/templates/project.html:150
+#: projects/forms.py:78 projects/templates/project.html:150
 #: resources/forms.py:40 resources/templates/resource.html:173
 msgid "Keywords"
 msgstr "Stichwörter"
 
-#: projects/forms.py:81
+#: projects/forms.py:84
 msgid "Closest approximate start date of the project"
 msgstr "Ungefähres Startdatum des Projekts"
 
-#: projects/forms.py:86
+#: projects/forms.py:89
 msgid "Approximate end date of the project"
 msgstr "Ungefähres Enddatum des Projekts"
 
-#: projects/forms.py:91
+#: projects/forms.py:94
 msgid "Please select the project topic(s) or field(s) of science."
 msgstr "Bitte wählen Sie die Projektthemen oder die Wissenschaftsgebiete."
 
-#: projects/forms.py:93 projects/templates/_finder_projects.html:52
+#: projects/forms.py:96 projects/templates/_finder_projects.html:52
 msgid "Topic"
 msgstr "Thema"
 
-#: projects/forms.py:98
+#: projects/forms.py:101
 msgid "Please select the tags that apply to your project."
 msgstr "Bitte wählen Sie die Schlagwörter aus, die auf Ihr Projekt zutreffen."
 
-#: projects/forms.py:100 projects/templates/project.html:166
+#: projects/forms.py:103 projects/templates/project.html:166
 msgid "Tags"
 msgstr "Schlagwörter"
 
-#: projects/forms.py:106
+#: projects/forms.py:109
 msgid "Please select the task(s) undertaken by participants."
 msgstr ""
 "Bitte wählen Sie die Aufgabe(n) aus, die die Teilnehmer*innen übernommen "
 "haben."
 
-#: projects/forms.py:108
+#: projects/forms.py:111
 msgid "Participation task"
 msgstr "Aufgabenstellung bei Teilnahme"
 
-#: projects/forms.py:113
+#: projects/forms.py:116
 msgid "Please select the difficulty level."
 msgstr "Bitte wählen Sie den Schwierigkeitsgrad."
 
-#: projects/forms.py:115
+#: projects/forms.py:118
 msgid "Difficulty level"
 msgstr "Schwierigkeitsgrad"
 
-#: projects/forms.py:119
+#: projects/forms.py:122
 msgid ""
 "Please describe how people can get involved in the project (max 2000 "
 "characters)."
@@ -907,7 +919,13 @@ msgstr ""
 "Bitte beschreiben Sie, wie sich Personen an dem Projekt beteiligen können "
 "(max. 2000 Zeichen)."
 
-#: projects/forms.py:126
+#: projects/forms.py:125 projects/forms.py:443
+#: projects/templates/project.html:76 projects/templates/project.html:97
+#: projects/templates/translation_form.html:62
+msgid "How to participate"
+msgstr "Teilnahmeinformationen"
+
+#: projects/forms.py:130
 msgid ""
 "Please indicate any required or suggested equipment to be used in the "
 "project (max 2000 characters)."
@@ -915,15 +933,19 @@ msgstr ""
 "Bitte geben Sie alle erforderlichen oder empfohlenen Hilfsmittel an, die für "
 "das Projekt verwendet werden können (max. 2000 Zeichen)."
 
-#: projects/forms.py:135
+#: projects/forms.py:134 projects/templates/translation_form.html:69
+msgid "Equipment"
+msgstr "Ausrüstung"
+
+#: projects/forms.py:140
 msgid "Please indicate the spatial scale of the project"
 msgstr "Bitte geben Sie den räumlichen Rahmen des Projekts an"
 
-#: projects/forms.py:143
+#: projects/forms.py:148
 msgid "Project locality"
 msgstr "Projektstandort"
 
-#: projects/forms.py:144
+#: projects/forms.py:149
 msgid ""
 "Please describe the locality of the project, in terms of where the main "
 "participant activities take place. E.g. in your backyard, parks in London, "
@@ -933,21 +955,21 @@ msgstr ""
 "wo die Hauptaktivitäten der Teilnehmer*innen stattfinden. z. B. in ihrem "
 "Hinterhof, in Parks in London, an Flüssen in Europa, weltweit online usw."
 
-#: projects/forms.py:151
+#: projects/forms.py:156
 msgid "Project geographic location"
 msgstr "Geografischer Standort des Projekts"
 
-#: projects/forms.py:157
+#: projects/forms.py:162
 msgid "Please name the contact person or contact point of the project."
 msgstr "Bitte nennen Sie die Kontaktperson oder Kontaktstelle des Projekts."
 
-#: projects/forms.py:164
+#: projects/forms.py:169
 msgid ""
 "Please provide the email address of the contact person or contact point."
 msgstr ""
 "Bitte geben Sie die E-Mail-Adresse der Kontaktperson oder Kontaktstelle an."
 
-#: projects/forms.py:173
+#: projects/forms.py:178
 msgid ""
 "Please select the organisation coordinating the project. If not listed, "
 "please add it <a href=\"/new_organisation\" target=\"_blank\">here</a> "
@@ -957,11 +979,11 @@ msgstr ""
 "diese nicht aufgeführt ist, fügen Sie sie bitte <a href=\"/new_organisation"
 "\" target=\"_blank\">hier</a> hinzu, bevor Sie das Projekt einreichen"
 
-#: projects/forms.py:176
+#: projects/forms.py:181
 msgid "Lead organisation / coordinator"
 msgstr "Leitende Organisation / Koordinator*in"
 
-#: projects/forms.py:185
+#: projects/forms.py:190
 msgid ""
 "Please select other organisation(s) participating in the project. If not "
 "listed,please add it <a href=\"/new_organisation\" target=\"_blank\">here</"
@@ -971,7 +993,7 @@ msgstr ""
 "sind. Falls nicht aufgeführt, fügen Sie sie bitte <a href=\"/new_organisation"
 "\" target=\"_blank\">hier</a> hinzu, bevor Sie das Projekt einreichen"
 
-#: projects/forms.py:197
+#: projects/forms.py:202
 msgid ""
 "Please enter the funding agencies of the project (e.g. European "
 "Commission)<br />Select them from the list or add your own <b>ended by comma "
@@ -981,54 +1003,54 @@ msgstr ""
 "Kommission)<br />Wählen Sie diese aus der Liste aus oder fügen Sie Ihre "
 "eigenen <b>mit Komma oder Enter ein</b>."
 
-#: projects/forms.py:200
+#: projects/forms.py:205
 msgid "Funding body"
 msgstr "Finanzierende Einrichtung"
 
-#: projects/forms.py:205
+#: projects/forms.py:210
 msgid "Funding programme"
 msgstr "Förderprogramm"
 
-#: projects/forms.py:206
+#: projects/forms.py:211
 msgid ""
 "Please indicate the name of the programme that funds or funded the project."
 msgstr ""
 "Bitte geben Sie den Namen des Programms an, das das Projekt finanziert oder "
 "finanziert hat."
 
-#: projects/forms.py:212
+#: projects/forms.py:217
 msgid "Image for the thumbnail profile"
 msgstr "Bild für das Vorschauprofil"
 
-#: projects/forms.py:213
+#: projects/forms.py:218
 msgid "It will be resized to 600x400 pixels"
 msgstr "Die Größe wird auf 600x400 Pixel geändert."
 
-#: projects/forms.py:224
+#: projects/forms.py:229
 msgid "Thumbnail credit, if applicable"
 msgstr "Vorschaubild-Rechte, falls erforderlich"
 
-#: projects/forms.py:228
+#: projects/forms.py:233
 msgid "Project logo"
 msgstr "Projektlogo"
 
-#: projects/forms.py:229
+#: projects/forms.py:234
 msgid "It will be resized to 600x400 pixels)"
 msgstr "Es wird auf 600x400 Pixel verkleinert)"
 
-#: projects/forms.py:243
+#: projects/forms.py:248
 msgid "Image for the profile heading"
 msgstr "Bild für die Profilkopfzeile"
 
-#: projects/forms.py:244
+#: projects/forms.py:249
 msgid "It will be resized to 1100x400 pixels"
 msgstr "Die Größe wird auf 1100x400 Pixel geändert."
 
-#: projects/forms.py:254
+#: projects/forms.py:259
 msgid "Heading image credit, if applicable"
 msgstr "Bildnachweis für die Profilkopfzeile, falls erforderlich"
 
-#: projects/forms.py:264
+#: projects/forms.py:269
 msgid ""
 "I want to participate in the #MonthOfTheProjects and agree to be contacted "
 "via email if theproject I am submitting wins the contest.<a href=\"/"
@@ -1040,36 +1062,24 @@ msgstr ""
 "eingereichte Projekt den Wettbewerb gewinnt.<a href=\"/blog/2021/05/31/june-"
 "monthoftheprojects-eu-citizenscience/\"> Erfahren Sie hier mehr!</a>"
 
-#: projects/forms.py:423
+#: projects/forms.py:428
 msgid "Please provide a <i>description</i> field translation."
 msgstr "Bitte geben Sie für die <i> Beschreibung</i> eine Übersetzung an. "
 
-#: projects/forms.py:429
+#: projects/forms.py:434
 msgid "Please provide an <i>aim</i> field translation."
 msgstr "Bitte geben Sie für das <i>Ziel</i> eine Übersetzung an. "
 
-#: projects/forms.py:431 projects/templates/project.html:72
-#: projects/templates/project.html:93
-#: projects/templates/translation_form.html:55
-msgid "Aim"
-msgstr "Ziel"
-
-#: projects/forms.py:436
+#: projects/forms.py:441
 msgid "Please provide a <i>how to participate</i> field translation."
 msgstr ""
 "Bitte geben Sie für die <i> Teilnahmeinformationen </i> eine Übersetzung an. "
 
-#: projects/forms.py:438 projects/templates/project.html:76
-#: projects/templates/project.html:97
-#: projects/templates/translation_form.html:62
-msgid "How to participate"
-msgstr "Teilnahmeinformationen"
-
-#: projects/forms.py:443
+#: projects/forms.py:448
 msgid "Please provide a <i>translated equipment</i> field translation."
 msgstr "Bitte geben Sie für die <i> Ausrüstung</i> eine Übersetzung an. "
 
-#: projects/forms.py:445 projects/templates/project.html:81
+#: projects/forms.py:450 projects/templates/project.html:81
 #: projects/templates/project.html:102
 msgid "Needed equipment"
 msgstr "Erforderliche Ausrüstung"
@@ -1425,10 +1435,6 @@ msgstr "Nutzer*innen <span class='lightBlue-color'>Suche</span>"
 #: projects/templates/translation_form.html:28
 msgid "Please indicate the language you want to translate to"
 msgstr "Bitte geben Sie die Sprache an, in die Sie übersetzen möchten"
-
-#: projects/templates/translation_form.html:69
-msgid "Equipment"
-msgstr "Ausrüstung"
 
 #: resources/forms.py:21
 msgid "Please write the title or name of the resource."
