@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-07 06:23+0000\n"
+"POT-Creation-Date: 2022-08-07 06:50+0000\n"
 "PO-Revision-Date: 2021-12-09 15:41+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2233,6 +2233,36 @@ msgstr "Utveckling"
 msgid "API"
 msgstr "API"
 
+#: templates/_latest_organisations.html:5
+#, fuzzy
+#| msgid "Past <span class='lightBlue-color'>events</span>"
+msgid "Latest <span class='lightBlue-color'>organisations</span>"
+msgstr "Avslutade <span class=’lightBlue-color’>evenemang</span>"
+
+#: templates/_latest_platforms.html:5
+#, fuzzy
+#| msgid "Past <span class='lightBlue-color'>events</span>"
+msgid "Latest <span class='lightBlue-color'>platforms or networks</span>"
+msgstr "Avslutade <span class=’lightBlue-color’>evenemang</span>"
+
+#: templates/_latest_projects.html:5
+#, fuzzy
+#| msgid "Submitted <span class='lightBlue-color'>projects</span>"
+msgid "Latest <span class='lightBlue-color'>projects</span>"
+msgstr "Inlagda <span class=’lightBlue-color’>projekt</span>"
+
+#: templates/_latest_resources.html:5
+#, fuzzy
+#| msgid "Past <span class='lightBlue-color'>events</span>"
+msgid "Latest <span class='lightBlue-color'>resources</span>"
+msgstr "Avslutade <span class=’lightBlue-color’>evenemang</span>"
+
+#: templates/_latest_training_resources.html:5
+#, fuzzy
+#| msgid "Past <span class='lightBlue-color'>events</span>"
+msgid "Latest <span class='lightBlue-color'>training resources</span>"
+msgstr "Avslutade <span class=’lightBlue-color’>evenemang</span>"
+
 #: templates/_modalsubmit.html:6
 #, fuzzy
 #| msgid "Do you want to proceed?"
@@ -3244,7 +3274,13 @@ msgstr ""
 msgid "Search..."
 msgstr "Sök…"
 
-#: templates/home.html:52
+#: templates/home.html:48
+msgid ""
+"Go to your <a class='lightBlue-color' href='/users/me'>personal area</a><br/"
+"> and see your stats</h3>"
+msgstr ""
+
+#: templates/home.html:50
 msgid "<a href='signup'>join the community</a> <div>and participate</div>"
 msgstr "<a href='signup'>delta</a><div>du med</div>"
 

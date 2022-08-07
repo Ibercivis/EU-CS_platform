@@ -45,9 +45,7 @@
                 </div>
                 <div class="col-md-6 col-12 mt-5 pb-5">
                     {% if user.is_authenticated %}
-                    <h3 class="mb-5 mt-5">Go to your 
-                        <a class="lightBlue-color" href="/users/me">personal area</a><br/>
-                        and see your stats</h3>
+                    <h3 class="mb-5 mt-5">{% trans "Go to your <a class='lightBlue-color' href='/users/me'>personal area</a><br/> and see your stats</h3>" %}
                     {% else %}
                     <h3 class="mb-5 mt-5">{% trans "<a href='signup'>join the community</a> <div>and participate</div>" %}</h3>
                     {% endif %}

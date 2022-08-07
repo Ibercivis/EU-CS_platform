@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-07 06:23+0000\n"
+"POT-Creation-Date: 2022-08-07 06:50+0000\n"
 "PO-Revision-Date: 2021-12-22 22:18+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2060,6 +2060,36 @@ msgstr "Desenvolvimento"
 msgid "API"
 msgstr "Interface de Programação de Aplicações"
 
+#: templates/_latest_organisations.html:5
+#, fuzzy
+#| msgid "Past <span class='lightBlue-color'>events</span>"
+msgid "Latest <span class='lightBlue-color'>organisations</span>"
+msgstr "Eventos <span class='lightBlue-color'>passados</span>"
+
+#: templates/_latest_platforms.html:5
+#, fuzzy
+#| msgid "Past <span class='lightBlue-color'>events</span>"
+msgid "Latest <span class='lightBlue-color'>platforms or networks</span>"
+msgstr "Eventos <span class='lightBlue-color'>passados</span>"
+
+#: templates/_latest_projects.html:5
+#, fuzzy
+#| msgid "Submitted <span class='lightBlue-color'>projects</span>"
+msgid "Latest <span class='lightBlue-color'>projects</span>"
+msgstr "Projetos <span class='lightBlue-color'>submetidos</span>"
+
+#: templates/_latest_resources.html:5
+#, fuzzy
+#| msgid "Past <span class='lightBlue-color'>events</span>"
+msgid "Latest <span class='lightBlue-color'>resources</span>"
+msgstr "Eventos <span class='lightBlue-color'>passados</span>"
+
+#: templates/_latest_training_resources.html:5
+#, fuzzy
+#| msgid "Past <span class='lightBlue-color'>events</span>"
+msgid "Latest <span class='lightBlue-color'>training resources</span>"
+msgstr "Eventos <span class='lightBlue-color'>passados</span>"
+
 #: templates/_modalsubmit.html:6
 msgid "What do you want to submit?"
 msgstr "O que quer submeter?"
@@ -3149,7 +3179,13 @@ msgstr ""
 msgid "Search..."
 msgstr "Pesquisar..."
 
-#: templates/home.html:52
+#: templates/home.html:48
+msgid ""
+"Go to your <a class='lightBlue-color' href='/users/me'>personal area</a><br/"
+"> and see your stats</h3>"
+msgstr ""
+
+#: templates/home.html:50
 msgid "<a href='signup'>join the community</a> <div>and participate</div>"
 msgstr "<a href='signup'>junta-te à comunidade</a> <div>e participa</div>"
 

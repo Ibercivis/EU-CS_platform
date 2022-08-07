@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-07 06:23+0000\n"
+"POT-Creation-Date: 2022-08-07 06:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2187,6 +2187,36 @@ msgstr "Fejlesztés"
 msgid "API"
 msgstr "API"
 
+#: templates/_latest_organisations.html:5
+#, fuzzy
+#| msgid "gold star <span class='lightBlue-color'> selection</span>"
+msgid "Latest <span class='lightBlue-color'>organisations</span>"
+msgstr "aranycsillag <span class='lightBlue-color'> selection</span>"
+
+#: templates/_latest_platforms.html:5
+#, fuzzy
+#| msgid "gold star <span class='lightBlue-color'> selection</span>"
+msgid "Latest <span class='lightBlue-color'>platforms or networks</span>"
+msgstr "aranycsillag <span class='lightBlue-color'> selection</span>"
+
+#: templates/_latest_projects.html:5
+#, fuzzy
+#| msgid "gold star <span class='lightBlue-color'> selection</span>"
+msgid "Latest <span class='lightBlue-color'>projects</span>"
+msgstr "aranycsillag <span class='lightBlue-color'> selection</span>"
+
+#: templates/_latest_resources.html:5
+#, fuzzy
+#| msgid "gold star <span class='lightBlue-color'> selection</span>"
+msgid "Latest <span class='lightBlue-color'>resources</span>"
+msgstr "aranycsillag <span class='lightBlue-color'> selection</span>"
+
+#: templates/_latest_training_resources.html:5
+#, fuzzy
+#| msgid "gold star <span class='lightBlue-color'> selection</span>"
+msgid "Latest <span class='lightBlue-color'>training resources</span>"
+msgstr "aranycsillag <span class='lightBlue-color'> selection</span>"
+
 #: templates/_modalsubmit.html:6
 msgid "What do you want to submit?"
 msgstr "Mit szeretnél feltölteni?"
@@ -3264,7 +3294,13 @@ msgstr ""
 msgid "Search..."
 msgstr "Keresés"
 
-#: templates/home.html:52
+#: templates/home.html:48
+msgid ""
+"Go to your <a class='lightBlue-color' href='/users/me'>personal area</a><br/"
+"> and see your stats</h3>"
+msgstr ""
+
+#: templates/home.html:50
 msgid "<a href='signup'>join the community</a> <div>and participate</div>"
 msgstr "<a href='signup'>Csatlakozz</a> <div>and participate</div>"
 
