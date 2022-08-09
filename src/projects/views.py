@@ -548,11 +548,8 @@ def setProjectApproved(id, approved):
         aProject.save()
         # sendEmail
         subject = 'Your project has been approved'
-        message = render_to_string(
-                'emails/approved_project.html',
-                {
-                    "domain": settings.HOST,
-                    "name": aProject.name, "id": id})
+        context = {"name": aProject.name, "id": id, "domain": settings.HOST}
+        message = render_to_string('emails/approved_project.html', context)
         to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
         to.append(aProject.creator.email)
         email = EmailMessage(subject, message, to=to)
@@ -603,7 +600,6 @@ def setFeatured(request):
     return JsonResponse(response, safe=False)
 
 
-@staff_member_required()
 def setProjectFeatured(id, featured):
     project = get_object_or_404(Project, id=id)
     project.featured = featured
