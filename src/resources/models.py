@@ -73,7 +73,7 @@ class Resource(models.Model):
     publisher = models.CharField(max_length=100, blank=True, null=True)
     datePublished = models.IntegerField(null=True, blank=True)
     resourceDOI = models.CharField(max_length=100, null=True, blank=True)
-    inLanguage = models.CharField(max_length=100)
+    inLanguage = models.CharField(max_length=100, blank=True)
     license = models.CharField(max_length=300, null=True, blank=True)
 
     # Links
@@ -88,8 +88,8 @@ class Resource(models.Model):
 
     # Training resources fields
     isTrainingResource = models.BooleanField(null=True, blank=True, default=False)
-    educationLevel = models.ManyToManyField(EducationLevel)
-    learningResourceType = models.ManyToManyField(LearningResourceType)
+    educationLevel = models.ManyToManyField(EducationLevel, blank=True)
+    learningResourceType = models.ManyToManyField(LearningResourceType, blank=True)
     timeRequired = models.FloatField(null=True, blank=True)
     conditionsOfAccess = models.CharField(max_length=300, null=True, blank=True)
 
@@ -105,7 +105,7 @@ class Resource(models.Model):
 
     # Other
     hidden = models.BooleanField(null=True, blank=True)
-    featured = models.BooleanField(default=False)
+    featured = models.BooleanField(default=False, blank=True)
     own = models.BooleanField(null=True, blank=True)
 
     def __str__(self):

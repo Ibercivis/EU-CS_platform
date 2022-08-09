@@ -179,7 +179,12 @@
             $('.myerror').remove()
 
             // To check that save & continue was clicked
-            var contin = ($(this).hasClass('continue')) ? true : false;
+            //var contin = ($(this).hasClass('continue')) ? true : false;
+            /* To check that we click on Save & continue  */
+            if($(this).hasClass('continue'))
+                var contin=true
+            else
+                var contin=false
 
             for(var instanceName in CKEDITOR.instances)
                 CKEDITOR.instances[instanceName].updateElement();

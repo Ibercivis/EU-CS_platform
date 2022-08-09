@@ -104,16 +104,16 @@ class Project(models.Model):
     description_citizen_science_aspects = models.CharField(max_length=2000)
     aim = models.CharField(max_length=2000)
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
-    keywords = models.ManyToManyField(Keyword, blank=True)
+    keywords = models.ManyToManyField(Keyword)
 
     # Useful information to classificate the project
-    topic = models.ManyToManyField(Topic)
-    hasTag = models.ManyToManyField(HasTag)
+    topic = models.ManyToManyField(Topic, blank=True)
+    hasTag = models.ManyToManyField(HasTag, blank=True)
     start_date = models.DateTimeField('Start date', null=True, blank=True)
     end_date = models.DateTimeField('End date', null=True, blank=True)
 
     # Participation information
-    participationTask = models.ManyToManyField(ParticipationTask)
+    participationTask = models.ManyToManyField(ParticipationTask, blank=True)
     difficultyLevel = models.ForeignKey(
             DifficultyLevel,
             default=None,
@@ -139,7 +139,7 @@ class Project(models.Model):
                 null=True,
                 blank=True,
                 related_name='main_organisation')
-    organisation = models.ManyToManyField(Organisation)
+    organisation = models.ManyToManyField(Organisation, blank=True)
 
     # Funding information
     fundingBody = models.ManyToManyField(FundingBody, blank=True)
@@ -165,15 +165,15 @@ class Project(models.Model):
 
     # Links
     # Others (some of them not used)
-    featured = models.BooleanField(default=False)
+    featured = models.BooleanField(default=False, blank=True)
     host = models.CharField(max_length=200, null=True, blank=True)
-    doingAtHome = models.BooleanField(null=True, default=False)
-    participatingInaContest = models.BooleanField(null=True, default=False)
+    doingAtHome = models.BooleanField(null=True, default=False, blank=True)
+    participatingInaContest = models.BooleanField(null=True, default=False, blank=True)
     hidden = models.BooleanField(null=True, blank=True)
     customField = models.ManyToManyField(CustomField, blank=True)
 
     # For translation
-    translatedProject = models.ManyToManyField(TranslatedProject)
+    translatedProject = models.ManyToManyField(TranslatedProject, blank=True)
 
     # For editPermission
     editors = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='project_editors')

@@ -86,7 +86,7 @@ class ResourceForm(forms.Form):
             help_text=_(
                 'Please select the audience(s) for which the resource is intended. '
                 'Multiple options can be selected.'),
-            label=_("Learning resource type"))
+            label=_("Audience"))
 
     theme = forms.ModelMultipleChoiceField(
             queryset=Theme.objects.all(),
@@ -192,7 +192,7 @@ class ResourceForm(forms.Form):
                 'Please add the education level needed, end using comma or pressing enter. '
                 'Examples of educational levels include beginner, intermediate or advanced, '
                 'and formal sets of level indicators.'),
-            required=False,
+            required=False
             )
     learning_resource_type = forms.ModelMultipleChoiceField(
             queryset=LearningResourceType.objects.all(),
@@ -203,7 +203,7 @@ class ResourceForm(forms.Form):
             help_text=_(
                 'Please indicate the predominant type or kind characterizing the learning resource. '
                 'For example, presentation, handout, etc.'),
-            required=False,
+            required=False
             )
     time_required = forms.FloatField(validators=[MinValueValidator(0)], min_value=0, required=False, help_text=_(
         'Please write the approximate  hours required to finish the training.'),
