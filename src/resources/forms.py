@@ -149,7 +149,6 @@ class ResourceForm(forms.Form):
             label=_("Publisher"))
 
     # Images
-
     image1 = forms.ImageField(
             required=False,
             widget=forms.FileInput,
@@ -216,7 +215,10 @@ class ResourceForm(forms.Form):
     ''' Save & update a Resource & Training Resource '''
     def save(self, args, images):
         pk = self.data.get('resourceID', '')
-        category = get_object_or_404(Category, id=self.data['category'])
+        if self.data['categorySelected']:
+            category = get_object_or_404(Category, id=self.data['categorySelected'])
+        else:
+            category = get_object_or_404(Category, id=self.data['category'])
 
         if pk:
             resource = get_object_or_404(Resource, id=pk)
