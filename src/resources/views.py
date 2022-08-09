@@ -378,7 +378,9 @@ def sendResourceEmail(pk, user):
     subject = '[EU-CITIZEN.SCIENCE] Your resource "%s" has been submitted' % resource.name
     print(subject)
     message = render_to_string('emails/new_resource.html', {'resourceName': resource.name, 'username': user.get_full_name, "domain": settings.HOST})
-    to = [user.email]
+    # to = [user.email]
+    to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
+    to.append(user.email)
     bcc = copy.copy(settings.EMAIL_RECIPIENT_LIST)
     email = EmailMessage(subject, message, to=to, bcc=bcc)
     email.content_subtype = "html"
@@ -621,9 +623,31 @@ def bookmarkResource(request):
 @staff_member_required()
 def approveResource(request):
     resourceId = request.POST.get("resourceId")
+    id = resourceId
     resource = get_object_or_404(Resource, id=resourceId)
     if request.POST.get("approved") in ['true']:
         resource.approved = True
+        # sendEmail
+        if resource.isTrainingResource == False: 
+            subject = 'Your resource has been approved'
+            message = render_to_string(
+                'emails/approved_resource.html',
+                {
+                    "domain": settings.HOST,
+                    "name": resource.name, "id": id})
+        else: 
+            subject = 'Your training resource has been approved'
+            message = render_to_string(
+                'emails/approved_training_resource.html',
+                {
+                    "domain": settings.HOST,
+                    "name": resource.name, "id": id})
+        
+        to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
+        to.append(aProject.creator.email)
+        email = EmailMessage(subject, message, to=to)
+        email.content_subtype = "html"
+        email.send()
     else:
         resource.approved = False
     resource.moderated = True

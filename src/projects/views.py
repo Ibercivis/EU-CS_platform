@@ -68,7 +68,9 @@ def sendProjectEmail(pk, user):
         'domain': settings.HOST,
         'projectname': project.name,
         'projectid': pk})
-    to = [user.email]
+    # to = [user.email]
+    to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
+    to.append(user.email)
     bcc = copy.copy(settings.EMAIL_RECIPIENT_LIST)
     email = EmailMessage(subject, message, to=to, bcc=bcc)
     email.content_subtype = "html"

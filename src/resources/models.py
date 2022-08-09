@@ -69,7 +69,7 @@ class Resource(models.Model):
 
     # Publish information
     # TODO: Convert datePublished to Year
-    authors = models.ManyToManyField(Author)
+    authors = models.ManyToManyField(Author, blank=True)
     publisher = models.CharField(max_length=100, blank=True, null=True)
     datePublished = models.IntegerField(null=True, blank=True)
     resourceDOI = models.CharField(max_length=100, null=True, blank=True)
@@ -77,8 +77,8 @@ class Resource(models.Model):
     license = models.CharField(max_length=300, null=True, blank=True)
 
     # Links
-    organisation = models.ManyToManyField(Organisation)
-    project = models.ManyToManyField(Project)
+    organisation = models.ManyToManyField(Organisation, blank=True)
+    project = models.ManyToManyField(Project, blank=True)
 
     # Pictures
     image1 = models.ImageField(upload_to='images/', max_length=300, null=True, blank=True)

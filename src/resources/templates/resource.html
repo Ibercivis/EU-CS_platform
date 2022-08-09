@@ -280,7 +280,7 @@
             console.log('change approve')
             $.ajax({
                 type: 'POST',
-                url: '/approveResource/',
+                url: 'approveResource/',
                 data: {
                     csrfmiddlewaretoken: '{{ csrf_token }}',
                     approved: $('#approve').is(':checked'),
