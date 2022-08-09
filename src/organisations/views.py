@@ -50,7 +50,7 @@ def new_organisation(request):
             organisation = form.save(request, image_path_database)
             messages.success(request, _('Organisation added correctly'))
             subject = 'New organisation submitted'
-            message = render_to_string('emails/new_organisation.html', {})
+            message = render_to_string('emails/new_organisation.html', {'submitter': user, 'organisationName': organisation.name})
             to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
             to.append(request.user.email)
             email = EmailMessage(subject, message, to=to)

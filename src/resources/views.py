@@ -104,6 +104,7 @@ def newTrainingResource(request):
 @login_required(login_url='/login')
 def newResource(request, isTrainingResource=False):
     form = ResourceForm()
+    user = request.user
     if request.method == 'POST':
         form = ResourceForm(request.POST, request.FILES)
         if form.is_valid():
@@ -120,14 +121,14 @@ def newResource(request, isTrainingResource=False):
             if(isTrainingResource):
                 messages.success(request, _('Training resource added correctly'))
                 subject = 'New training resource submitted'
-                message = render_to_string('emails/new_training_resource.html', {"domain": settings.HOST})
+                message = render_to_string('emails/new_training_resource.html', {"domain": settings.HOST, "resourceName": request.POST.get('name'), "username": user.name})
                 email = EmailMessage(subject, message, to=to)
                 email.content_subtype = "html"
                 email.send()
                 return redirect('/training_resources')
             messages.success(request, _('Resource added correctly'))
             subject = 'New resource submitted'
-            message = render_to_string('emails/new_resource.html', {"domain": settings.HOST})
+            message = render_to_string('emails/new_resource.html', {"domain": settings.HOST, "resourceName": request.POST.get('name'), "username": user.name})
             email = EmailMessage(subject, message, to=to)
             email.content_subtype = "html"
             email.send()
@@ -163,7 +164,8 @@ def resource(request, pk):
             message = render_to_string('emails/training_resource_review.html', {
                 "domain": settings.HOST,
                 "name": resource.name,
-                "id": pk})
+                "id": pk,
+                "username": user.name})
             email = EmailMessage(subject, message, to=to)
             email.content_subtype = "html"
             email.send()
@@ -172,7 +174,8 @@ def resource(request, pk):
             message = render_to_string('emails/resource_review.html', {
                 "domain": settings.HOST,
                 "name": resource.name,
-                "id": pk})
+                "id": pk,
+                "username": user.name})
             email = EmailMessage(subject, message, to=to)
             email.content_subtype = "html"
             email.send()
@@ -374,7 +377,7 @@ def sendResourceEmail(pk, user):
     resource = get_object_or_404(Resource, id=pk)
     subject = '[EU-CITIZEN.SCIENCE] Your resource "%s" has been submitted' % resource.name
     print(subject)
-    message = render_to_string('emails/new_resource.html')
+    message = render_to_string('emails/new_resource.html', {'resourceName': resource.name, 'username': user.get_full_name, "domain": settings.HOST})
     to = [user.email]
     bcc = copy.copy(settings.EMAIL_RECIPIENT_LIST)
     email = EmailMessage(subject, message, to=to, bcc=bcc)
