@@ -628,23 +628,25 @@ def approveResource(request):
     if request.POST.get("approved") in ['true']:
         resource.approved = True
         # sendEmail
-        if resource.isTrainingResource == False: 
-            subject = 'Your resource has been approved'
-            message = render_to_string(
-                'emails/approved_resource.html',
-                {
-                    "domain": settings.HOST,
-                    "name": resource.name, "id": id})
-        else: 
+        if(resource.isTrainingResource):
             subject = 'Your training resource has been approved'
             message = render_to_string(
                 'emails/approved_training_resource.html',
                 {
                     "domain": settings.HOST,
-                    "name": resource.name, "id": id})
-        
+                    "name": resource.name, 
+                    "id": id})
+            
+        else:
+            subject = 'Your resource has been approved'
+            message = render_to_string(
+                'emails/approved_resource.html',
+                {
+                    "domain": settings.HOST,
+                    "name": resource.name, 
+                    "id": id})
         to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
-        to.append(aProject.creator.email)
+        to.append(resource.creator.email)
         email = EmailMessage(subject, message, to=to)
         email.content_subtype = "html"
         email.send()

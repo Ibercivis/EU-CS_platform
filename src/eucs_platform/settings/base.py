@@ -339,8 +339,8 @@ AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
 AWS_SES_REGION_NAME = env('AWS_SES_REGION_NAME')
 AWS_SES_REGION_ENDPOINT = env('AWS_SES_REGION_ENDPOINT')
 
-EMAIL_RECIPIENT_LIST = ["frasanz@bifi.es", "Claudia.FaboCartas@mfn.berlin"]
-EMAIL_CONTACT_RECIPIENT_LIST = ["frasanz@bifi.es", "Claudia.FaboCartas@mfn.berlin"]
+EMAIL_RECIPIENT_LIST = ["frasanz@bifi.es"]
+EMAIL_CONTACT_RECIPIENT_LIST = ["frasanz@bifi.es"]
 HOST = env("HOST")
 
 SITE_ID = 1
