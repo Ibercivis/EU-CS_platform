@@ -95,7 +95,8 @@ class Project(models.Model):
             settings.AUTH_USER_MODEL,
             on_delete=models.CASCADE)
     dateCreated = models.DateTimeField('Created date', auto_now_add=True)
-    dateUpdated = models.DateTimeField('Updated date', auto_now=True)
+    dateUpdated = models.DateTimeField('Updated date', auto_now=False)
+    
 
     # Main information
     name = models.CharField(max_length=200)
@@ -176,7 +177,7 @@ class Project(models.Model):
     translatedProject = models.ManyToManyField(TranslatedProject, blank=True)
 
     # For editPermission
-    editors = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='project_editors')
+    editors = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='project_editors', blank=True)
 
     def __str__(self):
         return f'{self.name}'

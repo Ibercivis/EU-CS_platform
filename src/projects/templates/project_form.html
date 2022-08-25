@@ -204,8 +204,7 @@
                     if(contin){
                         $('#projectID').val(response.Project)
                         console.log('continue')
-                        $('.savedInfo').html('<span class="alert alert-success fade show">'+
-                            '<i class="fas fa-check"></i> Saved</span>').show().fadeOut(2500)
+                        $('.savedInfo').html('<div class="bg-my-darkGreen text-white fade show" style="margin: 12px;"> <p style="margin: 16px 12px -42px 12px;"> <small> {% trans "Your project has been saved." %}<br>{% trans "You can continue editing at any time in the" %} <a href="https://eu-citizen.science//users/me/submissions">{% trans "My Submissions section of your personal area."%}</a> </small> </p> </div>').show().fadeOut(8000, "swing")
                     }
                     else{
                         window.location.href = '/project/'+response.Project+'?prev='+window.location.pathname

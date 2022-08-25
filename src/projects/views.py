@@ -253,6 +253,13 @@ def projects(request):
             projectsTopIds = list(projectsTop.values_list('id', flat=True))
             projects = projects.exclude(id__in=projectsTopIds)
             projects = list(projectsTop) + list(projects)
+            
+        if("name" in orderBy):
+            projects = projects.order_by('name')
+
+        if("created" in orderBy):
+            projects = projects.order_by('-dateCreated')    
+
     else:
         projects = projects.order_by('-dateUpdated')
 

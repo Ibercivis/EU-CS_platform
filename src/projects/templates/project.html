@@ -22,10 +22,10 @@
 {% if 'newProject' in request.get_full_path %}
     <!-- TOAST para nuevos proyectos. TODO: optimizar. -->
 <div style="position: relative;">
-    <div class="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true" style="position: absolute; top: 10px; right: 10px; z-index:1;">
+    <div class="toast align-items-center text-white bg-my-darkGreen border-0" role="alert" aria-live="assertive" aria-atomic="true" style="position: absolute; top: 10px; right: 10px; z-index:1;">
         <div class="d-flex">
           <div class="toast-body">
-            {% trans "Your project has been added successfully. <br> Thank you!" %}
+            {% trans "Your project has been added successfully." %}<br> {% trans "You can continue to edit it in the" %} <a href='{{domain}}/users/me/submissions'>{% trans "My Submissions section of your personal area."%}</a> <br> {% trans "Thank you!" %}
           </div>
           <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
@@ -46,8 +46,11 @@
 </div>
 {% endif %}
 {% if project.image3 %}
-<div class="container-fluid profileImage" style="background: url('/media/{{project.image3}}') no-repeat; background-size: cover;">
-</div>
+<!-- <div class="container-fluid profileImage" style="background: url('/media/{{project.image3}}') no-repeat; background-size: cover;">
+</div> -->
+<div style="width: 100%;">
+    <img class="img-fluid" style="max-height: 300px; width: 100%;" src='/media/{{project.image3 | safe}}' />
+    </div>
 {% endif %}
 <div class="container">
     <div class="row mt-5">
@@ -140,6 +143,11 @@
             
         </div>
         <div class="col-xl-4 col-md-6 col-12">
+
+            {% if project.image2 %}
+            <img class="img-fluid" src='/media/{{project.image2 | safe}}' />
+            {%endif%}
+
             <a class="badge bg-dark" href="/projects?status={{status}}">{{status}}</a>
                 {% if project.start_date %}
                 {% trans "from" %} {{ project.start_date | date:"d/m/Y"}}

@@ -67,9 +67,13 @@ def resources(request, isTrainingResource=False):
             resourcesTopIds = list(resourcesTop.values_list('id', flat=True))
             resources = resources.exclude(id__in=resourcesTopIds)
             resources = list(resourcesTop) + list(resources)
-        else:
-            resources = resources.order_by('-dateUpdated')
-        filters['orderby'] = request.GET['orderby']
+
+        if("name" in orderBy):
+            resources = resources.order_by('name')
+
+        if("created" in orderBy):
+            resources = resources.order_by('-dateCreated')    
+   
     else:
         resources = resources.order_by('-dateUpdated')
 
@@ -565,6 +569,8 @@ def setFilters(request, filters):
         filters['category'] = request.GET['category']
     if request.GET.get('approved'):
         filters['approved'] = request.GET['approved']
+    if request.GET.get('orderby'):
+        filters['orderby'] = request.GET['orderby']    
     print(filters)
     return filters
 

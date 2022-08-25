@@ -10,6 +10,8 @@
                 <div class="input-group-text"><i class="fas fa-sort-amount-down"></i></div>
                 <select id="orderby" name="orderby" class="custom-select status-select form-control">
                     <option value="" {% if filters.orderby == "" %} selected {% endif %}>{% trans "Most Recent Updated" %}</option>
+                    <option value="name" {% if filters.orderby == "name" %} selected {% endif %}>{% trans "A-Z" %}</option>
+                    <option value="created" {% if filters.orderby == "created" %} selected {% endif %}>{% trans "Most Recent Created" %}</option>
                     <option value="featured" {% if filters.orderby == "featured" %} selected {% endif %}>{% trans "Featured" %}</option>
                 </select>
                 <div class="input-group-text"><i class="fas fa-filter"></i></div>

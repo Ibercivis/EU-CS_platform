@@ -10,6 +10,7 @@ from geopy.exc import GeocoderServiceError
 from .models import Project, Topic, Status, Keyword, FundingBody
 from .models import ParticipationTask, GeographicExtend, HasTag, DifficultyLevel, TranslatedProject
 from organisations.models import Organisation
+from django.utils import timezone
 
 
 geolocator = Nominatim(timeout=None)
@@ -332,7 +333,17 @@ class ProjectForm(forms.Form):
             project.image2 = images[1]
         if(images[2] != '/'):
             project.image3 = images[2]
-
+        
+        user = args.user
+        if user.is_staff==False:
+                project.dateUpdated = timezone.now()
+                project.save()
+        else:
+                if project.dateUpdated is None:
+                        project.dateUpdated = timezone.now()
+                else:
+                        project.dateUpdated = project.dateUpdated
+        
         project.save()
         project.topic.set(self.data.getlist('topic'))
         project.keywords.set(self.data.getlist('keywords'))
@@ -466,6 +477,13 @@ class ProjectTranslationForm(forms.Form):
                 )
         t1.save()
         project.translatedProject.add(t1)
+
+        user = args.user
+        if user.is_staff==False:
+                project.dateUpdated = timezone.now()
+                project.save()
+        else:
+                project.dateUpdated = project.dateUpdated
         project.save()
 
 

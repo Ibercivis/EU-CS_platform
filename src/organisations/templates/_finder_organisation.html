@@ -9,6 +9,7 @@
                 <div class="input-group-text"><i class="fas fa-sort-amount-down"></i></div>
                 <select id="orderby" name="orderby" class="custom-select form-control">
                     <option value="" {% if filters.orderby == "" %} selected {% endif %}>{% trans "Most Recent Updated" %}</option>
+                    <option value="name" {% if filters.orderby == "name" %} selected {% endif %}>{% trans "A-Z" %}</option>
                     <option value="country" {% if filters.orderby == "country" %} selected {% endif %}>{% trans "Country" %}</option>
                 </select>
                 <div class="input-group-text"><i class="fas fa-filter"></i></div>

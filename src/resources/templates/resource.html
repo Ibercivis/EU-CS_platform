@@ -7,9 +7,13 @@
 {% block title %}{{ block.super }} :: {{resource.name}}{% endblock %}
 {% block list_of_items %}
 {% if resource.image2 %}
-<div class="container-fluid profileImage" style="background: url('/media/{{resource.image2| safe}}') no-repeat; background-size: cover;"> 
-    <div class="container-fluid">
-    </div>
+    <!-- REVISAR ESTO PARA DETECTAR CUÁNDO SE ESTÁ DEFORMANDO LA IMAGEN Y PASAR DE RESPONSIVE A FIXED -->
+
+<!-- <div class="profileImage" style="background: url('/media/{{resource.image2| safe}}') no-repeat; background-size: cover;"> 
+    
+</div>  -->
+<div style="width: 100%;">
+<img class="img-fluid" style="height: 300px; width: 100%;" src='/media/{{resource.image2 | safe}}' />
 </div>
 {% endif %}
 
