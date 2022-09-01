@@ -119,6 +119,7 @@ INSTALLED_APPS = (
     "django_select2",
     "blog",
     "django_summernote",
+    "django_extensions",
     "leaflet",
     "django_countries",
     "authors",
@@ -452,3 +453,9 @@ CRONJOBS = [
     ('0 1 * * *', 'eucs_platform.cron.ExpiredUsersCronJob'),
     ('0 * * * *', 'eucs_platform.cron.NewForumResponseCronJob')
 ]
+
+
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
+}

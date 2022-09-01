@@ -107,7 +107,8 @@ class PasswordResetView(authviews.PasswordResetView):
     template_name = "accounts/password-reset.html"
     success_url = reverse_lazy("accounts:password-reset-done")
     subject_template_name = "accounts/emails/password-reset-subject.txt"
-    email_template_name = "accounts/emails/password-reset-email.html"
+    email_template_name = "accounts/emails/password-reset-plain-email.txt"
+    html_email_template_name = "accounts/emails/password-reset-email.html"
     extra_email_context = { 'PASSWORD_RESET_TIMEOUT_HOURS': settings.PASSWORD_RESET_TIMEOUT_DAYS * 24,
                             'domain': settings.HOST }
 
@@ -115,8 +116,9 @@ class PasswordResetDoneView(authviews.PasswordResetDoneView):
     template_name = "accounts/password-reset-done.html"
 
 class PasswordResetConfirmView(authviews.PasswordResetConfirmAndLoginView):
-    template_name = "accounts/password-reset-confirm.html"
     form_class = forms.SetPasswordForm
+    template_name = "accounts/password-reset-confirm.html"
+    
 
 
 def delete_user(request):
