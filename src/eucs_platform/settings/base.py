@@ -36,7 +36,6 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
         'LOCATION': '/tmp',
     },
-     # … default cache config and others
     "select2": {
         "BACKEND": "django_redis.cache.RedisCache",
         "LOCATION": "redis://127.0.0.1:6379/2",
@@ -119,7 +118,6 @@ INSTALLED_APPS = (
     "django_select2",
     "blog",
     "django_summernote",
-    "django_extensions",
     "leaflet",
     "django_countries",
     "authors",
@@ -330,6 +328,8 @@ SUMMERNOTE_CONFIG = {
 # EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django_ses.SESBackend'
 DEFAULT_FROM_EMAIL = env("FROM_EMAIL")
+EMAIL_RECIPIENT_LIST = env("EMAIL_RECIPIENT_LIST").split(",")
+EMAIL_CONTACT_RECIPIENT_LIST = env("EMAIL_CONTACT_RECIPIENT_LIST").split(",")
 # These are optional -- if they're set as environment variables they won't
 # need to be set here as well
 AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
@@ -340,8 +340,6 @@ AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
 AWS_SES_REGION_NAME = env('AWS_SES_REGION_NAME')
 AWS_SES_REGION_ENDPOINT = env('AWS_SES_REGION_ENDPOINT')
 
-EMAIL_RECIPIENT_LIST = ["frasanz@bifi.es"]
-EMAIL_CONTACT_RECIPIENT_LIST = ["frasanz@bifi.es"]
 HOST = env("HOST")
 
 SITE_ID = 1
