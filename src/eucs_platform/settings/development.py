@@ -1,7 +1,6 @@
 from .base import *  # NOQA
 import sys
 import logging.config
-from django.utils.translation import gettext_lazy as _
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
