@@ -69,6 +69,13 @@
             </div>
             {% endif %}
 
+            {% if organisation.logoCredit %}
+                <h4 class="mt-4 leftborder">{% trans "About branding" %}</h4>
+                
+                    <p class="leftborder">{% trans "<b>Logo design by: </b>" %} {{organisation.logoCredit|safe}} </p>
+                
+            {% endif %}
+
             <a target="_blank"
                href="{% if 'http' not in organisation.url %}//{%endif%}{{organisation.url}}"
                class="btn btn-my-darkGreen mt-4 mr-2 mb-5">

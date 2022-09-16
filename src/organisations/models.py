@@ -19,6 +19,7 @@ class Organisation(models.Model):
     description = models.CharField(max_length=3000)
     orgType = models.ForeignKey(OrganisationType, on_delete=models.CASCADE)
     logo = models.ImageField(upload_to='images/', max_length=300, null=True, blank=True)
+    logoCredit = models.CharField(max_length=300, null=True, blank=True)
     contactPoint = models.CharField(max_length=100, null=True, blank=True)
     contactPointEmail = models.EmailField(max_length=100, null=True, blank=True)
     latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)

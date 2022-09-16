@@ -33,6 +33,10 @@ class OrganisationForm(forms.Form):
             required=False,
             help_text=_('Please upload the logo of your organisation (.jpg or .png).'),
             widget=forms.FileInput)
+    logo_credit = forms.CharField(
+            max_length=300,
+            required=False,
+            label=_("Logo credit, if applicable"))
     x = forms.FloatField(widget=forms.HiddenInput(), required=False)
     y = forms.FloatField(widget=forms.HiddenInput(), required=False)
     width = forms.FloatField(widget=forms.HiddenInput(), required=False)
@@ -63,6 +67,7 @@ class OrganisationForm(forms.Form):
             organisation.orgType = orgType
             organisation.contactPoint = self.data['contact_point']
             organisation.contactPointEmail = self.data['contact_point_email']
+            organisation.logoCredit = self.data['logo_credit']
             organisation.latitude = self.data['latitude']
             organisation.longitude = self.data['longitude']
         else:
@@ -72,6 +77,7 @@ class OrganisationForm(forms.Form):
                     creator=args.user,
                     latitude=self.data['latitude'],
                     longitude=self.data['longitude'],
+                    logoCredit = self.data['logo_credit'],
                     description=self.data['description'],
                     orgType=orgType,
                     contactPoint=self.data['contact_point'],

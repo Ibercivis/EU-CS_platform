@@ -111,6 +111,7 @@ def edit_organisation(request, pk):
         'description': organisation.description,
         'orgType': organisation.orgType,
         'logo': organisation.logo,
+        'logo_credit' : organisation.logoCredit,
         'withLogo': (True, False)[organisation.logo == ""],
         'contact_point': organisation.contactPoint,
         'contact_point_email': organisation.contactPointEmail,
