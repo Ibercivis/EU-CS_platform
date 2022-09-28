@@ -53,10 +53,10 @@ class ProjectForm(forms.Form):
 
     description_citizen_science_aspects = forms.CharField(
             widget=CKEditorWidget(config_name='frontpage'),
-            help_text=_('Please describe the citizen science aspect(s) of the project and the link of the project toSA'
+            help_text=_('Please describe the citizen science aspect(s) of the project and the link of the project to '
                         'citizen science using the '
-                        '<a href="https://zenodo.org/cohttps://zenodo.org/record/5127534#.YV8J0dpBxPa">ECSA 10 '
-                        'Characteristics of Citizen Science</a> and the <a href="https://osf.io/xpr2n/">ECSA 10 '
+                        '<a href="https://zenodo.org/communities/citscicharacteristics" target="_blank">ECSA '
+                        'Characteristics of Citizen Science</a> and the <a href="https://zenodo.org/record/5127534#.YzQQNEzP2Um" target="_blank">ECSA 10 '
                         'Principles of Citizen Science</a>. What you introduce in this text field will not appear '
                         'on the platform; it is just for moderation purposes (max 2000 characters).'),
             max_length=2000,
