@@ -39,3 +39,6 @@ class Platform(models.Model):
     logoCredit = models.CharField(max_length=300, null=True, blank=True)
     profileImage = models.ImageField(upload_to='images/', max_length=300, null=True, blank=True)
     profileImageCredit = models.CharField(max_length=300, null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.name}'
