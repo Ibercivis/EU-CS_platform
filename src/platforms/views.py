@@ -1,10 +1,12 @@
 from django.shortcuts import render
-
+from django.conf import settings
+from django.core.mail import EmailMessage
+from django.core import serializers
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponse
 from django.utils import formats
 from django.shortcuts import get_object_or_404, redirect
-
+from django.template.loader import render_to_string
 from rest_framework import status
 
 from datetime import datetime
@@ -12,7 +14,7 @@ from PIL import Image
 
 from .forms import PlatformForm
 from .models import Platform
-
+import copy
 import random
 
 
@@ -76,7 +78,7 @@ def savePlatformAjax(request):
         if request.POST.get('Id').isnumeric():
             return JsonResponse({'Platform updated': 'OK', 'Id': pk}, status=status.HTTP_200_OK)
         else:
-            # sendPlatformEmail()
+            sendPlatformEmail(pk, request.user)
             return JsonResponse({'Platform created': 'OK', 'Id': pk}, status=status.HTTP_200_OK)
     else:
         return JsonResponse(form.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
@@ -137,3 +139,21 @@ def getImagePath(imageName):
     random_num = random.randint(0, 1000)
     image_path = "images/" + _datetime + '_' + str(random_num) + '_' + imageName
     return image_path
+
+def sendPlatformEmail(pk, user):
+    platform2 = get_object_or_404(Platform, id=pk)
+    subject = '[EU-CITIZEN.SCIENCE] Your platform "%s" has been submitted' % platform2.name
+    print(subject)
+    message = render_to_string('emails/new_platform.html', {
+        'username': user.name,
+        'domain': settings.HOST,
+        'platformname': platform2.name,
+        'platformid': pk})
+    # to = [user.email]
+    to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
+    to.append(user.email)
+    bcc = copy.copy(settings.EMAIL_RECIPIENT_LIST)
+    email = EmailMessage(subject, message, to=to, bcc=bcc)
+    email.content_subtype = "html"
+    email.send()
+    print(message)   
