@@ -49,9 +49,9 @@ class ResourceForm(forms.Form):
             widget=CKEditorWidget(config_name='frontpage'),
             help_text=_(
                 'Please describe the link between citizen science and the resource you are uploading '
-                '– for guidance see the <a href="https://zenodo.org/communities/citscicharacteristics"> '
+                '– for guidance see the <a href="https://zenodo.org/communities/citscicharacteristics" target="_blank"> '
                 'ECSA Characteristics of Citizen Science</a> as well as the'
-                '<a href="https://zenodo.org/record/5127534#.YV8J0dpBxPa"> '
+                '<a href="https://zenodo.org/record/5127534#.YV8J0dpBxPa" target="_blank"> '
                 'ECSA 10 Principles of Citizen Science</a>. What you introduce in this text field will not '
                 'appear on the platform; it is just for moderation purposes and for the administrators of '
                 'the platform to see (max 2000 characters).'),

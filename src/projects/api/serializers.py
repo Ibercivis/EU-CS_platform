@@ -5,6 +5,7 @@ from projects.models import Project, Topic, Status, Keyword, FundingBody, Origin
 from projects.models import ParticipationTask, GeographicExtend, HasTag, DifficultyLevel, TranslatedProject
 from projects.views import saveImageWithPath
 from organisations.models import Organisation
+from django.utils import timezone
 
 
 class TopicSerializer(serializers.ModelSerializer):
@@ -139,7 +140,7 @@ class ProjectSerializerCreateUpdate(serializers.ModelSerializer):
                 'id', 'name', 'url', 'aim', 'description', 'keywords', 'status', 'start_date', 'end_date', 'topic',
                 'hasTag', 'participationTask', 'difficultyLevel', 'howToParticipate', 'equipment', 'geographicextend',
                 'projectlocality', 'author', 'author_email', 'mainOrganisation', 'organisation', 'fundingProgram',
-                'originURL', 'image1', 'image2', 'image3', 'projectGeographicLocation'
+                'originURL', 'image1', 'image2', 'image3', 'projectGeographicLocation', 'dateCreated', 'dateUpdated'
                 ]
 
     def updateKeywords(self):
@@ -155,6 +156,7 @@ class ProjectSerializerCreateUpdate(serializers.ModelSerializer):
 
     def save(self, args, **kwargs):
         fundingBody = self.validated_data.get('fundingBody')
+        self.validated_data['dateUpdated'] = timezone.now()
         self.updateKeywords()
         if(fundingBody):
             fundingBody, exist = FundingBody.objects.get_or_create(body=fundingBody)

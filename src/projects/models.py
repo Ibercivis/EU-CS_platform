@@ -95,7 +95,7 @@ class Project(models.Model):
             settings.AUTH_USER_MODEL,
             on_delete=models.CASCADE)
     dateCreated = models.DateTimeField('Created date', auto_now_add=True)
-    dateUpdated = models.DateTimeField('Updated date', auto_now=False)
+    dateUpdated = models.DateTimeField('Updated date', auto_now=False, null=True)
     
 
     # Main information

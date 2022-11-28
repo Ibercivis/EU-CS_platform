@@ -17,6 +17,7 @@ from .models import Organisation, OrganisationType, OrganisationPermission
 from projects.models import Project
 from resources.models import Resource
 from profiles.models import Profile
+from platforms.models import Platform
 import copy
 import random
 
@@ -80,6 +81,7 @@ def organisation(request, pk):
     associatedProjects = associatedProjects.distinct()
     associatedResources = Resource.objects.all().filter(organisation__id=pk).filter(isTrainingResource=False)
     associatedTrainingResources = Resource.objects.all().filter(organisation__id=pk).filter(isTrainingResource=True)
+    associatedPlatforms = Platform.objects.all().filter(organisation__id=pk)
     members = Profile.objects.all().filter(profileVisible=True).filter(organisation__id=pk)
     users = getOtherUsers(organisation.creator, members)
     cooperators = getCooperatorsEmail(pk)
@@ -92,6 +94,7 @@ def organisation(request, pk):
         'cooperators': cooperatorsPK,
         'associatedResources': associatedResources,
         'associatedTrainingResources': associatedTrainingResources,
+        'associatedPlatforms': associatedPlatforms,
         'members': members,
         'permissionForm': permissionForm,
         'editable': editable,
@@ -111,6 +114,7 @@ def edit_organisation(request, pk):
         'description': organisation.description,
         'orgType': organisation.orgType,
         'logo': organisation.logo,
+        'logo_credit' : organisation.logoCredit,
         'withLogo': (True, False)[organisation.logo == ""],
         'contact_point': organisation.contactPoint,
         'contact_point_email': organisation.contactPointEmail,
