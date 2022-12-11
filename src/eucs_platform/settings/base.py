@@ -156,7 +156,7 @@ INSTALLED_APPS = (
     'machina.apps.forum_permission',
 
     'organisations',
-    'ecsa_integration',
+    #'ecsa_integration',
     'django_cron',
     'django_crontab',
     'ckeditor',

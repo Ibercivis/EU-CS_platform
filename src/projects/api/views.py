@@ -183,10 +183,18 @@ class ProjectTranslate(APIView):
         '''
         Translate a project
         '''
-        print(pk)
+        project = Project.objects.get(pk=pk)
+        print(request.data)
+        print("----")
+        inLanguage = request.data.get('inLanguage', None)
+        print(inLanguage)
+        translation = project.translatedProject.filter(inLanguage=inLanguage).first()
+        if translation:
+            TranslatedProject.objects.filter(id=translation.id).delete()
         serializer = ProjectTranslateCreateSerializer(data=request.data)
         if serializer.is_valid():
             translationId = serializer.save(request, pk)
+            project.translatedProject.add(translationId)
             serializerReturn = ProjectTranslateSerializer(
                     TranslatedProject.objects.get(id=translationId), context={'request': request})
             return Response(serializerReturn.data, status=HTTP_201_CREATED)

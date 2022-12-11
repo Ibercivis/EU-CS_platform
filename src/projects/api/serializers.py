@@ -79,6 +79,9 @@ class ProjectTranslateSerializer(serializers.ModelSerializer):
         model = TranslatedProject
         fields = '__all__'
 
+    def save(self, args, **kwargs):
+        print("Save Translate Serializer")
+
 
 class ProjectSerializer(serializers.ModelSerializer):
     topic = TopicSerializer(many=True, required=False)
