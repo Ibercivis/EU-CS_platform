@@ -140,7 +140,8 @@ class ProjectSerializerCreateUpdate(serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = [
-                'id', 'name', 'url', 'aim', 'description', 'keywords', 'status', 'start_date', 'end_date', 'topic',
+                'id', 'name', 'url', 'aim', 'description', 'description_citizen_science_aspects',
+                'keywords', 'status', 'start_date', 'end_date', 'topic',
                 'hasTag', 'participationTask', 'difficultyLevel', 'howToParticipate', 'equipment', 'geographicextend',
                 'projectlocality', 'author', 'author_email', 'mainOrganisation', 'organisation', 'fundingProgram',
                 'originURL', 'image1', 'image2', 'image3', 'projectGeographicLocation', 'dateCreated', 'dateUpdated'
