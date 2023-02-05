@@ -47,6 +47,11 @@ And edit `src/eucs_platform/settings/local.env` with database and email and othe
 $ python manage.py migrate
 ```
 
+Now, create superuser
+```
+$ python3 manage.py createsuperuser
+```
+
 ```bash
 $ python manage.py loaddata projects/fixtures/topics.json
 $ python manage.py loaddata projects/fixtures/status.json
