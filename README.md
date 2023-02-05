@@ -8,7 +8,7 @@ EU-CS_platform is a web platform for Citizen Science. It is built with [Python][
 ## Requirements
 
 ```bash
-$ sudo apt install python3-venv python3-pip libpq-dev postgresql gettext
+$ sudo apt install python3-venv python3-pip libpq-dev postgresql postgresql-10-postgis-2.4 gettext
 $ python3 -m venv venv
 $ source venv/bin/activate
 ```
@@ -21,6 +21,8 @@ $ psql
 postgres=# create database eucitizenscience;
 postgres=# create user eucitizenscience with password 'XXXXXXXXXXXXXX';
 postgres=# grant all on database eucitizenscience to eucitizenscience;
+postgres=# \c eucitizenscience
+postgres=# create extension postgis;
 ```
 
 ## Installation
