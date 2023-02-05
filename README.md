@@ -8,9 +8,9 @@ EU-CS_platform is a web platform for Citizen Science. It is built with [Python][
 ## Requirements
 
 ```bash
-$ sudo apt install python3-venv python3-pip libpq-dev libffi-dev postgresql postgresql-10-postgis-2.4 libjpeg-dev zlib1g-dev gettext
-$ python3 -m venv venv
-$ source venv/bin/activate
+sudo apt install python3-venv python3-pip libpq-dev libffi-dev postgresql postgresql-10-postgis-2.4 libjpeg-dev zlib1g-dev gettext
+python3 -m venv venv
+source venv/bin/activate
 ```
 
 ## Configure postgres
@@ -31,25 +31,25 @@ First of all, check whether you've up to Requirements.
 Second, clone the project with:
 
 ```bash
-$ git clone https://github.com/Ibercivis/EU-CS_platform ~/EU-CS_platform
-$ cd EU-CS_platform
-$ pip install -r requirements.txt
+git clone https://github.com/Ibercivis/EU-CS_platform ~/EU-CS_platform
+cd EU-CS_platform
+pip install -r requirements.txt
 ```
     
 ```bash
-$ cd src
-$ cp eucs_platform/settings/local.sample.reference.env eucs_platform/settings/local.env
+cd src
+cp eucs_platform/settings/local.sample.reference.env eucs_platform/settings/local.env
 ```
 
 And edit `src/eucs_platform/settings/local.env` with database and email and other configuration variables
 
 ```bash
-$ python manage.py migrate
+python manage.py migrate
 ```
 
 Now, create superuser
-```
-$ python3 manage.py createsuperuser
+```bash
+python3 manage.py createsuperuser
 ```
 
 ```bash
@@ -68,7 +68,7 @@ python manage.py loaddata ./resources/fixtures/categories.json
 
 ## Launch
 ```bash
-$ python manage.py runserver
+python manage.py runserver
 ```
 
 ## Cron jobs commands
@@ -76,14 +76,14 @@ $ python manage.py runserver
 Manually:
 
 ```bash
-$ python manage.py runcrons
-$ python manage.py runcrons --force
+python manage.py runcrons
+python manage.py runcrons --force
 ```
 
 And to do this automatically:
 
 ```bash
-$ python manage.py crontab add
+python manage.py crontab add
 ```
 
 
