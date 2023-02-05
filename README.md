@@ -39,7 +39,7 @@ $ cd src
 $ cp eucs_platform/settings/local.sample.reference.env eucs_platform/settings/local.env
 ```
 
-And edit `src/eucs_platform/settings/local.env` with database and email configuration
+And edit `src/eucs_platform/settings/local.env` with database and email and other configuration variables
 
 ```bash
 $ python manage.py migrate
