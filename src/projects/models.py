@@ -96,9 +96,9 @@ class Project(models.Model):
             on_delete=models.CASCADE)
     dateCreated = models.DateTimeField('Created date', auto_now_add=True)
     dateUpdated = models.DateTimeField('Updated date', auto_now=False, null=True)
-    
 
     # Main information
+
     name = models.CharField(max_length=200)
     url = models.CharField(max_length=200, null=True, blank=True)
     description = models.CharField(max_length=3000)

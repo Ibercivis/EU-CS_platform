@@ -464,6 +464,8 @@ class ProjectTranslationForm(forms.Form):
     def save(self, args):
         project = Project.objects.get(id=self.data.get('projectId'))
         translation = project.translatedProject.filter(inLanguage=self.data.get('languageId')).first()
+
+        print(translation)
         if translation:
             TranslatedProject.objects.filter(id=translation.id).delete()
         t1 = TranslatedProject(
