@@ -53,14 +53,16 @@ $ python3 manage.py createsuperuser
 ```
 
 ```bash
-$ python manage.py loaddata projects/fixtures/topics.json
-$ python manage.py loaddata projects/fixtures/status.json
-$ python manage.py loaddata projects/fixtures/participationtasks.json
-$ python manage.py loaddata projects/fixtures/geographicextend.json
-$ python manage.py loaddata resources/fixtures/categories.json
-$ python manage.py loaddata resources/fixtures/themes.json
-$ python manage.py loaddata resources/fixtures/audiences.json
-$ python manage.py loaddata organisations/fixtures/organisation_types.json
+python manage.py loaddata ./organisations/fixtures/organisation_types.json
+python manage.py loaddata ./projects/fixtures/participationtasks.json
+python manage.py loaddata ./projects/fixtures/status.json
+python manage.py loaddata ./projects/fixtures/topics.json
+python manage.py loaddata ./projects/fixtures/difficultylevel.json
+python manage.py loaddata ./projects/fixtures/hastag.json
+python manage.py loaddata ./projects/fixtures/geographicextend.json
+python manage.py loaddata ./resources/fixtures/audiences.json
+python manage.py loaddata ./resources/fixtures/themes.json
+python manage.py loaddata ./resources/fixtures/categories.json
 ```
 
 
