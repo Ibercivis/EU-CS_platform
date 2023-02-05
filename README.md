@@ -8,7 +8,7 @@ EU-CS_platform is a web platform for Citizen Science. It is built with [Python][
 ## Requirements
 
 ```bash
-$ sudo apt install python3-venv python3-pip libpq-dev postgresql gettext
+$ sudo apt install python3-venv python3-pip libpq-dev postgresql postgresql-10-postgis-2.4 gettext
 $ python3 -m venv venv
 $ source venv/bin/activate
 ```
@@ -21,6 +21,8 @@ $ psql
 postgres=# create database eucitizenscience;
 postgres=# create user eucitizenscience with password 'XXXXXXXXXXXXXX';
 postgres=# grant all on database eucitizenscience to eucitizenscience;
+postgres=# \c eucitizenscience
+postgres=# create extension postgis;
 ```
 
 ## Installation
@@ -39,21 +41,28 @@ $ cd src
 $ cp eucs_platform/settings/local.sample.reference.env eucs_platform/settings/local.env
 ```
 
-And edit `src/eucs_platform/settings/local.env` with database and email configuration
+And edit `src/eucs_platform/settings/local.env` with database and email and other configuration variables
 
 ```bash
 $ python manage.py migrate
 ```
 
+Now, create superuser
+```
+$ python3 manage.py createsuperuser
+```
+
 ```bash
-$ python manage.py loaddata projects/fixtures/topics.json
-$ python manage.py loaddata projects/fixtures/status.json
-$ python manage.py loaddata projects/fixtures/participationtasks.json
-$ python manage.py loaddata projects/fixtures/geographicextend.json
-$ python manage.py loaddata resources/fixtures/categories.json
-$ python manage.py loaddata resources/fixtures/themes.json
-$ python manage.py loaddata resources/fixtures/audiences.json
-$ python manage.py loaddata organisations/fixtures/organisation_types.json
+python manage.py loaddata ./organisations/fixtures/organisation_types.json
+python manage.py loaddata ./projects/fixtures/participationtasks.json
+python manage.py loaddata ./projects/fixtures/status.json
+python manage.py loaddata ./projects/fixtures/topics.json
+python manage.py loaddata ./projects/fixtures/difficultylevel.json
+python manage.py loaddata ./projects/fixtures/hastag.json
+python manage.py loaddata ./projects/fixtures/geographicextend.json
+python manage.py loaddata ./resources/fixtures/audiences.json
+python manage.py loaddata ./resources/fixtures/themes.json
+python manage.py loaddata ./resources/fixtures/categories.json
 ```
 
 
