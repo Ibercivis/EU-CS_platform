@@ -3,14 +3,15 @@ from .models import Resource, ResourceGroup, ResourcesGrouped, Category, Approve
 
 
 class ResourcesGroupedAdmin(admin.ModelAdmin):
-    list_filter = ('group','resource',)
+    list_filter = ('group', 'resource',)
     ordering = ('-group',)
 
 
 class CategoryGroupedAdmin(admin.ModelAdmin):
-    list_filter = ('text','parent',)
+    list_filter = ('text', 'parent',)
     ordering = ('-parent',)
-    
+
+
 admin.site.register(Resource)
 admin.site.register(Category, CategoryGroupedAdmin)
 admin.site.register(Theme)
