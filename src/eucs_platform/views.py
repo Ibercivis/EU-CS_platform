@@ -30,6 +30,7 @@ def home(request):
     # Projects
     # TODO: Clean this, we dont need lot of things
     user = request.user
+    
     projects = Project.objects.get_queryset().filter(~Q(hidden=True)).order_by('-dateCreated')
     approvedProjects = ApprovedProjects.objects.all().values_list('project_id', flat=True)
     projects = projects.filter(id__in=approvedProjects)
@@ -44,8 +45,11 @@ def home(request):
     paginatorprojects = Paginator(projects, 4)
     page = request.GET.get('page')
     projects = paginatorprojects.get_page(page)
-    likes = Likes.objects.filter(user=request.user)
-    likes = likes.values_list('project', flat=True)
+    if user.is_authenticated:
+        likes = Likes.objects.filter(user=request.user)
+        likes = likes.values_list('project', flat=True)
+    else:
+        likes = None
 
     # Resources
     resources = Resource.objects.all().filter(~Q(isTrainingResource=True)).order_by('-dateCreated')

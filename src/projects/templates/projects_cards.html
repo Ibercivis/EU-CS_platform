@@ -38,7 +38,8 @@
                             </p>
         </div><!-- End of card-body --> 
         <div class="card-footer  bg-white border-top-0 small">
-            <span class="me-2 heart {% if project.id in likes %} text-danger {% else %} text-muted {% endif %}" project_id="{{project.id}}" id="heart{{project.id}}">
+            <span class="me-2 
+            {% if user.is_authenticated %} heart {% endif %} {% if project.id in likes %} text-danger {% else %} text-muted {% endif %}" project_id="{{project.id}}" id="heart{{project.id}}">
             <i class="fa fa-heart" aria-hidden="true"></i> 
             <span class="value">{{project.totalLikes}}</span>
             </span>

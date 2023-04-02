@@ -221,6 +221,7 @@ def translateProject(request, pk):
 
 
 def projects(request):
+    user = request.user
     projects = Project.objects.get_queryset()
     topics = Topic.objects.all()
     status = Status.objects.all()
@@ -254,11 +255,12 @@ def projects(request):
     projects = projects.distinct()
     filters = setFilters(request, filters)
     projects = projects.filter(~Q(hidden=True))
-
-    likes = Likes.objects.filter(user=request.user)
-    likes = likes.values_list('project', flat=True)
+    if user.is_authenticated:
+        likes = Likes.objects.filter(user=user)
+        likes = likes.values_list('project', flat=True)
+    else:
+        likes = None
    
-
 
     # Ordering
     if request.GET.get('orderby'):
