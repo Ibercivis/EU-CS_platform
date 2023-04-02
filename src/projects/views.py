@@ -14,7 +14,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q, Avg, Count, Sum
 from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
-from datetime import datetime
+from datetime import datetime, timezone
 from PIL import Image
 from itertools import chain
 from reviews.models import Review
@@ -22,7 +22,7 @@ from django_countries import countries
 from itertools import chain
 from .forms import ProjectForm, ProjectPermissionForm, ProjectTranslationForm, ProjectGeographicLocationForm
 from .models import Project, Topic, ParticipationTask, Status, Keyword, ApprovedProjects, \
- FollowedProjects, FundingBody, CustomField, ProjectPermission, GeographicExtend, UnApprovedProjects, HasTag, DifficultyLevel
+    FollowedProjects, FundingBody, CustomField, ProjectPermission, GeographicExtend, UnApprovedProjects, HasTag, DifficultyLevel, Stats
 from organisations.models import Organisation
 import copy
 import csv
@@ -80,7 +80,7 @@ def sendProjectEmail(pk, user):
 
 def updateKeywords(dictio):
     keywords = dictio.pop('keywords', None)
-    if(keywords):
+    if (keywords):
         for k in keywords:
             if not k.isdecimal():
                 # This is a new keyword
@@ -95,7 +95,7 @@ def updateKeywords(dictio):
 
 def updateFundingBody(dictio):
     fundingbodies = dictio.pop('funding_body', None)
-    if(fundingbodies):
+    if (fundingbodies):
         for fb in fundingbodies:
             if not fb.isdecimal():
                 # This is a new funding body
@@ -111,7 +111,8 @@ def updateFundingBody(dictio):
 def getProjectTranslation(request):
     print(request.POST)
     project = get_object_or_404(Project, id=request.POST['projectId'])
-    translation = project.translatedProject.filter(inLanguage=request.POST['language'])
+    translation = project.translatedProject.filter(
+        inLanguage=request.POST['language'])
     if not translation:
         return HttpResponse({}, status=status.HTTP_404_NOT_FOUND, content_type="application/json")
     else:
@@ -125,26 +126,30 @@ def submitProjectTranslation(request):
     if form.is_valid():
         form.save(request)
         return JsonResponse(
-                {'UpdatedTranslation': 'OK', 'Project': request.POST['projectId']}, status=status.HTTP_200_OK)
+            {'UpdatedTranslation': 'OK', 'Project': request.POST['projectId']}, status=status.HTTP_200_OK)
     else:
         return JsonResponse(form.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
 
 
 def editProject(request, pk):
     project = get_object_or_404(Project, id=pk)
-    countriesWithContent1 = Project.objects.filter(id=pk).values_list('mainOrganisation__country', flat=True).distinct()
+    countriesWithContent1 = Project.objects.filter(id=pk).values_list(
+        'mainOrganisation__country', flat=True).distinct()
     countriesWithContent2 = Project.objects.filter(id=pk).values_list(
         'organisation__country', flat=True).distinct()
-    countriesWithContent3 = Project.objects.filter(id=pk).values_list('country', flat=True)
-    countriesWithContent = set(chain(countriesWithContent1, countriesWithContent2, countriesWithContent3))
+    countriesWithContent3 = Project.objects.filter(
+        id=pk).values_list('country', flat=True)
+    countriesWithContent = set(
+        chain(countriesWithContent1, countriesWithContent2, countriesWithContent3))
     user = request.user
     cooperators = getCooperators(pk)
-    if user != project.creator and not user.is_staff and not user.id in cooperators and  user.profile.manageProjectsFromCountry not in countriesWithContent:
+    if user != project.creator and not user.is_staff and not user.id in cooperators and user.profile.manageProjectsFromCountry not in countriesWithContent:
         return redirect('../projects', {})
 
     users = getOtherUsers(project.creator)
     cooperators = getCooperatorsEmail(pk)
-    permissionForm = ProjectPermissionForm(initial={'usersCollection': users, 'selectedUsers': cooperators})
+    permissionForm = ProjectPermissionForm(
+        initial={'usersCollection': users, 'selectedUsers': cooperators})
 
     start_datetime = None
     end_datetime = None
@@ -223,22 +228,26 @@ def projects(request):
     difficultyLevel = DifficultyLevel.objects.all()
     participationTask = ParticipationTask.objects.all()
 
-    countriesWithContent1 = projects.values_list('mainOrganisation__country', flat=True).distinct()
-    countriesWithContent2 = projects.values_list('organisation__country', flat=True).distinct()
-    countriesWithContent3 = projects.values_list('country', flat=True).distinct()
-    countriesWithContent = set(chain(countriesWithContent1, countriesWithContent2, countriesWithContent3))
+    countriesWithContent1 = projects.values_list(
+        'mainOrganisation__country', flat=True).distinct()
+    countriesWithContent2 = projects.values_list(
+        'organisation__country', flat=True).distinct()
+    countriesWithContent3 = projects.values_list(
+        'country', flat=True).distinct()
+    countriesWithContent = set(
+        chain(countriesWithContent1, countriesWithContent2, countriesWithContent3))
 
     # I think this is not needded
     filters = {
-            'keywords': '',
-            'topic': '',
-            'status': 0,
-            'host': '',
-            'approved': '',
-            'doingAtHome': '',
-            'difficultyLevel': '',
-            'featured': '',
-            'hasTag': ''}
+        'keywords': '',
+        'topic': '',
+        'status': 0,
+        'host': '',
+        'approved': '',
+        'doingAtHome': '',
+        'difficultyLevel': '',
+        'featured': '',
+        'hasTag': ''}
 
     projects = applyFilters(request, projects)
     projects = projects.distinct()
@@ -248,17 +257,20 @@ def projects(request):
     # Ordering
     if request.GET.get('orderby'):
         orderBy = request.GET.get('orderby')
-        if("featured" in orderBy):
+        if ("featured" in orderBy):
             projectsTop = projects.filter(featured=True)
             projectsTopIds = list(projectsTop.values_list('id', flat=True))
             projects = projects.exclude(id__in=projectsTopIds)
             projects = list(projectsTop) + list(projects)
-            
-        if("name" in orderBy):
+
+        if ("name" in orderBy):
             projects = projects.order_by('name')
 
-        if("created" in orderBy):
-            projects = projects.order_by('-dateCreated')    
+        if ("created" in orderBy):
+            projects = projects.order_by('-dateCreated')
+
+        if ("totalAccesses" in orderBy):
+            projects = projects.order_by('-totalAccesses')
 
     else:
         projects = projects.order_by('-dateUpdated')
@@ -287,22 +299,33 @@ def project(request, pk):
     project = get_object_or_404(Project, id=pk)
     users = getOtherUsers(project.creator)
     cooperators = getCooperators(pk)
+    project.totalAccesses += 1
+    project.save()
 
-    # TODO: Put in a function. in the end remove 
-    countriesWithContent1 = Project.objects.filter(id=pk).values_list('mainOrganisation__country', flat=True).distinct()
+    stats = Stats.objects.get_or_create(
+        project=project, day=datetime.now(pytz.utc))[0]
+    stats.accesses += 1
+    stats.save()
+
+    # TODO: Put in a function. in the end remove
+    countriesWithContent1 = Project.objects.filter(id=pk).values_list(
+        'mainOrganisation__country', flat=True).distinct()
     countriesWithContent2 = Project.objects.filter(id=pk).values_list(
         'organisation__country', flat=True).distinct()
-    countriesWithContent3 = Project.objects.filter(id=pk).values_list('country', flat=True)
-    countriesWithContent = set(chain(countriesWithContent1, countriesWithContent2, countriesWithContent3))
+    countriesWithContent3 = Project.objects.filter(
+        id=pk).values_list('country', flat=True)
+    countriesWithContent = set(
+        chain(countriesWithContent1, countriesWithContent2, countriesWithContent3))
 
     if project.projectGeographicLocation:
-        form = ProjectGeographicLocationForm(initial={'projectGeographicLocation': project.projectGeographicLocation})
+        form = ProjectGeographicLocationForm(
+            initial={'projectGeographicLocation': project.projectGeographicLocation})
     else:
         form = None
 
     # Check project permission to edit: TODO: Improve
     if hasattr(user, 'profile'):
-        if user != project.creator and not user.is_staff and not user.id in cooperators and  user.profile.manageProjectsFromCountry not in countriesWithContent:
+        if user != project.creator and not user.is_staff and not user.id in cooperators and user.profile.manageProjectsFromCountry not in countriesWithContent:
             hasPermissionToEdit = False
         else:
             hasPermissionToEdit = True
@@ -310,12 +333,13 @@ def project(request, pk):
         hasPermissionToEdit = False
 
     # Check if there is a translation
-    hasTranslation = project.translatedProject.filter(inLanguage=request.LANGUAGE_CODE).exists()
+    hasTranslation = project.translatedProject.filter(
+        inLanguage=request.LANGUAGE_CODE).exists()
 
     # Check status
     utc = pytz.UTC
-    if(project.end_date):
-        if(project.end_date < utc.localize(datetime.now())):
+    if (project.end_date):
+        if (project.end_date < utc.localize(datetime.now())):
             status = "Completed"
         else:
             status = project.status
@@ -323,11 +347,14 @@ def project(request, pk):
         status = project.status
 
     cooperators = getCooperatorsEmail(pk)
-    unApprovedProjects = UnApprovedProjects.objects.all().values_list('project_id', flat=True)
+    unApprovedProjects = UnApprovedProjects.objects.all(
+    ).values_list('project_id', flat=True)
     if (project.id in unApprovedProjects or project.hidden) and (user.is_anonymous or (user != project.creator and not user.is_staff and not user.id in getCooperators(pk))):
         return redirect('../projects', {})
-    permissionForm = ProjectPermissionForm(initial={'usersCollection': users, 'selectedUsers': cooperators})
-    followedProject = FollowedProjects.objects.all().filter(user_id=user.id, project_id=pk).exists()
+    permissionForm = ProjectPermissionForm(
+        initial={'usersCollection': users, 'selectedUsers': cooperators})
+    followedProject = FollowedProjects.objects.all().filter(
+        user_id=user.id, project_id=pk).exists()
     approvedProjects = ApprovedProjects.objects.all().values_list('project_id', flat=True)
     return render(request, 'project.html', {
         'project': project,
@@ -347,7 +374,8 @@ def deleteProject(request, pk):
     obj = get_object_or_404(Project, id=pk)
     if request.user == obj.creator or request.user.is_staff or request.user.id in getCooperators(pk):
         obj.delete()
-        reviews = Review.objects.filter(content_type=ContentType.objects.get(model="project"), object_pk=pk)
+        reviews = Review.objects.filter(
+            content_type=ContentType.objects.get(model="project"), object_pk=pk)
         for r in reviews:
             r.delete()
     return redirect('projects')
@@ -378,23 +406,27 @@ def saveImage(request, form, element, ref):
         photo = request.FILES[element]
         image = Image.open(photo)
         cropped_image = image.crop((x, y, w+x, h+y))
-        if(ref == '3'):
+        if (ref == '3'):
             finalSize = (1320, 400)
         else:
             finalSize = (600, 400)
 
         resized_image = cropped_image.resize(finalSize, Image.ANTIALIAS)
 
-        if(cropped_image.width > image.width):
-            size = (abs(int((finalSize[0]-(finalSize[0]/cropped_image.width*image.width))/2)), finalSize[1])
-            whitebackground = Image.new(mode='RGBA', size=size, color=(255, 255, 255, 0))
+        if (cropped_image.width > image.width):
+            size = (abs(int(
+                (finalSize[0]-(finalSize[0]/cropped_image.width*image.width))/2)), finalSize[1])
+            whitebackground = Image.new(
+                mode='RGBA', size=size, color=(255, 255, 255, 0))
             position = ((finalSize[0] - whitebackground.width), 0)
             resized_image.paste(whitebackground, position)
             position = (0, 0)
             resized_image.paste(whitebackground, position)
-        if(cropped_image.height > image.height):
-            size = (finalSize[0], abs(int((finalSize[1]-(finalSize[1]/cropped_image.height*image.height))/2)))
-            whitebackground = Image.new(mode='RGBA', size=size, color=(255, 255, 255, 0))
+        if (cropped_image.height > image.height):
+            size = (finalSize[0], abs(
+                int((finalSize[1]-(finalSize[1]/cropped_image.height*image.height))/2)))
+            whitebackground = Image.new(
+                mode='RGBA', size=size, color=(255, 255, 255, 0))
             position = (0, (finalSize[1] - whitebackground.height))
             resized_image.paste(whitebackground, position)
             position = (0, 0)
@@ -412,18 +444,21 @@ def saveImage(request, form, element, ref):
 def saveImageWithPath(image, photoName):
     _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
     random_num = random.randint(0, 1000)
-    image_path = "images/" + _datetime + '_' + str(random_num) + '_' + photoName
+    image_path = "images/" + _datetime + \
+        '_' + str(random_num) + '_' + photoName
     image.save("media/"+image_path)
     return image_path
 
 
 def getOtherUsers(creator):
-    users = list(User.objects.all().exclude(is_superuser=True).exclude(id=creator.id).values_list('name', 'email'))
+    users = list(User.objects.all().exclude(is_superuser=True).exclude(
+        id=creator.id).values_list('name', 'email'))
     return users
 
 
 def getCooperators(projectID):
-    users = list(ProjectPermission.objects.all().filter(project_id=projectID).values_list('user', flat=True))
+    users = list(ProjectPermission.objects.all().filter(
+        project_id=projectID).values_list('user', flat=True))
     return users
 
 
@@ -448,14 +483,18 @@ def projectsAutocompleteSearch(request):
 
 def getProjectsAutocomplete(text):
     projects = Project.objects.filter(~Q(hidden=True)).filter(approved=True).filter(
-            name__icontains=text).values_list('id', 'name').distinct()
-    keywords = Keyword.objects.filter(keyword__icontains=text).values_list('keyword', flat=True).distinct()
+        name__icontains=text).values_list('id', 'name').distinct()
+    keywords = Keyword.objects.filter(keyword__icontains=text).values_list(
+        'keyword', flat=True).distinct()
     report = []
     for project in projects:
-        report.append({"type": "project", "id": project[0], "text": project[1]})
+        report.append(
+            {"type": "project", "id": project[0], "text": project[1]})
     for keyword in keywords:
-        numberElements = Project.objects.filter(Q(keywords__keyword__icontains=keyword)).count()
-        report.append({"type": "projectKeyword", "text": keyword, "numberElements": numberElements})
+        numberElements = Project.objects.filter(
+            Q(keywords__keyword__icontains=keyword)).count()
+        report.append({"type": "projectKeyword", "text": keyword,
+                      "numberElements": numberElements})
     return report
 
 
@@ -484,14 +523,16 @@ def applyFilters(request, projects):
         projects = projects.filter(hasTag__hasTag=request.GET['hasTag'])
 
     if request.GET.get('difficultyLevel'):
-        projects = projects.filter(difficultyLevel__difficultyLevel=request.GET['difficultyLevel'])
+        projects = projects.filter(
+            difficultyLevel__difficultyLevel=request.GET['difficultyLevel'])
 
     if request.GET.get('participationTask'):
-        projects = projects.filter(participationTask__participationTask=request.GET['participationTask'])
+        projects = projects.filter(
+            participationTask__participationTask=request.GET['participationTask'])
 
     if request.GET.get('country'):
         projects = projects.filter(
-                Q(mainOrganisation__country=request.GET['country']) | Q(country=request.GET['country']) | Q(organisation__country=request.GET['country'])).distinct()
+            Q(mainOrganisation__country=request.GET['country']) | Q(country=request.GET['country']) | Q(organisation__country=request.GET['country'])).distinct()
 
     # Approved filters
     if request.GET.get('approved'):
@@ -594,7 +635,7 @@ def setHidden(request):
 
 def setProjectHidden(id, hidden):
     project = get_object_or_404(Project, id=id)
-    project.hidden = False if hidden in ['False','false','0'] else True
+    project.hidden = False if hidden in ['False', 'false', '0'] else True
     project.save()
 
 
@@ -632,7 +673,8 @@ def followProject(projectId, userId, follow):
     fUser = get_object_or_404(User, id=userId)
     if follow is True:
         # Insert
-        followedProject = FollowedProjects.objects.get_or_create(project=fProject, user=fUser)
+        followedProject = FollowedProjects.objects.get_or_create(
+            project=fProject, user=fUser)
         # sendEmail
         subject = 'Your project has been followed'
         message = render_to_string('emails/followed_project.html', {
@@ -648,7 +690,8 @@ def followProject(projectId, userId, follow):
     else:
         # Delete
         try:
-            obj = FollowedProjects.objects.get(project_id=projectId, user_id=userId)
+            obj = FollowedProjects.objects.get(
+                project_id=projectId, user_id=userId)
             obj.delete()
             return 'unfollowed'
         except FollowedProjects.DoesNotExist:
@@ -667,7 +710,7 @@ def allowUser(request):
 
     # Delete all
     objs = ProjectPermission.objects.all().filter(project_id=projectId)
-    if(objs):
+    if (objs):
         for obj in objs:
             obj.delete()
 
@@ -699,14 +742,16 @@ def downloadProjects(request):
 
 def get_headers():
     return ['id', 'name', 'aim', 'description', 'keywords', 'status', 'start_date', 'end_date', 'topic', 'url',
-     'host', 'howToParticipate', 'doingAtHome', 'equipment', 'fundingBody', 'fundingProgram', 'originDatabase', 'originURL', 'originUID']
+            'host', 'howToParticipate', 'doingAtHome', 'equipment', 'fundingBody', 'fundingProgram', 'originDatabase', 'originURL', 'originUID']
 
 
 def get_data(item):
     keywordsList = list(item.keywords.all().values_list('keyword', flat=True))
     topicList = list(item.topic.all().values_list('topic', flat=True))
-    participationTaskList = list(item.participationTask.all().values_list('participationTask', flat=True))
-    geographicextendList = list(item.geographicextend.all().values_list('geographicextend', flat=True))
+    participationTaskList = list(
+        item.participationTask.all().values_list('participationTask', flat=True))
+    geographicextendList = list(
+        item.geographicextend.all().values_list('geographicextend', flat=True))
 
     return {
         'id': item.id,
