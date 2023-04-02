@@ -30,8 +30,7 @@
                     <option value="">{% trans "Country" %}
                     <option>
                         {% for country in countries %}{% for cwc in countriesWithContent %}{% if country.code == cwc %}
-                    <option {% if country.code == filters.country %} selected {% endif %} value="{{ country.code }}">{{
-                        country.name }}</option>
+                    <option {% if country.code == filters.country %} selected {% endif %} value="{{ country.code }}"> {{ country.name }}</option>
                     {% endif %}{% endfor %}{% endfor %}
                 </select>
 
