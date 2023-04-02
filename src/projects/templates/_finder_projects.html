@@ -87,12 +87,13 @@
 
                 {% if user.is_staff %}
                 <select id="approved" name="approved" class="custom-select status-select form-control">
-                    <option value="approved" {% if filters.approved == "approved" %} selected {% endif %}>{% trans
-                        "Approved" %}</option>
-                    <option value="notApproved" {% if filters.approved == "notApproved" %} selected {% endif %}>{% trans
-                        "Not Approved" %}</option>
-                    <option value="notYetModerated" {% if filters.approved == "notYetModerated" %} selected {% endif %}>{%
-                        trans "Not yet moderated" %}</option>
+                    <option value="approved" {% if filters.approved == "approved" %} selected {% endif %}>
+                        {% trans "Approved" %}
+                    </option>
+                    <option value="notApproved" {% if filters.approved == "notApproved" %} selected {% endif %}>
+                        {% trans "Not Approved" %}</option>
+                    <option value="notYetModerated" {% if filters.approved == "notYetModerated" %} selected {% endif %}>
+                        {% trans "Not yet moderated" %}</option>
                 </select>
                 {% endif %}
             </div>

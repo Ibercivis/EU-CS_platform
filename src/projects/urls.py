@@ -22,6 +22,7 @@ urlpatterns = [
     path('setFollowedProject/', views.setFollowedProject, name='setFollowedProject'),
     path('allowUser/', views.allowUser, name='allowUser'),
     path('project_review/<int:pk>', views.project_review, name='project_review'),
+    path('likeProjectAjax', views.likeProjectAjax, name='likeProjectAjax'),
     url(r'^api/', include('projects.api.urls')),
     path('downloadProjects', views.downloadProjects, name='downloadProjects'),
 ]

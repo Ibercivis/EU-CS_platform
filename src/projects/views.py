@@ -22,7 +22,7 @@ from django_countries import countries
 from itertools import chain
 from .forms import ProjectForm, ProjectPermissionForm, ProjectTranslationForm, ProjectGeographicLocationForm
 from .models import Project, Topic, ParticipationTask, Status, Keyword, ApprovedProjects, \
-    FollowedProjects, FundingBody, CustomField, ProjectPermission, GeographicExtend, UnApprovedProjects, HasTag, DifficultyLevel, Stats
+    FollowedProjects, FundingBody, CustomField, ProjectPermission, GeographicExtend, UnApprovedProjects, HasTag, DifficultyLevel, Stats, Likes
 from organisations.models import Organisation
 import copy
 import csv
@@ -227,6 +227,7 @@ def projects(request):
     hasTag = HasTag.objects.all()
     difficultyLevel = DifficultyLevel.objects.all()
     participationTask = ParticipationTask.objects.all()
+    
 
     countriesWithContent1 = projects.values_list(
         'mainOrganisation__country', flat=True).distinct()
@@ -253,6 +254,11 @@ def projects(request):
     projects = projects.distinct()
     filters = setFilters(request, filters)
     projects = projects.filter(~Q(hidden=True))
+
+    likes = Likes.objects.filter(user=request.user)
+    likes = likes.values_list('project', flat=True)
+   
+
 
     # Ordering
     if request.GET.get('orderby'):
@@ -283,6 +289,7 @@ def projects(request):
 
     return render(request, 'projects.html', {
         'projects': projects,
+        'likes': likes,
         'topics': topics,
         'countriesWithContent': countriesWithContent,
         'status': status,
@@ -292,6 +299,36 @@ def projects(request):
         'participationTask': participationTask,
         'counter': counter,
         'isSearchPage': True})
+
+@login_required
+def likeProjectAjax(request):
+    
+    if request.method == 'POST':
+        project = get_object_or_404(Project, id=request.POST.get('project_id'))
+        user = request.user
+        # First, we check if the user has already liked the project
+        if Likes.objects.filter(project=project, user=user).exists():
+            # If the user has liked the project, we remove the like
+            Likes.objects.filter(project=project, user=user).delete()
+            project.totalLikes -= 1
+            project.save()
+
+            # We also update the stats to know how many likes we have per day
+            stats = Stats.objects.get_or_create(project=project, day=datetime.now(pytz.utc))[0]
+            stats.likes -= 1
+            stats.save()
+            return JsonResponse({'Liked': 'False', 'Project': project.id}, status=status.HTTP_200_OK)
+        else:
+            # If the user has not liked the project, we add the like
+            Likes.objects.create(project=project, user=user)
+            project.totalLikes += 1
+            project.save()
+
+            # We also update the stats to know how many likes we have per day
+            stats = Stats.objects.get_or_create(project=project, day=datetime.now(pytz.utc))[0]
+            stats.likes += 1
+            stats.save()
+            return JsonResponse({'Liked': 'True', 'Project': project.id}, status=status.HTTP_200_OK)
 
 
 def project(request, pk):

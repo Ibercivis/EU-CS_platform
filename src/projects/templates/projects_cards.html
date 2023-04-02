@@ -36,10 +36,16 @@
                         {% elif forloop.counter < 4 %} ... {% endif %} {% endfor %} <p class="mt-3 gray7">
                             {{ project.description | safe| truncatewords_html:30 }}
                             </p>
-        </div><!-- End of card-body -->
-        <div class="card-footer text-muted bg-white border-top-0 small">
+        </div><!-- End of card-body --> 
+        <div class="card-footer  bg-white border-top-0 small">
+            <span class="me-2 heart {% if project.id in likes %} text-danger {% else %} text-muted {% endif %}" project_id="{{project.id}}" id="heart{{project.id}}">
+            <i class="fa fa-heart" aria-hidden="true"></i> 
+            <span class="value">{{project.totalLikes}}</span>
+            </span>
+            <span class="float-left text-muted">
             <i class="fas fa-eye"></i>
             {{project.totalAccesses}}
+            </span>
         </div>
     </div><!-- end of card -->
 </div><!-- end of col -->
