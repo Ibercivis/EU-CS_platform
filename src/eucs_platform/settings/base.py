@@ -161,6 +161,7 @@ INSTALLED_APPS = (
     'django_crontab',
     'ckeditor',
     'ckeditor_uploader',
+    'fontawesomefree',
 )
 
 MIDDLEWARE = [

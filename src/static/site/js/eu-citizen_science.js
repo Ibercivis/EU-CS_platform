@@ -30,7 +30,42 @@ const CardManager = {
                 console.log(response)
             },
         })
+    },
+
+    clickOnFollow: function(project_id){
+        $.ajax({
+            type: 'POST',
+            url: '/followProjectAjax',
+            data: {project_id: project_id},
+            success: function(response){
+                console.log(response)
+                var hijo = $('#follow'+project_id).find(".value")
+                var valor = parseInt(hijo.text(),10);
+                if(response['Followed'] === "True"){
+                    $('#follow'+project_id).addClass("animate__animated animate__fadeIn text-primary")
+                    $('#follow'+project_id).removeClass("text-muted")
+                    valor ++;
+                    $('#follow'+project_id).one("animationend", function() {
+                        $('#follow'+project_id).removeClass("animate__animated animate__fadeIn ");
+                    });
+                }else{
+                    $('#follow'+project_id).addClass("animate__animated animate__fadeIn text-muted")
+                    $('#follow'+project_id).removeClass("text-primary")
+                    valor--;
+                    $('#follow'+project_id).one("animationend", function() {
+                        $('#follow'+project_id).removeClass("animate__animated animate__fadeIn");
+                    });
+                }
+                hijo.text(valor);
+
+            },
+            error: function(response){
+                console.log(response)
+            },
+        })
     }
+
+
 };
 $(document).ready(function() {
     function getCSRFToken() {
@@ -46,6 +81,27 @@ $(document).ready(function() {
         console.log("heart clicked");
         CardManager.clickOnHeart($(this).attr('project_id'))
     });
+    $(".followIcon").on("click", function() {
+        // Código que se ejecutará cuando se haga clic en el elemento con el ID "mi-boton"
+        console.log("follow clicked");
+        CardManager.clickOnFollow($(this).attr('project_id'))
+    });
+
+    // Enable tooltips everywhere
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+    
+    $('.copyLink').on('click', async function(event) {
+        const link = $(this).attr('url');
+        console.log('jere');
+        try {
+          await navigator.clipboard.writeText(link);
+        } catch (err) {
+          console.error('Error copying link: ', err);
+        }
+      });
 });
 $(function() {
     $('.doModalAction').click(function(){

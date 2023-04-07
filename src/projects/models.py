@@ -189,6 +189,8 @@ class Project(models.Model):
     # Statistics
     totalAccesses = models.IntegerField(default=0)
     totalLikes = models.IntegerField(default=0)
+    totalFollowers = models.IntegerField(default=0)
+    firstAccess = models.DateTimeField('First access', null=True, blank=True, default=None)
 
     def __str__(self):
         return f'{self.name}'
@@ -225,6 +227,7 @@ class Stats(models.Model):
                                 null=True)
     accesses = models.IntegerField(default=0)
     likes = models.IntegerField(default=0)
+    follows = models.IntegerField(default=0)
     day = models.DateField(auto_now_add=True, null=True)
 
 
@@ -233,6 +236,10 @@ class Likes(models.Model):
                                 on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True, related_name='likes')
 
+class Follows(models.Model):
+    user =  models.ForeignKey(settings.AUTH_USER_MODEL,
+                                on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True, related_name='bookmarks')
 
 
 class ProjectPermission(models.Model):

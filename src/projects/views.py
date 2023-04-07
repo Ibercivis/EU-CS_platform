@@ -22,7 +22,7 @@ from django_countries import countries
 from itertools import chain
 from .forms import ProjectForm, ProjectPermissionForm, ProjectTranslationForm, ProjectGeographicLocationForm
 from .models import Project, Topic, ParticipationTask, Status, Keyword, ApprovedProjects, \
-    FollowedProjects, FundingBody, CustomField, ProjectPermission, GeographicExtend, UnApprovedProjects, HasTag, DifficultyLevel, Stats, Likes
+    FollowedProjects, FundingBody, CustomField, ProjectPermission, GeographicExtend, UnApprovedProjects, HasTag, DifficultyLevel, Stats, Likes, Follows
 from organisations.models import Organisation
 import copy
 import csv
@@ -258,8 +258,12 @@ def projects(request):
     if user.is_authenticated:
         likes = Likes.objects.filter(user=user)
         likes = likes.values_list('project', flat=True)
+
+        follows = Follows.objects.filter(user=user)
+        follows = follows.values_list('project', flat=True)
     else:
         likes = None
+        follows = None
    
 
     # Ordering
@@ -279,6 +283,9 @@ def projects(request):
 
         if ("totalAccesses" in orderBy):
             projects = projects.order_by('-totalAccesses')
+        
+        if ("totalLikes" in orderBy):
+            projects = projects.order_by('-totalLikes')
 
     else:
         projects = projects.order_by('-dateUpdated')
@@ -292,6 +299,7 @@ def projects(request):
     return render(request, 'projects.html', {
         'projects': projects,
         'likes': likes,
+        'follows': follows,
         'topics': topics,
         'countriesWithContent': countriesWithContent,
         'status': status,
@@ -331,6 +339,37 @@ def likeProjectAjax(request):
             stats.likes += 1
             stats.save()
             return JsonResponse({'Liked': 'True', 'Project': project.id}, status=status.HTTP_200_OK)
+        
+@login_required
+def followProjectAjax(request):
+
+    if request.method == 'POST':
+        project = get_object_or_404(Project, id=request.POST.get('project_id'))
+        user = request.user
+        # First, we check if the user has already followed the project
+        if Follows.objects.filter(project=project, user=user).exists():
+            # If the user has followed the project, we remove the follow
+            Follows.objects.filter(project=project, user=user).delete()
+            project.totalFollowers -= 1
+            project.save()
+
+            # We also update the stats to know how many follows we have per day
+            stats = Stats.objects.get_or_create(project=project, day=datetime.now(pytz.utc))[0]
+            stats.follows -= 1
+            stats.save()
+            return JsonResponse({'Followed': 'False', 'Project': project.id}, status=status.HTTP_200_OK)        
+        else:
+            # If the user has not followed the project, we add the follow
+            Follows.objects.create(project=project, user=user)
+            project.totalFollowers += 1
+            project.save()
+
+            # We also update the stats to know how many follows we have per day
+            stats = Stats.objects.get_or_create(project=project, day=datetime.now(pytz.utc))[0]
+            stats.follows += 1
+            stats.save()
+            return JsonResponse({'Followed': 'True', 'Project': project.id}, status=status.HTTP_200_OK)
+
 
 
 def project(request, pk):
@@ -339,6 +378,11 @@ def project(request, pk):
     users = getOtherUsers(project.creator)
     cooperators = getCooperators(pk)
     project.totalAccesses += 1
+    
+
+    if project.firstAccess is None:
+        project.firstAccess = datetime.now(pytz.utc)
+    print(project.firstAccess)
     project.save()
 
     stats = Stats.objects.get_or_create(

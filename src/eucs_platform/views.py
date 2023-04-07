@@ -30,10 +30,9 @@ def home(request):
     # Projects
     # TODO: Clean this, we dont need lot of things
     user = request.user
-    
     projects = Project.objects.get_queryset().filter(~Q(hidden=True)).order_by('-dateCreated')
-    approvedProjects = ApprovedProjects.objects.all().values_list('project_id', flat=True)
-    projects = projects.filter(id__in=approvedProjects)
+    approved_projects = ApprovedProjects.objects.all().values_list('project_id', flat=True)
+    projects = projects.filter(id__in=approved_projects)
 
     filters = {'keywords': ''}
 
