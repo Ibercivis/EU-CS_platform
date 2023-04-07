@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
 from django.db.models import Q
 from itertools import chain
-from projects.models import Project, ApprovedProjects, Likes
+from projects.models import Project, ApprovedProjects, Likes, Follows
 from projects.views import getProjectsAutocomplete
 from resources.views import getResourcesAutocomplete
 from organisations.views import getOrganisationAutocomplete
@@ -47,8 +47,11 @@ def home(request):
     if user.is_authenticated:
         likes = Likes.objects.filter(user=request.user)
         likes = likes.values_list('project', flat=True)
+        follows = Follows.objects.filter(user=request.user)
+        follows = follows.values_list('project', flat=True)
     else:
         likes = None
+        follows = None
 
     # Resources
     resources = Resource.objects.all().filter(~Q(isTrainingResource=True)).order_by('-dateCreated')
@@ -112,6 +115,7 @@ def home(request):
         'user': user,
         'projects': projects,
         'likes': likes,
+        'follows': follows,
         'counterprojects': counterprojects,
         'resources': resources,
         'counterresources': counterresources,
