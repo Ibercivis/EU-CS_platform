@@ -646,7 +646,7 @@ def applyFilters(request, projects):
     country = request.GET.get('country')
     if search or topic or country:
         if search:
-            search = search.lower()
+            search = search.lower().lstrip()
         searchStats = SearchStats.objects.get_or_create(
             search=search,
             topic=topic,
