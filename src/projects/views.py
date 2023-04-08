@@ -647,14 +647,14 @@ def applyFilters(request, projects):
     if search or topic or country:
         if search:
             search = search.lower().lstrip()
-        searchStats = SearchStats.objects.get_or_create(
+        searchStats = SearchStats.objects.create(
             search=search,
             topic=topic,
             country=country,
+            ip_address=request.META.get('REMOTE_ADDR'),
             day=datetime.now().date(),
             user_registered=user_registered)
-        searchStats[0].count += 1
-        searchStats[0].save()
+        searchStats.save()
 
     return projects
 

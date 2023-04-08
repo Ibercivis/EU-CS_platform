@@ -253,4 +253,4 @@ class SearchStats(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE, null=True)
     country = CountryField(null=True, blank=True)
     day = models.DateField(auto_now_add=True, null=True)
-    count = models.IntegerField(default=0)
+    ip_address = models.GenericIPAddressField(null=True, blank=True)
