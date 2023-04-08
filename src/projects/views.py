@@ -636,6 +636,11 @@ def applyFilters(request, projects):
     search = None
     country = None
     search = request.GET.get('keywords')
+    user_agent = request.headers['User-Agent']
+    
+    # If the user is a bot, don't save the search
+    if 'bot' in user_agent.lower():
+        return projects
     if request.user.is_authenticated:
         user_registered = True
     else:
