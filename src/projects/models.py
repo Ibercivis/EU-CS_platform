@@ -254,3 +254,4 @@ class SearchStats(models.Model):
     country = CountryField(null=True, blank=True)
     day = models.DateField(auto_now_add=True, null=True)
     ip_address = models.GenericIPAddressField(null=True, blank=True)
+    user_agent = models.CharField(max_length=200, null=True, blank=True)

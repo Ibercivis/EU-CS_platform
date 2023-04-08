@@ -652,6 +652,7 @@ def applyFilters(request, projects):
             topic=topic,
             country=country,
             ip_address=request.META.get('REMOTE_ADDR'),
+            user_agent=request.headers['User-Agent'],
             day=datetime.now().date(),
             user_registered=user_registered)
         searchStats.save()
