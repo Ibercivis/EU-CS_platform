@@ -79,7 +79,8 @@
                                 <a id="imgResult" href="#"> <img
                                                   class="img-fluid img-zoom"
                                                   id="imageResult"
-                                                  src="{% thumbnail organisation.logo|default:'images/void_600.png' 600x400 crop%}"> </a>
+                                                  src="{% thumbnail organisation.logo|default:'void_600.png' 600x400 crop%}"> 
+                                </a>
 
                                 {{ form.logo|as_crispy_field }}
                                 {{ form.x|as_crispy_field }}

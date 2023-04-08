@@ -246,3 +246,11 @@ class ProjectPermission(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
+
+class SearchStats(models.Model):
+    user_registered = models.BooleanField(default=False)
+    search = models.CharField(max_length=200)
+    topic = models.ForeignKey(Topic, on_delete=models.CASCADE, null=True)
+    country = CountryField(null=True, blank=True)
+    day = models.DateField(auto_now_add=True, null=True)
+    count = models.IntegerField(default=0)

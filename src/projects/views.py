@@ -22,7 +22,7 @@ from django_countries import countries
 from itertools import chain
 from .forms import ProjectForm, ProjectPermissionForm, ProjectTranslationForm, ProjectGeographicLocationForm
 from .models import Project, Topic, ParticipationTask, Status, Keyword, ApprovedProjects, \
-    FollowedProjects, FundingBody, CustomField, ProjectPermission, GeographicExtend, UnApprovedProjects, HasTag, DifficultyLevel, Stats, Likes, Follows
+    FollowedProjects, FundingBody, CustomField, ProjectPermission, GeographicExtend, UnApprovedProjects, HasTag, DifficultyLevel, Stats, Likes, Follows, SearchStats
 from organisations.models import Organisation
 import copy
 import csv
@@ -592,6 +592,7 @@ def applyFilters(request, projects):
         projects = projects.filter(
             Q(name__icontains=request.GET['keywords']) |
             Q(keywords__keyword__icontains=request.GET['keywords'])).distinct()
+        
 
     if request.GET.get('topic'):
         projects = projects.filter(topic__topic=request.GET['topic'])
@@ -628,7 +629,35 @@ def applyFilters(request, projects):
     else:
         projects = projects.filter(approved=True)
 
+    
+
+    # Insert the search into Stats
+    topic = None
+    search = None
+    country = None
+    search = request.GET.get('keywords')
+    if request.user.is_authenticated:
+        user_registered = True
+    else:
+        user_registered = False
+    print(user_registered)
+    if (request.GET.get('topic')):
+        topic = Topic.objects.get(topic=request.GET.get('topic'))
+    country = request.GET.get('country')
+    if search or topic or country:
+        if search:
+            search = search.lower()
+        searchStats = SearchStats.objects.get_or_create(
+            search=search,
+            topic=topic,
+            country=country,
+            day=datetime.now().date(),
+            user_registered=user_registered)
+        searchStats[0].count += 1
+        searchStats[0].save()
+
     return projects
+
 
 
 def setFilters(request, filters):
