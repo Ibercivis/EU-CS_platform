@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 from django.urls import include, path, re_path
 from django.conf.urls import url
 from django.views.decorators.cache import never_cache
+from django.views.defaults import server_error
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from machina import urls as machina_urls
@@ -30,6 +31,12 @@ schema_view = get_schema_view(
    public=True,
    permission_classes=(permissions.AllowAny,),
 )
+
+
+def custom_server_error(request, *args, **kwargs):
+    return server_error(request, template_name="500.html", *args, **kwargs)
+
+handler500 = custom_server_error
 
 # Personalized admin site settings like title and header
 admin.site.site_title = "EU-Citizen.Science Site Admin"
