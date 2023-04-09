@@ -378,6 +378,15 @@ def project(request, pk):
     users = getOtherUsers(project.creator)
     cooperators = getCooperators(pk)
     project.totalAccesses += 1
+
+    if user.is_authenticated:
+        liked  = Likes.objects.filter(user=user, project=project).exists()
+
+        followed = Follows.objects.filter(user=user, project=project).exists()
+    
+    else:
+        liked = None
+        followed = None
     
 
     if project.firstAccess is None:
@@ -441,6 +450,8 @@ def project(request, pk):
     approvedProjects = ApprovedProjects.objects.all().values_list('project_id', flat=True)
     return render(request, 'project.html', {
         'project': project,
+        'liked': liked,
+        'followed': followed,
         'hasTranslation': hasTranslation,
         'followedProject': followedProject,
         'approvedProjects': approvedProjects,
