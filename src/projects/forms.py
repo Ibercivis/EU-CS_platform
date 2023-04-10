@@ -433,7 +433,6 @@ class ProjectForm(forms.Form):
         # If there are translations, need to improve them
         project.translatedProject.all().update(needsUpdate=True)
 
-
 def getCountryCode(latitude, longitude):
     try:
         location = geolocator.reverse([latitude, longitude], exactly_one=True)
@@ -446,8 +445,6 @@ def getCountryCode(latitude, longitude):
 
 
 ''' This is the form to translate projects '''
-
-
 class ProjectTranslationForm(forms.Form):
     translatedDescription = forms.CharField(
         widget=CKEditorWidget(config_name='frontpage'),
