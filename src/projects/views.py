@@ -859,13 +859,26 @@ def project_review(request, pk):
 
 # Download all projects in a CSV file
 def downloadProjects(request):
-    projects = Project.objects.get_queryset()
+    # Define the response object with appropriate headers for a CSV file
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="objects.csv"'
 
-    response = StreamingHttpResponse(
-        streaming_content=(iter_items(projects, Buffer())),
-        content_type='text/csv',
-    )
-    response['Content-Disposition'] = 'attachment; filename="projects.csv"'
+    # Create a CSV writer object
+    writer = csv.writer(response)
+
+    # Query the objects you want to export
+    objects = Project.objects.all()
+
+    # Get field names from the model
+    field_names = [field.name for field in Project._meta.fields]
+
+    # Write the header row
+    writer.writerow(field_names)
+
+    # Write the data rows
+    for obj in objects:
+        writer.writerow([getattr(obj, field) for field in field_names])
+
     return response
 
 
