@@ -857,37 +857,17 @@ def allowUser(request):
 def project_review(request, pk):
     return render(request, 'project_review.html', {'projectID': pk})
 
-def generate_fk_annotation_dict(model):
-    fields = model._meta.get_fields()
-    annotation_dict = {}
-
-    for field in fields:
-        if isinstance(field, ForeignKey):
-            related_model = field.related_model
-            related_fields = related_model._meta.get_fields()
-
-            for related_field in related_fields:
-                annotation_key = f"{field.name}__{related_field.name}"
-                annotation_value = F(f"{field.name}__{related_field.name}")
-                annotation_dict[annotation_key] = annotation_value
-
-    return annotation_dict
-
-
 # Download all projects in a CSV file
 def downloadProjects(request):
-# Define the response object with appropriate headers for a CSV file
+    # Define the response object with appropriate headers for a CSV file
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="objects.csv"'
 
     # Create a CSV writer object
     writer = csv.writer(response)
 
-    # Generate the annotation dictionary for ForeignKey fields
-    fk_annotation_dict = generate_fk_annotation_dict(Project)
-
     # Query the objects you want to export
-    objects = Project.objects.annotate(**fk_annotation_dict).values()
+    objects = Project.objects.prefetch_related('topic', 'participationTask').values() # Add ManyToMany fields
 
     # Write the header row
     if objects:
@@ -895,10 +875,15 @@ def downloadProjects(request):
 
     # Write the data rows
     for obj in objects:
-        writer.writerow(obj.values())
+        row = []
+        for k, v in obj.items():
+            if isinstance(v, list) or isinstance(v, set) or hasattr(v, 'all'):
+                row.append(";".join(str(item.pk) for item in v.all())) # Represent ManyToMany field with primary keys
+            else:
+                row.append(v)
+        writer.writerow(row)
 
     return response
-
 
 def get_headers():
     return ['id', 'name', 'aim', 'description', 'keywords', 'status', 'start_date', 'end_date', 'topic', 'url',
@@ -955,3 +940,14 @@ def iter_items(items, pseudo_buffer):
 def projects_stats(request):
 
     return None
+
+@login_required
+def generateProjectStatsAjax(request):
+    user = request.user
+    stats = Stats.objects.annotate(project_name=F('project__name')).filter(project__creator=user).filter(project__id=request.POST.get('project_id')).order_by("-day").all()
+    if stats is None:
+        response['error'] = 'No stats found'
+    else:
+
+        response = serializers.serialize('json', stats, use_natural_primary_keys=True, use_natural_foreign_keys=True)
+    return JsonResponse(response, safe=False)

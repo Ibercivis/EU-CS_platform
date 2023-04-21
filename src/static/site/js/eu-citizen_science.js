@@ -101,7 +101,8 @@ $(document).ready(function() {
         } catch (err) {
           console.error('Error copying link: ', err);
         }
-      });
+    });
+
 });
 $(function() {
     $('.doModalAction').click(function(){
@@ -131,6 +132,8 @@ $(function() {
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl)
     })
+
+
 })
 
 function attatchDeletePlatform(){
@@ -155,6 +158,35 @@ function attatchDeletePlatform(){
         })
     })
 }
+
+function generateProjectStats(project_id, div_id){
+    $.ajax({
+        type: 'POST',
+        url: '/generateProjectStatsAjax',
+        dataType: 'json',
+        data: {project_id: project_id},
+        success: function(response){
+            console.log(response)
+            var html = '<div class="row">'
+            html += '<div class="col-12 mb-5">'
+            html += '<div class="card">'
+            html += '<div class="card-body">'
+            html += '<h5 class="card-title">Project Stats</h5>'
+            html += '<p class="card-text">'+response+'</p>'
+            html += '<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>'
+            html += '</div>'
+            html += '</div>'
+            html += '</div>'
+            $('#project_stats_'+project_id).html(html)
+        },
+
+        error: function(response){
+            console.log(response)
+        }
+    })
+}    
+
+
 
 
 

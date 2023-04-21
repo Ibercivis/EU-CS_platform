@@ -1,0 +1,25 @@
+{% extends "./base_template_profiles.html" %}
+{% load i18n %}
+{% block profile_right %}
+
+{% if projects_submitted.all %}
+<h3 class="col-12 leftborder">{% trans "Projects <span class='lightBlue-color'>stats</span>" %}</h3>
+<div class="row">
+    {% for project in projects_submitted.all %}
+    <div class="col-12">
+        <div id="project_stats_{{project.id}}">
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}
+{% block scripts %}
+<script>
+    $(document).ready(function() {
+    {% for project in projects_submitted.all %}
+        generateProjectStats({{ project.id }}, "project_stats_{{ project.id}}")
+    {% endfor %}
+    });
+</script>
+{% endblock scripts%}

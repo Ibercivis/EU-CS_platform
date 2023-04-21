@@ -33,4 +33,5 @@ urlpatterns = [
     path('followProjectAjax', views.followProjectAjax, name='followProjectAjax'),
     url(r'^api/', include('projects.api.urls')),
     path('downloadProjects', views.downloadProjects, name='downloadProjects'),
+    path('generateProjectStatsAjax', views.generateProjectStatsAjax,name='generateProjectStatsAjax'),
 ]

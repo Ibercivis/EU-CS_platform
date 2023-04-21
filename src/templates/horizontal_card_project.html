@@ -10,7 +10,9 @@
 {% block title %}
 <a href="/project/{{project.id}}">{{ project.name | truncatechars:30}}</a>
 <div class="small text-muted">{{project.dateCreated}}</div>
-<div class="small text-muted">Accessed {{project.visits}} times</div>
+<div class="small">
+{% include "_social_zone.html" %}
+</div>
 {% if not project.moderated %}
 <div class="small text-danger">{% trans "Not yet moderated" %}</div>
 {% else %}

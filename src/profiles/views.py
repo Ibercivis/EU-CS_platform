@@ -10,7 +10,7 @@ from itertools import chain
 from . import forms
 from . import models
 from .models import Profile
-from projects.models import Project, FollowedProjects, ProjectPermission, ApprovedProjects, UnApprovedProjects
+from projects.models import Project, FollowedProjects, ProjectPermission, ApprovedProjects, UnApprovedProjects, Stats
 from resources.models import Resource, BookmarkedResources, ResourcePermission, ApprovedResources, UnApprovedResources
 from organisations.models import Organisation, OrganisationPermission
 from events.models import Event
@@ -155,6 +155,24 @@ class Bookmarks(LoginRequiredMixin, generic.TemplateView):
         kwargs["resources_followed"] = resources
         kwargs["trainings_followed"] = training
 
+        return super().get(request, *args, **kwargs)
+    
+class MyStats(generic.TemplateView):
+    template_name = "profiles/my_stats.html"
+    http_method_names = ["get"]
+
+    def get(self, request, *args, **kwargs):
+        slug = self.kwargs.get("slug")
+        if slug:
+            profile = get_object_or_404(models.Profile, slug=slug)
+            user = profile.user
+        else:
+            user = self.request.user
+        projectsSubmitted = Project.objects.all().filter(creator=user).order_by('-dateUpdated')
+        kwargs["show_user"] = user
+        kwargs["projects_submitted"] = projectsSubmitted
+        if user == self.request.user:
+            kwargs["editable"] = True
         return super().get(request, *args, **kwargs)
 
 

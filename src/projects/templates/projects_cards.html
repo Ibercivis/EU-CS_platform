@@ -38,37 +38,7 @@
                             </p>
         </div><!-- End of card-body --> 
         <div class="card-footer  bg-white border-top-0 small">
-            <span class="me-3 
-            {% if user.is_authenticated %} heart {% endif %} {% if project.id in likes %} text-danger {% else %} text-muted {% endif %}" project_id="{{project.id}}" id="heart{{project.id}}">
-            <i class="fa fa-heart" aria-hidden="true"></i> 
-            <span class="value">{{project.totalLikes}}</span>
-            </span>
-            <span class="me-3 
-            {% if user.is_authenticated %} followIcon {% endif %} {% if project.id in follows %} text-primary {% else %} text-muted {% endif %}" project_id="{{project.id}}" id="follow{{project.id}}">
-            <i class="far fa-bookmark"></i>
-            <span class="value">{{project.totalFollowers}}</span>
-            </span>
-            <span class="float-left text-muted me-3" 
-                data-bs-toggle="tooltip" 
-                data-bs-placement="top" 
-                title="Since {{ project.firstAccess }}">
-            <i class="fas fa-eye"></i>
-            {{project.totalAccesses}}
-            </span>
-            <span class="float-right text-muted dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false">
-               <i class="fas fa-share-alt" aria-hidden="true"></i>
-            </span>
-            <ul class="dropdown-menu">
-                <li> <a href="https://twitter.com/intent/tweet?text=I found this %23citizenscience project {{request.scheme}}://{{ request.get_host }}/project/{{project.id}}  @euCitSciProject" class="text-muted dropdown-item" target="_blank">
-                    <i class="fa-brands fa-twitter"></i> Share on Twitter
-                    </a>
-                </li>
-                <li>
-                    <a href="#" url="{{request.scheme}}://{{ request.get_host }}/project/{{project.id}}"  class="copyLink text-muted dropdown-item">
-                        <i class="fa-solid fa-link"></i> Copy the link
-                    </a>
-                </li>
-            </ul>
+            {% include "_social_zone.html" %}
         </div>
     </div><!-- end of card -->
 </div><!-- end of col -->
