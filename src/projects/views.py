@@ -13,6 +13,8 @@ from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import ForeignKey, F
 from django.db.models import Q, Avg, Count, Sum
+from django.core.serializers.json import DjangoJSONEncoder
+
 from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
 from datetime import datetime, timezone
@@ -944,10 +946,18 @@ def projects_stats(request):
 @login_required
 def generateProjectStatsAjax(request):
     user = request.user
-    stats = Stats.objects.annotate(project_name=F('project__name')).filter(project__creator=user).filter(project__id=request.POST.get('project_id')).order_by("-day").all()
+    stats = (
+        Stats.objects
+        .annotate(project_name=F('project__name'))
+        .filter(project__creator=user)
+        .filter(project__id=request.POST.get('project_id'))
+        .order_by("-day")
+        .values('project__name', 'accesses', 'follows', 'likes', 'day')
+    )
+    print(stats)
     if stats is None:
         response['error'] = 'No stats found'
     else:
-
-        response = serializers.serialize('json', stats, use_natural_primary_keys=True, use_natural_foreign_keys=True)
+        response = json.dumps(list(stats), cls=DjangoJSONEncoder)
+        response = json.loads(response)
     return JsonResponse(response, safe=False)

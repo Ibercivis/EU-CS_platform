@@ -3,7 +3,7 @@
 {% block profile_right %}
 
 {% if projects_submitted.all %}
-<h3 class="col-12 leftborder">{% trans "Projects <span class='lightBlue-color'>stats</span>" %}</h3>
+<h3 class="col-12 leftborder">{% trans "Your projects <span class='lightBlue-color'>stats</span>" %}</h3>
 <div class="row">
     {% for project in projects_submitted.all %}
     <div class="col-12">
@@ -15,6 +15,9 @@
 {% endif %}
 {% endblock %}
 {% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@^3"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@^2"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^1"></script>
 <script>
     $(document).ready(function() {
     {% for project in projects_submitted.all %}
