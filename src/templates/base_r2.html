@@ -28,7 +28,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
     <!-- Font awesome free -->
-    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/fontawesome.min.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
  
@@ -38,7 +38,7 @@
               rel="stylesheet" 
               integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
               crossorigin="anonymous">
-        <link href="{% static 'site/css/eu-citizen_science.css' %}" rel="stylesheet" />
+        <link href="{% static 'site/css/eu-citizen_science.css' %}?v={{ STATIC_VERSION }}" rel="stylesheet" />
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
 		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
@@ -54,7 +54,7 @@
                 crossorigin="anonymous">
         </script>
 
-        <script src="{% static 'site/js/eu-citizen_science.js' %}"></script>
+        <script src="{% static 'site/js/eu-citizen_science.js' %}?v={{ STATIC_VERSION }}"></script>
         <link rel="stylesheet" href="{% static 'cookielaw/css/cookielaw.css' %}">
         {% endblock head %}
         {% block meta %}
