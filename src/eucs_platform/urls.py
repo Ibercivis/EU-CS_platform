@@ -44,6 +44,7 @@ urlpatterns = [
     path("terms/", views.terms, name="terms"),
     path("privacy/", views.privacy, name="privacy"),
     path("faq/", views.faq, name="faq"),
+    path("ecs_project/", views.ecs_project, name="ecs_project"),
     path("subscribe/", views.subscribe, name="subscribe"),
     path("moderation/", views.moderation, name="moderation"),
     path("criteria/", views.criteria, name="criteria"),

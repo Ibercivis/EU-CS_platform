@@ -157,6 +157,8 @@ def privacy(request):
 def faq(request):
     return render(request, 'faq.html')
 
+def ecs_project(request):
+    return render(request, 'ecs_project.html')
 
 def development(request):
     return render(request, 'development.html')
