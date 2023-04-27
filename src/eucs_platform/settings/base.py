@@ -18,10 +18,16 @@ import environ
 
 # Build paths inside the project like this: BASE_DIR / "directory"
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
+STATIC_ROOT = "/home/ubuntu/eu-citizen.science/static"
 STATICFILES_DIRS = [str(BASE_DIR / "static"), MACHINA_MAIN_STATIC_DIR]
+
+# settings.py
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+STATIC_VERSION = '1.0'
+
+
 MEDIA_ROOT = str(BASE_DIR / "media")
 MEDIA_URL = "/media/"
-STATIC_ROOT = "/home/ubuntu/eu-citizen.science/static"
 THUMBNAIL_DEBUG = True
 
 LOCALE_PATHS = [
@@ -74,6 +80,8 @@ TEMPLATES = [
                 'machina.core.context_processors.metadata',
                 # Wwn
                 'eucs_platform.context_processors.global_settings',
+                # To manage static versions
+                'eucs_platform.context_processors.static_version',
 
             ]
         },
@@ -161,6 +169,7 @@ INSTALLED_APPS = (
     'django_crontab',
     'ckeditor',
     'ckeditor_uploader',
+    'fontawesomefree',
 )
 
 MIDDLEWARE = [
@@ -458,3 +467,7 @@ GRAPH_MODELS = {
   'all_applications': True,
   'group_models': True,
 }
+
+#For OSX
+# GDAL_LIBRARY_PATH = '/opt/homebrew/opt/gdal/lib/libgdal.dylib'
+# GEOS_LIBRARY_PATH = '/opt/homebrew/opt/geos/lib/libgeos_c.dylib'

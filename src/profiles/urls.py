@@ -15,6 +15,7 @@ urlpatterns = [
     path("me/resources", views.resources, name="self_resources"),
     path("me/followed_projects", views.followedProjects, name="followed_projects"),
     path("me/organisations", views.organisations, name="self_organisations"),
+    path("me/my_stats", views.MyStats.as_view(), name="mystats"),
     path("", views.UsersSearch.as_view(), name="userSearch"),
     path("me/usersAutocompleteSearch", views.usersAutocompleteSearch, name="usersAutocompleteSearch")
 ]

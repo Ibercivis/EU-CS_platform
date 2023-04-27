@@ -46,11 +46,9 @@
 </div>
 {% endif %}
 {% if project.image3 %}
-<!-- <div class="container-fluid profileImage" style="background: url('/media/{{project.image3}}') no-repeat; background-size: cover;">
-</div> -->
-<div style="width: 100%;">
-    <img class="img-fluid" style="max-height: 300px; width: 100%;" src='/media/{{project.image3 | safe}}' />
-    </div>
+<div class="container-fluid profileImage" style="background: url('/media/{{project.image3}}') no-repeat; background-size: cover;">
+</div>
+
 {% endif %}
 <div class="container">
     <div class="row mt-5">
@@ -82,7 +80,7 @@
 
             {% if project.equipment %}
             <h4 class="mt-4 leftborder">{% trans "Needed equipment" %}</h4>
-            <p class="gray7-color">{{project.translatedEquipment |safe}}</p>
+            <p class="gray7-color">{{translation.translatedEquipment |safe}}</p>
             {% endif %}
             {% endif %}
             {% endfor %}
@@ -245,37 +243,25 @@
         </div>
             <div class="row">
                 <div class="col-12 mt-4">
-                 
                     <a target="_blank" 
-                       href="{% if 'http' not in project.url %}//{%endif%}{{project.url}}"
-                       class="btn btn-my-darkBlue">
-                        <i class="fas fa-external-link-square-alt"></i> {% trans "Go to Project" %}
+                    href="{% if 'http' not in project.url %}//{%endif%}{{project.url}}"
+                    class="me-3 goto">
+                     <i class="fas fa-external-link-square-alt"></i> {% trans "Go to Project" %}
                     </a>
-
+                    <a href="/translateProject/{{project.id}}" 
+                    class="me-3 text-secondary">
+                        <i class="fas fa-language"></i> {% trans "Translate" %}
+                    </a>
                     {% if hasPermissionToEdit %}
-                    <a class="btn btn-warning" href="{% url 'editProject' project.id %}">
+                    <a class="me-3 text-warning" href="{% url 'editProject' project.id %}">
                         <i class="fas fa-edit"></i> Edit 
                     </a>
                     {% endif %}
-
-                    <a href="/translateProject/{{project.id}}" class="btn btn-my-darkBlue">
-                        <i class="fas fa-external-link-square-alt"></i> {% trans "Translate" %}
-                    </a>
-
-                    {% if user.is_authenticated %}
-                    <button 
-                        {% if followedProject %}
-                            class="btn btn-my-darkBlue"
-                                    {% else %}
-                            class="btn btn-my-outline-darkBlue"
-                                    {% endif %}
-                            id="buttonBookmarkProject" bookmarked="{{followedProject}}">
-                        <i class="far fa-bookmark"></i> Bookmark
-                    </button>
-                    {% endif %}
-
-
+                    {% include "_social_zone.html" %}
                 </div>
+                <div class="col-12 mt-4">    
+                </div>
+                
                 {% if user.is_staff %}
                 <div class="col-12 mt-4">
                     <h4 class="mt-4 leftborder">{% trans "Admin area" %}</h4>

@@ -162,6 +162,7 @@ a{
 /* Related with images */
 .profileImage{
     height: 300px !important;
+    width: 100% !important;
 }
 
 
@@ -175,4 +176,13 @@ a{
 }
 .img-card{
 	aspect-ratio: attr(width) / attr(height);
+}
+.fa{
+    font-weight: 100 !important;
+}
+.heart{
+    cursor: pointer;
+}
+.followIcon{
+    cursor: pointer;
 }
