@@ -163,7 +163,7 @@ function createChart(labels, accesses, likes, follows, div_id) {
     const ctx = document.getElementById(div_id).getContext('2d');
 
     const chart = new Chart(ctx, {
-        type: 'line', // You can change the chart type (e.g., 'bar', 'line', 'pie', etc.)
+        type: 'bar', // You can change the chart type (e.g., 'bar', 'line', 'pie', etc.)
         data: {
             labels: labels, // The x-axis labels (days)
             datasets: [{
