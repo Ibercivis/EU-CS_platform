@@ -27,6 +27,8 @@
     <div class="row mt-5">
         <div class="col-12">
             <h1 class="display-4">{{platform.name}}</h1>
+            <div class="small"><i>{% trans "Created" %} {{platform.dateCreated}}</i></div>
+            <div class="small"><i>{% trans "Updated" %} {{platform.dateUpdated}}</i></div>
             <input type='hidden' id='Id' value="{{platform.id}}" />
         </div>
 
@@ -44,17 +46,20 @@
             </div>
             {% endif %}
 
-            <a href="{{platform.url}}" target="_blank" class="btn btn-my-darkBlue mt-4 mb-4">
-                <i class="fas fa-external-link-square-alt"></i> Go to platform or network
+            <a target="_blank" 
+                href="{% if 'http' not in platform.url %}//{%endif%}{{platform.url}}"
+                class="me-3 goto">
+                <i class="fas fa-external-link-square-alt"></i> {% trans "Go to platform or network" %}
             </a>
-           
+
             {% if platform.creator == user %}
-            <a href="/editPlatform/{{platform.id}}" class="btn btn-warning mt-4 mb-4">
-                <i class="fas fa-edit"></i>Edit
+           
+            <a class="me-3 text-warning" href="/editPlatform/{{platform.id}}">
+                <i class="fas fa-edit"></i> Edit 
             </a>
-            <button type="button" id="deletePlatform" class="btn btn-danger mt-4 mb-4 doModalAction">
+            <a  id="deletePlatform" class="me-3 text-danger doModalAction">
                 <i class="fas fa-trash"></i> Delete
-            </button>
+            </a>
             {% endif %}
         </div><!-- End-of right column -->
 
