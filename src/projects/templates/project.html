@@ -248,10 +248,12 @@
                     class="me-3 goto">
                      <i class="fas fa-external-link-square-alt"></i> {% trans "Go to Project" %}
                     </a>
+                    {% if user.is_authenticated %}
                     <a href="/translateProject/{{project.id}}" 
                     class="me-3 text-secondary">
                         <i class="fas fa-language"></i> {% trans "Translate" %}
                     </a>
+                    {% endif %}
                     {% if hasPermissionToEdit %}
                     <a class="me-3 text-warning" href="{% url 'editProject' project.id %}">
                         <i class="fas fa-edit"></i> Edit 
