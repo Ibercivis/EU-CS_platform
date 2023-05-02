@@ -420,11 +420,13 @@ def resourcesAutocompleteSearch(request, isTrainingResource=False):
 
 def getResourcesAutocomplete(text, isTrainingResource=False):
     approvedResources = ApprovedResources.objects.all().values_list('resource_id', flat=True)
-    resources = Resource.objects.filter(~Q(hidden=True)).filter(id__in=approvedResources).filter(name__icontains=text)
+    resources = Resource.objects.filter(~Q(hidden=True)).filter(name__icontains=text).filter(approved=True)
+    print(resources)
     if(isTrainingResource):
         resources = resources.filter(isTrainingResource=True)
     else:
         resources = resources.filter(~Q(isTrainingResource=True))
+    
     resources = resources.values_list('id', 'name').distinct()
     keywords = Keyword.objects.filter(
             keyword__icontains=text).values_list('keyword', flat=True).distinct()
