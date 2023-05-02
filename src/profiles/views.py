@@ -124,12 +124,14 @@ class Submissions(generic.TemplateView):
         resourcesSubmitted = Resource.objects.all().filter(creator=user).filter(isTrainingResource=False)
         trainingsSubmitted = Resource.objects.all().filter(creator=user).filter(isTrainingResource=True)
         organisationsSubmitted = Organisation.objects.all().filter(creator=user)
+        platformsSubmitted = Organisation.objects.all().filter(creator=user)
         eventsSubmitted = Event.objects.all().filter(creator=user)
         kwargs["show_user"] = user
         kwargs["projects_submitted"] = projectsSubmitted
         kwargs["resources_submitted"] = resourcesSubmitted
         kwargs["trainings_submitted"] = trainingsSubmitted
         kwargs["organisations_submitted"] = organisationsSubmitted
+        kwargs["platforms_submitted"] = platformsSubmitted
         kwargs["event_submitted"] = eventsSubmitted
         if user == self.request.user:
             kwargs["editable"] = True
