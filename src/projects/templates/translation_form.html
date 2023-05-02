@@ -94,8 +94,9 @@
                     $(id).removeClass('error');
             })
         }
-        $('#languageSelector').change(function(){
-            console.log('changed');
+        console.log("ready!")
+        function getTranslation(){
+            console.log('here')
             $('#languageId').val($('#languageSelector').val())
             $.ajax({
                 type: 'POST',
@@ -106,6 +107,7 @@
                     projectId: '{{project.id}}'
                 },
                 success: function(response){
+                    console.log(response)
                     translatedDescription=response[0].fields.translatedDescription
                     translatedAim=response[0].fields.translatedAim
                     translatedHowToParticipate=response[0].fields.translatedHowToParticipate
@@ -119,9 +121,12 @@
                     console.log(response)
                     for(var instanceName in CKEDITOR.instances)
                         CKEDITOR.instances[instanceName].setData('')
-
                 },
             })
+        }
+      
+        $('#languageSelector').change(function(){
+            getTranslation()
         })
 
         $('#saveTranslation').click(function(e){
@@ -156,6 +161,11 @@
                     }, 500);
                 },
             })
+        })
+
+        // TODO: calling getTranslation() here is a workaround, it should be called when the form is loaded
+        CKEDITOR.on('instanceReady', function (event) {
+            getTranslation()
         })
     })
 </script>
