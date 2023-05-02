@@ -13,6 +13,7 @@ from .models import Profile
 from projects.models import Project, FollowedProjects, ProjectPermission, ApprovedProjects, UnApprovedProjects, Stats
 from resources.models import Resource, BookmarkedResources, ResourcePermission, ApprovedResources, UnApprovedResources
 from organisations.models import Organisation, OrganisationPermission
+from platforms.models import Platform
 from events.models import Event
 from django.db.models.functions import Concat
 from django.db.models import Value
@@ -124,7 +125,7 @@ class Submissions(generic.TemplateView):
         resourcesSubmitted = Resource.objects.all().filter(creator=user).filter(isTrainingResource=False)
         trainingsSubmitted = Resource.objects.all().filter(creator=user).filter(isTrainingResource=True)
         organisationsSubmitted = Organisation.objects.all().filter(creator=user)
-        platformsSubmitted = Organisation.objects.all().filter(creator=user)
+        platformsSubmitted = Platform.objects.all().filter(creator=user)
         eventsSubmitted = Event.objects.all().filter(creator=user)
         kwargs["show_user"] = user
         kwargs["projects_submitted"] = projectsSubmitted
