@@ -52,6 +52,7 @@ urlpatterns = [
     path("privacy/", views.privacy, name="privacy"),
     path("faq/", views.faq, name="faq"),
     path("ecs_project/", views.ecs_project, name="ecs_project"),
+    path("call_ambassadors/", views.call_ambassadors, name="call_ambassadors"),
     path("subscribe/", views.subscribe, name="subscribe"),
     path("moderation/", views.moderation, name="moderation"),
     path("criteria/", views.criteria, name="criteria"),
