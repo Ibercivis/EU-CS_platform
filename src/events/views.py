@@ -2,6 +2,7 @@ from datetime import datetime
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
 from django.utils import formats
 from .models import Event, ApprovedEvents, UnApprovedEvents
@@ -17,6 +18,17 @@ def events(request):
             start_date__lte=now,
             end_date__gte=now).order_by('-featured', 'start_date')
     pastEvents = Event.objects.get_queryset().order_by('-featured', '-start_date')
+    
+    paginator = Paginator(pastEvents, 3) # 3 son los elementos que se muestran por página.
+    page = request.GET.get('page')
+    try:
+        pastEvents = paginator.page(page)
+    except PageNotAnInteger:
+        # Si la página no es un entero, entrega la primera página.
+        pastEvents = paginator.page(1)
+    except EmptyPage:
+        # Si la página está fuera de rango (por ejemplo, 9999), entrega la última página de resultados.
+        pastEvents = paginator.page(paginator.num_pages)
     print(pastEvents)
     approvedEvents = ApprovedEvents.objects.all().values_list('event_id', flat=True)
     unApprovedEvents = UnApprovedEvents.objects.all().values_list('event_id', flat=True)

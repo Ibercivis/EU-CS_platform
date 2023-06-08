@@ -42,6 +42,24 @@
             {% endfor %}
         </div>
     </div>
+
+    <div class="pagination" style="justify-content: center;">
+        <span class="step-links">
+            {% if pastEvents.has_previous %}
+                <a href="?page=1" style="margin-right: 8px;">&lt;&lt; first</a>
+                <a href="?page={{ pastEvents.previous_page_number }}">&lt; previous</a>
+            {% endif %}
+
+            <span class="current" style="margin-left: 4px; margin-right: 4px;">
+                Page {{ pastEvents.number }} of {{ pastEvents.paginator.num_pages }}
+            </span>
+
+            {% if pastEvents.has_next %}
+                <a href="?page={{ pastEvents.next_page_number }}" style=" margin-right: 8px;">next &gt;</a>
+                <a href="?page={{ pastEvents.paginator.num_pages }}" >last &gt;&gt;</a>
+            {% endif %}
+        </span>
+    </div>
     {% endif %}
 
 </div>
