@@ -2,13 +2,35 @@
 {% load i18n %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
+{% load event_tags %}
 {% block title %}{{ block.super }} :: Events{% endblock %}
 
 
 {% block list_of_items %}
+
+<!-- Search form -->
+<div class="container">
+    <div class="col-12">
+        <form method="GET" action="" style="margin-bottom: 32px; display: flex; justify-content: center; padding-top: 20px;">
+            <input type="text" class="form-border-Blue" name="q" placeholder="Buscar eventos..." value="{{ request.GET.q }}" style="width: 50%;">
+            <input type="submit" value="Buscar" class="btn btn-my-outline-darkGreen" style="margin-left: 24px;">
+        </form>
+    </div>
+</div>
+<!-- End of search form -->
+
+<!-- Start of Text Results section -->
+<div class="container">
+    <div class="col-12">
+        {% if q %}
+        <p>Mostrando {{ total_events }} eventos con el término "{{ q }}"</p>
+        {% endif %}
+    </div>
+</div>
+<!-- End of Text Results section-->
 <div class="container">
     {% if ongoingEvents %}
-    <h1>{% trans "On going <span class='lightBlue-color'>events</span>" %}</h1>
+    <h1>{% trans "On going <span class='lightBlue-color'>events</span>" %}{% if q %} ({{ num_ongoingEvents }}){% endif %}</h1>
     <div class="row">
         <div class="col-1"></div>
         <div class="col-11">
@@ -21,7 +43,7 @@
 
 
     {% if events %}
-    <h1>{% trans "Upcoming <span class='lightBlue-color'>events</span>" %}</h1>
+    <h1>{% trans "Upcoming <span class='lightBlue-color'>events</span>" %}{% if q %} ({{ num_upcomingEvents }}){% endif %}</h1>
     <div class="row">
         <div class="col-1"></div>
         <div class="col-11">
@@ -33,7 +55,7 @@
     {% endif %}
 
     {% if pastEvents %}
-    <h1 class="mt-5">{% trans "Past <span class='lightBlue-color'>events</span>" %}</h1>
+    <h1 class="mt-5">{% trans "Past <span class='lightBlue-color'>events</span>" %}{% if q %} ({{ num_pastEvents }}){% endif %}</h1>
     <div class="row">
         <div class="col-1"></div>
         <div class="col-11">
@@ -43,11 +65,12 @@
         </div>
     </div>
 
+    <!-- Old Pagination 
     <div class="pagination" style="justify-content: center;">
         <span class="step-links">
             {% if pastEvents.has_previous %}
-                <a href="?page=1" style="margin-right: 8px;">&lt;&lt; first</a>
-                <a href="?page={{ pastEvents.previous_page_number }}">&lt; previous</a>
+                <a href="?page=1&q={{ q }}" style="margin-right: 8px;">&lt;&lt; first</a>
+                <a href="?page={{ pastEvents.previous_page_number }}&q={{ q }}">&lt; previous</a>
             {% endif %}
 
             <span class="current" style="margin-left: 4px; margin-right: 4px;">
@@ -55,11 +78,49 @@
             </span>
 
             {% if pastEvents.has_next %}
-                <a href="?page={{ pastEvents.next_page_number }}" style=" margin-right: 8px;">next &gt;</a>
-                <a href="?page={{ pastEvents.paginator.num_pages }}" >last &gt;&gt;</a>
+                <a href="?page={{ pastEvents.next_page_number }}&q={{ q }}" style=" margin-right: 8px;">next &gt;</a>
+                <a href="?page={{ pastEvents.paginator.num_pages }}&q={{ q }}" >last &gt;&gt;</a>
             {% endif %}
         </span>
     </div>
+    -->
+    {% if pastEvents.has_other_pages %}
+    <ul class="pagination">
+        {% if pastEvents.number|add:'-3' > 1 %}
+        <a href="?{% param_replace page=1 %}">
+            <li class="btn mb-4 btn-light">{{ 1 }}</li>
+        </a>
+        {% endif %}
+
+        {% if pastEvents.number|add:'-3' > 1 and pastEvents.number|add:'-4' > 1 %}
+            <a href="?{% param_replace page=pastEvents.number|add:'-4' %}">
+            <li class="btn mb-4 btn-light">&hellip;</li>
+            </a>
+        {% endif %}
+        {% for i in pastEvents.paginator.page_range %}
+        {% if pastEvents.number == i %}
+        <li class="active btn btn-info mb-4"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+        {% elif i > pastEvents.number|add:'-4' and i < pastEvents.number|add:'4' %}
+        <a href="?{% param_replace page=i %}">
+            <li class="btn mb-4 btn-light">{{ i }}</li>
+        </a>
+        {% endif %}
+        {% endfor %}
+        
+        {% if pastEvents.paginator.num_pages > pastEvents.number|add:'3' and pastEvents.paginator.num_pages > pastEvents.number|add:'4' %}
+            <a href="?{% param_replace page=pastEvents.number|add:'4' %}">
+            <li class="btn mb-4 btn-light">&hellip;</li>
+            </a>
+        {% endif %}
+
+        {% if pastEvents.paginator.num_pages > pastEvents.number|add:'3' %}
+            <a href="?{% param_replace page=pastEvents.paginator.num_pages %}">
+            <li class="btn mb-4 btn-light">{{ pastEvents.paginator.num_pages }}</li>
+            </a>
+        {% endif %}
+    </ul>
+    {% endif %}
+
     {% endif %}
 
 </div>

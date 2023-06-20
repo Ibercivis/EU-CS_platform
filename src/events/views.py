@@ -7,18 +7,54 @@ from django.http import JsonResponse
 from django.utils import formats
 from .models import Event, ApprovedEvents, UnApprovedEvents
 from .forms import EventForm
+from django.db.models import Q
 
 
 def events(request):
     user = request.user
     now = datetime.today()
     now = now.replace(hour=0, minute=0, second=0, microsecond=0)
-    events = Event.objects.get_queryset().filter(start_date__gt=now).order_by('-featured', 'start_date')
+
+    #For Searching, until events = Event.objects.get_queryset().filter(start_date__gt=now).order_by('-featured', 'start_date')
+
+    query = request.GET.get("q") or ""
+    if query:
+        events = Event.objects.filter(
+            Q(title__icontains=query) |
+            Q(description__icontains=query) |
+            Q(place__icontains=query), 
+            start_date__gt=now
+        ).distinct().order_by('-featured', 'start_date')
+        ongoingEvents = Event.objects.filter(
+            Q(title__icontains=query) |
+            Q(description__icontains=query) |
+            Q(place__icontains=query),
+            start_date__lte=now,
+            end_date__gte=now
+            ).distinct().order_by('-featured', 'start_date')
+        pastEvents = Event.objects.filter(
+            Q(title__icontains=query) |
+            Q(description__icontains=query) |
+            Q(place__icontains=query),
+            end_date__lt=now
+            ).distinct().order_by('-featured', 'start_date')
+    else:
+        events = Event.objects.get_queryset().filter(start_date__gt=now).order_by('-featured', 'start_date')
+        ongoingEvents = Event.objects.get_queryset().filter(
+            start_date__lte=now,
+            end_date__gte=now).order_by('-featured', 'start_date')
+        pastEvents = Event.objects.get_queryset().order_by('-featured', '-start_date')
+
+    total_events = len(ongoingEvents) + len(events) + len(pastEvents)
+    num_upcomingEvents = len(events)
+    num_ongoingevents = len(ongoingEvents)
+    num_pastEvents = len(pastEvents)
+    '''
     ongoingEvents = Event.objects.get_queryset().filter(
             start_date__lte=now,
             end_date__gte=now).order_by('-featured', 'start_date')
     pastEvents = Event.objects.get_queryset().order_by('-featured', '-start_date')
-    
+    '''
     paginator = Paginator(pastEvents, 3) # 3 son los elementos que se muestran por página.
     page = request.GET.get('page')
     try:
@@ -33,10 +69,17 @@ def events(request):
     approvedEvents = ApprovedEvents.objects.all().values_list('event_id', flat=True)
     unApprovedEvents = UnApprovedEvents.objects.all().values_list('event_id', flat=True)
 
+    
+
     if not user.is_staff:
         events = events.exclude(id__in=unApprovedEvents)
 
     return render(request, 'events.html', {
+        'q': query,
+        'total_events': total_events,
+        'num_upcomingEvents': num_upcomingEvents,
+        'num_ongoingevents': num_ongoingevents,
+        'num_pastEvents': num_pastEvents,
         'events': events,
         'pastEvents': pastEvents,
         'ongoingEvents': ongoingEvents,

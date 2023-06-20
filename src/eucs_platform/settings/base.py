@@ -82,7 +82,7 @@ TEMPLATES = [
                 'eucs_platform.context_processors.global_settings',
                 # To manage static versions
                 'eucs_platform.context_processors.static_version',
-
+                
             ]
         },
     }
