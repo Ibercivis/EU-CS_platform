@@ -2,6 +2,7 @@ from django.contrib.gis.db import models
 from django.conf import settings
 from organisations.models import Organisation
 from django_countries.fields import CountryField
+from eucs_platform import visao
 
 
 class Status(models.Model):
@@ -194,6 +195,29 @@ class Project(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+    
+    @property
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            # Can't use self.approved = self.creator.is_staff. Approved accepts None.
+            self.approved = True
+
+        super(Project, self).save(*args, **kwargs)
+        if self.approved and self.mainOrganisation and settings.VISAO_USERNAME:
+            try:
+                auth_header = visao.authenticate()
+                visao.save_project(self, auth_header)
+            except Exception as e:
+                print("Error saving project to VISAO: ", e)
+
+    def delete(self, *args, **kwargs):
+        if settings.VISAO_USERNAME:
+            try:
+                auth_header = visao.authenticate()
+                visao.delete_project(self, auth_header)
+            except Exception as e:
+                print("Error deleting project from VISAO: ", e)
+
 
 
 class ApprovedProjects(models.Model):
