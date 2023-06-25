@@ -269,3 +269,9 @@ def getForumResponsesNumber(request):
 
     response['forumresponses'] = forumresponses
     return JsonResponse(response)
+
+#For the project map
+def projects_map(request):
+    #We only select projects approved and with associated mainOrganisation
+    projects_to_markers = Project.objects.filter(approved=True, mainOrganisation__isnull=False)
+    return render(request, '_map_projects.html', {'projects': projects_to_markers})
