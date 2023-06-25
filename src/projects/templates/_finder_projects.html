@@ -101,63 +101,66 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12 mb-4">
-                {% if filters.country %}
-                <a class="badge rounded-pill bg-dark" id="pill-status">
-                    <i class="fas fa-times"></i>
-                    {% trans "country:" %} {{filters.country}}
-                </a>
-                {% endif %}
-
+            <div class="col-12 mb-4 mt-2">
                 {% if filters.keywords %}
-                <a class="badge rounded-pill bg-my-darkGreen search-filter">
-                    <i class="fas fa-times"></i> {% trans "keyword:" %} {{filters.keywords}}
+                <a class="badge rounded-pill bg-my-darkGreen search-filter" id="pill-keywords" style="cursor: pointer">
+                    <i class="fas fa-times"></i> {{filters.keywords}}
                 </a>
                 {% endif %}
-                {% if filters.topic %}
-                <a class="badge rounded-pill bg-my-darkBlue" id="pill-topic">
+                {% if filters.country %}
+                <a class="badge rounded-pill bg-dark" id="pill-country" style="cursor: pointer">
                     <i class="fas fa-times"></i>
-                    {% trans "topic:" %} {{filters.topic}}
+                    {% trans "Country:" %} {{filters.country}}
                 </a>
                 {% endif %}
                 {% if filters.status %}
-                <a class="badge rounded-pill bg-dark" id="pill-status">
+                <a class="badge rounded-pill bg-dark" id="pill-status" style="cursor: pointer">
                     <i class="fas fa-times"></i>
-                    {% trans "status:" %} {{filters.status}}
+                    {% trans "Status:" %} {{filters.status}}
                 </a>
                 {% endif %}
                 {% if filters.hasTag %}
-                <a class="badge rounded-pill bg-my-lightBlue" id="pill-hasTag">
+                <a class="badge rounded-pill bg-my-lightBlue" id="pill-hasTag" style="cursor: pointer">
                     <i class="fas fa-times"></i>
-                    {% trans "has tag:" %} {{filters.hasTag}}
+                    {% trans "Hastag:" %} {{filters.hasTag}}
                 </a>
                 {% endif %}
                 {% if filters.difficultyLevel %}
-                <a class="badge rounded-pill bg-my-lightGreen" id="pill-difficultyLevel">
+                <a class="badge rounded-pill bg-my-lightGreen" id="pill-difficultyLevel" style="cursor: pointer">
                     <i class="fas fa-times"></i>
-                    {% trans "difficulty level:" %} {{filters.difficultyLevel}}
+                    {% trans "Difficulty level:" %} {{filters.difficultyLevel}}
+                </a>
+                {% endif %}
+                {% if filters.topic %}
+                <a class="badge rounded-pill bg-my-darkBlue" id="pill-topic" style="cursor: pointer">
+                    <i class="fas fa-times"></i>
+                    {% trans "Topic:" %} {{filters.topic}}
                 </a>
                 {% endif %}
                 {% if filters.participationTask %}
-                <a class="badge rounded-pill bg-my-lightGreen" id="pill-participationTask">
+                <a class="badge rounded-pill bg-my-lightGreen pointer" id="pill-participationTask" style="cursor: pointer">
                     <i class="fas fa-times"></i>
-                    {% trans "participation task:" %} {{filters.participationTask}}
+                    {% trans "Participation task:" %} {{filters.participationTask}}
                 </a>
                 {% endif %}
                 <!-- TODO: improve next condition -->
                 {% if request.get_full_path != "/projects" %}
-                <a class="badge rounded-pill bg-danger text-decoration-none" href="/projects">
-                    <i class="fas fa-times"></i> {% trans "Clear current search query and filters" %}
-                </a>
+                    {% if filters.keywords != "" %}
+                    <a class="badge rounded-pill bg-danger text-decoration-none" href="/projects">
+                        <i class="fas fa-times"></i> {% trans "Clear search and filters" %}
+                    </a>
+                    {% endif %}
                 {% endif %}
-                <div class="small">
+                {% if filters.keywords != "" %}
+                <div class="small mt-3">
                     {{ counter }}
                     {% if counter != 1 %}
-                    {% trans "projects found" %}
+                    {% trans "projects found for " %} "{{filters.keywords}}"
                     {% else %}
-                    {% trans "project found" %}
+                    {% trans "project found for " %} "{{filters.keywords}}"
                     {% endif %}
                 </div>
+                {% endif %}
             </div>
         </div>
     </form>

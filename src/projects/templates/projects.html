@@ -18,9 +18,9 @@
 <div class="container">
     <div clas="row">
         <div class="col-12">
-            <h1>{% trans "project <span class='lightBlue-color'>search</span>" %}</h1>
+            
         <div>
-        {% include "_subnavbar.html" %}
+        {% include "_subnavbarNew.html" %}
         {% include "_finder_projects.html" %}
     </div>
     <div class="row">
@@ -65,6 +65,18 @@
             $('#participationTask').val('')
             $('#searchProjects').submit();
         });
+
+        $('#pill-country').on('click', function() {
+            $('#country').val('')
+            $('#searchProjects').submit();
+        });
+
+        $('#pill-keywords').on('click', function() {
+            $('#keywords').val('')
+            $('#searchProjects').submit();
+        });
+
+
 	});
  </script>
 {% endblock scripts %}
