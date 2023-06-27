@@ -66,7 +66,7 @@ urlpatterns = [
     path("development/", views.development, name="development"),
     path("about/", views.AboutPage.as_view(), name="about"),
     path("policy_brief/", views.policy_brief, name="policy_brief"),
-    path("users/", include(profiles.urls)),
+    path("", include(profiles.urls)),
     path("admin/", admin.site.urls),
     path("select2/", include("django_select2.urls")),
     path("", include(contact.urls)),

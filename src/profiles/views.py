@@ -185,7 +185,7 @@ class UsersSearch(generic.TemplateView):
 
     def get(self, request, *args, **kwargs):
         users = Profile.objects.all().filter(profileVisible=True).filter(user__is_active=True).order_by('-user__last_login')
-        filters = {}
+        filters = {'keywords': ''}
         # TODO: Add surname (needs to be added algo in the autocomplete search
         if request.GET.get('keywords'):
             users = users.filter(
@@ -196,7 +196,7 @@ class UsersSearch(generic.TemplateView):
         counter = len(users)
 
         paginator = Paginator(users, 42)
-        page = request.GET.get('page')
+        page = request.GET.get('page', 1)
         users = paginator.get_page(page)
 
         kwargs["users"] = users
@@ -204,6 +204,32 @@ class UsersSearch(generic.TemplateView):
         kwargs["counter"] = counter
         kwargs["filters"] = filters
         return super().get(request, *args, **kwargs)
+    
+def userSearch(request):
+    template_name = "profiles/usersSearch.html"
+    users = Profile.objects.filter(profileVisible=True, user__is_active=True).order_by('-user__last_login')
+    filters = {'keywords': ''}
+    keywords = request.GET.get('keywords')
+    if keywords:
+        users = users.filter(
+            Q(user__name__icontains=keywords) |
+            Q(interestAreas__interestArea__icontains=keywords)).distinct()
+        filters['keywords'] = keywords
+
+    counter = len(users)
+
+    paginator = Paginator(users, 42)
+    page = request.GET.get('page', 1)
+    users = paginator.get_page(page)
+
+    context = {
+        'users': users,
+        'isSearchPage': True,
+        'counter': counter,
+        'filters': filters
+    }
+    return render(request, template_name, context)
+
 
 
 def projects(request):
@@ -311,7 +337,7 @@ def usersAutocompleteSearch(request):
         return HttpResponse("No cookies")
 
 
-def getProfilesAutocomplete(text):
+"""def getProfilesAutocomplete(text):
     profiles = models.Profile.objects.all().filter(
             Q(surname__icontains=text) | Q(user__name__icontains=text)).filter(profileVisible=True).annotate(
                     fullname=Concat('user__name', Value(' '), 'surname')).values_list('user__id', 'fullname', 'slug')
@@ -324,4 +350,33 @@ def getProfilesAutocomplete(text):
         numberElements = models.Profile.objects.filter(
                 profileVisible=True).filter(Q(interestAreas__interestArea__icontains=interestArea)).count()
         report.append({"type": "profileInterestArea", "text": interestArea, "numberElements": numberElements})
+    return report """
+
+def getProfilesAutocomplete(text):
+    profiles = models.Profile.objects.all().filter(
+        Q(surname__icontains=text) | Q(user__name__icontains=text)
+    ).filter(profileVisible=True).annotate(
+        fullname=Concat('user__name', Value(' '), 'surname')
+    ).values('user__id', 'fullname', 'slug')
+
+    interestAreas = models.InterestArea.objects.filter(interestArea__icontains=text).values_list('interestArea', flat=True).distinct()
+
+    report = []
+    for profile in profiles:
+        report.append({
+            "type": "profile",
+            "id": str(profile['user__id']),
+            "text": profile['fullname'],
+            "slug": profile['slug']
+        })
+
+    for interestArea in interestAreas:
+        numberElements = models.Profile.objects.filter(profileVisible=True).filter(interestAreas__interestArea__icontains=interestArea).count()
+        report.append({
+            "type": "profileInterestArea",
+            "text": interestArea,
+            "numberElements": numberElements
+        })
+
     return report
+

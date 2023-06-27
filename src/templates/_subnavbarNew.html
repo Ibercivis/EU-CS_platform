@@ -44,37 +44,37 @@
                         <li class="nav-item text-start subnavbar-item">
                             <a class="nav-link ps-4  {% active_link 'projects' %}"
                             href="{% url 'projects' %}{% if request.GET.keywords %}?keywords={{request.GET.keywords}}{%endif%}">
-                                <i class="fas fa-binoculars"></i> {% trans "Projects" %}
+                                <i class="fas fa-binoculars"></i> {% trans "Projects" %} {% if filters.keywords != "" %} ({{counter}}) {% endif %}
                             </a>
                         </li>
                         <li class="nav-item subnavbar-item">
                             <a class="nav-link ps-4  {% active_link 'resources' %}"
                             href="{% url 'resources' %}{% if request.GET.keywords %}?keywords={{request.GET.keywords}}{%endif%}">
-                                <i class="fas fa-book"></i> {% trans "Resources" %}
+                                <i class="fas fa-book"></i> {% trans "Resources" %} {% if filters.keywords != "" %} ({{resourcesCounter}}) {% endif %}
                             </a>
                         </li>
                         <li class="nav-item subnavbar-item">
                             <a class="nav-link ps-4  {% active_link 'training_resources' %}"
                             href="{% url 'training_resources' %}{% if request.GET.keywords %}?keywords={{request.GET.keywords}}{%endif%}">
-                                <i class="fas fa-graduation-cap"></i> {% trans "Training" %}
+                                <i class="fas fa-graduation-cap"></i> {% trans "Training" %} {% if filters.keywords != "" %} ({{trainingResourcesCounter}}) {% endif %}
                             </a>
                         </li>
                         <li class="nav-item subnavbar-item">
                             <a class="nav-link ps-4  {% active_link 'organisations' %}"
                             href="{% url 'organisations'%}{% if request.GET.keywords %}?keywords={{request.GET.keywords}}{%endif%}">
-                                <i class="fas fa-university"></i> {% trans "Organisations" %}
+                                <i class="fas fa-university"></i> {% trans "Organisations" %} {% if filters.keywords != "" %} ({{organisationsCounter}}) {% endif %}
                             </a>
                         </li>
                         <li class="nav-item subnavbar-item">
                             <a class="nav-link ps-4  {% active_link 'platforms' %}"
                             href="{% url 'platforms'%}{% if request.GET.keywords %}?keywords={{request.GET.keywords}}{%endif%}">
-                                <i class="fas fa-globe-europe"></i> {% trans "Platforms" %}
+                                <i class="fas fa-globe-europe"></i> {% trans "Platforms" %} {% if filters.keywords != "" %} ({{platformsCounter}}) {% endif %}
                             </a>
                         </li>
                         <li class="nav-item subnavbar-item">
                             <a class="nav-link ps-4  {% active_link 'users' %}"
                             href="/users/{% if request.GET.keywords %}?keywords={{request.GET.keywords}}{%endif%}">
-                                <i class="fas fa-user-friends"></i> {% trans "Users" %}
+                                <i class="fas fa-user-friends"></i> {% trans "Users" %} {% if filters.keywords != "" %} ({{usersCounter}}) {% endif %}
                             </a>
                         </li>
                     </ul>
