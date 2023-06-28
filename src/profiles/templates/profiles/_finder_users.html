@@ -5,7 +5,7 @@
 {% get_countries as countries %}
 
 <div class="row">
-    <form class="form-inline float-lg-right" id="searchUsers" action="{% url 'profiles:userSearch' %}">
+    <form class="form-inline float-lg-right" id="searchUsers" action="/resources">
         <input type="hidden" name="keywords" value="{{filters.keywords}}">
         <div class="col-lg-6 col-6 mb-3 text">
             {{ counter }} {% if counter != 1 %}{% trans "users found" %} {% else %} {% trans "user found" %} {% endif %}

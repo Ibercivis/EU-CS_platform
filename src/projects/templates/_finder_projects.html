@@ -153,12 +153,14 @@
                 {% endif %}
                 {% if filters.keywords != "" %}
                 <div class="small mt-3">
-                    {{ counter }}
-                    {% if counter != 1 %}
-                    {% trans "projects found for " %} "{{filters.keywords}}"
-                    {% else %}
-                    {% trans "project found for " %} "{{filters.keywords}}"
-                    {% endif %}
+                    <span class"subnavbarCounter-text">
+                        {{ counter }}
+                        {% if counter != 1 %}
+                        {% trans "projects found for " %} "{{filters.keywords}}"
+                        {% else %}
+                        {% trans "project found for " %} "{{filters.keywords}}"
+                        {% endif %}
+                    </span>
                 </div>
                 {% endif %}
             </div>

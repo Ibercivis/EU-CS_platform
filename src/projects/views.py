@@ -344,6 +344,7 @@ def projects(request):
         'difficultyLevel': difficultyLevel,
         'participationTask': participationTask,
         'counter': counter,
+        'projectsCounter': counter,
         'resourcesCounter': resourcesCounter,
         'trainingResourcesCounter': trainingResourcesCounter,
         'organisationsCounter': organisationsCounter,
@@ -645,7 +646,8 @@ def applyFilters(request, projects):
             projects = projects.filter(
                 Q(name__icontains=request.GET['keywords']) |
                 Q(keywords__keyword__icontains=request.GET['keywords'])).distinct()
-            
+            projects = projects.filter(approved=True)
+
     if projects.model == Organisation:
         print("Estas son las organizaciones en el query")
         if request.GET.get('keywords'):
@@ -662,7 +664,10 @@ def applyFilters(request, projects):
     if projects.model == Profile:
         if request.GET.get('keywords'):
             keywords = request.GET.get('keywords')
-            projects = projects.filter(bio__icontains=keywords)               
+            projects = projects.filter(
+                Q(user__name__icontains=keywords) |
+                Q(interestAreas__interestArea__icontains=keywords) |
+                Q(bio__icontains=keywords)).distinct()               
                     
     # Specific filters only apply if projects is a Project instance    
     if projects.model == Project:

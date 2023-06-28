@@ -44,7 +44,7 @@
                         <li class="nav-item text-start subnavbar-item">
                             <a class="nav-link ps-4  {% active_link 'projects' %}"
                             href="{% url 'projects' %}{% if request.GET.keywords %}?keywords={{request.GET.keywords}}{%endif%}">
-                                <i class="fas fa-binoculars"></i> {% trans "Projects" %} {% if filters.keywords != "" %} ({{counter}}) {% endif %}
+                                <i class="fas fa-binoculars"></i> {% trans "Projects" %} {% if filters.keywords != "" %} ({{projectsCounter}}) {% endif %}
                             </a>
                         </li>
                         <li class="nav-item subnavbar-item">

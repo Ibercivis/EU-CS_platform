@@ -4,7 +4,7 @@
 <form class="form-inline float-lg-right" id="searchOrganisations" action="{% url 'organisations' %}">
     <input type="hidden" name="keywords" value="{{filters.keywords}}"/>
     <div class="row">
-        <div class="col-6">
+        <div class="col-12">
             <div class="input-group input-group-sm">
                 <div class="input-group-text"><i class="fas fa-sort-amount-down"></i></div>
                 <select id="orderby" name="orderby" class="custom-select form-control">
@@ -36,10 +36,10 @@
                 </select>
             </div>
         </div>
-        <div class="col-lg-6 col-6 mb-4">
+        <div class="col-12 mb-4 mt-2">
             {% if filters.keywords %}
             <a class="badge rounded-pill bg-my-darkGreen search-filter">
-                <i class="fas fa-times"></i> {% trans "keyword:" %} {{filters.keywords}}
+                <i class="fas fa-times"></i> {{filters.keywords}}
             </a>
             {% endif %}
             {% if filters.country %}
@@ -58,16 +58,22 @@
                 {% trans "type:" %} {{filters.orgTypes}}
             </a>
             {% endif %}
-            {{ counter }}
-            {% if counter != 1 %}
-            {% trans "organisations" %}
-            {% else %}
-            {% trans "organisation" %}
-            {% endif %}
-            {% trans "found" %}
             {% if request.get_full_path != "/organisations" %}
             <a class="badge rounded-pill bg-danger text-decoration-none" href="/organisations">
-                <i class="fas fa-times"></i> {% trans "Clear current search query and filters" %}</a>
+                <i class="fas fa-times"></i> {% trans "Clear current search" %}</a>
+            {% endif %}
+            {% if filters.keywords != "" %}
+            <div class="small mt-3">
+                <span class"subnavbarCounter-text">
+                    {{ counter }}
+                    {% if counter != 1 %}
+                    {% trans "organisations found for " %} "{{ filters.keywords }}"
+                    {% else %}
+                    {% trans "organisation found for " %} "{{ filters.keywords }}"
+                    {% endif %}
+                    {% trans "found" %}
+                </span>
+            </div>
             {% endif %}
             </a>
         </div>

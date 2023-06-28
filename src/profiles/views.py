@@ -213,7 +213,8 @@ def userSearch(request):
     if keywords:
         users = users.filter(
             Q(user__name__icontains=keywords) |
-            Q(interestAreas__interestArea__icontains=keywords)).distinct()
+            Q(interestAreas__interestArea__icontains=keywords) |
+            Q(bio__icontains=keywords)).distinct()
         filters['keywords'] = keywords
 
     counter = len(users)
