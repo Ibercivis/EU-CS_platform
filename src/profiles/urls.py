@@ -17,6 +17,6 @@ urlpatterns = [
     path("users/me/organisations", views.organisations, name="self_organisations"),
     path("users/me/my_stats", views.MyStats.as_view(), name="mystats"),
     #path("users/", views.UsersSearch.as_view(), name="users"),
-    path("users/", views.userSearch, name="userSearch"),
+    path("users/", views.userSearch, name="users"),
     path("users/me/usersAutocompleteSearch", views.usersAutocompleteSearch, name="usersAutocompleteSearch")
 ]

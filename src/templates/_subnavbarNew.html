@@ -14,9 +14,9 @@
                     {% elif 'organisations' in request.get_full_path %}
                         action="/organisations"
                     {% elif 'platforms' in request.get_full_path %}
-                        action= "platforms"
+                        action= "/platforms"
                     {% elif 'users' in request.get_full_path %}
-                        action= "users"
+                        action= "/users"
                     {% else %}
                         action="/projects"
                     {% endif %}>

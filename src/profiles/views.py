@@ -207,26 +207,73 @@ class UsersSearch(generic.TemplateView):
     
 def userSearch(request):
     template_name = "profiles/usersSearch.html"
-    users = Profile.objects.filter(profileVisible=True, user__is_active=True).order_by('-user__last_login')
-    filters = {'keywords': ''}
-    keywords = request.GET.get('keywords')
-    if keywords:
-        users = users.filter(
-            Q(user__name__icontains=keywords) |
-            Q(interestAreas__interestArea__icontains=keywords) |
-            Q(bio__icontains=keywords)).distinct()
-        filters['keywords'] = keywords
+    users = Profile.objects.filter(profileVisible=True, user__is_active=True)
+    interestAreasWithContent = models.InterestArea.objects.filter(profile__in=users).order_by('interestArea').distinct()
+    organisationsWithContent = Profile.objects.all().filter(profileVisible=True).filter(user__is_active=True).values_list('organisation', flat=True).distinct()
+    organisationsWithContent = Organisation.objects.filter(id__in=organisationsWithContent).order_by('name')
+    countriesWithContent = Profile.objects.all().filter(profileVisible=True).filter(user__is_active=True).values_list('country', flat=True).distinct()
+    filters = {'keywords': '', 'country': '', 'interestAreas': '', 'organisation': ''}
+    users = applyFilters(request, users)
+    filters = setFilters(request, filters)
+    users = users.distinct()
+
+    # Ordering
+    if request.GET.get('orderby'):
+        if(request.GET.get('orderby') == 'name'):
+            users = users.order_by('surname')    
+        else:
+            users = users.order_by('-user__last_login')
+        filters['orderby'] = request.GET['orderby']
 
     counter = len(users)
+    usersCounter = len(users)
 
     paginator = Paginator(users, 42)
     page = request.GET.get('page', 1)
     users = paginator.get_page(page)
 
+    #To count
+    #For resources count
+    allResources = Resource.objects.all()
+    allResources = applyFilters(request, allResources)
+    allResources = allResources.distinct()
+    resources2 = allResources.filter(~Q(isTrainingResource=True))
+    trainingResources = allResources.filter(isTrainingResource=True)
+    resourcesCounter = len(resources2)
+    trainingResourcesCounter = len(trainingResources)
+
+    #For projects count
+    projects = Project.objects.all()
+    projects = projects.filter(~Q(hidden=True))
+    projects = applyFilters(request, projects)
+    projects = projects.distinct()
+    projectsCounter = len(projects)
+
+    #For organisations count
+    organisations = Organisation.objects.all()
+    organisations = applyFilters(request, organisations)
+    organisations = organisations.distinct()
+    organisationsCounter = len(organisations)
+
+    #For platforms count
+    platforms = Platform.objects.all()
+    platforms = applyFilters(request, platforms)
+    platforms = platforms.distinct()
+    platformsCounter = len(platforms)
+
     context = {
         'users': users,
         'isSearchPage': True,
         'counter': counter,
+        'usersCounter': usersCounter,
+        'resourcesCounter': resourcesCounter,
+        'trainingResourcesCounter': trainingResourcesCounter,
+        'projectsCounter': projectsCounter,
+        'organisationsCounter': organisationsCounter,
+        'platformsCounter': platformsCounter,
+        'interestAreas': interestAreasWithContent,
+        'organisations': organisationsWithContent,
+        'countries': countriesWithContent,
         'filters': filters
     }
     return render(request, template_name, context)
@@ -381,3 +428,58 @@ def getProfilesAutocomplete(text):
 
     return report
 
+def applyFilters(request, queryset):
+    if queryset.model == Project:
+        if request.GET.get('keywords'):
+            queryset = queryset.filter(
+                Q(name__icontains=request.GET['keywords']) |
+                Q(keywords__keyword__icontains=request.GET['keywords'])).distinct()
+            queryset = queryset.filter(approved=True)
+
+    if queryset.model == Resource:
+        if request.GET.get('keywords'):
+            queryset = queryset.filter(
+                Q(name__icontains=request.GET['keywords']) |
+                Q(keywords__keyword__icontains=request.GET['keywords'])).distinct()
+            queryset = queryset.filter(approved=True)
+            
+    if queryset.model == Organisation:
+        if request.GET.get('keywords'):
+            queryset = queryset.filter(
+                Q(name__icontains=request.GET['keywords'])).distinct()
+            
+    if queryset.model == Platform:
+        if request.GET.get('keywords'):
+            keywords = request.GET.get('keywords')
+            queryset = queryset.filter(name__icontains=keywords).distinct()  
+        
+    if queryset.model == Profile:
+        if request.GET.get('keywords'):
+            keywords = request.GET.get('keywords')
+            queryset = queryset.filter(
+                Q(user__name__icontains=keywords) |
+                Q(interestAreas__interestArea__icontains=keywords) |
+                Q(bio__icontains=keywords)).distinct()
+        if request.GET.get('country'):
+            queryset = queryset.filter(country=request.GET['country'])
+        if request.GET.get('interestAreas'):
+            queryset = queryset.filter(interestAreas__interestArea=request.GET['interestAreas'])
+        if request.GET.get('organisation'):
+            organisation_name = request.GET['organisation']
+            organisation = Organisation.objects.get(name=organisation_name)
+            queryset = queryset.filter(organisation=organisation)
+            
+    return queryset
+
+def setFilters(request, filters):
+    if request.GET.get('keywords'):
+        filters['keywords'] = request.GET['keywords']
+    if request.GET.get('country'):
+        filters['country'] = request.GET['country']
+    if request.GET.get('interestAreas'):
+        filters['interestAreas'] = request.GET['interestAreas']
+    if request.GET.get('organisation'):
+        filters['organisation'] = request.GET['organisation']
+    if request.GET.get('orderby'):
+        filters['orderby'] = request.GET['orderby']    
+    return filters
