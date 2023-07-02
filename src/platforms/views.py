@@ -97,10 +97,20 @@ def platform(request, pk):
 
 def platforms(request):
     platforms = Platform.objects.get_queryset()
-    filters = {'keywords': ''}
+    filters = {'keywords': '', 'country': '', 'geographicExtend': ''}
+    countriesWithContent = Platform.objects.values_list('countries', flat=True).distinct()
+    geographicExtendsWithContent = Platform.objects.values_list('geographicExtend', flat=True).distinct()
     platforms = applyFilters(request, platforms)
     filters = setFilters(request, filters)
     platforms = platforms.distinct()
+
+    if request.GET.get('orderby'):
+        orderBy = request.GET.get('orderby')
+        if ("name" in orderBy):
+            platforms = platforms.order_by('name')
+    else:
+        platforms = platforms.order_by('-dateUpdated')
+
     counter = len(platforms)
     counterPlatforms = len(platforms)
 
@@ -141,6 +151,8 @@ def platforms(request):
                                               'projectsCounter': projectsCounter,
                                               'organisationsCounter': organisationsCounter,
                                               'usersCounter': usersCounter,
+                                              'countriesWithContent': countriesWithContent,
+                                              'geographicExtendWithContent': geographicExtendsWithContent,
                                               'filters': filters,
                                               'isSearchPage': True})
 
@@ -241,7 +253,10 @@ def applyFilters(request, queryset):
         if request.GET.get('keywords'):
             keywords = request.GET.get('keywords')
             queryset = queryset.filter(name__icontains=keywords).distinct()  
-        
+        if request.GET.get('country'):
+            queryset = queryset.filter(countries__icontains=request.GET['country']).distinct()
+        if request.GET.get('geographicExtend'):
+            queryset = queryset.filter(geographicExtend__icontains=request.GET['geographicExtend']).distinct()
             
     return queryset
 
@@ -250,8 +265,8 @@ def setFilters(request, filters):
         filters['keywords'] = request.GET['keywords']
     if request.GET.get('country'):
         filters['country'] = request.GET['country']
-    if request.GET.get('orgTypes'):
-        filters['orgTypes'] = request.GET['orgTypes']
+    if request.GET.get('geographicExtend'):
+        filters['geographicExtend'] = request.GET['geographicExtend']
     if request.GET.get('orderby'):
         filters['orderby'] = request.GET['orderby']    
     return filters

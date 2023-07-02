@@ -18,6 +18,8 @@ from events.models import Event
 from django.db.models.functions import Concat
 from django.db.models import Value
 from django.core.paginator import Paginator
+import pprint
+from django.db.models.functions import Lower
 
 
 class ShowProfile(LoginRequiredMixin, generic.TemplateView):
@@ -207,8 +209,8 @@ class UsersSearch(generic.TemplateView):
     
 def userSearch(request):
     template_name = "profiles/usersSearch.html"
-    users = Profile.objects.filter(profileVisible=True, user__is_active=True)
-    interestAreasWithContent = models.InterestArea.objects.filter(profile__in=users).order_by('interestArea').distinct()
+    users = Profile.objects.filter(profileVisible=True, user__is_active=True).order_by('-user__last_login')
+    interestAreasWithContent = models.InterestArea.objects.filter(profile__in=users).order_by(Lower('interestArea')).distinct()
     organisationsWithContent = Profile.objects.all().filter(profileVisible=True).filter(user__is_active=True).values_list('organisation', flat=True).distinct()
     organisationsWithContent = Organisation.objects.filter(id__in=organisationsWithContent).order_by('name')
     countriesWithContent = Profile.objects.all().filter(profileVisible=True).filter(user__is_active=True).values_list('country', flat=True).distinct()
@@ -273,7 +275,7 @@ def userSearch(request):
         'platformsCounter': platformsCounter,
         'interestAreas': interestAreasWithContent,
         'organisations': organisationsWithContent,
-        'countries': countriesWithContent,
+        'countriesWithContent': countriesWithContent,
         'filters': filters
     }
     return render(request, template_name, context)
@@ -463,7 +465,7 @@ def applyFilters(request, queryset):
         if request.GET.get('country'):
             queryset = queryset.filter(country=request.GET['country'])
         if request.GET.get('interestAreas'):
-            queryset = queryset.filter(interestAreas__interestArea=request.GET['interestAreas'])
+            queryset = queryset.filter(interestAreas__interestArea__icontains=request.GET['interestAreas'])
         if request.GET.get('organisation'):
             organisation_name = request.GET['organisation']
             organisation = Organisation.objects.get(name=organisation_name)

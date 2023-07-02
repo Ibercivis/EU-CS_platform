@@ -5,14 +5,14 @@
 {% get_countries as countries %}
 
 <div class="row">
-    <form class="form-inline float-lg-right" id="searchUsers" action="{% url 'profiles:users' %}">
+    <form class="form-inline float-lg-right" id="searchPlatforms" action="{% url 'platforms' %}">
         <input type="hidden" name="keywords" value="{{filters.keywords}}">
         <div class="row">
             <div class="col-12">
                 <div class="input-group input-group-sm">
                     <div class="input-group-text"><i class="fas fa-sort-amount-down"></i></div>
                     <select id="orderby" name="orderby" class="custom-select form-control">
-                        <option value="" {% if filters.orderby == "" %} selected {% endif %}>{% trans "Most Recent Login" %}</option>
+                        <option value="" {% if filters.orderby == "" %} selected {% endif %}>{% trans "Most Recent Updated" %}</option>
                         <option value="name" {% if filters.orderby == "name" %} selected {% endif %}>{% trans "A-Z" %}</option>
                     </select>
                     <div class="input-group-text"><i class="fas fa-filter"></i></div>
@@ -29,21 +29,13 @@
                         {% endfor %}
                         {% endfor %}
                     </select>
-                    <select id="interestAreas" name="interestAreas" class="custom-select form-control">
-                        <option value="">{% trans "Interest Area" %}<option>
-                            {% for t in interestAreas %}
-                                <option {% if t ==  filters.interestAreas %} selected {% endif %} value="{{t}}">
+                    <select id="geographicExtend" name="geographicExtend" class="custom-select form-control">
+                        <option value="">{% trans "Geographic Extend" %}<option>
+                            {% for t in geographicExtendWithContent %}
+                                <option {% if t ==  filters.geographicExtend %} selected {% endif %} value="{{t}}">
                                 {{t|capfirst}}
                                  </option>
                             {% endfor %}
-                    </select>
-                    <select id="organisation" name="organisation" class="custom-select form-control">
-                        <option value="">{% trans "Organisation" %}<option>
-                        {% for organisation in organisations %}
-                        <option {% if organisation.name ==  filters.organisation %} selected {% endif %} value="{{organisation.name}}">
-                        {{organisation.name|capfirst}}
-                        </option>
-                        {% endfor %}
                     </select>
                 </div>
             </div>
@@ -63,20 +55,14 @@
                     {% endfor %}
                 </a>
                 {% endif %}
-                {% if filters.interestAreas %}
-                <a href="#" class="badge rounded-pill bg-my-darkBlue" id="pill-interestAreas">
+                {% if filters.geographicExtend %}
+                <a href="#" class="badge rounded-pill bg-my-darkBlue" id="pill-geographicExtend">
                     <i class="fas fa-times"></i>
-                    {% trans "Interest Area:" %} {{filters.interestAreas}}
+                    {% trans "Interest Area:" %} {{filters.geographicExtend}}
                 </a>
                 {% endif %}
-                {% if filters.organisation %}
-                <a class="badge rounded-pill bg-my-lightGreen pointer" id="pill-organisation" style="cursor: pointer">
-                    <i class="fas fa-times"></i>
-                    {% trans "Participation task:" %} {{filters.organisation}}
-                </a>
-                {% endif %}
-                {% if request.get_full_path != "/users/" %}
-                <a class="badge rounded-pill bg-danger text-decoration-none" href="/users">
+                {% if request.get_full_path != "/platforms/" %}
+                <a class="badge rounded-pill bg-danger text-decoration-none" href="/platforms/">
                     <i class="fas fa-times"></i> {% trans "Clear current search" %}</a>
                 {% endif %}
                 {% if filters.keywords != "" %}

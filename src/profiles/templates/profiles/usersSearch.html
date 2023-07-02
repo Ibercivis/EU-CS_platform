@@ -46,7 +46,22 @@
 		$('.custom-select').on('change', function () {
 			$('#searchUsers').submit();
 		});
-        
+    $('#pill-keywords').on('click', function() {
+        $('#keywords').val('')
+        $('#searchUsers').submit();
+    });
+    $('#pill-country').on('click', function() {
+        $('#country').val('')
+        $('#searchUsers').submit();
+    });
+    $('#pill-interestAreas').on('click', function() {
+        $('#interestAreas').val('')
+        $('#searchUsers').submit();
+    });
+    $('#pill-organisation').on('click', function() {
+        $('#organisation').val('')
+        $('#searchUsers').submit();
+    });
 
 	});
     </script>
