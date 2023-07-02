@@ -95,6 +95,7 @@ urlpatterns = [
     re_path(r"^browse/", never_cache(ckeditor_uploader.views.browse), name="ckeditor_browse",),
     path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
     path('projects_map/', views.projects_map, name='projects_map'),
+    path('get_markers/', views.get_markers, name='get_markers'),
 ]
 
 # User-uploaded files like profile pics need to be served in development

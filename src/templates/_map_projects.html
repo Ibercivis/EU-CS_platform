@@ -43,15 +43,26 @@
 
             var markers = L.markerClusterGroup();
 
-            {% for project in projects %}
-                var marker = L.marker([{{ project.mainOrganisation.latitude }}, {{ project.mainOrganisation.longitude }}], { icon: individualIcon });
-                marker.bindPopup('<div style="font-family: Roboto Condensed; font-size: 14px;">' +
-                        '<a href="/project/{{ project.id }}" style="text-decoration: none;"> {{ project.name }}</a>' +
-                        '</div>');
-                markers.addLayer(marker);
-            {% endfor %}
-
-            map.addLayer(markers);
+            // Perform AJAX request to get the markers
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/get_markers/', true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var markersData = JSON.parse(xhr.responseText).markers;
+                    
+                    // Create markers on the map based on the data received
+                    for (var i = 0; i < markersData.length; i++) {
+                        var marker = L.marker([markersData[i].latitude, markersData[i].longitude], { icon: individualIcon });
+                        marker.bindPopup('<div style="font-family: Roboto Condensed; font-size: 14px;">' +
+                            '<a href="' + markersData[i].project_url + '" style="text-decoration: none;">' + markersData[i].name + '</a>' +
+                            '</div>');
+                        markers.addLayer(marker);
+                    }
+                    
+                    map.addLayer(markers);
+                }
+            };
+            xhr.send();
         });
     </script>
 </body>
