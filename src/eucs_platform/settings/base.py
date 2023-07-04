@@ -470,6 +470,4 @@ GRAPH_MODELS = {
 
 #For OSX
 #GDAL_LIBRARY_PATH = '/opt/homebrew/opt/gdal/lib/libgdal.dylib'
-GDAL_LIBRARY_PATH = '/usr/lib/libgdal.so'
 #GEOS_LIBRARY_PATH = '/opt/homebrew/opt/geos/lib/libgeos_c.dylib'
-GEOS_LIBRARY_PATH = '/usr/lib/x86_64-linux-gnu/libgeos_c.so'

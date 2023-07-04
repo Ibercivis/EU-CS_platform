@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mapa de Proyectos</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
+    <style>
+        #map {
+            width: 100%;
+            height: 580px;
+            box-shadow: 5px 5px 5px #888;
+        }
+
+        #textmap{
+            
+        } 
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var map = L.map('map').setView([0, 0], 2);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                subdomains: 'abcd',
+                maxZoom: 20
+            }).addTo(map);
+
+            L.control.scale().addTo(map);
+
+            var individualIcon = L.divIcon({
+                className: 'individual-icon',
+                html: '<div style="background-color: #277fca; border-radius: 50%; width: 12px; height: 12px; border: 1px solid white;"></div>',
+                iconSize: [30, 30],
+                iconAnchor: [15, 15]
+            });
+
+            var markers = L.markerClusterGroup();
+
+            // Perform AJAX request to get the markers
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/get_markers/', true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var markersData = JSON.parse(xhr.responseText).markers;
+                    
+                    // Create markers on the map based on the data received
+                    for (var i = 0; i < markersData.length; i++) {
+                        var marker = L.marker([markersData[i].latitude, markersData[i].longitude], { icon: individualIcon });
+                        marker.bindPopup('<div style="font-family: Roboto Condensed; font-size: 14px;">' +
+                            '<a href="' + markersData[i].project_url + '" style="text-decoration: none;">' + markersData[i].name + '</a>' +
+                            '</div>');
+                        markers.addLayer(marker);
+                    }
+                    
+                    map.addLayer(markers);
+                }
+            };
+            xhr.send();
+        });
+    </script>
+</body>
+</html>

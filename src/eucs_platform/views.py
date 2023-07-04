@@ -20,6 +20,7 @@ from django.conf import settings
 from blog.models import Post
 import random
 import json
+from django.template.loader import render_to_string
 from machina.apps.forum.models import Forum
 from machina.apps.forum_conversation.models import Topic, Post
 from machina.apps.forum_tracking.models import TopicReadTrack
@@ -269,3 +270,25 @@ def getForumResponsesNumber(request):
 
     response['forumresponses'] = forumresponses
     return JsonResponse(response)
+
+#For the project map
+def projects_map(request):
+    return render(request, '_map_projects.html')
+
+def get_markers(request):
+    # Filter approved projects with non-null mainOrganisation
+    projects = Project.objects.filter(approved=True, mainOrganisation__isnull=False)
+
+    # Create a list of marker dictionaries with the required data
+    markers = []
+    for project in projects:
+        marker = {
+            'latitude': project.mainOrganisation.latitude,
+            'longitude': project.mainOrganisation.longitude,
+            'name': project.name,
+            'project_url': f'/project/{project.id}'
+        }
+        markers.append(marker)
+
+    # Return marker data in JSON format
+    return JsonResponse({'markers': markers})
