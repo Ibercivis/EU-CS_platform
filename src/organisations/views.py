@@ -158,6 +158,7 @@ def organisations(request):
     countriesWithContent = Organisation.objects.all().values_list('country', flat=True).distinct()
     orgTypes = OrganisationType.objects.all()
     filters = {'keywords': '', 'orgTypes': '', 'country': '', 'orderby': ''}
+    """
     if request.GET.get('keywords'):
         organisations = organisations.filter(
                 Q(name__icontains=request.GET['keywords'])).distinct()
@@ -170,8 +171,43 @@ def organisations(request):
         filters['orgTypes'] = request.GET['orgTypes']
     if request.GET.get('orderby'):
         filters['orderby'] = request.GET['orderby']        
+    """
+
+    organisations = applyFilters(request, organisations)
+    filters = setFilters(request, filters)
+    organisations.distinct()
 
     counter = len(organisations)
+
+    #To Count
+    #For resources count
+    allResources = Resource.objects.all()
+    allResources = applyFilters(request, allResources)
+    allResources = allResources.distinct()
+    resources2 = allResources.filter(~Q(isTrainingResource=True))
+    trainingResources = allResources.filter(isTrainingResource=True)
+    resourcesCounter = len(resources2)
+    trainingResourcesCounter = len(trainingResources)
+
+    #For projects count
+    projects = Project.objects.all()
+    projects = projects.filter(~Q(hidden=True))
+    projects = applyFilters(request, projects)
+    projects = projects.distinct()
+    projectsCounter = len(projects)
+
+
+    #For platforms count
+    platforms = Platform.objects.all()
+    platforms = applyFilters(request, platforms)
+    platforms = platforms.distinct()
+    platformsCounter = len(platforms)
+
+    #For users count
+    users = Profile.objects.all().filter(profileVisible=True).filter(user__is_active=True)
+    users = applyFilters(request, users)
+    users = users.distinct()
+    usersCounter = len(users)
 
     # Ordering
     if request.GET.get('orderby'):
@@ -190,6 +226,12 @@ def organisations(request):
     return render(request, 'organisations.html', {
         'organisations': organisations,
         'counter': counter,
+        'organisationsCounter': counter,
+        'resourcesCounter': resourcesCounter,
+        'trainingResourcesCounter': trainingResourcesCounter,
+        'projectsCounter': projectsCounter,
+        'platformsCounter': platformsCounter,
+        'usersCounter': usersCounter,
         'filters': filters,
         'countriesWithContent': countriesWithContent,
         'orgTypes': orgTypes,
@@ -225,7 +267,7 @@ def getOrganisationAutocomplete(text):
         report.append({"type": "organisation", "id": organisation[0], "text": organisation[1]})
     return report
 
-
+"""
 def preFilteredOrganisations(request):
     organisations = Organisation.objects.get_queryset().order_by('id')
     return applyFilters(request, organisations)
@@ -237,7 +279,7 @@ def applyFilters(request, organisations):
     if request.GET.get('orgType'):
         organisations = organisations.filter(orgType=request.GET['orgType'])
     return organisations
-
+"""
 
 def getOtherUsers(creator, members):
     users = []
@@ -297,3 +339,52 @@ def saveImageWithPath(image, photoName):
     image.save(image_path)
     return image_path
 
+def applyFilters(request, queryset):
+    if queryset.model == Project:
+        if request.GET.get('keywords'):
+            queryset = queryset.filter(
+                Q(name__icontains=request.GET['keywords']) |
+                Q(keywords__keyword__icontains=request.GET['keywords'])).distinct()
+            queryset = queryset.filter(approved=True)
+
+    if queryset.model == Resource:
+        if request.GET.get('keywords'):
+            queryset = queryset.filter(
+                Q(name__icontains=request.GET['keywords']) |
+                Q(keywords__keyword__icontains=request.GET['keywords'])).distinct()
+            queryset = queryset.filter(approved=True)
+
+    if queryset.model == Platform:
+        if request.GET.get('keywords'):
+            keywords = request.GET.get('keywords')
+            queryset = queryset.filter(name__icontains=keywords)  
+
+    if queryset.model == Profile:
+        if request.GET.get('keywords'):
+            keywords = request.GET.get('keywords')
+            queryset = queryset.filter(
+                Q(user__name__icontains=keywords) |
+                Q(interestAreas__interestArea__icontains=keywords) |
+                Q(bio__icontains=keywords)).distinct()
+            
+    if queryset.model == Organisation:
+        if request.GET.get('keywords'):
+            queryset = queryset.filter(
+                Q(name__icontains=request.GET['keywords'])).distinct()
+        if request.GET.get('country'):
+            queryset = queryset.filter(country=request.GET['country'])
+        if request.GET.get('orgTypes'):
+            queryset = queryset.filter(orgType__type=request.GET['orgTypes'])
+            
+    return queryset
+
+def setFilters(request, filters):
+    if request.GET.get('keywords'):
+        filters['keywords'] = request.GET['keywords']
+    if request.GET.get('country'):
+        filters['country'] = request.GET['country']
+    if request.GET.get('orgTypes'):
+        filters['orgTypes'] = request.GET['orgTypes']
+    if request.GET.get('orderby'):
+        filters['orderby'] = request.GET['orderby']    
+    return filters

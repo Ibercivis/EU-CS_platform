@@ -33,6 +33,9 @@ import json
 import random
 import pytz
 from rest_framework import status
+from resources.models import Resource
+from platforms.models import Platform
+from profiles.models import Profile
 
 User = get_user_model()
 
@@ -299,6 +302,36 @@ def projects(request):
     page = request.GET.get('page')
     projects = paginator.get_page(page)
 
+    #For resources count
+    allResources = Resource.objects.all()
+    allResources = applyFilters(request, allResources)
+    allResources = allResources.distinct()
+    resources = allResources.filter(~Q(isTrainingResource=True))
+    trainingResources = allResources.filter(isTrainingResource=True)
+    resourcesCounter = len(resources)
+    trainingResourcesCounter = len(trainingResources)
+
+
+    #For organisations count
+    organisations = Organisation.objects.all()
+    filteredOrganisations = applyFilters(request, organisations).distinct()
+    organisations = organisations.distinct()
+    print("Estas son las organizaciones:")
+    print(filteredOrganisations)
+    organisationsCounter = len(filteredOrganisations)
+
+    #For platforms count
+    platforms = Platform.objects.all()
+    platforms = applyFilters(request, platforms)
+    platforms = platforms.distinct()
+    platformsCounter = len(platforms)
+
+    #For users count
+    users = Profile.objects.all().filter(profileVisible=True).filter(user__is_active=True)
+    users = applyFilters(request, users)
+    users = users.distinct()
+    usersCounter = len(users)
+
     return render(request, 'projects.html', {
         'projects': projects,
         'likes': likes,
@@ -311,6 +344,12 @@ def projects(request):
         'difficultyLevel': difficultyLevel,
         'participationTask': participationTask,
         'counter': counter,
+        'projectsCounter': counter,
+        'resourcesCounter': resourcesCounter,
+        'trainingResourcesCounter': trainingResourcesCounter,
+        'organisationsCounter': organisationsCounter,
+        'platformsCounter': platformsCounter,
+        'usersCounter': usersCounter,
         'isSearchPage': True})
 
 @login_required
@@ -602,79 +641,108 @@ def preFilteredProjects(request):
 
 def applyFilters(request, projects):
     # approvedProjects = ApprovedProjects.objects.all().values_list('project_id', flat=True)
-    if request.GET.get('keywords'):
-        projects = projects.filter(
-            Q(name__icontains=request.GET['keywords']) |
-            Q(keywords__keyword__icontains=request.GET['keywords'])).distinct()
+    if projects.model == Resource:
+        if request.GET.get('keywords'):
+            projects = projects.filter(
+                Q(name__icontains=request.GET['keywords']) |
+                Q(keywords__keyword__icontains=request.GET['keywords'])).distinct()
+            projects = projects.filter(approved=True)
+
+    if projects.model == Organisation:
+        print("Estas son las organizaciones en el query")
+        if request.GET.get('keywords'):
+            keywords = request.GET.get('keywords')
+            projects = projects.filter(Q(name__icontains=keywords))
+            print("Estas son las organizaciones en el query")
+            print(projects)
+
+    if projects.model == Platform:
+        if request.GET.get('keywords'):
+            keywords = request.GET.get('keywords')
+            projects = projects.filter(name__icontains=keywords)  
+
+    if projects.model == Profile:
+        if request.GET.get('keywords'):
+            keywords = request.GET.get('keywords')
+            projects = projects.filter(
+                Q(user__name__icontains=keywords) |
+                Q(interestAreas__interestArea__icontains=keywords) |
+                Q(bio__icontains=keywords)).distinct()               
+                    
+    # Specific filters only apply if projects is a Project instance    
+    if projects.model == Project:
+        if request.GET.get('keywords'):
+            projects = projects.filter(
+                Q(name__icontains=request.GET['keywords']) |
+                Q(keywords__keyword__icontains=request.GET['keywords'])).distinct()
+            
+        if request.GET.get('topic'):
+            projects = projects.filter(topic__topic=request.GET['topic'])
+
+        if request.GET.get('status'):
+            projects = projects.filter(status__status=request.GET['status'])
+
+        if request.GET.get('doingAtHome'):
+            projects = projects.filter(doingAtHome=request.GET['doingAtHome'])
+
+        if request.GET.get('hasTag'):
+            projects = projects.filter(hasTag__hasTag=request.GET['hasTag'])
+
+        if request.GET.get('difficultyLevel'):
+            projects = projects.filter(
+                difficultyLevel__difficultyLevel=request.GET['difficultyLevel'])
+
+        if request.GET.get('participationTask'):
+            projects = projects.filter(
+                participationTask__participationTask=request.GET['participationTask'])
+
+        if request.GET.get('country'):
+            projects = projects.filter(
+                Q(mainOrganisation__country=request.GET['country']) | Q(country=request.GET['country']) | Q(organisation__country=request.GET['country'])).distinct()
+
+        # Approved filters
+        if request.GET.get('approved'):
+            if request.GET['approved'] == 'approved':
+                projects = projects.filter(approved=True)
+            elif request.GET['approved'] == 'notApproved':
+                projects = projects.filter(approved=False).filter(moderated=True)
+            elif request.GET['approved'] == 'notYetModerated':
+                projects = projects.filter(moderated=False)
+        else:
+            projects = projects.filter(approved=True)
+
         
 
-    if request.GET.get('topic'):
-        projects = projects.filter(topic__topic=request.GET['topic'])
-
-    if request.GET.get('status'):
-        projects = projects.filter(status__status=request.GET['status'])
-
-    if request.GET.get('doingAtHome'):
-        projects = projects.filter(doingAtHome=request.GET['doingAtHome'])
-
-    if request.GET.get('hasTag'):
-        projects = projects.filter(hasTag__hasTag=request.GET['hasTag'])
-
-    if request.GET.get('difficultyLevel'):
-        projects = projects.filter(
-            difficultyLevel__difficultyLevel=request.GET['difficultyLevel'])
-
-    if request.GET.get('participationTask'):
-        projects = projects.filter(
-            participationTask__participationTask=request.GET['participationTask'])
-
-    if request.GET.get('country'):
-        projects = projects.filter(
-            Q(mainOrganisation__country=request.GET['country']) | Q(country=request.GET['country']) | Q(organisation__country=request.GET['country'])).distinct()
-
-    # Approved filters
-    if request.GET.get('approved'):
-        if request.GET['approved'] == 'approved':
-            projects = projects.filter(approved=True)
-        elif request.GET['approved'] == 'notApproved':
-            projects = projects.filter(approved=False).filter(moderated=True)
-        elif request.GET['approved'] == 'notYetModerated':
-            projects = projects.filter(moderated=False)
-    else:
-        projects = projects.filter(approved=True)
-
-    
-
-    # Insert the search into Stats
-    topic = None
-    search = None
-    country = None
-    search = request.GET.get('keywords')
-    user_agent = request.headers['User-Agent']
-    
-    # If the user is a bot, don't save the search
-    if 'bot' in user_agent.lower():
-        return projects
-    if request.user.is_authenticated:
-        user_registered = True
-    else:
-        user_registered = False
-    print(user_registered)
-    if (request.GET.get('topic')):
-        topic = Topic.objects.get(topic=request.GET.get('topic'))
-    country = request.GET.get('country')
-    if search or topic or country:
-        if search:
-            search = search.lower().lstrip()
-        searchStats = SearchStats.objects.create(
-            search=search,
-            topic=topic,
-            country=country,
-            ip_address=request.META.get('REMOTE_ADDR'),
-            user_agent=request.headers['User-Agent'],
-            day=datetime.now().date(),
-            user_registered=user_registered)
-        searchStats.save()
+        # Insert the search into Stats
+        topic = None
+        search = None
+        country = None
+        search = request.GET.get('keywords')
+        user_agent = request.headers['User-Agent']
+        
+        # If the user is a bot, don't save the search
+        if 'bot' in user_agent.lower():
+            return projects
+        if request.user.is_authenticated:
+            user_registered = True
+        else:
+            user_registered = False
+        print(user_registered)
+        if (request.GET.get('topic')):
+            topic = Topic.objects.get(topic=request.GET.get('topic'))
+        country = request.GET.get('country')
+        if search or topic or country:
+            if search:
+                search = search.lower().lstrip()
+            searchStats = SearchStats.objects.create(
+                search=search,
+                topic=topic,
+                country=country,
+                ip_address=request.META.get('REMOTE_ADDR'),
+                user_agent=request.headers['User-Agent'],
+                day=datetime.now().date(),
+                user_registered=user_registered)
+            searchStats.save()
 
     return projects
 

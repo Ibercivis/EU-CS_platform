@@ -11,12 +11,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            {% if isTrainingResource %}
-            <h1>{% trans "training resource <span class='lightBlue-color'>search</span>" %}</h1>
-            {% else %}
-            <h1>{% trans "resource <span class='lightBlue-color'>search</span>" %}</h1>
-            {% endif %}
-            {% include "_subnavbar.html" %}
+            {% include "_subnavbarNew.html" %}
             {% include "_finder_resources.html" %}
         </div>
     </div>

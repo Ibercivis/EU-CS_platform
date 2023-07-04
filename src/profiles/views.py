@@ -18,6 +18,8 @@ from events.models import Event
 from django.db.models.functions import Concat
 from django.db.models import Value
 from django.core.paginator import Paginator
+import pprint
+from django.db.models.functions import Lower
 
 
 class ShowProfile(LoginRequiredMixin, generic.TemplateView):
@@ -185,7 +187,7 @@ class UsersSearch(generic.TemplateView):
 
     def get(self, request, *args, **kwargs):
         users = Profile.objects.all().filter(profileVisible=True).filter(user__is_active=True).order_by('-user__last_login')
-        filters = {}
+        filters = {'keywords': ''}
         # TODO: Add surname (needs to be added algo in the autocomplete search
         if request.GET.get('keywords'):
             users = users.filter(
@@ -196,7 +198,7 @@ class UsersSearch(generic.TemplateView):
         counter = len(users)
 
         paginator = Paginator(users, 42)
-        page = request.GET.get('page')
+        page = request.GET.get('page', 1)
         users = paginator.get_page(page)
 
         kwargs["users"] = users
@@ -204,6 +206,80 @@ class UsersSearch(generic.TemplateView):
         kwargs["counter"] = counter
         kwargs["filters"] = filters
         return super().get(request, *args, **kwargs)
+    
+def userSearch(request):
+    template_name = "profiles/usersSearch.html"
+    users = Profile.objects.filter(profileVisible=True, user__is_active=True).order_by('-user__last_login')
+    interestAreasWithContent = models.InterestArea.objects.filter(profile__in=users).order_by(Lower('interestArea')).distinct()
+    organisationsWithContent = Profile.objects.all().filter(profileVisible=True).filter(user__is_active=True).values_list('organisation', flat=True).distinct()
+    organisationsWithContent = Organisation.objects.filter(id__in=organisationsWithContent).order_by('name')
+    countriesWithContent = Profile.objects.all().filter(profileVisible=True).filter(user__is_active=True).values_list('country', flat=True).distinct()
+    filters = {'keywords': '', 'country': '', 'interestAreas': '', 'organisation': ''}
+    users = applyFilters(request, users)
+    filters = setFilters(request, filters)
+    users = users.distinct()
+
+    # Ordering
+    if request.GET.get('orderby'):
+        if(request.GET.get('orderby') == 'name'):
+            users = users.order_by('surname')    
+        else:
+            users = users.order_by('-user__last_login')
+        filters['orderby'] = request.GET['orderby']
+
+    counter = len(users)
+    usersCounter = len(users)
+
+    paginator = Paginator(users, 42)
+    page = request.GET.get('page', 1)
+    users = paginator.get_page(page)
+
+    #To count
+    #For resources count
+    allResources = Resource.objects.all()
+    allResources = applyFilters(request, allResources)
+    allResources = allResources.distinct()
+    resources2 = allResources.filter(~Q(isTrainingResource=True))
+    trainingResources = allResources.filter(isTrainingResource=True)
+    resourcesCounter = len(resources2)
+    trainingResourcesCounter = len(trainingResources)
+
+    #For projects count
+    projects = Project.objects.all()
+    projects = projects.filter(~Q(hidden=True))
+    projects = applyFilters(request, projects)
+    projects = projects.distinct()
+    projectsCounter = len(projects)
+
+    #For organisations count
+    organisations = Organisation.objects.all()
+    organisations = applyFilters(request, organisations)
+    organisations = organisations.distinct()
+    organisationsCounter = len(organisations)
+
+    #For platforms count
+    platforms = Platform.objects.all()
+    platforms = applyFilters(request, platforms)
+    platforms = platforms.distinct()
+    platformsCounter = len(platforms)
+
+    context = {
+        'users': users,
+        'isSearchPage': True,
+        'counter': counter,
+        'usersCounter': usersCounter,
+        'resourcesCounter': resourcesCounter,
+        'trainingResourcesCounter': trainingResourcesCounter,
+        'projectsCounter': projectsCounter,
+        'organisationsCounter': organisationsCounter,
+        'platformsCounter': platformsCounter,
+        'interestAreas': interestAreasWithContent,
+        'organisations': organisationsWithContent,
+        'countriesWithContent': countriesWithContent,
+        'filters': filters
+    }
+    return render(request, template_name, context)
+
 
 
 def projects(request):
@@ -311,7 +387,7 @@ def usersAutocompleteSearch(request):
         return HttpResponse("No cookies")
 
 
-def getProfilesAutocomplete(text):
+"""def getProfilesAutocomplete(text):
     profiles = models.Profile.objects.all().filter(
             Q(surname__icontains=text) | Q(user__name__icontains=text)).filter(profileVisible=True).annotate(
                     fullname=Concat('user__name', Value(' '), 'surname')).values_list('user__id', 'fullname', 'slug')
@@ -324,4 +400,88 @@ def getProfilesAutocomplete(text):
         numberElements = models.Profile.objects.filter(
                 profileVisible=True).filter(Q(interestAreas__interestArea__icontains=interestArea)).count()
         report.append({"type": "profileInterestArea", "text": interestArea, "numberElements": numberElements})
+    return report """
+
+def getProfilesAutocomplete(text):
+    profiles = models.Profile.objects.all().filter(
+        Q(surname__icontains=text) | Q(user__name__icontains=text)
+    ).filter(profileVisible=True).annotate(
+        fullname=Concat('user__name', Value(' '), 'surname')
+    ).values('user__id', 'fullname', 'slug')
+
+    interestAreas = models.InterestArea.objects.filter(interestArea__icontains=text).values_list('interestArea', flat=True).distinct()
+
+    report = []
+    for profile in profiles:
+        report.append({
+            "type": "profile",
+            "id": str(profile['user__id']),
+            "text": profile['fullname'],
+            "slug": profile['slug']
+        })
+
+    for interestArea in interestAreas:
+        numberElements = models.Profile.objects.filter(profileVisible=True).filter(interestAreas__interestArea__icontains=interestArea).count()
+        report.append({
+            "type": "profileInterestArea",
+            "text": interestArea,
+            "numberElements": numberElements
+        })
+
     return report
+
+def applyFilters(request, queryset):
+    if queryset.model == Project:
+        if request.GET.get('keywords'):
+            queryset = queryset.filter(
+                Q(name__icontains=request.GET['keywords']) |
+                Q(keywords__keyword__icontains=request.GET['keywords'])).distinct()
+            queryset = queryset.filter(approved=True)
+
+    if queryset.model == Resource:
+        if request.GET.get('keywords'):
+            queryset = queryset.filter(
+                Q(name__icontains=request.GET['keywords']) |
+                Q(keywords__keyword__icontains=request.GET['keywords'])).distinct()
+            queryset = queryset.filter(approved=True)
+            
+    if queryset.model == Organisation:
+        if request.GET.get('keywords'):
+            queryset = queryset.filter(
+                Q(name__icontains=request.GET['keywords'])).distinct()
+            
+    if queryset.model == Platform:
+        if request.GET.get('keywords'):
+            keywords = request.GET.get('keywords')
+            queryset = queryset.filter(name__icontains=keywords).distinct()  
+        
+    if queryset.model == Profile:
+        if request.GET.get('keywords'):
+            keywords = request.GET.get('keywords')
+            queryset = queryset.filter(
+                Q(user__name__icontains=keywords) |
+                Q(interestAreas__interestArea__icontains=keywords) |
+                Q(bio__icontains=keywords)).distinct()
+        if request.GET.get('country'):
+            queryset = queryset.filter(country=request.GET['country'])
+        if request.GET.get('interestAreas'):
+            queryset = queryset.filter(interestAreas__interestArea__icontains=request.GET['interestAreas'])
+        if request.GET.get('organisation'):
+            organisation_name = request.GET['organisation']
+            organisation = Organisation.objects.get(name=organisation_name)
+            queryset = queryset.filter(organisation=organisation)
+            
+    return queryset
+
+def setFilters(request, filters):
+    if request.GET.get('keywords'):
+        filters['keywords'] = request.GET['keywords']
+    if request.GET.get('country'):
+        filters['country'] = request.GET['country']
+    if request.GET.get('interestAreas'):
+        filters['interestAreas'] = request.GET['interestAreas']
+    if request.GET.get('organisation'):
+        filters['organisation'] = request.GET['organisation']
+    if request.GET.get('orderby'):
+        filters['orderby'] = request.GET['orderby']    
+    return filters
