@@ -4,13 +4,17 @@
 {% load crispy_forms_tags %}
 {% load leaflet_tags %}
 {% load thumbnail %}
+{% load custom_filters %}
 
 {% block head %}
 {{block.super }}
+<link rel="stylesheet" href="{% static 'site/css/leaflet-geosearch_style.css' %}">
+<link rel="stylesheet" href="{% static 'site/css/leaflet.css' %}">
 <link rel="stylesheet" href="{% static 'site/css/forms.css' %}">
+{% leaflet_js %}
+{% leaflet_css %}
 {{ form.media.css }}
 {{ form.media.js }}
-
 {% endblock head %}
 
 {% block title %}{{ block.super }} :: Events{% endblock %}
@@ -22,7 +26,11 @@
 
 {% block list_of_items %}
 {% include '_crop_zone.html' %}
-
+<style>
+    .map-error {
+      border: 1px solid red;
+    }
+  </style>
 <div class="container mt-5">
      <form action="/new_event" class="edit-project" method="post" enctype="multipart/form-data"> 
         <div class="row">
@@ -43,25 +51,55 @@
                             <div class="col-1"></div>
                             <div class="col-11">
                                 {{ form.title|as_crispy_field }}
+                                {{ form.url|as_crispy_field }}
                                 {{ form.description|as_crispy_field }}
-                                {{ form.place|as_crispy_field }}
+                                
                                 {{ form.start_date|as_crispy_field }}
                                 {{ form.end_date|as_crispy_field }}
                                 {{ form.hour|as_crispy_field }}
-                                {{ form.url|as_crispy_field }}
+                                {{ form.event_type|as_crispy_field }}
                                 
+                                
+                                <h4 class="leftborder mt-3">{% trans "Event location" %}</h4>  
+                                <p style="font-size:12px">{% trans "This is a required parameter" %}<sup>*</sup> <br>
+                                  {% trans "(If it is a physical event, select the location where it takes place. If it is an online event, select the location from which it is mainly organised.)" %}</p>
+                                  <div class="row" id="map-container">
+                                    {% leaflet_map "map" callback="window.map_init_basic" %}
+                                  </div>
+                                  <div id="map-notification" class="alert alert-danger d-none"></div>
+                                  {{ form.latitude|as_crispy_field }}
+                                  {{ form.longitude|as_crispy_field }}
+                                
+                                <div class="row mt-3">
+                                  <div class="col-12">
+                                      {{ form.project|as_crispy_field }}
+                                  </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        {{ form.mainOrganisation|as_crispy_field }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        {{ form.organisations|as_crispy_field }}
+                                    </div>
+                                </div>
+                              
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-1"></div>
                             <div class="col-11">
 
-                                    <button type="submit" class="btn btn-my-darkBlue submit" style="
+                                <button type="submit" class="btn btn-my-darkBlue submit" style="
                                     margin-left: 40%;
                                     margin-top: 16px;
                                     margin-bottom: 32px;
                                     padding-left: 16px;
-                                    padding-right: 16px;"><i class="fas fa-share-square"></i> {% trans "Add" %} </button>
+                                    padding-right: 16px;" onclick="return validateMap();">
+                                    <i class="fas fa-share-square"></i> {% trans "Add" %} 
+                                </button>
                                 
                             </div>
                         </div>
@@ -72,3 +110,88 @@
     </form>
 </div>
 {% endblock list_of_items %}
+{% block scripts %}
+<script src="{% static 'site/js/site.js' %}"></script>
+<script src="{% static 'scripts/cropper.min.js' %}"></script>
+<script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"></script>
+<script src="{% static 'site/js/leaflet-geosearch_2_7.min.js' %}"></script>
+
+<script type="text/javascript">
+  var map;
+  var marker_layer = new L.marker([50.5, 30.5]);
+
+  function editMarker(e){
+    map.removeLayer(marker_layer);
+    marker_layer = new L.marker(e.latlng, {draggable:true});
+    marker_layer.on('drag', function (e) {
+      $("#id_latitude").val((e.latlng.lat).toFixed(6));
+      $("#id_longitude").val((e.latlng.lng).toFixed(6));
+    });
+    map.addLayer(marker_layer);
+    $("#id_latitude").val((e.latlng.lat).toFixed(6));
+    $("#id_longitude").val((e.latlng.lng).toFixed(6));
+  }
+
+  function searchedMarker(e){
+    map.removeLayer(marker_layer);
+    marker_layer = new L.marker([e.location.y,e.location.x], {draggable:true});
+    marker_layer.on('drag', function (e) {
+      $("#id_latitude").val((e.latlng.lat).toFixed(6));
+      $("#id_longitude").val((e.latlng.lng).toFixed(6));
+    });
+    map.addLayer(marker_layer);
+    $("#id_latitude").val(parseFloat(e.location.y).toFixed(6));
+    $("#id_longitude").val(parseFloat(e.location.x).toFixed(6));
+
+    $("#map-notification").addClass("d-none");
+  }
+
+  function map_init_basic (leafmap, options) {
+    map = leafmap;
+    var obj = { latlng: {
+      lat: parseFloat($("#id_latitude").val()),
+      lng: parseFloat($("#id_longitude").val()) }
+    }
+    if($("#id_latitude").val())
+    editMarker(obj);
+    map.on('click', editMarker);
+
+    var GeoSearchControl = window.GeoSearch.GeoSearchControl;
+    var OpenStreetMapProvider = window.GeoSearch.OpenStreetMapProvider;
+    var provider = new OpenStreetMapProvider({});
+
+    //  Define search controls
+    var searchControl = new GeoSearchControl({
+      provider: provider,
+      style: 'bar',
+      showMarker: false,
+      autoClose: true,
+      keepResult: true,
+      //retainZoomLevel: true,
+    });
+
+    map.addControl(searchControl);
+    map.on('geosearch/showlocation', searchedMarker);
+  }
+
+  function validateMap() {
+    console.log(marker_layer)
+    if (!marker_layer || marker_layer.getLatLng().equals([50.5, 30.5])) {
+        // No se ha añadido un marcador al mapa o el marcador no se ha movido
+        $("#map-notification").text("{% trans 'This field is required' %}");
+        $("#map-notification").removeClass("d-none");
+        console.log("Function executed")
+
+        // Resaltar el mapa en rojo
+        $("#map-container").addClass("map-error");
+        return false;
+  }
+
+    debugger;
+    return true;
+}
+</script>
+{{ form.media.js }}
+{% endblock scripts %}

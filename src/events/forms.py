@@ -3,6 +3,14 @@ from django.shortcuts import get_object_or_404
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from .models import Event
+from organisations.models import Organisation
+from projects.models import Project
+from django_select2 import forms as s2forms
+
+EVENT_TYPE_CHOICES = [
+    ('online', 'Online event'),
+    ('physical', 'Physical event'),
+]
 
 
 class EventForm(forms.Form):
@@ -27,6 +35,64 @@ class EventForm(forms.Form):
             label=_('Hour'))   
     url = forms.CharField(max_length=200, label=_('URL'),widget=forms.TextInput(),required=False,
             help_text=_('Please provide a URL to an external web site for the event.'))
+    latitude = forms.DecimalField(max_digits=9, decimal_places=6, widget=forms.HiddenInput())
+    longitude = forms.DecimalField(max_digits=9, decimal_places=6, widget=forms.HiddenInput())
+
+    event_type = forms.ChoiceField(
+        choices=EVENT_TYPE_CHOICES,
+        widget=forms.Select(),
+        help_text=_('Please indicate if the event is online or physical.'),
+        label=_('Event type'),
+        required=True
+    )
+    online_event = forms.BooleanField(
+        widget=forms.CheckboxInput(),
+        help_text=_('Please indicate if the event is online or physical.'),
+        label=_('Online event'),
+        required=False)
+    project = forms.ModelChoiceField(
+        queryset=Project.objects.all(),
+        widget=s2forms.ModelSelect2Widget(
+            model=Project,
+            search_fields=['name__icontains', ]),
+        help_text=_(
+            'If this event is associated with a project, please select it. If not listed, '
+            'please add it <a href="/newProject" target="_blank">here</a> '
+            'before submitting the event'),
+        label=_('Associated project'),
+        required=False
+    )
+    mainOrganisation = forms.ModelChoiceField(
+        queryset=Organisation.objects.all(),
+        widget=s2forms.ModelSelect2Widget(
+            model=Organisation,
+            search_fields=['name__icontains', ]),
+        help_text=_(
+            'Please select the organisation coordinating the event. If not listed, '
+            'please add it <a href="/new_organisation" target="_blank">here</a> '
+            'before submitting the event'),
+        label=_('Lead organisation / coordinator'),
+        required=False)
+
+    organisations = forms.ModelMultipleChoiceField(
+        queryset=Organisation.objects.all(),
+        widget=s2forms.ModelSelect2MultipleWidget(
+            model=Organisation,
+            search_fields=['name__icontains']),
+        help_text=_(
+            'Please select other organisation(s) participating in the event. If not listed,'
+            'please add it <a href="/new_organisation" target="_blank">here</a> '
+            'before submitting the event'),
+        label=_("Other Organisations"),
+        required=False)
+
+    def __init__(self, *args, **kwargs):
+        instance = kwargs.get('instance')
+        if instance:
+                event_type = 'online' if instance.online_event else 'physical'
+                kwargs['initial'] = kwargs.get('initial', {})
+                kwargs['initial']['event_type'] = event_type
+        super().__init__(*args, **kwargs)
     
     def save(self, args):
         pk = self.data.get('eventID', '')
@@ -42,10 +108,32 @@ class EventForm(forms.Form):
             event.end_date = self.data['end_date']
             event.hour = hour
             event.url = self.data['url']
+            event.latitude = self.data['latitude']
+            event.longitude = self.data['longitude']
             event.creator=args.user
+            event.project = self.cleaned_data['project']
+            event.mainOrganisation = self.cleaned_data['mainOrganisation']
+            event.organisations.set(self.cleaned_data['organisations'])
         else:
-            event = Event(title =  self.data['title'], description =  self.data['description'], place =  self.data['place'],
-                        start_date =  self.data['start_date'], end_date =  self.data['end_date'], hour = hour, url =  self.data['url'],
-                        creator = args.user
-                    )
+            event = Event(
+                title=self.data['title'],
+                description=self.data['description'],
+                place=self.data['place'],
+                start_date=self.data['start_date'],
+                end_date=self.data['end_date'],
+                hour=hour,
+                url=self.data['url'],
+                latitude=self.data['latitude'],
+                longitude=self.data['longitude'],
+                creator=args.user
+            )
+            event.save()
+            event.project = self.cleaned_data['project']
+            event.mainOrganisation = self.cleaned_data['mainOrganisation']
+            event.organisations.set(self.cleaned_data['organisations'])
+
+        event_type = self.cleaned_data['event_type']
+        event.online_event = (event_type == 'online')
+
+
         event.save()

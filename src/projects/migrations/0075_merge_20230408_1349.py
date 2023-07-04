@@ -6,7 +6,6 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('projects', '0073_auto_20230408_1210'),
         ('projects', '0074_remove_searchstats_count'),
     ]
 
