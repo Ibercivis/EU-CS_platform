@@ -65,6 +65,7 @@
 {% endif %}
 {% endblock splash %}
 {% block list_of_items %}
+{% include '_map_projects.html' %}
 {% if not user.is_authenticated %}
     {% include '_about_section.html' %}
     {% include '_what_can_you_find_here.html' %}
