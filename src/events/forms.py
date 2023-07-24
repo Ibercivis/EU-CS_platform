@@ -6,10 +6,12 @@ from .models import Event
 from organisations.models import Organisation
 from projects.models import Project
 from django_select2 import forms as s2forms
+import pytz
+
 
 EVENT_TYPE_CHOICES = [
     ('online', 'Online event'),
-    ('physical', 'Physical event'),
+    ('face-to-face', 'Face-to-face event'),
 ]
 
 
@@ -22,7 +24,7 @@ class EventForm(forms.Form):
     description = forms.CharField(widget=forms.Textarea(), max_length = 3000,
             help_text=_('Please add a brief description of the event.'),
             label=_('Description'))
-    place = forms.CharField(max_length=200,widget=forms.TextInput(),required=False,
+    place = forms.CharField(max_length=200,widget=forms.HiddenInput(),required=False,
             help_text=_('Please indicate the location of the event.'),
             label=_('Place'))
     start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}),
@@ -32,7 +34,23 @@ class EventForm(forms.Form):
             label=_('End date'))
     hour = forms.TimeField(widget=forms.TextInput(attrs={'type': 'time'}), required=False,
             help_text=_('Please indicate the start time of the event.'),
-            label=_('Hour'))   
+            label=_('Hour'))
+    timezone = forms.ChoiceField(choices=[(tz, tz) for tz in pytz.all_timezones], required=False, widget=forms.Select(attrs={'class' : 'form-control'}))
+    language = forms.ChoiceField(choices=[
+        ('NL', 'Dutch'),
+        ('EN', 'English'),
+        ('ET', 'Estonian'),
+        ('FR', 'Français'),
+        ('DE', 'German'),
+        ('EL', 'Greek'),
+        ('HU', 'Hungarian'),
+        ('IT', 'Italian'),
+        ('LT', 'Lituanian'),
+        ('PT', 'Portuguese'),
+        ('ES', 'Spanish'),
+        ('SV', 'Swedish'),
+        ('OT', 'Other'),
+    ], initial='EN', widget=forms.Select(attrs={'class' : 'form-control'}), help_text=_('Please indicate the language of the event.'), label=_('Language'))   
     url = forms.CharField(max_length=200, label=_('URL'),widget=forms.TextInput(),required=False,
             help_text=_('Please provide a URL to an external web site for the event.'))
     latitude = forms.DecimalField(max_digits=9, decimal_places=6, widget=forms.HiddenInput())
@@ -107,6 +125,8 @@ class EventForm(forms.Form):
             event.start_date = self.data['start_date']
             event.end_date = self.data['end_date']
             event.hour = hour
+            event.timezone=self.data['timezone'],
+            event.language=self.data['language'],
             event.url = self.data['url']
             event.latitude = self.data['latitude']
             event.longitude = self.data['longitude']
@@ -122,6 +142,8 @@ class EventForm(forms.Form):
                 start_date=self.data['start_date'],
                 end_date=self.data['end_date'],
                 hour=hour,
+                timezone=self.data['timezone'],
+                language=self.data['language'],
                 url=self.data['url'],
                 latitude=self.data['latitude'],
                 longitude=self.data['longitude'],
