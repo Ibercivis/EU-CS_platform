@@ -4,6 +4,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
+from django.conf import settings
 from django.utils import formats
 from .models import Event, ApprovedEvents, UnApprovedEvents
 from .forms import EventForm
@@ -14,40 +15,31 @@ def events(request):
     user = request.user
     now = datetime.today()
     now = now.replace(hour=0, minute=0, second=0, microsecond=0)
-
-    #For Searching, until events = Event.objects.get_queryset().filter(start_date__gt=now).order_by('-featured', 'start_date')
-
     query = request.GET.get("q") or ""
-    if query:
-        events = Event.objects.filter(
-            Q(title__icontains=query) |
-            Q(description__icontains=query) |
-            Q(place__icontains=query), 
-            start_date__gt=now
-        ).distinct().order_by('-featured', 'start_date')
-        ongoingEvents = Event.objects.filter(
-            Q(title__icontains=query) |
-            Q(description__icontains=query) |
-            Q(place__icontains=query),
-            start_date__lte=now,
-            end_date__gte=now
-            ).distinct().order_by('-featured', 'start_date')
-        pastEvents = Event.objects.filter(
-            Q(title__icontains=query) |
-            Q(description__icontains=query) |
-            Q(place__icontains=query),
-            end_date__lt=now
-            ).distinct().order_by('-featured', 'start_date')
-    else:
-        events = Event.objects.get_queryset().filter(start_date__gt=now).order_by('-featured', 'start_date')
-        ongoingEvents = Event.objects.get_queryset().filter(
-            start_date__lte=now,
-            end_date__gte=now).order_by('-featured', 'start_date')
-        pastEvents = Event.objects.get_queryset().order_by('-featured', '-start_date')
+    events = Event.objects.get_queryset().filter(start_date__gt=now).order_by('-featured', 'start_date')
+    ongoingEvents = Event.objects.get_queryset().filter(
+        start_date__lte=now,
+        end_date__gte=now).order_by('-featured', 'start_date')
+    pastEvents = Event.objects.get_queryset().order_by('-featured', '-start_date')
+
+    filters = {'q':'', 'country': '', 'language': '', 'event_type': '', 'project': '', 'organisation': ''}
+    cwc = set(Event.objects.exclude(country=None).values_list('country', flat=True))
+    languages = list(set(Event.objects.values_list('language', flat=True)))
+    projects = list(set(Event.objects.values_list('project__name', flat=True)))
+    organisations = organisations = list(set(Event.objects.values_list('organisations__name', flat=True).union(Event.objects.values_list('mainOrganisation__name', flat=True))))
+    # remove None if it exists in the lists
+    projects = [project for project in projects if project is not None]
+    organisations = [org for org in organisations if org is not None]
+    print(languages)
+
+    events = applyFilters(request, events).filter(start_date__gt=now)
+    ongoingEvents = applyFilters(request, ongoingEvents).filter(start_date__lte=now, end_date__gte=now)
+    pastEvents = applyFilters(request, pastEvents).filter(end_date__lt=now)
+    filters = setFilters(request, filters)
 
     total_events = len(ongoingEvents) + len(events) + len(pastEvents)
     num_upcomingEvents = len(events)
-    num_ongoingevents = len(ongoingEvents)
+    num_ongoingEvents = len(ongoingEvents)
     num_pastEvents = len(pastEvents)
     '''
     ongoingEvents = Event.objects.get_queryset().filter(
@@ -78,8 +70,13 @@ def events(request):
         'q': query,
         'total_events': total_events,
         'num_upcomingEvents': num_upcomingEvents,
-        'num_ongoingevents': num_ongoingevents,
+        'num_ongoingEvents': num_ongoingEvents,
         'num_pastEvents': num_pastEvents,
+        'cwc': cwc,
+        'languages': languages,
+        'projects': projects,
+        'organisations': organisations,
+        'filters': filters,
         'events': events,
         'pastEvents': pastEvents,
         'ongoingEvents': ongoingEvents,
@@ -99,7 +96,7 @@ def new_event(request):
             return redirect('/events')
         else:
             print(form.errors)
-    return render(request, 'new_event.html', {'form': form, 'user': user})
+    return render(request, 'new_event.html', {'form': form, 'user': user, 'user_agent': settings.USER_AGENT})
 
 
 def editEvent(request, pk):
@@ -138,6 +135,60 @@ def deleteEvent(request, pk):
     if request.user == obj.creator or request.user.is_staff:
         obj.delete()
     return redirect('events')
+
+def applyFilters(request, queryset):
+    if request.GET.get("q"):
+        queryset = queryset.filter(
+            Q(title__icontains=request.GET.get("q")) |
+            Q(description__icontains=request.GET.get("q")) |
+            Q(place__icontains=request.GET.get("q"))
+        ).distinct()       
+    if request.GET.getlist('country[]'):
+        print(request.GET.getlist('country[]'))
+        if request.GET.get('event_type') == '':
+            queryset = queryset.filter(
+                Q(online_event=True) |
+                Q(online_event=False, country__in=request.GET.getlist('country[]'))
+            ).distinct()
+        elif request.GET['event_type'] == 'online':
+            queryset = queryset.filter(Q(online_event=True, country__in=request.GET.getlist('country[]'))).distinct()
+        elif request.GET['event_type'] == 'facetoface':
+            queryset = queryset.filter(Q(online_event=False, country__in=request.GET.getlist('country[]'))).distinct()
+
+    if request.GET.getlist('language[]'):
+        print(request.GET.getlist('language[]'))
+        queryset = queryset.filter(language__in=request.GET.getlist('language[]')).distinct()
+
+    if request.GET.get('event_type'):
+        if request.GET['event_type'] == 'online':
+            queryset = queryset.filter(online_event=True).distinct()
+        elif request.GET['event_type'] == 'facetoface':
+            queryset = queryset.filter(online_event=False).distinct()
+
+    if request.GET.getlist('project[]'):
+        queryset = queryset.filter(project__name__in=request.GET.getlist('project[]')).distinct()
+
+    if request.GET.getlist('organisation[]'):
+        queryset = queryset.filter(
+            Q(organisations__name__in=request.GET.getlist('organisation[]')) |
+            Q(mainOrganisation__name__in=request.GET.getlist('organisation[]'))).distinct()
+    
+    return queryset
+
+def setFilters(request, filters):
+    if request.GET.get("q"):
+        filters['q'] = request.GET.get("q")
+    if request.GET.getlist('country[]'):
+        filters['country'] = request.GET.getlist('country[]')
+    if request.GET.getlist('language[]'):
+        filters['language'] = request.GET.getlist('language[]')
+    if request.GET.get('event_type'):
+        filters['event_type'] = request.GET['event_type']
+    if request.GET.getlist('project[]'):
+        filters['project'] = request.GET.getlist('project[]')
+    if request.GET.getlist('organisation[]'):
+        filters['organisation'] = request.GET.getlist('organisation[]')  
+    return filters
 
 
 @staff_member_required()

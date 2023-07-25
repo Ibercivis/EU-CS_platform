@@ -3,11 +3,42 @@
 <div class="row">
     <div class="col-sm-4 col-12 mt-4 mb-4">
         <h3>{{event.title}}</h3> 
+        {% if event.project %}
+            <a class="badge rounded-pill bg-my-lightGreen" id="pill-project" href="{% url 'project' pk=event.project.id %}" style="cursor: pointer">
+                {{event.project}}
+            </a>
+        {% endif %}
+        {% if event.mainOrganisation %}
+            <a class="badge rounded-pill bg-my-lightBlue" id="pill-mainOrganisation" href="{% url 'organisation' pk=event.mainOrganisation.id %}" style="cursor: pointer">
+                {{event.mainOrganisation}}
+            </a>
+        {% endif %}
+        {% if event.organisations.all %}
+            {% for organisation in event.organisations.all %}
+                <a class="badge rounded-pill bg-my-lightBlue" class="pill-organisation" href="{% url 'organisation' pk=organisation.id %}" style="cursor: pointer">
+                    {{ organisation }}
+                </a>
+            {% endfor %}
+            <br>
+        {% endif %}
+                
         <span><i>
-                {% if event.place %}{{event.place}}, {%endif%}
-                {{event.start_date | date:" M d, Y"}}
-                {% if event.hour %}{{event.hour | time:'H:i'}} {% endif %}
+                {% if event.place %}
+                    <div class="mt-2">
+                        {{event.place}}<br>
+                    </div>
+                {%endif%}
+                
+                    {{event.start_date | date:" M d, Y"}}
+                    {% if event.hour %}{{event.hour | time:'H:i'}} {% if event.timezone %}{{event.timezone}}{% endif %} {% endif %}
+                
+                <br>
             </i></span>
+        {% if event.language %} 
+            <a class="badge rounded-pill bg-my-darkBlue mt-2" id="pill-language">
+              {% trans "Language" %}:  {{event.language}}
+            </a>
+        {% endif %}
     </div>
     <div class="col-sm-7 col-12 mt-4 mb-4">
         {% with text=event.description %}

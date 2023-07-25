@@ -27,6 +27,7 @@ class EventForm(forms.Form):
     place = forms.CharField(max_length=200,widget=forms.HiddenInput(),required=False,
             help_text=_('Please indicate the location of the event.'),
             label=_('Place'))
+    country = forms.CharField(max_length=50,widget=forms.HiddenInput(),required=False)
     start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}),
             label=_('Start date'))
     end_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}),
@@ -122,6 +123,7 @@ class EventForm(forms.Form):
             event.title = self.data['title']
             event.description = self.data['description']            
             event.place = self.data['place']
+            event.country = self.data['country']
             event.start_date = self.data['start_date']
             event.end_date = self.data['end_date']
             event.hour = hour
@@ -139,6 +141,7 @@ class EventForm(forms.Form):
                 title=self.data['title'],
                 description=self.data['description'],
                 place=self.data['place'],
+                country=self.data['country'],
                 start_date=self.data['start_date'],
                 end_date=self.data['end_date'],
                 hour=hour,

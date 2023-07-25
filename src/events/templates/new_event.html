@@ -78,6 +78,7 @@
                                 {{ form.latitude|as_crispy_field }}
                                 {{ form.longitude|as_crispy_field }}
                                 {{ form.place|as_crispy_field }}
+                                {{ form.country|as_crispy_field }}
                                 
                                 {{ form.project|as_crispy_field }}
                                 {{ form.mainOrganisation|as_crispy_field }} 
@@ -119,6 +120,8 @@
 
 <script type="text/javascript">
   document.addEventListener("DOMContentLoaded", function(event) {
+    var userAgent = "{{ user_agent }}";
+    console.log(userAgent);
     var tz = jstz.determine(); // Determines the time zone of the browser client
     var timezone = document.getElementById('id_timezone'); // Assuming you have a select input in your form with id 'id_timezone'
     timezone.value = tz.name(); // Preselect the user's time zone in the dropdown
@@ -149,12 +152,13 @@
         // Inverse geocoding
         var lat = e.latlng.lat.toFixed(6);
         var lng = e.latlng.lng.toFixed(6);
-        var url = "https://nominatim.openstreetmap.org/reverse?format=json&lat=" + lat + "&lon=" + lng;
+        var url = "https://nominatim.openstreetmap.org/reverse?format=json&lat=" + lat + "&lon=" + lng + "&accept-language=en";
+        var userAgent = "{{ user_agent }}";
 
         fetch(url, {
           method: 'GET',
           headers: {
-            'User-Agent': 'eu-citizen.science (info@ibercivis.es)', // Header to respect Nominatim's policy
+            'User-Agent': userAgent, // Header to respect Nominatim's policy
           }
         })
         .then(response => response.json())
@@ -163,6 +167,9 @@
           var input = document.querySelector('.leaflet-control-geosearch form input');
           input.value = data.display_name;
           document.getElementById('id_place').value = data.display_name;
+          // Get country and store it in the 'country' field
+          var country = data.address.country;
+          document.getElementById('id_country').value = country;
           $("#map-notification").addClass("d-none");
         })
         .catch(error => console.error('Error:', error));
@@ -190,6 +197,27 @@
     $("#id_longitude").val(parseFloat(e.location.x).toFixed(6));
     var inputSearch = document.querySelector('.leaflet-control-geosearch form input');
     document.getElementById('id_place').value = inputSearch.value;
+
+    // Make a request to Nominatim to get country
+    var userAgent = "{{ user_agent }}";
+    var lat = e.location.y;
+    var lng = e.location.x;
+    var url = "https://nominatim.openstreetmap.org/reverse?format=json&lat=" + lat + "&lon=" + lng + "&accept-language=en";
+
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'User-Agent': userAgent, // Header to respect Nominatim's policy
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Get country and store it in the 'country' field
+      var country = data.address.country;
+      document.getElementById('id_country').value = country;
+    })
+    .catch(error => console.error('Error:', error));
+
     $("#map-notification").addClass("d-none");
   }
 

@@ -14,6 +14,7 @@ class Event(models.Model):
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=3000)
     place = models.CharField(max_length=200, blank=True, default='On-line')
+    country = models.CharField(null=True, blank=True, max_length=50)
     start_date = models.DateTimeField('Start date')
     end_date = models.DateTimeField('End date')
     hour = models.TimeField(null=True, blank=True)

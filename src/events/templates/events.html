@@ -7,27 +7,20 @@
 
 
 {% block list_of_items %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 
 <!-- Search form -->
-<div class="container">
+ <div class="container">
     <div class="col-12">
-        <form method="GET" action="" style="margin-bottom: 32px; display: flex; justify-content: center; padding-top: 20px;">
-            <input type="text" class="form-border-Blue" name="q" placeholder="Buscar eventos..." value="{{ request.GET.q }}" style="width: 50%;">
-            <input type="submit" value="Buscar" class="btn btn-my-outline-darkGreen" style="margin-left: 24px;">
-        </form>
+       <!-- <form method="GET" action="" style="margin-bottom: 32px; display: flex; justify-content: center; padding-top: 20px; width: 100%;">
+            <input id="q" type="text" class="form-border-Blue" name="q" placeholder="Search..." value="{{ filters.q }}" style="flex-grow: 1; margin-right: 24px;">
+            <input type="submit" value="Search" class="btn btn-my-outline-darkGreen" style="padding-left: 40px; padding-right: 40px;">
+        </form>-->
+        {% include "_finder_events.html" %}
     </div>
-</div>
+</div> 
 <!-- End of search form -->
 
-<!-- Start of Text Results section -->
-<div class="container">
-    <div class="col-12">
-        {% if q %}
-        <p>Mostrando {{ total_events }} eventos con el término "{{ q }}"</p>
-        {% endif %}
-    </div>
-</div>
-<!-- End of Text Results section-->
 <div class="container">
     {% if ongoingEvents %}
     <h1>{% trans "On going <span class='lightBlue-color'>events</span>" %}{% if q %} ({{ num_ongoingEvents }}){% endif %}</h1>
@@ -65,25 +58,6 @@
         </div>
     </div>
 
-    <!-- Old Pagination 
-    <div class="pagination" style="justify-content: center;">
-        <span class="step-links">
-            {% if pastEvents.has_previous %}
-                <a href="?page=1&q={{ q }}" style="margin-right: 8px;">&lt;&lt; first</a>
-                <a href="?page={{ pastEvents.previous_page_number }}&q={{ q }}">&lt; previous</a>
-            {% endif %}
-
-            <span class="current" style="margin-left: 4px; margin-right: 4px;">
-                Page {{ pastEvents.number }} of {{ pastEvents.paginator.num_pages }}
-            </span>
-
-            {% if pastEvents.has_next %}
-                <a href="?page={{ pastEvents.next_page_number }}&q={{ q }}" style=" margin-right: 8px;">next &gt;</a>
-                <a href="?page={{ pastEvents.paginator.num_pages }}&q={{ q }}" >last &gt;&gt;</a>
-            {% endif %}
-        </span>
-    </div>
-    -->
     {% if pastEvents.has_other_pages %}
     <ul class="pagination">
         {% if pastEvents.number|add:'-3' > 1 %}
@@ -127,7 +101,44 @@
 {% endblock list_of_items %}
 
 {% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script>
+    function adjustSelectHeights() {
+        var maxHeight = 0;
+        $('.select2-container--default .select2-selection--multiple').each(function() {
+            var thisHeight = $(this).height();
+            if (thisHeight > maxHeight) {
+                maxHeight = thisHeight;
+            }
+        });
+        $('.select2-container--default .select2-selection--multiple').css('height', maxHeight + 'px');
+    }
+
+    $(document).ready(function() {
+        $("#organisations").select2({
+            placeholder: "Select organisations",
+        }).on('select2:select select2:unselect', adjustSelectHeights);
+            
+        $("#project").select2({
+            placeholder: "Select projects",
+        }).on('select2:select select2:unselect', adjustSelectHeights);
+
+        $("#country").select2({
+            placeholder: "Select countries",
+        }).on('select2:select select2:unselect', adjustSelectHeights);
+            
+        $("#languages").select2({
+            placeholder: "Select languages",
+        }).on('select2:select select2:unselect', adjustSelectHeights);
+
+        // Triggers the adjustment function at the beginning
+        adjustSelectHeights();
+
+        $("#submitButton").click(function(event){
+            event.preventDefault();
+            $('#searchEvents').submit();
+        });
+    });
     function setFeaturedEvent(idEvent, featured){
         var htmlId = "featured" + idEvent;
         var request = $.ajax(
@@ -168,5 +179,16 @@ function setApprovedEvent(idEvent, approved){
         }
     );
 }
+
+$(function () {
+	$('.custom-select').on('change', function () {
+		$('#searchEvents').submit();
+	});
+    
+    });
+
+
+
+
 </script>
 {% endblock scripts %}

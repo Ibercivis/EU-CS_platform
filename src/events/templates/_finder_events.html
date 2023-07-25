@@ -1,0 +1,85 @@
+{% load i18n %}
+{% load staticfiles %}
+{% load l10n %}
+
+<div class="row">
+    <form class="form-inline float-lg-right" id="searchEvents" action="{% url 'events' %}">
+        
+        <div class="row">
+            <div class="col-12">
+                <div style="margin-bottom: 32px; display: flex; justify-content: center; padding-top: 20px; width: 100%;">
+                    <input id="q" type="text" class="form-border-Blue" name="q" placeholder="Search..." value="{{ filters.q }}" style="flex-grow: 1; margin-right: 24px;">
+                    <input type="submit" value="Search" class="btn btn-my-outline-darkGreen" style="padding-left: 40px; padding-right: 40px;">
+                </div>
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-text"><i class="fas fa-filter"></i></div>
+
+                        <select id="event_type" name="event_type" class="custom-select form-control">
+                            <option value="">{% trans "Event type" %}</option>                         
+                            <option value="online" {% if filters.event_type == "online" %} selected {% endif %}> Online </option>
+                            <option value="facetoface" {% if filters.event_type == "facetoface" %} selected {% endif %}> Face-to-face </option>
+                        </select>
+        
+                        <select id="country" name="country[]" class="custom-select form-control" multiple="multiple">
+                            <option value="">{% trans "Country" %}</option>
+                            {% for country in cwc %}
+                                <option value="{{ country }}" 
+                                {% for selected_country in filters.country %}
+                                    {% if country == selected_country %} 
+                                        selected 
+                                    {% endif %}
+                                {% endfor %}
+                                >{{ country }}</option>
+                            {% endfor %}
+                        </select>
+                        
+                        <select id="languages" name="language[]" class="custom-select form-control" multiple="multiple">
+                            <option value="">{% trans "Language" %}</option>
+                            {% for language in languages %}
+                                <option value="{{language}}" 
+                                {% for selected_language in filters.language %}
+                                    {% if language == selected_language %} 
+                                        selected 
+                                    {% endif %}
+                                {% endfor %}
+                                >{{language}}</option>
+                            {% endfor %}
+                        </select>
+                        
+                        <select id="project" name="project[]" class="custom-select form-control" multiple="multiple">
+                            <option value="">{% trans "Project" %}</option>
+                            {% for project in projects %}
+                                <option value="{{project}}" 
+                                {% for selected_project in filters.project %}
+                                    {% if project == selected_project %} 
+                                        selected 
+                                    {% endif %}
+                                {% endfor %}
+                                >{{project}}</option>
+                            {% endfor %}
+                        </select>
+                        <select id="organisations" name="organisation[]" class="custom-select form-control" multiple="multiple">
+                            <option value="">{% trans "Organisations" %}</option>
+                                {% for organisation in organisations %}
+                                    <option value="{{organisation}}" 
+                                    {% for selected_organisation in filters.organisation %}
+                                        {% if organisation == selected_organisation %} 
+                                            selected 
+                                        {% endif %}
+                                    {% endfor %}
+                                    >{{organisation}}</option>
+                                {% endfor %}
+                        </select>
+                    </div>
+            </div>
+            <div class="col-12 mb-4 mt-2">
+                {% if filters.country != "" or filters.language != "" or filters.project != "" or filters.organisation != "" or filters.event_type != "" %}
+                    <a class="badge rounded-pill bg-danger text-decoration-none" href="/events">
+                        <i class="fas fa-times"></i> {% trans "Clear current search" %}
+                    </a>
+                {% endif %}  
+               
+            </div>
+        </div>
+    </form>
+</div>
