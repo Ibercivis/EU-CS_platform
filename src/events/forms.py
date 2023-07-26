@@ -10,7 +10,7 @@ import pytz
 
 
 EVENT_TYPE_CHOICES = [
-    ('online', 'Online event'),
+    ('online', 'On-line event'),
     ('face-to-face', 'Face-to-face event'),
 ]
 
@@ -64,11 +64,6 @@ class EventForm(forms.Form):
         label=_('Event type'),
         required=True
     )
-    online_event = forms.BooleanField(
-        widget=forms.CheckboxInput(),
-        help_text=_('Please indicate if the event is online or physical.'),
-        label=_('Online event'),
-        required=False)
     project = forms.ModelChoiceField(
         queryset=Project.objects.all(),
         widget=s2forms.ModelSelect2Widget(
@@ -127,9 +122,10 @@ class EventForm(forms.Form):
             event.start_date = self.data['start_date']
             event.end_date = self.data['end_date']
             event.hour = hour
-            event.timezone=self.data['timezone'],
-            event.language=self.data['language'],
+            event.timezone=self.data['timezone']
+            event.language=self.data['language']
             event.url = self.data['url']
+            event.event_type = self.data['event_type']
             event.latitude = self.data['latitude']
             event.longitude = self.data['longitude']
             event.creator=args.user
@@ -150,15 +146,12 @@ class EventForm(forms.Form):
                 url=self.data['url'],
                 latitude=self.data['latitude'],
                 longitude=self.data['longitude'],
+                event_type=self.data['event_type'],
                 creator=args.user
             )
             event.save()
             event.project = self.cleaned_data['project']
             event.mainOrganisation = self.cleaned_data['mainOrganisation']
             event.organisations.set(self.cleaned_data['organisations'])
-
-        event_type = self.cleaned_data['event_type']
-        event.online_event = (event_type == 'online')
-
 
         event.save()

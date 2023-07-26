@@ -36,7 +36,10 @@ class Event(models.Model):
     ], default='EN')
     url = models.CharField(max_length=200)
     featured = models.BooleanField(null=True, default=False)
-    online_event = models.BooleanField(default=False)
+    event_type = models.CharField(max_length=20, choices=[
+        ('online', 'On-line event'),
+        ('face-to-face', 'Face-to-face event'),
+    ], default='online')
     latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     project = models.ForeignKey(

@@ -116,6 +116,15 @@ def editEvent(request, pk):
         'title': event.title,
         'description': event.description,
         'place': event.place,
+        'country': event.country,
+        'language': event.language,
+        'event_type': event.event_type,
+        'project': event.project,
+        'organisations': event.organisations.all(),
+        'mainOrganisation': event.mainOrganisation,
+        'timezone': event.timezone,
+        'latitude': event.latitude,
+        'longitude': event.longitude,
         'start_date': start_datetime,
         'end_date': end_datetime,
         'hour': event.hour,
@@ -127,7 +136,7 @@ def editEvent(request, pk):
             return redirect('/events')
         else:
             print(form.errors)
-    return render(request, 'editEvent.html', {'form': form, 'user': user, 'event': event})
+    return render(request, 'editEvent.html', {'form': form, 'user': user, 'event': event, 'user_agent': settings.USER_AGENT})
 
 
 def deleteEvent(request, pk):
@@ -147,13 +156,13 @@ def applyFilters(request, queryset):
         print(request.GET.getlist('country[]'))
         if request.GET.get('event_type') == '':
             queryset = queryset.filter(
-                Q(online_event=True) |
-                Q(online_event=False, country__in=request.GET.getlist('country[]'))
+                Q(event_type='online') |
+                Q(event_type='face-to-face', country__in=request.GET.getlist('country[]'))
             ).distinct()
         elif request.GET['event_type'] == 'online':
-            queryset = queryset.filter(Q(online_event=True, country__in=request.GET.getlist('country[]'))).distinct()
-        elif request.GET['event_type'] == 'facetoface':
-            queryset = queryset.filter(Q(online_event=False, country__in=request.GET.getlist('country[]'))).distinct()
+            queryset = queryset.filter(Q(event_type='online', country__in=request.GET.getlist('country[]'))).distinct()
+        elif request.GET['event_type'] == 'face-to-face':
+            queryset = queryset.filter(Q(event_type='face-to-face', country__in=request.GET.getlist('country[]'))).distinct()
 
     if request.GET.getlist('language[]'):
         print(request.GET.getlist('language[]'))
@@ -161,9 +170,9 @@ def applyFilters(request, queryset):
 
     if request.GET.get('event_type'):
         if request.GET['event_type'] == 'online':
-            queryset = queryset.filter(online_event=True).distinct()
-        elif request.GET['event_type'] == 'facetoface':
-            queryset = queryset.filter(online_event=False).distinct()
+            queryset = queryset.filter(event_type='online').distinct()
+        elif request.GET['event_type'] == 'face-to-face':
+            queryset = queryset.filter(event_type='face-to-face').distinct()
 
     if request.GET.getlist('project[]'):
         queryset = queryset.filter(project__name__in=request.GET.getlist('project[]')).distinct()

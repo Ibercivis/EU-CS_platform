@@ -17,7 +17,7 @@
                         <select id="event_type" name="event_type" class="custom-select form-control">
                             <option value="">{% trans "Event type" %}</option>                         
                             <option value="online" {% if filters.event_type == "online" %} selected {% endif %}> Online </option>
-                            <option value="facetoface" {% if filters.event_type == "facetoface" %} selected {% endif %}> Face-to-face </option>
+                            <option value="face-to-face" {% if filters.event_type == "face-to-face" %} selected {% endif %}> Face-to-face </option>
                         </select>
         
                         <select id="country" name="country[]" class="custom-select form-control" multiple="multiple">

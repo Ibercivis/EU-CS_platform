@@ -286,7 +286,7 @@ def get_markers(request):
             'latitude': project.mainOrganisation.latitude,
             'longitude': project.mainOrganisation.longitude,
             'name': project.name,
-            'project_url': f'/project/{project.id}'
+            'project_url': f'/project/{project.id}',
         }
         markers.append(marker)
 

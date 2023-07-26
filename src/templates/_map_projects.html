@@ -67,10 +67,11 @@
 
                     // Create markers on the map based on the data received
                     for (var i = 0; i < markersData.length; i++) {
+                        console.log(markersData[i].project_logo)
                         var marker = L.marker([markersData[i].latitude, markersData[i].longitude], { icon: individualIcon });
                         marker.bindPopup('<div style="font-family: Roboto Condensed; font-size: 14px;">' +
-                            '<a href="' + markersData[i].project_url + '" style="text-decoration: none;">' + markersData[i].name + '</a>' +
-                            '</div>');
+                                             '<a href="' + markersData[i].project_url + '" style="text-decoration: none;">' + markersData[i].name + '</a>' +
+                                         '</div>');
                         // Add the properties to the marker as a GeoJSON feature
                         marker.feature = { properties: { name: markersData[i].name } };
                         // Add the marker to the feature group
