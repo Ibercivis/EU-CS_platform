@@ -23,7 +23,7 @@ STATICFILES_DIRS = [str(BASE_DIR / "static"), MACHINA_MAIN_STATIC_DIR]
 
 # settings.py
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
-STATIC_VERSION = '1.0'
+STATIC_VERSION = '1.1'
 
 
 MEDIA_ROOT = str(BASE_DIR / "media")
