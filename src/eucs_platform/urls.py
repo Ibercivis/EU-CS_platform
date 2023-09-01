@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 from django.urls import include, path, re_path
 from django.conf.urls import url
 from django.views.decorators.cache import never_cache
+from django.views.defaults import server_error
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from machina import urls as machina_urls
@@ -31,6 +32,12 @@ schema_view = get_schema_view(
    permission_classes=(permissions.AllowAny,),
 )
 
+
+def custom_server_error(request, *args, **kwargs):
+    return server_error(request, template_name="500.html", *args, **kwargs)
+
+handler500 = custom_server_error
+
 # Personalized admin site settings like title and header
 admin.site.site_title = "EU-Citizen.Science Site Admin"
 admin.site.site_header = "EU-Citizen.Science Administration"
@@ -44,6 +51,8 @@ urlpatterns = [
     path("terms/", views.terms, name="terms"),
     path("privacy/", views.privacy, name="privacy"),
     path("faq/", views.faq, name="faq"),
+    path("ecs_project/", views.ecs_project, name="ecs_project"),
+    path("call_ambassadors/", views.call_ambassadors, name="call_ambassadors"),
     path("subscribe/", views.subscribe, name="subscribe"),
     path("moderation/", views.moderation, name="moderation"),
     path("criteria/", views.criteria, name="criteria"),
@@ -57,7 +66,7 @@ urlpatterns = [
     path("development/", views.development, name="development"),
     path("about/", views.AboutPage.as_view(), name="about"),
     path("policy_brief/", views.policy_brief, name="policy_brief"),
-    path("users/", include(profiles.urls)),
+    path("", include(profiles.urls)),
     path("admin/", admin.site.urls),
     path("select2/", include("django_select2.urls")),
     path("", include(contact.urls)),
@@ -85,6 +94,8 @@ urlpatterns = [
     re_path(r"^upload/", ckeditor_uploader.views.upload, name="ckeditor_upload"),
     re_path(r"^browse/", never_cache(ckeditor_uploader.views.browse), name="ckeditor_browse",),
     path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+    path('projects_map/', views.projects_map, name='projects_map'),
+    path('get_markers/', views.get_markers, name='get_markers'),
 ]
 
 # User-uploaded files like profile pics need to be served in development

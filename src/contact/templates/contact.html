@@ -26,6 +26,7 @@
 			<div class="card mb-4 mt-5 shadow">
 				<div class="card-text p-3">
 					<h3>{% trans "Contact" %}</h3>
+					{% if user.is_authenticated %}
 					<form method="post" autocomplete="off">
 						{% csrf_token %}
 						<div class="row">
@@ -56,6 +57,9 @@
 								<button type="submit" class="btn btn-success">{% trans "Send" %}</button>
 							</div>
 						</form>
+						{% else %}
+						<h5> You need to be logged to use the contact form</h5>
+						{% endif %}
 					</div>
 				</div>
 			</div>

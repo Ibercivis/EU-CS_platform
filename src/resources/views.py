@@ -19,6 +19,10 @@ from reviews.models import Review
 from .models import Resource, Keyword, ApprovedResources, SavedResources, BookmarkedResources, Theme, Category
 from .models import ResourcesGrouped, ResourcePermission, EducationLevel, LearningResourceType, UnApprovedResources
 from .models import Audience
+from projects.models import Project
+from organisations.models import Organisation
+from platforms.models import Platform
+from profiles.models import Profile
 from .forms import ResourceForm, ResourcePermissionForm
 import copy
 import csv
@@ -49,7 +53,7 @@ def resources(request, isTrainingResource=False):
     themes = Theme.objects.all()
     categories = Category.objects.all()
     audiencies = Audience.objects.all()
-
+    #To Count
     filters = {'keywords': '', 'inLanguage': ''}
     resources = applyFilters(request, resources)
     filters = setFilters(request, filters)
@@ -58,7 +62,43 @@ def resources(request, isTrainingResource=False):
 
     if not user.is_staff:
         resources = resources.filter(approved=True)
+    
+    #To Count
+    #For resources count
+    allResources = Resource.objects.all()
+    allResources = applyFilters(request, allResources)
+    allResources = allResources.distinct()
+    resources2 = allResources.filter(~Q(isTrainingResource=True))
+    trainingResources = allResources.filter(isTrainingResource=True)
+    resourcesCounter = len(resources2)
+    trainingResourcesCounter = len(trainingResources)
 
+    #For projects count
+    projects = Project.objects.all()
+    projects = projects.filter(~Q(hidden=True))
+    projects = applyFilters(request, projects)
+    projects = projects.distinct()
+    projectsCounter = len(projects)
+
+    #For organisations count
+    organisations = Organisation.objects.all()
+    filteredOrganisations = applyFilters(request, organisations).distinct()
+    organisations = organisations.distinct()
+    print("Estas son las organizaciones:")
+    print(filteredOrganisations)
+    organisationsCounter = len(filteredOrganisations)
+
+    #For platforms count
+    platforms = Platform.objects.all()
+    platforms = applyFilters(request, platforms)
+    platforms = platforms.distinct()
+    platformsCounter = len(platforms)
+
+    #For users count
+    users = Profile.objects.all().filter(profileVisible=True).filter(user__is_active=True)
+    users = applyFilters(request, users)
+    users = users.distinct()
+    usersCounter = len(users)
     # Ordering
     if request.GET.get('orderby'):
         orderBy = request.GET.get('orderby')
@@ -87,6 +127,12 @@ def resources(request, isTrainingResource=False):
         # 'approvedResources': approvedResources,
         # 'unApprovedResources': unApprovedResources,
         'counter': counter,
+        'resourcesCounter': resourcesCounter,
+        'trainingResourcesCounter': trainingResourcesCounter,
+        'projectsCounter': projectsCounter,
+        'organisationsCounter': organisationsCounter,
+        'platformsCounter': platformsCounter,
+        'usersCounter': usersCounter,
         # 'savedResources': savedResources,
         # 'bookmarkedResources': bookmarkedResources,
         'filters': filters,
@@ -420,11 +466,13 @@ def resourcesAutocompleteSearch(request, isTrainingResource=False):
 
 def getResourcesAutocomplete(text, isTrainingResource=False):
     approvedResources = ApprovedResources.objects.all().values_list('resource_id', flat=True)
-    resources = Resource.objects.filter(~Q(hidden=True)).filter(id__in=approvedResources).filter(name__icontains=text)
+    resources = Resource.objects.filter(~Q(hidden=True)).filter(name__icontains=text).filter(approved=True)
+    print(resources)
     if(isTrainingResource):
         resources = resources.filter(isTrainingResource=True)
     else:
         resources = resources.filter(~Q(isTrainingResource=True))
+    
     resources = resources.values_list('id', 'name').distinct()
     keywords = Keyword.objects.filter(
             keyword__icontains=text).values_list('keyword', flat=True).distinct()
@@ -526,30 +574,59 @@ def preFilteredResources(request):
 
 
 def applyFilters(request, resources):
-    if request.GET.get('keywords'):
-        resources = resources.filter(
+    if resources.model == Project:
+        if request.GET.get('keywords'):
+            resources = resources.filter(
                 Q(name__icontains=request.GET['keywords']) |
                 Q(keywords__keyword__icontains=request.GET['keywords'])).distinct()
-    print(resources)
-    if request.GET.get('inLanguage'):
-        resources = resources.filter(inLanguage=request.GET['inLanguage'])
-    if request.GET.get('license'):
-        resources = resources.filter(license__icontains=request.GET['license'])
-    if request.GET.get('theme'):
-        resources = resources.filter(theme__theme=request.GET['theme'])
-    if request.GET.get('category'):
-        resources = resources.filter(category__text=request.GET['category'])
-    if request.GET.get('audience'):
-        resources = resources.filter(audience__audience=request.GET['audience'])
-    if request.GET.get('approved'):
-        if request.GET['approved'] == 'approved':
             resources = resources.filter(approved=True)
-        if request.GET['approved'] == 'notApproved':
-            resources = resources.filter(approved=False).filter(moderated=True)
-        if request.GET['approved'] == 'notYetModerated':
-            resources = resources.filter(moderated=False)
-    else:
-        resources = resources.filter(approved=True)
+            print("Esto son proyectos con keywords")
+            print(resources)
+
+    if resources.model == Organisation:
+        print("Estas son las organizaciones en el query")
+        if request.GET.get('keywords'):
+            keywords = request.GET.get('keywords')
+            resources = resources.filter(Q(name__icontains=keywords))
+
+    if resources.model == Platform:
+        if request.GET.get('keywords'):
+            keywords = request.GET.get('keywords')
+            resources = resources.filter(name__icontains=keywords)  
+
+    if resources.model == Profile:
+        if request.GET.get('keywords'):
+            keywords = request.GET.get('keywords')
+            resources = resources.filter(
+                Q(user__name__icontains=keywords) |
+                Q(interestAreas__interestArea__icontains=keywords) |
+                Q(bio__icontains=keywords)).distinct()
+
+    if resources.model == Resource:        
+        if request.GET.get('keywords'):
+            resources = resources.filter(
+                    Q(name__icontains=request.GET['keywords']) |
+                    Q(keywords__keyword__icontains=request.GET['keywords'])).distinct()
+        print(resources)
+        if request.GET.get('inLanguage'):
+            resources = resources.filter(inLanguage=request.GET['inLanguage'])
+        if request.GET.get('license'):
+            resources = resources.filter(license__icontains=request.GET['license'])
+        if request.GET.get('theme'):
+            resources = resources.filter(theme__theme=request.GET['theme'])
+        if request.GET.get('category'):
+            resources = resources.filter(category__text=request.GET['category'])
+        if request.GET.get('audience'):
+            resources = resources.filter(audience__audience=request.GET['audience'])
+        if request.GET.get('approved'):
+            if request.GET['approved'] == 'approved':
+                resources = resources.filter(approved=True)
+            if request.GET['approved'] == 'notApproved':
+                resources = resources.filter(approved=False).filter(moderated=True)
+            if request.GET['approved'] == 'notYetModerated':
+                resources = resources.filter(moderated=False)
+        else:
+            resources = resources.filter(approved=True)
 
     return resources
 

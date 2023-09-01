@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mapa de Proyectos</title> 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    <link href="https://cdn.jsdelivr.net/npm/leaflet-search@3.0.9/dist/leaflet-search.src.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
+    <style>
+        #map {
+            width: 100%;
+            height: 500px;
+            box-shadow: 5px 5px 5px #888;
+        }
+
+        #textmap{
+            
+        } 
+    </style>
+</head>
+<body>
+    <div id="mapaHome" class="mb-5">
+        <div class="mapaContent">
+            <div class="d-sm-flex align-items-center">
+                <span class="title">Projects Map</span>
+            </div>
+            <br>
+            <div id="frameMap" class="">
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+    
+    
+
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-search@3.0.9/dist/leaflet-search.src.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var map = L.map('map').setView([0, 0], 2);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                subdomains: 'abcd',
+                maxZoom: 20,
+                minZoom: 2
+            }).addTo(map);
+
+            L.control.scale().addTo(map);
+
+            var individualIcon = L.divIcon({
+                className: 'individual-icon',
+                html: '<div style="background-color: #277fca; border-radius: 50%; width: 12px; height: 12px; border: 1px solid white;"></div>',
+                iconSize: [30, 30],
+                iconAnchor: [15, 15]
+            });
+
+            var markers = L.markerClusterGroup();
+
+            // Perform AJAX request to get the markers
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/get_markers/', true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var markersData = JSON.parse(xhr.responseText).markers;
+
+                    // Create markers on the map based on the data received
+                    for (var i = 0; i < markersData.length; i++) {
+                        console.log(markersData[i].project_logo)
+                        var marker = L.marker([markersData[i].latitude, markersData[i].longitude], { icon: individualIcon });
+                        marker.bindPopup('<div style="font-family: Roboto Condensed; font-size: 14px;">' +
+                                             '<a href="' + markersData[i].project_url + '" style="text-decoration: none;">' + markersData[i].name + '</a>' +
+                                         '</div>');
+                        // Add the properties to the marker as a GeoJSON feature
+                        marker.feature = { properties: { name: markersData[i].name } };
+                        // Add the marker to the feature group
+                        markers.addLayer(marker);
+                        
+                    }
+                    
+                    map.addLayer(markers);
+
+                    // Add search control (The search control MUST be added after markers have been added)
+                    var searchControl = new L.Control.Search({
+                        layer: markers,
+                        propertyName: 'name',
+                        zoom: 12,
+                        marker: false,
+                    });
+                    searchControl.addTo(map);
+
+                    // Add search:locationfound event handler
+                    searchControl.on('search:locationfound', function(e) {
+                        if (e.layer._popup) {  // Check if the layer has a popup to open
+                            markers.zoomToShowLayer(e.layer, function() {
+                                setTimeout(function() {
+                                    e.layer.openPopup();
+                                }, 2000);  // Waiting time (in milliseconds) to open the popup after the zoom
+                            });
+                        }
+                    });
+                }
+            };
+            xhr.send();
+        });
+    </script>
+</body>
+</html>

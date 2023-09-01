@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
 from django.db.models import Q
 from itertools import chain
-from projects.models import Project, ApprovedProjects
+from projects.models import Project, ApprovedProjects, Likes, Follows
 from projects.views import getProjectsAutocomplete
 from resources.views import getResourcesAutocomplete
 from organisations.views import getOrganisationAutocomplete
@@ -20,6 +20,7 @@ from django.conf import settings
 from blog.models import Post
 import random
 import json
+from django.template.loader import render_to_string
 from machina.apps.forum.models import Forum
 from machina.apps.forum_conversation.models import Topic, Post
 from machina.apps.forum_tracking.models import TopicReadTrack
@@ -31,8 +32,8 @@ def home(request):
     # TODO: Clean this, we dont need lot of things
     user = request.user
     projects = Project.objects.get_queryset().filter(~Q(hidden=True)).order_by('-dateCreated')
-    approvedProjects = ApprovedProjects.objects.all().values_list('project_id', flat=True)
-    projects = projects.filter(id__in=approvedProjects)
+    approved_projects = ApprovedProjects.objects.all().values_list('project_id', flat=True)
+    projects = projects.filter(id__in=approved_projects)
 
     filters = {'keywords': ''}
 
@@ -44,6 +45,14 @@ def home(request):
     paginatorprojects = Paginator(projects, 4)
     page = request.GET.get('page')
     projects = paginatorprojects.get_page(page)
+    if user.is_authenticated:
+        likes = Likes.objects.filter(user=request.user)
+        likes = likes.values_list('project', flat=True)
+        follows = Follows.objects.filter(user=request.user)
+        follows = follows.values_list('project', flat=True)
+    else:
+        likes = None
+        follows = None
 
     # Resources
     resources = Resource.objects.all().filter(~Q(isTrainingResource=True)).order_by('-dateCreated')
@@ -106,6 +115,8 @@ def home(request):
     return render(request, 'home.html', {
         'user': user,
         'projects': projects,
+        'likes': likes,
+        'follows': follows,
         'counterprojects': counterprojects,
         'resources': resources,
         'counterresources': counterresources,
@@ -157,6 +168,11 @@ def privacy(request):
 def faq(request):
     return render(request, 'faq.html')
 
+def ecs_project(request):
+    return render(request, 'ecs_project.html')
+
+def call_ambassadors(request):
+    return render(request, 'call_ambassadors.html')
 
 def development(request):
     return render(request, 'development.html')
@@ -254,3 +270,25 @@ def getForumResponsesNumber(request):
 
     response['forumresponses'] = forumresponses
     return JsonResponse(response)
+
+#For the project map
+def projects_map(request):
+    return render(request, '_map_projects.html')
+
+def get_markers(request):
+    # Filter approved projects with non-null mainOrganisation
+    projects = Project.objects.filter(approved=True, mainOrganisation__isnull=False)
+
+    # Create a list of marker dictionaries with the required data
+    markers = []
+    for project in projects:
+        marker = {
+            'latitude': project.mainOrganisation.latitude,
+            'longitude': project.mainOrganisation.longitude,
+            'name': project.name,
+            'project_url': f'/project/{project.id}',
+        }
+        markers.append(marker)
+
+    # Return marker data in JSON format
+    return JsonResponse({'markers': markers})

@@ -1,0 +1,84 @@
+{% load i18n %}
+{% load staticfiles %}
+{% load l10n %}
+{% load countries %}
+{% get_countries as countries %}
+
+<div class="row">
+    <form class="form-inline float-lg-right" id="searchPlatforms" action="{% url 'platforms' %}">
+        <input type="hidden" name="keywords" value="{{filters.keywords}}">
+        <div class="row">
+            <div class="col-12">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-text"><i class="fas fa-sort-amount-down"></i></div>
+                    <select id="orderby" name="orderby" class="custom-select form-control">
+                        <option value="" {% if filters.orderby == "" %} selected {% endif %}>{% trans "Most Recent Updated" %}</option>
+                        <option value="name" {% if filters.orderby == "name" %} selected {% endif %}>{% trans "A-Z" %}</option>
+                    </select>
+                    <div class="input-group-text"><i class="fas fa-filter"></i></div>
+    
+                    <select id="country" name="country" class="custom-select form-control">
+                        <option value="">{% trans "Country" %}<option>
+                        {% for country in countries %}
+                        {% for cwc in countriesWithContent %}
+                        {% if country.code == cwc %}
+                        <option {% if country.code ==  filters.country %} selected {% endif %} value="{{ country.code }}">
+                        {{ country.name }}
+                        </option>
+                        {% endif %}
+                        {% endfor %}
+                        {% endfor %}
+                    </select>
+                    <select id="geographicExtend" name="geographicExtend" class="custom-select form-control">
+                        <option value="">{% trans "Geographic Extend" %}<option>
+                            {% for t in geographicExtendWithContent %}
+                                <option {% if t ==  filters.geographicExtend %} selected {% endif %} value="{{t}}">
+                                {{t|capfirst}}
+                                 </option>
+                            {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="col-12 mb-4 mt-2">
+                {% if filters.keywords %}
+                <a class="badge rounded-pill bg-my-darkGreen search-filter" id="pill-keywords">
+                    <i class="fas fa-times"></i> {{filters.keywords}}
+                </a>
+                {% endif %}
+                {% if filters.country %}
+                <a href="#" class="badge rounded-pill bg-dark" id="pill-country">
+                    <i class="fas fa-times"></i>
+                    {% for country in countries %}
+                    {% if country.code == filters.country %}
+                    {% trans "Country:" %} {{country.name}}
+                    {% endif %}
+                    {% endfor %}
+                </a>
+                {% endif %}
+                {% if filters.geographicExtend %}
+                <a href="#" class="badge rounded-pill bg-my-darkBlue" id="pill-geographicExtend">
+                    <i class="fas fa-times"></i>
+                    {% trans "Geographic Extend:" %} {{filters.geographicExtend}}
+                </a>
+                {% endif %}
+                {% if request.get_full_path != "/platforms/" %}
+                <a class="badge rounded-pill bg-danger text-decoration-none" href="/platforms/">
+                    <i class="fas fa-times"></i> {% trans "Clear current search" %}</a>
+                {% endif %}
+                {% if filters.keywords != "" %}
+                <div class="small mt-3">
+                    <span class"subnavbarCounter-text">
+                        {{ counter }}
+                        {% if counter != 1 %}
+                        {% trans "users found for " %} "{{ filters.keywords }}"
+                        {% else %}
+                        {% trans "users found for " %} "{{ filters.keywords }}"
+                        {% endif %}
+                    </span>
+                </div>
+                {% endif %}
+               
+            </div>
+        </div>
+    </form>
+</div>

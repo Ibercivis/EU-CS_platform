@@ -66,58 +66,64 @@
             </div>
         </div>
     </form>
-    <div class="col-12 mb-4">
-        {% if filters.keywords %}
-        <a href="#" class="badge rounded-pill bg-my-darkGreen search-filter">
-            <i class="fas fa-times"></i> {% trans "keyword:" %} {{filters.keywords}}
-        </a>
-        {% endif %}
-
-        {% if filters.inLanguage %}
-        <a href="#" class="badge rounded-pill bg-dark" id="pill-inLanguage">
-            <i class="fas fa-times"></i>
-            {% trans "language:" %}
-            {% for language in languages %}
-            {% if language.code ==  filters.inLanguage %} {{ language.name }}{% endif %}
-            {% endfor %}
-        </a>
-        {% endif %}
-
-        {% if filters.theme %}
-        <a href="#" class="badge rounded-pill bg-my-wood" id="pill-theme">
-            <i class="fas fa-times"></i>
-            {% trans "theme:" %} {{filters.theme}}
-        </a>
-        {% endif %}
-
-        {% if filters.category %}
-        <a href="#" class="badge rounded-pill bg-my-darkBlue" id="pill-category">
-            <i class="fas fa-times"></i>
-            {% trans "category:" %} {{filters.category}}
-        </a>
-        {% endif %}
-
-        {% if filters.audience %}
-        <a href="#" class="badge rounded-pill bg-my-lightGreen" id="pill-audience">
-            <i class="fas fa-times"></i>
-            {% trans "audience:" %} {{filters.audience}}
-        </a>
-        {% endif %}
-
-        {% if request.get_full_path != "/resources" %}
-            {% if request.get_full_path != "/training_resources" %}
-                <a class="badge rounded-pill bg-danger"
-                href="{% if isTrainingResource %} {% url 'training_resources' %} {% else %}{% url 'resources' %} {% endif %}">
-                    <i class="fas fa-times"></i> {% trans "Clear current search query and filters" %}
-                </a>
+    <div class=" row">
+        <div class="col-12 mb-4 mt-2">
+            {% if filters.keywords %}
+            <a href="#" class="badge rounded-pill bg-my-darkGreen search-filter">
+                <i class="fas fa-times"></i> {{filters.keywords}}
+            </a>
             {% endif %}
-        {% endif %}
-        <div>
-            {% if isTrainingResource %}
-            {{ counter }} {% if counter != 1 %} {% trans "training resources found" %} {% else %}{% trans "training resource found" %} {% endif %}
 
-            {% else %}
-            {{ counter }} {% if counter != 1 %} {% trans "resources found" %} {% else %}{% trans "resource found" %} {% endif %}
+            {% if filters.inLanguage %}
+            <a href="#" class="badge rounded-pill bg-dark" id="pill-inLanguage">
+                <i class="fas fa-times"></i>
+                {% trans "language:" %}
+                {% for language in languages %}
+                {% if language.code ==  filters.inLanguage %} {{ language.name }}{% endif %}
+                {% endfor %}
+            </a>
+            {% endif %}
+
+            {% if filters.theme %}
+            <a href="#" class="badge rounded-pill bg-my-wood" id="pill-theme">
+                <i class="fas fa-times"></i>
+                {% trans "theme:" %} {{filters.theme}}
+            </a>
+            {% endif %}
+
+            {% if filters.category %}
+            <a href="#" class="badge rounded-pill bg-my-darkBlue" id="pill-category">
+                <i class="fas fa-times"></i>
+                {% trans "category:" %} {{filters.category}}
+            </a>
+            {% endif %}
+
+            {% if filters.audience %}
+            <a href="#" class="badge rounded-pill bg-my-lightGreen" id="pill-audience">
+                <i class="fas fa-times"></i>
+                {% trans "audience:" %} {{filters.audience}}
+            </a>
+            {% endif %}
+
+            {% if request.get_full_path != "/resources" %}
+                {% if request.get_full_path != "/training_resources" %}
+                    <a class="badge rounded-pill bg-danger"
+                    href="{% if isTrainingResource %} {% url 'training_resources' %} {% else %}{% url 'resources' %} {% endif %}">
+                        <i class="fas fa-times"></i> {% trans "Clear current search query and filters" %}
+                    </a>
+                {% endif %}
+            {% endif %}
+            {% if filters.keywords != "" %}
+            <div class="small mt-3">
+                <span class"subnavbarCounter-text">
+                {% if isTrainingResource %}
+                    {{ counter }} {% if counter != 1 %} {% trans "training resources found for " %} "{{filters.keywords}}" {% else %}{% trans "training resource found for " %} "{{filters.keywords}}"{% endif %}
+
+                    {% else %}
+                    {{ counter }} {% if counter != 1 %} {% trans "resources found for " %} "{{filters.keywords}}" {% else %}{% trans "resource found for " %} "{{filters.keywords}}" {% endif %}
+                    {% endif %}
+                </span>
+            </div>
             {% endif %}
         </div>
     </div>

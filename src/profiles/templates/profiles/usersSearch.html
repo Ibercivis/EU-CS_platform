@@ -8,9 +8,8 @@
 <div class="container">
     <div clas="row">
         <div class="col-12">
-            <h1>{% trans "user <span class='lightBlue-color'>search</span>" %}</h1>
             <div>
-                {% include "_subnavbar.html" %}
+                {% include "_subnavbarNew.html" %}
                 {% include "profiles/_finder_users.html" %}
             </div>
             <div class="row">
@@ -43,5 +42,27 @@
         $('#finder').submit();
         $('#searchTop').submit();
     });
+    $(function () {
+		$('.custom-select').on('change', function () {
+			$('#searchUsers').submit();
+		});
+    $('#pill-keywords').on('click', function() {
+        $('#keywords').val('')
+        $('#searchUsers').submit();
+    });
+    $('#pill-country').on('click', function() {
+        $('#country').val('')
+        $('#searchUsers').submit();
+    });
+    $('#pill-interestAreas').on('click', function() {
+        $('#interestAreas').val('')
+        $('#searchUsers').submit();
+    });
+    $('#pill-organisation').on('click', function() {
+        $('#organisation').val('')
+        $('#searchUsers').submit();
+    });
+
+	});
     </script>
 {% endblock scripts %}

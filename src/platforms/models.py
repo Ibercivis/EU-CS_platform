@@ -17,7 +17,7 @@ GEOGRAPHIC_EXTEND_CHOICES = (
 class Platform(models.Model):
     # Main information
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='platform_creator')
-    dateCreated = models.DateTimeField('Created date', auto_now=True)
+    dateCreated = models.DateTimeField('Created date', auto_now_add=True)
     dateUpdated = models.DateTimeField('Updated date', auto_now=True)
     name = models.CharField(max_length=200)
     url = models.URLField(max_length=200)

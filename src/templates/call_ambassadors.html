@@ -1,0 +1,87 @@
+{% extends "base_r2.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% block title %}{{ block.super }} :: {% trans "About ECS" %}{% endblock %}
+
+{% block list_of_items %}
+<div class="container">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <h1 class="mt-5 mb-5">
+                {% trans "Call for <span class='lightBlue-color'>Citizen Science</span> Ambassadors" %}
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2 col-12"></div>
+        <div class="col-sm-8 col-12">
+            <div class="row">
+                <div class="col-12">
+                    <img src="{% static 'site/img/Image_ECS_ambassadors.jpg' %}" alt="Imagen centrada" style="display:block; margin:0 auto; margin-bottom: 24px;" height="450">
+                </div>
+
+                        <!-- Start of What is the Call -->
+
+                <div class="col-12" style="margin-bottom: 24px;">
+                    <h3 class="lightBlue-color">What is the Call for citizen science (CS) Ambassadors about?</h3>
+                    <p style="margin-bottom: 24px;">We want to create a network of 28 Citizen Science Ambassadors (EU-27 + the UK) to support the activities in the <a href="https://eu-citizen.science/ecs_project/">ECS (European Citizen Science) project</a>, raise awareness about citizen science and spread and strengthen citizen science in Europe. The <b>open call is to select the 28 Citizen Science Ambassadors</b> that will act as the local representative and promoter of citizen science and the ECS project in the respective country.</p>
+
+                        <!-- Start of Who are we looking for? -->
+
+                <div class="col-12" style="margin-bottom: 24px;">
+                    <h3 class="lightBlue-color">Who are we looking for?</h3>
+                    <p style="margin-bottom: 24px;">We are looking for <b>people with different profiles and expertise</b> to become part of the network: citizen science practitioners, project coordinators, researchers, policy-makers, etc. with expertise in citizen science, public engagement, participatory research, open science, and/or other related fields. It is important that candidates are well-connected as part of local/national networks relevant to citizen science.</p>
+
+                        <!-- Start of What do you get from being a CS Ambassador? -->
+
+                <div class="col-12" style="margin-bottom: 24px;">
+                    <h3 class="lightBlue-color">What do you get from being a CS Ambassador?</h3>
+                    <p style="margin-bottom: 24px;">You get the unique opportunity to <b>be part of a growing network</b> with <b>many additional opportunities</b> that come with this: peer-learning, visibility, training and capacity-building opportunities, involvement in ECS events, access to project insights. You will get to contribute to widening citizen science in Europe as part of the network. CS Ambassadors will also receive a payment of 2.000 € (brute, i.e. including VAT) for the activities carried out.</p>
+
+                        <!-- Start of How to apply? -->
+
+                <div class="col-12" style="margin-bottom: 24px;">
+                    <h3 class="lightBlue-color">How to apply?</h3>
+                    <p style="margin-bottom: 24px;">Read the  <b><a href="{% static 'site/files/Guide_for_Applicants_Call_for_Ambassadors.pdf' %}" target="_blank">Guide for Applicants</a></b> with all relevant information on the call and submit your application via <a href="https://docs.google.com/forms/d/e/1FAIpQLScXPvw0qQuWxrQhUxOpBexQ6ColKeNlY_cvL201xdyYV3SSNg/viewform">the dedicated online form</a> by 29th June 2023, 17:00 CEST.</p>
+
+                        <!-- Start of Important dates -->
+
+                <div class="col-12" style="margin-bottom: 24px;">
+                    <h3 class="lightBlue-color">Important dates</h3>
+                    <p style="margin-bottom: 24px;">Call publication: 25th May 2023, 12:00 CEST<br>
+                        Call deadline: 29th June 2023, 17:00 CEST<br>
+                        Evaluation of applications by the ECS Consortium during July 2023<br>
+                        Engagement of the CS Ambassadors: 1 year or more between September 2023 and June 2026<br>
+                        </p>
+
+                        <!-- Start of Document download -->
+
+                <div class="col-12" style="margin-bottom: 24px;">
+                    <h3 class="lightBlue-color">Document download</h3>
+                    <ul>
+                        <li><p><b><a href="{% static 'site/files/Guide_for_Applicants_Call_for_Ambassadors.pdf' %}" target="_blank">Guide for Applicants</a></b> - All relevant information to apply to the call is contained in this guide, intended to be the main source of information regarding the call.</p></li>
+                    </ul>
+
+                    <p style="margin-top: 12px; margin-bottom: 24px;">In case you have any questions after reading the Guide for Applicants, you can contact us at eucitsciproject (at) ecsa.ngo.</p>
+
+                        <!-- Acknowledgement -->
+
+                <div class="col-12" style="margin-bottom: 24px;">
+                    <h3 class="lightBlue-color">Acknowledgement</h3>
+                    <p>We have used the documents produced by the ACTION, EU-Citizen.Science and IMPETUS projects (grant agreement nr. 824603, 824580 and 101058677 respectively) for their open calls as a basis to develop the Guide for Applicants and thank them for making these useful documents available.</p>
+
+                    <table style="margin: 0 auto; margin-top: 32px">
+                        <tr>
+                          <td style="width: 33.33%; text-align: right;"><img class="custom-image" title="cropped-europe-1.png" src="data:image/webp;base64,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" alt="" data-pagespeed-url-hash="3041872760"></td>
+                          <td style="width: 66.67%; text-align: left; padding-left: 16px;"><p>The ECS project has received funding from the European Union's Horizon Europe Framework Programme for Research and Innovation under grant agreement No. 101058509.</p></td>
+                        </tr>
+                    </table>
+
+                </div>   
+
+            </div>
+            <!-- End of Open Call for Ambassadors -->
+    </div>
+</div>
+{% endblock list_of_items %}    

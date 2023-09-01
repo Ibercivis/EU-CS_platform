@@ -8,6 +8,12 @@ from django.utils import formats
 from django.shortcuts import get_object_or_404, redirect
 from django.template.loader import render_to_string
 from rest_framework import status
+from django.db.models import Q
+from resources.models import Resource
+from projects.models import Project
+from organisations.models import Organisation
+from profiles.models import Profile
+
 
 from datetime import datetime
 from PIL import Image
@@ -91,7 +97,64 @@ def platform(request, pk):
 
 def platforms(request):
     platforms = Platform.objects.get_queryset()
-    return render(request, 'platforms.html', {'platforms': platforms, 'isSearchPage': True})
+    filters = {'keywords': '', 'country': '', 'geographicExtend': ''}
+    countriesWithContent = Platform.objects.values_list('countries', flat=True).distinct()
+    geographicExtendsWithContent = Platform.objects.values_list('geographicExtend', flat=True).distinct()
+    platforms = applyFilters(request, platforms)
+    filters = setFilters(request, filters)
+    platforms = platforms.distinct()
+
+    if request.GET.get('orderby'):
+        orderBy = request.GET.get('orderby')
+        if ("name" in orderBy):
+            platforms = platforms.order_by('name')
+    else:
+        platforms = platforms.order_by('-dateUpdated')
+
+    counter = len(platforms)
+    counterPlatforms = len(platforms)
+
+    #To Count
+    #For resources count
+    allResources = Resource.objects.all()
+    allResources = applyFilters(request, allResources)
+    allResources = allResources.distinct()
+    resources2 = allResources.filter(~Q(isTrainingResource=True))
+    trainingResources = allResources.filter(isTrainingResource=True)
+    resourcesCounter = len(resources2)
+    trainingResourcesCounter = len(trainingResources)
+
+    #For projects count
+    projects = Project.objects.all()
+    projects = projects.filter(~Q(hidden=True))
+    projects = applyFilters(request, projects)
+    projects = projects.distinct()
+    projectsCounter = len(projects)
+
+    #For organisations count
+    organisations = Organisation.objects.all()
+    organisations = applyFilters(request, organisations)
+    organisations = organisations.distinct()
+    organisationsCounter = len(organisations)
+
+    #For users count
+    users = Profile.objects.all().filter(profileVisible=True).filter(user__is_active=True)
+    users = applyFilters(request, users)
+    users = users.distinct()
+    usersCounter = len(users)   
+
+    return render(request, 'platforms.html', {'platforms': platforms,
+                                              'counter': counter,
+                                              'platformsCounter': counterPlatforms,
+                                              'resourcesCounter': resourcesCounter,
+                                              'trainingResourcesCounter': trainingResourcesCounter,
+                                              'projectsCounter': projectsCounter,
+                                              'organisationsCounter': organisationsCounter,
+                                              'usersCounter': usersCounter,
+                                              'countriesWithContent': countriesWithContent,
+                                              'geographicExtendWithContent': geographicExtendsWithContent,
+                                              'filters': filters,
+                                              'isSearchPage': True})
 
 
 def platformsAutocompleteSearch(request):
@@ -157,3 +220,53 @@ def sendPlatformEmail(pk, user):
     email.content_subtype = "html"
     email.send()
     print(message)   
+
+def applyFilters(request, queryset):
+    if queryset.model == Project:
+        if request.GET.get('keywords'):
+            queryset = queryset.filter(
+                Q(name__icontains=request.GET['keywords']) |
+                Q(keywords__keyword__icontains=request.GET['keywords'])).distinct()
+            queryset = queryset.filter(approved=True)
+
+    if queryset.model == Resource:
+        if request.GET.get('keywords'):
+            queryset = queryset.filter(
+                Q(name__icontains=request.GET['keywords']) |
+                Q(keywords__keyword__icontains=request.GET['keywords'])).distinct()
+            queryset = queryset.filter(approved=True)
+
+    if queryset.model == Profile:
+        if request.GET.get('keywords'):
+            keywords = request.GET.get('keywords')
+            queryset = queryset.filter(
+                Q(user__name__icontains=keywords) |
+                Q(interestAreas__interestArea__icontains=keywords) |
+                Q(bio__icontains=keywords)).distinct()
+            
+    if queryset.model == Organisation:
+        if request.GET.get('keywords'):
+            queryset = queryset.filter(
+                Q(name__icontains=request.GET['keywords'])).distinct()
+            
+    if queryset.model == Platform:
+        if request.GET.get('keywords'):
+            keywords = request.GET.get('keywords')
+            queryset = queryset.filter(name__icontains=keywords).distinct()  
+        if request.GET.get('country'):
+            queryset = queryset.filter(countries__icontains=request.GET['country']).distinct()
+        if request.GET.get('geographicExtend'):
+            queryset = queryset.filter(geographicExtend__icontains=request.GET['geographicExtend']).distinct()
+            
+    return queryset
+
+def setFilters(request, filters):
+    if request.GET.get('keywords'):
+        filters['keywords'] = request.GET['keywords']
+    if request.GET.get('country'):
+        filters['country'] = request.GET['country']
+    if request.GET.get('geographicExtend'):
+        filters['geographicExtend'] = request.GET['geographicExtend']
+    if request.GET.get('orderby'):
+        filters['orderby'] = request.GET['orderby']    
+    return filters

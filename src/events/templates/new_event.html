@@ -4,12 +4,16 @@
 {% load crispy_forms_tags %}
 {% load leaflet_tags %}
 {% load thumbnail %}
+{% load custom_filters %}
 
 {% block head %}
 {{block.super }}
+<link rel="stylesheet" href="{% static 'site/css/leaflet-geosearch_style.css' %}">
+<link rel="stylesheet" href="{% static 'site/css/leaflet.css' %}">
 <link rel="stylesheet" href="{% static 'site/css/forms.css' %}">
+{% leaflet_js %}
+{% leaflet_css %}
 {{ form.media.css }}
-{{ form.media.js }}
 
 {% endblock head %}
 
@@ -22,7 +26,6 @@
 
 {% block list_of_items %}
 {% include '_crop_zone.html' %}
-
 <div class="container mt-5">
      <form action="/new_event" class="edit-project" method="post" enctype="multipart/form-data"> 
         <div class="row">
@@ -43,25 +46,53 @@
                             <div class="col-1"></div>
                             <div class="col-11">
                                 {{ form.title|as_crispy_field }}
+                                {{ form.url|as_crispy_field }}
                                 {{ form.description|as_crispy_field }}
-                                {{ form.place|as_crispy_field }}
+                                {{ form.language|as_crispy_field }}
                                 {{ form.start_date|as_crispy_field }}
                                 {{ form.end_date|as_crispy_field }}
-                                {{ form.hour|as_crispy_field }}
-                                {{ form.url|as_crispy_field }}
+                                <div class="row">
+                                    <div class="col-8">
+                                      {{ form.hour|as_crispy_field }}
+                                    </div>
+                                    <div class="col-4">
+                                      {{ form.timezone|as_crispy_field }}
+                                    </div>
+                                </div>
+
+                                {{ form.event_type|as_crispy_field }}
+
+                                <div id="show-map" class="row mb-3">
+                                  <h4 class="leftborder mt-3">{% trans "Event location" %}</h4>  
+                                  <p style="font-size:12px">{% trans "This is a required parameter" %}<sup>*</sup> <br>
+                                    <div class="row" id="map-container">
+                                      {% leaflet_map "map" callback="window.map_init_basic" %}
+                                    </div>
+                                    <div id="map-notification" class="alert alert-danger d-none"></div>
+                                </div>
+                                {{ form.latitude|as_crispy_field }}
+                                {{ form.longitude|as_crispy_field }}
+                                {{ form.place|as_crispy_field }}
+                                {{ form.country|as_crispy_field }}
                                 
+                                {{ form.project|as_crispy_field }}
+                                {{ form.mainOrganisation|as_crispy_field }} 
+                                {{ form.organisations|as_crispy_field }}   
+                              
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-1"></div>
                             <div class="col-11">
 
-                                    <button type="submit" class="btn btn-my-darkBlue submit" style="
+                                <button type="submit" class="btn btn-my-darkBlue submit" style="
                                     margin-left: 40%;
                                     margin-top: 16px;
                                     margin-bottom: 32px;
                                     padding-left: 16px;
-                                    padding-right: 16px;"><i class="fas fa-share-square"></i> {% trans "Add" %} </button>
+                                    padding-right: 16px;" onclick="return validateMap();">
+                                    <i class="fas fa-share-square"></i> {% trans "Add" %} 
+                                </button>
                                 
                             </div>
                         </div>
@@ -72,3 +103,205 @@
     </form>
 </div>
 {% endblock list_of_items %}
+{% block scripts %}
+<script src="{% static 'site/js/site.js' %}"></script>
+<script src="{% static 'scripts/cropper.min.js' %}"></script>
+<script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"></script>
+<script src="{% static 'site/js/leaflet-geosearch_2_7.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jstimezonedetect/1.0.6/jstz.min.js"></script>
+
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var userAgent = "{{ user_agent }}";
+    console.log(userAgent);
+    var tz = jstz.determine(); // Determines the time zone of the browser client
+    var timezone = document.getElementById('id_timezone'); // Assuming you have a select input in your form with id 'id_timezone'
+    timezone.value = tz.name(); // Preselect the user's time zone in the dropdown
+    
+    $('#show-map').hide(); // Hide the map by default
+
+    $('#id_event_type').change(function() {
+      if ($(this).val() === 'face-to-face') {
+        $('#show-map').show();
+        document.getElementById('id_place').value = "";
+        map.invalidateSize();
+      } else {
+        $('#show-map').hide();
+        document.getElementById('id_place').value = "On-line";
+      }
+    });
+  });
+
+  var map;
+  var marker_layer = new L.marker([0.0, 0.0]);
+
+  function editMarker(e){
+    map.removeLayer(marker_layer);
+    marker_layer = new L.marker(e.latlng, {draggable:true});
+    console.log(e.latlng.lat);
+    // Wait 1 second before making the request to respect Nominatim's policy
+    setTimeout(function() {
+        // Inverse geocoding
+        var lat = e.latlng.lat.toFixed(6);
+        var lng = e.latlng.lng.toFixed(6);
+        var url = "https://nominatim.openstreetmap.org/reverse?format=json&lat=" + lat + "&lon=" + lng + "&accept-language=en";
+        var userAgent = "{{ user_agent }}";
+
+        fetch(url, {
+          method: 'GET',
+          headers: {
+            'User-Agent': userAgent, // Header to respect Nominatim's policy
+          }
+        })
+        .then(response => response.json())
+        .then(data => {
+          // Update the input field with the address
+          var input = document.querySelector('.leaflet-control-geosearch form input');
+          input.value = data.display_name;
+          document.getElementById('id_place').value = data.display_name;
+          // Get country and store it in the 'country' field
+          var country = data.address.country;
+          document.getElementById('id_country').value = country;
+          $("#map-notification").addClass("d-none");
+        })
+        .catch(error => console.error('Error:', error));
+      }, 1000);
+    marker_layer.on('drag', function (e) {
+      $("#id_latitude").val((e.latlng.lat).toFixed(6));
+      $("#id_longitude").val((e.latlng.lng).toFixed(6));
+
+      
+    });
+    map.addLayer(marker_layer);
+    $("#id_latitude").val((e.latlng.lat).toFixed(6));
+    $("#id_longitude").val((e.latlng.lng).toFixed(6));
+  }
+
+  function searchedMarker(e){
+    map.removeLayer(marker_layer);
+    marker_layer = new L.marker([e.location.y,e.location.x], {draggable:true});
+    marker_layer.on('drag', function (e) {
+      $("#id_latitude").val((e.latlng.lat).toFixed(6));
+      $("#id_longitude").val((e.latlng.lng).toFixed(6));
+    });
+    map.addLayer(marker_layer);
+    $("#id_latitude").val(parseFloat(e.location.y).toFixed(6));
+    $("#id_longitude").val(parseFloat(e.location.x).toFixed(6));
+    var inputSearch = document.querySelector('.leaflet-control-geosearch form input');
+    document.getElementById('id_place').value = inputSearch.value;
+
+    // Make a request to Nominatim to get country
+    var userAgent = "{{ user_agent }}";
+    var lat = e.location.y;
+    var lng = e.location.x;
+    var url = "https://nominatim.openstreetmap.org/reverse?format=json&lat=" + lat + "&lon=" + lng + "&accept-language=en";
+
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'User-Agent': userAgent, // Header to respect Nominatim's policy
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Get country and store it in the 'country' field
+      var country = data.address.country;
+      document.getElementById('id_country').value = country;
+    })
+    .catch(error => console.error('Error:', error));
+
+    $("#map-notification").addClass("d-none");
+  }
+
+  function map_init_basic (leafmap, options) {
+    map = leafmap;
+    var obj = { latlng: {
+      lat: parseFloat($("#id_latitude").val()),
+      lng: parseFloat($("#id_longitude").val()) }
+    }
+    if($("#id_latitude").val())
+    editMarker(obj);
+    map.on('click', editMarker);
+
+    var GeoSearchControl = window.GeoSearch.GeoSearchControl;
+    var OpenStreetMapProvider = window.GeoSearch.OpenStreetMapProvider;
+    var provider = new OpenStreetMapProvider({});
+
+    //  Define search controls
+    var searchControl = new GeoSearchControl({
+      provider: provider,
+      style: 'bar',
+      showMarker: false,
+      autoClose: true,
+      keepResult: true,
+      //retainZoomLevel: true,
+    });
+
+    map.addControl(searchControl);
+    map.on('geosearch/showlocation', searchedMarker);
+
+    var searchInput = document.querySelector('.leaflet-control-geosearch input'); // Get the input search field
+
+    searchInput.addEventListener('focus', function (event) { // Listen to the focus event on the input field
+        map.off('click', editMarker); // Disable the click event on the map to avoid add a marker when clicking on the input field
+    });
+
+    searchInput.addEventListener('blur', function (event) { // Listen to the blur event on the input field
+        map.on('click', editMarker); // Enable the click event on the map to come back to the default behaviour
+    });
+
+    var resetButton = document.querySelector('.leaflet-control-geosearch .reset'); // Get the reset button
+
+    resetButton.addEventListener('click', function (event) { // Listen to the click event on the reset button
+      map.removeLayer(marker_layer); // Remove the marker
+      $("#id_latitude").val(0.0); // Reset the latitude input field
+      $("#id_longitude").val(0.0); // Reset the longitude input field
+      map.off('click', editMarker); // Disable the click event on the map to avoid add a marker when clicking on the reset button
+      setTimeout(function() {
+        map.on('click', editMarker); // Enable the click event on the map after 300ms to come back to the default behaviour
+      }, 300);
+    });
+
+    var resultsSearch = document.querySelector('.leaflet-control-geosearch .results'); // Get the results div
+
+    resultsSearch.addEventListener('click', function (event) { // Listen to the click event on the results div
+      map.off('click', editMarker); // Disable the click event on the map to avoid add a marker when clicking on the results
+      setTimeout(function() {
+        map.on('click', editMarker); // Enable the click event on the map after 500ms to come back to the default behaviour
+      }, 500);
+    });
+    
+  }
+
+  function validateMap() {
+    // Only validate map if the event type is face-to-face
+    if ($('#id_event_type').val() === 'face-to-face') {
+      console.log(marker_layer)
+      if (!marker_layer || marker_layer.getLatLng().equals([0.0, 0.0])) {
+          // Not added marker o it is the default one
+          $("#map-notification").text("{% trans 'This field is required' %}");
+          $("#map-notification").removeClass("d-none");
+          console.log("Function executed")
+
+          // Add error class to the map container
+          $("#map-container").addClass("map-error");
+          return false;
+      }
+    }
+
+    // If the event type is on-line, set latitude and longitude as 0.0
+    if ($('#id_event_type').val() === 'online') {
+      $("#id_latitude").val(0.0);
+      $("#id_longitude").val(0.0);
+      document.getElementById('id_place').value = "On-line";
+    }
+
+    debugger;
+    return true;
+}
+</script>
+{{ form.media.js }}
+{% endblock scripts %}

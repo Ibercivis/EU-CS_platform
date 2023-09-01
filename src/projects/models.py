@@ -83,8 +83,8 @@ class TranslatedProject(models.Model):
     translatedHowToParticipate = models.CharField(max_length=10000)
     translatedEquipment = models.CharField(max_length=10000)
     creator = models.ForeignKey(
-            settings.AUTH_USER_MODEL,
-            on_delete=models.CASCADE)
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE)
     inLanguage = models.TextField(max_length=5)
     dateCreated = models.DateTimeField('Created date', auto_now=True)
     needsUpdate = models.BooleanField(default=False)
@@ -92,10 +92,11 @@ class TranslatedProject(models.Model):
 
 class Project(models.Model):
     creator = models.ForeignKey(
-            settings.AUTH_USER_MODEL,
-            on_delete=models.CASCADE)
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE)
     dateCreated = models.DateTimeField('Created date', auto_now_add=True)
-    dateUpdated = models.DateTimeField('Updated date', auto_now=False, null=True)
+    dateUpdated = models.DateTimeField(
+        'Updated date', auto_now=False, null=True)
 
     # Main information
 
@@ -116,11 +117,11 @@ class Project(models.Model):
     # Participation information
     participationTask = models.ManyToManyField(ParticipationTask, blank=True)
     difficultyLevel = models.ForeignKey(
-            DifficultyLevel,
-            default=None,
-            blank=True,
-            null=True,
-            on_delete=models.CASCADE)
+        DifficultyLevel,
+        default=None,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE)
     howToParticipate = models.CharField(max_length=2000, null=True, blank=True)
     equipment = models.CharField(max_length=2000, null=True, blank=True)
 
@@ -135,11 +136,11 @@ class Project(models.Model):
     author = models.CharField(max_length=100, null=True, blank=True)
     author_email = models.CharField(max_length=100, null=True, blank=True)
     mainOrganisation = models.ForeignKey(
-                Organisation,
-                on_delete=models.CASCADE,
-                null=True,
-                blank=True,
-                related_name='main_organisation')
+        Organisation,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name='main_organisation')
     organisation = models.ManyToManyField(Organisation, blank=True)
 
     # Funding information
@@ -147,16 +148,20 @@ class Project(models.Model):
     fundingProgram = models.CharField(max_length=500, null=True, blank=True)
 
     # Images
-    image1 = models.ImageField(upload_to='images/', max_length=300, null=True, blank=True)
+    image1 = models.ImageField(
+        upload_to='images/', max_length=300, null=True, blank=True)
     imageCredit1 = models.CharField(max_length=300, null=True, blank=True)
-    image2 = models.ImageField(upload_to='images/', max_length=300, null=True, blank=True)
+    image2 = models.ImageField(
+        upload_to='images/', max_length=300, null=True, blank=True)
     imageCredit2 = models.CharField(max_length=300, null=True, blank=True)
-    image3 = models.ImageField(upload_to='images/', max_length=300, null=True, blank=True)
+    image3 = models.ImageField(
+        upload_to='images/', max_length=300, null=True, blank=True)
     imageCredit3 = models.CharField(max_length=300, null=True, blank=True)
 
     # Database information
     origin = models.CharField(max_length=100, null=True, blank=True)
-    originDatabase = models.ForeignKey(OriginDatabase, on_delete=models.CASCADE, null=True, blank=True)
+    originDatabase = models.ForeignKey(
+        OriginDatabase, on_delete=models.CASCADE, null=True, blank=True)
     originURL = models.CharField(max_length=200, null=True, blank=True)
     originUID = models.CharField(max_length=200, null=True, blank=True)
 
@@ -169,7 +174,8 @@ class Project(models.Model):
     featured = models.BooleanField(default=False, blank=True)
     host = models.CharField(max_length=200, null=True, blank=True)
     doingAtHome = models.BooleanField(null=True, default=False, blank=True)
-    participatingInaContest = models.BooleanField(null=True, default=False, blank=True)
+    participatingInaContest = models.BooleanField(
+        null=True, default=False, blank=True)
     hidden = models.BooleanField(null=True, blank=True)
     customField = models.ManyToManyField(CustomField, blank=True)
 
@@ -177,7 +183,14 @@ class Project(models.Model):
     translatedProject = models.ManyToManyField(TranslatedProject, blank=True)
 
     # For editPermission
-    editors = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='project_editors', blank=True)
+    editors = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, related_name='project_editors', blank=True)
+
+    # Statistics
+    totalAccesses = models.IntegerField(default=0)
+    totalLikes = models.IntegerField(default=0)
+    totalFollowers = models.IntegerField(default=0)
+    firstAccess = models.DateTimeField('First access', null=True, blank=True, default=None)
 
     def __str__(self):
         return f'{self.name}'
@@ -201,12 +214,45 @@ class FollowedProjects(models.Model):
     class Meta:
         unique_together = (('user', 'project'),)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.project.id}'
 
 
+class Stats(models.Model):
+    project = models.ForeignKey(Project,
+                                on_delete=models.CASCADE,
+                                null=True)
+    accesses = models.IntegerField(default=0)
+    likes = models.IntegerField(default=0)
+    follows = models.IntegerField(default=0)
+    day = models.DateField(auto_now_add=True, null=True)
+
+
+class Likes(models.Model):
+    user =  models.ForeignKey(settings.AUTH_USER_MODEL,
+                                on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True, related_name='likes')
+
+class Follows(models.Model):
+    user =  models.ForeignKey(settings.AUTH_USER_MODEL,
+                                on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True, related_name='bookmarks')
+
+
 class ProjectPermission(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
+
+class SearchStats(models.Model):
+    user_registered = models.BooleanField(default=False)
+    search = models.CharField(max_length=200, null=True)
+    topic = models.ForeignKey(Topic, on_delete=models.CASCADE, null=True)
+    country = CountryField(null=True, blank=True)
+    day = models.DateField(auto_now_add=True, null=True)
+    ip_address = models.GenericIPAddressField(null=True, blank=True)
+    user_agent = models.CharField(max_length=200, null=True, blank=True)
+    count = models.IntegerField(default=0) #Creado por Jorge para evitar problema de migraciones

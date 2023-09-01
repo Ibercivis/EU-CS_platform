@@ -15,70 +15,87 @@ Privacy
 {% endblock page_title %}
 
 {% block list_of_items %}
+<div class="row">
+    <img src="{% static 'site/img/lighthouse_logo.png' %}" alt="Lighthouse logo" style="width: 100%">
+</div>
+
+</div>
 <div class="container">
   <div class="row mt-5">
     <div class="container">
       <div class="row mt-5">
-        <div class="col-12">
+        <div class="col-12" style="display: flex; justify-content: center;">
           <!-- Begin Mailchimp Signup Form -->
-          <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
-          <style type="text/css">
-            #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
-            /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
-            We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
-          </style>
-          <style type="text/css">
-            #mc-embedded-subscribe-form input[type=checkbox]{display: inline; width: auto;margin-right: 10px;}
-            #mergeRow-gdpr {margin-top: 20px;}
-            #mergeRow-gdpr fieldset label {font-weight: normal;}
-            #mc-embedded-subscribe-form .mc_fieldset{border:none;min-height: 0px;padding-bottom:0px;}
-          </style>
-          <div id="mc_embed_signup">
-            <form name="mc-embedded-subscribe-form" class="validate" id="mc-embedded-subscribe-form" action="https://ibercivis.us20.list-manage.com/subscribe/post?u=43994d556fa8e50df2ec2c705&amp;id=dd5b2f8cb2" method="post" target="_blank" novalidate="">
-              <div id="mc_embed_signup_scroll">
-                <h2>Sign up to the EU-Citizen.Science newsletter to get the latest updates on citizen science initiatives across Europe. This is a joint newsletter with nine EU-funded citizen science projects: ACTION, CitieS-Health, Co-Act, CSI-COP, CS-TRACK, D-NOSES, MICS, REINFORCE and WeCount.</h2>
-                <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
-                <div class="mc-field-group">
-                  <label for="mce-EMAIL">Email Address  <span class="asterisk">*</span>
-                  </label>
-                  <input name="EMAIL" class="required email" id="mce-EMAIL" type="email" value="">
-                </div>
-                <div class="mc-field-group">
-                  <label for="mce-FNAME">First Name </label>
-                  <input name="FNAME" id="mce-FNAME" type="text" value="">
-                </div>
-                <div class="mc-field-group">
-                  <label for="mce-LNAME">Last Name </label>
-                  <input name="LNAME" id="mce-LNAME" type="text" value="">
-                </div>
-                <div class="mc-field-group">
-                  <label for="mce-MMERGE3">Organisation </label>
-                  <input name="MMERGE3" id="mce-MMERGE3" type="text" value="">
-                </div>
-                <div class="mergeRow gdpr-mergeRow content__gdprBlock mc-field-group" id="mergeRow-gdpr">
-                  <div class="content__gdpr">
-                    <label>GDPR permission</label>
-                    <p>Please select all the ways you would like to hear from EU-Citizen.Science:</p>
-                    <fieldset name="interestgroup_field" class="mc_fieldset gdprRequired mc-field-group">
-                      <label class="checkbox subfield" for="gdpr_21365"><input name="gdpr[21365]" class="av-checkbox " id="gdpr_21365" type="checkbox" value="Y"><span>Email</span> </label>
-                    </fieldset>
-                    <p>You can unsubscribe at any time by clicking the link in the footer of our emails. For information about our privacy practices, please visit our website.</p>
-                  </div>
-                  <div class="content__gdprLegal">
-                    <p>We use Mailchimp as our marketing platform. By clicking below to subscribe, you acknowledge that your information will be transferred to Mailchimp for processing. <a href="https://mailchimp.com/legal/" target="_blank" rel="noopener noreferrer">Learn more about Mailchimp's privacy practices here.</a></p>
-                  </div>
-                </div>
-                <div class="clear" id="mce-responses">
-                  <div class="response" id="mce-error-response" style="display:none"></div>
-                  <div class="response" id="mce-success-response" style="display:none"></div>
-                </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                <div aria-hidden="true" style="position: absolute; left: -5000px;"><input name="b_43994d556fa8e50df2ec2c705_dd5b2f8cb2" tabindex="-1" type="text" value=""></div>
-                <div class="clear"><input name="subscribe" class="button" id="mc-embedded-subscribe" type="submit" value="Subscribe"></div>
-              </div>
-            </form>
-          </div>
-          <script src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js" type="text/javascript"></script><script type="text/javascript">(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='MMERGE3';ftypes[3]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
-          <!--End mc_embed_signup-->
+<link href="//cdn-images.mailchimp.com/embedcode/classic-071822.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif;  width:650px;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<style type="text/css">
+	#mc-embedded-subscribe-form input[type=checkbox]{display: inline; width: auto;margin-right: 10px;}
+	#mergeRow-gdpr {margin-top: 20px;}
+	#mergeRow-gdpr fieldset label {font-weight: normal;}
+	#mc-embedded-subscribe-form .mc_fieldset{border:none;min-height: 0px;padding-bottom:0px;}
+</style>
+<div id="mc_embed_signup">
+    <form action="https://science.us20.list-manage.com/subscribe/post?u=43994d556fa8e50df2ec2c705&amp;id=dd5b2f8cb2&amp;v_id=4387&amp;f_id=003c57e6f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+        <div id="mc_embed_signup_scroll">
+        <h2>Sign up to the Citizen science lighthouse, the newsletter of the European Citizen Science (ECS) collaboration group. Get the latest updates on citizen science initiatives across Europe and take part in the growth of citizen science. ECS is a project funded by the European Union.</h2>
+        <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+<div class="mc-field-group">
+	<label for="mce-EMAIL">Email Address  <span class="asterisk">*</span>
+</label>
+	<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" required>
+	<span id="mce-EMAIL-HELPERTEXT" class="helper_text"></span>
+</div>
+<div class="mc-field-group">
+	<label for="mce-FNAME">First Name </label>
+	<input type="text" value="" name="FNAME" class="" id="mce-FNAME">
+	<span id="mce-FNAME-HELPERTEXT" class="helper_text"></span>
+</div>
+<div class="mc-field-group">
+	<label for="mce-LNAME">Last Name </label>
+	<input type="text" value="" name="LNAME" class="" id="mce-LNAME">
+	<span id="mce-LNAME-HELPERTEXT" class="helper_text"></span>
+</div>
+<div class="mc-field-group">
+	<label for="mce-MMERGE3">Organisation </label>
+	<input type="text" value="" name="MMERGE3" class="" id="mce-MMERGE3">
+	<span id="mce-MMERGE3-HELPERTEXT" class="helper_text"></span>
+</div>
+<div id="mergeRow-gdpr" class="mergeRow gdpr-mergeRow content__gdprBlock mc-field-group">
+    <div class="content__gdpr">
+        <label>Consent on the collection and processing of data</label>
+        <p>The data you introduce will be handled and used in accordance to EU General Data Protection Regulation (GDPR).
+To be able to send you the newsletter of the ECS collaboration group, the European Citizen Science Association (ECSA) is collecting and processing the following personal data: email address (required), and first name, last name and organisation (optional).
+The data are collected exclusively to send you the "Citizen science lighthouse" newsletter and will not be passed on to third parties.
+Please confirm that you consent to the collection and processing of personal data by ECSA as explained above:</p>
+        <fieldset class="mc_fieldset gdprRequired mc-field-group" name="interestgroup_field">
+		<label class="checkbox subfield" for="gdpr_21365"><input type="checkbox" id="gdpr_21365" name="gdpr[21365]" value="Y" class="av-checkbox "><span>I accept</span> </label>
+        </fieldset>
+        <p>You can unsubscribe at any time by clicking the cancellation link in the footer of any of our emails. For more information on our privacy practices, please visit our website: https://eu-citizen.science/privacy/</p>
+    </div>
+    <div class="content__gdprLegal">
+        <p>We use Mailchimp as our marketing platform. By clicking below to subscribe, you acknowledge that your information will be transferred to Mailchimp for processing. <a href="https://mailchimp.com/legal/terms" target="_blank">Learn more about Mailchimp's privacy practices here.</a></p>
+    </div>
+</div>
+	<div id="mce-responses" class="clear foot">
+		<div class="response" id="mce-error-response" style="display:none"></div>
+		<div class="response" id="mce-success-response" style="display:none"></div>
+	</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_43994d556fa8e50df2ec2c705_dd5b2f8cb2" tabindex="-1" value=""></div>
+        <div class="optionalParent">
+            <div class="clear foot">
+                <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
+                <p class="brandingLogo"><a href="http://eepurl.com/ikmSwf" title="Mailchimp - email marketing made easy and fun"><img src="https://eep.io/mc-cdn-images/template_images/branding_logo_text_dark_dtp.svg"></a></p>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='MMERGE3';ftypes[3]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+<!--End mc_embed_signup-->
         </div>
       </div>
     </div>

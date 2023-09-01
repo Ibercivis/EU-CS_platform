@@ -6,8 +6,8 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <h1>{% trans "platform and network <span class='lightBlue-color'> search</span>" %}</h1>
-            {% include "_subnavbar.html" %}
+            {% include "_subnavbarNew.html" %}
+            {% include "_finder_platforms.html" %}
             <!-- TODO: Include filters -->
         </div>
     </div>
@@ -23,8 +23,25 @@
 	{ minLength: 3 }
 	);
 	$('.basicAutoComplete').on('autocomplete.select', function (evt, item) {
-		$('#searchOrganisations').submit();
+		$('#searchPlatforms').submit();
 	});
+    $(function () {
+		$('.custom-select').on('change', function () {
+			$('#searchPlatforms').submit();
+		});
+    $('#pill-keywords').on('click', function() {
+        $('#keywords').val('')
+        $('#searchPlatforms').submit();
+    });
+    $('#pill-country').on('click', function() {
+        $('#country').val('')
+        $('#searchPlatforms').submit();
+    });
+    $('#pill-geographicExtend').on('click', function() {
+        $('#geographicExtend').val('')
+        $('#searchPlatforms').submit();
+    });
+    });
 </script>
 {% endblock scripts %}
 

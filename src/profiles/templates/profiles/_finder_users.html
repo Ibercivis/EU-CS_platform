@@ -5,14 +5,94 @@
 {% get_countries as countries %}
 
 <div class="row">
-    <form class="form-inline float-lg-right" id="searchOrganisations" action="{% url 'organisations' %}">
+    <form class="form-inline float-lg-right" id="searchUsers" action="{% url 'profiles:users' %}">
         <input type="hidden" name="keywords" value="{{filters.keywords}}">
-        <div class="col-lg-6 col-6 mb-3 text">
-            {{ counter }} {% if counter != 1 %}{% trans "users found" %} {% else %} {% trans "user found" %} {% endif %}
-        {% if request.get_full_path != "/users/" %}
-            <a class="badge rounded-pill bg-warning" href="/users">
-                <i class="fas fa-times"></i> {% trans "Clear current search query and filters" %}
-            </a>
-        {% endif %}
+        <div class="row">
+            <div class="col-12">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-text"><i class="fas fa-sort-amount-down"></i></div>
+                    <select id="orderby" name="orderby" class="custom-select form-control">
+                        <option value="" {% if filters.orderby == "" %} selected {% endif %}>{% trans "Most Recent Login" %}</option>
+                        <option value="name" {% if filters.orderby == "name" %} selected {% endif %}>{% trans "A-Z" %}</option>
+                    </select>
+                    <div class="input-group-text"><i class="fas fa-filter"></i></div>
+    
+                    <select id="country" name="country" class="custom-select form-control">
+                        <option value="">{% trans "Country" %}<option>
+                        {% for country in countries %}
+                        {% for cwc in countriesWithContent %}
+                        {% if country.code == cwc %}
+                        <option {% if country.code ==  filters.country %} selected {% endif %} value="{{ country.code }}">
+                        {{ country.name }}
+                        </option>
+                        {% endif %}
+                        {% endfor %}
+                        {% endfor %}
+                    </select>
+                    <select id="interestAreas" name="interestAreas" class="custom-select form-control">
+                        <option value="">{% trans "Interest Area" %}<option>
+                            {% for t in interestAreas %}
+                                <option {% if t ==  filters.interestAreas %} selected {% endif %} value="{{t}}">
+                                {{t|capfirst}}
+                                 </option>
+                            {% endfor %}
+                    </select>
+                    <select id="organisation" name="organisation" class="custom-select form-control">
+                        <option value="">{% trans "Organisation" %}<option>
+                        {% for organisation in organisations %}
+                        <option {% if organisation.name ==  filters.organisation %} selected {% endif %} value="{{organisation.name}}">
+                        {{organisation.name|capfirst}}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="col-12 mb-4 mt-2">
+                {% if filters.keywords %}
+                <a class="badge rounded-pill bg-my-darkGreen search-filter" id="pill-keywords">
+                    <i class="fas fa-times"></i> {{filters.keywords}}
+                </a>
+                {% endif %}
+                {% if filters.country %}
+                <a href="#" class="badge rounded-pill bg-dark" id="pill-country">
+                    <i class="fas fa-times"></i>
+                    {% for country in countries %}
+                    {% if country.code == filters.country %}
+                    {% trans "Country:" %} {{country.name}}
+                    {% endif %}
+                    {% endfor %}
+                </a>
+                {% endif %}
+                {% if filters.interestAreas %}
+                <a href="#" class="badge rounded-pill bg-my-darkBlue" id="pill-interestAreas">
+                    <i class="fas fa-times"></i>
+                    {% trans "Interest Area:" %} {{filters.interestAreas}}
+                </a>
+                {% endif %}
+                {% if filters.organisation %}
+                <a class="badge rounded-pill bg-my-lightGreen pointer" id="pill-organisation" style="cursor: pointer">
+                    <i class="fas fa-times"></i>
+                    {% trans "Participation task:" %} {{filters.organisation}}
+                </a>
+                {% endif %}
+                {% if request.get_full_path != "/users/" %}
+                <a class="badge rounded-pill bg-danger text-decoration-none" href="/users">
+                    <i class="fas fa-times"></i> {% trans "Clear current search" %}</a>
+                {% endif %}
+                {% if filters.keywords != "" %}
+                <div class="small mt-3">
+                    <span class"subnavbarCounter-text">
+                        {{ counter }}
+                        {% if counter != 1 %}
+                        {% trans "users found for " %} "{{ filters.keywords }}"
+                        {% else %}
+                        {% trans "users found for " %} "{{ filters.keywords }}"
+                        {% endif %}
+                    </span>
+                </div>
+                {% endif %}
+               
+            </div>
+        </div>
     </form>
 </div>
