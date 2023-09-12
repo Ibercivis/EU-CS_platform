@@ -49,6 +49,7 @@ def resources(request, isTrainingResource=False):
                 ~Q(isTrainingResource=True)).values_list('inLanguage', flat=True).distinct()
         endPoint = 'resources'
     resources = resources.order_by('id')
+    totalCount = len(resources.filter(approved=True))
 
     themes = Theme.objects.all()
     categories = Category.objects.all()
@@ -127,6 +128,7 @@ def resources(request, isTrainingResource=False):
         # 'approvedResources': approvedResources,
         # 'unApprovedResources': unApprovedResources,
         'counter': counter,
+        'totalCount': totalCount,
         'resourcesCounter': resourcesCounter,
         'trainingResourcesCounter': trainingResourcesCounter,
         'projectsCounter': projectsCounter,

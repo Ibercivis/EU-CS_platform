@@ -210,6 +210,7 @@ class UsersSearch(generic.TemplateView):
 def userSearch(request):
     template_name = "profiles/usersSearch.html"
     users = Profile.objects.filter(profileVisible=True, user__is_active=True).order_by('-user__last_login')
+    totalCount = len(Profile.objects.all())
     interestAreasWithContent = models.InterestArea.objects.filter(profile__in=users).order_by(Lower('interestArea')).distinct()
     organisationsWithContent = Profile.objects.all().filter(profileVisible=True).filter(user__is_active=True).values_list('organisation', flat=True).distinct()
     organisationsWithContent = Organisation.objects.filter(id__in=organisationsWithContent).order_by('name')
@@ -267,6 +268,7 @@ def userSearch(request):
         'users': users,
         'isSearchPage': True,
         'counter': counter,
+        'totalCount': totalCount,
         'usersCounter': usersCounter,
         'resourcesCounter': resourcesCounter,
         'trainingResourcesCounter': trainingResourcesCounter,

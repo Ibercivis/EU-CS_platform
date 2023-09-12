@@ -70,9 +70,9 @@
                     <span class"subnavbarCounter-text">
                         {{ counter }}
                         {% if counter != 1 %}
-                        {% trans "users found for " %} "{{ filters.keywords }}"
+                        {% trans "platforms found for " %} "{{ filters.keywords }}" of {{ totalCount }}
                         {% else %}
-                        {% trans "users found for " %} "{{ filters.keywords }}"
+                        {% trans "platform found for " %} "{{ filters.keywords }}" of {{ totalCount }}
                         {% endif %}
                     </span>
                 </div>

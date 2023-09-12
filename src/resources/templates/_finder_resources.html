@@ -117,10 +117,10 @@
             <div class="small mt-3">
                 <span class"subnavbarCounter-text">
                 {% if isTrainingResource %}
-                    {{ counter }} {% if counter != 1 %} {% trans "training resources found for " %} "{{filters.keywords}}" {% else %}{% trans "training resource found for " %} "{{filters.keywords}}"{% endif %}
+                    {{ counter }} {% if counter != 1 %} {% trans "training resources found for " %} "{{filters.keywords}}" of {{totalCount}} {% else %}{% trans "training resource found for " %} "{{filters.keywords}}" of {{totalCount}} {% endif %}
 
                     {% else %}
-                    {{ counter }} {% if counter != 1 %} {% trans "resources found for " %} "{{filters.keywords}}" {% else %}{% trans "resource found for " %} "{{filters.keywords}}" {% endif %}
+                    {{ counter }} {% if counter != 1 %} {% trans "resources found for " %} "{{filters.keywords}}" of {{totalCount}} {% else %}{% trans "resource found for " %} "{{filters.keywords}}" of {{totalCount}} {% endif %}
                     {% endif %}
                 </span>
             </div>

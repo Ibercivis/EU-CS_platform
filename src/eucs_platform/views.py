@@ -143,9 +143,15 @@ class AboutPage(generic.TemplateView):
 def curated(request):
     groups = ResourceGroup.objects.get_queryset().order_by('id')
     resourcesgrouped = ResourcesGrouped.objects.get_queryset().order_by('group')
+
+    filters = {
+        'keywords': '',
+    }
+
     return render(request, 'curated.html', {
         'groups': groups,
         'resourcesgrouped': resourcesgrouped,
+        'filters': filters,
         'isSearchPage': False})
 
 

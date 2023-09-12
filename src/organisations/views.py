@@ -157,6 +157,7 @@ def organisations(request):
     organisations = Organisation.objects.get_queryset().order_by('-dateCreated')
     countriesWithContent = Organisation.objects.all().values_list('country', flat=True).distinct()
     orgTypes = OrganisationType.objects.all()
+    totalCount = len(organisations)
     filters = {'keywords': '', 'orgTypes': '', 'country': '', 'orderby': ''}
     """
     if request.GET.get('keywords'):
@@ -226,6 +227,7 @@ def organisations(request):
     return render(request, 'organisations.html', {
         'organisations': organisations,
         'counter': counter,
+        'totalCount': totalCount,
         'organisationsCounter': counter,
         'resourcesCounter': resourcesCounter,
         'trainingResourcesCounter': trainingResourcesCounter,

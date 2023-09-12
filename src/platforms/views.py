@@ -97,6 +97,7 @@ def platform(request, pk):
 
 def platforms(request):
     platforms = Platform.objects.get_queryset()
+    totalCount = len(platforms)
     filters = {'keywords': '', 'country': '', 'geographicExtend': ''}
     countriesWithContent = Platform.objects.values_list('countries', flat=True).distinct()
     geographicExtendsWithContent = Platform.objects.values_list('geographicExtend', flat=True).distinct()
@@ -145,6 +146,7 @@ def platforms(request):
 
     return render(request, 'platforms.html', {'platforms': platforms,
                                               'counter': counter,
+                                              'totalCount': totalCount,
                                               'platformsCounter': counterPlatforms,
                                               'resourcesCounter': resourcesCounter,
                                               'trainingResourcesCounter': trainingResourcesCounter,

@@ -234,6 +234,7 @@ def projects(request):
     hasTag = HasTag.objects.all()
     difficultyLevel = DifficultyLevel.objects.all()
     participationTask = ParticipationTask.objects.all()
+    totalProjects = len(projects.filter(approved=True))
     
 
     countriesWithContent1 = projects.values_list(
@@ -344,6 +345,7 @@ def projects(request):
         'difficultyLevel': difficultyLevel,
         'participationTask': participationTask,
         'counter': counter,
+        'totalProjects': totalProjects,
         'projectsCounter': counter,
         'resourcesCounter': resourcesCounter,
         'trainingResourcesCounter': trainingResourcesCounter,
