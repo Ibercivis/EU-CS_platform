@@ -15,7 +15,8 @@
                 <a class="badge rounded-pill bg-dark text-decoration-none">{{country.name}}</a>
                 {% endfor %}
                 <a class="badge rounded-pill bg-my-darkBlue text-decoration-none">{{platform.geographicExtend | title}}</a>
-                <p class="mt-4">{{ platform.description | safe | truncatewords_html:30 }} </p>
+                <p class="mt-4">{{platform.description | safe | truncatewords_html:30 }}</p>
+
         </div><!-- End of card-body -->
     </div><!-- end of card -->
 </div>
