@@ -108,23 +108,27 @@
 					{% trans "About" %}
 				</a>
 			</li>    
-            <li class="nav-item">
-				<a class="nav-link main {% active_link  'ecs_project' %}" href="/ecs_project">
-					<!-- <img src="{% static 'site/img/ecs_logo.png' %}" height="30" alt=""/> -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle main {% active_link 'ecs_project' %}" href="#" id="dropdownECSProject" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     ECS Project
-				</a>
-			</li>   
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownECSProject">
+                    <a class="dropdown-item" href="/ecs_project">About ECS</a>
+                    <a class="dropdown-item" href="/ecs_project/ambassadors">ECS Ambassadors</a>
+                </div>
+            </li>
+            <!-- COMMENT UNTIL NEXT OPEN CALL FOR THE 5 AMBASSADORS   
             <li class="nav-item">
 				<a class="nav-link main {% active_link  'call_ambassadors' %}" href="/call_ambassadors">
                     Open Call for Ambassadors
 				</a>
-			</li>  
+			</li>  -->
 		    </ul>
 
 		    <ul class="navbar-nav ml-auto">
 			    <li class="nav-item dropdown">
 				    <a class="nav-link dropdown-toggle" 
-	   role="button" 
+	                           role="button" 
                                data-bs-toggle="dropdown"
                                aria-haspopup="true" 
                                aria-expanded="false" href="#">

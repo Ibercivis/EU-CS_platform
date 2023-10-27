@@ -177,6 +177,9 @@ def faq(request):
 def ecs_project(request):
     return render(request, 'ecs_project.html')
 
+def ecs_project_ambassadors(request):
+    return render(request, 'ecs_project_ambassadors.html')
+
 def call_ambassadors(request):
     return render(request, 'call_ambassadors.html')
 

@@ -1,6 +1,7 @@
 :root {
     --wood: #494a42;
-    --lightBlue: #6ccde7; 
+    --lightBlue: #6ccde7;
+    --lightBlueOpacity: #d0eef7; 
     --darkGreen: #8dbc41;
     --darkGreen2: #7dac31;
     --palid: #abb79b;
@@ -11,6 +12,7 @@
     --gray7: #777;
     --white: #fff;
     --black: #000;
+    --lightPink: #f7ebec;
 }
 h1, h3 {
     font-family: 'Lato', Arial, Helvetica, sans-serif;
@@ -249,6 +251,140 @@ a{
 .map-error {
     border: 1px solid red;
 }
+
+/* Related to ambassadors */
+
+    .ambassador-card {
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        overflow: hidden;
+        margin: 15px;
+        background-color: var(--lightBlueOpacity);
+        transition: box-shadow 0.3s;
+        transition: transform 0.2s;
+    }
+
+    .ambassador-card:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transform: scale(1.05);
+    }
+
+    .ambassador-image img {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+    }
+
+    .ambassador-info {
+        padding: 10px 20px;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .country {
+        color: var(--black);
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+
+    .name {
+        font-weight: bolder;
+        color: var(--darkGreen);
+        margin-bottom: 6px;
+    }
+
+    .role, .affiliation {
+        color: var(--gray7);
+        margin-bottom: 4px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        
+    }
+
+    .link a {
+        color: var(--darkBlue2);
+        text-decoration: none;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 90%; 
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .link a:hover {
+        text-decoration: underline;
+    }
+
+    
+    .ambassadors-container {
+        display: flex;        
+        flex-wrap: wrap;     
+        justify-content: center; 
+    }
+
+    /* Media query Small-screens (cellphones) */
+    @media (max-width: 600px) {
+        .ambassador-card {
+            width: 100%;    
+        }
+    }
+
+    /* Media query Mid-screens (tablets) */
+    @media (min-width: 601px) and (max-width: 900px) {
+        .ambassador-card {
+            width: 48%;     
+        }
+    }
+
+    /* Media query Big screens */
+    @media (min-width: 901px) {
+        .ambassador-card {
+            width: 30%;     
+        }
+    }
+
+    
+    figure {
+        display: flex;
+        margin-top: 24px;
+        flex-direction: column;
+        align-items: center; /* Center vertically */
+    }
+
+    
+    figure img {
+        width: 600px;
+        border: 1px solid var(--darkGreen); 
+        margin: 0 auto; 
+    }
+
+    figure figcaption {
+        margin-bottom: 24px; 
+        text-align: center; /* Center horizontally */
+    }
+
+    .ambassador-modal {
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        overflow: hidden;
+        margin: 15px;
+        background-color: var(--lightBlueOpacity);
+        width: 100%; /* Aquí definimos una anchura del 80% de su contenedor. Ajusta según tus necesidades */
+        max-width: 600px; /* Define un ancho máximo si es necesario */
+    }
+    
+    /* Estilo para la información dentro del modal. Si quieres un padding diferente al de la card, ajústalo aquí */
+    .ambassador-modal .ambassador-info {
+        padding: 20px 30px;
+    }
+    
+    /* Aquí ajustamos el comportamiento de los textos dentro del modal */
+    .ambassador-modal .role, .ambassador-modal .affiliation, .ambassador-modal .link a {
+        white-space: normal; /* Permitir salto de línea */
+        text-overflow: clip; /* Eliminar el comportamiento de los puntos suspensivos */
+    }
 
 
 
