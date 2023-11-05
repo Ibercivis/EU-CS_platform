@@ -1,0 +1,14 @@
+{% extends "base_r2.html" %}
+
+{% block list_of_items %}
+    <div class="container bg-my-White">
+        <div class="row p-5">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-10">
+                {{ page.content|safe }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+```

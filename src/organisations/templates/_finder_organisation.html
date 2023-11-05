@@ -1,5 +1,5 @@
 {% load i18n %}
-{% load staticfiles %}
+{% load static %}
 {% load countries %}
 <form class="form-inline float-lg-right" id="searchOrganisations" action="{% url 'organisations' %}">
     <input type="hidden" name="keywords" value="{{filters.keywords}}"/>

@@ -16,7 +16,7 @@ from django.utils.encoding import force_bytes, force_text
 from django.shortcuts import render
 from django.core.mail import send_mail
 from profiles.models import Profile
-from authtools import views as authviews
+from django.contrib.auth import views as authviews
 from braces import views as bracesviews
 from templated_mail.mail import BaseEmailMessage
 from djoser import utils
@@ -115,9 +115,10 @@ class PasswordResetView(authviews.PasswordResetView):
 class PasswordResetDoneView(authviews.PasswordResetDoneView):
     template_name = "accounts/password-reset-done.html"
 
-class PasswordResetConfirmView(authviews.PasswordResetConfirmAndLoginView):
-    form_class = forms.SetPasswordForm
-    template_name = "accounts/password-reset-confirm.html"
+# TODO: Implement this view
+#class PasswordResetConfirmView(authviews.PasswordResetConfirmAndLoginView):
+#    form_class = forms.SetPasswordForm
+#    template_name = "accounts/password-reset-confirm.html"
     
 
 

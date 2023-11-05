@@ -5,7 +5,7 @@ from django_select2.forms import Select2MultipleWidget
 from django_select2 import forms as s2forms
 from django_summernote.widgets import SummernoteWidget
 from django.utils.translation import ugettext_lazy as _
-from geopy.geocoders import Nominatim
+from geopy.geocoders import Nominatim, options
 from geopy.exc import GeocoderServiceError
 from .models import Project, Topic, Status, Keyword, FundingBody
 from .models import ParticipationTask, GeographicExtend, HasTag, DifficultyLevel, TranslatedProject
@@ -13,7 +13,8 @@ from organisations.models import Organisation
 from django.utils import timezone
 
 
-geolocator = Nominatim(timeout=None)
+# TODO: Fix this to be an env variable
+geolocator = Nominatim(user_agent="eu-citizen-science-platform")
 
 
 class ProjectGeographicLocationForm(forms.Form):

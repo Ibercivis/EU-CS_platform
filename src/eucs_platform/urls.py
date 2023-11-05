@@ -18,6 +18,7 @@ import events.urls
 import contact.urls
 import digest.urls
 import platforms.urls
+import pages.urls
 import ckeditor_uploader.views
 from . import views
 
@@ -79,6 +80,7 @@ urlpatterns = [
     path("", include(events.urls)),
     path("", include(digest.urls)),
     path("", include(platforms.urls)),
+    path("", include(pages.urls)),
     path('summernote/', include('django_summernote.urls')),
     path('forum/', include(machina_urls)),
     path('getTopicsResponded', views.getTopicsResponded, name='getTopicsResponded'),
@@ -97,6 +99,7 @@ urlpatterns = [
     path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
     path('projects_map/', views.projects_map, name='projects_map'),
     path('get_markers/', views.get_markers, name='get_markers'),
+    path("ckeditor5/", include('django_ckeditor_5.urls'), name="ck_editor_5_upload_file"),
 ]
 
 # User-uploaded files like profile pics need to be served in development

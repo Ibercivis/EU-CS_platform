@@ -82,7 +82,7 @@ TEMPLATES = [
                 'eucs_platform.context_processors.global_settings',
                 # To manage static versions
                 'eucs_platform.context_processors.static_version',
-                
+
             ]
         },
     }
@@ -108,12 +108,15 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'modeltranslation',
     "django.contrib.auth",
     "django.contrib.admin",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    # translations
     "authtools",
     "crispy_forms",
     "easy_thumbnails",
@@ -125,6 +128,7 @@ INSTALLED_APPS = (
     "platforms",
     "django_select2",
     "blog",
+    "pages",
     "django_summernote",
     "leaflet",
     "django_countries",
@@ -164,12 +168,15 @@ INSTALLED_APPS = (
     'machina.apps.forum_permission',
 
     'organisations',
-    #'ecsa_integration',
+    # 'ecsa_integration',
     'django_cron',
     'django_crontab',
     'ckeditor',
     'ckeditor_uploader',
+    'django_ckeditor_5',
     'fontawesomefree',
+
+
 )
 
 MIDDLEWARE = [
@@ -193,16 +200,16 @@ WSGI_APPLICATION = "eucs_platform.wsgi.application"
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
 DATABASES = {
-        'default': {
-            # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'ENGINE': 'django.contrib.gis.db.backends.postgis',
-            'NAME': env("DATABASE_NAME"),
-            'USER': env("DATABASE_USER"),
-            'PASSWORD': env("DATABASE_PASSWORD"),
-            'HOST': 'localhost',
-            'PORT': '5432',
-        }
+    'default': {
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': env("DATABASE_NAME"),
+        'USER': env("DATABASE_USER"),
+        'PASSWORD': env("DATABASE_PASSWORD"),
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/dev/topics/i18n/
@@ -278,6 +285,9 @@ LANGUAGE_CODES = [
     'zh_CN'
 ]
 
+MODELTRANSLATION_LANGUAGES = (
+    'en', 'es', 'fr', 'de', 'el', 'hu', 'it', 'lt', 'pt', 'sv', 'et', 'nl')
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
 TIME_ZONE = "UTC"
 USE_I18N = True
 USE_L10N = True
@@ -295,12 +305,12 @@ CRISPY_TEMPLATE_PACK = "bootstrap3"
 
 
 MESSAGE_TAGS = {
-        messages.DEBUG: 'alert-secondary',
-        messages.INFO: 'alert-info',
-        messages.SUCCESS: 'alert-success',
-        messages.WARNING: 'alert-warning',
-        messages.ERROR: 'alert-danger',
- }
+    messages.DEBUG: 'alert-secondary',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}
 # Authentication Settings
 AUTH_USER_MODEL = "authtools.User"
 LOGIN_REDIRECT_URL = reverse_lazy("home")
@@ -324,10 +334,9 @@ SUMMERNOTE_CONFIG = {
     'summernote': {
         'airMode': False,
         'width': '100%',
-        'height': '300',
-        'toolbar': ['bold', 'italic', 'underline'],
+        'height': '500',
     },
-    'disable_attachment': True,
+    # 'disable_attachment': True,
 }
 
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -454,6 +463,73 @@ CKEDITOR_CONFIGS = {
     },
 }
 
+# CKEDITOR_5 SECTION
+
+
+CKEDITOR_5_CONFIGS = {
+    'default': {
+        'toolbar': ['heading', '|', 'bold', 'italic', 'link',
+                    'bulletedList', 'numberedList', 'blockQuote', 'imageUpload', ],
+
+    },
+    'extends': {
+        'blockToolbar': [
+            'paragraph', 'heading1', 'heading2', 'heading3',
+            '|',
+            'bulletedList', 'numberedList',
+            '|',
+            'blockQuote',
+        ],
+        'toolbar': ['heading', '|', 'outdent', 'indent', '|', 'bold', 'italic', 'link', 'underline', 'strikethrough',
+                    'code', 'subscript', 'superscript', 'highlight', '|', 'codeBlock', 'sourceEditing', 'insertImage',
+                    'bulletedList', 'numberedList', 'todoList', '|',  'blockQuote', 'imageUpload', '|',
+                    'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'mediaEmbed', 'removeFormat',
+                    'insertTable',],
+        'image': {
+            'toolbar': ['imageTextAlternative', '|', 'imageStyle:alignLeft',
+                        'imageStyle:alignRight', 'imageStyle:alignCenter', 'imageStyle:side',  '|'],
+            'styles': [
+                'full',
+                'side',
+                'alignLeft',
+                'alignRight',
+                'alignCenter',
+            ]
+
+        },
+        'table': {
+            'contentToolbar': ['tableColumn', 'tableRow', 'mergeTableCells',
+                               'tableProperties', 'tableCellProperties'],
+            'tableProperties': {
+               
+            },
+            'tableCellProperties': {
+            
+            }
+        },
+        'heading': {
+            'options': [
+                {'model': 'paragraph', 'title': 'Paragraph',
+                    'class': 'ck-heading_paragraph'},
+                {'model': 'heading1', 'view': 'h1', 'title': 'Heading 1',
+                    'class': 'ck-heading_heading1'},
+                {'model': 'heading2', 'view': 'h2', 'title': 'Heading 2',
+                    'class': 'ck-heading_heading2'},
+                {'model': 'heading3', 'view': 'h3',
+                    'title': 'Heading 3', 'class': 'ck-heading_heading3'}
+            ]
+        }
+    },
+    'list': {
+        'properties': {
+            'styles': 'true',
+            'startIndex': 'true',
+            'reversed': 'true',
+        }
+    }
+}
+
+# END CKEDITOR_5 SECTION
 
 CRON_CLASSES = [
     "eucs_platform.cron.ExpiredUsersCronJob",
@@ -467,10 +543,10 @@ CRONJOBS = [
 
 
 GRAPH_MODELS = {
-  'all_applications': True,
-  'group_models': True,
+    'all_applications': True,
+    'group_models': True,
 }
 
-#For OSX
-#GDAL_LIBRARY_PATH = '/opt/homebrew/opt/gdal/lib/libgdal.dylib'
-#GEOS_LIBRARY_PATH = '/opt/homebrew/opt/geos/lib/libgeos_c.dylib'
+# For OSX
+GDAL_LIBRARY_PATH = '/opt/homebrew/opt/gdal/lib/libgdal.dylib'
+GEOS_LIBRARY_PATH = '/opt/homebrew/opt/geos/lib/libgeos_c.dylib'

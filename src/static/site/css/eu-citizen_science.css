@@ -10,17 +10,24 @@
     --lightGreen: #d7e028;
     --gray3: #333;
     --gray7: #777;
+    --lightGray: #fafafa;
     --white: #fff;
     --black: #000;
     --lightPink: #f7ebec;
 }
-h1, h3 {
-    font-family: 'Lato', Arial, Helvetica, sans-serif;
-    font-weight: 800 !important;
+
+body {
+    color: var(--gray7) !important;
+    background-color: var(--white) !important;
+    font-weight: 300 !important;
 }
-h4, h5 {
+h1, h2, h3 {
     font-family: 'Lato', Arial, Helvetica, sans-serif;
-    font-weight: 800 !important;
+    font-weight: 300 !important;
+}
+h4, h5, h6 {
+    font-family: 'Lato', Arial, Helvetica, sans-serif;
+    font-weight: 300 !important;
 }
 .active{
     color: var(--darkBlue2) !important;
@@ -59,7 +66,10 @@ a.card-title:hover{
 .bg-my-darkGreen{
     background-color: var(--darkGreen) ! important;
     color: #fff !important;
-
+}
+.bg-my-White{
+    background-color: var(--white) !important;
+    color: var(--gray3) !important;
 }
 /* Buttons */
 .btn-my-outline-darkBlue{

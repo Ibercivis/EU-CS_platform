@@ -6,4 +6,5 @@
         <h3>This is a previsualization. <a href="/admin/blog/post/{{post.id}}/change/">Go back</a></h3>
     </div>
     {{ block.super }}
+    {{ page.content|safe}}
 {% endblock list_of_items %}

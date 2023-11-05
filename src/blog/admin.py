@@ -1,10 +1,11 @@
 from django.contrib import admin
-from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.templatetags.static import static
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, reverse, get_object_or_404
 from django.urls import reverse
 from django.conf import settings
 from django_summernote.widgets import SummernoteWidget
+from django_summernote.admin import SummernoteModelAdmin
 from django import forms
 from .models import Post
 
@@ -16,45 +17,19 @@ def make_draft(modeladmin, request, queryset):
     queryset.update(status=0)
 make_draft.short_description = "Mark selected posts as draft"
 
-class SummernoteModelAdminWithCustomToolbar(SummernoteWidget):
-    def summernote_settings(self):
-        summernote_settings = settings.SUMMERNOTE_CONFIG.get(
-            'summernote', {}).copy()
-        lang = settings.SUMMERNOTE_CONFIG['summernote'].get('lang')
-        if not lang:
-            lang = 'en-US'
-        summernote_settings.update({
-            'width': '80%',
-            'height': '500',
-            'lang': lang,
-            'url': {
-                'language': static('summernote/lang/summernote-' + lang + '.min.js'),
-                'upload_attachment': reverse('django_summernote-upload_attachment'),
-            },
-            'toolbar': [
-                ['style', ['style', ]],
-                ['font', ['bold', 'italic', 'underline', 'color', ]],
-                ['paragraph', ['paragraph', 'ol', 'ul', ]],
-                ['misc', ['link', 'picture', 'video', 'undo', 'redo', 'help', ]],
-            ],
-
-        })
-        return summernote_settings
-
-
 class CustomPostForm(forms.ModelForm):
     class Meta:
         model = Post
-        widgets = {'content': SummernoteModelAdminWithCustomToolbar()}
         fields = "__all__"
 
 
-class PostAdmin(admin.ModelAdmin):
+class PostAdmin(SummernoteModelAdmin):
     list_display = ('title', 'slug', 'status', 'sticky', 'excerpt', 'created_on')
     list_filter = ("status",)
     search_fields = ['title', 'content']
     prepopulated_fields = {'slug': ('title',)}
-    form = CustomPostForm
+    model = Post
+    summernote_fields = ('content',)
     actions = [make_published, make_draft]
     change_form_template = "blog_change_form.html"
 
