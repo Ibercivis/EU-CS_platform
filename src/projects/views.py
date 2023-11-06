@@ -1,5 +1,6 @@
 from django.http import HttpResponse, JsonResponse, StreamingHttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
+from django.template.response import TemplateResponse
 from django.core.paginator import Paginator
 from django.core import serializers
 from django.contrib.auth.decorators import login_required
@@ -317,8 +318,6 @@ def projects(request):
     organisations = Organisation.objects.all()
     filteredOrganisations = applyFilters(request, organisations).distinct()
     organisations = organisations.distinct()
-    print("Estas son las organizaciones:")
-    print(filteredOrganisations)
     organisationsCounter = len(filteredOrganisations)
 
     #For platforms count
@@ -333,7 +332,7 @@ def projects(request):
     users = users.distinct()
     usersCounter = len(users)
 
-    return render(request, 'projects.html', {
+    return TemplateResponse(request, 'projects.html', {
         'projects': projects,
         'likes': likes,
         'follows': follows,
@@ -492,7 +491,7 @@ def project(request, pk):
     followedProject = FollowedProjects.objects.all().filter(
         user_id=user.id, project_id=pk).exists()
     approvedProjects = ApprovedProjects.objects.all().values_list('project_id', flat=True)
-    return render(request, 'project.html', {
+    return TemplateResponse(request, 'project.html', {
         'project': project,
         'liked': liked,
         'followed': followed,

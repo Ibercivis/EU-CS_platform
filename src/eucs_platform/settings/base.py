@@ -11,7 +11,6 @@ from django.urls import reverse_lazy
 from machina import MACHINA_MAIN_TEMPLATE_DIR, MACHINA_MAIN_STATIC_DIR
 from pathlib import Path
 import os
-# For Bootstrap 3, change error alert to 'danger'
 from django.contrib import messages
 # Use 12factor inspired environment variables or from a file
 import environ
@@ -115,8 +114,6 @@ INSTALLED_APPS = (
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
-    # translations
     "authtools",
     "crispy_forms",
     "easy_thumbnails",
@@ -131,6 +128,7 @@ INSTALLED_APPS = (
     "pages",
     "django_summernote",
     "leaflet",
+    "thememanager",
     "django_countries",
     "authors",
     "contact",
@@ -187,21 +185,19 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'thememanager.middleware.TopBarMiddleware',
     # Machina
     'machina.apps.forum_permission.middleware.ForumPermissionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    # TopBar
+    
 ]
 
 ROOT_URLCONF = "eucs_platform.urls"
-
 WSGI_APPLICATION = "eucs_platform.wsgi.application"
-
-# Database
-# https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': env("DATABASE_NAME"),
         'USER': env("DATABASE_USER"),
@@ -211,8 +207,6 @@ DATABASES = {
     }
 }
 
-# Internationalization
-# https://docs.djangoproject.com/en/dev/topics/i18n/
 
 LANGUAGE_CODE = "en"
 
@@ -464,7 +458,32 @@ CKEDITOR_CONFIGS = {
 }
 
 # CKEDITOR_5 SECTION
-
+customColorPalette = [
+    {
+        'color': 'hsl(4, 90%, 58%)',
+        'label': 'Red'
+    },
+    {
+        'color': 'hsl(340, 82%, 52%)',
+        'label': 'Pink'
+    },
+    {
+        'color': 'hsl(291, 64%, 42%)',
+        'label': 'Purple'
+    },
+    {
+        'color': 'hsl(262, 52%, 47%)',
+        'label': 'Deep Purple'
+    },
+    {
+        'color': 'hsl(231, 48%, 48%)',
+        'label': 'Indigo'
+    },
+    {
+        'color': 'hsl(207, 90%, 54%)',
+        'label': 'Blue'
+    },
+]
 
 CKEDITOR_5_CONFIGS = {
     'default': {
@@ -481,7 +500,7 @@ CKEDITOR_5_CONFIGS = {
             'blockQuote',
         ],
         'toolbar': ['heading', '|', 'outdent', 'indent', '|', 'bold', 'italic', 'link', 'underline', 'strikethrough',
-                    'code', 'subscript', 'superscript', 'highlight', '|', 'codeBlock', 'sourceEditing', 'insertImage',
+        'code','subscript', 'superscript', 'highlight', '|', 'codeBlock', 'sourceEditing', 'insertImage',
                     'bulletedList', 'numberedList', 'todoList', '|',  'blockQuote', 'imageUpload', '|',
                     'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'mediaEmbed', 'removeFormat',
                     'insertTable',],
@@ -498,25 +517,23 @@ CKEDITOR_5_CONFIGS = {
 
         },
         'table': {
-            'contentToolbar': ['tableColumn', 'tableRow', 'mergeTableCells',
-                               'tableProperties', 'tableCellProperties'],
+            'contentToolbar': [ 'tableColumn', 'tableRow', 'mergeTableCells',
+            'tableProperties', 'tableCellProperties' ],
             'tableProperties': {
-               
+                'borderColors': customColorPalette,
+                'backgroundColors': customColorPalette
             },
             'tableCellProperties': {
-            
+                'borderColors': customColorPalette,
+                'backgroundColors': customColorPalette
             }
         },
-        'heading': {
+        'heading' : {
             'options': [
-                {'model': 'paragraph', 'title': 'Paragraph',
-                    'class': 'ck-heading_paragraph'},
-                {'model': 'heading1', 'view': 'h1', 'title': 'Heading 1',
-                    'class': 'ck-heading_heading1'},
-                {'model': 'heading2', 'view': 'h2', 'title': 'Heading 2',
-                    'class': 'ck-heading_heading2'},
-                {'model': 'heading3', 'view': 'h3',
-                    'title': 'Heading 3', 'class': 'ck-heading_heading3'}
+                { 'model': 'paragraph', 'title': 'Paragraph', 'class': 'ck-heading_paragraph' },
+                { 'model': 'heading1', 'view': 'h1', 'title': 'Heading 1', 'class': 'ck-heading_heading1' },
+                { 'model': 'heading2', 'view': 'h2', 'title': 'Heading 2', 'class': 'ck-heading_heading2' },
+                { 'model': 'heading3', 'view': 'h3', 'title': 'Heading 3', 'class': 'ck-heading_heading3' }
             ]
         }
     },

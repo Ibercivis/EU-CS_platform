@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-    {% load static %}
-    {% load thumbnail %}
-    {% load i18n %}
-    {% load cookielaw_tags %}
-    {% load countries %}
-    {% load active_link_tags %}
-    {% load static %}
-    {% get_countries as countries %}
+{% load static %}
+{% load thumbnail %}
+{% load i18n %}
+{% load cookielaw_tags %}
+{% load countries %}
+{% load active_link_tags %}
+{% load static %}
+{% get_countries as countries %}
 
-    <head>
-        {% block head %}
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="csrf-token" content="{{ csrf_token }}">
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token }}">
 
-        <title>
-            {% block title %}
-            EU-Citizen.Science
-            {% endblock title%}
-        </title>
+    <title>
+        {% block title %}
+        EU-Citizen.Science
+        {% endblock title%}
+    </title>
 
-            <!---Google Fonts-->
+    <!---Google Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
@@ -31,269 +31,215 @@
     <link href="{% static 'fontawesomefree/css/fontawesome.min.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
- 
 
-    
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
-              rel="stylesheet" 
-              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-              crossorigin="anonymous">
-        <link href="{% static 'site/css/eu-citizen_science.css' %}?v={{ STATIC_VERSION }}" rel="stylesheet" />
 
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
-		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
-	crossorigin="anonymous"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="{% static 'site/css/eu-citizen_science.css' %}?v={{ STATIC_VERSION }}" rel="stylesheet" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
-    
 
 
-        <script 
-                src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
-                integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
-                crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
         </script>
 
-        <script src="{% static 'site/js/eu-citizen_science.js' %}?v={{ STATIC_VERSION }}"></script>
-        <link rel="stylesheet" href="{% static 'cookielaw/css/cookielaw.css' %}">
-        {% endblock head %}
-        {% block meta %}
-        {% endblock meta %}
-    </head>
+    <script src="{% static 'site/js/eu-citizen_science.js' %}?v={{ STATIC_VERSION }}"></script>
+    <link rel="stylesheet" href="{% static 'cookielaw/css/cookielaw.css' %}">
+    {% endblock head %}
+    {% block meta %}
+    {% endblock meta %}
+</head>
 
-    <body class="d-flex flex-column min-vh-100">
-        <nav class="navbar navbar-light navbar-expand-lg sticky-top bg-white"><!-- Navbar -->
-            <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPrincipal" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+<body class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-light navbar-expand-lg sticky-top bg-white"><!-- Navbar -->
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPrincipal"
+                aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="/">
+                <img src="{% static 'site/img/icon.png' %}" width="30" height="30" alt="" />eu-citizen.science
+            </a>
+            <div class="collapse navbar-collapse" id="navbarPrincipal">
+                <ul class="navbar-nav me-auto">
+                    {% for item in topbar_items %}
+                    <li class="nav-item">
+                        <a class="nav-link main {% active_link item.name %}" href="{{ item.slug }}">{{ item.name }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false" href="#">
+                            {% get_current_language as LANGUAGE_CODE %}{{LANGUAGE_CODE}}
+                        </a>
+
+                        <ul class="dropdown-menu" aria-labelledby="dropdownLanguage">
+                            <form action="/i18n/setlang/" method="post" style="display: inline;" name="languageForm">
+                                {% csrf_token %}
+                                <div style="display: inline;">
+                                    <input id="language" name="language" type="hidden" value="en">
+                                    {% for lang in TRANSLATED_LANGUAGES %}
+                                    <li><a class="dropdown-item" style="cursor: pointer;"
+                                            onclick="javascript:document.getElementById('language').value='{{ lang.0 }}';languageForm.submit()">
+                                            {{ lang.1 }}
+                                        </a>
+                                    </li>
+                                    {% endfor %}
+                                </div>
+                            </form>
+                        </ul>
+                    </li>
+                </ul>
+
+                {% if not user.is_authenticated %}
+                <a class="btn btn-my-outline-darkBlue d-lg-inline-block my-1 my-md-0 ms-md-2"
+                    href="{% url 'accounts:login' %}">{% trans "Login" %}</a>
+                <a class="btn btn-my-outline-darkGreen d-lg-inline-block my-1 my-md-0 ms-md-2"
+                    href="{% url 'accounts:signup' %}">{% trans "Signup" %}</a>
+                {% else %}
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="dropdownRegistered" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false" href="#"><i class="fas fa-user-edit"></i>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownRegistered">
+                            <li><a class="dropdown-item" href="{% url 'profiles:show_self' %}">
+                                {% trans "My personal area" %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'profiles:submissions' %}">
+                                {% trans "My submissions" %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'profiles:bookmarks' %}">
+                                {% trans "My bookmarks" %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'profiles:privacyCenter' %}">
+                                {% trans "My privacy center" %}</a></li>
+                            {% if user.is_staff %}
+                            <li><a class="dropdown-item" href="{% url 'admin:index' %}">{% trans "Admin" %}</a></li>
+                            {% endif %}
+                            <li><a class="dropdown-item" href="{% url 'accounts:logout' %}">{% trans "Logout" %}</a>
+                            </li>
+                        </ul>
+
+                    </li>
+                </ul>
+                <button data-bs-toggle="modal" data-bs-target="#modalsubmit" class="btn btn-my-outline-darkBlue"
+                    type="submit">
+                    <i class="fas fa-paper-plane"></i>&nbsp;&nbsp;{% trans "New submission" %}
                 </button>
-                <a class="navbar-brand" href="/">
-                    <img src="{% static 'site/img/icon.png' %}" width="30" height="30" alt=""/>eu-citizen.science
-                </a>
-                <div class="collapse navbar-collapse" id="navbarPrincipal">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link main {% active_link 'all || projects || resources || training_resources || organisations'%}" 
-                               href="{% url 'projects' %}">{% trans "Search" %}
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link main {% active_link  'blog' %}" href="{% url 'blog' %}">{% trans "Blog" %}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link main {% active_link  'events' %}" href="{% url 'events' %}">{% trans "Events" %}</a>
-                        </li>    
-                        <li class="nav-item">
-                            <a class="nav-link main" href="https://moodle.eu-citizen.science/" target="_blank" rel="noreferrer">
-				    {% trans "Moocs" %}
-			    </a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link main {% active_link  'forum' %}" href="/forum">
-					{% trans "Forum" %}
-				</a>
-			</li>    
 
-			<li class="nav-item">
-				<!-- <a class="nav-link main {% active_link  'final_event' %}" href="{% url 'final_event' %}">
-					{% trans "Final Event" %}
-				</a> -->
-                <a class="nav-link main {% active_link  'faq' %}" href="{% url 'faq' %}">
-					{% trans "FAQ" %}
-				</a> 
-                
-			</li>    
-			<li class="nav-item">
-				<a class="nav-link main {% active_link  'about' %}" href="/about">
-					{% trans "About" %}
-				</a>
-			</li>    
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle main {% active_link 'ecs_project' %}" href="#" id="dropdownECSProject" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    ECS Project
-                </a>
-                <div class="dropdown-menu" aria-labelledby="dropdownECSProject">
-                    <a class="dropdown-item" href="/ecs_project">About ECS</a>
-                    <a class="dropdown-item" href="/ecs_project/ambassadors">ECS Ambassadors</a>
-                </div>
-            </li>
-            <!-- COMMENT UNTIL NEXT OPEN CALL FOR THE 5 AMBASSADORS   
-            <li class="nav-item">
-				<a class="nav-link main {% active_link  'call_ambassadors' %}" href="/call_ambassadors">
-                    Open Call for Ambassadors
-				</a>
-			</li>  -->
-		    </ul>
-
-		    <ul class="navbar-nav ml-auto">
-			    <li class="nav-item dropdown">
-				    <a class="nav-link dropdown-toggle" 
-	                           role="button" 
-                               data-bs-toggle="dropdown"
-                               aria-haspopup="true" 
-                               aria-expanded="false" href="#">
-                                {% get_current_language as LANGUAGE_CODE %}{{LANGUAGE_CODE}}
-                            </a>
-
-                            <ul class="dropdown-menu" aria-labelledby="dropdownLanguage">
-                                <form action="/i18n/setlang/" method="post" style="display: inline;" name="languageForm">
-                                    {% csrf_token %}
-                                    <div style="display: inline;">          
-                                        <input id="language" name="language" type="hidden" value="en">
-                                        {% for lang in TRANSLATED_LANGUAGES %}
-                                        <li><a class="dropdown-item" 
-                                               style="cursor: pointer;" 
-                                               onclick="javascript:document.getElementById('language').value='{{ lang.0 }}';languageForm.submit()">
-                                                {{ lang.1 }}
-                                            </a>
-                                        </li>
-                                        {% endfor %}          
-                                    </div>
-                                </form>
-                            </ul>
-                        </li>
-                    </ul>
-
-                    {% if not user.is_authenticated %}
-                    <a class="btn btn-my-outline-darkBlue d-lg-inline-block my-1 my-md-0 ms-md-2" 
-                       href="{% url 'accounts:login' %}">{% trans "Login" %}</a>
-                    <a class="btn btn-my-outline-darkGreen d-lg-inline-block my-1 my-md-0 ms-md-2" 
-                       href="{% url 'accounts:signup' %}">{% trans "Signup" %}</a>
-                    {% else %}
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" 
-                               id="dropdownRegistered"
-                               role="button" 
-                               data-bs-toggle="dropdown"
-                               aria-expanded="false" 
-                               href="#"><i class="fas fa-user-edit"></i>
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownRegistered">
-                                <li><a class="dropdown-item" href="{% url 'profiles:show_self' %}">{% trans "My personal area" %}</a></li>
-                                <li><a class="dropdown-item" href="{% url 'profiles:submissions' %}">{% trans "My submissions" %}</a></li>
-                                <li><a class="dropdown-item" href="{% url 'profiles:bookmarks' %}">{% trans "My bookmarks" %}</a></li>
-                                <li><a class="dropdown-item" href="{% url 'profiles:privacyCenter' %}">{% trans "My privacy center" %}</a></li>
-
-                                {% if user.is_staff %}
-                                <li><a class="dropdown-item" href="{% url 'admin:index' %}">{% trans "Admin" %}</a></li>
-                                {% endif %}
-                                <li><a class="dropdown-item" href="{% url 'accounts:logout' %}">{% trans "Logout" %}</a></li>
-                            </ul>
-
-                        </li>
-                    </ul>
-                    <button data-bs-toggle="modal" 
-                            data-bs-target="#modalsubmit"
-                            class="btn btn-my-outline-darkBlue"
-                            type="submit">
-                        <i class="fas fa-paper-plane"></i>&nbsp;&nbsp;{% trans "New submission" %}
-                    </button>
-
-                    {% endif %}
-                </div>
+                {% endif %}
             </div>
-        </nav>
-        <!--/.Navbar-->
+        </div>
+    </nav>
+    <!--/.Navbar-->
 
-        <main class="flex-fill">
-            {% include "_modalsubmit.html" %}
-            {% block splash %}
-            {% endblock splash %}
-            <div class="container">
-                <div class="col-12">
-                    {% for message in messages %}
-                    <div class="container-fluid p-0">
-                        <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            {{ message }}
-                        </div>
+    <main class="flex-fill">
+        {% include "_modalsubmit.html" %}
+        {% block splash %}
+        {% endblock splash %}
+        <div class="container">
+            <div class="col-12">
+                {% for message in messages %}
+                <div class="container-fluid p-0">
+                    <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ message }}
                     </div>
-                    {% endfor %} 
                 </div>
+                {% endfor %}
             </div>
-            {% block list_of_items %}
-            {% endblock list_of_items %}
-        </main>
-        {% cookielaw_banner %}
-        {% block footer %}
-        {% include "_footer.html" %}
-        {% endblock footer %}
+        </div>
+        {% block list_of_items %}
+        {% endblock list_of_items %}
+    </main>
+    {% cookielaw_banner %}
+    {% block footer %}
+    {% include "_footer.html" %}
+    {% endblock footer %}
 
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-        <!--link href="/static/reviews/css/star-rating.css" type="text/css" media="all" rel="stylesheet"-->
-        <link rel="stylesheet" href="{% static 'styles/cropper.min.css' %}">
-        <script type="text/javascript" src="{% static 'scripts/lazysizes.min.js' %}"></script>
-        <script src="{% static 'scripts/cropper.min.js' %}"></script>
-        <script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
-        <script src="{% static 'cookielaw/js/cookielaw.js' %}"></script>
-        <script>
-            $(document).ready(function () {
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" <link rel="stylesheet"
+        href="{% static 'styles/cropper.min.css' %}">
+    <script type="text/javascript" src="{% static 'scripts/lazysizes.min.js' %}"></script>
+    <script src="{% static 'scripts/cropper.min.js' %}"></script>
+    <script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
+    <script src="{% static 'cookielaw/js/cookielaw.js' %}"></script>
+    <script>
+        $(document).ready(function () {
 
-                getForumResponsesNumber();    
+            getForumResponsesNumber();
 
-                function getForumResponsesNumber() {        
-                    var request = $.ajax(
-                        {
-                            type: "GET",
-                            url: "{% url 'getForumResponsesNumber' %}",
-                            data: {
+            function getForumResponsesNumber() {
+                var request = $.ajax(
+                    {
+                        type: "GET",
+                        url: "{% url 'getForumResponsesNumber' %}",
+                        data: {
 
-                            },
-                            success: function (response) {
-                                var forumresponses = response.forumresponses
-                                if (forumresponses > 0){
-                                    $("#forumHeader").html('<a class="nav-link main" href="/forum">{% trans "FORUM" %}<sup>' + forumresponses + '</sup></a>');
-                                }            
+                        },
+                        success: function (response) {
+                            var forumresponses = response.forumresponses
+                            if (forumresponses > 0) {
+                                $("#forumHeader").html('<a class="nav-link main" href="/forum">{% trans "FORUM" %}<sup>' + forumresponses + '</sup></a>');
                             }
                         }
-                    );
-                }
+                    }
+                );
+            }
 
-            });
-        </script>
+        });
+    </script>
 
-        <!-- Google Analytics -->
-        <script>
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    <!-- Google Analytics -->
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-ga('create', 'UA-139349847-1' , 'auto');
-ga('send', 'pageview');
-        </script>
-        <!-- End Google Analytics -->
-        <script>
-            $(".navbar-toggler-icon").click(function () {
-                if($(".ribbon-top-left").is(":visible")){
-                    $(".ribbon-top-left").hide();
-                }else{
-                    $(".ribbon-top-left").show();
-                }
-            });
+        ga('create', 'UA-139349847-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <!-- End Google Analytics -->
+    <script>
+        $(".navbar-toggler-icon").click(function () {
+            if ($(".ribbon-top-left").is(":visible")) {
+                $(".ribbon-top-left").hide();
+            } else {
+                $(".ribbon-top-left").show();
+            }
+        });
 
-$('#mysearch').click(function(){
-    $('#finder').submit();
-});
-$('#backsign').click(function(){
-    $('#keywords').val('');
-    $('#backsign').html('')
-});
+        $('#mysearch').click(function () {
+            $('#finder').submit();
+        });
+        $('#backsign').click(function () {
+            $('#keywords').val('');
+            $('#backsign').html('')
+        });
 
-$('.basicAutoComplete').keyup(function(){
-    if(($(".basicAutoComplete").val().length)>0){
-        $('#backsign').html('<i class="fas fa-backspace"></i>')
-    }else{
-        $('#backsign').html('')
-    }
-});
+        $('.basicAutoComplete').keyup(function () {
+            if (($(".basicAutoComplete").val().length) > 0) {
+                $('#backsign').html('<i class="fas fa-backspace"></i>')
+            } else {
+                $('#backsign').html('')
+            }
+        });
 
-        </script>
-        {% block scripts %}
-        {% endblock scripts %}
+    </script>
+    {% block scripts %}
+    {% endblock scripts %}
 
-    </body>
+</body>
+
 </html>

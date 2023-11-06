@@ -1,5 +1,6 @@
 from datetime import datetime
 from django.shortcuts import render, redirect, get_object_or_404
+from django.template.response import TemplateResponse
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -47,7 +48,7 @@ def events(request):
             end_date__gte=now).order_by('-featured', 'start_date')
     pastEvents = Event.objects.get_queryset().order_by('-featured', '-start_date')
     '''
-    paginator = Paginator(pastEvents, 3) # 3 son los elementos que se muestran por página.
+    paginator = Paginator(pastEvents, 12) # 3 son los elementos que se muestran por página.
     page = request.GET.get('page')
     try:
         pastEvents = paginator.page(page)
@@ -66,7 +67,7 @@ def events(request):
     if not user.is_staff:
         events = events.exclude(id__in=unApprovedEvents)
 
-    return render(request, 'events.html', {
+    return TemplateResponse(request, 'events.html', {
         'q': query,
         'total_events': total_events,
         'num_upcomingEvents': num_upcomingEvents,

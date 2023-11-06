@@ -1,5 +1,6 @@
 from django.views import generic
 from django.shortcuts import render
+from django.template.response import TemplateResponse
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
@@ -18,6 +19,7 @@ from platforms.models import Platform
 from profiles.models import Profile
 from django.conf import settings
 from blog.models import Post
+from thememanager.models import TopBar
 import random
 import json
 from django.template.loader import render_to_string
@@ -112,7 +114,7 @@ def home(request):
 
     total = countertresources + counterprojects + countertresources + counterorganisations
 
-    return render(request, 'home.html', {
+    return TemplateResponse(request, 'home.html', {
         'user': user,
         'projects': projects,
         'likes': likes,
@@ -148,7 +150,7 @@ def curated(request):
         'keywords': '',
     }
 
-    return render(request, 'curated.html', {
+    return TemplateResponse(request, 'curated.html', {
         'groups': groups,
         'resourcesgrouped': resourcesgrouped,
         'filters': filters,
@@ -156,11 +158,11 @@ def curated(request):
 
 
 def imprint(request):
-    return render(request, 'imprint.html')
+    return TemplateResponse(request, 'imprint.html')
 
 
 def contact(request):
-    return render(request, 'contact.html')
+    return TemplateResponse(request, 'contact.html')
 
 
 def terms(request):
@@ -168,11 +170,10 @@ def terms(request):
 
 
 def privacy(request):
-    return render(request, 'privacy.html')
-
+    return TemplateResponse(request, 'privacy.html',{})
 
 def faq(request):
-    return render(request, 'faq.html')
+    return TemplateResponse(request, 'faq.html',{})
 
 def ecs_project(request):
     return render(request, 'ecs_project.html')
