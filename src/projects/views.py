@@ -1030,3 +1030,4 @@ def generateProjectStatsAjax(request):
         response = json.dumps(list(stats), cls=DjangoJSONEncoder)
         response = json.loads(response)
     return JsonResponse(response, safe=False)
+    

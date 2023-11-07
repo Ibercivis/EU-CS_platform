@@ -18,7 +18,8 @@ import environ
 # Build paths inside the project like this: BASE_DIR / "directory"
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 STATIC_ROOT = "/home/ubuntu/eu-citizen.science/static"
-STATICFILES_DIRS = [str(BASE_DIR / "static"), MACHINA_MAIN_STATIC_DIR]
+THEMEDIRSTATIC = str(BASE_DIR / "eucitizensciencetheme" / "static")
+STATICFILES_DIRS = [str(BASE_DIR / "static"), MACHINA_MAIN_STATIC_DIR, THEMEDIRSTATIC]
 
 # settings.py
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
@@ -107,7 +108,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-    'modeltranslation',
+    "modeltranslation",
+    "eucitizensciencetheme",
     "django.contrib.auth",
     "django.contrib.admin",
     "django.contrib.contenttypes",
@@ -128,7 +130,6 @@ INSTALLED_APPS = (
     "pages",
     "django_summernote",
     "leaflet",
-    "thememanager",
     "django_countries",
     "authors",
     "contact",
@@ -185,7 +186,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    'thememanager.middleware.TopBarMiddleware',
+    'eucitizensciencetheme.middleware.TopBarMiddleware',
+    'eucitizensciencetheme.middleware.FooterMiddleware',
     # Machina
     'machina.apps.forum_permission.middleware.ForumPermissionMiddleware',
     'django.middleware.locale.LocaleMiddleware',

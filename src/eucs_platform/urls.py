@@ -19,6 +19,8 @@ import contact.urls
 import digest.urls
 import platforms.urls
 import pages.urls
+import blog.urls
+import eucitizensciencetheme.urls
 import ckeditor_uploader.views
 from . import views
 
@@ -48,26 +50,7 @@ urlpatterns = [
     path("", views.home, name="home"),
     path("all/", views.all, name="all"),
     path("curated/", views.curated, name="curated"),
-    path("imprint/", views.imprint, name="imprint"),
-    path("terms/", views.terms, name="terms"),
-    path("privacy/", views.privacy, name="privacy"),
-    path("faq/", views.faq, name="faq"),
-    path("ecs_project", views.ecs_project, name="ecs_project"),
-    path("ecs_project/ambassadors", views.ecs_project_ambassadors, name="ecs_project_ambassadors"),
-    path("call_ambassadors/", views.call_ambassadors, name="call_ambassadors"),
-    path("subscribe/", views.subscribe, name="subscribe"),
-    path("moderation/", views.moderation, name="moderation"),
-    path("criteria/", views.criteria, name="criteria"),
-    path("moderation_quality_criteria", views.moderation_quality_criteria, name="moderation_quality_criteria"),
-    path("translations/", views.translations, name="translations"),
-    path("call/", views.call, name="call"),
-    path("policy_maker_event_2021/", views.policy_maker_event_2021, name="policy_maker_event_2021"),
-    path("final_launch/", views.final_launch, name="final_launch"),
-    path("final_event/", views.final_event, name="final_event"),
     path("home_autocomplete/", views.home_autocomplete, name="home_autocomplete"),
-    path("development/", views.development, name="development"),
-    path("about/", views.AboutPage.as_view(), name="about"),
-    path("policy_brief/", views.policy_brief, name="policy_brief"),
     path("", include(profiles.urls)),
     path("admin/", admin.site.urls),
     path("select2/", include("django_select2.urls")),
@@ -76,11 +59,12 @@ urlpatterns = [
     path("", include(organisations.urls)),
     path("", include(projects.urls)),
     path("", include(resources.urls)),
-    path('', include('blog.urls')),
+    path("", include(blog.urls)),
     path("", include(events.urls)),
     path("", include(digest.urls)),
     path("", include(platforms.urls)),
     path("", include(pages.urls)),
+    path("", include(eucitizensciencetheme.urls)),
     path('summernote/', include('django_summernote.urls')),
     path('forum/', include(machina_urls)),
     path('getTopicsResponded', views.getTopicsResponded, name='getTopicsResponded'),
@@ -97,8 +81,6 @@ urlpatterns = [
     re_path(r"^upload/", ckeditor_uploader.views.upload, name="ckeditor_upload"),
     re_path(r"^browse/", never_cache(ckeditor_uploader.views.browse), name="ckeditor_browse",),
     path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
-    path('projects_map/', views.projects_map, name='projects_map'),
-    path('get_markers/', views.get_markers, name='get_markers'),
     path("ckeditor5/", include('django_ckeditor_5.urls'), name="ck_editor_5_upload_file"),
 ]
 
@@ -108,5 +90,4 @@ urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # Include django debug toolbar if DEBUG is on
 if settings.DEBUG:
     import debug_toolbar
-
     urlpatterns += [path("__debug__/", include(debug_toolbar.urls))]
