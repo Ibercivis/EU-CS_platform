@@ -33,14 +33,9 @@ h4, h5, h6 {
     color: var(--darkBlue2) !important;
     /* Otros estilos que desees aplicar a la sección activa */
   }
-a.card-title{
-    color: #594a42 !important;
-}
 
-a.card-title:hover{
-    color: var(--lightBlue) !important;
-    transition: 0.3s;
-}
+
+
 
 .bg-dark{
     color: #fff !important;
@@ -71,6 +66,19 @@ a.card-title:hover{
     background-color: var(--white) !important;
     color: var(--gray3) !important;
 }
+
+/* Cards */
+.card{
+}
+a.card-title:hover{
+    color: var(--lightBlue) !important;
+    transition: 0.3s;
+}
+a.card-title{
+    color: #594a42 !important;
+}
+
+
 /* Buttons */
 .btn-my-outline-darkBlue{
     border: 1px solid var(--darkBlue) !important;
@@ -126,8 +134,6 @@ a.card-title:hover{
     transition: 0.3s;
 }
 
-
-
 .btn-my-outline-darkGreen{
     border: 1px solid var(--darkGreen) !important;
     color: var(--darkGreen);
@@ -137,8 +143,6 @@ a.card-title:hover{
     color: var(--white);
     transition: 0.3s;
 }
-
-
 
 
 /* Links */
@@ -177,7 +181,7 @@ a{
 
 /* Related with images */
 .profileImage{
-    height: 300px !important;
+    height: 400px !important;
     width: 100% !important;
 }
 
@@ -206,7 +210,6 @@ a{
 /* subnavbar */
 .subnavbar .active{
     color: var(--darkBlue2) !important;
-    /* Otros estilos que desees aplicar a la sección activa */
     border-bottom: 2px solid var(--lightBlue) !important;
 }
 .subnavbar-item:hover{
@@ -214,20 +217,9 @@ a{
 }
 
 .subnavbarCounter-text {
-    
     font-size: 16px;
-  }
-
-.form-border-Blue{
-    display: inline-block;
-    font-weight: 400;
-    border: 1px solid var(--darkBlue) !important;
-    background-color: transparent;
-    font-size: 1rem;
-    border-radius: 0.25rem;
-    line-height: 1.5;
-    padding: 0.375rem 0.75rem;
 }
+
 
 /* Related to MAP */
 #mapaHome {
@@ -242,24 +234,8 @@ a{
 }
 
 #mapaHome .title {
-    font-family: 'Lato', Arial, Helvetica, sans-serif;
-    font-size: 2.5rem;
-    color: #ffffff;
+    color: var(--white)
     display: block;
-}
-
-#mapaHome .subtitle {
-    font-size: 1.25rem;
-    color: #ffffff;
-}
-
-.mapaContent {
-    text-align: center;
-    width: 100%;
-}
-
-.map-error {
-    border: 1px solid red;
 }
 
 /* Related to ambassadors */
