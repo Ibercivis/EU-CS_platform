@@ -102,9 +102,9 @@ class Project(models.Model):
 
     name = models.CharField(max_length=200)
     url = models.CharField(max_length=200, null=True, blank=True)
-    description = models.CharField(max_length=3000)
-    description_citizen_science_aspects = models.CharField(max_length=2000)
-    aim = models.CharField(max_length=2000)
+    description = models.TextField()
+    description_citizen_science_aspects = models.TextField()
+    aim = models.TextField()
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
     keywords = models.ManyToManyField(Keyword)
 
@@ -122,8 +122,8 @@ class Project(models.Model):
         blank=True,
         null=True,
         on_delete=models.CASCADE)
-    howToParticipate = models.CharField(max_length=2000, null=True, blank=True)
-    equipment = models.CharField(max_length=2000, null=True, blank=True)
+    howToParticipate = models.TextField(null=True, blank=True)
+    equipment = models.TextField(null=True, blank=True)
 
     # Project Location
     geographicextend = models.ManyToManyField(GeographicExtend, blank=True)

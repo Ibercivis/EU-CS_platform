@@ -237,7 +237,7 @@ def userSearch(request):
 
     #To count
     #For resources count
-    allResources = Resource.objects.all()
+    allResources = Resource.objects.all().filter(approved=True)
     allResources = applyFilters(request, allResources)
     allResources = allResources.distinct()
     resources2 = allResources.filter(~Q(isTrainingResource=True))
@@ -246,7 +246,7 @@ def userSearch(request):
     trainingResourcesCounter = len(trainingResources)
 
     #For projects count
-    projects = Project.objects.all()
+    projects = Project.objects.all().filter(approved=True)
     projects = projects.filter(~Q(hidden=True))
     projects = applyFilters(request, projects)
     projects = projects.distinct()

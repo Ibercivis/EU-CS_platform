@@ -12,13 +12,14 @@ class Event(models.Model):
             null=True,
             blank=True)
     title = models.CharField(max_length=200)
-    description = models.CharField(max_length=3000)
+    description = models.TextField()
     place = models.CharField(max_length=200, blank=True, default='On-line')
     country = models.CharField(null=True, blank=True, max_length=50)
     start_date = models.DateTimeField('Start date')
     end_date = models.DateTimeField('End date')
     hour = models.TimeField(null=True, blank=True)
     timezone = models.CharField(max_length=100, choices=[(tz, tz) for tz in pytz.all_timezones], default='Europe/Brussels')
+    #TODO: reference this to settings
     language = models.CharField(max_length=20, choices=[
         ('NL', 'Dutch'),
         ('EN', 'English'),
@@ -34,8 +35,9 @@ class Event(models.Model):
         ('SV', 'Swedish'),
         ('OT', 'Other'),
     ], default='EN')
-    url = models.CharField(max_length=200)
+    url = models.URLField(max_length=200, blank=True)
     featured = models.BooleanField(null=True, default=False)
+    # TODO: This a a fixture
     event_type = models.CharField(max_length=20, choices=[
         ('online', 'On-line event'),
         ('face-to-face', 'Face-to-face event'),

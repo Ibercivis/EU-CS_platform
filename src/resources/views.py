@@ -75,7 +75,7 @@ def resources(request, isTrainingResource=False):
     trainingResourcesCounter = len(trainingResources)
 
     #For projects count
-    projects = Project.objects.all()
+    projects = Project.objects.all().filter(approved=True)
     projects = projects.filter(~Q(hidden=True))
     projects = applyFilters(request, projects)
     projects = projects.distinct()
@@ -469,7 +469,6 @@ def resourcesAutocompleteSearch(request, isTrainingResource=False):
 def getResourcesAutocomplete(text, isTrainingResource=False):
     approvedResources = ApprovedResources.objects.all().values_list('resource_id', flat=True)
     resources = Resource.objects.filter(~Q(hidden=True)).filter(name__icontains=text).filter(approved=True)
-    print(resources)
     if(isTrainingResource):
         resources = resources.filter(isTrainingResource=True)
     else:

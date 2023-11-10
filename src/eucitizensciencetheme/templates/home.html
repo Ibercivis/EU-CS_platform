@@ -10,52 +10,54 @@
 {% include "_navbar_r2.html"  %}
 {% endblock %}
 {% block splash %}
-{% if request.get_full_path == "/" %}
+
 <div class="container-fluid" style="background: url('/static/site/img/ilustracion_diversity.png') no-repeat fixed top right">
     <div class="container-fluid" >
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-6">
                     <h1 class="mt-5">eu-citizen.<span class="darkGreen-color">science</span></h1>
-                    <h3 class="fw-light mb-5">
+                    <h5 class="fw-light mb-4">
                         {% trans "Welcome to the platform for sharing citizen science projects, resources, tools, training and much more" %}
-                    </h3>
+                    </h5>
                 </div>
             </div>
         </div>
     </div>
     <div class="container-fluid bg-white">
-        <div class="container">
+        <div class="container mb-5">
             {% include "_subnavbarNew.html" %}
         </div>
     </div>
+</div>
+
+{% endblock splash %}
+{% block list_of_items %}
+{% include '_map_projects.html' %}
+{% if  user.is_authenticated %}
+{% include '_latest_projects.html' %}
+{% include '_latest_resources.html' %}
+{% include '_latest_training_resources.html' %}
+{% include '_latest_organisations.html' %}
+{% include '_latest_platforms.html' %}
+{% else %}
+    {% for section in sections %}
+    <div class="container-fluid">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 col-12 mt-5 pb-5">
-                    {% if user.is_authenticated %}
-                    <h3 class="mb-5 mt-5">{% trans "Go to your <a class='lightBlue-color' href='/users/me'>personal area</a><br/> and see your stats</h3>" %}
-                    {% else %}
-                    <h3 class="mb-5 mt-5">{% trans "<a href='signup'>join the community</a> <div>and participate</div>" %}</h3>
+                <div class="col-6">
+                <h2 class="mt-5 mb-5">{{section.title}}</h2>
+                {{section.content | safe}}
+                </div>
+                <div class="col-6">
+                    {% if section.image %}
+                    <img src="/media/{{section.image}}" class="img-fluid" alt="Responsive image" />
                     {% endif %}
                 </div>
             </div>
         </div>
     </div>
-</div>
-{% endif %}
-{% endblock splash %}
-{% block list_of_items %}
-{% include '_map_projects.html' %}
-{% if not user.is_authenticated %}
-    {% include '_about_section.html' %}
-    {% include '_what_can_you_find_here.html' %}
-    {% include '_what_is_citizen_science.html' %}
-{% else %}
-    {% include '_latest_projects.html' %}
-    {% include '_latest_resources.html' %}
-    {% include '_latest_training_resources.html' %}
-    {% include '_latest_organisations.html' %}
-    {% include '_latest_platforms.html' %}
+    {% endfor %}
 {% endif %}
 {% endblock list_of_items %}
 {% block scripts %}

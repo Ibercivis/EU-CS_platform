@@ -4,18 +4,20 @@ from . import views
 
 ''' Paths of eucitizensciencetheme, in alphabetical order '''
 urlpatterns = [
+    path("", views.home, name="home"),
     path("about/", views.about, name="about"),
-    path("all/", views.all, name="all"),
     path("call/", views.call, name="call"),
     path("call_ambassadors/", views.call_ambassadors, name="call_ambassadors"),
     path("criteria/", views.criteria, name="criteria"),
     path("development", views.development, name="development"),
-    path("ecs_project_ambassadors/", views.ecs_project_ambassadors, name="ecs_project_ambassadors"),
+    path("ecs_project/", views.ecs_project_ambassadors, name="ecs_project_ambassadors"),
     path("ecs_project/ambassadors", views.ecs_project_ambassadors, name="ecs_project_ambassadors"),
+    path("ecs_project/codesign", views.ecs_project_codesign, name="ecs_project_codesign"),
     path("faq/", views.faq, name="faq"),   
     path("final_event/", views.final_event, name="final_event"),
     path("final_launch/", views.final_launch, name="final_launch"),
-    path('get_markers/', views.get_markers, name='get_markers'),
+    path('get_projects/', views.get_projects, name='get_projects'),
+    path('get_organisations/', views.get_organisations, name='get_organisations'),
     path("imprint/", views.imprint, name="imprint"),
     path("moderation/", views.moderation, name="moderation"),
     path("moderation_quality_criteria/", views.moderation_quality_criteria, name="moderation_quality_criteria"),

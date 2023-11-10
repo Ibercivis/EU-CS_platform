@@ -208,35 +208,25 @@ a{
 }
 
 /* subnavbar */
-.subnavbar .active{
+.subnavbar-item{
+    border-bottom: 2px solid var(--white) !important;
+
+}
+
+.subnavbar-item .active{
     color: var(--darkBlue2) !important;
     border-bottom: 2px solid var(--lightBlue) !important;
+
 }
 .subnavbar-item:hover{
-    border-bottom: 2px solid var(--lightBlue) !important;
+    color: var(--darkBlue2) !important;
+    transition: 0.5s;
 }
 
 .subnavbarCounter-text {
     font-size: 16px;
 }
 
-
-/* Related to MAP */
-#mapaHome {
-    /* background: url(/static/site/img/mapa-interativo1x.png) no-repeat right;  */
-    background-color: var(--darkBlue2);
-    padding: 50px;
-}
-
-#mapaHome #frameMapa {
-    width: 100%;
-    height: 750px;
-}
-
-#mapaHome .title {
-    color: var(--white)
-    display: block;
-}
 
 /* Related to ambassadors */
 

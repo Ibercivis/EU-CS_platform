@@ -17,6 +17,7 @@ class TopBar(models.Model):
     def __str__(self):
         return self.name
     
+# Only one footer is allowed
 class Footer(models.Model):
     description = models.TextField()
     link_name1 = models.CharField(max_length=200, blank = True)
@@ -52,4 +53,20 @@ class Footer(models.Model):
         super(Footer, self).save(*args, **kwargs)
     
     def __str__(self):
-        return self.description
+        return "footer"
+    
+class HomeSection(models.Model):
+    name = models.CharField(max_length=200)
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    position = models.IntegerField()
+    image = models.ImageField(upload_to='images/', max_length=300, null=True, blank=True)
+
+    # order by position
+    class Meta:
+        verbose_name_plural = "HomeSection"
+        ordering = ["position"]
+
+    def __str__(self):
+        return self.name
+

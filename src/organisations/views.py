@@ -182,7 +182,7 @@ def organisations(request):
 
     #To Count
     #For resources count
-    allResources = Resource.objects.all()
+    allResources = Resource.objects.all().filter(approved=True)
     allResources = applyFilters(request, allResources)
     allResources = allResources.distinct()
     resources2 = allResources.filter(~Q(isTrainingResource=True))

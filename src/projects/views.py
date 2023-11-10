@@ -38,6 +38,8 @@ from resources.models import Resource
 from platforms.models import Platform
 from profiles.models import Profile
 
+from resources.views import applyFilters as applyFiltersResources
+
 User = get_user_model()
 
 
@@ -306,13 +308,12 @@ def projects(request):
 
     #For resources count
     allResources = Resource.objects.all()
-    allResources = applyFilters(request, allResources)
+    allResources = applyFiltersResources(request, allResources)
     allResources = allResources.distinct()
     resources = allResources.filter(~Q(isTrainingResource=True))
     trainingResources = allResources.filter(isTrainingResource=True)
     resourcesCounter = len(resources)
     trainingResourcesCounter = len(trainingResources)
-
 
     #For organisations count
     organisations = Organisation.objects.all()
@@ -355,7 +356,6 @@ def projects(request):
 
 @login_required
 def likeProjectAjax(request):
-    
     if request.method == 'POST':
         project = get_object_or_404(Project, id=request.POST.get('project_id'))
         user = request.user

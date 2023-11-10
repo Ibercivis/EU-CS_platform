@@ -20,7 +20,7 @@ class MyTransatedPagesAdmin(TabbedTranslationAdmin):
     prepopulated_fields = {"slug": ("name",)}
     list_display = ('name', 'slug', 'created_on')
     
-    # set content widget to ckeditor
+    # set content widget to ckeditor5
     formfield_overrides = {
         models.TextField: {'widget': CKEditor5Widget(config_name='extends')}
     }

@@ -16,7 +16,7 @@ class Organisation(models.Model):
     dateUpdated = models.DateTimeField('Updated date', auto_now=True)
     name = models.CharField(max_length=200)
     url = models.URLField(max_length=200)
-    description = models.CharField(max_length=3000)
+    description = models.TextField()
     orgType = models.ForeignKey(OrganisationType, on_delete=models.CASCADE)
     logo = models.ImageField(upload_to='images/', max_length=300, null=True, blank=True)
     logoCredit = models.CharField(max_length=300, null=True, blank=True)
@@ -26,6 +26,8 @@ class Organisation(models.Model):
     location = models.PointField(blank=True, null=True)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     country = CountryField(null=True, blank=True)
+
+    approved = models.BooleanField(default=True)   
 
     def __str__(self):
         return f'{self.name}'

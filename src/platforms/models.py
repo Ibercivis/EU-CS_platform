@@ -4,6 +4,7 @@ from organisations.models import Organisation
 from django_countries.fields import CountryField
 # Create your models here.
 
+# TODO: This as field and not as choicem and the translation
 GEOGRAPHIC_EXTEND_CHOICES = (
         ("GLOBAL", "Global"),
         ("MACRO-REGIONAL", "Macro-regional"),
@@ -21,7 +22,7 @@ class Platform(models.Model):
     dateUpdated = models.DateTimeField('Updated date', auto_now=True)
     name = models.CharField(max_length=200)
     url = models.URLField(max_length=200)
-    description = models.CharField(max_length=3000)
+    description = models.TextField()
     geographicExtend = models.CharField(
             max_length=15,
             choices=GEOGRAPHIC_EXTEND_CHOICES)
@@ -39,6 +40,8 @@ class Platform(models.Model):
     logoCredit = models.CharField(max_length=300, null=True, blank=True)
     profileImage = models.ImageField(upload_to='images/', max_length=300, null=True, blank=True)
     profileImageCredit = models.CharField(max_length=300, null=True, blank=True)
+
+    approved = models.BooleanField(default=True)
 
     def __str__(self):
         return f'{self.name}'

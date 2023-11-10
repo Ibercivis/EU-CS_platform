@@ -13,7 +13,7 @@ class Keyword(models.Model):
 
 
 class Theme(models.Model):
-    theme = models.TextField()
+    theme = models.CharField(max_length=200)
 
     def __str__(self):
         return f'{self.theme}'
@@ -61,8 +61,8 @@ class Resource(models.Model):
     name = models.CharField(max_length=200)
     url = models.URLField(max_length=200)
     keywords = models.ManyToManyField(Keyword)
-    abstract = models.CharField(max_length=3000)
-    description_citizen_science_aspects = models.CharField(max_length=2000)
+    abstract = models.TextField()
+    description_citizen_science_aspects = models.TextField()
     category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.CASCADE)
     audience = models.ManyToManyField(Audience)
     theme = models.ManyToManyField(Theme)

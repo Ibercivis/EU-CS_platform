@@ -13,6 +13,7 @@ class TopBarMiddleware:
 
     def process_template_response(self, request, response):
         response.context_data['topbar_items'] = TopBar.objects.all()
+        print(TopBar.objects.all())
         return response
     
 class FooterMiddleware:
