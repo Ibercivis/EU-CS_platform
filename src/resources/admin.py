@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Audience, Category, EducationLevel, LearningResourceType,  Resource, ResourceGroup, ResourcesGrouped, ApprovedResources, SavedResources, Theme
+from .models import Audience, Category, EducationLevel, HelpText, LearningResourceType,  Resource, ResourceGroup, ResourcesGrouped, ApprovedResources, SavedResources, Theme
 from django.db import models
 from django_ckeditor_5.fields import CKEditor5Widget
 from modeltranslation.admin import TabbedTranslationAdmin
@@ -16,6 +16,14 @@ class CategoryAdmin(TabbedTranslationAdmin):
 
 class EducationLevelAdmin(TabbedTranslationAdmin):
     list_display = ('educationLevel',)
+    pass
+
+class HelpTextAdmin(TabbedTranslationAdmin):
+    list_display = ('title','slug')
+    prepopulated_fields = {'slug': ('title',)}
+    formfield_overrides = {
+        models.TextField: {'widget': CKEditor5Widget(config_name='extends')}
+    }
     pass
 
 class LearningResourceTypeAdmin(TabbedTranslationAdmin):
@@ -40,6 +48,7 @@ class ThemeAdmin(TabbedTranslationAdmin):
 admin.site.register(Audience, AudienceAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(EducationLevel, EducationLevelAdmin)
+admin.site.register(HelpText, HelpTextAdmin)
 admin.site.register(LearningResourceType, LearningResourceTypeAdmin)
 admin.site.register(Resource, ResourceAdmin)
 admin.site.register(ResourceGroup)

@@ -26,7 +26,7 @@ from django_countries import countries
 from itertools import chain
 from .forms import ProjectForm, ProjectPermissionForm, ProjectTranslationForm, ProjectGeographicLocationForm
 from .models import Project, Topic, ParticipationTask, Status, Keyword, ApprovedProjects, \
-    FollowedProjects, FundingBody, CustomField, ProjectPermission, GeographicExtend, UnApprovedProjects, HasTag, DifficultyLevel, Stats, Likes, Follows, SearchStats
+    FollowedProjects, FundingBody, CustomField, ProjectPermission, GeographicExtend, UnApprovedProjects, HasTag, DifficultyLevel, Stats, Likes, Follows, SearchStats, HelpText
 from organisations.models import Organisation
 import copy
 import csv
@@ -47,7 +47,14 @@ User = get_user_model()
 def newProject(request):
     user = request.user
     form = ProjectForm()
-    return render(request, 'project_form.html', {'form': form, 'user': user})
+    text = HelpText.objects.filter(slug='new-project').first()
+    print(text)
+    print(text.paragraph)
+    return TemplateResponse(request, 'project_form.html', {
+        'form': form,
+        'user': user,
+        'text': text,
+        'modeltranlationlanguages': settings.MODELTRANSLATION_LANGUAGES})
 
 
 @login_required
@@ -434,7 +441,6 @@ def project(request, pk):
 
     if project.firstAccess is None:
         project.firstAccess = datetime.now(pytz.utc)
-    print(project.firstAccess)
     project.save()
 
     stats = Stats.objects.get_or_create(

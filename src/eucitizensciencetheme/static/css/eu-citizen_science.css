@@ -362,5 +362,8 @@ a{
         text-overflow: clip; /* Eliminar el comportamiento de los puntos suspensivos */
     }
 
-
+    #accordion-button {
+        transition: opacity 0.5s ease;
+    }
+    
 

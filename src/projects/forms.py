@@ -11,6 +11,7 @@ from .models import Project, Topic, Status, Keyword, FundingBody
 from .models import ParticipationTask, GeographicExtend, HasTag, DifficultyLevel, TranslatedProject
 from organisations.models import Organisation
 from django.utils import timezone
+from django.conf import settings
 
 
 # TODO: Fix this to be an env variable
@@ -28,10 +29,59 @@ class ProjectGeographicLocationForm(forms.Form):
 class ProjectForm(forms.Form):
 
     # Main information
+    def __init__(self, *args, **kwargs):
+        super(ProjectForm, self).__init__(*args, **kwargs)  
+        for lang_code in settings.MODELTRANSLATION_LANGUAGES:
+            self.fields[f'description_{lang_code}'] = forms.CharField(
+                max_length=3000,
+                widget=CKEditorWidget(config_name='frontpage'),
+                help_text=_('Please provide a description of your project here (max 3000 characters).'),
+                label=lang_code,
+                required=lang_code == settings.MODELTRANSLATION_DEFAULT_LANGUAGE
+            )
+            self.fields[f'aim_{lang_code}'] = forms.CharField(
+                max_length=3000,
+                widget=CKEditorWidget(config_name='frontpage'),
+                help_text=_('Please provide the aim of your project here (max 3000 characters).'),
+                label=lang_code,
+                required=lang_code == settings.MODELTRANSLATION_DEFAULT_LANGUAGE
+            )
+            self.fields[f'how_to_participate_{lang_code}'] = forms.CharField(
+                max_length=3000,
+                widget=CKEditorWidget(config_name='frontpage'),
+                help_text=_('Please describe how people can get involved in the project (max 3000 characters).'),
+                label=lang_code,
+                required=False,
+            )
+            self.fields[f'equipment_{lang_code}'] = forms.CharField(
+                max_length=3000,
+                widget=CKEditorWidget(config_name='frontpage'),
+                help_text=_('Please indicate any required or suggested equipment to be used in the project (max 3000 characters).'),
+                label=lang_code,
+                required=False,
+            )
+            
+    # return all fields from project_name_en, project_name_es, etc.
+    def get_description_fields(self):
+        for field_name in self.fields:
+            return [self[field_name] for field_name in self.fields if field_name.startswith('description_')]
+        
+    def get_aim_fields(self):
+        for field_name in self.fields:
+            return [self[field_name] for field_name in self.fields if field_name.startswith('aim_')]
+        
+    def get_how_to_participate_fields(self):
+        for field_name in self.fields:
+            return [self[field_name] for field_name in self.fields if field_name.startswith('how_to_participate_')]
+
+    def get_equipment_fields(self):
+        for field_name in self.fields:
+            return [self[field_name] for field_name in self.fields if field_name.startswith('equipment_')]
+        
     project_name = forms.CharField(
         max_length=200,
         widget=forms.TextInput(),
-        help_text=_('Please write the name of the project.'),
+        help_text=_('Please provide the name of the project.'),
         label=_('Project name'))
 
     url = forms.URLField(
@@ -39,20 +89,6 @@ class ProjectForm(forms.Form):
         widget=forms.TextInput(),
         label=_('URL'),
         help_text=_('Please provide the URL to an external website of the project.'))
-
-    description = forms.CharField(
-        widget=CKEditorWidget(config_name='frontpage'),
-        help_text=_(
-            'Please provide a description of your project here (max 3000 characters).'),
-        max_length=3000,
-        label=_('Description'))
-
-    aim = forms.CharField(
-        widget=CKEditorWidget(config_name='frontpage'),
-        help_text=_(
-            'Please indicate the primary aim, goal or objective of the project (max 2000 characters).'),
-        max_length=2000,
-        label=_('Aim'))
 
     description_citizen_science_aspects = forms.CharField(
         widget=CKEditorWidget(config_name='frontpage'),
@@ -122,23 +158,6 @@ class ProjectForm(forms.Form):
         help_text=_('Please select the difficulty level.'),
         required=False,
         label=_("Difficulty level"))
-
-    how_to_participate = forms.CharField(
-        widget=CKEditorWidget(config_name='frontpage'),
-        help_text=_(
-            'Please describe how people can get involved in the project (max 2000 characters).'),
-        max_length=2000,
-        required=False,
-        label=_('How to participate'))
-
-    equipment = forms.CharField(
-        widget=CKEditorWidget(config_name='frontpage'),
-        help_text=_(
-            'Please indicate any required or suggested equipment '
-            'to be used in the project (max 2000 characters).'),
-        max_length=2000,
-        required=False,
-        label=_('Equipment'))
 
     # Project location
     geographicextend = forms.ModelMultipleChoiceField(
@@ -368,6 +387,17 @@ class ProjectForm(forms.Form):
         project.geographicextend.set(self.data.getlist('geographicextend'))
         project.organisation.set(self.data.getlist('organisation'))
 
+        for key, value in self.data.items():
+            if key.startswith('description_'):
+                setattr(project, key, value)
+            if key.startswith('aim_'):
+                setattr(project, key, value)
+            if key.startswith('how_to_participate_'):
+                setattr(project, key, value)
+            if key.startswith('equipment_'):
+                setattr(project, key, value)
+
+
         project.save()
 
         return project.id
@@ -384,9 +414,8 @@ class ProjectForm(forms.Form):
             args):
         return Project(
             creator=args.user,
-            name=self.data['project_name'],
+            name=self.data.get('project_name', ''),
             url=self.data['url'],
-            description=self.data['description'],
             description_citizen_science_aspects=self.data['description_citizen_science_aspects'],
             aim=self.data['aim'],
             projectlocality=self.data['projectlocality'],

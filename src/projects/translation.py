@@ -1,5 +1,5 @@
 from modeltranslation.translator import translator, TranslationOptions,register
-from .models import Topic, Status, HasTag, DifficultyLevel, ParticipationTask, Project
+from .models import Topic, Status, HasTag, DifficultyLevel, ParticipationTask, Project, HelpText
 
 @register(DifficultyLevel)
 class DifficultyLevelTranslationOptions(TranslationOptions):
@@ -8,6 +8,10 @@ class DifficultyLevelTranslationOptions(TranslationOptions):
 @register(HasTag)
 class HasTagTranslationOptions(TranslationOptions):
     fields = ('hasTag',)
+
+@register(HelpText)
+class HelpTextTranslationOptions(TranslationOptions):
+    fields = ('title', 'paragraph',)
 
 @register(ParticipationTask)
 class ParticipationTaskTranslationOptions(TranslationOptions):

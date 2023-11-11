@@ -13,6 +13,7 @@ from resources.models import Resource
 from projects.models import Project
 from organisations.models import Organisation
 from profiles.models import Profile
+from django.template.response import TemplateResponse
 
 
 from datetime import datetime
@@ -144,7 +145,7 @@ def platforms(request):
     users = users.distinct()
     usersCounter = len(users)   
 
-    return render(request, 'platforms.html', {'platforms': platforms,
+    return TemplateResponse(request, 'platforms.html', {'platforms': platforms,
                                               'counter': counter,
                                               'totalCount': totalCount,
                                               'platformsCounter': counterPlatforms,

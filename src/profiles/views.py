@@ -4,6 +4,7 @@ from django.views import generic
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.template.response import TemplateResponse
 from django.db.models import Q
 from django.http import JsonResponse
 from itertools import chain
@@ -280,7 +281,7 @@ def userSearch(request):
         'countriesWithContent': countriesWithContent,
         'filters': filters
     }
-    return render(request, template_name, context)
+    return TemplateResponse(request, template_name, context)
 
 
 

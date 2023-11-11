@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Project, Topic, Status, ApprovedProjects, FollowedProjects, HasTag, DifficultyLevel, ParticipationTask
+from .models import Project, Topic, Status, ApprovedProjects, FollowedProjects, HasTag, DifficultyLevel, ParticipationTask, HelpText
 from django import forms
 from django.db import models
 from django_select2.forms import Select2MultipleWidget
@@ -43,12 +43,21 @@ class TopicAdmin(TabbedTranslationAdmin):
     list_display = ('topic',)
     pass
 
+class HelpTextAdmin(TabbedTranslationAdmin):
+    list_display = ('title',)
+    prepopulated_fields = {'slug': ('title',)}
+
+    formfield_overrides = {
+        models.TextField: {'widget': CKEditor5Widget(config_name='extends')}
+    }
+    pass
 
 admin.site.register(DifficultyLevel, DifficultyLevelAdmin)
 admin.site.register(HasTag, HasTagAdmin)
 admin.site.register(ParticipationTask, ParticipationTaskAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Status, StatusAdmin)
+admin.site.register(HelpText, HelpTextAdmin)
 admin.site.register(Topic, TopicAdmin)
 admin.site.register(ApprovedProjects)
 admin.site.register(FollowedProjects)

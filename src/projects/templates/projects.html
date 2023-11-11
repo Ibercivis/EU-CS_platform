@@ -17,13 +17,11 @@
 
 <div class="container">
     <div clas="row">
-        <div class="col-12">
-            
-        <div>
+        <div class="col-12 mt-4">
+        </div>
         {% include "_subnavbarNew.html" %}
         {% include "_finder_projects.html" %}
-    </div>
-    <div class="row">
+    <div class="row mt-5">
         {% include "projects_cards.html" %}
     </div>
 </div>
@@ -75,8 +73,6 @@
             $('#keywords').val('')
             $('#searchProjects').submit();
         });
-
-
 	});
  </script>
 {% endblock scripts %}

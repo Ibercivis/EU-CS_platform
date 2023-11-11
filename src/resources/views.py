@@ -12,13 +12,15 @@ from django.core.mail import EmailMessage
 from django.utils import formats
 from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
+from django.template.response import TemplateResponse
+
 from authors.models import Author
 from PIL import Image
 from datetime import datetime
 from reviews.models import Review
 from .models import Resource, Keyword, ApprovedResources, SavedResources, BookmarkedResources, Theme, Category
 from .models import ResourcesGrouped, ResourcePermission, EducationLevel, LearningResourceType, UnApprovedResources
-from .models import Audience
+from .models import Audience, HelpText
 from projects.models import Project
 from organisations.models import Organisation
 from platforms.models import Platform
@@ -85,8 +87,6 @@ def resources(request, isTrainingResource=False):
     organisations = Organisation.objects.all()
     filteredOrganisations = applyFilters(request, organisations).distinct()
     organisations = organisations.distinct()
-    print("Estas son las organizaciones:")
-    print(filteredOrganisations)
     organisationsCounter = len(filteredOrganisations)
 
     #For platforms count
@@ -123,7 +123,7 @@ def resources(request, isTrainingResource=False):
     page = request.GET.get('page')
     resources = paginator.get_page(page)
 
-    return render(request, 'resources.html', {
+    return TemplateResponse(request, 'resources.html', {
         'resources': resources,
         # 'approvedResources': approvedResources,
         # 'unApprovedResources': unApprovedResources,
@@ -157,6 +157,9 @@ def newTrainingResource(request):
 def newResource(request, isTrainingResource=False):
     form = ResourceForm()
     user = request.user
+    text = HelpText.objects.filter(slug='new-resource').first()
+
+    # TODO: This in forms.py 
     if request.method == 'POST':
         form = ResourceForm(request.POST, request.FILES)
         if form.is_valid():
@@ -189,6 +192,7 @@ def newResource(request, isTrainingResource=False):
     return render(request, 'resource_form.html', {
         'form': form,
         'settings': settings,
+        'text': text,
         'isTrainingResource': isTrainingResource})
 
 
@@ -341,7 +345,6 @@ def saveResourceAjax(request):
     request.POST = request.POST.copy()
     request.POST = updateKeywords(request.POST)
     request.POST = updateAuthors(request.POST)
-    print(request.POST)
     request.POST = updateEducationLevel(request.POST)
     request.POST = updateLearningResourceType(request.POST)
     form = ResourceForm(request.POST, request.FILES)
@@ -428,7 +431,6 @@ def setImages(request, form):
 def sendResourceEmail(pk, user):
     resource = get_object_or_404(Resource, id=pk)
     subject = '[EU-CITIZEN.SCIENCE] Your resource "%s" has been submitted' % resource.name
-    print(subject)
     message = render_to_string('emails/new_resource.html', {'resourceName': resource.name, 'username': user.get_full_name, "domain": settings.HOST})
     # to = [user.email]
     to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
@@ -437,7 +439,7 @@ def sendResourceEmail(pk, user):
     email = EmailMessage(subject, message, to=to, bcc=bcc)
     email.content_subtype = "html"
     email.send()
-    print(message)
+ 
 
 
 def deleteResource(request, pk, isTrainingResource):
@@ -581,11 +583,8 @@ def applyFilters(request, resources):
                 Q(name__icontains=request.GET['keywords']) |
                 Q(keywords__keyword__icontains=request.GET['keywords'])).distinct()
             resources = resources.filter(approved=True)
-            print("Esto son proyectos con keywords")
-            print(resources)
 
     if resources.model == Organisation:
-        print("Estas son las organizaciones en el query")
         if request.GET.get('keywords'):
             keywords = request.GET.get('keywords')
             resources = resources.filter(Q(name__icontains=keywords))
@@ -608,7 +607,6 @@ def applyFilters(request, resources):
             resources = resources.filter(
                     Q(name__icontains=request.GET['keywords']) |
                     Q(keywords__keyword__icontains=request.GET['keywords'])).distinct()
-        print(resources)
         if request.GET.get('inLanguage'):
             resources = resources.filter(inLanguage=request.GET['inLanguage'])
         if request.GET.get('license'):
@@ -649,7 +647,6 @@ def setFilters(request, filters):
         filters['approved'] = request.GET['approved']
     if request.GET.get('orderby'):
         filters['orderby'] = request.GET['orderby']    
-    print(filters)
     return filters
 
 

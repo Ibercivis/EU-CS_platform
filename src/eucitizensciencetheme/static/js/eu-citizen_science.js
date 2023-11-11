@@ -64,8 +64,6 @@ const CardManager = {
             },
         })
     }
-
-
 };
 $(document).ready(function() {
     function getCSRFToken() {
@@ -101,6 +99,18 @@ $(document).ready(function() {
         } catch (err) {
           console.error('Error copying link: ', err);
         }
+    });
+
+    $('#accordion-filters').on('show.bs.collapse', function(e) {
+        $('#accordion-button').css('opacity', '0');
+        $('#accordion-button').html('Hide filters <i class="fa-solid fa-chevron-up">').css('opacity', '1');;
+
+    });
+
+    $('#accordion-filters').on('hide.bs.collapse', function(e) {
+        $('#accordion-button').css('opacity', '0');
+        $('#accordion-button').html('Show filters <i class="fa-solid fa-chevron-down">').css('opacity', '1');;
+
     });
 
 });

@@ -1,6 +1,12 @@
 {% load i18n %}
 {% load static %}
 {% load countries %}
+<div class="accordion acordion-flush mb-3" id="accordion-filters">
+    <div class="">
+        <div class="accordion-header" id="flush-headingOne">
+            <div id="accordion-button" class="collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">Show filters <i class="fa-solid fa-chevron-down"></i></div>
+        </div>
+        <div id="flush-collapseOne" class="accordion-collapse collapse mt-2" aria-labelledby="flush-headingOne" data-bs-parent="#accordion-filters">
 <form class="form-inline float-lg-right" id="searchOrganisations" action="{% url 'organisations' %}">
     <input type="hidden" name="keywords" value="{{filters.keywords}}"/>
     <div class="row">
@@ -78,4 +84,6 @@
         </div>
     </div>
 </form>
+</div>
+</div>
 

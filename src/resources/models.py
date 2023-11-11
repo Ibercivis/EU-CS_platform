@@ -4,6 +4,7 @@ from authors.models import Author
 from organisations.models import Organisation
 from projects.models import Project
 
+# TODO: Order this file
 
 class Keyword(models.Model):
     keyword = models.TextField()
@@ -49,6 +50,11 @@ class LearningResourceType(models.Model):
 
     def __str__(self):
         return f'{self.learningResourceType}'
+    
+class HelpText(models.Model):
+    title = models.CharField(max_length=200)
+    slug = models.CharField(max_length=200)
+    paragraph = models.TextField()
 
 
 class Resource(models.Model):

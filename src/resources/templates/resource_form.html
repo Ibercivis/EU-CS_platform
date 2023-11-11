@@ -7,7 +7,7 @@
 {% load thumbnail %}
 {% block head %}
 {{ block.super }}
-<link rel="stylesheet" href="{% static 'site/css/forms.css' %}">
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
 {{ form.media.css }}
 {{ form.media.js }}
 {% endblock head %}
@@ -27,11 +27,14 @@
         {% csrf_token %}
         <div class="row">
             <div class="col-12">
-                {% if isTrainingResource %}
-                {% include "_intro_form_training_resource.html" %}
-                {% else %}
-                {% include "_intro_form_resource.html" %}
-                {% endif %}
+                <div class="row">
+                <div class="col-2"></div>
+                <div class="col-8">
+                  <h2>{{ text.title }}</h2>
+                  {{ text.paragraph | safe }}
+                  <div>
+                </div>
+              </div>
                 <div class="row">
                     <div class="col-2"></div>
                     <div class="col-8">
@@ -43,7 +46,20 @@
                                 {{ form.name|as_crispy_field }}
                                 {{ form.url|as_crispy_field }}
                                 {{ form.keywords|as_crispy_field }}
-                                {{ form.abstract|as_crispy_field }}
+                            <ul class="nav nav-tabs" id="languageAbstractTabs" role="tablist">
+                                {% for field in form.get_abstract_fields %}
+                                <li class="nav-item">
+                                  <button class="nav-link {% if field.language == LANGUAGE_CODE %}active{% endif %}" id="abstract_{{ field.label }}-tab" data-bs-toggle="tab" data-bs-target="#abstract-{{ field.label }}" type="button" role="tab" aria-controls="abstract-{{ field.label }}" aria-selected="true">{{ field.label }}</button>
+                                </li>
+                              {% endfor %}
+                              </ul>
+                              <div class="tab-content" id="languageAbstractTabsContent">
+                                {% for field in form.get_abstract_fields %}
+                                  <div class="tab-pane fade {% if field.label == LANGUAGE_CODE %}show active{% endif %}" id="abstract-{{ field.label }}" role="tabpanel" aria-labelledby="abstract-{{ field.label }}-tab">
+                                    {{ field | as_crispy_field}}
+                                  </div>
+                                {% endfor %}
+                              </div>
                                 {{ form.description_citizen_science_aspects|as_crispy_field }}
                                 {{ form.category|as_crispy_field }}
                                 {{ form.categorySelected|as_crispy_field }}
@@ -216,10 +232,12 @@
                         $('#id_'+i).parent().find('.select2-selection--multiple').addClass('error')
                         $('#hint_id_'+i).append('<div class="myerror small text-danger">'+val+'</div>')
                         $('#cke_id_'+i).addClass('error')
+                        $('#'+i+'-tab').addClass('error')
+
                     })
                     $('html, body').animate({
-                        scrollTop: $('.myerror:visible:first').offset().top-100
-                    }, 1000);
+                        scrollTop: $('.myerror:visible:first').offset().top-300
+                    }, 30);
                 }
             })
         }); /* End of submit */

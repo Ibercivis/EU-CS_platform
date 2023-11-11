@@ -11,10 +11,27 @@ from datetime import datetime
 from django.utils.translation import ugettext_lazy as _
 from organisations.models import Organisation
 from projects.models import Project
+from django.conf import settings 
 
 
 class ResourceForm(forms.Form):
     # Main information
+
+    def __init__(self, *args, **kwargs):
+        super(ResourceForm, self).__init__(*args, **kwargs)
+        for lang_code in settings.MODELTRANSLATION_LANGUAGES:
+            self.fields[f'abstract_{lang_code}'] = forms.CharField(
+                widget=CKEditorWidget(config_name='frontpage'),
+                help_text=_('Please briefly describe the resource (max 3000 characters).'),
+                max_length=3000,
+                label=lang_code,
+                required=lang_code == settings.MODELTRANSLATION_DEFAULT_LANGUAGE
+            )       
+
+    def get_abstract_fields(self):
+        for field_name in self.fields:
+            return [self[field_name] for field_name in self.fields if field_name.startswith('abstract_')] 
+
     name = forms.CharField(
             max_length=200,
             widget=forms.TextInput(),
@@ -38,12 +55,6 @@ class ResourceForm(forms.Form):
                 '<b>separated by commas or by pressing enter</b>.'),
             required=True,
             label=_('Keywords'))
-
-    abstract = forms.CharField(
-            widget=CKEditorWidget(config_name='frontpage'),
-            help_text=_('Please briefly describe the resource (max 3000 characters).'),
-            max_length=3000,
-            label=_("Abstract"))
 
     description_citizen_science_aspects = forms.CharField(
             widget=CKEditorWidget(config_name='frontpage'),
@@ -269,10 +280,13 @@ class ResourceForm(forms.Form):
         resource.organisation.set(self.data.getlist('organisation'))
         resource.project.set(self.data.getlist('project'))
         resource.keywords.set(self.data.getlist('keywords'))
-        print(self.data.getlist('authors'))
-        print("----")
         resource.authors.set(self.data.getlist('authors'))
         curatedList = self.data.getlist('curatedList')
+
+        for key, value in self.data.items():
+            if key.startswith('abstract_'):
+                setattr(resource, key, value)
+            
 
         if args.user.is_staff:
             objs = ResourcesGrouped.objects.filter(resource=resource)

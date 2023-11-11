@@ -74,6 +74,13 @@ class CustomField(models.Model):
     title = models.TextField()
     paragraph = models.TextField()
 
+class HelpText(models.Model):
+    title = models.CharField(max_length=200)
+    slug = models.CharField(max_length=200)
+    paragraph = models.TextField()
+
+    def __str__(self):
+        return f'{self.title}'
 
 # For translation
 
@@ -100,7 +107,7 @@ class Project(models.Model):
 
     # Main information
 
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, null=True, blank=True)
     url = models.CharField(max_length=200, null=True, blank=True)
     description = models.TextField()
     description_citizen_science_aspects = models.TextField()

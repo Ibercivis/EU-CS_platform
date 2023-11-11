@@ -1,5 +1,5 @@
 from modeltranslation.translator import translator, TranslationOptions, register
-from .models import Audience, Category, EducationLevel, LearningResourceType,  Resource, Theme
+from .models import Audience, Category, EducationLevel, HelpText, LearningResourceType,  Resource, Theme
 
 @register(Audience)
 class AudienceTranslationOptions(TranslationOptions):
@@ -12,6 +12,10 @@ class CategoryTranslationOptions(TranslationOptions):
 @register(EducationLevel)
 class EducationLevelTranslationOptions(TranslationOptions):
     fields = ('educationLevel',)
+
+@register(HelpText)
+class HelpTextTranslationOptions(TranslationOptions):
+    fields = ('title', 'paragraph')
 
 @register(LearningResourceType)
 class LearningResourceTypeTranslationOptions(TranslationOptions):

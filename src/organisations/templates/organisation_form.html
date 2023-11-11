@@ -6,9 +6,9 @@
 {% load crispy_forms_tags %}
 {% block head %}
 {{block.super }}
-<link rel="stylesheet" href="{% static 'site/css/leaflet-geosearch_style.css' %}">
-<link rel="stylesheet" href="{% static 'site/css/leaflet.css' %}">
-<link rel="stylesheet" href="{% static 'site/css/forms.css' %}">
+<link rel="stylesheet" href="{% static 'css/leaflet-geosearch_style.css' %}">
+<link rel="stylesheet" href="{% static 'css/leaflet.css' %}">
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
 {% leaflet_js %}
 {% leaflet_css %}
 {{ form.media.css }}
@@ -22,7 +22,6 @@
 {% block list_of_items %}
 {% include '_crop_zone.html' %}
 <!-- END MODAL TO CROP -->
-
 <!-- TODO: This form like the others -->
 <div class="container mt-5">
     <form
@@ -50,7 +49,22 @@
                                 <input type="hidden" id="organisationID" name="organisationID" value={{organisation.id}}>
                                 {{ form.name|as_crispy_field }}
                                 {{ form.url|as_crispy_field }}
-                                {{ form.description|as_crispy_field }}
+                                {% trans "Description" %}
+                                <!-- Project description -->
+                                <ul class="nav nav-tabs" id="languageDescriptionTabs" role="tablist">
+                                  {% for field in form.get_description_fields %}
+                                    <li class="nav-item">
+                                      <button class="nav-link {% if field.language == LANGUAGE_CODE %}active{% endif %}" id="description_{{ field.label }}-tab" data-bs-toggle="tab" data-bs-target="#description-{{ field.label }}" type="button" role="tab" aria-controls="description-{{ field.label }}" aria-selected="true">{{ field.label }}</button>
+                                    </li>
+                                  {% endfor %}
+                                  </ul>
+                                  <div class="tab-content" id="languageDescriptionTabsContent">
+                                    {% for field in form.get_description_fields %}
+                                      <div class="tab-pane fade {% if field.label == LANGUAGE_CODE %}show active{% endif %}" id="description-{{ field.label }}" role="tabpanel" aria-labelledby="description-{{ field.label }}-tab">
+                                        {{ field | as_crispy_field}}
+                                      </div>
+                                    {% endfor %}
+                                  </div>
                                 {{ form.orgType|as_crispy_field }}
                             </div>
                         </div>

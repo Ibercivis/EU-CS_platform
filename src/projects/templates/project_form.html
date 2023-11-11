@@ -28,11 +28,17 @@
         <div class="row">
             {% csrf_token %}
             <div class="col-12">
-                {% include "_intro_form_project.html" %}
-                <div class="row">
-                    <div class="col-2"></div>
-                    <div class="col-8">
-                        <h3 class="leftborder">{% trans "Main information" %}</h3>
+              <div class="row">
+                <div class="col-2"></div>
+                <div class="col-8">
+                  <h2>{{ text.title }}</h2>
+                  {{ text.paragraph | safe }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-2"></div>
+                <div class="col-8">
+                  <h3 class="leftborder">{% trans "Main information" %}</h3>
                         <input type="hidden" id="projectID" name="projectID" value={{project.id}}>
                         <div class="row">
                             <div class="col-12">
@@ -42,10 +48,44 @@
                         <div class="row">
                             <div class="col-1"></div>
                             <div class="col-11">
-                                {{ form.project_name|as_crispy_field }}
+                              {{ form.project_name|as_crispy_field }}
+
+                                {{ form.description.label_tag}}
+                                <!-- Project description -->
+                                <ul class="nav nav-tabs" id="languageDescriptionTabs" role="tablist">
+                                  {% for field in form.get_description_fields %}
+                                    <li class="nav-item">
+                                      <button class="nav-link {% if field.language == LANGUAGE_CODE %}active{% endif %}" id="description_{{ field.label }}-tab" data-bs-toggle="tab" data-bs-target="#description-{{ field.label }}" type="button" role="tab" aria-controls="description-{{ field.label }}" aria-selected="true">{{ field.label }}</button>
+                                    </li>
+                                  {% endfor %}
+                                  </ul>
+                                  <div class="tab-content" id="languageDescriptionTabsContent">
+                                    {% for field in form.get_description_fields %}
+                                      <div class="tab-pane fade {% if field.label == LANGUAGE_CODE %}show active{% endif %}" id="description-{{ field.label }}" role="tabpanel" aria-labelledby="description-{{ field.label }}-tab">
+                                        {{ field | as_crispy_field}}
+                                      </div>
+                                    {% endfor %}
+                                  </div>
+
                                 {{ form.url|as_crispy_field }}
-                                {{ form.description|as_crispy_field }}
-                                {{ form.aim|as_crispy_field }}
+
+                                <!-- Project Aim -->
+                                {{ form.aim.label_tag}}
+                                <ul class="nav nav-tabs" id="languageAimTabs" role="tablist">
+                                  {% for field in form.get_aim_fields %}
+                                    <li class="nav-item">
+                                      <button class="nav-link {% if field.language == LANGUAGE_CODE %}active{% endif %}" id="aim_{{ field.label }}-tab" data-bs-toggle="tab" data-bs-target="#aim-{{ field.label }}" type="button" role="tab" aria-controls="aim-{{ field.label }}" aria-selected="true">{{ field.label }}</button>
+                                    </li>
+                                  {% endfor %}
+                                  </ul>
+                                  <div class="tab-content" id="languageDescriptionTabsContent">
+                                    {% for field in form.get_aim_fields %}
+                                      <div class="tab-pane fade {% if field.label == LANGUAGE_CODE %}show active{% endif %}" id="aim-{{ field.label }}" role="tabpanel" aria-labelledby="aim-{{ field.label }}-tab">
+                                        {{ field | as_crispy_field}}
+                                      </div>
+                                    {% endfor %}
+                                  </div>
+                                
                                 {{ form.description_citizen_science_aspects|as_crispy_field }}
                                 {{ form.status|as_crispy_field }}
                                 {{ form.keywords|as_crispy_field }}
@@ -69,8 +109,39 @@
                             <div class="col-11">
                                 {{ form.participationTask |as_crispy_field }}
                                 {{ form.difficultyLevel |as_crispy_field }}
-                                {{ form.how_to_participate|as_crispy_field }}
-                                {{ form.equipment|as_crispy_field }}
+                                  <!-- Project How to participate -->
+                                  How to participate
+                                  <ul class="nav nav-tabs" id="languageHowToParticipateTabs" role="tablist">
+                                    {% for field in form.get_how_to_participate_fields %}
+                                      <li class="nav-item">
+                                        <button class="nav-link {% if field.language == LANGUAGE_CODE %}active{% endif %}" id="how-to-participate-{{ field.label }}-tab" 
+                                        data-bs-toggle="tab" data-bs-target="#how-to-participate-{{ field.label }}" type="button" role="tab" aria-controls="how-to-participate-{{ field.label }}" aria-selected="true">{{ field.label }}</button>
+                                      </li>
+                                    {% endfor %}
+                                    </ul>
+                                    <div class="tab-content" id="languageHowToParticipateTabsContent">
+                                      {% for field in form.get_how_to_participate_fields %}
+                                        <div class="tab-pane fade {% if field.label == LANGUAGE_CODE %}show active{% endif %}" id="how-to-participate-{{ field.label }}" role="tabpanel" aria-labelledby="how-to-participate-{{ field.label }}-tab">
+                                          {{ field | as_crispy_field}}
+                                        </div>
+                                      {% endfor %}
+                                    </div>
+                                    <ul class="nav nav-tabs" id="languageEquipmentTabs" role="tablist">
+                                      {% for field in form.get_equipment_fields %}
+                                        <li class="nav-item">
+                                          <button class="nav-link {% if field.language == LANGUAGE_CODE %}active{% endif %}" id="equipment-{{ field.label }}-tab" 
+                                          data-bs-toggle="tab" data-bs-target="#equipment-{{ field.label }}" type="button" role="tab" aria-controls="equipment-{{ field.label }}" aria-selected="true">{{ field.label }}</button>
+                                        </li>
+                                      {% endfor %}
+                                      </ul>
+                                      <div class="tab-content" id="languageEquipmentTabsContent">
+                                        {% for field in form.get_equipment_fields %}
+                                          <div class="tab-pane fade {% if field.label == LANGUAGE_CODE %}show active{% endif %}" id="equipment-{{ field.label }}" role="tabpanel" aria-labelledby="equipment-{{ field.label }}-tab">
+                                            {{ field | as_crispy_field}}
+                                          </div>
+                                        {% endfor %}
+                                      </div>
+                                
                                 {% include "_save_zone.html" %}
                             </div>
                         </div>
@@ -219,10 +290,14 @@
                         $('#id_'+i).parent().find('.select2-selection--multiple').addClass('error')
                         $('#hint_id_'+i).append('<div class="myerror small text-danger">'+val+'</div>')
                         $('#cke_id_'+i).addClass('error')
+                        $('#'+i+'-tab').addClass('error')
+                     
+
+                       
                     })
                     $('html, body').animate({
-                        scrollTop: $('.myerror:visible:first').offset().top-100
-                    }, 1000);
+                        scrollTop: $('.myerror:visible:first').offset().top-300
+                    }, 30);
                 }
             });
         });

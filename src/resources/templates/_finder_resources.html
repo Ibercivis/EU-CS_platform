@@ -2,6 +2,13 @@
 {% load i18n %}
 {% load l10n %}
 {% get_language_info_list for LANGUAGES as languages %}
+<div class="accordion acordion-flush mb-3" id="accordion-filters">
+    <div class="">
+        <div class="accordion-header" id="flush-headingOne">
+            <div id="accordion-button" class="collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">Show filters <i class="fa-solid fa-chevron-down"></i></div>
+        </div>
+        <div id="flush-collapseOne" class="accordion-collapse collapse mt-2" aria-labelledby="flush-headingOne" data-bs-parent="#accordion-filters">
+
 <div class="row">
     <form class=""
           id="searchResources"
@@ -127,5 +134,7 @@
             {% endif %}
         </div>
     </div>
+</div>
+</div>
 </div>
 

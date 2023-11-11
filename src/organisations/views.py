@@ -11,6 +11,7 @@ from django.utils import formats
 from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
+from django.template.response import TemplateResponse
 from datetime import datetime
 from .forms import OrganisationForm, OrganisationPermissionForm
 from .models import Organisation, OrganisationType, OrganisationPermission
@@ -88,7 +89,7 @@ def organisation(request, pk):
     permissionForm = OrganisationPermissionForm(
             initial={'usersCollection': users, 'selectedUsers': cooperators})
 
-    return render(request, 'organisation.html', {
+    return TemplateResponse(request, 'organisation.html', {
         'organisation': organisation,
         'associatedProjects': associatedProjects,
         'cooperators': cooperatorsPK,
@@ -224,7 +225,7 @@ def organisations(request):
     page = request.GET.get('page')
     organisations = paginator.get_page(page)
 
-    return render(request, 'organisations.html', {
+    return TemplateResponse(request, 'organisations.html', {
         'organisations': organisations,
         'counter': counter,
         'totalCount': totalCount,
