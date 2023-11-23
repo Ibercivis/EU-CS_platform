@@ -15,16 +15,16 @@
     <div class="container-fluid" >
         <div class="container">
             <div class="row">
-                <div class="col-12 col-md-6">
-                    <h1 class="mt-5">eu-citizen.<span class="darkGreen-color">science</span></h1>
-                    <h5 class="fw-light mb-4">
-                        {% trans "Welcome to the platform for sharing citizen science projects, resources, tools, training and much more" %}
+                <div class="col-12 col-md-6 mt-5">
+                    <h1>{{main.platform_name}}</h1>
+                    <h5 class="mb-4">
+                        {{main.platform_description | safe}}
                     </h5>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container-fluid bg-white">
+    <div class="container-fluid">
         <div class="container mb-5">
             {% include "_subnavbarNew.html" %}
         </div>
@@ -45,11 +45,12 @@
     <div class="container-fluid">
         <div class="container">
             <div class="row">
-                <div class="col-6">
+
+                <div class="col-6 {{section.content_position}}">
                 <h2 class="mt-5 mb-5">{{section.title}}</h2>
-                {{section.content | safe}}
+                <h5>{{section.content | safe}}</h5>
                 </div>
-                <div class="col-6">
+                <div class="col-6 {{section.image_position}}">
                     {% if section.image %}
                     <img src="/media/{{section.image}}" class="img-fluid" alt="Responsive image" />
                     {% endif %}

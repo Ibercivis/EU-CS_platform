@@ -2,13 +2,19 @@ from django.db import models
 
 # Create your models here.
 
-# A new class to store the top bar
+
+class Main(models.Model):
+    icon = models.ImageField(upload_to='images/', max_length=300, null=True, blank=True)
+    platform_name = models.CharField(max_length=200)
+    platform_description = models.TextField()
+    platform_url = models.URLField(max_length=200)
+
+
 class TopBar(models.Model):
     name = models.CharField(max_length=200)
     slug = models.CharField(max_length=200)
     position = models.IntegerField()
     parent = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True)
-
 
     class Meta:
         verbose_name_plural = "TopBar"
@@ -59,13 +65,18 @@ class HomeSection(models.Model):
     name = models.CharField(max_length=200)
     title = models.CharField(max_length=200)
     content = models.TextField()
-    position = models.IntegerField()
+    # position is a selector con float-left, float-right
+    content_position = models.CharField(
+        max_length=15,
+        choices=(("order-1", "left"), ("order-2", "right")))
     image = models.ImageField(upload_to='images/', max_length=300, null=True, blank=True)
+    image_position = models.CharField(
+        max_length=15,
+        choices=(("order-1", "left"), ("order-2", "right")))
 
     # order by position
     class Meta:
         verbose_name_plural = "HomeSection"
-        ordering = ["position"]
 
     def __str__(self):
         return self.name

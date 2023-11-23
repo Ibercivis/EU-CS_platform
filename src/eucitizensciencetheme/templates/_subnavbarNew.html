@@ -2,7 +2,7 @@
 {% load active_link_tags %}
 
 
- <div class="row bg-white">
+ <div class="row">
             <div class="col-12">
                     <form id="searchTop"
                     {% if 'all' in request.get_full_path %}
@@ -21,7 +21,7 @@
                         action="/projects"
                     {% endif %}>
                     <div class="input-group mt-3">
-                        <span class="input-group-text bg-white border-end-0 border-top">
+                        <span class="input-group-text  border-end-0 border-top">
                             <i class="fas fa-search"></i>
                         </span>
                         <input type="text" 
@@ -33,13 +33,13 @@
                             placeholder="Search..." 
                             data-url="/home_autocomplete/"
                             >
-                            <div class="input-group-text clickable border-start-0 border-top bg-white" id="backsign"></div>
+                            <div class="input-group-text clickable border-start-0 border-top " id="backsign"></div>
                     </div>
                 </form>
             </div>
 
             <div class="col-12">
-                <nav class="navbar navbar-light bg-white sub-nav-bar pb-0 pl-0 border-top-0 border-end-0 border-start-0 boder-0 mb-3 subnavbar">
+                <nav class="navbar navbar-light  sub-nav-bar pb-0 pl-0 border-top-0 border-end-0 border-start-0 boder-0 mb-3 subnavbar">
                     <ul class="nav">
                         <li class="nav-item text-start subnavbar-item">
                             <a class="nav-link ps-4  {% active_link 'projects' %}"

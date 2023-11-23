@@ -8,6 +8,11 @@ class OrganisationType(models.Model):
 
     def __str__(self):
         return f'{self.type}'
+    
+class HelpText(models.Model):
+    title = models.CharField(max_length=200)
+    slug = models.CharField(max_length=200)
+    paragraph = models.TextField()
 
 
 class Organisation(models.Model):

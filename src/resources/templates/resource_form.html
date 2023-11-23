@@ -46,6 +46,12 @@
                                 {{ form.name|as_crispy_field }}
                                 {{ form.url|as_crispy_field }}
                                 {{ form.keywords|as_crispy_field }}
+                                {{ form.category|as_crispy_field }}
+                                {{ form.categorySelected|as_crispy_field }}
+                                <div id="id_sub_categories" class="mb-3"></div>
+                                {{ form.audience|as_crispy_field }}
+                                {{ form.theme|as_crispy_field }}
+                            <label class="control-label">{% trans "Abstract" %}</label>
                             <ul class="nav nav-tabs" id="languageAbstractTabs" role="tablist">
                                 {% for field in form.get_abstract_fields %}
                                 <li class="nav-item">
@@ -61,11 +67,7 @@
                                 {% endfor %}
                               </div>
                                 {{ form.description_citizen_science_aspects|as_crispy_field }}
-                                {{ form.category|as_crispy_field }}
-                                {{ form.categorySelected|as_crispy_field }}
-                                <div id="id_sub_categories" class="mb-3"></div>
-                                {{ form.audience|as_crispy_field }}
-                                {{ form.theme|as_crispy_field }}
+                              
                                 {% include '_save_zone.html' %}
                             </div>
                         </div>

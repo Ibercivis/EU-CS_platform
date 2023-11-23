@@ -73,6 +73,7 @@ class OrganisationForm(forms.Form):
     longitude = forms.DecimalField(
         max_digits=9, decimal_places=6, widget=forms.HiddenInput())
 
+    # TODO: I link this more to be used in others
     def save(self, args, logo_path):
         pk = self.data.get('organisationID', '')
         orgType = get_object_or_404(OrganisationType, id=self.data['orgType'])
@@ -80,7 +81,7 @@ class OrganisationForm(forms.Form):
             organisation = get_object_or_404(Organisation, id=pk)
             organisation.name = self.data['name']
             organisation.url = self.data['url']
-            organisation.description = self.data['description']
+
             organisation.orgType = orgType
             organisation.contactPoint = self.data['contact_point']
             organisation.contactPointEmail = self.data['contact_point_email']
@@ -95,7 +96,6 @@ class OrganisationForm(forms.Form):
                 latitude=self.data['latitude'],
                 longitude=self.data['longitude'],
                 logoCredit=self.data['logo_credit'],
-                description=self.data['description'],
                 orgType=orgType,
                 contactPoint=self.data['contact_point'],
                 contactPointEmail=self.data['contact_point_email'])

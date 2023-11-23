@@ -3,9 +3,17 @@ from django import forms
 from modeltranslation.admin import TabbedTranslationAdmin
 from django.db import models   
 from django_ckeditor_5.fields import CKEditor5Widget
-from .models import  Platform
+from .models import  HelpText, Platform
 
 # Register your models here.
+
+class HelpTextAdmin(TabbedTranslationAdmin):
+    list_display = ('title', 'slug',)
+    prepopulated_fields = {'slug': ('title',)}
+    formfield_overrides = {
+        models.TextField: {'widget': CKEditor5Widget(config_name='extends')}
+    }
+    pass
 
 
 class PlatformAdminForm(forms.ModelForm):
@@ -20,5 +28,6 @@ class PlatformAdmin(TabbedTranslationAdmin):
     }
     pass
 
+admin.site.register(HelpText, HelpTextAdmin)
 admin.site.register(Platform, PlatformAdmin)
 

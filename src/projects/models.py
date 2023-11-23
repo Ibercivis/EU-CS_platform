@@ -110,8 +110,8 @@ class Project(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
     url = models.CharField(max_length=200, null=True, blank=True)
     description = models.TextField()
-    description_citizen_science_aspects = models.TextField()
-    aim = models.TextField()
+    citizen_science_aspects_description = models.TextField()
+    aim = models.TextField(null=True, blank=True)
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
     keywords = models.ManyToManyField(Keyword)
 

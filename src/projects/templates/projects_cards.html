@@ -3,7 +3,7 @@
 {% load reviews %}
 {% load thumbnail %}
 {% for project in projects %}
-<div class="col-lg-3 col-sm-6 col-12 mb-5">
+<div class="col-lg-4 col-sm-6 col-12 mb-5">
     <div class="card h-100 shadow border-0">
         <a href="/project/{{project.id}}">
             <img class="img-fluid img-card"
@@ -11,32 +11,35 @@
                 alt="image for {{project.name}}" width="600" height="400" />
         </a>
         <div class="card-body">
-            <h4 class="mt-2 mb-0">
-                <a href="/project/{{project.id}}" class="card-title">{{project.name | truncatewords:10 }}</a>
-            </h4>
-            {% if project.featured %}
-            <div class="small text-muted mb-2">Featured</div>
-            {% else %}
-            <div class="small text-muteed mb-2">&nbsp;</div>
-            {% endif %}
-            <!-- TODO: improve this loop -->
-            {% if project.mainOrganisation %}
-            <a href="/projects?country={{project.mainOrganisation.country}}" class="badge rounded-pill bg-dark">
-                {{ project.mainOrganisation.country.name }}
-            </a>
-            {% endif %}
-            {% for topic in project.topic.all %}
-            {% if forloop.counter < 3 %} <a class="badge rounded-pill bg-my-darkBlue text-decoration-none"
-                href="/projects?keywords=&topic={{topic|urlencode}}">{{topic}}</a>
-                {% elif forloop.counter < 4 %} ... {% endif %} {% endfor %} </button>
-                    {% for keyword in project.keywords.all %}
-                    {% if forloop.counter < 3 %} <a class="badge rounded-pill bg-my-darkGreen text-decoration-none"
-                        href="/projects?keywords={{keyword|urlencode}}">{{keyword}}
-                        </a>
-                        {% elif forloop.counter < 4 %} ... {% endif %} {% endfor %} <p class="mt-3 gray7">
-                            {{ project.description | safe| truncatewords_html:30 }}
-                            </p>
-        </div><!-- End of card-body --> 
+            <div class="card-title my-card-title">
+                <h4 class="mt-2 mb-0">
+                    <a href="/project/{{project.id}}" class="card-title my-link">{{project.name | truncatechars:30}}</a>
+                </h4>
+            </div>
+            <div class="card-text">
+                <div class="my-card-country">
+                    {% if project.mainOrganisation %}
+                    <a href="/projects?country={{project.mainOrganisation.country}}"
+                        class="badge rounded-pill bg-my-dark">
+                        {{ project.mainOrganisation.country.name }}
+                    </a>
+                    {% endif %}
+                    {% for topic in project.topic.all %}
+                    {% if forloop.counter <= 2 %} <a class="badge rounded-pill bg-secondary"
+                        href="/projects?keywords=&topic={{ topic|urlencode }}">{{ topic }}</a>
+                        {% endif %}
+                        {% endfor %}
+
+                </div>
+
+                <p class="mt-4">
+                    {{ project.description | safe| truncatewords_html:30 }}
+                </p>
+
+
+
+            </div>
+        </div><!-- End of card-body -->
         <div class="card-footer  bg-white border-top-0 small">
             {% include "_social_zone.html" %}
         </div>

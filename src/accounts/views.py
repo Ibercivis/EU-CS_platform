@@ -66,19 +66,21 @@ class SignUpView(
         profile = get_object_or_404(Profile, user_id=user.id)
         profile.orcid = orcid
         profile.save()
-        mail_subject = 'Activate your EU-Citizen.Science account.'
+        mail_subject = 'Activate your  %s account.', settings.PLATFORM_NAME 
         message = render_to_string('accounts/acc_active_email.html', {
             'user': user,
             'domain': settings.HOST,
             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
             'token': account_activation_token.make_token(user),
         })
+        print(message)
         html_message = render_to_string('accounts/acc_active_email.html', {
             'user': user,
             'domain': settings.HOST,
             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
             'token': account_activation_token.make_token(user),
         })
+        print(html_message)
 
         to_email = form.cleaned_data.get('email')
         send_mail(mail_subject, message, 'eu-citizen.science@ibercivis.es', [to_email], html_message=html_message)

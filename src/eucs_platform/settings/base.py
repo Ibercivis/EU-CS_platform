@@ -213,18 +213,9 @@ DATABASES = {
 LANGUAGE_CODE = "en"
 
 TRANSLATED_LANGUAGES = (
-    ('nl', 'Dutch'),
     ('en', 'English'),
-    ('et', 'Estonian'),
-    ('fr', 'Français'),
-    ('de', 'German'),
-    ('el', 'Greek'),
-    ('hu', 'Hungarian'),
-    ('it', 'Italian'),
-    ('lt', 'Lituanian'),
     ('pt', 'Portuguese'),
     ('es', 'Spanish'),
-    ('sv', 'Swedish'),
 )
 
 LANGUAGE_CODES = [
@@ -282,8 +273,8 @@ LANGUAGE_CODES = [
 ]
 
 MODELTRANSLATION_LANGUAGES = (
-    'en', 'es', 'fr', 'de', 'el', 'hu', 'it', 'lt', 'pt', 'sv', 'et', 'nl')
-MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
+    'en', 'es', 'pt')
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'pt'
 TIME_ZONE = "UTC"
 USE_I18N = True
 USE_L10N = True

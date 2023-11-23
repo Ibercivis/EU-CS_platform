@@ -2,21 +2,29 @@
 {% load static %}
 {% load thumbnail %}
 {% for organisation in organisations %}
-<div class="col-lg-3 col-sm-6 col-xs-12 mb-5">
+<div class="col-lg-4 col-sm-6 col-xs-12 mb-5">
     <div class="card h-100 shadow border-0"> 
         <a href="/organisation/{{organisation.id}}">
-        <img  class="card-img-top" src="{% thumbnail organisation.logo|default:'void_600.png' 306x204 crop %}">
+        <img  class="img-fluid img-card" src="{% thumbnail organisation.logo|default:'void_600.png' 612x408 crop %}">
         </a>
         <div class="card-body">
-            <h5 class="mt-2 mb-3">
-                <a href="/organisation/{{organisation.id }}" class="card-title">{{ organisation.name }}</a>
-            </h5>
+            <div class="card-title my-card-title">
+                <h4 class="mt-2 mb-0">
+                    <a href="/organisation/{{organisation.id }}" class="card-title my-link">{{ organisation.name | truncatechars:30 }}</a>
+                </h4>
+            </div>
+            {% if organisation.country %}
             <a href="/organisations?country={{organisation.country.code}}" class="badge rounded-pill bg-dark text-decoration-none">
                     {{organisation.country.name}}
                 </a>
+                {% endif %}
                 <a href="/organisations?orgTypes={{organisation.orgType}}"
-                    class="badge rounded-pill bg-my-darkBlue text-decoration-none">{{ organisation.orgType }}</a>
+                    class="badge rounded-pill bg-secondary">{{ organisation.orgType }}</a>
                 <p class="mt-4">{{organisation.description | safe | striptags | truncatechars:180 }}
+                    <p class="mt-4">
+                        {{ organisation.description | safe| truncatewords_html:30 }}
+                    </p>
+    
         </div><!-- End of card-body -->
     </div><!-- end of card -->
 </div>

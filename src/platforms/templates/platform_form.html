@@ -21,7 +21,13 @@
     <form autocomplete="off" id="Platform">
         {% csrf_token %}
         <div class="col-12">
-            {% include "_intro_form_platform.html" %}
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-8">
+                    <h2>{{text.title}}</h2>
+                    {{text.paragraph|safe}}
+                </div>
+            </div>
             <input type="hidden" id="Id" name="Id" value="{{id}}">
             <div class="row">
                 <div class="col-2"></div>
@@ -32,12 +38,15 @@
                         <div class="col-11">
                             {{ form.name | as_crispy_field }}
                             {{ form.url | as_crispy_field }}
+                            {{ form.geographicExtend | as_crispy_field }}
+                            {{ form.countries | as_crispy_field }}
+                            {{ form.platformLocality | as_crispy_field }}
                             <!-- Platform description -->
-                            {% trans description %}
+                            <label class="control-label">{% trans "Description" %}</label>
                             <ul class="nav nav-tabs" id="languageDescriptionTabs" role="tablist">
                                 {% for field in form.get_description_fields %}
                                   <li class="nav-item">
-                                    <button class="nav-link {% if field.language == LANGUAGE_CODE %}active{% endif %}" id="description_{{ field.label }}-tab" data-bs-toggle="tab" data-bs-target="#description-{{ field.label }}" type="button" role="tab" aria-controls="description-{{ field.label }}" aria-selected="true">{{ field.label }}</button>
+                                    <button class="nav-link {% if field.label == LANGUAGE_CODE %}active{% endif %}" id="description_{{ field.label }}-tab" data-bs-toggle="tab" data-bs-target="#description-{{ field.label }}" type="button" role="tab" aria-controls="description-{{ field.label }}" aria-selected="true">{{ field.label }}</button>
                                   </li>
                                 {% endfor %}
                                 </ul>
@@ -49,9 +58,7 @@
                                   {% endfor %}
                                 </div>
                             
-                            {{ form.geographicExtend | as_crispy_field }}
-                            {{ form.countries | as_crispy_field }}
-                            {{ form.platformLocality | as_crispy_field }}
+
                             {% include '_save_zone.html' %}
                         </div>
                     </div>

@@ -14,7 +14,7 @@ from django.template.loader import render_to_string
 from django.template.response import TemplateResponse
 from datetime import datetime
 from .forms import OrganisationForm, OrganisationPermissionForm
-from .models import Organisation, OrganisationType, OrganisationPermission
+from .models import HelpText, Organisation, OrganisationType, OrganisationPermission
 from projects.models import Project
 from resources.models import Resource
 from profiles.models import Profile
@@ -28,6 +28,8 @@ User = get_user_model()
 @login_required(login_url='/login')
 def new_organisation(request):
     user = request.user
+    text = get_object_or_404(HelpText, slug='new-organisation')
+
 
     form = OrganisationForm()
     if request.method == 'POST':
@@ -62,10 +64,10 @@ def new_organisation(request):
         else:
             print(form.errors)
 
-    return render(
+    return TemplateResponse(
             request,
             'organisation_form.html',
-            {'form': form, 'user': user})
+            {'form': form, 'user': user, 'text': text})
 
 
 def organisation(request, pk):
@@ -108,8 +110,8 @@ def edit_organisation(request, pk):
     cooperatorsPK = getCooperators(pk)
     if user != organisation.creator and not user.is_staff and not (user.id in cooperatorsPK):
         return redirect('../organisations', {})
-
-    form = OrganisationForm(initial={
+    
+    initial_data = {
         'name': organisation.name,
         'url': organisation.url,
         'description': organisation.description,
@@ -121,7 +123,14 @@ def edit_organisation(request, pk):
         'contact_point_email': organisation.contactPointEmail,
         'latitude': organisation.latitude,
         'longitude': organisation.longitude
-    })
+    }
+
+    translation_fields = ['description']
+    for field in translation_fields:
+        for language in settings.MODELTRANSLATION_LANGUAGES:
+            initial_data[field + '_' + language] = getattr(organisation, field + '_' + language)
+
+    form = OrganisationForm(initial=initial_data)
 
     if request.method == 'POST':
         form = OrganisationForm(request.POST, request.FILES)
@@ -221,7 +230,7 @@ def organisations(request):
             organisations = organisations.order_by('-dateUpdated')
         filters['orderby'] = request.GET['orderby']
 
-    paginator = Paginator(organisations, 12)
+    paginator = Paginator(organisations, 18)
     page = request.GET.get('page')
     organisations = paginator.get_page(page)
 

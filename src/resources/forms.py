@@ -236,7 +236,6 @@ class ResourceForm(forms.Form):
             if resource.hidden:
                 resource.hidden = False
             resource.name = self.data['name']
-            resource.abstract = self.data['abstract']
             resource.description_citizen_science_aspects = self.data['description_citizen_science_aspects']
             resource.url = self.data['url']
             resource.license = self.data['license']
@@ -286,6 +285,7 @@ class ResourceForm(forms.Form):
         for key, value in self.data.items():
             if key.startswith('abstract_'):
                 setattr(resource, key, value)
+        resource.save()
             
 
         if args.user.is_staff:
@@ -304,7 +304,6 @@ class ResourceForm(forms.Form):
                 creator=args.user,
                 name=self.data['name'],
                 url=self.data['url'],
-                abstract=self.data['abstract'],
                 description_citizen_science_aspects=self.data['description_citizen_science_aspects'],
                 license=self.data['license'],
                 publisher=self.data['publisher'],

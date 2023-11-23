@@ -5,6 +5,11 @@ from organisations.models import Organisation
 from django.utils import timezone
 import pytz
 
+class HelpText(models.Model):
+    title = models.CharField(max_length=200)
+    slug = models.CharField(max_length=200)
+    paragraph = models.TextField()
+
 class Event(models.Model):
     creator = models.ForeignKey(
             settings.AUTH_USER_MODEL,

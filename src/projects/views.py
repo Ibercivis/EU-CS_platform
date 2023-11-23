@@ -38,6 +38,7 @@ from resources.models import Resource
 from platforms.models import Platform
 from profiles.models import Profile
 
+
 from resources.views import applyFilters as applyFiltersResources
 
 User = get_user_model()
@@ -47,9 +48,7 @@ User = get_user_model()
 def newProject(request):
     user = request.user
     form = ProjectForm()
-    text = HelpText.objects.filter(slug='new-project').first()
-    print(text)
-    print(text.paragraph)
+    text = get_object_or_404(HelpText, slug='new-project')
     return TemplateResponse(request, 'project_form.html', {
         'form': form,
         'user': user,
@@ -91,7 +90,7 @@ def sendProjectEmail(pk, user):
     email = EmailMessage(subject, message, to=to, bcc=bcc)
     email.content_subtype = "html"
     email.send()
-    print(message)
+
 
 
 def updateKeywords(dictio):
@@ -175,16 +174,14 @@ def editProject(request, pk):
     if project.end_date:
         end_datetime = formats.date_format(project.end_date, 'Y-m-d')
 
-    form = ProjectForm(initial={
-        'project_name': project.name,
+    initial_data = {
+        'project_name': project.name, 
         'url': project.url,
         'start_date': start_datetime,
         'projectlocality': project.projectlocality,
         'keywords': project.keywords.all,
         'end_date': end_datetime,
-        'aim': project.aim,
-        'description': project.description,
-        'description_citizen_science_aspects': project.description_citizen_science_aspects,
+        'citizen_science_aspects_description': project.citizen_science_aspects_description,
         'status': project.status,
         'mainOrganisation': project.mainOrganisation,
         'organisation': project.organisation.all,
@@ -203,8 +200,6 @@ def editProject(request, pk):
         'image3': project.image3,
         'image_credit3': project.imageCredit3,
         'withImage3': (True, False)[project.image3 == ""],
-        'how_to_participate': project.howToParticipate,
-        'equipment': project.equipment,
         'contact_person': project.author,
         'contact_person_email': project.author_email,
         'host': project.host,
@@ -215,9 +210,17 @@ def editProject(request, pk):
         'originDatabase': project.originDatabase,
         'originUID': project.originUID,
         'originURL': project.originURL,
-    })
+    }
 
-    return render(request, 'project_form.html', {
+    translation_fields=['description','aim', 'howToParticipate','equipment']
+    for field in translation_fields:
+        for lang in settings.MODELTRANSLATION_LANGUAGES:
+            initial_data[field+'_'+lang]=getattr(project, field+'_'+lang)
+
+
+    form = ProjectForm(initial=initial_data)
+
+    return TemplateResponse(request, 'project_form.html', {
         'form': form,
         'project': project,
         'user': user,
@@ -309,7 +312,7 @@ def projects(request):
 
     counter = len(projects)
 
-    paginator = Paginator(projects, 16)
+    paginator = Paginator(projects, 18)
     page = request.GET.get('page')
     projects = paginator.get_page(page)
 
@@ -339,6 +342,8 @@ def projects(request):
     users = applyFilters(request, users)
     users = users.distinct()
     usersCounter = len(users)
+    for project in projects:
+        print(project.topic.all())
 
     return TemplateResponse(request, 'projects.html', {
         'projects': projects,
@@ -550,11 +555,11 @@ def saveImage(request, form, element, ref):
         image = Image.open(photo)
         cropped_image = image.crop((x, y, w+x, h+y))
         if (ref == '3'):
-            finalSize = (1320, 400)
+            finalSize = (1100, 400)
         else:
             finalSize = (600, 400)
 
-        resized_image = cropped_image.resize(finalSize, Image.ANTIALIAS)
+        resized_image = cropped_image.resize(finalSize, Image.Resampling.LANCZOS)
 
         if (cropped_image.width > image.width):
             size = (abs(int(

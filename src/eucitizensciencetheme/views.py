@@ -1,7 +1,7 @@
 from django.views import generic
 from django.shortcuts import render
 from django.template.response import TemplateResponse
-from .models import HomeSection
+from .models import HomeSection, Main
 from django.http import JsonResponse
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -11,6 +11,7 @@ from resources.models import Resource
 from organisations.models import Organisation
 from platforms.models import Platform
 from profiles.models import Profile
+from django.shortcuts import get_object_or_404
 
 # Create your views here, in alphabetical order
 
@@ -86,9 +87,10 @@ def get_organisations(request):
 def home(request):
     # Projects
     user = request.user
+    main = get_object_or_404(Main)
     projects = Project.objects.get_queryset().filter(~Q(hidden=True)).filter(approved=True).order_by('-dateCreated')
     projectsCounter = len(projects)
-    paginatorprojects = Paginator(projects, 4)
+    paginatorprojects = Paginator(projects, 3)
     page = request.GET.get('page')
     projects = paginatorprojects.get_page(page)
     if user.is_authenticated:
@@ -137,6 +139,7 @@ def home(request):
 
     return TemplateResponse(request, 'home.html', {
         'user': user,
+        'main': main,
         'projects': projects,
         'likes': likes,
         'follows': follows,

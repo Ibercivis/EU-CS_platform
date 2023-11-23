@@ -46,7 +46,8 @@
 </div>
 {% endif %}
 {% if project.image3 %}
-<div class="container-fluid profileImage" style="background: url('/media/{{project.image3}}') no-repeat; background-size: cover;">
+<div class="container-fluid profileImage" style="background: url('/media/{{project.image3 | safe}}') no-repeat; background-size: cover;">
+   
 </div>
 
 {% endif %}

@@ -10,7 +10,7 @@
 {{block.super }}
 <link rel="stylesheet" href="{% static 'site/css/leaflet-geosearch_style.css' %}">
 <link rel="stylesheet" href="{% static 'site/css/leaflet.css' %}">
-<link rel="stylesheet" href="{% static 'site/css/forms.css' %}">
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
 {% leaflet_js %}
 {% leaflet_css %}
 {{ form.media.css }}
@@ -31,7 +31,13 @@
         <div class="row">
             {% csrf_token %}
             <div class="col-12">
-                {% include "_intro_new_event.html" %}
+                <div class="row">
+                  <div class="col-2"></div>
+                  <div class="col-8">
+                    <h2>{{text.title}}</h2>
+                    {{text.paragraph | safe}}
+                  </div>
+                </div>
                 <div class="row">
                     <div class="col-2"></div>
                     <div class="col-8">
@@ -85,12 +91,7 @@
                             <div class="col-1"></div>
                             <div class="col-11">
 
-                                <button type="submit" class="btn btn-my-darkBlue submit" style="
-                                    margin-left: 40%;
-                                    margin-top: 16px;
-                                    margin-bottom: 32px;
-                                    padding-left: 16px;
-                                    padding-right: 16px;" onclick="return validateMap();">
+                                <button type="submit" class="btn btn-outline-success submit"  onclick="return validateMap();">
                                     <i class="fas fa-share-square"></i> {% trans "Add" %} 
                                 </button>
                                 

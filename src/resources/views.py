@@ -119,7 +119,7 @@ def resources(request, isTrainingResource=False):
         resources = resources.order_by('-dateUpdated')
 
     counter = len(resources)
-    paginator = Paginator(resources, 16)
+    paginator = Paginator(resources, 18)
     page = request.GET.get('page')
     resources = paginator.get_page(page)
 
@@ -157,7 +157,10 @@ def newTrainingResource(request):
 def newResource(request, isTrainingResource=False):
     form = ResourceForm()
     user = request.user
-    text = HelpText.objects.filter(slug='new-resource').first()
+    if isTrainingResource:
+        text = get_object_or_404(HelpText, slug='new-training-resource')
+    else:
+        text = get_object_or_404(HelpText, slug='new-resource')
 
     # TODO: This in forms.py 
     if request.method == 'POST':
@@ -189,7 +192,7 @@ def newResource(request, isTrainingResource=False):
             email.send()
             return redirect('/resources')
 
-    return render(request, 'resource_form.html', {
+    return TemplateResponse(request, 'resource_form.html', {
         'form': form,
         'settings': settings,
         'text': text,
@@ -254,7 +257,7 @@ def resource(request, pk):
 
     # TODO: Only ask for the resource
     approvedResources = ApprovedResources.objects.all().values_list('resource_id', flat=True)
-    return render(request, 'resource.html', {
+    return TemplateResponse(request, 'resource.html', {
         'resource': resource,
         'savedResources': savedResources,
         'bookmarkedResource': bookmarkedResource,
@@ -285,12 +288,12 @@ def editResource(request, pk):
     curatedGroups = list(ResourcesGrouped.objects.all().filter(resource_id=pk).values_list('group_id', flat=True))
 
     # TODO: is needed with image?
-    form = ResourceForm(initial={
+
+    initial_data = {
         # Main information, mandatory
         'name': resource.name,
         'url': resource.url,
         'keywords': resource.keywords.all,
-        'abstract': resource.abstract,
         'description_citizen_science_aspects': resource.description_citizen_science_aspects,
         'category': getCategory(resource.category),
         'categorySelected': resource.category.id,
@@ -317,22 +320,15 @@ def editResource(request, pk):
         'image2': resource.image2,
         'withImage1': (True, False)[resource.image1 == ""],
         'withImage2': (True, False)[resource.image2 == ""],
-    })
+    }
+    translation_fields=['abstract'] 
+    for field in translation_fields:
+        for lang in settings.MODELTRANSLATION_LANGUAGES:
+            initial_data[field+'_'+lang]=getattr(resource, field+'_'+lang)
 
-    if request.method == 'POST':
-        form = ResourceForm(request.POST, request.FILES)
-        if form.is_valid():
-            images = []
-            image1_path = saveImage(request, form, 'image1', '1')
-            image2_path = saveImage(request, form, 'image2', '2')
-            images.append(image1_path)
-            images.append(image2_path)
-            form.save(request, images)
-            if(isTrainingResource):
-                return redirect('/training_resource/' + str(pk))
-            return redirect('/resource/' + str(pk))
+    form = ResourceForm(initial=initial_data)
 
-    return render(request, 'resource_form.html', {
+    return TemplateResponse(request, 'resource_form.html', {
         'form': form,
         'resource': resource,
         'curatedGroups': curatedGroups,

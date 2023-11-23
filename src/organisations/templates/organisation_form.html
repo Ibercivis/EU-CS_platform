@@ -38,7 +38,13 @@
 
         <div class="row">
             <div class="col-12">
-                {% include "_intro_form_organisation.html" %}
+                <div class="row">
+                  <div class="col-2"></div>
+                  <div class="col-8"> 
+                    <h2>{{text.title}}</h2>
+                    {{text.paragraph | safe}}
+                  </div>
+                </div>
                 <div class="row">
                     <div class="col-2"></div>
                     <div class="col-8">
@@ -49,12 +55,13 @@
                                 <input type="hidden" id="organisationID" name="organisationID" value={{organisation.id}}>
                                 {{ form.name|as_crispy_field }}
                                 {{ form.url|as_crispy_field }}
-                                {% trans "Description" %}
+                                {{ form.orgType|as_crispy_field }}
+                                <label class="control-label">{% trans "Description" %}</label>
                                 <!-- Project description -->
                                 <ul class="nav nav-tabs" id="languageDescriptionTabs" role="tablist">
                                   {% for field in form.get_description_fields %}
                                     <li class="nav-item">
-                                      <button class="nav-link {% if field.language == LANGUAGE_CODE %}active{% endif %}" id="description_{{ field.label }}-tab" data-bs-toggle="tab" data-bs-target="#description-{{ field.label }}" type="button" role="tab" aria-controls="description-{{ field.label }}" aria-selected="true">{{ field.label }}</button>
+                                      <button class="nav-link {% if field.label == LANGUAGE_CODE %}active{% endif %}" id="description_{{ field.label }}-tab" data-bs-toggle="tab" data-bs-target="#description-{{ field.label }}" type="button" role="tab" aria-controls="description-{{ field.label }}" aria-selected="true">{{ field.label }}</button>
                                     </li>
                                   {% endfor %}
                                   </ul>
@@ -65,7 +72,7 @@
                                       </div>
                                     {% endfor %}
                                   </div>
-                                {{ form.orgType|as_crispy_field }}
+                                
                             </div>
                         </div>
                     </div>
@@ -121,7 +128,7 @@
                         </div>
                         <div class="row mt-5 mb-5">
                             <div class="col-11">
-                                <button type="submit" class="btn btn-my-darkBlue"><i class="fas fa-share-square"></i> {% trans "Save" %}</button>
+                                <button type="submit" class="btn btn-outline-success"><i class="fas fa-share-square"></i> {% trans "Save" %}</button>
                             </div>
                         </div>
                     </div>

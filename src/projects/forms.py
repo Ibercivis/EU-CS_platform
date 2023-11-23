@@ -90,7 +90,7 @@ class ProjectForm(forms.Form):
         label=_('URL'),
         help_text=_('Please provide the URL to an external website of the project.'))
 
-    description_citizen_science_aspects = forms.CharField(
+    citizen_science_aspects_description = forms.CharField(
         widget=CKEditorWidget(config_name='frontpage'),
         help_text=_('Please describe the citizen science aspect(s) of the project and the link of the project to '
                     'citizen science using the '
@@ -416,8 +416,7 @@ class ProjectForm(forms.Form):
             creator=args.user,
             name=self.data.get('project_name', ''),
             url=self.data['url'],
-            description_citizen_science_aspects=self.data['description_citizen_science_aspects'],
-            aim=self.data['aim'],
+            citizen_science_aspects_description=self.data['citizen_science_aspects_description'],
             projectlocality=self.data['projectlocality'],
             mainOrganisation=mainOrganisation,
             author=self.data['contact_person'],
@@ -427,12 +426,7 @@ class ProjectForm(forms.Form):
             imageCredit1=self.data['image_credit1'],
             imageCredit2=self.data['image_credit2'],
             imageCredit3=self.data['image_credit3'],
-            howToParticipate=self.data['how_to_participate'],
-            equipment=self.data['equipment'],
             fundingProgram=self.data['funding_program'],
-            # originUID=self.data['originUID'],
-            # originURL=self.data['originURL'],
-            # doingAtHome=doingAtHome,
             participatingInaContest=participatingInaContest,
             projectGeographicLocation=projectGeographicLocation)
 
@@ -444,21 +438,30 @@ class ProjectForm(forms.Form):
         project.projectlocality = self.data['projectlocality']
         project.author = self.data['contact_person']
         project.author_email = self.data['contact_person_email']
-        project.aim = self.data['aim']
-        project.description = self.data['description']
-        project.description_citizen_science_aspects = self.data[
-            'description_citizen_science_aspects']
+      
+        project.citizen_science_aspects_description = self.data[
+            'citizen_science_aspects_description']
         project.status = status
         project.difficultyLevel = difficultyLevel
         project.imageCredit1 = self.data['image_credit1']
         project.imageCredit2 = self.data['image_credit2']
         project.imageCredit3 = self.data['image_credit3']
-        project.howToParticipate = self.data['how_to_participate']
+        
         project.doingAtHome = doingAtHome
-        project.equipment = self.data['equipment']
+       
         project.fundingProgram = self.data['funding_program']
         project.mainOrganisation = mainOrganisation
         project.projectGeographicLocation = projectGeographicLocation
+
+        for key, value in self.data.items():
+            if key.startswith('description_'):
+                setattr(project, key, value)
+            if key.startswith('aim_'):
+                setattr(project, key, value)
+            if key.startswith('how_to_participate_'):
+                setattr(project, key, value)
+            if key.startswith('equipment_'):
+                setattr(project, key, value)
 
         # If there are translations, need to improve them
         project.translatedProject.all().update(needsUpdate=True)

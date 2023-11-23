@@ -20,7 +20,7 @@ from datetime import datetime
 from PIL import Image
 
 from .forms import PlatformForm
-from .models import Platform
+from .models import HelpText, Platform
 import copy
 import random
 
@@ -31,9 +31,10 @@ import random
 @login_required(login_url='/login')
 def newPlatform(request):
     user = request.user
+    text = get_object_or_404(HelpText, slug='new-platform')
     platformForm = PlatformForm()
 
-    return render(request, 'platform_form.html', {'form': platformForm, 'user': user})
+    return TemplateResponse(request, 'platform_form.html', {'form': platformForm, 'text': text, 'user': user})
 
 
 @login_required(login_url='/login')

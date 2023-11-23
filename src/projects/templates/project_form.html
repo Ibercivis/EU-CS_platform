@@ -49,32 +49,35 @@
                             <div class="col-1"></div>
                             <div class="col-11">
                               {{ form.project_name|as_crispy_field }}
-
+                              {{ form.url|as_crispy_field }}
+                              {{ form.status|as_crispy_field }}
+                              {{ form.keywords|as_crispy_field }}
+                                <label class="control-label">{% trans "Description" %}</label>
                                 {{ form.description.label_tag}}
                                 <!-- Project description -->
                                 <ul class="nav nav-tabs" id="languageDescriptionTabs" role="tablist">
                                   {% for field in form.get_description_fields %}
                                     <li class="nav-item">
-                                      <button class="nav-link {% if field.language == LANGUAGE_CODE %}active{% endif %}" id="description_{{ field.label }}-tab" data-bs-toggle="tab" data-bs-target="#description-{{ field.label }}" type="button" role="tab" aria-controls="description-{{ field.label }}" aria-selected="true">{{ field.label }}</button>
+                                      <button class="nav-link {% if field.label == LANGUAGE_CODE %}active{% endif %}" id="description_{{ field.label }}-tab" data-bs-toggle="tab" data-bs-target="#description-{{ field.label }}" type="button" role="tab" aria-controls="description-{{ field.label }}" aria-selected="true">{{ field.label }}</button>
                                     </li>
                                   {% endfor %}
                                   </ul>
                                   <div class="tab-content" id="languageDescriptionTabsContent">
                                     {% for field in form.get_description_fields %}
                                       <div class="tab-pane fade {% if field.label == LANGUAGE_CODE %}show active{% endif %}" id="description-{{ field.label }}" role="tabpanel" aria-labelledby="description-{{ field.label }}-tab">
-                                        {{ field | as_crispy_field}}
+                                        {{ field  | as_crispy_field}}
                                       </div>
                                     {% endfor %}
                                   </div>
 
-                                {{ form.url|as_crispy_field }}
-
+                                
+                                <label class="control-label">{% trans "Aim" %}</label>
                                 <!-- Project Aim -->
                                 {{ form.aim.label_tag}}
                                 <ul class="nav nav-tabs" id="languageAimTabs" role="tablist">
                                   {% for field in form.get_aim_fields %}
                                     <li class="nav-item">
-                                      <button class="nav-link {% if field.language == LANGUAGE_CODE %}active{% endif %}" id="aim_{{ field.label }}-tab" data-bs-toggle="tab" data-bs-target="#aim-{{ field.label }}" type="button" role="tab" aria-controls="aim-{{ field.label }}" aria-selected="true">{{ field.label }}</button>
+                                      <button class="nav-link {% if field.label == LANGUAGE_CODE %}active{% endif %}" id="aim_{{ field.label }}-tab" data-bs-toggle="tab" data-bs-target="#aim-{{ field.label }}" type="button" role="tab" aria-controls="aim-{{ field.label }}" aria-selected="true">{{ field.label }}</button>
                                     </li>
                                   {% endfor %}
                                   </ul>
@@ -86,9 +89,8 @@
                                     {% endfor %}
                                   </div>
                                 
-                                {{ form.description_citizen_science_aspects|as_crispy_field }}
-                                {{ form.status|as_crispy_field }}
-                                {{ form.keywords|as_crispy_field }}
+                                {{ form.citizen_science_aspects_description|as_crispy_field }}
+                                
                                 {% include "_save_zone.html" %}
                             </div>
                         </div>
@@ -110,11 +112,11 @@
                                 {{ form.participationTask |as_crispy_field }}
                                 {{ form.difficultyLevel |as_crispy_field }}
                                   <!-- Project How to participate -->
-                                  How to participate
+                                  <label class="control-label">{% trans "How to participate" %}</label>
                                   <ul class="nav nav-tabs" id="languageHowToParticipateTabs" role="tablist">
                                     {% for field in form.get_how_to_participate_fields %}
                                       <li class="nav-item">
-                                        <button class="nav-link {% if field.language == LANGUAGE_CODE %}active{% endif %}" id="how-to-participate-{{ field.label }}-tab" 
+                                        <button class="nav-link {% if field.label == LANGUAGE_CODE %}active{% endif %}" id="how-to-participate-{{ field.label }}-tab" 
                                         data-bs-toggle="tab" data-bs-target="#how-to-participate-{{ field.label }}" type="button" role="tab" aria-controls="how-to-participate-{{ field.label }}" aria-selected="true">{{ field.label }}</button>
                                       </li>
                                     {% endfor %}
@@ -126,10 +128,11 @@
                                         </div>
                                       {% endfor %}
                                     </div>
+                                    <label class="control-label">{% trans "Equipment" %}</label>
                                     <ul class="nav nav-tabs" id="languageEquipmentTabs" role="tablist">
                                       {% for field in form.get_equipment_fields %}
                                         <li class="nav-item">
-                                          <button class="nav-link {% if field.language == LANGUAGE_CODE %}active{% endif %}" id="equipment-{{ field.label }}-tab" 
+                                          <button class="nav-link {% if field.label == LANGUAGE_CODE %}active{% endif %}" id="equipment-{{ field.label }}-tab" 
                                           data-bs-toggle="tab" data-bs-target="#equipment-{{ field.label }}" type="button" role="tab" aria-controls="equipment-{{ field.label }}" aria-selected="true">{{ field.label }}</button>
                                         </li>
                                       {% endfor %}

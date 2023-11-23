@@ -7,7 +7,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
 from django.conf import settings
 from django.utils import formats
-from .models import Event, ApprovedEvents, UnApprovedEvents
+from .models import Event, HelpText, ApprovedEvents, UnApprovedEvents
 from .forms import EventForm
 from django.db.models import Q
 
@@ -90,6 +90,7 @@ def events(request):
 def new_event(request):
     user = request.user
     form = EventForm()
+    text = get_object_or_404(HelpText, slug='new-event')
     if request.method == 'POST':
         form = EventForm(request.POST)
         if form.is_valid():
@@ -97,7 +98,11 @@ def new_event(request):
             return redirect('/events')
         else:
             print(form.errors)
-    return render(request, 'new_event.html', {'form': form, 'user': user, 'user_agent': settings.USER_AGENT})
+    return TemplateResponse(request, 'new_event.html', {
+        'form': form, 
+        'user': user,
+        'text': text,
+        'user_agent': settings.USER_AGENT})
 
 
 def editEvent(request, pk):

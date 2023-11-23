@@ -82,8 +82,8 @@ class SignupForm(authtoolsforms.UserCreationForm):
         self.fields["name"].label = ""
         self.fields["password1"].label = ""
         self.fields["password2"].label = ""
-        self.fields["captcha"] = ReCaptchaField()
-        self.fields["captcha"].label = ""
+        #self.fields["captcha"] = ReCaptchaField()
+        #self.fields["captcha"].label = ""
         self.helper.layout = Layout(
             Field("email", placeholder=_("Enter Email"), autofocus=""),
             HTML('<div class="m-4"></div>'),
