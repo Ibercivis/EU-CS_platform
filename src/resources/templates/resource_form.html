@@ -55,7 +55,7 @@
                             <ul class="nav nav-tabs" id="languageAbstractTabs" role="tablist">
                                 {% for field in form.get_abstract_fields %}
                                 <li class="nav-item">
-                                  <button class="nav-link {% if field.language == LANGUAGE_CODE %}active{% endif %}" id="abstract_{{ field.label }}-tab" data-bs-toggle="tab" data-bs-target="#abstract-{{ field.label }}" type="button" role="tab" aria-controls="abstract-{{ field.label }}" aria-selected="true">{{ field.label }}</button>
+                                  <button class="nav-link {% if field.label == LANGUAGE_CODE %}active{% endif %}" id="abstract_{{ field.label }}-tab" data-bs-toggle="tab" data-bs-target="#abstract-{{ field.label }}" type="button" role="tab" aria-controls="abstract-{{ field.label }}" aria-selected="true">{{ field.label }}</button>
                                 </li>
                               {% endfor %}
                               </ul>
