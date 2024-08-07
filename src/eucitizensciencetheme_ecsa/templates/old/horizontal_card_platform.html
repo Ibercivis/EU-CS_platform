@@ -1,0 +1,10 @@
+{% extends "horizontal_card.html" %}
+{% load thumbnail %}
+{% block img %}
+<a href="/platform/{{platform.id}}">
+    <img title="profile picture" class="img-fluid p-1" src="{% thumbnail platform.logo|default:'default_profile.png' 200x133 crop %}">
+</a>
+{% endblock img %}
+{% block title %}
+<a href="/platform/{{platform.id}}">{{ platform.name | truncatechars:30 }}</a>
+{% endblock title %}

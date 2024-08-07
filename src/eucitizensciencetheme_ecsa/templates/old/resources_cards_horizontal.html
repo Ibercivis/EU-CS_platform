@@ -1,0 +1,118 @@
+{% load static %}
+{% load i18n %}
+{% load l10n %}
+{% if resources %}
+{% for rsc in resources  %}
+{% load reviews %}
+<div class="col-12 mb-4">
+  <div class="row">
+    <div class="col-3">
+      <a href="/resource/{{rsc.id}}">
+        {% if rsc.image1 %}
+        <img class="img-fluid {% if rsc.id not in approvedResources %} nonmoderated {% endif %} " src="{{ rsc.image1 }}" />
+        {% else %}
+        <img class="img-fluid img-zoom {% if rsc.id not in approvedResources %} nonmoderated {% endif %}" src="{% static 'site/img/resource_default_card.png' %}" />
+        {% endif %}
+      </a>
+
+      <div class="upper">
+        {% if rsc.hidden %}<a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">{% trans "NOT ACCEPTED" %}</a><br/>
+        {% else %} {% if rsc.id not in approvedResources %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">{% trans "NOT YET MODERATED" %}</a><br/>
+        {% else %} {% if filters.approvedCheck == "All" %}  <a class="badge frontpage frontpage-green mb-2" href="/faq#moderation">{% trans "MODERATED" %}</a><br/>{% endif %}
+        {% endif %}{% endif %}
+        {% get_language_info_list for LANGUAGES as languages %}
+        {% for language in languages %}
+        {% if language.code == rsc.inLanguage %}
+        <a class="badge frontpage ml-3" href="/resources?language={{rsc.inLanguage}}">{{language.name | upper}}</a><br/>
+        {% endif %}
+        {% endfor %}
+
+      </div>
+    </div>
+    <div class="col-8">
+      <h6 class=""><a class="card-link card-link-resource" href="/resource/{{rsc.id}}" class="card-link">{{ rsc.name | truncatewords:12 }}</a></h6>
+      {% get_rating for rsc as avg_rating %}
+      {% get_review_count for rsc as review_count %}
+      <span class="gl-star-rating-stars s{{ avg_rating | stringformat:'d'}}0 readonly">
+        <span data-value="1" data-text="Terrible"></span>
+        <span data-value="2" data-text="Poor"></span>
+        <span data-value="3" data-text="Average"></span>
+        <span data-value="4" data-text="Very Good"></span>
+        <span data-value="5" data-text="Excellent"></span>
+      </span>
+      {{ review_count }} {% if review_count == 1 %} {% trans "review" %} {% else %} {% trans "reviews" %} {% endif %}
+      <div class="card-text">{{rsc.abstract | safe | truncatewords:25 }}
+        <a class="" href="/resource/{{rsc.id}}" target="_blank">{% trans "Read more" %}</a>
+      </div>
+      <a class="badge badge-dark" href="/resources?category={{rsc.category.id}}">{{ rsc.category | upper }}</a>
+      {% for theme in rsc.theme.all %}<a class="badge badge-light" href="/resources?theme={{theme.id}}">{{ theme | upper}}</a> {% endfor %}
+      {% for keyword in rsc.keywords.all %} <a class="badge  badge-light" href="/resources?keywords={{keyword}}">{{keyword | upper}}</a>  {% endfor %}
+    </div><!-- end of card-body -->
+    <div class="">
+      <div class="row">
+        <div class="col-6">
+          <div id="approved{{rsc.id}}" class="float-left">
+            {% if user.is_staff %}
+            {% if rsc.id in approvedResources %}
+            <img onclick="setApprovedRsc({{rsc.id}}, false)" class="img-fluid mt-2" src="{% static 'site/img/icon_color.png' %}" />
+            {% else %}
+            <img onclick="setApprovedRsc({{rsc.id}}, true)" class="img-fluid mt-2" src="{% static 'site/img/icon_bw.png' %}" />
+            {% endif %}
+            {% else %}
+            {% if rsc.id in approvedResources %}
+            <img  class="img-fluid mt-2" src="{% static 'site/img/icon_color.png' %}" />
+            {% else %}
+            <img  class="img-fluid mt-2" src="{% static 'site/img/icon_bw.png' %}" />
+            {% endif %}
+            {% endif %}
+          </div>
+          <div id="hidden{{rsc.id}}">
+            {% if user.is_staff %}
+            {% if rsc.hidden %}
+            <a onclick="setHiddenResource({{rsc.id}}, false)"><i class="fas fa-eye-slash"></i></a>
+            {% else %}
+            <a onclick="setHiddenResource({{rsc.id}}, true)"><i class="fas fa-eye"></i></a>
+            {% endif %}
+            {% else %}
+            {% if rsc.hidden %}
+            <i class="fas fa-eye-slash"></i>
+            {% endif %}
+            {% endif %}
+          </div>
+          <div id="featured{{rsc.id}}" style="display:inline-block">
+            {% if user.is_staff %}
+            {% if rsc.featured %}
+            <a  onclick="setFeatured({{rsc.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
+            {% else %}
+            <a  onclick="setFeatured({{rsc.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
+            {% endif %}
+            {% endif %}
+          </div>
+        </div>
+        <div class="col-6">
+          {% if user.is_authenticated %}
+          <div id="saved{{rsc.id}}">
+            {% if rsc.id in savedResources %}
+            <button type="button" class="btn btn-outline-primary float-right mt-2" onclick="setSavedResource({{rsc.id}},{{user.id}}, false)">{% trans "In my library" %}</button>
+            {% else %}
+            <button type="button" class="btn btn-outline-secondary float-right mt-2" onclick="setSavedResource({{rsc.id}},{{user.id}}, true)">{% trans "Add to library" %}</button>
+            {% endif %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+</div>
+
+{% endfor %}
+<div class="col-lg-12">
+  {% include "fr2.html" %}
+</div>
+{% else %}
+<div class="col-12">
+  <img  class="img-fluid img-zoom col-12 mt-5" src="{% static 'site/img/undraw_empty_xct9.svg' %}">
+  <h5>Sorry, nothing found</h5>
+</div>
+{% endif %}

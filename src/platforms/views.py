@@ -147,18 +147,19 @@ def platforms(request):
     usersCounter = len(users)   
 
     return TemplateResponse(request, 'platforms.html', {'platforms': platforms,
-                                              'counter': counter,
-                                              'totalCount': totalCount,
-                                              'platformsCounter': counterPlatforms,
-                                              'resourcesCounter': resourcesCounter,
-                                              'trainingResourcesCounter': trainingResourcesCounter,
-                                              'projectsCounter': projectsCounter,
-                                              'organisationsCounter': organisationsCounter,
-                                              'usersCounter': usersCounter,
-                                              'countriesWithContent': countriesWithContent,
-                                              'geographicExtendWithContent': geographicExtendsWithContent,
-                                              'filters': filters,
-                                              'isSearchPage': True})
+                                                        'counter': counter,
+                                                        'totalCount': totalCount,
+                                                        'platformsCounter': counterPlatforms,
+                                                        'resourcesCounter': resourcesCounter,
+                                                        'trainingResourcesCounter': trainingResourcesCounter,
+                                                        'projectsCounter': projectsCounter,
+                                                        'organisationsCounter': organisationsCounter,
+                                                        'usersCounter': usersCounter,
+                                                        'countriesWithContent': countriesWithContent,
+                                                        'geographicExtendWithContent': geographicExtendsWithContent,
+                                                        'filters': filters,
+                                                        'isSearchPage': True,
+                                                        'show_search_bar': False})
 
 
 def platformsAutocompleteSearch(request):

@@ -7,12 +7,14 @@
 {% block list_of_items %}
 <div class="container">
     <div clas="row">
+	    <div class="col-12 mt-4">
         {% include "_subnavbarNew.html" %}
         {% include "_finder_organisation.html" %}
+	    </div>
     </div>
 	<div class="row">
     {% if organisations %}
-        {% include "organisations_cards.html" %}
+        {% include "_organisations_cards.html" %}
     {% endif %}
 	</div>
 </div>

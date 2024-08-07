@@ -1,0 +1,16 @@
+{% load i18n %}
+{% load active_link_tags %}
+{% for subitem in items %}
+    <li class="{% if subitem.is_parent %}dropdown-submenu{% else %}dropdown-item{% endif %}">
+        <a class="{% if subitem.is_parent %}dropdown-toggle{% endif %}"
+           {% if not subitem.is_parent %}href="{{ subitem.slug }}"{% endif %}
+           {% if subitem.is_parent %}data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{% endif %}>
+            {{ subitem.name }}
+        </a>
+        {% if subitem.is_parent %}
+            <ul class="dropdown-menu">
+                {% include '_sub_menu.html' with items=subitem.get_children %}
+            </ul>
+        {% endif %}
+    </li>
+{% endfor %}

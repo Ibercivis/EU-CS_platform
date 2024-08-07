@@ -145,7 +145,8 @@ def resources(request, isTrainingResource=False):
         'audiencies': audiencies,
         'isTrainingResource': isTrainingResource,
         'endPoint': endPoint,
-        'isSearchPage': True})
+        'isSearchPage': True,
+        'show_search_bar': False})
 
 
 @login_required(login_url='/login')
@@ -534,7 +535,7 @@ def saveImage(request, form, element, ref):
             finalSize = (1100, 400)
         else:
             finalSize = (600, 400)
-        resized_image = cropped_image.resize(finalSize, Image.ANTIALIAS)
+        resized_image = cropped_image.resize(finalSize, Image.Resampling.LANCZOS)
 
         if(cropped_image.width > image.width):
             size = (abs(int((finalSize[0]-(finalSize[0]/cropped_image.width*image.width))/2)), finalSize[1])
@@ -724,9 +725,11 @@ def approveResource(request):
                     "id": id})
         to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
         to.append(resource.creator.email)
+        print("-----")
+        print(settings.HOST)
         email = EmailMessage(subject, message, to=to)
         email.content_subtype = "html"
-        email.send()
+        # email.send()
     else:
         resource.approved = False
     resource.moderated = True

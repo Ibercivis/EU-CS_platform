@@ -1,0 +1,19 @@
+{% load i18n %}
+<div id="latest-projects" class="container-fluid mt-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 d-flex align-items-center mb-3">
+                <div class="circle-icon me-2 mb-3">
+                    <div class="inner-circle"></div>
+                </div>
+                <h2 class="h-100 text-center text-dark">{% trans "Latest projects" %}</h2>
+            </div>
+        </div>
+        <div class="row ps-3 pe-3">
+                    {% include "_projects_cards.html" %}
+        </div>
+            </div>
+        </div>
+    </div>
+</div>
+

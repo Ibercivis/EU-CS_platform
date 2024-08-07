@@ -7,11 +7,14 @@
         
         <div class="row">
             <div class="col-12">
-                <div style="margin-bottom: 32px; display: flex; justify-content: center; padding-top: 20px; width: 100%;">
-                    <input id="q" type="text" class="form-border-Blue" name="q" placeholder="Search..." value="{{ filters.q }}" style="flex-grow: 1; margin-right: 24px;">
-                    <input type="submit" value="Search" class="btn btn-my-outline-darkGreen" style="padding-left: 40px; padding-right: 40px;">
+                <div class="input-group">
+			    <span class="input-group-text  border-end-0 border-top">
+                            <i class="fas fa-search"></i>
+                        </span>
+			<input id="q" type="text" class="form-control border-start-0 border-end-0 border-top me-0" name="q" placeholder="{% trans "Search" %}..." value="{{ filters.q }}" style="flex-grow: 1; margin-right: 24px;">
+			<div class="input-group-text clickable border-start-0 border-top " id="backsign"></div>
                 </div>
-                    <div class="input-group input-group-sm">
+                    <!--div class="input-group input-group-sm">
                         <div class="input-group-text"><i class="fas fa-filter"></i></div>
 
                         <select id="event_type" name="event_type" class="custom-select form-control">
@@ -71,7 +74,7 @@
                                 {% endfor %}
                         </select>
                     </div>
-            </div>
+            </div-->
             <div class="col-12 mb-4 mt-2">
                 {% if filters.country != "" or filters.language != "" or filters.project != "" or filters.organisation != "" or filters.event_type != "" %}
                     <a class="badge rounded-pill bg-danger text-decoration-none" href="/events">

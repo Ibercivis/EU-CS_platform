@@ -1,0 +1,37 @@
+{% load static %}
+{% load i18n %}
+{% load l10n %}
+{% if resources %}
+{% for rsc in resources  %}
+{% load reviews %}
+<div class="col-lg-4 col-md-12 mb-4">
+  <div class="card h-100 shadow border-0">
+    <a class="card-img-wrap" href="/resource/{{rsc.id}}">
+      {% if rsc.image1 %}
+      <img class="img-fluid img-zoom {% if rsc.id not in approvedResources %} nonmoderated {% endif %} " alt="{{ rsc.name }}" src="{{ rsc.image1 }}" />
+      {% else %}
+      <img class="img-fluid img-zoom {% if rsc.id not in approvedResources %} nonmoderated {% endif %}" alt="{{ rsc.name}}" src="{% static 'site/img/resource_default_card.png' %}" />
+      {% endif %}
+    </a>
+    <div class="upper">
+      {% if rsc.id not in approvedResources %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">{% trans "NOT YET MODERATED" %}</a><br/>
+      {% else %} {% if filters.approvedCheck == "All" %}  <a class="badge frontpage frontpage-green mb-2" href="/faq#moderation">{% trans "MODERATED" %}</a><br/>{% endif %}
+      {% endif %}
+      {% get_language_info_list for LANGUAGES as languages %}
+      {% for language in languages %}
+      {% if language.code == rsc.inLanguage %}
+      <a class="badge frontpage" href="/resources?language={{rsc.inLanguage}}">{{language.name | upper}}</a><br/>
+      {% endif %}
+      {% endfor %}
+    </div>
+    <div class="card-body">
+      <h6 class="card-title mt-3 mb-3"><a class="card-link card-link-resource" href="/resource/{{rsc.id}}" class="card-link">{{ rsc.name | truncatewords:12 }}</a></h6>
+      <div class="card-text mt-3">{{rsc.abstract | safe | truncatewords:30 }}
+        <a class="" href="/resource/{{rsc.id}}" target="_blank">{% trans "Read more" %}</a>
+      </div>
+    </div><!-- end of card-body -->
+  </div>
+</div>
+{% endfor %}
+
+{% endif %}

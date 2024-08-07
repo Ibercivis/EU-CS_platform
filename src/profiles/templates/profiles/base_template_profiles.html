@@ -13,8 +13,19 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-3">
-            <div class="mt-4 mb-3">
+            <div class="mb-3">
+               
                 <div>
+                    {% if show_user.ecsa_user_profile.ecsaMember or show_user.ecsa_user_delegate.ecsaMember %}
+                    <div class="ecsa-badge-container">
+                    <div class="ecsa-badge">
+                        <img class="ecsa-badge-img" 
+                            data-bs-toggle="tooltip"
+                            title="ECSA Member" 
+                            src = "{% static 'ecsa_integration/img/ecsa_badge.png' %}" />
+                    </div>
+                    </div>
+                    {% endif %}
                     <img title="profile picture" class="img-fluid rounded-circle" src="{% thumbnail show_user.profile.picture|default:'default_profile.png' 280x280 crop %}">
                 </div>	
                 <h3 class="">

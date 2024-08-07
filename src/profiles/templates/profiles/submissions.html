@@ -49,14 +49,14 @@
 {% endif %}
 
 {% if event_submitted.all %}
-<h3 class="col-12 leftborder mt-5">{% trans "Submitted events" %}</h3>
+<!--h3 class="col-12 leftborder mt-5">{% trans "Submitted events" %}</h3>
 <div class="row">
     {% for event in event_submitted.all %}
     <div class="col-12 col-md-6">
         {% include "horizontal_card_event.html" %}
     </div>
     {% endfor %}
-</div>
+</div-->
 {% endif %}
 {% if platforms_submitted.all %}
 <h3 class="col-12 leftborder mt-5">{% trans "Submitted platforms" %}</h3>

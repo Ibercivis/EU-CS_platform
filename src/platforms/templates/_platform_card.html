@@ -1,0 +1,30 @@
+{% load thumbnail %}
+<div class="col-lg-2 col-sm-4 col-xs-6 mb-5 d-flex">
+    <div class="card h-100 w-100 shadow border-0 d-flex flex-column">
+        <a href="/platform/{{platform.id}}">
+            <img class="card-img-top img-fluid" src="{% thumbnail platform.logo|default:'void_600.png' 306x204 %}">
+        </a>
+        <div class="card-body w-100 justify-content-center flex-grow-1">
+            <div class="text-center">
+                <h3 class="project-name text-dark mb-2 w-100 mx-auto">
+                    <a href="/platform/{{platform.id }}" class="project-name text-dark text-center" style="font-size: smaller;">
+                        {{ platform.name }}
+                    </a>
+                </h3>
+            </div>
+            <div class="">
+                {% for country in platform.countries %}
+                    <a href="/platforms?countries={{country}}" class="me-1 project-topic">{{country.name}}</a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="mt-auto p-3">
+            <div class="d-flex justify-content-between">
+                <div class="text-details d-flex align-items-center">
+                    <i class="fas fa-map me-2"></i>
+                    <a href="/platforms?geographicExtend={{platform.geographicExtend}}" class="text-dark me-1">{{platform.geographicExtend|title}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

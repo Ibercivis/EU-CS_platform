@@ -6,14 +6,16 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-12">
+        <div class="col-12 mt-4">
             {% include "_subnavbarNew.html" %}
             {% include "_finder_platforms.html" %}
             <!-- TODO: Include filters -->
         </div>
     </div>
     <div class="row">
-        {% include "platforms_cards.html" %}
+        {% for platform in platforms %}
+            {% include "_platform_card.html" %}
+        {% endfor %}
     </div>
 </div>
 {% endblock list_of_items %}

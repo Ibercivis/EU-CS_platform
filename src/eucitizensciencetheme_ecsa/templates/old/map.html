@@ -1,0 +1,31 @@
+{% extends "base_r2.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% block head %}
+{{block.super }}
+<meta name="Map" content="Map of projects, resources, events">
+{% endblock %}
+{% block splash %}
+
+    {% include '_map_projects.html' %}
+
+{% endblock splash %}
+
+{% block list_of_items %}
+
+<button id="floatingButton" class="btn bg-dark text-white fixed-bottom mb-5 mx-auto" style="width: auto; max-width: 200px;">
+    Show list <i class="fas fa-list"></i>
+</button>
+
+{% endblock list_of_items %}
+
+
+
+{% block scripts %}
+<script>
+    document.getElementById('floatingButton').addEventListener('click', function() {
+        window.location.href = "{% url 'home' %}#latest-projects"; // Asegúrate de que la URL y el ID son correctos
+    });
+</script>
+{% endblock scripts %}

@@ -57,7 +57,6 @@ class SignUpView(
     form_valid_message = "You're signed up!"
 
     def form_valid(self, form):
-        print("form_valid")
         super().form_valid(form)
         user = form.save(commit=False)
         user.is_active = False
@@ -66,22 +65,19 @@ class SignUpView(
         profile = get_object_or_404(Profile, user_id=user.id)
         profile.orcid = orcid
         profile.save()
-        mail_subject = 'Activate your  %s account.', settings.PLATFORM_NAME 
-        message = render_to_string('accounts/acc_active_email.html', {
+        mail_subject = 'Activate your CC.pt account.' 
+        message = render_to_string('acc_active_email.html', {
             'user': user,
             'domain': settings.HOST,
             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
             'token': account_activation_token.make_token(user),
         })
-        print(message)
-        html_message = render_to_string('accounts/acc_active_email.html', {
+        html_message = render_to_string('acc_active_email.html', {
             'user': user,
             'domain': settings.HOST,
             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
             'token': account_activation_token.make_token(user),
         })
-        print(html_message)
-
         to_email = form.cleaned_data.get('email')
         send_mail(mail_subject, message, 'eu-citizen.science@ibercivis.es', [to_email], html_message=html_message)
 
@@ -147,8 +143,8 @@ def activate(request, uidb64, token):
         user.is_active = True
         user.save()
         # Send email
-        mail_subject = 'Welcome to EU-Citizen.Science.'
-        message = render_to_string('accounts/welcome_email.html', {
+        mail_subject = 'Welcome to CC.pt'
+        message = render_to_string('welcome_email.html', {
             'user': user,
             "domain": settings.HOST,
         })

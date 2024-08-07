@@ -1,0 +1,9 @@
+{% load i18n %}
+{% load active_link_tags %}
+<li class="nav-item"><a class="nav-link main {% active_link  'projects || resources || training_resources || organisations || curated' %}" href="{% url 'projects' %}">{% trans "SEARCH" %}</a></li>
+<li class="nav-item"><a class="nav-link main {% active_link  'blog' %}" href="{% url 'blog' %}">{% trans "BLOG" %}</a></li>
+<li class="nav-item"><a class="nav-link main {% active_link  'events' %}" href="{% url 'events' %}">{% trans "EVENTS" %}</a></li>
+<li class="nav-item"><a class="nav-link main" href="https://moodle.eu-citizen.science/">{% trans "MOOCS" %}</a></li>
+<li class="nav-item"><a class="nav-link main {% active_link  'call' %}" href="{% url 'call' %}">{% trans "CALL" %}</a></li>
+<li class="nav-item"><a class="nav-link main {% active_link  'about' %}" href="{% url 'about' %}">{% trans "ABOUT" %}</a></li>
+<!--li class="nav-item"><a class="nav-link {% if active_link == "contact" %}active{% endif %}" href="{% url 'contact' %}">CONTACT</a></li-->

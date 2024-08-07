@@ -279,7 +279,8 @@ def userSearch(request):
         'interestAreas': interestAreasWithContent,
         'organisations': organisationsWithContent,
         'countriesWithContent': countriesWithContent,
-        'filters': filters
+        'filters': filters,
+        'show_search_bar': False
     }
     return TemplateResponse(request, template_name, context)
 

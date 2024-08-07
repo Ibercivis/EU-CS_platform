@@ -4,16 +4,16 @@
 {% load thumbnail %}
 {% for project in projects %}
 <div class="col-lg-4 col-sm-6 col-12 mb-5">
-    <div class="card h-100 shadow border-0">
+    <div class="card h-100 border-0">
         <a href="/project/{{project.id}}">
             <img class="img-fluid img-card"
                 src="{% thumbnail project.image1|default:'void_600.png' 612x408 upscale crop %}"
-                alt="image for {{project.name}}" width="600" height="400" />
+                alt="image for {{project.name}}" />
         </a>
         <div class="card-body">
             <div class="card-title my-card-title">
                 <h4 class="mt-2 mb-0">
-                    <a href="/project/{{project.id}}" class="card-title my-link">{{project.name | truncatechars:30}}</a>
+                    <a href="/project/{{project.id}}" class="card-title my-link">{{project.name | truncatechars:60}}</a>
                 </h4>
             </div>
             <div class="card-text">
@@ -40,9 +40,9 @@
 
             </div>
         </div><!-- End of card-body -->
-        <div class="card-footer  bg-white border-top-0 small">
+        <!--div class="card-footer">
             {% include "_social_zone.html" %}
-        </div>
+        </div-->
     </div><!-- end of card -->
 </div><!-- end of col -->
 {% endfor %}

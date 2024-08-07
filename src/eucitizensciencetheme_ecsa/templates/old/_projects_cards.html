@@ -1,0 +1,76 @@
+{% load i18n %}
+{% load static %}
+{% load reviews %}
+{% load thumbnail %}
+{% load project_tags %}
+{% for project in projects %}
+<div class="col-lg-4 col-sm-6 col-12 mb-5">
+    <div class="card shadow project-card-container">
+        <div class="project-card">
+            <div class="project-image-container">
+                
+                <img class="project-image"
+                     src="{% thumbnail project.image1|default:'void_600.png' 612x408 upscale crop %}"
+                     alt="image for {{ project.name }}" />
+                
+                <div class="blur-overlay"></div> 
+
+                <div class="project-info">
+                    <div class="project-image-circumference">
+                        <a href="/project/{{project.id}}">
+                            <img class="project-image-circular" src="{% thumbnail project.image1|default:'void_600.png' 100x100 upscale crop %}" alt="">
+                        </a>
+                    </div>
+                    <a href="/project/{{project.id}}">
+                        <h3 class="project-name ms-3">{{ project.name|truncatechars:64 }}</h3>
+                    </a>
+                </div>
+
+                <div class="project-status-badge status-{{ project.status.status_code }}">
+                    <div class="circumference"></div> {{ project.status|capfirst }}
+                </div>
+            </div>
+            <div class="project-details">
+                <div class="row">
+                    {%if project.mainOrganisation%}
+                        <a class="col project-organisation" href="/organisation/{{project.mainOrganisation.id}}" data-bs-toggle="tooltip" title="Main organization in charge of the project">{{ project.mainOrganisation.name|default:"No organization"|truncatechars:20 }}</a>
+                    {%else%}
+                        <p class="col project-organisation" data-bs-toggle="tooltip" title="Main organization in charge of the project">{{ project.mainOrganisation.name|default:"No organization"|truncatechars:20 }}</p>
+                    {%endif%}
+                    <p class="col project-update-date text-right" data-bs-toggle="tooltip" title="Last date on which information was updated">{{ project.dateUpdated|date:"d/m/Y" }}</p>
+                </div>
+                <div class="project-topics mt-2">
+                    {% for item in project.display_items %}
+                        <a href="/projects?{{ item|item_type }}={{ item }}">
+                            <span class="project-topic">{{ item|capfirst }}</span>
+                        </a>
+                    {% endfor %}
+                    {% if project.more_count > 0 %}
+                        <span class="project-topic">+{{ project.more_count }}</span>
+                    {% endif %}
+                </div>                
+            </div>
+            <div class="project-footer">
+                <div class="project-geographic text-details">
+                    <i class="fas fa-flag" data-bs-toggle="tooltip" title="Geographic extend"></i> 
+                    <span >{{ project.geographicextend.first.geographicextend|default_if_none:"Not specified" }}</span>
+                </div>
+                <div class="project-interactions text-details">
+                    <span class="project-acceses" data-bs-toggle="tooltip" data-bs-placement="top" title="Since {{ project.firstAccess }}">
+                        <i class="fas fa-eye"></i> {{ project.totalAccesses }}
+                    </span>
+                    <span class="{% if user.is_authenticated %} heart {% endif %} {% if project.id in likes or liked %} text-danger {% else %} {% endif %}" project_id="{{ project.id }}" id="heart{{ project.id }}">
+                        <i class="fa fa-heart" aria-hidden="true"></i> 
+                        <span class="value">{{ project.totalLikes }}</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% if 'projects' in request.get_full_path %}
+<div class="col-lg-12">
+    {% include "paginator.html" %}
+</div>
+{% endif %}

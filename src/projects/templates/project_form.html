@@ -7,6 +7,7 @@
 
 {% block head %}
 {{block.super }}
+
 <link rel="stylesheet" href="{% static 'css/forms.css' %}">
 {{ form.media.css }}
 {{ form.media.js }}
@@ -154,7 +155,7 @@
                             <div class="col-11">
                                 {{ form.geographicextend |as_crispy_field }}
                                 {{ form.projectlocality |as_crispy_field }}
-                                {{ form.projectGeographicLocation|as_crispy_field }}
+                                {{ form.projectCountry|as_crispy_field }}
                                 {% include "_save_zone.html" %}
                             </div>
                         </div>
@@ -306,6 +307,7 @@
         });
     });
 </script>
+
 <script>
 
     $(function () {

@@ -83,7 +83,8 @@ def events(request):
         'ongoingEvents': ongoingEvents,
         'approvedEvents': approvedEvents,
         'unApprovedEvents': unApprovedEvents,
-        'user': user})
+        'user': user,
+        'show_search_bar': False})
 
 
 @login_required(login_url='/login')

@@ -1,0 +1,216 @@
+{% extends "base_r2.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}{{ block.super }} :: {% trans "About ECS" %}{% endblock %}
+
+{% block list_of_items %}
+<div class="container">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <h1 class="mt-5 mb-5">
+                {% trans "about European <span class='lightBlue-color'>Citizen Science</span>" %}
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2 col-12"></div>
+        <div class="col-sm-8 col-12">
+            <div class="row">
+                <div class="col-12">
+                    <img src="{% static 'site/img/ecs_logo.png' %}" alt="Imagen centrada" style="display:block; margin:0 auto; margin-bottom: 24px;" height="90">
+                    <p><b>European <span class='lightBlue-color'>Citizen Science</span></b> aims to create a globally connected, inclusive and strong citizen science community for societal change in Europe.<br>
+                        The <b>European <span class='lightBlue-color'>Citizen Science </span></b>project has the overall objective <b>to widen and strengthen the citizen science community </b>in Europe through <b>capacity building</b> and <b>awareness raising activities</b>, such as the creation of a European Citizen Science Academy and the establishment of a network of 28 ECS Ambassadors. It builds upon the previous EU-funded actions such as the <b>eu-citizen.science </b>project and <b>Cos4Cloud </b>and on the enormous achievements in citizen science over the past decade.</p>
+                        <div class="col-sm-2 col-12" style="margin-bottom: 24px;"></div>
+                </div>
+
+                        <!-- Start of Goal and Vision -->
+                <div class="col-12" style="margin-bottom: 24px;">
+                    <h3>Goal </h3> <p style="margin-bottom: 32px;"><b>Widening</b> and <b>strengthening</b> the European citizen science community through capacity building and awareness raising is the main goal of the <b>European Citizen Science</b> (ECS) project.</p>
+                    <h3>Vision</h3> <p>A globally <b>connected, inclusive</b> and <b>strong citizen science community</b> for societal change in Europe.</p>
+                </div>
+                        <!-- End of Goal and Vision -->
+
+                        <!-- Start of The European Citizen Science 5Cs mission -->
+                <div class="col-12" style="margin-bottom: 24px;">
+                    <h3>The European Citizen Science 5Cs mission</h3>
+                    <p><span style="color:#c10303;"><b>C</span></b>reating and sharing of citizen science data and knowledge</span><br>
+                                        <span style="color:#c99e11;"><b>C</span></b>apacity building and training services</span><br>
+                                        <span style="color:#087f14;"><b>C</span></b>ommon platform uniting diverse European actors</span><br>
+                                        <span style="color:#070abc;"><b>C</span></b>ontributing to European policy making</span><br>
+                                        <span style="color:#7d0c91;"><b>C</span></b>hanging today’s societal challenges into future opportunities through citizen science</span></p>
+                </div>   
+                        <!-- End of The European Citizen Science 5Cs mission -->
+                        
+                        <!-- Start of What ECS does -->
+
+                <div class="col-12" style="margin-bottom: 24px;">
+                    <h3>What ECS does</h3>
+                    <ol>
+                        <li><p>Expanding the <b>reach of citizen science</b> by strengthening the <b>community</b></p></li>
+                        <li><p>Enhancing <b>digital skills</b> for <b>FAIR</b> and <b>open science</b> communities</p></li>
+                        <li><p>Further <b>developing the eu-citizen.science platform</b> through co-design</p></li>
+                        <li><p>Developing the <b>ECS academy</b> with <b>free training</b> to increase the capacity to conduct citizen science</p></li>
+                        <li><p>Boosting <b>inclusion and diversity</b> for mainstreaming citizen science</p></li>
+                        <li><p><b>Advocating</b> for citizen science and working on <b>policy impacts</b></p></li>
+                        <li><p>Investigating the <b>impact</b> of citizen science on <b>research, society</b> and <b>economy</b></p></li>
+                    </ol>
+                </div>   
+                        <!-- End of What ECS does -->
+                        
+                        <!-- Start of Work Packages -->
+                <div class="col-12" style="margin-bottom: 24px;">
+                    <h3>Work Packages</h3>
+                    <ul>
+                        <li><p><b>WP1</b> | Project management and coordination</p></li>
+                        <li><p><b>WP2</b> | Strengthening links and collaboration</p></li>
+                        <li><p><b>WP3</b> | Enhancing digital skills for FAIR and open science communities</p></li>
+                        <li><p><b>WP4</b> | European citizen science academy</p></li>
+                        <li><p><b>WP5</b> | Boosting inclusion and diversity for mainstreaming citizen science</p></li>
+                        <li><p><b>WP6</b> | Communication and outreach for the global citizen science community</p></li>
+                        <li><p><b>WP7</b> | Policy impacts and recommendations</p></li>
+                        <li><p><b>WP8</b> | Impact Pathways Assessment</p></li>
+                        <li><p><b>WP9</b> | Ethics requirements</p></li>
+                    </ul>
+                    
+                        <!-- End of Work Packages -->
+
+                        <!-- Start of At a Glance -->
+                </div>
+                <div class="col-12" style="margin-bottom: 24px;">
+                    <h3>At a Glance</h3>
+                    
+                        <table style="margin: 16px auto 0; border: 1px solid black; padding: 16px;">
+                            <tr>
+                              <td style="width:50%; border: 1px solid black; text-align: center; padding: 16px;"><h5><b>12</b>  <span style="font-weight: normal;">partners</span><br><b>9</b> <span style="font-weight: normal;">affiliated entities</span><br><b>15</b> <span style="font-weight: normal;">countries</span></h5></td>
+                              <td style="width:50%; border: 1px solid black; text-align: center; padding: 16px;"><h5>Duration: <span style="font-weight: normal;">August 2022-July 2026</span><br>Coordination:<br> 
+                                <a href="https://ecsa.ngo/" target="_blank"><img src="{% static 'site/img/ecsa_main_id.png' %}" height="60" style="margin-top:12px;"/></a><br>Budget: <span style="font-weight: normal;">∼4 million euro</span></h5></td>
+                            </tr>
+                            
+                          </table>   
+                </div>
+
+                        <!-- End of At a Glance -->
+
+                        <!-- Start of Partners -->
+
+                <div class="col-12" style="margin-bottom: 24px;">
+                    <h3>Partners</h3>
+                    <div class="row">
+                        <div class="col-1"></div>
+                        <div class="col-11">
+                            <div class="row">
+                                <div class="col-12 mt-1 mb-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-6 col-xl-2">
+                                            <a href="https://www.csic.es/es" target="_blank"><img src="{% static 'site/img/csic_logo.png' %}" class="d-block img-fluid"/></a>
+                                        </div>
+                                        <div class="col-6 col-xl-2">
+                                            <a href="https://ecsa.ngo/" target="_blank"><img src="{% static 'site/img/ecsa_main_id.png' %}" class="d-block img-fluid"/></a>
+                                        </div>
+                                        <div class="col-6 col-xl-2">
+                                            <a href="https://www.ibercivis.es" target="_blank"><img src="{% static 'site/img/ibercivis_logo.png' %}" class="d-block img-fluid"/></a>
+                                        </div>
+                                        <div class="col-6 col-xl-2">
+                                            <a href="https://www.learningplanetinstitute.org/en/"><img src="{% static 'site/img/LPI_LOGO_RVB.png' %}" class="d-block img-fluid"/></a>
+                                        </div>
+                                        <div class="col-6 col-xl-2">
+                                            <a href="https://www.mariecuriealumni.eu/"><img src="{% static 'site/img/MCAA_logo.png' %}" class="d-block img-fluid"/></a>
+                                        </div>
+                                        <div class="col-6 col-xl-2">
+                                            <a href="https://museumfuernaturkunde.berlin/"><img src="{% static 'site/img/mfn_logo.png' %}" class="d-block img-fluid"/></a>
+                                        </div>
+                                        <div class="col-6 col-xl-2">
+                                            <a href="https://www.nilu.com/"><img src="{% static 'site/img/NILU_logo.png' %}" class="d-block img-fluid"/></a>
+                                        </div>
+                                        <div class="col-6 col-xl-2">
+                                            <a href="https://www.nordlicht-consultants.com/" target="_blank"><img src="{% static 'site/img/Nordlicht_Logo.png' %}" class="d-block img-fluid"/></a>
+                                        </div>
+                                        <div class="col-6 col-xl-2 align-items-center">
+                                            <a href="https://publiclibraries2030.eu/"><img src="{% static 'site/img/PL2030_logo.png' %}" class="d-block img-fluid"/></a>
+                                        </div>
+                                        <div class="col-6 col-xl-2">
+                                            <a href="https://stickydot.eu/"><img src="{% static 'site/img/StickyDot_logo_color.png' %}" class="d-block img-fluid"/></a>
+                                        </div>
+                                        <div class="col-6 col-xl-2">
+                                            <a href="https://www.scienceforchange.eu/"><img src="{% static 'site/img/SfC_main_logo.png' %}" class="d-block img-fluid"/></a>
+                                        </div>
+                                        <div class="col-6 col-xl-2">
+                                            <a href="https://www.zsi.at/en/home"><img src="{% static 'site/img/ZSI_Logo.jpg' %}" class="d-block img-fluid"/></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- End of consortium partners row -->
+            </div>
+
+            <!-- End of Partners -->
+
+            <!-- Start of AEs -->
+
+            <div class="col-12" style="margin-bottom: 24px;">
+                <h3 style="margin-bottom: 12px;">Affiliated Entities</h3>
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-11">
+                        <div class="row">
+                            <div class="col-12 mt-1 mb-4">
+                                <div class="row align-items-center">
+                                    <div class="col-6 col-xl-2">
+                                        <a href="https://www.blue-world.org/" target="_blank"><img src="{% static 'site/img/BWI_logo.png' %}" class="d-block img-fluid"/></a>
+                                    </div>
+                                    <div class="col-6 col-xl-2">
+                                        <a href="https://www.museonaturalemaremma.it/" target="_blank"><img src="{% static 'site/img/MSNM_logo.png' %}" class="d-block img-fluid"/></a>
+                                    </div>
+                                    <div class="col-6 col-xl-2">
+                                        <a href="https://www.ugn.cas.cz/?l=en" target="_blank"><img src="{% static 'site/img/UGN_logo.png' %}" class="d-block img-fluid"/></a>
+                                    </div>
+                                    <div class="col-6 col-xl-2">
+                                        <a href="https://eng.mofet.macam.ac.il/"><img src="{% static 'site/img/mofet_logo.png' %}" class="d-block img-fluid"/></a>
+                                    </div>
+                                    <div class="col-6 col-xl-2">
+                                        <a href="https://www.nordeco.dk/"><img src="{% static 'site/img/NORDECO_logo.jpg' %}" class="d-block img-fluid"/></a>
+                                    </div>
+                                    <div class="col-6 col-xl-2">
+                                        <a href="https://www.tcd.ie/"><img src="{% static 'site/img/Trinity_Main_Logo.jpeg' %}" class="d-block img-fluid"/></a>
+                                    </div>
+                                    <div class="col-6 col-xl-2">
+                                        <a href="https://www.universiteitleiden.nl/en/citizensciencelab"><img src="{% static 'site/img/ULEI_logo.png' %}" class="d-block img-fluid"/></a>
+                                    </div>
+                                    <div class="col-6 col-xl-2">
+                                        <a href="https://www.ulusofona.pt/" target="_blank"><img src="{% static 'site/img/logo_ulht.jpg' %}" class="d-block img-fluid"/></a>
+                                    </div>
+                                    <div class="col-6 col-xl-2 align-items-center">
+                                        <a href="https://web2learn.eu/"><img src="{% static 'site/img/Web2learn_logo.png' %}" class="d-block img-fluid"/></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- End of consortium AEs row -->
+        </div>
+
+        <!-- End of AEs -->
+
+        <!-- Start of Stay tuned-->
+        <div class="col-12">
+            <h3>Stay tuned</h3> 
+            <a href="{% url 'subscribe' %}"><p>Subscribe to the <b>ECS collaboration group</b> newsletter</p></a>
+            <p>Follow the project on <b>social media</b></p>
+            <ul>
+                <li><a href="https://www.facebook.com/EUCitSciProject/">Facebook</a></li>
+                <li><a href="https://twitter.com/eucitsciproject">Twitter</a></li>
+                <li><a href="https://www.instagram.com/eucitsciproject">Instagram</a></li>
+            </ul>
+            <table style="margin: 0 auto; margin-top: 32px">
+                <tr>
+                  <td style="width: 25%; text-align: right; vertical-align:top"><img class="custom-image" title="cropped-europe-1.png" src="data:image/webp;base64,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" alt="" data-pagespeed-url-hash="3041872760"></td>
+                  <td style="width: 75%; text-align: left; padding-left: 16px; vertical-align:top"><p class="small">Funded by the European Union. Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union or the European Research Executive Agency. Neither the European Union nor the granting authority can be held responsible for them.</p></td>
+                </tr>
+            </table>
+        </div>
+            <!-- End of about European Citizen Science -->
+    </div>
+</div>
+{% endblock list_of_items %}    

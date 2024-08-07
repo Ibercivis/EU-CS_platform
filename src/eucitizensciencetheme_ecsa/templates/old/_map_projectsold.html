@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
+    <style>
+        #map {
+            width: 100%;
+            height: 600px;
+        }
+    </style>
+    </head>
+    <body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 p-0">
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="//unpkg.com/leaflet-gesture-handling/dist/leaflet-gesture-handling.min.css"
+        type="text/css">
+    <script src="//unpkg.com/leaflet-gesture-handling"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            /* var map = L.map("map", {
+                center: [40, -7],
+                zoom: 6,
+                gestureHandling: true
+            });
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                subdomains: 'abcd',
+                maxZoom: 20,
+                minZoom: 2,
+                gestureHandling: true
+            }).addTo(map); */
+
+            var map = L.map('map', {center: [40, -7], zoom: 6});
+            L.tileLayer('https://api.mapbox.com/styles/v1/germangil/clt76zpgl008401qn2izgbfxp/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ2VybWFuZ2lsIiwiYSI6ImNsbXQxbDBoNTAwbjkybGxvcngxNDBhYzgifQ.kcRn3hE1wUpA1KpdxiG23g', {
+                tileSize: 512,
+                zoomOffset: -1,
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors &copy; <a href="https://www.mapbox.com/">Mapbox</a>',
+                maxZoom: 18,
+            }).addTo(map);
+
+            L.control.scale().addTo(map);
+
+            var projectIcon = L.divIcon({
+                className: 'individual-icon',
+                /* binoculars icon in red */
+                html: '<h5><i class="fas fa-neuter"></i></h5>', 
+                iconSize: [30, 30],
+                iconAnchor: [15, 15]
+            });
+
+            var organisationIcon = L.divIcon({
+                className: 'individual-icon',
+                /* binoculars icon in red */
+                html: '<h5><i class="fas fa-regular fa-building"></i></h5>',
+                iconSize: [30, 30],
+                iconAnchor: [15, 15]
+            });
+
+
+            var projects = L.markerClusterGroup({
+                spiderfyOnMaxZoom: true,
+                showCoverageOnHover: false,
+                zoomToBoundsOnClick: true
+            });
+            var organisations = L.markerClusterGroup();
+     
+
+            // Perform AJAX request to get the 
+            var xhr1 = new XMLHttpRequest();
+            xhr1.open('GET', '/get_projects/', true);
+            xhr1.onreadystatechange = function () {
+                if (xhr1.readyState === 4 && xhr1.status === 200) {
+                    var markersData = JSON.parse(xhr1.responseText).markers;
+
+                    // Create markers on the map based on the data received
+                    for (var i = 0; i < markersData.length; i++) {
+                        var marker = L.marker([markersData[i].latitude, markersData[i].longitude], { 
+                            icon: projectIcon,
+                            projectId: markersData[i].project_id,
+                            name: markersData[i].name,
+                        });
+                        marker.bindPopup('<div>' +
+                            '<a href="' + markersData[i].project_url + '" style="text-decoration: none;">' + markersData[i].name + '</a>' +
+                            '</div>');
+                        // Add the properties to the marker as a GeoJSON feature
+                        marker.feature = { properties: { name: markersData[i].name } };
+                        // Add the marker to the feature group
+                        marker.addTo(projects);
+                    }
+                }
+            };
+
+            // Perform AJAX request to get the organisations
+            var xhr2 = new XMLHttpRequest();
+            xhr2.open('GET', '/get_organisations/', true);
+            xhr2.onreadystatechange = function () {
+                if (xhr2.readyState === 4 && xhr2.status === 200) {
+                    var markersData = JSON.parse(xhr2.responseText).markers;
+
+                    // Create markers on the map based on the data received
+                    for (var i = 0; i < markersData.length; i++) {
+                        var marker = L.marker([markersData[i].latitude, markersData[i].longitude], { icon: organisationIcon });
+                        marker.bindPopup('<div>' +
+                            '<a href="' + markersData[i].organisation_url + '" style="text-decoration: none;">' + markersData[i].name + '</a>' +
+                            '</div>');
+                        // Add the properties to the marker as a GeoJSON feature
+                        marker.feature = { properties: { name: markersData[i].name } };
+                        // Add the marker to the feature group
+                        marker.addTo(organisations);
+                    }
+                }
+            };
+
+            // Perform AJAX request to get the platforms
+            var xhr3 = new XMLHttpRequest();
+           
+            xhr1.send();
+            xhr2.send();
+     
+            projects.addTo(map);
+            organisations.addTo(map);
+            var baseLayers = {
+                "<i class='fas fa-neuter'></i> Project": projects,
+                "<i class='fas fa-regular fa-building'></i> Organisation": organisations,
+            };
+            L.control.layers(null, baseLayers, { collapsed: false }).addTo(map);
+
+            // Highlight markers of the same project
+
+            var clickedMarkerId = null; 
+
+            /*function highlightMarkers(projectId, addHighlight, isClick = false) {
+                if (isClick) {
+                    clickedMarkerId = addHighlight ? projectId : null;  // Actualiza el ID del marcador clickeado
+                }
+                console.log(clickedMarkerId, projectId);
+                projects.eachLayer(function(marker) {
+                    if (marker.options.projectId === projectId) {
+                        console.log(marker.options.name);
+                        if (addHighlight ) {
+                            console.log("Resaltado: ", marker.options.name);
+                            marker.setIcon(L.divIcon({
+                                className: 'highlight-icon',
+                                html: '<h5><i class="fas fa-neuter" style="color: var(--primary)"></i></h5>', 
+                                iconSize: [30, 30],
+                                iconAnchor: [15, 15]
+                            }));
+                        } else {
+                            if (!clickedMarkerId || marker.options.projectId !== clickedMarkerId) {
+                                marker.setIcon(projectIcon);  // Restaura el icono original
+                            }
+                        }
+                    } else {
+                        marker.setIcon(projectIcon);
+                    }
+                });
+            }
+
+            // Ajustar los manejadores de eventos
+            projects.on('click', function(e) {
+                highlightMarkers(e.layer.options.projectId, true, true);
+            });
+
+            projects.on('mouseover', function(e) {
+                highlightMarkers(e.layer.options.projectId, true);
+            });
+
+            projects.on('mouseout', function(e) {
+                if (!clickedMarkerId) {
+                    highlightMarkers(e.layer.options.projectId, false);
+                }
+            });*/
+
+        });
+    </script>
+</body>
+</html>

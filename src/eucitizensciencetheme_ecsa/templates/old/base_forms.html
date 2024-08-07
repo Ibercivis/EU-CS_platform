@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% load thumbnail %}
+{% load i18n %}
+{% load leaflet_tags %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>EU-CITIZEN.SCIENCE :: Projects</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="{% static 'site/css/bootstrap.min.css' %}">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="{% static 'site/css/style_11_01_2021.css' %}">
+  <link rel="stylesheet" href="{% static 'styles/cropper.min.css' %}">
+  {% leaflet_js %}
+  {% leaflet_css %}
+</head>
+
+<body>
+<header>
+
+  <!--Navbar-->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white">
+    <div class="container">
+	    <a class="navbar-brand" href="https://eu-citizen.science">{% include "_brandname.html" %}</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+	  {% block navbar-left %}
+	  {% endblock navbar-left %}
+        </ul>
+        <form class="form-inline">
+				{% if not user.is_authenticated %}
+        <a  class="btn btn-outline-info rounded ml-2" onclick="return abrir_modal('{% url 'accounts:login' %}')">{% trans "Login" %}</a>
+        <a class="btn btn-outline-info rounded ml-2"  onclick="return abrir_modal('{% url 'accounts:signup' %}')" role="button">{% trans "Sign up" %}</a>
+				{% else %}
+					<a class="btn btn-outline-info rounded ml-2" href="{% url 'profiles:show_self' %}">{% trans "profile" %}</a>
+     			<a class="btn btn-outline-info rounded ml-2" href="{% url 'accounts:logout' %}">{% trans "logout" %}</a>
+				{% endif %}
+
+        {% if user.is_staff %}
+        <a class="btn btn-outline-danger rounded ml-2" href="{% url 'admin:index' %}">{% trans "Admin" %}</a>
+        {% endif %}
+        </form>
+      </div>
+    </div>
+  </nav>
+  <!--/.Navbar-->
+</header>
+
+  {% block splash %}
+  {% endblock splash %}
+
+  {% block container %}
+  <div class="container">
+  </div><!-- /.container -->
+  {% endblock container %}
+  <!-- Site footer -->
+  {% block footer %}
+  <!-- Some social button for contact will do -->
+  <div class="container">
+	  <div class="footer">
+		  <div class="row">
+			  <div class="col-lg-1"></div>
+			  <div class="col-lg-5">
+				  <p>&#127279; {% trans "Company" %} {% now 'Y' %}</p>
+			  </div>
+			  <div class="col-lg-5 text-right">
+				  {% trans "Connect with us on" %}
+				  <a href="https://www.facebook.com/EUCitSciProject/" target="_blank"><i class="fab fa-facebook"></i>
+					  Facebook</a> or
+				  <a href="https://twitter.com/eucitsci?lang=es" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+			  </div>
+			  <div class="col-lg-1"></div>
+
+		  </div>
+	  </div>
+  </div>
+  {% endblock %}
+
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js"
+    integrity="sha256-7BfFV/dSvQT4pGBvRAIt6JDXsehb92DQqpGUndLCPQ4=" crossorigin="anonymous"></script>
+  <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'scripts/cropper.min.js' %}"></script>
+  <script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
+  {% block scripts %}
+  {% endblock scripts %}
+</body>
+
+</html>

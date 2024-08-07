@@ -1,0 +1,114 @@
+{% extends theme|add:"base_r2.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% block head %}
+{{block.super }}
+<meta name="Description" content="Citizen Science in Europe, projects, resources, events">
+{% endblock %}
+{% block splash %}
+
+    {% if user.is_authenticated %}
+       {% include '_user_logged_section.html' %}
+    {% else %} 
+        {% include '_welcome_section_mobile.html' %}
+        {% include '_welcome_section.html' %}
+        
+    {% endif %}
+
+    {% include '_content_section.html' %}
+
+{% endblock splash %}
+
+{% block list_of_items %}
+<!--
+    {% for section in sections %}
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row mb-5">
+
+                <div class="col-6 {{section.content_position}}">
+                <h2 class="mb-3">{{section.title}}</h2>
+                <h5>{{section.content | safe}}</h5>
+                </div>
+                <div class="col-6 {{section.image_position}}">
+                    {% if section.image %}
+                    <img src="/media/{{section.image}}" class="img-fluid" alt="Responsive image" />
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+-->
+{% if projects %}
+    {% include '_latest_projects.html' %}
+{% endif %}
+{% if resources %}
+    {% include '_latest_resources.html' %}
+{% endif %}
+{% if trainings %}
+    {% include '_latest_training_resources.html' %}
+{% endif %}
+{% if events %}
+    {% include '_upcoming_events.html' %}
+{% endif %}
+
+{% include '_what_is_citizen_science.html' %}
+
+<button id="floatingButton" class="btn bg-dark text-white fixed-bottom mb-5 mx-auto" style="width: auto; max-width: 200px;">
+    Show map <i class="fas fa-map"></i>
+</button>
+
+{% endblock list_of_items %}
+
+
+
+{% block scripts %}
+<script src="{% static 'site/js/bootstrap-autocomplete.js'%}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.basicAutoComplete').autoComplete(
+            { minLength: 3 }
+            );
+            $('.basicAutoComplete').on('autocomplete.select', function (evt, item) {
+                $('#finder').submit();
+                $('#searchTop').submit();
+            });
+    });
+    
+    </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const sectionsToShowButton = [
+            '#_content_section', 
+            '#latest-projects', 
+            '#latest-resources', 
+            '#_latest-training-resources'
+        ];
+        const floatingButton = document.getElementById('floatingButton');
+
+        function checkVisibility() {
+            let shouldShowButton = sectionsToShowButton.some(sectionId => {
+                const section = document.querySelector(sectionId);
+                if (section) {
+                    const rect = section.getBoundingClientRect();
+                    console.log(`Checking ${sectionId}: rect.top=${rect.top}, rect.bottom=${rect.bottom}, window.innerHeight=${window.innerHeight}`);
+                    return rect.top < window.innerHeight && rect.bottom > 0;
+                }
+                return false;
+            });
+            console.log('Should show button:', shouldShowButton);
+            floatingButton.style.display = shouldShowButton ? 'block' : 'none';
+        }
+
+        window.addEventListener('scroll', checkVisibility);
+        checkVisibility();
+
+        floatingButton.addEventListener('click', function() {
+            window.location.href = "{% url 'map' %}"; 
+        });
+    });
+    </script>
+{% endblock scripts %}

@@ -1,0 +1,94 @@
+{% load i18n %}
+{% load static %}
+
+<!--Footer-->
+<footer class="mt-auto bg-color-tertiary">
+    <div class="text-white">
+        <div class="container">
+            <!-- Grid row-->
+            <div class="row">
+
+                <div class="col-md-6 col-12 mb-4 mt-4">
+                    <div>{% trans "Please provide your feedback in the official" %}
+                        <a class="text-decoration-none" style="color: #FFB03D"
+                            href="https://github.com/Ibercivis/EU-CS_platform/issues">{% trans "GitHub repository"%}</a>
+                    </div>
+                </div>
+
+                <!-- Grid column -->
+                <div class="col-md-4 col-12 mt-3">
+                    <div class="row">
+                        <div class="col-4 align-items-start">
+                            <!-- Facebook 
+                            <a class="fb-ic" href="{{footer.facebook_url}}" target="_blank" rel="noreferrer">
+                                <h3 class="float-right "><i class="fab fa-facebook-f"></i></h3>
+                            </a>-->
+                            <a href="{{footer.facebook_url}}" target="_blank" rel="noopener noreferrer" class="social-icon-link"><i class="fab fa-facebook-f text-color-tertiary"></i></a>
+                        </div>
+                        <div class="col-4 align-items-start">
+                            <!-- Twitter -->
+                            <a href="{{footer.twitter_url}}" target="_blank" rel="noopener noreferrer" class="social-icon-link"><i class="fab fa-twitter text-color-tertiary"></i></a>
+                        </div>
+                        <div class="col-4 align-items-start">
+                            <a href="{{footer.instagram_url}}" target="_blank" rel="noopener noreferrer" class="social-icon-link"><i class="fab fa-instagram text-color-tertiary"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row-->
+        </div>
+    </div>
+    <!-- Footer Links -->
+    <div class="container  mt-5 text-light">
+        <!-- Grid row -->
+        <div class="row mt-3">
+            <!-- Grid column -->
+            <div class="col-md-6 col-lg-6 col-xl-6 mb-4">
+                <!-- Content -->
+                <img src="{% static 'img/eu-citizen-science-logo-bgSecondary.svg'%}" alt="" height="100" style="margin-top: -30px;">
+                <br>
+                <p><small>{{ footer.description }}</small></p>
+                <br>
+                <img src="{% static 'img/EN_FundedbytheEU_RGB_NEG.png'%}" alt="" height="50" style="margin-top: -30px;">
+            </div>
+            <!-- Grid column -->
+            <!-- Grid column -->
+            <div class="col-md-2 col-lg-2 col-xl-2 mb-4">
+
+                <!-- Links -->
+                <h6 class="text-uppercase font-weight-bold">{% trans "Links" %}</h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto w-100" >
+                <p><a href="{{ footer.link_url1}}" class="text-white">{{footer.link_name1}}</a></p>
+                <p><a href="{{ footer.link_url2}}" class="text-white">{{footer.link_name2}}</a></p>
+                <p><a href="{{ footer.link_url3}}" class="text-white">{{footer.link_name3}}</a></p>
+                <p><a href="{{ footer.link_url4}}" class="text-white">{{footer.link_name4}}</a></p>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-2 col-xl-2 mb-4">
+                <p><a href="{{ footer.link_url5}}" class="text-white">{{footer.link_name5}}</a></p>
+                <p><a href="{{ footer.link_url6}}" class="text-white">{{footer.link_name6}}</a></p>
+                <p><a href="{{ footer.link_url7}}" class="text-white">{{footer.link_name7}}</a></p>
+                <p><a href="{{ footer.link_url8}}" class="text-white">{{footer.link_name8}}</a></p>
+            </div>
+            <!-- Grid column -->
+
+
+
+        </div>
+        <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3 text-light">
+        <a class="text-white" href="{{ footer.license_url}}" rel="noreferrer" target="_blank">{{ footer.license }}</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+<!--/.Footer-->

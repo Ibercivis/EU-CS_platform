@@ -1,0 +1,139 @@
+{% load i18n %}
+
+<div class="col-lg-4 col-sm-6 col-xs-12 mb-5 d-flex">
+    <div class="card h-100 shadow border-0 d-flex flex-column flex-grow-1">
+        <div class="card-background"></div>
+        <div class="mt-2 ms-3 bg-transparent">
+            <small class="text-details text-dark">
+                <div class="mt-2 d-flex align-items-baseline">
+                    <i class="far fa-calendar me-2"></i> 
+                {{event.start_date | date:" M d, Y"}}
+                {% if event.hour %}{{event.hour | time:'H:i'}} {% if event.timezone %}{{event.timezone}}{% endif %} {% endif %}
+                </div>
+            </small>
+            <small class="text-details text-dark">
+                {% if event.place %}
+                <div class="mt-2 d-flex align-items-baseline">
+                    <i class="fas fa-map-marker-alt me-2"></i>
+                    {% with text=event.place %}
+                        {% if text|wordcount > 4 %}
+                        <p data-bs-toggle="tooltip" title="{{event.place}}">
+                            {{ event.place|truncatewords:4 }}
+                        </p>
+                        {% else %}
+                            {{event.place}}<br>
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                {%endif%}
+            </small>
+        </div>
+        <div class="bg-transparent p-4">
+            <p class="project-name text-dark font-weight-bold">
+                {{event.title}}
+            </p>
+            <div class="text-details">
+                {% with text=event.description %}
+                    {% if text|wordcount > 60 %}
+                        <p class="text-details half-content" id="half-{{ event.pk }}">
+                            {{ event.description|striptags|truncatewords:60 }}<br>
+                            <a data-id='{{ event.pk }}' href="javascript:void();" class="show-hide-btn">more</a>
+                        </p>
+                        <p class="text-details full-content" id="full-{{ event.pk }}" style="display: none;">
+                            {{ event.description|striptags }}<br>
+                            <a data-id="{{ event.pk }}" href="javascript:void();" class="show-hide-btn">less</a>
+                        </p>
+                    {% else %}
+                        <p class="text-details">{{ event.description | safe }}</p>
+                    {% endif %}
+                {% endwith %}
+            </div>
+            {% if event.project %}
+                    <a class="project-topic me-1" id="pill-project" href="{% url 'project' pk=event.project.id %}" style="cursor: pointer">
+                        {{event.project}}
+                    </a>
+                {% endif %}
+                {% if event.mainOrganisation %}
+                    <a class="project-topic me-1" id="pill-mainOrganisation" href="{% url 'organisation' pk=event.mainOrganisation.id %}" style="cursor: pointer">
+                        {{event.mainOrganisation}}
+                    </a>
+                {% endif %}
+                {% if event.organisations.all %}
+                    {% for organisation in event.organisations.all %}
+                        <a class="project-topic me-1" class="pill-organisation" href="{% url 'organisation' pk=organisation.id %}" style="cursor: pointer">
+                            {{organisation}}
+                        </a>
+                    {% endfor %}
+            {% endif %}
+
+            
+        </div>   
+        {% if event.url %} 
+                <div class="mt-auto mb-2 d-flex justify-content-end p-4">
+                    <a class="btn btn-primary btn-sm" href="{% if 'http' not in event.url %}//{%endif%}{{event.url}}" target="_blank">
+                        Go to event page
+                    </a>
+                </div>
+        {% endif %}
+        {% if user.is_staff %}   
+            <div class="row d-flex align-items-center">
+                {% if event.id in approvedEvents %}
+                    <div class="col">
+                        <a onclick="setApprovedEvent({{event.id}}, false)"><i class="far fa-thumbs-down"></i></a>
+                    </div>
+                    {% elif event.id in unApprovedEvents %}
+                        <div class="col">
+                            <a onclick="setApprovedEvent({{event.id}}, true)"><i class="far fa-thumbs-up"></i></a>
+                        </div>
+                    {% else %}
+                        <div class="col">
+                            <a onclick="setApprovedEvent({{event.id}}, true)"><i class="far fa-thumbs-up"></i></a>
+                        </div>
+                        <div class="col">
+                            <a onclick="setApprovedEvent({{event.id}}, false)"><i class="far fa-thumbs-down"></i></a>
+                        </div> 
+                {% endif %}
+                <div class="col">
+                    <span id="featured{{event.id}}">
+                    {% if event.featured %}
+                        <a class="btn btn-red float-left mt-4" onclick="setFeaturedEvent({{event.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
+                    {% else %}
+                        <a class="btn btn-red float-left mt-4" onclick="setFeaturedEvent({{event.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
+                    {% endif %}
+                    </span>
+                </div>
+                <div class="col">
+                    <a class="btn btn-red float-left mt-4" href="{% url 'editEvent' event.id %}" ><i class="fas fa-edit"></i></a>
+                </div>
+                <div class="col">
+                    <a class="btn btn-red float-left mt-4" href="{% url 'deleteEvent' event.id %}"><i class="fas fa-trash-alt"></i></a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% block scripts %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $(".show-hide-btn").on('click', function() {
+            var id = $(this).data("id");
+            $("#half-" + id).toggle(); // Alternar visibilidad
+            $("#full-" + id).toggle();
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $(".place-show-hide-btn").on('click', function() {
+            var id = $(this).data("id");
+            $("#place-half-" + id).toggle(); // Alternar visibilidad
+            $("#place-full-" + id).toggle();
+        });
+    });
+</script>
+
+
+{% endblock scripts %}

@@ -7,7 +7,7 @@
 {% block list_of_items %}
 <div class="container">
     <div clas="row">
-        <div class="col-12">
+        <div class="col-12 mt-4">
             <div>
                 {% include "_subnavbarNew.html" %}
                 {% include "profiles/_finder_users.html" %}
@@ -16,9 +16,9 @@
                 {% if users %}
                 <div class="row">
                     {% for member in users %}
-                    <div class="col-12 col-sm-6 col-lg-4">
-                        {% include "profiles/horizontal_card_user.html" %}
-                    </div>
+                    
+                        {% include "profiles/_user_card.html" %}
+                    
                     {% endfor %}
                 </div>
                 {% endif %}
@@ -34,6 +34,12 @@
 {% endblock list_of_items %}
 {% block scripts %}
 <script src="{% static 'site/js/bootstrap-autocomplete.js'%}"></script>
+<script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+</script>
     <script>
     $('.basicAutoComplete').autoComplete(
         { minLength: 3 }

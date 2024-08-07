@@ -34,6 +34,9 @@ class Organisation(models.Model):
 
     approved = models.BooleanField(default=True)   
 
+    # Fields for the ecsa_integration app
+    ecsaMember = models.BooleanField(default=False)
+
     def __str__(self):
         return f'{self.name}'
 

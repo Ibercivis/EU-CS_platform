@@ -1,5 +1,6 @@
 from django import forms
-from captcha.fields import ReCaptchaField
+#from captcha.fields import ReCaptchaField
+from django_recaptcha.fields import ReCaptchaField
 
 
 class ContactForm(forms.Form):

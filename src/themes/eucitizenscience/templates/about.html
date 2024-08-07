@@ -1,0 +1,293 @@
+{% extends "base_r2.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}{{ block.super }} :: {% trans "About" %}{% endblock %}
+
+{% block list_of_items %}
+<div class="container">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <h1 class="mt-5 mb-5">
+                {% trans "about" %} <span class="lightBlue-color">eu-citizen.science</span>
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2 col-12"></div>
+        <div class="col-sm-8 col-11">
+            <div class="col-12">
+                <h3>{% trans "Watch the final project video!" %}</h3>
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-11">
+                    <div class="row">
+                        <div class="col-12 col-sm-9">
+                            <div class="ratio ratio-16x9 mb-4">
+                                <iframe src="https://www.youtube.com/embed/PLqfOXK_TRg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        </div>
+        <div class="col-sm-2 col-12"></div>
+        <div class="col-sm-8 col-11">
+            <div class="col-12">
+                <h3>{% trans "Watch our teaser, in 12 different languages!" %}</h3>
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-11">
+                    <div class="row">
+                        <div class="col-12 col-sm-9">
+                            <div class="ratio ratio-16x9">
+                                <iframe id="teaserIframe" src="https://www.youtube.com/embed/ps_kTQjQvU0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-3">
+                            <select id="id_teaser" class="select form-control pl-0" onchange="loadTeaserVideo()">
+                                <option value = "NL">Dutch</option>
+                                <option value = "EN" selected>English</option>
+                                <option value = "ET">Estonian</option>
+                                <option value = "FR">French</option>
+                                <option value = "DE">German</option>
+                                <option value = "EL">Greek</option>
+                                <option value = "HU">Hungarian</option>
+                                <option value = "IT">Italian</option>
+                                <option value = "LT">Lithuanian</option>
+                                <option value = "PT">Portuguese</option>
+                                <option value = "ES">Spanish</option>
+                                <option value = "SV">Swedish</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end row below watch -->
+
+             <div class="row">
+                <div class="col-12"><h3 class="mt-4">{% trans "Watch the video about the platform development and training modules!" %}</h3></div>
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-11">
+                    <div class="row">
+                        <div class="col-12 col-sm-9">
+                            <div class="ratio ratio-16x9">
+                    <iframe src="https://www.youtube.com/embed/OrC7qncpYTU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end of watch2 -->
+
+
+
+
+            <div class="row">
+                <div class="col-12"><h3 class="mt-4">{% trans "The Platform" %}</h3></div>
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-11">
+                    <div class="small mb-2">{% trans "EU-Citizen.Science is an online platform for sharing knowledge, tools, training and resources for citizen science – by the community, for the community." %}</div>
+                    <div class="small mb-2">{% trans "The vision for the platform is to serve as a Knowledge Hub, in aid of the mainstreaming of citizen science, and build on the growing impact of citizens participating in research across the full range of scientific enquiry. We accomplish this by supporting the sharing of knowledge, know-how, and experience between anyone doing or wanting to do citizen science." %}</div>
+                    <div class="small mb-2">{% trans "On this platform you will find:" %}</div>
+                    <ul>
+                        <li class="small">
+                            <a href="/projects">{% trans "Projects" %}</a> 
+                            {% trans "that are engaging the public in research via citizen science activities" %}
+                        </li>
+                        <li class="small"><a href="/resources">
+                                {% trans "Resources" %}</a>
+                            {% trans "that are useful for citizen science practitioners" %}
+                        </li>
+                        <li class="small">
+                            <a href="/training_resources">{% trans "Training resources" %}</a>
+                            {% trans "and materials on citizen science as a practice" %}
+                        </li>
+                        <li class="small">
+                            <a href="https://moodle.eu-citizen.science">{% trans "Training modules" %}</a>
+                            {% trans "on citizen science in a wide range of themes" %}
+                        </li>
+                        <li class="small"><a href="/organisations">{% trans "Organisations" %}</a>
+                            {% trans "that are involved in citizen science projects and research" %}
+                        </li>
+                        <li class="small"><a href="/events">{% trans "Events calendar" %}</a> </li>
+                        <li class="small"><a href="/blog">{% trans "A blog"%}</a></li>
+                        <li class="small"><a href="/forum">{% trans "Forum"%}</a>
+                            {% trans "for questions, conversations, and collaboration with the rest of the community" %}
+                        </li>
+
+                    </ul>
+                    <div class="small mb-2">{% trans "Spotted something missing? You can add your own profiles via the <i>New submission</i> button in the top menu. Have a suggestion for us? Please share your thoughts via the" %} <a href="/contact">{% trans "contact form" %}</a>.</div>
+                </div>
+            </div><!-- end of The platform row -->
+            <div class="row">
+                <div class="col-12"><h3 class="mt-4">{% trans "The project" %}</h3></div>
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-11">
+                    <div class="small mb-2">{% trans "The EU-Citizen.Science project has been funded by the European Commission Horizon 2020 programme, in the Science with and for Society programme of work (also known as SwafS). The project’s mission is ambitious – to become the reference point for citizen science through cross-network knowledge sharing for citizen science participants, practitioners, researchers, policy makers and society across Europe." %}</div>
+                    <ul>
+                        <li class="small">{% trans "<b>Our Vision</b> is that Citizen Science becomes an appreciated and widely established means for the democratization of science in Europe" %}</li>
+                        <li class="small">{% trans "<b>Our Core Mission</b> is to become the European reference point for citizen science through cross-network knowledge sharing for citizen science participants, practitioners, researchers, policy makers and society across Europe." %}</li>
+                        <li class="small"><b>{% trans "Our objectives are:" %}</b></li>
+                        <ul>
+                            <li class="small">{% trans "to establish EU-Citizen.Science as the knowledge and community hub for high-quality citizen science exchange and learning in Europe." %}</li>
+                            <li class="small">{% trans "to consolidate the citizen science knowledge base and celebrate outstanding practices and state of the art in citizen science in Europe." %}</li>
+                            <li class="small">{% trans "to empower diverse stakeholders to become citizen scientists, start citizen science initiatives, and implement citizen science approaches professionally." %}</li>
+                            <li class="small">{% trans "to explore new pathways for participatory governance, by strengthening links between citizen science and policy making." %}</li>
+
+                            <li class="small">{% trans "to advance citizen science into the mainstream of public engagement, science communication and education." %}</li>
+                        </ul>
+
+                    </ul>
+                </div>
+            </div><!-- enf of The Project row -->
+
+            <div class="row">
+                <div class="col-12"><h3 class="mt-4">{% trans "The team" %}</h3></div>
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-11">
+                    <div class="small mb-2">{% trans " The EU-Citizen.Science consortium consists of 14 partners and 9 third parties from across 14 European countries. We represent a variety of stakeholders that are active in citizen science, including universities, non-governmental organisations, local authorities, community service organisations and museums." %}</div>
+                    <img class="img-fluid mb-4 mt-4" src="{% static 'site/img/team.png' %}" />
+                </div>
+            </div><!-- end of the team row -->
+
+            <div class="row">
+                <div class="col-12"><h3 class="mt-4">{% trans "Consortium partners" %}</h3></div>
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-11">
+                    <div class="row">
+                        <div class="col-12 mt-1 mb-4">
+                            <div class="row align-items-center">
+                                <div class="col-6 col-xl-2">
+                                    <a href="https://www.museumfuernaturkunde.berlin/" target="_blank"><img src="{% static 'site/img/mfn.png' %}" class="d-block img-fluid"/></a>
+                                </div>
+                                <div class="col-6 col-xl-2">
+                                    <a href="https://ecsa.citizen-science.net/" target="_blank"><img src="{% static 'site/img/ecsa_main_id.png' %}" class="d-block img-fluid"/></a>
+                                </div>
+                                <div class="col-6 col-xl-2">
+                                    <a href="https://www.iiasa.ac.at/" target="_blank"><img src="{% static 'site/img/iiasalogo.png' %}" class="d-block img-fluid"/></a>
+                                </div>
+                                <div class="col-6 col-xl-2">
+                                    <a href="https://earthwatch.org.uk/"><img src="{% static 'site/img/Earthwatch_logo_Green.jpg' %}" class="d-block img-fluid"/></a>
+                                </div>
+                                <div class="col-6 col-xl-2">
+                                    <a href="http://www.ciencia.gob.es/portal/site/MICINN/"><img src="{% static 'site/img/Logotipo_del_Ministerio_de_Ciencia_e_Innovacion.png' %}" class="d-block img-fluid"/></a>
+                                </div>
+                                <div class="col-6 col-xl-2">
+                                    <a href="https://www.mruni.eu/lt/"><img src="{% static 'site/img/mru.png' %}" class="d-block img-fluid"/></a>
+                                </div>
+                                <div class="col-6 col-xl-2">
+                                    <a href="https://www.geog.ucl.ac.uk/research/research-centres/excites"><img src="{% static 'site/img/University_College_London_logo.png' %}" class="d-block img-fluid"/></a>
+                                </div>
+                                <div class="col-6 col-xl-2">
+                                    <a href="https://www.ecsite.eu/" target="_blank"><img src="{% static 'site/img/Ecsite_logo.jpg' %}" class="d-block img-fluid"/></a>
+                                </div>
+                                <div class="col-6 col-xl-2 align-items-center">
+                                    <a href="https://www.tcd.ie/"><img src="{% static 'site/img/Trinity_Main_Logo.jpg' %}" class="d-block img-fluid"/></a>
+                                </div>
+                                <div class="col-6 col-xl-2">
+                                    <a href="https://v-a.se/"><img src="{% static 'site/img/va-logo.png' %}" class="d-block img-fluid"/></a>
+                                </div>
+                                <div class="col-6 col-xl-2">
+                                    <a href="https://www.nhm.ac.uk/"><img src="{% static 'site/img/Natural-History-Museum-Logo.gif' %}" class="d-block img-fluid"/></a>
+                                </div>
+                                <div class="col-6 col-xl-2">
+                                    <a href="https://www.universiteitleiden.nl/en"><img src="{% static 'site/img/zegel.png' %}" class="d-block img-fluid"/></a>
+                                </div>
+                                <div class="col-6 col-xl-2">
+                                    <a href="https://cm-fcr.pt/en/pontos-de-interesse-english/"><img src="{% static 'site/img/Figueira.png' %}" class="d-block img-fluid"/></a>
+                                </div>
+                                <div class="col-6 col-xl-1">
+                                    <a href="https://www.zsi.at/"><img src="{% static 'site/img/logo.gif' %}" class="d-block img-fluid"/></a>
+                                </div>
+                                <div class="col-6 col-xl-2">
+                                    <a href="https://www.uc.pt/"><img src="{% static 'site/img/cropped-universidade-de-coimbra-uc.jpg.pagespeed.ce.WmFimWGBGi.jpg'%}" class="d-block img-fluid"/></a>
+                                </div>
+                                <div class="col-6 col-xl-2">
+                                    <a href=""><img src="{% static 'site/img/ximg021.jpg.pagespeed.ic.zDZzgJ-A8b.jpg'%}" class="d-block img-fluid"/></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- End of consortium partners row -->
+            <div class="row">
+                <div class="col-12"><h3 class="mt-4">{% trans "Third party partners" %}</h3></div>
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-11">
+                    <div class="row align-items-center">
+                        <div class="col-3 col-xl-1">
+                            <a href="https://boku.ac.at/" target="_blank"><img src="{% static 'site/img/Boku-wien.svg.png' %}" class="img-fluid"></a>
+                        </div>
+                        <div class="col-6 col-xl-2">
+                            <a href="https://www.naturalsciences.be/" target="_blank"><img src="{% static 'site/img/museumbelgique.png' %}" class="d-block img-fluid"></a>
+                        </div>
+                        <div class="col-xl-1 col-3 align-items-center">
+                            <a href="https://www.ut.ee/et" target="_blank"><img src="{% static 'site/img/tartuulikool.png' %}" class="d-block img-fluid"></a>
+                        </div>
+                        <div class="col-3 col-xl-1">
+                            <a href="https://www.mnhn.fr/" target="_blank"><img src="{% static 'site/img/MNHN-logo.jpg' %}" class="d-block img-fluid"></a>
+                        </div>
+                        <div class="col-6 col-xl-2">
+                            <a href="https://www.auth.gr/en" target="_blank"><img src="{% static 'site/img/thessaloniki_logo.png' %}" class="d-block img-fluid"></a>
+                        </div>
+                        <div class="col-6 col-xl-1">
+                            <a href="https://www.essrg.hu/en/" target="_blank"><img src="{% static 'site/img/essrg-logo.png' %}" class="d-block img-fluid"></a>
+                        </div>
+                        <div class="col-3 col-xl-1">
+                            <a href="https://www.fondazionegrossetocultura.it/index.php/museo/" target="_blank"><img src="{% static 'site/img/fgrc-logo.png' %}" class="d-block img-fluid"></a>
+                        </div>
+
+                        <div class="col-6 col-xl-2">
+                            <a href="https://ibercivis.es/" target="_blank"><img src="{% static 'site/img/Logo_Ibercivis_CMYK.png' %}" class="d-block img-fluid"></a>
+                        </div>
+                        <div class="col-6 col-xl-2">
+                            <a href="https://www.fecyt.es/" target="_blank"><img src="{% static 'site/img/ministerio-fecyt.png' %}" class="d-block img-fluid"></a>
+                        </div>
+                        <div class="col-3"></div>
+                    </div>
+                </div>
+                <div class="col-12 mb-5"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock list_of_items %}
+{% block scripts %}
+<script>
+	function loadTeaserVideo(){
+		var code = $("#id_teaser").val();
+		switch (code) {
+			case "NL": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/u2k3OIKmIz4"); break;
+			case "EN": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/ps_kTQjQvU0"); break;
+			case "ET": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/aHZRm0mbdDs"); break;
+			case "FR": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/FTzpRfwuiWg"); break;
+			case "DE": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/D0TV3rS1AaA"); break;
+			case "EL": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/3yEdYsFsfDo"); break;
+			case "HU": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/-JQ5U5tvbY0"); break;
+			case "IT": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/oPWAV1_tRgk"); break;
+			case "LT": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/wK1bcx6rhbo"); break;
+			case "PT": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/jSrJGY_JB8k"); break;
+			case "ES": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/TrFJENcB8fE"); break;
+			case "SV": $("#teaserIframe").attr("src", "https://www.youtube.com/embed/Tx-TqZlxyOo"); break;
+			default: $("#teaserIframe").attr("src", "https://www.youtube.com/embed/ps_kTQjQvU0");
+		}
+
+	}
+</script>
+https://youtu.be/u2k3OIKmIz4{% endblock scripts %}

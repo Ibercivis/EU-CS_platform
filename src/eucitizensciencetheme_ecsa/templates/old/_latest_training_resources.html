@@ -1,0 +1,16 @@
+{% load i18n %}
+<div id="lates-training-resources" class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="mb-3">{% trans "Latest <strong>training resources</strong>" %}</h2>
+            </div>
+        </div>
+        <div class="row">
+                    {% include "resources_cards.html" with resources=trainingResources%}
+        </div>
+            </div>
+        </div>
+    </div>
+</div>
+

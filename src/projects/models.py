@@ -5,11 +5,32 @@ from django_countries.fields import CountryField
 
 
 class Status(models.Model):
+    STATUS_CHOICES = (
+        ('not_started', 'Not yet started'),
+        ('periodically_active', 'Periodically Active'), 
+        ('active', 'Active'),
+        ('on_hold', 'On Hold'),
+        ('completed', 'Completed'),
+        ('abandoned', 'Abandoned'),
+    )
     status = models.TextField()
+    status_code = models.CharField(max_length=100, choices=STATUS_CHOICES, default='active')
 
     def __str__(self):
         return f'{self.status}'
+    
+class ProjectCountry(models.Model):
+    country = CountryField()
+    country_name = models.CharField(max_length=100, editable=False)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
 
+    def save(self, *args, **kwargs):
+        self.country_name = self.country.name  # Almacena el nombre del país antes de guardar
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.country.name
 
 class Topic(models.Model):
     topic = models.TextField()
@@ -136,6 +157,7 @@ class Project(models.Model):
     geographicextend = models.ManyToManyField(GeographicExtend, blank=True)
     projectlocality = models.CharField(max_length=300, null=True, blank=True)
     projectGeographicLocation = models.MultiPolygonField(blank=True, null=True)
+    projectCountry = models.ManyToManyField(ProjectCountry, blank=True, related_name="projects")
     # Legacy
     country = CountryField(null=True, blank=True)
 

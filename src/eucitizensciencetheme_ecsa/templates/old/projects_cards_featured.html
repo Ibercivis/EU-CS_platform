@@ -1,0 +1,37 @@
+{% load i18n %}
+{% load static %}
+{% load reviews %}
+{% if projects %}
+{% for project in featuredProjects %}
+<div class="col-lg-4 col-sm-12 mb-4">
+	<div class="card h-100 shadow border-0">
+		<a class="card-img-wrap "href="/project/{{project.id }}">
+			{% if project.image1 %}
+			<img class="card-img-top img-fluid img-zoom lazyload {% if project.id not in approvedProjects %} nonmoderated {% endif %}" alt="{{ project.name }}" src="{{ project.image1 }}" />
+			{% else %}
+			<picture>
+				<source srcset="{% static 'site/img/project_default_card.png' %}" type="image/png">
+				<source srcset="{% static 'site/img/project_default_card.webp' %}" type="image/webp">
+				<img src="site/img/project_default_card.png" class="card-img-top img-fluid img-zoom lazyload {% if project.id not in approvedProjects %} nonmoderated {% endif %}" alt="{{ project.name }}">	
+			</picture>
+			{% endif %}
+			<div class="upper">
+				{% if project.id not in approvedProjects %} <a class="badge frontpage frontpage-red mb-2" href="/faq#moderation">{% trans "NOT YET MODERATED" %}</a><br/>
+				{% else %} {% if filters.approvedCheck == "All" %}  <a class="badge frontpage frontpage-green mb-2" href="/faq#moderation">{% trans "MODERATED" %}</a><br/> {% endif %}
+				{% endif %}
+			</div>
+		</a>
+		<div class="card-body">
+			<h6 class="card-title mt-3 mb-3"> <a class="card-link" href="/project/{{project.id }}">{{ project.name }}</a></h6>
+
+			<div class="card-text mt-3">{{project.description | safe | truncatechars:180 }}
+				<a class="project" href="/project/{{project.id}}" target="_blank">{% trans "Read more" %}</a>
+			</div>
+			<br>
+
+		</div><!-- End of card-body -->
+
+	</div><!-- end of card -->
+</div>
+{% endfor %}
+{% endif %}

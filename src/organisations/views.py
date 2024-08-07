@@ -142,13 +142,17 @@ def edit_organisation(request, pk):
                 w = form.cleaned_data.get('width')
                 h = form.cleaned_data.get('height')
                 photo = request.FILES['logo']
-                image = Image.open(photo)
+                image = Image.open(photo).convert("RGBA")
                 cropped_image = image.crop((x, y, w+x, h+y))
-                resized_image = cropped_image.resize((600, 400), Image.ANTIALIAS)
+                resized_image = cropped_image.resize((600, 400), Image.Resampling.LANCZOS)
+
+                white_bg = Image.new('RGBA', (600, 400), 'white')
+                final_image = Image.alpha_composite(white_bg, resized_image)
+                final_image_rgb = final_image.convert("RGB")
                 _datetime = formats.date_format(datetime.now(), 'Y-m-d_hhmmss')
                 random_num = random.randint(0, 1000)
                 image_path = "media/images/" + _datetime + '_' + str(random_num) + '_' + photo.name
-                resized_image.save(image_path)
+                final_image.save(image_path)
                 image_path_database = "images/" + _datetime + '_' + str(random_num) + '_' + photo.name
             else:
                 image_path_database = ''
@@ -247,7 +251,8 @@ def organisations(request):
         'filters': filters,
         'countriesWithContent': countriesWithContent,
         'orgTypes': orgTypes,
-        'isSearchPage': True})
+        'isSearchPage': True,
+        'show_search_bar': False})
 
 
 def delete_organisation(request, pk):

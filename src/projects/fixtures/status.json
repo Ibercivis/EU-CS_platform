@@ -2,36 +2,42 @@
     {
         "model": "projects.status",
         "fields": {
+            "status_code": "not_started",
             "status": "Not yet started"
         }
     },
     {
         "model": "projects.status",
         "fields": {
+            "status_code": "active",
             "status": "Active"
         }
     },
     {
         "model": "projects.status",
         "fields": {
+            "status_code": "periodically_active",
             "status": "Periodically active"
         }
     },
     {
         "model": "projects.status",
         "fields": {
+            "status_code": "on_hold",
             "status": "On hold"
         }
     },
     {
         "model": "projects.status",
         "fields": {
+            "status_code": "completed",
             "status": "Completed"
         }
     },
     {
         "model": "projects.status",
         "fields": {
+            "status_code": "abandoned",
             "status": "Abandoned"
         }
     }

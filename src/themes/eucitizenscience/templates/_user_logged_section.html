@@ -1,0 +1,116 @@
+{% load static %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% load thumbnail %}
+<div class="row p-3 bg-secondary d-flex p-5" style="margin-bottom: 100px; z-index: 100;">
+    <h1 class="mb-2 text-dark">Welcome back, <span class="text-color-primary">{{user.name}}</span></h1>
+    <div class="card user-profile-card mt-2">
+        <div class="card-body">
+            <div class="row pt-3">
+                <div class="col-lg-2 col-md-2 col-sm-12 mb-2">
+                    <div class="d-flex flex-column align-items-center text-center">
+                        {% if user.ecsa_user_profile.ecsaMember or user.ecsa_user_delegate.ecsaMember %}
+                        <div class="ecsa-badge-container">
+                            <div class="ecsa-badge-big">
+                                <img 
+                                    class="ecsa-badge-img" 
+                                    data-bs-toggle="tooltip"
+                                    title="ECSA Member" 
+                                    src = "{% static 'ecsa_integration/img/ecsa_badge.png' %}" />
+                            </div>
+                        </div>
+                        {% endif %}
+                        <a href="/users/{{user.profile.slug}}">
+                            <img title="profile picture" class="img-fluid rounded-circle" src="{% thumbnail user.profile.picture|default:'default_profile.png' 280x280 crop %}" style="width: 120px;">
+                        </a>
+                        <div class="mt-3 mb-3">
+                            <h4 class="project-name text-dark mb-3 w-100 mx-auto">
+                                <a href="/users/{{user.profile.slug}}" class="project-name text-dark text-center" style="font-size: smaller;">
+                                    {% if user.profile.surname %}
+                                        {{user.profile.surname}},
+                                    {% endif %}
+                                    {{ user.name }}
+                                </a>
+                            </h4>
+                            <div class="text-details d-flex align-items-center ps-4 mb-2">
+                                <i class="fas fa-flag me-2"></i>
+                                {% if user.profile.country.name %}
+                                    <a href="/users?country={{user.profile.country.code}}" class="text-dark">
+                                            {{user.profile.country.name}}
+                                    </a>
+                                {% else %}
+                                    <a href="/users/me/edit" class="text-dark">
+                                        n/a
+                                    </a>
+                                {% endif %}
+                            </div>
+                            <div class="text-details d-flex align-items-center ps-4">
+                                {% if user.profile.organisation %}
+                                   {% for org in user.profile.organisation.all %}
+                                        <i class="fas fa-building me-2"></i>
+                                        <a href="/users?organisation={{org}}" class="me-1 project-topic">{{org|truncatechars:20}}</a>
+                                        <br>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class="text-details d-flex align-items-center ps-4 mb-2">
+                            <li class="dropdown" >
+                                <a class="dropdown-toggle text-color-primary" id="dropdownRegistered" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#">
+                                <i class="fas fa-user-edit"></i>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownRegistered">
+                                <a class="dropdown-item" href="{% url 'profiles:show_self' %}">{% trans "My personal area" %}</a>
+                                <a class="dropdown-item" href="{% url 'profiles:submissions' %}">{% trans "My submissions" %}</a>
+                                <a class="dropdown-item" href="{% url 'profiles:bookmarks' %}">{% trans "My bookmarks" %}</a>
+                                <a class="dropdown-item" href="{% url 'profiles:privacyCenter' %}">{% trans "My privacy center" %}</a>
+                                {% if user.is_staff %}
+                                <a class="dropdown-item" href="{% url 'admin:index' %}">{% trans "Admin" %}</a>
+                                {% endif %}
+                                <a class="dropdown-item" href="{% url 'accounts:logout' %}">{% trans "Logout" %}</a>
+                                </div>
+                                </li>
+                                </div>
+                            </li>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-12 mb-2">
+                    <h4 class="project-name text-dark mb-3">
+                        Bio and disciplinary background
+                    </h4>
+                    {% if user.profile.bio %}
+                        <p class="text-dark text-justify text-smaller pe-5">
+                            {{user.profile.bio | safe }}
+                        </p>
+                    {% else %}
+                        <p class="text-muted text-justify text-smaller pe-5">
+                            You do not have an associated biography yet. Help others understand your background. Share your biography from <a href="/users/me/edit">your personal area</a>.
+                        </p>
+                    {% endif %}
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-12 mb-2 d-flex flex-column">
+                    <h4 class="project-name text-dark mb-3">
+                        Interest and expertise areas
+                    </h4>
+                    <div class="d-flex flex-wrap pe-5">
+                        {% if user.profile.interestAreas.all %}
+                            {% for area in user.profile.interestAreas.all %}
+                            <a href="/users?interestAreas={{area}}" class="me-1 project-topic">{{area|title|truncatechars:20}}</a>
+                            {% endfor %}
+                        {% else %}
+                            <p class="text-muted text-justify text-smaller">
+                                Highlight your interests to engage with relevant projects and discussions. Enrich your profile from <a href="/users/me/edit">your personal area</a>.
+                            </p>
+                        {% endif %}
+                    </div>   
+                    <div class="d-flex justify-content-between align-items-center mt-auto pe-5">
+                      
+                        <button class="btn btn-solid-white sidebar-btn-submit" type="submit" data-bs-toggle="modal" data-bs-target="#modalsubmit">
+                            <i class="fas fa-paper-plane"></i>&nbsp;&nbsp;{% trans "New submission" %}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div>
+</div>

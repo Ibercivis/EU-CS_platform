@@ -16,8 +16,8 @@
 {% block list_of_items %}
 {{ permissionForm.media.css }}
 <style>
- #id_projectGeographicLocation_div_map { width: 100% !important; height: 100% !important; }
- #id_projectGeographicLocation_map { width: 100% !important; height: 100% !important; }
+ #id_projectGeographicLocation_div_map { width: 100% !important; }
+ #id_projectGeographicLocation_map { width: 100% !important; }
 </style>
 {% if 'newProject' in request.get_full_path %}
     <!-- TOAST para nuevos proyectos. TODO: optimizar. -->
@@ -55,8 +55,19 @@
     <div class="row">
         <div class="col-12">
             <h1 class="wood-color">{{project.name}}</h1>
-            <div class="small"><i>{% trans "Created" %} {{project.dateCreated}}</i></div>
-            <div class="small"><i>{% trans "Updated" %} {{project.dateUpdated}}</i></div>
+            <div class="row align-items-baseline" style="margin-left: 0.1rem;">
+                <div class="status-badge status-{{ project.status.status_code }} col-auto">
+                    <div class="circumference"></div> {{ project.status|capfirst }}
+                </div>
+                <p class="text-smaller col-auto">
+                {% if project.start_date %}
+                        {% trans "from" %} {{ project.start_date | date:"d/m/Y"}}
+                    {% endif %}
+                    {% if project.end_date %}
+                        {% trans "until" %} {{ project.end_date | date:"d/m/Y"}}
+                    {% endif %}
+                </p>
+            </div>
         </div>
         <div class="col-xl-8 col-md-6 col-12">
             <!-- TODO: I dont like this look -->
@@ -133,7 +144,10 @@
 
             {% endif %}
 
-
+            <br><br>
+            
+            <p class="text-smaller text-muted"><i>{% trans "Created" %} {{project.dateCreated}}</i></p>
+            <p class="text-smaller text-muted"><i>{% trans "Updated" %} {{project.dateUpdated}}</i></p>
 
             {% for resource in project.resource.all %}
                 {{resource}}
@@ -146,25 +160,19 @@
             {% if project.image2 %}
             <img class="img-fluid" src='/media/{{project.image2 | safe}}' />
             {%endif%}
-
-            <a class="badge bg-dark" href="/projects?status={{status}}">{{status}}</a>
-                {% if project.start_date %}
-                {% trans "from" %} {{ project.start_date | date:"d/m/Y"}}
-                {% endif %}
-                {% if project.end_date %}
-                {% trans "until" %} {{ project.end_date | date:"d/m/Y"}}
-                {% endif %}
+            
+                
             <h5 class="mt-3">{% trans "Keywords" %}</h5>
             <div>
                 {% for keyword in project.keywords.all %}
-                <a class="badge bg-my-darkGreen" href="/projects?keywords={{keyword|urlencode}}">{{keyword | title}}</a>
+                <a class="project-topic" href="/projects?keywords={{keyword|urlencode}}">{{keyword | title}}</a>
                 {% endfor %}
             </div>
             {% if project.topic.all %}
             <h5 class="mt-3">{% trans "Science Topics" %}</h5>
             <div>
                 {% for topic in project.topic.all %}
-                <a class="badge bg-my-darkBlue" href="/projects?keywords=&topic={{topic|urlencode}}">{{topic}}</a>
+                <a class="project-topic" href="/projects?keywords=&topic={{topic|urlencode}}">{{topic}}</a>
                 {% endfor %}
             </div>
             {% endif %}
@@ -173,7 +181,7 @@
             <h5 class="mt-3">{% trans "Tags" %}</h5>
             <div>
                 {% for tag in project.hasTag.all %}
-                <a class="badge bg-my-lightBlue" href="/projects?hasTag={{tag|urlencode}}">{{tag}}</a>
+                <a class="project-topic" href="/projects?hasTag={{tag|urlencode}}">{{tag}}</a>
                 {% endfor %}
             </div>
             {% endif %}
@@ -181,7 +189,7 @@
             {% if project.difficultyLevel%}
             <h5 class="mt-3">{% trans "Difficulty Level" %}</h5>
             <div>
-                <a class="badge bg-my-lightGreen" 
+                <a class="project-topic" 
                     href="/projects?difficultyLevel={{project.difficultyLevel}}">{{project.difficultyLevel}}
                 </a>
             </div>
@@ -192,7 +200,7 @@
             <h5 class="mt-3">{% trans "Participation tasks" %}</h5>
             <div>
                 {% for participationTask in project.participationTask.all %}
-                <a class="badge bg-my-wood" href="/projects?participationTask={{participationTask}}">{{participationTask}}</a>
+                <a class="project-topic" href="/projects?participationTask={{participationTask}}">{{participationTask}}</a>
                 {% endfor %}
             </div>
             {% endif %}
@@ -216,14 +224,11 @@
             <h5 class="mt-3">{% trans "Location" %}</h5>
             <div>
                 {% for geographicextend in project.geographicextend.all %}
-                <a class="badge bg-my-darkGreen" href="/projects?geographicextend={{geographicextend}}">{{geographicextend}}</a>
+                <a class="project-topic" href="/projects?geographicextend={{geographicextend}}">{{geographicextend}}</a>
                 {% endfor %}
                 {% if project.projectlocality%}
                 <div>
-                    <p style="font-family: 'Nunito', sans-serif;
-                    color: black;
-                    font-size: 90%;
-                    margin-top: 6px;">{{ project.projectlocality}}</p>
+			<a class="project-topic" href="#">{{ project.projectlocality}}</a>
                 </div>
                 {% endif %}
             </div>
@@ -246,18 +251,18 @@
                 <div class="col-12 mt-4">
                     <a target="_blank" 
                     href="{% if 'http' not in project.url %}//{%endif%}{{project.url}}"
-                    class="me-3 goto">
+                    class="btn btn-primary me-3">
                      <i class="fas fa-external-link-square-alt"></i> {% trans "Go to Project" %}
                     </a>
                     {% if user.is_authenticated %}
                     <a href="/translateProject/{{project.id}}" 
-                    class="me-3 text-secondary">
+                    class="me-3 btn btn-secondary">
                         <i class="fas fa-language"></i> {% trans "Translate" %}
                     </a>
                     {% endif %}
                     {% if hasPermissionToEdit %}
-                    <a class="me-3 text-warning" href="{% url 'editProject' project.id %}">
-                        <i class="fas fa-edit"></i> Edit 
+                    <a class="me-3 btn btn-warning" href="{% url 'editProject' project.id %}">
+			    <i class="fas fa-edit"></i>{% trans "Edit" %} 
                     </a>
                     {% endif %}
                     {% include "_social_zone.html" %}

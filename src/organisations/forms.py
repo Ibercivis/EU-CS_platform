@@ -75,13 +75,13 @@ class OrganisationForm(forms.Form):
 
     # TODO: I link this more to be used in others
     def save(self, args, logo_path):
+        print("In save")
         pk = self.data.get('organisationID', '')
         orgType = get_object_or_404(OrganisationType, id=self.data['orgType'])
         if (pk):
             organisation = get_object_or_404(Organisation, id=pk)
             organisation.name = self.data['name']
             organisation.url = self.data['url']
-
             organisation.orgType = orgType
             organisation.contactPoint = self.data['contact_point']
             organisation.contactPointEmail = self.data['contact_point_email']

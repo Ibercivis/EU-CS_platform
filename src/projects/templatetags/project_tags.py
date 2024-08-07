@@ -1,4 +1,6 @@
 from django import template
+from projects.models import Topic, Keyword
+
 register = template.Library()
 
 
@@ -29,3 +31,11 @@ def param_replace(context, **kwargs):
     for k in [k for k, v in d.items() if not v]:
         del d[k]
     return d.urlencode()
+
+@register.filter
+def item_type(item):
+    if isinstance(item, Topic):
+        return "topic"
+    elif isinstance(item, Keyword):
+        return "keywords"
+    return "unknown"

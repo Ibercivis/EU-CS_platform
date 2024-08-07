@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+{% extends "base_r2.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}{{ block.super }} :: {% trans "The ECS Co-Design Process" %}{% endblock %}
+
+{% block list_of_items %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The ECS Co-Design Process</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                
+                <h1 class="mt-5 mb-5">The <span class='text-color-secondary'>ECS Co-Design</span> Process</h1>
+                
+
+                <main>
+                    <section>
+                        <p>Welcome to the <strong>ECS Co-Design Process</strong>. As an integral part of the eu-citizen.science community, you have a unique opportunity to influence the future of our platform. Through this process, we seek to incorporate your <strong>ideas, needs, and visions</strong> to build a platform that truly empowers and supports citizen science initiatives across Europe.</p>
+                        <p>Engaging in the ECS Co-Design Process offers you several advantages:</p>
+                        
+                    </section>
+                </main>
+            </div>
+        </div>    
+    </div>
+
+    
+
+    <div class="container-fluid row-full-width mt-3">
+        <div class="row mt-4">
+            <!-- Col1: Influence -->
+            <div class="col-md-4 col"> <!-- usa 'col-md-4' para que cada columna ocupe 1/3 del ancho total en dispositivos medianos y mayores -->
+                <img src="{% static 'site/img/bulb-icon-w.png' %}" style="height: 120px; margin-bottom: 24px" alt="Icon 1" />
+                <h3 class="mb-3">Influence</h3>
+                <p>Play a direct role in shaping the features and services of the eu-citizen.science platform, ensuring that they cater to the genuine needs of the community.</p>
+            </div>
+            <!-- Col2: Networking -->
+            <div class="col-md-4 col">
+                <img src="{% static 'site/img/signal-icon-w.png' %}" style="height: 120px; margin-bottom: 24px" alt="Icon 2" />
+                <h3 class="mb-3">Networking</h3>
+                <p>Connect with like-minded individuals, share ideas, receive feedback and foster potential collaborations within the citizen science community.</p>
+            </div>
+            <!-- Col3: Skill Development -->
+            <div class="col-md-4 col">
+                <img src="{% static 'site/img/rocket-icon-w.png' %}" style="height: 120px; margin-bottom: 24px" alt="Icon 3" />
+                <h3 class="mb-3">Skill Development</h3>
+                <p>Enhance your understanding of platform design and development processes, gaining insights that can benefit your own projects and initiatives.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                
+                
+                <p class="mt-4">Your involvement is pivotal in two key stages of the design process, you can choose one or both of them!</p>
+
+            </div>
+        </div>
+        
+        <div class="ambassadors-container">
+            
+            <div class="codesign-card">
+                <a href="https://forms.gle/q3bnBiCMX8TPcaVZ8" target="_blank" style="text-decoration: none; color: inherit;">
+                    <div class="ambassador-info">
+                        <h3 style="margin-top: 8px">Participatory Service Selection</h3>
+                        <p>Your valuable participation will greatly determine which specific services and essential features should be prioritised for platform development.</p>
+                        <p><strong>When:</strong> December/January</p>
+                        <p><strong>Duration:</strong> 90 minutes</p>
+                        <p><strong>Where:</strong> Online</p>
+                    </div>
+                </a>
+            </div>
+        
+            <div class="codesign-card">
+                <a href="https://forms.gle/q3bnBiCMX8TPcaVZ8" target="_blank" style="text-decoration: none; color: inherit;">
+                    <div class="ambassador-info">
+                        <h3 style="margin-top: 8px">Co-Design of the Selected Services</h3>
+                        <p>You will collaborate with other participants in shaping the implementation of the selected services, contributing your expertise and insights. </p>
+                        <p><strong>When:</strong> March</p>
+                        <p><strong>Duration:</strong> 90 minutes</p>
+                        <p><strong>Where:</strong> Online</p>
+                    </div>
+                </a>
+            </div>
+            
+        </div>
+    </div>
+    
+    <div class="container">
+                    
+        <div class="row mt-3">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <p>To streamline the participation process, we have prepared two forms:</p>
+                <ul>
+                    <li><strong>Participate in the ECS Co-Design Process:</strong> If you find it exciting to participate in this co-design process, don't hesitate and let us know as soon as possible! Access the form <a href="https://forms.gle/q3bnBiCMX8TPcaVZ8" target="_blank">here</a>.</li>
+                    <li class="mt-3"><strong>Asynchronous Participation Form:</strong> If time is a constraint, use this form to provide input at your own pace. Access the form <a href="https://forms.gle/RMjaAoz8qHGkQvQd7" target="_blank">here</a>.</li>
+                </ul>
+                <p>Your dedication to the field of citizen science and your willingness to contribute to the eu-citizen.science platform is what drives us to make it the best it can be. Together, with your insights and collaboration, we will continue to develop a hub that truly represents and serves the European citizen science community.</p>
+                <p class="mt-3"><strong>Thank you for your interest</strong></p>
+            </div>
+        </div>
+               
+    </div>
+
+    <script>
+    
+
+    </script>
+</body>
+
+</html>
+{% endblock list_of_items %}   

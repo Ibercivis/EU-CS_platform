@@ -1,0 +1,161 @@
+{% extends "base_r2.html" %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ block.super }} :: Opencall{% endblock %}
+{% block splash %}
+<div class="jumbotron jumbotron-fluid">
+	<div class="container">
+		<h1 class="display-5 pt-2 pb-4 text-secondary">{% trans "EU-Citizen.Science call (closed)" %}</h1>
+	</div>
+</div>
+<div class="container mt-5">
+	<div class="row">
+		<div class="col-sm-12 col-12 mb-4">
+			<h4>The open call ran from 26th February to 30th April 2021 and is now closed.</h4>
+		</div>
+	</div>
+</div>
+{% endblock splash %}
+
+{% block navbar-left %}
+{% include "_navbar.html" %}
+{% endblock %}
+
+{% block list_of_items %}
+<div class="container mt-5">
+	<div class="row">
+		<div class="col-sm-4 col-12 mb-4">
+			<h3>Winner announcement</h3>
+		</div>
+		<div class="col-sm-8 col-12 mb-4">
+						<p>Update on 27th of May 2021: The EU-Citizen.Science call for 10 new citizen science training modules has now closed and the following projects have been selected. The new modules will be available on the platform from late summer 2021 so keep an eye out at <a href="https://moodle.eu-citizen.science/">https://moodle.eu-citizen.science/</a>.</p>
+						<ul>
+										<li><b>Doing citizen science as open science: What, why, and how.</b> This module will be available in English and is designed for citizen science practitioners. It will introduce what open science is and why it is mutually complementary with citizen science and will illustrate which tools can enable collaborative and inclusive processes underlying citizen science and open science. The module will be developed by Dr. Pen-Yuan Hsing and Rafaella Antoniou of the MammalWeb project and of the University of Bath, UK.</li>
+										<li><b>Kutatóknak a "Citizen Science" megközelítésben rejlő lehetőségekről (Value of citizen science for the traditional researcher).</b> This module will be available in Hungarian and is designed for Hungarian researchers in traditional citizen science fields such as the natural sciences. It will cover the benefits, opportunities, challenges and barriers of the citizen science method, data quality, fields of interests and the publication potential of citizen science data. The module will be developed by Dr. Oliver Vaczi of the Vadonlesők Közössége Természetvédelmi Egyesület (Nature Conservation Society of WildWatchers’ Community), Hungary.</li>
+										<li><b>Citizen science in the classroom: A toolkit.</b> This module will be available in English and is designed for educators, students and their families or guardians, and policy makers seeking to integrate citizen science  projects into school curricula. It will cover the basics on the value of citizen science for learning, how to design citizen science projects for a classroom setting and how to access projects that are suitable for the school curriculum. The module will be developed by Dr María Grau of the Universitat de Barcelona, Maria José Aparicio of the Escola La Maquinista Barcelona, Dr. Núria Codern Bové of the Escola Universitària d’Infermeria i Teràpia Ocupacional - Terrassa, Dr. Jorge L. Díaz, of the Parc de Salut Mar - Barcelona and Raul Martínez of the Escola La Maquinista Barcelona.</li>
+										<li><b>Empowerment through co-designed Citizen Science in research and formal university education.</b> This module will be developed in English and is designed for an educational policy/ decision-maker audience i.e. those in charge of designing educational programs from school to university level. It will explore how citizen science can be used as a way to empower people within co-designed research programs and students in formal education. The module will be developed by Dr. Annegret Nicolai and Morgane Herve of the Living Lab CLEF, France.</li>
+										<li><b>Research integrity, ethics and citizen science.</b> This module will be available in English and is designed for researchers and citizen science practitioners working in NGO’s, academics, graduate and post-graduate students, journalists and government officials. It will cover research integrity and ethics in the context of selected SDGs, how these topics are relevant when conducting citizen science, what is ethical behaviour and how do we maintain research integrity. The module will be developed by Professor Jacqueline Goldin of the University of the Western Cape, South Africa and Stef Dingemans of the University of Utrecht, Netherlands.</li>
+										<li><b>Estrategias y herramientas de comunicación aplicadas a proyectos de ciencia ciudadana (Engagement and dissemination tools and strategies to implement a citizen science project).</b> This module will be available in Spanish and is designed for citizen science practitioners. It will explore the different approaches for engaging citizens as stakeholders and introduce basic techniques for communication and dissemination. The module will be developed by Blue Room Innovation SL.</li>
+										<li><b>Basics on regulations and ethics for citizen scientists.</b> This module will be available in English and is designed for the aspiring citizen scientist. It will cover introductory information on volunteers’ rights and obligations in gathering and analysing data, and co-authoring research papers. A special emphasis will be placed on how to handle sensitive data and ethical requirements in gathering such information. The module will be developed by Dimitar Stoychev Kyosev, Bulgaria.</li>
+										<li><b>Bürger schaffen Klima Wissen (Citizens Create Climate Knowledge).</b> This module will be available in German and is designed for citizen scientists. This module will provide a tutorial on where and how to step into scientific work and become a citizen scientist primarily in the area of climate and environmental science. The module will be developed by Frank Becker, Thomas Hasenauer, Otto Kückmann, Michael Plögert, Antonia Rollwagge of the Science Shop kubus, Technische Universität Berlin, Germany and BANA (Berlin Model: Education for Post-Occupational Activities) course guest lecturers.</li>
+										<li><b>Social media management for citizen science projects.</b> This module will be available in English and is designed for citizen science practitioners. It will explore the ways that citizen science can benefit from social media; choose the social platforms that best suit particular projects; and teach participants how to implement the best strategies to increase engagement and grow a social media following. This module will be developed by Sofia Oliveira and Ruth Pereira (GreenUPorto / Faculty of Sciences - University of Porto), Paulo Santos (CIIMAR / Faculty of Sciences - University of Porto) and Joana Pereira (CESAM - University of Aveiro).</li>
+										<li><b>Začnime si s občianskou vedou (Let’s start with Citizen Science).</b> This module will be available in Slovak and is designed for students and researchers (interested in learning about citizen science and ways of making community-driven research), policy-makers (interested in strengthening the science – policy interface), and citizen scientists (interested in learning about how to get involved in citizen science projects). This module is designed for an audience based in the Slovak Republic, where the concept of citizen science is not yet widely familiar or taught at university level.  This is an introductory module aimed at helping to spread the idea of citizen science, its society-advancing potential and good practice awareness in and outside of the scientific community. The module will be developed by Jitka Dobbersteinová, Silvia Horáková and Zuzana Stožická of the Slovak Centre of Scientific and Technical Information, Slovakia (Centrum vedecko-technických informácií Slovenskej republiky).</li>
+						</ul>
+		</div>
+	</div>
+</div>
+
+<div class="container mt-5">
+	<div class="row">
+		<div class="col-sm-4 col-12 mb-4">
+			<h3>Task description</h3>
+		</div>
+		<div class="col-sm-8 col-12 mb-4">
+			The EU-Citizen.Science Call will fund the <b>development, implementation and testing of 10 training modules</b> 
+			on the topic of citizen science. These modules will be uploaded to the <a href="https://moodle.eu-citizen.science">Moodle integration</a> of the EU-Citizen.Science platform. 
+			Please refer to section 3 “Scope of the Call” in the <a href="{%static 'site/files/EU-Cit.Sci_Guide_for_Applicants.pdf'%}">Guide for Applicants</a> to read the themes and the suggested topics of the training modules.
+			<br/><br/>
+			Training modules are self-directed, 1 or 2 hours units that a learner can study at her own pace and receive a badge and a 
+			certificate upon completion. The system is based on the education content management system Moodle. 
+			We are estimating the effort of designing and developing a training unit at about 7-10 working days.<br/><br/>
+
+			Module designers are expected to:
+			<ul>
+				<li>develop the module content using the guidelines of the EU-Citizen.Science platform (see link below);</li>
+
+				<li>create a template for the module on the EU-Citizen.Science platform using Moodle, and upload all the content;</li>
+
+				<li>undertake user-testing of the module and implement changes where necessary with at least five members of the intended audience.</li>
+			</ul>
+
+			All guidance, templates etc. to help with the design of module content and uploading it to Moodle will be provided 
+			upon successful award of the grant. The preliminary 
+			<a href="{%static 'site/files/EU-Cit.Sci_Training_module_design_guidelines_v1.pdf' %}">module development guidelines document</a> and 
+			<a href="{%static 'site/files/EU-Cit.Sci_Content_Design_Template.pdf' %}">content template</a>
+			are available for download.<br/><br/>
+
+			Please refer to section 7 “Requirements” of the <a href="{%static 'site/files/EU-Cit.Sci_Guide_for_Applicants.pdf'%}">Guide for Applicants</a> to see all the requirements for a training module. Some of these requirements are: 
+			<ul>
+
+				<li>Each module should contain 5-8 sections, which must include the standard “Welcome and introduction”, “Conclusion and self-assessment”, 
+					“Further information and learning” and “Sources and acknowledgements”.</li>
+
+				<li>Modules can be prepared in any European language, but the application needs to be in English.</li>
+
+				<li>Each section of the module must end with a short activity or quiz to test student understanding of the section content. This is formative assessment, which allows the student to assess their progression and their understanding of key concepts.</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="container-fluid bg-white">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mt-4 mb-4">
+				<h3>Submission & evaluation process</h3>
+				<img class="img-fluid" src="{% static 'site/img/howtoapply.jpg'%}" alt="How to apply" />
+			</div>
+			<div class="col-sm-8 col-12 mt-4 mb-4">
+				The call will award 10 projects a maximum of 1.500 € each per project. Only one grant can be awarded per individual/organisation. Therefore, we ask each individual/organisation to submit a maximum of one application.</br/><br/>
+				Applicants can submit their applications (consisting of the completed Application Form, signed Declaration of Honour and a CV) as a single pdf per email to eucitsci.cg@gmail.com before the call deadline. Training modules can be prepared in any European language, but the application should be in English.<br/><br/>
+				The <a href="{%static 'site/files/EU-Cit.Sci_Application_form.docx'%}">Application Form</a> and the 
+				<a href="{%static 'site/files/EU-Cit.Sci_Declaration_of_Honour.docx' %}">Declaration of Honour</a> are available for download.<br/><br/>
+				The evaluation process and selection criteria are detailed in sections 6 and 10 in the <a href="{%static 'site/files/EU-Cit.Sci_Guide_for_Applicants.pdf'%}">Guide for Applicants</a>. Please, carefully read them before submitting your application. A decision of successful applications will be made no later than 24th May. Complete training modules (i.e. uploaded to Moodle and user-tested) are due for submission by the end of July 2021.</br></br>
+				<b>Call publication date:</b> 26.02.2021 at 17:00 CET<br/>
+				<b>Call deadline:</b> 30.04.2021 at 17:00 CET
+
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mt-4 mb-4">
+				<h3>Further information</h3>
+			</div>
+			<div class="col-sm-8 col-12 mt-4 mb-4">
+				Two ‘Information for applicants’ sessions took place on the 10th and 15th of March 2021 from 11am - 12pm (CET) starting with a short introduction to the EU-Citizen.Science project and training module design followed by a Q&amp;A session. A recording of one of the sessions is available <a href="https://www.youtube.com/watch?v=CbdV-V4A-yM">here</a>.<br/><br/>
+
+				We collected some FAQs during the ‘Information for applicants’ sessions. We have answered these questions in a document available for download in the list below. The presentation we used during these sessions is also available for download.<br/><br/>
+
+				<b>Contact person:</b> Nadia Dewhurst-Richman eucitsci.cg (at) gmail.com
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid bg-white">
+		<div class="container">
+			<div class="row">
+			<div class="col-sm-4 col-12 mt-4 mb-4">
+				<h3>Documents for download</h3>
+			</div>
+			<div class="col-sm-8 col-12 mt-4 mb-4">
+				<ul>
+					<li><a href="{%static 'site/files/EU-Cit.Sci_Guide_for_Applicants.pdf'%}">Guide for Applicants</a></li>
+					<li><a href="{%static 'site/files/EU-Cit.Sci_Application_form.docx'%}">Application Form</a> (to submit in the application)</li>
+					<li><a href="{%static 'site/files/EU-Cit.Sci_Declaration_of_Honour.docx' %}">Declaration of Honour</a> (to submit in the application)</li>
+					<li><a href="{%static 'site/files/EU-Cit.Sci_Training_module_design_guidelines_v1.pdf' %}">Preliminary module development guidelines document</a></li>
+					<li><a href="{%static 'site/files/EU-Cit.Sci_Content_Design_Template.pdf' %}">Content template</a></li>
+					<li><a href="{%static 'site/files/EU-Cit.Sci_FAQs.pdf' %}">FAQs</a> from the ‘Information for applicants’ sessions</li>
+					<li><a href="{%static 'site/files/EU-Cit.Sci_Info_session_presentation.pdf'%}">Presentation</a> of the ‘Information for applicants’ sessions. Also in <a href="{%static 'site/files/EU-Cit.Sci_Info_session_presentation_ES.pdf'%}">Spanish</a></li>
+					<li><a href="{%static 'site/files/EU-Cit.Sci_User-testing_protocol.pdf'%}">User-testing</a> protocol template</li>
+
+
+				</ul>
+	
+
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mt-4 mb-4">
+				<h3>Acknowledgement</h3>
+			</div>
+			<div class="col-sm-8 col-12 mt-4 mb-4">
+				We have used the documents produced by the <a href="https://actionproject.eu/" target="_blank">ACTION</a> project for their open call as a basis to develop the Guide for Applicants including both its annexes and thank the ACTION project for sharing these useful documents with us. ACTION has received funding from the European Union’s Horizon 2020 Framework Programme for Research and Innovation under grant agreement No. 824603
+			</div>
+		</div>
+	</div>
+</div>
+
+	{% endblock list_of_items %}

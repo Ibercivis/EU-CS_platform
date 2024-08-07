@@ -7,7 +7,7 @@ from django_summernote.widgets import SummernoteWidget
 from django.utils.translation import ugettext_lazy as _
 from geopy.geocoders import Nominatim, options
 from geopy.exc import GeocoderServiceError
-from .models import Project, Topic, Status, Keyword, FundingBody
+from .models import Project, Topic, Status, Keyword, FundingBody, ProjectCountry
 from .models import ParticipationTask, GeographicExtend, HasTag, DifficultyLevel, TranslatedProject
 from organisations.models import Organisation
 from django.utils import timezone
@@ -181,6 +181,13 @@ class ProjectForm(forms.Form):
         widget=forms.OSMWidget(attrs={}),
         label=_("Project geographic location"))
 
+    projectCountry = forms.ModelMultipleChoiceField(
+        queryset=ProjectCountry.objects.all(),
+        widget=Select2MultipleWidget(),
+        label=_("Countries involved"),
+        required=False,
+        help_text=_('Select all countries where the project is active.'))
+
     # Contact and hosts details
     contact_person = forms.CharField(
         max_length=100,
@@ -312,7 +319,8 @@ class ProjectForm(forms.Form):
         start_dateData = self.data['start_date']
         end_dateData = self.data['end_date']
         projectlocality = self.data['projectlocality']
-        projectGeographicLocation = self.data['projectGeographicLocation']
+        #projectGeographicLocation = self.data['projectGeographicLocation']
+        projectGeographicLocation = self.data.get('projectGeographicLocation')
         status = get_object_or_404(Status, id=self.data['status'])
         if (self.data['difficultyLevel']):
             difficultyLevel = get_object_or_404(
@@ -386,6 +394,7 @@ class ProjectForm(forms.Form):
         project.hasTag.set(self.data.getlist('hasTag'))
         project.geographicextend.set(self.data.getlist('geographicextend'))
         project.organisation.set(self.data.getlist('organisation'))
+        project.projectCountry.set(self.cleaned_data['projectCountry'])
 
         for key, value in self.data.items():
             if key.startswith('description_'):
@@ -452,6 +461,8 @@ class ProjectForm(forms.Form):
         project.fundingProgram = self.data['funding_program']
         project.mainOrganisation = mainOrganisation
         project.projectGeographicLocation = projectGeographicLocation
+
+        project.projectCountry.set(self.cleaned_data['projectCountry'])
 
         for key, value in self.data.items():
             if key.startswith('description_'):

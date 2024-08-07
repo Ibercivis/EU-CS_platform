@@ -1,0 +1,159 @@
+{% extends "base_r2.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{{ block.super }}Translations{% endblock %}
+
+{% block splash %}
+<div class="jumbotron jumbotron-fluid">
+	<div class="container">
+		<h1 class="display-5 pt-2 pb-4 text-secondary">{% trans "Translations" %}</h1>
+	</div>
+</div>
+{% endblock splash %}
+
+{% block navbar-left %}
+{% include "_navbar.html" %}
+{% endblock %}
+
+
+{% block list_of_items %}
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4 col-12 mt-4 mb-4">
+			<h3>Can you help us to translate this platform?</h3>
+		</div>
+		<div class="col-sm-8 col-12 mt-4 mb-4">
+
+
+
+			<p>Have you spotted an error in the translation? The EU-Citizen.Science platform is built by the community for the community. We would be very thankful if you could help us correct these errors.</p>
+
+
+			<p>All translations can be found in github, inside this <a target="_blank" href="https://github.com/Ibercivis/EU-CS_platform/tree/master/src/locale/"> folder</a>:  </p>
+
+
+			<p>In each of the subfolders you will see files with 'po' and 'mo' extensions. You can improve the translation in one language by editing the related 'po' file (see next section on how to edit po files). 
+			Here are direct links to each of the 'po' files.
+			<br/>
+
+			<ul>
+				<li><a href="https://github.com/Ibercivis/EU-CS_platform/blob/master/src/locale/de/LC_MESSAGES/django.po" target="_blank">De - german</a></li>
+				<li><a href="https://github.com/Ibercivis/EU-CS_platform/blob/master/src/locale/el/LC_MESSAGES/django.po" target="_blank">El - greek</a></li>
+				<li><a href="https://github.com/Ibercivis/EU-CS_platform/blob/master/src/locale/es/LC_MESSAGES/django.po" target="_blank">Es - spanish</a></li>
+				<li><a href="https://github.com/Ibercivis/EU-CS_platform/blob/master/src/locale/et/LC_MESSAGES/django.po" target="_blank">Et - estonian</a></li>
+				<li><a href="https://github.com/Ibercivis/EU-CS_platform/blob/master/src/locale/fr/LC_MESSAGES/django.po" target="_blank">Fr - french</a></li>
+				<li><a href="https://github.com/Ibercivis/EU-CS_platform/blob/master/src/locale/hu/LC_MESSAGES/django.po" target="_blank">Hu - hungarian</a></li>
+				<li><a href="https://github.com/Ibercivis/EU-CS_platform/blob/master/src/locale/it/LC_MESSAGES/django.po" target="_blank">It - italian</a></li>
+				<li><a href="https://github.com/Ibercivis/EU-CS_platform/blob/master/src/locale/lt/LC_MESSAGES/django.po" target="_blank">Lt - lituanian</a></li>
+				<li><a href="https://github.com/Ibercivis/EU-CS_platform/blob/master/src/locale/nl/LC_MESSAGES/django.po" target="_blank">Nl - dutch</a></li>
+				<li><a href="https://github.com/Ibercivis/EU-CS_platform/blob/master/src/locale/pt/LC_MESSAGES/django.po" target="_blank">Pt - portuguese</a></li>
+				<li><a href="https://github.com/Ibercivis/EU-CS_platform/blob/master/src/locale/sv/LC_MESSAGES/django.po" target="_blank">Sv - swedish</a></li>
+			</ul>
+		</div>
+
+		<div class="col-sm-4 col-12 mt-4 mb-4">
+			<h3>How to edit <i>po</i> files</h3>
+		</div>
+		<div class="col-sm-8 col-12 mt-4 mb-4">
+			<p>There are two ways to edit po files:</p>
+			<ul>
+				<li><b>Option #1 - You have a Github account: </b>In this particular case maybe you have enough experience to send us translation improvements through GitHub. If not, the easy way is to use the GitHub online editor:
+					<ul>
+						<li>(1) Go to your desired language to translate using the links to <i>po</i> files provided above</li>
+						<li>(2) Edit the file online by clicking on the pencil icon
+							<img title="translations example" 
+							     class="img-fluid mb-3" src="{% static 'site/img/edit_github.png' %}">
+							Take a look at the next section to understand <i>django.po</i> structure
+						</li>						
+
+						<li>(3) Once you are done editing, click on <i>Propose changes</i><img title="translations example" class="img-fluid mb-3"
+								src="{% static 'site/img/step3.png' %}"></li>
+
+						<li>(4) Click on "Create pull request"<img title="translations example" class="img-fluid mb-3"
+								src="{% static 'site/img/step4.png' %}"></li>
+
+						<li>(5) Click en "create pull request" again</i><img title="translations example" class="img-fluid mb-3"
+								src="{% static 'site/img/step5.png' %}"></li>
+
+
+					</ul>
+				</li>
+				<li><b>Option #2 - You do not have (and you do not want to have) a GitHub account: </b>In this case, the objective is to download your desired django.po file, edit it (using your favourite file editor, and send it back to us by email to vval (at) bifi.es
+					<ul>
+						<li>(1) Go to your desired language to translate using the links to <i>po</i> files provided above</li>
+						<li>(2) Right click on <i>Raw</i> to download the file in raw format to your computer: First, right click on <i>Raw</i>. Second, select <i>Save link as...</i>.
+							Third, when saving add <i>txt</i> extension to the filename.</li> 
+							<img title="translations example" 
+							     class="img-fluid mb-3" src="{% static 'site/img/raw_github.png' %}">
+						</li>
+						<li>(3) Edit the file using your favourite text editor. Take a look to the next section to undestand <i>django.po</i> structure</li>
+						<li>(4) Send it back to us by email to vval (at) bifi.es</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="col-sm-4 col-12 mt-4 mb-4">
+			<h3>The structure of the <i>po</i> files</h3>
+		</div>
+		<div class="col-sm-8 col-12 mt-4 mb-4">
+			This is how the <i>django.po</i> file looks like:</br>
+			<code>
+				...<br/>
+				...<br/>
+				#: .\src\accounts\forms.py:32 .\src\templates\base.html:69<br/>
+				#: .\src\templates\registration\password_reset_complete.html:18<br/>
+				msgid "Log in"<br/>
+				msgstr "Iniciar sesión"<br/>
+				<br/>
+				#: .\src\accounts\forms.py:50<br/>
+				msgid ""<br/>
+				"We see that your email address is in our database, but that you have not yet "<br>
+				"confirmed your address. Please search for the confirmation email in your "<br/>
+				"inbox (or spam) to activate your account"<br>
+				msgstr ""<br/>
+				"Su correo electrónico se encuentra en nuestra base de datos, pero Ud. no "<br/>
+				"haconfirmado todavía esta dirección. Por favor, busque el correo de "<br/>
+				"confirmaciónen su bandeja de entrada (o spam) para activar su cuenta"<br/>
+				...<br/>
+				...<br/>
+
+			</code>
+			<p>So, as you can imagine, all that you need to do is to provide a translation of the message that follows <i>msgid</i> inside <i>msgtr</i>. For example, in the above example, <i>Log in</i> is translated into <i>Iniciar sesión</i> in Spanish.</p>
+
+
+
+
+			<p>Be careful! msgid is the part in English
+			that you have to translate, you shouldn't change it since it identifies the text string that we want to translate. </p>
+
+			<p>Many text fragments have already been translated, you can check them to see if they are correct and if not, change them.</p>
+			<p>In the next example, we are going to  translate 'Can participate at home'. We fill msgstr with the translation.</p>
+			<img title="translations example" target="_blank"
+							  class="img-fluid mb-3" src="{% static 'site/img/locale_es_example.png' %}">
+			<img title="translations example" target="_blank"
+							  class="img-fluid mb-3" src="{% static 'site/img/locale_es_example2.png' %}">
+
+			<p>In translations where there are several lines, it must be respected that each line begins and ends with quotation marks</p>
+			<img title="some lines image" target="_blank"
+						      class="img-fluid mb-3" src="{% static 'site/img/some_lines.png' %}">
+
+			<p>In some cases, a strange symbol can appear, these symbols must be left as they are for it to work correctly</p>
+
+			<img title="python format translations image" target="_blank"
+								      class="img-fluid mb-3" src="{% static 'site/img/python_format_translations.png' %}">
+
+
+			<p>Remember, once you have finished translating, you can commit on github if you have permission or send us the file by email
+			and we will take care of updating the platform.</p>
+			<p>Thank you so much!</p>
+
+		</div>
+
+	</div>
+</div>
+
+</div>
+</div>
+</div>
+{% endblock list_of_items %}

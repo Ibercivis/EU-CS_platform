@@ -1,0 +1,18 @@
+{% load static %}
+{% load i18n %}
+<div id="what-is-cs" class="min-vh-100 bg-secondary d-flex align-items-center position-relative" style="overflow: hidden;">
+        <h2 class="title-position-end text-dark text-montserrat fw-bold">What is<br>citizen<br>science?</h2>
+        
+        <div class="container-fluid">
+            <div class="row container-fluid mb-3">
+                <div class="col-lg-6 col-md-6 col-sm-12 d-flex flex-column justify-content-between">
+                        <img class="img-fluid mt-auto" src="{% static 'img/image_what_is_cs.png'%}" alt="Citizen Science">
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 d-flex flex-column p-5 bg-white rounded">
+                    <p class="p-3 text-justify text-09">{% trans "Citizen science is any activity that involves the public in scientific research and thus has the potential to bring together science, policy makers, and society as a whole in an impactful way. Through citizen science, all people can participate in many stages of the scientific process, from the design of the research question, to data collection and volunteer mapping, data interpretation and analysis, and to publication and dissemination of results. Citizen science is also an approach of scientific work that may be used as a part of a broader scientific activity." %} <br></p>
+                    <p class="p-3 text-09">{% trans "Learn more about it with the <a href='/resource/88' class='text-color-primary'>ECSA 10 Principles of Citizen Science</a> and the <a href='/resource/87' class='text-color-primary'>ECSA Characteristics of Citizen Science!</a>" %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

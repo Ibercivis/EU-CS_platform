@@ -92,7 +92,7 @@
 
             <a target="_blank"
                href="{% if 'http' not in organisation.url %}//{%endif%}{{organisation.url}}"
-               class="btn btn-my-darkGreen mt-4 mr-2 mb-5">
+               class="btn btn-primary mt-4 mr-2 mb-5">
                <i class="fas fa-external-link-square-alt"></i> {% trans "Go to Organisation" %}
             </a>
 
@@ -163,13 +163,15 @@
         $(this).find('.btn-delete').attr('href', $(e.relatedTarget).data('href'));
     });
 
-var map;
-var marker_layer = new L.marker([50.5, 30.5]);
 function map_init_basic (leafmap, options) {
-    map = leafmap;
-    map.setView(organisation.latitude, organisation.longitude, 4)
-    new L.marker(organisation.latitude,organisation.longitude).addTo(map);
-}
+    var map = leafmap;
+
+    	// Replace comma with dot and parse as float
+        var lat = "{{ organisation.latitude }}".replace(',', '.');
+        var lng = "{{ organisation.longitude }}".replace(',', '.');
+		map.setView([lat, lng], 6)
+		new L.marker([lat,lng]).addTo(map);
+	}
 </script>
 {{ permissionForm.media.js }}
 {% endblock scripts %}

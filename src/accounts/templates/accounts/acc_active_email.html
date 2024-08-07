@@ -1,4 +1,3 @@
-
 {% load i18n %}
 {% block subject %}
 {% blocktrans %}Activate your EU-Citizen.Science account.{% endblocktrans %}
@@ -37,16 +36,3 @@
     <br>
 </body>
 {% endblock html_body %}
-<!-- Hi {{ user.name }},
-Thank you for signing up to become a member of the EU-Citizen.Science community. Please verify that this email address is correct, and that you entered it when signing up to join the community.
-
-Please click on the link to confirm your registration in <a href="{{domain}}{% url 'accounts:activate' uidb64=uid token=token %}">eu-citizen.science</a>.<br/>
-
-If you did not register to join the EU-Citizen.Science community, please ignore this email or reply to let us know.
-
-Thanks,
-
-The EU-Citizen.Science team
-
-P.S. Your email will always remain private, and is used only to allow us to send you alerts such as this one, unless you explicitly opt into future features on the platform. -->
-

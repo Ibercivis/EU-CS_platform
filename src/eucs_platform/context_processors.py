@@ -9,3 +9,7 @@ def global_settings(request):
 
 def static_version(request):
     return {'STATIC_VERSION': settings.STATIC_VERSION}
+
+
+def theme(request):
+    return {'THEME': settings.THEME}

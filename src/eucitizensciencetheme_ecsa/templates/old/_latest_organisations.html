@@ -1,0 +1,19 @@
+{% load i18n %}
+<div id="latest-organisations" class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 d-flex align-items-center mb-3">
+                <div class="circle-icon me-2 mb-3">
+                    
+                </div>
+                <h2 class="h-100 text-center">{% trans "Latest organisations" %}</h2>
+            </div>
+        </div>
+        <div class="row">
+                    {% include "_organisations_cards.html" %}
+        </div>
+            </div>
+        </div>
+    </div>
+</div>
+

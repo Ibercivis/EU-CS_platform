@@ -1,0 +1,91 @@
+{% load i18n %}
+{% load active_link_tags %}
+<!-- Sidebar Menu -->
+<nav id="sidebar-menu" class="sidebar-menu">
+    <!-- Language and Close Button -->
+    <div class="sidebar-top">
+        <!-- Moved to the topBar, not here -->
+        <!--
+        <div class="language-select">
+            <li class="dropdown">
+                <a class="sidebar-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+                {% get_current_language as LANGUAGE_CODE %}{{ LANGUAGE_CODE }}
+                </a>
+                <div class="dropdown-menu">
+                <form action="/i18n/setlang/" method="post" style="display: inline;" name="languageForm">
+                    {% csrf_token %}
+                    <div style="display: inline;">
+                    <input id="language" name="language" type="hidden" value="en">
+                    {% for lang in TRANSLATED_LANGUAGES %}
+                    <a class="dropdown-item" style="cursor: pointer;"
+                        onclick="document.getElementById('language').value='{{ lang.0 }}';languageForm.submit()">
+                        {{ lang.1 }}
+                    </a>
+                    {% endfor %}
+                    </div>
+                </form>
+                </div>
+            </li>
+        </div> -->
+        <button id="close-sidebar" class="btn close-sidebar">
+            &times; <!-- 'X' Symbol -->
+        </button>
+    </div>
+  
+    <!-- Navigation Menu Items -->
+    <ul class="sidebar-nav">
+        {% for item in topbar_items %}
+        <li class="sidebar-item">
+            <a class="sidebar-link {% active_link item.name %}" href="{{ item.slug }}">{{ item.name }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <!-- Separator -->
+    <hr class="sidebar-separator">
+  
+    <!-- Authentication Links and Join Community Text -->
+    <div class="auth-community-section">
+        <span class="join-community-text w-100">Join the community and participate!</span>
+        
+        {% if not user.is_authenticated %}
+        <a class="btn btn-solid-white text-color-secondary sidebar-btn-auth" style="margin-right: 12px;"href="{% url 'accounts:login' %}">{% trans "Login" %}</a>
+        <a class="btn btn-outline-white sidebar-btn-auth" href="{% url 'accounts:signup' %}">{% trans "Signup" %}</a>
+        {% else %}
+        <li class="sidebar-item dropdown">
+            <a class="sidebar-link dropdown-toggle" id="dropdownRegistered" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#">
+            <i class="fas fa-user-edit"></i>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownRegistered">
+            <a class="dropdown-item" href="{% url 'profiles:show_self' %}">{% trans "My personal area" %}</a>
+            <a class="dropdown-item" href="{% url 'profiles:submissions' %}">{% trans "My submissions" %}</a>
+            <a class="dropdown-item" href="{% url 'profiles:bookmarks' %}">{% trans "My bookmarks" %}</a>
+            <a class="dropdown-item" href="{% url 'profiles:privacyCenter' %}">{% trans "My privacy center" %}</a>
+            {% if user.is_staff %}
+            <a class="dropdown-item" href="{% url 'admin:index' %}">{% trans "Admin" %}</a>
+            {% endif %}
+            <a class="dropdown-item" href="{% url 'accounts:logout' %}">{% trans "Logout" %}</a>
+            </div>
+        </li>
+        <button class="btn btn-outline-secondary sidebar-btn-auth" type="submit" data-bs-toggle="modal" data-bs-target="#modalsubmit">
+            <i class="fas fa-paper-plane"></i>&nbsp;&nbsp;{% trans "New submission" %}
+        </button>
+        {% endif %}
+    </div>
+
+    <!-- Contact and Social Media Section -->
+    <div class="contact-social-section">
+        <!-- Contact link -->
+        <a href="{% url 'contact' %}" class="sidebar-link">Contact</a>
+        
+        <!-- Social media links -->
+        <div class="social-icons">
+            <!-- Vertical separator -->
+            <div class="vertical-separator"></div>
+            <a href="{{footer.facebook_url}}" target="_blank" rel="noopener noreferrer" class="social-icon-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="{{footer.twitter_url}}" target="_blank" rel="noopener noreferrer" class="social-icon-link"><i class="fab fa-twitter"></i></a>
+            <a href="{{footer.instagram_url}}" target="_blank" rel="noopener noreferrer" class="social-icon-link"><i class="fab fa-instagram"></i></a>
+            <!-- More social links if needed -->
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,62 @@
+{% load thumbnail %}
+{% load static %}
+
+<div class="col-lg-2 col-sm-4 col-xs-6 mb-5 d-flex">
+    <div class="card h-100 w-100 shadow border-0 d-flex flex-column">
+        <div class="card-body w-100 justify-content-center flex-grow-1">
+            <div class="container-card">
+                {% if member.user.ecsa_user_profile.ecsaMember or member.user.ecsa_user_delegate.ecsaMember %}
+                <div class="ecsa-badge">
+                    <img class="ecsa-badge-img" 
+                        data-bs-toggle="tooltip"
+                        title="ECSA Member" 
+                        src = "{% static 'ecsa_integration/img/ecsa_badge.png' %}" />
+                </div>
+                {% endif %}
+                <div class="project-image-circumference mx-auto mb-3">
+                    <a href="/users/{{member.slug}}">
+                        <img class="project-image-circular" src="{% thumbnail member.picture|default:'default_profile.png' 133x133 crop %}" alt="image for {{organisation.name}}" style="width: 100%; height: auto;">
+                    </a>
+                </div>
+            </div>
+            <div class="text-center">
+                <h3 class="project-name text-dark mb-2 w-100 mx-auto">
+                    <a href="/users/{{member.slug}}" class="project-name text-dark text-center" style="font-size: smaller;">
+                        {% if member.surname %}
+                            {{member.surname}},
+                        {% endif %}
+                        {{ member.user.name }}
+                    </a>
+                </h3>
+            </div>
+            <div class="text-details align-items-center">
+                {% if member.organisation %}
+                   {% for org in member.organisation.all %}
+                    <a href="/users?organisation={{org}}" class=" me-1 mb-1  badge project-topic">{{org|truncatechars:25}}</a>
+                    {% endfor %}
+                {% endif %}
+                {% for area in member.interestAreas.all %}
+                    {% if forloop.counter <= 2 %}
+                        <a href="/users?interestAreas={{area}}" class=" me-1 mb-1  badge project-topic">{{area | capfirst}}</a>
+                    {% elif forloop.counter < 3 %}
+                        ...
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="mt-auto p-3">
+            <div class="d-flex justify-content-between">
+                <div class="text-details d-flex align-items-center">
+                    <i class="fas fa-flag me-2"></i>
+                    {% if member.country.name %}
+                    <a href="/users?country={{member.country.code}}" class="text-dark">
+                            {{member.country.name}}
+                    </a>
+                    {% else %}
+                        n/a
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

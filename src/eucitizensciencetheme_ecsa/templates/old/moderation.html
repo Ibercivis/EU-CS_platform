@@ -1,0 +1,210 @@
+{% extends "base_r2.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}{{ block.super }} :: Moderation{% endblock %}
+
+
+{% block splash %}
+<div class="jumbotron jumbotron-fluid  jumbotron-default">
+	<div class="container">
+		<h1 class="display-4 text-white pt-4 pb-4">{% trans "The moderation process" %}</h1>
+	</div>
+</div>
+{% endblock splash %}
+{% block navbar-left %}
+{% include "_navbar.html" %}
+{% endblock %}
+
+
+{% block list_of_items %}
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4 col-12 mt-4 mb-4">
+			<h2>{% trans "The Moderation Process" %}</h2>
+		</div>
+		<div class="col-sm-8 col-12 mt-4 mb-4">
+			Our ambitious goal is to become the place to share useful resources about planning,
+			running, evaluating and participating in citizen science initiatives or simply learning
+			about citizen science, including tools and guidelines, best practices and training materials.<br/><br/>
+
+			It is important to us, and the community of practitioners, that we have a way of ensuring that the resources
+			profiled on the platform are indeed of good quality, and that the projects profiled on the platform are indeed
+			citizen science initiatives. This is why we have a moderation process for all submissions.<br/><br/>
+
+			When you create a profile for a resource or a project to share on the platform, you will be asked to provide a
+			range of descriptive information about it, and once all of the mandatory data fields are completed, you will be able
+			to submit the profile. The provision of this mandatory metadata is the first requirement for all profiles.<br/><br/>
+
+			Upon submitting that profile, it will be sent for moderation to a member of the EU-Citizen.Science consortium.
+			Until someone has reviewed it against our criteria, it will be marked as ‘not yet moderated’ on the platform,
+			and will not be automatically visible in search results.<br/><br/>
+
+		</div>
+	</div>
+</div>
+<div class="container-fluid whitebackground">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mt-4 mb-4">
+				<h2>TLDR - too long, didn’t read</h2>
+			</div>
+			<div class="col-sm-8 col-12 mt-4 mb-4">
+				This visualisation of our moderation workflow for resources allows you to see the steps of
+				the moderation process at a glance. The sections below provide you with more detail about how moderation works. <br/><br/>
+				<img class="img-fluid img-zoom col12 mt-5" src="{% static 'site/img/mod_proc.png' %}"/>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4 col-12 mt-4 mb-4">
+			<h2>Required Criteria - Citizen Science</h2>
+		</div>
+		<div class="col-sm-8 col-12 mt-4 mb-4">
+			The first criterion that the moderator will look for, is that your <b>resource is relevant to citizen science</b>, or that your project is a <b>citizen science initiative</b>.<br/><br/>
+			Although there are no hard and fast definitions of what citizen science is and is not (nor should there be -
+			citizen science should always remain a broad and inclusive concept), we turn to the recent work conducted by the citizen science
+			community on the <b><a target="_blank" href="https://zenodo.org/communities/citscicharacteristics/?page=1&size=20">Characteristics of Citizen Science</a></b> as guidance. Please consult these characteristics if you are uncertain
+			whether the resource or the project you would like to share really does relate to citizen science. If the moderator has concerns they will contact you directly.
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid whitebackground">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mt-4 mb-4">
+				<h2>Suggested Criteria - the Principles of Citizen Science</h2>
+			</div>
+			<div class="col-sm-8 col-12 mt-4 mb-4">
+				The moderator of your submitted profile will also consider whether your resource or project is in alignment with the <a href="/about#ten">10 Principles of Citizen Science.</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4 col-12 mt-4 mb-4">
+			<h2>Specific criteria - the quality of the resource</h2>
+		</div>
+		<div class="col-sm-8 col-12 mt-4 mb-4">
+			For the resources to be shared on the platform, we have developed a specific set of further criteria, which will be assessed during the moderation process. You can read more about
+			how we developed these in the blog post: ‘How we developed the quality criteria for resources’<link> and you can
+			read the full list of resources criteria in Quality Criteria for Resources.<br/><br/>
+			We consider good quality citizen science resources to be those that are easy to access, implement and adapt, are well structured, are clearly described and written in clear
+			language, and ideally improve or support the desired impact of the initiative (eg. on science, policy or society, etc).<br/><br/>
+			For this purpose we have developed a range of criteria that the moderator will assess against a 5-point scale, from strongly disagree (1 point) to Stronly agree (5 points)<br/><br/>
+			<ul>
+				<li><b>Easy access to the resource:</b>the resource should be easy to access, i.e. it doesn’t require registration, and is not behind a paywall. </li>
+				<li><b>Readability and Legibility:</b></li>
+				<ul>
+					<li>
+						the resource should be <b>clearly structured</b> according to the type of the resource. For example, a scientific paper or report should include an introduction, methodology,
+						results, discussion and/or conclusions, and methodology documents should include an introduction, audience description, step by step methodology, and an example.
+					</li>
+					<li>
+						the resource should be written in <b>clear language</b> that is easy to read and understand for the intended target audience, and should be concise, unambiguous,
+						and avoid the use of unusual words and jargon. Where technical terms are used, their meaning should be explained clearly.
+					</li>
+					<li>
+						the resource should pay attention to <b>basic formatting</b>, such as clear titles and paragraphs,
+						correct grammar and spelling, a legible font of large enough size to read, and clearly marked references.
+					</li>
+				</ul>
+				<li>
+					<b>Clarity of Content:</b> the resource should clearly describe its aims, goals and methods, so that it is easy for
+					readers to understand how to apply the resource in their own context.
+				</li>
+				<li><b>Applicability</b></li>
+				<ul>
+					<li>
+						the resource should be <b>easy to implement,</b> ideally with descriptions of how it can be implemented,
+						the contexts that it is useful for, and recommendations for further use or development.
+					</li>
+					<li>
+						the resource should be <b>easy to adapt</b> to different cases, ideally with an explanation
+						of any limitations of the resource and the contexto in which it could be useful, and with
+						guidelines or recommendations for its adaptation to different cases.
+					</li>
+				</ul>
+				<li><b>Object Quality:</b></li>
+				<ul>
+					<li>If the resource is an audio object, it should be <b>clearly audible</b>, with no interruptions or background noise.</li>
+					<li>If the resource is a video, an image or illustration, the quality should be good enough to <b>see clearly, with a sharp focus</b>.</li>
+
+				</ul>
+
+			</ul>
+			The highest possible score is 40 points, if all criteria are applicable. But in most cases, only a selection of the above criteria will be applicable. The moderator
+			will look to see that your resource exceeds 50% of the total possible points for that type of resource.
+			That is the threshold for being listed on the platform as a good quality resource. <br/><br/>
+
+
+		</div>
+	</div>
+</div>
+<div class="container-fluid whitebackground">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mt-4 mb-4">
+				<h2>Supporting criteria</h2>
+			</div>
+			<div class="col-sm-8 col-12 mt-4 mb-4">
+				It really enhances the value and quality of your resources when you can say something about how it has been
+				used and developed further in practice, and whether or not it has been evaluated for usefulness and
+				applicability in practice. The moderator will also take it into positive consideration if there is evidence
+				of the following criteria being met (but these are not part of the threshold calculation mentioned above):<br/><br/>
+				<ul>
+					<li><b>Evaluation:</b></li>
+					<ul>
+						<li>
+							The resource has been <b>used in the context of citizen science,</b>
+							or is it currently being used in a citizen science initiative,  and the outcome of this has been shared.
+						</li>
+						<li>
+							The resource has been <b>evaluated</b> in terms of the quality of the content, or the methods,
+							or the results of the method, and the outcomes of these evaluations have been shared.
+						</li>
+					</ul>
+					<li><b>Impact</b></li>
+					<ul>
+						<li>The resource refers to any <b>impact</b> that it could have (or has had) on science, policy,  society, etc.</li>
+						<li>The impact of the resource has been <b>measured</b> and is shared in the resource.</li>
+					</ul>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4 col-12 mt-4 mb-4">
+			<h2>Marking as ‘Moderated’</h2>
+		</div>
+		<div class="col-sm-8 col-12 mt-4 mb-4">
+			Once your resource profile has successfully been through the moderation process,
+			it will be marked as ‘moderated’ on the platform, and will be fully available in all search results.
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid whitebackground">
+	<div class="row">
+		<div class="col-sm-4 col-12 mt-4 mb-4">
+		</div>
+		<div class="col-sm-8 col-12 mt-4 mb-4">
+		</div>
+
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4 col-12 mt-4 mb-4">
+		</div>
+		<div class="col-sm-8 col-12 mt-4 mb-4">
+		</div>
+
+	</div>
+</div>
+{% endblock list_of_items %}

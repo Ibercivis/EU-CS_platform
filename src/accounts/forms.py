@@ -9,7 +9,10 @@ from crispy_forms.bootstrap import StrictButton
 from authtools import forms as authtoolsforms
 from django.contrib.auth import forms as authforms
 from django.urls import reverse
-from captcha.fields import ReCaptchaField
+#from captcha.fields import ReCaptchaField
+from django_recaptcha.fields import ReCaptchaField
+#from captcha.fields import ReCaptchaField
+
 
 User = get_user_model()
 
@@ -33,7 +36,7 @@ class LoginForm(AuthenticationForm):
                     reverse("accounts:password-reset")
                 )
             ),
-            StrictButton(_("Log in"), css_class="btn btn-my-darkBlue", type="Submit")
+            StrictButton(_("Log in"), css_class="btn btn-secondary", type="Submit")
 
         )
 
@@ -82,8 +85,8 @@ class SignupForm(authtoolsforms.UserCreationForm):
         self.fields["name"].label = ""
         self.fields["password1"].label = ""
         self.fields["password2"].label = ""
-        #self.fields["captcha"] = ReCaptchaField()
-        #self.fields["captcha"].label = ""
+        self.fields["captcha"] = ReCaptchaField()
+        self.fields["captcha"].label = ""
         self.helper.layout = Layout(
             Field("email", placeholder=_("Enter Email"), autofocus=""),
             HTML('<div class="m-4"></div>'),
@@ -94,7 +97,7 @@ class SignupForm(authtoolsforms.UserCreationForm):
             Field("password2", placeholder=_("Re-enter Password")),
             HTML('<div class="m-4"></div>'),
             Field("captcha"),
-            StrictButton(_("Sign up"), css_class="btn btn-my-darkBlue mt-5", type="Submit"),
+            StrictButton(_("Sign up"), css_class="btn btn-secondary mt-5", type="Submit"),
         )
 
 

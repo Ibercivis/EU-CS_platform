@@ -210,6 +210,7 @@ def editProject(request, pk):
         'originDatabase': project.originDatabase,
         'originUID': project.originUID,
         'originURL': project.originURL,
+        'countries': project.countries.all,
     }
 
     translation_fields=['description','aim', 'howToParticipate','equipment']
@@ -315,6 +316,15 @@ def projects(request):
     paginator = Paginator(projects, 18)
     page = request.GET.get('page')
     projects = paginator.get_page(page)
+    # To only show some topics and keywords
+    for project in projects:
+        combined = list(project.topic.all()) + list(project.keywords.all())
+        if len(combined) > 3:
+            project.display_items = combined[:3]
+            project.more_count = len(combined) - 3
+        else:
+            project.display_items = combined
+            project.more_count = 0
 
     #For resources count
     allResources = Resource.objects.all()
@@ -364,7 +374,8 @@ def projects(request):
         'organisationsCounter': organisationsCounter,
         'platformsCounter': platformsCounter,
         'usersCounter': usersCounter,
-        'isSearchPage': True})
+        'isSearchPage': True,
+        'show_search_bar': False})
 
 @login_required
 def likeProjectAjax(request):

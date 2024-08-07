@@ -1,0 +1,24 @@
+{% extends "base_r2.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}{{ block.super }} :: {% trans "Policy Brief" %}{% endblock %}
+{% block splash %}
+<div class="jumbotron jumbotron-fluid">
+	<div class="container">
+		<h1 class="display-5 pt-2 pb-4 text-secondary">{% trans "Policy Brief" %}</h1>
+	</div>
+</div>
+{% endblock splash %}
+{% block navbar-left %}
+{% include "_navbar.html" with active_link="about" %}
+{% endblock %}
+{% block list_of_items %}
+<div class="container">
+	You can download this policy brief in pdf format <a href="{% static 'site/img/policy_brief_eucitizenscience_2021.pdf' %}">here</a>
+
+	<img src="{% static 'site/img/policy_brief_eucitizenscience_2021.jpg' %}" />
+</div>
+{% endblock list_of_items %}
+
+{% block scripts %}
+{% endblock scripts %}

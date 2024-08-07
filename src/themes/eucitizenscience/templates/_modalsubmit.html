@@ -1,0 +1,28 @@
+{% load i18n %}
+<div class="modal fade" id="modalsubmit">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">{% trans "What do you want to submit?" %}</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5><a  href="/newProject" class="my-link"><i class="fas fa-binoculars"></i> {% trans "Project" %}</a></h5>
+                {% trans "Create a Citizen Science Project profile" %}<br/><hr>
+                <h5><a href="/newResource" class="my-link"><i class="fas fa-book"></i> {% trans "Resource" %}</a></h5>
+                {% trans "Create a profile for a Resource that is relevant for Citizen Science" %}<br/><hr>
+                <h5><a href="/newTrainingResource" class="my-link"><i class="fas fa-graduation-cap"></i> {% trans "Training" %}</a></h5>
+                {% trans "Create a profile for Training and Education Material related to the practice of Citizen Science" %}<br/><hr>
+                <h5><a href="/new_organisation" class="my-link"><i class="fas fa-university"></i> {% trans "Organisation" %}</a></h5>
+                {% trans "Create a profile for your Organisation" %}<br/>
+                <hr>
+                <h5><a href="/new_event" class="my-link"><i class="fas fa-calendar-day"></i> {% trans "Event" %}</a></h5>
+                {% trans "Create an Event" %}<br/><hr>
+
+                <h5><a href="/newPlatform" class="my-link"><i class="fas fa-globe-europe"></i> {% trans "Platform" %}</a></h5>
+                {% trans "Create a profile for your citizen science platform or network" %}
+            </div>
+        </div>
+    </div>
+</div>

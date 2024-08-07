@@ -1,0 +1,291 @@
+{% extends "base_r2.html" %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ block.super }} :: What’s new in citizen science training: from open science to public engagement{% endblock %}
+{% block splash %}
+<div class="jumbotron jumbotron-fluid">
+	<div class="container">
+		<h1 class="display-5 pt-2 pb-4 text-secondary">{% trans "What’s new in citizen science training: from open science to public engagement" %}</h1>
+		<h3>27 October 2021 at 11:00 AM - 12:35 PM CEST</h3>
+		<br/>
+	</div>
+</div>
+{% endblock splash %}
+
+{% block navbar-left %}
+{% include "_navbar.html" %}
+{% endblock %}
+
+{% block list_of_items %}
+<div class="container mt-5">
+	<div class="row">
+		<div class="col-12">
+			<img class="img img-fluid" src="{% static 'site/img/27_10_csa_event_3.jpg' %}" />
+		</div>
+	</div>
+</div>
+<div class="container mt-5">
+	<div class="row">
+		<div class="col-sm-4 col-12 mb-4">
+		<h3>Mission</h3>
+		</div>
+		<div class="col-sm-8 col-12 mb-4">
+			EU-Citizen.Science contains a wide array of free, self-directed training modules on citizen science on <a href="https://moodle.eu-citizen.science/">its Moodle page</a>. The themes of the training modules range from introduction to citizen science over research design and methods, engagement and impact to communication and regulations and ethics.<br /><br />
+
+			At this event, we will showcase three of these training modules and offer the opportunity to meet the trainers who developed them. We will launch the final version of the EU-Citizen.Science platform and show its new features. Finally, the winners of the #MonthOfTheProjects campaign will be presented.
+
+		</div>
+	</div>
+</div>
+<div class="container-fluid bg-white">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mt-4 mb-4">
+				<h3>Objectives</h3>
+			</div>
+			<div class="col-sm-8 col-12 mt-4 mb-4">
+					<ul>
+						<li>Showcase three training modules available on the EU-Citizen.Science Moodle platform and meet the trainers who developed them.</li>
+						<li>Launch the final version of the EU-Citizen.Science platform and show the new features which have been introduced.</li>
+						<li>Present the winners of the #MonthOfTheProjects campaign.</li>
+
+					</ul>
+
+
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4 col-12 mt-4 mb-4">
+			<h3>Recording of the event and presentations</h3>
+		</div>
+		<div class="col-sm-8 col-12 mt-4 mb-4">
+						<p>Over 90 participants joined the event over Zoom. You can see a recording of the event <a href="https://www.youtube.com/watch?v=lSQMDHGA9KU" target="_blank">here</a> on the ECSA Youtube channel. Download the presentations of our speakers by directly clicking on the title:</p>
+						<ul>
+										<li><a href="{% static 'site/files/Citizen and societal engagement - Niamh Delaney and Linden Farrer.pdf'%}" target="_blank">Citizen and Societal Engagement: A policy and programme priority for the European Commission</a> - Niamh Delaney and Linden Farrer</li>
+										<li>
+														<a href="{%static 'site/files/Volunteer engagement, management and care - Alice Sheppard.pdf'%}" target="_blank">
+																		Volunteer engagement, management and care
+														</a> - Alice Sheppard</li>
+										<li><a href="{%static 'site/files/Designing for Learning through Citizen Science - Alice Sheppard for Jessica Wardlaw.pdf'%}" target="_blank">Designing for learning through citizen science</a> - Alice Sheppard on behalf of Jessica Wardlaw</li>
+										<li><a href="{%static 'site/files/Doing citizen science as open science_ what, why, and how - Pen-Yuan Hsing.pptx'%}" target="_blank">Doing citizen science as open science: what, why, and how</a> - Pen-Yuan Hsing</li>
+										<li><a href="{%static 'site/files/YouCount - Patricia Canto.pptx.pdf'%}" target="_blank">YouCount project</a> - Patricia Canto Farachala</li>
+										<li><a href="{%static 'site/files/amai! - Annelies Duerinckx.pdf'%}" target="_blank">amai! Project</a> - Annelies Duerinckx</li>
+										<li><a href="{%static 'site/files/Objective1000 - Patrick Grootaert.pdf'%}" target="_blank">Objective1000</a> - Patrick Grootaert</li>
+						</ul>
+		</div>
+	</div>
+</div>
+<div class="container-fluid bg-white">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mt-4 mb-4">
+				<h3>Agenda</h3>
+			</div>
+			<div class="col-sm-8 col-12 mt-4 mb-4">
+				<b>11:00 - 11:25 Opening and ice-breaker</b>
+				<div class="ms-5"><b>11:00 - 11:05</b>  Welcome and introduction by the EU-Citizen.Science project - Antonella Radicchi, MfN</div>
+				<div class="ms-5"><b> 11:05 - 11:15</b>  Citizen and Societal Engagement: A policy and programme priority for the European Commission - Niamh Delaney, European Commission and Linden Farrer, European Commission </div>
+				<div class="ms-5 mb-3"><b>11:15 - 11:25</b> Let’s warm up for the event - Stickydot</div>
+
+				<b>11:25 - 12:10  Training module session: pitches and interactive session</b>
+
+				<div class="ms-5"><b>11:25 - 11:35</b>  Training module pitch: Volunteer engagement, management and care - Alice Sheppard, UCL</div>
+				<div class="ms-5"><b>11:35 - 11:45</b>  Training module pitch: Designing for learning through citizen science - Jessica Wardlaw, Natural History Museum in London</div>
+	<div class="ms-5"><b>11:45 - 11:55</b>  Training module pitch: Doing citizen science as open science: what, why, and how - Pen-Yuan Hsing, University of Bath</div>
+
+				<div class="ms-5 mb-3"><b>11:55 - 12:10</b>  Interactive discussion with the trainers in break-out rooms - </div>
+
+				<b>12:10 - 12:20  EU-Citizen.Science: introduction to the new features and guided tour of the platform</b> - Claudia Fabó Cartas, ECSA and Francisco Sanz, Ibercivis 
+				<div class="ms-5 mb-3">Overview of the new training modules and additional new features of the platform: e.g. projects, resources and training resources, multi-language option, etc.</div>
+
+				<b>12:20 - 12:30  Presentation of the #MonthOfTheProjects winners</b> - Claudia Fabó Cartas, ECSA
+				<div class="ms-5 mb-3">Winners: Patricia Canto Farachala, Annelies Duerinckx and Patrick Grootaert</div>
+
+				<b>12:30 - 12:35  Wrap-up and closing remarks</b>
+
+			</div>
+		</div>
+	</div>
+<!-- Participants -->
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mt-4 <mb-4">
+				<h3>Invited Speakers</h3>
+			</div>
+			<div class="col-sm-8 col-12 mt-4 mb-4">
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mt-4 mb-4">
+				<img  class="img-fluid img-zoom" src="{% static 'site/img/Patricia_canto.png' %}"/>
+			</div>
+			<div class="col-sm-8 col-12 mt-4 mb-4">
+				<h4>Patricia Canto Farachala</h4>
+				Patricia is a researcher at Orkestra-Basque Institute of Competitiveness and is interested in how research communication (with a focus on the social sciences) contributes to territorial development processes. Patricia is part of the research team behind YouCount, a citizen social science project in which research communication is a key dimension.
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mt-4 mb-4">
+				<img  class="img-fluid img-zoom" src="{% static 'site/img/Annelies_duerinkx.png' %}"/>
+			</div>
+			<div class="col-sm-8 col-12 mt-4 mb-4">
+				<h4>Annelies Duerinckx</h4>
+				Annelies Duerinckx, PhD, is coordinator of Scivil, the Flemish citizen science center. Scivil promotes citizen science, creates synergies between stakeholders and offers supports to project initiators. As coordinator, Annelies provides policy advice, conducts surveys on citizen science in Flanders and organizes working groups, lectures, workshops, and tailored advice.
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mt-4 mb-4">
+				<img  class="img-fluid img-zoom" src="{% static 'site/img/claudia_fabo.png' %}"/>
+			</div>
+			<div class="col-sm-8 col-12 mt-4 mb-4">
+				<h4>Claudia Fabó Cartas</h4>
+				Claudia works at ECSA as Project Officer for the EU-Citizen.Science project, where she leads the work package on “Platform, Community and Network Building“. Previously, she was part of the organising team of the Citizen Science SDG Conference in October 2020 on citizen science’s contribution to framing and achieving sustainable development.
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mt-4 mb-4">
+				<img  class="img-fluid img-zoom" src="{% static 'site/img/linden.png' %}"/>
+			</div>
+			<div class="col-sm-8 col-12 mt-4 mb-4">
+				<h4>Linden Farrer</h4>
+				Linden Farrer is Policy Officer in the DG Research &amp; Innovation “Open Science” unit, where he is involved in mainstreaming Responsible Research Innovation and developing citizen science policy. Before joining the Commission, he worked on research projects for civil society in Brussels, and for local government in England on employment and skills. His background is in the social sciences and humanities.
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mt-4 mb-4">
+				<img  class="img-fluid img-zoom" src="{% static 'site/img/patricl_grootaert.png' %}"/>
+			</div>
+			<div class="col-sm-8 col-12 mt-4 mb-4">
+				<h4>Patrick Grootaert</h4>
+				Patrick Grootaert, former entomologist retired since 2016 was involved in the first entomological inventories in the Botanic Garden Jean Massart in Brussels. Actually, he coordinates a book on the diversity of the flies in this amazing urban site.
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mt-4 mb-4">
+				<img  class="img-fluid img-zoom" src="{% static 'site/img/pem-yuan_hsing.png' %}"/>
+			</div>
+			<div class="col-sm-8 col-12 mt-4 mb-4">
+				<h4>Pen-Yuan Hsing</h4>
+				Passionate about the role of science in society and civic engagement, Dr Pen-Yuan Hsing co-founded MammalWeb, a citizen science project for ecological monitoring across five European countries. Pen also advocates for open science, having created an online course and guidebook, ran interactive workshops, and received certification on open licensing. Pen hopes to work with you to creatively expand the circle of liberty for knowledge and innovation.
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mt-4 mb-4">
+				<img  class="img-fluid img-zoom" src="{% static 'site/img/antonella_radicchi.png' %}"/>
+			</div>
+			<div class="col-sm-8 col-12 mt-4 mb-4">
+				<h4>Antonella Radicchi</h4>
+				Antonella Radicchi is an architect and holds a PhD in Urban Design and Territorial Planning. She currently works as a post-doctoral research associate at the Museum für Naturkunde Berlin where she manages the EU-Citizen.Science project. She also is the principal investigator of the award-winning citizen science project Hush City.
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mt-4 mb-4">
+				<img  class="img-fluid img-zoom" src="{% static 'site/img/francisco_sanz.png' %}"/>
+			</div>
+			<div class="col-sm-8 col-12 mt-4 mb-4">
+				<h4>Francisco Sanz</h4>
+				Francisco is a mathematician and holds a Master’s degree in Computational Mechanics from the University of Zaragoza. He is the Executive Director of the Ibercivis Foundation and has been one of the promoters of the Cesar Citizen-Laboratories in Etopia-Centro de Arte y Tecnología in Zaragoza, being its coordinator from its beginnings in 2015. Throughout his professional career he has combined work as an associate professor at the University of Zaragoza with research at the Institute of Biocomputation and Physics of Complex Systems (BIFI) of the University of Zaragoza.
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mt-4 mb-4">
+				<img  class="img-fluid img-zoom" src="{% static 'site/img/alice_sheppard.png' %}"/>
+			</div>
+			<div class="col-sm-8 col-12 mt-4 mb-4">
+				<h4>Alice Sheppard</h4>
+				Alice Sheppard is UCL ExCiteS’s Community Manager. Her experience with citizen science began with Galaxy Zoo in 2007: she led a large, thriving discussion forum in which citizen scientists made discoveries and began projects of their own. This work gave her many insights into the needs of citizen scientists.
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mt-4 mb-4">
+				<img  class="img-fluid img-zoom" src="{% static 'site/img/jessica_wardlaw.png' %}"/>
+			</div>
+			<div class="col-sm-8 col-12 mt-4 mb-4">
+				<h4>Jessica Wardlaw</h4>
+				Dr Jessica Wardlaw is Citizen Science Programme Developer at the Natural History Museum in London, where she develops new projects, and works to enhance project outcomes and impact. She is an active and experienced practitioner/researcher in international citizen science networks focused on the Sustainable Development Goals and issues of empowerment/inclusiveness/equity.
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+
+
+<!-- end of participants -->
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mt-4 mb-4">
+				<h3>General Information</h3>
+			</div>
+			<div class="col-sm-8 col-12 mt-4 mb-4">
+				The event is organized by the EU-Citizen.Science project and moderated by <a href="https://stickydot.eu/">Stickydot</a>.<br /><br />
+							<p><b>Organization Team (in alphabetical order)</b></p>
+							The EU-Citizen.Science project
+							<ul>
+
+											<li>Claudia Fab&oacute; Cartas (ECSA)</li>
+											<li>Antonella Radicchi (MfN)</li>
+											<li>Francisco Sanz (Ibercivis)</li>
+											<li>Lucie Steigleder (Ecsite)</li>
+							</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<div class="container-fluid bg-white">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-12 mt-4 mb-4">
+				<h3></h3>
+			</div>
+			<div class="col-sm-8 col-12 mt-4 mb-4">
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4 col-12 mt-4 mb-4">
+			<h3></h3>
+		</div>
+		<div class="col-sm-8 col-12 mt-4 mb-4">
+		</div>
+	</div>
+</div>
+
+
+{% endblock list_of_items %}

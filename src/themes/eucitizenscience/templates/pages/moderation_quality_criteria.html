@@ -1,0 +1,211 @@
+{% extends "base_r2.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}{{ block.super }} :: {% trans "About" %}{% endblock %}
+
+{% block list_of_items %}
+<div class="container">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <h1 class="mt-5 mb-3">
+                {% trans "moderation" %} {% trans "and" %}<span class="lightBlue-color"> {% trans "quality criteria" %}</span>
+            </h1>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-11">
+                    <div class="small mb-2">{% trans "The project and (training) resource profiles that you can find on the platform have been submitted by the citizen science community or the EU-Citizen.Science project consortium. Before publishing, they undergo a moderation process where the quality criteria framework developed within the EU-Citizen.Science project is applied. Below you can find a description of the moderation process and of all the criteria. IIASA and other partners in the project have developed these criteria and assessment framework as part of WP3 “Content - Framework, Quality Assurance and Curation” of the EU-Citizen.Science project. The work carried out can be found in <a href='https://zenodo.org/record/3716236#.YZNyLRwxlhE' target='_blank'>D3.1 <i>Framework Report Describing Criteria and Rationale for Sharing and Selecting State of the art Citizen Science Resources</i></a> and <a href='https://zenodo.org/record/5041332#.YZNxBRwxlhF' target='_blank'>D3.3 <i>Review of Framework Implementation Defined in D3.1</i></a>." %}  </div>
+                </div>
+                <div class="col-12"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2 col-12"></div>
+        <div class="col-sm-8 col-11">
+            <div class="row">
+                <div class="col-12">
+                    <h3>The moderation process</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-11">
+                    <div class="small mb-2">{% trans "Our ambitious goal is to become <b>the</b> place to share useful resources about planning, running, evaluating and participating in citizen science initiatives or simply learning about citizen science, including tools and guidelines, best practices and training modules. We hope to make practical guidance on citizen science findable and accessible to all, and enable people to initiate their own activities wherever they are. It is important to us, and the community of practitioners, that we have a way of ensuring that the resources profiled on the platform are of good quality, and that the projects profiled on the platform are indeed citizen science initiatives. This is why we have a moderation process for all submissions." %}</div>
+
+                    <div class="small mb-2">{% trans "When you create a profile for a resource or a project to share on the platform, you will be asked to provide a range of descriptive information about it, and once all of the mandatory data fields are completed, you will be able to submit the profile. Upon submission, it will be sent for moderation. Until it has been reviewed against our criteria, it will be marked as ‘not yet moderated’, and will not be automatically visible in search results. Once your resource profile has successfully been through the moderation process, it will be marked as ‘moderated’, and will be fully available in search results." %}</div>
+
+                </div>
+            </div><!-- End of template section -->
+
+            <div class="row">
+                <div class="col-12">
+                    <h3>{% trans "Quality criteria" %}</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-11">
+                    <div class="small mb-2">{% trans "We have developed a set of comprehensive quality criteria as a way of ensuring that the projects and resources that you can find on this platform are of good quality. The overarching criteria can be applied to both projects and resources. Specific and supporting criteria have been developed for resources. The table below provides an overview of all resources; further down on this page you can read about all the quality criteria in more detail." %}</div>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th scope="row" rowspan=3>{% trans "Overarching Criteria (for projects and resources)" %}</th>
+                                <td colspan=2>{% trans "About citizen science or relevant to citizen science (required)" %}</td>
+                            </tr>
+                            <tr>
+                                <td colspan=2>{% trans "All mandatory metadata is provided (required)" %}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">{% trans "Engages with the <a target='_blank' href='https://zenodo.org/record/5127534#.YV7PKt9CRhF'>ECSA 10 Principles of Citizen Science</a> (suggested)" %}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" rowspan=9>{% trans "Specific Criteria (for resources)" %}</th>
+                                <td colspan=2>{% trans "Access to the resource" %}</td>
+                            </tr>
+                            <tr>
+                                <td rowspan=3>{% trans "Readability and Legibility" %}</td>
+                                <td>{% trans "Clear structure" %}</td>
+                            </tr>
+                            <tr>
+                                <td>{% trans "Clear language" %}</td>
+                            </tr>
+                            <tr>
+                                <td>{% trans "Basic formatting" %}</td>
+                            </tr>
+                            <tr>
+                                <td colspan=2>{% trans "Content" %}</td>
+                            </tr>
+                            <tr>
+                                <td rowspan=2>{% trans "Applicability" %}</td>
+                                <td>{% trans "Easy to implement" %}</td>
+                            </tr>
+                            <tr>
+                                <td>{% trans "Easy to adapt" %}</td>
+                            </tr>
+                            <tr>
+                                <td rowspan=2>{% trans "Object" %}</td>
+                                <td>{% trans "Clearly audible (audio object)" %}</td>
+                            </tr>
+                            <tr>
+                                <td>{% trans "Good quality (video or image)" %}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" rowspan=4>{% trans "Supporting Criteria (for resources)" %}</th>
+                                <td rowspan=2>{% trans "Evaluation" %}</td>
+                                <td>{% trans "Used in the context of a citizen science initiative" %}</td>
+                            </tr>
+                            <tr>
+                                <td>{% trans "Evaluated in terms of the quality of the content, methods, or results of the method" %}</td>
+                            </tr>
+                            <tr>
+                                <td rowspan=2>{% trans "Impact" %}</td>
+                                <td>Impact it has had/could have</td>
+                            </tr>
+                            <tr>
+                                <td>Measured impact</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div><!-- End of template section -->
+
+            <div class="row">
+                <div class="col-12">
+                    <h3>{% trans "The overarching criteria for all resources" %}</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-11">
+                    <div class="small mb-2"><b>{% trans " Required Criteria - Citizen Science" %}</b></div>
+                    <div class="small mb-2">{% trans "The first criterion that the moderator will look for, is that your <b>resource is relevant to citizen science</b>, or that your <b>project is a citizen science initiative</b>." %}</div>
+
+                    <div class="small mb-2">{% trans "Although there are no hard and fast definitions of what citizen science is and is not (nor should there be - citizen science should always remain a broad and inclusive concept), we turn to the recent work conducted by the citizen science community on the <a target='_blank' href='https://zenodo.org/communities/citscicharacteristics/?page=1&size=20'>ECSA Characteristics of Citizen Science</a> as guidance. Please consult these characteristics if you are uncertain whether the resource or the project you would like to share really does relate to citizen science. If the moderator has concerns they will contact you directly." %}</div>
+
+                    <div class="small mb-2">{% trans "The moderator will also check if all mandatory fields in the resource profile are completed. This is to ensure that all project and resource profiles provide sufficient information to enable users of the platform to see whether it is useful or relevant to them." %}</div>
+
+                    <div class="small mb-2"><b>{% trans "Suggested Criteria - the Principles of Citizen Science" %}</b></div>
+                    <div class="small mb-2">{% trans "The moderator of your submitted profile will also consider whether your resource or project is in alignment with the <a href='https://zenodo.org/record/5127534#.YV7PKt9CRhF' target='_blank'>ECSA 10 Principles of Citizen Science</a>." %}</div>
+                </div>
+            </div><!-- End of template section -->
+
+            <div class="row">
+                <div class="col-12">
+                    <h3>{% trans "Specific criteria" %}</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-11">
+                    <div class="small mb-2">{% trans "For the resources to be shared on the platform, we have developed a specific set of further criteria, which will be assessed during the moderation process. You can read more about how we developed these in the blog post ‘<a href='/blog/2020/04/30/how-we-developed-quality-criteria-resources/'>How we developed the quality criteria for resources’</a>." %}</div>
+
+                    <div class="small mb-2">{% trans "We consider good quality citizen science resources to be those that are easy to access, implement and adapt, well structured, clearly described and written in clear language, and ideally improve or support the desired impact of the initiative (eg. on science, policy or society, etc). For this purpose we have developed a range of criteria that the moderator will assess against a 5-point scale, from strongly disagree (1 point) to strongly agree (5 points)." %}</div>
+
+                    <ul>
+                        <li class="small"><b>{% trans "Easy access to the resource" %}</b></li>
+                        <ul>
+                            <li class="small">{% trans "The resource should be easy to access, i.e. it doesn’t require registration, and is not behind a paywall." %}</li>
+                        </ul>
+
+                        <li class="small"><b>{% trans "Readability and Legibility" %}</b></li>
+                        <ul>
+                            <li class="small">{% trans "The resource should be <b>clearly structured</b> according to the type of the resource. For example, a scientific paper or report should include an introduction, methodology, results, discussion and/or conclusions, and methodology documents should include an introduction, audience description, step by step methodology, and an example." %}</li>
+                            <li class="small">{% trans "The resource should be <b>written in clear language</b> that is easy to read and understand for the intended target audience, and should be concise, unambiguous, and avoid the use of unusual words and jargon. Where technical terms are used, their meaning should be explained clearly." %}</li>
+                            <li class="small">{% trans "The resource should pay attention to <b>basic formatting</b>, such as clear titles and paragraphs, correct grammar and spelling, a legible font of large enough size to read, and clearly marked references." %}</li>
+                        </ul>
+
+                        <li class="small"><b>{% trans "Clarity of Content" %}</b></li>
+                        <ul>
+                            <li class="small">{% trans "The resource should clearly describe its aims, goals and methods, so that it is easy for readers to understand how to apply the resource in their own context." %}</li>
+                        </ul>
+
+                        <li class="small"><b>{% trans "Applicability" %}</b></li>
+                        <ul>
+
+                            <li class="small">{% trans "The resource should be <b>easy to implement</b>, ideally with descriptions of how it can be implemented, the contexts that it is useful for, and recommendations for further use or development." %}</li>
+                            <li class="small">{% trans "The resource should be <b>easy to adapt</b> to different cases, ideally with an explanation of any limitations of the resource and the contexto in which it could be useful, and with guidelines or recommendations for its adaptation to different cases." %}</li>
+                        </ul>
+
+                        <li class="small"><b>{% trans "Object Quality" %}</b></li>
+                        <ul>
+                            <li class="small">{% trans "If the resource is an audio object, it should be <b>clearly audible</b>, with no interruptions or background noise." %}</li>
+                            <li class="small">{% trans "If the resource is a video, an image or illustration, the quality should be good enough to <b>see clearly, with a sharp focus</b>." %}</li>
+                        </ul>
+                    </ul>
+
+                        <div class="small mb-2">{% trans "The highest possible score is 40 points, if all criteria are applicable. But in most cases, only a selection of the above criteria will be applicable. The moderator will look to see that your resource exceeds 50% of the total possible points for that type of resource. That is the threshold for being listed on the platform as a good quality resource." %}</div>
+
+                </div>
+            </div><!-- End of template section -->
+
+            <div class="row">
+                <div class="col-12">
+                    <h3>{% trans "Supporting criteria" %}</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-11">
+                    <div class="small mb-2">{% trans "It really enhances the value and quality of your resources when you can say something about how it has been used and developed further in practice, and whether or not it has been evaluated for usefulness and applicability in practice. The moderator will also take it into positive consideration if there is evidence of the following criteria being met (but these are not part of the threshold calculation mentioned above):" %}</div>
+
+                    <ul>
+                        <li class="small"><b>{% trans "Evaluation" %}</b></li>
+                        <ul>
+                            <li class="small">{% trans "The resource has been <b>used in the context of citizen science</b>, or is currently being used in a citizen science initiative, and the outcome of this has been shared." %}</li>
+                            <li class="small">{% trans "The resource has been <b>evaluated</b> in terms of the quality of the content, or the methods, or the results of the method, and the outcomes of these evaluations have been shared." %}</li>
+                        </ul>
+
+                        <li class="small"><b>{% trans "Impact" %}</b></li>
+                        <ul>
+                            <li class="small">{% trans "The resource refers to any <b>impact</b> that it could have (or has had) on science, policy, society, etc." %}</li>
+                            <li class="small">{% trans "The impact of the resource has been <b>measured</b> and is shared in the resource." %}</li>
+                        </ul>
+                    </ul>
+                </div>
+            </div><!-- End of template section -->
+        </div>
+    </div>
+</div>
+{% endblock list_of_items %}
+

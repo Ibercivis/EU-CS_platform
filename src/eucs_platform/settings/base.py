@@ -17,13 +17,15 @@ import environ
 
 # Build paths inside the project like this: BASE_DIR / "directory"
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-STATIC_ROOT = "/home/ubuntu/eu-citizen.science/static"
+STATIC_ROOT = "/home/ubuntu/eu_citizen_science_04_24/static"
 THEMEDIRSTATIC = str(BASE_DIR / "eucitizensciencetheme" / "static")
 STATICFILES_DIRS = [str(BASE_DIR / "static"), MACHINA_MAIN_STATIC_DIR, THEMEDIRSTATIC]
 
 # settings.py
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 STATIC_VERSION = '1.2'
+THEME = 'eucitizenscience'
+#THEME = 'portugal'
 
 
 MEDIA_ROOT = str(BASE_DIR / "media")
@@ -60,8 +62,9 @@ TEMPLATES = [
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
             str(BASE_DIR / "templates"),
-            MACHINA_MAIN_TEMPLATE_DIR
+            MACHINA_MAIN_TEMPLATE_DIR,
             # insert more TEMPLATE_DIRS here
+            str(BASE_DIR / "themes" / THEME / "templates")
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -82,7 +85,8 @@ TEMPLATES = [
                 'eucs_platform.context_processors.global_settings',
                 # To manage static versions
                 'eucs_platform.context_processors.static_version',
-
+                # To manage the theme
+                'eucs_platform.context_processors.theme',
             ]
         },
     }
@@ -102,6 +106,7 @@ if env_file.exists():
 # SECURITY WARNING: keep the secret key used in production secret!
 # Raises ImproperlyConfigured exception if SECRET_KEY not in os.environ
 SECRET_KEY = env("SECRET_KEY")
+PLATFORM_NAME = env("PLATFORM_NAME")
 
 ALLOWED_HOSTS = []
 
@@ -134,6 +139,7 @@ INSTALLED_APPS = (
     "authors",
     "contact",
     "reviews",
+    'ecsa_integration',
     'django.contrib.sites',
     'cookielaw',
     'events',
@@ -143,7 +149,7 @@ INSTALLED_APPS = (
     'rest_framework_swagger',
     'oidc_provider',
     'drf_yasg',
-    'captcha',
+    'django_recaptcha',
     'active_link',
     'oauth2_provider',
     'django.contrib.gis',
@@ -213,11 +219,19 @@ DATABASES = {
 LANGUAGE_CODE = "en"
 
 TRANSLATED_LANGUAGES = (
+    ('nl', 'Dutch'),
     ('en', 'English'),
+    ('et', 'Estonian'),
+    ('fr', 'Français'),
+    ('de', 'German'),
+    ('el', 'Greek'),
+    ('hu', 'Hungarian'),
+    ('it', 'Italian'),
+    ('lt', 'Lituanian'),
     ('pt', 'Portuguese'),
     ('es', 'Spanish'),
+    ('sv', 'Swedish'),
 )
-
 LANGUAGE_CODES = [
     'fr',
     'en',
@@ -273,8 +287,8 @@ LANGUAGE_CODES = [
 ]
 
 MODELTRANSLATION_LANGUAGES = (
-    'en', 'es', 'pt')
-MODELTRANSLATION_DEFAULT_LANGUAGE = 'pt'
+    'en', 'es', 'pt', 'nl', 'et', 'fr', 'de', 'el', 'hu', 'it', 'lt', 'sv')
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
 TIME_ZONE = "UTC"
 USE_I18N = True
 USE_L10N = True
@@ -336,6 +350,7 @@ EMAIL_BACKEND = 'django_ses.SESBackend'
 DEFAULT_FROM_EMAIL = env("FROM_EMAIL")
 EMAIL_RECIPIENT_LIST = env("EMAIL_RECIPIENT_LIST").split(",")
 EMAIL_CONTACT_RECIPIENT_LIST = env("EMAIL_CONTACT_RECIPIENT_LIST").split(",")
+EMAIL_ECSA_ADMIN = env("EMAIL_ECSA_ADMIN").split(",")
 # These are optional -- if they're set as environment variables they won't
 # need to be set here as well
 AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
@@ -558,5 +573,5 @@ GRAPH_MODELS = {
 }
 
 # For OSX
-GDAL_LIBRARY_PATH = '/opt/homebrew/opt/gdal/lib/libgdal.dylib'
-GEOS_LIBRARY_PATH = '/opt/homebrew/opt/geos/lib/libgeos_c.dylib'
+#GDAL_LIBRARY_PATH = '/opt/homebrew/opt/gdal/lib/libgdal.dylib'
+#GEOS_LIBRARY_PATH = '/opt/homebrew/opt/geos/lib/libgeos_c.dylib'

@@ -1,0 +1,93 @@
+<div id="content-section" class="bg-primary d-flex align-items-center p-4 position-relative mb-4 content-section" style="margin-top: -100px; overflow: hidden;">
+    <div class="container">
+        <h2 class="title-position text-dark text-montserrat fw-bold">What can <br>you find <br>here?</h2>
+        
+        <div class="row" style="margin-top: 25vh;">
+            <!--Projects-->
+            <div class="col-lg-2 col-md-4 col-sm-6 mb-5">
+                <a href="{% url 'projects' %}">
+                    <div class="card content-card h-100 mt-5">
+                        <div class="card-body d-flex flex-column align-items-center">
+                            <div class="number-circle mb-3">
+                                <p class="number">{{projectsCounter}}</p>
+                            </div>
+                            <h3 class="card-title mb-4">Projects</h3>
+                            <p class="card-text text-center mb-3">That are engaging the public in research via citizen science activities.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!--Resources-->
+            <div class="col-lg-2 col-md-4 col-sm-6 mb-5">
+                <a href="{% url 'resources' %}">
+                    <div class="card content-card h-100">
+                        <div class="card-body d-flex flex-column align-items-center">
+                            <div class="number-circle mb-3">
+                                <p class="number">{{resourcesCounter}}</p>
+                            </div>
+                            <h3 class="card-title mb-4">Resources</h3>
+                            <p class="card-text text-center mb-3">Useful for planning and running citizen science projects.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!--Training Resources-->
+            <div class="col-lg-2 col-md-4 col-sm-6 mb-5">
+                <a href="{% url 'training_resources' %}">
+                    <div class="card content-card h-100 mt-5">
+                        <div class="card-body d-flex flex-column align-items-center">
+                            <div class="number-circle mb-3">
+                                <p class="number">{{trainingResourcesCounter}}</p>
+                            </div>
+                            <h3 class="card-title mb-4 text-center">Training Resources</h3>
+                            <p class="card-text text-center mb-3">About the practice of citizen science.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!--Organisations-->
+            <div class="col-lg-2 col-md-4 col-sm-6 mb-5">
+                <a href="{% url 'organisations' %}">
+                    <div class="card content-card h-100">
+                        <div class="card-body d-flex flex-column align-items-center">
+                            <div class="number-circle mb-3">
+                                <p class="number">{{organisationsCounter}}</p>
+                            </div>
+                            <h3 class="card-title mb-4">Organisations</h3>
+                            <p class="card-text text-center mb-3">Involved in citizen science projects and research.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!--Platforms-->
+            <div class="col-lg-2 col-md-4 col-sm-6 mb-5">
+                <a href="{% url 'platforms' %}">
+                    <div class="card content-card h-100 mt-5">
+                        <div class="card-body d-flex flex-column align-items-center">
+                            <div class="number-circle mb-3">
+                                <p class="number text-monsterrat">{{platformsCounter}}</p>
+                            </div>
+                            <h3 class="card-title mb-4">Platforms</h3>
+                            <p class="card-text text-center mb-3">To get an overview of further developments in citizen science.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!--Users-->
+            <div class="col-lg-2 col-md-4 col-sm-6 mb-5">
+                <a href="/users">
+                    <div class="card content-card h-100">
+                        <div class="card-body d-flex flex-column align-items-center">
+                            <div class="number-circle mb-3">
+                                <p class="number text-monsterrat">{{usersCounter}}</p>
+                            </div>
+                            <h3 class="card-title mb-4">Users</h3>
+                            <p class="card-text text-center mb-3">You can connect with.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>

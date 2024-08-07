@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Project, Topic, Status, ApprovedProjects, FollowedProjects, HasTag, DifficultyLevel, ParticipationTask, HelpText
+from .models import Project, Topic, Status, ApprovedProjects, FollowedProjects, HasTag, DifficultyLevel, ParticipationTask, HelpText, ProjectCountry
 from django import forms
 from django.db import models
 from django_select2.forms import Select2MultipleWidget
@@ -52,10 +52,15 @@ class HelpTextAdmin(TabbedTranslationAdmin):
     }
     pass
 
+class ProjectCountryAdmin(admin.ModelAdmin):
+    list_display = ('country_name', 'country', 'latitude', 'longitude')
+    search_fields = ('country_name', 'country')  # Asumiendo que 'country' es un campo accesible
+
 admin.site.register(DifficultyLevel, DifficultyLevelAdmin)
 admin.site.register(HasTag, HasTagAdmin)
 admin.site.register(ParticipationTask, ParticipationTaskAdmin)
 admin.site.register(Project, ProjectAdmin)
+admin.site.register(ProjectCountry, ProjectCountryAdmin)
 admin.site.register(Status, StatusAdmin)
 admin.site.register(HelpText, HelpTextAdmin)
 admin.site.register(Topic, TopicAdmin)
