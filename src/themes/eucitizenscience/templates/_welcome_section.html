@@ -1,0 +1,36 @@
+<div id="welcome-section" class="min-vh-100 bg-secondary d-flex align-items-center" style="margin-top: -46px;">
+    <div class="container">
+      <div class="row align-items-center">
+        
+            <div class="col-md-6 text-start">
+                <div class="square-wrapper">
+                    <div class="square-content">
+                        <h1 class="text-dark big-title">Welcome to <br> the <span class="text-color-primary">european <br> citizen science <br></span>platform.</h1>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 p-5">
+                <div class="square-wrapper">
+                    <div class="square-background position-absolute" style="z-index: 1;"></div>
+                    <div class="square-middle position-absolute" style="z-index: 2;"></div>
+                    <div class="square-box text-center d-flex flex-column justify-content-center align-items-center p-5" style="z-index: 3;">
+                        <p class="text-montserrat medium-title text-white text-start mb-4">Join the <br> community and participate!</p>
+                        <div class="d-flex w-100">
+                                <a class="btn btn-custom btn-solid-white flex-fill me-2" href="{% url 'accounts:signup' %}">Create account</a>
+                                <a class="btn btn-custom btn-outline-white flex-fill" href="{% url 'accounts:login' %}">Login</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="#content-section" class="btn-scroll color-tertiary mt-4">
+                    <i class="fas fa-circle-chevron-down"></i>
+                    <p class="text-montserrat">What?</p>
+                </a>
+            </div>
+      </div>
+            
+    </div> 
+  </div>
+  

@@ -1,0 +1,20 @@
+{% load i18n %}
+<div id="upcoming-events" class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 d-flex align-items-center mb-3">
+                <div class="circle-icon me-2 mb-3">
+                    <div class="inner-circle" style="transform: translate(-50%, -50%) translate(-3px, 3px);"></div>
+                </div>
+                <h2 class="h-100 text-center">{% trans "Upcoming events" %}</h2>
+            </div>
+        </div>
+        <div class="row ps-3 pe-3">
+            {% for event in events %}
+                {% include "_events_card.html" %}
+            {% endfor %}
+        </div>
+            </div>
+        </div>
+    </div>
+</div>
