@@ -8,13 +8,13 @@
 {% endblock %}
 {% block splash %}
 
-    {% if user.is_authenticated %}
-       {% include '_user_logged_section.html' %}
-    {% else %} 
-        {% include '_welcome_section_mobile.html' %}
-        {% include '_welcome_section.html' %}
-        
-    {% endif %}
+<div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+        {% include "_subnavbarNew.html" %}
+    </div>
+    <div class="col-2"></div>
+</div>
 
     {% include '_content_section.html' %}
 

@@ -204,6 +204,21 @@ a {
     color: var(--primary) !important;
 }
 
+.btn-outline-secondary{
+    border: 1px solid var(--secondary) !important;
+    border-radius: 10px;
+    background-color: var(--secondary) !important;
+    color: white !important;
+    padding: .275rem .9rem;
+    font-weight: 200;
+}
+
+.btn-outline-secondary:hover{
+    border: 1px solid var(--primary) !important;
+    background-color: white !important;
+    color: var(--primary) !important;
+}
+
 .btn-scroll{
     font-size: 2rem; 
     font-weight: 500;
@@ -836,40 +851,44 @@ a {
         justify-content: flex-end; /* This will align the content to the right */
     }
 
-    /* Estilo general del desplegable de idiomas */
     .nav-item.dropdown .dropdown-toggle {
         display: flex; 
         align-items: center; 
         justify-content: center; 
-        color: var(--contentPrimary) !important; 
+        /* color: var(--contentPrimary) !important; */
         background-color: transparent; 
-        border-radius: 12px; 
+        /* border-radius: 12px; 
         margin-right: 24px;
-        margin-left: 32px;
-        font-family: "Baloo Paaji 2", sans-serif;
+        margin-left: 32px; */
+        /* font-family: "Baloo Paaji 2", sans-serif;
         font-size: 1.2rem; 
-        font-weight: 500;
+        font-weight: 500; */
     }
     
-    /* Estilo del menú desplegable */
     .nav-item.dropdown .dropdown-menu {
+        color: white !important; /* Text color */
         background-color: var(--secondary); /* Background color for the items */
     }
     
-    /* Estilo de los elementos dentro del menú desplegable */
-    .nav-item.dropdown .dropdown-item {
-        color: white; /* Text color */
-        font-family: "Baloo Paaji 2", sans-serif;
-        font-size: 1.2rem; 
-        font-weight: 500;
+    .nav-item.dropdown .dropdown-item a {
+        color: white !important; /* Text color */
+        
     }
     
-    /* Estilo del menú desplegable al pasar el ratón por encima */
-    .nav-item.dropdown .dropdown-item:hover, .nav-item.dropdown .dropdown-item:focus {
-        color: var(--contentSecondary); /* Text color for hover and focus */
+    .nav-item.dropdown .dropdown-item:hover a, .nav-item.dropdown .dropdown-item:focus a {
+        color: var(--color1) !important; /* Text color for hover and focus */
         background-color: var(--bgPrimary); /* Background color for hover and focus */
     }
+
+    .nav-item.dropdown .dropdown-item {
+        color: white !important; /* Text color */
+        
+    }
     
+    .nav-item.dropdown .dropdown-item:hover, .nav-item.dropdown .dropdown-item:focus {
+        color: var(--color1) !important; /* Text color for hover and focus */
+        background-color: var(--bgPrimary); /* Background color for hover and focus */
+    }
 
     .nav-item.dropdown .dropdown-toggle::after {
         color: var(--contentPrimary); /* Icon color */

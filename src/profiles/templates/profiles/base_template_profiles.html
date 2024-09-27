@@ -12,9 +12,8 @@
 {% block list_of_items %}
 <div class="container mt-5">
     <div class="row">
-        <div class="col-3">
-            <div class="mb-3">
-               
+        <div class="col-3 mb-3">
+            <div class="mt-4 mb-3">
                 <div>
                     {% if show_user.ecsa_user_profile.ecsaMember or show_user.ecsa_user_delegate.ecsaMember %}
                     <div class="ecsa-badge-container">
@@ -81,6 +80,10 @@
                     <i class="fas fa-edit"></i>
                     Edit profile</a>
                 {% endif %} 
+                <a href="#" class="list-group-item list-group-item-action text-danger" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
+                    <i class="fas fa-trash-alt"></i>
+                    Delete account
+                </a>
             </div>
         </div>
         <div class="col-9">
@@ -89,6 +92,8 @@
         </div>
     </div>
 </div>
+{% url 'accounts:delete' as delete_url %}
+{% include "_modal_danger.html" with modal_id="deleteAccountModal" modal_title="Delete Account" modal_message="Are you sure? This action cannot be undone." form_action=delete_url confirm_button_text="Delete" %}
 {% endblock list_of_items %}
 {% block scripts %}
 {% endblock scripts %}

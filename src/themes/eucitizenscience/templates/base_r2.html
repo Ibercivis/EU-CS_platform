@@ -77,14 +77,38 @@
             <div class="collapse navbar-collapse" id="navbarPrincipal">
 
                 <div class="navbar-right-content">
-
+                    {% comment %}
                     <!-- Search bar (If you don't want the search bar in a template, 
-                        you have to set the show_search_bar variable to False in its associated view.) -->
+                        you have to set the show_search_bar variable to False in its associated view.) 
                     {% if show_search_bar != False %}
                         {% include '_searchBar.html' with nav_bar=True%} 
                     {% endif %}
-                    <!-- Language dropdown and menu button for sidebar toggle -->
-                    <li class="nav-item dropdown">
+                     Language dropdown and menu button for sidebar toggle -->
+                    {% endcomment %}
+
+                    <!-- Navigation Menu Items -->
+                    <ul class="navbar-nav ms-5 me-auto mb-2 mb-lg-0">
+                        {% for item in topbar_items %}
+                            {% if not item.parent %} 
+                                <li class="nav-item me-3 {% if item.is_parent %}dropdown{% endif %}">
+                                    <a class="nav-link {% if item.is_parent %}dropdown-toggle{% endif %}"
+                                    {% if not item.is_parent %}href="{{ item.slug }}"{% endif %}
+                                    {% if item.is_parent %}data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{% endif %}>
+                                        {{ item.name }}
+                                    </a>
+                                    {% if item.is_parent %}
+                                        <ul class="dropdown-menu">
+                                            {% include '_sub_menu.html' with items=item.get_children %}
+                                        </ul>
+                                    {% endif %}
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+
+
+
+                    <li class="nav-item dropdown me-3">
                         <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false" href="#">
                             {% get_current_language as LANGUAGE_CODE %}{{LANGUAGE_CODE}}
@@ -105,16 +129,53 @@
                             </form>
                         </ul>
                     </li>
-                    <button class="menu-button">
-                        <i class="fas fa-bars"></i> Menu
-                    </button>
+
+                    {% if not user.is_authenticated %}
+                <a class="btn btn-outline-primary me-2"
+                    href="{% url 'accounts:login' %}">{% trans "Login" %}</a>
+
+                <a class="btn btn-outline-success me-2"
+                    href="{% url 'accounts:signup' %}">{% trans "Signup" %}</a>
+                {% else %}
+                
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="dropdownRegistered" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false" href="#"><i class="fas fa-user-edit"></i>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownRegistered">
+                            <li><a class="dropdown-item" href="{% url 'profiles:show_self' %}">
+                                {% trans "My personal area" %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'profiles:submissions' %}">
+                                {% trans "My submissions" %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'profiles:bookmarks' %}">
+                                {% trans "My bookmarks" %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'profiles:privacyCenter' %}">
+                                {% trans "My privacy center" %}</a></li>
+                            {% if user.is_staff %}
+                            <li><a class="dropdown-item" href="{% url 'admin:index' %}">{% trans "Admin" %}</a></li>
+                            {% endif %}
+                            <li><a class="dropdown-item" href="{% url 'accounts:logout' %}">{% trans "Logout" %}</a>
+                            </li>
+                        </ul>
+
+                    </li>
+                </ul>
+                <button data-bs-toggle="modal" data-bs-target="#modalsubmit" class="btn btn-outline-success me-2"
+                    type="submit">
+                    <i class="fas fa-paper-plane"></i>&nbsp;&nbsp;{% trans "New submission" %}
+                </button>
+
+                {% endif %}
+                
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Including the sidebar menu from a separate file for modularity -->
-    {% include '_sidebar_menu.html' %}
+    {% comment %}
+        <!-- Including the sidebar menu from a separate file for modularity -->
+        <!-- {% include '_sidebar_menu.html' %} -->
+    {% endcomment %}
 
     <!-- Main content area with flexible fill for layout and included modals and messages -->
     <main class="flex-fill">

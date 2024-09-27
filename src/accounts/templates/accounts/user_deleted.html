@@ -1,0 +1,20 @@
+{% extends "base_r2.html" %}
+
+{% block head %}
+{{ block.super }}
+    <meta http-equiv="refresh" content="3;url={% url 'home' %}">
+    <title>Account Deleted</title>
+{% endblock %}
+
+{% block list_of_items %}
+    <div class="container bg-my-White">
+        <div class="row p-5">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-10">
+                <h1>Your account has been deleted</h1>
+                <p>Your account has been successfully deleted. You will be redirected to the homepage. If you are not redirected, <a href="{% url 'home' %}">click here</a>.</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

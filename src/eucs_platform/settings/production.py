@@ -58,7 +58,9 @@ LOGGING = {
             "format": "[%(asctime)s] %(levelname)s [%(pathname)s:%(lineno)s] %(message)s",
             "datefmt": "%d/%b/%Y %H:%M:%S",
         },
-        "simple": {"format": "%(levelname)s %(message)s"},
+        "simple": {
+            "format": "%(levelname)s %(message)s",
+        },
     },
     "handlers": {
         "proj_log_file": {
@@ -67,13 +69,41 @@ LOGGING = {
             "filename": str(LOGFILE_ROOT / "project.log"),
             "formatter": "verbose",
         },
+        "django_error_log": {
+            "level": "ERROR",
+            "class": "logging.FileHandler",
+            "filename": "/var/log/django/error.log",
+            "formatter": "verbose",
+        },
         "console": {
             "level": "DEBUG",
             "class": "logging.StreamHandler",
             "formatter": "simple",
         },
     },
-    "loggers": {"project": {"handlers": ["proj_log_file"], "level": "DEBUG"}},
+    "loggers": {
+        "project": {
+            "handlers": ["proj_log_file"],
+            "level": "DEBUG",
+        },
+        "django": {
+            "handlers": ["django_error_log"],
+            "level": "ERROR",
+            "propagate": True,
+        },
+        "django.request": {
+            "handlers": ["django_error_log"],
+            "level": "ERROR",
+            "propagate": False,
+        },
+    },
 }
 
 logging.config.dictConfig(LOGGING)
+
+# Configuration for using the client's IP address in django-ratelimit
+RATELIMIT_USE_X_FORWARDED_FOR = True
+RATELIMIT_IP_META_KEY = 'HTTP_X_FORWARDED_FOR'
+
+# Configuration to indicate that requests are secure behind a reverse proxy
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
