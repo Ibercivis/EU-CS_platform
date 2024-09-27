@@ -65,14 +65,14 @@ class SignUpView(
         profile = get_object_or_404(Profile, user_id=user.id)
         profile.orcid = orcid
         profile.save()
-        mail_subject = 'Activate your CC.pt account.' 
-        message = render_to_string('acc_active_email.html', {
+        mail_subject = 'Activate your account.' 
+        message = render_to_string('emails/acc_active_email.html', {
             'user': user,
             'domain': settings.HOST,
             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
             'token': account_activation_token.make_token(user),
         })
-        html_message = render_to_string('acc_active_email.html', {
+        html_message = render_to_string('emails/acc_active_email.html', {
             'user': user,
             'domain': settings.HOST,
             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
@@ -112,6 +112,11 @@ class PasswordResetView(authviews.PasswordResetView):
 
 class PasswordResetDoneView(authviews.PasswordResetDoneView):
     template_name = "accounts/password-reset-done.html"
+
+class PasswordResetConfirmView(authviews.PasswordResetConfirmView):
+    form_class = forms.SetPasswordForm  
+    template_name = "accounts/password-reset-confirm.html"  
+    success_url = reverse_lazy("accounts:login")  
 
 # TODO: Implement this view
 #class PasswordResetConfirmView(authviews.PasswordResetConfirmAndLoginView):
@@ -174,7 +179,7 @@ class PasswordResetEmail(BaseEmailMessage):
 
 
 class ActivationEmail(BaseEmailMessage):
-    template_name = "accounts/acc_active_email.html"
+    template_name = "emails/acc_active_email.html"
 
     def get_context_data(self):
         context = super().get_context_data()
