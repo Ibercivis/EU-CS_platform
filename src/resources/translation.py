@@ -23,7 +23,7 @@ class LearningResourceTypeTranslationOptions(TranslationOptions):
 
 @register(Resource)
 class ResourceTranslationOptions(TranslationOptions):
-    fields = ('name', 'abstract', 'description_citizen_science_aspects')
+    fields = ('abstract', 'description_citizen_science_aspects')
 
 @register(Theme)
 class ThemeTranslationOptions(TranslationOptions):
