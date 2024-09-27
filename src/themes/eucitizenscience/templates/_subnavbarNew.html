@@ -1,7 +1,6 @@
 {% load i18n %}
 {% load active_link_tags %}
 
-
  <div class="row">
             <div class="col-12">
                     <form id="searchTop"
@@ -72,7 +71,7 @@
                             </a>
                         </li>
                         <li class="nav-item subnavbar-item">
-                            <a class="nav-link ps-4  {% active_link 'users' %}"
+                            <a class="nav-link ps-4  {% active_link 'profiles:users' %}"
                             href="/users/{% if request.GET.keywords %}?keywords={{request.GET.keywords}}{%endif%}">
                                 <i class="fas fa-user-friends"></i> {% trans "Users" %} {% if filters.keywords != "" %} ({{usersCounter}}) {% endif %}
                             </a>

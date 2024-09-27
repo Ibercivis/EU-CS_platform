@@ -165,10 +165,13 @@ def home(request):
     events = paginatorEvents.get_page(page)
 
     # Users
-    # TODO: Filter users by active
-    usersCounter = Profile.objects.filter().count()
+    usersCounter = Profile.objects.filter(user__is_active=True).count()
 
     sections = HomeSection.objects.all()
+
+    filters = {
+        'keywords': '',
+        }
 
     return TemplateResponse(request, 'home.html', {
         'user': user,
@@ -187,6 +190,7 @@ def home(request):
         'usersCounter': usersCounter,
         'events': events,
         'sections': sections,
+        'filters': filters,
         'isSearchPage': True})
 
 def imprint(request):
