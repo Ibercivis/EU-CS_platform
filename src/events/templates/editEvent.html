@@ -273,8 +273,10 @@
   }
 
   function validateMap() {
-    // Only validate map if the event type is face-to-face
-    if ($('#id_event_type').val() === 'face-to-face') {
+    // Only validate map if the event type is face-to-face or hybrid
+    var eventType = $('#id_event_type').val();
+
+    if (eventType === 'face-to-face' || eventType === 'hybrid') {
       console.log(marker_layer)
       if (!marker_layer || marker_layer.getLatLng().equals([0.0, 0.0])) {
           // Not added marker o it is the default one
@@ -309,7 +311,8 @@
     $('#show-map').hide(); // Hide the map by default
 
     $('#id_event_type').change(function() {
-      if ($(this).val() === 'face-to-face') {
+    var eventType = $(this).val(); 
+    if (eventType === 'face-to-face' || eventType === 'hybrid') {
         $('#show-map').show();
         document.getElementById('id_place').value = "";
         map.invalidateSize();
