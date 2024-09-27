@@ -106,7 +106,9 @@
                     <a class="btn btn-red float-left mt-4" href="{% url 'editEvent' event.id %}" ><i class="fas fa-edit"></i></a>
                 </div>
                 <div class="col">
-                    <a class="btn btn-red float-left mt-4" href="{% url 'deleteEvent' event.id %}"><i class="fas fa-trash-alt"></i></a>
+                    <a class="btn btn-red float-left mt-4" href="{% url 'deleteEvent' event.id %}" onclick="return confirmDelete(event)">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
                 </div>
             </div>
         {% endif %}
@@ -120,7 +122,7 @@
     $(document).ready(function() {
         $(".show-hide-btn").on('click', function() {
             var id = $(this).data("id");
-            $("#half-" + id).toggle(); // Alternar visibilidad
+            $("#half-" + id).toggle();
             $("#full-" + id).toggle();
         });
     });
@@ -129,10 +131,22 @@
     $(document).ready(function() {
         $(".place-show-hide-btn").on('click', function() {
             var id = $(this).data("id");
-            $("#place-half-" + id).toggle(); // Alternar visibilidad
+            $("#place-half-" + id).toggle();
             $("#place-full-" + id).toggle();
         });
     });
+</script>
+<script>
+    function confirmDelete(event) {
+        var confirmation = window.confirm("¿Estás seguro? Esta acción no se puede deshacer.");
+        
+        if (!confirmation) {
+            event.preventDefault(); 
+            return false;
+        }
+    
+        return true;
+    }
 </script>
 
 

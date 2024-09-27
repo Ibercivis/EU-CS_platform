@@ -19,6 +19,7 @@ class NewUserAdmin(NamedUserAdmin):
         "is_active",
         "email",
         "name",
+        "date_joined",
         "permalink",
         "is_superuser",
         "is_staff",
