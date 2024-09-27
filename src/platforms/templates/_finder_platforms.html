@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="input-group input-group-sm">
-                    <div class="input-group-text"><i class="fas fa-sort-amount-down"></i></div>
+                    <div class="input-group-text" style="border-radius: 30px 0px 0px 30px;"><i class="fas fa-sort-amount-down"></i></div>
                     <select id="orderby" name="orderby" class="custom-select form-control">
                         <option value="" {% if filters.orderby == "" %} selected {% endif %}>{% trans "Most Recent Updated" %}</option>
                         <option value="name" {% if filters.orderby == "name" %} selected {% endif %}>{% trans "A-Z" %}</option>
