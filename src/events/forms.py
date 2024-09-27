@@ -12,6 +12,7 @@ import pytz
 EVENT_TYPE_CHOICES = [
     ('online', 'On-line event'),
     ('face-to-face', 'Face-to-face event'),
+    ('hybrid', 'Hybrid event'),
 ]
 
 
