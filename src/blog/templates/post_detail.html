@@ -27,7 +27,7 @@
               {% endif %}
               <h1>{% block title %} {{ post.title }} {% endblock title %}</h1>
               <p class=" text-muted">{% if post.author.name != "Empty user" %}
-								{{ post.author.name }} {% endif %} <br /> {{ post.created_on }}</p>
+								{{ post.author.name }} {% endif %} {% if post.author.profile.surname %} {{ post.author.profile.surname }} {%endif%} <br /> {{ post.created_on }}</p>
               {% if post.image.width < post.image.height %}
                 <img class="img-fluid img-responsive img-zoom" style="float: right; margin: 0px 0px 15px 15px;" width="300px" src="/media/{{post.image}}" alt="Card image">
               {% endif %}

@@ -20,8 +20,11 @@
                 <div class="card-body">
                     <p class="small text-muted">
                     {% if post.author.name != "Empty user" %}
-                    {{ post.author.name }},
+                    {{ post.author.name }}
                     {% endif %} 
+                    {% if post.author.profile.surname %}
+                    {{ post.author.profile.surname }},
+                    {%endif%}
                     {{ post.created_on}}
                     </p>
 
