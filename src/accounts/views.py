@@ -20,8 +20,6 @@ from django.contrib.auth import views as authviews
 from braces import views as bracesviews
 from templated_mail.mail import BaseEmailMessage
 from djoser import utils
-from django_ratelimit.decorators import ratelimit
-from django.utils.decorators import method_decorator
 from django.contrib.auth.tokens import default_token_generator
 from .tokens import account_activation_token
 from . import forms
@@ -32,12 +30,6 @@ User = get_user_model()
 class LoginView(bracesviews.AnonymousRequiredMixin, authviews.LoginView):
     template_name = "accounts/login.html"
     form_class = forms.LoginForm
-
-    @method_decorator(ratelimit(key='ip', rate='5/m', method='POST', block=False))
-    def dispatch(self, request, *args, **kwargs):
-        if getattr(request, 'limited', False):
-            return HttpResponse('Too many login attempts, try again later.', status=429)
-        return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         redirect = super().form_valid(form)
@@ -50,7 +42,7 @@ class LoginView(bracesviews.AnonymousRequiredMixin, authviews.LoginView):
 
 
 class LogoutView(authviews.LogoutView):
-    template_name = 'accounts/logged_out.html'
+    url = reverse_lazy("home")
 
 
 class SignUpView(
@@ -64,30 +56,16 @@ class SignUpView(
     success_url = reverse_lazy("home")
     form_valid_message = "You're signed up!"
 
-    @method_decorator(ratelimit(key='ip', rate='5/h', method='POST', block=False))
-    def dispatch(self, request, *args, **kwargs):
-        if getattr(request, 'limited', False):
-            return HttpResponse('Too many account creation attempts, try again later.', status=429)
-        return super().dispatch(request, *args, **kwargs)
-
-
     def form_valid(self, form):
         super().form_valid(form)
         user = form.save(commit=False)
         user.is_active = False
         user.save()
-
-        surname = form.cleaned_data.get('surname')
-        profile_visible = form.cleaned_data.get('profileVisible')
         orcid = form.cleaned_data.get('orcid')
-
         profile = get_object_or_404(Profile, user_id=user.id)
         profile.orcid = orcid
-        profile.surname = surname
-        profile.profileVisible = profile_visible
         profile.save()
-        
-        mail_subject = 'Activate your account.' 
+        mail_subject = 'Activate your CC.pt account.' 
         message = render_to_string('emails/acc_active_email.html', {
             'user': user,
             'domain': settings.HOST,
@@ -151,13 +129,13 @@ def delete_user(request):
     try:
         u = User.objects.get(id = request.user.id)
         u.delete()
-        return render(request, 'accounts/user_deleted.html')
+        messages.success(request, "The user has been deleted.")
     except User.DoesNotExist:
         messages.error = 'User does not exist.'
-        return redirect('home')
     except Exception as e:
         messages.error = 'There was a problem trying delete an user'
-        return redirect('home')
+
+    return redirect('home')
 
 
 def activate(request, uidb64, token):
@@ -171,7 +149,7 @@ def activate(request, uidb64, token):
         user.save()
         # Send email
         mail_subject = 'Welcome to CC.pt'
-        message = render_to_string('welcome_email.html', {
+        message = render_to_string('email/welcome_email.html', {
             'user': user,
             "domain": settings.HOST,
         })
