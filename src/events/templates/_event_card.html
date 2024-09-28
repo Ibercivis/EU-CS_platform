@@ -44,8 +44,8 @@
         {% with text=event.description %}
             {% if text|wordcount > 100 %}
         <!-- {{ event.description | safe | truncatewords:100}} -->
-                <p class="half-content" id="half-{{ event.pk }}">{{event.description|truncatewords:100}}<a data-id='{{ event.pk }}' href="javascript:void();" class="show-hide-btn"><br>Read more</a></p>
-                <p class="full-content" id="full-{{ event.pk }}" style="display: none">{{ event.description }}<a data-id="{{ event.pk }}" href="javascript:void();" class="show-hide-btn"><br>Read less</a></p>
+                <p class="half-content" id="half-{{ event.pk }}">{{event.description|truncatewords:100}}<a data-id='{{ event.pk }}' href="#" class="show-hide-btn"><br>Read more</a></p>
+                <p class="full-content" id="full-{{ event.pk }}" style="display: none">{{ event.description }}<a data-id="{{ event.pk }}" href="#" class="show-hide-btn"><br>Read less</a></p>
              {% else %}
                 {{ event.description | safe | truncatewords:100}}
             {% endif %}
@@ -93,7 +93,7 @@
     var id = $(this).data("id");
     $("#half-" + id).toggle();//hide/show..
     $("#full-" + id).toggle();
-  })
+  });
 })
 //}
 </script>

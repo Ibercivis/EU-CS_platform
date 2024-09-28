@@ -35,13 +35,13 @@
             <div class="text-details">
                 {% with text=event.description %}
                     {% if text|wordcount > 60 %}
-                        <p class="text-details half-content" id="half-{{ event.pk }}">
+                        <p class="text-details" id="half-{{ event.pk }}">
                             {{ event.description|striptags|truncatewords:60 }}<br>
-                            <a data-id='{{ event.pk }}' href="javascript:void();" class="show-hide-btn">more</a>
+                            <a data-id='{{ event.pk }}' id='{{ event.pk }}' href="javascript:void();" class="show-hide-btn">more</a>
                         </p>
-                        <p class="text-details full-content" id="full-{{ event.pk }}" style="display: none;">
+                        <p class="text-details" id="full-{{ event.pk }}" style="display: none;">
                             {{ event.description|striptags }}<br>
-                            <a data-id="{{ event.pk }}" href="javascript:void();" class="show-hide-btn">less</a>
+                            <a data-id="{{ event.pk }}" id='{{ event.pk }}' href="javascript:void();" class="show-hide-btn">less</a>
                         </p>
                     {% else %}
                         <p class="text-details">{{ event.description | safe }}</p>
@@ -120,31 +120,20 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
-        $(".show-hide-btn").on('click', function() {
+        $(".show-hide-btn").off('click').on('click', function() {
             var id = $(this).data("id");
+            console.log(id);
+            console.log("#half-" + id);
             $("#half-" + id).toggle();
             $("#full-" + id).toggle();
         });
     });
-</script>
-<script>
-    $(document).ready(function() {
-        $(".place-show-hide-btn").on('click', function() {
-            var id = $(this).data("id");
-            $("#place-half-" + id).toggle();
-            $("#place-full-" + id).toggle();
-        });
-    });
-</script>
-<script>
+
     function confirmDelete(event) {
-        var confirmation = window.confirm("¿Estás seguro? Esta acción no se puede deshacer.");
-        
-        if (!confirmation) {
-            event.preventDefault(); 
+        if (!window.confirm("¿Estás seguro? Esta acción no se puede deshacer.")) {
+            event.preventDefault();
             return false;
         }
-    
         return true;
     }
 </script>
