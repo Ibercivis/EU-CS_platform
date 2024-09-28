@@ -76,10 +76,17 @@ class SignUpView(
         user = form.save(commit=False)
         user.is_active = False
         user.save()
+
+        surname = form.cleaned_data.get('surname')
+        profile_visible = form.cleaned_data.get('profileVisible')
         orcid = form.cleaned_data.get('orcid')
+
         profile = get_object_or_404(Profile, user_id=user.id)
         profile.orcid = orcid
+        profile.surname = surname
+        profile.profileVisible = profile_visible
         profile.save()
+        
         mail_subject = 'Activate your account.' 
         message = render_to_string('emails/acc_active_email.html', {
             'user': user,

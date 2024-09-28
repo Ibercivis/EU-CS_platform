@@ -76,6 +76,17 @@ class LoginForm(AuthenticationForm):
 
 
 class SignupForm(authtoolsforms.UserCreationForm):
+    surname = forms.CharField(
+        required=True,
+        max_length=200,
+        label=_(""),
+        widget=forms.TextInput(attrs={"placeholder": _("Enter Surname")})
+    )
+    profileVisible = forms.BooleanField(
+        required=False,
+        initial=False,
+        label=_("Make profile visible to others"),
+    )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -90,11 +101,15 @@ class SignupForm(authtoolsforms.UserCreationForm):
         self.helper.layout = Layout(
             Field("email", placeholder=_("Enter Email"), autofocus=""),
             HTML('<div class="m-4"></div>'),
-            Field("name", placeholder=_("Enter name")),
+            Field("name", placeholder=_("Enter Name")),
+            HTML('<div class="m-4"></div>'),
+            Field("surname", placeholder=_("Enter Surname")),
             HTML('<div class="m-4"></div>'),
             Field("password1", placeholder=_("Enter Password")),
             HTML('<div class="m-4"></div>'),
             Field("password2", placeholder=_("Re-enter Password")),
+            HTML('<div class="m-4"></div>'),
+            Field("profileVisible"),
             HTML('<div class="m-4"></div>'),
             Field("captcha"),
             StrictButton(_("Sign up"), css_class="btn btn-secondary mt-5", type="Submit"),
