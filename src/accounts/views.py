@@ -170,8 +170,8 @@ def activate(request, uidb64, token):
         user.is_active = True
         user.save()
         # Send email
-        mail_subject = 'Welcome to CC.pt'
-        message = render_to_string('welcome_email.html', {
+        mail_subject = 'Welcome!'
+        message = render_to_string('emails/welcome_email.html', {
             'user': user,
             "domain": settings.HOST,
         })

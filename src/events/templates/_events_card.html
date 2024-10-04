@@ -75,12 +75,13 @@
                     </a>
                 </div>
         {% endif %}
-        {% if user.is_staff %}   
-            <div class="row d-flex align-items-center">
-                {% if event.id in approvedEvents %}
-                    <div class="col">
-                        <a onclick="setApprovedEvent({{event.id}}, false)"><i class="far fa-thumbs-down"></i></a>
-                    </div>
+        {% if user.is_staff or event.creator == user %}   
+            <div class="row d-flex justify-content-end mx-2">        
+                {% if user.is_staff %}
+                    {% if event.id in approvedEvents %}
+                        <div class="col">
+                            <a onclick="setApprovedEvent({{event.id}}, false)"><i class="far fa-thumbs-down"></i></a>
+                        </div>
                     {% elif event.id in unApprovedEvents %}
                         <div class="col">
                             <a onclick="setApprovedEvent({{event.id}}, true)"><i class="far fa-thumbs-up"></i></a>
@@ -92,17 +93,18 @@
                         <div class="col">
                             <a onclick="setApprovedEvent({{event.id}}, false)"><i class="far fa-thumbs-down"></i></a>
                         </div> 
-                {% endif %}
-                <div class="col">
-                    <span id="featured{{event.id}}">
-                    {% if event.featured %}
-                        <a class="btn btn-red float-left mt-4" onclick="setFeaturedEvent({{event.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
-                    {% else %}
-                        <a class="btn btn-red float-left mt-4" onclick="setFeaturedEvent({{event.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
                     {% endif %}
-                    </span>
-                </div>
-                <div class="col">
+                    <div class="col">
+                        <span id="featured{{event.id}}">
+                        {% if event.featured %}
+                            <a class="btn btn-red mt-4" onclick="setFeaturedEvent({{event.id}}, false)"><i class="fas fa-arrow-alt-circle-up"></i></a>
+                        {% else %}
+                            <a class="btn btn-red mt-4" onclick="setFeaturedEvent({{event.id}}, true)"><i class="far fa-arrow-alt-circle-up"></i></a>
+                        {% endif %}
+                        </span>
+                    </div>
+                {% endif %}
+                <div class="col flex justify-content-end">
                     <a class="btn btn-red float-left mt-4" href="{% url 'editEvent' event.id %}" ><i class="fas fa-edit"></i></a>
                 </div>
                 <div class="col">
@@ -130,7 +132,7 @@
     });
 
     function confirmDelete(event) {
-        if (!window.confirm("¿Estás seguro? Esta acción no se puede deshacer.")) {
+        if (!window.confirm("Are you sure? This cannot be undone.")) {
             event.preventDefault();
             return false;
         }

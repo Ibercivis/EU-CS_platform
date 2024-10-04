@@ -9,7 +9,7 @@
 {% if show_user.profile.interestAreas.all %}
 <h4 class="col-12 leftborder mt-4">{% trans "Interest and expertise areas" %}</h4>
 {% for area in show_user.profile.interestAreas.all %}
-<span class="badge bg-my-darkGreen">{{ area }}</span>
+<span class="project-topic">{{ area }}</span>
 {% endfor %}
 {% endif %}
 

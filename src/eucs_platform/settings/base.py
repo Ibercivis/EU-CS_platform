@@ -17,13 +17,13 @@ import environ
 
 # Build paths inside the project like this: BASE_DIR / "directory"
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-STATIC_ROOT = "/home/ubuntu/eu_citizen_science_04_24/static"
+STATIC_ROOT = "/home/ubuntu/eu-citizen.science_07_08/static"
 THEMEDIRSTATIC = str(BASE_DIR / "eucitizensciencetheme" / "static")
 STATICFILES_DIRS = [str(BASE_DIR / "static"), MACHINA_MAIN_STATIC_DIR, THEMEDIRSTATIC]
 
 # settings.py
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
-STATIC_VERSION = '1.2'
+STATIC_VERSION = '1.5'
 THEME = 'eucitizenscience'
 #THEME = 'portugal'
 
