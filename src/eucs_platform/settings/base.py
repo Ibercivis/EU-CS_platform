@@ -11,6 +11,7 @@ from django.urls import reverse_lazy
 from machina import MACHINA_MAIN_TEMPLATE_DIR, MACHINA_MAIN_STATIC_DIR
 from pathlib import Path
 import os
+import platform
 from django.contrib import messages
 # Use 12factor inspired environment variables or from a file
 import environ
@@ -26,7 +27,7 @@ STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 STATIC_VERSION = '1.5'
 THEME = 'eucitizenscience'
 #THEME = 'portugal'
-
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = str(BASE_DIR / "media")
 MEDIA_URL = "/media/"
@@ -139,7 +140,7 @@ INSTALLED_APPS = (
     "authors",
     "contact",
     "reviews",
-    'ecsa_integration',
+    #'ecsa_integration',
     'django.contrib.sites',
     'cookielaw',
     'events',
@@ -173,7 +174,6 @@ INSTALLED_APPS = (
     'machina.apps.forum_permission',
 
     'organisations',
-    # 'ecsa_integration',
     'django_cron',
     'django_crontab',
     'ckeditor',
@@ -573,5 +573,6 @@ GRAPH_MODELS = {
 }
 
 # For OSX
-#GDAL_LIBRARY_PATH = '/opt/homebrew/opt/gdal/lib/libgdal.dylib'
-#GEOS_LIBRARY_PATH = '/opt/homebrew/opt/geos/lib/libgeos_c.dylib'
+if platform.system() == 'Darwin':
+    GDAL_LIBRARY_PATH = '/opt/homebrew/opt/gdal/lib/libgdal.dylib'
+    GEOS_LIBRARY_PATH = '/opt/homebrew/opt/geos/lib/libgeos_c.dylib'
