@@ -8,12 +8,26 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
       matrix:
         python-version: [3.9]
+    services:
+      postgres:
+        image: postgis/postgis:latest
+        env:
+          POSTGRES_USER: eucs_platform
+          POSTGRES_PASSWORD: eucs_platform
+          POSTGRES_DB: eucs_platform
+        ports:
+          - 5432:5432
+        options: --health-cmd=pg_isready --health-interval=10s --health-timeout=5s --health-retries=5
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+        options: --health-cmd="redis-cli ping" --health-interval=10s --health-timeout=5s --health-retries=5
 
     steps:
     - uses: actions/checkout@v4

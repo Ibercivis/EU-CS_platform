@@ -106,7 +106,7 @@ if env_file.exists():
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # Raises ImproperlyConfigured exception if SECRET_KEY not in os.environ
-SECRET_KEY = env("SECRET_KEY")
+SECRET_KEY = env("SECRET_KEY", default="CHANGEME!!!")
 PLATFORM_NAME = env("PLATFORM_NAME")
 
 ALLOWED_HOSTS = []
@@ -207,9 +207,9 @@ WSGI_APPLICATION = "eucs_platform.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': env("DATABASE_NAME"),
-        'USER': env("DATABASE_USER"),
-        'PASSWORD': env("DATABASE_PASSWORD"),
+        'NAME': env("DATABASE_NAME", default="eucs_platform"),
+        'USER': env("DATABASE_USER", default="eucs_platform"),
+        'PASSWORD': env("DATABASE_PASSWORD", default="eucs_platform"),
         'HOST': 'localhost',
         'PORT': '5432',
     }
