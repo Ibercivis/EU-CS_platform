@@ -39,6 +39,13 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+    # Install gdal library
+    - name: Install GDAL
+      run: |
+        sudo apt-get update
+        sudo apt-get install gdal-bin -y
+        sudo apt-get install libgdal-dev -y
+        pip install GDAL==$(gdal-config --version) --global-option=build_ext --global-option="-I/usr/include/gdal"
     - name: Run Tests
       run: |
         python src/manage.py test
