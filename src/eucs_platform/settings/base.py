@@ -11,6 +11,7 @@ from django.urls import reverse_lazy
 from machina import MACHINA_MAIN_TEMPLATE_DIR, MACHINA_MAIN_STATIC_DIR
 from pathlib import Path
 import os
+import platform
 from django.contrib import messages
 # Use 12factor inspired environment variables or from a file
 import environ
@@ -26,7 +27,7 @@ STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 STATIC_VERSION = '1.5'
 THEME = 'eucitizenscience'
 #THEME = 'portugal'
-
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = str(BASE_DIR / "media")
 MEDIA_URL = "/media/"
@@ -105,8 +106,8 @@ if env_file.exists():
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # Raises ImproperlyConfigured exception if SECRET_KEY not in os.environ
-SECRET_KEY = env("SECRET_KEY")
-PLATFORM_NAME = env("PLATFORM_NAME")
+SECRET_KEY = env("SECRET_KEY", default="CHANGEME!!!")
+PLATFORM_NAME = env("PLATFORM_NAME", default="EuCitizenScience")
 
 ALLOWED_HOSTS = []
 
@@ -139,7 +140,7 @@ INSTALLED_APPS = (
     "authors",
     "contact",
     "reviews",
-    'ecsa_integration',
+    #'ecsa_integration',
     'django.contrib.sites',
     'cookielaw',
     'events',
@@ -173,7 +174,6 @@ INSTALLED_APPS = (
     'machina.apps.forum_permission',
 
     'organisations',
-    # 'ecsa_integration',
     'django_cron',
     'django_crontab',
     'ckeditor',
@@ -207,9 +207,9 @@ WSGI_APPLICATION = "eucs_platform.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': env("DATABASE_NAME"),
-        'USER': env("DATABASE_USER"),
-        'PASSWORD': env("DATABASE_PASSWORD"),
+        'NAME': env("DATABASE_NAME", default="eucs_platform"),
+        'USER': env("DATABASE_USER", default="eucs_platform"),
+        'PASSWORD': env("DATABASE_PASSWORD", default="eucs_platform"),
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -347,24 +347,24 @@ SUMMERNOTE_CONFIG = {
 # EMAIL_PORT = '587'
 # EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django_ses.SESBackend'
-DEFAULT_FROM_EMAIL = env("FROM_EMAIL")
-EMAIL_RECIPIENT_LIST = env("EMAIL_RECIPIENT_LIST").split(",")
-EMAIL_CONTACT_RECIPIENT_LIST = env("EMAIL_CONTACT_RECIPIENT_LIST").split(",")
-EMAIL_ECSA_ADMIN = env("EMAIL_ECSA_ADMIN").split(",")
+DEFAULT_FROM_EMAIL = env("FROM_EMAIL", default="")
+EMAIL_RECIPIENT_LIST = env("EMAIL_RECIPIENT_LIST", default="").split(",")
+EMAIL_CONTACT_RECIPIENT_LIST = env("EMAIL_CONTACT_RECIPIENT_LIST", default="").split(",")
+EMAIL_ECSA_ADMIN = env("EMAIL_ECSA_ADMIN", default="").split(",")
 # These are optional -- if they're set as environment variables they won't
 # need to be set here as well
-AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID', default="")
+AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY', default="")
 
 # Additionally, if you are not using the default AWS region of us-east-1,
 # you need to specify a region, like so:
-AWS_SES_REGION_NAME = env('AWS_SES_REGION_NAME')
-AWS_SES_REGION_ENDPOINT = env('AWS_SES_REGION_ENDPOINT')
+AWS_SES_REGION_NAME = env('AWS_SES_REGION_NAME', default="")
+AWS_SES_REGION_ENDPOINT = env('AWS_SES_REGION_ENDPOINT', default="")
 
 # For Nominatim headers
-USER_AGENT = env('USER_AGENT')
+USER_AGENT = env('USER_AGENT', default="")
 
-HOST = env("HOST")
+HOST = env("HOST", default="http://localhost:8000")
 
 SITE_ID = 1
 REVIEW_PUBLISH_UNMODERATED = True
@@ -399,8 +399,8 @@ OIDC_USERINFO = 'eucs_platform.oidc_provider_settings.userinfo'
 # Swagger
 LOGOUT_URL = 'rest_framework:logout'
 
-RECAPTCHA_PUBLIC_KEY = env("RECAPTCHA_PUBLIC_KEY")
-RECAPTCHA_PRIVATE_KEY = env("RECAPTCHA_PRIVATE_KEY")
+RECAPTCHA_PUBLIC_KEY = env("RECAPTCHA_PUBLIC_KEY", default="")
+RECAPTCHA_PRIVATE_KEY = env("RECAPTCHA_PRIVATE_KEY", default="")
 
 # Machina - search for forum conversations
 HAYSTACK_CONNECTIONS = {
@@ -573,5 +573,6 @@ GRAPH_MODELS = {
 }
 
 # For OSX
-#GDAL_LIBRARY_PATH = '/opt/homebrew/opt/gdal/lib/libgdal.dylib'
-#GEOS_LIBRARY_PATH = '/opt/homebrew/opt/geos/lib/libgeos_c.dylib'
+if platform.system() == 'Darwin':
+    GDAL_LIBRARY_PATH = '/opt/homebrew/opt/gdal/lib/libgdal.dylib'
+    GEOS_LIBRARY_PATH = '/opt/homebrew/opt/geos/lib/libgeos_c.dylib'

@@ -1,26 +1,32 @@
-from django.http import HttpResponse, JsonResponse
-from django.shortcuts import get_object_or_404, render, redirect
-from django.contrib.auth.decorators import login_required
-from PIL import Image
-from django.conf import settings
-from django.core.mail import EmailMessage
-from django.core.paginator import Paginator
-from django.contrib import messages
-from django.contrib.auth import get_user_model
-from django.utils import formats
-from django.db.models import Q
-from django.utils.translation import ugettext_lazy as _
-from django.template.loader import render_to_string
-from django.template.response import TemplateResponse
+# Standard library imports
 from datetime import datetime
-from .forms import OrganisationForm, OrganisationPermissionForm
-from .models import HelpText, Organisation, OrganisationType, OrganisationPermission
-from projects.models import Project
-from resources.models import Resource
-from profiles.models import Profile
-from platforms.models import Platform
 import copy
 import random
+
+# Third-party imports
+from PIL import Image
+from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
+from django.core.mail import EmailMessage
+from django.core.paginator import Paginator
+from django.db.models import Q
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import get_object_or_404, redirect, render
+from django.template.loader import render_to_string
+from django.template.response import TemplateResponse
+from django.utils import formats
+from django.utils.translation import ugettext_lazy as _
+
+# Local application imports
+from platforms.models import Platform
+from profiles.models import Profile
+from projects.models import Project
+from resources.models import Resource
+from .forms import OrganisationForm, OrganisationPermissionForm
+from .models import HelpText, Organisation, OrganisationPermission, OrganisationType
+
 
 User = get_user_model()
 
@@ -51,16 +57,16 @@ def new_organisation(request):
                 image_path = "media/images/" + _datetime + '_' + str(random_num) + '_' + photo.name
                 resized_image.save(image_path)
                 image_path_database = "images/" + _datetime + '_' + str(random_num) + '_' + photo.name
-            organisation = form.save(request, image_path_database)
+            saved_organisation = form.save(request, image_path_database)
             messages.success(request, _('Organisation added correctly'))
             subject = 'New organisation submitted'
-            message = render_to_string('emails/new_organisation.html', {'submitter': user, 'organisationName': organisation.name})
+            message = render_to_string('emails/new_organisation.html', {'submitter': user, 'organisationName': saved_organisation.name})
             to = copy.copy(settings.EMAIL_RECIPIENT_LIST)
             to.append(request.user.email)
             email = EmailMessage(subject, message, to=to)
             email.content_subtype = "html"
             email.send()
-            return redirect('/organisation/'+str(organisation.id), {})
+            return redirect('/organisation/'+str(saved_organisation.id), {})
         else:
             print(form.errors)
 
