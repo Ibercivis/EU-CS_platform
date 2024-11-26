@@ -23,15 +23,26 @@ class PlatformForm(forms.Form):
         ("NEIGHBOURHOOD", "Neighbourhood"))
     
     def __init__(self, *args, **kwargs):
+        self.instance = kwargs.pop('instance', None)  # Explicitly store the instance
         super(PlatformForm, self).__init__(*args, **kwargs)
+
+        # Configure translated fields dynamically
         for lang_code in settings.MODELTRANSLATION_LANGUAGES:
-            self.fields[f'description_{lang_code}'] = forms.CharField(
+            field_name = f'description_{lang_code}'
+            self.fields[field_name] = forms.CharField(
                 help_text=_('Please briefly describe the network or platform (max 3000 characters).'),
                 widget=CKEditorWidget(config_name='frontpage'),
                 max_length=3000,
                 label=lang_code,
                 required=lang_code == settings.MODELTRANSLATION_DEFAULT_LANGUAGE
             )
+
+            # Pre-fill the field with the existing instance value, if present
+            if self.instance:
+                print("Instance data:", self.instance.__dict__)
+                value = getattr(self.instance, field_name, None)
+                print(f"Setting initial value for {field_name}: {value}")  # Depuración
+                self.fields[field_name].initial = value
 
     def get_description_fields(self):
         for field_name in self.fields:
@@ -130,51 +141,74 @@ class PlatformForm(forms.Form):
 
     ''' Save function '''
 
-    def save(self, args, images):
-        pk = self.data.get('Id', '')
-        if (pk):
-            platform = get_object_or_404(Platform, id=pk)
-            self.updatePlatform(platform, args)
-        else:
-            platform = self.createPlatfom(args)
-        platform.save()
-        platform.organisation.set(self.data.getlist('organisation'))
-        platform.countries = self.data.getlist('countries')
-        # I don't like it
-        for key in images:
+    def save(self, request, images):
+        if self.instance:  # Update
+            platform = self.instance
+        else:  # Crate
+            platform = Platform(creator=request.user)
+        
+        # Update fields
+        platform.name = self.cleaned_data['name']
+        platform.url = self.cleaned_data['url']
+        platform.geographicExtend = self.cleaned_data['geographicExtend']
+        platform.countries = self.cleaned_data['countries']
+        platform.platformLocality = self.cleaned_data['platformLocality']
+        platform.contactPoint = self.cleaned_data['contactPoint']
+        platform.contactPointEmail = self.cleaned_data['contactPointEmail']
+        platform.logoCredit = self.cleaned_data['logoCredit']
+        platform.profileImageCredit = self.cleaned_data['profileImageCredit']
+
+        # Manage images
+        for key, path in images.items():
             if key == 'logo':
-                platform.logo = images[key]
-            if key == 'profileImage':
-                platform.profileImage = images[key]
-        platform.save()
+                platform.logo = path
+            elif key == 'profileImage':
+                platform.profileImage = path
+        
+        platform.save()  # Save platform first, required for ManyToMany relations
+
+        # Update ManyToMany relations (organisations)
+        organisations = self.cleaned_data['organisation']
+        platform.organisation.set(organisations)  # Assign the organisations to the platform
+
+        platform.save()  # Save again to ensure consistency
         return platform.id
 
     ''' Create function '''
 
     def createPlatfom(self, args):
-        print("creating")
-        return Platform(
+        platform = Platform(
             creator=args.user,
             name=self.data['name'],
             url=self.data['url'],
-            description=self.data['description'],
             contactPoint=self.data['contactPoint'],
             contactPointEmail=self.data['contactPointEmail'],
             geographicExtend=self.data['geographicExtend'],
             platformLocality=self.data['platformLocality'],
             logoCredit=self.data['logoCredit'],
-            profileImageCredit=self.data['profileImageCredit'])
+            profileImageCredit=self.data['profileImageCredit']
+        )
+
+        # Manage multilingual descriptions
+        for lang_code in settings.MODELTRANSLATION_LANGUAGES:
+            field_name = f'description_{lang_code}'
+            setattr(platform, f'description_{lang_code}', self.data.get(field_name, '').strip())
+
+        return platform
 
     ''' Update function '''
 
     def updatePlatform(self, platform, args):
-        print("updating")
         platform.name = self.data['name']
         platform.url = self.data['url']
-        platform.description = self.data['description']
         platform.contactPoint = self.data['contactPoint']
         platform.contactPointEmail = self.data['contactPointEmail']
         platform.geographicExtend = self.data['geographicExtend']
         platform.platformLocality = self.data['platformLocality']
         platform.logoCredit = self.data['logoCredit']
         platform.profileImageCredit = self.data['profileImageCredit']
+
+        # Manage multilingual descriptions
+        for lang_code in settings.MODELTRANSLATION_LANGUAGES:
+            field_name = f'description_{lang_code}'
+            setattr(platform, f'description_{lang_code}', self.data.get(field_name, '').strip())

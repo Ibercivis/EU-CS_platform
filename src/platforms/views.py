@@ -44,11 +44,12 @@ def editPlatform(request, pk):
 
     if user != platform.creator and not user.is_staff:
         return redirect('../platforms', {})
+    
+    platformForm = PlatformForm(instance=platform)
 
-    platformForm = PlatformForm(initial={
+    platformForm.initial.update({
         'name': platform.name,
         'url': platform.url,
-        'description': platform.description,
         'geographicExtend': platform.geographicExtend,
         'countries': platform.countries,
         'platformLocality': platform.platformLocality,
@@ -78,17 +79,28 @@ def deletePlatformAjax(request, pk):
 
 @login_required(login_url='/login')
 def savePlatformAjax(request):
-    print(request.POST)
-    form = PlatformForm(request.POST, request.FILES)
+    request.POST = request.POST.copy()
+    print("Sent data", request.POST)
+    print("Sent files", request.FILES)
+
+    platform_instance = None
+    if request.POST.get('Id').isnumeric():
+        platform_instance = get_object_or_404(Platform, id=request.POST['Id'])
+
+    # Create a form instance and populate it with data from the request:
+    form = PlatformForm(request.POST, request.FILES, instance=platform_instance)
+    
     if form.is_valid():
         images = setImages(request, form)
         pk = form.save(request, images)
-        if request.POST.get('Id').isnumeric():
-            return JsonResponse({'Platform updated': 'OK', 'Id': pk}, status=status.HTTP_200_OK)
-        else:
+
+        # Send email to user only if the platform is new
+        if not platform_instance:
             sendPlatformEmail(pk, request.user)
-            return JsonResponse({'Platform created': 'OK', 'Id': pk}, status=status.HTTP_200_OK)
+
+        return JsonResponse({'Created': 'OK', 'Id': pk}, status=status.HTTP_200_OK)
     else:
+        print("Form errors:", form.errors)
         return JsonResponse(form.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
 
 
@@ -193,7 +205,7 @@ def setImages(request, form):
             finalsize = (1100, 400)
         else:
             finalsize = (600, 400)
-        image = image.resize(finalsize, Image.ANTIALIAS)
+        image = image.resize(finalsize, Image.LANCZOS)
         imagePath = getImagePath(value.name)
         image.save('media/'+imagePath)
         images[key] = imagePath

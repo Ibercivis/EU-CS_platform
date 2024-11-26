@@ -108,7 +108,127 @@
 </div>
 {% endblock list_of_items %}
 {% block scripts %}
-<script src='{% static 'js/forms.js' %}' ></script>
+<script src="{% static 'scripts/cropper.min.js' %}"></script>
+<script src="{% static 'scripts/jquery-cropper.min.js' %}"></script>
+<script>
+    $(function () {
+        var imgSelected;
+        var $image = $("#image"); // Element in the modal to display and crop the image
+        var cropBoxData;
+        var canvasData;
+
+        // Remove visual error classes when an input or select element gains focus
+        $('input, select').on('focus', function () {
+            if ($(this).is('.error')) $(this).removeClass('error');
+        });
+
+        // Handle form submission using AJAX
+        $('.submit').click(function (e) {
+            e.preventDefault();
+
+            // Update CKEditor instances with the latest data
+            for (var instanceName in CKEDITOR.instances) {
+                CKEDITOR.instances[instanceName].updateElement();
+            }
+
+            $('.myerror').remove();
+            $.ajaxSettings.traditional = true;
+
+            $.ajax({
+                type: 'POST',
+                url: '{% url "savePlatformAjax" %}',
+                processData: false,
+                contentType: false,
+                data: new FormData(document.getElementById("Platform")),
+                success: function (response) {
+                    if (response['Platform created']) {
+                        window.location.href = '/platform/' + response['Id'];
+                    } else {
+                        window.location.href = '/platform/' + response['Id'];
+                    }
+                },
+                error: function (response) {
+                    if (response.status === 500) {
+                        alert('Unexpected error. Please contact the administrator.');
+                    }
+                    $.each(response.responseJSON, function (i, val) {
+                        $('#id_' + i).addClass('error');
+                        $('#hint_id_' + i).append('<div class="myerror small text-danger">' + val + '</div>');
+                    });
+                    $('html, body').animate({
+                        scrollTop: $('.myerror:visible:first').offset().top - 300
+                    }, 30);
+                }
+            });
+        });
+
+        // Handle image selection and preview for logo and profileImage
+        $("#id_logo").change(function () {
+            handleImageUpload(this, 'logo');
+        });
+
+        $("#id_profileImage").change(function () {
+            handleImageUpload(this, 'profileImage');
+        });
+
+        // Function to manage image upload and preview in the modal
+        function handleImageUpload(input, imageType) {
+            imgSelected = imageType;
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $("#image").attr("src", e.target.result);
+                    $("#modalCrop").modal("show");
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // Configure the cropping modal
+        $("#modalCrop").on("shown.bs.modal", function () {
+            $image.cropper({
+                viewMode: 1,
+                aspectRatio: imgSelected === 'logo' ? 3 / 2 : 11 / 4,
+                minCropBoxWidth: imgSelected === 'logo' ? 600 : 1100,
+                minCropBoxHeight: 400,
+                dragMode: 'move',
+                guides: false,
+                center: false,
+                highlight: false,
+                cropBoxResizable: false,
+                toggleDragModeOnDblclick: false,
+                ready: function () {
+                    $image.cropper("setCanvasData", canvasData);
+                    $image.cropper("setCropBoxData", cropBoxData);
+                }
+            });
+        }).on("hidden.bs.modal", function () {
+            cropBoxData = $image.cropper("getCropBoxData");
+            canvasData = $image.cropper("getCanvasData");
+            $image.cropper("destroy");
+        });
+
+        // Save crop coordinates and update the image preview
+        $(".js-crop-and-upload").click(function () {
+            var cropData = $image.cropper("getData");
+            $("#id_x" + imgSelected).val(cropData["x"]);
+            $("#id_y" + imgSelected).val(cropData["y"]);
+            $("#id_height" + imgSelected).val(cropData["height"]);
+            $("#id_width" + imgSelected).val(cropData["width"]);
+            $("#modalCrop").modal("hide");
+            $('#imageResult' + imgSelected).attr('src', $image.cropper('getCroppedCanvas',
+                { width: imgSelected === 'logo' ? 600 : 1100, height: 400 }).toDataURL());
+        });
+
+        // Alert users if they attempt to leave the page without saving changes
+        if (window.history && window.history.pushState) {
+            window.history.pushState('forward', null, null);
+            $(window).on('popstate', function () {
+                alert('If you leave before saving, your changes will be lost. Be careful!');
+            });
+        }
+    });
+</script>
 {% endblock scripts %}
 
 

@@ -58,7 +58,6 @@ def newProject(request):
 
 @login_required
 def saveProjectAjax(request):
-    print(request.POST)
     request.POST = request.POST.copy()
     request.POST = updateKeywords(request.POST)
     request.POST = updateFundingBody(request.POST)
