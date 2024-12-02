@@ -25,8 +25,6 @@ class NewUserAdmin(NamedUserAdmin):
         "is_staff",
     )
 
-    
-
     # 'View on site' didn't work since the original User model needs to
     # have get_absolute_url defined. So showing on the list display
     # was a workaround.

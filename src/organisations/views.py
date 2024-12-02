@@ -36,6 +36,8 @@ def new_organisation(request):
     user = request.user
     text = get_object_or_404(HelpText, slug='new-organisation')
 
+    print("Data submitted", request.POST)
+
 
     form = OrganisationForm()
     if request.method == 'POST':

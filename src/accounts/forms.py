@@ -78,7 +78,7 @@ class LoginForm(AuthenticationForm):
 class SignupForm(authtoolsforms.UserCreationForm):
     surname = forms.CharField(
         required=True,
-        max_length=200,
+        max_length=20,
         label=_(""),
         widget=forms.TextInput(attrs={"placeholder": _("Enter Surname")})
     )
@@ -94,6 +94,10 @@ class SignupForm(authtoolsforms.UserCreationForm):
         self.fields["email"].widget.input_type = "email"  # ugly hack
         self.fields["email"].label = ""
         self.fields["name"].label = ""
+        self.fields["name"].widget.attrs.update({
+            "maxlength": "20",  # Limit name to 20 characters
+            "placeholder": _("Enter Name (max 20 characters)"),
+        })
         self.fields["password1"].label = ""
         self.fields["password2"].label = ""
         self.fields["captcha"] = ReCaptchaField()
@@ -101,9 +105,9 @@ class SignupForm(authtoolsforms.UserCreationForm):
         self.helper.layout = Layout(
             Field("email", placeholder=_("Enter Email"), autofocus=""),
             HTML('<div class="m-4"></div>'),
-            Field("name", placeholder=_("Enter Name")),
+            Field("name", placeholder=_("Enter Name (max 20 characters)"),),
             HTML('<div class="m-4"></div>'),
-            Field("surname", placeholder=_("Enter Surname")),
+            Field("surname", placeholder=_("Enter Surname (max 20 characters)"),),
             HTML('<div class="m-4"></div>'),
             Field("password1", placeholder=_("Enter Password")),
             HTML('<div class="m-4"></div>'),
@@ -115,6 +119,18 @@ class SignupForm(authtoolsforms.UserCreationForm):
             StrictButton(_("Sign up"), css_class="btn btn-secondary mt-5", type="Submit"),
         )
 
+    def clean_name(self):
+        name = self.cleaned_data.get("name")
+
+        # Validate length
+        if len(name) > 20:
+            raise forms.ValidationError(_("Name must not exceed 20 characters."))
+
+        # Validate contains no URLs
+        if "http" in name.lower():
+            raise forms.ValidationError(_("Name cannot contain the string 'http'."))
+
+        return name
 
 class PasswordChangeForm(authforms.PasswordChangeForm):
     def __init__(self, *args, **kwargs):
