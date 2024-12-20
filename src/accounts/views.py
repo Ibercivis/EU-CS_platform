@@ -148,7 +148,8 @@ class PasswordResetConfirmView(authviews.PasswordResetConfirmView):
     
 class DeleteAccount(LoginRequiredMixin, View):
     """
-    This view allows the user to delete their account after entering correct password for verification.
+    This view allows the user to delete their account after entering correct
+    password for verification.
     """
     def get(self, request):
         form = forms.PasswordVerificationForm()
@@ -163,9 +164,8 @@ class DeleteAccount(LoginRequiredMixin, View):
             if user.check_password(entered_password):
                 user.delete()
                 return render(request, 'accounts/user_deleted.html', status=202)
-            else:
-                messages.error(request, "Incorrect password.")
-        
+            
+            messages.error(request, "Incorrect password.")
         return render(request, "accounts/delete_account.html", {"form": form})
 
 
