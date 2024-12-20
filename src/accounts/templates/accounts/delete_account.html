@@ -1,0 +1,28 @@
+{% extends "base_r2.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}{{ block.super }}Delete Account{% endblock %}
+
+{% block list_of_items %}
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="container d-flex justify-content-center">
+      <div class="col-lg-6 col-12">
+        <div class="card mb-4 mt-5 shadow">
+          <div class="card-header">
+            <h3>Delete Account</h3>
+          </div>
+          <div class="text-text p-3">
+            <p>To delete your account, please enter your password for confirmation.</p>
+            {% block form %}
+            {% crispy form %}
+            {% endblock form %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock list_of_items %}

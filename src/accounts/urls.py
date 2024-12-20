@@ -32,4 +32,5 @@ urlpatterns = [
         name="password-reset-confirm",
     ),
     path('activate/<uidb64>/<token>/', views.activate, name='activate'),
+    path("delete-account/", views.DeleteAccount.as_view(), name="delete_account"),
 ]

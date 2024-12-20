@@ -165,3 +165,22 @@ class SetPasswordForm(authforms.SetPasswordForm):
             Field("new_password2", placeholder=_("Enter new password (again)")),
             Submit("pass_change", _("Change Password"), css_class="btn-red"),
         )
+
+
+class PasswordVerificationForm(forms.Form):
+    """
+    Verifying user's password for their account deletion.
+    """
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={"placeholder": _("Password"), "autofocus": True}),
+        label=_("Password"),
+        required=True,
+    )
+
+    def __init__(self, *args, ** kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Field("password"),
+            StrictButton(_("Delete Account"), css_class="btn-danger mt-3", type="Submit"),
+        )
