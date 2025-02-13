@@ -130,7 +130,29 @@ class SignupForm(authtoolsforms.UserCreationForm):
         if "http" in name.lower():
             raise forms.ValidationError(_("Name cannot contain the string 'http'."))
 
+        # Validate prohibited words
+        forbidden_words = ["bitcoin", "casino", "baby", "dear"]
+        for word in forbidden_words:
+            if word in name.lower():
+                raise forms.ValidationError(_(f"Name cannot contain the word '{word}'."))
+
         return name
+
+    def clean_email(self):
+        email = self.cleaned_data.get("email")
+
+        # Validate prohibited words
+        forbidden_words = ["bitcoin", "casino", "baby", "dear"]
+        for word in forbidden_words:
+            if word in email.lower():
+                raise forms.ValidationError(_(f"Email cannot contain the word '{word}'."))
+
+        # Validate email dot count before @
+        local_part = email.split('@')[0]
+        if local_part.count('.') > 2:
+            raise forms.ValidationError(_("Email cannot contain more than two dots before the '@'."))
+
+        return email
 
 class PasswordChangeForm(authforms.PasswordChangeForm):
     def __init__(self, *args, **kwargs):

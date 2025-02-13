@@ -40,94 +40,75 @@ def training_resources(request):
 
 def resources(request, isTrainingResource=False):
     user = request.user
-    if(isTrainingResource):
-        resources = Resource.objects.all().filter(isTrainingResource=True).order_by('-dateUpdated')
-        languagesWithContent = Resource.objects.all().filter(
-                isTrainingResource=True).values_list('inLanguage', flat=True).distinct()
+
+    # Optimización: Cargar todas las relaciones de una vez
+    all_resources = Resource.objects.select_related("category").prefetch_related(
+        "keywords", "theme", "audience", "authors", "organisation", "project"
+    ).all()
+
+    if isTrainingResource:
+        resources = all_resources.filter(isTrainingResource=True)
+        languagesWithContent = resources.values_list('inLanguage', flat=True).distinct()
         endPoint = 'training_resources'
     else:
-        resources = Resource.objects.all().filter(~Q(isTrainingResource=True)).order_by('-dateUpdated')
-        languagesWithContent = Resource.objects.all().filter(
-                ~Q(isTrainingResource=True)).values_list('inLanguage', flat=True).distinct()
+        resources = all_resources.filter(~Q(isTrainingResource=True))
+        languagesWithContent = resources.values_list('inLanguage', flat=True).distinct()
         endPoint = 'resources'
-    resources = resources.order_by('id')
-    totalCount = len(resources.filter(approved=True))
 
+    resources = resources.order_by('-dateUpdated')
+    totalCount = resources.filter(approved=True).count()
+
+    # Filtrados
     themes = Theme.objects.all()
     categories = Category.objects.all()
     audiencies = Audience.objects.all()
-    #To Count
     filters = {'keywords': '', 'inLanguage': ''}
-    resources = applyFilters(request, resources)
-    filters = setFilters(request, filters)
-    resources = resources.distinct()
-    # resources = resources.filter(~Q(hidden=True))
 
+    resources = applyFilters(request, resources).distinct()
     if not user.is_staff:
         resources = resources.filter(approved=True)
-    
-    #To Count
-    #For resources count
-    allResources = Resource.objects.all()
-    allResources = applyFilters(request, allResources)
-    allResources = allResources.distinct()
-    resources2 = allResources.filter(~Q(isTrainingResource=True))
-    trainingResources = allResources.filter(isTrainingResource=True)
-    resourcesCounter = len(resources2)
-    trainingResourcesCounter = len(trainingResources)
 
-    #For projects count
-    projects = Project.objects.all().filter(approved=True)
-    projects = projects.filter(~Q(hidden=True))
-    projects = applyFilters(request, projects)
-    projects = projects.distinct()
-    projectsCounter = len(projects)
+    # Contadores optimizados con .count()
+    resourcesCounter = all_resources.filter(~Q(isTrainingResource=True)).count()
+    trainingResourcesCounter = all_resources.filter(isTrainingResource=True).count()
+    projectsCounter = Project.objects.filter(approved=True, hidden=False).count()
+    organisationsCounter = Organisation.objects.distinct().count()
+    platformsCounter = Platform.objects.distinct().count()
+    usersCounter = Profile.objects.filter(profileVisible=True, user__is_active=True).count()
 
-    #For organisations count
-    organisations = Organisation.objects.all()
-    filteredOrganisations = applyFilters(request, organisations).distinct()
-    organisations = organisations.distinct()
-    organisationsCounter = len(filteredOrganisations)
+    # Debugging
+    print(f"Resources count: {resourcesCounter}")
+    print(f"Training resources count: {trainingResourcesCounter}")
+    print(f"Projects count: {projectsCounter}")
+    print(f"Organisations count: {organisationsCounter}")
+    print(f"Platforms count: {platformsCounter}")
+    print(f"Users count: {usersCounter}")
 
-    #For platforms count
-    platforms = Platform.objects.all()
-    platforms = applyFilters(request, platforms)
-    platforms = platforms.distinct()
-    platformsCounter = len(platforms)
-
-    #For users count
-    users = Profile.objects.all().filter(profileVisible=True).filter(user__is_active=True)
-    users = applyFilters(request, users)
-    users = users.distinct()
-    usersCounter = len(users)
-    # Ordering
-    if request.GET.get('orderby'):
-        orderBy = request.GET.get('orderby')
-        if("featured" in orderBy):
+    # Ordenamiento
+    orderBy = request.GET.get('orderby')
+    if orderBy:
+        if "featured" in orderBy:
             resourcesTop = resources.filter(featured=True)
             resourcesTopIds = list(resourcesTop.values_list('id', flat=True))
             resources = resources.exclude(id__in=resourcesTopIds)
             resources = list(resourcesTop) + list(resources)
 
-        if("name" in orderBy):
+        if "name" in orderBy:
             resources = resources.order_by('name')
 
-        if("created" in orderBy):
+        if "created" in orderBy:
             resources = resources.order_by('-dateCreated')    
-   
     else:
         resources = resources.order_by('-dateUpdated')
 
-    counter = len(resources)
+    # Paginación
     paginator = Paginator(resources, 18)
     page = request.GET.get('page')
     resources = paginator.get_page(page)
 
-    return TemplateResponse(request, 'resources.html', {
+    return render(request, 'resources.html', {
         'resources': resources,
-        # 'approvedResources': approvedResources,
-        # 'unApprovedResources': unApprovedResources,
-        'counter': counter,
+        'counter': len(resources),
         'totalCount': totalCount,
         'resourcesCounter': resourcesCounter,
         'trainingResourcesCounter': trainingResourcesCounter,
@@ -135,8 +116,6 @@ def resources(request, isTrainingResource=False):
         'organisationsCounter': organisationsCounter,
         'platformsCounter': platformsCounter,
         'usersCounter': usersCounter,
-        # 'savedResources': savedResources,
-        # 'bookmarkedResources': bookmarkedResources,
         'filters': filters,
         'settings': settings,
         'languagesWithContent': languagesWithContent,
@@ -146,7 +125,8 @@ def resources(request, isTrainingResource=False):
         'isTrainingResource': isTrainingResource,
         'endPoint': endPoint,
         'isSearchPage': True,
-        'show_search_bar': False})
+        'show_search_bar': False
+    })
 
 
 @login_required(login_url='/login')
