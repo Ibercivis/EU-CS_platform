@@ -49,16 +49,17 @@ class LearningResourceTypeViewSet(viewsets.ModelViewSet):
 class ResourceList(APIView):
 
     def applyFilters(self, request, resources):
-        approvedResources = ApprovedResources.objects.all().values_list('resource_id',flat=True)
+        resources = resources.filter(approved=True)
 
         keywords = request.query_params.get('keywords', None)
         if keywords is not None:
-            resources = resources.filter( Q(name__icontains = keywords) |
-                                    Q(keywords__keyword__icontains = keywords) ).distinct()
+            resources = resources.filter(
+                Q(name__icontains=keywords) | Q(keywords__keyword__icontains=keywords)
+            ).distinct()
 
         language = request.query_params.get('language', None)
         if language is not None:
-            resources = resources.filter(inLanguage = language)
+            resources = resources.filter(inLanguage=language)
 
         license = request.query_params.get('license', None)
         if license is not None:
@@ -71,16 +72,6 @@ class ResourceList(APIView):
         category = request.query_params.get('category', None)
         if category is not None:
             resources = resources.filter(category=category)
-
-        if request.GET.get('approvedCheck'):
-            if request.GET['approvedCheck'] == 'On':
-                resources = resources.filter(id__in=approvedResources)
-            if request.GET['approvedCheck'] == 'Off':
-                resources = resources.exclude(id__in=approvedResources)
-            if request.GET['approvedCheck'] == 'All':
-                resources = resources
-        else:
-            resources = resources.filter(id__in=approvedResources)
 
         return resources
 
@@ -159,16 +150,17 @@ class ResourceDetail(APIView):
 class TrainingResourceList(APIView):
 
     def applyFilters(self, request, resources):
-        approvedResources = ApprovedResources.objects.all().values_list('resource_id',flat=True)
+        resources = resources.filter(approved=True)
 
         keywords = request.query_params.get('keywords', None)
         if keywords is not None:
-            resources = resources.filter( Q(name__icontains = keywords) |
-                                    Q(keywords__keyword__icontains = keywords) ).distinct()
+            resources = resources.filter(
+                Q(name__icontains=keywords) | Q(keywords__keyword__icontains=keywords)
+            ).distinct()
 
         language = request.query_params.get('language', None)
         if language is not None:
-            resources = resources.filter(inLanguage = language)
+            resources = resources.filter(inLanguage=language)
 
         license = request.query_params.get('license', None)
         if license is not None:
@@ -181,16 +173,6 @@ class TrainingResourceList(APIView):
         category = request.query_params.get('category', None)
         if category is not None:
             resources = resources.filter(category=category)
-
-        if request.GET.get('approvedCheck'):
-            if request.GET['approvedCheck'] == 'On':
-                resources = resources.filter(id__in=approvedResources)
-            if request.GET['approvedCheck'] == 'Off':
-                resources = resources.exclude(id__in=approvedResources)
-            if request.GET['approvedCheck'] == 'All':
-                resources = resources
-        else:
-            resources = resources.filter(id__in=approvedResources)
 
         return resources
 

@@ -60,8 +60,8 @@ class TrainingResourceSerializer(serializers.ModelSerializer):
     theme = ThemeSerializer(many=True)
     authors = AuthorSerializer(many=True)
     keywords = KeywordSerializer(many=True, required=False)
-    educationLevel = EducationLevelSerializer(many=False)
-    learningResourceType = LearningResourceTypeSerializer(many=False)
+    educationLevel = EducationLevelSerializer(many=True)
+    learningResourceType = LearningResourceTypeSerializer(many=True)
 
     class Meta:
         model = Resource

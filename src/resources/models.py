@@ -32,10 +32,19 @@ class Category(models.Model):
     parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
-        res = str(self.text)
-        if(self.parent):
-            res = str(self.parent) + ' : ' + res
-        return res
+        category_chain = []
+        current = self
+        max_depth = 10  # Avoid infinite cycles
+
+        while current and max_depth > 0:
+            category_chain.append(str(current.text))
+            current = current.parent
+            max_depth -= 1
+
+        if max_depth == 0:
+            category_chain.append("... (loop detected)")  # Indicate detected loop
+
+        return " : ".join(reversed(category_chain))
 
 
 class EducationLevel(models.Model):
