@@ -169,19 +169,6 @@ class DeleteAccount(LoginRequiredMixin, View):
         return render(request, "accounts/delete_account.html", {"form": form})
 
 
-def delete_user(request):
-    try:
-        u = User.objects.get(id = request.user.id)
-        u.delete()
-        return render(request, 'accounts/user_deleted.html')
-    except User.DoesNotExist:
-        messages.error = 'User does not exist.'
-        return redirect('home')
-    except Exception as e:
-        messages.error = 'There was a problem trying delete an user'
-        return redirect('home')
-
-
 def activate(request, uidb64, token):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
