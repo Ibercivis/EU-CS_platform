@@ -80,7 +80,7 @@
                     <i class="fas fa-edit"></i>
                     Edit profile</a>
                 {% endif %} 
-                <a href="delete-account/" class="list-group-item list-group-item-action text-danger" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
+                <a href="{% url 'accounts:delete_account' %}" class="list-group-item list-group-item-action text-danger">
                     <i class="fas fa-trash-alt"></i>
                     Delete account
                 </a>
@@ -92,8 +92,6 @@
         </div>
     </div>
 </div>
-{% url 'accounts:delete' as delete_url %}
-{% include "_modal_danger.html" with modal_id="deleteAccountModal" modal_title="Delete Account" modal_message="Are you sure? This action cannot be undone." form_action=delete_url confirm_button_text="Delete" %}
 {% endblock list_of_items %}
 {% block scripts %}
 {% endblock scripts %}
