@@ -8,7 +8,7 @@ EU-CS_platform is a web platform for Citizen Science. It is built with [Python][
 ## Requirements
 
 ```bash
-sudo apt install python3-venv python3-pip libpq-dev libffi-dev postgresql postgresql-10-postgis-2.4 libjpeg-dev zlib1g-dev gettext
+sudo apt install python3-venv python3-pip libpq-dev libffi-dev postgresql postgresql-12.22-postgis-3.0 libjpeg-dev zlib1g-dev gettext
 python3 -m venv venv
 source venv/bin/activate
 ```
