@@ -88,6 +88,21 @@ class SignupForm(authtoolsforms.UserCreationForm):
         label=_("Make profile visible to others"),
     )
 
+    """
+    username and phone are hidden Honeypot-Fields to prevent bots from submitting the form.
+    """
+    username = forms.CharField(
+    required=False,
+    widget=forms.TextInput(attrs={"style": "display:none;"}), 
+    label=""
+    )
+
+    phone = forms.CharField(
+    required=False,
+    widget=forms.TextInput(attrs={"style": "display:none;"}), 
+    label=""
+    )
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -108,6 +123,8 @@ class SignupForm(authtoolsforms.UserCreationForm):
             Field("name", placeholder=_("Enter Name (max 20 characters)"),),
             HTML('<div class="m-4"></div>'),
             Field("surname", placeholder=_("Enter Surname (max 20 characters)"),),
+            Field("username", placeholder=_("Enter Username"),),
+            Field("phone", placeholder=_("Enter Mobile Number"),),
             HTML('<div class="m-4"></div>'),
             Field("password1", placeholder=_("Enter Password")),
             HTML('<div class="m-4"></div>'),
@@ -118,6 +135,17 @@ class SignupForm(authtoolsforms.UserCreationForm):
             Field("captcha"),
             StrictButton(_("Sign up"), css_class="btn btn-secondary mt-5", type="Submit"),
         )
+    
+    def clean(self):
+        cleaned_data = super().clean()
+
+        # If honeypot fields are filled, reject the form
+        if cleaned_data.get("username"):
+            raise forms.ValidationError(_("Wrong username. Try Again."))
+        elif cleaned_data.get("phone"):
+            raise forms.ValidationError(_("Incorrecct phone number"))
+
+        return cleaned_data
 
     def clean_name(self):
         name = self.cleaned_data.get("name")
