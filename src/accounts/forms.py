@@ -143,7 +143,7 @@ class SignupForm(authtoolsforms.UserCreationForm):
         if cleaned_data.get("username"):
             raise forms.ValidationError(_("Wrong username. Try Again."))
         elif cleaned_data.get("phone"):
-            raise forms.ValidationError(_("Incorrecct phone number"))
+            raise forms.ValidationError(_("Incorrect phone number"))
 
         return cleaned_data
 
