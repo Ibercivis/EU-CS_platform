@@ -1,7 +1,7 @@
 from django import forms
 from django.shortcuts import get_object_or_404
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from .models import Event
 from organisations.models import Organisation
 from projects.models import Project

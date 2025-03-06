@@ -16,7 +16,7 @@ from django.db.models import ForeignKey, F
 from django.db.models import Q, Avg, Count, Sum
 from django.core.serializers.json import DjangoJSONEncoder
 
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.template.loader import render_to_string
 from datetime import datetime, timezone
 from PIL import Image

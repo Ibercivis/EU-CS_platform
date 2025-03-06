@@ -8,7 +8,7 @@ from .models import Resource, Keyword, Category, Audience, Theme, ResourceGroup
 from .models import ResourcesGrouped, EducationLevel, LearningResourceType
 from authors.models import Author
 from datetime import datetime
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from organisations.models import Organisation
 from projects.models import Project
 from django.conf import settings 
