@@ -1,5 +1,4 @@
-from django.urls import path, include
-from django.conf.urls import url
+from django.urls import path, include, re_path
 from . import views
 
 urlpatterns = [
@@ -26,7 +25,7 @@ urlpatterns = [
     path('setHiddenResource/', views.setHiddenResource, name='setHiddenResource'),
     path('allowUserResource/', views.allowUserResource, name='allowUserResource'),
     path('resource_review/<int:pk>', views.resource_review, name='resource_review'),
-    url(r'^api/', include('resources.api.urls')),
+    re_path(r'^api/', include('resources.api.urls')),
     path('downloadResources', views.downloadResources, name='downloadResources'),
     path('newTrainingResource', views.newTrainingResource, name='newTrainingResource'),
     path('training_resources', views.training_resources, name='training_resources'),

@@ -1,5 +1,4 @@
-from django.urls import path, include
-from django.conf.urls import url
+from django.urls import path, include, re_path
 from . import views
 
 urlpatterns = [
@@ -13,5 +12,5 @@ urlpatterns = [
         views.organisationsAutocompleteSearch,
         name='organisationsAutocompleteSearch'),
     path('allowUserOrganisation/', views.allowUserOrganisation, name='allowUserOrganisation'),
-    url(r'^api/', include('organisations.api.urls')),
+    re_path(r'^api/', include('organisations.api.urls')),
 ]

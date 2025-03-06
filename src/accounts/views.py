@@ -12,7 +12,7 @@ from django.http import HttpResponse
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_bytes, force_text
+from django.utils.encoding import force_bytes, force_str
 from django.shortcuts import render
 from django.core.mail import send_mail
 from profiles.models import Profile
@@ -130,7 +130,7 @@ class PasswordResetView(authviews.PasswordResetView):
     subject_template_name = "accounts/emails/password-reset-subject.txt"
     email_template_name = "accounts/emails/password-reset-plain-email.txt"
     html_email_template_name = "accounts/emails/password-reset-email.html"
-    extra_email_context = { 'PASSWORD_RESET_TIMEOUT_HOURS': settings.PASSWORD_RESET_TIMEOUT_DAYS * 24,
+    extra_email_context = { 'PASSWORD_RESET_TIMEOUT_HOURS': settings.PASSWORD_RESET_TIMEOUT // (3600 * 3),
                             'domain': settings.HOST }
 
 class PasswordResetDoneView(authviews.PasswordResetDoneView):
@@ -171,7 +171,7 @@ class DeleteAccount(LoginRequiredMixin, View):
 
 def activate(request, uidb64, token):
     try:
-        uid = force_text(urlsafe_base64_decode(uidb64))
+        uid = force_str(urlsafe_base64_decode(uidb64))
         user = User.objects.get(pk=uid)
     except(TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None

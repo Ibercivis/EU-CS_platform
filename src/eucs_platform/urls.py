@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import include, path, re_path
-from django.conf.urls import url
 from django.views.decorators.cache import never_cache
 from django.views.defaults import server_error
 from drf_yasg.views import get_schema_view
@@ -69,15 +68,15 @@ urlpatterns = [
     path('forum/', include(machina_urls)),
     path('getTopicsResponded', views.getTopicsResponded, name='getTopicsResponded'),
     path('getForumResponsesNumber', views.getForumResponsesNumber, name='getForumResponsesNumber'),
-    url(r'^i18n/', include('django.conf.urls.i18n')),
-    url(r'^reviews/', include('reviews.urls')),
+    re_path(r'^i18n/', include('django.conf.urls.i18n')),
+    re_path(r'^reviews/', include('reviews.urls')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     #url(r'^api/auth/', include('djoser.urls')),
-    url(r'^api/auth/', include('djoser.urls.authtoken')),
-    url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
-    url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-    url(r'^openid/', include('oidc_provider.urls', namespace='oidc_provider')),
+    re_path(r'^api/auth/', include('djoser.urls.authtoken')),
+    re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
+    re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    re_path(r'^openid/', include('oidc_provider.urls', namespace='oidc_provider')),
     re_path(r"^upload/", ckeditor_uploader.views.upload, name="ckeditor_upload"),
     re_path(r"^browse/", never_cache(ckeditor_uploader.views.browse), name="ckeditor_browse",),
     path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),

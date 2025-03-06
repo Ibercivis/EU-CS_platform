@@ -1,7 +1,6 @@
 
 """ Urls for projects app """
-from django.urls import path, include
-from django.conf.urls import url
+from django.urls import path, include, re_path
 from . import views
 
 
@@ -31,7 +30,7 @@ urlpatterns = [
     path('project_review/<int:pk>', views.project_review, name='project_review'),
     path('likeProjectAjax', views.likeProjectAjax, name='likeProjectAjax'),
     path('followProjectAjax', views.followProjectAjax, name='followProjectAjax'),
-    url(r'^api/', include('projects.api.urls')),
+    re_path(r'^api/', include('projects.api.urls')),
     path('downloadProjects', views.downloadProjects, name='downloadProjects'),
     path('generateProjectStatsAjax', views.generateProjectStatsAjax,name='generateProjectStatsAjax'),
 ]
