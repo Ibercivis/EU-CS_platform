@@ -93,13 +93,13 @@ class SignupForm(authtoolsforms.UserCreationForm):
     """
     username = forms.CharField(
     required=False,
-    widget=forms.TextInput(attrs={"style": "display:none;"}), 
+    widget=forms.TextInput(attrs={"class": "font-fix-123"}), 
     label=""
     )
 
     phone = forms.CharField(
     required=False,
-    widget=forms.TextInput(attrs={"style": "display:none;"}), 
+    widget=forms.TextInput(attrs={"class": "font-fix-123"}), 
     label=""
     )
 
