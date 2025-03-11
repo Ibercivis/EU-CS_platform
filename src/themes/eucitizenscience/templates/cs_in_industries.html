@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+{% extends "base_r2.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}{{ block.super }} :: {% trans "Citizen science in industries" %}{% endblock %}
+
+{% block list_of_items %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citizen science in industries</title>
+
+    <style>
+        .dotted-border {
+            border: 2px dotted black;
+            border-color: #0d6efd;
+            padding: 10px;
+            font-size: 0.8rem;
+        }
+        .purple-bg {
+            background-color: #8338EC;
+            color: white;
+        }
+        .orange-bg {
+            background-color: #FB5607;
+            color: white;
+        }
+        .yellow-bg {
+            background-color: #FFBE0B;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                    <h1 class="mt-5 mb-5 text-center"><span class='text-color-secondary'>Empower Your Innovation Journey</span></h1>
+                <main>
+                    <section>
+                        <h3 class="fst-italic">Join our pilots to solve innovation challenges through citizen science and the co-design of new business models</h3>
+                        
+                        <p>To strengthen collaboration between SMEs, industries, and citizen science initiatives, the  European Citizen Science project is launching an open call for partnerships between citizen science projects and businesses. This call invites participants to take part in three pilot cases, where we will co-design new models for integrating citizen science into business practices.</p>
+                        <p>
+                            Through these pilots, we aim to tackle innovation challenges and drive meaningful social and environmental impact in three key areas:
+                        </p>
+                        <ul>
+                            <li>Restoring our oceans and waters</li>
+                            <li>Climate-neutral and smart cities</li>
+                            <li>Health.</li>
+                        </ul>
+                    </section>   
+                    <section>
+                        <div class="d-flex flex-wrap p-3 gap-3">
+                            <div style="flex: 1 1 300px; min-width: 280px;">
+                            <h2 class="text-color-secondary">Process and timeline</h2>
+                                <p><span class='text-color-secondary'>Open call will be open from April 1st - April 15th.</span> Build up your partnerships between citizen science projects and industries/SMEs and apply together.</p>
+                                <p><span class='text-color-secondary'>Pilot development will take place from May - June 2025.</span> Three online sessions to explore citizen science practices in industries and SMEs and co-create 3 business/sustainability plans.</p>
+                                <ul>
+                                <li>Sessions: 3 co-creation workshops</li>
+                                <li>When: 1.5 months between April to June 2025</li>
+                                <li>Outcome: a co-created business model to solve the SME/Industry innovation challenges.</li>
+                                </ul>
+                                <h2 class="text-color-secondary">Why participate?</h2>
+                                <p><span class="text-color-secondary">I'm a SME or an industry</span>: Generate new value for your business — data insights, brand visibility, community engagement and funding opportunities.</p>
+                                <p><span class="text-color-secondary">I'm a citizen science project</span>: Amplify impact of your project — transfer knowledge, drive innovation and funding opportunities.</p>
+                            </div>
+                            
+                            <div style="flex: 0 1 230px;">
+                                <div class="d-flex justify-content-center align-items-center rounded-circle purple-bg text-center p-4"
+                                    style="width: 245px; height: 245px;">
+                                <strong class="text-white">Team up and apply as a pilot to co-design new business models through our open call!</strong>
+                                </div>
+                                <br>
+                                <a href="https://forms.gle/WmSodPCKR8zuXkHi8" target="blank" class="d-flex justify-content-center align-items-center rounded-circle yellow-bg text-muted text-center p-4"
+                                    style="width: 245px; height: 245px;">
+                                <p class="mt-4"><strong>You want to participate but you do not know who to partner with? Register <span class="text-color-secondary"><u>here</u></span> for our upcoming matchmaking event.</strong></p>
+                                </a>
+                            </div>
+                            
+                        </div>
+                        <h2 class="text-color-secondary text-center">------ Eligibility ------</h2>
+                        <div class="d-flex flex-wrap p-3 gap-3">
+                            <a href="https://forms.gle/XqurUwKSMNsEvc3X6" target="blank" class="d-flex justify-content-center align-items-center rounded-circle orange-bg text-dark text-center p-4"
+                                    style="width: 245px; height: 245px;">
+                                <p class="mt-4"><strong class="text-white">Not sure if this is for you? Express your interest <span class="text-color-secondary"><u>here</u></span></strong></p>
+                            </a>
+
+                            <div style="flex: 1 1 300px; min-width: 280px;">
+                                <p><span class='text-color-secondary'>Geographical scope</span>: Both companies and citizen science projects must be based in Europe, although it is not necessary they are based in the same country</p>
+                                <p><span class='text-color-secondary'>Experience</span>: Prior experience in citizen science is not required, but is preferred.</p>
+                                <p><strong>Let's lead the way in innovation with citizen science! </strong></p>
+                            </div>
+                            
+                            </div>    
+                    </section>
+                    <section>
+                        <h2 class="text-color-secondary">About the ECS project</h2>
+                        <p>ECS aims to create a globally connected, inclusive and strong citizen science community for societal change in Europe. It has the overall objective to widen and strengthen the citizen science community in Europe through capacity building and awareness raising activities, such as the creation of a European citizen science Academy and the establishment of a network of 28 citizen science ambassadors. </p>
+                        <p class="dotted-border">Note: While this initiative offers valuable opportunities for collaboration and innovation, please be aware that there will not be funding provided for the pilot projects. Instead, the focus will be on leveraging expertise, resources, and collective insights to achieve impactful outcomes.</p>
+                    </section>  
+                    <br>
+                </main>
+            </div>
+        </div>        
+    </div>
+</body>
+
+</html>
+{% endblock list_of_items %}   

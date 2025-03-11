@@ -38,6 +38,9 @@ def ecs_project(request):
 def ecs_project_ambassadors(request):
     return TemplateResponse(request, 'ecs_project_ambassadors.html',{})
 
+def cs_in_industries(request):
+    return TemplateResponse(request, 'cs_in_industries.html',{})
+
 def ecs_project_codesign(request):
     return TemplateResponse(request, 'ecs_project_codesign.html',{})
 
