@@ -1,0 +1,3994 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-26 16:44+0000\n"
+"PO-Revision-Date: 2025-09-27 23:19+0200\n"
+"Last-Translator: Jiří Podhorecký <j.podhorecky@volny.cz>\n"
+"Language-Team: \n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
+"X-Generator: Poedit 3.4.4\n"
+
+#: accounts/forms.py:28 accounts/forms.py:88
+msgid "Enter Email"
+msgstr "Zadejte e-mail"
+
+#: accounts/forms.py:30 accounts/forms.py:92
+msgid "Enter Password"
+msgstr "Zadejte heslo"
+
+#: accounts/forms.py:36 templates/registration/password_reset_complete.html:18
+msgid "Log in"
+msgstr "Přihlásit se"
+
+#: accounts/forms.py:54
+msgid ""
+"We see that your email address is in our database, but that you have not yetconfirmed "
+"your address. Please search for the confirmation email in your inbox(or spam) to "
+"activate your account"
+msgstr ""
+"Vidíme, že vaše e-mailová adresa je v naší databázi, ale že jste ji ještě "
+"nepotvrdili. Pro aktivaci účtu prosím vyhledejte potvrzovací e-mail ve vaší schránce "
+"(nebo ve spamu)."
+
+#: accounts/forms.py:90
+msgid "Enter name"
+msgstr "Zadejte jméno"
+
+#: accounts/forms.py:94
+msgid "Re-enter Password"
+msgstr "Znovu zadejte heslo"
+
+#: accounts/forms.py:97 eucitizensciencetheme/templates/base_forms.html:44
+msgid "Sign up"
+msgstr "Zaregistrujte se"
+
+#: accounts/forms.py:106
+msgid "Enter old password"
+msgstr "Zadejte staré heslo"
+
+#: accounts/forms.py:107 accounts/forms.py:130
+#: templates/registration/password_reset_confirm.html:18
+msgid "Enter new password"
+msgstr "Zadejte nové heslo"
+
+#: accounts/forms.py:108 accounts/forms.py:131
+msgid "Enter new password (again)"
+msgstr "Zadejte nové heslo (znovu)"
+
+#: accounts/forms.py:109 accounts/forms.py:132
+#: profiles/templates/profiles/privacy_center.html:35
+msgid "Change Password"
+msgstr "Změnit heslo"
+
+#: accounts/forms.py:119
+msgid "Enter email"
+msgstr "Zadejte e-mail"
+
+#: accounts/forms.py:120
+msgid "Reset Password"
+msgstr "Obnovit heslo"
+
+#: accounts/templates/accounts/acc_active_email.html:3
+msgid "Activate your EU-Citizen.Science account."
+msgstr "Aktivujte si svůj účet EU-Citizen.Science."
+
+#: accounts/templates/accounts/acc_active_email.html:16
+#: accounts/templates/accounts/emails/password-reset-email.html:15
+#: accounts/templates/accounts/welcome_email.html:13
+#: eucitizensciencetheme/templates/acc_active_email.html:15
+#: eucitizensciencetheme/templates/welcome_email.html:13
+#: organisations/templates/emails/new_organisation.html:17
+#: platforms/templates/emails/new_platform.html:19
+#: projects/templates/emails/new_project.html:19
+#: resources/templates/emails/new_resource.html:16
+#: resources/templates/emails/new_training_resource.html:16
+#: resources/templates/emails/resource_review.html:17
+#: resources/templates/emails/training_resource_review.html:17
+msgid "Hello,"
+msgstr "Dobrý den,"
+
+#: accounts/templates/accounts/acc_active_email.html:17
+msgid ""
+"Thank you for signing up to become a member of the EU-Citizen.Science community. "
+"Please verify that this email address is correct, and that you entered it when "
+"signing up to join the community."
+msgstr ""
+"Děkujeme, že jste se zaregistrovali jako členové komunity EU-Citizen.Science. Ověřte "
+"prosím, zda je tato e-mailová adresa správná a zda jste ji zadali při registraci do "
+"komunity."
+
+#: accounts/templates/accounts/acc_active_email.html:18
+#: eucitizensciencetheme/templates/acc_active_email.html:17
+msgid "Please click on the link to confirm your registration in "
+msgstr "Pro potvrzení registrace prosím klikněte na odkaz"
+
+#: accounts/templates/accounts/acc_active_email.html:20
+msgid ""
+"If you did not register to join the EU-Citizen.Science community, please ignore this "
+"email or reply to let us know."
+msgstr ""
+"Pokud jste se nezaregistrovali do komunity EU-Citizen.Science, prosím ignorujte tento "
+"e-mail nebo nám dejte vědět prostřednictvím odpovědi."
+
+#: accounts/templates/accounts/acc_active_email.html:22
+#: accounts/templates/accounts/welcome_email.html:28
+#: organisations/templates/emails/new_organisation.html:23
+#: platforms/templates/emails/new_platform.html:29
+#: projects/templates/emails/approved_project.html:28
+#: projects/templates/emails/followed_project.html:27
+#: projects/templates/emails/new_project.html:29
+#: projects/templates/emails/project_review.html:29
+#: resources/templates/emails/approved_resource.html:26
+#: resources/templates/emails/approved_training_resource.html:22
+#: resources/templates/emails/library_resource.html:22
+#: resources/templates/emails/library_training_resource.html:26
+#: resources/templates/emails/new_resource.html:27
+#: resources/templates/emails/new_training_resource.html:24
+#: resources/templates/emails/resource_review.html:23
+#: resources/templates/emails/training_resource_review.html:23
+msgid "The EU-CITIZEN.SCIENCE Team"
+msgstr "Tým EU-CITIZEN.SCIENCE"
+
+#: accounts/templates/accounts/acc_active_email.html:25
+#: accounts/templates/accounts/emails/password-reset-email.html:23
+#: accounts/templates/accounts/welcome_email.html:31
+#: eucitizensciencetheme/templates/acc_active_email.html:24
+#: eucitizensciencetheme/templates/welcome_email.html:31
+#: organisations/templates/emails/new_organisation.html:25
+#: platforms/templates/emails/new_platform.html:31
+#: projects/templates/emails/approved_project.html:30
+#: projects/templates/emails/followed_project.html:29
+#: projects/templates/emails/new_project.html:31
+#: projects/templates/emails/project_review.html:31
+#: resources/templates/emails/approved_resource.html:28
+#: resources/templates/emails/approved_training_resource.html:27
+#: resources/templates/emails/library_resource.html:27
+#: resources/templates/emails/library_training_resource.html:28
+#: resources/templates/emails/new_resource.html:29
+#: resources/templates/emails/new_training_resource.html:28
+#: resources/templates/emails/resource_review.html:27
+#: resources/templates/emails/training_resource_review.html:27
+#: templates/forum_emails/forum_answer.html:19
+#: templates/forum_emails/forum_subscription_new_message.html:19
+msgid "Thanks!"
+msgstr "Díky!"
+
+#: accounts/templates/accounts/acc_active_email.html:27
+#: eucitizensciencetheme/templates/acc_active_email.html:26
+msgid ""
+"P.S. Your email will always remain private, and is used only to allow us to send you "
+"alerts such as this one, unless you explicitly opt into future features on the "
+"platform."
+msgstr ""
+"P.S. Váš e-mail zůstane vždy soukromý a bude použit pouze k tomu, abychom vám mohli "
+"zasílat upozornění, jako je toto, pokud se výslovně nepřihlásíte k odběru budoucích "
+"funkcí na platformě."
+
+#: accounts/templates/accounts/acc_active_email.html:32
+#: accounts/templates/accounts/emails/password-reset-email.html:29
+#: accounts/templates/accounts/welcome_email.html:37
+#: organisations/templates/emails/new_organisation.html:31
+#: platforms/templates/emails/new_platform.html:37
+#: projects/templates/emails/approved_project.html:36
+#: projects/templates/emails/followed_project.html:35
+#: projects/templates/emails/new_project.html:37
+#: projects/templates/emails/project_review.html:37
+#: resources/templates/emails/approved_resource.html:34
+#: resources/templates/emails/approved_training_resource.html:33
+#: resources/templates/emails/library_resource.html:33
+#: resources/templates/emails/library_training_resource.html:34
+#: resources/templates/emails/new_resource.html:35
+#: resources/templates/emails/new_training_resource.html:34
+#: resources/templates/emails/resource_review.html:33
+#: resources/templates/emails/training_resource_review.html:33
+#: templates/forum_emails/forum_answer.html:25
+#: templates/forum_emails/forum_subscription_new_message.html:25
+msgid ""
+"This is an automatic message generated by the EU-citizen.science platform. Please do "
+"not reply to this email."
+msgstr ""
+"Toto je automatická zpráva generovaná platformou EU-citizen.science. Na tento e-mail "
+"prosím neodpovídejte."
+
+#: accounts/templates/accounts/emails/password-reset-email.html:16
+msgid ""
+"You recently requested to reset your password for your EU-Citizen.Science account. "
+"Click on the link below to reset it."
+msgstr ""
+"Nedávno jste požádali o resetování hesla k vašemu účtu EU-Citizen.Science. Klikněte "
+"na odkaz níže a resetujte ho."
+
+#: accounts/templates/accounts/emails/password-reset-email.html:20
+msgid ""
+"If you did not request a password reset, please ignore this email or reply to let us "
+"know. This password reset is only valid for the next "
+msgstr ""
+"Pokud jste nepožádali o resetování hesla, ignorujte prosím tento e-mail nebo nám "
+"odpovězte a dejte nám vědět. Toto resetování hesla je platné pouze pro příštích "
+
+#: accounts/templates/accounts/emails/password-reset-email.html:20
+msgid "hours."
+msgstr "hodin."
+
+#: accounts/templates/accounts/emails/password-reset-subject.txt:1
+#, python-format
+msgid "Password reset on %(domain)s"
+msgstr "Obnovení hesla v doméně %(domain)s"
+
+#: accounts/templates/accounts/welcome_email.html:15
+msgid ""
+"Welcome to the EU-Citizen.Science community! We are really pleased that you have "
+"joined us here."
+msgstr ""
+"Vítejte v komunitě EU-Citizen.Science! Jsme velmi rádi, že jste se k nám připojili."
+
+#: accounts/templates/accounts/welcome_email.html:16
+msgid "In this alpha release of the platform you can browse and search for "
+msgstr "V této alfa verzi platformy můžete procházet a vyhledávat "
+
+#: accounts/templates/accounts/welcome_email.html:17
+#: eucitizensciencetheme/templates/_subnavbarNew.html:53
+#: eucitizensciencetheme/templates/about.html:106
+#: eucitizensciencetheme/templates/welcome_email.html:17
+#: organisations/templates/organisation.html:40
+msgid "Resources"
+msgstr "Zdroje"
+
+#: accounts/templates/accounts/welcome_email.html:18
+#: eucitizensciencetheme/templates/welcome_email.html:18
+#| msgid "useful for planning and running citizen science projects"
+msgid ""
+"that are useful for planning and running citizen science projects, and can explore a "
+"wide range of citizen science "
+msgstr ""
+"které jsou užitečné pro plánování a realizaci projektů občanské vědy a mohou "
+"prozkoumat širokou škálu občanské vědy"
+
+#: accounts/templates/accounts/welcome_email.html:19
+#: eucitizensciencetheme/templates/_subnavbarNew.html:47
+#: eucitizensciencetheme/templates/about.html:102
+#: eucitizensciencetheme/templates/welcome_email.html:19
+#: organisations/templates/organisation.html:27
+msgid "Projects"
+msgstr "Projekty"
+
+#: accounts/templates/accounts/welcome_email.html:20
+#: eucitizensciencetheme/templates/welcome_email.html:20
+msgid " to learn from others experience and know-how."
+msgstr "učit se ze zkušeností a znalostí ostatních."
+
+#: accounts/templates/accounts/welcome_email.html:22
+#: eucitizensciencetheme/templates/welcome_email.html:22
+msgid ""
+"By signing up, you are now able to follow projects and add resources to your library, "
+"which you can find in your "
+msgstr ""
+"Registrací nyní můžete sledovat projekty a přidávat zdroje do své knihovny, kterou "
+"najdete ve svém"
+
+#: accounts/templates/accounts/welcome_email.html:23
+#: eucitizensciencetheme/templates/welcome_email.html:23
+#| msgid "My personal area"
+msgid "Personal Area"
+msgstr "Osobní zóna"
+
+#: accounts/templates/accounts/welcome_email.html:25
+#: eucitizensciencetheme/templates/welcome_email.html:25
+msgid ""
+"The success of the platform relies on the contribution of all of our members, so "
+"please do share your own best practice citizen science resources, and profile the "
+"citizen science projects that you have been involved with - both past and present."
+msgstr ""
+"Úspěch platformy závisí na příspěvku všech našich členů, proto se prosím podělte o "
+"své vlastní osvědčené zdroje občanské vědy a uveďte profily projektů občanské vědy, "
+"na kterých jste se podíleli – v minulosti i v současnosti."
+
+#: accounts/templates/accounts/welcome_email.html:26
+#: eucitizensciencetheme/templates/welcome_email.html:26
+msgid "Log in now to get started!"
+msgstr "Přihlaste se a začněte!"
+
+#: contact/templates/contact.html:10 contact/templates/contact.html:19
+#: contact/templates/contact.html:28 contact/templates/submitter_contact.html:20
+#: contact/templates/submitter_contact.html:29 projects/templates/project.html:238
+msgid "Contact"
+msgstr "Kontakt"
+
+#: contact/templates/contact.html:57 contact/templates/submitter_contact.html:45
+msgid "Send"
+msgstr "Odeslat"
+
+#: contact/templates/submitter_contact.html:10
+msgid "Submitter Contact"
+msgstr "Kontakt odesílatele"
+
+#: contact/templates/submitter_contact.html:30
+msgid "This email will be sent to "
+msgstr "Tento e-mail bude odeslán na adresu "
+
+#: contact/templates/submitter_contact.html:30
+msgid "(submitter of"
+msgstr "(předkladatel"
+
+#: contact/templates/success.html:26
+msgid "Thank you for your message."
+msgstr "Děkujeme za vaši zprávu."
+
+#: digest/admin.py:92
+#, python-format
+msgid "%d test email was sent"
+msgid_plural "%d test mails were sent"
+msgstr[0] "%d testovací e-mail byl odeslán"
+msgstr[1] "%d testovací e-maily byly odeslány"
+msgstr[2] "%d testovacích e-mailů bylo odesláno"
+
+#: eucitizensciencetheme/templates/_crop_zone.html:7
+#: eucitizensciencetheme/templates/_modal_to_crop.html:7
+msgid "Crop the photo"
+msgstr "Oříznout fotku"
+
+#: eucitizensciencetheme/templates/_crop_zone.html:9
+#: eucitizensciencetheme/templates/_modal_to_crop.html:9
+#: projects/templates/modal_projects.html:10 resources/templates/modal_resources.html:10
+msgid "Close"
+msgstr "Zavřít"
+
+#: eucitizensciencetheme/templates/_crop_zone.html:22
+#: eucitizensciencetheme/templates/_modal_to_crop.html:22
+msgid "zoom_in"
+msgstr "přiblížit"
+
+#: eucitizensciencetheme/templates/_crop_zone.html:25
+#: eucitizensciencetheme/templates/_modal_to_crop.html:25
+msgid "zoom_out"
+msgstr "oddálit"
+
+#: eucitizensciencetheme/templates/_crop_zone.html:28
+#: eucitizensciencetheme/templates/_modal_to_crop.html:28
+#: organisations/templates/_delete_modal.html:16
+msgid "Cancel"
+msgstr "Zrušit"
+
+#: eucitizensciencetheme/templates/_crop_zone.html:29
+#: eucitizensciencetheme/templates/_modal_to_crop.html:29
+msgid "Crop and upload"
+msgstr "Oříznout a nahrát"
+
+#: eucitizensciencetheme/templates/_footer.html:11
+msgid "Please provide your feedback in the official"
+msgstr "Prosím, poskytněte nám zpětnou vazbu v oficiálním"
+
+#: eucitizensciencetheme/templates/_footer.html:13
+msgid "GitHub repository"
+msgstr "repozitáři GitHubu"
+
+#: eucitizensciencetheme/templates/_footer.html:62
+msgid "Links"
+msgstr "Odkazy"
+
+#: eucitizensciencetheme/templates/_latest_organisations.html:6
+msgid "Latest <span class='lightBlue-color'>organisations</span>"
+msgstr "Nejnovější <span class='lightBlue-color'>organizace</span>"
+
+#: eucitizensciencetheme/templates/_latest_platforms.html:6
+msgid "Latest <span class='lightBlue-color'>platforms or networks</span>"
+msgstr "Nejnovější <span class='lightBlue-color'>platformy nebo sítě</span>"
+
+#: eucitizensciencetheme/templates/_latest_projects.html:6
+msgid "Latest <span class='lightBlue-color'>projects</span>"
+msgstr "Nejnovější <span class='lightBlue-color'>projekty</span>"
+
+#: eucitizensciencetheme/templates/_latest_resources.html:6
+msgid "Latest <span class='lightBlue-color'>resources</span>"
+msgstr "Nejnovější <span class='lightBlue-color'>zdroje</span>"
+
+#: eucitizensciencetheme/templates/_latest_training_resources.html:6
+msgid "Latest <span class='lightBlue-color'>training resources</span>"
+msgstr "Nejnovější <span class='lightBlue-color'>školicí zdroje</span>"
+
+#: eucitizensciencetheme/templates/_modalsubmit.html:6
+msgid "What do you want to submit?"
+msgstr "Co chcete odeslat?"
+
+#: eucitizensciencetheme/templates/_modalsubmit.html:11
+#: events/templates/_finder_events.html:50
+msgid "Project"
+msgstr "Projekt"
+
+#: eucitizensciencetheme/templates/_modalsubmit.html:12
+msgid "Create a Citizen Science Project profile"
+msgstr "Vytvořte si profil v rámci Občanského vědeckého projektu"
+
+#: eucitizensciencetheme/templates/_modalsubmit.html:13
+msgid "Resource"
+msgstr "Zdroj"
+
+#: eucitizensciencetheme/templates/_modalsubmit.html:14
+msgid "Create a profile for a Resource that is relevant for Citizen Science"
+msgstr "Vytvořte profil pro zdroj, který je relevantní pro Občanskou vědu"
+
+#: eucitizensciencetheme/templates/_modalsubmit.html:15
+msgid "Training"
+msgstr "Školení"
+
+#: eucitizensciencetheme/templates/_modalsubmit.html:16
+msgid ""
+"Create a profile for Training and Education Material related to the practice of "
+"Citizen Science"
+msgstr ""
+"Vytvořte si profil pro školicí a vzdělávací materiály týkající se praxe občanské vědy"
+
+#: eucitizensciencetheme/templates/_modalsubmit.html:17
+#: profiles/templates/profiles/_finder_users.html:47
+msgid "Organisation"
+msgstr "Organizace"
+
+#: eucitizensciencetheme/templates/_modalsubmit.html:18
+msgid "Create a profile for your Organisation"
+msgstr "Vytvořte profil pro vaši organizaci"
+
+#: eucitizensciencetheme/templates/_modalsubmit.html:20
+msgid "Event"
+msgstr "Událost"
+
+#: eucitizensciencetheme/templates/_modalsubmit.html:21
+msgid "Create an Event"
+msgstr "Vytvořit událost"
+
+#: eucitizensciencetheme/templates/_modalsubmit.html:23
+msgid "Platform"
+msgstr "Platforma"
+
+#: eucitizensciencetheme/templates/_modalsubmit.html:24
+msgid "Create a profile for your citizen science platform or network"
+msgstr "Vytvořte si profil pro svou platformu nebo síť občanské vědy"
+
+#: eucitizensciencetheme/templates/_navbar.html:3
+msgid "SEARCH"
+msgstr "HLEDAT"
+
+#: eucitizensciencetheme/templates/_navbar.html:4
+msgid "BLOG"
+msgstr "BLOG"
+
+#: eucitizensciencetheme/templates/_navbar.html:5
+msgid "EVENTS"
+msgstr "UDÁLOSTI"
+
+#: eucitizensciencetheme/templates/_navbar.html:6
+msgid "MOOCS"
+msgstr "MOOCS"
+
+#: eucitizensciencetheme/templates/_navbar.html:7
+msgid "CALL"
+msgstr "PŘIHLÁŠKY"
+
+#: eucitizensciencetheme/templates/_navbar.html:8
+msgid "ABOUT"
+msgstr "O NÁS"
+
+#: eucitizensciencetheme/templates/_save_zone.html:3
+#: organisations/templates/organisation_form.html:131
+#: profiles/templates/profiles/edit_profile.html:56
+msgid "Save"
+msgstr "Uložit"
+
+#: eucitizensciencetheme/templates/_save_zone.html:6
+msgid "Save & continue editing"
+msgstr "Uložit a pokračovat v úpravách"
+
+#: eucitizensciencetheme/templates/_subnavbarNew.html:59
+msgid "Trainings"
+msgstr "Školení"
+
+#: eucitizensciencetheme/templates/_subnavbarNew.html:65
+#: eucitizensciencetheme/templates/about.html:117
+#: events/templates/_finder_events.html:62 platforms/templates/platform.html:39
+#: profiles/templates/profiles/show_profile.html:17
+msgid "Organisations"
+msgstr "Organizace"
+
+#: eucitizensciencetheme/templates/_subnavbarNew.html:71
+#: organisations/templates/organisation.html:51
+msgid "Platforms"
+msgstr "Platformy"
+
+#: eucitizensciencetheme/templates/_subnavbarNew.html:77
+msgid "Users"
+msgstr "Uživatelé"
+
+#: eucitizensciencetheme/templates/_subnavbarNew.html:84
+msgid "Our Gold Star Selection"
+msgstr "Náš výběr Zlatých hvězd"
+
+#: eucitizensciencetheme/templates/_what_can_you_find_here.html:6
+msgid "what can you find here?"
+msgstr "Co se tu dá najít?"
+
+#: eucitizensciencetheme/templates/_what_can_you_find_here.html:13
+msgid "projects"
+msgstr "projekty"
+
+#: eucitizensciencetheme/templates/_what_can_you_find_here.html:16
+#: eucitizensciencetheme/templates/about.html:103
+msgid "that are engaging the public in research via citizen science activities"
+msgstr "které zapojují veřejnost do výzkumu prostřednictvím aktivit občanské vědy"
+
+#: eucitizensciencetheme/templates/_what_can_you_find_here.html:27
+msgid "resources"
+msgstr "zdroje"
+
+#: eucitizensciencetheme/templates/_what_can_you_find_here.html:30
+msgid "useful for planning and running citizen science projects"
+msgstr "užitečné pro plánování a řízení projektů občanské vědy"
+
+#: eucitizensciencetheme/templates/_what_can_you_find_here.html:41
+msgid "training resources"
+msgstr "školicí zdroje"
+
+#: eucitizensciencetheme/templates/_what_can_you_find_here.html:44
+msgid "about the practice of citizen science"
+msgstr "o praxi občanské vědy"
+
+#: eucitizensciencetheme/templates/_what_can_you_find_here.html:55
+msgid "organisations"
+msgstr "organizace"
+
+#: eucitizensciencetheme/templates/_what_can_you_find_here.html:57
+msgid "involved in citizen science projects and research"
+msgstr "zapojený do občanských vědeckých projektů a výzkumu"
+
+#: eucitizensciencetheme/templates/_what_can_you_find_here.html:68
+msgid "platforms"
+msgstr "platformy"
+
+#: eucitizensciencetheme/templates/_what_can_you_find_here.html:70
+msgid "to get an overview of further developments in citizen science"
+msgstr "získat přehled o dalším vývoji v občanské vědě"
+
+#: eucitizensciencetheme/templates/_what_can_you_find_here.html:81
+msgid "users"
+msgstr "uživatelé"
+
+#: eucitizensciencetheme/templates/_what_can_you_find_here.html:84
+msgid "with whom you can connect"
+msgstr "s kým se můžete spojit"
+
+#: eucitizensciencetheme/templates/_what_can_you_find_here.html:92
+msgid ""
+" Check out our <a href='/events'>events</a> calendar, <a href='/blog'>blog</a> and <a "
+"href='/forum'>forum!</a>"
+msgstr ""
+"Podívejte se na náš kalendář <a href='/events'>událostí</a>, <a href='/blog'>blog</a> "
+"a <a href='/forum'>fórum!</a>"
+
+#: eucitizensciencetheme/templates/_what_is_citizen_science.html:9
+msgid "what is <span class='text-white'>citizen science?</span>"
+msgstr "co je <span class='text-white'>občanská věda?</span>"
+
+#: eucitizensciencetheme/templates/_what_is_citizen_science.html:12
+msgid ""
+"Citizen science is any activity that involves the public in scientific research and "
+"thus has the potential to bring together science, policy makers, and society as a "
+"whole in an impactful way. Through citizen science, all people can participate in "
+"many stages of the scientific process, from the design of the research question, to "
+"data collection and volunteer mapping, data interpretation and analysis, and to "
+"publication and dissemination of results. Citizen science is also an approach of "
+"scientific work that may be used as a part of a broader scientific activity."
+msgstr ""
+"Občanská věda je jakákoli činnost, která zapojuje veřejnost do vědeckého výzkumu, a "
+"má tak potenciál efektivně propojit vědu, tvůrce politik a společnost jako celek. "
+"Prostřednictvím občanské vědy se všichni lidé mohou zapojit do mnoha fází vědeckého "
+"procesu, od návrhu výzkumné otázky, přes sběr dat a mapování dobrovolníků, "
+"interpretaci a analýzu dat až po publikaci a šíření výsledků. Občanská věda je také "
+"přístup k vědecké práci, který lze využít jako součást širší vědecké činnosti."
+
+#: eucitizensciencetheme/templates/_what_is_citizen_science.html:16
+msgid ""
+"Learn more about it with the <a href='/resource/88'>ECSA 10 Principles of Citizen "
+"Science</a> and the <a href='/resource/87'>ECSA Characteristics of Citizen Science!</"
+"a>"
+msgstr ""
+"Zjistěte o tom více v článku <a href='/resource/88'>10 principů občanské vědy ECSA</"
+"a> a <a href='/resource/87'>Charakteristiky občanské vědy ECSA!</a>"
+
+#: eucitizensciencetheme/templates/about.html:4
+#: eucitizensciencetheme/templates/faq.html:4
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:4
+msgid "About"
+msgstr "O nás"
+
+#: eucitizensciencetheme/templates/about.html:12
+msgid "about"
+msgstr "o nás"
+
+#: eucitizensciencetheme/templates/about.html:20
+msgid "Watch the final project video!"
+msgstr "Podívejte se na finální video projektu!"
+
+#: eucitizensciencetheme/templates/about.html:40
+msgid "Watch our teaser, in 12 different languages!"
+msgstr "Podívejte se na naši upoutávku ve 12 různých jazycích!"
+
+#: eucitizensciencetheme/templates/about.html:73
+msgid "Watch the video about the platform development and training modules!"
+msgstr "Podívejte se na video o vývoji platformy a školicích modulech!"
+
+#: eucitizensciencetheme/templates/about.html:92
+msgid "The Platform"
+msgstr "Platforma"
+
+#: eucitizensciencetheme/templates/about.html:97
+msgid ""
+"EU-Citizen.Science is an online platform for sharing knowledge, tools, training and "
+"resources for citizen science – by the community, for the community."
+msgstr ""
+"EU-Citizen.Science é uma plataforma online para partilha de conhecimentos, "
+"ferramentas, formação e recursos de ciência cidadã - pela comunidade, para a "
+"comunidade."
+
+#: eucitizensciencetheme/templates/about.html:98
+msgid ""
+"The vision for the platform is to serve as a Knowledge Hub, in aid of the "
+"mainstreaming of citizen science, and build on the growing impact of citizens "
+"participating in research across the full range of scientific enquiry. We accomplish "
+"this by supporting the sharing of knowledge, know-how, and experience between anyone "
+"doing or wanting to do citizen science."
+msgstr ""
+"Vizí platformy je sloužit jako znalostní centrum, které napomáhá začleňování občanské "
+"vědy do hlavních témat a staví na rostoucím vlivu občanů zapojených do výzkumu v celé "
+"škále vědeckého bádání. Toho dosahujeme podporou sdílení znalostí, know-how a "
+"zkušeností mezi kýmkoli, kdo se občanské vědě věnuje nebo chce věnovat."
+
+#: eucitizensciencetheme/templates/about.html:99
+msgid "On this platform you will find:"
+msgstr "Na této platformě najdete:"
+
+#: eucitizensciencetheme/templates/about.html:107
+msgid "that are useful for citizen science practitioners"
+msgstr "které jsou užitečné pro praktiky občanské vědy"
+
+#: eucitizensciencetheme/templates/about.html:110
+#: organisations/templates/organisation.html:63
+msgid "Training resources"
+msgstr "Školicí zdroje"
+
+#: eucitizensciencetheme/templates/about.html:111
+msgid "and materials on citizen science as a practice"
+msgstr "a materiály o občanské vědě jako praxi"
+
+#: eucitizensciencetheme/templates/about.html:114
+msgid "Training modules"
+msgstr "Školicí moduly"
+
+#: eucitizensciencetheme/templates/about.html:115
+msgid "on citizen science in a wide range of themes"
+msgstr "o občanské vědě v široké škále témat"
+
+#: eucitizensciencetheme/templates/about.html:118
+msgid "that are involved in citizen science projects and research"
+msgstr "kteří se podílejí na občanských vědeckých projektech a výzkumu"
+
+#: eucitizensciencetheme/templates/about.html:120
+msgid "Events calendar"
+msgstr "Kalendář událostí"
+
+#: eucitizensciencetheme/templates/about.html:121
+msgid "A blog"
+msgstr "Blog"
+
+#: eucitizensciencetheme/templates/about.html:122
+msgid "Forum"
+msgstr "Fórum"
+
+#: eucitizensciencetheme/templates/about.html:123
+msgid "for questions, conversations, and collaboration with the rest of the community"
+msgstr "pro otázky, konverzace a spolupráci se zbytkem komunity"
+
+#: eucitizensciencetheme/templates/about.html:127
+msgid ""
+"Spotted something missing? You can add your own profiles via the <i>New submission</"
+"i> button in the top menu. Have a suggestion for us? Please share your thoughts via "
+"the"
+msgstr ""
+"Všimli jste si, že vám něco chybí? Můžete přidat své vlastní profily pomocí tlačítka "
+"<i>Nový příspěvek</i> v horní nabídce. Máte pro nás návrh? Podělte se s námi o své "
+"myšlenky prostřednictvím"
+
+#: eucitizensciencetheme/templates/about.html:127
+msgid "contact form"
+msgstr "kontaktní formulář"
+
+#: eucitizensciencetheme/templates/about.html:131
+msgid "The project"
+msgstr "Projekt"
+
+#: eucitizensciencetheme/templates/about.html:136
+msgid ""
+"The EU-Citizen.Science project has been funded by the European Commission Horizon "
+"2020 programme, in the Science with and for Society programme of work (also known as "
+"SwafS). The project’s mission is ambitious – to become the reference point for "
+"citizen science through cross-network knowledge sharing for citizen science "
+"participants, practitioners, researchers, policy makers and society across Europe."
+msgstr ""
+"Projekt EU-Citizen.Science byl financován programem Evropské komise Horizont 2020 v "
+"rámci pracovního programu Věda se společností a pro společnost (známého také jako "
+"SwafS). Posláním projektu je ambiciózní – stát se referenčním bodem pro občanskou "
+"vědu prostřednictvím sdílení znalostí napříč sítěmi pro účastníky občanské vědy, "
+"odborníky z praxe, výzkumníky, tvůrce politik a společnost v celé Evropě."
+
+#: eucitizensciencetheme/templates/about.html:138
+msgid ""
+"<b>Our Vision</b> is that Citizen Science becomes an appreciated and widely "
+"established means for the democratization of science in Europe"
+msgstr ""
+"<b>Naší vizí</b> je, aby se Občanská věda stala uznávaným a široce zavedeným "
+"prostředkem demokratizace vědy v Evropě"
+
+#: eucitizensciencetheme/templates/about.html:139
+msgid ""
+"<b>Our Core Mission</b> is to become the European reference point for citizen science "
+"through cross-network knowledge sharing for citizen science participants, "
+"practitioners, researchers, policy makers and society across Europe."
+msgstr ""
+"<b>Naším hlavním posláním</b> je stát se evropským referenčním bodem pro občanskou "
+"vědu prostřednictvím sdílení znalostí napříč sítěmi pro účastníky občanské vědy, "
+"odborníky z praxe, výzkumníky, tvůrce politik a společnost v celé Evropě."
+
+#: eucitizensciencetheme/templates/about.html:140
+msgid "Our objectives are:"
+msgstr "Naše cíle jsou:"
+
+#: eucitizensciencetheme/templates/about.html:142
+msgid ""
+"to establish EU-Citizen.Science as the knowledge and community hub for high-quality "
+"citizen science exchange and learning in Europe."
+msgstr ""
+"vytvořit EU-Citizen.Science jako centrum znalostí a komunity pro vysoce kvalitní "
+"výměnu a vzdělávání občanů v oblasti vědy v Evropě."
+
+#: eucitizensciencetheme/templates/about.html:143
+msgid ""
+"to consolidate the citizen science knowledge base and celebrate outstanding practices "
+"and state of the art in citizen science in Europe."
+msgstr ""
+"konsolidovat znalostní základnu občanské vědy a ocenit vynikající postupy a "
+"nejmodernější technologie v občanské vědě v Evropě."
+
+#: eucitizensciencetheme/templates/about.html:144
+msgid ""
+"to empower diverse stakeholders to become citizen scientists, start citizen science "
+"initiatives, and implement citizen science approaches professionally."
+msgstr ""
+"posílit postavení různých zúčastněných stran, aby se staly občanskými vědci, zahájily "
+"občanské vědecké iniciativy a profesionálně implementovaly občanské vědecké přístupy."
+
+#: eucitizensciencetheme/templates/about.html:145
+msgid ""
+"to explore new pathways for participatory governance, by strengthening links between "
+"citizen science and policy making."
+msgstr ""
+"prozkoumat nové cesty k participativní správě věcí veřejných posílením vazeb mezi "
+"občanskou vědou a tvorbou politik."
+
+#: eucitizensciencetheme/templates/about.html:147
+msgid ""
+"to advance citizen science into the mainstream of public engagement, science "
+"communication and education."
+msgstr ""
+"posunout občanskou vědu do hlavního proudu zapojení veřejnosti, vědecké komunikace a "
+"vzdělávání."
+
+#: eucitizensciencetheme/templates/about.html:155
+msgid "The team"
+msgstr "Tým"
+
+#: eucitizensciencetheme/templates/about.html:160
+msgid ""
+" The EU-Citizen.Science consortium consists of 14 partners and 9 third parties from "
+"across 14 European countries. We represent a variety of stakeholders that are active "
+"in citizen science, including universities, non-governmental organisations, local "
+"authorities, community service organisations and museums."
+msgstr ""
+"Konsorcium EU-Citizen.Science se skládá ze 14 partnerů a 9 třetích stran ze 14 "
+"evropských zemí. Zastupujeme řadu zúčastněných stran, které jsou aktivní v oblasti "
+"občanské vědy, včetně univerzit, nevládních organizací, místních samospráv, "
+"organizací komunitních služeb a muzeí."
+
+#: eucitizensciencetheme/templates/about.html:166
+msgid "Consortium partners"
+msgstr "Partneři konsorcia"
+
+#: eucitizensciencetheme/templates/about.html:228
+msgid "Third party partners"
+msgstr "Partneři třetích stran"
+
+#: eucitizensciencetheme/templates/acc_active_email.html:16
+msgid ""
+"Thank you for signing up to become a member of the CC.pt community. Please verify "
+"that this email address is correct, and that you entered it when signing up to join "
+"the community."
+msgstr ""
+"Děkujeme, že jste se zaregistrovali a stali se členem komunity CC.pt. Ověřte prosím, "
+"zda je tato e-mailová adresa správná a zda jste ji zadali při registraci do komunity."
+
+#: eucitizensciencetheme/templates/acc_active_email.html:19
+msgid ""
+"If you did not register to join the CC.pt community, please ignore this email or "
+"reply to let us know."
+msgstr ""
+"Pokud jste se nezaregistrovali do komunity CC.pt, ignorujte prosím tento e-mail nebo "
+"nám dejte vědět odpovědí."
+
+#: eucitizensciencetheme/templates/acc_active_email.html:21
+#: eucitizensciencetheme/templates/welcome_email.html:28
+msgid "The CC.pt Team"
+msgstr "Tým CC.pt"
+
+#: eucitizensciencetheme/templates/acc_active_email.html:31
+#: eucitizensciencetheme/templates/welcome_email.html:37
+msgid ""
+"This is an automatic message generated by the CC.pt platform. Please do not reply to "
+"this email."
+msgstr ""
+"Toto je automaticky generovaná zpráva platformou CC.pt. Prosím, neodpovídejte na "
+"tento e-mail."
+
+#: eucitizensciencetheme/templates/base_forms.html:43
+#: eucitizensciencetheme/templates/base_r2.html:105
+msgid "Login"
+msgstr "Přihlášení"
+
+#: eucitizensciencetheme/templates/base_forms.html:46
+msgid "profile"
+msgstr "profil"
+
+#: eucitizensciencetheme/templates/base_forms.html:47
+msgid "logout"
+msgstr "odhlásit se"
+
+#: eucitizensciencetheme/templates/base_forms.html:51
+#: eucitizensciencetheme/templates/base_r2.html:124
+msgid "Admin"
+msgstr "Administrátor"
+
+#: eucitizensciencetheme/templates/base_forms.html:75
+msgid "Company"
+msgstr "Společnost"
+
+#: eucitizensciencetheme/templates/base_forms.html:78
+msgid "Connect with us on"
+msgstr "Spojte se s námi na"
+
+#: eucitizensciencetheme/templates/base_r2.html:107
+msgid "Signup"
+msgstr "Registrace"
+
+#: eucitizensciencetheme/templates/base_r2.html:116
+msgid "My personal area"
+msgstr "Moje osobní zóna"
+
+#: eucitizensciencetheme/templates/base_r2.html:118
+msgid "My submissions"
+msgstr "Moje příspěvky"
+
+#: eucitizensciencetheme/templates/base_r2.html:120
+msgid "My bookmarks"
+msgstr "Moje záložky"
+
+#: eucitizensciencetheme/templates/base_r2.html:122
+msgid "My privacy center"
+msgstr "Moje centrum ochrany osobních údajů"
+
+#: eucitizensciencetheme/templates/base_r2.html:126
+msgid "Logout"
+msgstr "Odhlásit se"
+
+#: eucitizensciencetheme/templates/base_r2.html:134
+msgid "New submission"
+msgstr "Nové podání"
+
+#: eucitizensciencetheme/templates/base_r2.html:192
+msgid "FORUM"
+msgstr "FÓRUM"
+
+#: eucitizensciencetheme/templates/call.html:10
+msgid "EU-Citizen.Science call (closed)"
+msgstr "Výzva EU-Citizen.Science (uzavřeno)"
+
+#: eucitizensciencetheme/templates/call_ambassadors.html:4
+#: eucitizensciencetheme/templates/ecs_project.html:4
+msgid "About ECS"
+msgstr "O ECS"
+
+#: eucitizensciencetheme/templates/call_ambassadors.html:12
+msgid "Call for <span class='lightBlue-color'>Citizen Science</span> Ambassadors"
+msgstr "Výzva pro ambasadory <span class='lightBlue-color'>Občanské vědy</span>"
+
+#: eucitizensciencetheme/templates/criteria.html:10
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:43
+msgid "Quality criteria"
+msgstr "Kritéria kvality"
+
+#: eucitizensciencetheme/templates/curated.html:11
+msgid "gold star <span class='lightBlue-color'> selection</span>"
+msgstr "výběr <span class='lightBlue-color'> zlatých hvězd</span>"
+
+#: eucitizensciencetheme/templates/curated.html:15
+msgid ""
+"The EU-Citizen.Science consortium has curated a selection of Gold Star citizen "
+"science resources"
+msgstr ""
+"Konsorcium EU-Citizen.Science sestavilo výběr zdrojů pro občany s označením Gold Star."
+
+#: eucitizensciencetheme/templates/curated.html:16
+msgid ""
+"to help you get started with designing and launching your own citizen science project "
+"or simply learn about citizen science, categorised across the project lifecycle."
+msgstr ""
+"které vám pomohou začít s návrhem a spuštěním vlastního projektu občanské vědy nebo "
+"se jednoduše dozvíte o občanské vědě, rozdělené do kategorií v rámci celého životního "
+"cyklu projektu."
+
+#: eucitizensciencetheme/templates/development.html:10
+msgid "Development"
+msgstr "Vývoj"
+
+#: eucitizensciencetheme/templates/ecs_project.html:12
+msgid "about European <span class='lightBlue-color'>Citizen Science</span>"
+msgstr "o evropské <span class='lightBlue-color'>Občanské vědě</span>"
+
+#: eucitizensciencetheme/templates/ecs_project_ambassadors.html:6
+msgid "Citizen Science Ambassadors of the ECS project"
+msgstr "Ambasadoři občanské vědy projektu ECS"
+
+#: eucitizensciencetheme/templates/ecs_project_codesign.html:6
+msgid "The ECS Co-Design Process"
+msgstr "Proces společného návrhu ECS"
+
+#: eucitizensciencetheme/templates/faq.html:12
+msgid "frequently <span class='lightBlue-color'>asked questions</span>"
+msgstr "často <span class='lightBlue-color'>kladené otázky</span>"
+
+#: eucitizensciencetheme/templates/faq.html:21
+msgid "What is Citizen Science?"
+msgstr "Co je to Občanská věda?"
+
+#: eucitizensciencetheme/templates/faq.html:27
+msgid ""
+"Citizen science actively involves the public in scientific research that generates "
+"new knowledge or understanding, and thus has the potential to bring together science, "
+"policy makers, and society as a whole in an impactful way. As a core dimension of "
+"Open Science, it opens up the opportunity for all members of society to take an "
+"active role in research, innovation and the development of evidence-based policy, at "
+"local, national and EU levels. Citizen scientists can participate in many stages of "
+"the scientific process, from data collection and volunteer mapping, through data "
+"interpretation and analysis, to publication and dissemination of results."
+msgstr ""
+"Občanská věda aktivně zapojuje veřejnost do vědeckého výzkumu, který generuje nové "
+"znalosti nebo poznatky, a má tak potenciál efektivně propojit vědu, tvůrce politik a "
+"společnost jako celek. Jako klíčový rozměr otevřené vědy otevírá všem členům "
+"společnosti příležitost aktivně se zapojit do výzkumu, inovací a rozvoje politik "
+"založených na důkazech na místní, národní i evropské úrovni. Občanští vědci se mohou "
+"podílet na mnoha fázích vědeckého procesu, od sběru dat a mapování dobrovolníků, přes "
+"interpretaci a analýzu dat až po publikování a šíření výsledků."
+
+#: eucitizensciencetheme/templates/faq.html:28
+msgid ""
+"Citizen science is a flexible concept which can be adapted and applied within diverse "
+"situations and disciplines, and represents a range of approaches and historical "
+"practices for public participation in scientific research. As a result, there are a "
+"wide range of activities that can fall under the umbrella of citizen science, as can "
+"be seen in the <a target='_blank' href='https://zenodo.org/communities/"
+"citscicharacteristics/'>ECSA Characteristics of Citizen Science</a>. A good source of "
+"guidance when planning a citizen science initiative is the <a target='_blank' "
+"href='https://zenodo.org/record/5127534#.YV7PKt9CRhF'>ECSA 10 Principles of Citizen "
+"Science</a>. They have been translated to 30 languages by the citizen science "
+"community!"
+msgstr ""
+"Občanská věda je flexibilní koncept, který lze přizpůsobit a aplikovat v různých "
+"situacích a oborech a představuje řadu přístupů a historických postupů pro účast "
+"veřejnosti na vědeckém výzkumu. V důsledku toho existuje široká škála aktivit, které "
+"mohou spadat pod pojem občanská věda, jak je vidět v dokumentu <a target='_blank' "
+"href='https://zenodo.org/communities/citscicharacteristics/'>ECSA Characteristics of "
+"Citizen Science</a>. Dobrým zdrojem vodítka při plánování iniciativy občanské vědy je "
+"<a target='_blank' href='https://zenodo.org/record/5127534#.YV7PKt9CRhF'>ECSA 10 "
+"Principles of Citizen Science</a>. Komunita občanské vědy je přeložila do 30 jazyků!"
+
+#: eucitizensciencetheme/templates/faq.html:34
+msgid "Who is the EU-Citizen.Science Knowledge Hub for?"
+msgstr "Pro koho je určeno znalostní centrum EU-Citizen.Science?"
+
+#: eucitizensciencetheme/templates/faq.html:40
+msgid ""
+"Our community is open to anyone interested in citizen science - our vision for the "
+"platform is to encourage the democratization of science via the wide establishment "
+"and appreciation of citizen science approaches across Europe."
+msgstr ""
+"Naše komunita je otevřená všem, kteří se zajímají o občanskou vědu – naší vizí pro "
+"platformu je podpořit demokratizaci vědy prostřednictvím širokého zavádění a "
+"oceňování přístupů občanské vědy v celé Evropě."
+
+#: eucitizensciencetheme/templates/faq.html:42
+msgid ""
+"We hope to become the central reference point for anyone setting up or running a "
+"citizen science project (practitioners, researchers, educators, communities and "
+"citizens), anyone supporting the ecosystem of citizen science projects (policy makers "
+"and funding bodies), and anyone interested in the outcomes and impact of citizen "
+"science (decision makers, the press, and society as a whole). It doesn’t matter if "
+"you have years of experience or are completely new to citizen science."
+msgstr ""
+"Doufáme, že se staneme ústředním referenčním bodem pro každého, kdo zakládá nebo "
+"provozuje projekt občanské vědy (odborníky z praxe, výzkumníky, pedagogy, komunity a "
+"občany), pro každého, kdo podporuje ekosystém projektů občanské vědy (tvůrce politik "
+"a financující orgány), a pro každého, kdo se zajímá o výsledky a dopad občanské vědy "
+"(osoby s rozhodovací pravomocí, tisk a společnost jako celek). Nezáleží na tom, zda "
+"máte dlouholeté zkušenosti, nebo jste v občanské vědě zcela nováčkem."
+
+#: eucitizensciencetheme/templates/faq.html:48
+msgid "What are the features of the EU-Citizen.Science platform?"
+msgstr "Jaké jsou funkce platformy EU-Citizen.Science?"
+
+#: eucitizensciencetheme/templates/faq.html:54
+msgid ""
+"On the platform you can browse and search for <a href='/resources'>resources</a> that "
+"are useful for planning and running citizen science projects, <a href='/"
+"training_resources'>training resources</a> and materials about the practice of "
+"citizen science, and citizen science <a href='/projects'>projects</a> to learn from "
+"the experience of others and collaborate. There is a section with <a target='_blank' "
+"href='https://moodle.eu-citizen.science/'>training modules or MOOCS</a> on citizen "
+"science from introduction to citizen science over research design and methods to "
+"engagement, impact and communication. There are also an <a href='/events'>events "
+"calendar</a> and a <a href='/blog'>blog</a>, profiles of <a href='/"
+"organisations'>organisations</a> and <a href='/platforms'>platforms</a> involved in "
+"citizen science projects and research, community forums for questions and "
+"conversations with the community."
+msgstr ""
+"Na platformě si můžete prohlížet a vyhledávat <a href='/resources'>zdroje</a>, které "
+"jsou užitečné pro plánování a realizaci projektů občanské vědy, <a href='/"
+"training_resources'>školicí zdroje</a> a materiály o praxi občanské vědy a <a href='/"
+"projects'>projekty</a> občanské vědy, abyste se mohli učit ze zkušeností ostatních a "
+"spolupracovat. K dispozici je sekce s <a target='_blank' href='https://moodle.eu-"
+"citizen.science/'>školicími moduly nebo MOOCS</a> o občanské vědě, od úvodu do "
+"občanské vědy přes návrh a metody výzkumu až po zapojení, dopad a komunikaci. K "
+"dispozici je také <a href='/events'>kalendář akcí</a> a <a href='/blog'>blog</a>, "
+"profily <a href='/organisations'>organizací</a> a <a href='/platforms'>platform</a> "
+"zapojených do projektů a výzkumu občanské vědy, komunitní fóra pro dotazy a "
+"konverzace s komunitou."
+
+#: eucitizensciencetheme/templates/faq.html:60
+msgid "Why should I sign-up to become a member of the community?"
+msgstr "Proč bych se měl/a zaregistrovat a stát se členem/členkou komunity?"
+
+#: eucitizensciencetheme/templates/faq.html:66
+msgid ""
+"A range of additional features become available to you when you sign-up to be a "
+"member of the community. You will be able to share your own projects and resources "
+"with the community, profile your organisation and link that profile with the projects "
+"you are involved in, and leave feedback or information about your own experience "
+"using the materials on the platform. When viewing a project profile, you can follow "
+"it, or when viewing a resource profile you can bookmark it to find them quickly again "
+"from your <a href='/users/me'>Personal Area</a>. You will also be able to join the "
+"discussions in the Forum."
+msgstr ""
+"Po registraci jako člen komunity se vám zpřístupní řada dalších funkcí. Budete moci "
+"sdílet své vlastní projekty a zdroje s komunitou, profilovat svou organizaci a "
+"propojit tento profil s projekty, na kterých se podílíte, a zanechávat zpětnou vazbu "
+"nebo informace o vlastních zkušenostech s používáním materiálů na platformě. Při "
+"prohlížení profilu projektu jej můžete sledovat, nebo si při prohlížení profilu "
+"zdroje můžete jej uložit do záložek, abyste jej mohli rychle znovu najít ve své <a "
+"href='/users/me'>osobní sekci</a>. Budete se také moci zapojit do diskusí ve fóru."
+
+#: eucitizensciencetheme/templates/faq.html:72
+msgid "Are the resources hosted on the EU-Citizen.Science platform?"
+msgstr "Jsou zdroje hostovány na platformě EU-Citizen.Science?"
+
+#: eucitizensciencetheme/templates/faq.html:78
+msgid ""
+"No, we don’t host any documents, files, or software on our platform. When a profile "
+"is created for a resource, it points to the location where that resource is stored or "
+"published, and project profiles point to the external website of that project. We "
+"strongly recommend the use of permanent repositories (such as the publisher’s page, "
+"<a href='https://zenodo.org/' target='_blank'>Zenodo</a>, <a href='https://osf.io/' "
+"target='_blank'>OSF</a> or the <a href='https://riojournal.com/' target='_blank'>RIO "
+"Journal</a>) to create permalinks and digital object identifiers (DOI) for all "
+"resources."
+msgstr ""
+"Ne, na naší platformě nehostujeme žádné dokumenty, soubory ani software. Když je pro "
+"zdroj vytvořen profil, odkazuje na umístění, kde je tento zdroj uložen nebo "
+"publikován, a profily projektů odkazují na externí webové stránky daného projektu. "
+"Důrazně doporučujeme používat trvalá úložiště (jako je stránka vydavatele, <a "
+"href='https://zenodo.org/' target='_blank'>Zenodo</a>, <a href='https://osf.io/' "
+"target='_blank'>OSF</a> nebo <a href='https://riojournal.com/' target='_blank'>RIO "
+"Journal</a>) k vytvoření trvalých odkazů a identifikátorů digitálních objektů (DOI) "
+"pro všechny zdroje."
+
+#: eucitizensciencetheme/templates/faq.html:84
+msgid "I can’t find the type of resource that I’m looking for, can you help?"
+msgstr "Nemohu najít typ zdroje, který hledám, můžete mi prosím pomoci?"
+
+#: eucitizensciencetheme/templates/faq.html:90
+msgid ""
+"While there are a lot of resources on the platform, we don’t host a database of all "
+"possibly existing materials on citizen science. Maybe what you are looking for does "
+"not exist yet. Please send us a message via the <a href='/contact/'>contact form</a> "
+"and we will do our best to help you find it, or initiate the creation of it!"
+msgstr ""
+"Přestože je na platformě mnoho zdrojů, nemáme databázi všech možných existujících "
+"materiálů o občanské vědě. Možná to, co hledáte, ještě neexistuje. Zašlete nám prosím "
+"zprávu prostřednictvím <a href='/contact/'>kontaktního formuláře</a> a my se vám "
+"pokusíme pomoci to najít nebo iniciovat jeho vytvoření!"
+
+#: eucitizensciencetheme/templates/faq.html:96
+msgid "Can I add a project or resource of my own?"
+msgstr "Mohu přidat vlastní projekt nebo zdroj?"
+
+#: eucitizensciencetheme/templates/faq.html:102
+msgid ""
+"Yes, we actively encourage all members of the community to create a profile for their "
+"organisations, citizen science projects and resources on the platform. To create a "
+"profile, you will first need to <a href='/signup'>sign up</a> and <a href='/"
+"login'>log in</a> to the platform and then select the appropriate form via the +Add "
+"button in the top right-hand corner."
+msgstr ""
+"Ano, aktivně povzbuzujeme všechny členy komunity, aby si na platformě vytvořili "
+"profil pro své organizace, projekty občanské vědy a zdroje. Chcete-li si vytvořit "
+"profil, musíte se nejprve <a href='/signup'>zaregistrovat</a> a <a href='/"
+"login'>přihlásit</a> na platformu a poté vybrat příslušný formulář pomocí tlačítka "
+"+Přidat v pravém horním rohu."
+
+#: eucitizensciencetheme/templates/faq.html:103
+msgid ""
+"Please note that we moderate all submissions (<a href='#moderation'>What is the "
+"moderation process?</a>) to ensure that all resources are of good quality (<a "
+"href='#quality'>What are the quality criteria?</a>), and that all projects are indeed "
+"citizen science initiatives (<a href='#citsci'>What is citizen science?</a>). Please "
+"note that resources are not uploaded to the platform, rather they are linked to from "
+"within the profile that you create."
+msgstr ""
+"Vezměte prosím na vědomí, že všechny příspěvky moderujeme (<a href='#moderation'>Co "
+"je proces moderování?</a>), abychom zajistili, že všechny zdroje jsou kvalitní (<a "
+"href='#quality'>Jaká jsou kritéria kvality?</a>) a že všechny projekty jsou skutečně "
+"iniciativami občanské vědy (<a href='#citsci'>Co je občanská věda?</a>). "
+"Upozorňujeme, že zdroje se nenahrávají na platformu, ale odkazují se na ně z profilu, "
+"který si vytvoříte."
+
+#: eucitizensciencetheme/templates/faq.html:109
+msgid "What types of resources can I submit?"
+msgstr "Jaké typy zdrojů mohu předložit?"
+
+#: eucitizensciencetheme/templates/faq.html:115
+msgid ""
+"Resources should be related to citizen science, and useful for understanding, "
+"planning, implementing and evaluating citizen science and citizen science practices, "
+"or otherwise of value to citizen science practitioners. Resources can include "
+"documents such as how-to guides, publications, reports, policy briefs, and protocols; "
+"technical tools such as software or hardware; other file formats such as videos, "
+"podcasts, and diagrams; and even websites or webpages. Please note that there is a "
+"separate form for training resources and materials that are about the practice of "
+"citizen science. All resources should meet a range of quality criteria such as being "
+"clearly structured, easy to read (or hear, or view), and easy to understand. For "
+"guidance, read our <a href='/moderation_quality_criteria'>quality criteria</a>."
+msgstr ""
+"Zdroje by měly souviset s občanskou vědou a měly by být užitečné pro pochopení, "
+"plánování, implementaci a hodnocení občanské vědy a jejích postupů, nebo by měly být "
+"pro praktiky občanské vědy jinak hodnotné. Zdroje mohou zahrnovat dokumenty, jako "
+"jsou návody, publikace, zprávy, shrnutí politik a protokoly; technické nástroje, jako "
+"je software nebo hardware; další formáty souborů, jako jsou videa, podcasty a "
+"diagramy; a dokonce i webové stránky. Upozorňujeme, že pro školicí zdroje a materiály "
+"týkající se praxe občanské vědy existuje samostatný formulář. Všechny zdroje by měly "
+"splňovat řadu kritérií kvality, jako je jasná struktura, snadná čtení (nebo poslech "
+"či prohlížení) a snadná srozumitelnost. Pro lepší pochopení si přečtěte naše <a "
+"href='/moderation_quality_criteria'>kritéria kvality</a>."
+
+#: eucitizensciencetheme/templates/faq.html:121
+msgid "What types of projects can I submit?"
+msgstr "Jaké typy projektů mohu předložit?"
+
+#: eucitizensciencetheme/templates/faq.html:127
+msgid ""
+"The projects profiled must involve participants in a way that can genuinely be "
+"considered citizen science. For guidance, please refer to <a href='https://zenodo.org/"
+"communities/citscicharacteristics/?page=1&size=20' target='_blank'>ECSA's "
+"Characteristics of Citizen Science</a>. The projects can be short-term or long-term "
+"initiatives or projects without an end date. Citizen science projects can involve "
+"voluntary participants (citizen scientists) in many fields of research and in many "
+"stages of the research process - from data collection and volunteer mapping, through "
+"data interpretation and analysis, to publication and dissemination of results. "
+"Additionally, projects profiled on the platform should engage as much as possible "
+"with the <a href='https://zenodo.org/record/5127534#.YV7PKt9CRhF' "
+"target='_blank'>ECSA 10 Principles of Citizen Science</a>."
+msgstr ""
+"Profilované projekty musí zahrnovat účastníky způsobem, který lze skutečně považovat "
+"za občanskou vědu. Pokyny naleznete v dokumentu <a href='https://zenodo.org/"
+"communities/citscicharacteristics/?page=1&size=20' target='_blank'>Charakteristiky "
+"občanské vědy ECSA</a>. Projekty mohou být krátkodobé nebo dlouhodobé iniciativy nebo "
+"projekty bez data ukončení. Projekty občanské vědy mohou zahrnovat dobrovolné "
+"účastníky (občanské vědce) v mnoha oblastech výzkumu a v mnoha fázích výzkumného "
+"procesu – od sběru dat a mapování dobrovolníků, přes interpretaci a analýzu dat až po "
+"publikaci a šíření výsledků. Projekty profilované na platformě by se navíc měly co "
+"nejvíce zapojit do <a href='https://zenodo.org/record/5127534#.YV7PKt9CRhF' "
+"target='_blank'>10 principů občanské vědy ECSA</a>."
+
+#: eucitizensciencetheme/templates/faq.html:133
+msgid "How do I add a project or resource?"
+msgstr "Jak přidám projekt nebo zdroj?"
+
+#: eucitizensciencetheme/templates/faq.html:139
+msgid ""
+"Once you have <a href='/signup'>signed up</a> and are <a href='/login'>logged in</a>, "
+"look for the +Add button in the top right-hand corner of the website. There you can "
+"select the profile form that you wish to complete. We recommend that you first create "
+"a profile for your organisation, so that it can be linked to your projects and "
+"resources. In this form you will be asked to provide descriptive information in a "
+"number of mandatory and optional data fields. This information will be used for "
+"creating the public profile of the project or resource on our platform. Please note "
+"that resources are not uploaded to the platform, rather they are linked to from "
+"within the profile that you create."
+msgstr ""
+"Jakmile se <a href='/signup'>zaregistrujete</a> a budete <a href='/login'>přihlášeni</"
+"a>, vyhledejte tlačítko +Přidat v pravém horním rohu webových stránek. Zde si můžete "
+"vybrat profilový formulář, který chcete vyplnit. Doporučujeme vám nejprve vytvořit "
+"profil pro vaši organizaci, aby jej bylo možné propojit s vašimi projekty a zdroji. V "
+"tomto formuláři budete požádáni o poskytnutí popisných informací v řadě povinných a "
+"volitelných datových polí. Tyto informace budou použity k vytvoření veřejného profilu "
+"projektu nebo zdroje na naší platformě. Upozorňujeme, že zdroje se na platformu "
+"nenahrávají, ale odkazují se na ně z profilu, který si vytvoříte."
+
+#: eucitizensciencetheme/templates/faq.html:141
+msgid ""
+"Please note that you will be required to describe the citizen science aspects of your "
+"project, and the way in which your resource relates to the practice of citizen "
+"science. When saved, the profile will be submitted to a member of the EU-Citizen."
+"Science team for <a href='/moderation_quality_criteria'>moderation</a>. Once that "
+"process is complete, the profile will be marked as ‘Moderated’, and will be fully "
+"available on the platform."
+msgstr ""
+"Vezměte prosím na vědomí, že budete muset popsat aspekty občanské vědy ve vašem "
+"projektu a způsob, jakým se váš zdroj vztahuje k praxi občanské vědy. Po uložení bude "
+"profil odeslán členovi týmu EU-Citizen.Science k <a href='/"
+"moderation_quality_criteria'>moderaci</a>. Po dokončení tohoto procesu bude profil "
+"označen jako „Moderovaný“ a bude plně dostupný na platformě."
+
+#: eucitizensciencetheme/templates/faq.html:148
+msgid "How does moderation work?"
+msgstr "Jak funguje moderování?"
+
+#: eucitizensciencetheme/templates/faq.html:154
+msgid ""
+"When a profile is saved, it will be submitted for <a href='/"
+"moderation_quality_criteria'>moderation</a> to the platform moderator, and marked as "
+"‘not yet moderated’ on the platform. The first criterion that the moderator will look "
+"for, is that you have described the citizen science aspects of your project, or "
+"described the way in which your resource is relevant to citizen science. Guidance for "
+"this can be found in <a href='https://zenodo.org/communities/citscicharacteristics/?"
+"page=1&size=20'>ECSA's Characteristics of Citizen Science</a> developed by the "
+"citizen science community. The moderator will also consider whether your resource or "
+"project is in alignment with the <a href='https://zenodo.org/record/5127534#."
+"YV7PKt9CRhF'>ECSA 10 Principles of Citizen Science</a>."
+msgstr ""
+"Po uložení profilu bude odeslán k <a href='/moderation_quality_criteria'>moderování</"
+"a> moderátorovi platformy a na platformě bude označen jako „zatím nemoderováno“. "
+"Prvním kritériem, které bude moderátor hledat, je, zda jste popsali aspekty občanské "
+"vědy vašeho projektu nebo zda jste popsali, jakým způsobem je váš zdroj relevantní "
+"pro občanskou vědu. Pokyny k tomu naleznete v <a href='https://zenodo.org/communities/"
+"citscicharacteristics/?page=1&size=20'>Charakteristikách občanské vědy ECSA</a>, "
+"které vypracovala komunita občanské vědy. Moderátor také zváží, zda je váš zdroj nebo "
+"projekt v souladu s <a href='https://zenodo.org/record/5127534#.YV7PKt9CRhF'>10 "
+"principy občanské vědy ECSA</a>."
+
+#: eucitizensciencetheme/templates/faq.html:156
+msgid ""
+"Resources will be assessed further against a range of specific criteria to ensure "
+"that they are easy to access, implement and adapt, well structured, clearly described "
+"and written in clear language, and ideally improve or support the desired impact of "
+"the initiative (e.g. on science, policy or society, etc.). You can read the full list "
+"of <a href='/moderation_quality_criteria'>quality criteria</a>."
+msgstr ""
+"Zdroje budou dále posouzeny podle řady specifických kritérií, aby se zajistilo, že "
+"budou snadno dostupné, implementovatelné a adaptovatelné, dobře strukturované, jasně "
+"popsány a napsány srozumitelným jazykem a v ideálním případě zlepší nebo podpoří "
+"požadovaný dopad iniciativy (např. na vědu, politiku nebo společnost atd.). Úplný "
+"seznam <a href='/moderation_quality_criteria'>kritérií kvality</a> si můžete přečíst."
+
+#: eucitizensciencetheme/templates/faq.html:162
+msgid "What are the quality criteria for resources?"
+msgstr "Jaká jsou kritéria kvality zdrojů?"
+
+#: eucitizensciencetheme/templates/faq.html:168
+msgid ""
+"After completing all mandatory metadata fields in the profile, and ensuring that the "
+"resource is relevant to citizen science initiatives, the resource will be assessed "
+"against a set of specific criteria developed to ensure that all resources profiled on "
+"the platform are of good quality. We consider good quality citizen science resources "
+"to be those that are easy to access, implement and adapt, well structured, clearly "
+"described and written in clear language, and ideally improve or support the desired "
+"impact of the initiative (e.g. on science, policy or society, etc.). It also enhances "
+"the value and quality of your resource when you can say something about how it has "
+"been used and developed further in practice, and whether or not it has been evaluated "
+"for usefulness, applicability, and impact. You can read the full list of <a href='/"
+"moderation_quality_criteria'>quality criteria</a>."
+msgstr ""
+"Po vyplnění všech povinných polí metadat v profilu a zajištění relevantnosti zdroje "
+"pro občanské vědecké iniciativy bude zdroj posouzen podle souboru specifických "
+"kritérií vyvinutých s cílem zajistit, aby všechny zdroje profilované na platformě "
+"byly kvalitní. Za kvalitní zdroje občanské vědy považujeme ty, které jsou snadno "
+"dostupné, implementovatelné a adaptabilní, dobře strukturované, jasně popsané a "
+"napsané srozumitelným jazykem a v ideálním případě zlepšují nebo podporují požadovaný "
+"dopad iniciativy (např. na vědu, politiku nebo společnost atd.). Hodnotu a kvalitu "
+"vašeho zdroje také zvyšuje, když můžete něco říct o tom, jak byl v praxi použit a "
+"dále rozvíjen a zda byl hodnocen z hlediska užitečnosti, použitelnosti a dopadu. "
+"Úplný seznam <a href='/moderation_quality_criteria'>kritérií kvality</a> si můžete "
+"přečíst zde."
+
+#: eucitizensciencetheme/templates/faq.html:173
+msgid "What are the quality criteria for projects?"
+msgstr "Jaká jsou kritéria kvality projektů?"
+
+#: eucitizensciencetheme/templates/faq.html:179
+msgid ""
+"The same overarching criteria are applied to both projects and resources. You are "
+"required to provide descriptive information in a number of data fields in the project "
+"profile, some of which are mandatory, before it can be submitted for moderation. One "
+"of these mandatory fields is a description of the citizen science aspects of the "
+"project. Guidance for this can be found in <a href='https://zenodo.org/communities/"
+"citscicharacteristics/?page=1&size=20'>ECSA's Characteristics of Citizen Science</a>. "
+"A further suggested overarching criteria for projects is that they be in alignment "
+"with the <a href='https://zenodo.org/record/5127534#.YV7PKt9CRhF'>ECSA 10 Principles "
+"of Citizen Science</a>."
+msgstr ""
+"Stejná zastřešující kritéria platí pro projekty i zdroje. Před odesláním k moderování "
+"musíte v profilu projektu poskytnout popisné informace v řadě datových polí, z nichž "
+"některá jsou povinná. Jedním z těchto povinných polí je popis aspektů občanské vědy v "
+"rámci projektu. Pokyny k tomu naleznete v dokumentu <a href='https://zenodo.org/"
+"communities/citscicharacteristics/?page=1&size=20'>Charakteristiky občanské vědy "
+"ECSA</a>. Dalším doporučeným zastřešujícím kritériem pro projekty je, aby byly v "
+"souladu s <a href='https://zenodo.org/record/5127534#.YV7PKt9CRhF'>10 principy "
+"občanské vědy ECSA</a>."
+
+#: eucitizensciencetheme/templates/faq.html:185
+msgid "Can I edit a profile after I have saved it?"
+msgstr "Mohu profil po jeho uložení upravit?"
+
+#: eucitizensciencetheme/templates/faq.html:191
+msgid ""
+"Yes, you can edit and update the profiles of the projects, resources, and "
+"organisations that you have shared, both before and after they have been moderated. "
+"You can find these profile edit pages in your Personal Area."
+msgstr ""
+"Ano, můžete upravovat a aktualizovat profily projektů, zdrojů a organizací, které "
+"jste sdíleli, a to jak před, tak i po jejich moderování. Tyto stránky pro úpravu "
+"profilů najdete ve své osobní sekci."
+
+#: eucitizensciencetheme/templates/faq.html:197
+msgid "What is the Our Gold Star Selection page?"
+msgstr "Co je to stránka Náš výběr zlatých hvězd?"
+
+#: eucitizensciencetheme/templates/faq.html:203
+msgid ""
+"The members of the EU-Citizen.Science consortium have curated a list of ‘Gold Star’ "
+"resources from amongst those in the (training) resources section that are of "
+"particularly high quality, or represent best practice, to make it easier for new and "
+"experienced practitioners alike to zoom in on the most useful resources. Read more "
+"about Our Selection on the blog post ‘<a href='/blog/2020/07/17/starter-set-of-"
+"resources-and-our-selection/'>How we selected the starter set of resources, and "
+"curated ‘Our Selection’</a>. "
+msgstr ""
+"Členové konsorcia EU-Citizen.Science sestavili seznam zdrojů s označením „Zlatá "
+"hvězda“ z těch, které jsou v sekci (školicích) zdrojů obzvláště kvalitní nebo "
+"představují osvědčené postupy, aby se noví i zkušení odborníci mohli snadněji zaměřit "
+"na nejužitečnější zdroje. Více informací o našem výběru naleznete v příspěvku na "
+"blogu „<a href='/blog/2020/07/17/starter-set-of-resources-and-our-selection/'>Jak "
+"jsme vybrali úvodní sadu zdrojů a sestavili „Náš výběr“</a>."
+
+#: eucitizensciencetheme/templates/faq.html:209
+msgid "What is the Personal Area?"
+msgstr "Co je to Osobní zóna?"
+
+#: eucitizensciencetheme/templates/faq.html:215
+msgid ""
+"The <a href='/users/me/'>Personal Area</a> is where you can edit any of the content "
+"profiles that you have submitted (as a logged-in member of the platform), in order to "
+"keep those profiles up to date. There you will also find the list of projects that "
+"you have ‘followed’, and the resources that you have bookmarked so that you can find "
+"them quickly again from your Personal Area. Please also share more information about "
+"yourself in the Personal area with other members of the community."
+msgstr ""
+"V <a href='/users/me/'>Osobní zóně</a> můžete upravovat libovolné profily obsahu, "
+"které jste odeslali (jako přihlášený člen platformy), aby tyto profily byly aktuální. "
+"Najdete zde také seznam projektů, které „sledujete“, a zdroje, které jste si uložili "
+"do záložek, abyste je mohli rychle znovu najít ve své osobní sekci. Sdílejte prosím "
+"také více informací o sobě v osobní sekci s ostatními členy komunity."
+
+#: eucitizensciencetheme/templates/faq.html:224
+msgid "What does it mean to bookmark a project or resource?"
+msgstr "Co znamená uložit projekt nebo zdroj do záložek?"
+
+#: eucitizensciencetheme/templates/faq.html:230
+msgid ""
+"When you are logged in, you will see a ‘bookmark’ button at the bottom of project and "
+"(training) resource profiles. This allows you to add the profiles that you are "
+"interested in to a list that can be found in your Personal Area under <a href='/users/"
+"me/bookmarks'><i>My bookmarks</i></a>, allowing you to find this content again easily."
+msgstr ""
+"Po přihlášení se ve spodní části profilů projektů a (školicích) zdrojů zobrazí "
+"tlačítko „záložky“. To vám umožní přidat profily, které vás zajímají, do seznamu, "
+"který najdete ve vaší osobní síti v sekci <a href='/users/me/bookmarks'><i>Moje "
+"záložky</i></a>, což vám umožní tento obsah snadno znovu najít."
+
+#: eucitizensciencetheme/templates/final_event.html:4
+msgid "Final Event"
+msgstr "Závěrečná událost"
+
+#: eucitizensciencetheme/templates/final_launch.html:10
+msgid "What’s new in citizen science training: from open science to public engagement"
+msgstr ""
+"Co je nového ve vzdělávání občanů v oblasti vědy: od otevřené vědy k zapojení "
+"veřejnosti"
+
+#: eucitizensciencetheme/templates/horizontal_card_project.html:17
+#: eucitizensciencetheme/templates/horizontal_card_resource.html:13
+#: projects/templates/_finder_projects.html:104
+#: resources/templates/_finder_resources.html:70
+msgid "Not yet moderated"
+msgstr "Zatím nemoderováno"
+
+#: eucitizensciencetheme/templates/horizontal_card_project.html:20
+#: eucitizensciencetheme/templates/horizontal_card_resource.html:16
+#: resources/templates/_finder_resources.html:69
+msgid "Not approved"
+msgstr "Neschváleno"
+
+#: eucitizensciencetheme/templates/imprint.html:10
+#: eucitizensciencetheme/templates/imprint.html:22
+msgid "Imprint"
+msgstr "Imprint"
+
+#: eucitizensciencetheme/templates/moderation.html:10
+msgid "The moderation process"
+msgstr "Proces moderování"
+
+#: eucitizensciencetheme/templates/moderation.html:23
+msgid "The Moderation Process"
+msgstr "Proces moderování"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:12
+msgid "moderation"
+msgstr "moderování"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:12
+msgid "and"
+msgstr "a "
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:12
+msgid "quality criteria"
+msgstr "kritéria kvality"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:17
+msgid ""
+"The project and (training) resource profiles that you can find on the platform have "
+"been submitted by the citizen science community or the EU-Citizen.Science project "
+"consortium. Before publishing, they undergo a moderation process where the quality "
+"criteria framework developed within the EU-Citizen.Science project is applied. Below "
+"you can find a description of the moderation process and of all the criteria. IIASA "
+"and other partners in the project have developed these criteria and assessment "
+"framework as part of WP3 “Content - Framework, Quality Assurance and Curation” of the "
+"EU-Citizen.Science project. The work carried out can be found in <a href='https://"
+"zenodo.org/record/3716236#.YZNyLRwxlhE' target='_blank'>D3.1 <i>Framework Report "
+"Describing Criteria and Rationale for Sharing and Selecting State of the art Citizen "
+"Science Resources</i></a> and <a href='https://zenodo.org/record/5041332#."
+"YZNxBRwxlhF' target='_blank'>D3.3 <i>Review of Framework Implementation Defined in "
+"D3.1</i></a>."
+msgstr ""
+"Profily projektů a (školicích) zdrojů, které naleznete na platformě, byly předloženy "
+"komunitou občanské vědy nebo konsorciem projektu EU-Citizen.Science. Před zveřejněním "
+"procházejí procesem moderace, při kterém se uplatňuje rámec kritérií kvality vyvinutý "
+"v rámci projektu EU-Citizen.Science. Níže naleznete popis procesu moderace a všech "
+"kritérií. IIASA a další partneři v projektu vyvinuli tato kritéria a rámec hodnocení "
+"jako součást WP3 „Obsah – rámec, zajištění kvality a kurátorství“ projektu EU-Citizen."
+"Science. Provedenou práci lze nalézt v dokumentech <a href='https://zenodo.org/"
+"record/3716236#.YZNyLRwxlhE' target='_blank'>D3.1 <i>Rámcová zpráva popisující "
+"kritéria a zdůvodnění pro sdílení a výběr nejmodernějších zdrojů občanské vědy</i></"
+"a> a <a href='https://zenodo.org/record/5041332#.YZNxBRwxlhF' target='_blank'>D3.3 "
+"<i>Přehled implementace rámce definovaného v dokumentu D3.1</i></a>."
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:34
+msgid ""
+"Our ambitious goal is to become <b>the</b> place to share useful resources about "
+"planning, running, evaluating and participating in citizen science initiatives or "
+"simply learning about citizen science, including tools and guidelines, best practices "
+"and training modules. We hope to make practical guidance on citizen science findable "
+"and accessible to all, and enable people to initiate their own activities wherever "
+"they are. It is important to us, and the community of practitioners, that we have a "
+"way of ensuring that the resources profiled on the platform are of good quality, and "
+"that the projects profiled on the platform are indeed citizen science initiatives. "
+"This is why we have a moderation process for all submissions."
+msgstr ""
+"Naším ambiciózním cílem je stát se místem pro sdílení užitečných zdrojů o plánování, "
+"provozování, hodnocení a účasti na iniciativách občanské vědy nebo jednoduše o "
+"vzdělávání v oblasti občanské vědy, včetně nástrojů a pokynů, osvědčených postupů a "
+"školicích modulů. Doufáme, že praktické pokyny k občanské vědě budou dostupné a "
+"dostupné všem a umožníme lidem zahájit vlastní aktivity, ať jsou kdekoli. Pro nás i "
+"komunitu odborníků je důležité, abychom měli způsob, jak zajistit, aby zdroje "
+"zveřejňované na platformě byly kvalitní a aby projekty zveřejňované na platformě "
+"skutečně představovaly iniciativy občanské vědy. Proto máme pro všechny příspěvky "
+"zavedený proces moderace."
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:36
+msgid ""
+"When you create a profile for a resource or a project to share on the platform, you "
+"will be asked to provide a range of descriptive information about it, and once all of "
+"the mandatory data fields are completed, you will be able to submit the profile. Upon "
+"submission, it will be sent for moderation. Until it has been reviewed against our "
+"criteria, it will be marked as ‘not yet moderated’, and will not be automatically "
+"visible in search results. Once your resource profile has successfully been through "
+"the moderation process, it will be marked as ‘moderated’, and will be fully available "
+"in search results."
+msgstr ""
+"Když si vytvoříte profil pro zdroj nebo projekt, který chcete sdílet na platformě, "
+"budete požádáni o poskytnutí řady popisných informací o něm. Jakmile vyplníte všechna "
+"povinná datová pole, budete moci profil odeslat. Po odeslání bude odeslán k "
+"moderování. Dokud nebude posouzen podle našich kritérií, bude označen jako „zatím "
+"nemoderovaný“ a nebude automaticky viditelný ve výsledcích vyhledávání. Jakmile váš "
+"profil zdroje úspěšně projde procesem moderování, bude označen jako „moderovaný“ a "
+"bude plně dostupný ve výsledcích vyhledávání."
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:49
+msgid ""
+"We have developed a set of comprehensive quality criteria as a way of ensuring that "
+"the projects and resources that you can find on this platform are of good quality. "
+"The overarching criteria can be applied to both projects and resources. Specific and "
+"supporting criteria have been developed for resources. The table below provides an "
+"overview of all resources; further down on this page you can read about all the "
+"quality criteria in more detail."
+msgstr ""
+"Vypracovali jsme sadu komplexních kritérií kvality, abychom zajistili, že projekty a "
+"zdroje, které na této platformě najdete, jsou kvalitní. Zastřešující kritéria lze "
+"použít jak na projekty, tak na zdroje. Pro zdroje byla vyvinuta specifická a podpůrná "
+"kritéria. Níže uvedená tabulka poskytuje přehled všech zdrojů; dále na této stránce "
+"si můžete přečíst o všech kritériích kvality podrobněji."
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:53
+msgid "Overarching Criteria (for projects and resources)"
+msgstr "Zastřešující kritéria (pro projekty a zdroje)"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:54
+msgid "About citizen science or relevant to citizen science (required)"
+msgstr "O občanské vědě nebo relevantní pro občanskou vědu (povinné)"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:57
+msgid "All mandatory metadata is provided (required)"
+msgstr "Jsou poskytnuta všechna povinná metadata (povinné)"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:60
+msgid ""
+"Engages with the <a target='_blank' href='https://zenodo.org/record/5127534#."
+"YV7PKt9CRhF'>ECSA 10 Principles of Citizen Science</a> (suggested)"
+msgstr ""
+"Zabývá se <a target='_blank' href='https://zenodo.org/record/5127534#."
+"YV7PKt9CRhF'>ECSA 10 principů občanské vědy</a> (doporučeno)"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:63
+msgid "Specific Criteria (for resources)"
+msgstr "Specifická kritéria (pro zdroje)"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:64
+msgid "Access to the resource"
+msgstr "Přístup k zdroji"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:67
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:151
+msgid "Readability and Legibility"
+msgstr "Čitelnost a srozumitelnost"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:68
+msgid "Clear structure"
+msgstr "Jasná struktura"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:71
+msgid "Clear language"
+msgstr "Srozumitelný jazyk"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:74
+msgid "Basic formatting"
+msgstr "Základní formátování"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:77
+msgid "Content"
+msgstr "Obsah"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:80
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:163
+msgid "Applicability"
+msgstr "Použitelnost"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:81
+msgid "Easy to implement"
+msgstr "Snadná implementace"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:84
+msgid "Easy to adapt"
+msgstr "Snadná adaptace"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:87
+msgid "Object"
+msgstr "Objekt"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:88
+msgid "Clearly audible (audio object)"
+msgstr "Jasně slyšitelný (zvukový objekt)"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:91
+msgid "Good quality (video or image)"
+msgstr "Dobrá kvalita (video nebo obrázek)"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:94
+msgid "Supporting Criteria (for resources)"
+msgstr "Podpůrná kritéria (pro zdroje)"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:95
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:193
+msgid "Evaluation"
+msgstr "Hodnocení"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:96
+msgid "Used in the context of a citizen science initiative"
+msgstr "Používá se v kontextu občanské vědecké iniciativy"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:99
+msgid ""
+"Evaluated in terms of the quality of the content, methods, or results of the method"
+msgstr "Hodnoceno z hlediska kvality obsahu, metod nebo výsledků metody"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:102
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:199
+msgid "Impact"
+msgstr "Dopad"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:115
+msgid "The overarching criteria for all resources"
+msgstr "Zastřešující kritéria pro všechny zdroje"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:121
+msgid " Required Criteria - Citizen Science"
+msgstr "Požadovaná kritéria - Občanská věda"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:122
+msgid ""
+"The first criterion that the moderator will look for, is that your <b>resource is "
+"relevant to citizen science</b>, or that your <b>project is a citizen science "
+"initiative</b>."
+msgstr ""
+"Prvním kritériem, které bude moderátor hledat, je, zda je váš <b>zdroj relevantní pro "
+"občanskou vědu</b>, nebo zda je váš <b>projekt iniciativou občanské vědy</b>."
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:124
+msgid ""
+"Although there are no hard and fast definitions of what citizen science is and is not "
+"(nor should there be - citizen science should always remain a broad and inclusive "
+"concept), we turn to the recent work conducted by the citizen science community on "
+"the <a target='_blank' href='https://zenodo.org/communities/citscicharacteristics/?"
+"page=1&size=20'>ECSA Characteristics of Citizen Science</a> as guidance. Please "
+"consult these characteristics if you are uncertain whether the resource or the "
+"project you would like to share really does relate to citizen science. If the "
+"moderator has concerns they will contact you directly."
+msgstr ""
+"Ačkoli neexistují žádné pevné a jasné definice toho, co občanská věda je a co není (a "
+"neměly by existovat – občanská věda by vždy měla zůstat širokým a inkluzivním "
+"konceptem), obracíme se jako vodítko na nedávnou práci komunity občanské vědy na téma "
+"<a target='_blank' href='https://zenodo.org/communities/citscicharacteristics/?"
+"page=1&size=20'>Charakteristiky občanské vědy ECSA</a>. Pokud si nejste jisti, zda se "
+"zdroj nebo projekt, o který se chcete podělit, skutečně týká občanské vědy, "
+"prostudujte si prosím tyto charakteristiky. Pokud bude mít moderátor jakékoli obavy, "
+"bude vás kontaktovat přímo."
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:126
+msgid ""
+"The moderator will also check if all mandatory fields in the resource profile are "
+"completed. This is to ensure that all project and resource profiles provide "
+"sufficient information to enable users of the platform to see whether it is useful or "
+"relevant to them."
+msgstr ""
+"Moderátor také zkontroluje, zda jsou vyplněna všechna povinná pole v profilu zdroje. "
+"Tím se zajistí, že všechny profily projektů a zdrojů poskytují dostatek informací, "
+"aby si uživatelé platformy mohli ověřit, zda jsou pro ně užitečné nebo relevantní."
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:128
+msgid "Suggested Criteria - the Principles of Citizen Science"
+msgstr "Navrhovaná kritéria – Principy občanské vědy"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:129
+msgid ""
+"The moderator of your submitted profile will also consider whether your resource or "
+"project is in alignment with the <a href='https://zenodo.org/record/5127534#."
+"YV7PKt9CRhF' target='_blank'>ECSA 10 Principles of Citizen Science</a>."
+msgstr ""
+"Moderátor vámi odeslaného profilu také posoudí, zda je váš zdroj nebo projekt v "
+"souladu s <a href='https://zenodo.org/record/5127534#.YV7PKt9CRhF' target='_blank'>10 "
+"principy občanské vědy ECSA</a>."
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:135
+msgid "Specific criteria"
+msgstr "Specifická kritéria"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:141
+msgid ""
+"For the resources to be shared on the platform, we have developed a specific set of "
+"further criteria, which will be assessed during the moderation process. You can read "
+"more about how we developed these in the blog post ‘<a href='/blog/2020/04/30/how-we-"
+"developed-quality-criteria-resources/'>How we developed the quality criteria for "
+"resources’</a>."
+msgstr ""
+"Pro zdroje, které budou na platformě sdíleny, jsme vyvinuli specifickou sadu dalších "
+"kritérií, která budou posouzena během procesu moderování. Více o tom, jak jsme je "
+"vyvinuli, si můžete přečíst v příspěvku na blogu „<a href='/blog/2020/04/30/how-we-"
+"developed-quality-criteria-resources/'>Jak jsme vyvinuli kritéria kvality pro "
+"zdroje“</a>."
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:143
+msgid ""
+"We consider good quality citizen science resources to be those that are easy to "
+"access, implement and adapt, well structured, clearly described and written in clear "
+"language, and ideally improve or support the desired impact of the initiative (eg. on "
+"science, policy or society, etc). For this purpose we have developed a range of "
+"criteria that the moderator will assess against a 5-point scale, from strongly "
+"disagree (1 point) to strongly agree (5 points)."
+msgstr ""
+"Za kvalitní zdroje občanské vědy považujeme ty, které jsou snadno dostupné, "
+"implementovatelné a adaptabilní, dobře strukturované, jasně popsané a napsané "
+"srozumitelným jazykem a v ideálním případě zlepšují nebo podporují požadovaný dopad "
+"iniciativy (např. na vědu, politiku nebo společnost atd.). Za tímto účelem jsme "
+"vyvinuli řadu kritérií, která moderátor posoudí na 5bodové stupnici, od „rozhodně "
+"nesouhlasím“ (1 bod) po „rozhodně souhlasím“ (5 bodů)."
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:146
+msgid "Easy access to the resource"
+msgstr "Snadný přístup ke zdroji"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:148
+msgid ""
+"The resource should be easy to access, i.e. it doesn’t require registration, and is "
+"not behind a paywall."
+msgstr ""
+"Zdroj by měl být snadno dostupný, tj. nevyžaduje registraci a nesmí být za paywallem."
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:153
+msgid ""
+"The resource should be <b>clearly structured</b> according to the type of the "
+"resource. For example, a scientific paper or report should include an introduction, "
+"methodology, results, discussion and/or conclusions, and methodology documents should "
+"include an introduction, audience description, step by step methodology, and an "
+"example."
+msgstr ""
+"Zdroj by měl být <b>jasně strukturovaný</b> podle typu zdroje. Například vědecký "
+"článek nebo zpráva by měly obsahovat úvod, metodologii, výsledky, diskusi a/nebo "
+"závěry a metodologické dokumenty by měly obsahovat úvod, popis cílové skupiny, "
+"podrobný popis metodologie a příklad."
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:154
+msgid ""
+"The resource should be <b>written in clear language</b> that is easy to read and "
+"understand for the intended target audience, and should be concise, unambiguous, and "
+"avoid the use of unusual words and jargon. Where technical terms are used, their "
+"meaning should be explained clearly."
+msgstr ""
+"Zdroj by měl být <b>napsán srozumitelným jazykem</b>, který je snadno čitelný a "
+"srozumitelný pro cílovou skupinu, a měl by být stručný, jednoznačný a vyhýbat se "
+"používání neobvyklých slov a žargonu. Pokud jsou použity odborné termíny, jejich "
+"význam by měl být jasně vysvětlen."
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:155
+msgid ""
+"The resource should pay attention to <b>basic formatting</b>, such as clear titles "
+"and paragraphs, correct grammar and spelling, a legible font of large enough size to "
+"read, and clearly marked references."
+msgstr ""
+"Zdroj by měl věnovat pozornost <b>základnímu formátování</b>, jako jsou jasné názvy a "
+"odstavce, správná gramatika a pravopis, čitelné písmo dostatečně velké pro čtení a "
+"jasně označené odkazy."
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:158
+msgid "Clarity of Content"
+msgstr "Srozumitelnost obsahu"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:160
+msgid ""
+"The resource should clearly describe its aims, goals and methods, so that it is easy "
+"for readers to understand how to apply the resource in their own context."
+msgstr ""
+"Zdroj by měl jasně popisovat své cíle, záměry a metody, aby čtenáři snadno pochopili, "
+"jak zdroj aplikovat ve svém vlastním kontextu."
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:166
+msgid ""
+"The resource should be <b>easy to implement</b>, ideally with descriptions of how it "
+"can be implemented, the contexts that it is useful for, and recommendations for "
+"further use or development."
+msgstr ""
+"Zdroj by měl být <b>snadno implementovatelný</b>, ideálně s popisem, jak jej lze "
+"implementovat, kontexty, pro které je užitečný, a doporučeními pro další použití nebo "
+"rozvoj."
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:167
+msgid ""
+"The resource should be <b>easy to adapt</b> to different cases, ideally with an "
+"explanation of any limitations of the resource and the contexto in which it could be "
+"useful, and with guidelines or recommendations for its adaptation to different cases."
+msgstr ""
+"Zdroj by měl být <b>snadno přizpůsobitelný</b> různým případům, ideálně s vysvětlením "
+"případných omezení zdroje a kontextu, ve kterém by mohl být užitečný, a s pokyny nebo "
+"doporučeními pro jeho přizpůsobení různým případům."
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:170
+msgid "Object Quality"
+msgstr "Kvalita objektu"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:172
+msgid ""
+"If the resource is an audio object, it should be <b>clearly audible</b>, with no "
+"interruptions or background noise."
+msgstr ""
+"Pokud je zdrojem zvukový objekt, měl by být <b>jasně slyšitelný</b>, bez přerušení "
+"nebo šumu na pozadí."
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:173
+msgid ""
+"If the resource is a video, an image or illustration, the quality should be good "
+"enough to <b>see clearly, with a sharp focus</b>."
+msgstr ""
+"Pokud je zdrojem video, obrázek nebo ilustrace, měla by být kvalita dostatečně dobrá, "
+"aby byl <b>jasně viditelný a zaostřený</b>."
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:177
+#, python-format
+msgid ""
+"The highest possible score is 40 points, if all criteria are applicable. But in most "
+"cases, only a selection of the above criteria will be applicable. The moderator will "
+"look to see that your resource exceeds 50%% of the total possible points for that "
+"type of resource. That is the threshold for being listed on the platform as a good "
+"quality resource."
+msgstr ""
+"Nejvyšší možné skóre je 40 bodů, pokud jsou splněna všechna kritéria. Ve většině "
+"případů však bude splněn pouze výběr z výše uvedených kritérií. Moderátor se ujistí, "
+"že váš zdroj překračuje 50 %% z celkového počtu možných bodů pro daný typ zdroje. To "
+"je prahová hodnota pro zařazení na platformu jako kvalitní zdroj."
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:184
+msgid "Supporting criteria"
+msgstr "Podpůrná kritéria"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:190
+msgid ""
+"It really enhances the value and quality of your resources when you can say something "
+"about how it has been used and developed further in practice, and whether or not it "
+"has been evaluated for usefulness and applicability in practice. The moderator will "
+"also take it into positive consideration if there is evidence of the following "
+"criteria being met (but these are not part of the threshold calculation mentioned "
+"above):"
+msgstr ""
+"Hodnotu a kvalitu vašich zdrojů skutečně zvyšuje, když můžete něco říct o tom, jak "
+"byly v praxi použity a dále rozvíjeny a zda byly či nebyly vyhodnoceny z hlediska "
+"užitečnosti a použitelnosti v praxi. Moderátor to také kladně zváží, pokud existují "
+"důkazy o splnění následujících kritérií (ta však nejsou součástí výše uvedeného "
+"výpočtu prahových hodnot):"
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:195
+msgid ""
+"The resource has been <b>used in the context of citizen science</b>, or is currently "
+"being used in a citizen science initiative, and the outcome of this has been shared."
+msgstr ""
+"Zdroj byl <b>použit v kontextu občanské vědy</b> nebo je v současné době používán v "
+"rámci občanské vědecké iniciativy a výsledek této iniciativy byl sdílen."
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:196
+msgid ""
+"The resource has been <b>evaluated</b> in terms of the quality of the content, or the "
+"methods, or the results of the method, and the outcomes of these evaluations have "
+"been shared."
+msgstr ""
+"Zdroj byl <b>vyhodnocen</b> z hlediska kvality obsahu, metod nebo výsledků metody a "
+"výsledky těchto hodnocení byly sdíleny."
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:201
+msgid ""
+"The resource refers to any <b>impact</b> that it could have (or has had) on science, "
+"policy, society, etc."
+msgstr ""
+"Zdroj označuje jakýkoli <b>dopad</b>, který by mohl mít (nebo měl) na vědu, politiku, "
+"společnost atd."
+
+#: eucitizensciencetheme/templates/moderation_quality_criteria.html:202
+msgid ""
+"The impact of the resource has been <b>measured</b> and is shared in the resource."
+msgstr "Dopad zdroje byl <b>změřen</b> a je sdílen v rámci zdroje."
+
+#: eucitizensciencetheme/templates/policy_brief.html:4
+#: eucitizensciencetheme/templates/policy_brief.html:8
+msgid "Policy Brief"
+msgstr "Stručný přehled zásad"
+
+#: eucitizensciencetheme/templates/policy_maker_event_2021.html:10
+msgid "Citizen Science for Policy across Europe"
+msgstr "Občanská věda pro politiku napříč Evropou"
+
+#: eucitizensciencetheme/templates/privacy.html:10
+#: eucitizensciencetheme/templates/privacy.html:21
+msgid "Privacy"
+msgstr "Soukromí"
+
+#: eucitizensciencetheme/templates/projects_cards_featured.html:19
+#: eucitizensciencetheme/templates/projects_cards_short.html:19
+#: eucitizensciencetheme/templates/resources_cards_featured.html:17
+#: eucitizensciencetheme/templates/resources_cards_horizontal.html:20
+#: eucitizensciencetheme/templates/resources_cards_short.html:17
+msgid "NOT YET MODERATED"
+msgstr "ZATÍM NEMODEROVÁNO"
+
+#: eucitizensciencetheme/templates/projects_cards_featured.html:20
+#: eucitizensciencetheme/templates/projects_cards_short.html:20
+#: eucitizensciencetheme/templates/resources_cards_featured.html:18
+#: eucitizensciencetheme/templates/resources_cards_horizontal.html:21
+#: eucitizensciencetheme/templates/resources_cards_short.html:18
+msgid "MODERATED"
+msgstr "MODEROVÁNO"
+
+#: eucitizensciencetheme/templates/projects_cards_featured.html:28
+#: eucitizensciencetheme/templates/projects_cards_short.html:28
+#: eucitizensciencetheme/templates/resources_cards_featured.html:30
+#: eucitizensciencetheme/templates/resources_cards_horizontal.html:45
+#: eucitizensciencetheme/templates/resources_cards_short.html:30
+msgid "Read more"
+msgstr "Číst dále"
+
+#: eucitizensciencetheme/templates/resources_cards_horizontal.html:19
+msgid "NOT ACCEPTED"
+msgstr "NEAKCEPTOVÁNO"
+
+#: eucitizensciencetheme/templates/resources_cards_horizontal.html:43
+msgid "review"
+msgstr "posudek"
+
+#: eucitizensciencetheme/templates/resources_cards_horizontal.html:43
+msgid "reviews"
+msgstr "posudky"
+
+#: eucitizensciencetheme/templates/resources_cards_horizontal.html:96
+msgid "In my library"
+msgstr "V mé knihovně"
+
+#: eucitizensciencetheme/templates/resources_cards_horizontal.html:98
+msgid "Add to library"
+msgstr "Přidat do knihovny"
+
+#: eucitizensciencetheme/templates/translations.html:10
+msgid "Translations"
+msgstr "Překlady"
+
+#: eucitizensciencetheme/templates/welcome_email.html:15
+msgid ""
+"Welcome to the CC.pt community! We are really pleased that you have joined us here."
+msgstr "Vítejte v komunitě CC.pt! Jsme opravdu rádi, že jste se k nám připojili."
+
+#: eucitizensciencetheme/templates/welcome_email.html:16
+msgid "In this release of the platform you can browse and search for "
+msgstr "V této verzi platformy můžete procházet a vyhledávat"
+
+#: events/forms.py:22
+msgid "Please write the title of the event."
+msgstr "Prosím, napište název události."
+
+#: events/forms.py:23 profiles/models.py:38
+msgid "Title"
+msgstr "Název"
+
+#: events/forms.py:25
+msgid "Please add a brief description of the event."
+msgstr "Prosím, přidejte stručný popis události."
+
+#: events/forms.py:26 organisations/templates/organisation_form.html:59
+#: platforms/templates/platform_form.html:45 projects/forms.py:486
+#: projects/templates/project_form.html:55 projects/templates/translation_form.html:48
+msgid "Description"
+msgstr "Popis"
+
+#: events/forms.py:28
+msgid "Please indicate the location of the event."
+msgstr "Uveďte prosím místo konání události."
+
+#: events/forms.py:29
+msgid "Place"
+msgstr "Místo"
+
+#: events/forms.py:32
+msgid "Start date"
+msgstr "Datum zahájení"
+
+#: events/forms.py:34
+msgid "Please indicate the start and end dates of the event."
+msgstr "Prosím, uveďte datum zahájení a ukončení události."
+
+#: events/forms.py:35
+msgid "End date"
+msgstr "Datum ukončení"
+
+#: events/forms.py:37
+msgid "Please indicate the start time of the event."
+msgstr "Uveďte prosím čas začátku události."
+
+#: events/forms.py:38
+msgid "Hour"
+msgstr "Hodina"
+
+#: events/forms.py:54
+msgid "Please indicate the language of the event."
+msgstr "Prosím, uveďte jazyk události."
+
+#: events/forms.py:54 events/templates/_event_card.html:39
+#: events/templates/_finder_events.html:37 resources/templates/resource.html:169
+msgid "Language"
+msgstr "Jazyk"
+
+#: events/forms.py:55 organisations/forms.py:36 platforms/forms.py:47
+#: projects/forms.py:90 resources/forms.py:43
+msgid "URL"
+msgstr "URL"
+
+#: events/forms.py:56
+msgid "Please provide a URL to an external web site for the event."
+msgstr "Uveďte prosím URL na externí webovou stránku pro událost."
+
+#: events/forms.py:63
+msgid "Please indicate if the event is online or physical."
+msgstr "Prosím, uveďte, zda se událost koná online nebo fyzicky."
+
+#: events/forms.py:64 events/templates/_finder_events.html:18
+msgid "Event type"
+msgstr "Typ události"
+
+#: events/forms.py:73
+msgid ""
+"If this event is associated with a project, please select it. If not listed, please "
+"add it <a href=\"/newProject\" target=\"_blank\">here</a> before submitting the event"
+msgstr ""
+"Pokud je tato událost spojena s projektem, vyberte jej. Pokud není uvedena, přidejte "
+"ji prosím <a href=\"/newProject\" target=\"_blank\">sem</a> před odesláním události."
+
+#: events/forms.py:76
+msgid "Associated project"
+msgstr "Související projekt"
+
+#: events/forms.py:85
+msgid ""
+"Please select the organisation coordinating the event. If not listed, please add it "
+"<a href=\"/new_organisation\" target=\"_blank\">here</a> before submitting the event"
+msgstr ""
+"Vyberte prosím organizaci koordinující akci. Pokud není uvedena, přidejte ji prosím "
+"<a href=\"/new_organisation\" target=\"_blank\">sem</a> před odesláním události"
+
+#: events/forms.py:88 projects/forms.py:209
+msgid "Lead organisation / coordinator"
+msgstr "Vedoucí organizace / koordinátor"
+
+#: events/forms.py:97
+msgid ""
+"Please select other organisation(s) participating in the event. If not listed,please "
+"add it <a href=\"/new_organisation\" target=\"_blank\">here</a> before submitting the "
+"event"
+msgstr ""
+"Vyberte prosím další organizaci (organizace) účastnící se události. Pokud nejsou v "
+"seznamu, přidejte je prosím <a href=\"/new_organisation\" target=\"_blank\">sem</a> "
+"před odesláním události."
+
+#: events/forms.py:100 profiles/forms.py:73 projects/forms.py:221
+msgid "Other Organisations"
+msgstr "Další organizace"
+
+#: events/templates/_finder_events.html:24
+#: organisations/templates/_finder_organisation.html:19
+#: organisations/templates/_finder_organisation.html:24
+#: organisations/templates/finder_organisations.html:28
+#: platforms/templates/_finder_platforms.html:29
+#: profiles/templates/profiles/_finder_users.html:27
+#: projects/templates/_finder_projects.html:39
+msgid "Country"
+msgstr "Země"
+
+#: events/templates/_finder_events.html:78
+#: organisations/templates/_finder_organisation.html:69
+#: platforms/templates/_finder_platforms.html:74
+#: profiles/templates/profiles/_finder_users.html:86
+msgid "Clear current search"
+msgstr "Vymazat aktuální vyhledávání"
+
+#: events/templates/editEvent.html:35
+msgid "Edit event"
+msgstr "Upravit událost"
+
+#: events/templates/editEvent.html:46 events/templates/new_event.html:44
+msgid "Event info"
+msgstr "Informace o události"
+
+#: events/templates/editEvent.html:75 events/templates/new_event.html:72
+msgid "Event location"
+msgstr "Místo události"
+
+#: events/templates/editEvent.html:76 events/templates/new_event.html:73
+#: organisations/templates/organisation_form.html:123
+msgid "This is a required parameter"
+msgstr "Toto je povinný parametr."
+
+#: events/templates/editEvent.html:103 events/templates/new_event.html:95
+msgid "Add"
+msgstr "Přidat"
+
+#: events/templates/editEvent.html:281 events/templates/new_event.html:286
+msgid "This field is required"
+msgstr "Toto pole je povinné"
+
+#: events/templates/events.html:26
+msgid "On going <span class='lightBlue-color'>events</span>"
+msgstr "Probíhající <span class='lightBlue-color'>události</span>"
+
+#: events/templates/events.html:39
+msgid "Upcoming <span class='lightBlue-color'>events</span>"
+msgstr "Přicházející <span class='lightBlue-color'>události</span>"
+
+#: events/templates/events.html:51
+msgid "Past <span class='lightBlue-color'>events</span>"
+msgstr "Minulé <span class='lightBlue-color'>události</span>"
+
+#: organisations/forms.py:17
+msgid "Please briefly describe the organisation (max 3000 characters)."
+msgstr "Stručně popište organizaci (max. 3000 znaků)."
+
+#: organisations/forms.py:31
+msgid "Please write the name of the organisation."
+msgstr "Prosím, napište název organizace."
+
+#: organisations/forms.py:33 resources/forms.py:39
+msgid "Name"
+msgstr "Název"
+
+#: organisations/forms.py:38
+msgid "Please provide the URL to the website of the organisation."
+msgstr "Prosím o poskytnutí URL adresy webových stránek organizace."
+
+#: organisations/forms.py:42 organisations/templates/_finder_organisation.html:36
+#: organisations/templates/finder_organisations.html:18
+msgid "Type"
+msgstr "Typ"
+
+#: organisations/forms.py:43
+msgid "Please select one."
+msgstr "Vyberte prosím jednu možnost."
+
+#: organisations/forms.py:48
+msgid "Please upload the logo of your organisation (.jpg or .png)."
+msgstr "Nahrajte prosím logo vaší organizace (.jpg nebo .png)."
+
+#: organisations/forms.py:53 platforms/forms.py:111 projects/forms.py:275
+msgid "Logo credit, if applicable"
+msgstr "Autorství loga, pokud je to relevantní"
+
+#: organisations/forms.py:61
+msgid "Please name the contact person or contact point for the organisation."
+msgstr "Uveďte prosím kontaktní osobu nebo kontaktní místo pro danou organizaci."
+
+#: organisations/forms.py:62 platforms/forms.py:71 projects/forms.py:191
+msgid "Public contact point"
+msgstr "Kontaktní místo pro veřejnost"
+
+#: organisations/forms.py:67 platforms/forms.py:82
+msgid ""
+"Please provide the email address of the contact person or contact point. Note you "
+"will need permission to do that."
+msgstr ""
+"Uveďte prosím e-mailovou adresu kontaktní osoby nebo kontaktního místa. Upozorňujeme, "
+"že k tomu budete potřebovat povolení."
+
+#: organisations/forms.py:70 platforms/forms.py:79 projects/forms.py:198
+msgid "Contact point email"
+msgstr "E-mail kontaktního místa"
+
+#: organisations/forms.py:127 projects/forms.py:555 resources/forms.py:327
+msgid "Give additional users permission to edit"
+msgstr "Udělte oprávnění k úpravám dalším uživatelům"
+
+#: organisations/templates/_delete_modal.html:6
+msgid "Confirm delete"
+msgstr "Potvrdit smazání"
+
+#: organisations/templates/_delete_modal.html:12
+msgid "You are going to delete this organisation, this procedure is irreversible."
+msgstr "Chystáte se smazat tuto organizaci, tento postup je nevratný."
+
+#: organisations/templates/_delete_modal.html:13
+msgid "Do you want to proceed?"
+msgstr "Chcete pokračovat?"
+
+#: organisations/templates/_delete_modal.html:17
+msgid "Delete"
+msgstr "Smazat"
+
+#: organisations/templates/_delete_modal.html:23
+msgid "Confirm"
+msgstr "Potvrdit"
+
+#: organisations/templates/_finder_organisation.html:17
+#: platforms/templates/_finder_platforms.html:23
+#: projects/templates/_finder_projects.html:19
+#: resources/templates/_finder_resources.html:23
+msgid "Most Recent Updated"
+msgstr "Naposledy aktualizováno"
+
+#: organisations/templates/_finder_organisation.html:18
+#: platforms/templates/_finder_platforms.html:24
+#: profiles/templates/profiles/_finder_users.html:22
+#: projects/templates/_finder_projects.html:28
+#: resources/templates/_finder_resources.html:24
+msgid "A-Z"
+msgstr "A-Z"
+
+#: organisations/templates/_finder_organisation.html:56
+msgid "country:"
+msgstr "země:"
+
+#: organisations/templates/_finder_organisation.html:64
+msgid "type:"
+msgstr "typ:"
+
+#: organisations/templates/_finder_organisation.html:76
+msgid "organisations found for "
+msgstr "organizace nalezené pro"
+
+#: organisations/templates/_finder_organisation.html:78
+msgid "organisation found for "
+msgstr "organizace nalezená pro"
+
+#: organisations/templates/_intro_form_organisation.html:6
+#: resources/templates/_intro_form_training_resource.html:6
+msgid "Editing"
+msgstr "Úpravy"
+
+#: organisations/templates/_intro_form_organisation.html:8
+#: resources/templates/_intro_form_training_resource.html:8
+msgid "New"
+msgstr "Nový"
+
+#: organisations/templates/_intro_form_organisation.html:8
+msgid "organisation"
+msgstr "organizace"
+
+#: organisations/templates/_intro_form_organisation.html:13
+msgid ""
+"Thank you for creating a profile for your organisation on the EU-Citizen.Science "
+"platform. This can be linked with the personal profiles of the people in your "
+"organisation, the project profiles that your organisation is involved in, and the "
+"resource profiles or the training resources that were published by your organisation. "
+"Please fill in all of the mandatory information in the fields below (indicated with "
+"an asterisk*), and as much of the non-mandatory information as possible."
+msgstr ""
+"Děkujeme, že jste si vytvořili profil vaší organizace na platformě EU-Citizen."
+"Science. Lze jej propojit s osobními profily lidí ve vaší organizaci, profily "
+"projektů, na kterých je vaše organizace zapojena, a profily zdrojů nebo školicích "
+"materiálů, které vaše organizace zveřejnila. Vyplňte prosím všechny povinné informace "
+"v níže uvedených polích (označených hvězdičkou*) a co nejvíce nepovinných informací."
+
+#: organisations/templates/_intro_form_organisation.html:15
+msgid ""
+"Upon saving this profile, your organisational profile will immediately show up on the "
+"platform but will be later moderated by one of the platform moderators. This step is "
+"simply to check for spam or inappropriate uses of the profile form."
+msgstr ""
+"Po uložení tohoto profilu se profil vaší organizace okamžitě zobrazí na platformě, "
+"ale později jej bude moderovat jeden z moderátorů platformy. Tento krok slouží pouze "
+"ke kontrole spamu nebo nevhodného použití profilového formuláře."
+
+#: organisations/templates/_intro_form_organisation.html:17
+#: resources/templates/_intro_form_training_resource.html:38
+msgid ""
+"We would like to point out that, as the author of this profile, you have to clear the "
+"image rights and copyrights of the content you are submitting. Please indicate the "
+"author or copyright holder of pictures. You may need to obtain express written "
+"permission from them."
+msgstr ""
+"Rádi bychom upozornili, že jako autor tohoto profilu musíte mít vyjasněna práva k "
+"obrázku a autorská práva k obsahu, který odesíláte. Uveďte prosím autora nebo "
+"držitele autorských práv k obrázkům. Možná budete muset od nich získat výslovný "
+"písemný souhlas."
+
+#: organisations/templates/emails/new_organisation.html:18
+msgid "Thank you for submitting your organisation profile of "
+msgstr "Děkujeme za zaslání profilu vaší organizace"
+
+#: organisations/templates/emails/new_organisation.html:19
+msgid ""
+"This profile will now be visible on the platform, and you can make updates or changes "
+"to this resource profile at any time, by going to the "
+msgstr ""
+"Tento profil bude nyní viditelný na platformě a můžete jej kdykoli aktualizovat nebo "
+"změnit na stránce "
+
+#: organisations/templates/emails/new_organisation.html:19
+#: projects/templates/emails/approved_project.html:22
+#: resources/templates/emails/approved_resource.html:20
+#: resources/templates/emails/approved_training_resource.html:20
+#: resources/templates/emails/library_resource.html:20
+#: resources/templates/emails/library_training_resource.html:20
+msgid "Submissions section in your Personal Area"
+msgstr "Sekce „Podání“ ve vaší Osobní zóně"
+
+#: organisations/templates/emails/new_organisation.html:19
+#: resources/templates/emails/library_resource.html:20
+#: resources/templates/emails/library_training_resource.html:20
+#: resources/templates/emails/new_resource.html:22
+#: resources/templates/emails/resource_review.html:21
+#: resources/templates/emails/training_resource_review.html:21
+msgid "(see the top-right of the platform menu)."
+msgstr "(viz pravý horní roh nabídky platformy)."
+
+#: organisations/templates/finder_organisations.html:44
+msgid "result"
+msgstr "výsledek"
+
+#: organisations/templates/finder_organisations.html:44
+msgid "found"
+msgstr "nalezeno"
+
+#: organisations/templates/finder_organisations.html:54
+#: resources/templates/_finder_resources.html:119
+msgid "Clear current search query and filters"
+msgstr "Vymazat aktuální vyhledávací dotaz a filtry"
+
+#: organisations/templates/organisation.html:74
+msgid "Staff"
+msgstr "Zaměstnanci"
+
+#: organisations/templates/organisation.html:87 projects/templates/project.html:126
+msgid "About branding"
+msgstr "O značce"
+
+#: organisations/templates/organisation.html:89 projects/templates/project.html:131
+msgid "<b>Logo design by: </b>"
+msgstr "<b>Design loga: </b>"
+
+#: organisations/templates/organisation.html:96
+msgid "Go to Organisation"
+msgstr "Přejít na Organizaci"
+
+#: organisations/templates/organisation.html:101
+msgid "Edit Organisation"
+msgstr "Upravit Organizaci"
+
+#: organisations/templates/organisation.html:109
+#: organisations/templates/organisation.html:119
+#: organisations/templates/organisation.html:123
+msgid "Delete Organisation"
+msgstr "Smazat Organizaci"
+
+#: organisations/templates/organisation_form.html:51
+#: platforms/templates/platform_form.html:35 projects/templates/project_form.html:41
+#: resources/templates/resource_form.html:41
+msgid "Main information"
+msgstr "Hlavní informace"
+
+#: organisations/templates/organisation_form.html:83
+#: platforms/templates/platform_form.html:66
+msgid "Contact information"
+msgstr "Kontaktní informace"
+
+#: organisations/templates/organisation_form.html:96
+msgid "Organisation logo"
+msgstr "Logo organizace"
+
+#: organisations/templates/organisation_form.html:119
+#: projects/templates/project.html:216
+msgid "Location"
+msgstr "Umístění"
+
+#: organisations/views.py:55
+msgid "Organisation added correctly"
+msgstr "Organizace byla přidána správně"
+
+#: platforms/forms.py:29
+msgid "Please briefly describe the network or platform (max 3000 characters)."
+msgstr "Stručně popište síť nebo platformu (max. 3000 znaků)."
+
+#: platforms/forms.py:42
+msgid "Please write the name of the network or platform."
+msgstr "Prosím, napište název sítě nebo platformy."
+
+#: platforms/forms.py:48
+msgid "Please provide the URL of the network or platform."
+msgstr "Uveďte prosím URL adresu sítě nebo platformy."
+
+#: platforms/forms.py:52
+msgid "Geographic extent"
+msgstr "Geografický rozsah – uveďte URL adresu sítě nebo platformy."
+
+#: platforms/forms.py:54
+msgid "Please indicate the spatial scale of the network or platform."
+msgstr "Uveďte prosím prostorový rozsah sítě nebo platformy."
+
+#: platforms/forms.py:61
+msgid "Please select the country(ies) related to the network or platform."
+msgstr "Vyberte prosím zemi (země) související se sítí nebo platformou."
+
+#: platforms/forms.py:64
+msgid "Network / platform locality"
+msgstr "Lokalita sítě / platformy"
+
+#: platforms/forms.py:68
+msgid ""
+"Please describe the locality of the network or platform. For example: City of Lisbon."
+msgstr "Popište prosím lokalitu sítě nebo platformy. Například: město Lisabon."
+
+#: platforms/forms.py:74
+msgid "Please name the contact person or contact point for the network or platform."
+msgstr "Uveďte prosím kontaktní osobu nebo kontaktní místo pro síť nebo platformu."
+
+#: platforms/forms.py:88 resources/forms.py:141
+msgid "Organisation(s)"
+msgstr "Organizace(e)"
+
+#: platforms/forms.py:90
+msgid ""
+"Please select the organisation(s) coordinating the platform. If not listed, please "
+"add <a href=\"/new_organisation\" target=_blank\">here</a> before submitting the "
+"network or platform."
+msgstr ""
+"Vyberte prosím organizaci (organizace) koordinující platformu. Pokud není uvedena, "
+"přidejte ji prosím <a href=\"/new_organisation\" target=\"_blank\">sem</a> před "
+"odesláním sítě nebo platformy."
+
+#: platforms/forms.py:101
+msgid "Logo of your network or platform"
+msgstr "Logo vaší sítě nebo platformy"
+
+#: platforms/forms.py:102
+msgid "This image will be resized to 600x400 pixels."
+msgstr "Velikost tohoto obrázku bude změněna na 600x400 pixelů."
+
+#: platforms/forms.py:115
+msgid "Network or platform profile image"
+msgstr "Obrázek profilu sítě nebo platformy"
+
+#: platforms/forms.py:116
+msgid "This image will be resized to 1100x400 pixels."
+msgstr "Velikost tohoto obrázku bude změněna na 1100x400 pixelů."
+
+#: platforms/forms.py:129
+msgid "Profile image credit, if applicable."
+msgstr "Pokud je to relevantní, uveďte zdroj na profilovém obrázku."
+
+#: platforms/templates/_finder_platforms.html:41
+msgid "Geographic Extend"
+msgstr "Zeměpisné rozšíření"
+
+#: platforms/templates/_finder_platforms.html:61
+#: profiles/templates/profiles/_finder_users.html:67
+#: projects/templates/_finder_projects.html:119
+msgid "Country:"
+msgstr "Země:"
+
+#: platforms/templates/_finder_platforms.html:69
+msgid "Geographic Extend:"
+msgstr "Zeměpisné rozšíření:"
+
+#: platforms/templates/_finder_platforms.html:81
+msgid "platforms found for "
+msgstr "nalezené platformy pro"
+
+#: platforms/templates/_finder_platforms.html:83
+msgid "platform found for "
+msgstr "platforma založena pro "
+
+#: platforms/templates/emails/new_platform.html:20
+msgid "Thank you for submitting the platform "
+msgstr "Děkujeme za odeslání platformy"
+
+#: platforms/templates/emails/new_platform.html:22
+msgid ""
+"This has been sent to the EU-Citizen.Science moderation team, who will check it to "
+"ensure that all of the platforms shared on the platform can indeed be considered "
+"citizen science platforms."
+msgstr ""
+"Toto bylo zasláno moderátorskému týmu EU-Citizen.Science, který to zkontroluje, aby "
+"se ujistil, že všechny platformy sdílené na platformě lze skutečně považovat za "
+"platformy občanské vědy."
+
+#: platforms/templates/emails/new_platform.html:24
+msgid ""
+"We will be in touch with you if we have any questions, and otherwise you will receive "
+"an alert that your platform has been moderated and published to the platform. Your "
+"platform profile will be visible to the public in the meantime, but will be marked as "
+"unmoderated."
+msgstr ""
+"Pokud budeme mít nějaké dotazy, budeme vás kontaktovat. V opačném případě obdržíte "
+"upozornění, že vaše platforma byla zkontrolována a zveřejněna na platformě. Váš "
+"profil na platformě bude mezitím viditelný pro veřejnost, ale bude označen jako "
+"nekontrolovaný."
+
+#: platforms/templates/emails/new_platform.html:25
+msgid ""
+"You can make updates or changes to this platform profile at any time by going to "
+msgstr "Tento profil platformy můžete kdykoli aktualizovat nebo změnit na "
+
+#: platforms/templates/emails/new_platform.html:25
+msgid "your submitted platforms section in your Personal Area"
+msgstr "sekci odeslaných platforem ve vaší Osobní zóně"
+
+#: platforms/templates/platform.html:30 projects/templates/project.html:58
+#: resources/templates/resource.html:24
+msgid "Created"
+msgstr "Vytvořeno"
+
+#: platforms/templates/platform.html:31 projects/templates/project.html:59
+#: resources/templates/resource.html:25
+msgid "Updated"
+msgstr "Aktualizováno"
+
+#: platforms/templates/platform.html:52
+msgid "Go to platform or network"
+msgstr "Přejít na platformu nebo síť"
+
+#: platforms/templates/platform.html:71 projects/forms.py:168
+msgid "Geographic extend"
+msgstr "Zeměpisný rozsah"
+
+#: platforms/templates/platform.html:76
+msgid "Countries"
+msgstr "Země"
+
+#: platforms/templates/platform_form.html:77
+msgid "Network or platform images"
+msgstr "Obrázky sítě nebo platformy"
+
+#: profiles/forms.py:60
+msgid "Please write or select interest areas, separated by commas or pressing enter"
+msgstr ""
+"Napište nebo vyberte oblasti zájmu, oddělené čárkami nebo stisknutím klávesy Enter"
+
+#: profiles/forms.py:70
+msgid ""
+"Other Organisation participating in the project.If not listed,please add it <a "
+"href=\"/new_organisation\" target=\"_blank\">here</a> before submitting the project"
+msgstr ""
+"Jiná organizace zapojené do projektu. Pokud není uvedena, přidejte ji prosím <a "
+"href=\"/new_organisation\" target=\"_blank\">zde</a> před odesláním projektu."
+
+#: profiles/models.py:22
+msgid "Surname"
+msgstr "Příjmení"
+
+#: profiles/models.py:33
+msgid "Profile picture"
+msgstr "Profilový obrázek"
+
+#: profiles/models.py:40
+msgid "Short Bio and disciplinary background"
+msgstr "Krátký životopis a odborné znalosti"
+
+#: profiles/models.py:46
+msgid ""
+"ORCID (If you have registered on the ORCID platform for researchers and havea "
+"persistent digital identifier (your ORCID iD) you can add it here to link thisprofile "
+"with your professional information such as affiliations, grants, publications,peer "
+"review, and more.)"
+msgstr ""
+"ORCID (Pokud jste se zaregistrovali na platformě ORCID pro výzkumníky a máte trvalý "
+"digitální identifikátor (vaše ORCID iD), můžete jej sem přidat a propojit tak tento "
+"profil s vašimi profesními informacemi, jako jsou například afiliace, granty, "
+"publikace, recenzní hodnocení a další.)"
+
+#: profiles/models.py:54
+msgid "Email verified"
+msgstr "E-mail ověřen"
+
+#: profiles/templates/profiles/_finder_users.html:21
+msgid "Most Recent Login"
+msgstr "Nejnovější přihlášení"
+
+#: profiles/templates/profiles/_finder_users.html:39
+msgid "Interest Area"
+msgstr "Oblast zájmu"
+
+#: profiles/templates/profiles/_finder_users.html:75
+msgid "Interest Area:"
+msgstr "Oblast zájmu:"
+
+#: profiles/templates/profiles/_finder_users.html:81
+#: projects/templates/_finder_projects.html:149
+msgid "Participation task:"
+msgstr "Úkol k participaci:"
+
+#: profiles/templates/profiles/_finder_users.html:93
+#: profiles/templates/profiles/_finder_users.html:95
+msgid "users found for "
+msgstr "uživatelé nalezeni pro"
+
+#: profiles/templates/profiles/bookmarks.html:6
+msgid "Projects in bookmarks"
+msgstr "Projekty v záložkách"
+
+#: profiles/templates/profiles/bookmarks.html:17
+#: profiles/templates/profiles/submissions.html:41
+msgid "Submitted organisations"
+msgstr "Předložené organizace"
+
+#: profiles/templates/profiles/bookmarks.html:29
+msgid "Resources in bookmarks"
+msgstr "Zdroje v záložkách"
+
+#: profiles/templates/profiles/bookmarks.html:40
+msgid "Training in bookmarks"
+msgstr "Školení v záložkách"
+
+#: profiles/templates/profiles/bookmarks.html:51
+#: profiles/templates/profiles/submissions.html:52
+msgid "Submitted events"
+msgstr "Odeslané události"
+
+#: profiles/templates/profiles/edit_profile.html:20
+msgid "Personal information"
+msgstr "Osobní údaje"
+
+#: profiles/templates/profiles/edit_profile.html:31
+msgid "Bio &amp; Interest Areas"
+msgstr "Životopis &amp; Zájmové oblasti"
+
+#: profiles/templates/profiles/edit_profile.html:39
+msgid "Participation"
+msgstr "Participace"
+
+#: profiles/templates/profiles/edit_profile.html:46
+msgid "Picture"
+msgstr "Obrázek"
+
+#: profiles/templates/profiles/my_stats.html:6
+msgid "Your projects <span class='lightBlue-color'>stats</span>"
+msgstr "<span class='lightBlue-color'>Statistiky</span> vašich projektů"
+
+#: profiles/templates/profiles/privacy_center.html:4
+msgid "Permissions and password"
+msgstr "Oprávnění a heslo"
+
+#: profiles/templates/profiles/privacy_center.html:40
+msgid "General information"
+msgstr "Obecné informace"
+
+#: profiles/templates/profiles/show_profile.html:5
+msgid "Bio and <span class='lightBlue-color'>disciplinary background</span>"
+msgstr "Životopis a <span class='lightBlue-color'>disciplinární zázemí</span>"
+
+#: profiles/templates/profiles/show_profile.html:10
+msgid "Interest and expertise areas"
+msgstr "Oblasti zájmů a odbornosti"
+
+#: profiles/templates/profiles/submissions.html:6
+msgid "Submitted <span class='lightBlue-color'>projects</span>"
+msgstr "Odeslané <span class='lightBlue-color'>projekty</span>"
+
+#: profiles/templates/profiles/submissions.html:18
+msgid "Submitted resources"
+msgstr "Předložené zdroje"
+
+#: profiles/templates/profiles/submissions.html:29
+msgid "Submitted training"
+msgstr "Předložené školení"
+
+#: profiles/templates/profiles/submissions.html:62
+msgid "Submitted platforms"
+msgstr "Předložené platformy"
+
+#: projects/forms.py:38
+msgid "Please provide a description of your project here (max 3000 characters)."
+msgstr "Zde prosím uveďte popis vašeho projektu (max. 3000 znaků)."
+
+#: projects/forms.py:45
+msgid "Please provide the aim of your project here (max 3000 characters)."
+msgstr "Zde prosím uveďte cíl vašeho projektu (max. 3000 znaků)."
+
+#: projects/forms.py:52
+msgid ""
+"Please describe how people can get involved in the project (max 3000 characters)."
+msgstr "Popište prosím, jak se lidé mohou do projektu zapojit (max. 3000 znaků)."
+
+#: projects/forms.py:59
+msgid ""
+"Please indicate any required or suggested equipment to be used in the project (max "
+"3000 characters)."
+msgstr ""
+"Uveďte prosím jakékoli požadované nebo doporučené vybavení, které bude v projektu "
+"použito (max. 3000 znaků)."
+
+#: projects/forms.py:84
+msgid "Please provide the name of the project."
+msgstr "Uveďte prosím název projektu."
+
+#: projects/forms.py:85
+msgid "Project name"
+msgstr "Název projektu"
+
+#: projects/forms.py:91
+msgid "Please provide the URL to an external website of the project."
+msgstr "Prosím, uveďte URL adresu externího webu projektu."
+
+#: projects/forms.py:95
+msgid ""
+"Please describe the citizen science aspect(s) of the project and the link of the "
+"project to citizen science using the <a href=\"https://zenodo.org/communities/"
+"citscicharacteristics\" target=\"_blank\">ECSA Characteristics of Citizen Science</a> "
+"and the <a href=\"https://zenodo.org/record/5127534#.YzQQNEzP2Um\" "
+"target=\"_blank\">ECSA 10 Principles of Citizen Science</a>. What you introduce in "
+"this text field will not appear on the platform; it is just for moderation purposes "
+"(max 2000 characters)."
+msgstr ""
+"Popište prosím aspekt(y) občanské vědy v rámci projektu a jeho propojení s občanskou "
+"vědou pomocí <a href=\"https://zenodo.org/communities/citscicharacteristics\" "
+"target=\"_blank\">Charakteristik občanské vědy dle ECSA</a> a <a href=\"https://"
+"zenodo.org/record/5127534#.YzQQNEzP2Um\" target=\"_blank\">10 principů občanské vědy "
+"dle ECSA</a>. Text, který uvedete v tomto textovém poli, se na platformě nezobrazí; "
+"slouží pouze pro účely moderace (max. 2000 znaků)."
+
+#: projects/forms.py:102
+msgid "Description of citizen science aspects"
+msgstr "Popis aspektů občanské vědy"
+
+#: projects/forms.py:106
+msgid "Activity status"
+msgstr "Stav aktivity"
+
+#: projects/forms.py:108
+msgid "Please, select the status of your project."
+msgstr "Prosím, vyberte stav vašeho projektu."
+
+#: projects/forms.py:118
+msgid "Please select or enter 2-3 keywords separated by commas or by pressing enter."
+msgstr ""
+"Vyberte nebo zadejte 2–3 klíčová slova oddělená čárkami nebo stisknutím klávesy Enter."
+
+#: projects/forms.py:119 projects/templates/project.html:157 resources/forms.py:57
+#: resources/templates/resource.html:177
+msgid "Keywords"
+msgstr "Klíčová slova"
+
+#: projects/forms.py:125
+msgid "Closest approximate start date of the project"
+msgstr "Nejbližší přibližné datum zahájení projektu"
+
+#: projects/forms.py:130
+msgid "Approximate end date of the project"
+msgstr "Přibližné datum ukončení projektu"
+
+#: projects/forms.py:136
+msgid "Please select the project topic(s) or field(s) of science."
+msgstr "Vyberte prosím téma (témata) projektu nebo vědní obor (obory)."
+
+#: projects/forms.py:138 projects/templates/_finder_projects.html:78
+msgid "Topic"
+msgstr "Téma"
+
+#: projects/forms.py:143
+msgid "Please select the tags that apply to your project."
+msgstr "Vyberte prosím štítky, které se vztahují k vašemu projektu."
+
+#: projects/forms.py:145 projects/templates/project.html:173
+msgid "Tags"
+msgstr "Štítky"
+
+#: projects/forms.py:151
+msgid "Please select the task(s) undertaken by participants."
+msgstr "Vyberte prosím úkol(y), které účastníci plnili."
+
+#: projects/forms.py:153
+msgid "Participation task"
+msgstr "Participační úkol"
+
+#: projects/forms.py:158
+msgid "Please select the difficulty level."
+msgstr "Vyberte prosím úroveň obtížnosti."
+
+#: projects/forms.py:160
+msgid "Difficulty level"
+msgstr "Úroveň obtížnosti"
+
+#: projects/forms.py:166
+msgid "Please indicate the spatial scale of the project"
+msgstr "Uveďte prosím prostorový rozsah projektu"
+
+#: projects/forms.py:174
+msgid "Project locality"
+msgstr "Lokalita projektu"
+
+#: projects/forms.py:175
+msgid ""
+"Please describe the locality of the project, in terms of where the main participant "
+"activities take place. E.g. in your backyard, parks in London, rivers in Europe, "
+"online globally, etc."
+msgstr ""
+"Popište prosím lokalitu projektu, tedy kde se odehrávají hlavní aktivity účastníků. "
+"Např. na vaší zahradě, v parcích v Londýně, u řek v Evropě, online globálně atd."
+
+#: projects/forms.py:182
+msgid "Project geographic location"
+msgstr "Zeměpisné umístění projektu"
+
+#: projects/forms.py:189
+msgid "Please name the contact person or contact point of the project."
+msgstr "Uveďte prosím kontaktní osobu nebo kontaktní místo projektu."
+
+#: projects/forms.py:197
+msgid "Please provide the email address of the contact person or contact point."
+msgstr "Uveďte prosím e-mailovou adresu kontaktní osoby nebo kontaktního místa."
+
+#: projects/forms.py:206
+msgid ""
+"Please select the organisation coordinating the project. If not listed, please add it "
+"<a href=\"/new_organisation\" target=\"_blank\">here</a> before submitting the project"
+msgstr ""
+"Vyberte prosím organizaci koordinující projekt. Pokud není v seznamu, přidejte ji "
+"prosím <a href=\"/new_organisation\" target=\"_blank\">sem</a> před odesláním "
+"projektu."
+
+#: projects/forms.py:218
+msgid ""
+"Please select other organisation(s) participating in the project. If not listed,"
+"please add it <a href=\"/new_organisation\" target=\"_blank\">here</a> before "
+"submitting the project"
+msgstr ""
+"Vyberte prosím další organizaci (organizace) zapojené do projektu. Pokud nejsou v "
+"seznamu, přidejte je prosím <a href=\"/new_organisation\" target=\"_blank\">sem</a> "
+"před odesláním projektu."
+
+#: projects/forms.py:230
+msgid ""
+"Please enter the funding agencies of the project (e.g. European Commission)<br /"
+">Select them from the list or add your own <b>ended by comma or pressing enter</b>."
+msgstr ""
+"Zadejte prosím názvy agentur financujících projekt (např. Evropská komise).<br /"
+">Vyberte je ze seznamu nebo přidejte své vlastní názvy <b>ukončené čárkou nebo "
+"stisknutím klávesy Enter</b>."
+
+#: projects/forms.py:233
+msgid "Funding body"
+msgstr "Financující orgán"
+
+#: projects/forms.py:238
+msgid "Funding programme"
+msgstr "Program financování"
+
+#: projects/forms.py:240
+msgid "Please indicate the name of the programme that funds or funded the project."
+msgstr "Uveďte prosím název programu, který projekt financuje nebo financoval."
+
+#: projects/forms.py:246
+msgid "Image for the thumbnail profile"
+msgstr "Obrázek pro miniaturu profilu"
+
+#: projects/forms.py:247
+msgid "It will be resized to 600x400 pixels"
+msgstr "Bude upraven rozměr na 600x400 pixelů."
+
+#: projects/forms.py:259
+msgid "Thumbnail credit, if applicable"
+msgstr "Uveďte zdroj miniatury, pokud je to relevantní"
+
+#: projects/forms.py:263
+msgid "Project logo"
+msgstr "Logo projektu"
+
+#: projects/forms.py:264
+msgid "It will be resized to 600x400 pixels)"
+msgstr "Bude změněn na 600 x 400 pixelů)"
+
+#: projects/forms.py:279
+msgid "Image for the profile heading"
+msgstr "Obrázek pro záhlaví profilu"
+
+#: projects/forms.py:280
+msgid "It will be resized to 1100x400 pixels"
+msgstr "Bude změněna velikost na 1100x400 pixelů."
+
+#: projects/forms.py:291
+msgid "Heading image credit, if applicable"
+msgstr "Kredit obrázku nadpisu, je-li k dispozici"
+
+#: projects/forms.py:301
+msgid ""
+"I want to participate in the #MonthOfTheProjects and agree to be contacted via email "
+"if theproject I am submitting wins the contest.<a href=\"/blog/2021/05/31/june-"
+"monthoftheprojects-eu-citizenscience/\"> Learn more here!</a>"
+msgstr ""
+"Chci se zúčastnit soutěže #MonthOfTheProjects a souhlasím s tím, že budu kontaktován/"
+"a e-mailem, pokud projekt, který předkládám, vyhraje soutěž.<a href=\"/"
+"blog/2021/05/31/june-monthoftheprojects-eu-citizenscience/\"> Více se dozvíte zde!</a>"
+
+#: projects/forms.py:484
+msgid "Please provide a <i>description</i> field translation."
+msgstr "Prosím, uveďte překlad pole <i>popis</i>."
+
+#: projects/forms.py:490
+msgid "Please provide an <i>aim</i> field translation."
+msgstr "Prosím o překlad pole s <i>cíli</i>."
+
+#: projects/forms.py:492 projects/templates/project.html:74
+#: projects/templates/project.html:95 projects/templates/project_form.html:74
+#: projects/templates/translation_form.html:55
+msgid "Aim"
+msgstr "Cíle"
+
+#: projects/forms.py:498
+msgid "Please provide a <i>how to participate</i> field translation."
+msgstr "Prosím, uveďte překlad pole <i>jak se zapojit</i>."
+
+#: projects/forms.py:500 projects/templates/project.html:78
+#: projects/templates/project.html:99 projects/templates/project_form.html:115
+#: projects/templates/translation_form.html:62
+msgid "How to participate"
+msgstr "Jak se zapojit"
+
+#: projects/forms.py:506
+msgid "Please provide a <i>translated equipment</i> field translation."
+msgstr "Prosím, uveďte překlad požadovaného <i>pole s vybavením</i>."
+
+#: projects/forms.py:508 projects/templates/project.html:83
+#: projects/templates/project.html:104
+msgid "Needed equipment"
+msgstr "Potřebné vybavení"
+
+#: projects/templates/_finder_projects.html:22
+msgid "Total Accesses"
+msgstr "Celkový počet přístupů"
+
+#: projects/templates/_finder_projects.html:25
+msgid "Total Likes"
+msgstr "Celkový počet lajků"
+
+#: projects/templates/_finder_projects.html:31
+#: resources/templates/_finder_resources.html:25
+msgid "Most Recent Created"
+msgstr "Nejnovější vytvořené"
+
+#: projects/templates/_finder_projects.html:34
+#: resources/templates/_finder_resources.html:26
+msgid "Featured"
+msgstr "Doporučené"
+
+#: projects/templates/_finder_projects.html:47
+msgid "Status"
+msgstr "Stav"
+
+#: projects/templates/_finder_projects.html:57
+msgid "Tag"
+msgstr "Štítek"
+
+#: projects/templates/_finder_projects.html:67 projects/templates/project.html:182
+msgid "Difficulty Level"
+msgstr "Úroveň obtížnosti"
+
+#: projects/templates/_finder_projects.html:88
+msgid "Participation Task"
+msgstr "Úkol k participaci"
+
+#: projects/templates/_finder_projects.html:99
+#: resources/templates/_finder_resources.html:68
+msgid "Approved"
+msgstr "Schváleno"
+
+#: projects/templates/_finder_projects.html:102
+msgid "Not Approved"
+msgstr "Neschváleno"
+
+#: projects/templates/_finder_projects.html:125
+msgid "Status:"
+msgstr "Stav:"
+
+#: projects/templates/_finder_projects.html:131
+msgid "Hastag:"
+msgstr "Hashtag:"
+
+#: projects/templates/_finder_projects.html:137
+msgid "Difficulty level:"
+msgstr "Úroveň obtížnosti:"
+
+#: projects/templates/_finder_projects.html:143
+msgid "Topic:"
+msgstr "Téma:"
+
+#: projects/templates/_finder_projects.html:156
+msgid "Clear search and filters"
+msgstr "Vymazat vyhledávání a filtry"
+
+#: projects/templates/_finder_projects.html:165
+msgid "projects found for "
+msgstr "projektů nalezeno pro"
+
+#: projects/templates/_finder_projects.html:167
+msgid "project found for "
+msgstr "projekt nalezen pro"
+
+#: projects/templates/emails/approved_project.html:20
+#: projects/templates/emails/followed_project.html:19
+msgid "We are pleased to let you know that your project "
+msgstr "S potěšením Vám oznamujeme, že Váš projekt "
+
+#: projects/templates/emails/approved_project.html:20
+#: resources/templates/emails/approved_resource.html:18
+#: resources/templates/emails/approved_training_resource.html:18
+msgid ""
+" has now been moderated and approved. It is now visible in platform search results, "
+"and is marked as moderated."
+msgstr ""
+" byl nyní moderován a schválen. Nyní je viditelný ve výsledcích vyhledávání platformy "
+"a je označen jako moderovaný."
+
+#: projects/templates/emails/approved_project.html:22
+#: resources/templates/emails/approved_resource.html:20
+#: resources/templates/emails/approved_training_resource.html:20
+#: resources/templates/emails/new_resource.html:22
+msgid ""
+"You can make updates or changes to this resource profile at any time, by going to the "
+msgstr "Tento profil zdroje můžete kdykoli aktualizovat nebo změnit na "
+
+#: projects/templates/emails/approved_project.html:22
+#: resources/templates/emails/approved_resource.html:20
+#: resources/templates/emails/approved_training_resource.html:20
+msgid " (see the top-right of the platform menu)."
+msgstr " (viz pravý horní roh nabídky platformy)."
+
+#: projects/templates/emails/followed_project.html:19
+msgid " has been followed by another member of the community."
+msgstr "začal být sledován dalším členem komunity."
+
+#: projects/templates/emails/followed_project.html:21
+msgid ""
+"To keep the information about this project up to date, you can open it for editing by "
+"going to the Submitted projects <a href='{{domain}}/users/me/projects'> section in "
+"your Personal Area </a> (see the top-right of the platform menu)."
+msgstr ""
+"Chcete-li udržovat informace o tomto projektu aktuální, můžete jej otevřít k úpravám "
+"v sekci Odeslané projekty <a href=‚{{domain}}/users/me/projects‘> ve vaší Osobní zóně "
+"</a> (viz pravá horní část nabídky platformy)."
+
+#: projects/templates/emails/new_project.html:20
+msgid "Thank you for submitting the project "
+msgstr "Děkujeme za zaslání projektu "
+
+#: projects/templates/emails/new_project.html:22
+msgid ""
+"This has been sent to the EU-Citizen.Science moderation team, who will check it to "
+"ensure that all of the projects shared on the platform can indeed be considered "
+"citizen science projects."
+msgstr ""
+"Toto bylo odesláno moderačnímu týmu EU-Citizen.Science, který jej zkontroluje, aby se "
+"ujistil, že všechny projekty sdílené na platformě lze skutečně považovat za projekty "
+"občanské vědy."
+
+#: projects/templates/emails/new_project.html:24
+msgid ""
+"We will be in touch with you if we have any questions, and otherwise you will receive "
+"an alert that your project has been moderated and published to the platform. Your "
+"project profile will be visible to the public in the meantime, but will be marked as "
+"unmoderated."
+msgstr ""
+"Pokud budeme mít nějaké dotazy, budeme vás kontaktovat. V opačném případě obdržíte "
+"upozornění, že váš projekt byl zkontrolován a zveřejněn na platformě. Váš projektový "
+"profil bude mezitím viditelný pro veřejnost, ale bude označen jako nekontrolovaný."
+
+#: projects/templates/emails/new_project.html:25
+msgid "You can make updates or changes to this project profile at any time by going to "
+msgstr "Tento profil projektu můžete kdykoli aktualizovat nebo změnit na "
+
+#: projects/templates/emails/new_project.html:25
+msgid "your submitted projects section in your Personal Area"
+msgstr "sekci odeslaných projektů ve vaší Osobní zóně"
+
+#: projects/templates/emails/project_review.html:19
+msgid ""
+"We are pleased to let you know that your project <a href='{{domain}}/project/"
+"{{id}}'>{{name}}</a> has received a review from a fellow community member."
+msgstr ""
+"S potěšením Vám oznamujeme, že Váš projekt <a href=‚{{domain}}/project/"
+"{{id}}‘>{{name}}</a> byl zhodnocen jiným členem komunity."
+
+#: projects/templates/emails/project_review.html:21
+msgid ""
+"You can read this review by going to your project profile in the Submitted projects "
+"<a href='{{domain}}/users/me/projects'> section in your Personal Area </a> (see the "
+"top-right of the platform menu)."
+msgstr ""
+"Tuto recenzi si můžete přečíst v profilu svého projektu v sekci Odeslané projekty <a "
+"href=‚{{domain}}/users/me/projects‘> ve vaší Osobní zóně </a> (viz pravý horní roh "
+"nabídky platformy)."
+
+#: projects/templates/emails/project_review.html:23
+msgid ""
+"You can also respond to this review on your project profile by using the review form "
+"yourself."
+msgstr ""
+"Na tuto recenzi můžete také reagovat ve svém profilu projektu pomocí recenzního "
+"formuláře."
+
+#: projects/templates/modal_projects.html:8 resources/templates/modal_resources.html:8
+msgid "Info"
+msgstr "Informace"
+
+#: projects/templates/modal_projects.html:14 resources/templates/modal_resources.html:14
+msgid "Search"
+msgstr "Hledat"
+
+#: projects/templates/modal_projects.html:14
+msgid "projects by title or keywords by typing text directly into the the search bar"
+msgstr ""
+"projekty podle názvu nebo klíčových slov zadáním textu přímo do vyhledávacího řádku"
+
+#: projects/templates/modal_projects.html:15 resources/templates/modal_resources.html:15
+msgid "Sort"
+msgstr "Seřadit"
+
+#: projects/templates/modal_projects.html:15
+msgid "projects by date or by rating"
+msgstr "projekty podle data nebo podle hodnocení"
+
+#: projects/templates/modal_projects.html:16 resources/templates/modal_resources.html:16
+msgid "Filter"
+msgstr "Filtr"
+
+#: projects/templates/modal_projects.html:16
+msgid "search results by project status, or topic"
+msgstr "výsledky vyhledávání podle stavu projektu nebo tématu"
+
+#: projects/templates/modal_projects.html:18
+msgid ""
+"Submitted projects that have been through the moderation process are marked as "
+"'Moderated'.Only these will show in your search results unless you filter for 'not "
+"yet moderated' or 'All'."
+msgstr ""
+"Odeslané projekty, které prošly procesem moderování, jsou označeny jako „Moderované“. "
+"Ve výsledcích vyhledávání se zobrazí pouze tyto, pokud nefiltrujete „zatím "
+"nemoderované“ nebo „Vše“."
+
+#: projects/templates/modal_projects.html:20 resources/templates/modal_resources.html:20
+msgid "Read more about our"
+msgstr "Přečtěte si více o našem"
+
+#: projects/templates/modal_projects.html:20 resources/templates/modal_resources.html:20
+msgid "moderation process"
+msgstr "procesu moderování"
+
+#: projects/templates/project.html:28
+msgid "Your project has been added successfully."
+msgstr "Váš projekt byl úspěšně přidán."
+
+#: projects/templates/project.html:28
+msgid "You can continue to edit it in the"
+msgstr "Můžete pokračovat v úpravách v"
+
+#: projects/templates/project.html:28 projects/templates/project_form.html:281
+msgid "My Submissions section of your personal area."
+msgstr "Sekce Moje příspěvky ve vaší Osobní zóně."
+
+#: projects/templates/project.html:28
+msgid "Thank you!"
+msgstr "Děkujeme Vám!"
+
+#: projects/templates/project.html:41
+msgid "Your project has been updated successfully."
+msgstr "Váš projekt byl úspěšně aktualizován."
+
+#: projects/templates/project.html:68
+msgid "This translation was done before a project profile update."
+msgstr "Tento překlad byl proveden před aktualizací profilu projektu."
+
+#: projects/templates/project.html:69
+msgid "Plase help the community by improving it"
+msgstr "Prosím, pomozte komunitě jejím vylepšením."
+
+#: projects/templates/project.html:70
+msgid "here"
+msgstr "zde"
+
+#: projects/templates/project.html:91
+msgid "This project profile is not available in your selected language,"
+msgstr "Tento profil projektu není k dispozici ve vámi vybraném jazyce,"
+
+#: projects/templates/project.html:110
+msgid "About funding"
+msgstr "O financování"
+
+#: projects/templates/project.html:113
+msgid "<b>Funding bodies: </b>"
+msgstr "<b>Financující orgány: </b>"
+
+#: projects/templates/project.html:120
+msgid "<b>Funding program: </b>"
+msgstr "<b>Program financování: </b>"
+
+#: projects/templates/project.html:128
+msgid "<b>Profile image design by: </b>"
+msgstr "<b>Design profilového obrázku: </b>"
+
+#: projects/templates/project.html:152
+msgid "from"
+msgstr "od"
+
+#: projects/templates/project.html:155
+msgid "until"
+msgstr "do"
+
+#: projects/templates/project.html:164
+msgid "Science Topics"
+msgstr "Vědecká témata"
+
+#: projects/templates/project.html:192
+msgid "Participation tasks"
+msgstr "Úkoly účasti"
+
+#: projects/templates/project.html:201
+msgid "Coordinator"
+msgstr "Koordinátor"
+
+#: projects/templates/project.html:207
+msgid "Other Organisations involved"
+msgstr "Další zapojené organizace"
+
+#: projects/templates/project.html:240
+msgid "E-mail"
+msgstr "E-mail"
+
+#: projects/templates/project.html:250
+msgid "Go to Project"
+msgstr "Přejít do Projektu"
+
+#: projects/templates/project.html:255
+msgid "Translate"
+msgstr "Přeložit"
+
+#: projects/templates/project.html:270 resources/templates/resource.html:141
+msgid "Admin area"
+msgstr "Administrativní oblast"
+
+#: projects/templates/project_form.html:97
+msgid "Useful information to classify the project"
+msgstr "Užitečné informace pro klasifikaci projektu"
+
+#: projects/templates/project_form.html:108
+msgid "Participation information"
+msgstr "Informace o participaci"
+
+#: projects/templates/project_form.html:131 projects/templates/translation_form.html:69
+msgid "Equipment"
+msgstr "Vybavení"
+
+#: projects/templates/project_form.html:151
+msgid "Project location"
+msgstr "Lokalita projektu"
+
+#: projects/templates/project_form.html:161
+msgid "Contact and hosts details"
+msgstr "Kontaktní údaje a údaje hostitelů"
+
+#: projects/templates/project_form.html:172
+msgid "Funding Information"
+msgstr "Informace o financování"
+
+#: projects/templates/project_form.html:181
+msgid "Project profile images"
+msgstr "Obrázky profilu projektu"
+
+#: projects/templates/project_form.html:281
+msgid "Your project has been saved."
+msgstr "Váš projekt byl uložen."
+
+#: projects/templates/project_form.html:281
+msgid "You can continue editing at any time in the"
+msgstr "Můžete pokračovat v úpravách kdykoliv v "
+
+#: projects/templates/project_review.html:18 resources/templates/resource_review.html:18
+msgid "Review"
+msgstr "Přezkoumání"
+
+#: projects/templates/project_review.html:19 resources/templates/resource_review.html:19
+msgid "Rate and comment"
+msgstr "Hodnotit a komentovat"
+
+#: projects/templates/translation_form.html:28
+msgid "Please indicate the language you want to translate to"
+msgstr "Prosím, uveďte jazyk, do kterého chcete překládat"
+
+#: resources/forms.py:25
+msgid "Please briefly describe the resource (max 3000 characters)."
+msgstr "Stručně popište zdroj (max. 3000 znaků)."
+
+#: resources/forms.py:38
+msgid "Please write the title or name of the resource."
+msgstr "Prosím, napište nadpis nebo název zdroje."
+
+#: resources/forms.py:45
+msgid ""
+"Please provide the URL to where the document is hosted by the publisher, or in a "
+"permanent repository such as Zenodo, OSF, the RIO Journal, or similar."
+msgstr ""
+"Uveďte prosím URL adresu, kde je dokument uložen u vydavatele nebo v trvalém "
+"repozitáři, jako je Zenodo, OSF, RIO Journal nebo podobné."
+
+#: resources/forms.py:54
+msgid ""
+"Please select the keywords that describe the resource or add new ones <b>separated by "
+"commas or by pressing enter</b>."
+msgstr ""
+"Vyberte prosím klíčová slova, která popisují zdroj, nebo přidejte nová, <b>oddělená "
+"čárkami nebo stisknutím klávesy Enter</b>."
+
+#: resources/forms.py:62
+msgid ""
+"Please describe the link between citizen science and the resource you are uploading – "
+"for guidance see the <a href=\"https://zenodo.org/communities/citscicharacteristics\" "
+"target=\"_blank\"> ECSA Characteristics of Citizen Science</a> as well as the<a "
+"href=\"https://zenodo.org/record/5127534#.YV8J0dpBxPa\" target=\"_blank\"> ECSA 10 "
+"Principles of Citizen Science</a>. What you introduce in this text field will not "
+"appear on the platform; it is just for moderation purposes and for the administrators "
+"of the platform to see (max 2000 characters)."
+msgstr ""
+"Popište prosím souvislost mezi občanskou vědou a nahrávaným zdrojem – pokyny "
+"naleznete v dokumentu <a href=\"https://zenodo.org/communities/"
+"citscicharacteristics\" target=\"_blank\"> ECSA Characteristics of Citizen Science</"
+"a> a také v dokumentu <a href=\"https://zenodo.org/record/5127534#.YV8J0dpBxPa\" "
+"target=\"_blank\"> ECSA 10 Principles of Citizen Science</a>. Text, který uvedete v "
+"tomto textovém poli, se na platformě nezobrazí; slouží pouze pro účely moderace a pro "
+"administrátory platformy (max. 2000 znaků)."
+
+#: resources/forms.py:70
+msgid "Description of Citizen Science Aspects"
+msgstr "Popis aspektů občanské vědy"
+
+#: resources/forms.py:79
+msgid ""
+"Please name the author(s) of the resource. Enter <i>FirstInitial LastName</i> and "
+"close with a comma or press enter to add an author or multiple authors."
+msgstr ""
+"Uveďte prosím autora/autory zdroje. Zadejte <i>Křestní jméno Příjmení</i> a uzavřete "
+"čárkou, nebo stiskněte Enter pro přidání autora nebo více autorů."
+
+#: resources/forms.py:83
+msgid "Authors"
+msgstr "Autoři"
+
+#: resources/forms.py:89
+msgid "Please select one of the proposed categories."
+msgstr "Vyberte si prosím jednu z navrhovaných kategorií."
+
+#: resources/forms.py:90 resources/templates/_finder_resources.html:49
+#: resources/templates/resource.html:187
+msgid "Category"
+msgstr "Kategorie"
+
+#: resources/forms.py:98
+msgid ""
+"Please select the audience(s) for which the resource is intended. Multiple options "
+"can be selected."
+msgstr ""
+"Prosím, vyberte si publikum (publika), pro které je zdroj určen. Lze vybrat více "
+"možností. V jedné z navrhovaných kategorií."
+
+#: resources/forms.py:100 resources/templates/_finder_resources.html:57
+#: resources/templates/resource.html:193
+msgid "Audience"
+msgstr "Publikum"
+
+#: resources/forms.py:105
+msgid "Please select the thematic content of the resource."
+msgstr "Vyberte prosím tematický obsah zdroje."
+
+#: resources/forms.py:106 resources/templates/resource.html:182
+msgid "Theme"
+msgstr "Téma"
+
+#: resources/forms.py:112
+msgid ""
+"Please provide the <b>Digital Object Identifier</b> that is unique to your resource."
+msgstr ""
+"Uveďte prosím <b>identifikátor digitálního objektu</b>, který je pro váš zdroj "
+"jedinečný."
+
+#: resources/forms.py:114
+msgid "Resource DOI"
+msgstr "Zdroj DOI"
+
+#: resources/forms.py:120
+msgid "Please enter the year (YYYY) when this version of the resource was published."
+msgstr "Zadejte prosím rok (RRRR), kdy byla tato verze zdroje publikována."
+
+#: resources/forms.py:121
+msgid "Year of publication"
+msgstr "Rok vydání"
+
+#: resources/forms.py:126
+msgid ""
+"Please indicate the resource license, such as Creative Commons CC-BY. Enter a URL "
+"link to the license if available."
+msgstr ""
+"Uveďte prosím licenci zdroje, například Creative Commons CC-BY. Pokud je k dispozici, "
+"zadejte odkaz URL na licenci."
+
+#: resources/forms.py:137
+msgid ""
+"Please select the organisation(s) contributing the resource. If not listed, please "
+"add them <a href=\"/new_organisation\" target=\"_blank\">here</a > before submitting."
+msgstr ""
+"Vyberte organizaci (organizace) přispívající ke zdroji. Pokud nejsou v seznamu, "
+"přidejte je prosím <a href=\"/new_organisation\" target=\"_blank\">zde</a> před "
+"odesláním."
+
+#: resources/forms.py:149
+msgid ""
+"Please select the project(s) where the resource was created. If not listed, please "
+"add them <a href=\"/newProject\" target=\"_blank\">here</a > before submitting."
+msgstr ""
+"Vyberte prosím projekt(y), kde byl zdroj vytvořen. Pokud nejsou v seznamu, přidejte "
+"je prosím <a href=\"/newProject\" target=\"_blank\">sem</a> před odesláním."
+
+#: resources/forms.py:153
+msgid "Project(s)"
+msgstr "Projekt(y)"
+
+#: resources/forms.py:158
+msgid "Please indicate the publisher of the resource"
+msgstr "Uveďte prosím vydavatele zdroje"
+
+#: resources/forms.py:160
+msgid "Publisher"
+msgstr "Vydavatel"
+
+#: resources/forms.py:166
+msgid "Resource image for the thumbnail profile"
+msgstr "Zdrojový obrázek pro miniaturu profilu"
+
+#: resources/forms.py:167
+msgid "This image will be resized to 600x400 pixels"
+msgstr "Velikost tohoto obrázku bude změněna na 600x400 pixelů"
+
+#: resources/forms.py:168
+msgid "Image 1 credit"
+msgstr "Obrázek 1, kredit"
+
+#: resources/forms.py:178
+msgid "Resource image for the profile heading"
+msgstr "Zdrojový obrázek pro záhlaví profilu"
+
+#: resources/forms.py:179
+msgid "This image will be resized to 1100x400 pixels"
+msgstr "Velikost tohoto obrázku bude změněna na 1100x400 pixelů"
+
+#: resources/forms.py:180
+msgid "Image 2 credit"
+msgstr "Obrázek 2, kredit"
+
+#: resources/forms.py:192
+msgid "Curated lists"
+msgstr "Vybrané seznamy"
+
+#: resources/forms.py:200
+msgid "Educational level"
+msgstr "Úroveň vzdělání"
+
+#: resources/forms.py:202
+msgid ""
+"Please add the education level needed, end using comma or pressing enter. Examples of "
+"educational levels include beginner, intermediate or advanced, and formal sets of "
+"level indicators."
+msgstr ""
+"Zadejte prosím požadovanou úroveň vzdělání a ukončete ji čárkou nebo stisknutím "
+"klávesy Enter. Mezi příklady úrovní vzdělání patří začátečník, středně pokročilý nebo "
+"pokročilý a formální sady ukazatelů úrovně."
+
+#: resources/forms.py:212
+msgid "Learning resource type"
+msgstr "Typ studijního zdroje"
+
+#: resources/forms.py:214
+msgid ""
+"Please indicate the predominant type or kind characterizing the learning resource. "
+"For example, presentation, handout, etc."
+msgstr ""
+"Uveďte prosím převládající typ nebo druh charakterizující daný studijní materiál. "
+"Například prezentace, materiál k podání atd."
+
+#: resources/forms.py:219
+msgid "Please write the approximate  hours required to finish the training."
+msgstr "Prosím, napište přibližný počet hodin potřebných k dokončení školení."
+
+#: resources/forms.py:220 resources/templates/resource.html:87
+msgid "Time required"
+msgstr "Potřebný čas"
+
+#: resources/forms.py:222
+msgid ""
+"Please describe any conditions that affect the accessibility of the training "
+"material, such as <i>requires registration</i>, <i>requires enrollment</i>, or "
+"<i>requires payment</i>."
+msgstr ""
+"Popište prosím jakékoli podmínky, které ovlivňují přístupnost školicích materiálů, "
+"například <i>vyžaduje registraci</i>, <i>vyžaduje zápis</i> nebo <i>vyžaduje platbu</"
+"i>."
+
+#: resources/forms.py:224 resources/templates/resource.html:90
+msgid "Conditions of access"
+msgstr "Podmínky přístupu"
+
+#: resources/templates/_finder_resources.html:30
+msgid "All languages"
+msgstr "Všechny jazyky"
+
+#: resources/templates/_finder_resources.html:43
+msgid "All themes"
+msgstr "Všechna témata"
+
+#: resources/templates/_finder_resources.html:87
+msgid "language:"
+msgstr "jazyk:"
+
+#: resources/templates/_finder_resources.html:97
+msgid "theme:"
+msgstr "tema:"
+
+#: resources/templates/_finder_resources.html:104
+msgid "category:"
+msgstr "kategorie:"
+
+#: resources/templates/_finder_resources.html:111
+msgid "audience:"
+msgstr "publikum:"
+
+#: resources/templates/_finder_resources.html:127
+msgid "training resources found for "
+msgstr "zdroje školení nalezeny pro"
+
+#: resources/templates/_finder_resources.html:127
+msgid "training resource found for "
+msgstr "zdroj školení nalezen pro"
+
+#: resources/templates/_finder_resources.html:130
+msgid "resources found for "
+msgstr "zdroje nalezené pro"
+
+#: resources/templates/_finder_resources.html:130
+msgid "resource found for "
+msgstr "zdroj nalezen pro"
+
+#: resources/templates/_intro_form_training_resource.html:8
+msgid "training resource"
+msgstr "zdroj školení"
+
+#: resources/templates/_intro_form_training_resource.html:14
+msgid ""
+"Thank you for submitting a new citizen science training resource or educational "
+"material to be shared on the EU-Citizen.Science platform. Please fill in all of the "
+"mandatory information in the fields below (indicated with an asterisk*), and as much "
+"of the non-mandatory information as possible."
+msgstr ""
+"Děkujeme vám za zaslání nového vzdělávacího materiálu pro občanskou vědu ke sdílení "
+"na platformě EU-Citizen.Science. Vyplňte prosím všechny povinné informace v níže "
+"uvedených polích (označených hvězdičkou*) a co nejvíce nepovinných informací."
+
+#: resources/templates/_intro_form_training_resource.html:16
+msgid ""
+"Training resources and educational material is material that is designed or can be "
+"used explicitly for the goals of teaching or training a person on the practice of "
+"citizen science e.g. how to design and implement a volunteer-based activity, how to "
+"control data quality, the ethical and legal requirements of working with volunteers "
+"and managing their data. These can include massive open online courses (MOOCs), "
+"workshops, webinars, gamified training, and quizzes."
+msgstr ""
+"Zdroje školení a vzdělávací materiály jsou materiály, které jsou navrženy nebo mohou "
+"být explicitně použity pro účely výuky nebo školení osoby v praxi občanské vědy, "
+"např. jak navrhnout a implementovat aktivitu založenou na dobrovolnictví, jak "
+"kontrolovat kvalitu dat, etické a právní požadavky na práci s dobrovolníky a správu "
+"jejich dat. Patří sem masivní otevřené online kurzy (MOOC), workshopy, webináře, "
+"gamifikovaná školení a kvízy."
+
+#: resources/templates/_intro_form_training_resource.html:18
+msgid ""
+"Upon saving this profile, your resource will be submitted for moderation. The "
+"moderation process is meant to ensure that all of the resources shared on the "
+"platform are useful for citizen science projects and practitioners, and are of good "
+"quality."
+msgstr ""
+"Po uložení tohoto profilu bude váš zdroj odeslán k moderování. Proces moderování má "
+"zajistit, aby všechny zdroje sdílené na platformě byly užitečné pro občanské vědecké "
+"projekty a odborníky z praxe a aby byly kvalitní."
+
+#: resources/templates/_intro_form_training_resource.html:20
+msgid "Read more about the moderation process."
+msgstr "Přečtěte si více o procesu moderování."
+
+#: resources/templates/_intro_form_training_resource.html:22
+msgid ""
+"As quality factors we consider whether your resource is easy to access, is structured "
+"clearly, is easy to read (or hear or view) and understand."
+msgstr ""
+"Jako faktory kvality bereme v úvahu, zda je váš zdroj snadno dostupný, jasně "
+"strukturovaný, snadno čitelný (nebo slyšitelný či prohlížený) a srozumitelný."
+
+#: resources/templates/_intro_form_training_resource.html:24
+msgid "Read our quality criteria."
+msgstr "Přečtěte si naše kritéria kvality."
+
+#: resources/templates/_intro_form_training_resource.html:28
+msgid ""
+"Please note that we strongly recommend that you first ensure that your resource is "
+"hosted in a permanent repository, such as on a website that will be maintained and "
+"can provide a permalink, or a repository such as a publisher like"
+msgstr ""
+"Vezměte prosím na vědomí, že důrazně doporučujeme, abyste se nejprve ujistili, že je "
+"váš zdroj hostován v trvalém repozitáři, například na webových stránkách, které budou "
+"spravovány a mohou poskytovat trvalý odkaz, nebo v repozitáři vydavatele, jako je"
+
+#: resources/templates/_intro_form_training_resource.html:29
+msgid "Zenodo"
+msgstr "Zenodo"
+
+#: resources/templates/_intro_form_training_resource.html:30
+msgid "OSF"
+msgstr "OSF"
+
+#: resources/templates/_intro_form_training_resource.html:31
+msgid "the RIO Journal"
+msgstr "RIO Journal"
+
+#: resources/templates/emails/approved_resource.html:18
+#: resources/templates/emails/approved_training_resource.html:18
+#: resources/templates/emails/new_resource.html:18
+#: resources/templates/emails/resource_review.html:19
+#: resources/templates/emails/training_resource_review.html:19
+msgid "We are pleased to let you know that your resource "
+msgstr "S potěšením Vám oznamujeme, že Váš zdroj "
+
+#: resources/templates/emails/library_resource.html:18
+msgid ""
+"We are pleased to let you know that your resource <a href='{{domain}}/resource/"
+"{{id}}'>{{name}}</a> has been added to the resource library of another member of the "
+"community."
+msgstr ""
+"S potěšením Vám oznamujeme, že Váš zdroj <a href=‚{{domain}}/resource/{{id}}‘>{{name}}"
+"</a> byl přidán do knihovny zdrojů jiného člena komunity."
+
+#: resources/templates/emails/library_resource.html:20
+#: resources/templates/emails/library_training_resource.html:20
+msgid ""
+"To keep the information about your resource up to date, you can open it for editing "
+"by going to the "
+msgstr ""
+"Chcete-li udržovat informace o svém zdroji aktuální, můžete jej otevřít k úpravám "
+"tak, že přejdete na stránku "
+
+#: resources/templates/emails/library_training_resource.html:18
+msgid ""
+"We are pleased to let you know that your training resource <a href='{{domain}}/"
+"training_resource/{{id}}'>{{name}}</a> has been added to the resource library of "
+"another member of the community."
+msgstr ""
+"S potěšením Vám oznamujeme, že Váš vzdělávací zdroj <a href=‚{{domain}}/"
+"training_resource/{{id}}‘>{{name}}</a> byl přidán do knihovny zdrojů jiného člena "
+"komunity."
+
+#: resources/templates/emails/new_resource.html:18
+#: resources/templates/emails/new_training_resource.html:18
+msgid ""
+"has been submitted succesfully. This has been sent to the EU-Citizen.Science "
+"moderation team, who will check it to ensure that all of the resources shared on the "
+"platform are indeed useful for citizen science projects and practitioners, and are of "
+"good quality."
+msgstr ""
+"byl úspěšně odeslán. Byl zaslán moderátorskému týmu EU-Citizen.Science, který jej "
+"zkontroluje, aby se ujistil, že všechny zdroje sdílené na platformě jsou skutečně "
+"užitečné pro projekty a praktiky v oblasti občanské vědy a jsou kvalitní."
+
+#: resources/templates/emails/new_resource.html:20
+#: resources/templates/emails/new_training_resource.html:20
+msgid ""
+"We will be in touch with you if we have any questions, and otherwise you will receive "
+"an alert that your resource has been moderated and published to the platform. Your "
+"resource profile will be visible to the public in the meantime, but will be marked as "
+"unmoderated 'not yet moderated'"
+msgstr ""
+"Pokud budeme mít nějaké dotazy, budeme vás kontaktovat. V opačném případě obdržíte "
+"upozornění, že váš zdroj byl zkontrolován a zveřejněn na platformě. Váš profil zdroje "
+"bude mezitím viditelný pro veřejnost, ale bude označen jako nekontrolovaný „dosud "
+"nekontrolovaný“."
+
+#: resources/templates/emails/new_resource.html:22
+#: resources/templates/emails/resource_review.html:21
+#: resources/templates/emails/training_resource_review.html:21
+msgid "Submitted resources section in your Personal Area"
+msgstr "Sekce odeslaných zdrojů ve vaší Osobní zóně"
+
+#: resources/templates/emails/new_training_resource.html:18
+msgid "We are pleased to let you know that your resource"
+msgstr "S potěšením Vám oznamujeme, že Váš zdroj"
+
+#: resources/templates/emails/new_training_resource.html:22
+msgid ""
+"You can make updates or changes to this resource profile at any time, by going to the "
+"<a href='{{domain}}/users/me/submissions'>Submitted training resources section in "
+"your Personal Area </a> (see the top-right of the platform menu)."
+msgstr ""
+"Tento profil zdrojů můžete kdykoli aktualizovat nebo změnit v sekci <a "
+"href=‚{{domain}}/users/me/submissions‘>Odeslané vzdělávací zdroje ve vaší Osobní zóně "
+"</a> (viz pravý horní roh nabídky platformy)."
+
+#: resources/templates/emails/resource_review.html:19
+#: resources/templates/emails/training_resource_review.html:19
+msgid "has received a review from a fellow community member."
+msgstr "obdržel recenzi od jiného člena komunity."
+
+#: resources/templates/emails/resource_review.html:21
+#: resources/templates/emails/training_resource_review.html:21
+msgid "You can read this review by going to your project profile in the "
+msgstr "Tuto recenzi si můžete přečíst v profilu svého projektu v "
+
+#: resources/templates/emails/resource_review.html:22
+#: resources/templates/emails/training_resource_review.html:22
+msgid ""
+"You can also respond to this review on your resource profile by using the review form "
+"yourself."
+msgstr ""
+"Na tuto recenzi můžete také reagovat ve svém profilu zdroje pomocí formuláře pro "
+"recenze."
+
+#: resources/templates/modal_resources.html:14
+msgid "resources by title or keywords by typing text directly into the the search bar"
+msgstr ""
+"zdroje podle názvu nebo klíčových slov zadáním textu přímo do vyhledávacího pole"
+
+#: resources/templates/modal_resources.html:15
+msgid "resources by date or by rating"
+msgstr "zdroje podle data nebo podle hodnocení"
+
+#: resources/templates/modal_resources.html:16
+msgid "search results by language, theme or category"
+msgstr "výsledky vyhledávání podle jazyka, tématu nebo kategorie"
+
+#: resources/templates/modal_resources.html:18
+msgid ""
+"Submitted resources that have been through the moderation process are marked as "
+"'Moderated'.Only these will show in your search results unless you filter for 'not "
+"yet moderated' or 'All'."
+msgstr ""
+"Odeslané zdroje, které prošly procesem moderování, jsou označeny jako „Moderované“. "
+"Ve výsledcích vyhledávání se zobrazí pouze tyto zdroje, pokud nepoužijete filtr "
+"„zatím nemoderované“ nebo „Vše“."
+
+#: resources/templates/resource.html:29 resources/templates/resource_form.html:74
+msgid "Publish information"
+msgstr "Publikovat informace"
+
+#: resources/templates/resource.html:51 resources/templates/resource.html:72
+msgid "Links with projects and/or organisations"
+msgstr "Propojení s projekty a/nebo organizacemi"
+
+#: resources/templates/resource.html:85
+msgid "Training information"
+msgstr "Informace o školení"
+
+#: resources/templates/resource.html:103
+msgid "Go to Training"
+msgstr "Přejít na školení"
+
+#: resources/templates/resource.html:105
+msgid "Go to Resource"
+msgstr "Přejít na Zdroj"
+
+#: resources/templates/resource.html:113 resources/templates/resource.html:118
+msgid "Edit"
+msgstr "Upravit"
+
+#: resources/templates/resource.html:134
+msgid "Comment"
+msgstr "Komentář"
+
+#: resources/templates/resource.html:147
+msgid "Approve"
+msgstr "Schválit"
+
+#: resources/templates/resource.html:154
+msgid "Set featured"
+msgstr "Definovat charakteristiky"
+
+#: resources/templates/resource.html:161
+msgid "Is training"
+msgstr "Je školení"
+
+#: resources/templates/resource.html:163
+msgid "Contact submitter"
+msgstr "Kontakt na předkladatele"
+
+#: resources/templates/resource.html:201
+msgid "Education level"
+msgstr "Úroveň vzdělání"
+
+#: resources/templates/resource.html:209
+msgid "Learning Resource Type"
+msgstr "Typ studijního zdroje"
+
+#: resources/templates/resource_form.html:54
+msgid "Abstract"
+msgstr "Abstrakt"
+
+#: resources/templates/resource_form.html:86
+msgid "Please indicate the (main) language that the resource is made available in"
+msgstr "Uveďte prosím (hlavní) jazyk, ve kterém je zdroj k dispozici."
+
+#: resources/templates/resource_form.html:103
+msgid "Training resource fields"
+msgstr "Pole zdrojů školení"
+
+#: resources/templates/resource_form.html:118
+msgid "Links with projects and organisations"
+msgstr "Odkazy na projekty a organizace"
+
+#: resources/templates/resource_form.html:128
+msgid "Resource profile images"
+msgstr "Obrázky profilů zdrojů"
+
+#: resources/views.py:180
+msgid "Training resource added correctly"
+msgstr "Školicí zdroj byl přidán správně"
+
+#: resources/views.py:187
+msgid "Resource added correctly"
+msgstr "Zdroj byl přidán správně"
+
+#: templates/forum_emails/forum_answer.html:15
+msgid "You're receiving this message because someone has answered you in the topic "
+msgstr "Tuto zprávu dostáváte, protože vám někdo v daném tématu odpověděl."
+
+#: templates/forum_emails/forum_subscription_new_message.html:15
+msgid "There is a new message in EU-Citizen.Science forum."
+msgstr "Ve fóru EU-Citizen.Science je nová zpráva."
+
+#: templates/forum_emails/forum_subscription_new_message.html:16
+msgid "You're receiving this message because you're subscribed to the topic "
+msgstr "Tuto zprávu dostáváte, protože jste se přihlásili k odběru tohoto tématu "
+
+#: templates/registration/logged_out.html:9
+msgid "Thanks for spending some quality time with the Web site today."
+msgstr "Děkuji, že jste dnes strávili nějaký kvalitní čas s webovými stránkami."
+
+#: templates/registration/logged_out.html:11
+msgid "Log in again"
+msgstr "Přihlásit se znovu"
+
+#: templates/registration/password_change_done.html:6
+#: templates/registration/password_change_form.html:6
+#: templates/registration/password_reset_complete.html:6
+#: templates/registration/password_reset_confirm.html:6
+#: templates/registration/password_reset_done.html:6
+#: templates/registration/password_reset_form.html:6
+msgid "Home"
+msgstr "Úvodní strana"
+
+#: templates/registration/password_change_done.html:7
+#: templates/registration/password_change_form.html:7
+#: templates/registration/password_change_form.html:11
+#: templates/registration/password_change_form.html:12
+msgid "Password change"
+msgstr "Změna hesla"
+
+#: templates/registration/password_change_done.html:11
+#: templates/registration/password_change_done.html:12
+msgid "Password change successful"
+msgstr "Změna hesla byla úspěšná"
+
+#: templates/registration/password_change_done.html:16
+msgid "Your password was changed."
+msgstr "Vaše heslo bylo změněno."
+
+#: templates/registration/password_change_form.html:19
+msgid "Please correct the error below."
+msgstr "Opravte prosím níže uvedenou chybu."
+
+#: templates/registration/password_change_form.html:19
+msgid "Please correct the errors below."
+msgstr "Opravte prosím níže uvedené chyby."
+
+#: templates/registration/password_change_form.html:23
+msgid ""
+"Please enter your old password, for security's sake, and then enter your new password "
+"twice so we can verify you typed it in correctly."
+msgstr ""
+"Z bezpečnostních důvodů zadejte prosím své staré heslo a poté dvakrát zadejte nové "
+"heslo, abychom ověřili, že jste jej zadali správně."
+
+#: templates/registration/password_change_form.html:63
+#: templates/registration/password_reset_confirm.html:42
+msgid "Change my password"
+msgstr "Změnit heslo"
+
+#: templates/registration/password_reset_complete.html:7
+#: templates/registration/password_reset_complete.html:11
+#: templates/registration/password_reset_complete.html:12
+msgid "Password reset complete"
+msgstr "Resetování hesla bylo dokončeno"
+
+#: templates/registration/password_reset_complete.html:16
+msgid "Your password has been set.  You may go ahead and log in now."
+msgstr "Vaše heslo bylo nastaveno. Nyní se můžete přihlásit."
+
+#: templates/registration/password_reset_confirm.html:7
+msgid "Password reset confirmation"
+msgstr "Potvrzení resetování hesla"
+
+#: templates/registration/password_reset_confirm.html:11
+#: templates/registration/password_reset_confirm.html:12
+#: templates/registration/password_reset_done.html:7
+#: templates/registration/password_reset_form.html:7
+#: templates/registration/password_reset_form.html:11
+#: templates/registration/password_reset_form.html:12
+msgid "Password reset"
+msgstr "Resetování hesla"
+
+#: templates/registration/password_reset_confirm.html:20
+msgid "Please enter your new password twice so we can verify you typed it in correctly."
+msgstr ""
+"Zadejte prosím své nové heslo dvakrát, abychom ověřili, že jste jej zadali správně."
+
+#: templates/registration/password_reset_confirm.html:25
+msgid "New password:"
+msgstr "Nové heslo:"
+
+#: templates/registration/password_reset_confirm.html:34
+msgid "Confirm password:"
+msgstr "Potvrzení hesla:"
+
+#: templates/registration/password_reset_confirm.html:48
+msgid "Password reset unsuccessful"
+msgstr "Obnovení hesla se nezdařilo"
+
+#: templates/registration/password_reset_confirm.html:50
+msgid ""
+"The password reset link was invalid, possibly because it has already been used.  "
+"Please request a new password reset."
+msgstr ""
+"Odkaz pro resetování hesla byl neplatný, pravděpodobně proto, že již byl použit. "
+"Požádejte o nové resetování hesla."
+
+#: templates/registration/password_reset_done.html:11
+#: templates/registration/password_reset_done.html:12
+msgid "Password reset successful"
+msgstr "Obnovení hesla bylo úspěšné"
+
+#: templates/registration/password_reset_done.html:16
+msgid ""
+"We've emailed you instructions for setting your password to the email address you "
+"submitted. You should be receiving it shortly."
+msgstr ""
+"Pokyny k nastavení hesla jsme vám zaslali e-mailem na vámi uvedenou e-mailovou "
+"adresu. Měli byste je brzy obdržet."
+
+#: templates/registration/password_reset_form.html:16
+msgid ""
+"Forgotten your password? Enter your email address below, and we'll email instructions "
+"for setting a new one."
+msgstr ""
+"Zapomněli jste heslo? Zadejte níže svou e-mailovou adresu a my vám e-mailem zašleme "
+"pokyny k nastavení nového."
+
+#: templates/registration/password_reset_form.html:21
+msgid "Email address:"
+msgstr "E-mailová adresa:"
+
+#: templates/registration/password_reset_form.html:30
+msgid "Reset my password"
+msgstr "Obnovit heslo"
