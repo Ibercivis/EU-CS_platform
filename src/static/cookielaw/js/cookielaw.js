@@ -1,25 +1,26 @@
-var Cookielaw = {
-
-    createCookie: function (name, value, days) {
-        var date = new Date(),
-            expires = '';
-        if (days) {
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            expires = "; expires=" + date.toGMTString();
-        } else {
-            expires = "";
+// Cookie Law consent management
+var Cookielaw = (function() {
+    return {
+        createCookielawCookie: function() {
+            // Set cookie to accept cookies
+            var expirationDate = new Date();
+            expirationDate.setFullYear(expirationDate.getFullYear() + 1);
+            document.cookie = "cookielaw_accepted=true; path=/; expires=" + expirationDate.toUTCString();
+        },
+        
+        rejectCookies: function() {
+            // Set cookie to reject cookies
+            var expirationDate = new Date();
+            expirationDate.setFullYear(expirationDate.getFullYear() + 1);
+            document.cookie = "cookielaw_accepted=false; path=/; expires=" + expirationDate.toUTCString();
+        },
+        
+        isCookieAccepted: function() {
+            return document.cookie.indexOf('cookielaw_accepted=true') !== -1;
+        },
+        
+        isCookieRejected: function() {
+            return document.cookie.indexOf('cookielaw_accepted=false') !== -1;
         }
-        document.cookie = name + "=" + value + expires + "; path=/";
-    },
-
-    createCookielawCookie: function () {
-        this.createCookie('cookielaw_accepted', '1', 10 * 365);
-
-        if (typeof (window.jQuery) === 'function') {
-            jQuery('#CookielawBanner').slideUp();
-        } else {
-            document.getElementById('CookielawBanner').style.display = 'none';
-        }
-    }
-
-};
+    };
+})();

@@ -1,5 +1,5 @@
- /*Cookie Consent Begin*/
- #cookieConsent {
+/*Cookie Consent Begin*/
+#cookieConsent {
     background-color: rgba(20,20,20,0.8);
     min-height: 26px;
     font-size: 14px;
@@ -14,33 +14,87 @@
     display: none;
     z-index: 9999;
 }
+
 #cookieConsent a {
     color: #4B8EE7;
     text-decoration: none;
 }
-#closeCookieConsent {
-    float: right;
-    display: inline-block;
-    cursor: pointer;
-    height: 20px;
-    width: 20px;
-    margin: -15px 0 0 0;
-    font-weight: bold;
+
+.cookieBannerContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-right: 30px;
 }
-#closeCookieConsent:hover {
-    color: #FFF;
+
+.cookieText {
+    flex: 1;
+    min-width: 250px;
 }
-#cookieConsent a.cookieConsentOK {
+
+.cookieButtons {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+#cookieConsent a.cookieConsentOK,
+#cookieConsent a.cookieConsentReject {
     background-color: #F1D600;
     color: #000;
     display: inline-block;
     border-radius: 5px;
-    padding: 0 20px;
+    padding: 8px 20px;
     cursor: pointer;
-    float: right;
-    margin: 0 60px 0 10px;
+    border: none;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
 }
+
 #cookieConsent a.cookieConsentOK:hover {
     background-color: #E0C91F;
 }
+
+#cookieConsent a.cookieConsentReject {
+    background-color: #666;
+    color: #fff;
+}
+
+#cookieConsent a.cookieConsentReject:hover {
+    background-color: #777;
+}
+
+/* Responsive design for mobile devices */
+@media (max-width: 768px) {
+    #cookieConsent {
+        padding: 8px 10px;
+    }
+    
+    .cookieBannerContent {
+        flex-direction: column;
+        gap: 10px;
+        padding-right: 10px;
+    }
+    
+    .cookieText {
+        min-width: auto;
+        width: 100%;
+    }
+    
+    .cookieButtons {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    #cookieConsent a.cookieConsentOK,
+    #cookieConsent a.cookieConsentReject {
+        flex: 1;
+    }
+}
+
 /*Cookie Consent End*/
