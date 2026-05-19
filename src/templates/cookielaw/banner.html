@@ -1,9 +1,15 @@
-
 {% load static %}
 
 <div id="cookieConsent">
-    <div id="closeCookieConsent">x</div>
-    This website is using cookies. <a href="{% url 'privacy' %}" target="_blank">More info</a>. <a class="cookieConsentOK" href="javascript:Cookielaw.createCookielawCookie();">That's Fine</a>
+    <div class="cookieBannerContent">
+        <div class="cookieText">
+            This website is using cookies. <a href="{% url 'privacy' %}" target="_blank">More info</a>.
+        </div>
+        <div class="cookieButtons">
+            <a href="javascript:Cookielaw.createCookielawCookie();" class="cookieConsentOK">That's Fine</a>
+            <a href="javascript:Cookielaw.rejectCookies();" class="cookieConsentReject">No Cookies Thanks</a>
+        </div>
+    </div>
 </div>
 <script type="text/javascript" src="{% static 'site/js/jquery.min.js' %}"></script>
 <script>
@@ -11,7 +17,7 @@ $(document).ready(function(){
     setTimeout(function () {
         $("#cookieConsent").fadeIn(200);
      }, 1000);
-    $("#closeCookieConsent, .cookieConsentOK").click(function() {
+    $("#cookieConsent .cookieButtons a").click(function() {
         $("#cookieConsent").fadeOut(200);
     }); 
 });
