@@ -158,6 +158,14 @@ class PlatformForm(forms.Form):
         platform.logoCredit = self.cleaned_data['logoCredit']
         platform.profileImageCredit = self.cleaned_data['profileImageCredit']
 
+        for lang_code in settings.MODELTRANSLATION_LANGUAGES:
+            field_name = f'description_{lang_code}'
+            setattr(platform, field_name, self.cleaned_data.get(field_name, '').strip())
+
+        default_description_field = f'description_{settings.MODELTRANSLATION_DEFAULT_LANGUAGE}'
+        platform.__dict__['description'] = self.cleaned_data.get(
+            default_description_field, '').strip()
+
         # Manage images
         for key, path in images.items():
             if key == 'logo':
